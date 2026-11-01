@@ -32,7 +32,30 @@ Pour $2 \le m \le p - 1$, le coefficient $\binom{p}{m}$ est divisible par $p$, e
 Pour $p = 2$, le lemme est faux. Sur $B = \mathbf Z/8$, soit $\theta = -1$. Alors $\theta^2 = 1$, et $\theta$ fixe $\Omega_1(B) = \{0, 4\}$, puisque $-4 = 4$. Mais $2(\theta(1) - 1) = -4 \ne 0$.
 \end{contrexemple}
 
-\noindent Sur $\mathbf Z/4$, en revanche, $\theta = -1$ vérifie la conclusion ($2 \cdot (-2) = 0$) : le premier contre-exemple cyclique demande l'ordre~$8$. Une recherche exhaustive, sur les groupes $\mathbf Z/9$, $\mathbf Z/27$, $\mathbf Z/9 \times \mathbf Z/3$, $\mathbf Z/9 \times \mathbf Z/9$, $\mathbf Z/27 \times \mathbf Z/3$ pour $p = 3$ et $\mathbf Z/25$ pour $p = 5$, n'a trouvé aucun automorphisme qui contredise le lemme ; pour $p = 2$, elle en trouve sur $\mathbf Z/8$ et $\mathbf Z/8 \times \mathbf Z/2$, et aucun sur $\mathbf Z/4$, $\mathbf Z/4 \times \mathbf Z/2$, $\mathbf Z/4 \times \mathbf Z/4$. Le titre \q{$p$ odd} de la page est donc nécessaire. L'hypothèse que $B$ est un $p$-groupe l'est aussi : l'anneau $\mathbf Z[\zeta_p]$ des entiers cyclotomiques, avec $\theta$ la multiplication par $\zeta_p$, a $\Omega_1 = 0$ et $\theta^p = 1$, sans que $p(\theta - 1)$ soit nul.
+\noindent Sur $\mathbf Z/4$, en revanche, $\theta = -1$ vérifie la conclusion ($2 \cdot (-2) = 0$) : le premier contre-exemple cyclique demande l'ordre~$8$. Une recherche exhaustive, sur les groupes $\mathbf Z/9$, $\mathbf Z/27$, $\mathbf Z/9 \times \mathbf Z/3$, $\mathbf Z/9 \times \mathbf Z/9$, $\mathbf Z/27 \times \mathbf Z/3$ pour $p = 3$ et $\mathbf Z/25$ pour $p = 5$, n'a trouvé aucun automorphisme qui contredise le lemme ; pour $p = 2$, elle en trouve sur $\mathbf Z/8$ et $\mathbf Z/8 \times \mathbf Z/2$, et aucun sur $\mathbf Z/4$, $\mathbf Z/4 \times \mathbf Z/2$, $\mathbf Z/4 \times \mathbf Z/4$. Le titre \q{$p$ odd} de la page est donc nécessaire (figure~\ref{fig:quillen-1971-11}). L'hypothèse que $B$ est un $p$-groupe l'est aussi : l'anneau $\mathbf Z[\zeta_p]$ des entiers cyclotomiques, avec $\theta$ la multiplication par $\zeta_p$, a $\Omega_1 = 0$ et $\theta^p = 1$, sans que $p(\theta - 1)$ soit nul.
+
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\begin{scope}
+\foreach \k in {0,...,8} { \coordinate (n\k) at ({90-40*\k}:1.45); }
+\foreach \a/\b in {1/4,4/7,7/1,2/8,8/5,5/2} { \draw[->, frise, shorten >=4pt, shorten <=4pt] (n\a) -- (n\b); }
+\foreach \k in {1,2,4,5,7,8} { \fill (n\k) circle (1.7pt); \node at ({90-40*\k}:1.8) {$\k$}; }
+\foreach \k in {0,3,6} { \fill[piste] (n\k) circle (2.2pt); \node[piste] at ({90-40*\k}:1.8) {$\k$}; }
+\node at (0,-2.35) {$p = 3$, $B = \mathbf Z/9$, $\theta = 4$};
+\end{scope}
+\begin{scope}[xshift=5.6cm]
+\foreach \k in {0,...,7} { \coordinate (m\k) at ({90-45*\k}:1.45); }
+\foreach \k in {1,2,3} { \pgfmathtruncatemacro{\l}{8-\k} \draw[<->, frise, shorten >=4pt, shorten <=4pt] (m\k) -- (m\l); }
+\foreach \k in {1,2,3,5,6,7} { \fill (m\k) circle (1.7pt); \node at ({90-45*\k}:1.8) {$\k$}; }
+\foreach \k in {0,4} { \fill[piste] (m\k) circle (2.2pt); \node[piste] at ({90-45*\k}:1.8) {$\k$}; }
+\node at (0,-2.35) {$p = 2$, $B = \mathbf Z/8$, $\theta = -1$};
+\end{scope}
+\end{tikzpicture}
+\caption{L'action de $\theta$ (flèches) et le sous-groupe $\Omega_1(B)$ (en rouge). À gauche, un exemple de l'édition : la multiplication par $4$ sur $\mathbf Z/9$ vérifie $\theta^3 = 1$, fixe $\Omega_1(B) = \{0, 3, 6\}$ et permute circulairement $1, 4, 7$ et $2, 8, 5$ ; $\theta - 1$ est la multiplication par $3$, à valeurs dans $\Omega_1(B)$, comme le veut le théorème. À droite, le contre-exemple~\ref{ce:quillen-1971-11} : $\theta = -1$ fixe $\Omega_1(B) = \{0, 4\}$, mais $\theta(1) - 1 = 6$ n'est pas dans $\Omega_1(B)$.}
+\label{fig:quillen-1971-11}
+\end{figure}
 
 \emph{Vérification en Lean.} Le fichier \href{\leanblobmain/Notebook1971_11.lean}{\texttt{Notebook1971\_11.\allowbreak{}lean}} démontre le théorème~\ref{thm:quillen-1971-11} sous le nom \texttt{nsmul\_sub\_one\_eq\_zero}, pour $\theta$ dans l'anneau \texttt{AddMonoid.End B} des endomorphismes de $B$, et sous le nom \texttt{addEquiv\_nsmul\_sub\_one\_eq\_zero} pour un automorphisme \texttt{B ≃+ B} dont l'itéré $p$-ième est l'identité, comme sur la page. La baisse de l'ordre est \texttt{sub\_one\_nsmul\_eq\_zero\_of\_nsmul}, le développement binomial évalué en un point \texttt{pow\_apply\_eq\_sum}. Le contre-exemple~\ref{ce:quillen-1971-11} est \texttt{zmod8\_neg}, vérifié par calcul. Les axiomes utilisés sont les trois axiomes usuels de mathlib.
 

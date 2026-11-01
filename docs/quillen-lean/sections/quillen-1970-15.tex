@@ -1,8 +1,32 @@
 \section[Carnet 1970-15 : la fonction de Möbius du treillis des sous-espaces]{Carnet 1970-15 : la fonction de Möbius du treillis des sous-espaces\protect\verifie{Notebook1970_15}}\label{sec:quillen-1970-15}
 
-\emph{Le contexte.} En septembre 1970, le \carnet{1970}{15} compare la cohomologie d'un groupe dans un topos à celle de ses points. Pages~21--22, Quillen inverse des caractéristiques d'Euler sur les types d'isotropie d'une action, avec des coefficients de Möbius, et vérifie la formule pour un groupe abélien élémentaire agissant sur un point. Au rang~$3$, la vérification se ramène à l'identité $1 - (q^2 + q + 1) + q(q^2 + q + 1) - q^3 = 0$ : la somme alternée, sur les sous-espaces $W$ d'un espace de dimension $n$ sur $\mathbf F_q$, des $(-1)^{\dim W} q^{\binom{\dim W}{2}}$, est nulle pour $n \ge 1$, puisque $(-1)^k q^{\binom{k}{2}}$ est la valeur de la fonction de Möbius du treillis des sous-espaces sur un intervalle de rang~$k$.
+\emph{Le contexte.} En septembre 1970, le \carnet{1970}{15} compare la cohomologie d'un groupe dans un topos à celle de ses points. Pages~21--22, Quillen inverse des caractéristiques d'Euler sur les types d'isotropie d'une action, avec des coefficients de Möbius, et vérifie la formule pour un groupe abélien élémentaire agissant sur un point. Au rang~$3$, la vérification se ramène à l'identité $1 - (q^2 + q + 1) + q(q^2 + q + 1) - q^3 = 0$ : la somme alternée, sur les sous-espaces $W$ d'un espace de dimension $n$ sur $\mathbf F_q$, des $(-1)^{\dim W} q^{\binom{\dim W}{2}}$, est nulle pour $n \ge 1$, puisque $(-1)^k q^{\binom{k}{2}}$ est la valeur de la fonction de Möbius du treillis des sous-espaces sur un intervalle de rang~$k$. La figure~\ref{fig:quillen-1970-15} montre le cas $n = 3$, $q = 2$.
 
 \emph{L'intuition.} Le nombre de sous-espaces de dimension $k$ est le coefficient binomial de Gauss $\left[\begin{smallmatrix} n \\ k \end{smallmatrix}\right]_q$, et ces coefficients vérifient le théorème binomial de Gauss $\prod_{i < n}(1 + q^i t) = \sum_k q^{\binom{k}{2}} \left[\begin{smallmatrix} n \\ k \end{smallmatrix}\right]_q t^k$. Pour $t = -1$, le facteur $i = 0$ du produit est nul.
+
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.05cm, y=1.25cm, every node/.style={font=\small}]
+\foreach \i in {0,...,6} {
+  \coordinate (d\i) at ({\i-3},1);
+  \coordinate (p\i) at ({\i-3},2);
+  \draw[black!45] (0,0) -- (d\i);
+  \draw[black!45] (p\i) -- (0,3);
+}
+\foreach \i/\j in {0/1,0/3,0/5,1/0,1/3,1/4,2/2,2/3,2/6,3/0,3/1,3/2,4/1,4/4,4/6,5/0,5/5,5/6,6/2,6/4,6/5} { \draw[black!35] (d\i) -- (p\j); }
+\fill (0,0) circle (2pt); \fill (0,3) circle (2pt);
+\foreach \i in {0,...,6} { \fill (d\i) circle (2pt); \fill (p\i) circle (2pt); }
+\node[below=2pt] at (0,0) {$0$};
+\node[above=2pt] at (0,3) {$\mathbf F_2^3$};
+\foreach \y/\t in {0/{1 \times 1}, 1/{7 \times (-1)}, 2/{7 \times 2}, 3/{1 \times (-8)}} {
+  \node[anchor=west] at (4.1,\y) {$k = \y$ : \quad $\t$};
+}
+\node[anchor=west, black!65] at (4.1,3.65) {dimension, nombre $\times$ valeur};
+\end{tikzpicture}
+\caption{Le treillis des sous-espaces de $\mathbf F_2^3$ : le sous-espace nul, sept droites, sept plans et l'espace entier ; chaque plan contient trois droites. À droite, pour chaque dimension $k$, le nombre $\left[\begin{smallmatrix} 3 \\ k \end{smallmatrix}\right]_2$ de sous-espaces et la valeur $(-1)^k q^{\binom{k}{2}}$ de la fonction de Möbius entre $0$ et un sous-espace de dimension $k$, pour $q = 2$. La somme $1 - 7 + 14 - 8$ est nulle : c'est l'identité de la page~22 pour $q = 2$.}
+\label{fig:quillen-1970-15}
+\end{figure}
 
 \begin{encadre}
 \begin{theoreme}[Quillen, carnet 1970-15, pp.~21--22]\label{thm:quillen-1970-15}

@@ -4,7 +4,29 @@
 
 \emph{La page.} À la page~31 (sa page~154), Quillen observe que ses deux formules d'indice, la forme de Toeplitz et la forme graduée, se ramènent au même type d'expression : la trace d'une puissance impaire d'une différence $e_1 - e_2$ de deux idempotents. Il propose d'étudier $\operatorname{tr}((e_1 - e_2)^{2n+1})$ et d'essayer de montrer que c'est un entier indépendant de $n$. La page pose la question ; elle n'y répond pas.
 
-\emph{L'intuition.} En dimension infinie, $e_1 - e_2$ n'est pas à trace en général, et seule une puissance assez grande l'est ; la question est alors profonde. En dimension finie, toutes les traces existent, et la réponse attendue est $\operatorname{tr} e_1 - \operatorname{tr} e_2$, différence des rangs quand on travaille sur un corps de caractéristique nulle. Le calcul classique pose $A = P - Q$ et $B = P + Q - 1$ : ces deux matrices anticommutent et $A^2 + B^2 = 1$. Pour $m$ impair, $\operatorname{tr}(A^m B^2)$ est égal à son opposé, par cyclicité de la trace et anticommutation, d'où $\operatorname{tr}(A^m) = \operatorname{tr}(A^{m+2})$ \emph{à condition de pouvoir diviser par~$2$}. On pourrait croire que la caractéristique~$2$ fait exception. Ce n'est pas le cas.
+\emph{L'intuition.} En dimension infinie, $e_1 - e_2$ n'est pas à trace en général, et seule une puissance assez grande l'est ; la question est alors profonde. En dimension finie, toutes les traces existent, et la réponse attendue est $\operatorname{tr} e_1 - \operatorname{tr} e_2$, différence des rangs quand on travaille sur un corps de caractéristique nulle. Le calcul classique pose $A = P - Q$ et $B = P + Q - 1$ : ces deux matrices anticommutent et $A^2 + B^2 = 1$ (figure~\ref{fig:quillen-1983-10}). Pour $m$ impair, $\operatorname{tr}(A^m B^2)$ est égal à son opposé, par cyclicité de la trace et anticommutation, d'où $\operatorname{tr}(A^m) = \operatorname{tr}(A^{m+2})$ \emph{à condition de pouvoir diviser par~$2$}. On pourrait croire que la caractéristique~$2$ fait exception. Ce n'est pas le cas.
+
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05, >=stealth, every node/.style={font=\small}]
+\draw[black!40, thick] (-2.6,0) -- (2.8,0) node[right] {$\ell_P$};
+\draw[black!40, thick] ({-1.9*cos(50)},{-1.9*sin(50)}) -- ({2.9*cos(50)},{2.9*sin(50)}) node[above right=-2pt] {$\ell_Q$};
+\draw[frise, dashed] ({-1.1*cos(25)},{-1.1*sin(25)}) -- ({2.8*cos(25)},{2.8*sin(25)}) node[right] {$b$};
+\draw[piste, dashed] ({-2.4*cos(-20)},{-2.4*sin(-20)}) -- ({2.8*cos(-20)},{2.8*sin(-20)}) node[right] {$a$};
+\draw (0.6,0) arc (0:50:0.6); \node at (13:0.85) {$\varphi$};
+\draw[black!45, densely dotted] (-1.2,2.0785) -- (-1.2,0);
+\draw[black!45, densely dotted] (-1.2,2.0785) -- (0.5276,0.6287);
+\draw[->, thick] (0,0) -- (-1.2,2.0785) node[above] {$v$};
+\draw[->, thick] (0,0) -- (-1.2,0) node[above left=-1pt] {$Pv$};
+\draw[->, thick] (0,0) -- (0.5276,0.6287) node[above left=-1pt] {$Qv$};
+\draw[->, thick, piste] (0,0) -- (-1.7276,-0.6287) node[below left=-2pt] {$Av$};
+\draw[->, thick, frise] (0,0) -- (0.5276,-1.4498) node[below] {$Bv$};
+\fill (0,0) circle (1.2pt);
+\end{tikzpicture}
+\caption{Deux projecteurs orthogonaux $P$ et $Q$ du plan euclidien, sur des droites $\ell_P$ et $\ell_Q$ qui font un angle $\varphi$ (ici $50^\circ$). La matrice $A = P - Q$ est $\sin\varphi$ fois la symétrie orthogonale d'axe $a$, et $B = P + Q - 1$ est $\cos\varphi$ fois la symétrie d'axe $b$, bissectrice de $\ell_P$ et $\ell_Q$. Les deux axes font un angle de $45^\circ$ : le produit des deux symétries est un quart de tour, d'où $AB = -BA$, et $A^2 + B^2 = (\sin^2\varphi + \cos^2\varphi)\cdot 1 = 1$. Ici $\operatorname{tr} A^{2k+1} = 0 = \operatorname{tr} P - \operatorname{tr} Q$.}
+\label{fig:quillen-1983-10}
+\end{figure}
 
 \begin{encadre}
 \begin{theoreme}[énoncé de l'édition ; réponse, en dimension finie, à la question du carnet 1983-10, p.~31]\label{thm:quillen-1983-10}
