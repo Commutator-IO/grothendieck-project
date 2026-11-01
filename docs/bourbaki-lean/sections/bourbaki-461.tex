@@ -67,7 +67,85 @@ Ne sont pas démontrés ici : la forme de la page de la proposition~13 et de la 
 \emph{Deux énoncés faux tels qu'ils sont tapés.} La rédaction est maintenant transcrite en entier, et sa lecture complète relève deux écarts, que la transcription signale déjà en note. La formule~(6) du §~2 (p.~97 du fac-similé) donne, pour une flèche $\lambda : a \to a'$ et un sous-objet $x'$ de $a'$, l'égalité $\lambda^{-1}(\lambda(\lambda^{-1}(x'))) = x'$ ; l'argument de la page donne $\lambda^{-1}(x')$, et pour $\lambda = 0 : \mathbf Z \to \mathbf Z$ et $x' = 0$ le membre de gauche est $\mathbf Z$. Après la définition~3 du §~1 (pp.~16--17), les foncteurs conoyaux sur la catégorie des flèches sont dits compatibles aux limites projectives, et les foncteurs noyaux aux limites inductives : les deux sortes de limites sont échangées, comme le disent le corollaire~4 (p.~13) et la proposition~27 (p.~89). Un foncteur compatible aux limites projectives conserve les monomorphismes ; le carré qui va de $0 \to \mathbf Z$ à $\mathrm{id} : \mathbf Z \to \mathbf Z$ a ses deux composantes injectives, et la flèche induite entre conoyaux, $\mathbf Z \to 0$, ne l'est pas.
 
 \begin{sloppypar}
-\noindent Dans la catégorie des $\mathbf Z$-modules, la forme juste de la formule est \texttt{comap\_map\_comap}, son échec tel que tapé \texttt{formula6\_fails}, et l'exemple des conoyaux \texttt{cokernel\_map\_not\_injective}, dans \href{\leanblobmain/Redaction461Slips.lean}{\texttt{Redaction461\allowbreak{}Slips.\allowbreak{}lean}}. Les \q{fracteurs} de la rédaction, et l'énoncé (proposition~43) que toute catégorie abélienne est équivalente à une catégorie à fracteurs, n'ont pas été retrouvés chez Freyd, Mitchell, dans l'article du Tôhoku ni chez Kashiwara et Schapira ; l'article de Raoult reste à dépouiller sur ce point. Ils ne sont pas formalisés.
+\noindent Dans la catégorie des $\mathbf Z$-modules, la forme juste de la formule est \texttt{comap\_map\_comap}, son échec tel que tapé \texttt{formula6\_fails}, et l'exemple des conoyaux \texttt{cokernel\_map\_not\_injective}, dans \href{\leanblobmain/Redaction461Slips.lean}{\texttt{Redaction461\allowbreak{}Slips.\allowbreak{}lean}}.
 \end{sloppypar}
+
+\emph{Trois propositions.} La lecture complète relève encore trois énoncés dont la forme ne se
+retrouve pas telle quelle dans les traités de l'époque.
+
+La proposition~24 du \S\,1 (p.~43--44 du fac-similé) porte sur une catégorie sous-additive,
+c'est-à-dire munie d'un objet nul et de sommes finies qui sont aussi des produits ; les
+ensembles de flèches y sont alors des monoïdes commutatifs. Si toute flèche à la fois
+monomorphisme faible et épimorphisme faible (noyau nul et conoyau nul) y est inversible, la
+catégorie est additive : chaque monoïde de flèches est un groupe. La démonstration applique
+l'hypothèse à la flèche de cisaillement $(x, y) \mapsto (x, x + y)$ de $a \oplus a$, de matrice
+$\bigl(\begin{smallmatrix} 1 & 0 \\ 1 & 1 \end{smallmatrix}\bigr)$, puis lit dans la matrice de
+l'inverse un opposé de l'identité de~$a$ ; l'opposé d'une flèche quelconque $f : a \to b$ s'en
+déduit en composant avec~$f$. Deux coquilles de la page (une matrice et un objet mal nommés)
+sont déjà signalées par la transcription et n'affectent pas l'argument.
+
+La première proposition~41 du \S\,2 (p.~105--106 ; le numéro est repris à la page suivante)
+considère un diagramme commutatif à deux lignes $a_0 \to b_0 \to c_0$ et $a_1 \to b_1 \to c_1$
+d'une catégorie abélienne, reliées par trois flèches verticales $\alpha$, $\beta$, $\gamma$. Si
+$\alpha$ est un épimorphisme, si le carré de droite est cartésien, si le composé de la ligne du
+haut est nul et si la ligne du bas est exacte, la ligne du haut est exacte. La page suppose la
+catégorie équivalente à une catégorie à fracteurs et raisonne sur les sous-objets (images
+directes et réciproques, loi modulaire) ; sa remarque~1 renvoie au n°~8 pour dire que cette
+hypothèse est toujours remplie. Le carré cartésien ne sert qu'à garantir que l'intersection du
+noyau de la flèche horizontale du haut et du noyau de~$\beta$ est nulle.
+
+La définition~4 du \S\,2 (p.~78--79) appelle catégorie abélienne à fracteurs une catégorie
+abélienne munie de deux classes de flèches, des injections et des surjections, formées de
+monomorphismes et d'épimorphismes, contenant les identités, stables par composition, telles que
+chaque sous-objet et chaque quotient ait exactement un représentant dans la classe, et telles
+que l'image réciproque d'une injection par une surjection soit strictement unique (axiomes
+Fr~1 à Fr~5). Tel qu'il est tapé, Fr~5 n'exige pas que le carré commute dans sa clause
+d'unicité ; une seconde clause dit que tout couple qui la remplit forme un carré cartésien.
+Le lemme~1 (p.~79), selon lequel deux injections (ou deux surjections) de même source et de
+même but sont égales, se sert de l'unicité sous cette forme. La proposition~43 (p.~109--117)
+construit, pour toute catégorie abélienne, une catégorie à fracteurs équivalente qui la contient
+comme sous-catégorie : on choisit d'abord un représentant dans chaque classe d'épimorphismes à
+isomorphisme près, puis, dans la catégorie obtenue, un représentant de chaque sous-objet, et
+l'on vérifie les axiomes un à un.
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} La proposition~24 est démontrée pour une catégorie
+munie de flèches nulles et de biproduits binaires, avec la structure de monoïde commutatif que
+Mathlib en tire : la flèche de cisaillement est \texttt{shear}, ses propriétés de noyau et de
+conoyau nuls \texttt{shear\_weakMono} et \texttt{shear\_weakEpi}, l'opposé de l'identité
+\texttt{exists\_add\_id\_eq\_zero\_of\_isIso}, l'hypothèse de la page
+\texttt{WeakMonoEpiInvertible}, l'énoncé \texttt{exists\_add\_eq\_zero}, et la structure
+préadditive qui en résulte \texttt{preadditive}, dont l'addition est celle des biproduits
+(\texttt{preadditive\_add}). La première proposition~41 est \texttt{exact\_top\_row}, dans une
+catégorie abélienne quelconque, sans l'hypothèse des fracteurs ; la preuve chasse les éléments à
+raffinement près. La définition~4 est la structure \texttt{Fracteurs}, transcrite telle que
+tapée, et le lemme~1 est \texttt{Fracteurs.\allowbreak{}J\_eq} et
+\texttt{Fracteurs.\allowbreak{}Q\_eq}, dans
+\href{\leanblobmain/Redaction461Props.lean}{\texttt{Redaction461\allowbreak{}Props.\allowbreak{}lean}}.
+La proposition~43 n'est pas formalisée : il faudrait construire les deux catégories
+intermédiaires de la page, dont les objets sont des représentants choisis de classes
+d'épimorphismes puis de monomorphismes, transporter la structure abélienne le long de
+l'équivalence et vérifier Fr~1 à Fr~5, où les égalités d'objets interviennent explicitement.
+Aucun modèle de la structure \texttt{Fracteurs} n'est donc construit ici, et sa cohérence avec
+Fr~5 tel que tapé n'est pas vérifiée.
+\end{sloppypar}
+
+\noindent\emph{Recherche bibliographique pour ces trois énoncés.} En partie retrouvés. Pour la proposition~24, le pas central figure chez
+S.~Schwede \cite{schwede2018}, proposition~2.5.3 (p.~189--190 de la version arXiv) : dans une
+catégorie enrichie en monoïdes commutatifs et munie de produits finis, la flèche de
+cisaillement de $A \times A$ est un isomorphisme si et seulement si l'identité de~$A$ a un
+opposé, avec la même lecture de l'inverse ; c'est, de mémoire et sans vérification sur le
+texte, aussi le pas par lequel P.~Freyd \cite{freyd1964} montre au chapitre~2 qu'une
+catégorie abélienne est additive. L'énoncé de la page, avec l'hypothèse qu'une flèche
+de noyau et de conoyau nuls est inversible, n'a pas été trouvé sous cette forme autonome.
+Pour la première proposition~41, J.-C.~Raoult \cite{raoult2019} donne au \S\,3, proposition~1
+(p.~6 de la version arXiv), un transfert d'exactitude du même type entre les deux lignes de
+deux carrés accolés ; pour passer de la ligne du bas à celle du haut, il suppose le carré de
+gauche semi-cartésien, alors que la page suppose le carré de droite cartésien et la flèche
+verticale gauche épimorphe. On n'a pas cherché à déduire l'un de l'autre ; l'énoncé de la page
+n'a pas été vu ailleurs. Raoult ne parle pas de fracteurs, ni d'aucune structure de choix
+strict des sous-objets et des quotients ; une recherche sur la toile (\q{catégorie abélienne
+à fracteurs}, \q{fracteur}) n'a rien donné, et zbMATH n'a pas été interrogé directement. La
+notion et la proposition~43 restent introuvables dans ce qui a été consulté.
 
 \litterature{retrouvé, pour l'essentiel. J.-C.~Raoult \cite{raoult2019}, qui dit tenir les carrés semi-cartésiens d'un cours de DEA de Chevalley à l'Institut Henri Poincaré (1965--1966), en donne au \S\,2 la définition et les propriétés de base (pagination de la version arXiv) : la proposition~1 (p.~3--4) établit l'équivalence de $\nu$ épimorphisme, de $\mu$ monomorphisme, de l'exactitude de $0 \to a_1 \times_b a_2 \to a_1 \oplus a_2 \to a_1 \sqcup_a a_2 \to 0$ et de celle de $a \to a_1 \oplus a_2 \to b$ ; la forme retenue par l'édition en a) y figure donc. Les carrés cartésiens et cocartésiens y sont semi-cartésiens (p.~4) ; la proposition~2 (p.~4) est la proposition~14 de la page ; la proposition~3 (p.~4--5) contient la première assertion de la proposition~15 ; la proposition~4 (p.~5) en donne la deuxième et la troisième assertion, sous l'hypothèse que le carré que l'on simplifie est un épimorphisme, resp.\ un monomorphisme, de la catégorie des flèches, plus forte que celle de d) ; son corollaire (p.~6) est le corollaire~2. Le corollaire~4 de la proposition~16 (caractérisation par $\ker \alpha_1 \to a_2 \to b$ et $a \to a_1 \to \operatorname{coker} \beta_2$) n'y a pas été vu. Les deux traités de la même époque ne l'ont pas. P.~Freyd \cite{freyd1964} caractérise, à la proposition~2.53 (p.~52), les carrés cartésiens, cocartésiens et à la fois l'un et l'autre (ses « diagrammes de Doolittle ») par l'exactitude de $a \to a_1 \oplus a_2 \to b$ aux extrémités ; l'exactitude au milieu seule, qui est la condition semi-cartésienne, n'y apparaît ni dans le chapitre~2 ni dans ses exercices. B.~Mitchell \cite{mitchell1965} n'a que le lemme des neuf avec produit fibré et somme amalgamée (I, proposition~16.5, p.~23) ; son texte entier, parcouru par mots-clés (\q{square}, \q{pullback}, \q{pushout}), n'a pas la notion. La recherche dans les articles (Puppe, Hilton) n'est pas faite.}

@@ -14,6 +14,40 @@ abbrev Dual (E : Type*) [AddCommGroup E] [Module A E] : Type _ := E →ₗ[A] KM
 
 variable {A K}
 
+variable (K) in
+/-- The orthogonal `F⁰ ⊆ E*` of a submodule `F ⊆ E`. -/
+def orth {E : Type*} [AddCommGroup E] [Module A E] (F : Submodule A E) :
+    Submodule A (Dual A K E) where
+  carrier := {φ | ∀ x ∈ F, φ x = 0}
+  add_mem' hφ hψ x hx := by simp [hφ x hx, hψ x hx]
+  zero_mem' _ _ := rfl
+  smul_mem' a φ hφ x hx := by simp [hφ x hx]
+
+/-- The orthogonal in `E` of a submodule `G ⊆ E*`. -/
+def orth' {E : Type*} [AddCommGroup E] [Module A E] (G : Submodule A (Dual A K E)) :
+    Submodule A E where
+  carrier := {x | ∀ φ ∈ G, φ x = 0}
+  add_mem' hx hy φ hφ := by simp [hx φ hφ, hy φ hφ]
+  zero_mem' _ _ := map_zero _
+  smul_mem' a x hx φ hφ := by simp [hx φ hφ]
+
+theorem orth'_sup {E : Type*} [AddCommGroup E] [Module A E] (G G' : Submodule A (Dual A K E)) :
+    orth' (G ⊔ G') = orth' G ⊓ orth' G' := by
+  ext x
+  refine ⟨fun h => ⟨fun φ hφ => h φ (Submodule.mem_sup_left hφ),
+    fun φ hφ => h φ (Submodule.mem_sup_right hφ)⟩, fun ⟨h, h'⟩ φ hφ => ?_⟩
+  obtain ⟨ψ, hψ, ψ', hψ', rfl⟩ := Submodule.mem_sup.1 hφ
+  simp [h ψ hψ, h' ψ' hψ']
+
+/-- Prop. 3: the orthogonal of a sum is the intersection of the orthogonals. -/
+theorem orth_sup {E : Type*} [AddCommGroup E] [Module A E] (F F' : Submodule A E) :
+    orth K (F ⊔ F') = orth K F ⊓ orth K F' := by
+  ext φ
+  refine ⟨fun h => ⟨fun x hx => h x (Submodule.mem_sup_left hx),
+    fun x hx => h x (Submodule.mem_sup_right hx)⟩, fun ⟨h, h'⟩ x hx => ?_⟩
+  obtain ⟨y, hy, y', hy', rfl⟩ := Submodule.mem_sup.1 hx
+  simp [h y hy, h' y' hy']
+
 theorem mk_eq_zero_iff (k : K) :
     (Submodule.Quotient.mk k : KModA A K) = 0 ↔ ∃ a : A, algebraMap A K a = k := by
   rw [Submodule.Quotient.mk_eq_zero, LinearMap.mem_range]
@@ -141,6 +175,30 @@ theorem dual_surjective_of_injective {L M : Type*} [AddCommGroup L] [Module A L]
     Function.Surjective (fun f : Dual A K M => f ∘ₗ i) := fun g =>
   (baer (A := A) (K := K)).extension_property i hi g
 
+/-- **Prop. 2.** The functor `*` is exact: if `E' → E → E''` is exact, so is
+`E''* → E* → E'*`. (Since `K/A` is injective, no finiteness is needed here.) -/
+theorem dual_exact {E' E E'' : Type*} [AddCommGroup E'] [Module A E'] [AddCommGroup E]
+    [Module A E] [AddCommGroup E''] [Module A E''] {f : E' →ₗ[A] E} {g : E →ₗ[A] E''}
+    (hfg : Function.Exact f g) :
+    Function.Exact (fun ψ : Dual A K E'' => ψ ∘ₗ g) (fun φ : Dual A K E => φ ∘ₗ f) := by
+  intro φ
+  constructor
+  · intro hφ
+    have hle : LinearMap.ker g ≤ LinearMap.ker φ := fun x hx => by
+      obtain ⟨y, rfl⟩ := (hfg x).1 hx
+      exact LinearMap.congr_fun hφ y
+    obtain ⟨ψ, hψ⟩ := (baer (A := A) (K := K)).extension_property (LinearMap.range g).subtype
+      (Submodule.injective_subtype _)
+      (((LinearMap.ker g).liftQ φ hle).comp g.quotKerEquivRange.symm.toLinearMap)
+    refine ⟨ψ, LinearMap.ext fun x => ?_⟩
+    have := LinearMap.congr_fun hψ ⟨g x, LinearMap.mem_range_self g x⟩
+    simp only [LinearMap.comp_apply, Submodule.subtype_apply, LinearEquiv.coe_coe,
+      LinearMap.quotKerEquivRange_symm_apply_image, Submodule.mkQ_apply,
+      Submodule.liftQ_apply] at this
+    exact this
+  · rintro ⟨ψ, rfl⟩
+    simp only [LinearMap.comp_assoc, hfg.linearMap_comp_eq_zero, LinearMap.comp_zero]
+
 variable [IsDomain A]
 
 variable (K) in
@@ -234,5 +292,67 @@ variable (K) in
 noncomputable def evalDualEquiv (E : Type*) [AddCommGroup E] [Module A E] [Module.Finite A E]
     (hE : Module.IsTorsion A E) : E ≃ₗ[A] Dual A K (Dual A K E) :=
   LinearEquiv.ofBijective _ (evalDual_bijective E hE)
+
+/-- Over a torsion module, linear forms with values in `K/A` separate points from submodules. -/
+theorem exists_separating {E : Type*} [AddCommGroup E] [Module A E] (hE : Module.IsTorsion A E)
+    (F : Submodule A E) {x : E} (hx : x ∉ F) : ∃ φ ∈ orth K F, φ x ≠ 0 := by
+  have hQ : Module.IsTorsion A (E ⧸ F) := fun y => by
+    obtain ⟨y, rfl⟩ := Submodule.Quotient.mk_surjective _ y
+    obtain ⟨a, ha⟩ := @hE y
+    exact ⟨a, by rw [← Submodule.Quotient.mk_smul, ha, Submodule.Quotient.mk_zero]⟩
+  have h0 : (Submodule.Quotient.mk x : E ⧸ F) ≠ 0 := by
+    rwa [Ne, Submodule.Quotient.mk_eq_zero]
+  have hne : evalDual (A := A) K (E ⧸ F) (Submodule.Quotient.mk x) ≠ 0 :=
+    fun h => h0 (evalDual_injective hQ (h.trans (map_zero _).symm))
+  obtain ⟨ψ, hψ⟩ : ∃ ψ : Dual A K (E ⧸ F), ψ (Submodule.Quotient.mk x) ≠ 0 := by
+    by_contra! h
+    exact hne (LinearMap.ext h)
+  refine ⟨ψ ∘ₗ F.mkQ, fun y hy => ?_, hψ⟩
+  simp [(Submodule.Quotient.mk_eq_zero F).2 hy]
+
+theorem orth'_orth {E : Type*} [AddCommGroup E] [Module A E] (hE : Module.IsTorsion A E)
+    (F : Submodule A E) : orth' (orth K F) = F := by
+  refine le_antisymm (fun x hx => ?_) fun x hx φ hφ => hφ x hx
+  by_contra h
+  obtain ⟨φ, hφ, hφx⟩ := exists_separating (K := K) hE F h
+  exact hφx (hx φ hφ)
+
+theorem dual_isTorsion (E : Type*) [AddCommGroup E] [Module A E] [Module.Finite A E]
+    (hE : Module.IsTorsion A E) : Module.IsTorsion A (Dual A K E) := fun φ => by
+  obtain ⟨d⟩ := nonempty_dual_equiv K E hE
+  obtain ⟨a, ha⟩ := @hE (d φ)
+  refine ⟨a, d.injective ?_⟩
+  rw [Submonoid.smul_def] at ha ⊢
+  rw [map_smul, ha, map_zero]
+
+theorem orth_orth' {E : Type*} [AddCommGroup E] [Module A E] [Module.Finite A E]
+    (hE : Module.IsTorsion A E) (G : Submodule A (Dual A K E)) : orth K (orth' G) = G := by
+  refine le_antisymm (fun φ hφ => ?_) fun φ hφ x hx => hx φ hφ
+  by_contra h
+  obtain ⟨Φ, hΦ, hΦφ⟩ := exists_separating (K := K) (dual_isTorsion (K := K) E hE) G h
+  obtain ⟨x, rfl⟩ := (evalDual_bijective (K := K) E hE).2 Φ
+  exact hΦφ (hφ x fun ψ hψ => hΦ ψ hψ)
+
+variable (K) in
+/-- **Prop. 3.** For `E` of finite length, `F ↦ F⁰` is an inclusion-reversing bijection from the
+submodules of `E` onto those of `E*`. -/
+def orthOrderIso (E : Type*) [AddCommGroup E] [Module A E] [Module.Finite A E]
+    (hE : Module.IsTorsion A E) : Submodule A E ≃o (Submodule A (Dual A K E))ᵒᵈ where
+  toFun F := OrderDual.toDual (orth K F)
+  invFun G := orth' (OrderDual.ofDual G)
+  left_inv F := orth'_orth (K := K) hE F
+  right_inv G := orth_orth' hE (OrderDual.ofDual G)
+  map_rel_iff' {F F'} := by
+    refine ⟨fun h => ?_, fun h φ hφ x hx => hφ x (h hx)⟩
+    rw [← orth'_orth (K := K) hE F, ← orth'_orth (K := K) hE F']
+    exact fun x hx φ hφ => hx φ (h hφ)
+
+/-- Prop. 3: for `E` of finite length, the orthogonal of an intersection is the sum of the
+orthogonals. -/
+theorem orth_inf {E : Type*} [AddCommGroup E] [Module A E] [Module.Finite A E]
+    (hE : Module.IsTorsion A E) (F F' : Submodule A E) :
+    orth K (F ⊓ F') = orth K F ⊔ orth K F' := by
+  conv_lhs => rw [← orth'_orth (K := K) hE F, ← orth'_orth (K := K) hE F', ← orth'_sup]
+  exact orth_orth' hE _
 
 end Bourbaki.Redaction398

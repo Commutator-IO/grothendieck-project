@@ -17,6 +17,7 @@ import Bourbaki.Redaction448
 import Bourbaki.Redaction453
 import Bourbaki.Redaction457
 import Bourbaki.Redaction461
+import Bourbaki.Redaction461Props
 import Bourbaki.Redaction461Slips
 import Bourbaki.Redaction469
 import Bourbaki.Redaction476

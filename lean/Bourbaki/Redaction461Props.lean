@@ -1,5 +1,55 @@
 import Mathlib
 
+/-!
+# Bourbaki, rédaction n° 461 (February 1966): three propositions of Chevalley's abelian categories
+
+Rédaction 461 of the Bourbaki archive (Archives Henri Poincaré, item 1036) is Chevalley's draft
+« Catégories abéliennes ». This file checks two of its propositions and states the definition
+behind a third.
+
+**§ 1, Proposition 24 (pp. 43–44).** A category with a zero object and binary biproducts (the
+page's « sous-additive » categories; the hom-sets are then commutative monoids, Mathlib's
+`CategoryTheory.SemiadditiveOfBinaryBiproducts.addCommMonoidHomOfHasBinaryBiproducts`) in which
+every morphism that is both a weak monomorphism and a weak epimorphism (zero kernel and zero
+cokernel, in the sense `g ≫ f = 0 → g = 0` and `f ≫ g = 0 → g = 0`) is invertible is
+additive. The page applies the hypothesis to the shear map `(x, y) ↦ (x, x + y)` of `X ⊞ X`,
+writes the inverse as a matrix and reads off an additive inverse of the identity of `X`.
+
+* `shear`, `inl_comp_shear`, `inr_comp_shear`, `lift_comp_shear`, `shear_comp_desc`: the shear
+  map and how it acts on lifts and descents;
+* `shear_weakMono`, `shear_weakEpi`: it has zero kernel and zero cokernel;
+* `exists_add_id_eq_zero_of_isIso`: if it is invertible, `𝟙 X` has an additive inverse;
+* `WeakMonoEpiInvertible`: the hypothesis of the proposition;
+* `exists_add_eq_zero`: under it every morphism has an additive inverse;
+* `preadditive`, `preadditive_add`: the resulting preadditive structure, whose addition is the
+  one given by the biproducts.
+
+**§ 2, first Proposition 41 (pp. 105–106).** In a commutative diagram with two rows
+`a₀ ⟶ b₀ ⟶ c₀` and `a₁ ⟶ b₁ ⟶ c₁` of an abelian category, if the left vertical map is an
+epimorphism, the right square is cartesian, the top composite is zero and the bottom row is
+exact, then the top row is exact. The page assumes the category equivalent to one « à
+fracteurs » and argues with subobjects; its Remark 1 notes that the assumption always holds
+(Proposition 43), so it is dropped here, and the proof chases elements up to refinements
+(Mathlib's `CategoryTheory.ShortComplex.exact_iff_exact_up_to_refinements`). The number 41 is
+used twice on the typescript; this is the first one.
+
+* `exact_top_row`: the proposition.
+
+**§ 2, Definition 4 (pp. 78–79).** A « catégorie abélienne à fracteurs » is an abelian category
+with two classes `J`, `Q` of monomorphisms and epimorphisms in which every subobject and every
+quotient has exactly one representative in the class, both classes contain the identities and
+are closed under composition, and pullbacks of an injection along a surjection are strictly
+unique. Axiom Fr 5 is transcribed as typed: the uniqueness clause does not ask the square to
+commute, and a second clause says that any such pair forms a cartesian square. Lemma 1 (p. 79)
+uses the uniqueness clause in exactly this form. Proposition 43 (pp. 109–117), that every
+abelian category is equivalent to one with fracteurs, is not formalised, and no model of the
+structure is constructed here.
+
+* `Fracteurs`: Definition 4;
+* `Fracteurs.J_eq`, `Fracteurs.Q_eq`: Lemma 1, two injections (surjections) with the same
+  source and target are equal.
+-/
+
 open CategoryTheory Limits
 
 namespace Bourbaki.Redaction461Props
