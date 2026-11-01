@@ -28,6 +28,12 @@ surjective, in place of the typescript's reduction to the cyclic case.
 * `KModA`, `Dual`: the module `K/A` and the dual `E* = E →ₗ[A] K/A`;
 * `range_evalOne`: evaluation at `1` identifies `(A/tA)*` with the part of `K/A` killed by `t`;
 * `dualQuotEquiv`: Prop. 1 in the cyclic case, `(A/tA)* ≃ A/tA` for `t ≠ 0`;
+* `dualGen`, `dualGen_mk_one`, `dualQuotEquiv_dualGen`, `dualQuotEquiv_symm_mk_one_apply`: the
+  explicit formula of the reader's marginal note, the form corresponding to the class of `1`
+  sends the class of `1` to the class of `t⁻¹` in `K/A`;
+* `dualBasis`, `dualBasis_lof`, `dualSumEquiv`, `dualSumEquiv_dualBasis`,
+  `dualSumEquiv_symm_lof`: for `E = ⊕ᵢ A/tᵢA` with basis `eᵢ`, the dual basis
+  `e*ᵢ(eⱼ) = δᵢⱼ tᵢ⁻¹ mod A`, image of the `eᵢ` under an isomorphism `E ≃ E*`;
 * `nonempty_dual_equiv`: Prop. 1, `E* ≃ E` for every finite-length `E`;
 * `evalDual`, `evalDual_injective`, `evalDual_bijective`, `evalDualEquiv`: the canonical map
   `E → E**`, injective for torsion `E` and bijective for finite-length `E`;
@@ -189,6 +195,103 @@ noncomputable def dualQuotEquiv {t : A} (ht : t ≠ 0) :
     (LinearEquiv.ofEq _ _ ((range_evalOne t).trans (range_divBy ht).symm)).trans <|
     (LinearMap.quotKerEquivRange (divBy K t)).symm.trans <|
     Submodule.quotEquivOfEq _ _ (ker_divBy ht)
+
+variable (K) in
+/-- The generator of `(A/tA)*`: the linear form sending the class of `a` to `a/t mod A`. -/
+noncomputable def dualGen {t : A} (ht : t ≠ 0) : Dual A K (A ⧸ Ideal.span {t}) :=
+  (Ideal.span {t}).liftQ (divBy K t) (ker_divBy ht).ge
+
+/-- The generator of `(A/tA)*` sends the class of `1` to the class of `t⁻¹` in `K/A`. -/
+theorem dualGen_mk_one {t : A} (ht : t ≠ 0) :
+    dualGen K ht (Submodule.Quotient.mk 1) = Submodule.Quotient.mk (algebraMap A K t)⁻¹ := by
+  rw [dualGen, Submodule.liftQ_apply, divBy_apply, map_one, one_mul]
+
+/-- The isomorphism `dualQuotEquiv` sends the generator `1 ↦ t⁻¹ mod A` to the class of `1`. -/
+theorem dualQuotEquiv_dualGen {t : A} (ht : t ≠ 0) :
+    dualQuotEquiv K ht (dualGen K ht) = Submodule.Quotient.mk 1 := by
+  have h1 : evalOne K t (dualGen K ht) = divBy K t 1 := by
+    rw [evalOne, LinearMap.applyₗ_apply_apply, dualGen, Submodule.liftQ_apply]
+  simp only [dualQuotEquiv, LinearEquiv.trans_apply]
+  rw [← Submodule.quotEquivOfEq_mk _ _ (ker_divBy (K := K) ht) (1 : A)]
+  congr 1
+  rw [LinearEquiv.symm_apply_eq]
+  ext1
+  rw [LinearEquiv.coe_ofEq_apply, LinearEquiv.ofInjective_apply,
+    LinearMap.quotKerEquivRange_apply_mk, h1]
+
+/-- The marginal note of the rédaction: the linear form on `A/tA` corresponding to the class
+of `1` maps the class of `1` to the class of `t⁻¹` in `K/A`. -/
+theorem dualQuotEquiv_symm_mk_one_apply {t : A} (ht : t ≠ 0) :
+    (dualQuotEquiv K ht).symm (Submodule.Quotient.mk 1) (Submodule.Quotient.mk 1) =
+      Submodule.Quotient.mk (algebraMap A K t)⁻¹ := by
+  rw [← dualGen_mk_one ht]
+  congr 1
+  rw [LinearEquiv.symm_apply_eq, dualQuotEquiv_dualGen]
+
+section DirectSum
+
+open DirectSum
+
+variable {ι : Type*} [Fintype ι] [DecidableEq ι] {t : ι → A} (ht : ∀ i, t i ≠ 0)
+
+variable (K) in
+/-- The dual basis of the marginal note: on `⊕ⱼ A/tⱼA`, the form `e*ᵢ` reads the `i`-th
+component and sends the class of `a` to `a/tᵢ mod A`. -/
+noncomputable def dualBasis (i : ι) : Dual A K (⨁ j, A ⧸ Ideal.span {t j}) :=
+  dualGen K (ht i) ∘ₗ DirectSum.component A ι _ i
+
+omit [Fintype ι] in
+/-- The marginal note: `e*ᵢ(eⱼ) = δᵢⱼ tᵢ⁻¹ mod A`, where `eⱼ` is the class of `1` in the
+`j`-th summand. -/
+theorem dualBasis_lof (i j : ι) :
+    dualBasis K ht i (lof A ι (fun j => A ⧸ Ideal.span {t j}) j (Submodule.Quotient.mk 1)) =
+      if i = j then Submodule.Quotient.mk (algebraMap A K (t i))⁻¹ else 0 := by
+  rw [dualBasis, LinearMap.comp_apply]
+  split_ifs with h
+  · subst h
+    rw [DirectSum.component.lof_self, dualGen_mk_one]
+  · rw [DirectSum.component.of]
+    simp [Ne.symm h]
+
+variable (K) in
+/-- Prop. 1 for `E = ⊕ᵢ A/tᵢA`: the dual is isomorphic to `E`, factor by factor through
+`dualQuotEquiv`. -/
+noncomputable def dualSumEquiv :
+    Dual A K (⨁ i, A ⧸ Ideal.span {t i}) ≃ₗ[A] ⨁ i, A ⧸ Ideal.span {t i} :=
+  ((DirectSum.linearEquivFunOnFintype A ι _).arrowCongr (LinearEquiv.refl _ _)).trans <|
+    (LinearMap.lsum A (fun i => A ⧸ Ideal.span {t i}) A).symm.trans <|
+    (LinearEquiv.piCongrRight fun i => dualQuotEquiv K (ht i)).trans <|
+    (DirectSum.linearEquivFunOnFintype A ι _).symm
+
+/-- `dualSumEquiv` sends the dual basis `e*ᵢ` to the basis `eᵢ`. -/
+theorem dualSumEquiv_dualBasis (i : ι) :
+    dualSumEquiv K ht (dualBasis K ht i) =
+      lof A ι (fun j => A ⧸ Ideal.span {t j}) i (Submodule.Quotient.mk 1) := by
+  apply (DirectSum.linearEquivFunOnFintype A ι _).injective
+  funext j
+  simp only [dualSumEquiv, LinearEquiv.trans_apply, LinearEquiv.apply_symm_apply,
+    LinearEquiv.piCongrRight_apply, DirectSum.linearEquivFunOnFintype_lof]
+  by_cases h : j = i
+  · subst h
+    rw [Pi.single_eq_same]
+    refine (congrArg (dualQuotEquiv K (ht j)) (LinearMap.ext fun y => ?_)).trans
+      (dualQuotEquiv_dualGen (K := K) (ht j))
+    simp [dualBasis, LinearMap.lsum_symm_apply, LinearEquiv.arrowCongr_apply,
+      DirectSum.linearEquivFunOnFintype_symm_single]
+  · rw [Pi.single_eq_of_ne h]
+    refine (congrArg (dualQuotEquiv K (ht j)) (LinearMap.ext fun y => ?_)).trans (map_zero _)
+    simp [dualBasis, LinearMap.lsum_symm_apply, LinearEquiv.arrowCongr_apply,
+      DirectSum.linearEquivFunOnFintype_symm_single, DirectSum.component.of, h]
+
+/-- The dual basis is the image of the basis `eᵢ` under the inverse isomorphism; in particular
+the forms `e*ᵢ` generate `(⊕ᵢ A/tᵢA)*`. -/
+theorem dualSumEquiv_symm_lof (i : ι) :
+    (dualSumEquiv K ht).symm
+      (lof A ι (fun j => A ⧸ Ideal.span {t j}) i (Submodule.Quotient.mk 1)) =
+      dualBasis K ht i := by
+  rw [LinearEquiv.symm_apply_eq, dualSumEquiv_dualBasis]
+
+end DirectSum
 
 variable [IsPrincipalIdealRing A]
 
