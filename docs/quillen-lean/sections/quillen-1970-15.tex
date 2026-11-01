@@ -1,0 +1,29 @@
+\section[Carnet 1970-15 : la fonction de Möbius du treillis des sous-espaces]{Carnet 1970-15 : la fonction de Möbius du treillis des sous-espaces\protect\verifie{Notebook1970_15}}\label{sec:quillen-1970-15}
+
+\emph{Le contexte.} En septembre 1970, le \carnet{1970}{15} compare la cohomologie d'un groupe dans un topos à celle de ses points. Pages~21--22, Quillen inverse des caractéristiques d'Euler sur les types d'isotropie d'une action, avec des coefficients de Möbius, et vérifie la formule pour un groupe abélien élémentaire agissant sur un point. Au rang~$3$, la vérification se ramène à l'identité $1 - (q^2 + q + 1) + q(q^2 + q + 1) - q^3 = 0$ : la somme alternée, sur les sous-espaces $W$ d'un espace de dimension $n$ sur $\mathbf F_q$, des $(-1)^{\dim W} q^{\binom{\dim W}{2}}$, est nulle pour $n \ge 1$. C'est la fonction de Möbius du treillis des sous-espaces.
+
+\emph{L'intuition.} Le nombre de sous-espaces de dimension $k$ est le coefficient binomial de Gauss $\left[\begin{smallmatrix} n \\ k \end{smallmatrix}\right]_q$, et ces coefficients vérifient le théorème binomial de Gauss $\prod_{i < n}(1 + q^i t) = \sum_k q^{\binom{k}{2}} \left[\begin{smallmatrix} n \\ k \end{smallmatrix}\right]_q t^k$. Pour $t = -1$, le facteur $i = 0$ du produit est nul.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, carnet 1970-15, pp.~21--22]\label{thm:quillen-1970-15}
+Soient $R$ un anneau commutatif et $q \in R$. On définit $\left[\begin{smallmatrix} n \\ k \end{smallmatrix}\right]_q$ par $\left[\begin{smallmatrix} n \\ 0 \end{smallmatrix}\right] = 1$, $\left[\begin{smallmatrix} 0 \\ k + 1 \end{smallmatrix}\right] = 0$ et $\left[\begin{smallmatrix} n + 1 \\ k + 1 \end{smallmatrix}\right] = \left[\begin{smallmatrix} n \\ k \end{smallmatrix}\right] + q^{k+1} \left[\begin{smallmatrix} n \\ k + 1 \end{smallmatrix}\right]$. Alors, pour tout $t \in R$,
+\[
+\prod_{i = 0}^{n - 1} (1 + q^i t) = \sum_{k = 0}^{n} q^{\binom{k}{2}} \begin{bmatrix} n \\ k \end{bmatrix}_q t^k,
+\qquad\text{et}\qquad
+\sum_{k = 0}^{n} (-1)^k q^{\binom{k}{2}} \begin{bmatrix} n \\ k \end{bmatrix}_q = 0 \quad (n \ge 1).
+\]
+Pour $n = 3$, c'est l'identité de la page~22.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Par récurrence sur $n$, pour tout $t$ à la fois. On écrit $\prod_{i \le n}(1 + q^i t) = (1 + t) \prod_{i < n}(1 + q^i (qt))$ et l'on applique l'hypothèse de récurrence à $qt$. Le coefficient de $t^{k+1}$ du produit par $1 + t$ est $q^{\binom{k}{2} + k}\left[\begin{smallmatrix} n \\ k \end{smallmatrix}\right] + q^{\binom{k+1}{2} + k + 1}\left[\begin{smallmatrix} n \\ k + 1 \end{smallmatrix}\right]$, soit $q^{\binom{k+1}{2}}\left[\begin{smallmatrix} n + 1 \\ k + 1 \end{smallmatrix}\right]$ par la récurrence de Pascal, puisque $\binom{k+1}{2} = \binom{k}{2} + k$ et $\left[\begin{smallmatrix} n \\ n + 1 \end{smallmatrix}\right] = 0$. Pour $t = -1$ et $n \ge 1$, le facteur $1 + q^0 \cdot (-1)$ est nul.
+\end{proof}
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} Les coefficients sont \texttt{qBinom}, avec \texttt{qBinom\_eq\_zero\_of\_lt} ; le théorème binomial est \texttt{prod\_one\_add\_eq\_sum}, la somme alternée \texttt{sum\_alternating\_eq\_zero}, et la vérification de la page \texttt{quillen\_check\_rank\_three}, dans \href{\leanblobmain/Notebook1970_15.lean}{\texttt{Notebook1970\_15.\allowbreak{}lean}}. mathlib n'a pas de coefficients binomiaux de Gauss ; le fichier les définit.
+\end{sloppypar}
+
+Ne sont pas formalisés : le dénombrement des sous-espaces de $\mathbf F_q^n$ par les $\left[\begin{smallmatrix} n \\ k \end{smallmatrix}\right]_q$, et l'inversion de Möbius sur les types d'isotropie. La proposition de la page~14 (un pro-$\ell$-groupe a une cohomologie de type fini si et seulement s'il a un sous-groupe ouvert de cohomologie finie) demanderait la cohomologie des groupes profinis, absente de mathlib ; elle n'est pas tentée.
+
+\litterature{retrouvé : P.~Hall (1936) ; Rota, \q{On the foundations of combinatorial theory I} (1964) ; Stanley, \emph{Enumerative Combinatorics}~I, 3.10. L'énoncé est classique ; l'édition ne le donne pas pour nouveau.}

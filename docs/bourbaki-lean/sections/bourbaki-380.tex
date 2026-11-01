@@ -1,0 +1,26 @@
+\section[Rédaction Bourbaki \redac{380} : deux énoncés faux tels que tapés]{Rédaction Bourbaki \redac{380} : un critère de pôle inversé et un spectre dit non compact\protect\verifie{Redaction380}}\label{sec:bourbaki-380}
+
+La rédaction \redac{380}, \q{Analyse fonctionnelle. Chapitre I. Algèbres normées}, des archives Bourbaki (Archives Henri Poincaré, \ahp{935}) est datée d'avril 1962 ; c'est le projet de Koszul qui devint le chapitre~I des \emph{Théories spectrales} (1967). Deux énoncés y sont faux tels qu'ils sont tapés. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{Le critère de pôle.} Pour un point isolé $\lambda$ du spectre de $x$, d'idempotent associé $e_\lambda$, le lemme~5 du §~2 dit que $\lambda$ est un pôle d'ordre $p$ de la résolvante quand $(x - \lambda e)^{p-1} e_\lambda \neq 0$ et $(x - \lambda e)^p e_\lambda = 0$. La proposition~6 (p.~40 du fac-similé) le reprend avec les conditions inversées : $(x - \lambda e)^k e_\lambda = 0$ pour $k < p$ et $\neq 0$ pour $k = p$. Aucun élément ne vérifie cette condition, puisque la nullité pour $k = p - 1$ entraîne la nullité pour $k = p$ ; telle que tapée, la proposition dirait que la résolvante n'a jamais de pôle.
+
+\emph{Le spectre d'une algèbre sans unité.} La proposition~16 du §~3 (p.~54) dit que le spectre, l'espace des caractères, d'une algèbre normée sans unité n'est pas compact. Il peut être vide : si tout produit est nul, un caractère $\varphi$ vérifie $\varphi(x)^2 = \varphi(x^2) = 0$, donc $\varphi = 0$, ce qui est exclu.
+
+\begin{encadre}
+\begin{contrexemple}[aux propositions~6 et~16 de la rédaction \redac{380}, telles qu'elles sont tapées]
+\begin{enumerate}
+\item[a)] Dans tout anneau, pour $p \ge 1$, il n'existe pas d'éléments $a$, $e$ tels que $a^k e = 0$ pour tout $k < p$ et $a^p e \neq 0$. La condition du lemme~5, elle, est réalisée : pour $x = 0$ dans $\mathbf C$, $\lambda = 0$, $e_\lambda = 1$ et $p = 1$ (la résolvante $1/\lambda$ a un pôle simple en~$0$).
+\item[b)] Soit $A$ l'espace $\mathbf C$ muni du produit nul. C'est une $\mathbf C$-algèbre commutative non nulle sans unité, et son espace de caractères est vide, donc compact.
+\end{enumerate}
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+a) Si $a^{p-1} e = 0$, alors $a^p e = a\,(a^{p-1} e) = 0$. b) Un élément unité $e$ vérifierait $e \cdot 1 = 1$, alors que tout produit est nul ; un caractère est nul, comme on l'a vu.
+\end{proof}
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} a) est \texttt{reversed\_pole\_condition\_never} et \texttt{pole\_condition\_example} ; b) est \texttt{isEmpty\_characterSpace\_of\_mul\_self\_eq\_zero}, pour toute algèbre où les carrés sont nuls, appliqué à l'algèbre \texttt{ZeroMulC} (\texttt{not\_exists\_unit}, \texttt{compactSpace\_characterSpace\_zeroMulC}), dans \href{\leanblobmain/Redaction380.lean}{\texttt{Redaction380.\allowbreak{}lean}}. La résolvante et ses pôles ne sont pas formalisés : a) en porte le contenu algébrique.
+\end{sloppypar}
+
+\litterature{le reste du projet est retrouvé dans les \emph{Théories spectrales} (1967) et chez Rickart (1960). Le texte imprimé n'a pas été consulté : on ne sait pas si les deux énoncés y sont corrigés.}

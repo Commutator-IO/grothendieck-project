@@ -1,0 +1,34 @@
+\section[Carnet 1968-13 : l'espace $X \cup_\Phi \{\infty\}$ et le lemme du smash]{Carnet 1968-13 : l'espace $X \cup_\Phi \{\infty\}$ d'une famille de supports, et le lemme du smash\protect\verifie{Notebook1968_13}}\label{sec:quillen-1968-13}
+
+\emph{Le contexte.} En décembre 1968, le \carnet{1968}{13} relie supports et bordisme. Page~64, Quillen prend sur un espace $X$ une famille de supports $\Phi$ : des fermés, stable par réunion finie et par passage aux sous-fermés. Page~65, il forme l'espace $X \cup_\Phi \{\infty\}$, où $X$ est ouvert et où les voisinages de $\infty$ sont les $(X \setminus Z) \cup \{\infty\}$, $Z \in \Phi$. Pour $\Phi$ la famille des fermés, $\infty$ est un point isolé ; pour $\Phi$ celle des compacts, on retrouve le compactifié d'Alexandroff $X^+$. Un passage barré de la page~64 note que l'espace est séparé si $\Phi$ contient un voisinage de chaque point. Pages~67--69, après sa propre correction (\q{Correction} : il avait mal défini le smash, qui est le quotient de $X \times Y$ par le bouquet), il énonce et démontre que $X^+ \wedge (Y \cup_\Phi \{\infty\}) = (X \times Y) \cup_\Psi \{\infty\}$, où $\Psi$ est la famille des fermés de $X \times Y$ contenus dans un $X \times F$, $F \in \Phi$, et propres sur $F$.
+
+\emph{L'intuition.} Un voisinage de $\infty$ dans le smash est l'image d'un ouvert qui contient le bouquet $X^+ \times \{\infty\} \cup \{\infty\} \times (Y \cup_\Phi \{\infty\})$ ; son complémentaire est un fermé $C$ de $X \times Y$, fermé dans tout le produit. Comme $X^+$ est compact, le lemme du tube éloigne $C$ de $X^+ \times \{\infty\}$, c'est-à-dire le place dans un $X \times F$ ; et $C$ est fermé dans $X^+ \times F$. C'est la preuve de la page.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, carnet 1968-13, pp.~64--69]\label{thm:quillen-1968-13}
+Soient $X$, $Y$ des espaces topologiques et $\Phi$ une famille de supports sur $Y$.
+\begin{enumerate}
+\item[a)] $X$ est un ouvert de $X \cup_\Phi \{\infty\}$ et $\{\infty\}$ est fermé. Si $X$ est séparé, $X \cup_\Phi \{\infty\}$ l'est si et seulement si tout point de $X$ a un voisinage dans $\Phi$.
+\item[b)] Pour $\Phi$ la famille des fermés compacts, $X \cup_\Phi \{\infty\}$ est homéomorphe à $X^+$ ; pour $\Phi$ celle des fermés, $\infty$ est isolé.
+\item[c)] Soit $\Psi$ la famille des fermés $A$ de $X \times Y$ contenus dans un $X \times F$, $F \in \Phi$, et fermés dans $X^+ \times Y$. L'application $X^+ \times (Y \cup_\Phi \{\infty\}) \to (X \times Y) \cup_\Psi \{\infty\}$, identité sur $X \times Y$ et qui envoie le bouquet sur $\infty$, est une application quotient : $(X \times Y) \cup_\Psi \{\infty\}$ est le smash $X^+ \wedge (Y \cup_\Phi \{\infty\})$ muni de la topologie quotient.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\noindent Quillen suppose $X$ localement compact, ce qui rend $X^+$ séparé ; la preuve n'utilise que la compacité de $X^+$, et c) vaut sans hypothèse. La famille $\Psi$ est prise sous la forme que la preuve de la page utilise (fermé dans $X^+ \times F$) ; l'équivalence avec \q{propre sur $F$}, qui demande $X^+$ séparé, n'est pas formalisée.
+
+\begin{proof}
+a) La séparation de $x \in X$ et de $\infty$ demande un ouvert $U \ni x$ disjoint d'un $X \setminus Z$, $Z \in \Phi$, c'est-à-dire $U \subset Z$ : $Z$ est un voisinage de $x$. Réciproquement, l'intérieur de $Z$ et $(X \setminus Z) \cup \{\infty\}$ séparent $x$ et $\infty$.
+
+b) Un ouvert contenant $\infty$ a, dans les deux topologies, un complémentaire dans $X$ fermé et compact, ou contenu dans un fermé compact, ce qui revient au même. Pour les fermés, $X$ lui-même est dans $\Phi$, et $\{\infty\}$ est ouvert.
+
+c) L'application est surjective. Pour un ensemble $U$ qui ne contient pas $\infty$, son image réciproque est l'image de $U \cap (X \times Y)$ par le plongement ouvert $X \times Y \to X^+ \times (Y \cup_\Phi \{\infty\})$. Pour $U \ni \infty$, l'image réciproque est le complémentaire de l'image du fermé $C = (X \times Y) \setminus U$, et tout revient à voir que cette image est fermée si et seulement si $C \in \Psi$. Si elle est fermée, le lemme du tube, appliqué au compact $X^+ \times \{\infty\}$, donne $F \in \Phi$ avec $C \subset X \times F$, et l'image réciproque par $\mathrm{id} \times \iota : X^+ \times Y \to X^+ \times (Y \cup_\Phi \{\infty\})$ montre que $C$ est fermé dans $X^+ \times Y$. Réciproquement, l'image de $C$ est contenue dans le fermé $X^+ \times F$, qui ne rencontre pas $\{\infty\}$, et elle y est l'image d'un fermé par un plongement.
+\end{proof}
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} \texttt{SupportFamily} et \texttt{Extension} définissent la famille et l'espace ; a) est \texttt{isOpenEmbedding\_ι}, \texttt{isClosed\_infty} et \texttt{t2Space\_iff} ; b) est \texttt{homeomorphOnePoint}, vers le compactifié \texttt{OnePoint X} de mathlib, et \texttt{isOpen\_infty\_closedSupports} ; c) est \texttt{isQuotientMap\_smashMap}, avec la famille \texttt{smashSupports} et le lemme clé \texttt{isClosed\_image\_e\_iff}, dans \href{\leanblobmain/Notebook1968_13.lean}{\texttt{Notebook1968\_13.\allowbreak{}lean}}.
+\end{sloppypar}
+
+Ne sont pas formalisés : $\Gamma(X^+, j_!F) = \Gamma_\Phi(X, F)$ (p.~65), la suite exacte qui en découle (p.~66), et l'application au bordisme (pp.~66--69).
+
+\litterature{les supports et $\Gamma_\Phi$ sont de Godement (1958) et de Bredon (\emph{Sheaf Theory}) ; l'espace $X \cup_\Phi \{\infty\}$ et le lemme du smash n'ont pas été retrouvés imprimés (zbMATH, \q{one-point compactification} avec \q{supports}), mais le livre de Bredon n'a pas été dépouillé page à page. L'\q{espace unifié} de Whyburn (\emph{Trans. AMS} 74, 1953) est l'analogue relatif des pp.~30--31 du même carnet. Ce sont des énoncés de topologie générale élémentaires, que l'édition ne donne pas pour nouveaux.}

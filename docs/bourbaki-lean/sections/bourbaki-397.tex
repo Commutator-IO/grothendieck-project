@@ -1,0 +1,32 @@
+\section[Rédaction Bourbaki \redac{397} : divisible et injectif sur un anneau principal]{Rédaction Bourbaki \redac{397} : sur un anneau principal, divisible équivaut à injectif\protect\verifie{Redaction397}}\label{sec:bourbaki-397}
+
+La rédaction \redac{397}, \q{Compléments au chapitre VII d'Algèbre. Dualité des modules de longueur finie sur un anneau principal}, des archives Bourbaki (Archives Henri Poincaré, \ahp{948}) est datée d'avril 1963. Elle définit les modules injectifs, démontre le critère de Baer (sa proposition~2) et en tire un corollaire : sur un anneau principal, un module est injectif si et seulement s'il est divisible ; puis un \q{corollaire du corollaire} : tout quotient d'un module injectif est injectif. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{L'idée.} Sur un anneau principal $R$, un idéal est engendré par un seul élément $a$. Prolonger à $R$ une application linéaire $g$ définie sur l'idéal $(a)$, c'est choisir l'image $q$ de $1$, avec la seule contrainte $a\,q = g(a)$ : c'est exactement résoudre une équation de divisibilité. Le critère de Baer, qui ramène l'injectivité aux prolongements depuis les idéaux, fait le reste.
+
+\begin{encadre}
+\begin{enonce}[Bourbaki, rédaction \redac{397}, corollaire de la proposition~2 et son corollaire]
+Soient $R$ un anneau commutatif et $Q$ un $R$-module.
+\begin{enumerate}
+\item[a)] Si $R$ est principal et si $Q$ est divisible (pour tout $r \neq 0$, l'application $q \mapsto rq$ de $Q$ dans $Q$ est surjective), alors $Q$ est injectif.
+\item[b)] Si $R$ est intègre et si $Q$ est injectif, alors $Q$ est divisible.
+\item[c)] Si $R$ est principal et intègre, tout quotient d'un $R$-module injectif est injectif.
+\end{enumerate}
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+a) Par le critère de Baer, il suffit de prolonger à $R$ toute application linéaire $g$ définie sur un idéal $(a)$. Si $a = 0$, on prend l'application nulle. Sinon, on choisit $q$ tel que $a q = g(a)$ ; l'application $r \mapsto r q$ prolonge $g$, car $g(c a) = c\,g(a) = (c a)\, q$.
+
+b) Soient $r \neq 0$ et $q \in Q$. Comme $R$ est intègre, $c \mapsto c r$ est une bijection de $R$ sur l'idéal $(r)$, et $c r \mapsto c q$ est une application linéaire de $(r)$ dans $Q$. Elle se prolonge à $R$ ; si $x$ est l'image de $1$, alors $r x$ est l'image de $r$, c'est-à-dire $q$.
+
+c) Si $Q$ est injectif, il est divisible par b), et un quotient d'un module divisible est divisible ; il est donc injectif par a).
+\end{proof}
+
+\noindent Le point a) n'utilise pas l'intégrité : il vaut sur tout anneau commutatif principal.
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} a) est \texttt{baer\_of\_divisible} et \texttt{injective\_of\_divisible}, b) \texttt{divisible\_of\_injective}, l'équivalence \texttt{injective\_iff\_divisible}, et c) \texttt{injective\_quotient}, dans \href{\leanblobmain/Redaction397.lean}{\texttt{Redaction397.\allowbreak{}lean}}. Le critère de Baer de mathlib demande que $R$ et $Q$ soient dans le même univers, et la formalisation garde cette restriction.
+\end{sloppypar}
+
+\litterature{retrouvée. Le critère est de Baer (1940) ; l'équivalence entre divisible et injectif sur un anneau principal est classique (Lam, \emph{Lectures on Modules and Rings}, §~3). mathlib n'en avait que le cas de $\mathbf Z$ (\texttt{Module.Baer.of\_divisible}) ; le cas général est un candidat pour mathlib, sans être une piste de l'édition.}

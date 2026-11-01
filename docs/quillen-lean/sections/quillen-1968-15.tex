@@ -1,0 +1,36 @@
+\section[Carnets 1968-15 et 1968-16 : sous-groupes parfaits, le groupe élémentaire et le lemme de Whitehead]{Carnets 1968-15 et 1968-16 : sous-groupes parfaits, le groupe élémentaire et le lemme de Whitehead\protect\verifie{Notebook1968_15}}\label{sec:quillen-1968-15}
+
+\emph{Le contexte.} Les \carnet{1968}{15} et \carnet{1968}{16} contiennent la mise au net de la construction \q{plus}. Au §~1 du premier, \q{Killing a perfect subgroup of the fundamental group}, la proposition~1.2 tue un sous-groupe parfait $E$ de $\pi_1 X$ ; sa preuve (PDF, pp.~28--29) remplace d'abord $E$ par le sous-groupe distingué $N$ qu'il engendre, encore parfait parce que $[N, N]$ est distingué et contient $[E, E] = E$. Au §~2 du second, \q{The K-theory associated to a ring} (p.~1), la construction s'applique au sous-groupe $E(A)$ de $GL(A)$ engendré par les matrices élémentaires, qui est parfait (Quillen renvoie à Bass) ; la page~2 utilise que $E(A)$ est distingué dans $GL(A)$, ce qui repose sur le lemme de Whitehead. L'anneau $A$ y est quelconque, \q{not necessarily commutative}.
+
+\emph{L'intuition.} La matrice élémentaire $e_{ij}(a) = 1 + a\,e_{ij}$ est un commutateur dès qu'on dispose d'un troisième indice $k$ : $[e_{ik}(a), e_{kj}(b)] = e_{ij}(ab)$. Pour le lemme de Whitehead, les matrices unipotentes par blocs $\left(\begin{smallmatrix} 1 & B \\ 0 & 1 \end{smallmatrix}\right)$ sont des produits de matrices élémentaires, une par coefficient de $B$, et trois d'entre elles fabriquent la matrice antidiagonale $\left(\begin{smallmatrix} 0 & \theta \\ -\theta^{-1} & 0 \end{smallmatrix}\right)$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, carnets 1968-15, p.~28, et 1968-16, pp.~1--2]\label{thm:quillen-1968-15}
+Soient $G$ un groupe et $A$ un anneau unitaire.
+\begin{enumerate}
+\item[a)] Le sous-groupe distingué engendré par un sous-groupe parfait de $G$ est parfait.
+\item[b)] Si $i$, $k$, $j$ sont deux à deux distincts, $[e_{ik}(a), e_{kj}(b)] = e_{ij}(ab)$ ; en particulier, le sous-groupe $E(n, A)$ des matrices inversibles engendré par les $e_{ij}(a)$ est parfait dès que $n \ge 3$.
+\item[c)] (Lemme de Whitehead.) Pour $\theta$ inversible dans $M_n(A)$, la matrice $\operatorname{diag}(\theta, \theta^{-1})$ est dans $E(2n, A)$ ; pour $\theta$, $\eta$ inversibles, $\operatorname{diag}(\theta\eta\theta^{-1}\eta^{-1}, 1)$ aussi.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+a) Soient $H$ parfait et $N$ le sous-groupe distingué qu'il engendre. Le commutateur $[N, N]$ est distingué et contient $[H, H] = H$, donc $N$, d'où $[N, N] = N$.
+
+b) Posons $X = a\,e_{ik}$ et $Y = b\,e_{kj}$. Alors $X^2 = Y^2 = YX = 0$, $XY = ab\,e_{ij}$, et $XY$ annule $X$ et $Y$ à droite ; on vérifie que $(1 + X)(1 + Y)(1 - X)(1 - Y) = 1 + XY$. Pour $n \ge 3$, tout générateur $e_{ij}(a)$ est le commutateur de $e_{ik}(a)$ et de $e_{kj}(1)$, pour un troisième indice $k$.
+
+c) $\left(\begin{smallmatrix} 1 & B \\ 0 & 1 \end{smallmatrix}\right)\left(\begin{smallmatrix} 1 & C \\ 0 & 1 \end{smallmatrix}\right) = \left(\begin{smallmatrix} 1 & B + C \\ 0 & 1 \end{smallmatrix}\right)$, et $\left(\begin{smallmatrix} 1 & a\,e_{ij} \\ 0 & 1 \end{smallmatrix}\right)$ est élémentaire ; de même pour les matrices triangulaires inférieures. Un calcul par blocs donne
+\[
+\begin{pmatrix} 1 & \theta \\ 0 & 1 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ -\theta^{-1} & 1 \end{pmatrix}\begin{pmatrix} 1 & \theta \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 0 & \theta \\ -\theta^{-1} & 0 \end{pmatrix},
+\]
+et le produit de cette matrice par la même pour $\theta = -1$ est $\operatorname{diag}(\theta, \theta^{-1})$. Enfin $\operatorname{diag}(\theta\eta\theta^{-1}\eta^{-1}, 1) = \operatorname{diag}(\theta, \theta^{-1})\operatorname{diag}(\eta, \eta^{-1})\operatorname{diag}((\eta\theta)^{-1}, \eta\theta)$.
+\end{proof}
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} a) est \texttt{normalClosure\_isPerfect}, b) \texttt{commutator\_transvectionUnit} et \texttt{elementary\_isPerfect}, avec l'identité d'anneau \texttt{commutator\_aux}, dans \href{\leanblobmain/Notebook1968_15.lean}{\texttt{Notebook1968\_15.\allowbreak{}lean}} ; c) est \texttt{exists\_mem\_elementary\_diag} et \texttt{exists\_mem\_elementary\_commutator}, avec \texttt{upper\_mem\_elementary}, \texttt{lower\_mem\_elementary} et \texttt{upper\_lower\_upper}, dans \href{\leanblobmain/Notebook1968_16.lean}{\texttt{Notebook1968\_16.\allowbreak{}lean}}. Les matrices sont les unités de l'anneau \texttt{Matrix n n A}, pour un anneau $A$ quelconque.
+\end{sloppypar}
+
+Ne sont pas formalisés : les énoncés stables, $E(A)$ distingué dans $GL(A)$ et $E(A) = [GL(A), GL(A)]$, qui demandent la limite inductive sur $n$ ; et la construction \q{plus} elle-même.
+
+\litterature{retrouvé : Milnor, \emph{Introduction to Algebraic K-Theory} (1971), §~3 et lemme~3.1 ; Rosenberg, \emph{Algebraic K-Theory and its Applications}, §~2.1. mathlib a les groupes parfaits (\texttt{Group.IsPerfect}) mais aucun de ces trois énoncés ; ce sont des candidats pour mathlib, pas des pistes de l'édition.}

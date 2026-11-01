@@ -57,7 +57,7 @@
 \maketitle
 
 \begin{abstract}
-\noindent Les carnets de recherche de Daniel Quillen, de 1968 à 2003, sont en ligne au Clay Mathematics Institute. Ce document y relève trois énoncés précis, en topologie générale, en algèbre linéaire et en théorie des groupes, et les démontre. Chaque démonstration suit une preuve vérifiée dans l'assistant de preuve Lean~4 \cite{lean4}, avec sa bibliothèque mathlib \cite{mathlib2020}, et elle est rédigée pour être lue sans Lean. Pour chaque énoncé, le document dit d'où il vient, ce qu'il veut dire, comment on le démontre, ce qui n'est pas formalisé et ce que l'on sait de sa présence dans la littérature. Les trois énoncés sont justes ; deux tiennent sous des hypothèses plus faibles que celles de la page ou de la démonstration attendue, et le troisième échoue pour $p = 2$, comme la page le laisse entendre.
+\noindent Les carnets de recherche de Daniel Quillen, de 1968 à 2003, sont en ligne au Clay Mathematics Institute. Ce document y relève six énoncés précis, en topologie générale, en algèbre linéaire, en théorie des groupes et en combinatoire, et les démontre. Chaque démonstration suit une preuve vérifiée dans l'assistant de preuve Lean~4 \cite{lean4}, avec sa bibliothèque mathlib \cite{mathlib2020}, et elle est rédigée pour être lue sans Lean. Pour chaque énoncé, le document dit d'où il vient, ce qu'il veut dire, comment on le démontre, ce qui n'est pas formalisé et ce que l'on sait de sa présence dans la littérature. Les six énoncés sont justes ; trois tiennent sous des hypothèses plus faibles que celles de la page ou de la démonstration attendue, un échoue pour $p = 2$, comme la page le laisse entendre, et deux sont classiques mais absents de mathlib.
 \end{abstract}
 
 \tableofcontents
@@ -68,7 +68,7 @@
 
 \emph{La règle sur les droits.} Les carnets sont protégés par le droit d'auteur. Ce document n'en cite presque rien, au plus quelques mots ; il énonce chaque résultat dans ses propres termes et renvoie à la page du fac-similé, que chacun peut consulter. Les transcriptions faites pour ce travail restent privées.
 
-\emph{La méthode.} Les carnets ont été lus en trois temps. On repère d'abord les énoncés précis : lemmes, propositions, identités, questions posées. Chaque énoncé fait ensuite l'objet d'une recherche bibliographique. La plus grande partie de ce qu'on lit dans les carnets se retrouve dans les articles publiés de Quillen, sur l'algèbre homotopique, la cohomologie des groupes et la $K$-théorie algébrique, le cobordisme, les superconnexions, les déterminants et la cohomologie cyclique ; ces énoncés ne sont pas repris ici. On ne formalise enfin que les énoncés précis que la recherche n'a pas retrouvés imprimés, ou dont la forme imprimée ne correspond pas à la page. Les trois énoncés de ce document sont dans ce cas.
+\emph{La méthode.} Les carnets ont été lus en trois temps. On repère d'abord les énoncés précis : lemmes, propositions, identités, questions posées. Chaque énoncé fait ensuite l'objet d'une recherche bibliographique. La plus grande partie de ce qu'on lit dans les carnets se retrouve dans les articles publiés de Quillen, sur l'algèbre homotopique, la cohomologie des groupes et la $K$-théorie algébrique, le cobordisme, les superconnexions, les déterminants et la cohomologie cyclique ; ces énoncés ne sont pas repris ici. On ne formalise enfin que les énoncés précis que la recherche n'a pas retrouvés imprimés, ou dont la forme imprimée ne correspond pas à la page. Quatre des six énoncés de ce document sont dans ce cas. Les deux autres, aux carnets 1968-15 et~16 et 1970-15, sont classiques et retrouvés ; ils sont formalisés parce que la construction \q{plus} et la vérification de la page s'appuient sur eux et que mathlib ne les a pas, et leurs sections le disent.
 
 \emph{Les garanties de Lean.} Chaque section cite en note de son titre le fichier Lean qui en contient les preuves, dans la bibliothèque \texttt{lean/Quillen/} du projet, un fichier par carnet. Lean vérifie mécaniquement qu'un énoncé tient sous les hypothèses écrites. Il ne garantit pas que l'énoncé rend fidèlement la page, ni qu'il est nouveau. Un énoncé que la page formule porte le nom de Quillen, le carnet et la page ; quand la démonstration établit davantage, on dit \q{d'après} ; une forme que l'édition ajoute (généralisation, réponse à une question, lemme intermédiaire) se dit énoncé de l'édition.
 
@@ -83,14 +83,20 @@
 Carnet & Énoncé & Verdict & Fichier Lean & \S\\
 \midrule
 \endhead
+1968-13, pp.~64--69 & L'espace $X \cup_\Phi \{\infty\}$ et le lemme du smash & confirmé ; plus général (ni compacité locale, ni séparation) & \href{\leanblobmain/Notebook1968_13.lean}{\texttt{Notebook1968\_13}} & \ref{sec:quillen-1968-13}\\
 1968-14, pp.~27--28 & Préimages compactes des fermés loin de $A$ & confirmé ; plus général (ni compacité locale, ni $\sigma$-compacité, ni $A$ fermé) & \href{\leanblobmain/Notebook1968_14.lean}{\texttt{Notebook1968\_14}} & \ref{sec:quillen-1968-14}\\
+1968-15, p.~28 ; 1968-16, pp.~1--2 & $E(n, A)$ parfait pour $n \ge 3$ ; lemme de Whitehead & classique, retrouvé ; sur tout anneau unitaire & \href{\leanblobmain/Notebook1968_15.lean}{\texttt{Notebook1968\_15}}, \href{\leanblobmain/Notebook1968_16.lean}{\texttt{\_16}} & \ref{sec:quillen-1968-15}\\
+1970-15, pp.~21--22 & Fonction de Möbius du treillis des sous-espaces & classique, retrouvé ; théorème binomial de Gauss & \href{\leanblobmain/Notebook1970_15.lean}{\texttt{Notebook1970\_15}} & \ref{sec:quillen-1970-15}\\
 1971-11, pp.~68--69 & Automorphismes d'ordre $p$ triviaux sur $\Omega_1$ & confirmé ; plus général (ni finitude, ni bijectivité) ; faux pour $p = 2$ & \href{\leanblobmain/Notebook1971_11.lean}{\texttt{Notebook1971\_11}} & \ref{sec:quillen-1971-11}\\
 1983-10, p.~31 & Traces des puissances impaires de $P - Q$ & question de la page ; réponse en dimension finie, sur tout anneau commutatif & \href{\leanblobmain/Notebook1983_10.lean}{\texttt{Notebook1983\_10}} & \ref{sec:quillen-1983-10}\\
 \bottomrule
 \end{longtable}}
 \end{center}
 
+\input{sections/quillen-1968-13}
 \input{sections/quillen-1968-14}
+\input{sections/quillen-1968-15}
+\input{sections/quillen-1970-15}
 \input{sections/quillen-1971-11}
 \input{sections/quillen-1983-10}
 

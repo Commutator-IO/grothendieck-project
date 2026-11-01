@@ -1,0 +1,21 @@
+\section[Rédaction Bourbaki \redac{387} : l'indice des puissances $n$-ièmes]{Rédaction Bourbaki \redac{387} : une formule pour l'indice des puissances $n$-ièmes des unités, fausse pour $\mathbf Q_2$\protect\verifie{Redaction387}}\label{sec:bourbaki-387}
+
+La rédaction \redac{387}, \q{Algèbre commutative. Chapitre VI. Valuations}, des archives Bourbaki (Archives Henri Poincaré, \ahp{942}) est datée de septembre 1962 ; c'est une refonte par Dieudonné du chapitre qui parut en 1964. Son §~9 traite des corps localement compacts. L'exercice~3 de ce paragraphe (p.~67 du fac-similé) donne, pour un tel corps $K$ et le groupe $U$ des unités de son anneau d'entiers, une formule pour l'indice $[U : U^n]$ du sous-groupe des puissances $n$-ièmes. La formule y est tapée comme le produit $\operatorname{mod}_K(n)\cdot \operatorname{Card}({}_nU)$ du module de $n$ et du nombre de racines $n$-ièmes de l'unité. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{La formule juste} est le quotient : $[U : U^n] = \operatorname{Card}({}_nU)/\operatorname{mod}_K(n)$ (pour $\mathbf Q_p$, Serre, \emph{Cours d'arithmétique}, chap.~II ; en général, Neukirch, \emph{Algebraic Number Theory}, chap.~II, §~5). Pour $K = \mathbf Q_2$ et $n = 2$, le module de $2$ est $|2|_2 = 1/2$, et les racines carrées de l'unité sont $\pm 1$. Le quotient vaut $2/(1/2) = 4$, le produit $(1/2) \cdot 2 = 1$.
+
+\begin{encadre}
+\begin{contrexemple}[à l'exercice~3 du §~9 de la rédaction \redac{387}, tel qu'il est tapé]
+Pour $K = \mathbf Q_2$ et $n = 2$, la formule tapée donne $[U : U^2] = 1$, c'est-à-dire que toute unité de $\mathbf Z_2$ serait un carré. Or $-1$ n'est pas un carré dans $\mathbf Z_2$.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+$|2|_2 = 1/2$, et l'équation $x^2 = 1$ n'a que les solutions $\pm 1$ dans l'anneau intègre $\mathbf Z_2$, qui sont distinctes. Si $x^2 = -1$ dans $\mathbf Z_2$, la réduction modulo~$4$ donnerait $\bar x^2 = 3$ dans $\mathbf Z/4$, où les carrés sont $0$ et $1$.
+\end{proof}
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} \texttt{norm\_two} donne $\|2\| = 1/2$ dans $\mathbf Q_2$, \texttt{sq\_eq\_one\_iff} et \texttt{one\_ne\_neg\_one} les deux racines carrées de l'unité, \texttt{not\_isSquare\_neg\_one} le fait que $-1$ n'est pas un carré (par réduction modulo~$4$), et \texttt{typed\_formula\_fails} le contre-exemple, dans \href{\leanblobmain/Redaction387.lean}{\texttt{Redaction387.\allowbreak{}lean}}. L'indice exact $4$ n'est pas formalisé.
+\end{sloppypar}
+
+\litterature{la formule juste est classique ; la forme tapée ne l'est pas. L'exercice imprimé (\emph{Algèbre commutative}, chap.~VI, 1964) n'a pas été consulté : on ne sait pas si l'erreur y subsiste.}
