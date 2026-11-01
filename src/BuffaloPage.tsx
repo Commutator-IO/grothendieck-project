@@ -7,10 +7,9 @@ import type { Board } from './components/Blackboard.tsx';
 import { buffaloIssueUrl } from './lib/report.ts';
 import { commentData, useComments } from './components/Comments.tsx';
 
-// The reconstructed boards (git-ignored transcripts-buffalo/) are shown only
-// with RENDER_BUFFALO and in the dev server, with one exception: the first
-// tape side of the topos course, published as a demonstration (2026-10-22).
-const RENDER_BUFFALO = import.meta.env.DEV || import.meta.env.VITE_RENDER_BUFFALO === 'true';
+// The reconstructed boards are published (2026-11-01): written in the git-ignored
+// transcripts-buffalo/, copied to public/buffalo-boards/ by `npm run buffalo-boards`.
+// The first tape side of the topos course keeps its edited demonstration copy.
 const Blackboard = lazy(() => import('./components/Blackboard.tsx').then((m) => ({ default: m.Blackboard })));
 const PUBLIC_BOARDS: Record<string, () => Promise<{ default: unknown }>> = {
   'URU5jgTvjhU-0000': () => import('./content/buffalo-board-URU5jgTvjhU-0000.json'),
@@ -240,10 +239,10 @@ export function BuffaloPage() {
   const side = video && playing ? sideOf(video, Math.max(now, playing.t)) : null;
   useEffect(() => {
     const key = video && side !== null ? `${video.id}-${String(side).padStart(4, '0')}` : null;
-    if (!key || (!RENDER_BUFFALO && !(key in PUBLIC_BOARDS))) return setBoard(null);
+    if (!key) return setBoard(null);
     let alive = true;
     const local = (k: string): Promise<Board | null> =>
-      fetch(`/transcripts-buffalo/${k}.json`).then((r) =>
+      fetch(`/buffalo-boards/${k}.json`).then((r) =>
         r.ok && r.headers.get('content-type')?.includes('json') ? r.json() : null,
       );
     // A « Tape 2, cont. » segment of the catalogue lies inside the previous side's board.
@@ -281,9 +280,9 @@ export function BuffaloPage() {
 
         <aside className="mt-6 max-w-[46em] rounded-xl border border-ink-200 bg-ink-50 px-4 py-3 text-[13px] leading-relaxed text-ink-700">
           The recordings are on the « Erwin Schulhoff » YouTube channel and are played from there; no sound is copied
-          to this site, and the lectures are not transcribed here, with one exception: as a demonstration, the
-          first tape side of the topos course (4 April, from 0:00:00) opens beside a blackboard reconstructed from
-          the recording's automatic captions. The « bad tape » marks come from the videos'
+          to this site, and the lectures are not transcribed here. Beside the player, a blackboard gives notes of
+          what was probably written on the board: formulas, statements and steps, in our wording, reconstructed
+          from the recordings (automatic captions and speech recognition), not from the board itself. The « bad tape » marks come from the videos'
           descriptions. For the content of the topos course, see Colin McLarty,{' '}
           <a href="https://www.youtube.com/watch?v=5AR55ZsHmKI" target="_blank" rel="noopener noreferrer" className={link}>
             « Grothendieck's 1973 Topos Lectures » ↗
