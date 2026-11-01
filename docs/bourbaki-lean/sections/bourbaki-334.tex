@@ -1,0 +1,23 @@
+\section[Rédaction Bourbaki \redac{334} : effectivité et action infinitésimale en caractéristique $p$]{Rédaction Bourbaki \redac{334} : une action effective d'action infinitésimale nulle\protect\verifie{Redaction334}}\label{sec:bourbaki-334}
+
+La rédaction \redac{334}, \q{Les espaces fibrés géométriques}, des archives Bourbaki (Archives Henri Poincaré, \ahp{896}) est un projet de Chevalley (1960) pour le chapitre des connexions. Elle travaille avec des variétés analytiques sur un corps valué complet non discret $K$. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{L'énoncé.} Un groupe de Lie $G$ opère analytiquement sur une variété $V$. Selon la définition~1 du §~1 (p.~5 du fac-similé), il opère \emph{effectivement} si toute application $h : T \to G$, définie sur une variété et telle que $(t,x) \mapsto h(t)\cdot x$ soit analytique, est elle-même analytique. Les pp.~6--8 affirment qu'alors l'application canonique $\xi$ de l'algèbre de Lie $\mathfrak g$ dans les champs de vecteurs sur $V$ est injective, en toute caractéristique. En caractéristique $p$, la preuve munit $G$ d'une structure $G'$ plus grossière, au moyen de cartes où $r$ coordonnées sont remplacées par leurs puissances $p$-ièmes. Ces cartes sont présentées comme des homéomorphismes sur des ouverts de $K^n$. Or c'est faux si $K$ n'est pas parfait, car $K^p$ est alors d'intérieur vide ; l'énoncé lui-même tombe.
+
+\begin{encadre}
+\begin{contrexemple}[à l'injectivité de $\xi$, p.~6 de la rédaction \redac{334}]
+Soit $K$ un corps valué complet de caractéristique $p$, avec $[K : K^p]$ fini et $K \neq K^p$ (par exemple $\mathbf F_q((\pi))$). Le groupe additif $K$ opère sur $V = K$ par $s \cdot x = x + s^p$. Cette action est analytique et fidèle, et effective au sens de la définition~1. Son application $\xi$ est pourtant nulle.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+On a $x + (s+t)^p = (x + t^p) + s^p$, et $s^p = t^p$ entraîne $s = t$. La dérivée de $s \mapsto x + s^p$ est $p s^{p-1} = 0$, donc $\xi = 0$. Pour l'effectivité, soit $h : T \to K$ telle que $g = h^p$ soit analytique, avec $T$ localement ouvert dans $K^m$. (i) La fonction $g$ est à valeurs dans le sous-corps $K^p$, qui est fermé. Ses quotients différentiels le long des accroissements $c^p$ sont dans $K^p$, ceux le long des $\pi c^p$ dans $\pi^{-1}K^p$. Ces deux fermés ne se rencontrent qu'en $0$ : les dérivées partielles de $g$ sont nulles, et seuls les monômes $t^{p\beta}$ y figurent. (ii) Décomposons les coefficients sur une base $1, \pi, \dots$ de $K$ sur $K^p$ et évaluons en $t = u^p$. Les composantes non triviales s'annulent, et les coefficients sont des puissances $p$-ièmes $a_{p\beta} = b_\beta^p$. La série $h = \sum b_\beta t^\beta$ converge, donc $h$ est analytique.
+\end{proof}
+
+Si $K$ est parfait, l'élévation à la puissance $p$ est un homéomorphisme de $K$. Les cartes de la rédaction sont alors légitimes, et l'argument semble correct, moyennant le théorème de Frobenius analytique pour les distributions $p$-fermées. L'énoncé vaut donc en caractéristique~$0$ et, selon toute apparence, pour $K$ parfait ; il est faux pour les corps locaux de caractéristique~$p$.
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} \texttt{act\_add}, \texttt{act\_injective} et \texttt{hasDerivAt\_act} (action fidèle, d'action infinitésimale nulle) ; \texttt{isClosed\_range\_pow} ($K^p$ fermé si $K$ est complet) ; \texttt{interior\_range\_pow\_eq\_empty} ($K^p$ d'intérieur vide si $K \ne K^p$, ce qui ruine les cartes de la preuve) ; \texttt{hasDerivAt\_eq\_zero\_of\_mem\_range\_pow} (étape (i)), dans \href{\leanblobmain/Redaction334.lean}{\texttt{Redaction334.\allowbreak{}lean}}. L'étape (ii), sur les séries entières, n'est pas formalisée.
+\end{sloppypar}
+
+\litterature{Serre, \emph{Lie Algebras and Lie Groups}, II$^{\text e}$ partie, travaille sur un corps complet quelconque, mais n'y traite pas ce point. Glöckner (\q{Endomorphisms of Lie groups over local fields}, 2017) montre, avec le Frobenius de $\mathbf F((X))$, qu'en caractéristique $p$ les morphismes analytiques injectifs peuvent avoir une différentielle nulle. Nous n'avons trouvé ce contre-exemple nulle part sous cette forme. Voir aussi la rédaction~\redac{324}, où un exemple voisin, $x^2 + t y^2$, répond à une question de Serre sur le rang.}
