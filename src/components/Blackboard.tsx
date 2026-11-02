@@ -39,6 +39,14 @@ const prose = (s: string) => s.split(/(\$[^$]+\$)/).map((p) => (p.startsWith('$'
  * next, so a turn of the wheel moves one board and never races through several.
  */
 const PAD_Y = 32; // py-4, top and bottom of a panel
+/*
+ * The panels are shorter than the board's window, so the foot of the previous panel stays in view
+ * above the current one. Their size follows what the recordings say of Grothendieck's board at
+ * Buffalo: he writes « on the other part of the blackboard » after about a dozen of our items and
+ * erases after thirty-five to forty, in two or three parts, so about a dozen items a panel.
+ */
+const PEEK = 0.28;
+const MAX_ITEMS = 12;
 
 export function Blackboard({ board, now, onSeek }: { board: Board; now: number; onSeek: (t: number) => void }) {
   const html = useMemo(
@@ -79,9 +87,11 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
   }, [shown, html]);
 
   // Fill the panels in order; a heading is never left alone at the foot of a panel.
+  const peek = Math.round(ph * PEEK);
+  const panelH = ph - peek;
   useLayoutEffect(() => {
     if (!ph) return;
-    const room = ph - PAD_Y;
+    const room = panelH - PAD_Y;
     const size = (k: number) => {
       const el = items.current[k];
       if (!el) return { h: 0, m: 0 };
@@ -89,17 +99,22 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
     };
     const out: number[] = [];
     let used = 0;
+    let count = 0;
     for (let k = 0; k < shown; k++) {
       const { h, m } = size(k);
       let need = used ? m + h : h;
       if (board.items[k].kind === 'h' && k + 1 < shown) need += size(k + 1).m + size(k + 1).h;
-      if (used && used + need > room) {
+      if (used && (used + need > room || count >= MAX_ITEMS)) {
         out.push(k);
         used = h;
-      } else used += used ? m + h : h;
+        count = 1;
+      } else {
+        used += used ? m + h : h;
+        count++;
+      }
     }
     setBreaks((b) => (b.length === out.length && b.every((x, i) => x === out[i]) ? b : out));
-  }, [shown, html, ph, board.items]);
+  }, [shown, html, ph, panelH, board.items]);
 
   // Keep the latest chalk in view: the last panel, smoothly for one new item, at once after a jump.
   const before = useRef(0);
@@ -107,6 +122,7 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
     const el = pane.current;
     if (el) el.scrollTo({ top: el.scrollHeight, behavior: shown - before.current === 1 ? 'smooth' : 'auto' });
     before.current = shown;
+    setAt(Number.MAX_SAFE_INTEGER); // the last panel; clamped below
   }, [shown, breaks.length]);
 
   const starts = [0, ...breaks.filter((b) => b < shown)];
@@ -116,13 +132,14 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
     <div className="blackboard flex h-full flex-col overflow-hidden rounded-md border-[3px] border-[#3b3f43] bg-[#2a2e31] shadow-[0_2px_10px_rgb(0_0_0/.25)]">
       <div
         ref={pane}
-        onScroll={(e) => ph && setAt(Math.round(e.currentTarget.scrollTop / ph))}
+        onScroll={(e) => panelH > 0 && setAt(Math.round((e.currentTarget.scrollTop + peek) / panelH))}
+        style={{ scrollPaddingTop: peek }}
         className="board-scroll flex-1 snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
       >
         {panels.map(([a, b], n) => (
           <section
             key={n}
-            style={{ minHeight: ph || undefined }}
+            style={{ minHeight: panelH || undefined }}
             className={`slate relative snap-start snap-always px-5 py-4 ${n ? 'rail' : ''}`}
           >
             {board.items.slice(a, b).map((i, j) => {
