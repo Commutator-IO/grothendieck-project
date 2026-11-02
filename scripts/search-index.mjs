@@ -30,6 +30,7 @@ const json = (p) => JSON.parse(readFileSync(resolve(ROOT, 'src/content', p), 'ut
 const { COTES, GROUPS } = await import(resolve(ROOT, 'src/content/catalogue.ts'));
 const { FINDINGS } = await import(resolve(ROOT, 'src/content/findings.ts'));
 const { BNF_BOXES } = await import(resolve(ROOT, 'src/content/bnf-boxes.ts'));
+const { NOTEBOOK_NOTES } = await import(resolve(ROOT, 'src/content/quillen-highlights.ts'));
 
 const HOLDER = {
   montpellier: 'Université de Montpellier',
@@ -151,8 +152,21 @@ for (const [i, l] of json('letters.json').records.entries()) {
 const subjects = (f) => json(f).tags;
 const TAGS = { bourbaki: subjects('tags-bourbaki.json'), quillen: subjects('tags-quillen.json'), ihes: subjects('tags-illusie.json') };
 
+/*
+ * The other collections are searched only where they meet Grothendieck (Michel, 2 November 2026):
+ * the search is the front page of an edition of his work, not a catalogue of three archives.
+ * Bourbaki: the documents the Bourbaki tab marks (author, named, present, met in the fonds) or that
+ * were transcribed for him. Quillen: the notebooks the Quillen tab marks, and those that name him.
+ * IHÉS: the fonds is his papers; out go only the items with no tie to him or his seminars.
+ */
+const G = /grothendieck/i;
+const tagged = (tags) => (tags ?? []).some((t) => G.test(t));
+const IHES_HIS = /grothendieck|\bS?GA\b|SGA ?\d|EGA|festschrift|récoltes|crafoord/i;
+const IHES_SERIES = new Set(['FG_IL_4_Ecrits_Mathematiques', 'FG_IL_5_Ecrits_Mathematiques_SGA', '2ILL_Papiers_Grothendieck']);
+
 /* Bourbaki: the AHP catalogue; its summaries are the archive's. */
 for (const r of json('bourbaki.json').records) {
+  if (!r.grothendieck?.length && !(r.creators ?? []).some((c) => G.test(c)) && !TAGS.bourbaki[r.id]) continue;
   const [yearFrom, yearTo] = years(r.date);
   push({
     id: `bourbaki:${r.id}`,
@@ -173,6 +187,7 @@ for (const r of json('bourbaki.json').records) {
 /* Quillen: the Clay's file list, with Glenys Luke's index. */
 const Q = json('quillen.json');
 for (const n of Q.notebooks) {
+  if (!NOTEBOOK_NOTES[n.id] && !tagged(TAGS.quillen[n.id]) && !G.test(n.index ?? '')) continue;
   const y = /^\d{4}$/.test(n.group) ? Number(n.group) : /^(\d{4})/.exec(n.label) ? Number(n.label.slice(0, 4)) : null;
   push({
     id: `quillen:${n.id}`,
@@ -195,6 +210,11 @@ const I = json('illusie.json');
 const series = new Map(I.series.map((s) => [s.id, s.label]));
 const cap = (s) => (s ? s.charAt(0) + s.slice(1).toLowerCase() : null);
 for (const it of I.items) {
+  const his =
+    [it.creator, it.recipient, it.title].some((x) => G.test(x ?? '')) ||
+    IHES_SERIES.has(it.series) ||
+    (TAGS.ihes[it.id] ?? []).some((t) => IHES_HIS.test(t));
+  if (!his) continue;
   const [yearFrom, yearTo] = years(it.sort ?? it.date);
   push({
     id: `ihes:${it.id}`,

@@ -506,9 +506,10 @@ export function SearchPage() {
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink-400">Search</p>
           <h1 className="titre mt-2 text-[28px] leading-tight text-ink-900">Every document, by its catalogue entry</h1>
           <p className="mt-3 text-[14.5px] leading-relaxed text-ink-600">
-            Search the catalogue entries of the Montpellier folders, the letters found in them, the Bourbaki archive,
-            Quillen's notebooks, the Fonds Grothendieck–Illusie, the BnF boxes, the Buffalo lectures and the edition's
-            findings. The index holds titles, dates, shelfmarks, keywords and summaries. It never holds the text of a
+            Search the catalogue entries of the Montpellier folders, the letters found in them, the Fonds
+            Grothendieck–Illusie, the BnF boxes, the Buffalo lectures and the edition's findings, and of the
+            Bourbaki documents and Quillen notebooks that concern Grothendieck. The index holds titles, dates,
+            shelfmarks, keywords and summaries. It never holds the text of a
             document or of its transcription, so you read each document where it is kept.
           </p>
         </header>
@@ -723,8 +724,9 @@ export function SearchPage() {
         <p className="mt-12 max-w-[48em] text-[12px] leading-relaxed text-ink-400">
           public/search-index.json{data ? `, built on ${data.built}` : ''} by scripts/search-index.mjs from the
           site's catalogues: the Montpellier inventory and its notices (title, group, typology, keywords, no Résumé),
-          the letters' register, the AHP's Bourbaki catalogue, the Clay's file list with Glenys Luke's index, the
-          IHÉS inventory, the BnF boxes, our index of the Buffalo lectures (one entry per tape side) and the findings.
+          the letters' register, the AHP's Bourbaki catalogue and the Clay's file list with Glenys Luke's index
+          (the documents and notebooks marked on the Bourbaki and Quillen tabs, or that name him), the IHÉS
+          inventory, the BnF boxes, our index of the Buffalo lectures (one entry per tape side) and the findings.
           The keywords on the transcribed Bourbaki, Quillen and IHÉS documents are ours, written from the
           transcriptions.
         </p>
