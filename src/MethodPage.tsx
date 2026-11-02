@@ -5,21 +5,113 @@ import { BY_ID, COTES } from './content/catalogue.ts';
 import {
   BATCH_SIZE,
   batchCount,
-  batchRange,
-  declared,
-  evidence,
   useManifest,
 } from './lib/batches.ts';
-import { STATES, shownState, type State } from './lib/progress.ts';
+import { STATES, type State } from './lib/progress.ts';
+
+const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: string; src: string; tei?: string }[] = [
+  {
+    id: 'article',
+    title: "A Machine Reads Grothendieck's Working Notes: Transcribing and Encoding Mathematical Manuscripts",
+    lang: 'English',
+    what: 'The method of this edition, prepared for the Journal of the Text Encoding Initiative: the fonds, the transcription rules, how the TEI carries the mathematics, and what the method does not do. CC BY 4.0.',
+    pdf: '/article/grothendieck-jtei.pdf',
+    tei: '/article/grothendieck-jtei.xml',
+    src: 'docs/study/article.tex',
+  },
+  {
+    id: 'article-rhm',
+    title: "Dater, reprendre, déplacer. Les notes de travail d'Alexandre Grothendieck et une pratique mathématique (fonds de Montpellier, 1949–1991)",
+    lang: 'French',
+    what: 'What the notes show: how the fonds came to be dated, how he wrote, and what recurs and what stops across thirty years. An annex lists the readings still to check against the facsimile.',
+    pdf: '/article/grothendieck-rhm.pdf',
+    src: 'docs/rhm/article.tex',
+  },
+  {
+    id: 'article-cicm',
+    title: "Formalising a Mathematician's Working Notes: Lean Proofs from the Grothendieck Archive",
+    lang: 'English',
+    what: 'Prepared for the Conference on Intelligent Computer Mathematics: how statements of the readings are chosen, formalised and attributed, what the proofs found, and how the lemmas offered to Mathlib were received.',
+    pdf: '/article/grothendieck-cicm.pdf',
+    src: 'docs/cicm/article.tex',
+  },
+  {
+    id: 'article-lean',
+    title: 'Annexe. Énoncés des lectures modernisées démontrés',
+    lang: 'French',
+    what: 'For each folder proved in Lean: the leaf in context, the statement as the reading has it, a proof written out for a mathematician, and what is not proved. In the chronological order of the fonds’ themes.',
+    pdf: '/article/grothendieck-lean.pdf',
+    src: 'docs/lean/article.tex',
+  },
+  {
+    id: 'article-problems',
+    title: "Open Questions from Grothendieck's Montpellier Notes: Fourteen Statements a Formalisation Could Not Reach",
+    lang: 'English',
+    what: 'Statements from the folders that the formalisation could not settle, each with its page, the context, what the literature search found, the ideas of proof, and what would settle it.',
+    pdf: '/article/grothendieck-problems.pdf',
+    src: 'docs/problems/article.tex',
+  },
+  {
+    id: 'article-bourbaki-lean',
+    title: 'Rédactions Bourbaki : énoncés démontrés en Lean',
+    lang: 'French',
+    what: 'Statements from fifteen rédactions of the Bourbaki archive (1950–1974), proved in Lean and written out for a reader who does not use Lean. Several typed statements turn out false, with counterexamples.',
+    pdf: '/article/bourbaki-lean.pdf',
+    src: 'docs/bourbaki-lean/article.tex',
+  },
+  {
+    id: 'article-quillen-lean',
+    title: "Daniel Quillen's Notebooks: Statements Proved in Lean",
+    lang: 'English',
+    what: "Ten statements from Quillen's research notebooks (Clay Mathematics Institute), from general topology and linear algebra to representation theory and analysis on the torus, proved in Lean and written out without it. All ten hold; three under weaker hypotheses than the page's, and one fails for p = 2. The notebooks are in copyright: everything is stated in the paper's own words, with notebook and page.",
+    pdf: '/article/quillen-lean.pdf',
+    src: 'docs/quillen-lean/article.tex',
+  },
+  {
+    id: 'book-methods',
+    title: 'Mathématiques outillées : le génie logiciel au service de la recherche',
+    lang: 'French',
+    what: 'A short book for mathematicians on the practices this edition runs on: git as a laboratory notebook, continuous integration, Lean and mathlib, working with an AI assistant, keeping apart what the machine produced from what a person checked, rights.',
+    pdf: '/article/maths-toolbox.pdf',
+    src: 'docs/livre-methodes/livre.tex',
+  },
+];
+
+/** The papers, first: they are what a visitor from outside the project came for. */
+function Articles() {
+  const pill = 'rounded-full border border-ink-200 px-3 py-0.5 text-[12.5px] text-ink-700 transition hover:border-brand-400 hover:text-brand-700';
+  return (
+    <section className="mt-10">
+      <H2 id="articles">The articles</H2>
+      <div className="mt-4 grid gap-4 md:grid-cols-2">
+        {ARTICLES.map((a) => (
+          <article key={a.id} id={a.id} className="card flex scroll-mt-20 flex-col px-5 py-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-ink-400">{a.lang}</p>
+            <h3 className="mt-1 text-[15px] font-semibold italic leading-snug text-ink-900">{a.title}</h3>
+            <p className="mt-2 flex-1 text-[13px] leading-relaxed text-ink-600">{a.what}</p>
+            <p className="mt-3 flex flex-wrap items-center gap-2">
+              <a href={a.pdf} className={pill}>
+                PDF
+              </a>
+              {a.tei && (
+                <a href={a.tei} className={pill} title="The submission file, valid against the journal's tei_jtei schema">
+                  TEI
+                </a>
+              )}
+              <code className="ml-auto text-[11px] text-ink-400">{a.src}</code>
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 /**
- * Method, and where the transcription stands.
+ * Method: the papers first, then how a page becomes a transcription.
  *
- * Two things on one page, on purpose. A progress table without a method is a
- * scoreboard: it says how much has been done and nothing about whether it is
- * worth anything. A method without a progress table is a promise. Together
- * they are checkable — which is the only claim this project can honestly make
- * about a body of work no one will read end to end.
+ * The batch-by-batch progress table was dropped on 2 November 2026; each folder's state is on its
+ * own page, and the cost section below still follows the manifest.
  */
 export function MethodPage() {
   const manifest = useManifest();
@@ -31,12 +123,12 @@ export function MethodPage() {
 
       <main className="mx-auto max-w-6xl px-5 py-10">
         <header className="max-w-[46em]">
-          <h1 className="titre text-[34px] leading-tight text-ink-900">Method &amp; progress</h1>
+          <h1 className="titre text-[34px] leading-tight text-ink-900">Method</h1>
           <P id="intro" className="mt-3 text-[15.5px] leading-relaxed text-ink-700">
-            How these pages are turned into LaTeX, what the process refuses to do, and how far it
-            has got. The refusals matter most: a transcription that guesses silently is worse than
-            none, because nothing on the page tells you which words were read and which were
-            invented.
+            The papers written from this edition first, then how a page of Grothendieck's becomes a
+            transcription, what the process refuses to do, and how far it has got. The refusals
+            matter most: a transcription that guesses silently is worse than none, because nothing
+            on the page tells you which words were read and which were invented.
           </P>
           <p className="mt-2 text-[12.5px] text-ink-400">
             Each paragraph below has its own address. Hovering over one shows a mark in the margin
@@ -44,11 +136,15 @@ export function MethodPage() {
           </p>
         </header>
 
-        <StatusSequence />
+        <Articles />
 
-        <Progress4 manifest={manifest} />
+        <section className="mt-16">
+          <H2 id="process" className="!text-[26px]">How a page becomes a transcription</H2>
+        </section>
 
-        <div className="mt-14 grid gap-x-10 gap-y-8 md:grid-cols-2">
+        <Pipeline />
+
+        <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2">
           <div className="prose-fonds">
             <H2 id="how-he-wrote">How Grothendieck wrote</H2>
             <P id="how-he-wrote-working-notes" className="mt-3">
@@ -262,7 +358,8 @@ export function MethodPage() {
           </div>
         </div>
 
-        <Pipeline />
+
+        <StatusSequence />
 
         <CostAndHorizon manifest={manifest} />
 
@@ -272,7 +369,7 @@ export function MethodPage() {
           <H2 id="not-claimed">What this site does not claim</H2>
           <ul className="prose-fonds mt-3">
             <LI id="not-claimed-observed-vs-declared">
-              <strong>Most of the progress table is observed; the last step is claimed.</strong>{' '}
+              <strong>Most of a batch's state is observed; the last step is claimed.</strong>{' '}
               Which files exist is a fact, read from the manifest: a transcribed batch shows as{' '}
               <em>drafted</em>, and one that also has a modernised reading shows as{' '}
               <em>AI-reviewed</em>. The modernisation pass reads the transcription critically and,
@@ -302,293 +399,12 @@ export function MethodPage() {
           </ul>
         </section>
 
-        {/* The article, served rather than described — as the Hopper edition
-            serves its own. A method page that explains the method and then
-            sends a reader to a repository for the paper about it withholds
-            the one document written for somebody outside the project. Two
-            forms, because they are not the same thing: the PDF is for
-            reading, and the TEI is the file the journal is sent, encoded
-            against the journal's own schema and validated on every build. */}
-        <section className="mt-14 max-w-[52em]">
-          <H2 id="article">The articles</H2>
-          <P id="article-what" className="prose-fonds mt-3">
-            <em>
-              A Machine Reads Grothendieck's Working Notes: Transcribing and Encoding Mathematical
-              Manuscripts
-            </em>{' '}
-            is the paper on this edition's method, prepared for the{' '}
-            <a
-              href="https://journal.tei-c.org/"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
-            >
-              Journal of the Text Encoding Initiative
-            </a>
-            . It describes the fonds, the transcription rules, the two registers, how the TEI
-            carries the mathematics, the facsimile the edition does not hold, and the registers
-            derived from the reading, and then what the method does not do, which is the half
-            worth reading. Licensed CC BY 4.0.
-          </P>
-          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
-            <a
-              href="/article/grothendieck-jtei.pdf"
-              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
-            >
-              PDF
-            </a>
-            <span className="text-ink-400">to read</span>
-            <a
-              href="/article/grothendieck-jtei.xml"
-              className="ml-3 rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
-            >
-              TEI
-            </a>
-            <span className="text-ink-400">
-              the submission file, encoded against the journal's schema,{' '}
-              <code className="text-[12px]">tei_jtei</code>, and valid on every build
-            </span>
-          </p>
-          <p className="mt-3 text-[12.5px] leading-relaxed text-ink-500">
-            Both are rebuilt from <code className="text-[12px]">docs/study/article.tex</code> by{' '}
-            <code className="text-[12px]">npm run article-tei</code> and are no more current than
-            the last build; its figures are drawn from the same derived files this site shows, and
-            each names the day it was generated.
-          </p>
-
-          <P id="article-rhm" className="prose-fonds mt-6">
-            <em>
-              Dater, reprendre, déplacer. Les notes de travail d'Alexandre Grothendieck et une
-              pratique mathématique (fonds de Montpellier, 1949–1991)
-            </em>{' '}
-            is a second paper, in French. Its subject is what the notes show: how the fonds came to be dated,
-            how he wrote, and what recurs and what stops across thirty years. Several readings it
-            depends on have been checked against the facsimile; the rest are the machine's, and
-            an annex lists what remains to check.
-          </P>
-          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
-            <a
-              href="/article/grothendieck-rhm.pdf"
-              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
-            >
-              PDF
-            </a>
-            <span className="text-ink-400">
-              built from <code className="text-[12px]">docs/rhm/article.tex</code>
-            </span>
-          </p>
-
-          <P id="article-lean" className="prose-fonds mt-6">
-            <em>Annexe. Énoncés des lectures modernisées démontrés</em> is its appendix, in French.
-            For each of the seventy-three folders proved in Lean it gives the leaf in context, the
-            statement as the reading has it, a proof written out for a mathematician, remarks, and
-            what is not proved. The parts follow the themes of the fonds in chronological order.
-          </P>
-          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
-            <a
-              href="/article/grothendieck-lean.pdf"
-              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
-            >
-              PDF
-            </a>
-            <span className="text-ink-400">
-              built from <code className="text-[12px]">docs/lean/article.tex</code>; the proofs in{' '}
-              <code className="text-[12px]">lean/</code>
-            </span>
-          </p>
-
-          <P id="article-cicm" className="prose-fonds mt-6">
-            <em>Formalising a Mathematician's Working Notes: 2,052 Lean Theorems from the Grothendieck
-            Archive</em>{' '}
-            is a paper prepared for the Conference on Intelligent Computer Mathematics (CICM). It
-            complements the first, covering how the statements of the readings are chosen,
-            formalised and attributed, what the proofs found, and how the lemmas proposed to
-            Mathlib were received.
-          </P>
-          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
-            <a
-              href="/article/grothendieck-cicm.pdf"
-              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
-            >
-              PDF
-            </a>
-            <span className="text-ink-400">
-              built from <code className="text-[12px]">docs/cicm/article.tex</code>
-            </span>
-          </p>
-
-          <P id="article-problems" className="prose-fonds mt-6">
-            <em>Open Questions from Grothendieck's Montpellier Notes: Fourteen Statements a
-            Formalisation Could Not Reach</em>{' '}
-            is a working paper for mathematicians. It collects statements from the folders that the
-            Lean formalisation could not settle, most of them in theories Mathlib does not have yet,
-            each with its page, the context, what the literature search found, the ideas of proof on
-            the page and in the edition, and what would settle it.
-          </P>
-          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
-            <a
-              href="/article/grothendieck-problems.pdf"
-              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
-            >
-              PDF
-            </a>
-            <span className="text-ink-400">
-              built from <code className="text-[12px]">docs/problems/article.tex</code>
-            </span>
-          </p>
-          <P id="article-bourbaki-lean" className="prose-fonds mt-6">
-            <em>Rédactions Bourbaki : énoncés démontrés en Lean</em>{' '}
-            is a working paper in French. It takes precise statements from fifteen rédactions of
-            the Bourbaki archive (Archives Henri Poincaré), from 1950 to 1974, and proves them, each
-            proof checked in Lean and written out for a reader who does not use Lean: where the
-            rédaction comes from, the intuition, the proof, what is not formalised and what the
-            literature search found. Several typed statements turn out false, with counterexamples.
-            The transcriptions stay private until the AHP and the ACNB agree.
-          </P>
-          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
-            <a
-              href="/article/bourbaki-lean.pdf"
-              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
-            >
-              PDF
-            </a>
-            <span className="text-ink-400">
-              built from <code className="text-[12px]">docs/bourbaki-lean/article.tex</code>
-            </span>
-          </p>
-          <P id="article-quillen-lean" className="prose-fonds mt-6">
-            <em>Carnets de Daniel Quillen : énoncés démontrés en Lean</em>{' '}
-            is a working paper in French. It takes three precise statements from Quillen's research
-            notebooks (Clay Mathematics Institute), from 1968, 1971 and 1983, in general topology,
-            group theory and linear algebra, and proves them, each proof checked in Lean and
-            written out for a reader who does not use Lean, with the notebook page, the intuition,
-            what is not formalised and what the literature search found. The notebooks are in
-            copyright: the paper states everything in its own words and cites notebook and page.
-          </P>
-          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
-            <a
-              href="/article/quillen-lean.pdf"
-              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
-            >
-              PDF
-            </a>
-            <span className="text-ink-400">
-              built from <code className="text-[12px]">docs/quillen-lean/article.tex</code>
-            </span>
-          </p>
-          <P id="book-methods" className="prose-fonds mt-6">
-            <em>Mathématiques outillées : le génie logiciel au service de la recherche</em>{' '}
-            is a short book in French for mathematicians, on the practices this edition runs on:
-            git as a laboratory notebook, issues, continuous integration, Lean and mathlib, working
-            with an AI assistant (written procedures, cloud sessions, the LaTeX–Lean loop, the
-            humaniser passes), keeping apart what the machine produced from what a person checked,
-            literature searches without priority claims, rights and withdrawal. Its examples come
-            from this project but name no corpus (#100).
-          </P>
-          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
-            <a
-              href="/article/maths-toolbox.pdf"
-              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
-            >
-              PDF
-            </a>
-            <span className="text-ink-400">
-              built from <code className="text-[12px]">docs/livre-methodes/livre.tex</code>
-            </span>
-          </p>
-        </section>
       </main>
 
       <Footer />
     </>
   );
 }
-
-/** Progress across the five notebooks, batch by batch. */
-function Progress4({ manifest }: { manifest: ReturnType<typeof useManifest> }) {
-  return (
-    <section className="mt-10">
-      <H2 id="where-it-stands">Where it stands</H2>
-      <P id="where-it-stands-bars" className="mt-2 max-w-[46em] text-[13.5px] leading-relaxed text-ink-600">
-        One bar per notebook grouping. The grey portion is untouched, and the coloured portions
-        are the states read off the files and declared in <code>transcripts/status.json</code>.
-      </P>
-
-      <ul className="mt-6 space-y-5">
-        {BOOKS.map((b) => {
-          const cotes = cotesOf(b);
-          const batches = cotes.flatMap((c) =>
-            Array.from({ length: batchCount(c.pages) }, (_, i) => {
-              const { first, last } = batchRange(i + 1, c.pages);
-              return { cote: c.id, batch: i + 1, pages: last - first + 1 };
-            }),
-          );
-          const counts: Record<State, number> = {
-            todo: 0,
-            running: 0,
-            drafted: 0,
-            reviewed: 0,
-            checked: 0,
-            skipped: 0,
-          };
-          for (const x of batches) {
-            counts[
-              shownState(declared(manifest, x.cote, x.batch), evidence(manifest, x.cote, x.batch))
-            ] += 1;
-          }
-          const mirrored = batches.filter((x) =>
-            manifest?.facsimiles?.[x.cote]?.batches.includes(x.batch),
-          ).length;
-
-          return (
-            <li key={b.key} className="card px-5 py-4">
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <h3 className="titre text-[17px] text-ink-900">
-                  {b.title}
-                </h3>
-                <p className="tabular ml-auto text-[12.5px] text-ink-500">
-                  {batches.length} batches · {mirrored} mirrored ·{' '}
-                  <strong className="font-semibold text-relu-600">{counts.checked}</strong> checked
-                </p>
-              </div>
-
-              <div className="mt-2.5 flex h-2.5 overflow-hidden rounded-full bg-ink-200">
-                {(['checked', 'reviewed', 'drafted', 'running', 'skipped'] as State[]).map((s) =>
-                  counts[s] ? (
-                    <span
-                      key={s}
-                      className={BAR_COLOURS[s]}
-                      style={{ width: `${(counts[s] / batches.length) * 100}%` }}
-                      title={`${counts[s]} ${s}`}
-                    />
-                  ) : null,
-                )}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-
-      <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-1.5 text-[12px] text-ink-500">
-        {STATES.map((s) => (
-          <li key={s.key} className="flex items-center gap-1.5" title={s.help}>
-            <span className={`h-2.5 w-2.5 rounded-sm ${BAR_COLOURS[s.key]}`} />
-            {s.label}
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
-const BAR_COLOURS: Record<State, string> = {
-  todo: 'bg-ink-200',
-  running: 'bg-encours-500',
-  drafted: 'bg-brand-300',
-  reviewed: 'bg-brand-600',
-  checked: 'bg-relu-500',
-  skipped: 'bg-alerte-200',
-};
 
 /**
  * The people who did the transcription work.
