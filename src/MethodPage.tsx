@@ -70,7 +70,7 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
   {
     id: 'article-recollement',
     title: 'Poème grothendieckien · Poema grothendieckiano',
-    lang: 'French and Italian · three pages',
+    lang: 'French and Italian · typewritten',
     what: "A short note in the manner of the Éléments: fragments on a site, the stack of their readings, a gerbe and its obstruction, the relative point of view over a base, and a conjecture.",
     pdf: '/article/poeme-grothendieckien.pdf',
     more: [{ label: 'PDF (italiano)', href: '/article/poema-grothendieckiano.pdf' }],
