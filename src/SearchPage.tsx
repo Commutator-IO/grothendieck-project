@@ -502,10 +502,10 @@ export function SearchPage() {
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink-400">Search</p>
           <h1 className="titre mt-2 text-[28px] leading-tight text-ink-900">Every document, by its catalogue entry</h1>
           <p className="mt-3 text-[14.5px] leading-relaxed text-ink-600">
-            The Montpellier folders, the letters found in them, the Bourbaki archive, Quillen's notebooks, the Fonds
-            Grothendieck–Illusie, the BnF boxes, the Buffalo lectures and the edition's findings, searched by title,
-            date, shelfmark, keywords and summary. <strong className="font-semibold text-ink-800">Metadata only:</strong>{' '}
-            no text of the documents or of their transcriptions; each one is read at its holder.
+            Search the catalogue entries of the Montpellier folders, the letters found in them, the Bourbaki archive,
+            Quillen's notebooks, the Fonds Grothendieck–Illusie, the BnF boxes, the Buffalo lectures and the edition's
+            findings. The index holds titles, dates, shelfmarks, keywords and summaries. It never holds the text of a
+            document or of its transcription, so you read each document where it is kept.
           </p>
         </header>
 
@@ -554,11 +554,12 @@ export function SearchPage() {
           <details className="w-full text-[12px] leading-relaxed text-ink-500">
             <summary className="cursor-pointer select-none font-medium text-brand-600 hover:text-brand-700">How to search</summary>
             <p className="mt-1">
-              Every word must match, in any case and with or without accents; "quoted words" match as a phrase.{' '}
-              <code className="font-mono text-[11.5px]">source:bourbaki</code> and{' '}
-              <code className="font-mono text-[11.5px]">year:1960-1970</code> in the query override the filters. A document is
-              kept when its dating overlaps the years chosen; « [vers 1963-1973] » counts as 1963–1973. A keyword, in a
-              result or in the left column, narrows the search to the documents that carry it.
+              A result has to contain every word you type. Case and accents don't matter, and words in "quotes" are
+              matched as a phrase. Typing <code className="font-mono text-[11.5px]">source:bourbaki</code> or{' '}
+              <code className="font-mono text-[11.5px]">year:1960-1970</code> in the box overrides the filters on the
+              left. A document counts for a range of years if its dating overlaps it, so « [vers 1963-1973] » turns up
+              for any year from 1963 to 1973. Clicking a keyword, under a result or in the left column, keeps only the
+              documents tagged with it.
             </p>
           </details>
         </form>
@@ -705,7 +706,7 @@ export function SearchPage() {
                     ))}
                   </ol>
                 ) : (
-                  <p className="mt-3 text-[14px] text-ink-500">Nothing matches every word. Try fewer words, fewer keywords, or wider years.</p>
+                  <p className="mt-3 text-[14px] text-ink-500">No document matches all of this. Drop a word or a keyword, or widen the years.</p>
                 )}
                 <div className="mt-4">
                   <Pager page={page} pages={pages} go={go} />
@@ -720,7 +721,8 @@ export function SearchPage() {
           site's catalogues: the Montpellier inventory and its notices (title, group, typology, keywords, no Résumé),
           the letters' register, the AHP's Bourbaki catalogue, the Clay's file list with Glenys Luke's index, the
           IHÉS inventory, the BnF boxes, our index of the Buffalo lectures (one entry per tape side) and the findings.
-          The transcribed Bourbaki, Quillen and IHÉS documents carry subject keywords of our own.
+          The keywords on the transcribed Bourbaki, Quillen and IHÉS documents are ours, written from the
+          transcriptions.
         </p>
       </main>
 
