@@ -68,6 +68,12 @@ const GROUPS: { id: string; label: string }[] = [
 const inGroup = (g: string) => NOTEBOOKS.filter((n) => n.group === g);
 const COUNT = new Map(GROUPS.map((g) => [g.id, inGroup(g.id).length]));
 const MAX = Math.max(...YEARS.map((y) => COUNT.get(y) ?? 0));
+// The red notebooks, those that meet Grothendieck: what the page shows by default (2 November 2026).
+const isRed = (n: Notebook) => NOTEBOOK_NOTES[n.id] !== undefined;
+const RED = NOTEBOOKS.filter(isRed);
+const RED_COUNT = new Map(GROUPS.map((g) => [g.id, inGroup(g.id).filter(isRed).length]));
+const RED_MAX = Math.max(...YEARS.map((y) => RED_COUNT.get(y) ?? 0));
+const FIRST_RED = RED[0]?.group ?? "1968";
 const totalGB = (NOTEBOOKS.reduce((s, n) => s + n.bytes, 0) / 1e9).toFixed(1);
 const totalPages = NOTEBOOKS.reduce((s, n) => s + (n.pages ?? 0), 0).toLocaleString('en');
 
@@ -108,11 +114,17 @@ function parsed(): { nb: Notebook; batch: number; page?: number } | undefined {
     : undefined;
 }
 const named = (): Notebook | undefined => parsed()?.nb;
+const onlyRedStart = () => {
+  const n = named();
+  return n === undefined || isRed(n);
+};
 const fromHash = (): Notebook => named() ?? inGroup("1968")[0] ?? NOTEBOOKS[0];
 
 export function QuillenPage() {
   const [nb, setNb] = useState<Notebook>(fromHash);
-  const [group, setGroup] = useState(nb.group);
+  // A link to a notebook that is not red opens with the filter off, so the notebook is in the list.
+  const [onlyRed, setOnlyRed] = useState(onlyRedStart);
+  const [group, setGroup] = useState(() => (named() ? nb.group : FIRST_RED));
   // The facsimile opens when a notebook is chosen, or when the link names one.
   const [pane, setPane] = useState(() => named() !== undefined);
   const [batch, setBatch] = useState(() => parsed()?.batch ?? 1);
@@ -125,6 +137,7 @@ export function QuillenPage() {
       const n = fromHash();
       setNb(n);
       setGroup(n.group);
+      if (!isRed(n)) setOnlyRed(false);
       setBatch(parsed()?.batch ?? 1);
       setPage(parsed()?.page);
       setPane(true);
@@ -155,16 +168,22 @@ export function QuillenPage() {
     history.replaceState(null, "", `#${nb.id}`);
     setPane(false);
   }, [nb.id]);
-  const list = useMemo(() => inGroup(group), [group]);
+  const list = useMemo(() => inGroup(group).filter((n) => !onlyRed || isRed(n)), [group, onlyRed]);
+  const counts = onlyRed ? RED_COUNT : COUNT;
+  const max = onlyRed ? RED_MAX : MAX;
+  const toggleRed = (on: boolean) => {
+    setOnlyRed(on);
+    if (on && !RED_COUNT.get(group)) setGroup(nb && isRed(nb) ? nb.group : FIRST_RED);
+  };
   const q = fold(query.trim());
   const found = useMemo(
     () =>
       q.length < 2
         ? null
-        : NOTEBOOKS.filter((n) =>
-            fold(`${n.label} ${n.index ?? ""}`).includes(q),
+        : NOTEBOOKS.filter(
+            (n) => (!onlyRed || isRed(n)) && fold(`${n.label} ${n.index ?? ""}`).includes(q),
           ),
-    [q],
+    [q, onlyRed],
   );
   const foundYears = useMemo(
     () => new Set(found?.map((n) => n.group)),
@@ -253,7 +272,7 @@ export function QuillenPage() {
                 aria-label="Year"
               >
                 {YEARS.map((y) => {
-                  const k = COUNT.get(y) ?? 0;
+                  const k = counts.get(y) ?? 0;
                   const on = y === group;
                   const dim = found !== null && !foundYears.has(y);
                   return (
@@ -264,7 +283,7 @@ export function QuillenPage() {
                       aria-selected={on}
                       title={`${y}: ${k} notebook${k === 1 ? "" : "s"}${YEAR_NOTES[y] ? ` — ${YEAR_NOTES[y]}` : ""}`}
                       onClick={() => setGroup(y)}
-                      className={`group flex flex-1 flex-col items-center gap-1 transition-opacity ${dim ? "opacity-25" : ""}`}
+                      className={`group flex flex-1 flex-col items-center gap-1 transition-opacity ${dim || k === 0 ? "opacity-25" : ""}`}
                     >
                       <span
                         className={`w-full rounded-t-[3px] transition ${
@@ -276,7 +295,7 @@ export function QuillenPage() {
                               ? "bg-brand-600"
                               : "bg-brand-200 group-hover:bg-brand-400"
                         }`}
-                        style={{ height: `${Math.max(3, (64 * k) / MAX)}px` }}
+                        style={{ height: `${Math.max(3, (64 * k) / max)}px` }}
                       />
                       <span
                         className={`tabular text-[10px] ${on ? "font-semibold text-ink-900" : YEAR_NOTES[y] ? "font-semibold text-alerte-600" : "text-ink-400"}`}
@@ -296,6 +315,18 @@ export function QuillenPage() {
               Years and notebooks in red meet the Grothendieck fonds; hover over
               one or open it to see why.
             </p>
+            <label className="mt-2 flex w-fit cursor-pointer items-center gap-2 text-[13px] text-ink-700">
+              <input
+                type="checkbox"
+                checked={onlyRed}
+                onChange={(e) => toggleRed(e.target.checked)}
+                className="accent-alerte-600"
+              />
+              Only the notebooks related to Grothendieck
+              <span className="tabular text-ink-400">
+                ({RED.length} of {NOTEBOOKS.length})
+              </span>
+            </label>
             <div className="mt-3 flex flex-wrap gap-2 text-[12.5px]">
               {GROUPS.slice(YEARS.length).map((g) => (
                 <button
@@ -310,7 +341,7 @@ export function QuillenPage() {
                   }`}
                 >
                   {g.label}{" "}
-                  <span className="tabular opacity-70">{COUNT.get(g.id)}</span>
+                  <span className="tabular opacity-70">{counts.get(g.id)}</span>
                 </button>
               ))}
             </div>
