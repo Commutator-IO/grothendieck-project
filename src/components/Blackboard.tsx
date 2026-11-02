@@ -136,11 +136,13 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
         style={{ scrollPaddingTop: peek }}
         className="board-scroll flex-1 snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
       >
+        {/* The lecture opens on a clean board: an empty panel above, the one he writes on below, both in view. */}
+        <section aria-hidden="true" style={{ minHeight: panelH || undefined }} className="slate relative snap-start snap-always" />
         {panels.map(([a, b], n) => (
           <section
             key={n}
             style={{ minHeight: panelH || undefined }}
-            className={`slate relative snap-start snap-always px-5 py-4 ${n ? 'rail' : ''}`}
+            className="slate rail relative snap-start snap-always px-5 py-4"
           >
             {board.items.slice(a, b).map((i, j) => {
               const k = a + j;
@@ -164,7 +166,7 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
           </section>
         ))}
       </div>
-      <Ledge panel={Math.min(at, panels.length - 1) + 1} of={panels.length} />
+      <Ledge panel={Math.max(1, Math.min(at, panels.length))} of={panels.length} />
     </div>
   );
 }
