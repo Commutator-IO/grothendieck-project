@@ -132,6 +132,11 @@ export interface EditionDocument {
    */
   pages?: number;
   /**
+   * The PDF page the document opens at, when several folders share one file —
+   * the seven chapters of Pursuing Stacks are one arXiv PDF.
+   */
+  page?: number;
+  /**
    * Whether the host lets this file be embedded. Defaults to true.
    *
    * `false` where the server sends `X-Frame-Options` or a CSP `frame-ancestors`

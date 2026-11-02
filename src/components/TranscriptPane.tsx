@@ -477,8 +477,8 @@ function CommunityPane({
           Range — the same arrangement the facsimile uses, and the reason a
           chapter of 200 pages opens rather than downloads. */}
       <iframe
-        key={doc.url}
-        src={doc.framable === false ? editionDocUrl(doc.url) : doc.url}
+        key={`${doc.url}#${doc.page ?? ''}`}
+        src={`${doc.framable === false ? editionDocUrl(doc.url) : doc.url}${doc.page ? `#page=${doc.page}` : ''}`}
         title={`${doc.title}, ${edition.editors}`}
         className="h-[75vh] w-full border-0 bg-white"
       />
