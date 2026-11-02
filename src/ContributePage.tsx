@@ -79,6 +79,7 @@ export function ContributePage() {
         <Routes />
         <Comments />
         <Review />
+        <Site />
         <Skills />
         <RunABatch />
         <PullRequest />
@@ -188,6 +189,43 @@ function Review() {
         « Reading is right », « I read something else », « Can't tell » or skip; your answers stay in
         your browser until you send them, all at once, as a prefilled GitHub issue. No mathematics
         is needed.
+      </p>
+    </section>
+  );
+}
+
+/** The site itself is open to change, like the readings. */
+function Site() {
+  const link = 'font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700';
+  const idea = `${REPO}/issues/new?labels=${encodeURIComponent('enhancement')}&title=${encodeURIComponent('Site: ')}&body=${encodeURIComponent(
+    'Page (URL):\n\nWhat I was trying to do:\n\nWhat got in the way, or what I would change:\n',
+  )}`;
+  return (
+    <section id="site" className="mt-14 max-w-[52em] scroll-mt-16">
+      <h2 className="titre text-[22px] text-ink-900">Changing the site</h2>
+      <p className="prose-fonds mt-3">
+        The way the site is laid out is as open to correction as the readings. If you got lost, if the
+        search did not find what you knew was there, if a page is awkward on a phone or hard to use
+        with a screen reader, say so: a short{' '}
+        <a href={idea} target="_blank" rel="noopener noreferrer" className={link}>
+          issue labelled enhancement
+        </a>{' '}
+        with the page and what you were trying to do is enough, and a screenshot helps.
+      </p>
+      <p className="prose-fonds mt-3">
+        You can also change it yourself. The site is a small Vite, React and Tailwind application in
+        the same repository, and its code is released under CC0. Each tab is one file,{' '}
+        <code>src/&lt;Name&gt;Page.tsx</code>; the header and footer are in{' '}
+        <code>src/components/Frame.tsx</code>; the search is <code>src/SearchPage.tsx</code>, over
+        an index built by <code>scripts/search-index.mjs</code>. After <code>npm install</code>,{' '}
+        <code>npm run dev</code> serves it locally, and a pull request with a before-and-after
+        screenshot is the quickest to review.
+      </p>
+      <p className="prose-fonds mt-3">
+        Three things a change must keep. Old links go on working, because they are cited in articles
+        and forum answers. No facsimile is served from here: the scans come from their archives. And
+        nothing that the rights do not allow is shipped to the browser, so the search index holds
+        catalogue entries and our own keywords, never the text of a document or of its transcription.
       </p>
     </section>
   );
