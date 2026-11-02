@@ -9,7 +9,7 @@ import {
 } from './lib/batches.ts';
 import { STATES, type State } from './lib/progress.ts';
 
-const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: string; src: string; tei?: string}[] = [
+const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: string; src: string; tei?: string; more?: { label: string; href: string }[] }[] = [
   {
     id: 'article',
     title: "A Machine Reads Grothendieck's Working Notes: Transcribing and Encoding Mathematical Manuscripts",
@@ -69,11 +69,12 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
   },
   {
     id: 'article-recollement',
-    title: 'Poema grothendieckiano',
-    lang: 'Italian · two pages',
+    title: 'Poème grothendieckien · Poema grothendieckiano',
+    lang: 'French and Italian · two pages',
     what: "Two tasks of a later reader of working notes, as mathematics in the manner of the Éléments: drawing from hard-to-read pages statements that hold whatever the doubtful words, glued into one text in one notation (a Čech class that vanishes), and recognising afterwards which questions of the mathematical community the pages had already answered.",
-    pdf: '/article/poema-grothendieckiano.pdf',
-    src: 'docs/recollement/articolo.tex',
+    pdf: '/article/poeme-grothendieckien.pdf',
+    more: [{ label: 'PDF (italiano)', href: '/article/poema-grothendieckiano.pdf' }],
+    src: 'docs/recollement/article.tex',
   },
   {
     id: 'book-methods',
@@ -101,6 +102,11 @@ function Articles() {
               <a href={a.pdf} className={pill}>
                 PDF
               </a>
+              {a.more?.map((m) => (
+                <a key={m.href} href={m.href} className={pill}>
+                  {m.label}
+                </a>
+              ))}
               {a.tei && (
                 <a href={a.tei} className={pill} title="The submission file, valid against the journal's tei_jtei schema">
                   TEI
