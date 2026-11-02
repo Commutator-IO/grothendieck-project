@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run manifest && vite",
-    "build": "npm run relay:allowlist -- --check && npm run manifest && tsc -b && vite build && npm run sitemap",
+    "dev": "npm run manifest && npm run search-index && vite",
+    "build": "npm run relay:allowlist -- --check && npm run manifest && npm run search-index && tsc -b && vite build && npm run sitemap",
     "lint": "oxlint --deny-warnings",
     "preview": "vite preview",
     "postinstall": "node scripts/katex.mjs",
@@ -37,7 +37,8 @@
     "bourbaki": "node scripts/bourbaki-catalogue.mjs",
     "illusie": "node scripts/illusie-catalogue.mjs",
     "buffalo-index": "node scripts/buffalo-index.mjs",
-    "buffalo-boards": "node scripts/buffalo-boards.mjs"
+    "buffalo-boards": "node scripts/buffalo-boards.mjs",
+    "search-index": "node scripts/search-index.mjs"
   },
   "dependencies": {
     "react": "^19.2.7",

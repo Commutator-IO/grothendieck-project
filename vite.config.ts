@@ -190,6 +190,7 @@ export default defineConfig(({ mode }) => ({
         illusie: resolve(import.meta.dirname, 'illusie/index.html'),
         buffalo: resolve(import.meta.dirname, 'buffalo/index.html'),
         review: resolve(import.meta.dirname, 'review/index.html'),
+        search: resolve(import.meta.dirname, 'search/index.html'),
       },
     },
   },

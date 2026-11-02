@@ -78,6 +78,30 @@ function isCurrent(path: string, here: string): boolean {
   return path === h;
 }
 
+// The metadata search runs over every collection at once, so it sits outside them all.
+const SEARCH = { path: '/search/', label: 'Search' };
+
+function SearchLink({ here }: { here: string }) {
+  const on = isCurrent(SEARCH.path, here);
+  return (
+    <a
+      href={SEARCH.path}
+      aria-current={on ? 'page' : undefined}
+      title="Search all collections"
+      className={`flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-1 transition ${
+        on ? 'bg-ink-100 font-semibold text-ink-900' : 'hover:bg-ink-50 hover:text-brand-700'
+      }`}
+    >
+      <svg viewBox="0 0 16 16" className="h-4 w-4" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6">
+        <circle cx="7" cy="7" r="4.5" />
+        <path d="M10.5 10.5 14 14" strokeLinecap="round" />
+      </svg>
+      {/* Icon only in the row: the fonds' tabs already fill it. */}
+      <span className="sr-only">{SEARCH.label}</span>
+    </a>
+  );
+}
+
 function Tab({ path, label, here }: { path: string; label: string; here: string }) {
   const on = isCurrent(path, here);
   return (
@@ -152,6 +176,9 @@ export function Header({ path }: { path: string }) {
           ) : (
             pagesOf(collection).map((p) => <Tab key={p.path} {...p} here={path} />)
           )}
+          {/* Across every collection, so in every header (#108). */}
+          <span aria-hidden="true" className="mx-1 h-4 w-px bg-ink-200" />
+          <SearchLink here={path} />
         </nav>
 
         <button
@@ -166,6 +193,13 @@ export function Header({ path }: { path: string }) {
 
       {open && (
         <nav className="border-t border-ink-200 bg-white px-5 py-2 lg:hidden">
+          <a
+            href={SEARCH.path}
+            aria-current={isCurrent(SEARCH.path, path) ? 'page' : undefined}
+            className="block rounded-lg px-2 py-2 text-[14px] font-medium text-ink-700 hover:bg-ink-50 aria-[current=page]:font-semibold"
+          >
+            {SEARCH.label} all collections
+          </a>
           {COLLECTIONS.map((c) => (
             <div key={c.id} className="py-1">
               <p className="px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-ink-400">
