@@ -1,34 +1,29 @@
 % Poème grothendieckien.
-% Note courte, dans la manière des Éléments (site, champ, gerbe, descente, point de vue relatif).
-% Le vocabulaire reste abstrait à dessein : la nature des deux problèmes se devine en lisant.
+% Écrit à la manière de ses notes de travail : paragraphes numérotés, titres soulignés, « N.B. »,
+% « i.e. », « cf. », « OK », points d'exclamation, questions qu'on se pose en route, un mot
+% barré, la première personne. Structures : site, champ, descente, gerbe, point de vue relatif.
+% Le vocabulaire reste abstrait à dessein ; cinq mots sont caviardés.
 \documentclass[10pt]{article}
 \usepackage[a4paper,left=42mm,right=42mm,top=24mm,bottom=26mm]{geometry}
 \usepackage{fontspec}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath,amssymb}
 \usepackage[french]{babel}
 \usepackage[hidelinks]{hyperref}
-\usepackage{enumitem}
-\setlist{nosep,leftmargin=1.4em}
-\setlength{\parskip}{0.25em}
+\usepackage[normalem]{ulem}
+\setlength{\parskip}{0.3em}
+\setlength{\parindent}{0pt}
 \setlength{\emergencystretch}{2em}
 \frenchsetup{SmallCapsFigTabCaptions=false}
-
-\newtheoremstyle{bbk}{0.45em}{0.45em}{\itshape}{}{\bfseries}{.}{0.4em}{}
-\theoremstyle{bbk}
-\newtheorem{prop}{Proposition}[section]
-\newtheorem{coro}[prop]{Corollaire}
-\newtheorem{conj}[prop]{Conjecture}
-\newtheoremstyle{bbkdef}{0.45em}{0.45em}{}{}{\bfseries}{.}{0.4em}{}
-\theoremstyle{bbkdef}
-\newtheorem{defi}[prop]{Définition}
-\newtheorem{rema}[prop]{Remarque}
-\renewcommand{\qedsymbol}{\(\square\)}
 
 \newcommand{\Lec}{\mathcal L}
 \newcommand{\U}{\mathfrak U}
 \newcommand{\Cl}[1]{\overline{#1}}
 % Un mot caviardé : un rectangle noir de sa largeur ; le mot lui-même n'entre pas dans le PDF.
 \newcommand{\cache}[1]{\setbox0\hbox{#1}\rule[-0.32ex]{\wd0}{1.02em}}
+% Un paragraphe numéroté, au titre souligné, comme dans les notes.
+\newcounter{no}
+\newcommand{\para}[1]{\par\medskip\stepcounter{no}\textbf{\arabic{no}.}\ \uline{#1}.\ }
+\newcommand{\enonce}[2]{\par\smallskip{\bfseries #1}\ ---\ \textit{#2}\par\smallskip}
 \makeatletter
 \renewcommand{\@seccntformat}[1]{\S\,\csname the#1\endcsname.\quad}
 \makeatother
@@ -42,170 +37,122 @@
 \maketitle
 \vspace{-1.6em}
 
-\noindent\emph{Introduction.} On se donne des fragments, chacun pris dans sa propre langue. On
-les traite comme les objets locaux d'un champ ; ce qu'ils esquissent ensemble est une section
-globale, et ce qu'ils résolvent se lit sur une base. Les obstructions sont des classes de
-cohomologie, et c'est elles qu'il s'agit de lire.
+Je voudrais dégager ici, de façon aussi peu technique que possible (!), le yoga qui me semble
+sous-jacent à deux problèmes de recollement. On se donne des fragments, chacun dans sa propre
+langue. Ce qu'ils esquissent ensemble est une section globale, ce qu'ils résolvent se lit sur une
+base, et les obstructions sont des classes de cohomologie --- c'est elles qu'il s'agit de lire.
 
 \section{Le champ des lectures}
 
-\begin{defi}
-Soit $P$ un ensemble fini de \emph{fragments}, et $S$ un ensemble de symboles. Une partie
-$U \subset P$ est \emph{autonome} si elle porte le contexte qu'il faut pour être comprise seule.
-Les parties autonomes et leurs inclusions forment une catégorie $C$, que l'on munit de la
-topologie engendrée par les familles $(U_i \subset U)$ de réunion $U$. Un fragment isolé n'est en
-général pas autonome : c'est ce qui rend cette topologie non triviale.
-\end{defi}
+\para{Le site} Soit $P$ un ensemble fini de \emph{fragments}, $S$ un ensemble de symboles. Je dirai
+qu'une partie $U \subset P$ est \emph{autonome} si elle porte le contexte qu'il faut pour être
+comprise seule. Les parties autonomes et les inclusions forment une catégorie $C$, que je munis de
+la topologie engendrée par les familles $(U_i \subset U)$ de réunion $U$.
 
-\begin{defi}
-Le \emph{champ des lectures} $\Lec$ associe à $U$ le groupoïde $\Lec(U)$ dont les objets sont
-les lectures de $U$ — un sens donné à chaque fragment, et une application qui envoie chaque
-symbole employé dans $U$ sur l'objet qu'il désigne — et dont les flèches $\ell \to \ell'$ sont les
-\emph{renommages} des symboles employés qui transforment $\ell$ en $\ell'$. La restriction à
-$V \subset U$ oublie les fragments hors de $V$.
-\end{defi}
+N.B. Un fragment isolé n'est en général pas autonome --- c'est là toute la difficulté, et c'est
+ce qui rend cette topologie non triviale.
 
-\begin{prop}
-$\Lec$ est un préchamp : pour $\ell, \ell' \in \Lec(U)$, le préfaisceau
-$V \mapsto \mathrm{Isom}(\ell|_V, \ell'|_V)$ est un faisceau. Une donnée de descente
-$(\ell_i, g_{ij})$ relative à un recouvrement $\U$ — lectures $\ell_i \in \Lec(U_i)$ et
-renommages $g_{ij} \colon \ell_j|_{U_{ij}} \to \ell_i|_{U_{ij}}$ tels que
-$g_{ij}g_{jk} = g_{ik}$ — est effective, c'est-à-dire provient d'une lecture de $U$ dans une
-notation unique, si et seulement si sa classe est nulle dans $\check H^1(\U, G)$, où $G$ est le
-groupe des permutations de $S$.
-\end{prop}
+\para{Le champ} À $U$ j'associe le groupoïde $\Lec(U)$ des lectures de $U$ (i.e. un sens donné à
+chaque fragment, et une application qui envoie chaque symbole employé dans $U$ sur l'objet qu'il
+désigne), les flèches $\ell \to \ell'$ étant les \emph{renommages} des symboles employés qui
+transforment $\ell$ en $\ell'$. La restriction à $V \subset U$ oublie ce qui est hors de $V$.
+Ceci posé, on trouve :
 
-\begin{proof}
-Des renommages compatibles sur un recouvrement se recollent, un renommage n'étant qu'une
-application définie symbole par symbole. Si $g_{ij} = h_i^{-1}h_j$, les lectures $h_i\ell_i$
-coïncident sur les intersections et se recollent ; la réciproque est la définition de la
-trivialité de la classe.
-\end{proof}
+\enonce{Prop. 1}{$\Lec$ est un préchamp. Une donnée de descente $(\ell_i, g_{ij})$ relative à un
+recouvrement $\U$, avec $g_{ij} g_{jk} = g_{ik}$, est effective --- i.e. provient d'une lecture de
+$U$ dans une notation unique --- si et seulement si sa classe est nulle dans
+$\check H^1(\U, G)$, $G$ le groupe des permutations de $S$.}
 
-Le champ associé $\tilde\Lec$ a donc plus d'objets que $\Lec$ : ce sont les \emph{textes},
-données de descente que l'on accepte de ne pas réduire à une notation unique. Un objet de
-$\tilde\Lec(P)$ est un texte de $P$ ; un objet de $\Lec(P)$ en est une \emph{réalisation}.
+Démonstration : des renommages compatibles se recollent, symbole par symbole ; et si
+$g_{ij} = h_i^{-1}h_j$, les $h_i\ell_i$ coïncident sur les $U_{ij}$, donc se recollent. La
+réciproque est une tautologie. OK.
 
-\begin{coro}
-Si le nerf de $\U$ est un arbre, tout texte relatif à $\U$ admet une réalisation.
-\end{coro}
+\para{Textes et réalisations} Le champ associé $\tilde\Lec$ a plus d'objets que $\Lec$ : ce sont
+les \emph{textes}, données de descente qu'on accepte de ne pas réduire à une notation unique. Un
+objet de $\Lec(P)$ est une \emph{réalisation} du texte. Il y a lieu de distinguer soigneusement
+les deux !
 
-\begin{proof}
-$\check H^1$ d'un arbre est trivial à coefficients dans un groupe quelconque : on choisit $h$ en
-une racine et on le propage le long des arêtes par $h_j = h_ig_{ij}$.
-\end{proof}
+\enonce{Cor.}{Si le nerf de $\U$ est un arbre, tout texte relatif à $\U$ admet une réalisation.}
 
-\begin{prop}
-Supposons la lecture \emph{localement bien posée} : tout fragment appartient à une partie
-autonome qui admet une lecture, et deux lectures d'une même partie sont localement isomorphes.
-Alors $\tilde\Lec$ est une gerbe ; son lien est le faisceau $\mathcal A$ des automorphismes d'une
-lecture, les \emph{symétries de notation}. Un texte de $P$ existe si et seulement si cette gerbe
-est neutre ; lorsque $\mathcal A$ est abélien, l'obstruction est une classe de
-$H^2(C, \mathcal A)$, et deux textes diffèrent par un torseur sous $\mathcal A$, classé par
-$H^1(C, \mathcal A)$ (Giraud).
-\end{prop}
+(Évident : on choisit $h$ en une racine et on le propage le long des arêtes, $h_j = h_ig_{ij}$.)
 
-\begin{proof}
-Les deux hypothèses sont, mot pour mot, les axiomes d'une gerbe ; le reste est la théorie de
-Giraud des gerbes à lien abélien.
-\end{proof}
+\para{La gerbe} Supposons maintenant la lecture \emph{localement bien posée} : tout fragment est
+dans une partie autonome qui a une lecture, et deux lectures d'une même partie sont localement
+isomorphes. (Hypothèse raisonnable, qu'il faudrait peut-être affaiblir.) Alors :
 
-\begin{rema}
-On voit ainsi deux étages d'obstruction. Le premier ($H^2$) dit qu'il n'y a pas de texte du tout :
-les symétries locales ne se recollent pas. Le second ($H^1$) dit qu'il y a un texte, mais pas de
-réalisation dans une notation unique. Une classe non nulle n'est pas une faute : elle naît d'un
-cycle de fragments où un même nom désigne deux objets, et on la tue en agrandissant $S$, non en
-corrigeant une lecture.
-\end{rema}
+\enonce{Prop. 2}{$\tilde\Lec$ est une gerbe, de lien le faisceau $\mathcal A$ des automorphismes
+d'une lecture --- les \emph{symétries de notation}. Un texte existe si et seulement si la gerbe est
+neutre ; si $\mathcal A$ est abélien, l'obstruction est dans $H^2(C, \mathcal A)$, et deux
+textes diffèrent par un torseur sous $\mathcal A$, classé par $H^1(C, \mathcal A)$.}
 
-\begin{defi}
-Un fragment peut admettre plusieurs lectures. Soit $\Lambda(U) \subset \mathrm{Ob}\,\Lec(U)$
-l'ensemble des lectures \emph{admissibles} de $U$, et $E(\lambda)$ l'ensemble des énoncés que
-$\lambda$ affirme. Un énoncé est \emph{reconstitué} sur $U$ s'il appartient à
-\[E(U) = \textstyle\bigcap_{\lambda \in \Lambda(U)} E(\lambda),\]
-et \emph{correct} s'il est vrai tel qu'il est écrit, éventuellement après l'ajout d'une hypothèse
-que le fragment tait et que l'on déclare.
-\end{defi}
+(Les deux hypothèses sont mot pour mot les axiomes d'une gerbe ; le reste, cf. Giraud.) Sauf
+erreur, c'est exactement ce qu'on observe : \emph{deux étages d'obstruction}. $H^2$ : pas de
+texte du tout. $H^1$ : un texte, mais pas de réalisation. Une classe non nulle n'est pas une
+faute ; elle naît d'un cycle de fragments où un même nom désigne deux objets, et on la tue non pas
+en \sout{corrigeant} une lecture, mais en agrandissant $S$.
 
-Restreindre $\Lambda$ fait croître $E$, et un énoncé reconstitué et correct le reste. Une
-vérification \cache{formelle} contrôle donc les mathématiques d'une lecture, jamais sa fidélité au
-fragment : les deux se mesurent séparément.
+\para{Énoncés reconstitués} Un fragment peut admettre plusieurs lectures. Soit $\Lambda(U)$
+l'ensemble des lectures \emph{admissibles} de $U$, $E(\lambda)$ les énoncés qu'affirme $\lambda$,
+et
+\[E(U) = \textstyle\bigcap_{\lambda \in \Lambda(U)} E(\lambda)\]
+les énoncés \emph{reconstitués}. Un énoncé est \emph{correct} s'il est vrai tel qu'il est écrit,
+quitte à ajouter une hypothèse que le fragment tait --- et qu'on déclare !
+
+N.B. Restreindre $\Lambda$ fait croître $E$. Une vérification \cache{formelle} contrôle donc les
+mathématiques d'une lecture, jamais sa fidélité au fragment : deux choses bien distinctes, qu'on a
+tendance à confondre.
 
 \section{Le point de vue relatif}
 
-Tout ce qui précède se place au-dessus d'une base : un ensemble ordonné $T$, muni de sa topologie
-d'Alexandrov, que l'on appellera le \cache{temps}. Les fragments y sont placés par un morphisme
-$P \to T$ ; on note $t_P$ la borne de son image. Au-dessus de $T$ vit un faisceau croissant
-$t \mapsto C_{<t}$, les énoncés que la communauté \cache{mathématique} tenait pour acquis avant $t$, et un
-ensemble $Q$ de \cache{questions}, chacune avec sa date $t_q$. Un ordre des fragments compatible aux
-indices de position existe si et seulement si ces indices sont sans cycle (Szpilrajn).
+\para{La base} Tout ce qui précède vit au-dessus d'une base : un ensemble ordonné $T$, avec sa
+topologie d'Alexandrov, que j'appellerai le \cache{temps}. Les fragments y sont placés par
+$P \to T$ ; soit $t_P$ la borne de l'image. Au-dessus de $T$ il y a un faisceau croissant
+$t \mapsto C_{<t}$, les énoncés que la communauté \cache{mathématique} tenait pour acquis avant
+$t$, et un ensemble $Q$ de \cache{questions}, chacune avec sa date $t_q$. (Un ordre des fragments
+compatible aux indices existe ssi ces indices sont sans cycle --- Szpilrajn.)
 
-\begin{prop}
-Soit $R \subset Q \times E$ la relation « l'énoncé $e$ touche la question $q$ ». Les applications
-$A \mapsto A'$ et $B \mapsto B'$ qu'elle définit entre parties de $Q$ et de $E$ forment une
-correspondance de Galois, et les couples fermés un treillis complet.
-\end{prop}
+\para{Correspondance de Galois} Soit $R \subset Q \times E$ la relation « $e$ touche $q$ ». Les
+applications $A \mapsto A'$, $B \mapsto B'$ qu'elle définit forment une correspondance de Galois,
+et les couples fermés un treillis complet (polarité de Birkhoff ; cf. Ganter--Wille).
 
-\begin{proof}
-C'est la polarité de Birkhoff d'une relation binaire ; les couples fermés sont les « concepts »
-de Ganter et Wille.
-\end{proof}
-
-\begin{defi}
-Soit $\vdash$ un système déductif où chaque question fermée $q$ s'énonce par une formule
+\para{Réponses} Soit $\vdash$ un système déductif où chaque question fermée $q$ s'écrit
 $\varphi_q$, et $\Cl X$ la clôture déductive de $X$. Une \emph{réponse} à $q$ est une partie finie
-$B \subset E(P)$ telle que $\varphi_q$ ou $\neg\varphi_q$ appartienne à $\Cl B$ ; elle est
-\emph{attestée} si chaque énoncé de $B$ porte son fragment, \emph{vérifiée} si la déduction a été
-contrôlée, \emph{anticipée} si tous ses fragments précèdent $t_q$.
-\end{defi}
+$B \subset E(P)$ avec $\varphi_q$ ou $\neg\varphi_q$ dans $\Cl B$ --- \emph{attestée} si chaque
+énoncé porte son fragment, \emph{vérifiée} si la déduction a été contrôlée, \emph{anticipée} si
+tous ses fragments précèdent $t_q$.
 
-\begin{prop}
-Si $\varphi_q \in \Cl{E(P)}$, il existe une réponse minimale pour l'inclusion, et l'ensemble des
-questions résolues croît avec $P$.
-\end{prop}
+\enonce{Prop. 3}{Si $\varphi_q \in \Cl{E(P)}$, il y a une réponse minimale pour l'inclusion, et
+les questions résolues croissent avec $P$.}
 
-\begin{proof}
-Une démonstration n'emploie qu'un nombre fini d'hypothèses.
-\end{proof}
+(Une démonstration n'emploie qu'un nombre fini d'hypothèses. CQFD.)
 
-\begin{rema}
-Une réponse anticipée est une section au-dessus de l'ouvert $\{t < t_q\}$, qui ne contient pas la
-date de la question : la question avait une réponse avant d'être posée. La donner après coup
-n'établit aucune priorité ; cela fournit, avec les fragments, la matière d'une \cache{histoire}. Une
-question peut aussi n'avoir de réponse que dans le texte recollé, et dans aucune lecture locale.
-\end{rema}
+\para{Anticipations} Une réponse anticipée est une section au-dessus de l'ouvert $\{t < t_q\}$,
+qui ne contient pas la date de la question : la question avait une réponse avant d'être posée !
+La donner après coup n'établit aucune priorité ; cela fournit seulement, avec les fragments, la
+matière d'une \cache{histoire}. Soit enfin $D(P) \subset E(P)$ les énoncés que les fragments
+démontrent eux-mêmes.
 
-Soit enfin $D(P) \subset E(P)$ l'ensemble des énoncés dont les fragments donnent eux-mêmes une
-démonstration.
+\enonce{Conjecture}{Tout énoncé correct de $E(P)$ est dans $\Cl{D(P) \cup C_{<t_P}}$ ---
+l'espace des énoncés démontrables que visent les fragments se reconstitue à partir d'eux et de ce
+que la communauté savait alors.}
 
-\begin{conj}
-Tout énoncé correct de $E(P)$ appartient à
-\[\Cl{D(P) \cup C_{<t_P}} .\]
-L'espace des énoncés démontrables que visent les fragments se reconstitue à partir d'eux et de
-ce que la communauté savait alors.
-\end{conj}
+Est-ce raisonnable ?? Un contre-exemple serait un énoncé correct que les fragments affirment sans
+le démontrer, et que rien en leur temps ne démontrait : une \emph{anticipation}. Je serais tenté
+de croire la conjecture fausse --- et ses contre-exemples sont justement ce qui vaut la peine
+d'être cherché (à vérifier sur des exemples).
 
-\begin{rema}
-Un contre-exemple serait un énoncé correct que les fragments affirment sans le démontrer et que
-rien, en leur temps, ne démontrait : une anticipation. C'est en cherchant les contre-exemples
-qu'on trouve ce que $P$ a de neuf ; chaque réponse anticipée qui tombe hors de
-$\Cl{D(P) \cup C_{<t_P}}$ en est un.
-\end{rema}
-
-\begin{rema}[Réflexion]
-On aurait pu attaquer au marteau : fixer d'avance une notation et y plier chaque fragment. Le
-yoga est ici inverse. On laisse chaque fragment dans sa langue, on note seulement comment les
-langues se traduisent sur les recouvrements, et l'on attend que la structure parle : la
-cohomologie dit si un texte existe et s'il admet une réalisation. Quand elle ne s'annule pas, elle
-ne dit pas que la lecture est mauvaise ; elle dit où regarder.
-\end{rema}
+\para{Réflexion} On aurait pu attaquer au marteau : fixer d'avance une notation et y plier chaque
+fragment. Le yoga est ici inverse. On laisse chaque fragment dans sa langue, on note seulement
+comment les langues se traduisent sur les recouvrements, et l'on attend que la structure parle.
+La cohomologie dit si un texte existe, et s'il admet une réalisation ; quand elle ne s'annule pas,
+elle ne dit pas que la lecture est mauvaise --- elle dit où regarder.
 
 \vspace{0.3em}
-\noindent{\small\textbf{Références.}
+{\small\textbf{Références.}
 G.~Birkhoff, \emph{Lattice Theory}, Amer. Math. Soc. Colloq. Publ.~25, 1940. ---
 B.~Ganter, R.~Wille, \emph{Formal Concept Analysis. Mathematical Foundations}, Springer, 1999. ---
 J.~Giraud, \emph{Cohomologie non abélienne}, Grundlehren~179, Springer, 1971. ---
 R.~Godement, \emph{Topologie algébrique et théorie des faisceaux}, Hermann, 1958. ---
-E.~Szpilrajn, « Sur l'extension de l'ordre partiel », \emph{Fund. Math.} 16 (1930), 386--389.}
+E.~Szpilrajn, « Sur l'extension de l'ordre partiel », \emph{Fund. Math.} 16 (1930), 386--389.\par}
 
 \end{document}

@@ -1,34 +1,28 @@
 % Poema grothendieckiano.
-% Nota breve, alla maniera degli Éléments (sito, campo, gerbo, discesa, punto di vista relativo).
-% Il vocabolario resta astratto di proposito: la natura dei due problemi si indovina leggendo.
+% Scritto alla maniera dei suoi appunti di lavoro: paragrafi numerati, titoli sottolineati, « N.B. »,
+% « i.e. », « cf. », « OK », punti esclamativi, domande che ci si pone strada facendo, una parola
+% cancellata, la prima persona. Strutture: sito, campo, discesa, gerbo, punto di vista relativo.
+% Il vocabolario resta astratto di proposito; cinque parole sono censurate.
 \documentclass[10pt]{article}
 \usepackage[a4paper,left=42mm,right=42mm,top=24mm,bottom=26mm]{geometry}
 \usepackage{fontspec}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath,amssymb}
 \usepackage[italian]{babel}
 \usepackage[hidelinks]{hyperref}
-\usepackage{enumitem}
-\setlist{nosep,leftmargin=1.4em}
-\setlength{\parskip}{0.25em}
+\usepackage[normalem]{ulem}
+\setlength{\parskip}{0.3em}
+\setlength{\parindent}{0pt}
 \setlength{\emergencystretch}{2em}
-
-\newtheoremstyle{bbk}{0.45em}{0.45em}{\itshape}{}{\bfseries}{.}{0.4em}{}
-\theoremstyle{bbk}
-\newtheorem{prop}{Proposizione}[section]
-\newtheorem{coro}[prop]{Corollario}
-\newtheorem{conj}[prop]{Congettura}
-\newtheoremstyle{bbkdef}{0.45em}{0.45em}{}{}{\bfseries}{.}{0.4em}{}
-\theoremstyle{bbkdef}
-\newtheorem{defi}[prop]{Definizione}
-\newtheorem{rema}[prop]{Osservazione}
-\renewcommand{\qedsymbol}{\(\square\)}
-\renewcommand{\proofname}{Dimostrazione}
 
 \newcommand{\Lec}{\mathcal L}
 \newcommand{\U}{\mathfrak U}
 \newcommand{\Cl}[1]{\overline{#1}}
-% Un mot caviardé : un rectangle noir de sa largeur ; le mot lui-même n'entre pas dans le PDF.
+% Una parola censurata: un rettangolo nero della sua larghezza; la parola non entra nel PDF.
 \newcommand{\cache}[1]{\setbox0\hbox{#1}\rule[-0.32ex]{\wd0}{1.02em}}
+% Un paragrafo numerato, dal titolo sottolineato, come negli appunti.
+\newcounter{no}
+\newcommand{\para}[1]{\par\medskip\stepcounter{no}\textbf{\arabic{no}.}\ \uline{#1}.\ }
+\newcommand{\enonce}[2]{\par\smallskip{\bfseries #1}\ ---\ \textit{#2}\par\smallskip}
 \makeatletter
 \renewcommand{\@seccntformat}[1]{\S\,\csname the#1\endcsname.\quad}
 \makeatother
@@ -42,170 +36,121 @@
 \maketitle
 \vspace{-1.6em}
 
-\noindent\emph{Introduzione.} Sono dati dei frammenti, ciascuno nella propria lingua. Li si
-tratta come gli oggetti locali di un campo; ciò che abbozzano insieme è una sezione globale, e
-ciò che risolvono si legge su una base. Le ostruzioni sono classi di coomologia, ed è queste che
-si tratta di leggere.
+Vorrei mettere in luce qui, nel modo meno tecnico possibile (!), lo yoga che mi sembra soggiacente
+a due problemi di incollamento. Sono dati dei frammenti, ciascuno nella propria lingua. Ciò che
+abbozzano insieme è una sezione globale, ciò che risolvono si legge su una base, e le ostruzioni
+sono classi di coomologia --- è queste che si tratta di leggere.
 
 \section{Il campo delle letture}
 
-\begin{defi}
-Sia $P$ un insieme finito di \emph{frammenti}, e $S$ un insieme di simboli. Una parte
-$U \subset P$ è \emph{autonoma} se porta il contesto necessario per essere compresa da sola. Le
-parti autonome e le loro inclusioni formano una categoria $C$, che si munisce della topologia
-generata dalle famiglie $(U_i \subset U)$ di unione $U$. Un frammento isolato in generale non è
-autonomo: è ciò che rende non banale questa topologia.
-\end{defi}
+\para{Il sito} Sia $P$ un insieme finito di \emph{frammenti}, $S$ un insieme di simboli. Dirò che
+una parte $U \subset P$ è \emph{autonoma} se porta il contesto necessario per essere compresa da
+sola. Le parti autonome e le inclusioni formano una categoria $C$, che munisco della topologia
+generata dalle famiglie $(U_i \subset U)$ di unione $U$.
 
-\begin{defi}
-Il \emph{campo delle letture} $\Lec$ associa a $U$ il gruppoide $\Lec(U)$ i cui oggetti sono le
-letture di $U$ — un senso dato a ogni frammento, e un'applicazione che manda ogni simbolo usato
-in $U$ sull'oggetto che designa — e le cui frecce $\ell \to \ell'$ sono le
-\emph{ridenominazioni} dei simboli usati che trasformano $\ell$ in $\ell'$. La restrizione a
-$V \subset U$ dimentica i frammenti fuori da $V$.
-\end{defi}
+N.B. Un frammento isolato in generale non è autonomo --- è tutta qui la difficoltà, ed è ciò che
+rende non banale questa topologia.
 
-\begin{prop}
-$\Lec$ è un precampo: per $\ell, \ell' \in \Lec(U)$, il prefascio
-$V \mapsto \mathrm{Isom}(\ell|_V, \ell'|_V)$ è un fascio. Un dato di discesa $(\ell_i, g_{ij})$
-relativo a un ricoprimento $\U$ — letture $\ell_i \in \Lec(U_i)$ e ridenominazioni
-$g_{ij} \colon \ell_j|_{U_{ij}} \to \ell_i|_{U_{ij}}$ tali che $g_{ij}g_{jk} = g_{ik}$ — è
-effettivo, cioè proviene da una lettura di $U$ in una notazione unica, se e solo se la sua classe
-è nulla in $\check H^1(\U, G)$, dove $G$ è il gruppo delle permutazioni di $S$.
-\end{prop}
+\para{Il campo} A $U$ associo il gruppoide $\Lec(U)$ delle letture di $U$ (i.e. un senso dato a
+ogni frammento, e un'applicazione che manda ogni simbolo usato in $U$ sull'oggetto che designa),
+le frecce $\ell \to \ell'$ essendo le \emph{ridenominazioni} dei simboli usati che trasformano
+$\ell$ in $\ell'$. La restrizione a $V \subset U$ dimentica ciò che sta fuori da $V$. Detto
+questo, si trova:
 
-\begin{proof}
-Ridenominazioni compatibili su un ricoprimento si incollano, poiché una ridenominazione non è che
-un'applicazione definita simbolo per simbolo. Se $g_{ij} = h_i^{-1}h_j$, le letture $h_i\ell_i$
-coincidono sulle intersezioni e si incollano; il viceversa è la definizione di banalità della
-classe.
-\end{proof}
+\enonce{Prop. 1}{$\Lec$ è un precampo. Un dato di discesa $(\ell_i, g_{ij})$ relativo a un
+ricoprimento $\U$, con $g_{ij} g_{jk} = g_{ik}$, è effettivo --- i.e. proviene da una lettura di
+$U$ in una notazione unica --- se e solo se la sua classe è nulla in $\check H^1(\U, G)$, $G$ il
+gruppo delle permutazioni di $S$.}
 
-Il campo associato $\tilde\Lec$ ha dunque più oggetti di $\Lec$: sono i \emph{testi}, dati di
-discesa che si accetta di non ridurre a una notazione unica. Un oggetto di $\tilde\Lec(P)$ è un
-testo di $P$; un oggetto di $\Lec(P)$ ne è una \emph{realizzazione}.
+Dimostrazione: ridenominazioni compatibili si incollano, simbolo per simbolo; e se
+$g_{ij} = h_i^{-1}h_j$, le $h_i\ell_i$ coincidono sugli $U_{ij}$, dunque si incollano. Il
+viceversa è una tautologia. OK.
 
-\begin{coro}
-Se il nervo di $\U$ è un albero, ogni testo relativo a $\U$ ammette una realizzazione.
-\end{coro}
+\para{Testi e realizzazioni} Il campo associato $\tilde\Lec$ ha più oggetti di $\Lec$: sono i
+\emph{testi}, dati di discesa che si accetta di non ridurre a una notazione unica. Un oggetto di
+$\Lec(P)$ è una \emph{realizzazione} del testo. Bisogna distinguere con cura le due cose!
 
-\begin{proof}
-$\check H^1$ di un albero è banale a coefficienti in un gruppo qualsiasi: si sceglie $h$ in una
-radice e lo si propaga lungo i lati con $h_j = h_ig_{ij}$.
-\end{proof}
+\enonce{Cor.}{Se il nervo di $\U$ è un albero, ogni testo relativo a $\U$ ammette una
+realizzazione.}
 
-\begin{prop}
-Supponiamo la lettura \emph{localmente ben posta}: ogni frammento appartiene a una parte autonoma
-che ammette una lettura, e due letture di una stessa parte sono localmente isomorfe. Allora
-$\tilde\Lec$ è un gerbo; il suo legame è il fascio $\mathcal A$ degli automorfismi di una
-lettura, le \emph{simmetrie di notazione}. Un testo di $P$ esiste se e solo se questo gerbo è
-neutro; quando $\mathcal A$ è abeliano, l'ostruzione è una classe di $H^2(C, \mathcal A)$, e due
-testi differiscono per un torsore sotto $\mathcal A$, classificato da $H^1(C, \mathcal A)$
-(Giraud).
-\end{prop}
+(Evidente: si sceglie $h$ in una radice e lo si propaga lungo i lati, $h_j = h_ig_{ij}$.)
 
-\begin{proof}
-Le due ipotesi sono, parola per parola, gli assiomi di un gerbo; il resto è la teoria di Giraud
-dei gerbi a legame abeliano.
-\end{proof}
+\para{Il gerbo} Supponiamo ora la lettura \emph{localmente ben posta}: ogni frammento sta in una
+parte autonoma che ha una lettura, e due letture di una stessa parte sono localmente isomorfe.
+(Ipotesi ragionevole, che forse bisognerebbe indebolire.) Allora:
 
-\begin{rema}
-Si vedono così due piani di ostruzione. Il primo ($H^2$) dice che non c'è alcun testo: le
-simmetrie locali non si incollano. Il secondo ($H^1$) dice che un testo c'è, ma nessuna
-realizzazione in una notazione unica. Una classe non nulla non è un errore: nasce da un ciclo di
-frammenti in cui uno stesso nome designa due oggetti, e la si uccide ingrandendo $S$, non
-correggendo una lettura.
-\end{rema}
+\enonce{Prop. 2}{$\tilde\Lec$ è un gerbo, di legame il fascio $\mathcal A$ degli automorfismi di
+una lettura --- le \emph{simmetrie di notazione}. Un testo esiste se e solo se il gerbo è neutro;
+se $\mathcal A$ è abeliano, l'ostruzione sta in $H^2(C, \mathcal A)$, e due testi differiscono per
+un torsore sotto $\mathcal A$, classificato da $H^1(C, \mathcal A)$.}
 
-\begin{defi}
-Un frammento può ammettere più letture. Sia $\Lambda(U) \subset \mathrm{Ob}\,\Lec(U)$ l'insieme
-delle letture \emph{ammissibili} di $U$, e $E(\lambda)$ l'insieme degli enunciati che $\lambda$
-afferma. Un enunciato è \emph{ricostruito} su $U$ se appartiene a
-\[E(U) = \textstyle\bigcap_{\lambda \in \Lambda(U)} E(\lambda),\]
-e \emph{corretto} se è vero così com'è scritto, eventualmente dopo l'aggiunta di un'ipotesi che
-il frammento tace e che si dichiara.
-\end{defi}
+(Le due ipotesi sono parola per parola gli assiomi di un gerbo; il resto, cf. Giraud.) Salvo
+errore, è esattamente ciò che si osserva: \emph{due piani di ostruzione}. $H^2$: nessun testo.
+$H^1$: un testo, ma nessuna realizzazione. Una classe non nulla non è un errore; nasce da un ciclo
+di frammenti in cui uno stesso nome designa due oggetti, e la si uccide non \sout{correggendo} una
+lettura, ma ingrandendo $S$.
 
-Restringere $\Lambda$ fa crescere $E$, e un enunciato ricostruito e corretto resta tale. Una
-verifica \cache{formale} controlla dunque la matematica di una lettura, mai la sua fedeltà al
-frammento: le due cose si misurano separatamente.
+\para{Enunciati ricostruiti} Un frammento può ammettere più letture. Sia $\Lambda(U)$ l'insieme
+delle letture \emph{ammissibili} di $U$, $E(\lambda)$ gli enunciati che $\lambda$ afferma, e
+\[E(U) = \textstyle\bigcap_{\lambda \in \Lambda(U)} E(\lambda)\]
+gli enunciati \emph{ricostruiti}. Un enunciato è \emph{corretto} se è vero così com'è scritto, a
+costo di aggiungere un'ipotesi che il frammento tace --- e che si dichiara!
+
+N.B. Restringere $\Lambda$ fa crescere $E$. Una verifica \cache{formale} controlla dunque la
+matematica di una lettura, mai la sua fedeltà al frammento: due cose ben distinte, che si tende a
+confondere.
 
 \section{Il punto di vista relativo}
 
-Tutto ciò che precede si colloca al di sopra di una base: un insieme ordinato $T$, munito della
-sua topologia di Alexandrov, che si chiamerà il \cache{tempo}. I frammenti vi sono collocati da un
-morfismo $P \to T$; si indica con $t_P$ il limite superiore della sua immagine. Al di sopra di
-$T$ vive un fascio crescente $t \mapsto C_{<t}$, gli enunciati che la comunità \cache{matematica}
-riteneva acquisiti prima di $t$, e un insieme $Q$ di \cache{domande}, ciascuna con la sua data $t_q$. Un
-ordine dei frammenti compatibile con gli indizi di posizione esiste se e solo se tali indizi sono
-privi di cicli (Szpilrajn).
+\para{La base} Tutto ciò che precede vive al di sopra di una base: un insieme ordinato $T$, con la
+sua topologia di Alexandrov, che chiamerò il \cache{tempo}. I frammenti vi sono collocati da
+$P \to T$; sia $t_P$ il limite superiore dell'immagine. Al di sopra di $T$ c'è un fascio crescente
+$t \mapsto C_{<t}$, gli enunciati che la comunità \cache{matematica} riteneva acquisiti prima di
+$t$, e un insieme $Q$ di \cache{domande}, ciascuna con la sua data $t_q$. (Un ordine dei frammenti
+compatibile con gli indizi esiste sse gli indizi sono privi di cicli --- Szpilrajn.)
 
-\begin{prop}
-Sia $R \subset Q \times E$ la relazione « l'enunciato $e$ tocca la domanda $q$ ». Le applicazioni
-$A \mapsto A'$ e $B \mapsto B'$ che essa definisce tra parti di $Q$ e di $E$ formano una
-corrispondenza di Galois, e le coppie chiuse un reticolo completo.
-\end{prop}
+\para{Corrispondenza di Galois} Sia $R \subset Q \times E$ la relazione « $e$ tocca $q$ ». Le
+applicazioni $A \mapsto A'$, $B \mapsto B'$ che essa definisce formano una corrispondenza di
+Galois, e le coppie chiuse un reticolo completo (polarità di Birkhoff; cf. Ganter--Wille).
 
-\begin{proof}
-È la polarità di Birkhoff di una relazione binaria; le coppie chiuse sono i « concetti » di
-Ganter e Wille.
-\end{proof}
-
-\begin{defi}
-Sia $\vdash$ un sistema deduttivo in cui ogni domanda chiusa $q$ si enuncia con una formula
+\para{Risposte} Sia $\vdash$ un sistema deduttivo in cui ogni domanda chiusa $q$ si scrive
 $\varphi_q$, e $\Cl X$ la chiusura deduttiva di $X$. Una \emph{risposta} a $q$ è una parte finita
-$B \subset E(P)$ tale che $\varphi_q$ o $\neg\varphi_q$ appartenga a $\Cl B$; essa è
-\emph{attestata} se ogni enunciato di $B$ porta il suo frammento, \emph{verificata} se la
-deduzione è stata controllata, \emph{anticipata} se tutti i suoi frammenti precedono $t_q$.
-\end{defi}
+$B \subset E(P)$ con $\varphi_q$ o $\neg\varphi_q$ in $\Cl B$ --- \emph{attestata} se ogni
+enunciato porta il suo frammento, \emph{verificata} se la deduzione è stata controllata,
+\emph{anticipata} se tutti i suoi frammenti precedono $t_q$.
 
-\begin{prop}
-Se $\varphi_q \in \Cl{E(P)}$, esiste una risposta minimale rispetto all'inclusione, e l'insieme
-delle domande risolte cresce con $P$.
-\end{prop}
+\enonce{Prop. 3}{Se $\varphi_q \in \Cl{E(P)}$, c'è una risposta minimale rispetto
+all'inclusione, e le domande risolte crescono con $P$.}
 
-\begin{proof}
-Una dimostrazione usa solo un numero finito di ipotesi.
-\end{proof}
+(Una dimostrazione usa solo un numero finito di ipotesi. CVD.)
 
-\begin{rema}
-Una risposta anticipata è una sezione al di sopra dell'aperto $\{t < t_q\}$, che non contiene la
-data della domanda: la domanda aveva una risposta prima di essere posta. Darla a posteriori non
-stabilisce alcuna priorità; fornisce, con i frammenti, il materiale di una \cache{storia}. Una domanda
-può anche avere risposta soltanto nel testo incollato, e in nessuna lettura locale.
-\end{rema}
+\para{Anticipazioni} Una risposta anticipata è una sezione al di sopra dell'aperto
+$\{t < t_q\}$, che non contiene la data della domanda: la domanda aveva una risposta prima di
+essere posta! Darla a posteriori non stabilisce alcuna priorità; fornisce soltanto, con i
+frammenti, il materiale di una \cache{storia}. Sia infine $D(P) \subset E(P)$ l'insieme degli
+enunciati che i frammenti dimostrano da sé.
 
-Sia infine $D(P) \subset E(P)$ l'insieme degli enunciati di cui i frammenti stessi danno una
-dimostrazione.
+\enonce{Congettura}{Ogni enunciato corretto di $E(P)$ sta in $\Cl{D(P) \cup C_{<t_P}}$ --- lo
+spazio degli enunciati dimostrabili a cui mirano i frammenti si ricostruisce a partire da essi e
+da ciò che la comunità sapeva allora.}
 
-\begin{conj}
-Ogni enunciato corretto di $E(P)$ appartiene a
-\[\Cl{D(P) \cup C_{<t_P}} .\]
-Lo spazio degli enunciati dimostrabili a cui mirano i frammenti si ricostruisce a partire da essi
-e da ciò che la comunità sapeva allora.
-\end{conj}
+È ragionevole?? Un controesempio sarebbe un enunciato corretto che i frammenti affermano senza
+dimostrarlo, e che nulla al loro tempo dimostrava: un'\emph{anticipazione}. Sarei tentato di
+credere falsa la congettura --- e i suoi controesempi sono proprio ciò che vale la pena di
+cercare (da verificare su esempi).
 
-\begin{rema}
-Un controesempio sarebbe un enunciato corretto che i frammenti affermano senza dimostrarlo e che
-nulla, al loro tempo, dimostrava: un'anticipazione. È cercando i controesempi che si trova ciò
-che $P$ ha di nuovo; ogni risposta anticipata che cade fuori da $\Cl{D(P) \cup C_{<t_P}}$ ne è
-uno.
-\end{rema}
-
-\begin{rema}[Riflessione]
-Si sarebbe potuto attaccare a colpi di martello: fissare in anticipo una notazione e piegarvi ogni
-frammento. Lo yoga qui è inverso. Si lascia ogni frammento nella sua lingua, si annota soltanto
-come le lingue si traducono sui ricoprimenti, e si aspetta che la struttura parli: la coomologia
-dice se un testo esiste e se ammette una realizzazione. Quando non si annulla, non dice che la
-lettura è cattiva; dice dove guardare.
-\end{rema}
+\para{Riflessione} Si sarebbe potuto attaccare a colpi di martello: fissare in anticipo una
+notazione e piegarvi ogni frammento. Lo yoga qui è inverso. Si lascia ogni frammento nella sua
+lingua, si annota soltanto come le lingue si traducono sui ricoprimenti, e si aspetta che la
+struttura parli. La coomologia dice se un testo esiste, e se ammette una realizzazione; quando non
+si annulla, non dice che la lettura è cattiva --- dice dove guardare.
 
 \vspace{0.3em}
-\noindent{\small\textbf{Bibliografia.}
+{\small\textbf{Bibliografia.}
 G.~Birkhoff, \emph{Lattice Theory}, Amer. Math. Soc. Colloq. Publ.~25, 1940. ---
 B.~Ganter, R.~Wille, \emph{Formal Concept Analysis. Mathematical Foundations}, Springer, 1999. ---
 J.~Giraud, \emph{Cohomologie non abélienne}, Grundlehren~179, Springer, 1971. ---
 R.~Godement, \emph{Topologie algébrique et théorie des faisceaux}, Hermann, 1958. ---
-E.~Szpilrajn, « Sur l'extension de l'ordre partiel », \emph{Fund. Math.} 16 (1930), 386--389.}
+E.~Szpilrajn, « Sur l'extension de l'ordre partiel », \emph{Fund. Math.} 16 (1930), 386--389.\par}
 
 \end{document}
