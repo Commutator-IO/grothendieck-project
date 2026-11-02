@@ -147,6 +147,10 @@ for (const [i, l] of json('letters.json').records.entries()) {
   });
 }
 
+/* Subject keywords of our own for the documents transcribed locally (tags-*.json): never text of the transcriptions. */
+const subjects = (f) => json(f).tags;
+const TAGS = { bourbaki: subjects('tags-bourbaki.json'), quillen: subjects('tags-quillen.json'), ihes: subjects('tags-illusie.json') };
+
 /* Bourbaki: the AHP catalogue; its summaries are the archive's. */
 for (const r of json('bourbaki.json').records) {
   const [yearFrom, yearTo] = years(r.date);
@@ -159,7 +163,7 @@ for (const r of json('bourbaki.json').records) {
     date: r.date,
     shelfmark: r.identifier ?? (r.number != null ? `Rédaction n° ${r.number}` : null),
     holder: HOLDER.bourbaki,
-    tags: [r.type, r.book, ...(r.creators ?? []), r.grothendieck?.length ? 'Grothendieck' : null],
+    tags: [...(TAGS.bourbaki[r.id] ?? []), r.type, r.book, ...(r.creators ?? []), r.grothendieck?.length ? 'Grothendieck' : null],
     summary: clip(r.summary),
     url: r.url,
     siteUrl: `/bourbaki/#doc/${r.id}`,
@@ -179,7 +183,7 @@ for (const n of Q.notebooks) {
     date: y ? String(y) : null,
     shelfmark: n.label,
     holder: HOLDER.quillen,
-    tags: [n.group === 'lectures' ? 'lecture notes' : n.group === 'misc' ? 'miscellaneous' : 'research notebook', `${n.pages} pages`],
+    tags: [...(TAGS.quillen[n.id] ?? []), n.group === 'lectures' ? 'lecture notes' : n.group === 'misc' ? 'miscellaneous' : 'research notebook', `${n.pages} pages`],
     summary: clip(n.index, 900),
     url: n.url,
     siteUrl: `/quillen/#${n.id}`,
@@ -201,7 +205,7 @@ for (const it of I.items) {
     date: it.date,
     shelfmark: it.id,
     holder: HOLDER.ihes,
-    tags: [series.get(it.series), cap(it.creator), cap(it.recipient), it.pages ? `${it.pages} pages` : null],
+    tags: [...(TAGS.ihes[it.id] ?? []), series.get(it.series), cap(it.creator), cap(it.recipient), it.pages ? `${it.pages} pages` : null],
     summary: null,
     url: it.url,
     siteUrl: `/illusie/#${it.id}/1`,
