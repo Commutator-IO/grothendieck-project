@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * Header and footer, shared by every page.
@@ -52,14 +52,16 @@ const FONDS_PAGES: { path: string; label: string }[] = [
   { path: '/fonds/', label: 'Whole fonds' },
   { path: '/index/', label: 'Index' },
   { path: '/timeline/', label: 'Timeline' },
-  { path: '/notices/', label: 'Notices' },
   { path: '/letters/', label: 'Letters' },
+  { path: '/findings/', label: 'Findings' },
+  { path: '/notices/', label: 'Notices' },
   { path: '/hand/', label: 'The hand' },
   { path: '/diagrams/', label: 'Diagrams' },
   { path: '/formulas/', label: 'Formulas' },
   { path: '/maps/', label: 'Maps' },
-  { path: '/findings/', label: 'Findings' },
 ];
+// The row shows the first few; the rest, and the project's pages, fold into « More » (2 November 2026: twelve tabs beside the switch were too many).
+const FONDS_SHOWN = 5;
 const PROJECT_PAGES: { path: string; label: string }[] = [
   { path: '/method/', label: 'Method' },
   { path: '/contribute/', label: 'Contribute' },
@@ -102,6 +104,60 @@ function SearchLink({ here }: { here: string }) {
       {/* Icon only in the row: the fonds' tabs already fill it. */}
       <span className="sr-only">{SEARCH.label}</span>
     </a>
+  );
+}
+
+/** A folded-out list for the pages the row has no room for; it reads as current when one of them is. */
+function More({ groups, here }: { groups: { path: string; label: string }[][]; here: string }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const on = groups.some((g) => g.some((p) => isCurrent(p.path, here)));
+  useEffect(() => {
+    if (!open) return;
+    const away = (e: MouseEvent) => ref.current && !ref.current.contains(e.target as Node) && setOpen(false);
+    const key = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    document.addEventListener('mousedown', away);
+    document.addEventListener('keydown', key);
+    return () => {
+      document.removeEventListener('mousedown', away);
+      document.removeEventListener('keydown', key);
+    };
+  }, [open]);
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-haspopup="true"
+        onClick={() => setOpen(!open)}
+        className={`flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-1 transition ${
+          on ? 'bg-ink-100 font-semibold text-ink-900' : 'hover:bg-ink-50 hover:text-brand-700'
+        }`}
+      >
+        More
+        <svg viewBox="0 0 12 12" className={`h-3 w-3 transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true">
+          <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      {open && (
+        <div className="absolute right-0 top-full z-50 mt-1.5 min-w-[11rem] rounded-xl border border-ink-200 bg-white p-1.5 shadow-lg">
+          {groups.map((g, i) => (
+            <div key={i} className={i ? 'mt-1 border-t border-ink-100 pt-1' : ''}>
+              {g.map((p) => (
+                <a
+                  key={p.path}
+                  href={p.path}
+                  aria-current={isCurrent(p.path, here) ? 'page' : undefined}
+                  className="block rounded-lg px-2.5 py-1.5 text-[13px] text-ink-700 hover:bg-ink-50 hover:text-brand-700 aria-[current=page]:bg-ink-100 aria-[current=page]:font-semibold aria-[current=page]:text-ink-900"
+                >
+                  {p.label}
+                </a>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -170,13 +226,10 @@ export function Header({ path }: { path: string }) {
             PROJECT_PAGES.map((p) => <Tab key={p.path} {...p} here={path} />)
           ) : collection === 'fonds' ? (
             <>
-              {FONDS_PAGES.map((p) => (
+              {FONDS_PAGES.slice(0, FONDS_SHOWN).map((p) => (
                 <Tab key={p.path} {...p} here={path} />
               ))}
-              <span aria-hidden="true" className="mx-1.5 h-4 w-px bg-ink-200" />
-              {PROJECT_PAGES.map((p) => (
-                <Tab key={p.path} {...p} here={path} />
-              ))}
+              <More groups={[FONDS_PAGES.slice(FONDS_SHOWN), PROJECT_PAGES]} here={path} />
             </>
           ) : (
             pagesOf(collection).map((p) => <Tab key={p.path} {...p} here={path} />)
