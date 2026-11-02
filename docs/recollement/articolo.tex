@@ -1,0 +1,186 @@
+% Due problemi di lettura: incollare frammenti, rispondere a domande.
+% Versione italiana di article.tex (stessa numerazione, stesso contenuto).
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=17mm,top=15mm,bottom=17mm]{geometry}
+\usepackage{fontspec}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[italian]{babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=1.4em}
+\setlength{\parskip}{0.25em}
+
+\newtheoremstyle{bbk}{0.45em}{0.45em}{\itshape}{}{\bfseries}{.}{0.4em}{}
+\theoremstyle{bbk}
+\newtheorem{prop}{Proposizione}[section]
+\newtheorem{coro}[prop]{Corollario}
+\newtheoremstyle{bbkdef}{0.45em}{0.45em}{}{}{\bfseries}{.}{0.4em}{}
+\theoremstyle{bbkdef}
+\newtheorem{defi}[prop]{Definizione}
+\newtheorem{rema}[prop]{Osservazione}
+\renewcommand{\qedsymbol}{\(\square\)}
+\renewcommand{\proofname}{Dimostrazione}
+
+\newcommand{\Lec}{\mathcal L}
+\newcommand{\U}{\mathfrak U}
+\makeatletter
+\renewcommand{\@seccntformat}[1]{\S\,\csname the#1\endcsname.\quad}
+\makeatother
+
+\title{\vspace{-1.2em}\large\bfseries Poème grothendieckien\\[0.2em]
+\normalsize\mdseries Incollare frammenti, rispondere a domande}
+\author{\small Michel Hua\thanks{Scritto con un assistente, Claude Opus~5.5 (Anthropic), poi riletto dall'autore. Traduzione dell'originale francese.}}
+\date{\small Novembre 2026}
+
+\begin{document}
+\maketitle
+\vspace{-1.6em}
+
+\noindent\emph{Introduzione.} Un fascicolo di appunti di lavoro non è un testo. È un fascio di
+fogli, ciascuno letto nella propria notazione, in cui l'argomento passa da una pagina all'altra
+senza dirlo. Formuliamo qui due compiti del suo lettore in un linguaggio in cui diventano
+domande precise: ricostruire il testo che i frammenti abbozzano (\S1), e riconoscere, tra le
+domande che ci si pone altrove, quelle a cui questi frammenti rispondono (\S2). Nulla di ciò che
+segue è difficile; l'interesse sta nel fatto che la difficoltà vera si lascia localizzare.
+
+\section{I frammenti}
+
+\begin{defi}
+Sia $P$ l'insieme finito dei fogli di un fascicolo. Si chiama \emph{plico} ogni parte
+$U \subset P$. Fissiamo un insieme $S$ di simboli. Una \emph{lettura} di $U$ è il dato di una
+trascrizione di ogni foglio di $U$ e di un \emph{glossario} $\gamma_U$, applicazione che associa
+a ogni simbolo di $S$ usato in $U$ l'oggetto che designa. Si indica con $\Lec(U)$ l'insieme delle
+letture di $U$; per $V \subset U$, dimenticare i fogli fuori da $V$ definisce
+$\Lec(U) \to \Lec(V)$, $\ell \mapsto \ell|_V$.
+\end{defi}
+
+Si munisce $P$ della topologia discreta: un ricoprimento di $U$ è una famiglia di plichi la cui
+unione è $U$.
+
+\begin{prop}
+Il prefascio $\Lec$ è un fascio: se $\U = (U_i)$ ricopre $U$ e se letture $\ell_i \in \Lec(U_i)$
+coincidono sugli $U_i \cap U_j$, esiste un'unica lettura $\ell$ di $U$ tale che
+$\ell|_{U_i} = \ell_i$ per ogni $i$.
+\end{prop}
+
+\begin{proof}
+Una lettura è una famiglia di dati indicizzata dai fogli, insieme a un'applicazione definita sui
+simboli usati; famiglie e applicazioni compatibili sulle intersezioni si incollano, e in modo
+unico.
+\end{proof}
+
+La situazione reale è meno favorevole: ogni frammento è letto nella sua notazione, e due letture
+di una stessa pagina coincidono solo \emph{a meno di un cambiamento di notazione}. Sia $G$ il
+gruppo delle permutazioni di $S$; esso opera su ogni $\Lec(U)$ rinominando i simboli, e questa
+azione commuta con le restrizioni.
+
+\begin{defi}
+Una \emph{lettura frammentaria} di $P$ è il dato di un ricoprimento $\U = (U_i)$, di letture
+$\ell_i \in \Lec(U_i)$ e, per ogni $i, j$, di ridenominazioni $g_{ij} \in G$ tali che
+$\ell_i|_{U_{ij}} = g_{ij}\,\ell_j|_{U_{ij}}$ e $g_{ij}\,g_{jk} = g_{ik}$ quando
+$U_{ijk} \neq \varnothing$ (cociclo di Čech, di classe $[g] \in \check H^1(\U, G)$).
+\end{defi}
+
+\begin{prop}
+Una lettura frammentaria proviene da una lettura di $P$ in una \emph{notazione unica} — esistono
+$\ell \in \Lec(P)$ e $h_i \in G$ con $\ell|_{U_i} = h_i\,\ell_i$ e $g_{ij} = h_i^{-1} h_j$ — se e
+solo se $[g] = 0$ in $\check H^1(\U, G)$.
+\end{prop}
+
+\begin{proof}
+Se $g_{ij} = h_i^{-1} h_j$, le letture $h_i \ell_i$ coincidono sulle intersezioni, poiché
+$h_i \ell_i = h_i g_{ij} \ell_j = h_j \ell_j$ su $U_{ij}$; si incollano per 1.2. Il viceversa è
+la definizione di banalità di $[g]$.
+\end{proof}
+
+\begin{coro}
+Se i plichi si incontrano solo a due a due e il grafo delle loro intersezioni è un albero — un
+fascicolo letto per lotti successivi, ciascuno dei quali condivide pagine solo con i vicini —
+ogni lettura frammentaria si legge in una notazione unica.
+\end{coro}
+
+\begin{proof}
+Il nervo di $\U$ è allora un albero, e $\check H^1$ di un albero è banale a coefficienti in un
+gruppo qualsiasi: si sceglie $h$ arbitrariamente in una radice e lo si propaga lungo i lati con
+$h_j = h_i g_{ij}$.
+\end{proof}
+
+\begin{rema}
+Una classe non nulla non è un errore di lettura. Nasce da un ciclo di frammenti in cui uno stesso
+nome designa, da un capo all'altro del ciclo, due oggetti distinti (così i due « dati di
+ramificazione » di uno stesso fascicolo, l'uno ausiliario, l'altro divenuto un campo). Non la si
+uccide correggendo una lettura, ma ingrandendo $S$: distinguendo i due nomi.
+\end{rema}
+
+\begin{rema}
+Resta da fissare l'ordine dei fogli. Gli indizi di datazione (un verso datato, un rinvio a una
+pagina anteriore) definiscono una relazione $\prec$ su $P$. Un ordine di lettura è
+un'estensione lineare di $\prec$; ne esiste una se e solo se $\prec$ è priva di cicli
+(Szpilrajn), e un ciclo segnala una datazione sbagliata o una pagina riletta più tardi.
+\end{rema}
+
+\section{Le domande}
+
+Sia $E$ l'insieme degli \emph{enunciati} di una lettura $\ell \in \Lec(P)$, ciascuno munito del
+suo \emph{luogo} (il foglio che lo porta), e $Q$ l'insieme delle domande poste su un forum. Si
+dà un insieme $K$ di parole chiave e applicazioni $\kappa \colon E \to \mathfrak P(K)$,
+$\kappa \colon Q \to \mathfrak P(K)$; si dice che $e$ \emph{tocca} $q$, e si scrive
+$q \mathrel{R} e$, se $\kappa(q) \cap \kappa(e) \neq \varnothing$.
+
+\begin{prop}
+Le applicazioni $A \mapsto A' = \{e : q \mathrel R e \text{ per ogni } q \in A\}$ da
+$\mathfrak P(Q)$ in $\mathfrak P(E)$, e $B \mapsto B'$ in senso inverso, formano una
+corrispondenza di Galois: sono decrescenti, $A \subset A''$, $B \subset B''$ e $A' = A'''$. Le
+coppie $(A, B)$ con $A' = B$ e $B' = A$ formano un reticolo completo.
+\end{prop}
+
+\begin{proof}
+È la polarità di Birkhoff associata a ogni relazione binaria; le coppie chiuse sono i « concetti »
+dell'analisi formale dei concetti (Ganter--Wille).
+\end{proof}
+
+Per un frammento $e$, l'insieme $\{e\}'$ è l'elenco delle domande candidate; le si ordina secondo
+la cardinalità di $\kappa(q) \cap \kappa(e)$. Toccare non è rispondere.
+
+\begin{defi}
+Fissiamo un sistema deduttivo $\vdash$ in cui ogni domanda chiusa $q$ si enuncia con una formula
+$\varphi_q$. Una \emph{risposta} a $q$ tratta da $E$ è una parte finita $B \subset E$ tale che
+$B \vdash \varphi_q$ oppure $B \vdash \neg\varphi_q$; essa è \emph{attestata} se ogni enunciato di
+$B$ porta il suo luogo, \emph{verificata} se la deduzione è stata controllata (da un assistente
+di dimostrazione o da una persona).
+\end{defi}
+
+\begin{prop}
+Se $E \vdash \varphi_q$, esiste una risposta $B$ a $q$, e la si può scegliere minimale rispetto
+all'inclusione. L'insieme delle domande a cui $E$ risponde cresce con $E$.
+\end{prop}
+
+\begin{proof}
+Una dimostrazione usa solo un numero finito di ipotesi; tra le parti finite che bastano, una
+parte di cardinalità minima è minimale rispetto all'inclusione. La crescita è quella di $\vdash$.
+\end{proof}
+
+\begin{rema}
+I due problemi si incontrano: una domanda può avere risposta solo nella lettura incollata
+$\ell \in \Lec(P)$, e in nessuna lettura locale — la domanda che un fascicolo pone a pagina~24 e
+a cui risponde a pagina~190. È la ragione per leggere un fascicolo intero prima di cercarvi
+risposte. Inversamente, una risposta vale solo per i suoi luoghi: si attribuisce all'autore solo
+ciò che la pagina enuncia, e il resto lo si dice a proprio nome.
+\end{rema}
+
+\begin{rema}[Riflessione]
+Si sarebbe potuto cercare di forzare il testo: scegliere in anticipo una notazione e piegarvi
+ogni foglio. L'approccio qui è inverso. Si lascia che ogni frammento parli nella sua lingua, si
+annota soltanto come le lingue si traducono sui ricoprimenti, ed è la coomologia a dire se esiste
+un testo unico. Quando non si annulla, non dice che la lettura è cattiva; dice dove guardare.
+\end{rema}
+
+\vspace{0.3em}
+\noindent{\small\textbf{Bibliografia.}
+G.~Birkhoff, \emph{Lattice Theory}, Amer. Math. Soc. Colloq. Publ.~25, 1940. ---
+B.~Ganter, R.~Wille, \emph{Formal Concept Analysis. Mathematical Foundations}, Springer, 1999. ---
+J.~Giraud, \emph{Cohomologie non abélienne}, Grundlehren~179, Springer, 1971. ---
+R.~Godement, \emph{Topologie algébrique et théorie des faisceaux}, Hermann, 1958. ---
+E.~Szpilrajn, « Sur l'extension de l'ordre partiel », \emph{Fund. Math.} 16 (1930), 386--389.}
+
+\end{document}

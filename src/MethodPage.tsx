@@ -9,7 +9,7 @@ import {
 } from './lib/batches.ts';
 import { STATES, type State } from './lib/progress.ts';
 
-const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: string; src: string; tei?: string }[] = [
+const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: string; src: string; tei?: string; more?: { label: string; href: string }[] }[] = [
   {
     id: 'article',
     title: "A Machine Reads Grothendieck's Working Notes: Transcribing and Encoding Mathematical Manuscripts",
@@ -69,10 +69,11 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
   },
   {
     id: 'article-recollement',
-    title: 'Recoller des fragments, répondre à des questions',
-    lang: 'French · two pages',
+    title: 'Poème grothendieckien',
+    lang: 'French and Italian · two pages',
     what: "The edition's two tasks as mathematics, in the manner of the Éléments: the readings of a folder form a sheaf, a single notation exists exactly when a Čech class vanishes (always, for batches read in sequence), and the questions a corpus answers come from a Galois correspondence and the finiteness of proofs.",
     pdf: '/article/recollement.pdf',
+    more: [{ label: 'PDF (italiano)', href: '/article/recollement-it.pdf' }],
     src: 'docs/recollement/article.tex',
   },
   {
@@ -101,6 +102,11 @@ function Articles() {
               <a href={a.pdf} className={pill}>
                 PDF
               </a>
+              {a.more?.map((m) => (
+                <a key={m.href} href={m.href} className={pill}>
+                  {m.label}
+                </a>
+              ))}
               {a.tei && (
                 <a href={a.tei} className={pill} title="The submission file, valid against the journal's tei_jtei schema">
                   TEI
