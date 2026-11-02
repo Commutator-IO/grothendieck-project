@@ -68,6 +68,14 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
     src: 'docs/quillen-lean/article.tex',
   },
   {
+    id: 'article-recollement',
+    title: 'Recoller des fragments, répondre à des questions',
+    lang: 'French · two pages',
+    what: "The edition's two tasks as mathematics, in the manner of the Éléments: the readings of a folder form a sheaf, a single notation exists exactly when a Čech class vanishes (always, for batches read in sequence), and the questions a corpus answers come from a Galois correspondence and the finiteness of proofs.",
+    pdf: '/article/recollement.pdf',
+    src: 'docs/recollement/article.tex',
+  },
+  {
     id: 'book-methods',
     title: 'Mathématiques outillées : le génie logiciel au service de la recherche',
     lang: 'French',
