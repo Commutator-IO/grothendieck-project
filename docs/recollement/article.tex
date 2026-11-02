@@ -10,6 +10,7 @@
 \usepackage[french]{babel}
 \usepackage[hidelinks]{hyperref}
 \usepackage[normalem]{ulem}
+\usepackage{tikz-cd}
 \setlength{\parskip}{0.3em}
 \setlength{\parindent}{0pt}
 \setlength{\emergencystretch}{2em}
@@ -66,7 +67,14 @@ $\check H^1(\U, G)$, $G$ le groupe des permutations de $S$.}
 
 Démonstration : des renommages compatibles se recollent, symbole par symbole ; et si
 $g_{ij} = h_i^{-1}h_j$, les $h_i\ell_i$ coïncident sur les $U_{ij}$, donc se recollent. La
-réciproque est une tautologie. OK.
+réciproque est une tautologie. OK. La condition de cocycle dit que, sur une triple intersection,
+le triangle
+
+\[\begin{tikzcd}[column sep=small,row sep=small]
+ & \ell_j|_{U_{ijk}} \arrow[dr, "g_{ij}"] & \\
+\ell_k|_{U_{ijk}} \arrow[ur, "g_{jk}"] \arrow[rr, "g_{ik}"'] & & \ell_i|_{U_{ijk}}
+\end{tikzcd}\]
+commute.
 
 \para{Textes et réalisations} Le champ associé $\tilde\Lec$ a plus d'objets que $\Lec$ : ce sont
 les \emph{textes}, données de descente qu'on accepte de ne pas réduire à une notation unique. Un
@@ -87,7 +95,13 @@ neutre ; si $\mathcal A$ est abélien, l'obstruction est dans $H^2(C, \mathcal A
 textes diffèrent par un torseur sous $\mathcal A$, classé par $H^1(C, \mathcal A)$.}
 
 (Les deux hypothèses sont mot pour mot les axiomes d'une gerbe ; le reste, cf. Giraud.) Sauf
-erreur, c'est exactement ce qu'on observe : \emph{deux étages d'obstruction}. $H^2$ : pas de
+erreur, c'est exactement ce qu'on observe : \emph{deux étages d'obstruction}. Le schéma est le suivant :
+
+\[\begin{tikzcd}[column sep=normal,row sep=small]
+H^2(C,\mathcal A) & \tilde\Lec(P) \arrow[l, dashed, "\text{obstr.}"'] & \Lec(P) \arrow[l] \\
+ & & H^1(C,\mathcal A) \arrow[u, dashed, "\text{torseurs}"']
+\end{tikzcd}\]
+$H^2$ : pas de
 texte du tout. $H^1$ : un texte, mais pas de réalisation. Une classe non nulle naît d'un
 cycle de fragments où un même nom désigne deux objets ; on la tue en agrandissant $S$, sans
 \sout{corriger} toucher aux lectures.
@@ -110,10 +124,21 @@ topologie d'Alexandrov, que j'appellerai le \cache{temps}. Les fragments y sont 
 $P \to T$ ; soit $t_P$ la borne de l'image. Au-dessus de $T$ il y a un faisceau croissant
 $t \mapsto C_{<t}$, les énoncés que la communauté \cache{mathématique} tenait pour acquis avant
 $t$, et un ensemble $Q$ de \cache{questions}, chacune avec sa date $t_q$. (Un ordre des fragments
-compatible aux indices existe ssi ces indices sont sans cycle --- Szpilrajn.)
+compatible aux indices existe ssi ces indices sont sans cycle --- Szpilrajn.) En un dessin :
+
+\[\begin{tikzcd}[column sep=small,row sep=small]
+P \arrow[dr] & E \arrow[l, "\text{lieu}"'] & R \arrow[l] \arrow[r] & Q \arrow[dl] \\
+ & T & C_{<t} \arrow[l, dotted] &
+\end{tikzcd}\]
+
 
 \para{Correspondance de Galois} Soit $R \subset Q \times E$ la relation « $e$ touche $q$ ». Les
-applications $A \mapsto A'$, $B \mapsto B'$ qu'elle définit forment une correspondance de Galois,
+applications
+
+\[\begin{tikzcd}
+\mathfrak P(Q) \arrow[r, shift left, "A \,\mapsto\, A'"] & \mathfrak P(E) \arrow[l, shift left, "B \,\mapsto\, B'"']
+\end{tikzcd}\]
+qu'elle définit forment une correspondance de Galois,
 et les couples fermés un treillis complet (polarité de Birkhoff ; cf. Ganter--Wille).
 
 \para{Réponses} Soit $\vdash$ un système déductif où chaque question fermée $q$ s'écrit

@@ -10,6 +10,7 @@
 \usepackage[italian]{babel}
 \usepackage[hidelinks]{hyperref}
 \usepackage[normalem]{ulem}
+\usepackage{tikz-cd}
 \setlength{\parskip}{0.3em}
 \setlength{\parindent}{0pt}
 \setlength{\emergencystretch}{2em}
@@ -64,7 +65,14 @@ gruppo delle permutazioni di $S$.}
 
 Dimostrazione: ridenominazioni compatibili si incollano, simbolo per simbolo; e se
 $g_{ij} = h_i^{-1}h_j$, le $h_i\ell_i$ coincidono sugli $U_{ij}$, dunque si incollano. Il
-viceversa è una tautologia. OK.
+viceversa è una tautologia. OK. La condizione di cociclo dice che, su un'intersezione tripla, il
+triangolo
+
+\[\begin{tikzcd}[column sep=small,row sep=small]
+ & \ell_j|_{U_{ijk}} \arrow[dr, "g_{ij}"] & \\
+\ell_k|_{U_{ijk}} \arrow[ur, "g_{jk}"] \arrow[rr, "g_{ik}"'] & & \ell_i|_{U_{ijk}}
+\end{tikzcd}\]
+commuta.
 
 \para{Testi e realizzazioni} Il campo associato $\tilde\Lec$ ha più oggetti di $\Lec$: sono i
 \emph{testi}, dati di discesa che si accetta di non ridurre a una notazione unica. Un oggetto di
@@ -85,7 +93,13 @@ se $\mathcal A$ è abeliano, l'ostruzione sta in $H^2(C, \mathcal A)$, e due tes
 un torsore sotto $\mathcal A$, classificato da $H^1(C, \mathcal A)$.}
 
 (Le due ipotesi sono parola per parola gli assiomi di un gerbo; il resto, cf. Giraud.) Salvo
-errore, è esattamente ciò che si osserva: \emph{due piani di ostruzione}. $H^2$: nessun testo.
+errore, è esattamente ciò che si osserva: \emph{due piani di ostruzione}. Lo schema è il seguente:
+
+\[\begin{tikzcd}[column sep=normal,row sep=small]
+H^2(C,\mathcal A) & \tilde\Lec(P) \arrow[l, dashed, "\text{ostr.}"'] & \Lec(P) \arrow[l] \\
+ & & H^1(C,\mathcal A) \arrow[u, dashed, "\text{torsori}"']
+\end{tikzcd}\]
+$H^2$: nessun testo.
 $H^1$: un testo, ma nessuna realizzazione. Una classe non nulla nasce da un ciclo di frammenti in
 cui uno stesso nome designa due oggetti; la si uccide ingrandendo $S$, senza \sout{correggere}
 toccare le letture.
@@ -107,10 +121,21 @@ sua topologia di Alexandrov, che chiamerò il \cache{tempo}. I frammenti vi sono
 $P \to T$; sia $t_P$ il limite superiore dell'immagine. Al di sopra di $T$ c'è un fascio crescente
 $t \mapsto C_{<t}$, gli enunciati che la comunità \cache{matematica} riteneva acquisiti prima di
 $t$, e un insieme $Q$ di \cache{domande}, ciascuna con la sua data $t_q$. (Un ordine dei frammenti
-compatibile con gli indizi esiste sse gli indizi sono privi di cicli --- Szpilrajn.)
+compatibile con gli indizi esiste sse gli indizi sono privi di cicli --- Szpilrajn.) In un disegno:
+
+\[\begin{tikzcd}[column sep=small,row sep=small]
+P \arrow[dr] & E \arrow[l, "\text{luogo}"'] & R \arrow[l] \arrow[r] & Q \arrow[dl] \\
+ & T & C_{<t} \arrow[l, dotted] &
+\end{tikzcd}\]
+
 
 \para{Corrispondenza di Galois} Sia $R \subset Q \times E$ la relazione « $e$ tocca $q$ ». Le
-applicazioni $A \mapsto A'$, $B \mapsto B'$ che essa definisce formano una corrispondenza di
+applicazioni
+
+\[\begin{tikzcd}
+\mathfrak P(Q) \arrow[r, shift left, "A \,\mapsto\, A'"] & \mathfrak P(E) \arrow[l, shift left, "B \,\mapsto\, B'"']
+\end{tikzcd}\]
+che essa definisce formano una corrispondenza di
 Galois, e le coppie chiuse un reticolo completo (polarità di Birkhoff; cf. Ganter--Wille).
 
 \para{Risposte} Sia $\vdash$ un sistema deduttivo in cui ogni domanda chiusa $q$ si scrive
