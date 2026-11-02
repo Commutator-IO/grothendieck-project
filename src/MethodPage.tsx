@@ -71,7 +71,7 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
     id: 'article-recollement',
     title: 'Poema grothendieckiano',
     lang: 'Italian · two pages',
-    what: "The edition's two tasks as mathematics, in the manner of the Éléments: the readings of a folder form a sheaf, a single notation exists exactly when a Čech class vanishes (always, for batches read in sequence), and the questions a corpus answers come from a Galois correspondence and the finiteness of proofs.",
+    what: "Two tasks of a later reader of working notes, as mathematics in the manner of the Éléments: drawing from hard-to-read pages statements that hold whatever the doubtful words, glued into one text in one notation (a Čech class that vanishes), and recognising afterwards which questions of the mathematical community the pages had already answered.",
     pdf: '/article/poema-grothendieckiano.pdf',
     src: 'docs/recollement/articolo.tex',
   },
