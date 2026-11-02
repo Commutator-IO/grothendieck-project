@@ -70,7 +70,7 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
   {
     id: 'article-recollement',
     title: 'Poème grothendieckien · Poema grothendieckiano',
-    lang: 'French and Italian · two pages',
+    lang: 'French and Italian · three pages',
     what: "Two tasks of a later reader of working notes, as mathematics in the manner of the Éléments: drawing from hard-to-read pages statements that hold whatever the doubtful words, glued into one text in one notation (a Čech class that vanishes), and recognising afterwards which questions of the mathematical community the pages had already answered.",
     pdf: '/article/poeme-grothendieckien.pdf',
     more: [{ label: 'PDF (italiano)', href: '/article/poema-grothendieckiano.pdf' }],
