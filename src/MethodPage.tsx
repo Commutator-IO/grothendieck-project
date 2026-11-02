@@ -71,7 +71,7 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
     id: 'article-recollement',
     title: 'Poème grothendieckien · Poema grothendieckiano',
     lang: 'French and Italian · three pages',
-    what: "Two tasks of a later reader of working notes, as mathematics in the manner of the Éléments: drawing from hard-to-read pages statements that hold whatever the doubtful words, glued into one text in one notation (a Čech class that vanishes), and recognising afterwards which questions of the mathematical community the pages had already answered. It ends on a conjecture: what the notes aim at can be proved from their own proofs and the literature of their time, so that every counterexample is an anticipation.",
+    what: "A short note in the manner of the Éléments: fragments on a site, the stack of their readings, a gerbe and its obstruction, the relative point of view over a base, and a conjecture.",
     pdf: '/article/poeme-grothendieckien.pdf',
     more: [{ label: 'PDF (italiano)', href: '/article/poema-grothendieckiano.pdf' }],
     src: 'docs/recollement/article.tex',

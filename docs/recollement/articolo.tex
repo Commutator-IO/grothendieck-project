@@ -1,5 +1,6 @@
-% Due problemi di lettura: incollare frammenti, rispondere a domande.
-% Versione italiana di article.tex (stessa numerazione, stesso contenuto).
+% Poema grothendieckiano.
+% Nota breve, alla maniera degli Éléments (sito, campo, gerbo, discesa, punto di vista relativo).
+% Il vocabolario resta astratto di proposito: la natura dei due problemi si indovina leggendo.
 \documentclass[10pt]{article}
 \usepackage[a4paper,left=42mm,right=42mm,top=24mm,bottom=26mm]{geometry}
 \usepackage{fontspec}
@@ -25,12 +26,13 @@
 
 \newcommand{\Lec}{\mathcal L}
 \newcommand{\U}{\mathfrak U}
+\newcommand{\Cl}[1]{\overline{#1}}
 \makeatletter
 \renewcommand{\@seccntformat}[1]{\S\,\csname the#1\endcsname.\quad}
 \makeatother
 
 \title{\vspace{-1.2em}\large\bfseries Poema grothendieckiano\\[0.2em]
-\normalsize\mdseries Incollare frammenti, rispondere a domande}
+\normalsize\mdseries Due problemi di incollamento}
 \author{\small Michel Hua\thanks{Scritto con un assistente, Claude Opus~5.5 (Anthropic), poi riletto dall'autore.}}
 \date{\small Novembre 2026}
 
@@ -38,189 +40,162 @@
 \maketitle
 \vspace{-1.6em}
 
-\noindent\emph{Introduzione.} Un fascicolo di appunti di lavoro non è un testo. È un fascio di
-fogli scritti per un solo lettore, spesso difficili da decifrare, ciascuno nella propria
-notazione, in cui l'argomento passa da una pagina all'altra senza dirlo. Il lettore che viene
-dopo ha due compiti. Il primo è trarne enunciati che reggano: teoremi, e non soltanto parole
-decifrate (\S1). Il secondo è riconoscere, tra le domande che la comunità matematica si è posta più
-tardi, quelle a cui questi fogli avevano già risposto; rispondervi a posteriori ricostruisce una
-storia (\S2). Nulla di ciò che segue è difficile; l'interesse sta nel fatto che la difficoltà
-vera si lascia localizzare.
+\noindent\emph{Introduzione.} Sono dati dei frammenti, ciascuno nella propria lingua. Li si
+tratta come gli oggetti locali di un campo; ciò che abbozzano insieme è una sezione globale, e
+ciò che risolvono si legge su una base. Le ostruzioni sono classi di coomologia, ed è queste che
+si tratta di leggere.
 
-\section{I frammenti}
+\section{Il campo delle letture}
 
 \begin{defi}
-Sia $P$ l'insieme finito dei fogli di un fascicolo. Si chiama \emph{plico} ogni parte
-$U \subset P$. Fissiamo un insieme $S$ di simboli. Una \emph{lettura} di $U$ è il dato di una
-trascrizione di ogni foglio di $U$ e di un \emph{glossario} $\gamma_U$, applicazione che associa
-a ogni simbolo di $S$ usato in $U$ l'oggetto che designa. Si indica con $\Lec(U)$ l'insieme delle
-letture di $U$; per $V \subset U$, dimenticare i fogli fuori da $V$ definisce
-$\Lec(U) \to \Lec(V)$, $\ell \mapsto \ell|_V$.
+Sia $P$ un insieme finito di \emph{frammenti}, e $S$ un insieme di simboli. Una parte
+$U \subset P$ è \emph{autonoma} se porta il contesto necessario per essere compresa da sola. Le
+parti autonome e le loro inclusioni formano una categoria $C$, che si munisce della topologia
+generata dalle famiglie $(U_i \subset U)$ di unione $U$. Un frammento isolato in generale non è
+autonomo: è ciò che rende non banale questa topologia.
 \end{defi}
 
-Si munisce $P$ della topologia discreta: un ricoprimento di $U$ è una famiglia di plichi la cui
-unione è $U$.
-
-\begin{prop}
-Il prefascio $\Lec$ è un fascio: se $\U = (U_i)$ ricopre $U$ e se letture $\ell_i \in \Lec(U_i)$
-coincidono sugli $U_i \cap U_j$, esiste un'unica lettura $\ell$ di $U$ tale che
-$\ell|_{U_i} = \ell_i$ per ogni $i$.
-\end{prop}
-
-\begin{proof}
-Una lettura è una famiglia di dati indicizzata dai fogli, insieme a un'applicazione definita sui
-simboli usati; famiglie e applicazioni compatibili sulle intersezioni si incollano, e in modo
-unico.
-\end{proof}
-
-Una pagina difficile non ha una lettura sola: le parole dubbie ne ammettono parecchie. Sia
-$\Lambda(U) \subset \Lec(U)$ l'insieme delle letture \emph{ammissibili} di $U$, e $E(\lambda)$
-l'insieme degli enunciati che una lettura $\lambda$ afferma.
-
 \begin{defi}
-Un enunciato è \emph{ricostruito} su $U$ se appartiene a
-\[E(U) = \textstyle\bigcap_{\lambda \in \Lambda(U)} E(\lambda),\]
-cioè se non dipende dalla scelta tra le
-letture ammissibili; è \emph{corretto} se, così com'è scritto, è vero, eventualmente dopo
-l'aggiunta di un'ipotesi che la pagina tace e che si dichiara.
-\end{defi}
-
-Restringere $\Lambda$ (decifrare una parola, confrontare con il facsimile) fa crescere $E(U)$; un
-enunciato ricostruito e corretto resta tale. Per questo una dimostrazione controllata a macchina
-verifica la matematica di una lettura e mai la sua fedeltà alla pagina: le due cose si misurano
-separatamente.
-
-La situazione reale è meno favorevole: ogni frammento è letto nella sua notazione, e due letture
-di una stessa pagina coincidono solo \emph{a meno di un cambiamento di notazione}. Sia $G$ il
-gruppo delle permutazioni di $S$; esso opera su ogni $\Lec(U)$ rinominando i simboli, e questa
-azione commuta con le restrizioni.
-
-\begin{defi}
-Una \emph{lettura frammentaria} di $P$ è il dato di un ricoprimento $\U = (U_i)$, di letture
-$\ell_i \in \Lec(U_i)$ e, per ogni $i, j$, di ridenominazioni $g_{ij} \in G$ tali che
-$\ell_i|_{U_{ij}} = g_{ij}\,\ell_j|_{U_{ij}}$ e $g_{ij}\,g_{jk} = g_{ik}$ quando
-$U_{ijk} \neq \varnothing$ (cociclo di Čech, di classe $[g] \in \check H^1(\U, G)$).
+Il \emph{campo delle letture} $\Lec$ associa a $U$ il gruppoide $\Lec(U)$ i cui oggetti sono le
+letture di $U$ — un senso dato a ogni frammento, e un'applicazione che manda ogni simbolo usato
+in $U$ sull'oggetto che designa — e le cui frecce $\ell \to \ell'$ sono le
+\emph{ridenominazioni} dei simboli usati che trasformano $\ell$ in $\ell'$. La restrizione a
+$V \subset U$ dimentica i frammenti fuori da $V$.
 \end{defi}
 
 \begin{prop}
-Una lettura frammentaria proviene da una lettura di $P$ in una \emph{notazione unica} — esistono
-$\ell \in \Lec(P)$ e $h_i \in G$ con $\ell|_{U_i} = h_i\,\ell_i$ e $g_{ij} = h_i^{-1} h_j$ — se e
-solo se $[g] = 0$ in $\check H^1(\U, G)$.
+$\Lec$ è un precampo: per $\ell, \ell' \in \Lec(U)$, il prefascio
+$V \mapsto \mathrm{Isom}(\ell|_V, \ell'|_V)$ è un fascio. Un dato di discesa $(\ell_i, g_{ij})$
+relativo a un ricoprimento $\U$ — letture $\ell_i \in \Lec(U_i)$ e ridenominazioni
+$g_{ij} \colon \ell_j|_{U_{ij}} \to \ell_i|_{U_{ij}}$ tali che $g_{ij}g_{jk} = g_{ik}$ — è
+effettivo, cioè proviene da una lettura di $U$ in una notazione unica, se e solo se la sua classe
+è nulla in $\check H^1(\U, G)$, dove $G$ è il gruppo delle permutazioni di $S$.
 \end{prop}
 
 \begin{proof}
-Se $g_{ij} = h_i^{-1} h_j$, le letture $h_i \ell_i$ coincidono sulle intersezioni, poiché
-$h_i \ell_i = h_i g_{ij} \ell_j = h_j \ell_j$ su $U_{ij}$; si incollano per 1.2. Il viceversa è
-la definizione di banalità di $[g]$.
+Ridenominazioni compatibili su un ricoprimento si incollano, poiché una ridenominazione non è che
+un'applicazione definita simbolo per simbolo. Se $g_{ij} = h_i^{-1}h_j$, le letture $h_i\ell_i$
+coincidono sulle intersezioni e si incollano; il viceversa è la definizione di banalità della
+classe.
 \end{proof}
+
+Il campo associato $\tilde\Lec$ ha dunque più oggetti di $\Lec$: sono i \emph{testi}, dati di
+discesa che si accetta di non ridurre a una notazione unica. Un oggetto di $\tilde\Lec(P)$ è un
+testo di $P$; un oggetto di $\Lec(P)$ ne è una \emph{realizzazione}.
 
 \begin{coro}
-Se i plichi si incontrano solo a due a due e il grafo delle loro intersezioni è un albero — un
-fascicolo letto per lotti successivi, ciascuno dei quali condivide pagine solo con i vicini —
-ogni lettura frammentaria si legge in una notazione unica.
+Se il nervo di $\U$ è un albero, ogni testo relativo a $\U$ ammette una realizzazione.
 \end{coro}
 
 \begin{proof}
-Il nervo di $\U$ è allora un albero, e $\check H^1$ di un albero è banale a coefficienti in un
-gruppo qualsiasi: si sceglie $h$ arbitrariamente in una radice e lo si propaga lungo i lati con
-$h_j = h_i g_{ij}$.
+$\check H^1$ di un albero è banale a coefficienti in un gruppo qualsiasi: si sceglie $h$ in una
+radice e lo si propaga lungo i lati con $h_j = h_ig_{ij}$.
 \end{proof}
 
-\begin{rema}
-Una classe non nulla non è un errore di lettura. Nasce da un ciclo di frammenti in cui uno stesso
-nome designa, da un capo all'altro del ciclo, due oggetti distinti (così i due « dati di
-ramificazione » di uno stesso fascicolo, l'uno ausiliario, l'altro divenuto un campo). Non la si
-uccide correggendo una lettura, ma ingrandendo $S$: distinguendo i due nomi.
-\end{rema}
-
-\begin{rema}
-Resta da fissare l'ordine dei fogli. Gli indizi di datazione (un verso datato, un rinvio a una
-pagina anteriore) definiscono una relazione $\prec$ su $P$. Un ordine di lettura è
-un'estensione lineare di $\prec$; ne esiste una se e solo se $\prec$ è priva di cicli
-(Szpilrajn), e un ciclo segnala una datazione sbagliata o una pagina riletta più tardi.
-\end{rema}
-
-\section{Le domande}
-
-Sia $E$ l'insieme degli \emph{enunciati} di una lettura $\ell \in \Lec(P)$, ciascuno munito del
-suo \emph{luogo} (il foglio che lo porta), e $Q$ l'insieme delle domande che la comunità matematica si pone e si scambia. Si
-dà un insieme $K$ di parole chiave e applicazioni $\kappa \colon E \to \mathfrak P(K)$,
-$\kappa \colon Q \to \mathfrak P(K)$; si dice che $e$ \emph{tocca} $q$, e si scrive
-$q \mathrel{R} e$, se $\kappa(q) \cap \kappa(e) \neq \varnothing$.
-
 \begin{prop}
-Le applicazioni $A \mapsto A' = \{e : q \mathrel R e \text{ per ogni } q \in A\}$ da
-$\mathfrak P(Q)$ in $\mathfrak P(E)$, e $B \mapsto B'$ in senso inverso, formano una
-corrispondenza di Galois: sono decrescenti, $A \subset A''$, $B \subset B''$ e $A' = A'''$. Le
-coppie $(A, B)$ con $A' = B$ e $B' = A$ formano un reticolo completo.
+Supponiamo la lettura \emph{localmente ben posta}: ogni frammento appartiene a una parte autonoma
+che ammette una lettura, e due letture di una stessa parte sono localmente isomorfe. Allora
+$\tilde\Lec$ è un gerbo; il suo legame è il fascio $\mathcal A$ degli automorfismi di una
+lettura, le \emph{simmetrie di notazione}. Un testo di $P$ esiste se e solo se questo gerbo è
+neutro; quando $\mathcal A$ è abeliano, l'ostruzione è una classe di $H^2(C, \mathcal A)$, e due
+testi differiscono per un torsore sotto $\mathcal A$, classificato da $H^1(C, \mathcal A)$
+(Giraud).
 \end{prop}
 
 \begin{proof}
-È la polarità di Birkhoff associata a ogni relazione binaria; le coppie chiuse sono i « concetti »
-dell'analisi formale dei concetti (Ganter--Wille).
+Le due ipotesi sono, parola per parola, gli assiomi di un gerbo; il resto è la teoria di Giraud
+dei gerbi a legame abeliano.
 \end{proof}
 
-Per un frammento $e$, l'insieme $\{e\}'$ è l'elenco delle domande candidate; le si ordina secondo
-la cardinalità di $\kappa(q) \cap \kappa(e)$. Toccare non è rispondere.
+\begin{rema}
+Si vedono così due piani di ostruzione. Il primo ($H^2$) dice che non c'è alcun testo: le
+simmetrie locali non si incollano. Il secondo ($H^1$) dice che un testo c'è, ma nessuna
+realizzazione in una notazione unica. Una classe non nulla non è un errore: nasce da un ciclo di
+frammenti in cui uno stesso nome designa due oggetti, e la si uccide ingrandendo $S$, non
+correggendo una lettura.
+\end{rema}
 
 \begin{defi}
-Fissiamo un sistema deduttivo $\vdash$ in cui ogni domanda chiusa $q$ si enuncia con una formula
-$\varphi_q$. Una \emph{risposta} a $q$ tratta da $E$ è una parte finita $B \subset E$ tale che
-$B \vdash \varphi_q$ oppure $B \vdash \neg\varphi_q$; essa è \emph{attestata} se ogni enunciato di
-$B$ porta il suo luogo, \emph{verificata} se la deduzione è stata controllata (da un assistente
-di dimostrazione o da una persona).
+Un frammento può ammettere più letture. Sia $\Lambda(U) \subset \mathrm{Ob}\,\Lec(U)$ l'insieme
+delle letture \emph{ammissibili} di $U$, e $E(\lambda)$ l'insieme degli enunciati che $\lambda$
+afferma. Un enunciato è \emph{ricostruito} su $U$ se appartiene a
+\[E(U) = \textstyle\bigcap_{\lambda \in \Lambda(U)} E(\lambda),\]
+e \emph{corretto} se è vero così com'è scritto, eventualmente dopo l'aggiunta di un'ipotesi che
+il frammento tace e che si dichiara.
+\end{defi}
+
+Restringere $\Lambda$ fa crescere $E$, e un enunciato ricostruito e corretto resta tale. Una
+verifica formale controlla dunque la matematica di una lettura, mai la sua fedeltà al
+frammento: le due cose si misurano separatamente.
+
+\section{Il punto di vista relativo}
+
+Tutto ciò che precede si colloca al di sopra di una base: un insieme ordinato $T$, munito della
+sua topologia di Alexandrov, che si chiamerà il tempo. I frammenti vi sono collocati da un
+morfismo $P \to T$; si indica con $t_P$ il limite superiore della sua immagine. Al di sopra di
+$T$ vive un fascio crescente $t \mapsto C_{<t}$, gli enunciati che la comunità matematica
+riteneva acquisiti prima di $t$, e un insieme $Q$ di domande, ciascuna con la sua data $t_q$. Un
+ordine dei frammenti compatibile con gli indizi di posizione esiste se e solo se tali indizi sono
+privi di cicli (Szpilrajn).
+
+\begin{prop}
+Sia $R \subset Q \times E$ la relazione « l'enunciato $e$ tocca la domanda $q$ ». Le applicazioni
+$A \mapsto A'$ e $B \mapsto B'$ che essa definisce tra parti di $Q$ e di $E$ formano una
+corrispondenza di Galois, e le coppie chiuse un reticolo completo.
+\end{prop}
+
+\begin{proof}
+È la polarità di Birkhoff di una relazione binaria; le coppie chiuse sono i « concetti » di
+Ganter e Wille.
+\end{proof}
+
+\begin{defi}
+Sia $\vdash$ un sistema deduttivo in cui ogni domanda chiusa $q$ si enuncia con una formula
+$\varphi_q$, e $\Cl X$ la chiusura deduttiva di $X$. Una \emph{risposta} a $q$ è una parte finita
+$B \subset E(P)$ tale che $\varphi_q$ o $\neg\varphi_q$ appartenga a $\Cl B$; essa è
+\emph{attestata} se ogni enunciato di $B$ porta il suo frammento, \emph{verificata} se la
+deduzione è stata controllata, \emph{anticipata} se tutti i suoi frammenti precedono $t_q$.
 \end{defi}
 
 \begin{prop}
-Se $E \vdash \varphi_q$, esiste una risposta $B$ a $q$, e la si può scegliere minimale rispetto
-all'inclusione. L'insieme delle domande a cui $E$ risponde cresce con $E$.
+Se $\varphi_q \in \Cl{E(P)}$, esiste una risposta minimale rispetto all'inclusione, e l'insieme
+delle domande risolte cresce con $P$.
 \end{prop}
 
 \begin{proof}
-Una dimostrazione usa solo un numero finito di ipotesi; tra le parti finite che bastano, una
-parte di cardinalità minima è minimale rispetto all'inclusione. La crescita è quella di $\vdash$.
+Una dimostrazione usa solo un numero finito di ipotesi.
 \end{proof}
 
 \begin{rema}
-Le domande e i fogli sono datati. Una risposta $B$ a $q$ è \emph{anticipata} se ogni foglio di
-$B$ è anteriore alla data in cui $q$ fu posta: la domanda aveva già una risposta, rimasta in un
-fascicolo. Leggere oggi i fogli e rispondere a posteriori non stabilisce alcuna priorità; dà
-soltanto, con i luoghi, il materiale di una storia che altri potranno scrivere.
+Una risposta anticipata è una sezione al di sopra dell'aperto $\{t < t_q\}$, che non contiene la
+data della domanda: la domanda aveva una risposta prima di essere posta. Darla a posteriori non
+stabilisce alcuna priorità; fornisce, con i frammenti, il materiale di una storia. Una domanda
+può anche avere risposta soltanto nel testo incollato, e in nessuna lettura locale.
 \end{rema}
 
-\begin{rema}
-I due problemi si incontrano: una domanda può avere risposta solo nella lettura incollata
-$\ell \in \Lec(P)$, e in nessuna lettura locale — la domanda che un fascicolo pone a pagina~24 e
-a cui risponde a pagina~190. È la ragione per leggere un fascicolo intero prima di cercarvi
-risposte. Inversamente, una risposta vale solo per i suoi luoghi: si attribuisce all'autore solo
-ciò che la pagina enuncia, e il resto lo si dice a proprio nome.
-\end{rema}
-
-Indichiamo con $\overline{X}$ la chiusura deduttiva di un insieme di enunciati $X$: gli
-enunciati dimostrabili a partire da $X$. Sia $D(P) \subset E(P)$ l'insieme degli enunciati di cui
-i fogli danno una dimostrazione e, per una data $t$, $C_{<t}$ l'insieme degli enunciati che la
-comunità matematica aveva pubblicato prima di $t$.
+Sia infine $D(P) \subset E(P)$ l'insieme degli enunciati di cui i frammenti stessi danno una
+dimostrazione.
 
 \begin{conj}
-Per ogni fascicolo $P$, di data $t_P$, ogni enunciato corretto di $E(P)$ appartiene a
-\[\overline{D(P) \cup C_{<t_P}} .\]
-In altre parole, lo spazio degli enunciati dimostrabili a cui mirano gli appunti si ricostruisce
-a partire dai frammenti, aggiungendovi ciò che la comunità sapeva allora.
+Ogni enunciato corretto di $E(P)$ appartiene a
+\[\Cl{D(P) \cup C_{<t_P}} .\]
+Lo spazio degli enunciati dimostrabili a cui mirano i frammenti si ricostruisce a partire da essi
+e da ciò che la comunità sapeva allora.
 \end{conj}
 
 \begin{rema}
-Un controesempio sarebbe un enunciato corretto che i fogli affermano senza dimostrarlo, e che
-nemmeno la letteratura del loro tempo permette di dimostrare: un'anticipazione. La congettura
-afferma che un fascicolo non ne contiene. È cercando i suoi controesempi che si trova ciò che un
-fascicolo ha di nuovo, e ogni risposta anticipata (2.4) che cade fuori da
-$\overline{D(P) \cup C_{<t_P}}$ ne è uno.
+Un controesempio sarebbe un enunciato corretto che i frammenti affermano senza dimostrarlo e che
+nulla, al loro tempo, dimostrava: un'anticipazione. È cercando i controesempi che si trova ciò
+che $P$ ha di nuovo; ogni risposta anticipata che cade fuori da $\Cl{D(P) \cup C_{<t_P}}$ ne è
+uno.
 \end{rema}
 
 \begin{rema}[Riflessione]
-Si sarebbe potuto cercare di forzare il testo: scegliere in anticipo una notazione e piegarvi
-ogni foglio. L'approccio qui è inverso. Si lascia che ogni frammento parli nella sua lingua, si
-annota soltanto come le lingue si traducono sui ricoprimenti, ed è la coomologia a dire se esiste
-un testo unico. Quando non si annulla, non dice che la lettura è cattiva; dice dove guardare.
+Si sarebbe potuto attaccare a colpi di martello: fissare in anticipo una notazione e piegarvi ogni
+frammento. Lo yoga qui è inverso. Si lascia ogni frammento nella sua lingua, si annota soltanto
+come le lingue si traducono sui ricoprimenti, e si aspetta che la struttura parli: la coomologia
+dice se un testo esiste e se ammette una realizzazione. Quando non si annulla, non dice che la
+lettura è cattiva; dice dove guardare.
 \end{rema}
 
 \vspace{0.3em}
