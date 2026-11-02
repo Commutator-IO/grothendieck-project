@@ -528,7 +528,7 @@ function Pager({
 // A card on an IHÉS item names it by its identifier and opens it on the Illusie tab.
 const proofCote = (p: (typeof PROOFS)[number]) => (isIhes(p.folder) ? `IHÉS ${p.folder}` : `n° ${p.folder}`);
 const proofHref = (p: (typeof PROOFS)[number]) =>
-  isIhes(p.folder) ? `/illusie/#${p.folder}/${p.batch}/p${parseInt(p.page, 10)}` : `/#${p.folder}/${p.batch}/p${p.page}`;
+  isIhes(p.folder) ? `/illusie/#${p.folder}/${p.batch}/p${parseInt(p.page, 10)}` : `/fonds/#${p.folder}/${p.batch}/p${p.page}`;
 const proofCtx = (p: (typeof PROOFS)[number]): CommentContext => ({
   kind: 'proof',
   label: `${proofCote(p)} · ${p.name}`,
@@ -657,7 +657,7 @@ function UnpublishedManuscripts() {
                   <span className="font-semibold"><em>{notation(r.title)}</em></span>{' '}
                   <span className="text-ink-500">({r.when}) ·{' '}
                     {r.cotes.map((c, i) => (
-                      <span key={c}>{i > 0 && ', '}<a href={`/#${c}`} className="hover:text-brand-700">{c}</a></span>
+                      <span key={c}>{i > 0 && ', '}<a href={`/fonds/#${c}`} className="hover:text-brand-700">{c}</a></span>
                     ))}
                   </span>
                   {r.note && <div className="text-[11.5px] text-ink-400">{r.note}</div>}

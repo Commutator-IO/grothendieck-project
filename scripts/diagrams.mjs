@@ -103,7 +103,7 @@ const figureOf = (d, i, n, withFolder) =>
   `<figure class="dg" id="slide-${i + 1}">` +
   // One link: the page in the side-by-side view, the transcription on the
   // left and Montpellier's facsimile on the right, both at this page.
-  `<figcaption><a href="/#${d.folder}/${d.batch}${d.page ? `/p${encodeURIComponent(d.page)}` : ''}" target="_top">` +
+  `<figcaption><a href="/fonds/#${d.folder}/${d.batch}${d.page ? `/p${encodeURIComponent(d.page)}` : ''}" target="_top">` +
   `${withFolder ? `n° ${d.folder} · ` : ''}batch ${d.batch}${d.page ? ` · p. ${escapeHtml(d.page)}` : ''} — read it beside the facsimile</a>` +
   `<span class="dg-n">${i + 1} / ${n}${withFolder ? ` · ${d.nodes} nodes, ${d.arrows} arrows, ${d.symbols} symbols` : ''}</span></figcaption>` +
   `<div class="ltx_p">${enlarge(renderDiagram(d.raw), scale(d))}</div></figure>`;

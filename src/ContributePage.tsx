@@ -354,7 +354,7 @@ function RunABatch() {
       <p className="prose-fonds mt-3">
         Every folder no edition covers has a first pass, so pick a batch to take again from{' '}
         <a
-          href="/#folders"
+          href="/fonds/#folders"
           className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
         >
           the list of folders

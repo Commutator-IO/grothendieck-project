@@ -662,7 +662,7 @@ function Contributors() {
         who knew the mathematics. Where their edition exists it is better than anything produced
         here and should be used instead; the{' '}
         <a
-          href="/#folders"
+          href="/fonds/#folders"
           className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
         >
           list of folders

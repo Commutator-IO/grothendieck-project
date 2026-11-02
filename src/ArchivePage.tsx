@@ -119,7 +119,7 @@ export function ArchivePage() {
           openBatch ? 'lg:pr-[var(--pane,0px)]' : ''
         }`}
       >
-        <Header path="/" />
+        <Header path="/fonds/" />
 
         <main className="mx-auto max-w-6xl px-5 py-10">
           {openBatch && openCote ? (

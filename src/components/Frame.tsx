@@ -21,9 +21,11 @@ import { useEffect, useState } from 'react';
  * diaries. Every URL is what it was.
  */
 type Collection = 'fonds' | 'quillen' | 'bourbaki' | 'illusie' | 'buffalo';
+// The front page is the search over every collection (since 2 November 2026), so it belongs to none of them.
+type Place = Collection | 'home';
 
 const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
-  { id: 'fonds', label: 'Fonds', path: '/' },
+  { id: 'fonds', label: 'Montpellier', path: '/fonds/' },
   // A second corpus, Daniel Quillen's notebooks at the Clay (#36): the other
   // side of the 1968 and 1983 exchanges, with a reading room of its own.
   { id: 'quillen', label: 'Quillen', path: '/quillen/' },
@@ -47,7 +49,7 @@ const pagesOf = (c: Collection) =>
 // The readings of the whole fonds, and then — after a rule — the pages about
 // the project rather than about the folders.
 const FONDS_PAGES: { path: string; label: string }[] = [
-  { path: '/', label: 'Whole fonds' },
+  { path: '/fonds/', label: 'Whole fonds' },
   { path: '/index/', label: 'Index' },
   { path: '/timeline/', label: 'Timeline' },
   { path: '/notices/', label: 'Notices' },
@@ -63,9 +65,10 @@ const PROJECT_PAGES: { path: string; label: string }[] = [
   { path: '/contribute/', label: 'Contribute' },
 ];
 
-// The front page is the whole fonds; the notebooks have their own landing.
-export const collectionOf = (path: string): Collection => {
+// The front page is the search; the fonds and each other collection have their own landing.
+export const collectionOf = (path: string): Place => {
   const h = path.endsWith('/') ? path : `${path}/`;
+  if (h === '/') return 'home';
   if (h.startsWith('/quillen/')) return 'quillen';
   if (h.startsWith('/bourbaki/')) return 'bourbaki';
   if (h.startsWith('/illusie/')) return 'illusie';
@@ -78,8 +81,8 @@ function isCurrent(path: string, here: string): boolean {
   return path === h;
 }
 
-// The metadata search runs over every collection at once, so it sits outside them all.
-const SEARCH = { path: '/search/', label: 'Search' };
+// The metadata search runs over every collection at once, so it sits outside them all, and is the front page.
+const SEARCH = { path: '/', label: 'Search' };
 
 function SearchLink({ here }: { here: string }) {
   const on = isCurrent(SEARCH.path, here);
@@ -163,7 +166,9 @@ export function Header({ path }: { path: string }) {
         </div>
 
         <nav className="ml-auto hidden items-center gap-0.5 text-[12.5px] text-ink-500 lg:flex xl:text-[13px]">
-          {collection === 'fonds' ? (
+          {collection === 'home' ? (
+            PROJECT_PAGES.map((p) => <Tab key={p.path} {...p} here={path} />)
+          ) : collection === 'fonds' ? (
             <>
               {FONDS_PAGES.map((p) => (
                 <Tab key={p.path} {...p} here={path} />
@@ -240,7 +245,7 @@ function Mark() {
   );
 }
 
-export function Footer({ collection = 'fonds' }: { collection?: Collection }) {
+export function Footer({ collection = 'fonds' }: { collection?: Place }) {
   const quillen = collection === 'quillen';
   const bourbaki = collection === 'bourbaki';
   const illusie = collection === 'illusie';
@@ -248,7 +253,18 @@ export function Footer({ collection = 'fonds' }: { collection?: Collection }) {
   return (
     <footer className="mt-16 border-t border-ink-200 bg-white">
       <div className="mx-auto max-w-6xl px-5 py-8 text-[12.5px] leading-relaxed text-ink-500">
-        {buffalo ? (
+        {collection === 'home' ? (
+          <>
+            <p className="max-w-[52em]">
+              The documents belong to the archives that keep them: the University of Montpellier, the Archives
+              Henri Poincaré, the Clay Mathematics Institute, the IHÉS and the BnF. The Buffalo lectures are on
+              YouTube.
+            </p>
+            <p className="mt-3 max-w-[52em]">
+              This site keeps their catalogue entries and sends you to each archive to read the documents.
+            </p>
+          </>
+        ) : buffalo ? (
           <>
             <p className="max-w-[52em]">
               The recordings of Grothendieck's{' '}

@@ -40,7 +40,7 @@ const HOLDER = {
   bnf: 'Bibliothèque nationale de France',
 };
 const facsimile = (cote) => `https://grothendieck.umontpellier.fr/${cote}.pdf`;
-const folderPage = (cote, batch = 1) => `/#${cote}/${batch}`;
+const folderPage = (cote, batch = 1) => `/fonds/#${cote}/${batch}`;
 
 /**
  * The years an archivist's dating spans: « 1965-1969 », « [à partir de 1958] »,

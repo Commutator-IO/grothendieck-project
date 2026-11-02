@@ -302,7 +302,7 @@ function push(it, snip) {
     claim: it.claim ?? null,
     details: it.details ?? null,
     context: it.context ?? null,
-    link: `/#${it.cote}/${batch}/${edition}${page ? `/p${page}` : ''}`,
+    link: `/fonds/#${it.cote}/${batch}/${edition}${page ? `/p${page}` : ''}`,
   });
   if (snip) snippets[id] = snip;
 }

@@ -214,7 +214,7 @@ function NoticeBody({ n }: { n: Notice }) {
             <ul className="mt-0.5 text-[13px]">
               {n.leaves.map((l, i) => (
                 <li key={i} title={l.context}>
-                  <a href={`/#${n.cote}/${l.batch}`} className="tabular hover:text-brand-700">
+                  <a href={`/fonds/#${n.cote}/${l.batch}`} className="tabular hover:text-brand-700">
                     p. {l.page}
                   </a>{' '}
                   — « {l.written} » ({KIND[l.kind] ?? l.kind}, {HAND[l.hand] ?? l.hand})
@@ -281,7 +281,7 @@ function NoticeBody({ n }: { n: Notice }) {
                 {notation(t.title)}{' '}
                 <span className="font-normal text-ink-400">
                   — table de l’auteur, {t.pages ? pageList(t.pages) : `lot ${t.batch}`} du fonds,{' '}
-                  <a href={`/#${n.cote}/${t.batch}`} className="hover:text-brand-700">
+                  <a href={`/fonds/#${n.cote}/${t.batch}`} className="hover:text-brand-700">
                     transcription
                   </a>
                 </span>
@@ -378,7 +378,7 @@ function NoticeBody({ n }: { n: Notice }) {
           {ph.transcribed
             ? `Transcription de travail ${complete ? 'complète' : 'partielle'} (${ph.transcribed} pages sur ${ph.pages})${n.modern ? ' et lecture modernisée' : ''} disponibles dans le projet ; première passe, non vérifiée sur le fac-similé.`
             : 'Pas encore transcrit dans le projet.'}{' '}
-          <a href={`/#${n.cote}`} className="text-brand-700 hover:underline">
+          <a href={`/fonds/#${n.cote}`} className="text-brand-700 hover:underline">
             Voir le fac-similé
           </a>
           .

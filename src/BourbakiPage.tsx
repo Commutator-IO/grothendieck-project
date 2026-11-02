@@ -290,7 +290,7 @@ export function BourbakiPage() {
                         {w.folder && (
                           <>
                             {' '}
-                            <a href={`/#${w.folder}/1`} className="underline hover:text-alerte-900">
+                            <a href={`/fonds/#${w.folder}/1`} className="underline hover:text-alerte-900">
                               open folder {w.folder}
                             </a>
                           </>

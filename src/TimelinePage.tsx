@@ -1117,7 +1117,7 @@ function Ranges() {
         {sel ? (
           <>
             <p>
-              <a href={`/#${sel.id}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
+              <a href={`/fonds/#${sel.id}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
                 n° {sel.id}
               </a>{' '}
               {shortTitle(sel.title)} <span className="text-ink-500">· inventory: « {sel.dating.raw} »</span>
@@ -1195,7 +1195,7 @@ function Proposals() {
       <ul className="mt-2 space-y-2">
         {list.map((p) => (
           <li key={p.folder} id={`dating-${p.folder}`} className="scroll-mt-16" {...commentData(proposalCtx(p))}>
-            <a href={`/#${p.folder}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
+            <a href={`/fonds/#${p.folder}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
               n° {p.folder}
             </a>{' '}
             <span className="text-ink-500">inventory « {p.inventory} »</span> →{' '}
@@ -1360,7 +1360,7 @@ function Calendar() {
             {(days.get(sel) ?? []).map((l, i) => (
               <li key={i}>
                 <span className="tabular text-ink-900">{sel}</span> ·{' '}
-                <a href={`/#${l.folder}/${l.batch}`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
+                <a href={`/fonds/#${l.folder}/${l.batch}`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
                   n° {l.folder}
                 </a>{' '}
                 p. {l.page}: « {l.written} », {l.context}
@@ -1398,7 +1398,7 @@ function Register() {
             <ul className="pl-4">
               {ls.map((l, i) => (
                 <li key={i} {...commentData(leafCtx(l))}>
-                  <a href={`/#${l.folder}/${l.batch}`} className="tabular hover:text-brand-700">
+                  <a href={`/fonds/#${l.folder}/${l.batch}`} className="tabular hover:text-brand-700">
                     p. {l.page}
                   </a>{' '}
                   « {l.written} » <span className="text-ink-400">· {l.kind}, {l.context} · {l.where}</span>{' '}

@@ -173,6 +173,7 @@ export default defineConfig(({ mode }) => ({
       // transcription stretches over months.
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
+        fonds: resolve(import.meta.dirname, 'fonds/index.html'),
         archive: resolve(import.meta.dirname, 'archive/index.html'),
         method: resolve(import.meta.dirname, 'method/index.html'),
         contribute: resolve(import.meta.dirname, 'contribute/index.html'),

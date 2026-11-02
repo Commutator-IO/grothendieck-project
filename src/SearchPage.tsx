@@ -388,7 +388,11 @@ export function SearchPage() {
   }, []);
 
   useEffect(() => {
-    const on = () => setSt(readHash());
+    const on = () => {
+      // An old link into the fonds (#115/1) followed from this page: index.html only sees it on a fresh load.
+      if (location.hash.length > 1 && !location.hash.includes('=')) location.replace(`/fonds/${location.hash}`);
+      else setSt(readHash());
+    };
     addEventListener('hashchange', on);
     return () => removeEventListener('hashchange', on);
   }, []);
@@ -495,7 +499,7 @@ export function SearchPage() {
 
   return (
     <>
-      <Header path="/search/" />
+      <Header path="/" />
 
       <main className="mx-auto max-w-6xl px-5 py-10">
         <header className="max-w-[48em]">
@@ -726,7 +730,7 @@ export function SearchPage() {
         </p>
       </main>
 
-      <Footer />
+      <Footer collection="home" />
     </>
   );
 }
