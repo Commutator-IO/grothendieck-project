@@ -1,0 +1,141 @@
+\chapter{Un nouveau fonds : les manuscrits mathématiques de Leibniz}\label{ch:leibniz}
+
+Ce livre est né d'une demande venue de l'École nationale des chartes : reprendre la méthode sur les manuscrits mathématiques de Leibniz, dont une partie est
+présentée sur le site du projet PhiLiUMM :
+\url{https://eman-archives.org/philiumm/mathematical-manuscripts}. Ce chapitre applique
+au fonds la grille du chapitre~\ref{ch:grille} et en tire un plan de travail. Les constats
+datent du 3 novembre 2026. Ils ont été faits depuis un terminal, sur quelques pages et
+quelques manifestes, pas sur l'ensemble du fonds : on les refait avant de s'appuyer
+dessus.
+
+\section{Deux sites, deux rôles}
+
+Il faut distinguer d'abord ce que montre chaque site, parce que le site de PhiLiUMM
+n'est pas celui qui détient le fonds.
+
+\begin{description}
+  \item[Le projet PhiLiUMM] (\emph{The Philosophy of Leibniz in Light of his Unpublished
+        Mathematical Manuscripts}), financé par le Conseil européen de la recherche
+        (ERC, ADG~101020985, 2021--2026) et rattaché au laboratoire SPHERE, travaille avec
+        le Leibniz-Archiv de Hanovre. Sa page d'équipe nomme en premier David Rabouin
+        (CNRS). Le site, sur la plateforme EMAN, présente une sélection de manuscrits en
+        neuf rubriques (construction des courbes et des équations, perspective et géométrie
+        projective, fondements de la géométrie, \emph{Fundamenta calculi}, justification
+        du calcul différentiel, dyadique, angles de contact, \emph{ars combinatoria},
+        caténaire). Chaque manuscrit a une présentation et une transcription en HTML, le
+        latin de Leibniz avec les formules en notation LaTeX. Les images ne sont pas sur
+        ce site : il renvoie à celui de la bibliothèque.
+  \item[La Gottfried Wilhelm Leibniz Bibliothek] (GWLB, Hanovre) détient les papiers. Ses
+        collections numérisées (\url{https://digitale-sammlungen.gwlb.de}, sur le logiciel
+        Kitodo.Presentation) rangent les manuscrits mathématiques sous la cote LH~35
+        (\emph{Leibniz-Handschriften zur Mathematik}). Une recherche sur « LH 35 » y renvoie
+        311 notices. Chaque unité a une cote fine (par exemple LH~35, 3~A~35) et un
+        manifeste IIIF.
+\end{description}
+
+\section{La grille, appliquée}
+
+\paragraph{Le fonds est-il servi entier ?} Pour les unités LH~35 qui sont numérisées, oui :
+le manifeste d'une unité liste toutes ses vues. Reste à établir quelle part de LH~35 est
+numérisée. Le site de PhiLiUMM parle d'environ 17\,000 feuillets mathématiques de Leibniz,
+dont moins de la moitié a été transcrite. Le premier travail est donc un inventaire, sur le
+modèle de celui de Gallica (chapitre~\ref{ch:gallica}) : une ligne par unité, avec la cote,
+le nombre de vues, l'adresse du manifeste, la date du relevé.
+
+\paragraph{Comment les images arrivent-elles ?} Par le protocole IIIF, et c'est la bonne
+nouvelle. Les manifestes sont au format IIIF Presentation~2, à une adresse stable de la
+forme \fichier{https://digitale-sammlungen.gwlb.de/content/<numéro>/manifest.json}. Chaque
+vue a un service IIIF Image (niveau~1) qui sert l'image à la largeur demandée. Les
+manifestes et les images répondent avec l'en-tête \texttt{Access-Control-Allow-Origin: *},
+ce qui veut dire que n'importe quelle page web peut les lire dans le navigateur. C'est la
+situation de Gallica, pas celle de Montpellier : pas besoin de relais, et aucune image n'a
+à être stockée. Les vues relevées font autour de 4\,800 pixels de large.
+
+\begin{terminal}
+curl -s https://digitale-sammlungen.gwlb.de/content/00067960/manifest.json \
+  | python3 -c "import json,sys; m=json.load(sys.stdin); print(m['label'], m['license'])"
+\end{terminal}
+
+\paragraph{Que permet la bibliothèque ?} Les deux manifestes relevés, dont un de LH~35,
+portent dans leur champ \texttt{license} la \emph{Public Domain Mark}~1.0 de Creative
+Commons, avec la mention « No Copyright - Public Domain Marked » et l'attribution à la GWLB.
+La bibliothèque publie aussi une \emph{Open Digitisation Policy}, en PDF, que je n'ai pas
+pu lire depuis le terminal (le texte n'en est pas extractible) : il faut la lire, et
+vérifier que la marque figure sur chaque manifeste qu'on utilise. Leibniz est mort en
+1716, ses manuscrits sont dans le domaine public ; ce sont les images, les notices et les
+transcriptions d'autrui qui demandent qu'on regarde les conditions.
+
+\paragraph{Les transcriptions existantes.} C'est la vraie difficulté de ce fonds, et elle
+est double.
+
+D'abord, il y a une édition. La série~VII de l'édition de l'Académie (\emph{Sämtliche
+Schriften und Briefe}, Reihe~VII, \emph{Mathematische Schriften}) publie les écrits
+mathématiques par volumes ; le site de PhiLiUMM la cite (par exemple « A~VII-6 »). Chaque
+unité retenue doit donc être cherchée dans l'édition avant d'être transcrite, comme on le
+fait pour le fonds Grothendieck avec les éditions de Maltsiniotis. Une unité déjà éditée
+n'est pas à refaire ; au mieux, on l'affiche à côté de son fac-similé en renvoyant à
+l'édition, si ses conditions le permettent. Je n'ai pas vérifié lesquels des volumes sont
+en ligne ni sous quelle licence.
+
+Ensuite, il y a le travail de PhiLiUMM lui-même. Ses transcriptions sont sur son site, sans
+licence que j'aie trouvée. Il en prépare un encodage en TEI, qu'il présente comme
+expérimental : transcriptions d'abord saisies en ODT avec les formules en LaTeX,
+converties en XML par l'outil Odette, puis reprises dans d'autres éditeurs. Il a aussi
+entraîné des modèles de reconnaissance d'écriture (HTR) sur l'écriture de Leibniz :
+détection des zones (RF-DETR), des lignes (Kraken), et un modèle de reconnaissance affiné
+à partir de FoNDUE-GD, avec un taux d'erreur par caractère de 8,33\,\% annoncé. Les modèles
+et les jeux d'entraînement sont déposés sur Zenodo et Hugging Face. Une équipe a déjà, en
+somme, fait le travail le plus dur de la chaîne. On ne le refait pas dans son coin : on lui
+écrit.
+
+\paragraph{La main et la langue.} Latin du \textsc{xvii}\ieme{} siècle, abréviations,
+notations de Leibniz qui changent d'une année à l'autre (ses signes d'égalité, ses
+\emph{omn.}, ses premiers $\int$), ratures et ajouts entre les lignes, figures dans le
+texte. Les règles de transcription du fonds Grothendieck s'appliquent (les deux registres,
+le doute marqué, la variante gardée), mais la notation d'époque pose une question qu'un
+fonds du \textsc{xx}\ieme{} siècle ne pose pas : faut-il transcrire le signe de Leibniz ou
+son équivalent moderne ? La réponse de ce livre est de garder le signe dans la
+transcription et de ne moderniser que dans la lecture modernisée, qui est un autre
+fichier.
+
+\paragraph{Les liens profonds.} Les liens du site de PhiLiUMM vers le visualiseur de la
+GWLB portent des paramètres de session (\texttt{cHash}). Une variante de l'un d'eux, sans
+ces paramètres, répond par une erreur~404. On ne fonde donc rien sur ces liens : on cite la
+cote et l'adresse du manifeste, qui ne changent pas.
+
+\section{Ce qu'on ferait, dans l'ordre}
+
+\begin{enumerate}
+  \item \textbf{Écrire avant de commencer}, à l'équipe de PhiLiUMM et au Leibniz-Archiv,
+        pour présenter le projet et demander ce qu'ils accepteraient : partir de leurs
+        transcriptions, réutiliser leurs modèles HTR, citer leurs numéros. Une réponse
+        négative change le plan ; une absence de réponse ne vaut pas accord.
+  \item \textbf{L'inventaire} : les notices LH~35 de la GWLB, une ligne par unité, avec la
+        cote, le nombre de vues, le manifeste et sa licence, relevés par un script qui
+        attend entre deux requêtes et se nomme dans son \emph{user agent}. On y ajoute pour
+        chaque unité sa présence dans la série~VII et sur le site de PhiLiUMM.
+  \item \textbf{Le choix d'un premier lot} : quelques unités non éditées, courtes, d'un
+        sujet que l'élève connaît. Vingt vues, pas plus, pour éprouver la chaîne
+        entière : transcription, relecture contre le fac-similé, statut, page de lecture.
+  \item \textbf{Le site} sur le modèle de germain-project : le fac-similé lu en direct par
+        IIIF à côté de la transcription, aucun fichier image dans le dépôt, un
+        \fichier{.gitignore} qui refuse \fichier{*.jpg} et \fichier{*.pdf}.
+  \item \textbf{La procédure écrite pour l'assistant} (\fichier{SKILL.md}), adaptée de
+        \texttt{transcribe-grothendieck} : latin, abréviations, notation de Leibniz,
+        renvoi à l'édition de l'Académie quand l'unité y figure.
+  \item \textbf{Lean ensuite, et seulement là où il apporte quelque chose}. Les manuscrits de
+        Leibniz contiennent des énoncés arithmétiques et combinatoires (la dyadique, l'art
+        combinatoire, des sommes de séries) qu'on peut énoncer et vérifier ; on les énonce
+        dans la lecture modernisée, jamais dans la transcription, et l'on cite la
+        littérature avant de parler de nouveauté. Le calcul différentiel de Leibniz, lui,
+        se lit dans l'histoire des mathématiques et pas dans mathlib.
+  \item \textbf{Ne rien publier qui reproduise une transcription d'autrui} sans l'accord de
+        son auteur, et garder dans un dépôt privé ce qui attend un accord.
+\end{enumerate}
+
+\begin{noteblock}
+L'École des chartes forme exactement à ce qui manque à une transcription faite par une
+machine : la lecture des écritures anciennes, la description des documents, l'édition
+critique. Le projet gagne à ce que la relecture contre le fac-similé soit le travail d'une
+personne qui sait lire la main, et que l'assistant fasse le reste.
+\end{noteblock}

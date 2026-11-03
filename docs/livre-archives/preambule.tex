@@ -1,0 +1,127 @@
+% Préambule du second livre, copié de docs/livre-methodes/preambule.tex. Même mise en page que le livre de learn-lean
+% (book/preambule.tex) : format 17 × 24 cm, texte en serif et titres en
+% sans-serif, encadrés à icônes pour les notes et les mises en garde.
+%
+% Le document se compile avec XeTeX (donc avec tectonic) : fontspec et
+% awesomebox l'exigent.
+\documentclass[11pt,DIV=12,BCOR=6mm,open=any,numbers=noenddot,chapterprefix=false]{scrbook}
+
+% Format 17 × 24 cm, celui des livres scientifiques français.
+\usepackage[paperwidth=17cm,paperheight=24cm,
+  inner=2.1cm,outer=1.9cm,top=2.2cm,bottom=2.4cm]{geometry}
+
+% Le texte en XCharter et les titres en Fira Sans. L'ordre compte : les
+% paquets de polices avant fontspec.
+\usepackage{XCharter}
+\usepackage[scaled=0.94]{FiraSans}
+\usepackage{fontspec}
+% La chasse fixe porte les commandes et les noms de fichiers.
+\setmonofont{DejaVuSansMono.ttf}[Scale=0.82]
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype}
+
+% Les encadrés à icônes : note, astuce, mise en garde, avertissement.
+\usepackage{awesomebox}
+\usepackage[most]{tcolorbox}
+
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,arrows.meta,patterns,fit,backgrounds}
+
+% Les figures : schémas et écrans fictifs, dessinés en TikZ pour que leurs
+% étiquettes soient composées dans les polices du texte. Gris neutres, une
+% seule couleur d'accent par figure ; le vert et le rouge ne servent qu'aux
+% résultats des vérifications.
+\definecolor{tonok}{HTML}{15803D}
+\definecolor{tonko}{HTML}{B91C1C}
+\tikzset{
+  boite/.style={draw=black!45, fill=black!3, rounded corners=2pt,
+    font=\sffamily\footnotesize, align=center, inner sep=4pt, minimum height=8mm},
+  fleche/.style={-{Stealth[length=2.2mm]}, draw=black!60, line width=0.6pt},
+  etiq/.style={font=\sffamily\scriptsize, text=black!70, align=center},
+  mono/.style={font=\ttfamily\scriptsize, anchor=west, inner sep=0pt},
+  bouton/.style={draw=black!40, fill=black!5, rounded corners=2pt,
+    font=\sffamily\scriptsize, inner xsep=5pt, inner ysep=2.5pt},
+  etiquette/.style={rounded corners=4pt, font=\sffamily\tiny, inner xsep=4pt,
+    inner ysep=2pt},
+}
+% Une fenêtre fictive de #1 cm sur #2 cm, coin inférieur gauche à l'origine,
+% avec une barre de titre de 0,55 cm qui porte #3.
+\newcommand{\fenetre}[3]{%
+  \fill[white] (0,0) rectangle (#1,#2);
+  \begin{scope}
+    \clip[rounded corners=3pt] (0,0) rectangle (#1,#2);
+    \fill[black!9] (0,#2-0.55) rectangle (#1,#2);
+  \end{scope}
+  \draw[black!30] (0,#2-0.55) -- (#1,#2-0.55);
+  \draw[black!40, rounded corners=3pt] (0,0) rectangle (#1,#2);
+  \foreach \i in {0,1,2} \fill[black!25] (0.3+\i*0.28,#2-0.275) circle (0.07);
+  \node[font=\sffamily\scriptsize, text=black!65] at (#1/2,#2-0.275) {#3};
+}
+\newcommand{\ok}{{\ttfamily\color{tonok}✓}}
+\newcommand{\ko}{{\ttfamily\color{tonko}✗}}
+
+\usepackage[hidelinks]{hyperref}
+
+% Les noms de fichiers et de commandes ne se coupent pas : mieux vaut des
+% espacements plus lâches que des lignes qui débordent dans la marge.
+\emergencystretch=2em
+
+\DeclareTOCStyleEntry[numwidth=2.4em]{tocline}{section}
+\DeclareTOCStyleEntry[numwidth=3.6em]{tocline}{subsection}
+
+% Titres et en-têtes en sans-serif, comme dans un manuel technique.
+\setkomafont{disposition}{\sffamily}
+\setkomafont{descriptionlabel}{\sffamily\bfseries}
+\addtokomafont{caption}{\small}
+\usepackage[automark]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\clearpairofpagestyles
+\automark[section]{chapter}
+\ihead*{\small\sffamily\headmark}
+\ohead*{\small\sffamily\pagemark}
+\newcommand{\versionlivre}{0.1}
+\cfoot*{\scriptsize\sffamily\color{black!50}Archives outillées, version \versionlivre}
+
+% Les exemples, composés comme dans le livre de learn-lean : bloc détaché,
+% filet et fond tramés.
+\theoremstyle{definition}
+\newtheorem{exemple}{Exemple}[chapter]
+\newtheorem{regle}[exemple]{Règle}
+\definecolor{tonexemple}{HTML}{B45309}
+\tcolorboxenvironment{exemple}{
+  enhanced, breakable, sharp corners, boxrule=0pt,
+  colback=tonexemple!4, borderline west={2.5pt}{0pt}{tonexemple!70},
+  left=10pt, right=8pt, top=6pt, bottom=6pt,
+  before skip=10pt, after skip=10pt,
+}
+\definecolor{tonregle}{HTML}{1D4ED8}
+\tcolorboxenvironment{regle}{
+  enhanced, breakable, sharp corners, boxrule=0pt,
+  colback=tonregle!4, borderline west={2.5pt}{0pt}{tonregle!70},
+  left=10pt, right=8pt, top=6pt, bottom=6pt,
+  before skip=10pt, after skip=10pt,
+}
+
+% Ce que ce livre ajoute au préambule de learn-lean : des commandes de
+% terminal, composées en chasse fixe sur fond gris, sans numérotation.
+\newtcblisting{terminal}{
+  listing only, breakable, sharp corners, boxrule=0pt,
+  colback=black!4, borderline west={2.5pt}{0pt}{black!40},
+  left=8pt, right=6pt, top=4pt, bottom=4pt,
+  before skip=8pt, after skip=8pt,
+  listing options={basicstyle=\ttfamily\small, columns=fullflexible,
+    keepspaces=true, breaklines=true, showstringspaces=false},
+}
+% Encadré de fin de chapitre : les outils compatibles avec un assistant.
+\newenvironment{outils}{\begin{tipblock}\textbf{Outils.}\ }{\end{tipblock}}
+\newcommand{\fichier}[1]{\texttt{#1}}
+\newcommand{\cmd}[1]{\texttt{#1}}
+
+\title{%
+  Archives outillées\\
+  \large reproduire la méthode sur des fonds publics\\[6pt]
+  \normalsize\sffamily version \versionlivre}
+\author{Michel Hua \\[8pt]
+  \normalsize\normalfont avec Claude (Anthropic) comme assistant}
+\date{}
