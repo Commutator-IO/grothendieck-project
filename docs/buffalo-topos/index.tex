@@ -29,9 +29,9 @@
 \newcommand{\session}[1]{\par\bigskip\noindent{\small\bfseries\textcolor{frise}{Session of #1}}\par\nopagebreak\smallskip}
 % An entry: the moment on the tape (link to YouTube), then the statement.
 \newlength{\horo}\settowidth{\horo}{\small\texttt{00:00:00}\quad}
-% Kinds of entry, as in a course: \entree[def]{…}, [thm], [prop], [ex], [cex], [rem], [q]; none = plain.
+% Kinds of entry, as in a course: \entree[def]{…}, [thm], [prop], [ex], [cex], [rem], [q], [disc]; none = plain.
 \definecolor{kdef}{HTML}{2E6B3F}\definecolor{kthm}{HTML}{2F4DA8}\definecolor{kex}{HTML}{8A5A00}
-\definecolor{kcex}{HTML}{A8322F}\definecolor{krem}{HTML}{5E5E5E}\definecolor{kq}{HTML}{6B3FA0}
+\definecolor{kcex}{HTML}{A8322F}\definecolor{krem}{HTML}{5E5E5E}\definecolor{kq}{HTML}{6B3FA0}\definecolor{kdisc}{HTML}{0F766E}
 \makeatletter
 \def\kind@def#1{\textcolor{kdef}{\textbf{Definition\kindname{#1}.}}\enspace}
 \def\kind@thm#1{\textcolor{kthm}{\textbf{Theorem\kindname{#1}.}}\enspace\itshape}
@@ -40,6 +40,7 @@
 \def\kind@cex#1{\textcolor{kcex}{\textbf{Counterexample\kindname{#1}.}}\enspace}
 \def\kind@rem#1{\textcolor{krem}{\textbf{Remark\kindname{#1}.}}\enspace}
 \def\kind@q#1{\textcolor{kq}{\textbf{Question\kindname{#1}.}}\enspace}
+\def\kind@disc#1{\textcolor{kdisc}{\textbf{Discussion\kindname{#1}.}}\enspace}
 \newcommand{\kindlabel}[2]{\ifcsname kind@#1\endcsname\csname kind@#1\endcsname{#2}\fi}
 \newcommand{\kindname}[1]{\if\relax\detokenize{#1}\relax\else\ (#1)\fi}
 \makeatother
@@ -72,7 +73,7 @@
 
 \emph{The course.} From April to July 1973, Alexandre Grothendieck gave a course on topos theory, in English, at the State University of New York at Buffalo, alongside two other courses, on algebraic geometry and on algebraic groups. The sessions were recorded on magnetic tape. This document relies on the recordings published by the YouTube channel \q{Erwin Schulhoff} in four videos; it cites each session by its date, tape and side, following the descriptions of these videos, and each moment by its position in the video.
 
-\emph{What this index is.} For each result, definition or example treated in a session, the index gives one line: the statement, in today’s mathematical language and in our own words, and the moment on the tape where it is treated, as a link to the video accurate to the second. An entry corresponds to a statement, not to a minute of the lecture. A few words in quotation marks reproduce a name or a term coined in the course, when it matters. When what is said is sketched or incomplete, the entry gives the correct statement, with the hypotheses it requires; a claim that is false as heard is not reproduced. A passage whose audio remains doubtful is not indexed.
+\emph{What this index is.} For each result, definition or example treated in a session, the index gives one line: the statement, in today’s mathematical language and in our own words, and the moment on the tape where it is treated, as a link to the video accurate to the second. An entry corresponds to a statement, not to a minute of the lecture. A few words in quotation marks reproduce a name or a term coined in the course, when it matters. When what is said is sketched or incomplete, the entry gives the correct statement, with the hypotheses it requires; a claim that is false as heard is not reproduced. A passage whose audio remains doubtful is not indexed. Entries marked \emph{Discussion} state no result: they point to an exchange with the audience, described in our words, where something is settled, corrected or left open.
 
 \emph{What it is not.} This index is neither a transcription nor a summary of the course. It reproduces neither the explanations, nor the worked examples, nor the digressions, nor the order of the exposition beyond the succession of statements, and it does not quote the course. The course as delivered is a protected oral work, whose rights belong to the rightsholders of Alexandre Grothendieck; only the recordings are authoritative, and the reader is referred to them through the links. The statements here are standard mathematical statements, written by us.
 
@@ -115,6 +116,8 @@
 \noindent\textit{Not indexed (sound too degraded to be transcribed).}\par
 \section{Limits and colimits}
 \face{Tape 2, side A}
+\entree[disc]{3152}{0:52:32}{On the word « étalé »: it comes from domaines étalés in complex analysis, has no English equivalent, and 'local homeomorphism' is judged misleading and unfit for differentiable or analytic settings.}
+\entree[disc]{3692}{1:01:32}{Asked whether the oldest étale maps are Riemann surfaces, the lecturer agrees, once ramification points are removed, though sheaves were not then in view.}
 \entree[def]{5826}{1:37:06}{The notions dual to products, equalizers, fibre products and the terminal object are coproducts, coequalizers, pushouts and the initial object.}
 \entree[prop]{5888}{1:38:08}{In $\mathbf{Set}$, coproducts are disjoint unions and the initial object is $\varnothing$.}
 \entree[prop]{5888}{1:38:08}{In $\mathbf{Set}$, the coequalizer of $E\rightrightarrows F$ is the quotient of $F$ by the equivalence relation generated by the image of $E$ in $F\times F$.}
@@ -139,6 +142,7 @@
 \section{Exactness properties of sheaves}
 \entree[rem]{7704}{2:08:24}{Principle: $\mathrm{Sh}(X)$ has the exactness properties of $\mathbf{Set}$ that involve arbitrary colimits and finite limits.}
 \entree[cex]{7768}{2:09:28}{In $\mathbf{Set}$, an arbitrary product of epimorphisms is an epimorphism; this is false in $\mathrm{Sh}(X)$ in general.}
+\entree[disc]{7768}{2:09:28}{Infinite products of epimorphisms are epimorphisms in sets, because surjections split there, but not for sheaves; the lecturer warns that infinite inverse limits behave differently and promises to return to it.}
 \entree[prop]{7960}{2:12:40}{Categories of presheaves (of functors to $\mathbf{Set}$) have all the exactness properties of $\mathbf{Set}$, limits and colimits being computed argumentwise.}
 \entree[prop]{8025}{2:13:45}{The functor $a\colon P\mapsto\widetilde{P}$ is left adjoint to the inclusion $i$: $\mathrm{Hom}(P,iF)\simeq\mathrm{Hom}(aP,F)$; it commutes with colimits.}
 \entree[thm]{8089}{2:14:49}{The associated-sheaf functor is left exact (it commutes with finite products and equalizers).}
@@ -162,6 +166,7 @@
 \entree[prop]{9402}{2:36:42}{A morphism of sheaves is an epimorphism if and only if it is one on stalks; $E$ is a $G$-torsor if and only if each $E_x$ is a $G_x$-torsor.}
 \entree[prop]{9530}{2:38:50}{A torsor is trivial (isomorphic to $G$ acting by translations) if and only if it admits a global section; nontrivial ones exist.}
 \entree[rem]{9658}{2:40:58}{Principle: statements about structures defined by finite limits and colimits can be checked stalkwise, the fibre functors forming an exact conservative family.}
+\entree[disc]{9724}{2:42:04}{The principle that statements proved for sets transfer to sheaves by checking on fibres is recalled with a historical remark: Chevalley devoted a year of his IHÉS seminar around 1958 to formalising it.}
 \entree[cex]{9900}{2:45:00}{The structures of field and of integral domain cannot be expressed by finite limits alone.}
 \entree[def]{10229}{2:50:29}{A sheaf of rings $K$ is called integral if $K'\sqcup 1\to K$ (inclusion and zero section) is an epimorphism, $K'$ being defined below.}
 \entree[prop]{10358}{2:52:38}{For two sheaves $K$, $L$, the presheaf $\underline{\mathrm{Hom}}(K,L)\colon U\mapsto\mathrm{Hom}(K|_U,L|_U)$ is a sheaf.}
@@ -250,6 +255,7 @@
 \entree[prop]{22292}{6:11:32}{Every kind of structure defined by finite limits and arbitrary colimits admits a \q{classifying topos}, equipped with a universal model.}
 \entree[rem]{22357}{6:12:37}{Normal rings, reduced rings, rings with connected spectrum can also be defined by such diagrammatic axioms.}
 \entree[prop]{22420}{6:13:40}{A sheaf of rings is never a presheaf of fields: its value on $\varnothing$ is the zero ring.}
+\entree[disc]{22420}{6:13:40}{A question shows that a sheaf of fields in the usual sense can never be a field object: sections over disjoint opens form a product of fields, and the empty open gives the zero ring.}
 \entree[prop]{22545}{6:15:45}{On a space, such an axiom is checked stalkwise: a sheaf of rings $A$ is a field object iff each stalk $A_x$ is a field.}
 \section{Constant sheaves and sheaves of fields}
 \entree[def]{22609}{6:16:49}{The constant sheaf $I_X=p^*I$ ($p:X\to\mathrm{pt}$) has étalé space $I\times X$; it is the coproduct of $I$ copies of the terminal object.}
@@ -278,6 +284,7 @@
 \entree[prop]{25045}{6:57:25}{The stalk functor at $x$ commutes with products iff $x$ has a smallest open neighbourhood; if points are closed, iff $x$ is isolated.}
 \entree[cex]{25113}{6:58:33}{In $\mathrm{Sh}(X)$, an infinite product of epimorphisms is not always an epimorphism; one reduces to the case of the $F_i\to e$.}
 \entree[ex]{25307}{7:01:47}{$X$ locally connected, $x$ closed, $U_i$ open neighbourhoods of $x$ whose intersection is not a neighbourhood, $F_i=U_i\sqcup(X\setminus\{x\})$; $\prod_i F_i\to e$ is not an epimorphism.}
+\entree[disc]{25307}{7:01:47}{Looking for a counterexample to products of epimorphisms of sheaves being epimorphisms, the lecturer finds none on locally connected spaces such as a line, nor on totally disconnected compact ones.}
 \entree[prop]{25503}{7:05:03}{If $X$ is compact and totally disconnected, $F\to G$ is an epimorphism iff $F(U)\to G(U)$ is surjective for every clopen set $U$; every product of epimorphisms is an epimorphism.}
 \section{Connectedness and cohomology}
 \entree[prop]{25977}{7:12:57}{$X$ is connected iff the terminal object of $\mathrm{Sh}(X)$ is not a sum of two non-initial subobjects.}
@@ -380,6 +387,7 @@
 \entree[prop]{35860}{9:57:40}{In a topos, $P:\mathcal{E}^{\circ}\to\mathbf{Set}$ is representable iff it sends colimits to limits.}
 \entree[prop]{36055}{10:00:55}{Every topos is an elementary topos (Lawvere--Tierney: finite $\varprojlim$, $\mathcal{H}om$, $P_{\mathcal{E}}$); an elementary topos with small coproducts and a small generator is a topos.}
 \section{Presheaf topoi and the classifying topos of a group}
+\entree[disc]{36182}{10:03:02}{Lawvere's elementary topoi are compared with Giraud's: more general, with finitary axioms, though internal Hom is a very strong operation; adding generators and limits recovers sheaf topoi.}
 \entree[prop]{36307}{10:05:07}{In $\mathrm{Sh}(X,G)$, limits, $\mathcal{H}om$ and $P$ are computed in $\mathrm{Sh}(X)$, with the induced action of $G$.}
 \entree[prop]{36436}{10:07:16}{For $C$ small, $\widehat{C}$ is a topos (limits argumentwise, representables generating), with all the exactness properties of $\mathbf{Set}$.}
 \entree[ex]{36630}{10:10:30}{$B_G=\widehat{C}$ for $C$ the category with one object whose endomorphisms are $G$.}
@@ -466,6 +474,7 @@
 \noindent\textit{The first half hour is a question session, as agreed at the end of the previous meeting. The lecture closes at 3:40:24 with the next meeting fixed for Wednesday.}\par\medskip
 \face{Tape 1, side A}
 \entree[def]{6937}{1:55:37}{A space is sober if every irreducible closed subset has exactly one generic point.}
+\entree[disc]{6937}{1:55:37}{A question asks for a criterion characterising sober spaces, in the way sheaves of groups or rings might; the lecturer says he knows no such characterisation.}
 \entree[prop]{7000}{1:56:40}{Spaces with the same sobrification have equivalent categories of sheaves. The sober space attached to a topos has the isomorphism classes of points as underlying set, with the topology given by the subobjects of the final object; for a space $X$ it is the set of irreducible closed subsets of $X$ with the evident topology.}
 \entree[ex]{7063}{1:57:43}{For a finitely generated algebra $A$ over an algebraically closed field $K$, the set of maximal ideals with the Zariski topology (the spaces of Serre's FAC) is not sober: irreducible closed subsets of positive dimension have no generic point.}
 \entree[ex]{7188}{1:59:48}{Hausdorff spaces and schemes are sober.}
@@ -570,6 +579,7 @@
 \entree[prop]{20146}{5:35:46}{If 2-sums exist in $\mathrm{Cat}_D$, a conjunction of exactness properties $(I_\lambda,\Sigma_\lambda)$ is one exactness property $(I,\Sigma)$, with $I$ the 2-sum and $\Sigma$ the union of the images of the $\Sigma_\lambda$.}
 \entree[def]{20502}{5:41:42}{The $D$-envelope of a category $J$ is an object $\mathrm{Env}(J)$ of $\mathrm{Cat}_D$ with a functor $J\to\mathrm{Env}(J)$ such that, for every $C\in\mathrm{Cat}_D$, composition $\mathrm{Hom}_D(\mathrm{Env}(J),C)\to\mathrm{Hom}(J,C)$ is an equivalence of categories (a 2-universal problem).}
 \entree[rem]{20613}{5:43:33}{Asserted without proof: if $D'$ or $D''$ is small, every category has a $D$-envelope; it is the category obtained by adjoining the limits of type $D'$ and the colimits of type $D''$.}
+\entree[disc]{20739}{5:45:39}{A remark suggests 2-representability as a weaker substitute for representability when no genuine reflection exists; the reply is inconclusive.}
 \entree[cex]{20801}{5:46:41}{The naive fibre product of categories (pairs of objects, resp. arrows, with equal images in $S$) is not invariant under equivalence: replacing $X$ and $Y$ by equivalent categories mapping into two isomorphic copies of $S$ makes it empty.}
 \entree[def]{21085}{5:51:25}{The 2-fibre product $X\times^2_SY$ of $f\colon X\to S$ and $g\colon Y\to S$ has as objects the triples $(x,y,\alpha)$ with $\alpha\colon f(x)\xrightarrow{\sim}g(y)$, and as arrows the pairs of arrows compatible with the $\alpha$'s.}
 \entree[prop]{21085}{5:51:25}{If $X\to S$ is fibred, the naive fibre product is equivalent to the 2-fibre product.}
@@ -579,12 +589,14 @@
 \face{Tape 1, side B}
 \section{Envelopes, localization and a worked exactness property}
 \entree[rem]{21664}{6:01:04}{All the universal problems considered are 2-universal, their solutions defined up to equivalence; 2-inverse limits are taken of pseudo-functors $I\to$ (a 2-category), and 2-direct limits by reversing arrows.}
+\entree[disc]{21787}{6:03:07}{Asked whether the one-dimensional construction of coproducts would also be valid in the 2-categorical setting, the lecturer does not know and says the construction is ugly even at the lower level.}
 \entree[rem]{21959}{6:05:59}{Size conventions: a universe $U$ is fixed; categories are required to have $U$-small Hom-sets, but may be large, such as the categories of all $U$-groups or $U$-rings.}
 \entree[ex]{22260}{6:11:00}{Universality of sums as an exactness property: if $X$ is the sum of objects $x_\alpha$ and $X'\to X$ is any morphism, then with $X'_\alpha=x_\alpha\times_XX'$, the object $X'$ is the sum of the $X'_\alpha$.}
 \entree[prop]{22678}{6:17:58}{This property is expressed by inverting arrows: realisations of the diagram type in $C$ are the functors from its envelope $\tilde J$ to $C$; those for which the squares are Cartesian and $X$ is the sum are the functors inverting a set $\Sigma$ of arrows of $\tilde J$; and the conclusion says that the canonical arrow $\coprod X'_\alpha\to X'$ is also inverted.}
 \entree[def]{22849}{6:20:49}{For $J\in\mathrm{Cat}_D$ and a set $\Sigma$ of arrows of $J$, $J[\Sigma^{-1}]\in\mathrm{Cat}_D$ is defined by the 2-universal property that $\mathrm{Hom}_D(J[\Sigma^{-1}],C)\to\mathrm{Hom}_D(J,C;\Sigma)$ is an equivalence onto the functors commuting with $D$-limits that invert $\Sigma$.}
 \entree[rem]{23076}{6:24:36}{Existence of $\tilde J$ and $J[\Sigma^{-1}]$ is assumed; he expects it in all cases except possibly when neither $D'$ nor $D''$ is small.}
 \entree[def]{23134}{6:25:34}{An elementary exactness property is given by a diagram $\Delta$, diagrams $\Delta'_i$ (inverse limit type) and $\Delta''_j$ (direct limit type) with cones to vertices $x'_i$, $x''_j$ of $\Delta$, and further diagrams $\Lambda'_\alpha$, $\Lambda''_\beta$ with vertices $y'_\alpha$, $y''_\beta$: whenever a realisation of $\Delta$ in $C$ makes each $x'_i$ the limit and each $x''_j$ the colimit of the corresponding diagram, then each $y'_\alpha$ is a limit and each $y''_\beta$ a colimit of the corresponding diagram.}
+\entree[disc]{23481}{6:31:21}{A doubt is raised about exactness properties holding vacuously because no suitable functors exist; the lecturer first dismisses it, then concedes the point, since constant diagrams need not satisfy the imposed conditions.}
 \entree[prop]{23710}{6:35:10}{An elementary exactness property becomes a functor condition: with $\Sigma$ the arrows of $\tilde\Delta$ comparing the vertices with the limits and colimits, realisations are the functors $\tilde\Delta[\Sigma^{-1}]\to C$, and one requires that they invert the further comparison arrows for $y'_\alpha$ and $y''_\beta$.}
 \entree[def]{23931}{6:38:51}{For a set $\eta$ of exactness properties, $\mathrm{Cat}_{D,\eta}\subset\mathrm{Cat}_D$ is the full sub-2-category of categories satisfying them, with the same functors.}
 \entree[def]{24284}{6:44:44}{An algebraic structure $T$ realisable in the categories $C$ of a given class assigns to each $C$ the category $T(C)$ of realisations of $T$ in $C$, functorially in the functors $C\to C'$ commuting with the relevant limits.}
@@ -636,7 +648,9 @@
 \section{Theories as 2-fibred categories over $\mathrm{Cat}_D$}
 \entree[q]{30897}{8:34:57}{Are the algebraic theories relative to $D$, to be defined by stepwise rules, exactly the theories 2-represented by objects of $\mathrm{Cat}_D$? For $D$ the 2-category of topoi, this would identify types of algebraic structure with classifying topoi.}
 \entree[q]{31127}{8:38:47}{Can every exactness property be written as “every $D$-functor $I\to C$ factors through a given $D$-functor $I\to I'$”, i.e. $\mathrm{Hom}_D(I',C)\to\mathrm{Hom}_D(I,C)$ fully faithful with prescribed image? Only the converse direction (an exactness property gives such a pair, with $I'=I[\Sigma^{-1}]$) was shown.}
+\entree[disc]{31300}{8:41:40}{The audience asks whether every condition that a functor between categories be an equivalence can be rephrased as an exactness property; the lecturer proved only one direction and doubts the converse without extra hypotheses.}
 \entree[ex]{31476}{8:44:36}{“Every monoid object is a group” is an exactness property: a monoid is a group iff the shear map $(x,y)\mapsto(x,xy)$ of $G\times G$ is an isomorphism (Cartesian squares in the nerve).}
+\entree[disc]{31476}{8:44:36}{Examples are tried for exactness properties: that every monoid in a category is a group is expressible through Cartesian squares, whereas that every semigroup is a monoid seems not to be.}
 \entree[q]{31586}{8:46:26}{Is “every semigroup object is a monoid” an exactness property?}
 \entree[rem]{31658}{8:47:38}{A theory is identified with the family of its realisations $C\mapsto T(C)$, a 2-fibred category over $\mathrm{Cat}_D$, not with a presentation by axioms: different axiomatisations of the same structure give the same theory.}
 \entree[rem]{32109}{8:55:09}{Constructions that are functorial only for isomorphisms, not for homomorphisms, do not fit the framework.}
@@ -667,6 +681,7 @@
 \entree[q]{36019}{10:00:19}{Which conditions on a pair $(R,I)$ make $T_R$ an algebraic theory with base objects $I$, built from the empty structure on $I$ by adding arrows and axioms?}
 \entree[q]{36186}{10:03:06}{For which $D$ are the envelope and localization problems solvable? Known for finite inverse limits with left exact functors, and for topoi; open for additive, abelian and Karoubian categories (where every projector has an image).}
 \section{Additive categories as an exactness property}
+\entree[disc]{36242}{10:04:02}{The lecturer asks for examples of enveloping categories, additive or abelian; the room points to a universal additive category, but he stresses that his version also requires initial and final objects to coincide.}
 \entree[def]{36352}{10:05:52}{A semi-additive category has finite products and sums, the canonical arrow from the initial to the final object is an isomorphism (so zero morphisms exist), and the canonical arrow $X\sqcup Y\to X\times Y$ is an isomorphism.}
 \entree[prop]{36465}{10:07:45}{In a semi-additive category every object carries a unique monoid structure and a unique comonoid structure, both commutative (Eckmann–Hilton), and the Hom-sets are commutative monoids.}
 \entree[prop]{36577}{10:09:37}{A semi-additive category is additive iff every monoid object is a group, which is an exactness property: the map $(x,y)\mapsto(x,x+y)$ of $X\times X$ is an isomorphism.}
@@ -687,6 +702,7 @@
 \entree[prop]{1104}{0:18:24}{If $I'\subset R$ is a small full strictly cogenerating subcategory, the $\Delta$-functor $\widetilde{I'}\to R$ is essentially surjective and full; $R$ is a category of fractions of $\widetilde{I'}$.}
 \entree[prop]{1357}{0:22:37}{Such a theory is obtained in three steps (empty structure on $I$, adjoining arrows, axioms), without transfinite construction.}
 \entree[prop]{1845}{0:30:45}{If $T$ is represented by $R$ having a small strictly cogenerating subcategory, $T(\mathbf{Set})=\mathrm{Hom}_\Delta(R,\mathbf{Set})\simeq R^{\mathrm{op}}$: $T$ is determined by its realizations in sets.}
+\entree[disc]{2103}{0:35:03}{The lecturer notes that universal problems for other exactness conditions can have natural solutions too large to lie in the universe, while for toposes the solutions are explicit and well behaved.}
 \entree[ex]{2233}{0:37:13}{For the theory of groups, $R\simeq\mathbf{Grp}^{\mathrm{op}}$; the universal object is $\mathbb{Z}$, a cogroup of $\mathbf{Grp}$ via $\mathbb{Z}\to\mathbb{Z}*\mathbb{Z}$, $x\mapsto x_1x_2$.}
 \entree[def]{2681}{0:44:41}{For $C$ small and a class $D'$ of diagrams, the envelope of $C$ under limits of type $D'$ is the smallest full subcategory of the envelope $\widetilde{C}$ containing $C$ and stable under these limits.}
 \entree[ex]{2746}{0:45:46}{On categories with finite products, the theory of groups is represented by a small category, the full subcategory of $\mathbf{Grp}^{\mathrm{op}}$ of finitely generated free groups.}
@@ -709,6 +725,7 @@
 \entree[prop]{4454}{1:14:14}{Between cocomplete accessible categories, $F$ has a right adjoint if and only if it commutes with colimits, and a left adjoint if and only if it commutes with limits and is accessible.}
 \entree[ex][SGA 4]{4531}{1:15:31}{On $\mathbf{Grp}$, a functor with small values, pro-represented by a non-small system of simple groups, commutes with limits without being accessible.}
 \section{Morphisms of algebraic theories}
+\entree[disc]{4531}{1:15:31}{An example from SGA of a functor commuting with inverse limits yet not accessible, hence not representable: built from an inverse system of arbitrarily large simple groups, with small values on each group.}
 \entree[prop]{4664}{1:17:44}{A morphism of algebraic theories $T\to T'$ is equivalent to a functor $S'\to S$ commuting with colimits; its right adjoint $S\to S'$ is $T(\mathbf{Set})\to T'(\mathbf{Set})$.}
 \entree[prop]{4853}{1:20:53}{The functors $S\to S'$ arising from morphisms of algebraic theories are exactly those that commute with limits and are accessible.}
 \entree[prop]{4931}{1:22:11}{If $F\to I$ is fibred over $I$ small, with accessible fibres and transition functors, the category of cartesian sections (2-limit) and that of all sections are accessible.}
@@ -778,11 +795,15 @@
 \entree[cex]{13056}{3:37:36}{For an algebraic theory $R$ with base objects $I$, $I$ is not in general strictly cogenerating in $R$: a group structure is not determined by the maps $x\mapsto x^n$.}
 \entree[cex]{13185}{3:39:45}{Strict generation is not transitive: $\mathbb{Z}$ is strictly generating in free groups, these are so in $\mathbf{Gr}$, but $\{\mathbb{Z}\}$ is not in $\mathbf{Gr}$ (likewise in $\mathbf{Ab}$).}
 \entree[cex]{13314}{3:41:54}{An algebraic theory relative to limits is not always obtained in two steps (arrows, then axioms); a transfinite construction, indexed by a small ordinal, may be needed.}
+\entree[disc]{13314}{3:41:54}{The lecturer retracts a theorem stated earlier: a small strictly cogenerating family is necessary for an algebraic theory but not sufficient, and he previews a counterexample involving the opposite of the category of sets.}
 \entree[prop]{13380}{3:43:00}{If $R\in\Delta$ is algebraic, $R$ admits a small strictly cogenerating family; the converse is false.}
 \entree[ex]{13448}{3:44:08}{$\mathbf{Set}^{\mathrm{op}}$ admits a strict generator (the two-element set) but is the category $T(\mathbf{Set})$ of no algebraic theory $T$.}
 \entree[prop]{13577}{3:46:17}{$\mathbf{Set}^{\mathrm{op}}$ is equivalent to the category of complete atomic Boolean algebras, via $X\mapsto\mathcal{P}(X)$.}
+\entree[disc]{13577}{3:46:17}{A listener objects that the opposite of sets is the category of complete atomic Boolean algebras; the lecturer replies that its axioms need a large family, so it is not algebraic here.}
 \entree[rem]{13967}{3:52:47}{Completeness of a Boolean algebra concerns families indexed by an arbitrary set $I$: a non-small family of operations and axioms, excluded from the algebraic theories of the course.}
+\entree[disc]{14362}{3:59:22}{Debate on whether joins over every index set count as a small set of axioms: the lecturer insists on smallness, others suggest bounding cardinalities, and he calls the choice partly one of taste.}
 \entree[prop]{14825}{4:07:05}{Every complete Boolean algebra falls, for a suitable cardinal $\pi$, under the theory of $\pi$-complete Boolean algebras, which has only a small set of operations.}
+\entree[disc]{14887}{4:08:07}{The lecturer admits long-standing unease with definitions quantifying over arbitrary sets, notes that no contradiction has been shown, and sets aside non-small infinitary operations as a different framework.}
 \entree[prop]{15016}{4:10:16}{The objects of $\Delta$ representing algebraic theories are the $\Delta$-envelopes (adjoining small limits) of small categories of $\Delta_\pi$ (limits of cardinality ${\le}\,\pi$).}
 \entree[prop]{15081}{4:11:21}{The categories $S=R^{\mathrm{op}}=T(\mathbf{Set})$ of set-theoretic realizations of these theories are accessible categories.}
 \section{Accessible categories}
@@ -806,6 +827,7 @@
 \entree[prop]{16654}{4:37:34}{If $E$ satisfies $L$, has fibre products, kernels $(u,v)\mapsto\mathrm{Ker}(u,v)$ forming an accessible functor, and such a $C$, then every object of $E$ is accessible and $E$ is accessible (SGA 4, I, 9.11).}
 \entree[ex]{16782}{4:39:42}{Every topos is an accessible category.}
 \entree[cex]{16782}{4:39:42}{A set $X$ of cardinality ${\ge}\,2$ is not an accessible object of $\mathbf{Set}^{\mathrm{op}}$; hence $\mathbf{Set}^{\mathrm{op}}$, which has small colimits and a generator, is not accessible.}
+\entree[disc]{16845}{4:40:45}{The lecturer argues that the opposite of the category of sets is not co-accessible in the relevant sense, since large products break the commutation that is required.}
 \entree[prop]{16908}{4:41:48}{For $\pi$ infinite, the subsets of cardinality ${\le}\,\pi$ of a set $I$ form an ordered set dominating $\pi$, and $\prod_{i\in I}Y_i$ is the limit of the corresponding partial products.}
 \entree[prop]{17102}{4:45:02}{If $\mathrm{card}\,I>\pi$ and $\mathrm{card}\,Y_i\ge 2$, the indicator of a point of $\prod Y_i$ factors through no partial product; the opposite of a nondegenerate topos, or of $\mathbf{Ab}$, is not accessible.}
 \entree[q]{17297}{4:48:17}{If $E$ and $E^{\mathrm{op}}$ are accessible, is $E$ equivalent to the point category?}
@@ -839,8 +861,10 @@
 \entree[prop]{21008}{5:50:08}{If $E$ has small colimits and $C$ is small, $i$ extends to $i_!\colon\widehat{C}\to E$, left adjoint to $E\to\widehat{C}$; $i$ is strictly generating if and only if $i_!$ makes $E$ a category of fractions of $\widehat{C}$.}
 \entree[thm]{21139}{5:52:19}{A category with small colimits has a small strictly generating subcategory if and only if it is equivalent to a reflective full subcategory of some $\widehat{C}$, $C$ small.}
 \entree[ex]{21201}{5:53:21}{$\mathbf{Set}^{\mathrm{op}}$ (complete atomic Boolean algebras) and $\mathbf{Ab}^{\mathrm{op}}$ (compact abelian groups) have small colimits and a small strictly generating family.}
+\entree[disc]{21263}{5:54:23}{Whether compact spaces admit a small strictly generating family: a listener proposes ultrafilter operations, but the lecturer argues the point cannot strictly generate, since the forgetful functor to sets is not fully faithful.}
 \entree[cex]{21464}{5:57:44}{In the category of compact spaces, the one-point space is not strictly generating: the underlying-set functor is faithful but not fully faithful.}
 \section{Theories defined by finite limits}
+\entree[disc]{21730}{6:02:10}{The lecturer warns that a statement of the previous day was false: exactness conditions on objects and on functors must match, since existence conditions without uniqueness give no existence theorems for envelopes.}
 \entree[prop]{21923}{6:05:23}{For $\Delta_D$ (limits of type $D'$ only), the envelope of $C$ is the subcategory of $\mathrm{Hom}(C,\mathbf{Set})^{\mathrm{op}}$ generated by $C$ under iterated limits of type $D'$; $C$ embeds fully in it.}
 \entree[prop]{22054}{6:07:34}{If $R_0$ represents a theory for $\Delta_D$, the theory extended to $\Delta$ is represented by $R=T(\mathbf{Set})^{\mathrm{op}}$, the envelope of $R_0$ under small limits; $R_0\subset R$ is full.}
 \entree[prop]{22118}{6:08:38}{A theory relative to $\Delta_D$ is equivalent to the pair $(S,\Sigma_0)$, $S=T(\mathbf{Set})$, $\Sigma_0=R_0^{\mathrm{op}}\subset S$, where $S$ is the envelope of $\Sigma_0$ under small colimits.}
@@ -853,6 +877,7 @@
 \entree[thm]{22638}{6:17:18}{$S$ with small colimits is $T(\mathbf{Set})$ for a theory defined by finite limits if and only if $S_{\mathrm{fp}}$ is essentially small and strictly generating.}
 \entree[ex]{22766}{6:19:26}{In $\mathbf{Gr}$, for $C$ full on the object $\mathbb{Z}$, $\widehat{C}$ consists of the sets acted on by the monoid $(\mathbb{Z},\times)$; $G\mapsto(G,x\mapsto x^n)$ is faithful but not full: $\mathbb{Z}$ is generating, but not strictly.}
 \entree[rem]{22960}{6:22:40}{For $C\subset E$ full, $E\to\widehat{C}$ fully faithful, faithful, conservative, or conservative on monomorphisms: distinct notions of generation, which coincide in a topos.}
+\entree[disc]{22960}{6:22:40}{Clarifying generating versus strictly generating, the lecturer lists several notions that coincide in a topos but differ in general; free groups of finite type serve as the natural strictly generating family for groups.}
 \entree[prop]{23147}{6:25:47}{Finitely generated free groups form a small strictly generating subcategory of $\mathbf{Gr}$.}
 \entree[prop]{23211}{6:26:51}{The morphisms $T\to T'$ of theories defined by finite limits correspond to the functors $S'\to S$ commuting with small colimits and preserving finitely presented objects.}
 \section{Lawvere theories and finite products}
@@ -866,10 +891,12 @@
 \section{Birkhoff's theorem}
 \face{Tape 2, side A}
 \entree[thm]{24608}{6:50:08}{Birkhoff’s theorem: a full subcategory of a category of structures defined by finite products, stable under products, subobjects and quotients, is defined by equations.}
+\entree[disc]{24608}{6:50:08}{On Birkhoff's theorem, a subcategory closed under products, subobjects and quotients is defined by equations; torsion-free abelian groups inside abelian groups show that closure conditions alone do not capture all subcategories.}
 \entree[prop]{24671}{6:51:11}{Such a subcategory is reflective: the adjoint associates to $X$ its largest quotient belonging to the subcategory.}
 \entree[cex]{24737}{6:52:17}{Torsion-free abelian groups, stable under products and subgroups but not under quotients, are not definable by equations in $\mathbf{Ab}$.}
 \entree[prop]{24866}{6:54:26}{To a Birkhoff subcategory $S'\subset S$ corresponds $R\to R'$ bijective on objects and surjective on arrows: $T'$ is deduced from $T$ by equalizing arrows.}
 \entree[cex]{25511}{7:05:11}{Groups are the monoids in which a certain arrow is invertible; not stable under submonoids, they are not definable by equations in monoids.}
+\entree[disc]{25511}{7:05:11}{Groups inside monoids cannot be cut out by equations alone, since the integers contain the natural numbers as a submonoid that is not a group, so the subclass is not closed under submonoids.}
 \entree[prop]{25649}{7:07:29}{The reflective full subcategories $S'\subset S$ such that the composite $S'\to\mathbf{Set}^I$ is monadic form a larger class than that of Birkhoff subcategories.}
 \section{Pseudo-topoi and classifying topoi}
 \entree[def]{25846}{7:10:46}{A \q{pseudo-topos} satisfies Giraud’s axioms a), b), c): small colimits and finite limits; universal disjoint coproducts; universal effective equivalence relations.}
@@ -913,9 +940,11 @@
 \section{Generating subcategories of a topos}
 \entree[prop]{1967}{0:32:47}{If a small full subcategory $C$ generates the topos $\mathcal{E}$, $\mathcal{E}$ is a subtopos of $\widehat{C}$: $\mathcal{E}\simeq\mathrm{Sh}(C,J)$ for the induced topology.}
 \entree[prop]{2248}{0:37:28}{For $C$ full in $\mathcal{E}$: (a) $\mathcal{E}\to\widehat{C}$ fully faithful is equivalent to (b) every $X$ is a colimit of the $Y$ in $C/X$; (b) implies (c): every $X$ is the target of a strictly epimorphic family from $C$.}
+\entree[disc]{2248}{0:37:28}{The lecturer corrects an SGA claim on strictly generating families: a family with sources in a subcategory need not make the subcategory strictly generating, as the free groups on one and two generators show.}
 \entree[cex]{2380}{0:39:40}{Counterexample to (c) $\Rightarrow$ (b): in groups, with $C=\{\mathbb{Z}\}$, $\mathbb{Z}*\mathbb{Z}$ satisfies (c) but is not a colimit of $C/(\mathbb{Z}*\mathbb{Z})$.}
 \entree[cex]{2446}{0:40:46}{Enlarging a strictly epimorphic family can make it lose this property (all the arrows $\mathbb{Z}\to\mathbb{Z}*\mathbb{Z}$ in groups).}
 \entree[prop]{2572}{0:42:52}{If fibre products exist and distribute over coproducts, $(X_i\to X)$ is strictly epimorphic iff $\coprod X_i\to X$ is; this is false in general.}
+\entree[disc]{2572}{0:42:52}{A correction on strictly epimorphic families: the equivalence with the epimorphism of their sum needs fibre products distributing over sums, and the repaired statement asks for universality as well.}
 \entree[prop]{2765}{0:46:05}{Corrected statement: (c$'$) every $X$ is the target of a family from $C$ that is strictly and universally epimorphic; then (c$'$) implies (b).}
 \entree[prop]{2829}{0:47:09}{If a strictly and universally epimorphic family factors through a family $(X_i\to Y)$, the latter is again strictly and universally epimorphic.}
 \entree[prop]{2891}{0:48:11}{(b) is equivalent to (b$'$): for every $X$, the family of all arrows $Y\to X$, $Y$ in $C$, is strictly epimorphic.}
@@ -978,6 +1007,7 @@
 \entree[def]{12397}{3:26:37}{Universal torsor: $G$ acting on itself by left translations (an object of $B_G$), with the right action of $\overline{G}=p^*G$ by right translations.}
 \entree[prop]{12798}{3:33:18}{Universality: for $q\colon X\to S$, the $q^*G$-torsors on $X$ correspond to the morphisms $X\to B_G$ over $S$, via the contracted product.}
 \section{Classifying topoi: further examples}
+\entree[disc]{12994}{3:36:34}{A question on what structure the classifying topos of a monoid, rather than a group, would classify: the lecturer does not know, and instead explains torsors and locally free modules as the case of interest.}
 \entree[prop]{13187}{3:39:47}{On a stack, the category of objects locally isomorphic to a section $s$, with their isomorphisms, is equivalent to that of torsors under $\underline{\mathrm{Aut}}(s)$.}
 \entree[ex]{13251}{3:40:51}{Locally free $\mathcal{O}_X$-modules of rank $n$, with their isomorphisms, are equivalent to torsors under $\mathrm{GL}_n(\mathcal{O}_X)$.}
 \entree[prop]{13379}{3:42:59}{The topos $B_{\mathrm{GL}_n}$ over the classifying topos of rings classifies ringed topoi equipped with a locally free module of rank $n$ (with isomorphisms).}
@@ -1002,7 +1032,9 @@
 \entree[def]{15751}{4:22:31}{Elementary topos: a category with finite limits, cartesian closed, equipped with a subobject classifier.}
 \entree[cex]{15944}{4:25:44}{Faithfulness of a $G$-action on $X$ is not stable under inverse image: it is not an algebraic structure in the sense of topoi.}
 \section{Topoi without points}
+\entree[disc]{16009}{4:26:49}{Can topological spaces be seen as structures inside a topos? A suggestion based on the power-set object is discussed; the lecturer is not convinced that it behaves well with inverse limits.}
 \entree[prop]{16521}{4:35:21}{A theory represented by a nonempty topos may have no set-theoretic model: there exist topoi without points.}
+\entree[disc]{16521}{4:35:21}{Structures classified by toposes need not have set-theoretic realizations: the lecturer explains that toposes without points exist, and a listener recalls an example built from a measure space.}
 \entree[ex][Deligne]{16587}{4:36:27}{Borel sets of $[0,1]$ modulo null measure, countable coverings up to null measure; the resulting topos has no point.}
 \section{The classifying topos of fields}
 \entree[prop]{16853}{4:40:53}{Classifying topos of fields: affine schemes of finite type over $\mathbb{Z}$, covering families generated by $\{D(f)\to X,\ V(f)\to X\}$ and by $X_{\mathrm{red}}\to X$.}
@@ -1015,6 +1047,7 @@
 \entree[prop]{17307}{4:48:27}{Criterion: $M$ is flat over $A$ if for every $U$ and every finitely generated ideal $J\subset A_U$, $M_U\otimes J\to M_U$ is a monomorphism.}
 \entree[prop]{17371}{4:49:31}{This criterion is a countable family of axioms: for each $n$, on $U_n=A^n$, the ideal generated by the $n$ universal projections.}
 \face{Tape 4, side B}
+\entree[disc]{17635}{4:53:55}{When a notion such as flatness or connectedness has several candidate extensions to toposes, the lecturer says he discards any not stable under inverse image, and so far has met no serious ambiguity.}
 \entree[rem]{17700}{4:55:00}{For a relative scheme of finite presentation over a ringed topos, two notions of flatness (Hakim): a flat morphism of ringed topoi, or locally arising from a flat morphism of schemes.}
 \section{Hypertopoi}
 \entree[prop]{18019}{5:00:19}{In $\mathbf{Set}$, an arbitrary product of epimorphisms is an epimorphism (analogue of total disconnectedness); this does not hold in every topos.}
@@ -1029,8 +1062,12 @@
 \entree[rem]{18997}{5:16:37}{Asked whether the universe axiom could be shown consistent relative to ZFC, the lecturer recalls having been told by logicians, ten years earlier, that there was no hope. This does follow from Gödel's second incompleteness theorem, since the axiom implies the consistency of ZFC.}
 \entree[rem]{19061}{5:17:41}{Samuel's idea of \q{galaxies}, sets smaller than universes in which the union axiom is weakened, is recalled as a way to avoid a new axiom. The description given is unclear, and it is not reproduced here as a definition.}
 \section{The standard conjectures}
+\entree[disc]{19507}{5:25:07}{In a discussion of foundations and the continuum hypothesis, a listener recalls an abelian group statement settled by that hypothesis, and the conversation turns to whether such questions have a definite answer.}
 \entree[rem]{19969}{5:32:49}{The standard conjectures are formulated on algebraic cycles modulo numerical equivalence, with no particular cohomology; they include the equality of homological and numerical equivalence.}
 \entree[rem]{20035}{5:33:55}{The standard conjectures would allow one to construct motives from algebraic cycles alone, independently of any cohomology.}
+\entree[disc]{21214}{5:53:34}{Asked for an example of a site that is not small, the lecturer proposes all schemes with the étale or flat topology, since some schemes are too big to be covered by a set.}
+\entree[disc]{21925}{6:05:25}{Subtopoi of a presheaf topos correspond to topologies on the category; as classifying topoi of structures, they correspond to adding axioms to a type of algebraic structure.}
+\entree[disc]{22186}{6:09:46}{Quotient topoi are suggested for foliations, where the naive quotient space may be very bad; the lecturer says a good quotient topos always exists, and points to exercises in SGA 4.}
 
 \section*{References}\addcontentsline{toc}{section}{References}
 \noindent Colin McLarty, \emph{Grothendieck's 1973 topos lectures}, talk, CultureMath (DMA, École normale supérieure, Paris), video published 7 October 2018, \url{https://www.youtube.com/watch?v=5AR55ZsHmKI}.

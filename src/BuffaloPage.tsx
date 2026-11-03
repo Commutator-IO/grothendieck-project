@@ -134,7 +134,7 @@ type IndexItem =
   | { k: 'session'; text: string }
   | { k: 'side'; text: string }
   | { k: 'entry'; v: string; t: number; ts: string; text: string; kind?: Kind; name?: string };
-type Kind = 'def' | 'thm' | 'prop' | 'ex' | 'cex' | 'rem' | 'q';
+type Kind = 'def' | 'thm' | 'prop' | 'ex' | 'cex' | 'rem' | 'q' | 'disc';
 // The kinds of entry, labelled as in a course; the colours are those of the PDF.
 const KIND: Record<Kind, { label: string; color: string; italic?: boolean }> = {
   def: { label: 'Definition', color: '#2E6B3F' },
@@ -144,6 +144,7 @@ const KIND: Record<Kind, { label: string; color: string; italic?: boolean }> = {
   cex: { label: 'Counterexample', color: '#A8322F' },
   rem: { label: 'Remark', color: '#5E5E5E' },
   q: { label: 'Question', color: '#6B3FA0' },
+  disc: { label: 'Discussion', color: '#0F766E' },
 };
 type CourseIndex = { pdf: string; entries: number; items: IndexItem[] };
 const loadIndex = () => import('./content/buffalo-index.json').then((m) => m.default as unknown as Record<string, CourseIndex>);
@@ -399,7 +400,7 @@ export function BuffaloPage() {
                 <h2 className="titre text-[24px] text-ink-900">{c.title}</h2>
                 <p className="mt-2 max-w-[46em] text-[13px] leading-relaxed text-ink-600">
                   Index of results: one line per result, definition or example, in our own words, with the moment of
-                  the tape; an index, not a transcription.
+                  the tape; an index, not a transcription. Entries marked Discussion point to an exchange with the audience.
                   {indexes?.[c.id] && (
                     <>
                       {' '}

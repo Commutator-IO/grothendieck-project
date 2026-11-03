@@ -27,9 +27,9 @@
 \usepackage{needspace}
 % An entry: the moment on the tape (link to YouTube), then the statement.
 \newlength{\horo}\settowidth{\horo}{\small\texttt{00:00:00}\quad}
-% Kinds of entry, as in a course: \entree[def]{…}, [thm], [prop], [ex], [cex], [rem], [q]; none = plain.
+% Kinds of entry, as in a course: \entree[def]{…}, [thm], [prop], [ex], [cex], [rem], [q], [disc]; none = plain.
 \definecolor{kdef}{HTML}{2E6B3F}\definecolor{kthm}{HTML}{2F4DA8}\definecolor{kex}{HTML}{8A5A00}
-\definecolor{kcex}{HTML}{A8322F}\definecolor{krem}{HTML}{5E5E5E}\definecolor{kq}{HTML}{6B3FA0}
+\definecolor{kcex}{HTML}{A8322F}\definecolor{krem}{HTML}{5E5E5E}\definecolor{kq}{HTML}{6B3FA0}\definecolor{kdisc}{HTML}{0F766E}
 \makeatletter
 \def\kind@def#1{\textcolor{kdef}{\textbf{Definition\kindname{#1}.}}\enspace}
 \def\kind@thm#1{\textcolor{kthm}{\textbf{Theorem\kindname{#1}.}}\enspace\itshape}
@@ -38,6 +38,7 @@
 \def\kind@cex#1{\textcolor{kcex}{\textbf{Counterexample\kindname{#1}.}}\enspace}
 \def\kind@rem#1{\textcolor{krem}{\textbf{Remark\kindname{#1}.}}\enspace}
 \def\kind@q#1{\textcolor{kq}{\textbf{Question\kindname{#1}.}}\enspace}
+\def\kind@disc#1{\textcolor{kdisc}{\textbf{Discussion\kindname{#1}.}}\enspace}
 \newcommand{\kindlabel}[2]{\ifcsname kind@#1\endcsname\csname kind@#1\endcsname{#2}\fi}
 \newcommand{\kindname}[1]{\if\relax\detokenize{#1}\relax\else\ (#1)\fi}
 \makeatother
@@ -68,7 +69,7 @@
 
 \emph{The course.} In June and July 1973, Alexandre Grothendieck gave a course on the theory of algebraic groups at the State University of New York at Buffalo, in English, alongside two other courses, on algebraic geometry and on topos theory. The sessions were recorded on magnetic tape. This document relies on the recordings published by the YouTube channel \q{Erwin Schulhoff} in two videos; it cites each session by its date, tape and side, following the descriptions of these videos, and each moment by its position in the video.
 
-\emph{What this index is.} For each result or definition treated in a session, the index gives one line: the statement, in today’s mathematical language and in our own words, and the moment of the tape where it is treated, as a link to the video at the exact second. An entry corresponds to a statement, not to a minute of the lecture. A few words in quotation marks reproduce a name or a term coined in the course, when it matters. When what is said is sketched or incomplete, the entry gives the correct statement, with the hypotheses it requires; a claim that is false as heard is not reproduced. A passage whose audio remains doubtful is not indexed.
+\emph{What this index is.} For each result or definition treated in a session, the index gives one line: the statement, in today’s mathematical language and in our own words, and the moment of the tape where it is treated, as a link to the video at the exact second. An entry corresponds to a statement, not to a minute of the lecture. A few words in quotation marks reproduce a name or a term coined in the course, when it matters. When what is said is sketched or incomplete, the entry gives the correct statement, with the hypotheses it requires; a claim that is false as heard is not reproduced. A passage whose audio remains doubtful is not indexed. Entries marked \emph{Discussion} state no result: they point to an exchange with the audience, described in our words, where something is settled, corrected or left open.
 
 \emph{What it is not.} This index is neither a transcript nor a summary of the course. It reproduces neither the explanations, nor the worked examples, nor the digressions, nor the order of the exposition beyond the succession of statements, and it does not quote the course. The course as delivered is a protected oral work, whose rights belong to the heirs of Alexandre Grothendieck; only the recordings are authoritative, and they are reached through the links. The statements here are standard mathematical statements, written by us.
 
@@ -417,7 +418,9 @@
 \entree[def]{11119}{3:05:19}{For schemes of finite type over a field, a morphism is étale if it is flat with étale fibres, i.e. spectra of finite products of finite separable extensions of the residue fields.}
 \entree[def]{11314}{3:08:34}{For $X$ locally of finite type, geometric regularity at $x$ is called smoothness at $x$; a scheme étale over $\mathbb{A}^n_k$ is smooth.}
 \entree[prop]{11575}{3:12:55}{A finitely generated extension of $k$ is separable if and only if it is a finite separable extension of a purely transcendental extension of $k$.}
+\entree[disc]{11967}{3:19:27}{A question on why $\hat{\mathcal O}_x$ is flat over $\hat A$ is answered by combining finiteness, from $x$ being isolated in its fibre, with the $f_i$ forming a regular sequence on the module.}
 \entree[prop]{12229}{3:23:49}{For a morphism locally of finite presentation, the set of points where it is flat is open; the set of points where it is étale is open.}
+\entree[disc]{12293}{3:24:53}{Asked whether the flatness criterion is the same as the exterior product of the differentials being nonzero, the lecturer agrees, calling it the naive criterion that 1-differentials would have made much simpler.}
 \entree[prop]{12422}{3:27:02}{The set $X_{\mathrm{sm}}$ of smooth points of a scheme locally of finite type over $k$ is open.}
 \entree[prop]{12486}{3:28:06}{For $X$ locally of finite type over $k$, $X_{\mathrm{sm}}$ is dense if and only if $X$ is smooth at every maximal point, i.e. $X$ is reduced to generic points whose residue fields are separable over $k$.}
 \entree[prop]{12550}{3:29:10}{A finitely generated extension $K$ of $k$ is geometrically regular if and only if it is separable, i.e. if and only if it is geometrically reduced.}
@@ -430,6 +433,7 @@
 \topic{Smoothness of group schemes}
 \entree[prop]{13091}{3:38:11}{For a group scheme $G$ over $k$, the following are equivalent: $G$ is separable (geometrically reduced); $G$ is geometrically normal; and, if $G$ is locally of finite type, $G$ is smooth over $k$.}
 \entree[prop]{13544}{3:45:44}{If $G$ acts on $X$ with $G\times X\to X\times X$, $(g,x)\mapsto(gx,x)$, surjective and $X$ is separable, then $X$ is geometrically normal, and smooth if moreover locally of finite type.}
+\entree[disc]{13544}{3:45:44}{Asked whether homogeneity-based regularity results hold for monoids, not groups, the lecturer says translations are no longer isomorphisms and suspects failure, since the unit may be singular, as for $\mathbb R_+$ with boundary.}
 \entree[prop]{13739}{3:48:59}{If $k$ is perfect, $G_{\mathrm{red}}$ is geometrically normal, and smooth if $G$ is locally of finite type.}
 \entree[prop]{13803}{3:50:03}{If $G$ is locally of finite type over $k$, the connected components of $G$ coincide with its irreducible components.}
 \entree[prop]{13937}{3:52:17}{In a locally noetherian space, connected and irreducible components coincide if and only if only one irreducible component passes through each point.}
@@ -457,6 +461,7 @@
 \face{Tape 1, side B}
 \topic{Quotients and images}
 \entree[prop]{17079}{4:44:39}{If $f\colon G\to H$ is a group homomorphism over a field, generalizing at one point, then $f(G^0)=H^0$ (irreducible components of the neutral element).}
+\entree[disc]{17208}{4:46:48}{An objection that the image of $G^0$ equalling $H^0$ should fail, since $H$ could be a bigger group containing $G$, is met by the lecturer's appeal to the morphism being generalising.}
 \entree[thm]{17500}{4:51:40}{If $G$ is of finite type over a field and $H\subset G$ a subgroup, the quotient $G/H$ (in the sense of fpqc sheaves) exists and is a scheme of finite type.}
 \entree[prop]{17500}{4:51:40}{For a homomorphism $G\to G'$ with $G$ of finite type, with kernel $K$, the quotient $G/K$ is a group of finite type and the homomorphism factors through a monomorphism $G/K\to G'$.}
 \entree[prop]{17566}{4:52:46}{A monomorphism between groups of finite type over a field is a closed immersion.}
@@ -484,6 +489,10 @@
 \entree[prop]{19511}{5:25:11}{Over an algebraically closed field, the simple commutative radicial groups of height one are $\alpha_p$ and $\mu_p$, corresponding to the simple restricted Lie algebras of dimension one.}
 \face{Tape 3}
 \topic{Structure of affine groups (preview)}
+\entree[disc]{19641}{5:27:21}{On infinitesimal group schemes concentrated at one point, which cannot exist in characteristic zero, the floor offers $\alpha_p$ as an example and notes $\mu_p$ is not one; SGA 3 is pointed to.}
+\entree[disc]{23180}{6:26:20}{Asked why not define the topology using all families of universal one-descent, the lecturer says that is the largest possible choice but such morphisms are hard to characterise, motivating the faithfully flat quasi-compact topology.}
+\entree[disc]{23437}{6:30:37}{A question on whether members of a covering family must be quasi-compact is answered no: enlarging a covering family should keep it covering, so only the refining finite flat family is constrained.}
+\entree[disc]{23952}{6:39:12}{Asked for a characterisation of schemes among algebraic spaces, the lecturer says that would solve the representability problem; algebraic spaces are presented as the stable setting for quotients and moduli, with references to Artin's papers.}
 \entree[prop]{25299}{7:01:39}{A complex abelian variety of dimension $n$ is a compact complex torus $\mathbb{C}^n/\Lambda$, where $\Lambda$ is a lattice of rank $2n$.}
 \entree[prop]{25299}{7:01:39}{Over an algebraically closed field, a smooth connected affine group is an extension of a semisimple group by its radical, which is solvable.}
 \entree[prop]{25361}{7:02:41}{Up to isogeny, a semisimple group is a product of simple groups.}
