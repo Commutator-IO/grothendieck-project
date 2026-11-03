@@ -337,6 +337,46 @@ export function BuffaloPage() {
           is not checked.
         </aside>
 
+        <details className="mt-3 max-w-[46em] rounded-xl border border-ink-200 px-4 py-3 text-[13px] leading-relaxed text-ink-700">
+          <summary className="cursor-pointer select-none font-medium text-brand-600 hover:text-brand-700">Who speaks on the tapes</summary>
+          <p className="mt-2">
+            The recordings do not name the voices in the room. Colin McLarty, who was not there (he gave his talk in 2018), names a few
+            from what is said, and we add two inferences of our own.
+          </p>
+          <ul className="mt-2 list-disc space-y-1.5 pl-5">
+            <li>
+              <strong className="font-semibold">John Duskin</strong>, who made the tapes, asks whether the universe axiom could be shown
+              consistent relative to ZFC; Grothendieck answers that, about ten years earlier, logicians he had asked saw no hope. Video 4,{' '}
+              <a href="#ORG14LNb5gE@18997" className={link}>
+                5:16:37
+              </a>
+              . A little earlier in the same video, at{' '}
+              <a href="#ORG14LNb5gE@15688" className={link}>
+                4:21:28
+              </a>
+              , someone says Jack understands more than the others and asks him to go to the blackboard: probably Duskin too, our inference, not McLarty's.
+            </li>
+            <li>
+              <strong className="font-semibold">William Lawvere</strong> is credited by McLarty with having helped save the tapes. In video 1,
+              Grothendieck compares his own definition of a topos with Lawvere and Tierney's and says he does not know their theory well, at{' '}
+              <a href="#URU5jgTvjhU@36055" className={link}>
+                10:00:55
+              </a>
+              .
+            </li>
+            <li>
+              <strong className="font-semibold">An unnamed speaker</strong> remarks in the same discussion that some infinite cardinals
+              do not really exist; McLarty places it in a conversation about the Whitehead conjecture.
+            </li>
+          </ul>
+          <p className="mt-2">
+            McLarty dates the last topos session, with the news that Deligne has proved the Weil conjectures, to 13 July 1973; the videos'
+            descriptions, which our catalogue follows, put the whole of video 4 under 12 July. He counts 33 hours of topos tapes, about 16
+            hours of introduction and 17 with a smaller group; our catalogue has {hours(CAT.courses.find((c) => c.id === 'topos')!)} hours for the course, damaged sides included.
+            The identifications above are readings of what is said, not labels on the tapes.
+          </p>
+        </details>
+
         <nav className="mt-8 flex flex-wrap gap-2" aria-label="Courses">
           {CAT.courses.map((c) => (
             <button
