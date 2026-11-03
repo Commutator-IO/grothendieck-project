@@ -44,14 +44,14 @@
 \newcommand{\kindlabel}[2]{\ifcsname kind@#1\endcsname\csname kind@#1\endcsname{#2}\fi}
 \newcommand{\kindname}[1]{\if\relax\detokenize{#1}\relax\else\ (#1)\fi}
 \makeatother
-% The moment on the tape sits in the left margin, small and pale (a link to YouTube), the statement runs full width.
+% The moment on the tape sits in the right margin, small and pale (a link to YouTube), the statement runs full width.
 \definecolor{frisepale}{HTML}{7F90C4}
 \definecolor{kread}{HTML}{6B5B3E}
 \def\kind@read#1{\textcolor{kread}{\textbf{Reading.}}\enspace}
 \tcbset{thmbox/.style={enhanced,breakable,colback=kthm!4,colframe=kthm!55,boxrule=0.4pt,arc=1pt,left=2.2mm,right=2.2mm,top=0.8mm,bottom=0.8mm,before skip=3pt,after skip=6pt}}
 \NewDocumentCommand{\entree}{O{}O{}mmm}{\ifstrequal{#1}{thm}{%
-\begin{tcolorbox}[thmbox,overlay unbroken and first={\node[anchor=north east,inner sep=0pt,xshift=-3.5mm,yshift=-1.4mm] at (frame.north west) {\href{https://www.youtube.com/watch?v=\videoid&t=#3s}{\textcolor{frisepale}{\texttt{\footnotesize #4}}}};}]\raggedright\kindlabel{#1}{#2}#5\end{tcolorbox}%
-}{\par\raggedright\noindent\llap{\href{https://www.youtube.com/watch?v=\videoid&t=#3s}{\textcolor{frisepale}{\texttt{\footnotesize #4}}}\hspace{3.5mm}}{\kindlabel{#1}{#2}#5\par}\smallskip}}
+\begin{tcolorbox}[thmbox,overlay unbroken and first={\node[anchor=north west,inner sep=0pt,xshift=3.5mm,yshift=-1.4mm] at (frame.north east) {\href{https://www.youtube.com/watch?v=\videoid&t=#3s}{\textcolor{frisepale}{\texttt{\footnotesize #4}}}};}]\raggedright\kindlabel{#1}{#2}#5\end{tcolorbox}%
+}{\par\raggedright\noindent\rlap{\hspace{\dimexpr\linewidth+3.5mm\relax}\href{https://www.youtube.com/watch?v=\videoid&t=#3s}{\textcolor{frisepale}{\texttt{\footnotesize #4}}}}{\kindlabel{#1}{#2}#5\par}\smallskip}}
 \raggedbottom\emergencystretch=1.5em
 
 \title{\LARGE The Buffalo Course on Algebraic Geometry (1973):\\ Index of Results}
