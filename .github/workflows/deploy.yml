@@ -214,6 +214,14 @@ jobs:
           path: node_modules/.cache/jtei
           key: jtei-tools-${{ hashFiles('docs/study/tei.mjs') }}
           restore-keys: jtei-tools-
+      # The second book (docs/livre-archives/) is compiled here when no PDF is committed, so
+      # that /article/archives-toolbox.pdf exists before anyone has built it locally. A
+      # failure leaves the deploy alone: tei.mjs copies the book only if the PDF exists.
+      - name: Compile the second book if its PDF is not committed
+        run: |
+          if [ ! -f docs/livre-archives/livre.pdf ]; then
+            (cd docs/livre-archives && tectonic -X compile livre.tex) || echo "livre-archives did not compile"
+          fi
       - name: The article, in TEI against tei_jtei
         run: npm run article-tei
 
