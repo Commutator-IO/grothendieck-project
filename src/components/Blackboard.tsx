@@ -33,41 +33,54 @@ const tex = (s: string, display: boolean) => katex.renderToString(s, { displayMo
 const prose = (s: string) => s.split(/(\$[^$]+\$)/).map((p) => (p.startsWith('$') ? tex(p.slice(1, -1), false) : p)).join('');
 
 /**
- * The ghost of earlier chalk: broad, faint sweeps where a brush went over the slate. Each panel has
- * its own set, laid out from its number, so the marks change with the board.
+ * The ghost of earlier chalk: broad, faint sweeps where a brush went over the slate, and the prints of
+ * chalky fingers along its edges.
+ *
+ * He works two boards in turn, so every other panel is the same physical board. The marks come from the
+ * board, not from the panel: all the panels of one board carry the same bands and the same prints, and
+ * each time the board is wiped again a new layer, a little shifted, lands on top of the earlier ones.
  */
-const Smears = memo(function Smears({ seed }: { seed: number }) {
-  // A right-handed lecturer wipes in short repeated passes at shoulder height, the arm rising a little
-  // towards the right: two or three bands of two or three overlapping, nearly horizontal sweeps.
-  const strokes = useMemo(() => {
-    let a = Math.imul(seed + 1, 2654435761) >>> 0;
-    const rnd = () => {
-      a = (a + 0x6d2b79f5) | 0;
-      let t = Math.imul(a ^ (a >>> 15), 1 | a);
-      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-    };
-    const out: { d: string; w: number; o: number }[] = [];
-    const bands = 2 + Math.floor(rnd() * 2);
-    for (let b = 0; b < bands; b++) {
-      const gy = 50 + rnd() * 190;
-      const gx = 15 + rnd() * 230;
-      const passes = 2 + Math.floor(rnd() * 2);
-      for (let k = 0; k < passes; k++) {
-        const x0 = gx + (rnd() - 0.3) * 50;
-        const y0 = gy + k * (11 + rnd() * 9);
-        const len = 230 + rnd() * 190;
-        const rise = 6 + rnd() * 20;
-        const sag = 4 + rnd() * 12;
-        out.push({
-          d: `M${x0} ${y0} Q${x0 + len * 0.55} ${y0 - rise * 0.4 + sag} ${x0 + len} ${y0 - rise}`,
-          w: 13 + rnd() * 14,
-          o: 0.03 + rnd() * 0.035,
-        });
-      }
+const mulberry = (seed: number) => {
+  let a = Math.imul(seed + 1, 2654435761) >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+};
+const MAX_LAYERS = 5;
+
+const Smears = memo(function Smears({ board, layers }: { board: 0 | 1; layers: number }) {
+  const { strokes, prints } = useMemo(() => {
+    // The geometry of the board: the same for every layer of it.
+    const rnd = mulberry(board * 101 + 7);
+    const bands = Array.from({ length: 3 }, () => ({
+      gy: 50 + rnd() * 190,
+      gx: 15 + rnd() * 230,
+      passes: 2 + Math.floor(rnd() * 2),
+      pass: Array.from({ length: 3 }, () => ({ dx: (rnd() - 0.3) * 50, dy: 11 + rnd() * 9, len: 230 + rnd() * 190, rise: 6 + rnd() * 20, sag: 4 + rnd() * 12, w: 13 + rnd() * 14, o: 0.03 + rnd() * 0.035 })),
+    }));
+    const marks = Array.from({ length: 6 }, (_, k) => ({ x: k < 3 ? 3 + rnd() * 5 : 592 + rnd() * 5, y: 40 + rnd() * 220, rx: 4 + rnd() * 5, ry: 14 + rnd() * 22, o: 0.05 + rnd() * 0.05 }));
+    const strokes: { d: string; w: number; o: number }[] = [];
+    const prints: typeof marks = [];
+    const n = Math.min(layers, MAX_LAYERS);
+    // The layers pile up, but the total is held down so that old boards stay discreet.
+    const gain = n > 1 ? 1.5 / (n + 0.5) : 1;
+    for (let l = 0; l < n; l++) {
+      const j = mulberry(board * 1009 + l * 31 + 3); // each wipe lands a little off the last
+      for (const b of bands)
+        for (let k = 0; k < b.passes; k++) {
+          const q = b.pass[k];
+          const x0 = b.gx + q.dx + (j() - 0.5) * 28;
+          const y0 = b.gy + k * q.dy + (j() - 0.5) * 14;
+          const len = q.len + (j() - 0.5) * 60;
+          strokes.push({ d: `M${x0} ${y0} Q${x0 + len * 0.55} ${y0 - q.rise * 0.4 + q.sag} ${x0 + len} ${y0 - q.rise}`, w: q.w, o: q.o * gain });
+        }
+      for (const m of marks) prints.push({ ...m, o: m.o * gain, x: m.x + (j() - 0.5) * 3, y: m.y + (j() - 0.5) * 16 });
     }
-    return out;
-  }, [seed]);
+    return { strokes, prints };
+  }, [board, layers]);
   return (
     <svg
       aria-hidden="true"
@@ -82,6 +95,11 @@ const Smears = memo(function Smears({ seed }: { seed: number }) {
           <path key={`${i}b`} d={k.d} strokeWidth={k.w} strokeOpacity={k.o * 0.5} />,
           <path key={`${i}c`} d={k.d} strokeWidth={k.w * 0.55} strokeOpacity={k.o * 0.6} />,
         ])}
+      </g>
+      <g fill="#f4f4ee">
+        {prints.map((m, i) => (
+          <ellipse key={i} cx={m.x} cy={m.y} rx={m.rx} ry={m.ry} fillOpacity={m.o} />
+        ))}
       </g>
     </svg>
   );
@@ -199,7 +217,7 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
       >
         {/* The lecture opens on a clean board: an empty panel above, the one he writes on below, both in view. */}
         <section aria-hidden="true" style={{ minHeight: panelH || undefined }} className="slate relative snap-start snap-always">
-          <Smears seed={-1} />
+          <Smears board={1} layers={1} />
         </section>
         {panels.map(([a, b], n) => (
           <section
@@ -207,7 +225,7 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
             style={{ minHeight: panelH || undefined }}
             className="slate rail relative snap-start snap-always px-5 py-4"
           >
-            <Smears seed={n} />
+            <Smears board={(n % 2) as 0 | 1} layers={n % 2 === 0 ? n / 2 + 1 : (n + 3) / 2} />
             {board.items.slice(a, b).map((i, j) => {
               const k = a + j;
               return (
