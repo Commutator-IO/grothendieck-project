@@ -42,8 +42,9 @@
 \newcommand{\kindlabel}[2]{\ifcsname kind@#1\endcsname\csname kind@#1\endcsname{#2}\fi}
 \newcommand{\kindname}[1]{\if\relax\detokenize{#1}\relax\else\ (#1)\fi}
 \makeatother
-\NewDocumentCommand{\entree}{O{}O{}mmm}{\par\raggedright\noindent\hangindent=\horo\hangafter=1%
-  \makebox[\horo][l]{\small\href{https://www.youtube.com/watch?v=\videoid&t=#3s}{\textcolor{frise}{\texttt{#4}}}}{\kindlabel{#1}{#2}#5\par}\smallskip}
+% The moment on the tape sits in the left margin, small and pale (a link to YouTube), the statement runs full width.
+\definecolor{frisepale}{HTML}{7F90C4}
+\NewDocumentCommand{\entree}{O{}O{}mmm}{\par\raggedright\noindent\llap{\href{https://www.youtube.com/watch?v=\videoid&t=#3s}{\textcolor{frisepale}{\texttt{\footnotesize #4}}}\hspace{3.5mm}}{\kindlabel{#1}{#2}#5\par}\smallskip}
 \raggedbottom\emergencystretch=1.5em
 
 \title{\Large Buffalo Lectures on the Theory of Algebraic Groups (1973):\\ Index of Results}
