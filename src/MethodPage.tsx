@@ -76,6 +76,10 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
     more: [{ label: 'PDF (italiano)', href: '/article/poema-grothendieckiano.pdf' }],
     src: 'docs/recollement/article.tex',
   },
+];
+
+/** The two books, in French: the tools first, then the sources they were used on. */
+const LIVRES: typeof ARTICLES = [
   {
     id: 'book-methods',
     title: 'Mathématiques outillées : le génie logiciel au service de la recherche',
@@ -84,16 +88,24 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
     pdf: '/article/maths-toolbox.pdf',
     src: 'docs/livre-methodes/livre.tex',
   },
+  {
+    id: 'book-archives',
+    title: 'Archives outillées : reproduire la méthode sur des fonds publics',
+    lang: 'French',
+    what: "The companion book, on the sources rather than the tools: each archive the method ran on (Montpellier, the Bourbaki archive, Quillen's notebooks, the IHÉS, the BnF, the Buffalo tapes, Gallica for germain-project), how it is served, what got in the way and what was decided about rights; then a plan for Leibniz's mathematical manuscripts in Hanover.",
+    pdf: '/article/archives-toolbox.pdf',
+    src: 'docs/livre-archives/livre.tex',
+  },
 ];
 
 /** The papers, first: they are what a visitor from outside the project came for. */
-function Articles() {
+function Articles({ id = 'articles', title = 'The articles', items = ARTICLES }: { id?: string; title?: string; items?: typeof ARTICLES }) {
   const pill = 'rounded-full border border-ink-200 px-3 py-0.5 text-[12.5px] text-ink-700 transition hover:border-brand-400 hover:text-brand-700';
   return (
     <section className="mt-10">
-      <H2 id="articles">The articles</H2>
+      <H2 id={id}>{title}</H2>
       <div className="mt-4 grid gap-4 md:grid-cols-2">
-        {ARTICLES.map((a) => (
+        {items.map((a) => (
           <article key={a.id} id={a.id} className="card flex scroll-mt-20 flex-col px-5 py-4">
             <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-ink-400">{a.lang}</p>
             <h3 className="mt-1 text-[15px] font-semibold italic leading-snug text-ink-900">{a.title}</h3>
@@ -151,6 +163,7 @@ export function MethodPage() {
         </header>
 
         <Articles />
+        <Articles id="books" title="The books" items={LIVRES} />
 
         <section className="mt-16">
           <H2 id="process" className="!text-[26px]">How a page becomes a transcription</H2>

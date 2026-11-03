@@ -1,0 +1,24 @@
+% Chapitre 1 : la chaîne, de l'inventaire aux trouvailles.
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm, node distance=4mm]
+  \node[boite, text width=2.1cm] (inv) at (0,0) {Inventaire\\[-1pt]\scriptsize les cotes du détenteur};
+  \node[boite, text width=2.1cm, right=of inv] (copie) {Copie locale\\[-1pt]\scriptsize ignorée par \texttt{git}};
+  \node[boite, text width=2.1cm, right=of copie] (tr) {Transcription\\[-1pt]\scriptsize lots de 20 pages};
+  \node[boite, text width=2.1cm, below=9mm of tr] (rel) {Seconde passe\\[-1pt]\scriptsize puis une personne};
+  \node[boite, text width=2.1cm, left=of rel] (mod) {Lecture modernisée\\[-1pt]\scriptsize un autre fichier};
+  \node[boite, text width=2.1cm, left=of mod] (lean) {Lean, trouvailles\\[-1pt]\scriptsize contre la littérature};
+  \draw[fleche] (inv) -- (copie);
+  \draw[fleche] (copie) -- (tr);
+  \draw[fleche] (tr) -- (rel);
+  \draw[fleche] (rel) -- (mod);
+  \draw[fleche] (mod) -- (lean);
+  \node[boite, fill=white, dashed, text width=6.6cm, below=9mm of mod] (site)
+    {Le site : la transcription à côté du fac-similé, servi par la source};
+  \draw[fleche, dashed] (rel.south) |- (site.east);
+  \draw[fleche, dashed] (mod) -- (site);
+\end{tikzpicture}
+\caption{La chaîne, la même sur tous les fonds. Les étapes du haut dépendent de la
+source (format, serveur, débit) ; celles du bas dépendent des droits.}
+\label{fig:chaine}
+\end{figure}

@@ -1,0 +1,81 @@
+\chapter{Ce qu'on demande à une source}\label{ch:grille}
+
+Avant de transcrire une page, on pose à la source une dizaine de questions. Chacune a
+coûté, sur l'un des fonds de ce livre, des jours de travail à qui ne l'avait pas posée.
+Les réponses se trouvent presque toutes en une heure, avec un navigateur et la commande
+\cmd{curl}.
+
+\section{L'accès}
+
+\begin{description}
+  \item[Le fonds est-il servi entier ?] Une source qui ne montre qu'une sélection, ou qui
+        renvoie pour le reste au site d'un partenaire, donne un inventaire troué. Le projet
+        Gallica s'est donné une seule règle de sélection : un volume n'entre au catalogue
+        que si Gallica le sert en entier.
+  \item[Sous quelle forme ?] Un PDF par dossier (Montpellier, les archives Bourbaki, la
+        Clay), des images par page derrière un protocole (IIIF chez Gallica et à la
+        bibliothèque de Hanovre), des fichiers bruts sur un serveur (l'IHÉS), ou rien en
+        ligne du tout (la BnF pour les papiers de Lasserre). Le format décide des scripts de
+        copie, de la résolution disponible et de la façon d'afficher le fac-similé.
+  \item[Le serveur se laisse-t-il afficher ailleurs ?] Deux en-têtes HTTP le disent.
+        \texttt{X-Frame-Options} (ou \texttt{Content-Security-Policy: frame-ancestors})
+        interdit d'afficher le document dans une page d'un autre site.
+        \texttt{Access-Control-Allow-Origin} autorise, ou non, une page d'un autre site à
+        lire les fichiers dans le navigateur. Sans ces autorisations, il faut un relais,
+        c'est-à-dire un petit serveur à soi qui va chercher le document et le renvoie.
+  \item[Le certificat est-il valide ?] Un certificat TLS expiré n'empêche pas un humain de
+        cliquer sur « continuer », mais un cadre intégré dans une page reste blanc, sans
+        message.
+  \item[Combien de requêtes tolère-t-il ?] On ne le sait qu'en se faisant bloquer, et
+        mieux vaut ne pas l'apprendre ainsi. Une pause entre deux requêtes, un plafond par
+        heure, un \emph{user agent} qui nomme le projet, l'arrêt au premier refus.
+\end{description}
+
+\begin{terminal}
+curl -sI https://exemple.org/document.pdf | grep -iE "x-frame|access-control|content-type"
+\end{terminal}
+
+\section{Le catalogue}
+
+\begin{description}
+  \item[Les cotes sont-elles stables ?] On cite la cote et l'adresse durable (un manifeste
+        IIIF, une URL d'API), jamais un lien de visualiseur qui porte des paramètres de
+        session.
+  \item[Comment les pages sont-elles numérotées ?] Il y a souvent trois numérotations : celle
+        de la page du fichier, celle que la bibliothèque a portée (foliotation), celle de
+        l'auteur. On choisit celle qui pilote l'affichage, on note les autres quand on les
+        lit, et on n'en déduit aucune.
+  \item[Le catalogue date-t-il ?] Les datations du détenteur se citent telles quelles, entre
+        leurs crochets s'il en met ; celles qu'on propose soi-même se marquent comme telles.
+\end{description}
+
+\section{Les droits}
+
+\begin{description}
+  \item[L'œuvre est-elle dans le domaine public ?] En France, les droits patrimoniaux
+        courent soixante-dix ans après la mort de l'auteur ; le droit moral, dont le droit
+        de divulgation d'une œuvre inédite, ne s'éteint pas. Grothendieck est mort en 2014,
+        Quillen en 2011 : leurs notes sont protégées. Germain, Fourier ou Leibniz ne le sont
+        plus.
+  \item[Que permet le détenteur des images ?] Une numérisation a ses propres conditions
+        (celles de Gallica, une \emph{Public Domain Mark}, un « © » sans plus). On les lit,
+        on les date, on les cite.
+  \item[Qui a déjà transcrit ?] Une édition imprimée, un projet de recherche, Wikisource. On
+        ne recopie ni ne prend pour point de départ la transcription d'autrui sans son
+        accord, et l'on renvoie à l'édition établie quand elle existe.
+  \item[Y a-t-il des tiers ?] Les lettres reçues ont leurs propres auteurs. Les personnes
+        privées nommées dans des papiers récents ont droit à leur vie privée.
+\end{description}
+
+\section{La main et la langue}
+
+La dernière question est celle qu'on croit la première : peut-on lire ? Écriture,
+abréviations, langue, notation de l'époque, figures, pages retournées ou écrites au dos
+d'autres documents. Une machine lit mieux une dactylographie qu'un brouillon, et un
+brouillon de 1960 mieux qu'un brouillon de 1680. Un échantillon de vingt pages, transcrit
+et relu contre l'image, en dit plus que toute estimation.
+
+\begin{regle}
+Avant tout script de copie, on remplit la grille pour la source, dans une issue, avec la
+date de chaque constat. L'issue sert ensuite de référence quand la source change.
+\end{regle}

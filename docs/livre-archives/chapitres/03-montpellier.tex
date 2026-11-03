@@ -1,0 +1,96 @@
+\chapter{Le fonds Grothendieck de Montpellier}\label{ch:montpellier}
+
+\section{La source}
+
+Le fonds Alexandre Grothendieck a été donné à l'université de Montpellier par Jean
+Malgoire et catalogué en 2015--2016 par Hélène Rodriguez et Frédéric Troilo, sous la
+direction de Sophie Dikoff. Il compte environ 28\,000 pages ; environ 18\,000 peuvent être
+communiquées, la correspondance des tiers ne pouvant l'être sans autorisation. La partie
+ouverte en ligne (\url{https://grothendieck.umontpellier.fr/archives-grothendieck/}) compte
+178 dossiers, environ 16\,000 pages, de 1949 à 1991. Chaque dossier est un seul PDF, de 4 à
+270~Mo ; l'ensemble pèse environ 28~Go. Tout est en français.
+
+C'est la source sur laquelle la méthode a été inventée, et la plus difficile des cinq,
+techniquement et juridiquement.
+
+\section{Ce qui a coincé}
+
+\paragraph{Le serveur refuse d'être affiché ailleurs.} Trois constats, faits à
+l'automne 2026 :
+\begin{itemize}
+  \item il envoie \texttt{X-Frame-Options: SAMEORIGIN} : aucun autre site ne peut afficher
+        ses PDF dans une page ;
+  \item son certificat TLS a expiré le 10 décembre 2025, et un cadre intégré reste blanc,
+        sans message ;
+  \item il n'envoie aucun en-tête CORS : une page d'un autre site ne peut pas lire les
+        fichiers.
+\end{itemize}
+
+\paragraph{La réponse : un relais.} Le projet a écrit un petit serveur Node
+(\fichier{relay/server.mjs}), hébergé gratuitement, qui va chercher le PDF chez Montpellier
+et le renvoie au lecteur. Il faut Node parce qu'il faut accepter le certificat expiré, ce
+qu'un service sans serveur ne permet pas. Le relais transmet les requêtes partielles
+(\emph{range requests}) : ouvrir la page 221 d'un volume de 204~Mo ne déplace que 256~Ko.
+Il n'accepte que \texttt{GET} et \texttt{HEAD} sur une adresse par cote, ne transmet aucun
+cookie, ne garde rien. L'hébergement gratuit s'endort au bout de quinze minutes : la
+première page met une minute à venir. Rien de cela n'est satisfaisant ; c'est ce qu'il
+fallait pour qu'un lecteur voie le fac-similé à côté de la transcription sans que le
+projet stocke une seule image.
+
+\paragraph{La copie de travail.} Pour transcrire, on extrait un lot de vingt pages dans un
+dossier ignoré par \texttt{git}. Le premier outil essayé (poppler) faisait d'un lot de
+vingt pages un fichier de 42~Mo, plus lourd que le volume source ; pdf-lib en fait 7~Mo.
+Ensuite, chaque page est découpée en six tuiles qui se chevauchent, à 700~dpi. Cet outil a
+été écrit après un lot de seize pages qui avait demandé quatre-vingt-dix recadrages à la
+main.
+
+\paragraph{Les pages.} Grothendieck écrivait souvent au dos de documents sans rapport : ces
+pages-là sont sautées, sans être décrites. Certaines ont été numérisées à l'envers. Trois
+numérotations se superposent (celle du PDF, décalée d'une unité par une page de garde,
+celle de l'archive, celle de l'auteur). Presque rien n'est daté ; les datations entre
+crochets de l'inventaire sont recopiées telles quelles.
+
+\section{Les droits, et ce qu'on a décidé}
+
+Grothendieck est mort le 13 novembre 2014. Ses droits patrimoniaux courent jusqu'à la fin
+de 2084 et appartiennent à ses héritiers ; son droit moral, dont le droit de divulgation,
+est perpétuel. Une transcription reproduit le texte : elle est couverte par ces droits,
+qu'elle soit tapée par une personne ou par une machine.
+
+Le projet a d'abord mis tout le dépôt sous CC0, en écrivant que le fonds « n'appartenait à
+personne ». C'était faux ; c'est retiré, et le fichier \fichier{RIGHTS.md} dit maintenant :
+\begin{itemize}
+  \item le code, les scripts, le site et les preuves Lean sont sous CC0 ;
+  \item les transcriptions ne sont sous aucune licence du projet, qui n'en revendique aucun
+        droit et n'autorise personne à les reproduire ;
+  \item chaque page porte le filigrane « Édition de démonstration » ;
+  \item aucun fac-similé n'est stocké ni redistribué ;
+  \item si l'université ou les ayants droit demandent le retrait, il est fait, sans
+        discussion ni délai ; un interrupteur de déploiement retire du site tout le texte
+        des transcriptions sans rien effacer ;
+  \item aucun dépôt sur Zenodo ni identifiant pérenne (DOI), parce qu'un identifiant
+        pérenne rendrait le retrait impossible ; il en irait de même pour un modèle
+        entraîné sur ces transcriptions.
+\end{itemize}
+La question de ce que permet la mention « libre accès » du fonds a été posée par écrit au
+service des archives et n'a pas reçu de réponse. En attendant, le projet lit cette mention
+comme couvrant une édition de démonstration, filigranée et retirable.
+
+Les lettres ont leur propre règle : celles des tiers ne sont pas diffusées, les lettres
+publiées avec Serre restent résumées, et les personnes privées ne sont pas nommées. Le
+registre des lettres compte 93 entrées.
+
+\section{Ce qui a été produit}
+
+À la fin d'octobre 2026 : 638 lots transcrits, couvrant 164 dossiers et environ 9\,400
+pages, chacun avec sa lecture modernisée ; une seconde passe sur tuiles pour 61 lots ; des
+énoncés démontrés en Lean pour 73 dossiers ; des vérifications par une personne, ponctuelles
+(125 lectures dans 54 dossiers, 31 lettres, 57 dates) ; cinq articles. Aucun lot n'est
+vérifié en entier par une personne.
+
+\begin{exemple}
+La leçon de Montpellier est que l'obstacle technique se contourne en une semaine, et que
+l'obstacle juridique ne se contourne pas. Le relais est un bricolage ; le filigrane, la
+promesse de retrait et l'absence de DOI sont des décisions, prises tôt et écrites, qui
+permettent au projet d'exister tant que personne ne s'y oppose.
+\end{exemple}

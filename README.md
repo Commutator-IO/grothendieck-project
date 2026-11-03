@@ -428,6 +428,15 @@ Each PDF is compiled locally and committed, excepted by name from `*.pdf` in
 copies the served ones into `public/article/` (`npm run article-tei`, which
 also builds and validates the jTEI submission).
 
+## The books
+
+Two short books in French, compiled locally like the articles and committed.
+
+| Source | Book | Served at |
+|---|---|---|
+| [`docs/livre-methodes/`](docs/livre-methodes/livre.tex) | *Mathématiques outillées* — the tools: git, issues, continuous integration, Lean, working with an assistant, rights; it names no corpus | [/article/maths-toolbox.pdf](https://grothendieck.commutator.io/article/maths-toolbox.pdf) |
+| [`docs/livre-archives/`](docs/livre-archives/livre.tex) | *Archives outillées* — the sources: each archive the method ran on, here and in germain-project, what got in the way and what was decided, then a plan for Leibniz's mathematical manuscripts | [/article/archives-toolbox.pdf](https://grothendieck.commutator.io/article/archives-toolbox.pdf), once compiled |
+
 ## The repository
 
 | Path | Role |

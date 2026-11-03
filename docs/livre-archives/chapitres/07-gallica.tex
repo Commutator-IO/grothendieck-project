@@ -1,0 +1,126 @@
+\chapter{Gallica, et ce qu'on a fait de germain-project}\label{ch:gallica}
+
+Le second projet est celui dont un nouveau fonds du domaine public doit s'inspirer. Il a
+repris la chaîne du projet Grothendieck sur une source dont les conditions sont presque
+inverses : pas de droit d'auteur, un serveur ouvert, un protocole standard. Ce qui reste
+difficile y apparaît d'autant mieux.
+
+\section{La source}
+
+La BnF a mis en ligne sur Gallica, entiers et gratuits, des manuscrits de mathématiciens :
+papiers de travail, lettres, mises au net, catalogués par fonds et par numéro. Le projet
+(\url{https://germain.commutator.io}, dépôt \texttt{germain-project}) en a dressé
+l'inventaire à partir de la recherche de Gallica du 14 septembre 2026 : 78 volumes, 25\,258
+vues, dix-neuf mathématiciens et deux albums de plusieurs mains, de Maurolico et Viète à
+Libri et Prony. Les plus gros ensembles sont ceux de Fourier (20 volumes, 6\,173 vues), de
+Mersenne (10 volumes, 3\,297 vues), de Libri (8 volumes, 2\,970 vues) et de Sophie Germain
+(4 volumes, 1\,010 vues). Les détenteurs sont la BnF (Manuscrits et Arsenal) et, pour les
+journaux de Prony, l'École des ponts.
+
+Le site porte le nom de la première archive lue, celle de Sophie Germain.
+
+\section{Les choix de départ}
+
+\paragraph{Une seule règle de sélection.} Un volume n'entre au catalogue que si Gallica le
+sert en entier. Un manuscrit non numérisé, ou que Gallica signale seulement chez un
+partenaire, n'y figure pas, ni comme ligne ni comme vignette.
+
+\paragraph{Les cahiers sont des regroupements du projet.} La BnF catalogue par fonds, pas
+par mathématicien. Le site range les volumes en trois « cahiers » (\textsc{xvii}\ieme,
+\textsc{xviii}\ieme, \textsc{xix}\ieme{} siècles), une section par mathématicien, et chaque
+cahier dit que ce regroupement est le sien.
+
+\paragraph{Aucune image stockée, nulle part.} Le volet du fac-similé demande à l'API IIIF
+Image de Gallica la vue que le lecteur regarde, à la largeur du volet ; les octets vont de
+la BnF au navigateur. Le \fichier{.gitignore} refuse \fichier{*.jpg} et \fichier{*.pdf}.
+Faire défiler la transcription fait tourner les pages du fac-similé.
+
+\paragraph{Pas de relais.} C'est le contraire de Montpellier, constaté le 10 septembre
+2026 : les manifestes et les images IIIF répondent avec \texttt{Access-Control-Allow-Origin:
+*}, le certificat est valide, et le champ \texttt{license} des manifestes renvoie aux
+conditions de Gallica. Un script (\cmd{npm run check-sources}) vérifie à chaque fois que ces
+conditions tiennent encore.
+
+\section{Ce qui a coincé}
+
+\paragraph{Le débit.} En septembre, une dizaine de requêtes en quelques secondes ont reçu
+des coupures de connexion. Le 17 octobre 2026, le pare-feu placé devant la BnF a bloqué la
+machine du projet sur toutes les adresses, avec une erreur~403, sans doute à cause des
+copies de travail faites en septembre. Le script de copie a été réécrit en conséquence :
+dix secondes entre deux images, avec une part aléatoire ; au plus 150 images par heure ;
+arrêt complet au premier 403 ou à une erreur 429 qui persiste. Une adresse bloquée se
+débloque en écrivant à la BnF, pas en réessayant.
+
+\begin{warningblock}
+C'est l'erreur la plus facile à commettre sur une source ouverte, et la plus coûteuse : une
+copie de travail trop rapide fait bloquer le projet, et parfois toute une institution
+derrière la même adresse. On règle la cadence avant le premier lot, pas après le blocage.
+\end{warningblock}
+
+\paragraph{La numérotation.} La plupart des vues de Gallica sont étiquetées « NP » (non
+paginé). La transcription numérote donc par le numéro de vue de Gallica, qui pilote le
+fac-similé, et note la foliotation de la bibliothèque seulement là où on la lit sur la
+page, sans jamais la déduire.
+
+\paragraph{La résolution.} Les images IIIF complètes sont grandes (environ $5200\times 7100$
+pixels pour le manuscrit Français~9115). L'assistant les lit par bandes de 2\,400 pixels,
+découpées dans la copie locale, ce qui ne coûte rien de plus à Gallica.
+
+\paragraph{Les langues et les notations.} Français pour la plupart, latin pour Sluse,
+Maurolico, Varignon et une partie de Mersenne et de Roberval. La transcription garde
+l'orthographe, les abréviations et la notation de l'époque. La lecture modernisée traduit
+la notation (les résidus de Legendre en congruences, par exemple) et signale chaque
+traduction en note.
+
+\section{Les droits, et ce qu'on a décidé}
+
+Les manuscrits sont dans le domaine public : le dernier de ces mathématiciens est mort en
+1869. Restent les conditions des numérisations. Celles de Gallica, lues le 23 septembre
+2026 : la réutilisation non commerciale est libre, à condition de citer la source ; la
+réutilisation commerciale est payante ; les métadonnées sont sous licence Etalab. Le site
+est non commercial, sans publicité, et cite la source sous le volet et dans l'en-tête de
+chaque fichier. Il soutient que ce qu'il extrait de la base de Gallica n'est pas
+substantiel, et qu'il affiche Gallica parce que Gallica y invite.
+
+Tout ce qui est au projet est sous CC0, transcriptions comprises. Pour une transcription
+fidèle d'un texte du domaine public, CC0 dit seulement que le projet ne revendique rien :
+une telle transcription vise l'exactitude et ne crée sans doute aucun droit nouveau. Pour
+les lectures modernisées et le cahier d'exercices, qui sont des textes originaux, CC0
+renonce à un droit qui existe.
+
+Une règle encore : aucune transcription d'autrui n'est recopiée, ni prise comme point de
+départ d'une lecture. Les procédures refusent de travailler sur la reproduction d'une page
+dans une publication, et le site fabrique en retour du wikicode pour Wikisource.
+
+\section{Ce qui a été produit}
+
+D'après les fichiers, au début de novembre 2026 :
+\begin{itemize}
+  \item un peu plus de quatre-vingt-dix lots transcrits dans quinze volumes, chacun avec
+        sa lecture modernisée. Les quatre volumes de Sophie Germain sont lus, dont le
+        Français~9115 jusqu'à sa dernière vue ; des volumes de Mersenne, Viète, Descartes,
+        Fermat, Roberval, Maurolico, Pascal et Lagrange sont commencés ;
+  \item aucun lot n'est encore déclaré vérifié par une personne contre les vues ;
+  \item 55 trouvailles, chacune écrite contre des sources nommées : 33 pistes, 19 déjà dans
+        la littérature, 3 non encore cherchées ; la plupart portent sur les manuscrits
+        eux-mêmes (36), puis sur les mathématiques (11) et l'histoire (8) ;
+  \item environ 240 énoncés démontrés en Lean, tirés des volumes de Germain (arithmétique,
+        courbure, élasticité), et un cahier de 42 exercices, lui aussi vérifié en Lean ;
+  \item une frise des dix-neuf vies, une page des sources et des droits, une page de
+        méthode, une page pour contribuer.
+\end{itemize}
+
+\begin{noteblock}
+Le \fichier{README} du projet compte encore moins que les fichiers (seule Sophie Germain y
+est donnée comme transcrite). Les compteurs du site, eux, sont tirés des fichiers. C'est
+un défaut ordinaire et instructif : un chiffre écrit à la main dans un texte vieillit, un
+chiffre calculé ne vieillit pas.
+\end{noteblock}
+
+\begin{exemple}
+Pour un fonds du domaine public servi en IIIF, germain-project est le modèle à copier
+presque tel quel : l'inventaire selon une règle unique, le fac-similé lu en direct, aucune
+image dans le dépôt, un script de copie qui se nomme et ralentit, la vérification
+périodique des en-têtes, et CC0 sur ce qui est à soi. Ses difficultés ne sont plus
+juridiques ni techniques : elles tiennent à la cadence et à la relecture humaine.
+\end{exemple}

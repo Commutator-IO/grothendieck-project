@@ -846,6 +846,10 @@ copyFileSync(resolve(root, 'docs/buffalo-groupes/index.pdf'), resolve(served, 'b
 // And a book in French on the methods behind the edition, written for mathematicians and
 // naming no corpus (docs/livre-methodes/, #100).
 copyFileSync(resolve(root, 'docs/livre-methodes/livre.pdf'), resolve(served, 'maths-toolbox.pdf'));
+// Its companion, on the sources the method ran on and how to take it to another fonds
+// (docs/livre-archives/). Copied once it has been compiled and committed.
+const livreArchives = resolve(root, 'docs/livre-archives/livre.pdf');
+if (existsSync(livreArchives)) copyFileSync(livreArchives, resolve(served, 'archives-toolbox.pdf'));
 
 const elements = [...new Set([...xml.matchAll(/<([a-zA-Z]+)[\s>/]/g)].map((m) => m[1]))].sort();
 process.stdout.write(
