@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { memo, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 
@@ -31,6 +31,48 @@ export interface Board {
 const tex = (s: string, display: boolean) => katex.renderToString(s, { displayMode: display, throwOnError: false });
 // Inline $…$ in prose; the rest is our own HTML (<b>, <i>), written with the board.
 const prose = (s: string) => s.split(/(\$[^$]+\$)/).map((p) => (p.startsWith('$') ? tex(p.slice(1, -1), false) : p)).join('');
+
+/**
+ * The ghost of earlier chalk: broad, faint sweeps where a brush went over the slate. Each panel has
+ * its own set, laid out from its number, so the marks change with the board.
+ */
+const Smears = memo(function Smears({ seed }: { seed: number }) {
+  const strokes = useMemo(() => {
+    let a = Math.imul(seed + 1, 2654435761) >>> 0;
+    const rnd = () => {
+      a = (a + 0x6d2b79f5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+    const n = 6 + Math.floor(rnd() * 3);
+    return Array.from({ length: n }, () => {
+      const y = 12 + rnd() * 276;
+      const x0 = -40 + rnd() * 260;
+      const len = 180 + rnd() * 340;
+      const tilt = (rnd() - 0.5) * 80;
+      const bend = (rnd() - 0.5) * 50;
+      return { d: `M${x0} ${y} Q${x0 + len / 2} ${y + bend} ${x0 + len} ${y + tilt}`, w: 16 + rnd() * 34, o: 0.05 + rnd() * 0.08 };
+    });
+  }, [seed]);
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 600 300"
+      preserveAspectRatio="none"
+      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
+    >
+      {/* Soft edges without a blur filter, which is costly on ten panels: three strokes, wide and faint to narrow. */}
+      <g fill="none" stroke="#f4f4ee" strokeLinecap="round">
+        {strokes.flatMap((k, i) => [
+          <path key={`${i}a`} d={k.d} strokeWidth={k.w * 1.5} strokeOpacity={k.o * 0.35} />,
+          <path key={`${i}b`} d={k.d} strokeWidth={k.w} strokeOpacity={k.o * 0.5} />,
+          <path key={`${i}c`} d={k.d} strokeWidth={k.w * 0.55} strokeOpacity={k.o * 0.6} />,
+        ])}
+      </g>
+    </svg>
+  );
+});
 
 /**
  * The board is a stack of sliding panels of one fixed height, as in the amphitheatres of the IHP:
@@ -73,18 +115,24 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
   // No horizontal scrolling: a line of chalk wider than the board (a long display formula) is
   // written smaller until it fits, as one would on a real board.
   useLayoutEffect(() => {
-    const fit = () =>
-      pane.current?.querySelectorAll<HTMLElement>('.chalk').forEach((b) => {
-        b.style.fontSize = '';
+    const fit = () => {
+      const lines = [...(pane.current?.querySelectorAll<HTMLElement>('.chalk') ?? [])];
+      // One pass to reset, one to measure, one to write: interleaving them forces a layout per line.
+      lines.forEach((b) => (b.style.fontSize = ''));
+      const sizes = lines.map((b) => {
         const w = b.clientWidth;
         const need = Math.max(b.scrollWidth, ...[...b.querySelectorAll<HTMLElement>('.katex-display > .katex')].map((k) => k.scrollWidth));
-        if (need > w + 1) b.style.fontSize = `${(parseFloat(getComputedStyle(b).fontSize) * w) / need}px`;
+        return need > w + 1 ? (parseFloat(getComputedStyle(b).fontSize) * w) / need : 0;
       });
+      lines.forEach((b, i) => {
+        if (sizes[i]) b.style.fontSize = `${sizes[i]}px`;
+      });
+    };
     fit();
     const ro = new ResizeObserver(fit);
     if (pane.current) ro.observe(pane.current);
     return () => ro.disconnect();
-  }, [shown, html]);
+  }, [shown, html, breaks]);
 
   // Fill the panels in order; a heading is never left alone at the foot of a panel.
   const peek = Math.round(ph * PEEK);
@@ -95,7 +143,7 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
     const size = (k: number) => {
       const el = items.current[k];
       if (!el) return { h: 0, m: 0 };
-      return { h: el.offsetHeight, m: k === 0 ? 0 : parseFloat(getComputedStyle(el).marginTop) || 0 };
+      return { h: el.offsetHeight, m: k === 0 ? 0 : board.items[k].kind === 'h' ? 16 : 6 };
     };
     const out: number[] = [];
     let used = 0;
@@ -137,13 +185,16 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
         className="board-scroll flex-1 snap-y snap-mandatory overflow-y-auto overflow-x-hidden"
       >
         {/* The lecture opens on a clean board: an empty panel above, the one he writes on below, both in view. */}
-        <section aria-hidden="true" style={{ minHeight: panelH || undefined }} className="slate relative snap-start snap-always" />
+        <section aria-hidden="true" style={{ minHeight: panelH || undefined }} className="slate relative snap-start snap-always">
+          <Smears seed={-1} />
+        </section>
         {panels.map(([a, b], n) => (
           <section
             key={n}
             style={{ minHeight: panelH || undefined }}
             className="slate rail relative snap-start snap-always px-5 py-4"
           >
+            <Smears seed={n} />
             {board.items.slice(a, b).map((i, j) => {
               const k = a + j;
               return (

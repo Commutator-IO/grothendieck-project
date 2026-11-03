@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 import { Footer, Header } from './components/Frame.tsx';
@@ -151,24 +151,70 @@ const loadIndex = () => import('./content/buffalo-index.json').then((m) => m.def
 const tex = (s: string) => katex.renderToString(s, { throwOnError: false });
 const statement = (s: string) => s.split(/(\$[^$]*\$)/).map((p) => (p.startsWith('$') ? tex(p.slice(1, -1)) : p)).join('');
 
+/*
+ * A course index holds hundreds of entries and thousands of formulas; typesetting them all at once froze
+ * the page (about 65,000 elements, several long tasks). An entry with a formula shows its plain text
+ * until it comes within a screen or two of the viewport, and is typeset then, by one shared observer.
+ */
+const waiting = new Map<Element, () => void>();
+let near: IntersectionObserver | null = null;
+const whenNear = (el: Element, run: () => void) => {
+  near ??= new IntersectionObserver(
+    (es) =>
+      es.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const f = waiting.get(e.target);
+        waiting.delete(e.target);
+        near?.unobserve(e.target);
+        f?.();
+      }),
+    { rootMargin: '1500px 0px' },
+  );
+  waiting.set(el, run);
+  near.observe(el);
+};
+const plain = (s: string) => s.replace(/<[^>]+>/g, '');
+
+/** Text whose $…$ is typeset when it is about to be seen. */
+function Typeset({ text, prefix = '' }: { text: string; prefix?: string }) {
+  const hasMath = text.includes('$');
+  const [on, setOn] = useState(!hasMath);
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (on || !el) return;
+    whenNear(el, () => setOn(true));
+    return () => {
+      waiting.delete(el);
+      near?.unobserve(el);
+    };
+  }, [on]);
+  return on ? <span dangerouslySetInnerHTML={{ __html: prefix + statement(text) }} /> : <span ref={ref}>{prefix + plain(text)}</span>;
+}
+
 /** One course's index, typeset like the transcripts' reading view; a timestamp plays the tape there. */
 function CourseIndexView({ course, index, playing, onPlay }: { course: string; index: CourseIndex; playing: { id: string; t: number } | null; onPlay: (id: string, t: number) => void }) {
-  const html = useMemo(() => index.items.map((i) => statement(i.text)), [index]);
   // Select words in an entry to comment on them in a prefilled issue, as on the reading view.
   const root = useComments<HTMLDivElement>('buffalo', `Buffalo — ${course}`);
   return (
     <div ref={root} className="buffalo-index text-[14.5px] leading-relaxed text-ink-800">
       {index.items.map((i, n) =>
         i.k === 'topic' ? (
-          <h3 key={n} className="titre mt-8 border-b border-ink-200 pb-1 text-[18px] text-ink-900 first:mt-0" dangerouslySetInnerHTML={{ __html: html[n] }} />
+          <h3 key={n} className="titre mt-8 border-b border-ink-200 pb-1 text-[18px] text-ink-900 first:mt-0">
+            <Typeset text={i.text} />
+          </h3>
         ) : i.k === 'session' ? (
-          <p key={n} className="mt-5 text-[12px] font-semibold uppercase tracking-[0.06em] text-brand-600" dangerouslySetInnerHTML={{ __html: html[n] }} />
+          <p key={n} className="mt-5 text-[12px] font-semibold uppercase tracking-[0.06em] text-brand-600">
+            <Typeset text={i.text} />
+          </p>
         ) : i.k === 'side' ? (
-          <p key={n} className="mt-2 text-[12px] italic text-ink-500" dangerouslySetInnerHTML={{ __html: html[n] }} />
+          <p key={n} className="mt-2 text-[12px] italic text-ink-500">
+            <Typeset text={i.text} />
+          </p>
         ) : (
           <div
             key={n}
-            className="group mt-1.5 grid grid-cols-[4.6rem_minmax(0,1fr)_1.5rem] gap-2"
+            className="group mt-1.5 grid grid-cols-[4.6rem_minmax(0,1fr)_1.5rem] gap-2 [contain-intrinsic-size:auto_2.4rem] [content-visibility:auto]"
             {...commentData({ kind: 'lecture', label: `Buffalo, ${course}, ${i.ts}`, ref: i.ts, link: `https://www.youtube.com/watch?v=${i.v}&t=${i.t}s` })}
           >
             <button
@@ -187,7 +233,7 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
                   {i.name && <span dangerouslySetInnerHTML={{ __html: ` (${statement(i.name)})` }} />}.
                 </b>
               )}
-              <span dangerouslySetInnerHTML={{ __html: html[n] }} />
+              <Typeset text={i.text} />
             </p>
             <a
               href={buffaloIssueUrl(course, i)}
