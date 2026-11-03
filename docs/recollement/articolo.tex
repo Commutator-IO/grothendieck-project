@@ -21,7 +21,10 @@
 \pagestyle{suite}
 \definecolor{vieuxpapier}{RGB}{246,238,216}
 \definecolor{encre}{RGB}{42,32,24}
-\pagecolor{vieuxpapier}
+% Le fond jauni est un calque PDF : visible à l'écran, jamais imprimé.
+\usepackage{ocgx2}
+\usepackage{eso-pic}
+\AddToShipoutPictureBG{\begin{ocg}[printocg=never,viewocg=always]{Fond}{fond}{1}\put(0,0){\textcolor{vieuxpapier}{\rule{\paperwidth}{\paperheight}}}\end{ocg}}
 \color{encre}
 \usepackage[normalem]{ulem}
 \usepackage{tikz-cd}
