@@ -37,6 +37,8 @@ const prose = (s: string) => s.split(/(\$[^$]+\$)/).map((p) => (p.startsWith('$'
  * its own set, laid out from its number, so the marks change with the board.
  */
 const Smears = memo(function Smears({ seed }: { seed: number }) {
+  // A right-handed lecturer wipes in short repeated passes at shoulder height, the arm rising a little
+  // towards the right: two or three bands of two or three overlapping, nearly horizontal sweeps.
   const strokes = useMemo(() => {
     let a = Math.imul(seed + 1, 2654435761) >>> 0;
     const rnd = () => {
@@ -45,15 +47,26 @@ const Smears = memo(function Smears({ seed }: { seed: number }) {
       t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
       return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
     };
-    const n = 6 + Math.floor(rnd() * 3);
-    return Array.from({ length: n }, () => {
-      const y = 12 + rnd() * 276;
-      const x0 = -40 + rnd() * 260;
-      const len = 180 + rnd() * 340;
-      const tilt = (rnd() - 0.5) * 80;
-      const bend = (rnd() - 0.5) * 50;
-      return { d: `M${x0} ${y} Q${x0 + len / 2} ${y + bend} ${x0 + len} ${y + tilt}`, w: 16 + rnd() * 34, o: 0.05 + rnd() * 0.08 };
-    });
+    const out: { d: string; w: number; o: number }[] = [];
+    const bands = 2 + Math.floor(rnd() * 2);
+    for (let b = 0; b < bands; b++) {
+      const gy = 50 + rnd() * 190;
+      const gx = 15 + rnd() * 230;
+      const passes = 2 + Math.floor(rnd() * 2);
+      for (let k = 0; k < passes; k++) {
+        const x0 = gx + (rnd() - 0.3) * 50;
+        const y0 = gy + k * (11 + rnd() * 9);
+        const len = 230 + rnd() * 190;
+        const rise = 6 + rnd() * 20;
+        const sag = 4 + rnd() * 12;
+        out.push({
+          d: `M${x0} ${y0} Q${x0 + len * 0.55} ${y0 - rise * 0.4 + sag} ${x0 + len} ${y0 - rise}`,
+          w: 13 + rnd() * 14,
+          o: 0.03 + rnd() * 0.035,
+        });
+      }
+    }
+    return out;
   }, [seed]);
   return (
     <svg
