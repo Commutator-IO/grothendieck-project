@@ -18,6 +18,8 @@
 \usepackage{xcolor}
 \usepackage[hidelinks,pageanchor=false,pdftitle={Buffalo Lectures on Topos Theory (1973): Index of Results},pdfauthor={Michel Hua}]{hyperref}
 \usepackage{amsmath,amssymb}
+\usepackage{etoolbox}
+\usepackage[most]{tcolorbox}
 \usepackage{tocloft}\setlength{\cftsecnumwidth}{2.4em}
 \definecolor{frise}{HTML}{2F4DA8}
 
@@ -46,7 +48,12 @@
 \makeatother
 % The moment on the tape sits in the left margin, small and pale (a link to YouTube), the statement runs full width.
 \definecolor{frisepale}{HTML}{7F90C4}
-\NewDocumentCommand{\entree}{O{}O{}mmm}{\par\raggedright\noindent\llap{\href{https://www.youtube.com/watch?v=\videoid&t=#3s}{\textcolor{frisepale}{\texttt{\footnotesize #4}}}\hspace{3.5mm}}{\kindlabel{#1}{#2}#5\par}\smallskip}
+\definecolor{kread}{HTML}{6B5B3E}
+\def\kind@read#1{\textcolor{kread}{\textbf{Reading.}}\enspace}
+\tcbset{thmbox/.style={enhanced,breakable,colback=kthm!4,colframe=kthm!55,boxrule=0.4pt,arc=1pt,left=2.2mm,right=2.2mm,top=0.8mm,bottom=0.8mm,before skip=3pt,after skip=6pt}}
+\NewDocumentCommand{\entree}{O{}O{}mmm}{\ifstrequal{#1}{thm}{%
+\begin{tcolorbox}[thmbox,overlay unbroken and first={\node[anchor=north east,inner sep=0pt,xshift=-3.5mm,yshift=-1.4mm] at (frame.north west) {\href{https://www.youtube.com/watch?v=\videoid&t=#3s}{\textcolor{frisepale}{\texttt{\footnotesize #4}}}};}]\raggedright\kindlabel{#1}{#2}#5\end{tcolorbox}%
+}{\par\raggedright\noindent\llap{\href{https://www.youtube.com/watch?v=\videoid&t=#3s}{\textcolor{frisepale}{\texttt{\footnotesize #4}}}\hspace{3.5mm}}{\kindlabel{#1}{#2}#5\par}\smallskip}}
 \raggedbottom\emergencystretch=4em
 
 \begin{document}
@@ -80,7 +87,7 @@
 
 \emph{What is missing.} The second video (30 May to late June 1973) is indexed from a full machine transcription of the sound, which is noisier than the caption-based transcriptions used for the other videos; the dating of its meetings follows the evidence of the text and is discussed at the head of each session. Four sides whose sound is too degraded are not indexed either (4 April, tape 1, side B; 11 May, tape 2, side A; and two sides without label or date at the end of the fourth video).
 
-\emph{Voices, hours and dates.} The tapes do not name the voices in the room. McLarty, who was not there, names John Duskin, who made the tapes, as the one who asks about the consistency of the universe axiom (video 4, 5:16:37), and William Lawvere as having helped to save them. He counts 33 hours of topos tapes, about 16 of introduction and 17 with a smaller group; this index covers 35 hours of video, damaged sides included. He dates the last session, with the news of Deligne's proof, to 13 July 1973, where the descriptions of the videos, which this index follows, give 12 July for the whole of video 4.
+\emph{Voices, hours and dates.} The tapes do not name the voices in the room. McLarty~\cite{mclarty}, who was not there, names John Duskin, who made the tapes, as the one who asks about the consistency of the universe axiom (video 4, 5:16:37), and William Lawvere as having helped to save them. He counts 33 hours of topos tapes, about 16 of introduction and 17 with a smaller group; this index covers 35 hours of video, damaged sides included. He dates the last session, with the news of Deligne's proof, to 13 July 1973, where the descriptions of the videos, which this index follows, give 12 July for the whole of video 4.
 
 \emph{Loose notions.} Several notions of the course are not defined precisely in the lectures: \q{hypertopos}, \q{pseudo-topos}, and \q{all the exactness properties of sets}, which McLarty reads as the single property that arbitrary products of epimorphisms are epimorphisms. The entries say so where it matters.
 
@@ -109,6 +116,8 @@
 \entree[ex]{2164}{0:36:04}{$U\mapsto\{\text{subsets of }U\}$, with restriction by intersection, is a sheaf; the closed subsets of $U$ form a subsheaf.}
 \entree[ex]{2291}{0:38:11}{On an analytic space, the analytic subsets of the open sets form a sheaf.}
 \section{Sheaves of sections and the case of a point}
+\entree[read]{2358}{0:39:18}{For sheaves in general he recommends Godement’s book as the standard reference. \cite{godement}}
+\entree[read]{2424}{0:40:24}{A second book on sheaves, mainly cohomological, is Bredon’s. \cite{bredon}}
 \entree[prop]{2487}{0:41:27}{The sheaf of sections $\widetilde{E}$ of a space $E$ over $X$ defines a functor $\mathrm{Fib}(X)\to\mathrm{Sh}(X)$, $f\mapsto(s\mapsto f\circ s)$.}
 \entree[cex]{2680}{0:44:40}{This functor is not fully faithful: for $X$ a point, it is identified with the forgetful functor from topological spaces to $\mathbf{Set}$.}
 \entree[prop]{2745}{0:45:45}{On a point, the functor $\Gamma\colon F\mapsto F(\mathrm{pt})$ is an equivalence of categories $\mathrm{Sh}(\mathrm{pt})\simeq\mathbf{Set}$.}
@@ -135,6 +144,7 @@
 \section{The associated sheaf}
 \entree[def]{7053}{1:57:33}{The sheaf associated to a presheaf $P$ is a sheaf $\widetilde{P}$ equipped with $P\to\widetilde{P}$, universal among morphisms from $P$ to sheaves.}
 \entree[thm]{7116}{1:58:36}{Every presheaf admits an associated sheaf, unique up to unique isomorphism.}
+\entree[read]{7180}{1:59:40}{He returns to Godement’s book for sheaves. \cite{godement}}
 \entree[prop]{7310}{2:01:50}{$\mathrm{Sh}(X)$ admits all colimits, the sheaf associated to the colimit computed in presheaves.}
 \entree[prop]{7310}{2:01:50}{A presheaf and its associated sheaf have the same stalks.}
 \entree[prop]{7450}{2:04:10}{In terms of étalé spaces, the coproduct of a family of sheaves is the disjoint topological sum, which is étalé over $X$.}
@@ -174,6 +184,7 @@
 \entree[prop]{10423}{2:53:43}{The sections $f$ of $K$ whose left and right multiplications are monomorphisms of $K|_U$ form a subsheaf $K'$ (a local property).}
 \section{Generating families and images}
 \entree[def]{10756}{2:59:16}{$(Z_i)$ is a generating family of $C$ if every monomorphism $E\to F$ such that $\mathrm{Hom}(Z_i,E)\to\mathrm{Hom}(Z_i,F)$ is bijective for all $i$ is an isomorphism.}
+\entree[read]{10756}{2:59:16}{Universes, generators and ind-objects are treated in exposé I of SGA 4. \cite{sga4}}
 \entree[prop]{10884}{3:01:24}{In $\mathrm{Sh}(X)$, $(Z_i)$ is generating if and only if the family of functors $\mathrm{Hom}(Z_i,-)$ is conservative.}
 \entree[prop]{11028}{3:03:48}{In $\mathrm{Sh}(X)$, every morphism factors, essentially uniquely, as an epimorphism followed by a monomorphism (image).}
 \entree[prop]{11157}{3:05:57}{In $\mathrm{Sh}(X)$, a morphism that is both a monomorphism and an epimorphism is an isomorphism.}
@@ -292,11 +303,13 @@
 \face{Tape 2, side A}
 \entree[prop]{26075}{7:14:35}{$X$ is nonempty iff $\varnothing\to e$ is not an isomorphism in $\mathrm{Sh}(X)$; $X$ is empty iff $\mathrm{Sh}(X)$ is equivalent to the point category.}
 \entree[def]{26202}{7:16:42}{The abelian group objects of $\mathrm{Sh}(X)$ form a category with enough injectives; $H^i(X,F)=R^i\Gamma(F)$, with $\Gamma(F)=\mathrm{Hom}(e,F)$.}
+\entree[read]{26202}{7:16:42}{Cohomology of topoi is in exposé V of SGA 4. \cite{sga4}}
 \entree[def]{26328}{7:18:48}{For an abelian group $M$, we set $H^i(X,M)=H^i(X,M_X)$; these groups depend only on the category $\mathrm{Sh}(X)$.}
 \entree[prop]{26392}{7:19:52}{$X$ is connected iff $\mathbb{Z}\to H^0(X,\mathbb{Z})$ is surjective; connected and nonempty iff it is bijective.}
 \entree[prop]{26457}{7:20:57}{The sections of $I_X$ over $U$ are the locally constant maps $U\to I$.}
 \entree[rem]{26587}{7:23:07}{The lattice of open sets of $X$ is that of the subobjects of the terminal object of $\mathrm{Sh}(X)$; the Čech constructions (Artin--Mazur) follow from it.}
 \section{Covering spaces and torsors}
+\entree[read]{26587}{7:23:07}{Homotopy invariants of a topos are the subject of Artin and Mazur’s book. \cite{artinmazur}}
 \entree[thm]{26650}{7:24:10}{If $X$ is connected, locally connected and locally simply connected, the covering spaces of $X$ correspond to $\pi_1(X,x)$-sets.}
 \entree[prop]{26716}{7:25:16}{The covering spaces of $X$ are the locally constant objects $X'$ of $\mathrm{Sh}(X)$: $X'\times U_i\simeq\coprod_{S_i}U_i$ for a covering $e=\sup_i U_i$.}
 \entree[prop]{26781}{7:26:21}{For $X$ connected and locally connected but not locally simply connected, the covering spaces are classified by a pro-group.}
@@ -309,6 +322,7 @@
 \entree[ex][which are stacks]{27167}{7:32:47}{$U\mapsto\mathrm{Sh}(U)$, fibre spaces over $U$, sheaves of groups on $U$, $G|_U$-torsors.}
 \entree[def]{27291}{7:34:51}{A fibred category is a stack if the presheaves $\mathcal{H}om(F,G)$ are sheaves and if every gluing datum (cocycle on the $U_{ijk}$) is effective.}
 \entree[def]{27549}{7:39:09}{For $G$ noncommutative, $H^2(X,G)$ is defined as a set of classes of stacks (gerbes) attached to $G$ (Giraud); it depends only on $\mathrm{Sh}(X)$.}
+\entree[read]{27549}{7:39:09}{Non-abelian cohomology and stacks are in Giraud’s book. \cite{giraud}}
 \entree[def]{27873}{7:44:33}{A stack over $\mathcal{E}$ is a fibred category over $\mathcal{E}$ with descent along epimorphic families, the intersections becoming fibre products.}
 \entree[prop]{27938}{7:45:38}{Restriction and extension give an equivalence between stacks over $\mathcal{O}(X)$ and stacks over $\mathrm{Sh}(X)$.}
 \section{Gluing and quotient topoi}
@@ -334,6 +348,7 @@
 \entree[prop]{29559}{8:12:39}{A fibre functor on $\mathrm{Sh}(X)$ has no nontrivial automorphism.}
 \entree[thm]{29622}{8:13:42}{$\tilde X$ is sober, and $X\mapsto\tilde X$ is left adjoint to the inclusion of sober spaces: $\mathrm{Hom}(X,Y)\simeq\mathrm{Hom}(\tilde X,Y)$ for $Y$ sober.}
 \entree[def]{29816}{8:16:56}{On the set $\Phi(\mathcal{E})$ of classes of fibre functors, the sets $\tilde U=\{\varepsilon : \varepsilon(U)\neq\varnothing\}$, $U\subset e$, form a topology.}
+\entree[read]{29816}{8:16:56}{The exercises of SGA 4 are recommended. \cite{sga4}}
 \entree[thm]{30013}{8:20:13}{$X\to\Phi(\mathrm{Sh}(X))$ is a homeomorphism iff $X$ is sober: a sober space can be reconstructed from $\mathrm{Sh}(X)$.}
 \entree[prop]{30076}{8:21:16}{If $X$ is $T_1$ (for example the closed points of a Jacobson scheme), $X$ is identified with the subspace of closed points of $\tilde X$.}
 \section{Points and morphisms of sober spaces}
@@ -362,6 +377,8 @@
 \entree[def]{32668}{9:04:28}{The constant object $I_{\mathcal{E}}=\coprod_I e$: $I\mapsto I_{\mathcal{E}}$ commutes with $\varinjlim$ and finite $\varprojlim$; we set $H^i(\mathcal{E},M)=H^i(\mathcal{E},M_{\mathcal{E}})$.}
 \entree[rem]{32805}{9:06:45}{A topos has homotopy invariants (pro-groups, the Čech method of Artin--Mazur), which recover the $\pi_i$ of a locally contractible space.}
 \section{Basic examples of topoi}
+\entree[read]{32805}{9:06:45}{Artin and Mazur again, for homotopy invariants. \cite{artinmazur}}
+\entree[read]{32934}{9:08:54}{Again the exercises of SGA 4. \cite{sga4}}
 \entree[prop]{32997}{9:09:57}{$\mathrm{Sh}(\varnothing)$ is equivalent to the point category: it is the \q{empty topos}.}
 \entree[prop]{33121}{9:12:01}{A topos $\mathcal{E}$ is empty iff the arrow $\varnothing_{\mathcal{E}}\to e_{\mathcal{E}}$ is an isomorphism.}
 \entree[prop]{33248}{9:14:08}{$\mathrm{Sh}(\mathrm{pt})\simeq\mathbf{Set}$ via $F\mapsto F(\mathrm{pt})$: it is the point topos, or \q{final topos}.}
@@ -372,6 +389,7 @@
 \entree[prop]{33954}{9:25:54}{The cohomology of $\mathrm{Sh}(X,G)$ is the equivariant cohomology $H^i(X;G,M)$ (Tôhoku).}
 \section{Points of a topos}
 \face{Tape 1, side B}
+\entree[read]{34022}{9:27:02}{Cohomology with operators $H^i(X;G,M)$ is in his 1957 paper on homological algebra. \cite{tohoku}}
 \entree[cex]{34130}{9:28:50}{If $G\neq1$, the topos $B_G$ is equivalent to no $\mathrm{Sh}(X)$.}
 \entree[ex]{34201}{9:30:01}{The forgetful functor $B_G\to\mathbf{Set}$ is a fibre functor, with automorphism group $G$.}
 \entree[prop]{34328}{9:32:08}{If $X$ is sober, every fibre functor on $\mathrm{Sh}(X)$ is isomorphic to $F\mapsto F_x$ for a unique $x\in X$.}
@@ -386,6 +404,7 @@
 \entree[prop]{35724}{9:55:24}{In a topos, $\mathcal{H}om(X,Y)$ exists: it represents $Z\mapsto\mathrm{Hom}(X\times Z,Y)$.}
 \entree[prop]{35789}{9:56:29}{In a topos, the functor $Z\mapsto\mathrm{Sub}(Z)$ is representable by an object $P_{\mathcal{E}}$.}
 \entree[prop]{35860}{9:57:40}{In a topos, $P:\mathcal{E}^{\circ}\to\mathbf{Set}$ is representable iff it sends colimits to limits.}
+\entree[read]{35991}{9:59:51}{Accessible functors are in exposé I, \S\,9 of SGA 4, which he says tells the matter somewhat inadequately. \cite{sga4}}
 \entree[prop]{36055}{10:00:55}{Every topos is an elementary topos (Lawvere--Tierney: finite $\varprojlim$, $\mathcal{H}om$, $P_{\mathcal{E}}$); an elementary topos with small coproducts and a small generator is a topos.}
 \section{Presheaf topoi and the classifying topos of a group}
 \entree[disc]{36182}{10:03:02}{Lawvere's elementary topoi are compared with Giraud's: more general, with finitary axioms, though internal Hom is a very strong operation; adding generators and limits recovers sheaf topoi.}
@@ -762,6 +781,7 @@
 \entree[ex]{9126}{2:32:06}{The two conditions together define essentially discrete categories, 2-equivalent to $\mathbf{Set}$.}
 \entree[ex]{9190}{2:33:10}{For $\Delta=\mathbf{Cat}$: the envelope of $I$ is $I$; problem two is solved by the category of fractions $I[\Sigma^{-1}]$ (Gabriel--Zisman).}
 \entree[ex]{9256}{2:34:16}{For groupoids: the envelope of $I$ is its fundamental groupoid $I[I^{-1}]$, with the same connected components; problem two is trivial.}
+\entree[read]{9256}{2:34:16}{Categories of fractions are in Gabriel and Zisman’s book. \cite{gabrielzisman}}
 \entree[ex]{9381}{2:36:21}{For preorders: the envelope of $I$ is $\mathrm{Ob}\,I$ with the preorder $x\ge y$ if there is an arrow $x\to y$.}
 \entree[ex]{9444}{2:37:24}{Making relations $x_i\le y_i$ of a preorder invertible: take the preorder generated by the given preorder and the $y_i\le x_i$.}
 \entree[ex]{9510}{2:38:30}{For discrete categories: the envelope of $I$ is $\pi_0(I)$, the set of connected components; problem two is trivial.}
@@ -799,6 +819,7 @@
 \entree[disc]{13314}{3:41:54}{The lecturer retracts a theorem stated earlier: a small strictly cogenerating family is necessary for an algebraic theory but not sufficient, and he previews a counterexample involving the opposite of the category of sets.}
 \entree[prop]{13380}{3:43:00}{If $R\in\Delta$ is algebraic, $R$ admits a small strictly cogenerating family; the converse is false.}
 \entree[ex]{13448}{3:44:08}{$\mathbf{Set}^{\mathrm{op}}$ admits a strict generator (the two-element set) but is the category $T(\mathbf{Set})$ of no algebraic theory $T$.}
+\entree[read]{13513}{3:45:13}{Accessible functors: he refers again to SGA 4. \cite{sga4}}
 \entree[prop]{13577}{3:46:17}{$\mathbf{Set}^{\mathrm{op}}$ is equivalent to the category of complete atomic Boolean algebras, via $X\mapsto\mathcal{P}(X)$.}
 \entree[disc]{13577}{3:46:17}{A listener objects that the opposite of sets is the category of complete atomic Boolean algebras; the lecturer replies that its axioms need a large family, so it is not algebraic here.}
 \entree[rem]{13967}{3:52:47}{Completeness of a Boolean algebra concerns families indexed by an arbitrary set $I$: a non-small family of operations and axioms, excluded from the algebraic theories of the course.}
@@ -814,6 +835,7 @@
 \entree[def]{15673}{4:21:13}{An object $X$ of $E$ is $\pi$-accessible (resp. accessible) if the functor $\mathrm{Hom}(X,-)$ from $E$ to $\mathbf{Set}$ is $\pi$-accessible (resp. accessible).}
 \entree[def]{15809}{4:23:29}{$E$ is $\pi$-accessible if it has a small full strictly generating subcategory $C$ consisting of $\pi$-accessible objects (every object is a colimit of a diagram in $C$).}
 \entree[rem]{15877}{4:24:37}{This definition is stronger than that of SGA 4, I, 9, which only required a small generating subcategory.}
+\entree[read]{15877}{4:24:37}{Accessible functors: SGA 4 once more. \cite{sga4}}
 \entree[prop]{16008}{4:26:48}{If $E$, $F$ satisfy $L_\pi$, the full subcategory $\mathrm{Hom}_\pi(E,F)$ of $\pi$-accessible functors is stable in $\mathrm{Hom}(E,F)$ under colimits computed argumentwise.}
 \entree[prop]{16076}{4:27:56}{It is also stable under limits, computed argumentwise, indexed by a small category $J$ with at most $\pi$ arrows.}
 \entree[prop]{16213}{4:30:13}{In $\mathbf{Set}$, colimits along an $I$ dominating $\pi$ commute with limits along a category with at most $\pi$ arrows.}
@@ -835,6 +857,7 @@
 \section{Ind-categories}
 \entree[def]{17429}{4:50:29}{For $C$ small, $\mathrm{Ind}(C)$ is the category of filtered inductive systems in $C$, identified via $\varinjlim$ with a full subcategory of $\widehat{C}$.}
 \entree[prop]{17557}{4:52:37}{$\mathrm{Hom}_{\mathrm{Ind}(C)}((X_i),(Y_j))=\varprojlim_i\varinjlim_j\mathrm{Hom}(X_i,Y_j)$ (SGA 4, I, 8).}
+\entree[read]{17620}{4:53:40}{Accessible functors: SGA 4 once more. \cite{sga4}}
 \entree[prop]{17684}{4:54:44}{$C\to\mathrm{Ind}(C)$ is universal: for $E$ with filtered colimits, restriction to $C$ of the functors $\mathrm{Ind}(C)\to E$ commuting with these colimits is an equivalence with $\mathrm{Hom}(C,E)$.}
 \entree[prop]{17880}{4:58:00}{If $C$ has finite colimits, $\mathrm{Ind}(C)$ has small colimits and, for $E$ having them, $F\mapsto F|_C$ identifies the functors commuting with these colimits with the right exact functors $C\to E$.}
 \entree[def]{18008}{5:00:08}{$\mathrm{Ind}_\pi(C)$ is the full subcategory of $\mathrm{Ind}(C)$ of the systems indexed by an $I$ dominating $\pi$; for $C$ small, it is $\pi$-accessible.}
@@ -891,6 +914,7 @@
 \entree[prop]{24233}{6:43:53}{Then $S\to\mathbf{Set}^I$, $X\mapsto(\mathrm{Hom}(i,X))_{i\in I}$, has a left adjoint and is monadic (\q{tripleable}).}
 \section{Birkhoff's theorem}
 \face{Tape 2, side A}
+\entree[read]{24364}{6:46:04}{On algebraic theories he points to Lawvere, and to a paper of his own for tripleability. \cite{lawvere}}
 \entree[thm]{24608}{6:50:08}{Birkhoff’s theorem: a full subcategory of a category of structures defined by finite products, stable under products, subobjects and quotients, is defined by equations.}
 \entree[disc]{24608}{6:50:08}{On Birkhoff's theorem, a subcategory closed under products, subobjects and quotients is defined by equations; torsion-free abelian groups inside abelian groups show that closure conditions alone do not capture all subcategories.}
 \entree[prop]{24671}{6:51:11}{Such a subcategory is reflective: the adjoint associates to $X$ its largest quotient belonging to the subcategory.}
@@ -1071,19 +1095,19 @@
 \entree[disc]{22186}{6:09:46}{Quotient topoi are suggested for foliations, where the naive quotient space may be very bad; the lecturer says a good quotient topos always exists, and points to exercises in SGA 4.}
 
 \section*{References}\addcontentsline{toc}{section}{References}
-\noindent Colin McLarty, \emph{Grothendieck's 1973 topos lectures}, talk, CultureMath (DMA, École normale supérieure, Paris), video published 7 October 2018, \url{https://www.youtube.com/watch?v=5AR55ZsHmKI}.
-
-\subsection*{Readings recommended in the lectures}
-\noindent What Grothendieck tells the audience to read, with the moment he says it (video/timestamp). A ``?'' marks a title the captions do not make certain.
-\begin{itemize}\setlength\itemsep{1pt}
-\item R.~Godement, \emph{Topologie algébrique et théorie des faisceaux}, Hermann, 1958: ``the standard reference'' for sheaves (1/4, 0:39:18; again 1:59:40).
-\item G.~E.~Bredon, \emph{Sheaf Theory}, McGraw-Hill, 1967: mainly cohomological (1/4, 0:40:24).
-\item M.~Artin, A.~Grothendieck, J.-L.~Verdier, \emph{SGA~4, Théorie des topos et cohomologie étale des schémas}, LNM 269, 270, 305, Springer, 1972--1973: exp.~I on universes, generators and ind-objects, \S\,9 on accessible functors, which he says is told ``somewhat inadequately'' there (1/4, 2:59:16, 9:59:51; 3/4, 3:45:13, 4:24:37, 4:53:40); exp.~V for cohomology (1/4, 7:16:42); the exercises (1/4, 8:16:56, 9:08:54).
-\item M.~Artin, B.~Mazur, \emph{Etale Homotopy}, LNM 100, Springer, 1969: homotopy invariants of a topos (1/4, 7:23:07, 9:06:45).
-\item J.~Giraud, \emph{Cohomologie non abélienne}, Springer, 1971: non-abelian cohomology and stacks (1/4, 7:39:09).
-\item A.~Grothendieck, ``Sur quelques points d'algèbre homologique'', \emph{Tôhoku Math.~J.} 9 (1957): cohomology with operators $H^i(X;G,M)$ (1/4, 9:27:02).
-\item P.~Gabriel, M.~Zisman, \emph{Calculus of Fractions and Homotopy Theory}, Springer, 1967: categories of fractions (3/4, 2:34:16).
-\item F.~W.~Lawvere, on algebraic theories (? title not heard; presumably \emph{Functorial Semantics of Algebraic Theories}, Columbia, 1963), and ``a paper of mine'' for tripleability (3/4, 6:46:04).
-\end{itemize}
+\noindent Numbers in square brackets refer to this list. It gathers what the lecturer tells the audience to read, with the moment he says it (video/timestamp), and the other sources used. A ``?'' marks a title the captions do not make certain.
+\begingroup\renewcommand{\section}[2]{}\setlength{\itemsep}{1pt}\small
+\begin{thebibliography}{99}
+\bibitem{godement} R.~Godement, \emph{Topologie algébrique et théorie des faisceaux}, Hermann, 1958: ``the standard reference'' for sheaves (1/4, 0:39:18; again 1:59:40).
+\bibitem{bredon} G.~E.~Bredon, \emph{Sheaf Theory}, McGraw-Hill, 1967: mainly cohomological (1/4, 0:40:24).
+\bibitem{sga4} M.~Artin, A.~Grothendieck, J.-L.~Verdier, \emph{SGA~4, Théorie des topos et cohomologie étale des schémas}, LNM 269, 270, 305, Springer, 1972--1973: exp.~I on universes, generators and ind-objects, \S\,9 on accessible functors, which he says is told ``somewhat inadequately'' there (1/4, 2:59:16, 9:59:51; 3/4, 3:45:13, 4:24:37, 4:53:40); exp.~V for cohomology (1/4, 7:16:42); the exercises (1/4, 8:16:56, 9:08:54).
+\bibitem{artinmazur} M.~Artin, B.~Mazur, \emph{Etale Homotopy}, LNM 100, Springer, 1969: homotopy invariants of a topos (1/4, 7:23:07, 9:06:45).
+\bibitem{giraud} J.~Giraud, \emph{Cohomologie non abélienne}, Springer, 1971: non-abelian cohomology and stacks (1/4, 7:39:09).
+\bibitem{tohoku} A.~Grothendieck, ``Sur quelques points d'algèbre homologique'', \emph{Tôhoku Math.~J.} 9 (1957): cohomology with operators $H^i(X;G,M)$ (1/4, 9:27:02).
+\bibitem{gabrielzisman} P.~Gabriel, M.~Zisman, \emph{Calculus of Fractions and Homotopy Theory}, Springer, 1967: categories of fractions (3/4, 2:34:16).
+\bibitem{lawvere} F.~W.~Lawvere, on algebraic theories (? title not heard; presumably \emph{Functorial Semantics of Algebraic Theories}, Columbia, 1963), and ``a paper of mine'' for tripleability (3/4, 6:46:04).
+\bibitem{mclarty} Colin McLarty, \emph{Grothendieck's 1973 topos lectures}, talk, CultureMath (DMA, École normale supérieure, Paris), video published 7 October 2018, \url{https://www.youtube.com/watch?v=5AR55ZsHmKI}.
+\end{thebibliography}
+\endgroup
 
 \end{document}

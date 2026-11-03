@@ -134,7 +134,7 @@ type IndexItem =
   | { k: 'session'; text: string }
   | { k: 'side'; text: string }
   | { k: 'entry'; v: string; t: number; ts: string; text: string; kind?: Kind; name?: string };
-type Kind = 'def' | 'thm' | 'prop' | 'ex' | 'cex' | 'rem' | 'q' | 'disc';
+type Kind = 'def' | 'thm' | 'prop' | 'ex' | 'cex' | 'rem' | 'q' | 'disc' | 'read';
 // The kinds of entry, labelled as in a course; the colours are those of the PDF.
 const KIND: Record<Kind, { label: string; color: string; italic?: boolean }> = {
   def: { label: 'Definition', color: '#2E6B3F' },
@@ -145,8 +145,9 @@ const KIND: Record<Kind, { label: string; color: string; italic?: boolean }> = {
   rem: { label: 'Remark', color: '#5E5E5E' },
   q: { label: 'Question', color: '#6B3FA0' },
   disc: { label: 'Discussion', color: '#0F766E' },
+  read: { label: 'Reading', color: '#6B5B3E' },
 };
-type CourseIndex = { pdf: string; entries: number; items: IndexItem[] };
+type CourseIndex = { pdf: string; entries: number; items: IndexItem[]; refs?: string[] };
 const loadIndex = () => import('./content/buffalo-index.json').then((m) => m.default as unknown as Record<string, CourseIndex>);
 
 const tex = (s: string) => katex.renderToString(s, { throwOnError: false });
@@ -248,6 +249,19 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
             </a>
           </div>
         ),
+      )}
+      {index.refs && index.refs.length > 0 && (
+        <>
+          <h3 className="titre mt-8 border-b border-ink-200 pb-1 text-[18px] text-ink-900">References</h3>
+          <ol className="mt-3 space-y-1.5 text-[13px] text-ink-700">
+            {index.refs.map((r, n) => (
+              <li key={n} className="grid grid-cols-[2.2rem_minmax(0,1fr)] gap-1">
+                <span className="tabular text-ink-500">[{n + 1}]</span>
+                <span dangerouslySetInnerHTML={{ __html: r }} />
+              </li>
+            ))}
+          </ol>
+        </>
       )}
     </div>
   );

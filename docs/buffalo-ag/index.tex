@@ -10,6 +10,8 @@
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \usepackage{amsmath,amssymb}
+\usepackage{etoolbox}
+\usepackage[most]{tcolorbox}
 \definecolor{frise}{HTML}{2F4DA8}
 
 \newcommand{\q}[1]{``#1''}
@@ -44,7 +46,12 @@
 \makeatother
 % The moment on the tape sits in the left margin, small and pale (a link to YouTube), the statement runs full width.
 \definecolor{frisepale}{HTML}{7F90C4}
-\NewDocumentCommand{\entree}{O{}O{}mmm}{\par\raggedright\noindent\llap{\href{https://www.youtube.com/watch?v=\videoid&t=#3s}{\textcolor{frisepale}{\texttt{\footnotesize #4}}}\hspace{3.5mm}}{\kindlabel{#1}{#2}#5\par}\smallskip}
+\definecolor{kread}{HTML}{6B5B3E}
+\def\kind@read#1{\textcolor{kread}{\textbf{Reading.}}\enspace}
+\tcbset{thmbox/.style={enhanced,breakable,colback=kthm!4,colframe=kthm!55,boxrule=0.4pt,arc=1pt,left=2.2mm,right=2.2mm,top=0.8mm,bottom=0.8mm,before skip=3pt,after skip=6pt}}
+\NewDocumentCommand{\entree}{O{}O{}mmm}{\ifstrequal{#1}{thm}{%
+\begin{tcolorbox}[thmbox,overlay unbroken and first={\node[anchor=north east,inner sep=0pt,xshift=-3.5mm,yshift=-1.4mm] at (frame.north west) {\href{https://www.youtube.com/watch?v=\videoid&t=#3s}{\textcolor{frisepale}{\texttt{\footnotesize #4}}}};}]\raggedright\kindlabel{#1}{#2}#5\end{tcolorbox}%
+}{\par\raggedright\noindent\llap{\href{https://www.youtube.com/watch?v=\videoid&t=#3s}{\textcolor{frisepale}{\texttt{\footnotesize #4}}}\hspace{3.5mm}}{\kindlabel{#1}{#2}#5\par}\smallskip}}
 \raggedbottom\emergencystretch=1.5em
 
 \title{\LARGE The Buffalo Course on Algebraic Geometry (1973):\\ Index of Results}
@@ -59,7 +66,7 @@
 
 \section*{Introduction}\addcontentsline{toc}{section}{Introduction}
 
-\emph{The course.} From May to July 1973, Alexandre Grothendieck gave a course on algebraic geometry, in English, at the State University of New York at Buffalo, alongside two other courses, on topos theory and on algebraic groups. The sessions were recorded on magnetic tape. This document relies on the recordings published by the YouTube channel \q{Erwin Schulhoff} in four videos; it cites each session by its date, tape and side, following the descriptions of these videos, and each moment by its position in the video.
+\emph{The course.} From May to July 1973, Alexandre Grothendieck gave a course on algebraic geometry, in English, at the State University of New York at Buffalo, alongside two other courses, on topos theory and on algebraic groups. Lecture notes for its first part were written by Federico Gaeta~\cite{gaeta}. The sessions were recorded on magnetic tape. This document relies on the recordings published by the YouTube channel \q{Erwin Schulhoff} in four videos; it cites each session by its date, tape and side, following the descriptions of these videos, and each moment by its position in the video.
 
 \emph{What this index is.} For each result or definition treated in a session, the index gives one line: the statement, in today's mathematical language and in our own words, and the moment of the tape where it is treated, as a link to the video accurate to the second. An entry corresponds to a statement, not to a minute of the course. A few words in quotation marks reproduce a name or a term coined in the course, when it matters. When what is said is sketched or incomplete, the entry gives the correct statement, with the hypotheses it requires; a claim that is false as heard is not reproduced. A passage whose audio remains doubtful is not indexed. Entries marked \emph{Discussion} state no result: they point to an exchange with the audience, described in our words, where something is settled, corrected or left open.
 
@@ -73,6 +80,9 @@
 \video{51wmmpHand0}
 \face{Tape 1, side A}
 \topic{Affine algebraic spaces as functors}
+\entree[read]{207}{0:03:27}{For the commutative algebra needed he recommends Bourbaki, which he finds more than adequate, and Zariski and Samuel, slightly old-fashioned but substantial. \cite{bourbaki,zariskisamuel}}
+\entree[read]{402}{0:06:42}{For sheaves he again points to Godement’s book. \cite{godement}}
+\entree[read]{467}{0:07:47}{Generalized sheaves are in exposés I and II of SGA 4, an easy reading. \cite{sga4}}
 \entree[cex]{791}{0:13:11}{For an arbitrary set $I$, let $P_I=k[T_i]_{i\in I}$; a polynomial $f\in P_I$ defines a map $\tilde f\colon k^I\to k$, which in general does not determine $f$.}
 \entree[prop]{920}{0:15:20}{For every $k$-algebra $k'$, $u\mapsto(u(T_i))_{i\in I}$ is a bijection from $\mathrm{Hom}_k(P_I,k')$ onto $k'^I$ (universal property of the polynomial algebra).}
 \entree[prop]{983}{0:16:23}{A point $x\in k^I$ is equivalent to a homomorphism $\varepsilon_x\colon P_I\to k$, and $f(x)=\varepsilon_x(f)$.}
@@ -118,6 +128,7 @@
 \entree[prop]{7566}{2:06:06}{If $A$ is a ring and $f\in A$ satisfies $u(f)=0$ for every homomorphism $u$ from $A$ to a field, then $f$ is nilpotent.}
 \face{Tape 1, side B}
 \entree[prop]{7663}{2:07:43}{Every nonzero ring has a maximal ideal (Krull); it follows that the intersection of the kernels of the homomorphisms of a ring into fields is its nilradical.}
+\entree[read]{7663}{2:07:43}{He comes back to Bourbaki’s commutative algebra. \cite{bourbaki}}
 \entree[prop]{7725}{2:08:45}{The kernels of the homomorphisms from $A$ to fields are the prime ideals of $A$; the nilradical of $A$ is the intersection of its prime ideals.}
 \entree[thm]{7993}{2:13:13}{Nullstellensatz: if $k$ is an algebraically closed field and $I$ is finite, the radical of $J\subset k[T_1,\dots,T_n]$ is the set of polynomials vanishing at the points of $k^n$ where $J$ vanishes.}
 \entree[thm]{8200}{2:16:40}{Algebraic form: if $A$ is a finitely generated algebra over an algebraically closed field $k$ and $f\in A$ is killed by every $k$-homomorphism $A\to k$, then $f$ is nilpotent.}
@@ -219,6 +230,7 @@
 \entree[disc]{19097}{5:18:17}{Question on why flatness of a module can be tested by tensoring with injections of algebras only; the lecturer sketches how this implies the usual definition.}
 \entree[def]{19161}{5:19:21}{The algebra of dual numbers $D_K(N)=K\times N$ with $(\lambda,x)(\lambda',x')=(\lambda\lambda',\lambda x'+\lambda'x)$; $N$ is an ideal of square zero in it, and $D_K(N)$ is functorial in $N$.}
 \entree[prop]{19362}{5:22:42}{One has $M\otimes_K D_K(N)\simeq M\oplus(M\otimes_K N)$, functorially in $N$; this reduces the flatness of $M$ to injectivity for algebras.}
+\entree[read]{19425}{5:23:45}{The principle of idealization is in Nagata’s book. \cite{nagata}}
 \entree[prop]{19491}{5:24:51}{Projective limits of affine spaces correspond to inductive limits of algebras: products and fibre products correspond to the tensor products $\otimes_K$ and $A\otimes_C B$.}
 \entree[prop]{19491}{5:24:51}{The kernel of a double arrow $u,v\colon A\rightrightarrows B$ of algebras corresponds to the quotient of $B$ by the ideal generated by the $u(x)-v(x)$.}
 \entree[prop]{19557}{5:25:57}{The kernel of a homomorphism of affine algebraic groups and the stabilizer of a rational point of an affine space equipped with an action of $G$ are closed algebraic subgroups of $G$.}
@@ -504,6 +516,7 @@
 \entree[prop]{8624}{2:23:44}{For $A\to\hat A$ faithfully flat, $M$ is finitely generated if and only if $M\otimes_A\hat A$ is; then $M\otimes_A\hat A$ is the completion of $M$.}
 \face{Tape 1}
 \topic{Locally ringed spaces and morphisms of spectra}
+\entree[read]{8802}{2:26:42}{The yoga of descent is in his Séminaire Bourbaki talks. \cite{fga}}
 \entree[def]{8874}{2:27:54}{For $f\in\mathcal{O}_X(U)$, one sets $U_f=\{x\in U : f(x)\neq0\}$, where $f(x)$ is the image of $f_x$ in $\kappa(x)$; it is the set of $x$ where $f_x$ is invertible.}
 \entree[prop]{9004}{2:30:04}{A ringed space with nonzero fibres is locally ringed if and only if, for $f_1,\dots,f_n\in\mathcal{O}_X(U)$ with $\sum f_i=1$, the $U_{f_i}$ cover $U$.}
 \entree[prop]{9067}{2:31:07}{For $u\colon A\to B$, $\varphi\colon\mathrm{Spec}\,B\to\mathrm{Spec}\,A$, $\mathfrak p\mapsto u^{-1}(\mathfrak p)$, is continuous.}
@@ -666,6 +679,7 @@
 \entree[prop]{31232}{8:40:32}{The $\mathbb{G}_m$-torsor $\mathbf{V}^{*}\to\mathbf{P}$ is that of trivializations of the universal invertible quotient: a point above $S'\to\mathbf{P}$ is an isomorphism of this quotient with $\mathcal{O}_{S'}$.}
 \entree[def]{31617}{8:46:57}{Projective space $\mathbb{P}^n$ over a field $k$ is $\mathbf{P}(k^{n+1})$.}
 \entree[prop]{31747}{8:49:07}{A morphism $X\to\mathbb{P}^n$ is equivalent to an invertible sheaf $L$ on $X$ and $n+1$ sections of $L$ that generate it at every point, that is, an invertible quotient of $\mathcal{O}_X^{\,n+1}$.}
+\entree[read]{31942}{8:52:22}{The same yoga for analytic geometry is in his exposés at the Cartan seminar. \cite{cartan13}}
 \entree[prop]{32079}{8:54:39}{$\mathbf{P}(\mathcal{M})(S')$ is the set of isomorphism classes of pairs $(L,\mathcal{M}_{S'}\to L)$, with $L$ invertible and $\mathcal{M}_{S'}\to L$ an epimorphism.}
 \session{20 June 1973}
 \noindent\textit{Video 2/4 (\href{https://www.youtube.com/watch?v=thSz9ZHDK9o}{\texttt{thSz9ZHDK9o}}): tape 1 (8:55:21--9:43:38); tape 2 (9:43:38--10:32:26).}\par\medskip
@@ -1123,6 +1137,7 @@
 \entree[def]{7841}{2:10:41}{A gluing datum satisfying the cocycle condition is a descent datum.}
 \entree[def]{7906}{2:11:46}{$g$ is of descent of rank $2$ (effective descent) if the functor $\mathrm{Mod}(S)\to\mathrm{Mod}(S')$ with descent data is an equivalence of categories.}
 \entree[thm]{7970}{2:12:50}{If $g$ is faithfully flat and quasi-compact, $g^*$ induces an equivalence between quasi-coherent modules on $S$ and quasi-coherent modules on $S'$ equipped with a descent datum.}
+\entree[read]{8175}{2:16:15}{The general nonsense of descent is in Giraud’s memoir, which he calls pretty hard reading. \cite{girauddescent}}
 \entree[prop]{8629}{2:23:49}{If $g$ is of descent of rank $1$ over every open set, effectiveness of a descent datum is local on $S$: the modules $M_\alpha$ on an open covering glue by uniqueness.}
 \entree[prop]{8760}{2:26:00}{For an open covering $(S_i)$ of $S$, the morphism $\coprod_i S_i\to S$ is of effective descent for quasi-coherent modules.}
 \face{Tape 3}
@@ -1180,6 +1195,7 @@
 \entree[prop]{16510}{4:35:10}{An open set of $X'$ is stable under the descent datum if and only if its underlying subset has the same inverse image in $X''$ under $q_1$ and $q_2$ (set-theoretic condition).}
 \entree[prop]{16640}{4:37:20}{If $X'$ is a union of stable open sets $X'_i$, the descent datum on $X'$ is effective if and only if the induced data on the $X'_i$ are.}
 \face{Tape 1 (4:52:26--5:41:49)}
+\entree[read]{17357}{4:49:17}{For effective equivalence relations he points to Demazure. \cite{demazure}}
 \entree[prop]{17552}{4:52:32}{If $g$ is faithfully flat quasi-compact and $X'$ is covered by open sets $X'_i$ stable under the descent datum and affine over $S'$, the descent datum on $X'$ is effective.}
 \entree[prop]{17754}{4:55:54}{A faithfully flat, quasi-compact and radicial morphism is a universal homeomorphism.}
 \entree[prop]{18155}{5:02:35}{If $g$ is faithfully flat quasi-compact radicial, every subset of $X'$ is stable under a descent datum, which is therefore effective; for example for a purely inseparable field extension.}
@@ -1254,20 +1270,20 @@
 \entree[thm]{25060}{6:57:40}{If $G$ is an algebraic group over a field and $H\subset G$ a subgroup, the relation defined by $H$ is flat and the quotient $G/H$ is a scheme, a homogeneous space under $G$ by translations.}
 
 \section*{References}\addcontentsline{toc}{section}{References}
-\noindent Alexander Grothendieck, \emph{Introduction to functorial algebraic geometry}, Part~1: \emph{Affine algebraic geometry}, lecture notes written by Federico Gaeta, State University of New York at Buffalo, Department of Mathematics, 168~pp., \url{https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/FuncAlg.pdf}.
-
-\subsection*{Readings recommended in the lectures}
-\noindent What Grothendieck tells the audience to read, with the moment he says it (video/timestamp). A ``?'' marks a title the captions do not make certain.
-\begin{itemize}\setlength\itemsep{1pt}
-\item N.~Bourbaki, \emph{Algèbre commutative}, Hermann, 1961--1965: ``more than adequate'' for the commutative algebra needed (1/4, 0:03:27; also 2:07:43).
-\item O.~Zariski, P.~Samuel, \emph{Commutative Algebra}, Van Nostrand, 1958--1960: ``slightly old-time'', but with the substance (1/4, 0:03:27).
-\item R.~Godement, \emph{Topologie algébrique et théorie des faisceaux}, Hermann, 1958: the standard reference for sheaves (1/4, 0:06:42).
-\item \emph{SGA~4}, exp.~I--II: for generalized sheaves, ``easy reading'' (1/4, 0:06:42--0:07:47).
-\item M.~Nagata, \emph{Local Rings}, Interscience, 1962: the principle of idealization (1/4, 5:23:45).
-\item A.~Grothendieck, ``Technique de descente et théorèmes d'existence en géométrie algébrique'', Séminaire Bourbaki (\emph{FGA}), 1959--1962: ``the yoga of descent'' (2/4, 2:26:42).
-\item A.~Grothendieck, exposés in the \emph{Séminaire Henri Cartan} 13 (1960/61), ``Techniques de construction en géométrie analytique'' (? the seminar's name is uncertain in the captions): the same yoga for analytic geometry (2/4, 8:52:22).
-\item J.~Giraud, ``Méthode de la descente'', \emph{Mém. Soc. Math. France} 2 (1964) (? the name is uncertain in the captions): the general nonsense of descent, ``pretty hard reading'' (4/4, 2:16:15).
-\item M.~Demazure (? seminar named with a doubt), for effective equivalence relations (4/4, 4:49:17).
-\end{itemize}
+\noindent Numbers in square brackets refer to this list. It gathers what the lecturer tells the audience to read, with the moment he says it (video/timestamp), and the other sources used. A ``?'' marks a title the captions do not make certain.
+\begingroup\renewcommand{\section}[2]{}\setlength{\itemsep}{1pt}\small
+\begin{thebibliography}{99}
+\bibitem{bourbaki} N.~Bourbaki, \emph{Algèbre commutative}, Hermann, 1961--1965: ``more than adequate'' for the commutative algebra needed (1/4, 0:03:27; also 2:07:43).
+\bibitem{zariskisamuel} O.~Zariski, P.~Samuel, \emph{Commutative Algebra}, Van Nostrand, 1958--1960: ``slightly old-time'', but with the substance (1/4, 0:03:27).
+\bibitem{godement} R.~Godement, \emph{Topologie algébrique et théorie des faisceaux}, Hermann, 1958: the standard reference for sheaves (1/4, 0:06:42).
+\bibitem{sga4} M.~Artin, A.~Grothendieck, J.-L.~Verdier, \emph{SGA~4, Théorie des topos et cohomologie étale des schémas}, LNM 269, 270, 305, Springer, 1972--1973: exp.~I--II, for generalized sheaves, ``easy reading'' (1/4, 0:06:42--0:07:47).
+\bibitem{nagata} M.~Nagata, \emph{Local Rings}, Interscience, 1962: the principle of idealization (1/4, 5:23:45).
+\bibitem{fga} A.~Grothendieck, ``Technique de descente et théorèmes d'existence en géométrie algébrique'', Séminaire Bourbaki (\emph{FGA}), 1959--1962: ``the yoga of descent'' (2/4, 2:26:42).
+\bibitem{cartan13} A.~Grothendieck, exposés in the \emph{Séminaire Henri Cartan} 13 (1960/61), ``Techniques de construction en géométrie analytique'' (? the seminar's name is uncertain in the captions): the same yoga for analytic geometry (2/4, 8:52:22).
+\bibitem{girauddescent} J.~Giraud, ``Méthode de la descente'', \emph{Mém. Soc. Math. France} 2 (1964) (? the name is uncertain in the captions): the general nonsense of descent, ``pretty hard reading'' (4/4, 2:16:15).
+\bibitem{demazure} M.~Demazure (? seminar named with a doubt), for effective equivalence relations (4/4, 4:49:17).
+\bibitem{gaeta} Alexander Grothendieck, \emph{Introduction to functorial algebraic geometry}, Part~1: \emph{Affine algebraic geometry}, lecture notes written by Federico Gaeta, State University of New York at Buffalo, Department of Mathematics, 168~pp., \url{https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/FuncAlg.pdf}.
+\end{thebibliography}
+\endgroup
 
 \end{document}
