@@ -176,21 +176,39 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
       if (!el) return { h: 0, m: 0 };
       return { h: el.offsetHeight, m: k === 0 ? 0 : board.items[k].kind === 'h' ? 16 : 6 };
     };
+    // A sentence is never cut between two panels: a display is kept with the line that introduces
+    // it, and the words that finish the sentence after it (« commutes. ») stay with the display.
+    const glued = (k: number) => {
+      if (k === 0) return false;
+      const a = board.items[k - 1];
+      const b = board.items[k];
+      const display = (i: BoardItem) => i.kind === 'm' || i.kind === 'cd';
+      if (b.kind === 'p' && display(a) && /^[a-z]/.test(b.text.trimStart())) return true;
+      return display(b) && a.kind === 'p' && !/[.?!]\s*$/.test(a.text);
+    };
     const out: number[] = [];
     let used = 0;
     let count = 0;
     for (let k = 0; k < shown; k++) {
       const { h, m } = size(k);
-      let need = used ? m + h : h;
-      if (board.items[k].kind === 'h' && k + 1 < shown) need += size(k + 1).m + size(k + 1).h;
-      if (used && (used + need > room || count >= MAX_ITEMS)) {
-        out.push(k);
-        used = h;
-        count = 1;
-      } else {
-        used += used ? m + h : h;
-        count++;
+      // The whole run of glued items that follows k, to be placed together.
+      let run = h;
+      let n = 1;
+      for (let j = k + 1; j < shown && glued(j); j++) {
+        run += size(j).m + size(j).h;
+        n++;
       }
+      let need = used ? m + run : run;
+      if (board.items[k].kind === 'h' && k + n < shown) need += size(k + n).m + size(k + n).h;
+      if (used && (used + need > room || count + n > MAX_ITEMS)) {
+        out.push(k);
+        used = run;
+        count = n;
+      } else {
+        used += used ? m + run : run;
+        count += n;
+      }
+      k += n - 1;
     }
     setBreaks((b) => (b.length === out.length && b.every((x, i) => x === out[i]) ? b : out));
   }, [shown, html, ph, panelH, board.items]);
