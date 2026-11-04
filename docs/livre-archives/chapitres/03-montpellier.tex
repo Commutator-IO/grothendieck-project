@@ -15,27 +15,18 @@ techniquement et juridiquement.
 
 \section{Les obstacles}
 
-\paragraph{Le serveur refuse d'être affiché ailleurs.} Trois constats, faits à
-l'automne 2026 :
-\begin{itemize}
-  \item il envoie \texttt{X-Frame-Options: SAMEORIGIN} : aucun autre site ne peut afficher
-        ses PDF dans une page ;
-  \item son certificat TLS a expiré le 10 décembre 2025, et un cadre intégré reste blanc,
-        sans message ;
-  \item il n'envoie aucun en-tête CORS : une page d'un autre site ne peut pas lire les
-        fichiers.
-\end{itemize}
+\paragraph{Un serveur qui a longtemps refusé d'être affiché ailleurs.} À l'automne 2026, le serveur
+envoyait \texttt{X-Frame-Options: SAMEORIGIN}, ce qui interdit à un autre site d'afficher ses PDF
+dans une page, et son certificat TLS avait expiré le 10 décembre 2025 : un cadre intégré
+restait blanc, sans message. Le projet avait écrit un petit relais Node
+(\fichier{relay/server.mjs}) pour contourner les deux, hébergé gratuitement, qui allait
+chercher le PDF chez Montpellier et le renvoyait au lecteur en transmettant les requêtes
+partielles : ouvrir la page 221 d'un volume de 204~Mo ne déplaçait que 256~Ko.
 
-\paragraph{La réponse : un relais.} Le projet a écrit un petit serveur Node
-(\fichier{relay/server.mjs}), hébergé gratuitement, qui va chercher le PDF chez Montpellier
-et le renvoie au lecteur. Il faut Node parce qu'il faut accepter le certificat expiré, ce
-qu'un service sans serveur ne permet pas. Le relais transmet les requêtes partielles
-(\emph{range requests}) : ouvrir la page 221 d'un volume de 204~Mo ne déplace que 256~Ko.
-Il n'accepte que \texttt{GET} et \texttt{HEAD} sur une adresse par cote, ne transmet aucun
-cookie, ne garde rien. L'hébergement gratuit s'endort au bout de quinze minutes : la
-première page met une minute à venir. Rien de cela n'est satisfaisant ; c'est ce qu'il
-fallait pour qu'un lecteur voie le fac-similé à côté de la transcription sans que le
-projet stocke une seule image.
+Le 4 novembre 2026, le site est revenu avec un certificat valide et sans \texttt{X-Frame-Options}.
+Le navigateur affiche maintenant le PDF directement, sans passer par le projet, et le relais
+est désactivé, le code restant dans le dépôt au cas où le serveur changerait de nouveau.
+Aucun en-tête CORS n'est envoyé non plus, ce qui ne gêne pas l'affichage dans un cadre.
 
 \paragraph{La copie de travail.} Pour transcrire, on extrait un lot de vingt pages dans un
 dossier ignoré par \texttt{git}. Le premier outil essayé (poppler) faisait d'un lot de
@@ -90,7 +81,8 @@ vérifié en entier par une personne.
 
 \begin{exemple}
 La leçon de Montpellier est que l'obstacle technique se contourne en une semaine, et que
-l'obstacle juridique ne se contourne pas. Le relais est un bricolage ; le filigrane, la
-promesse de retrait et l'absence de DOI sont des décisions, prises tôt et écrites, qui
-permettent au projet d'exister tant que personne ne s'y oppose.
+l'obstacle juridique ne se contourne pas. Le relais a servi quelques semaines, puis le
+serveur a changé ; le filigrane, la promesse de retrait et l'absence de DOI sont des
+décisions, prises tôt et écrites, qui permettent au projet d'exister tant que personne ne
+s'y oppose.
 \end{exemple}

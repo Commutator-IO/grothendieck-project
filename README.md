@@ -73,6 +73,12 @@ Montpellier's **own file**, fetched as you read it, and `.gitignore` refuses
 It cannot point at their server directly, and not for want of trying. Three
 things were measured:
 
+> **Update, 4 November 2026.** Montpellier's server now has a valid certificate (issued the same
+> day, valid to 22 May 2027) and no longer sends `X-Frame-Options`: the pane frames its PDFs
+> directly and the relay is switched off for them (`VITE_USE_RELAY=true` turns it back on). The
+> code and the notes below stay as a record of what was measured and why, and the relay still
+> frames the community editions whose own server refuses it.
+
 - **`X-Frame-Options: SAMEORIGIN`** — no other origin may embed their files. A
   probe iframe receives no document at all. Decisive on its own, and the one
   that would outlive every other fix.
