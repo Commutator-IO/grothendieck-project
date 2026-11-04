@@ -32,12 +32,14 @@ export const batchName = (k: number) => `batch-${String(k).padStart(2, '0')}`;
  * them, so opening page 400 of a 204 MB volume costs a few hundred kilobytes
  * rather than the volume.
  *
- * It has to pass through this origin because the browser will not frame
- * Montpellier directly — `X-Frame-Options: SAMEORIGIN`, plus a certificate
- * that expired on 10 December 2025. Both are enforced by the browser against
- * the remote origin, and neither applies to a request made server-side.
+ * It used to have to pass through this origin, because the browser would not
+ * frame Montpellier directly — `X-Frame-Options: SAMEORIGIN`, plus a certificate
+ * that expired on 10 December 2025; both are enforced by the browser against the
+ * remote origin, and neither applies to a request made server-side. Both are gone
+ * since 4 November 2026 (see `USE_RELAY` below), so the PDF is framed from
+ * Montpellier itself unless the relay is switched back on.
  */
-export const facsimileUrl = (cote: string) => `${RELAY}/source/${cote}.pdf`;
+export const facsimileUrl = (cote: string) => (USE_RELAY ? `${RELAY}/source/${cote}.pdf` : `${MONTPELLIER}/${cote}.pdf`);
 
 /**
  * A community edition's own file, streamed through this origin.
@@ -74,6 +76,16 @@ export const editionDocUrl = (url: string) =>
  * which is the only other thing the browser insists on.
  */
 const RELAY = (import.meta.env.VITE_RELAY ?? '').replace(/\/$/, '');
+
+/**
+ * Whether the facsimile goes through the relay. Not any more: since 4 November 2026 Montpellier's
+ * server has a valid certificate and sends no `X-Frame-Options`, so the browser frames its PDFs
+ * directly (checked in the pane on 145.pdf#page=35). The relay stays in the repository, and is
+ * still what frames the editions whose own server refuses it (`editionDocUrl`); set
+ * `VITE_USE_RELAY=true` to send the facsimile through it again, should the server change.
+ */
+const USE_RELAY = import.meta.env.VITE_USE_RELAY === 'true';
+const MONTPELLIER = 'https://grothendieck.umontpellier.fr';
 
 /**
  * The PDF page showing a given archive page.
@@ -217,6 +229,11 @@ export type RelayState = 'waking' | 'ready' | 'absent';
 export function useFacsimileProxy(): RelayState {
   const [state, setState] = useState<RelayState>('waking');
   useEffect(() => {
+    // Framed directly: nothing to wake, nothing to ask.
+    if (!USE_RELAY) {
+      setState('ready');
+      return;
+    }
     let alive = true;
     let timer: ReturnType<typeof setTimeout>;
     let tries = 0;
