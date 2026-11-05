@@ -46,7 +46,7 @@
 \newcommand{\leanst}{\entry{Lean.}}
 \newcommand{\settle}{\entry{What would settle it.}}
 
-\title{Open questions from Grothendieck's Montpellier notes:\\ fourteen statements a formalisation could not reach}
+\title{Open questions from Grothendieck's Montpellier notes:\\ thirteen statements a formalisation could not reach}
 \author{Michel Hua\\ \small Commutator, Paris\\ \small\texttt{michel@commutator.io} · ORCID 0009-0002-8304-0683}
 \date{Working paper, 29 October 2026, revised 1 November 2026}
 
@@ -57,7 +57,7 @@
 \maketitle
 
 \begin{abstract}
-The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 165 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects fourteen of them for mathematicians, and adds one problem he stated aloud in a lecture at Buffalo in 1973. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. A last section takes seven conjectures that are in print under his name, from the standard conjectures to the $p$-curvature conjecture, and drafts from the pages the route he meant to take to each and where it stops. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
+The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 165 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects thirteen of them for mathematicians, and adds one problem he stated aloud in a lecture at Buffalo in 1973. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. A last section takes seven conjectures that are in print under his name, from the standard conjectures to the $p$-curvature conjecture, and drafts from the pages the route he meant to take to each and where it stops. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
 \end{abstract}
 
 
@@ -374,10 +374,10 @@ A pseudoline arrangement in the real projective plane is \emph{bigonal along} on
 \end{tikzpicture}
 
 \medskip
-\caption{The four arrangements of the dichotomy, drawn with straight lines in an affine chart chosen so that every crossing is visible. In $\mathrm{II}'_{3,2}$ the line $PQ$ is absent; in the complete quadrangle $\mathrm{III}_6$ the six lines join $P_1,\dots,P_4$, and the triangle $P_1P_2P_3$ has every other line through one of its vertices, the case that needs the second step of the answer to Problem~\ref{p:skel} (Figure~\ref{fig:split}).}\label{fig:pseudo}
+\caption{The four arrangements of the dichotomy, drawn with straight lines in an affine chart chosen so that every crossing is visible. In $\mathrm{II}'_{3,2}$ the line $PQ$ is absent; in the complete quadrangle $\mathrm{III}_6$ the six lines join $P_1,\dots,P_4$, and the triangle $P_1P_2P_3$ has every other line through one of its vertices.}\label{fig:pseudo}
 \end{figure}
 
-An arrangement is \emph{bigon-free} when none of its pseudolines is bigonal, and four pseudolines are in \emph{general position} when no three of them pass through one point. The page's boxed dichotomy, which this note listed as an open problem until 26 October 2026, has a short proof, and so does the numbering lemma of page~28; we record it because the problem below depends on it.
+An arrangement is \emph{bigon-free} when none of its pseudolines is bigonal, and four pseudolines are in \emph{general position} when no three of them pass through one point. The page's boxed dichotomy, which this note listed as an open problem until 26 October 2026, has a short proof, and so does the numbering lemma of page~28; we record them here.
 
 \begin{proposition}[Grothendieck, \fac{80}, pp.~20, 24, 28; the proof is ours]
 A bigon-free arrangement $\mathcal A$ either is $\mathrm{II}_4$ or contains $\mathrm{II}_5$, $\mathrm{II}'_{3,2}$ or $\mathrm{III}_6$; and its pseudolines can be numbered, starting from a $\mathrm{II}_4$ or a $\mathrm{III}_6$, so that every partial arrangement is bigon-free.
@@ -392,53 +392,6 @@ A bigon-free arrangement $\mathcal A$ either is $\mathrm{II}_4$ or contains $\ma
 \end{proof}
 
 This agrees with a computer enumeration of all arrangements of at most nine pseudolines (\nolinkurl{computations/bigon}). The dichotomy is also checked in Lean for combinatorial maps (generalised maps of Euler characteristic~$1$ whose flags are labelled by the pseudolines; \nolinkurl{lean/Grothendieck/Folder80Maps2.lean}, \texttt{map\_dichotomy}); the numbering and the passage from a topological arrangement to its map are not formalised. We have not found the statement in print; it is elementary, and probably folklore among people who work on arrangements.
-
-\begin{problem}[A bigon-free arrangement is determined by its skeleton: the three-pencil case]\label{p:skel}
-Is a combinatorial arrangement of pseudolines in the real projective plane without bigonal pseudolines determined by its $1$-skeleton together with the decomposition of the edges into pseudolines, functorially: is the functor from bigon-free arrangements to their decomposed skeleta fully faithful, so that every automorphism of the decomposed skeleton comes from the arrangement? The Lean proof in combinatorial maps covers every arrangement in which each triangle has a fourth pseudoline through none of its vertices (see below). What it leaves is a bigon-free arrangement with a triangle $P_1P_2P_3$ whose three vertices are multiple and through which every other pseudoline passes, so that the arrangement lies in the three pencils at $P_1$, $P_2$, $P_3$; the complete quadrangle $\mathrm{III}_6$ is the first example.
-\end{problem}
-
-\src{\fac{80}, pp.~39--54. The statement of page~54 (\q{En résumé}) is clean. It composes a full faithfulness theorem (p.~39) for arrangements with an orientation of every non-concurrent triple (pp.~41--49, conditions (A1)--(A4)) with a canonical reconstruction of these orientations from the skeleton (pp.~49--54, (A5), (A6), with the complete quadrangle as residual case). Conditions (A1)--(A6) are said to hold \q{bien entendu} and not proved.}
-
-\known Line arrangements in the projective plane are determined up to isomorphism by their circular sequences up to local equivalence (Goodman--Pollack), and the graph of a simple projective arrangement of at least four pseudolines is $4$-connected \cite[Th.~5.2.2, 5.5.1]{felsnergoodman}. Embeddings of graphs in the projective plane are unique at face-width at least~$3$ and are classified at face-width $2$ and $3$ \cite{vitray,mohar1995,mohar-robertson-vitray}. For simple arrangements the question reduces to the plane, by our argument, unchecked by a specialist: deleting one labelled pseudoline leaves a simple Euclidean arrangement; its graph, with one vertex added and joined to the vertices of degree less than four, is $3$-connected and planar \cite{boseeverettwismath}, so by Whitney's theorem every isomorphism of such graphs (which preserves degrees) comes from a homeomorphism of the sphere, and the pseudolines are the paths through opposite edges \cite[Lemma~1]{eppstein}. Lean now proves more (see below): multiple points are allowed as long as every triangle has a fourth pseudoline avoiding its vertices. We found no statement for arrangements with multiple points in print. The question, with the three-pencil case singled out, is also asked on MathOverflow (question 516410, \href{https://mathoverflow.net/q/516410}{\nolinkurl{mathoverflow.net/q/516410}}).
-
-\entry{An answer.} Yes, for every bigon-free arrangement, by the following argument, which no specialist has checked. It goes through oriented matroids. Let $\varphi$ be an isomorphism of decomposed skeleta from $\mathcal A$ to $\mathcal A'$, and $\sigma$ the bijection it induces on the pseudolines. Since every pseudoline carries at least three vertices, $\varphi$ is determined by $\sigma$: a vertex goes to the vertex on the images of its pseudolines, and an edge is fixed by its two ends and its label. Choose chirotopes $\chi$ and $\chi'$ of the two arrangements. Along $L_i$, $\varphi$ keeps the cyclic order of the vertices up to reversal, so by the representation theorem in rank~$2$ the contractions at $i$ and at $\sigma(i)$ differ by a sign $s_i$ and a reorientation $\varepsilon^i$:
-\[\chi'(\sigma i, \sigma j, \sigma l) = s_i\,\varepsilon^i_j\,\varepsilon^i_l\,\chi(i, j, l)\]
-for every three pseudolines $i, j, l$ without a common point. Put
-\[\psi(i,j,l) = \chi'(\sigma i,\sigma j,\sigma l)\,\chi(i,j,l)\,s_is_js_l.\]
-It is symmetric, and at each $i$ it has the form $\psi(i,j,l) = \delta^i_j\delta^i_l$, with $\delta^i_j = \varepsilon^i_j s_j$. We show that $\psi = 1$.
-
-Suppose first that a fourth pseudoline $m$ avoids the vertices of the triangle $i, j, l$. The rule at $i$ gives $\psi(ijl)\,\psi(ijm)\,\psi(ilm) = 1$, so the product $\Pi$ of $\psi$ over the four triples of $\{i, j, l, m\}$ is $\psi(jlm)$. The same holds at $j$, $l$ and $m$, so all four values equal $\Pi$, and $\Pi = \Pi^4 = 1$. This is condition (A5) in another form.
-
-Otherwise every other pseudoline passes through a vertex of the triangle. Call its sides $a, b, c$ and its vertices $P_1 = b \cap c$, $P_2 = a \cap c$, $P_3 = a \cap b$. The pseudoline $a$ carries a third vertex, and a pseudoline through it other than $a$ can only pass through $P_1$; let $x$ be one. The rule at $a$ gives $\psi(abc) = \psi(abx)\,\psi(axc)$. Because $b$ carries a third vertex, some pseudoline $y \ne a, c$ passes through $P_2$, and it avoids the vertices $P_3$, $P_1$ and $a \cap x$ of the triangle $a, b, x$. In the same way a pseudoline $z \ne a, b$ through $P_3$ avoids the vertices of the triangle $a, x, c$. By the first case both factors are $1$ (Figure~\ref{fig:split}). In the complete quadrangle, for the triangle with sides $P_1P_2$, $P_2P_3$, $P_3P_1$, the three pseudolines $x$, $y$, $z$ are the sides through $P_4$.
-
-\begin{figure}[ht]
-\centering
-\definecolor{sbleu}{HTML}{38539D}\definecolor{sorange}{HTML}{E0612B}\definecolor{sgris}{HTML}{6F6A62}
-\begin{tikzpicture}[scale=0.95,line cap=round]
-\coordinate (A) at (0,0); \coordinate (B) at (4,0); \coordinate (C) at (2,3.4); \coordinate (D) at (2,1.25);
-\coordinate (Q) at (2,0);
-\fill[sorange!14] (A) -- (Q) -- (C) -- cycle;
-\fill[sbleu!14] (Q) -- (B) -- (C) -- cycle;
-\draw[sgris,line width=1.1pt] ($(A)!-0.25!(B)$) -- ($(A)!1.25!(B)$) node[right,black] {$a$};
-\draw[sgris,line width=1.1pt] ($(B)!-0.18!(C)$) -- ($(B)!1.15!(C)$) node[above,black] {$b$};
-\draw[sgris,line width=1.1pt] ($(C)!-0.15!(A)$) -- ($(C)!1.18!(A)$) node[left,black] {$c$};
-\draw[black,line width=1.3pt] ($(C)!-0.12!(Q)$) -- ($(C)!1.22!(Q)$) node[below] {$x$};
-\draw[sbleu,line width=1.3pt,dashed] ($(A)!-0.15!(D)$) -- ($(A)!2.15!(D)$) node[above right] {$y$};
-\draw[sorange,line width=1.3pt,dashed] ($(B)!-0.15!(D)$) -- ($(B)!2.15!(D)$) node[above left] {$z$};
-\foreach \p/\l/\pos in {A/{P_2}/below left,B/{P_3}/below right,C/{P_1}/above left,Q/Q/below right}
-  \fill (\p) circle (1.8pt) node[\pos] {$\l$};
-\fill (D) circle (1.8pt);
-\end{tikzpicture}
-\caption{The second step of the answer to Problem~\ref{p:skel}, on the complete quadrangle. The triangle $a, b, c$ has no fourth line avoiding its vertices. The line $x$ through $P_1$ splits it into the blue triangle $a, b, x$, which the line $y$ through $P_2$ avoids at its vertices, and the orange triangle $a, x, c$, which the line $z$ through $P_3$ avoids. So $\psi(abc) = \psi(abx)\,\psi(axc) = 1$.}\label{fig:split}
-\end{figure}
-
-Hence $\chi' \circ \sigma$ is the reorientation of $\chi$ by $s$, and the Folkman--Lawrence representation theorem gives a homeomorphism of the projective plane that carries $L_i$ to $L'_{\sigma(i)}$ for every $i$ \cite{folkmanlawrence}, \cite[\S5.2]{felsnergoodman}. This homeomorphism induces $\sigma$, and therefore $\varphi$. For arrangements of lines, Goodman and Pollack had shown that two arrangements are isomorphic when they have circular sequences in which each line meets the others in the same or the opposite order \cite[Th.~5.2.2]{felsnergoodman}. The argument above uses the same data for pseudolines and gives full faithfulness. The face-width bound with a uniqueness theorem for embeddings would not have given the statement: the graph of $\mathrm{III}_6$ is $K_7$ minus a triangle and has six inequivalent polyhedral embeddings in the projective plane (\nolinkurl{computations/bigon}).
-
-\leanst Proved, multiple points included, whenever every triangle has a fourth pseudoline through none of its vertices (\texttt{full\_of\_fourth'}), in the combinatorial maps of page~60 with its axiom that each pseudoline goes straight through each vertex (\nolinkurl{lean/Grothendieck/Folder80Maps3.lean}). The steps: the functor is faithful (\texttt{faithful}); a skeleton isomorphism lifts exactly when it preserves the face paths of length three (\texttt{lift\_iff}, page~41); the orientation of a triangle is read on the skeleton when a fourth pseudoline avoids its vertices ((A5), \texttt{triangle\_iff}); the side on which an edge leaves another is read by bounding triangles ((A4), \texttt{side\_tri}); and two edges at a vertex of any multiplicity are adjacent iff no edge lies between them ((A1)--(A3), \texttt{between\_iff}, \texttt{SkelIso.corner\_map}). A triangle with a vertex on exactly two pseudolines always has a fourth one (\texttt{fourth\_at}), which gives the statement when every triangle has such a vertex (\texttt{full\_of\_simpleCorner}), in particular for simple arrangements (\texttt{full\_simple}). In that model, (A6) is not formalised, nor is the passage from a topological arrangement to its map. The sign argument above, from the rule along each pseudoline to the reorientation, is proved in \nolinkurl{lean/Grothendieck/Folder80Signs.lean} (\texttt{eq\_zero\_of\_fourth}, \texttt{eq\_zero}, \texttt{reorientation\_of\_locallyEquivalent}), for any incidence structure in which two lines meet in one point, every point lies on two lines and every line carries three points. So is the rank-2 step (\texttt{const\_add\_cut}, \texttt{reorientation\_of\_sameSeparation}): on a complete multipartite graph with at least three parts, a sign function whose sum over every $4$-cycle vanishes is a constant plus a cut, and along a pseudoline these sums are the separation relation of the vertices. What is left outside Lean is the Folkman--Lawrence theorem, and the reading of the separation relation on an actual arrangement.
-
-A computer test (\nolinkurl{computations/bigon/three_pencil.py}) finds no counterexample in the open case up to nine pseudolines: for the 132 bigon-free arrangements of at most nine pseudolines that lie in the three pencils at the vertices of a triangle, every automorphism of the labelled skeleton comes from the arrangement, and no two of them have isomorphic labelled skeleta. The sign argument depends only on which pseudolines are concurrent. Its linear algebra over $\mathbb F_2$ (\nolinkurl{computations/bigon/obstruction.py}) leaves no room for anything other than a reorientation on any of the $37\,213$ bigon-free intersection lattices of at most nine pseudolines that the enumeration finds.
-
-\settle A check of the argument above by a specialist, in particular of the form in which it uses the two representation theorems: the contraction of a simple oriented matroid of rank~$3$ at an element is read as the cyclic order of the vertices along the corresponding pseudoline.
 
 \section{A problem stated in a lecture}\label{sec:lecture}
 
@@ -460,7 +413,7 @@ Let $k$ be a field, $X$ a finite $k$-scheme and $R \subset X\times_k X$ a closed
 
 \section{The large conjectures, and how the notes approach them}\label{sec:big}
 
-The fourteen problems above may not be in the literature. Seven conjectures of the notes are, under Grothendieck's name, and the companion paper lists where each first appears in the fonds \cite{huacicm}. This section reads the same pages for how he meant to prove them. For each conjecture it gives the statement in today's form, the pages, a draft of the route the pages take, where the route stops, and what is known now. The drafts are the edition's, made from the transcriptions with a language model. They report what the pages do, and say so when a step comes from the modernised reading instead. None of the seven is solved here, and no route is complete on the page.
+The thirteen problems above may not be in the literature. Seven conjectures of the notes are, under Grothendieck's name, and the companion paper lists where each first appears in the fonds \cite{huacicm}. This section reads the same pages for how he meant to prove them. For each conjecture it gives the statement in today's form, the pages, a draft of the route the pages take, where the route stops, and what is known now. The drafts are the edition's, made from the transcriptions with a language model. They report what the pages do, and say so when a step comes from the modernised reading instead. None of the seven is solved here, and no route is complete on the page.
 
 \begin{bigconj}[The standard conjectures]\label{c:std}
 Let $X$ be smooth projective of dimension $n$ over an algebraically closed field, with a Weil cohomology $H$ and the Lefschetz operator $L$ of an ample class. \emph{Lefschetz type}: the inverse of $L^{n-i} : H^i(X) \to H^{2n-i}(X)$ is induced by an algebraic correspondence. \emph{Hodge type}: on the primitive algebraic classes of $H^{2i}(X)$, $2i \le n$, the form $(-1)^i \langle L^{n-2i}x, x\rangle$ is positive definite.
@@ -548,14 +501,14 @@ Let $S$ be integral, of finite type and dominant over $\Spec \mathbb Z$, $X/S$ s
 
 \section{How the list was made, and its limits}
 
-The fourteen problems were chosen from the register of findings among the rows still open and outside what Lean reached, and with a statement precise enough to be proved or refuted. Rows whose only interest is a slip on the page, a dating, or a statement now known to be in print were left out, as were the conjectures already in the published record, which \S\ref{sec:big} treats from the side of the routes the notes take, and the companion paper from the side of their first appearance \cite{huacicm}.
+The thirteen problems were chosen from the register of findings among the rows still open and outside what Lean reached, and with a statement precise enough to be proved or refuted. Rows whose only interest is a slip on the page, a dating, or a statement now known to be in print were left out, as were the conjectures already in the published record, which \S\ref{sec:big} treats from the side of the routes the notes take, and the companion paper from the side of their first appearance \cite{huacicm}.
 
 Three limits apply to every entry. The transcriptions are first passes by a language model, and doubtful readings are marked but not all checked against the facsimile; a statement may rest on a misread word, and the entries say where we know this. The literature searches were made by the same means, with full texts where they were open and abstracts otherwise; an entry that says \q{not found} reports a search, not an absence. And the steps marked \q{ours} have not been checked by a specialist.
 
 Corrections, references and proofs are welcome at the address above. The register of findings, the Lean files and the notices of the folders are on the project's site, \url{https://grothendieck.commutator.io/}.
 
 \subsection*{Changes}
-26 October 2026: the pseudoline dichotomy of \fac{80} proved (\S\ref{sec:pseudo}); the count of Kostant quadruples derived, and Problem~\ref{p:kostant} replaced by the question Grothendieck asked Kostant; Problem~\ref{p:ext2} narrowed after Breen's 1975 theorem; references corrected after a citation check. 29 October 2026: \S\ref{sec:big} added, on the routes the notes take to seven published conjectures; the arguments for Problems~\ref{p:lef} and~\ref{p:surf} written out step by step, with what a specialist should check; Problem~\ref{p:lef} narrowed to the condition $A^0(Y_T)$, after a Lean proof of the two cases of the splitting; the OpenAI preprints on four of the seven conjectures noted. 31 October 2026: Problem~\ref{p:skel} answered for every bigon-free arrangement, three pencils included, by a sign argument on chirotopes and the Folkman--Lawrence theorem; the sign argument and its rank-$2$ step proved in Lean, Folkman--Lawrence left outside; the sources of \S\ref{sec:big} completed from the texts read (issue \#102). 1 November 2026: Problem~\ref{p:pic} updated after Grothendieck's letter to Breen of 5 February 1975 (IHÉS, 1ILL21), which withdraws the \q{universal} argument of 1974, and what would settle it restated; the letter to Giraud of 1969 added to the source of Problem~\ref{p:ext2}; the full-faithfulness conjecture of the IHÉS plan \q{Motifs} (2ILL5) added to the source of Conjecture~\ref{c:per}. Problem~\ref{p:eff} added (\S\ref{sec:lecture}), from the recording of his Buffalo lecture of 11 July 1973, with its first statement in print (1961).
+26 October 2026: the pseudoline dichotomy of \fac{80} proved (\S\ref{sec:pseudo}); the count of Kostant quadruples derived, and Problem~\ref{p:kostant} replaced by the question Grothendieck asked Kostant; Problem~\ref{p:ext2} narrowed after Breen's 1975 theorem; references corrected after a citation check. 29 October 2026: \S\ref{sec:big} added, on the routes the notes take to seven published conjectures; the arguments for Problems~\ref{p:lef} and~\ref{p:surf} written out step by step, with what a specialist should check; Problem~\ref{p:lef} narrowed to the condition $A^0(Y_T)$, after a Lean proof of the two cases of the splitting; the OpenAI preprints on four of the seven conjectures noted. 31 October 2026: the problem on bigon-free arrangements answered for every bigon-free arrangement, three pencils included, by a sign argument on chirotopes and the Folkman--Lawrence theorem; the sign argument and its rank-$2$ step proved in Lean, Folkman--Lawrence left outside; the sources of \S\ref{sec:big} completed from the texts read (issue \#102). 1 November 2026: Problem~\ref{p:pic} updated after Grothendieck's letter to Breen of 5 February 1975 (IHÉS, 1ILL21), which withdraws the \q{universal} argument of 1974, and what would settle it restated; the letter to Giraud of 1969 added to the source of Problem~\ref{p:ext2}; the full-faithfulness conjecture of the IHÉS plan \q{Motifs} (2ILL5) added to the source of Conjecture~\ref{c:per}. The Buffalo problem added (\S\ref{sec:lecture}), from the recording of his Buffalo lecture of 11 July 1973, with its first statement in print (1961). 5 November 2026: the problem on bigon-free arrangements and their skeleton removed (it was Problem~14 in the earlier versions); the Buffalo problem is now Problem~\ref{p:eff}.
 
 \subsection*{Declaration}
 This note was drafted with a language model (Claude Opus 5.5, Anthropic) from the edition's registers: the findings, the modernised readings and the Lean files. The transcriptions and the modernised readings it relies on were also made with language models (Claude Opus~5 and Opus~5.5). The author received no funding for this work.
@@ -567,7 +520,6 @@ This note was drafted with a language model (Claude Opus 5.5, Anthropic) from th
 \bibitem{baues} H.-J.~Baues, \emph{Homotopy Type and Homology}, Oxford Mathematical Monographs, 1996.
 \bibitem{beilinson} A.~Beilinson, Remarks on Grothendieck's standard conjectures, in \emph{Regulators}, Contemp.\ Math.~571, AMS, 2012, 25--32, arXiv:1006.1116.
 \bibitem{bokowskipokora} J.~Bokowski, P.~Pokora, On the Sylvester--Gallai and the orchard problem for pseudoline arrangements, \emph{Period.\ Math.\ Hungar.} 77 (2018), 164--174, arXiv:1607.05864.
-\bibitem{boseeverettwismath} P.~Bose, H.~Everett, S.~Wismath, Properties of arrangement graphs, \emph{Internat.\ J.\ Comput.\ Geom.\ Appl.} 13 (2003), 447--462.
 \bibitem{bostcharles} J.-B.~Bost, F.~Charles, Some remarks concerning the Grothendieck period conjecture, \emph{J.\ reine angew.\ Math.} 714 (2016), 175--208; statements numbered as in arXiv:1307.1045v2.
 \bibitem{breen1975} L.~Breen, Un théorème d'annulation pour certains $\Ext^i$ de faisceaux abéliens, \emph{Ann.\ Sci.\ ÉNS} (4) 8 (1975), 339--352.
 \bibitem{breen1999} L.~Breen, Monoidal categories and multiextensions, \emph{Compositio Math.} 117 (1999), 295--335, arXiv:math/9809104.
@@ -578,9 +530,6 @@ This note was drafted with a language model (Claude Opus 5.5, Anthropic) from th
 \bibitem{collas} B.~Collas, Anabelian perspectives in Galois-Teichmüller theory, arXiv:2603.02848, 2026.
 \bibitem{durfee} A.~H.~Durfee, Mixed Hodge structures on punctured neighborhoods, \emph{Duke Math.\ J.} 50 (1983), 1017--1040.
 \bibitem{elephant} P.~T.~Johnstone, \emph{Sketches of an Elephant: A Topos Theory Compendium}, 2 vols, Oxford Logic Guides 43--44, Oxford, 2002.
-\bibitem{eppstein} D.~Eppstein, Drawing arrangement graphs in small grids, or how to play Planarity, \emph{J.\ Graph Algorithms Appl.} 18 (2014), 211--231, arXiv:1308.0066.
-\bibitem{felsnergoodman} S.~Felsner, J.~E.~Goodman, Pseudoline arrangements, in \emph{Handbook of Discrete and Computational Geometry}, 3rd ed., ch.~5, CRC Press, 2017.
-\bibitem{folkmanlawrence} J.~Folkman, J.~Lawrence, Oriented matroids, \emph{J.\ Combin.\ Theory Ser.~B} 25 (1978), 199--236.
 \bibitem{friedmanlaza} R.~Friedman, R.~Laza, The higher Du Bois and higher rational properties for isolated singularities, \emph{J.\ Algebraic Geom.} 33 (2024), 493--520, arXiv:2207.07566.
 \bibitem{gabberorgogozo} O.~Gabber, F.~Orgogozo, Sur la $p$-dimension des corps, \emph{Invent.\ Math.} 174 (2008), 47--80, arXiv:0706.0671.
 \bibitem{gabberzavyalov} O.~Gabber, B.~Zavyalov, Algebraization techniques and rigid-analytic Artin--Grothendieck vanishing, \emph{Ann.\ Sci.\ ÉNS} 59 (2026), 387--436, arXiv:2402.08741.
@@ -600,8 +549,6 @@ This note was drafted with a language model (Claude Opus 5.5, Anthropic) from th
 \bibitem{mathew} A.~Mathew, On $K(1)$-local TR, \emph{Compositio Math.} 157 (2021), 1079--1119, arXiv:2005.08744.
 \bibitem{milneadt} J.~S.~Milne, \emph{Arithmetic Duality Theorems}, 2nd ed., BookSurge, 2006.
 \bibitem{moerdijk1993} I.~Moerdijk, Foliations, groupoids and Grothendieck étendues, \emph{Rev.\ Acad.\ Cienc.\ Zaragoza} (2) 48 (1993), 5--33.
-\bibitem{mohar-robertson-vitray} B.~Mohar, N.~Robertson, R.~P.~Vitray, Planar graphs on the projective plane, \emph{Discrete Math.} 149 (1996), 141--157.
-\bibitem{mohar1995} B.~Mohar, Uniqueness and minimality of large face-width embeddings of graphs, \emph{Combinatorica} 15 (1995), 541--556.
 \bibitem{mukai1981} S.~Mukai, Duality between $D(X)$ and $D(\hat X)$ with its application to Picard sheaves, \emph{Nagoya Math.\ J.} 81 (1981), 153--175.
 \bibitem{openaimath} OpenAI, \texttt{openai/math}, repository of manuscripts and Lean files, \url{https://github.com/openai/math}, folder \texttt{preprints}, read on 17 and 26 October 2026; none of the manuscripts is peer-reviewed.
 \bibitem{philippe} A.~Philippe, Morphisme net d'anneaux, et descente, \emph{Bull.\ Sci.\ Math.~(2)} 97 (1973), 57--64.
@@ -617,8 +564,6 @@ This note was drafted with a language model (Claude Opus 5.5, Anthropic) from th
 \bibitem{tonini2013} F.~Tonini, Stacks of ramified Galois covers, PhD thesis, 2013, arXiv:1307.1116.
 \bibitem{tonini2017} F.~Tonini, Ramified Galois covers via monoidal functors, \emph{Transform.\ Groups} 22 (2017), 845--868, arXiv:1507.05309.
 \bibitem{venken} J.~Venken, Non effectivité de la descente de modules plats par un morphisme fini d'anneaux locaux artiniens, \emph{C.\ R.\ Acad.\ Sci.\ Paris Sér.~A--B} 272 (1971), A1553--A1554.
-\bibitem{vitray} R.~P.~Vitray, The 2 and 3 representative projective planar embeddings, \emph{J.\ Combin.\ Theory Ser.\ B} 54 (1992), 1--12.
-
 \end{thebibliography}
 
 \end{document}
