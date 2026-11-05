@@ -50,6 +50,7 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
     lang: 'English',
     what: 'Statements from the folders that the formalisation could not settle, each with its page, the context, what the literature search found, the ideas of proof, and what would settle it.',
     pdf: '/article/grothendieck-problems.pdf',
+    more: [{ label: 'Hexagon (part II)', href: 'https://hexagonmath.org/2611.00125v1' }],
     src: 'docs/problems/article.tex',
   },
   {
