@@ -44,7 +44,8 @@ function save(s: Store) {
 type Box = (typeof BNF.boxes)[number];
 // Boxes whose review is finished carry `done` (the date) and leave the tab; « Copy all answers »
 // still exports what was entered for them.
-const BOXES: Box[] = BNF.boxes.filter((b) => !('done' in b));
+// Boxes for a later visit carry `later` and stay off the tab until then.
+const BOXES: Box[] = BNF.boxes.filter((b) => !('done' in b) && !('later' in b));
 const plain = (s: string) => s.replace(/«\s*/g, '"').replace(/\s*»/g, '"');
 const one = (s?: string) => (s ?? '').trim().replace(/\s*\n\s*/g, ' ');
 
