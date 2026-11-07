@@ -219,6 +219,7 @@ about the file rather than about whichever model happened to be selected.
 | [`/transcribe-grothendieck`](.claude/skills/transcribe-grothendieck/SKILL.md) | the transcription of a twenty-page batch — the pages as written, with the critical apparatus |
 | [`/modernize-grothendieck`](.claude/skills/modernize-grothendieck/SKILL.md) | the modernised reading of a whole folder — a résumé, then current notation and names, footnotes instead of apparatus |
 | [`/tag-grothendieck`](.claude/skills/tag-grothendieck/SKILL.md) | the folder's tags — the `\keywords{}` line closing the résumé |
+| [`/vectorise-drawings`](.claude/skills/vectorise-drawings/SKILL.md) | a folder's drawings (issue 73) — the combinatorial ones encoded as checked data, the rest redrawn in TikZ, into `transcripts/<cote>/drawings/` |
 | [`/find-novelty`](.claude/skills/find-novelty/SKILL.md) | candidate findings, written as claims about the literature and never about priority, into `src/content/findings.ts` |
 | [`/contribute-to-mathlib`](.claude/skills/contribute-to-mathlib/SKILL.md) | a general lemma a Lean proof needed, proposed to mathlib as a draft pull request |
 | [`/transcribe-quillen`](.claude/skills/transcribe-quillen/SKILL.md) | a batch of one of Quillen's notebooks, same apparatus — local only, in `transcripts-quillen/` |
