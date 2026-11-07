@@ -9,11 +9,7 @@ import { commentData, useComments } from './components/Comments.tsx';
 
 // The reconstructed boards are published (2026-11-01): written in the git-ignored
 // transcripts-buffalo/, copied to public/buffalo-boards/ by `npm run buffalo-boards`.
-// The first tape side of the topos course keeps its edited demonstration copy.
 const Blackboard = lazy(() => import('./components/Blackboard.tsx').then((m) => ({ default: m.Blackboard })));
-const PUBLIC_BOARDS: Record<string, () => Promise<{ default: unknown }>> = {
-  'URU5jgTvjhU-0000': () => import('./content/buffalo-board-URU5jgTvjhU-0000.json'),
-};
 
 /** The tape side a second falls in: boards are filed by video and side. */
 const sideOf = (v: { segments: { start: number }[] }, t: number) =>
@@ -308,12 +304,9 @@ export function BuffaloPage() {
       );
     // A « Tape 2, cont. » segment of the catalogue lies inside the previous side's board.
     const prev = video ? video.segments.filter((s) => s.start < (side ?? 0)).at(-1)?.start : undefined;
-    const load: Promise<Board | null> =
-      key in PUBLIC_BOARDS
-        ? PUBLIC_BOARDS[key]().then((m) => m.default as Board)
-        : local(key).then((b) =>
-            b || prev === undefined ? b : local(`${video!.id}-${String(prev).padStart(4, '0')}`),
-          );
+    const load: Promise<Board | null> = local(key).then((b) =>
+      b || prev === undefined ? b : local(`${video!.id}-${String(prev).padStart(4, '0')}`),
+    );
     load.then((b) => alive && setBoard(b)).catch(() => alive && setBoard(null));
     return () => {
       alive = false;
