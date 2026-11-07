@@ -247,12 +247,12 @@
   "key": "URU5jgTvjhU-2745",
   "line": 123,
   "kind": "prop",
-  "status": "not-formalised",
+  "status": "proved",
   "lean": [
-   "Buffalo.Topos.Part01.sheaf_empty_unique"
+   "Buffalo.Topos.Part02.sheafPtEquiv"
   ],
   "mathlib": [],
-  "note": "Not attempted: the equivalence Sh(pt) ≃ Set (Mathlib has no ready statement); only F(∅) = pt (6730) is proved."
+  "note": "Sh(pt) ≃ Set via F ↦ F(pt) (ptSections is full, faithful, essentially surjective via skyscraper sheaves); proved in Part02a (also entry 33248)."
  },
  {
   "key": "URU5jgTvjhU-2811",
@@ -437,10 +437,15 @@
   "key": "URU5jgTvjhU-6861",
   "line": 143,
   "kind": "prop",
-  "status": "not-formalised",
-  "lean": [],
-  "mathlib": [],
-  "note": "Not attempted (general corepresentability criterion for colimits in a full subcategory); true."
+  "status": "proved",
+  "lean": [
+   "Buffalo.Topos.Part01.hasColimit_iff_corepresentable",
+   "Buffalo.Topos.Part01.sheaf_hasColimit_iff"
+  ],
+  "mathlib": [
+   "CategoryTheory.Limits.IsColimit.ofCorepresentableBy"
+  ],
+  "note": "For any full subcategory ι : C ⊂ D (here Sh(X) ⊂ PSh(X)): cocones over K with vertex S are the arrows colim(ι∘K) → ιS (coconesIsoHom), so a colimit exists iff that functor is corepresentable (Part01e)."
  },
  {
   "key": "URU5jgTvjhU-7053",
@@ -551,10 +556,12 @@
   "key": "URU5jgTvjhU-7768",
   "line": 155,
   "kind": "cex",
-  "status": "not-formalised",
-  "lean": [],
+  "status": "proved",
+  "lean": [
+   "Buffalo.Topos.Part02.product_of_epis_not_epi"
+  ],
   "mathlib": [],
-  "note": "Not attempted: counterexample (sheaves U_n ⊔ (X∖x₀) on ℝ) needs products of sheaves vs. local surjectivity; true."
+  "note": "Sh(ℝ): with Fₙ = Uₙ ⊔ (ℝ ∖ {0}), Uₙ = ]-1/(n+1),1/(n+1)[, each Fₙ → e is an epimorphism but ∏ Fₙ → ∏ e is not (Part02b, also entries 25113 and 25307). In Set, products of surjections are surjective (choice)."
  },
  {
   "key": "URU5jgTvjhU-7768",
@@ -963,7 +970,7 @@
   "status": "not-formalised",
   "lean": [],
   "mathlib": [],
-  "note": "Not attempted; carriers exist (Projective, Sheaf of AddCommGrp), the counterexample is not in Mathlib."
+  "note": "Attempted: the standard argument needs extension by zero j_!ℤ_U of abelian sheaves from an open set and direct sums of them, which Mathlib lacks; the set-level failure of exactness of infinite products is Part02.product_of_epis_not_epi."
  },
  {
   "key": "URU5jgTvjhU-12248",
@@ -1125,10 +1132,15 @@
   "key": "URU5jgTvjhU-13813",
   "line": 215,
   "kind": "thm",
-  "status": "not-formalised",
-  "lean": [],
-  "mathlib": [],
-  "note": "Left exactness of the sheaf pullback on spaces is not stated in Mathlib at this revision; stalk formula 14332 is."
+  "status": "proved",
+  "lean": [
+   "Buffalo.Topos.Part02.pullback_preservesFiniteLimits"
+  ],
+  "mathlib": [
+   "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits",
+   "TopologicalSpace.Opens.map"
+  ],
+  "note": "f^* = sheafification ∘ left Kan extension along the flat functor Opens.map f, which commutes with finite limits (Part02a)."
  },
  {
   "key": "URU5jgTvjhU-13945",
