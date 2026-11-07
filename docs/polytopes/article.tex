@@ -6,6 +6,7 @@
 \usepackage{lmodern,microtype,amssymb,mathtools,enumitem,booktabs}
 \usepackage[margin=2.7cm]{geometry}
 \usepackage{tikz}
+\usetikzlibrary{calc}
 \usepackage[hidelinks]{hyperref}
 \usepackage{xurl}
 \emergencystretch=3em
@@ -39,14 +40,14 @@
 
 \begin{document}
 \begin{abstract}
-In the \emph{Esquisse d'un programme} Grothendieck announced that the regular polytopes make sense over any field, and even over any base ring, through universal formulae in a few parameters. Four folders of his working notes, kept at the University of Montpellier and dating from the late 1970s, contain the computations behind that announcement. We state and prove the main results they contain, completed or corrected where the pages are incomplete. Over any commutative ring, a regular polygon closes after $n$ steps exactly when a Chebyshev-type polynomial $F_n$ vanishes at its invariant, and in characteristic $p$ there are regular $2p$-gons whose vertices lie on two parallel lines. In any dimension, the rotation $\sigma_k\sigma_{k+1}$ of the universal realisation by reflections satisfies $(t-1)(t^2-\alpha_k t+1) = 0$, and its order is $3$, $4$ or $5$ exactly when $\alpha_k = -1$, $0$ or $\alpha_k^2 + \alpha_k = 1$, over every nonzero ring. Realisations by pseudo-reflections with a pinned start vector are classified over any ring by $2n+1$ parameters, with automorphism group $\mathbb G_m \times \mathcal U_\rho$, where $\mathcal U_\rho$ deforms $\mathbb G_m$ into $\mathbb G_a$. The icosahedron written over $\mathbb Z[\alpha]/(\alpha^2+\alpha-1)$ stays faithful over every nonzero ring, characteristics $2$ and $5$ included. Its circumscribed quadric is smooth exactly when $5$ is invertible, and modulo $5$ it becomes a cone whose six vertex directions fill a conic of $\mathbb P^2(\mathbb F_5)$. Finally, the combinatorial icosahedron carries five distinguished triples of edge directions on which its group acts through $\Alt_5$, and the hemi-icosahedron is rebuilt from an oriented set of five elements. All statements are formalised in Lean.
+In the \emph{Esquisse d'un programme} Grothendieck announced that the regular polytopes make sense over any field, and even over any base ring, through universal formulae in a few parameters. Four folders of his working notes, kept at the University of Montpellier and dating from the late 1970s, contain the computations behind that announcement. We state and prove the main results they contain, completed or corrected where the pages are incomplete. Over any commutative ring, a regular polygon closes after $n$ steps exactly when a Chebyshev-type polynomial $F_n$ vanishes at its invariant, and in characteristic $p$ there are regular $2p$-gons whose vertices lie on two parallel lines. In any dimension, the rotation $\sigma_k\sigma_{k+1}$ of the universal realisation by reflections satisfies $(t-1)(t^2-\alpha_k t+1) = 0$, and its order is $3$, $4$ or $5$ exactly when $\alpha_k = -1$, $0$ or $\alpha_k^2 + \alpha_k = 1$, over every nonzero ring. Realisations by pseudo-reflections with a pinned start vector are classified over any ring by $2n+1$ parameters, with automorphism group $\mathbb G_m \times \mathcal U_\rho$, where $\mathcal U_\rho$ deforms $\mathbb G_m$ into $\mathbb G_a$. The icosahedron written over $\mathbb Z[\alpha]/(\alpha^2+\alpha-1)$ stays faithful over every nonzero ring, characteristics $2$ and $5$ included. Its circumscribed quadric is smooth whenever $5$ is invertible and, over a field, singular only in characteristic $5$, where it becomes a cone whose six vertex directions fill a conic of $\mathbb P^2(\mathbb F_5)$. Finally, the combinatorial icosahedron carries five distinguished triples of edge directions on which its group acts through $\Alt_5$, and the hemi-icosahedron is rebuilt from an oriented set of five elements. All statements are formalised in Lean.
 \end{abstract}
 
 \maketitle
 
 \section{Introduction}
 
-In the \emph{Esquisse d'un programme} \cite[\S4]{esquisse}, written in 1984, Grothendieck describes a project from the late 1970s: to realise the regular polyhedra, and more generally the regular maps and polytopes \cite{coxeter1973,mcmullenschulte2002}, not only over the real numbers but over any field and any base ring, without lengths or angles, by universal formulae in a few parameters, the doubles of the cosines of the fundamental angles. He adds that the icosahedron specialised to a finite field remains an icosahedron, and that the characteristics $2$ and $5$ are the most singular. Ji \cite{ji2023} has recently reconstructed part of this programme from the \emph{Esquisse} alone, and observes that his own formulae for the icosahedron are undefined in characteristics $2$ and $5$.
+In the \emph{Esquisse d'un programme} \cite[\S4]{esquisse}, written in 1984, Grothendieck describes a project from the late 1970s: to realise the regular polyhedra, and more generally the regular maps and polytopes \cite{coxeter1973,mcmullenschulte2002}, over any field and even over any base ring, without lengths or angles, by universal formulae in a few parameters, the doubles of the cosines of the fundamental angles. He adds that the icosahedron specialised to a finite field remains an icosahedron, and that the characteristics $2$ and $5$ are the most singular. Ji \cite{ji2023} has recently reconstructed part of this programme from the \emph{Esquisse} alone, and observes that his own formulae for the icosahedron are undefined in characteristics $2$ and $5$.
 
 The University of Montpellier holds the mathematical papers that Grothendieck left to Jean Malgoire and publishes their facsimiles. Four of its folders contain the computations behind the passage of the \emph{Esquisse}:
 \begin{itemize}[leftmargin=1.5em]
@@ -102,7 +103,7 @@ F_n(\alpha) = F_n(\alpha)\,(F_nF_{n+1})(\alpha) + \bigl(F_{n-2}(\alpha) - \alpha
 (b)$\Leftrightarrow$(c): $u_\alpha^n(s_i) = u_\alpha^i(s_n)$ and $u_\alpha^i$ is injective.
 \end{proof}
 
-The criterion holds over every commutative ring, zero divisors included: the converse goes through the Bézout relation of (1), not through a factorisation. Over a field, Bachmann and Schmidt gave the corresponding criterion for linear circulant systems, in the form recalled by Korchmáros and Szőnyi \cite[(3.4)]{korchmarosszonyi2008}: $x^2 - cx + 1$ divides $x^n - 1$. In terms of the Lucas sequence $U_m = U_m(\alpha, 1)$ \cite{lucas1878}, $F_{2m}(\alpha) = U_m$ and $F_{2m+1}(\alpha) = U_{m+1} + U_m$. On page~113 the first Bézout coefficient is written $F_{n-2} - UF_{n-1}$, which fails already for $n = 4$; the correct coefficient is $A_n$ above. The page also concludes ``$F_n(\alpha) = 1$'' on page~112, where $F_n(\alpha) = 0$ is meant. An affinity of $k^2$ is determined by its values at $s_0 = (0,0)$, $s_1 = (1,0)$, $s_{-1} = (0,1)$, so a combinatorial automorphism of the polygon extends in at most one way; together with $\sigma_1 u_\alpha \sigma_1 = u_\alpha^{-1}$, where $\sigma_1(x,y) = (y,x)$, the dihedral group acts on the vertices. The quadratic function $f_\alpha(x,y) = x^2 - x + y^2 - y - \alpha xy$ of page~96 is $u_\alpha$-invariant and vanishes at every vertex.
+The criterion holds over every commutative ring, zero divisors included, because the converse uses only the Bézout relation of (1) and no factorisation. Over a field, Bachmann and Schmidt gave a criterion of the same kind for the linear circular system $v_{i-1} + cv_i + v_{i+1} = 0$ ($i$ modulo $n$), as recalled by Korchmáros and Sz\H{o}nyi \cite[(3.4)]{korchmarosszonyi2008}: it has a nontrivial solution iff $c = \pm2$ or $x^2 - cx + 1$ divides $x^n - 1$. Fisher and Jamison \cite{fisherjamison1998} relate the diagonals of affinely regular polygons over a field to Chebyshev polynomials of the second kind. In terms of the Lucas sequence $U_m = U_m(\alpha, 1)$ \cite{lucas1878}, $F_{2m}(\alpha) = U_m$ and $F_{2m+1}(\alpha) = U_{m+1} + U_m$. On page~113 the first Bézout coefficient is written $F_{n-2} - UF_{n-1}$, which fails already for $n = 4$; the correct coefficient is $A_n$ above. The page also concludes ``$F_n(\alpha) = 1$'' on page~112, where $F_n(\alpha) = 0$ is meant. An affinity of $k^2$ is determined by its values at $s_0 = (0,0)$, $s_1 = (1,0)$, $s_{-1} = (0,1)$, so a combinatorial automorphism of the polygon extends in at most one way; together with $\sigma_1 u_\alpha \sigma_1 = u_\alpha^{-1}$, where $\sigma_1(x,y) = (y,x)$, the dihedral group acts on the vertices. The quadratic function $f_\alpha(x,y) = x^2 - x + y^2 - y - \alpha xy$ of page~96 is $u_\alpha$-invariant and vanishes at every vertex.
 
 \subsection*{Polygons on two parallel lines}
 A \emph{characteristic} of a nonzero ring $k$ is an integer $p \ge 0$ such that $m \in \Z$ maps to $0$ in $k$ exactly when $p \mid m$. Pages~84--85 and~94--99 describe two polygons in characteristic $p$ whose vertices lie alternately on two parallel lines: the one with invariant $\alpha = -2$, and the \emph{improper} one, with rotation $v(x,y) = (1 - y, -x)$. Put $t_n = v^n(0,0)$.
@@ -121,7 +122,7 @@ Let $k$ be a nonzero ring of characteristic $p$.
 (1) By induction both ways: $u_{-2}(-m, m) = (1+m, -m)$ and $u_{-2}(1+m, -m) = (-(m+1), m+1)$. (2) $s_{2m} = (0,0)$ iff $m = 0$ in $k$, iff $p \mid m$; and $s_{2m+1} = (0,0)$ would force $1 = 0$. Theorem~\ref{thm:closure} gives the rest. (3) For $n = 2m$ the two vectors are $(1+2m, -2m)$ and $(2m, 1-2m)$, of determinant $1$; the odd case is similar. (4) By induction, $v^{2m}(x,y) = (x+m, y-m)$ and $v^{2m+1}(x,y) = (1-y+m, -x-m)$, and one argues as in (2).
 \end{proof}
 
-No primality or parity of $p$ is needed. For $p = 2$, $\alpha = -2 = 0$ and one recovers the square; for $p = 0$ both rotations have infinite order and the vertices form the two staircase $\infty$-gons of page~85. The two polygons have the same vertex set, $s_{2m+1} = t_{2m+1}$ and $s_{2m} = t_{-2m}$: the first zigzags along the two lines in opposite directions, the second climbs them in the same direction (Figure~\ref{fig:strip}). Over a field, every affinely regular polygon lies on an irreducible conic \cite[Th.~2.1--2.3]{korchmarosszonyi2008}, and the case $c = -2$ is treated there for $n$ prime to the characteristic, where the even and odd vertices coincide; the two-line $2p$-gons do not appear there. Here the conic $f_{-2} = 0$ is the pair of lines.
+No primality or parity of $p$ is needed. For $p = 2$, $\alpha = -2 = 0$ and one recovers the square; for $p = 0$ both rotations have infinite order and the vertices form the two staircase $\infty$-gons of page~85. The two polygons have the same vertex set, $s_{2m+1} = t_{2m+1}$ and $s_{2m} = t_{-2m}$: the first zigzags along the two lines in opposite directions, the second climbs them in the same direction (Figure~\ref{fig:strip}). For $p \ge 3$ each line carries $p$ vertices, so these polygons are degenerate in the sense of Korchmáros and Sz\H{o}nyi (three vertices are collinear, though never three consecutive ones). Their survey is consistent with this: over a field, every non-degenerate affinely regular polygon lies on an irreducible conic \cite[Lemma~2.2]{korchmarosszonyi2008}, the classification \cite[Th.~2.1 and~2.3]{korchmarosszonyi2008} lists ellipses, hyperbolas and, in characteristic $p$, parabolas carrying $p$-gons, and the case $c = -2$ of the circular system is discussed there for $n$ prime to the characteristic, where the even vertices coincide and so do the odd ones. We have not found the two-line $2p$-gons in that survey. Here the invariant conic $f_{-2} = 0$ is the pair of lines.
 
 \begin{figure}[ht]
 \centering
@@ -167,7 +168,7 @@ so $\rho$ has trace $\alpha_k$ and determinant $1$ on $W$, which contains the im
 (3) Write $\rho^m x = x + \sum_{j<m}\rho^j(\rho x - x)$. On $W$, $\sum_{j<3}\rho^j = (1 + \alpha_k)\rho$, $\sum_{j<4}\rho^j = \alpha_k\bigl((1 + \alpha_k)\rho - 1\bigr)$ and $\sum_{j<5}\rho^j = (\alpha_k^2 + \alpha_k - 1)(\alpha_k\rho - 1)$, which vanish under the corresponding hypothesis. Conversely, on $\langle s_k, s_{k+1}, s_{k+2}\rangle$, $\rho(a,b,c) = \bigl(c - (1+\alpha)b,\ a + (1+\alpha)b,\ b\bigr)$ with $\alpha = \alpha_k$, and the iterates of $s_k = (1,0,0)$ are $(0,1,0)$, $(-1-\alpha, 1+\alpha, 1)$, $(-2\alpha - \alpha^2, \alpha + \alpha^2, 1 + \alpha)$, then vectors whose last two coordinates are $(\alpha^3 + \alpha^2 - \alpha, \alpha + \alpha^2)$ and $\bigl((\alpha^2 - 1)P, \alpha P\bigr)$, with $P = \alpha^2 + \alpha - 1$. So $\rho^3s_k = s_k$ forces $1 + \alpha = 0$; $\rho^4s_k = s_k$ forces $\alpha + \alpha^2 = 0 = \alpha^3 + \alpha^2 - \alpha$, hence $\alpha = \alpha(\alpha + \alpha^2) - (\alpha^3 + \alpha^2 - \alpha) = 0$; and $\rho^5s_k = s_k$ forces $P = \alpha\cdot\alpha P - (\alpha^2 - 1)P = 0$. Under each hypothesis, the iterates of order $m < p$ have a coordinate equal to $1$ where $s_k$ has $0$, so $\rho^m \ne 1$ when $R \ne 0$.
 \end{proof}
 
-On the affine plane $s_k + W$, which $\rho$ preserves, the linear part of $\rho$ has trace $\alpha_k$ and determinant $1$; over $\R$ it is conjugate to the rotation by $2\pi/p$ when $\alpha_k = 2\cos(2\pi/p)$, and $-1$, $0$, $(\sqrt5 - 1)/2$ give $p = 3, 4, 5$ (Figure~\ref{fig:orders}). The parameters are thus twice the cosines of the rotation angles, which is presumably the sense of the \emph{Esquisse}'s ``doubles of the cosines of the fundamental angles''. The five Platonic solids are $(\alpha_0, \alpha_1) = (-1,-1)$ (tetrahedron), $(0,-1)$ (cube), $(-1,0)$ (octahedron), $(\alpha,-1)$ (dodecahedron) and $(-1,\alpha)$ (icosahedron), with $\alpha^2 + \alpha = 1$; the other root of $\alpha^2 + \alpha - 1$ gives the star polyhedra of page~69.
+On the affine plane $s_k + W$, which $\rho$ preserves, the linear part of $\rho$ has trace $\alpha_k$ and determinant $1$; over $\R$ it is conjugate to the rotation by $2\pi/p$ when $\alpha_k = 2\cos(2\pi/p)$, and $-1$, $0$, $(\sqrt5 - 1)/2$ give $p = 3, 4, 5$ (Figure~\ref{fig:orders}). The parameters are thus twice the cosines of the rotation angles, which is presumably the sense of the \emph{Esquisse}'s ``doubles of the cosines of the fundamental angles''. Ji's formulae are written in the cosines themselves, and he notes that he could not reconcile them with the doubles \cite[\S2]{ji2023}. The five Platonic solids are $(\alpha_0, \alpha_1) = (-1,-1)$ (tetrahedron), $(0,-1)$ (cube), $(-1,0)$ (octahedron), $(\alpha,-1)$ (dodecahedron) and $(-1,\alpha)$ (icosahedron), with $\alpha^2 + \alpha = 1$; the other root of $\alpha^2 + \alpha - 1$ gives the star polyhedra of page~69.
 
 \begin{figure}[ht]
 \centering
@@ -181,7 +182,7 @@ On the affine plane $s_k + W$, which $\rho$ preserves, the linear part of $\rho$
   \draw[black!55] (-90:1.25) \foreach \j in {1,...,\p} { -- ({-90+\j*\stp}:1.25) } -- cycle;
   \fill[black!45] (0,0) circle (1.1pt);
   \draw[->, black!70] ({-90+0.18*\stp}:0.5) arc[start angle={-90+0.18*\stp}, end angle={-90+0.82*\stp}, radius=0.5];
-  \node[black!70] at ({-90+0.5*\stp}:0.25) {\footnotesize $\rho$};
+  \node[black!70] at ({-90+0.5*\stp}:0.74) {\footnotesize $\rho$};
   \foreach \j in {1,...,\p} \fill ({-90+\j*\stp}:1.25) circle (1.6pt);
   \node[below=2pt] at (-90:1.25) {$s_k$};
   \node[anchor=\anA, inner sep=3pt] at ({-90+\stp}:1.25) {$s_{k+1}$};
@@ -205,7 +206,7 @@ Let $n \ge 1$, $k \le n-1$ and $\rho = \sigma_k\sigma_{k+1}$.
 \end{theorem}
 
 \begin{proof}
-(1) $\chi(\rho) = 0$ by Theorem~\ref{thm:univ}(2). Conversely, if $\rho^m = 1$, the remainder $r = r_0 + r_1t + r_2t^2$ of $t^m - 1$ modulo the monic $\chi$ satisfies $r(\rho)s_k = r_0s_k + r_1s_{k+1} + r_2\bigl(s_{k+2} + (1+\alpha_k)w_k\bigr) = 0$, whence $r_2 = r_1 = r_0 = 0$: the vector $s_k$ is cyclic. (2) $T = x^d\Psi_p(x + x^{-1})$ is an integer polynomial of degree at most $2d$ and constant term $1$, vanishing at $\zeta = e^{2i\pi/p}$, so $\Phi_p \mid T$; and $\deg\Phi_p = [\Q(\zeta):\Q(\cos(2\pi/p))]\,d \ge 2d$, since $\Q(\cos(2\pi/p))$ is real and $\zeta$ is not. Hence $T = \Phi_p$. (3) Let $\zeta$ be a root of $t^2 - \alpha_kt + 1$ in an algebraic closure; $\alpha_k = \zeta + \zeta^{-1}$. In characteristic $0$, $t^m - 1$ has simple roots, so by (1) $\rho^m = 1$ iff $\zeta^m = 1$ and $\zeta^2 \ne 1$; thus $\rho$ has order $p$ iff $\zeta$ is a primitive $p$-th root of unity, iff $\Phi_p(\zeta) = 0$, iff $\Psi_p(\alpha_k) = 0$ by (2).
+(1) $\chi(\rho) = 0$ by Theorem~\ref{thm:univ}(2). Conversely, if $\rho^m = 1$, the remainder $r = r_0 + r_1t + r_2t^2$ of $t^m - 1$ modulo the monic $\chi$ satisfies $r(\rho)s_k = r_0s_k + r_1s_{k+1} + r_2\bigl(s_{k+2} + (1+\alpha_k)w_k\bigr) = 0$, whence $r_2 = r_1 = r_0 = 0$: the vector $s_k$ is cyclic. (2) $T = x^d\Psi_p(x + x^{-1})$ is an integer polynomial of degree at most $2d$ and constant term $1$, vanishing at $\zeta = e^{2i\pi/p}$, so $\Phi_p \mid T$; and $\deg\Phi_p = [\Q(\zeta):\Q(\cos(2\pi/p))]\,d \ge 2d$, since $\Q(\cos(2\pi/p))$ is real and $\zeta$ is not. Hence $T = c\,\Phi_p$ with $c$ constant, and $c = 1$ since both have constant term $1$. (3) Let $\zeta$ be a root of $t^2 - \alpha_kt + 1$ in an algebraic closure; $\alpha_k = \zeta + \zeta^{-1}$. In characteristic $0$, $t^m - 1$ has simple roots for $m \ge 1$, so by (1) $\rho^m = 1$ iff $\zeta^m = 1$ and $\zeta^2 \ne 1$ (the roots $1$, $\zeta$, $\zeta^{-1}$ of $\chi$ must be distinct); thus $\rho$ has order $p$ iff $\zeta$ is a primitive $p$-th root of unity, iff $\Phi_p(\zeta) = 0$, iff $\Psi_p(\alpha_k) = 0$ by (2).
 \end{proof}
 
 For $p = 3, 4, 5$, $\Psi_p = x + 1$, $x$, $x^2 + x - 1$, and Theorem~\ref{thm:univ}(3) is the same statement over every nonzero ring. In positive characteristic the criterion for arbitrary $p$ is not proved here.
@@ -227,7 +228,7 @@ Over every commutative ring $k$ and for every $k$-module $E$, (A) and (B) are eq
 \end{theorem}
 
 \begin{proof}[Sketch]
-One reduces to the submodule $N$ spanned by the family, in which it is a basis. Under (A), $s_{i+1} - s_i = \langle s_i, a'_i\rangle a_i$, and the coordinate on $s_{i+1}$ of the projection onto $N$ shows that $\langle s_i, a'_i\rangle$ is invertible; so $a_i \in N$, the $\tau_i$ restrict to $N$, and the commutation of $\tau_i$ and $\tau_j$ becomes $\langle a_i, a'_j\rangle = 0$. Under (B), $\langle s_i, a'_i\rangle = \nu_i/\nu_{i-1}$, and in both directions the transition matrix between $(s_0, \dots, s_{n+1})$ and $(s_0, a_0, \dots, a_n)$ is triangular with invertible diagonal.
+One reduces to the submodule $N$ spanned by the family, in which it is a basis. Under (A), $s_{i+1} - s_i = \langle s_i, a'_i\rangle a_i$, and the coordinate on $s_{i+1}$ of the projection onto $N$ shows that $\langle s_i, a'_i\rangle$ is invertible; so $a_i \in N$, the $\tau_i$ restrict to $N$, and the commutation of $\tau_i$ and $\tau_j$ becomes $\langle a_i, a'_j\rangle = 0$. Under (B), $\langle s_i, a'_i\rangle = \nu_i$, by induction on $i$, since $\langle s_{i-1}, a'_i\rangle = 0$; in both directions the transition matrix between $(s_0, \dots, s_{n+1})$ and $(s_0, a_0, \dots, a_n)$ is triangular with invertible diagonal.
 \end{proof}
 
 A realisation satisfying (B) with $E$ free of rank $n+2$ is \emph{pinned} and \emph{normalised} when $\langle s_0, a'_0\rangle = 1$ and $\langle a_{i-1}, a'_i\rangle = 1$. Its invariants are $\mu_i = \langle a_i, a'_i\rangle = \lambda_i - 1$ and $\beta_i = \langle a_{i+1}, a'_i\rangle$, so that $\tau_ia_i = \lambda_ia_i$ and $\tau_ia_{i+1} = a_{i+1} + \beta_ia_i$.
@@ -236,7 +237,7 @@ A realisation satisfying (B) with $E$ free of rank $n+2$ is \emph{pinned} and \e
 A normalised pinned realisation is isomorphic, by a unique isomorphism sending $s_0$ to $e_0$ and conjugating the $\tau_i$, to the coordinate realisation on $k^{n+2}$ with basis $(s_0, a_0, \dots, a_n)$ and parameters $(\mu_i, \beta_i)$. The coordinate realisation satisfies (B) for all parameters, and $\tau_i$ is invertible iff $\lambda_i$ is. A linear map between two normalised realisations that is compatible with $s_0$ and the $\tau_i$ forces their parameters to be equal. Non-degenerate pinned realisations on a free module of rank $n+2$ are thus classified, rigidly, by the $2n+1$ parameters $(\lambda_0, \beta_0, \lambda_1, \dots, \beta_{n-1}, \lambda_n)$, with $\lambda_i \in k^\times$ and $\beta_i \in k$.
 \end{theorem}
 
-Over $\R$, for reflection representations of Coxeter groups, the reflections determine their Cartan matrix up to diagonal conjugation \cite[\S3.1]{dgklm2021}, and Monson and Schulte study reflection groups of polytopes over finite fields through a similar Gram matrix \cite{monsonschulte2004}. Theorem~\ref{thm:classif} works over any ring, with pseudo-reflections of arbitrary eigenvalue $\lambda_i$, and the start vector $s_0$ removes the diagonal ambiguity.
+Over $\R$, for representations of a Coxeter group generated by reflections, the reflections determine their Cartan matrix $(\alpha_i(v_j))$ only up to conjugation by a diagonal matrix \cite[\S3.2]{dgklm2021}. Monson and Schulte reduce the root-lattice representation of a crystallographic Coxeter group modulo an odd prime and ask when the image is the group of an abstract regular polytope \cite{monsonschulte2004}. Theorem~\ref{thm:classif} works over any ring, with pseudo-reflections of arbitrary eigenvalue $\lambda_i$, and the start vector $s_0$ removes the diagonal ambiguity. The count $2n+1$ agrees with the $n + (n+1)$ variables that a footnote of the \emph{Esquisse} announces for the universal pseudo-polyhedron, one additional invariant for each pseudo-reflection \cite[\S4]{esquisse}.
 
 \subsection*{Automorphisms}
 In the basis $(s_0, a_0, \dots, a_n)$ let $\pi$ be the first coordinate, and $\tilde c$ the unique vector killed by all the $a'_i$ whose coordinate on $a_n$ is $1$, obtained by back substitution. Put $\rho = \pi(\tilde c)$; for $n = 1$, $\rho = \mu_0\mu_1 - \beta_0$, which is $4 - \beta_0$ for reflections, as on page~41. Page~37 introduces the group $\mathcal U_\rho = \operatorname{Spec}\mathcal O_S[T]_{(1+\rho T)}$ with law $\lambda * \lambda' = \lambda + \lambda' + \rho\lambda\lambda'$, acting by $u_\lambda = \id + \lambda\,\pi\otimes\tilde c$; the theorem of page~38 asserts without proof that $\mathbb G_m \times \mathcal U_\rho \to \operatorname{Aut}(E, (\tau_i))$ is an isomorphism.
@@ -281,7 +282,7 @@ The representation on $C$ is irreducible iff all the $\beta_i$ are nonzero and, 
 \end{corollary}
 
 \begin{proof}
-Intersect the list of Theorem~\ref{thm:inv} with $C$: $E \not\subset C$ since $\pi(s_0) = 1$; $k\tilde c \subset C$ iff $\rho = 0$; $Z^*_i \subset C$ always. If $\rho = 0$ and $n \ge 1$, $k\tilde c$ is a line of $C$ different from $C$, since $h_0 \subset C$ is not a multiple of $\tilde c$, whose last coordinate is $1$.
+Intersect the list of Theorem~\ref{thm:inv} with $C$: $E \not\subset C$ since $\pi(s_0) = 1$; $k\tilde c \subset C$ iff $\rho = 0$; $Z^*_i \subset C$ always. If $\beta_i = 0$ for some $i < n$, then $Z^*_i$ is a stable subspace of $C$ that is neither $0$ nor $C$: it contains $h_{i+1}$ but not $h_0$, which lies in $C$. If $\rho = 0$ and $n \ge 1$, $k\tilde c$ is a line of $C$ different from $C$, since $h_0 \subset C$ is not a multiple of $\tilde c$, whose last coordinate is $1$.
 \end{proof}
 
 The struck-out (d) of page~80 asks for $\rho \ne 0$ and all $\beta_i \ne 0$; the (c) of page~82 omits $\rho \ne 0$, which is needed. For $i < n$, $Z^*_i \subset Z'_i$ iff $\beta_i = 0$, the ``$\in$'' of the margin of page~79 rather than the ``$\notin$'' of page~81.
@@ -319,13 +320,13 @@ Let $R$ be a commutative ring with $\alpha^2 + \alpha = 1$.
 \begin{enumerate}
 \item $q$ is invariant under the $\sigma_i$, and every quadratic function vanishing at the nine vertices $s_0, s_1, s_2, s_3, s'_3, s''_3$, $\iota s_0, \iota s_1, \iota s_2$ is a multiple of $q$.
 \item The half-discriminant of $q_0$ is $1$.
-\item The projective quadric $Q = q_0(x,y,z) - (x+y+z)t$ has discriminant $-\alpha - 3$, of norm $5$; it is smooth iff $5$ is invertible in $R$.
+\item The projective quadric $Q = q_0(x,y,z) - (x+y+z)t$ has discriminant $-\alpha - 3$, of norm $5$. The discriminant is invertible iff $5$ is invertible in $R$, and then $0$ is the only common zero of the four partial derivatives of $Q$: $Q$ is smooth.
 \item If $5 = 0$ and $\alpha = 2$, $Q$ is a cone with vertex the centre $o = (1, 2, 2)$. Over a field, $Q$ is singular iff the characteristic is $5$.
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-The uniqueness follows from a $9 \times 9$ minor equal to $13\alpha + 21$, a unit of $\Z[\alpha]$ with inverse $13\alpha - 8$; it holds over any ring, without dividing. The half-discriminant $4abc + uvw - au^2 - bv^2 - cw^2$ of $q_0$ is $2 - (\alpha^2 + \alpha) = 1$, the \emph{merveille} of page~101, also in characteristic~$2$. The $4 \times 4$ polar matrix of $Q$ has determinant $\alpha^2 - 4 = -\alpha - 3$; since $(-\alpha - 3)(\alpha - 2) = 5$ and $(-\alpha - 3)^2 = 5(\alpha + 2)$, it is invertible iff $5$ is. In characteristic $5$, $\alpha^2 + \alpha - 1 = (\alpha - 2)^2$, and the kernel is spanned by $(1, 2, 2, 1)$, which lies on $Q$.
+The uniqueness follows from a $9 \times 9$ minor equal to $13\alpha + 21$, a unit of $\Z[\alpha]$ with inverse $13\alpha - 8$; it holds over any ring, without dividing. The half-discriminant $4abc + uvw - au^2 - bv^2 - cw^2$ of $q_0$ is $2 - (\alpha^2 + \alpha) = 1$, the \emph{merveille} of page~101, also in characteristic~$2$. The $4 \times 4$ polar matrix of $Q$ has determinant $\alpha^2 - 4 = -\alpha - 3$; since $(-\alpha - 3)(\alpha - 2) = 5$ and $(-\alpha - 3)^2 = 5(\alpha + 2)$, it is invertible iff $5$ is. The rows of the polar matrix are the partial derivatives of $Q$, and a square matrix with invertible determinant has zero kernel. In characteristic $5$, $\alpha^2 + \alpha - 1 = (\alpha - 2)^2$, and the kernel is spanned by $(1, 2, 2, 1)$, which lies on $Q$.
 \end{proof}
 
 \begin{theorem}[after \fac{70}, p.~78]\label{thm:mod5}
@@ -342,11 +343,27 @@ Over $\F_5$, where $\alpha = 2$, put $\bar s = s - o$ for a vertex $s$.
 All statements concern the $125$ vectors of $\F_5^3$ and finite lists of vertices, edges and faces, and are checked by computation.
 \end{proof}
 
-Page~78 gives the table of directions, the count $125 = 1 + 24 + 60 + 40$, and the phrase ``deux icos.'': the twenty-four isotropic vectors are the vertices of the icosahedron and of its homothetic image of ratio~$2$. Points~(2) and~(4) explain the fifteen edge directions as the exterior points of the conic and the ten face directions as the interior points; that $\mathfrak A_5 \cong \mathrm{PSL}_2(\F_5)$ acts on the six axes as on $\mathbb P^1(\F_5)$ is classical, but we have not found the icosahedron drawn as a conic in $\mathbb P^2(\F_5)$ in print. This is the most singular characteristic of the \emph{Esquisse}: the quadric degenerates to a cone, and the icosahedron survives on its isotropic directions.
+Page~78 gives the table of directions, the count $125 = 1 + 24 + 60 + 40$, and the phrase ``deux icos.'': the twenty-four isotropic vectors are the vertices of the icosahedron and of its homothetic image of ratio~$2$. Points~(2) and~(4) explain the fifteen edge directions as the exterior points of the conic and the ten face directions as the interior points (Figure~\ref{fig:conic}); that $\mathfrak A_5 \cong \mathrm{PSL}_2(\F_5)$ acts on the six axes as on $\mathbb P^1(\F_5)$ is classical, but we do not know a printed source that reads the reduction modulo~$5$ of the icosahedron as this conic and its exterior and interior points. This is one of the two most singular characteristics of the \emph{Esquisse}: the quadric degenerates to a cone, and the icosahedron survives on its isotropic directions. A footnote of the \emph{Esquisse} suggests that the exceptional characteristics are those where the circumscribed hyperquadric is degenerate or tangent to the hyperplane at infinity \cite[\S4]{esquisse}. Characteristic $5$ is the degenerate case. In characteristic $2$ the conic at infinity $q_0 = 0$ stays smooth, since its half-discriminant is $1$; what happens there is that the centre goes to infinity, as the \emph{Esquisse} says of characteristic~$2$: by Theorem~\ref{thm:faithful}(4), $\iota$ is a translation.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\small}]
+\draw[black!55] (0,0) circle (1.3);
+\coordinate (E) at (2.6,0);
+\draw[black!70] ($(E)!-0.06!(60:1.3)$) -- ($(E)!1.3!(60:1.3)$);
+\draw[black!70] ($(E)!-0.06!(-60:1.3)$) -- ($(E)!1.3!(-60:1.3)$);
+\foreach \a in {0,60,...,300} \fill (\a:1.3) circle (1.7pt);
+\fill (E) circle (1.7pt); \node[right=4pt] at (E) {edge direction};
+\fill (0.1,0.35) circle (1.7pt); \draw[black!45] (0.1,0.35) -- (-0.75,1.95); \node[anchor=south] at (-0.75,1.95) {face direction};
+\draw[black!45] (180:1.3) -- (-2.6,0.55); \draw[black!45] (240:1.3) -- (-2.6,0.55); \node[anchor=south east] at (-2.6,0.55) {vertex directions};
+\node[black!55] at (-1.75,-1.2) {$q_0 = 0$};
+\end{tikzpicture}
+\caption{Theorem~\ref{thm:mod5}, drawn schematically over $\R$. In $\mathbb P^2(\F_5)$ the conic $q_0 = 0$ consists of the six vertex directions; each of the fifteen edge directions lies on exactly two tangents, and none of the ten face directions lies on a tangent.}\label{fig:conic}
+\end{figure}
 
 \section{The combinatorial icosahedron and the hemi-icosahedron}\label{sec:comb}
 
-Folder~86 takes the icosahedron as a purely combinatorial object. Label its vertices $0, \dots, 11$, with $0$ and $11$ opposite and $1, \dots, 5$ and $6, \dots, 10$ the two pentagons of their neighbours; everything below is computed from the adjacency. For a face $\{x, y, z\}$, let $\mathrm o(x, y, z)$ be the third vertex of the other face bordering $\{x, y\}$, and let $\iota x$ be the antipode, the only vertex that is neither $x$ nor a neighbour of $x$ nor a neighbour of a neighbour. A \emph{flag} is an oriented triangle $(s, t, u)$; there are $120$. Two edges have the same \emph{direction} if they are equal or antipodal. For an edge $\{s, t\}$ with faces $\{s, t, u\}$, $\{s, t, v\}$, page~18 defines $\rho_0(s, t) = \{\mathrm o(s, u, t), \mathrm o(s, v, t)\}$: the side of the pentagon around $s$ opposite to $t$.
+Folder~86 takes the icosahedron as a purely combinatorial object. Label its vertices $0, \dots, 11$, with $0$ and $11$ opposite and $1, \dots, 5$ and $6, \dots, 10$ the two pentagons of their neighbours; everything below is computed from the adjacency. For a face $\{x, y, z\}$, let $\mathrm o(x, y, z)$ be the third vertex of the other face bordering $\{x, y\}$, and let $\iota x$ be the antipode, the only vertex that is neither $x$ nor a neighbour of $x$ nor a neighbour of a neighbour. A \emph{flag} is an oriented triangle $(s, t, u)$; there are $120$. Figure~\ref{fig:triedre} shows the labelling. Two edges have the same \emph{direction} if they are equal or antipodal. For an edge $\{s, t\}$ with faces $\{s, t, u\}$, $\{s, t, v\}$, page~18 defines $\rho_0(s, t) = \{\mathrm o(s, u, t), \mathrm o(s, v, t)\}$: the side of the pentagon around $s$ opposite to $t$.
 
 \begin{theorem}[Grothendieck, \fac{86}, pp.~18--25]\label{thm:triedres}
 \leavevmode
@@ -361,6 +378,25 @@ An automorphism commutes with $\mathrm o$, since $\mathrm o(x, y, z)$ is the onl
 \end{proof}
 
 Page~23 puts two edges of different trihedra in the same triple; the correction is part of the proof's check. The page's own argument goes through the parity of the generators and the orders $6$, $10$ and $4$ of the images of the stabilisers of a face, a vertex and an edge; here the statement is obtained by counting flags. In Euclidean terms the trihedra are the five orthogonal frames, or the five octahedra inscribed in the icosahedron; that identification is not used.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\small}]
+\coordinate (v0) at (0,0);
+\foreach \k in {1,...,5} { \coordinate (v\k) at ({90-72*(\k-1)}:1.15); }
+\coordinate (v7) at (54:2.5); \coordinate (v8) at (-18:2.5); \coordinate (v9) at (-90:2.5);
+\coordinate (v10) at (-162:2.5); \coordinate (v6) at (126:2.5);
+\foreach \a/\b in {0/1,0/2,0/3,0/4,0/5,1/2,2/3,3/4,4/5,5/1,1/6,1/7,2/7,2/8,3/8,3/9,4/9,4/10,5/10,5/6,6/7,7/8,8/9,9/10,10/6} \draw[black!45] (v\a)--(v\b);
+\foreach \k/\ang in {7/54,8/-18,9/-90,10/-162,6/126} { \draw[black!45] (v\k)--(\ang:3.15); \node[black!55, font=\scriptsize] at (\ang:3.4) {$11$}; }
+\foreach \a/\b in {0/1,3/4,6/7,2/8,5/10} \draw[line width=1.6pt] (v\a)--(v\b);
+\draw[line width=1.6pt] (v9)--(-90:3.15);
+\foreach \k in {0,...,10} \fill (v\k) circle (1.5pt);
+\node at (198:0.32) {$0$};
+\foreach \k in {1,...,5} { \node at ({90-72*(\k-1)+20}:1.3) {$\k$}; }
+\foreach \k/\ang in {7/54,8/-18,9/-90,10/-162,6/126} { \node at (\ang+12:2.75) {$\k$}; }
+\end{tikzpicture}
+\caption{The icosahedron of Section~\ref{sec:comb}, projected from the vertex $11$: $0$ at the centre, the pentagons $1, \dots, 5$ and $6, \dots, 10$ around it, and $11$ at infinity, joined to $6, \dots, 10$ by the radial segments. In thick lines, one of the five distinguished trihedra: the six edges $\{0,1\}$, $\{9,11\}$, $\{3,4\}$, $\{6,7\}$, $\{2,8\}$, $\{5,10\}$, pairwise disjoint, in three directions of two antipodal edges each.}\label{fig:triedre}
+\end{figure}
 
 \begin{theorem}[after \fac{86}, pp.~21, 26--32]\label{thm:hemi}
 To a flag $(s, t, u)$, with $v = \mathrm o(s, t, u)$, associate the numbering $\nu(s, t, u)\colon \{1, \dots, 5\} \to T$ formed by the trihedra of the five edges at $s$, read around the pentagon from $t$, away from $u$.
@@ -392,13 +428,14 @@ The transcriptions of folders~70, 72, 78 and~86, the modernised readings, the pr
 \section*{Acknowledgements}
 The facsimiles are published by the University of Montpellier, \href{https://grothendieck.umontpellier.fr/}{grothendieck.umontpellier.fr}.
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{10}
 \bibitem{coxeter1973} H.~S.~M.~Coxeter, \emph{Regular Polytopes}, 3rd ed., Dover, New York, 1973.
-\bibitem{dgklm2021} J.~Danciger, F.~Guéritaud, F.~Kassel, G.-S.~Lee, L.~Marquis, Convex cocompactness for Coxeter groups, arXiv:2102.02757.
-\bibitem{esquisse} A.~Grothendieck, Esquisse d'un programme, in L.~Schneps, P.~Lochak (eds.), \emph{Geometric Galois Actions 1}, London Math.\ Soc.\ Lecture Note Ser.~242, Cambridge University Press, 1997, 7--48, \href{https://doi.org/10.1017/CBO9780511758874.003}{doi:10.1017/CBO9780511758874.003}.
+\bibitem{dgklm2021} J.~Danciger, F.~Guéritaud, F.~Kassel, G.-S.~Lee, L.~Marquis, Convex cocompactness for Coxeter groups, \emph{J. Eur. Math. Soc.} 27 (2025), no.~1, 119--181, \href{https://doi.org/10.4171/jems/1539}{doi:10.4171/jems/1539}; section numbers as in arXiv:2102.02757v3.
+\bibitem{esquisse} A.~Grothendieck, Esquisse d'un programme, in L.~Schneps, P.~Lochak (eds.), \emph{Geometric Galois Actions 1}, London Math.\ Soc.\ Lecture Note Ser.~242, Cambridge University Press, 1997, 7--48, \href{https://doi.org/10.1017/CBO9780511758874.003}{doi:10.1017/CBO9780511758874.003}; English translation by P.~Lochak and L.~Schneps, Sketch of a Programme, ibid., 243--283, \href{https://doi.org/10.1017/CBO9780511758874.017}{doi:10.1017/CBO9780511758874.017}.
+\bibitem{fisherjamison1998} J.~C.~Fisher, R.~E.~Jamison, Properties of affinely regular polygons, \emph{Geom.\ Dedicata} 69 (1998), 241--259, \href{https://doi.org/10.1023/A:1004903818702}{doi:10.1023/A:1004903818702}.
 \bibitem{ji2023} C.~Ji, A note on regular polyhedra over finite fields, arXiv:2304.03345 (2023).
-\bibitem{korchmarosszonyi2008} G.~Korchmáros, T.~Szőnyi, Affinely regular polygons in an affine plane, \emph{Contrib.\ Discrete Math.} 3 (2008), \href{https://doi.org/10.55016/ojs/cdm.v3i1.62767}{doi:10.55016/ojs/cdm.v3i1.62767}.
-\bibitem{lucas1878} É.~Lucas, Théorie des fonctions numériques simplement périodiques, \emph{Amer.\ J.\ Math.} 1 (1878), 184--240 and 289--321, \href{https://doi.org/10.2307/2369308}{doi:10.2307/2369308}.
+\bibitem{korchmarosszonyi2008} G.~Korchmáros, T.~Sz\H{o}nyi, Affinely regular polygons in an affine plane, \emph{Contrib.\ Discrete Math.} 3 (2008), no.~1, 20--38, \href{https://doi.org/10.55016/ojs/cdm.v3i1.62767}{doi:10.55016/ojs/cdm.v3i1.62767}.
+\bibitem{lucas1878} É.~Lucas, Théorie des fonctions numériques simplement périodiques, \emph{Amer.\ J.\ Math.} 1 (1878), no.~2, 184--196; no.~3, 197--240; no.~4, 289--321, \href{https://doi.org/10.2307/2369308}{doi:10.2307/2369308}, \href{https://doi.org/10.2307/2369311}{10.2307/2369311}, \href{https://doi.org/10.2307/2369373}{10.2307/2369373}.
 \bibitem{mcmullenschulte2002} P.~McMullen, E.~Schulte, \emph{Abstract Regular Polytopes}, Cambridge University Press, 2002, \href{https://doi.org/10.1017/CBO9780511546686}{doi:10.1017/CBO9780511546686}.
 \bibitem{monsonschulte2004} B.~Monson, E.~Schulte, Reflection groups and polytopes over finite fields, I, \emph{Adv.\ Appl.\ Math.} 33 (2004), 290--317, \href{https://doi.org/10.1016/j.aam.2003.11.002}{doi:10.1016/j.aam.2003.11.002}.
 \end{thebibliography}
