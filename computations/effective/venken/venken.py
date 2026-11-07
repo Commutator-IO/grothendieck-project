@@ -56,6 +56,16 @@ def span(gs,ncop,d):
             v=red(mul(g,{tuple(e):one()}),ncop)
             if v: out.append(v)
     return out
+PIVP=set()
+def _fac(n):
+    n=abs(int(n)); f=set(); d=2
+    while d*d<=n:
+        while n%d==0: f.add(d); n//=d
+        d+=1
+    if n>1: f.add(n)
+    return f
+def note(c):
+    if not P: PIVP.update(_fac(c.numerator)|_fac(c.denominator))
 class Elim:
     def __init__(s): s.piv={}
     def reduce(s,v):
@@ -67,7 +77,7 @@ class Elim:
     def insert(s,v):
         v=s.reduce(v)
         if not v: return False
-        m=max(v); c=inv(v[m]); s.piv[m]={k:nm(c*x) for k,x in v.items()}; return True
+        m=max(v); note(v[m]); c=inv(v[m]); s.piv[m]={k:nm(c*x) for k,x in v.items()}; return True
 def member(gs,ncop,g):
     d=sum(next(iter(g))); E=Elim()
     for v in span(gs,ncop,d): E.insert(v)
@@ -94,7 +104,7 @@ for d in range(1,maxd+1):
             m=mm[0]; c=v[m]; wv,tw=piv[m]
             v=add(v,{k:nm(c*x) for k,x in wv.items()},-1); t=add(t,{k:nm(c*x) for k,x in tw.items()},-1)
         if v:
-            m=max(v); c=inv(v[m]); piv[m]=({k:nm(c*x) for k,x in v.items()},{k:nm(c*x) for k,x in t.items()})
+            m=max(v); note(v[m]); c=inv(v[m]); piv[m]=({k:nm(c*x) for k,x in v.items()},{k:nm(c*x) for k,x in t.items()})
         else:
             b={ms[i]:c for i,c in t.items()}
             Bdiff.append(add({emb(e,0,2):c for e,c in b.items()},{emb(e,1,2):c for e,c in b.items()},-1))
@@ -108,3 +118,4 @@ print('degrees where I_R != J_{B^R} (d, dim I_R, dim J):',bad)
 w=IR[-1]; E2=Elim()
 for v in span(Bdiff,2,4): E2.insert(v)
 print('mxy⊗w in J_{B^R}:', not E2.reduce(red(w,2)))
+if not P: print('primes dividing a pivot over Q:', sorted(PIVP))

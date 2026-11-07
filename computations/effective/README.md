@@ -65,5 +65,6 @@ is a negative answer to Grothendieck's question over every field, in print two y
 footnote 1): dim B = 33; the relation is symmetric and transitive (checked in B^{⊗3}); its ring of invariants
 has dimension 10 (A has dimension 6); I_R and J_{B^R} differ only in degree 4 (269 against 268), and
 mxy ⊗ w is not in J. Same over Q and F_p, p = 2, 3, 5, 7, 11, 101. Footnote ideal: dim B = 45, gap 410 > 409
-in degree 4. Pivots not recorded. The Raicu examples above are now a second, smaller example (length 15,
+in degree 4. Every pivot over Q is ±1 (`venken.py 0` prints the primes dividing a pivot: none,
+`venken/out-Q.txt`), so the elimination runs over Z and the result holds over every field. The Raicu examples above are now a second, smaller example (length 15,
 two variables); `docs/effective/article.tex` is rewritten accordingly.
