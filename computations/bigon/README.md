@@ -115,7 +115,7 @@ an extra 2. The correct simple counts for n = 3..10 are 1, 1, 1, 4, 11,
 
 **Dichotomy: true, with no counterexample.**
 
-* *Up to n = 9.* All 461049 bigon-free arrangements with n ≤ 9 satisfy it,
+* *Up to n = 9.* All 466094 bigon-free arrangements with n ≤ 9 (461049 of them with n = 9) satisfy it,
   simple and non-simple. The remaining four classes for n = 9 are I_9 and
   I_{6,2}, I_{5,3}, I_{4,4}.
 * *Simple arrangements, n = 10.* All 312356 satisfy it trivially, since each
