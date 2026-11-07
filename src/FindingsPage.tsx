@@ -526,9 +526,10 @@ function Pager({
  * the reading is what the page says.
  */
 // A card on an IHÉS item names it by its identifier and opens it on the Illusie tab.
-const proofCote = (p: (typeof PROOFS)[number]) => (isIhes(p.folder) ? `IHÉS ${p.folder}` : `n° ${p.folder}`);
+// A card not tied to a folder (Venken's example, asked in Buffalo) carries its own label and link.
+const proofCote = (p: (typeof PROOFS)[number]) => p.cote ?? (isIhes(p.folder) ? `IHÉS ${p.folder}` : `n° ${p.folder}`);
 const proofHref = (p: (typeof PROOFS)[number]) =>
-  isIhes(p.folder) ? `/illusie/#${p.folder}/${p.batch}/p${parseInt(p.page, 10)}` : `/fonds/#${p.folder}/${p.batch}/p${p.page}`;
+  p.href ?? (isIhes(p.folder) ? `/illusie/#${p.folder}/${p.batch}/p${parseInt(p.page, 10)}` : `/fonds/#${p.folder}/${p.batch}/p${p.page}`);
 const proofCtx = (p: (typeof PROOFS)[number]): CommentContext => ({
   kind: 'proof',
   label: `${proofCote(p)} · ${p.name}`,
