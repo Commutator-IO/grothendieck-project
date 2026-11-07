@@ -1,0 +1,51 @@
+\section[La question de Buffalo : une relation d'équivalence finie non effective (Venken, 1971)]{La question de Buffalo : une relation d'équivalence finie non effective (Venken, 1971)\protect\verifie[\leanblobmain]{EffectiveVenken}}\label{sec:venken}
+
+Cette section ne porte pas sur une cote du fonds. Elle répond à une question que Grothendieck a laissée ouverte deux fois. En 1961, dans le troisième exposé sur la construction des schémas, il écrit qu'il ne sait pas si une relation d'équivalence finie, sans hypothèse de platitude, est toujours effective, même sur un corps \cite{fga3}. Le 11 juillet 1973, à la fin d'une séance de son cours de Buffalo, il la donne encore comme problème ouvert, en ajoutant qu'il attend une réponse négative et que la question est \q{très élémentaire}. La réponse était imprimée depuis deux ans : c'est le corollaire~3.1 d'une note de Jacques Venken aux \emph{Comptes rendus} \cite{venken}, dont le titre parle de descente des modules plats et qui, de ce fait, semble être passée inaperçue.
+
+\emph{L'idée.} On reprend le vocabulaire de la section~\ref{sec:128}. Soit $A$ une algèbre de dimension finie sur un anneau $k$ et $J \subset A \otimes_k A$ un idéal d'équivalence : il est contenu dans le noyau de la multiplication, stable par l'échange des facteurs, et vérifie la condition de transitivité. Le quotient de $\operatorname{Spec} A$ par la relation est le spectre de l'anneau des invariants
+\[
+  A^J = \{\, a \in A : a \otimes 1 - 1 \otimes a \in J \,\}.
+\]
+Les éléments $b \otimes 1 - 1 \otimes b$, pour $b$ invariant, engendrent un idéal $J_{A^J} \subset J$, celui de la relation \q{avoir la même image dans le quotient}. La relation est \emph{effective} quand les deux coïncident, c'est-à-dire quand elle est exactement la relation définie par son propre quotient. Pour une relation finie et plate, c'est toujours le cas (SGA~3, exposé~V \cite{sga3-1}). La question est de savoir si la platitude est nécessaire. Comme tout est de dimension finie, la réponse est une affaire d'algèbre linéaire : il suffit d'exhiber un élément de $J$ qui n'est pas dans $J_{A^J}$, et pour le montrer, une forme linéaire qui s'annule sur $J_{A^J}$ et pas sur cet élément.
+
+\emph{L'exemple de Venken.} Soit $B$ le quotient de $k[M, N, X, Y, Z, W]$ par l'idéal engendré par
+\[
+  M^2,\ MN,\ N^2,\ X^3,\ Y^3,\ Z^3,\ W^3,\ YZ,\ NY,\ MZ,\ NXY,\ MYW
+\]
+et par tous les monômes de degré~$3$ en $X, Y, Z, W$ ; on note les classes en minuscules. C'est une algèbre locale, de base les $33$ monômes qui échappent à ces relations, tous de degré au plus~$3$. Venken considère la sous-algèbre engendrée par $m$, $n$, $mx$, $nw$ et $my - nz$, et la relation d'équivalence sur $\operatorname{Spec} B$ dont l'idéal est
+\[
+  I_V = \bigl(a \otimes 1 - 1 \otimes a : a = m, n, mx, nw, my - nz\bigr) + (mxy \otimes w) \subset B \otimes_k B .
+\]
+Les premiers générateurs disent que deux points ont les mêmes valeurs de $m, n, mx, nw, my - nz$ ; le dernier ajoute une condition qui n'est pas de cette forme.
+
+\begin{encadre}
+\begin{enonce}[Venken 1971, corollaire~3.1, sous la forme démontrée en Lean]
+Soit $k$ un anneau commutatif non nul, et $B$, $I_V$ comme ci-dessus.
+\begin{enumerate}
+\item $I_V$ est un idéal d'équivalence : il est contenu dans le noyau de la multiplication $B \otimes_k B \to B$, il est stable par l'échange des facteurs, et $p_{13}(I_V) \subset p_{12}(I_V) + p_{23}(I_V)$ dans $B \otimes_k (B \otimes_k B)$.
+\item Ses invariants forment le sous-module engendré par les dix éléments
+\[
+  1,\ m,\ n,\ mx,\ nz - my,\ nw,\ mx^2,\ my^2,\ nz^2,\ nw^2 .
+\]
+\item $mxy \otimes w$ appartient à $I_V$ mais pas à l'idéal engendré par les $b \otimes 1 - 1 \otimes b$, $b$ invariant. La relation n'est donc pas effective.
+\end{enumerate}
+\end{enonce}
+\end{encadre}
+
+\noindent Le point~2 contient une petite surprise : la sous-algèbre de Venken a pour base les six éléments $1$, $m$, $n$, $mx$, $nw$ et $my - nz$, et les invariants de la relation sont plus nombreux. Les quatre éléments de degré~$3$, $mx^2$, $my^2$, $nz^2$ et $nw^2$, sont invariants sans appartenir à cette sous-algèbre. Cela ne change pas la conclusion, mais il faut les connaître pour la démontrer, puisque l'idéal $J_{A^J}$ dépend de tous les invariants.
+
+\begin{proof}
+Tout se ramène à des identités entre éléments de $B \otimes_k B$, et l'on travaille dans la base des $33 \times 33$ produits $u \otimes v$ de monômes de base. La table de multiplication de $B$ est calculée une fois, et Lean la vérifie terme à terme.
+
+\emph{Réflexivité.} Chaque générateur de $I_V$ s'envoie sur $0$ par la multiplication : $a \cdot 1 - 1 \cdot a = 0$, et $mxy \cdot w = mxyw = 0$ puisque $MYW$ est dans l'idéal.
+
+\emph{Symétrie et transitivité.} L'échange envoie $a \otimes 1 - 1 \otimes a$ sur son opposé, qui est dans $I_V$ ; pour l'image $w \otimes mxy$ du dernier générateur, on exhibe une combinaison explicite des générateurs de $I_V$ à coefficients dans $B \otimes_k B$ qui lui est égale (neuf termes). De même, chaque image par $p_{13}$ d'un générateur est écrite comme combinaison explicite d'images par $p_{12}$ et $p_{23}$ (vingt termes en tout). Ce sont des certificats : trouver la combinaison demande un calcul, la vérifier n'est qu'un développement.
+
+\emph{Les invariants.} Que les dix éléments soient invariants se vérifie de la même façon, par des combinaisons explicites. L'inclusion inverse est la partie délicate : il faut montrer qu'aucun autre élément de $B$ n'est invariant. On utilise vingt-trois formes linéaires $\psi_p$ sur $B \otimes_k B$, à coefficients entiers, qui s'annulent sur $I_V$. Si $b = \sum_s c_s\, s$ est invariant, alors $\psi_p(b \otimes 1 - 1 \otimes b) = 0$ pour tout $p$, et ces vingt-trois équations linéaires en les coefficients $c_s$ forcent $b$ à être une combinaison des dix éléments. Les formes et les combinaisons sont à coefficients entiers et l'argument ne divise jamais : c'est pourquoi l'énoncé vaut sur tout anneau commutatif non nul.
+
+\emph{La non-effectivité.} Soit $\varphi$ la forme linéaire sur $B \otimes_k B$, à seize coefficients non nuls, tous entiers, que fournit le calcul. On vérifie qu'elle s'annule sur tous les produits $(u \otimes v)(b \otimes 1 - 1 \otimes b)$, pour $u, v$ monômes de base et $b$ l'un des dix invariants ; elle s'annule donc sur l'idéal $J_{A^J}$ qu'ils engendrent. Et $\varphi(mxy \otimes w) = 1$. Donc $mxy \otimes w \notin J_{A^J}$, alors que $mxy \otimes w \in I_V$ par définition.
+\end{proof}
+
+\emph{Comment la preuve a été trouvée, et ce qu'elle vérifie.} Les combinaisons et les formes linéaires ont été obtenues par une élimination de Gauss sur $\mathbf Q$, dans la base des monômes, dont tous les pivots valent $\pm 1$ ; c'est ce qui permet des certificats à coefficients entiers, valables sur tout anneau. Lean ne refait pas l'élimination : il vérifie les certificats, chacun par un calcul sur des listes d'entiers que le noyau évalue (\texttt{decide +kernel}, sans \texttt{native\_decide}). Découpées par degré, ces vérifications prennent une à deux minutes. La démonstration n'utilise que les trois axiomes standard de Lean. Venken, lui, démontre la non-effectivité par la cohomologie d'Amitsur : $mxy \otimes w$ définit une classe non nulle dans $H^1(B/A, \mathbb G_a)$. Le certificat $\varphi$ joue ici le rôle de cette classe.
+
+\emph{Ce qui n'est pas formalisé.} Les dimensions des deux idéaux en degré~$4$ ($269$ et $268$ sur un corps) ne sont pas démontrées en Lean ; seule la forme qui les sépare l'est. Les énoncés de Venken sur la descente des modules plats, et la traduction entre idéaux d'équivalence et relations d'équivalence dans la catégorie des schémas, ne le sont pas non plus. Un second exemple, de longueur~$15$ (ou $16$ en caractéristique~$2$) en deux variables, obtenu en restreignant la relation de Raicu sur le plan à un sous-schéma fini, est démontré à la main dans la note \href{https://grothendieck.commutator.io/article/grothendieck-effective.pdf}{\texttt{grothendieck-effective.pdf}} ; il n'est pas formalisé.
