@@ -118,6 +118,14 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     pdf: '/article/grothendieck-moduli.pdf',
     src: 'docs/moduli/article.tex',
   },
+  {
+    id: 'article-forms',
+    title: "Toward a geometry of forms: ordered and combinatorial structures in Grothendieck's notes of 1986",
+    lang: 'English',
+    what: 'Folders 156-1 to 156-4 and 121: a segment model is a bounded dense biorder, not necessarily total; the cuts of comparable pairs determine the order up to reversal; the sides of an arbitrary subset embed into a Stone space; saturated parts form an orthocomplemented lattice that need not be Boolean (a seven-element hexagon); coarsest cell decompositions in a tame Boolean algebra.',
+    pdf: '/article/grothendieck-forms.pdf',
+    src: 'docs/forms/article.tex',
+  },
 ];
 
 /** The two books, in French: the tools first, then the sources they were used on. */

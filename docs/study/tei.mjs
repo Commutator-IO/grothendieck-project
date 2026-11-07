@@ -835,6 +835,7 @@ copyFileSync(resolve(root, 'docs/bigon/article.pdf'), resolve(served, 'grothendi
 copyFileSync(resolve(root, 'docs/tangent/article.pdf'), resolve(served, 'grothendieck-tangent.pdf'));
 copyFileSync(resolve(root, 'docs/polytopes/article.pdf'), resolve(served, 'grothendieck-polytopes.pdf'));
 copyFileSync(resolve(root, 'docs/moduli/article.pdf'), resolve(served, 'grothendieck-moduli.pdf'));
+copyFileSync(resolve(root, 'docs/forms/article.pdf'), resolve(served, 'grothendieck-forms.pdf'));
 // The sixth, the statements read in Bourbaki rédactions and proved in Lean (docs/bourbaki-lean/).
 copyFileSync(resolve(root, 'docs/bourbaki-lean/article.pdf'), resolve(served, 'bourbaki-lean.pdf'));
 // The seventh, the statements read in Quillen's notebooks and proved in Lean (docs/quillen-lean/).
