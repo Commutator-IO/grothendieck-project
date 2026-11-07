@@ -264,6 +264,41 @@ export function MethodPage() {
         <Articles id="sub-articles" title="Sub-articles" items={SOUS_ARTICLES} />
         <Articles id="books" title="The books" items={LIVRES} />
 
+        <section className="mt-16 max-w-[48em] text-[15px] leading-relaxed text-ink-700">
+          <H2 id="reading-ega-sga">Reading EGA and SGA</H2>
+          <P id="reading-ega-sga-why" className="mt-3">
+            The notes assume EGA and SGA throughout. Nobody reads them cover to cover: they are references, read by chapters,
+            with a modern companion open alongside, Vakil&rsquo;s <em>The Rising Sea</em> or Hartshorne II&ndash;III, and the
+            Stacks Project, which cross-references EGA numbering. The section and exposé numbers below were checked against the
+            volumes (Numdam for EGA, the Springer editions for SGA) on 1 November 2026.
+          </P>
+          <ol className="mt-3 list-decimal space-y-1.5 pl-6">
+            <li>
+              <b>EGA I</b> (2nd ed., 1971): chapter I, chapter 0 as needed. <b>EGA II</b>: §&nbsp;1 affine morphisms, §§&nbsp;2&ndash;4 Proj and
+              ample sheaves, §§&nbsp;5&ndash;7 proper, finite, valuative criteria.
+            </li>
+            <li>
+              <b>EGA III</b> §§&nbsp;1&ndash;4: cohomology of affine and projective morphisms, finiteness and formal functions; §&nbsp;5 for
+              formal geometry.
+            </li>
+            <li>
+              <b>EGA IV</b> by topic: §§&nbsp;2, 11, 12 flatness and descent; §§&nbsp;5&ndash;6 dimension, depth, regularity; §&nbsp;8 limits;
+              §§&nbsp;17&ndash;18 smooth, unramified and étale morphisms, the most used.
+            </li>
+            <li>
+              <b>SGA&nbsp;1</b> (étale morphisms, π₁, descent), then <b>SGA&nbsp;4½</b> before <b>SGA&nbsp;4</b> (topoi I&ndash;IV, étale
+              cohomology VII&ndash;IX, base change XII&ndash;XIII and XVI, duality XVIII), then <b>SGA&nbsp;5</b>; by topic <b>SGA&nbsp;3</b>
+              (group schemes), <b>SGA&nbsp;6</b> (Riemann&ndash;Roch), <b>SGA&nbsp;7</b> (monodromy), <b>SGA&nbsp;2</b> (local cohomology).
+            </li>
+          </ol>
+          <P id="reading-ega-sga-shortest" className="mt-3">
+            The shortest path to the notes is EGA&nbsp;I, then EGA&nbsp;IV §§&nbsp;17&ndash;18, then SGA&nbsp;1. The 1992 <em>Géométrie
+            élémentaire schématique</em> at the BnF belongs next to EGA&nbsp;IV §&nbsp;18 and the never-published §&nbsp;24 of the 1965 plan
+            (smooth forms and ordinary quadratic singularities, Montpellier folder&nbsp;25, p.&nbsp;134), with SGA&nbsp;3 for orthogonal group
+            schemes.
+          </P>
+        </section>
+
         <section className="mt-16">
           <H2 id="process" className="!text-[26px]">How a page becomes a transcription</H2>
         </section>
