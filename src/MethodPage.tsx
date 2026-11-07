@@ -134,6 +134,14 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     pdf: '/article/grothendieck-algebra.pdf',
     src: 'docs/algebra/article.tex',
   },
+  {
+    id: 'article-pseudolines',
+    title: "Pseudoline arrangements, continued: cells, skeleta and added pseudolines",
+    lang: 'English',
+    what: 'Folders 80 and 154, after the bigon-free dichotomy: the lattice criterion of page 26 refuted by five lines and replaced by the correct one (no two points carry every line), for any symmetric composition-closed set of sign vectors; the skeleton determines a bigon-free arrangement (faithful, lifting criterion, fullness when triangles have a fourth line, the rest through chirotopes); an added pseudoline is determined by its crossing order, and its generisations form a cube.',
+    pdf: '/article/grothendieck-pseudolines.pdf',
+    src: 'docs/pseudolines/article.tex',
+  },
 ];
 
 /** The two books, in French: the tools first, then the sources they were used on. */
