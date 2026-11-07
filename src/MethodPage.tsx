@@ -110,6 +110,14 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     pdf: '/article/grothendieck-polytopes.pdf',
     src: 'docs/polytopes/article.tex',
   },
+  {
+    id: 'article-moduli',
+    title: 'Small moduli problems over Spec ℤ: quadratic algebras, rotations in PGL₂ and the integral Schwarzian',
+    lang: 'English',
+    what: 'Folders 84, 83, 85, 64 and 93: quadratic algebras classified by triples when 2 is regular and their product, the line of twists and its Azumaya criterion in every characteristic, the orders of rotations in forms of PGL₂ and the string group G₂, the octahedral configuration in characteristic 5, and the Schwarzian with divided derivatives, rigid at level p only for p > 3.',
+    pdf: '/article/grothendieck-moduli.pdf',
+    src: 'docs/moduli/article.tex',
+  },
 ];
 
 /** The two books, in French: the tools first, then the sources they were used on. */
