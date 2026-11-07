@@ -833,6 +833,7 @@ copyFileSync(resolve(root, 'docs/problems/article.pdf'), resolve(served, 'grothe
 // The sub-articles: single results of the edition written up on their own, for Hexagon.
 copyFileSync(resolve(root, 'docs/bigon/article.pdf'), resolve(served, 'grothendieck-bigon.pdf'));
 copyFileSync(resolve(root, 'docs/tangent/article.pdf'), resolve(served, 'grothendieck-tangent.pdf'));
+copyFileSync(resolve(root, 'docs/effective/article.pdf'), resolve(served, 'grothendieck-effective.pdf'));
 copyFileSync(resolve(root, 'docs/polytopes/article.pdf'), resolve(served, 'grothendieck-polytopes.pdf'));
 copyFileSync(resolve(root, 'docs/moduli/article.pdf'), resolve(served, 'grothendieck-moduli.pdf'));
 copyFileSync(resolve(root, 'docs/forms/article.pdf'), resolve(served, 'grothendieck-forms.pdf'));

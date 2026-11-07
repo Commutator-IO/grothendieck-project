@@ -31,3 +31,12 @@ The random search was looking in the wrong place. Raicu's non-effective finite e
 - `raicu/hilb.py`: the Hilbert function of Z (1, 2, 3, 4, 5, 6, 4, 2).
 
 Monomial algebras are close to monoid algebras, where Raicu's Theorem 3.1 makes the Amitsur complex exact, which may be why the search above found nothing.
+
+## Every characteristic (7 November 2026)
+
+`raicu/certify.py` reruns `raicu/full.py` over Q and records the prime factors of every pivot of the
+eliminations: 2, 3, 5, 7, 11, 13, 41, 61, 67, 661. For any other prime the same elimination runs over
+F_p with the same pivots, so the ranks and the gap (44 > 43 in degree 5, 77 > 75 in degree 6) are
+those over Q. Each listed prime was checked directly with `full.py`, as were all primes up to 101,
+1009 and 10007 (`raicu/out-primes.txt`). The witness (x1y2 − x2y1)y2³ lies in (I+K)₅ and not in
+(J+K)₅ over Q, F2, F3 and F5. Written up in `docs/effective/article.tex`.

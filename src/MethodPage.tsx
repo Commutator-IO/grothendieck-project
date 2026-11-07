@@ -111,6 +111,14 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     src: 'docs/tangent/article.tex',
   },
   {
+    id: 'article-effective',
+    title: 'A non-effective finite equivalence relation on a finite scheme over a field, after a question of Grothendieck',
+    lang: 'English',
+    what: "The problem he gave at Buffalo on 11 July 1973, first asked in FGA (1961): is every finite equivalence relation on a finite scheme over a field effective? No, over every field: Raicu's relation on the plane, restricted to a local Artin scheme of length 27, is not. A finite computation, carried out over Q with its pivot primes checked separately.",
+    pdf: '/article/grothendieck-effective.pdf',
+    src: 'docs/effective/article.tex',
+  },
+  {
     id: 'article-polytopes',
     title: "Regular polytopes realised over arbitrary rings, after Grothendieck's working notes",
     lang: 'English',
