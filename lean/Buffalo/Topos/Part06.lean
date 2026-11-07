@@ -1,6 +1,7 @@
 import Buffalo.Topos.Part06a
 import Buffalo.Topos.Part06b
 import Buffalo.Topos.Part06c
+import Buffalo.Topos.Part06boards
 
 /-!
 # Buffalo, topos theory, part 6 (10–12 July 1973)
