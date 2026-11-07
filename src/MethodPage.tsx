@@ -41,10 +41,7 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
     lang: 'French',
     what: 'For each folder proved in Lean: the leaf in context, the statement as the reading has it, a proof written out for a mathematician, and what is not proved. In the chronological order of the fonds’ themes.',
     pdf: '/article/grothendieck-lean.pdf',
-    more: [
-      { label: 'Hexagon', href: 'https://hexagonmath.org/2611.00125v1' },
-      { label: 'Palomar', href: 'https://palomar-registry.org/entry.html?id=PALOMAR-2026-11-07-000003' },
-    ],
+    more: [{ label: 'Hexagon', href: 'https://hexagonmath.org/2611.00125v1' }],
     src: 'docs/lean/article.tex',
   },
   {
