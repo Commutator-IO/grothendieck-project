@@ -177,7 +177,24 @@ For bigon-free combinatorial arrangements:
 \caption{Condition~(A5). The pseudoline $\Delta$ avoids the three vertices of the triangle and crosses two of the three segments bounding the face $T$, an even number, and this cycle bounds $T$. Replacing one segment of $\partial T$ by the complementary segment of the same pseudoline changes the parity, since $\Delta$ meets that pseudoline once: the new triangle cycle bounds nothing.}\label{fig:A5}
 \end{figure}
 
-What remains are the triangles whose three vertices are multiple and through which every other pseudoline passes, the case of condition~(A6) on pages~52 and~53; the complete quadrangle $\III$, on page~53, is one of them. We handle them with oriented matroids. A \emph{chirotope} assigns a sign to each triple of pseudolines without common point, the orientation of the triangle they form \cite{bjorner1999}. The following lemma uses only incidences and alternation.
+What remains are the triangles whose three vertices are multiple and through which every other pseudoline passes, the case of condition~(A6) on pages~52 and~53; the complete quadrangle $\III$, on page~53, is one of them (Figure~\ref{fig:III}). Page~51 opens this ``2\`eme cas'' by supposing first that three pseudolines $D_a$, $D_b$, $D_c$ through the vertices $a$, $b$, $c$ can be chosen not concurrent, and draws that configuration; when they are concurrent at a point $d$, the six pseudolines $ab$, $bc$, $ca$, $ad$, $bd$, $cd$ form the complete quadrangle $\III$. We do not follow the page's configuration, and handle both subcases at once with oriented matroids. A \emph{chirotope} assigns a sign to each triple of pseudolines without common point, the orientation of the triangle they form \cite{bjorner1999}. The following lemma uses only incidences and alternation.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.1,line cap=round,every node/.style={font=\small}]
+\coordinate (A) at (0,0); \coordinate (B) at (4,0); \coordinate (C) at (1.6,3); \coordinate (D) at (1.9,1.1);
+\draw ($(A)!-0.15!(B)$) -- ($(B)!-0.15!(A)$);
+\draw ($(A)!-0.2!(C)$) -- ($(A)!1.2!(C)$);
+\draw ($(B)!-0.15!(C)$) -- ($(B)!1.2!(C)$);
+\draw ($(A)!-0.2!(D)$) -- ($(A)!1.75!(D)$);
+\draw ($(B)!-0.15!(D)$) -- ($(B)!1.8!(D)$);
+\draw ($(C)!-0.2!(D)$) -- ($(C)!1.4!(D)$);
+\foreach \p in {A,B,C,D} \fill (\p) circle (1.8pt);
+\foreach \p in {(2.074,0),(0.873,1.638),(2.734,1.583)} \draw[fill=white] \p circle (1.8pt);
+\node at ($(A)+(-0.3,0.22)$) {$a$}; \node at ($(B)+(0.3,0.22)$) {$b$}; \node at ($(C)+(0.32,0.1)$) {$c$}; \node at ($(D)+(0.3,-0.12)$) {$d$};
+\end{tikzpicture}
+\caption{The complete quadrangle $\III$, which page~24 calls the tetrahedral arrangement: the six lines through four points $a, b, c, d$ in general position, with $4 + 3 = 7$ vertices, the four triple points (black) and the three diagonal points (white). The triangle of the lines $ab$, $bc$, $ca$ has three triple vertices, and each of the other lines passes through one of them.}\label{fig:III}
+\end{figure}
 
 \begin{theorem}[the edition's sign lemma]\label{thm:chirotope}
 Consider finite sets of points and lines with an incidence relation such that two distinct lines meet in exactly one point, every point lies on at least two lines, and every line carries at least three points. Call \emph{basis} a triple of distinct lines without common point. Let $\chi$ and $\chi'$ be alternating sign functions on the bases. Suppose that for every line $i$ and all lines $j, k, l, m$ such that $(i, j, l)$, $(i, j, m)$, $(i, k, l)$, $(i, k, m)$ are bases,
