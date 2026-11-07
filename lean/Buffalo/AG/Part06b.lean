@@ -601,8 +601,8 @@ theorem prop_11114 :
   ⟨(inferInstance : MorphismProperty.IsMultiplicative @Surjective.{u}).toIsStableUnderComposition,
     inferInstance⟩
 
-/-- Oqhr-Gt66es-11246 (3:07:26) [prop] Epimorphisms of schemes are stable under composition (but
-not under base change: no counterexample formalised). -/
+/-- Oqhr-Gt66es-11246 (3:07:26) [prop] Epimorphisms of schemes are stable under composition (not
+under base change: for affine schemes, see `board_11246`). -/
 theorem prop_11246 {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [Epi f] [Epi g] : Epi (f ≫ g) :=
   inferInstance
 
