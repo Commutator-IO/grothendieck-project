@@ -7,7 +7,7 @@ Every entry of the three indexes and every item of the published blackboards was
 - *Probably oral slips of the lecturer* (the board has the same wording): limits for colimits (Topos 19371), implicit n ≥ 2 (Topos 13696, 14022), "quasi-separated" for "coherent" (AG 16396 and board 16267), the restricted Lie algebra axioms (Groupes 19319), the bialgebra condition (Groupes 10811).
 - *The edition's* (the board has the right form): Topos 25307 (the lecture does find a counterexample on the line), Groupes 2844 and 5696, AG 8186 and 327 (« anneau principal » is a domain), the dropped "Hausdorff" (Topos 17712, 25503).
 
-**Status.** Every correction below is applied: the index ones in `docs/buffalo-*/index.tex`, the blackboard ones in `public/buffalo-boards/*.json` (text field only). Still to do: rebuild the index PDFs from the corrected `index.tex`, and carry the blackboard corrections into the blackboard sources, so that a rebuild of the JSON does not undo them.
+**Status.** Every correction below is applied: the index ones in `docs/buffalo-*/index.tex`, the blackboard ones in `public/buffalo-boards/*.json` (text field only). The index PDFs and `src/content/buffalo-index.json` are rebuilt from the corrected `index.tex`, and the blackboard corrections are carried into the local blackboard sources, so a full `npm run buffalo-boards` keeps them (2026-11-07).
 
 | Course | Index entries | proved | Mathlib | partial | def | not formalised | n/a | false | imprecise | index corrections | board items | board corrections |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
