@@ -6,6 +6,10 @@ thousand manuscript pages, 1949 to 1991.**
 
 → **[grothendieck.commutator.io](https://grothendieck.commutator.io)**
 
+[![carbon estimate: about 110 kgCO₂e, range 15–1,100 kg](https://img.shields.io/badge/carbon%20estimate-%E2%89%88110%20kgCO%E2%82%82e%20%2815%E2%80%931100%20kg%29-2e7d32)](https://grothendieck.commutator.io/article/grothendieck-carbon.pdf)
+
+The badge is the central estimate of the project's carbon footprint so far: language-model inference, CI and the site, from 7 August to 7 November 2026, with its range. Method and caveats are in the draft article ([PDF](https://grothendieck.commutator.io/article/grothendieck-carbon.pdf), [#121](https://github.com/Commutator-IO/grothendieck-project/issues/121)).
+
 ## The point
 
 Montpellier's inventory is complete and rigorous, and unreadable for anyone who
