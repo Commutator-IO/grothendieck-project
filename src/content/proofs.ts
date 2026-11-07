@@ -1595,4 +1595,15 @@ export const PROOFS: Proof[] = [
     lean: "lean/Grothendieck/IhesSGA6_2_3Verdier.lean",
     theorems: ["map_surjective", "map_comp_map_ι", "isZero_map_iff", "cl_sub_cl_mem_of_trW", "cl_sub_cl_mem_of_isIso", "cl_sub_cl_mem_range_of_iso", "descQuotient", "descQuotient_map", "ker_map_eq_range", "exact", "exact_localization"],
   },
+  {
+    folder: "2ILL5",
+    batch: 1,
+    page: "2–3",
+    name: "« Serein » objects are the dualizable ones",
+    statement: "An object F of a tensor category is « serein » when F^∨ ⊗ F ≅ End F; this is the usual notion of a dualizable object.",
+    found: "The definition of « serein » on pp. 2–3 is the standard characterisation of dualizable objects, proved here in both directions. Let C be monoidal and F an object with an internal Hom; put F^∨ = [F, 𝟙], with evaluation ev : F ⊗ F^∨ → 𝟙, and let ν_X : F^∨ ⊗ X → [F, X] be the transpose of ev ⊗ X. Then F has a dual (an exact pairing (Y, F)) iff ν_F : F^∨ ⊗ F → End F is an isomorphism (exists_exactPairing_iff_isIso_endMap, nonempty_hasLeftDual_iff_isIso_endMap), and then every ν_X is an isomorphism (isIso_endMap_iff_forall, isIso_canonicalMap_of_exactPairing). When ν_F is invertible, F^∨ itself is the dual, with evaluation ev and coevaluation 𝟙 → End F → F^∨ ⊗ F, the identity followed by ν_F⁻¹ (exactPairingOfIsIso); the one non-formal step is the second triangle identity, derived from the first through the universal property of F^∨ (triangle_two). No braiding is needed; in a braided category left and right duals are exchanged, so « serein », left- and right-dualizable coincide (exists_exactPairing_right_iff_isIso_endMap). As a check, every finite-dimensional vector space is « serein ». Not formalised: that « ≅ » on the page means the canonical map (an abstract isomorphism F^∨ ⊗ F ≅ End F is weaker in general, and the page does not say which is meant); finite free modules over an arbitrary commutative ring.",
+    verdict: ["holds"],
+    lean: "lean/Grothendieck/Ihes2ILL5.lean",
+    theorems: ["comparison", "uncurry_comparison", "comparison_precomp", "comparisonInv", "isIso_comparison", "triangle_one", "triangle_two", "exactPairingOfIsIso", "isIso_canonicalMap_of_exactPairing", "whiskerLeft_comparison_ev", "exists_exactPairing_iff_isIso_endMap", "nonempty_hasLeftDual_iff_isIso_endMap", "isIso_endMap_iff_forall", "exists_exactPairing_right_iff_isIso_endMap"],
+  },
 ];
