@@ -40,3 +40,14 @@ F_p with the same pivots, so the ranks and the gap (44 > 43 in degree 5, 77 > 75
 those over Q. Each listed prime was checked directly with `full.py`, as were all primes up to 101,
 1009 and 10007 (`raicu/out-primes.txt`). The witness (x1y2 − x2y1)y2³ lies in (I+K)₅ and not in
 (J+K)₅ over Q, F2, F3 and F5. Written up in `docs/effective/article.tex`.
+
+## A smaller example: length 15 (7 November 2026)
+
+`raicu/scan.py` is `full.py` with the exponents of Z = V(f1^a, f2^b, f3^c) read from the variable
+EXP. Among the 16 triples with entries at most 3 tried over F3 (`raicu/scan-out.txt`), the smallest
+with a gap is (2, 2, 2): Z = V(f1², f2², f3²), of length 15 (against 27 for (3, 3, 2)), with
+dim (I+K)_5 = 52 > 51 = dim (J+K)_5. `raicu/certify_scan.py` (EXP=2,2,2) finds the pivot primes over Q
+to be 2, 3, 5, 7, 13, 41, 61; each was checked directly, with the same gap, and the witness
+(x1y2 − x2y1)y2³ lies in (I+K)_5 and not in (J+K)_5 over Q, F2 and F3 (`raicu/out-length15.txt`).
+So the length-15 example holds over every field. Whether a shorter one exists (other ideals than powers
+of f1, f2, f3) is not known.
