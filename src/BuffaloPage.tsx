@@ -397,6 +397,15 @@ export function BuffaloPage() {
               {c.title} · {hours(c)} h
             </button>
           ))}
+          <a
+            href="/article/grothendieck-buffalo-open.pdf"
+            target="_blank"
+            rel="noopener"
+            title="Open problems from the Buffalo courses (article, PDF)"
+            className="rounded-lg border border-ink-200 px-3 py-1 text-[12.5px] text-ink-700 hover:border-brand-500 hover:bg-brand-50"
+          >
+            Problems ↗
+          </a>
         </nav>
 
         {CAT.courses
