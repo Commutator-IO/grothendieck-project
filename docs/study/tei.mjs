@@ -830,6 +830,10 @@ copyFileSync(resolve(root, 'docs/lean/article.pdf'), resolve(served, 'grothendie
 copyFileSync(resolve(root, 'docs/cicm/article.pdf'), resolve(served, 'grothendieck-cicm.pdf'));
 // The fifth, open questions for mathematicians from what Lean did not reach (docs/problems/).
 copyFileSync(resolve(root, 'docs/problems/article.pdf'), resolve(served, 'grothendieck-problems.pdf'));
+// The sub-articles: single results of the edition written up on their own, for Hexagon.
+copyFileSync(resolve(root, 'docs/bigon/article.pdf'), resolve(served, 'grothendieck-bigon.pdf'));
+copyFileSync(resolve(root, 'docs/tangent/article.pdf'), resolve(served, 'grothendieck-tangent.pdf'));
+copyFileSync(resolve(root, 'docs/polytopes/article.pdf'), resolve(served, 'grothendieck-polytopes.pdf'));
 // The sixth, the statements read in Bourbaki rédactions and proved in Lean (docs/bourbaki-lean/).
 copyFileSync(resolve(root, 'docs/bourbaki-lean/article.pdf'), resolve(served, 'bourbaki-lean.pdf'));
 // The seventh, the statements read in Quillen's notebooks and proved in Lean (docs/quillen-lean/).
