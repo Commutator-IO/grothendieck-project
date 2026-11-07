@@ -414,7 +414,12 @@ reading's gloss false, or the page itself wrong, and say so.
 Each statement, its proof written out in French and what the verification
 found are in the appendix [`docs/lean/article.tex`](docs/lean/article.tex),
 served as [/article/grothendieck-lean.pdf](https://grothendieck.commutator.io/article/grothendieck-lean.pdf)
-and linked from Findings and Method. General lemmas the proofs needed are
+and linked from Findings and Method. It is on Hexagon as
+[2611.00125](https://hexagonmath.org/2611.00125v1), and its proofs are
+registered in the Palomar Registry as
+[PALOMAR-2026-11-07-000003](https://palomar-registry.org/entry.html?id=PALOMAR-2026-11-07-000003),
+from the repository
+[grothendieck-project-palomar](https://github.com/Commutator-IO/grothendieck-project-palomar). General lemmas the proofs needed are
 proposed upstream to mathlib as draft pull requests, through
 `/contribute-to-mathlib` (issue
 [#52](https://github.com/Commutator-IO/grothendieck-project/issues/52)).
