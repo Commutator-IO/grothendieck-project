@@ -272,6 +272,17 @@ jobs:
           if [ ! -f docs/livre-archives/livre.pdf ]; then
             (cd docs/livre-archives && tectonic -X compile livre.tex) || echo "livre-archives did not compile"
           fi
+      # The Lean article (docs/lean/) is recompiled here, so that the PDF the site
+      # serves follows its sources even when the committed PDF is older. It compiles
+      # into a scratch folder: on failure the committed PDF is served unchanged.
+      - name: Compile the Lean article
+        run: |
+          mkdir -p "$RUNNER_TEMP/lean-article"
+          if (cd docs/lean && tectonic -X compile article.tex --outdir "$RUNNER_TEMP/lean-article"); then
+            cp "$RUNNER_TEMP/lean-article/article.pdf" docs/lean/article.pdf
+          else
+            echo "docs/lean did not compile; the committed PDF is served"
+          fi
       - name: The article, in TEI against tei_jtei
         run: npm run article-tei
 
