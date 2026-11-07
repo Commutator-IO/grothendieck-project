@@ -1,198 +1,274 @@
-% Draft, 7 November 2026, issue #121. Figures recomputed after the review of 7 November (docs/carbon/review/).
-% Language: English, to reach the widest readership; a French summary follows the abstract.
+% Version française, 7 novembre 2026, issue #121. Revue visée : Humanités numériques (charte éthique v1.4 : textes rédigés en français).
+% Chiffres recalculés avec les totaux de jetons du 7 novembre (24 septembre -- 7 novembre, dédoublonnés par message).
+% La version anglaise antérieure est conservée dans article-en.tex.
 \documentclass[11pt,a4paper]{article}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[french,english]{babel}
-\usepackage{lmodern,microtype,booktabs,amsmath}
+\usepackage{fontspec}
+\usepackage[english,french]{babel}
+\usepackage{microtype,booktabs,amsmath}
 \usepackage[margin=2.5cm]{geometry}
-\usepackage[numbers]{natbib}
+\usepackage[authoryear,round]{natbib}
 \usepackage[hidelinks]{hyperref}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
+\usetikzlibrary{positioning,arrows.meta,decorations.pathreplacing}
 \definecolor{rangefill}{HTML}{86B6EF}
 \definecolor{markblue}{HTML}{2A78D6}
 \definecolor{inksec}{HTML}{52514E}
+\pgfplotsset{/pgf/number format/use comma, /pgf/number format/1000 sep={\,}}
 \pgfplotsset{rangechart/.style={
   xbar, bar width=7pt, axis line style={inksec!60}, tick style={inksec!60},
   ytick=data, y dir=reverse, yticklabel style={align=right, font=\small},
   xticklabel style={font=\small, text=inksec}, xlabel style={font=\small},
   xmajorgrids, grid style={inksec!15}, enlarge y limits=0.18,
-  width=0.62\textwidth, clip=false, axis lines*=left}}
-% A range drawn as a pale bar from lo to hi, a dark dot at the central value, and a label after it.
-\newcommand{\rangerow}[5]{% y, lo, hi, central (or empty), label
+  width=0.58\textwidth, clip=false, axis lines*=left}}
+% Une fourchette : barre pâle de lo à hi, point foncé à la valeur centrale, étiquette après.
+\newcommand{\rangerow}[5]{% y, lo, hi, central (ou vide), étiquette
   \draw[rangefill, line width=7pt] (axis cs:#2,#1) -- (axis cs:#3,#1);
   \if\relax\detokenize{#4}\relax\else\fill[markblue] (axis cs:#4,#1) circle (2.6pt);\fi
   \node[anchor=west, font=\footnotesize, inner sep=3pt] at (axis cs:#3,#1) {#5};}
+\setlength{\emergencystretch}{1em}
 \newcommand{\todo}[1]{\textbf{[À vérifier : #1]}}
-\newcommand{\COe}{\,kgCO$_2$e}
+\newcommand{\COe}{\,kg\,CO$_2$e}
+\newcommand{\motscles}[2]{\par\smallskip{\raggedright\noindent\textbf{#1}~#2\par}}
 
-\title{What does it cost to read an archive with a language model?\\
-\large The energy and carbon footprint of a machine reading of Grothendieck's working notes}
+\title{Le coût carbone d'une lecture d'archives par un modèle de langage\\
+\large Le cas des notes de travail d'Alexandre Grothendieck}
 \author{Michel Hua}
-\date{Draft, 7 November 2026}
+\date{Version de travail, 7 novembre 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Between August and November 2026, a single researcher used commercial large language models to transcribe 9\,414 pages of Alexandre Grothendieck's mathematical working notes held at the University of Montpellier, to write modernised readings of them, to check some of their statements in the proof assistant Lean, and to draft several articles. This paper estimates what that work cost in energy and greenhouse-gas emissions. It relies on the token counts recorded by the tool during part of the period and on the run times of the continuous-integration service, and it borrows its method from the life-cycle assessments of language models published since 2022. The central estimate is about 110\,kg of CO$_2$e for three months, within a range of 15\,kg to 1.1\,t. Counting the manufacture of the servers, as one published assessment does, could raise it several times. Almost all of it comes from model inference, and most of that from re-reading long contexts. We compare this figure with the professional footprint of the researchers who work on the same corpus, and we discuss what the comparison does and does not show.
+D'août à novembre 2026, un chercheur seul a utilisé des modèles de langage commerciaux pour transcrire 9\,414 pages des notes de travail mathématiques d'Alexandre Grothendieck conservées à l'université de Montpellier, en rédiger des lectures modernisées, vérifier certains énoncés dans l'assistant de preuve Lean et préparer des articles. Cet article estime ce que ce travail a coûté en énergie et en gaz à effet de serre, à partir des jetons comptés par l'outil pendant six semaines et des durées d'exécution de l'intégration continue. L'estimation centrale est d'environ 110\,kg d'équivalent CO$_2$ pour trois mois, dans une fourchette de 15\,kg à 1,1\,t. Un recoupement qui inclut la fabrication des serveurs donne cinq à neuf fois plus. Presque tout vient de l'inférence, et surtout de la relecture de longs contextes à chaque tour. L'article explique d'où vient cette dépense, la compare à l'empreinte professionnelle des personnes qui éditent ce corpus et discute l'effet rebond.
 \end{abstract}
 
-\selectlanguage{french}
+\motscles{Mots-clés :}{humanités numériques, modèles de langage, empreinte carbone, effet rebond, manuscrits de Grothendieck}
+
+\begin{otherlanguage}{english}
 \begin{abstract}
-\textit{Résumé.} D'août à novembre 2026, un chercheur seul a transcrit avec des modèles de langage commerciaux 9\,414 pages des notes de travail d'Alexandre Grothendieck conservées à l'université de Montpellier, en a rédigé des lectures modernisées, a vérifié certains de leurs énoncés en Lean et a écrit plusieurs articles. Cet article estime ce que ce travail a coûté en énergie et en gaz à effet de serre : environ 110\,kg d'équivalent CO$_2$ pour trois mois, entre 15\,kg et 1,1\,t, presque entièrement dus à l'inférence des modèles. Il compare ce chiffre à l'empreinte professionnelle des chercheurs qui travaillent sur le même corpus.
+\textbf{The carbon cost of reading an archive with a language model.} Between August and November 2026, a single researcher used commercial large language models to transcribe 9,414 pages of Alexandre Grothendieck's mathematical working notes held at the University of Montpellier, to write modernised readings of them, to check some of their statements in the Lean proof assistant and to draft articles. This paper estimates what that work cost in energy and greenhouse-gas emissions, from the token counts recorded by the tool over six weeks and the run times of the continuous-integration service. The central estimate is about 110\,kg of CO$_2$e for three months, within a range of 15\,kg to 1.1\,t. A cross-check that includes the manufacture of the servers gives five to nine times more. Almost all of it comes from model inference, and most of that from re-reading long contexts at every turn. The paper explains where this energy goes, compares the figure with the professional footprint of the people who edit the corpus, and discusses the rebound effect.
 \end{abstract}
-\selectlanguage{english}
+\motscles{Keywords:}{digital humanities, large language models, carbon footprint, rebound effect, Grothendieck manuscripts}
+\end{otherlanguage}
 
-\section{Why measure it}
+\section{Pourquoi mesurer}
 
-In 2018 The Shift Project estimated that the digital sector's share of global greenhouse-gas emissions had risen from 2.5\,\% in 2013 to 3.7\,\%, and that its energy use was growing by about 9\,\% a year \citep{shift2018}. The Shift Project's 2025 report on artificial intelligence and data centres finds that, if current trends continue, data centres could emit up to 920\,MtCO$_2$e a year by 2030 \citep{shift2025}. The environmental cost of language models has been measured for their training \citep{luccioni2023,morand2026}, and life-cycle assessment has been used to bring out the hidden impacts of AI applications, including those meant to serve the environment \citep{ligozat2022}. A special issue of \emph{Humanités numériques} has brought the question of digital sobriety to the humanities \citep{baillot2025}.
+En 2018, The Shift Project estimait que la part du numérique dans les émissions mondiales de gaz à effet de serre était passée de 2,5\,\% en 2013 à 3,7\,\%, et que sa consommation d'énergie augmentait d'environ 9\,\% par an \citep{shift2018}. Son rapport de 2025 sur l'intelligence artificielle et les centres de données conclut que, si les tendances actuelles se poursuivent, les centres de données pourraient émettre jusqu'à 920\,Mt\,CO$_2$e par an en 2030 \citep{shift2025}. Le coût environnemental des modèles de langage a été mesuré pour leur entraînement \citep{luccioni2023,morand2026}, et l'analyse du cycle de vie a servi à faire apparaître les impacts cachés des applications de l'IA, y compris de celles qui prétendent servir l'environnement \citep{ligozat2022}. Un numéro de \emph{Humanités numériques} a porté la question de la sobriété numérique dans les sciences humaines \citep{baillot2025}.
 
-What is missing is the cost of one concrete scholarly use: one project, one corpus, from beginning to end. The question was put to this project directly. When the author asked the custodians of a mathematical archive for permission to read their documents with these tools, their answer objected to the use of commercial AI on scholarly archives. The objection was ethical as much as environmental. Its environmental part can be measured, and this paper measures it.
+On connaît mal, en revanche, le coût d'un usage savant concret : un projet, un corpus, du début à la fin. La question a été posée directement à ce projet. Quand l'auteur a demandé aux gardiens d'une archive mathématique l'autorisation de lire leurs documents avec ces outils, la réponse de l'ACNB s'est opposée à l'usage d'une IA commerciale sur des archives savantes. L'objection était éthique autant qu'environnementale. Sa part environnementale peut se mesurer ; c'est ce que fait cet article.
 
-\section{The project}
+\section{Le projet}
 
-\todo{one paragraph: the fonds (178 folders, 16\,074 pages), what was produced (transcriptions of 164 folders, modernised readings, about 3\,500 Lean theorems, articles), the models used (Claude Opus~5.5, Sonnet~5.5, Haiku~5.5), the period (7 August -- 7 November 2026)}.
+\todo{un paragraphe : le fonds (178 cotes, 16\,074 pages), ce qui a été produit (transcriptions de 164 cotes, lectures modernisées, environ 3\,500 théorèmes Lean, articles), les modèles utilisés (Claude Opus~5.5, Sonnet~5.5, Haiku~5.5), la période (7 août -- 7 novembre 2026)}.
 
-\section{Data}
+\section{Comment un modèle de langage dépense de l'énergie}\label{sec:mecanique}
 
-\paragraph{Model usage.} The tool (Claude Code) writes one record per model call, with the number of input, output and cached tokens. It deletes its transcripts after a configurable delay, which was set to 14 days during the project. The records that survive cover 24 September to 7 November 2026: 44 of the project's 92 days, about six of its thirteen weeks. De-duplicated by message, they give the totals of Table~\ref{tab:tokens}. Retention was raised on 7 November, so the rest of the project will be measured rather than extrapolated. \todo{Haiku~5.5 is listed among the models used but has no row: add its tokens or state that they are negligible}.
+Cette section s'adresse aux lecteurs qui n'ont pas de formation en informatique. Elle explique les quelques mécanismes qui déterminent la dépense d'énergie d'un modèle de langage, et sur lesquels reposent les choix de méthode de la section~\ref{sec:methode}.
+
+\paragraph{Paramètres et opérations.} Un modèle de langage est un très grand ensemble de nombres, ses \emph{paramètres}, fixés pendant l'entraînement. Il ne manipule pas des mots mais des \emph{jetons} (\emph{tokens}), des fragments de mots. Pour traiter un jeton, il fait passer ce jeton à travers toutes ses couches, ce qui demande environ deux opérations par paramètre, une multiplication et une addition. Un modèle de $N$ paramètres effectue ainsi environ $2N$ opérations par jeton, auxquelles s'ajoute un terme qui croît avec la longueur du texte déjà présent, le \emph{contexte} \citep[éq.~2.2]{kaplan2020}. Pour les grands modèles, ce second terme pèse peu dans le calcul \citep{pope2023}. Un modèle de cent milliards de paramètres fait donc de l'ordre de $2\times10^{11}$ opérations pour chaque jeton qu'il lit ou qu'il écrit. Les fournisseurs ne publient pas la taille de leurs modèles les plus récents, et c'est la première raison pour laquelle on ne peut pas calculer leur consommation directement.
+
+\paragraph{Lire et écrire.} Une requête se déroule en deux phases. Dans la première, le modèle lit tout le texte qu'on lui soumet (le \emph{préremplissage}, \emph{prefill}). Tous les jetons de ce texte sont connus d'avance : la machine peut les traiter ensemble, en parallèle, et ses unités de calcul travaillent à plein. Dans la seconde, le modèle écrit sa réponse (le \emph{décodage}). Chaque nouveau jeton dépend du précédent, si bien qu'il faut les produire un par un. À chaque pas, la machine doit relire depuis sa mémoire tous les paramètres du modèle et tout ce qu'elle garde du contexte, pour un calcul très court. Le décodage est donc limité par le débit de la mémoire, non par la puissance de calcul. L'étude de \citet{patel2024}, menée sur des grappes de processeurs graphiques en production, mesure cette différence : la phase de lecture est « intensive en calcul » et sa puissance électrique augmente avec le nombre de requêtes traitées ensemble, tandis que la phase d'écriture est limitée par la mémoire et sous-utilise les unités de calcul. Brider la puissance de ces processeurs de 700 à 350\,W ne ralentit presque pas l'écriture, alors que la lecture y est très sensible.
+
+\paragraph{Le cache des clés et des valeurs.} Pour écrire chaque nouveau jeton, le modèle doit tenir compte de tous les jetons précédents. Il ne les recalcule pas : il conserve, pour chaque couche, deux tableaux de nombres qui les résument, les \emph{clés} et les \emph{valeurs}, ce qu'on appelle le cache KV. Ce cache évite de refaire le calcul, mais il occupe de la mémoire et il faut le relire à chaque pas. \citet{pope2023} donnent un exemple : pour un modèle de plus de 500 milliards de paramètres, 512 requêtes simultanées et des contextes de 2\,048 jetons, le cache KV atteint 3\,téraoctets, trois fois la taille du modèle, et il doit être chargé depuis la mémoire pour chaque jeton produit, pendant que les unités de calcul restent presque inactives.
+
+Les fournisseurs proposent en outre de garder ce résumé d'une requête à l'autre (\emph{prompt caching}). Quand une conversation reprend avec le même début, le modèle n'a pas à relire ce début : il récupère son cache. Une lecture depuis le cache coûte donc beaucoup moins qu'une relecture complète, puisqu'elle évite les $2N$ opérations par jeton du préremplissage. Elle n'est pas gratuite pour autant : le cache doit être stocké, transféré vers le processeur qui traite la requête, puis relu à chaque jeton écrit, comme on vient de le voir. Le fournisseur ne publie pas comment son cache est mis en œuvre ; ce qui précède décrit le principe général, non son infrastructure.
+
+\paragraph{Pourquoi le contexte domine dans un usage agentique.} Un agent comme celui utilisé ici (Claude Code) travaille par tours : à chaque tour, il envoie au modèle toute la conversation depuis le début, les fichiers lus, les résultats des commandes, puis il reçoit une réponse courte, qui s'ajoute au contexte du tour suivant (figure~\ref{fig:tour}). Le contexte grandit au fil de la session, et il est relu à chaque tour. Dans ce projet, sur la fenêtre mesurée, chaque appel à Opus~5.5 a relu en moyenne environ 515\,000 jetons depuis le cache, en a écrit environ 5\,200 nouveaux dans le cache et a produit environ 680 jetons de réponse. Pour un jeton écrit, le modèle en a donc relu plus de 700. Même à un centième du coût d'un jeton écrit, ces relectures pèsent plus que tout le reste (section~\ref{sec:resultats}).
+
+\begin{figure}[h]\centering
+\begin{tikzpicture}[font=\small, every node/.style={inner sep=3pt},
+  box/.style={draw=inksec!70, minimum height=7mm, anchor=west}]
+% Tour n
+\node[anchor=east, font=\small\bfseries] at (-0.2,0) {Tour $n$};
+\node[box, fill=rangefill!45, minimum width=7.6cm] (ctx) at (0,0) {contexte déjà lu, relu depuis le cache};
+\node[box, fill=rangefill, minimum width=1.3cm, right=0pt of ctx] (new) {neuf};
+\node[box, fill=markblue, text=white, minimum width=1.5cm, right=0pt of new] (out) {réponse};
+\draw[decorate, decoration={brace, amplitude=4pt, mirror}, inksec] (ctx.south west) -- (ctx.south east)
+  node[midway, below=4pt, align=center, font=\footnotesize] {$\approx$\,515\,000 jetons en moyenne\\lecture depuis le cache : peu de calcul, beaucoup de mémoire};
+\draw[decorate, decoration={brace, amplitude=4pt}, inksec] (new.north west) -- (new.north east)
+  node[midway, above=4pt, anchor=south east, xshift=4mm, align=right, font=\footnotesize] (lnew) {$\approx$\,5\,200 jetons nouveaux\\lus d'un bloc (préremplissage)\\et écrits dans le cache};
+\draw[decorate, decoration={brace, amplitude=4pt}, inksec] (out.north west) -- (out.north east)
+  node[midway, above=4pt, anchor=south west, xshift=-4mm, align=left, font=\footnotesize] {$\approx$\,680 jetons\\écrits un à un\\(décodage)};
+% Tour n+1
+\node[anchor=east, font=\small\bfseries] at (-0.2,-2.4) {Tour $n+1$};
+\node[box, fill=rangefill!45, minimum width=10.4cm] (ctx2) at (0,-2.4) {contexte du tour $n$, réponse comprise, relu depuis le cache};
+\node[box, fill=rangefill, minimum width=1.3cm, right=0pt of ctx2] (new2) {neuf};
+\node[box, fill=markblue, text=white, minimum width=1.5cm, right=0pt of new2] (out2) {réponse};
+\draw[-{Stealth[length=2mm]}, inksec] (out.south) to[out=-90, in=90] ([xshift=-1mm]ctx2.north east);
+\end{tikzpicture}
+\caption{Un tour d'agent. À chaque appel, le modèle relit tout le contexte accumulé (en pâle), lit et met en cache les éléments nouveaux (le message, le fichier ou le résultat de commande qui vient d'arriver), puis écrit sa réponse, qui entre dans le contexte du tour suivant. Les nombres sont les moyennes par appel à Opus~5.5 sur la fenêtre mesurée (24 septembre -- 7 novembre 2026). Les longueurs ne sont pas à l'échelle : à l'échelle, la partie pâle serait environ cent fois plus longue que la partie « neuf ».}\label{fig:tour}
+\end{figure}
+
+\paragraph{Traitement par lots et taux d'occupation.} Un serveur ne traite pas une requête à la fois : il en regroupe plusieurs dans un même lot, ce qui permet de relire une seule fois les paramètres pour toutes les requêtes du lot. Plus le lot est grand, plus l'énergie par jeton baisse, jusqu'à ce que la mémoire soit pleine \citep{patel2024}. \citet{pope2023} montrent qu'un petit lot donne une faible utilisation des unités de calcul et un coût par jeton plus élevé. L'énergie dépensée pour un jeton dépend donc de l'occupation des machines au moment de la requête, que l'utilisateur ne voit pas. Les machines tenues en réserve et inactives consomment aussi ; la mesure publiée par Google pour son assistant Gemini les compte \citep{elsworth2025}.
+
+\paragraph{Mesures publiées.} \citet{luccioni2024} ont mesuré l'énergie de l'inférence pour 88 modèles et dix tâches, sur des modèles allant jusqu'à 11 milliards de paramètres. La génération de texte y consomme en moyenne environ 0,05\,kWh pour 1\,000 requêtes, plus de dix fois la classification de textes, et les modèles génératifs polyvalents coûtent des ordres de grandeur de plus que les modèles spécialisés pour une même tâche. Les modèles utilisés dans ce projet sont beaucoup plus grands et leurs requêtes beaucoup plus longues, de sorte que ces mesures ne s'appliquent pas telles quelles ; elles donnent un plancher et montrent l'écart entre usages.
+
+\paragraph{Du serveur au bâtiment.} L'énergie consommée par les processeurs n'est qu'une partie de celle du centre de données. Il faut y ajouter le refroidissement, l'alimentation électrique et les pertes, que mesure l'indicateur d'efficacité énergétique (PUE, \emph{power usage effectiveness}) : le rapport entre l'énergie totale du bâtiment et celle des équipements informatiques. La méthode Cloud Carbon Footprint retient 1,135 pour Amazon Web Services, 1,1 pour Google Cloud et 1,185 pour Microsoft Azure \citep{ccf}. Les fourchettes de cet article sont données au niveau du centre de données, ces pertes comprises.
+
+\paragraph{De l'énergie au carbone.} Un kilowattheure n'émet pas partout la même quantité de gaz à effet de serre. L'intensité carbone du réseau électrique varie selon le mode de production : de l'ordre de 60\,g\,CO$_2$e par kWh en France, très nucléarisée, contre 475\,g en moyenne mondiale, selon les valeurs retenues par \citet{depaepe2024}. Le fournisseur ne publie pas où se trouvent les centres de données qui ont servi ce projet, d'où la fourchette de la section~\ref{sec:methode}.
+
+\paragraph{La fabrication.} Les serveurs, les processeurs graphiques et les bâtiments ont été fabriqués, et cette fabrication a émis des gaz à effet de serre avant toute utilisation. L'analyse du cycle de vie demande d'en compter une part, ainsi que la fin de vie du matériel \citep{ligozat2022}. Pour l'entraînement du modèle BLOOM, \citet{luccioni2023} trouvent 24,7\,t\,CO$_2$e si l'on ne compte que la consommation électrique dynamique, et 50,5\,t si l'on ajoute la fabrication du matériel et la consommation des machines au repos. Notre estimation principale ne compte que l'électricité ; le recoupement de la section~\ref{sec:resultats} donne une idée de ce qu'ajoute la fabrication.
+
+\paragraph{Le prix comme indicateur.} Faute de chiffres d'énergie, on peut pondérer les jetons par leur prix, en supposant que le prix suit le coût du calcul. C'est une approximation grossière. Le prix comprend la marge du fournisseur et reflète sa stratégie commerciale. On le voit dans la grille tarifaire elle-même : la lecture depuis le cache est facturée 5\,\% du prix d'un jeton d'entrée sur Opus~5.5 et Sonnet~5.5, mais 10\,\% sur Haiku~5.5, et Haiku facture cinq fois plus cher les requêtes de plus de 100\,000 jetons \citep{anthropicpricing}. Le second écart traduit sans doute un coût réel des longs contextes ; le premier ressemble davantage à un choix commercial. Le prix ne dit rien non plus de l'occupation des machines ni de l'électricité du lieu. Il donne cependant un ordre de grandeur cohérent pour comparer entre eux les types de jetons d'un même modèle, et c'est l'usage qu'en fait cet article.
+
+\section{Données}
+
+\paragraph{Usage des modèles.} L'outil (Claude Code) enregistre une ligne par appel au modèle, avec le nombre de jetons d'entrée, de sortie et de cache. Il efface ses historiques après un délai réglable, fixé à 14 jours pendant le projet. Les enregistrements conservés couvrent la période du 24 septembre au 7 novembre 2026 : 44 des 92 jours du projet, environ six de ses treize semaines. Dédoublonnés par message, ils donnent les totaux du tableau~\ref{tab:jetons}. Haiku~5.5 n'a servi que 23 fois, du 2 au 7 novembre ; sa part est négligeable. La durée de conservation a été allongée le 7 novembre, si bien que la suite du projet sera mesurée et non extrapolée.
 
 \begin{table}[h]\centering
-\begin{tabular}{lrrr}
+\begin{tabular}{lrrrr}
 \toprule
-Model & Output & Cache writes & Cache reads\\
+Modèle & Appels & Sortie & Écritures en cache & Lectures en cache\\
 \midrule
-Opus 5.5 & 9.7\,M & 78.5\,M & 7.8\,G\\
-Sonnet 5.5 & 1.6\,M & 16\,M & 0.70\,G\\
+Opus 5.5 & 15\,556 & 10,53\,M & 81,4\,M & 8,01\,G\\
+Sonnet 5.5 & 1\,584 & 1,62\,M & 16,0\,M & 0,699\,G\\
+Haiku 5.5 & 23 & 0,023\,M & 0,211\,M & 0,000\,2\,G\\
 \bottomrule
 \end{tabular}
-\caption{Tokens recorded, 24 September -- 7 November 2026. Uncached input is negligible.}\label{tab:tokens}
+\caption{Jetons enregistrés du 24 septembre au 7 novembre 2026, dédoublonnés par message (M : millions, G : milliards). Les jetons d'entrée hors cache sont négligeables.}\label{tab:jetons}
 \end{table}
 
-\paragraph{Continuous integration.} The project's repository had run 2\,346 GitHub Actions workflows by 7 November. Most of them build and deploy the website, which includes rendering the transcriptions and compiling their PDFs; a smaller number check the Lean proofs against the mathlib library. Wall-clock time overstates the computing, since it includes the time a run waits for a machine. In a sample of 120 runs spread over the whole history, the jobs ran for 14.3 hours out of 20.2 hours of wall-clock time. Scaled to all runs, that gives about 280 runner-hours (an earlier sample of 1\,000 runs, timed by wall clock, gave about 450 hours). A standard GitHub runner for a public repository is a virtual machine with 4 processors and 16\,GB of memory. \todo{replace the sample with the billed runner minutes of every run, from the API}.
+\paragraph{Intégration continue.} Le dépôt du projet avait exécuté 2\,346 flux de travail GitHub Actions au 7 novembre. La plupart construisent et déploient le site web, ce qui comprend la mise en forme des transcriptions et la compilation de leurs PDF ; un plus petit nombre vérifient les preuves Lean avec la bibliothèque mathlib. Le temps écoulé surestime le calcul, car il inclut l'attente d'une machine libre. Sur un échantillon de 120 exécutions réparties sur tout l'historique, les tâches ont tourné 14,3 heures pour 20,2 heures de temps écoulé. Rapporté à l'ensemble, cela donne environ 280 heures-machine. Un exécuteur standard de GitHub pour un dépôt public est une machine virtuelle à 4 processeurs virtuels et 16\,Go de mémoire, hébergée sur Microsoft Azure (ou, pour certaines tâches Linux, sur Amazon Web Services) \citep{githubrunners}. \todo{remplacer l'échantillon par les minutes facturées de toutes les exécutions, d'après l'API}.
 
-\paragraph{Other.} The author's laptop, the hosting of the project's website, and the storage of the facsimiles, which are streamed from Montpellier rather than copied.
+\paragraph{Autres postes.} L'ordinateur portable de l'auteur, l'hébergement du site du projet et le stockage des fac-similés, qui sont lus en direct depuis Montpellier et non copiés.
 
-\section{Method}
+\section{Méthode}\label{sec:methode}
 
-The provider does not publish the energy consumed per token. We therefore bound it, following the approach of the published assessments \citep{luccioni2023,ligozat2022}.
+Le fournisseur ne publie pas l'énergie consommée par jeton. On l'encadre donc, en suivant la démarche des évaluations publiées \citep{luccioni2023,ligozat2022}.
 
 \begin{enumerate}
-\item \emph{Weighting.} Tokens are weighted by their list price relative to an output token, as a proxy for compute. For Opus~5.5 and Sonnet~5.5 the published ratios are 1 for output, 0.25 for a five-minute cache write (0.40 for a one-hour write) and 0.01 for a cache read \citep{anthropicpricing}. With the five-minute ratios, the measured window comes to about 120\,M output-equivalent tokens (107\,M on Opus, 13\,M on Sonnet). Price includes margin and reflects demand, so the proxy is crude. To allow for it we carry an upper weighting into the ranges: one-hour writes and cache reads at 0.02, the ratio that applies to most other models, which gives about 220\,M. \todo{justify the proxy further, or replace it by a model of prefill and decoding cost}.
-\item \emph{Energy per token.} Between 0.5 and 5\,mWh per output-equivalent token, at the level of the data centre (cooling, idle capacity and other overheads included). The low end matches the public figures for mid-size models. Google measured 0.24\,Wh for the median text prompt to its Gemini assistant in May 2025, counting idle machines and data-centre overhead \citep{elsworth2025}. Epoch AI estimated about 0.3\,Wh for a typical ChatGPT query to GPT-4o, assuming 500 output tokens, which is about 0.6\,mWh per output token \citep{you2025epoch}. The high end allows for a larger frontier model and long contexts. On Epoch AI's figures, a query with 10\,000 input tokens takes about 2.5\,Wh and one with 100\,000 about 40\,Wh, when the input is not cached. \todo{an energy figure from the provider, if it will give one}.
-\item \emph{Carbon intensity.} Between 0.2 and 0.4\COe/kWh, the intensity of the electricity grid. Overheads are already in the energy figure. \todo{the region of the data centres used}.
-\item \emph{Extrapolation.} The unmeasured weeks were lighter than the measured ones. The repository received 321 commits before 24 September and 1\,996 after, and 219\,000 lines of transcription before against 432\,000 after; no Lean file was added before that date. Scaling the window by the share of transcription lines gives a factor of 1.5, by commits 1.2, and by time alone 2.1. We use 1.2 to 2.5, with 1.5 as the central value. \todo{a direct measure of the earlier weeks, if the account keeps any usage history}.
-\item \emph{Continuous integration.} Runner-hours times a share of server power between 20 and 100\,W per runner, overheads included, and the same grid intensity. \citet{benaben2024} describe how such a factor per core-hour is derived for a computing centre. \todo{a published figure for the power of a cloud virtual machine of this size}.
-\item \emph{Central estimate.} The central values are the list-price weighting, 2\,mWh per output-equivalent token, 0.3\COe/kWh and a factor of 1.5. They sit near the middle of each range and have no statistical meaning. The low and high ends of every range combine the extremes of all the factors.
-\item \emph{Scope.} Inference only in the main estimate. The manufacture of the hardware, which \citet{ligozat2022} insist should be counted, is brought in through a cross-check (Section~\ref{sec:results}). Training the models is left out.
+\item \emph{Pondération.} Les jetons sont pondérés par leur prix catalogue rapporté à celui d'un jeton de sortie, comme indicateur du calcul (section~\ref{sec:mecanique}). Pour Opus~5.5 et Sonnet~5.5, les rapports publiés sont 1 pour la sortie, 0,25 pour une écriture en cache de cinq minutes (0,40 pour une heure) et 0,01 pour une lecture en cache ; pour Haiku~5.5, 1, 0,25 (0,40) et 0,02 \citep{anthropicpricing}. Avec les rapports à cinq minutes, la fenêtre mesurée représente environ 124\,M de jetons équivalent-sortie (111\,M sur Opus, 12,6\,M sur Sonnet, moins de 0,1\,M sur Haiku). Les jetons de Haiku sont comptés comme ceux des grands modèles, ce qui les surestime sans changer le total. Pour tenir compte de la grossièreté de l'indicateur, on reporte dans les fourchettes une pondération haute : écritures à une heure et lectures en cache à 0,02, le rapport qui vaut pour la plupart des autres modèles, ce qui donne environ 225\,M.
+\item \emph{Énergie par jeton.} Entre 0,5 et 5\,mWh par jeton équivalent-sortie, au niveau du centre de données (refroidissement, capacité inactive et autres pertes comprises). Le bas de la fourchette correspond aux chiffres publics pour des modèles de taille moyenne. Google a mesuré 0,24\,Wh pour la requête textuelle médiane de son assistant Gemini en mai 2025, machines inactives et pertes du centre de données comprises \citep{elsworth2025}. Epoch AI estime à environ 0,3\,Wh une requête typique à GPT-4o, en supposant 500 jetons de sortie, soit environ 0,6\,mWh par jeton de sortie \citep{you2025epoch}. Le haut de la fourchette tient compte d'un modèle de pointe plus grand et des longs contextes : selon Epoch AI, une requête de 10\,000 jetons d'entrée demande environ 2,5\,Wh et une de 100\,000 jetons environ 40\,Wh, quand l'entrée n'est pas en cache. \todo{un chiffre d'énergie du fournisseur, s'il accepte d'en donner un}.
+\item \emph{Intensité carbone.} Entre 0,2 et 0,4\COe/kWh, l'intensité du réseau électrique. Les pertes sont déjà dans le chiffre d'énergie. \todo{la région des centres de données utilisés}.
+\item \emph{Extrapolation.} Les semaines non mesurées ont été moins chargées que les semaines mesurées. Le dépôt a reçu 321 commits avant le 24 septembre et 1\,996 après, et 219\,000 lignes de transcription avant contre 432\,000 après ; aucun fichier Lean n'avait été ajouté avant cette date. Mettre la fenêtre à l'échelle de la part des lignes de transcription donne un facteur 1,5, celle des commits 1,2, et la seule durée 2,1. On retient 1,2 à 2,5, avec 1,5 comme valeur centrale. \todo{une mesure directe des premières semaines, si le compte en garde un historique}.
+\item \emph{Intégration continue.} On applique les coefficients de la méthode Cloud Carbon Footprint pour Azure \citep{ccf} : de 0,78\,W par processeur virtuel au repos à 3,76\,W à pleine charge, 0,392\,W par gigaoctet de mémoire et un PUE de 1,185. La puissance moyenne d'un processeur s'y calcule comme le minimum plus le taux d'utilisation fois l'écart entre maximum et minimum ; la méthode retient 50\,\% d'utilisation quand le taux réel est inconnu. Les compilations du site et des preuves occupent fortement les processeurs : on suppose donc une utilisation entre 50 et 100\,\%, avec 75\,\% comme valeur centrale. Pour 4 processeurs virtuels et 16\,Go, cela donne 18 à 25\,W par exécuteur (22\,W au centre), PUE compris, et 5 à 7\,kWh pour 280 heures. Ces coefficients ne comptent ni le réseau ni le stockage, et la part de fabrication que la méthode estime à part n'est pas incluse. \citet{benaben2024} décrivent comment un facteur par heure-cœur se calcule pour un centre de calcul.
+\item \emph{Estimation centrale.} Les valeurs centrales sont la pondération au prix catalogue, 2\,mWh par jeton équivalent-sortie, 0,3\COe/kWh et un facteur 1,5. Elles se situent vers le milieu de chaque fourchette et n'ont pas de sens statistique. Les bornes basse et haute de chaque fourchette combinent les extrêmes de tous les facteurs.
+\item \emph{Périmètre.} L'estimation principale ne compte que l'inférence et son électricité. La fabrication du matériel, que \citet{ligozat2022} demandent de compter, intervient par un recoupement (section~\ref{sec:resultats}). L'entraînement des modèles est laissé de côté.
 \end{enumerate}
 
-\section{Results}\label{sec:results}
+\section{Résultats}\label{sec:resultats}
 
 \begin{table}[h]\centering
 \begin{tabular}{lrr}
 \toprule
-Item & Energy (kWh) & Carbon (kgCO$_2$e)\\
+Poste & Énergie (kWh) & Carbone (kg\,CO$_2$e)\\
 \midrule
-Inference, measured window (6 weeks) & 60 -- 1\,100 & 12 -- 440\\
-\quad central & 240 & 72\\
-Inference, whole project ($\times$1.2 to $\times$2.5) & 70 -- 2\,700 & 15 -- 1\,100\\
-\quad central ($\times$1.5) & 360 & 110\\
-Continuous integration ($\approx$\,280 runner-hours) & 6 -- 28 & 1 -- 11\\
-Laptop, website & 15 -- 30 & < 5\\
+Inférence, fenêtre mesurée (6 semaines) & 62 -- 1\,100 & 12 -- 450\\
+\quad valeur centrale & 250 & 74\\
+Inférence, projet entier ($\times$1,2 à $\times$2,5) & 74 -- 2\,800 & 15 -- 1\,100\\
+\quad valeur centrale ($\times$1,5) & 370 & 110\\
+Intégration continue ($\approx$\,280 heures-machine) & 5 -- 7 & 1,0 -- 2,8\\
+Ordinateur portable, site web & 15 -- 30 & < 5\\
 \midrule
-Total, central estimate & $\approx$\,400 & $\approx$\,110\\
+Total, estimation centrale & $\approx$\,400 & $\approx$\,110\\
 \bottomrule
 \end{tabular}
-\caption{First estimate for the whole project, 7 August -- 7 November 2026. Ranges, not confidence intervals. The laptop's carbon is for its electricity on the French grid; its manufacture is excluded.}\label{tab:results}
+\caption{Première estimation pour l'ensemble du projet, du 7 août au 7 novembre 2026. Des fourchettes, non des intervalles de confiance. Le carbone de l'ordinateur portable est celui de son électricité sur le réseau français ; sa fabrication est exclue.}\label{tab:resultats}
 \end{table}
-
 
 \begin{figure}[h]\centering
 \begin{tikzpicture}
 \begin{axis}[rangechart, xmode=log, xmin=0.5, xmax=3000,
   ytick={1,2,3,4,5}, ymin=0.5, ymax=5.5,
-  yticklabels={Inference{,} measured window, Inference{,} whole project, {With hardware (Mistral\\cross-check){,} whole project}, Continuous integration, {Laptop (electricity){,}\\website}},
-  xlabel={kgCO$_2$e (log scale)},
+  yticklabels={Inférence{,} fenêtre mesurée, Inférence{,} projet entier, {Avec le matériel (recoupement\\Mistral){,} projet entier}, Intégration continue, {Ordinateur (électricité){,}\\site web}},
+  xlabel={kg\,CO$_2$e (échelle logarithmique)},
   log ticks with fixed point, xtick={1,10,100,1000}]
 \addplot[draw=none] coordinates {(1,1)};
-\rangerow{1}{12}{440}{72}{12 -- 440 (72)}
+\rangerow{1}{12}{450}{74}{12 -- 450 (74)}
 \rangerow{2}{15}{1100}{110}{15 -- 1\,100 (110)}
-\rangerow{3}{510}{940}{}{510 -- 940}
-\rangerow{4}{1}{11}{4}{1 -- 11 (4)}
+\rangerow{3}{530}{960}{}{530 -- 960}
+\rangerow{4}{1}{2.8}{1.8}{1,0 -- 2,8 (1,8)}
 \rangerow{5}{0.5}{5}{}{< 5}
 \end{axis}
 \end{tikzpicture}
-\caption{Estimated carbon by item. Pale bars are ranges and dots the central values, which are also given in brackets. The Mistral cross-check counts the manufacture of the servers and has no central value of its own. The scale is logarithmic: each gridline is ten times the one before.}\label{fig:items}
+\caption{Carbone estimé par poste. Les barres pâles sont les fourchettes, les points les valeurs centrales, rappelées entre parenthèses. Le recoupement Mistral compte la fabrication des serveurs et n'a pas de valeur centrale propre. L'échelle est logarithmique : chaque graduation vaut dix fois la précédente.}\label{fig:postes}
 \end{figure}
 
-Inference dominates (Figure~\ref{fig:items}), and within it the cache reads (Figure~\ref{fig:tokens}). On every turn of a session the whole context is read again, and long sessions over long transcriptions multiply that cost. With list-price weights, cache reads make up 71\,\% of the output-equivalent tokens, cache writes 20\,\% and output 9\,\%. Under the upper weighting cache reads rise to 78\,\%. They would stop dominating only if a cache read cost far less than 1\,\% of an output token in energy. This is where sobriety would act first: shorter contexts, smaller models for simple tasks, fewer rebuilds.
+L'inférence domine (figure~\ref{fig:postes}), et en son sein les lectures en cache (figure~\ref{fig:jetons}). À chaque tour d'une session, tout le contexte est relu (section~\ref{sec:mecanique}), et les longues sessions sur de longues transcriptions multiplient ce coût. Avec les pondérations au prix catalogue, les lectures en cache font 70\,\% des jetons équivalent-sortie, les écritures en cache 20\,\% et la sortie 10\,\%. Avec la pondération haute, les lectures montent à 77\,\%. Elles ne cesseraient de dominer que si une lecture en cache coûtait en énergie bien moins de 1\,\% d'un jeton de sortie. C'est là qu'une démarche de sobriété agirait d'abord : des contextes plus courts, des modèles plus petits pour les tâches simples, moins de reconstructions du site.
 
 \begin{figure}[h]\centering
 \begin{tikzpicture}
 \begin{axis}[rangechart, xmin=0, xmax=240, ytick={1,2,3}, ymin=0.5, ymax=3.5,
-  yticklabels={{Output\\(11.3\,M tokens)}, {Cache writes\\(94.5\,M tokens)}, {Cache reads\\(8.5\,G tokens)}},
-  xlabel={Output-equivalent tokens, millions (measured window)}, xtick={0,50,100,150,200}]
+  yticklabels={{Sortie\\(12,2\,M jetons)}, {Écritures en cache\\(97,6\,M jetons)}, {Lectures en cache\\(8,71\,G jetons)}},
+  xlabel={Jetons équivalent-sortie, en millions (fenêtre mesurée)}, xtick={0,50,100,150,200}]
 \addplot[draw=none] coordinates {(0,1)};
-\draw[markblue, line width=7pt] (axis cs:0,1) -- (axis cs:11.3,1);
-\node[anchor=west, font=\footnotesize] at (axis cs:11.3,1) {11.3};
-\draw[markblue, line width=7pt] (axis cs:0,2) -- (axis cs:23.6,2);
-\draw[inksec, line width=0.8pt] (axis cs:23.6,2) -- (axis cs:37.8,2);
-\draw[inksec, line width=0.8pt] (axis cs:37.8,1.85) -- (axis cs:37.8,2.15);
-\node[anchor=west, font=\footnotesize] at (axis cs:37.8,2) {23.6 (up to 37.8)};
-\draw[markblue, line width=7pt] (axis cs:0,3) -- (axis cs:85,3);
-\draw[inksec, line width=0.8pt] (axis cs:85,3) -- (axis cs:170,3);
-\draw[inksec, line width=0.8pt] (axis cs:170,2.85) -- (axis cs:170,3.15);
-\node[anchor=west, font=\footnotesize] at (axis cs:170,3) {85 (up to 170)};
+\draw[markblue, line width=7pt] (axis cs:0,1) -- (axis cs:12.2,1);
+\node[anchor=west, font=\footnotesize] at (axis cs:12.2,1) {12,2};
+\draw[markblue, line width=7pt] (axis cs:0,2) -- (axis cs:24.4,2);
+\draw[inksec, line width=0.8pt] (axis cs:24.4,2) -- (axis cs:39.0,2);
+\draw[inksec, line width=0.8pt] (axis cs:39.0,1.85) -- (axis cs:39.0,2.15);
+\node[anchor=west, font=\footnotesize] at (axis cs:39.0,2) {24,4 (jusqu'à 39,0)};
+\draw[markblue, line width=7pt] (axis cs:0,3) -- (axis cs:87.1,3);
+\draw[inksec, line width=0.8pt] (axis cs:87.1,3) -- (axis cs:174.2,3);
+\draw[inksec, line width=0.8pt] (axis cs:174.2,2.85) -- (axis cs:174.2,3.15);
+\node[anchor=west, font=\footnotesize] at (axis cs:174.2,3) {87,1 (jusqu'à 174)};
 \end{axis}
 \end{tikzpicture}
-\caption{Tokens recorded on Opus~5.5 and Sonnet~5.5, by kind, weighted by list price relative to an output token. Bars use the list-price weights (1, 0.25, 0.01); the thin lines run to the upper weighting (one-hour cache writes at 0.40, cache reads at 0.02). Raw counts are under each label. Cache reads are 99\,\% of the raw tokens and 71 to 78\,\% of the weighted total.}\label{fig:tokens}
+\caption{Jetons enregistrés sur Opus~5.5, Sonnet~5.5 et Haiku~5.5, par type, pondérés par leur prix catalogue rapporté à un jeton de sortie. Les barres utilisent les rapports au prix catalogue (1, 0,25, 0,01) ; les traits fins vont jusqu'à la pondération haute (écritures à une heure à 0,40, lectures à 0,02). Les nombres bruts sont sous chaque libellé. Les lectures en cache font 99\,\% des jetons bruts et 70 à 77\,\% du total pondéré.}\label{fig:jetons}
 \end{figure}
 
+\paragraph{Un recoupement qui inclut le matériel.} L'analyse du cycle de vie de Mistral AI pour son modèle Mistral Large~2, menée avec Carbone~4 et l'ADEME, donne l'impact marginal de l'inférence pour une réponse de 400 jetons de son assistant : 1,14\,g\,CO$_2$e et 45\,mL d'eau \citep{mistral2025}. Ce chiffre compte la fabrication des serveurs et toute leur électricité, pas seulement celle des accélérateurs. Appliqué par jeton équivalent-sortie, il donne 0,35 à 0,64\,t pour la fenêtre mesurée, et 0,53 à 0,96\,t pour le projet avec le facteur central, soit cinq à neuf fois l'estimation centrale fondée sur la seule énergie. Les deux chiffres diffèrent par le périmètre, le modèle, la longueur des réponses et le réseau électrique ; l'écart ne remet donc pas en cause la fourchette d'énergie. Il suggère que l'estimation fondée sur l'énergie ne représente que la partie basse de l'empreinte complète, et que fabriquer le matériel pèse peut-être autant que le faire fonctionner, ou davantage.
 
-\paragraph{A cross-check with hardware included.} Mistral AI's life-cycle assessment of its Mistral Large~2 model, made with Carbone~4 and ADEME, gives the marginal impact of inference for one 400-token response of its assistant: 1.14\,gCO$_2$e and 45\,mL of water \citep{mistral2025}. That figure counts the manufacture of the servers and all of their electricity, not only the accelerators. Applied per output-equivalent token, it gives 0.34 to 0.63\,t for the measured window and 0.5 to 0.9\,t for the project with the central factor, five to eight times the energy-only central estimate. The two figures differ in scope, model, response length and grid, so the gap leaves the energy range standing. It suggests that the energy-only estimate is the lower part of the full footprint, and that making the hardware may weigh as much as running it, or more.
+\section{Ordres de grandeur : les éditeurs du corpus}
 
-\section{Scale: the people who work on this corpus}
+Le chiffre ne dit pas grand-chose à lui seul. Un point de comparaison est l'empreinte professionnelle des chercheurs des laboratoires français, mesurée avec l'outil GES~1point5. Une première analyse de plus d'une centaine de laboratoires trouve en moyenne 3,6\,t\,CO$_2$e par an et par membre, ou 3,1\,t sans les effets de l'aviation autres que son CO$_2$ \citep{mariette2022}. Une étude ultérieure de 108 laboratoires, qui ajoute les achats, trouve une moyenne de 6,2\,t par personne (médiane 5,6\,t), dont la moitié environ pour les achats \citep{depaepe2024}. Ces études ne publient pas de chiffre par personne pour les mathématiques ou l'histoire. \citet{depaepe2024} distinguent seulement trois grands domaines : leurs laboratoires de sciences humaines et sociales ont une intensité carbone des achats plus faible (0,22\,kg\,CO$_2$e par euro contre 0,31 en moyenne), et une réduction de 6\,\% de leurs émissions totales y représente 0,2\,t par personne, ce qui situe ces émissions autour de 3\,t par personne et par an (calcul de l'auteur). Les auteurs préviennent que ce résultat repose sur 10 inventaires de 8 laboratoires seulement. L'enseignement supérieur et la recherche devront réduire fortement ces empreintes pour tenir les objectifs climatiques \citep{ligozat2024targets}. On retient 2 à 5\,t par an pour un chercheur, autour de la moyenne de \citet{mariette2022}. \todo{des chiffres par personne pour les laboratoires de mathématiques, s'ils existent dans la base GES~1point5 ; 1 à 3\,t pour un doctorant reste une hypothèse de travail}.
 
-The figure means little on its own. One point of comparison is the professional footprint of researchers in French laboratories, measured with the GES~1point5 tool. In a first analysis of more than a hundred laboratories, the average was 3.6\,tCO$_2$e a year per lab member, or 3.1\,t without the effects of aviation other than its CO$_2$ \citep{mariette2022}. A later study of 108 laboratories, which adds purchases, finds a median of 5.6\,t per person, about half of it from purchases \citep{depaepe2024}. Higher education and research will have to cut such footprints sharply to meet climate targets \citep{ligozat2024targets}. We take 2 to 5\,t a year for a researcher, around the average of \citet{mariette2022}. \todo{the per-person figures for mathematics and history from Labos 1point5; 1 to 3\,t for a doctoral student is a working hypothesis}.
+Les éditions faites à la main couvrent 20 cotes et 5\,129 pages, établies par une dizaine de personnes nommées : M.~Künzer, J.~Malgoire et G.~Maltsiniotis pour \emph{Les Dérivateurs} (2\,135 pages) ; G.~Maltsiniotis pour \emph{À la poursuite des champs}~I (837 pages) ; J.~Malgoire pour \emph{La Longue Marche à travers la théorie de Galois} (1995, 1\,584 pages) ; L.~Schneps et P.~Lochak pour l'\emph{Esquisse d'un programme} (313 pages) ; P. et J.~Blass pour les notes préparatoires à EGA~V (260 pages). L'équipe de Montpellier qui a catalogué le fonds (S.~Dikoff, H.~Rodriguez, F.~Troilo) complète ce groupe, soit dix personnes. Elles n'ont pas travaillé en même temps, et le corpus n'occupait qu'une partie de leur temps. Si l'on suppose qu'il en a occupé 10 à 50\,\% pendant leurs années de travail, l'empreinte professionnelle qui lui revient est de 2 à 25\,t par an, autour de 7\,t au milieu géométrique de la fourchette.
 
-About ten to thirty people work on Grothendieck's manuscripts, mostly part time: the editors of the published transcriptions, the team that catalogued the fonds, and doctoral students. \todo{count them from the bibliography and theses.fr}. At 20 to 50\,\% of their time, their work on the subject weighs 4 to 75\,t a year.
-
-On these hypotheses the comparison is one of orders of magnitude, and its ranges are wide. The project's three months (central 0.11\,t) are a few percent of one researcher-year, and between 0.3\,\% and about half of one in the extreme cases. At the pace of the measured weeks the project would emit about 0.6\,t a year (0.1 to 3.6\,t). That is about 3\,\% of the community's footprint on the subject, taken at the geometric middle of its range (about 17\,t). The extremes run from 0.1\,\% to almost the same amount. If the manufacture of the hardware is counted, as in the Mistral cross-check, these shares grow several times. Figure~\ref{fig:scale} shows these ranges side by side.
+Avec ces hypothèses, la comparaison porte sur des ordres de grandeur, et ses fourchettes sont larges. Les trois mois du projet (0,11\,t au centre) font quelques pour cent d'une année de chercheur, et entre 0,3\,\% et la moitié environ dans les cas extrêmes. Au rythme des semaines mesurées, le projet émettrait environ 0,6\,t par an (0,1 à 3,7\,t), soit à peu près un dixième de l'empreinte du groupe consacrée au corpus prise au centre ; les extrêmes vont de 0,4\,\% à près du double. Si l'on compte la fabrication du matériel, comme dans le recoupement Mistral, ces parts sont multipliées par cinq à neuf. La figure~\ref{fig:echelle} montre ces fourchettes côte à côte.
 
 \begin{figure}[h]\centering
 \begin{tikzpicture}
 \begin{axis}[rangechart, xmode=log, xmin=0.05, xmax=200, ytick={1,2,3,4}, ymin=0.5, ymax=4.5,
-  yticklabels={{This project, a year at the pace\\of the measured weeks}, {The same, with hardware\\(Mistral cross-check)}, {One researcher-year}, {The community's work on\\the corpus, one year}},
-  xlabel={tCO$_2$e a year (log scale)},
+  yticklabels={{Ce projet, une année au rythme\\des semaines mesurées}, {Le même, avec le matériel\\(recoupement Mistral)}, {Une année de chercheur}, {Le travail du groupe\\sur le corpus, une année}},
+  xlabel={t\,CO$_2$e par an (échelle logarithmique)},
   log ticks with fixed point, xtick={0.1,1,10,100}]
 \addplot[draw=none] coordinates {(1,1)};
-\rangerow{1}{0.1}{3.6}{0.6}{0.1 -- 3.6 (0.6)}
-\rangerow{2}{2.8}{5.2}{}{2.8 -- 5.2}
-\rangerow{3}{2}{5}{3.6}{2 -- 5 (3.6)}
-\rangerow{4}{4}{75}{17}{4 -- 75 (17)}
+\rangerow{1}{0.1}{3.7}{0.6}{0,1 -- 3,7 (0,6)}
+\rangerow{2}{2.9}{5.3}{}{2,9 -- 5,3}
+\rangerow{3}{2}{5}{3.6}{2 -- 5 (3,6)}
+\rangerow{4}{2}{25}{7}{2 -- 25 (7)}
 \end{axis}
 \end{tikzpicture}
-\caption{The project's footprint at its current pace, beside the professional footprint of researchers. The dot for one researcher-year is the average of 3.6\,t per lab member found by \citet{mariette2022}; the dot for the community is the geometric middle of its range. The ranges rest on hypotheses that remain to be checked (ten to thirty people, at 20 to 50\,\% of their time). The comparison is of orders of magnitude; it does not measure the value of the work.}\label{fig:scale}
+\caption{L'empreinte du projet à son rythme actuel, à côté de l'empreinte professionnelle des chercheurs. Le point d'une année de chercheur est la moyenne de 3,6\,t par membre de laboratoire trouvée par \citet{mariette2022} ; celui du groupe est le milieu géométrique de sa fourchette. Les fourchettes reposent sur des hypothèses (dix personnes, 10 à 50\,\% de leur temps). La comparaison porte sur des ordres de grandeur ; elle ne mesure pas la valeur du travail.}\label{fig:echelle}
 \end{figure}
 
+Divisée par les 9\,414 pages, l'inférence du projet entier donne environ 12\,g\,CO$_2$e par page (2 à 120\,g). C'est un majorant pour la seule transcription, puisqu'une partie du calcul est allée aux lectures modernisées, aux preuves Lean et aux articles. Une transcription experte à la main, à un rythme supposé de deux à cinq pages par jour et d'environ 200 jours de travail par an, porterait 2 à 12\,kg par page si l'on y imputait toute l'empreinte professionnelle de la personne qui transcrit. \todo{le rythme, à demander aux éditeurs}. Les deux chiffres ne doivent pas se lire comme un rapport. Le chiffre humain impute des déplacements, des bâtiments et des achats qui servent à tout le travail d'un chercheur ; ce n'est pas le coût de la transcription en tant que telle. Et les deux ne sont pas le même produit. Une page lue par la machine est une première lecture, non vérifiée hormis les citations que l'auteur a collationnées ; une édition humaine est un texte vérifié. La lecture par la machine prépare le travail humain : quelqu'un doit encore vérifier chaque page, si bien que son coût s'ajoute à celui d'une édition. Ces chiffres ne disent pas que le travail humain serait trop lent, et ils ne donnent aucune raison de s'en passer.
 
-Divided by the 9\,414 pages, the inference of the whole project gives about 10\,g\,CO$_2$e per page (2 to 120\,g). That is an upper bound for transcription alone, since part of the computing went to the modernised readings, the Lean proofs and the articles. An expert transcription by hand, at an assumed two to five pages a day and about 200 working days a year, would carry 2 to 12\,kg per page if the whole professional footprint of the transcriber were allocated to it. \todo{the pace, to be asked of the editors}. The two figures should not be read as a ratio. The human figure allocates travel, buildings and purchases that serve all of a researcher's work, so it is not the cost of transcribing as such. And the two are not the same product. A machine page is a first reading, unchecked except for the quotations the author collated; a human edition is a verified text. The machine reading prepares the human work: someone still has to check every page, so its cost comes on top of the cost of an edition. These figures say nothing about whether the human work is too slow, and they give no ground for doing without it.
+\section{L'effet rebond}
 
-\section{Limits}
+Rendre une activité moins chère tend à la faire croître. Pour l'entraînement des modèles, \citet{morand2026} trouvent que l'énergie et les impacts ont augmenté de façon exponentielle sur une décennie, malgré un matériel plus efficace et une électricité moins carbonée ; les optimisations n'ont pas réduit les impacts, ce qui suggère un effet rebond, et l'efficacité seule ne garantit pas la soutenabilité. Le manifeste issu d'un atelier de Dagstuhl sur la responsabilité de l'informatique face au climat fait le même constat à plus grande échelle : l'informatique améliore surtout l'efficacité et réduit les coûts, ce qui conduit à consommer davantage, et les gains d'efficacité n'ont pas suffi jusqu'ici à freiner les émissions mondiales \citep{knowles2025}. \citet{lacroux2026} ajoutent que les effets rebond indirects sont peu étudiés, moins par manque de connaissances que parce que les cadres institutionnels de l'évaluation les laissent de côté.
 
-The energy per token of a frontier model is not published, and it is the largest source of uncertainty. Price is a crude proxy for compute. Less than half of the period was measured; the rest is extrapolated from activity in the repository. The manufacture of the hardware is only brought in through a cross-check, and training is left out. Water is left out too: the two published figures per response differ by more than a hundredfold (0.26\,mL for the median Gemini prompt, 45\,mL for a Mistral response of 400 tokens) \citep{elsworth2025,mistral2025}, and we have no basis for choosing between them. \todo{rebound: does a cheap first reading lead to reading more, and to more computing overall? \citet{morand2026} find that efficiency gains in training have not curbed its total impact}.
+Ce projet en donne un exemple à petite échelle. La lecture par la machine a été assez bon marché pour qu'on lise tout : 9\,414 pages en trois mois, presque deux fois les 5\,129 pages des éditions faites à la main. Sans la machine, ces pages n'auraient pas été transcrites en trois mois, et rien n'indique qu'elles l'auraient été bientôt. Le calcul n'a donc pas remplacé un travail qui se serait fait autrement ; il a servi à faire davantage. Les 110\,kg ne sont pas une économie par rapport à une édition à la main : ils s'ajoutent à ce qui se serait fait sans eux.
+
+Il faut en tirer deux conséquences pour la sobriété. La première est qu'un coût par page faible ne suffit pas à justifier un usage : ce qui compte est le total, et le total croît avec ce qu'on décide de lire. La seconde est que le choix de ce qu'on lit par la machine doit être fait pour lui-même. Une première lecture de tout le fonds a une valeur, celle d'un inventaire du contenu, qui aide à choisir ce qu'il faudra éditer avec soin. Le même calcul, refait à chaque reconstruction du site ou à chaque relecture d'une transcription déjà faite, n'en a guère. \todo{dire si l'auteur limite désormais certains usages (relectures, reconstructions, choix du modèle) et ce que cela a changé, chiffres à l'appui}.
+
+\section{Limites}
+
+L'énergie par jeton d'un modèle de pointe n'est pas publiée, et c'est la principale source d'incertitude. Le prix est un indicateur grossier du calcul (section~\ref{sec:mecanique}). Moins de la moitié de la période a été mesurée ; le reste est extrapolé à partir de l'activité du dépôt. La fabrication du matériel n'intervient que par un recoupement, et l'entraînement est laissé de côté. L'eau aussi : les deux chiffres publiés par réponse diffèrent de plus d'un facteur cent (0,26\,mL pour la requête Gemini médiane, 45\,mL pour une réponse Mistral de 400 jetons) \citep{elsworth2025,mistral2025}, et nous n'avons pas de raison de choisir entre eux. Les coefficients de l'intégration continue sont des moyennes publiées pour un fournisseur, non des mesures de ces machines.
 
 \section{Conclusion}
 
-\todo{to be written by the author once the figures are checked}.
+% Brouillon de conclusion, à réécrire par l'auteur.
+\todo{brouillon de conclusion, à réécrire par l'auteur}
 
-\section*{Statement on the use of AI}
-\todo{the same form as the other articles of the project; check the target journal's policy on AI-assisted writing first}.
+Trois mois de lecture d'un fonds d'archives mathématiques par un modèle de langage ont coûté, selon notre estimation, autour de 110\,kg\,CO$_2$e, dans une fourchette qui va de 15\,kg à 1,1\,t, et sans doute plusieurs fois plus si l'on compte la fabrication des serveurs. C'est l'ordre de grandeur de quelques pour cent de l'empreinte professionnelle annuelle d'un chercheur. Ce n'est pas rien, et ce n'est pas non plus ce qui décide à lui seul de la légitimité d'un tel projet.
+
+La plus grande part de la dépense tient à la manière de travailler plus qu'au nombre de pages : un agent relit à chaque tour un contexte de plusieurs centaines de milliers de jetons pour en écrire quelques centaines. C'est là que se trouvent les marges de sobriété, et elles dépendent de choix que l'utilisateur peut faire : la longueur des sessions, la taille du modèle, la fréquence des reconstructions.
+
+La comparaison avec le travail des éditeurs ne mesure pas la valeur de leur travail, et la lecture par la machine ne le remplace pas : elle s'y ajoute. Elle a aussi conduit à lire beaucoup plus qu'on ne l'aurait fait sans elle, ce qui est le mécanisme même de l'effet rebond. La question qui reste, et que ce chiffre ne tranche pas, est de savoir si ce qu'on a lu en plus valait ce qu'il a coûté.
+
+\section*{Déclaration sur l'usage de l'intelligence artificielle}
+
+\emph{Humanités numériques} ne publie pas de politique sur l'usage de l'intelligence artificielle. Sa charte éthique réserve la qualité de coauteur aux « personnes ayant contribué d'une manière significative » ; aucun modèle n'est donc nommé parmi les auteurs, et l'auteur assume seul la responsabilité du texte. Nous décrivons ici tout ce que les modèles ont fait.
+
+Le projet étudié repose sur des modèles de langage de l'entreprise Anthropic (Claude Opus~5.5, Sonnet~5.5 et Haiku~5.5), utilisés au moyen de l'outil Claude Code : ils ont transcrit les pages manuscrites, rédigé les lectures modernisées, écrit les preuves Lean et préparé les brouillons des articles du projet. Pour le présent article, les mêmes outils ont servi à compter les jetons et les exécutions de l'intégration continue, à faire les calculs et les figures, à rédiger une première version en anglais, à produire un rapport de relecture simulé et une vérification des références, puis à écrire la présente version française. Chaque référence a été vérifiée sur sa notice (Crossref, DataCite, arXiv, HAL ou la page de l'éditeur) avant d'être citée, et seules les affirmations lues dans les sources sont attribuées à leurs auteurs. Les choix de méthode, les hypothèses et les conclusions sont ceux de l'auteur, qui a relu et vérifié l'ensemble. Les calculs de cet article comprennent la consommation de ces usages eux-mêmes, puisqu'ils entrent dans la fenêtre mesurée. \todo{préciser la part du texte que l'auteur a réécrite lui-même, et vérifier que la revue accepte cette déclaration sous cette forme}.
 
 \renewcommand{\bibfont}{\small\raggedright}
 \bibliographystyle{plainnat}
+\begin{otherlanguage}{english}
+\renewcommand{\refname}{Bibliographie}
 \bibliography{article}
+\end{otherlanguage}
 \end{document}

@@ -1,0 +1,197 @@
+% Draft, 7 November 2026, issue #121. Figures recomputed after the review of 7 November (docs/carbon/review/).
+% Language: English, to reach the widest readership; a French summary follows the abstract.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french,english]{babel}
+\usepackage{lmodern,microtype,booktabs,amsmath}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[numbers]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\definecolor{rangefill}{HTML}{86B6EF}
+\definecolor{markblue}{HTML}{2A78D6}
+\definecolor{inksec}{HTML}{52514E}
+\pgfplotsset{rangechart/.style={
+  xbar, bar width=7pt, axis line style={inksec!60}, tick style={inksec!60},
+  ytick=data, y dir=reverse, yticklabel style={align=right, font=\small},
+  xticklabel style={font=\small, text=inksec}, xlabel style={font=\small},
+  xmajorgrids, grid style={inksec!15}, enlarge y limits=0.18,
+  width=0.62\textwidth, clip=false, axis lines*=left}}
+% A range drawn as a pale bar from lo to hi, a dark dot at the central value, and a label after it.
+\newcommand{\rangerow}[5]{% y, lo, hi, central (or empty), label
+  \draw[rangefill, line width=7pt] (axis cs:#2,#1) -- (axis cs:#3,#1);
+  \if\relax\detokenize{#4}\relax\else\fill[markblue] (axis cs:#4,#1) circle (2.6pt);\fi
+  \node[anchor=west, font=\footnotesize, inner sep=3pt] at (axis cs:#3,#1) {#5};}
+\newcommand{\todo}[1]{\textbf{[À vérifier : #1]}}
+\newcommand{\COe}{\,kgCO$_2$e}
+
+\title{The carbon cost of reading an archive with a language model}
+\author{Michel Hua}
+\date{Draft, 7 November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Between August and November 2026, a single researcher used commercial large language models to transcribe 9\,414 pages of Alexandre Grothendieck's mathematical working notes held at the University of Montpellier, to write modernised readings of them, to check some of their statements in the proof assistant Lean, and to draft several articles. This paper estimates what that work cost in energy and greenhouse-gas emissions. It relies on the token counts recorded by the tool during part of the period and on the run times of the continuous-integration service, and it borrows its method from the life-cycle assessments of language models published since 2022. The central estimate is about 110\,kg of CO$_2$e for three months, within a range of 15\,kg to 1.1\,t. Counting the manufacture of the servers, as one published assessment does, could raise it several times. Almost all of it comes from model inference, and most of that from re-reading long contexts. We compare this figure with the professional footprint of the researchers who work on the same corpus, and we discuss what the comparison does and does not show.
+\end{abstract}
+
+\selectlanguage{french}
+\begin{abstract}
+\textit{Résumé.} D'août à novembre 2026, un chercheur seul a transcrit avec des modèles de langage commerciaux 9\,414 pages des notes de travail d'Alexandre Grothendieck conservées à l'université de Montpellier, en a rédigé des lectures modernisées, a vérifié certains de leurs énoncés en Lean et a écrit plusieurs articles. Cet article estime ce que ce travail a coûté en énergie et en gaz à effet de serre : environ 110\,kg d'équivalent CO$_2$ pour trois mois, entre 15\,kg et 1,1\,t, presque entièrement dus à l'inférence des modèles. Il compare ce chiffre à l'empreinte professionnelle des chercheurs qui travaillent sur le même corpus.
+\end{abstract}
+\selectlanguage{english}
+
+\section{Why measure it}
+
+In 2018 The Shift Project estimated that the digital sector's share of global greenhouse-gas emissions had risen from 2.5\,\% in 2013 to 3.7\,\%, and that its energy use was growing by about 9\,\% a year \citep{shift2018}. The Shift Project's 2025 report on artificial intelligence and data centres finds that, if current trends continue, data centres could emit up to 920\,MtCO$_2$e a year by 2030 \citep{shift2025}. The environmental cost of language models has been measured for their training \citep{luccioni2023,morand2026}, and life-cycle assessment has been used to bring out the hidden impacts of AI applications, including those meant to serve the environment \citep{ligozat2022}. A special issue of \emph{Humanités numériques} has brought the question of digital sobriety to the humanities \citep{baillot2025}.
+
+What is missing is the cost of one concrete scholarly use: one project, one corpus, from beginning to end. The question was put to this project directly. When the author asked the custodians of a mathematical archive for permission to read their documents with these tools, their answer objected to the use of commercial AI on scholarly archives. The objection was ethical as much as environmental. Its environmental part can be measured, and this paper measures it.
+
+\section{The project}
+
+\todo{one paragraph: the fonds (178 folders, 16\,074 pages), what was produced (transcriptions of 164 folders, modernised readings, about 3\,500 Lean theorems, articles), the models used (Claude Opus~5.5, Sonnet~5.5, Haiku~5.5), the period (7 August -- 7 November 2026)}.
+
+\section{Data}
+
+\paragraph{Model usage.} The tool (Claude Code) writes one record per model call, with the number of input, output and cached tokens. It deletes its transcripts after a configurable delay, which was set to 14 days during the project. The records that survive cover 24 September to 7 November 2026: 44 of the project's 92 days, about six of its thirteen weeks. De-duplicated by message, they give the totals of Table~\ref{tab:tokens}. Retention was raised on 7 November, so the rest of the project will be measured rather than extrapolated. \todo{Haiku~5.5 is listed among the models used but has no row: add its tokens or state that they are negligible}.
+
+\begin{table}[h]\centering
+\begin{tabular}{lrrr}
+\toprule
+Model & Output & Cache writes & Cache reads\\
+\midrule
+Opus 5.5 & 9.7\,M & 78.5\,M & 7.8\,G\\
+Sonnet 5.5 & 1.6\,M & 16\,M & 0.70\,G\\
+\bottomrule
+\end{tabular}
+\caption{Tokens recorded, 24 September -- 7 November 2026. Uncached input is negligible.}\label{tab:tokens}
+\end{table}
+
+\paragraph{Continuous integration.} The project's repository had run 2\,346 GitHub Actions workflows by 7 November. Most of them build and deploy the website, which includes rendering the transcriptions and compiling their PDFs; a smaller number check the Lean proofs against the mathlib library. Wall-clock time overstates the computing, since it includes the time a run waits for a machine. In a sample of 120 runs spread over the whole history, the jobs ran for 14.3 hours out of 20.2 hours of wall-clock time. Scaled to all runs, that gives about 280 runner-hours (an earlier sample of 1\,000 runs, timed by wall clock, gave about 450 hours). A standard GitHub runner for a public repository is a virtual machine with 4 processors and 16\,GB of memory. \todo{replace the sample with the billed runner minutes of every run, from the API}.
+
+\paragraph{Other.} The author's laptop, the hosting of the project's website, and the storage of the facsimiles, which are streamed from Montpellier rather than copied.
+
+\section{Method}
+
+The provider does not publish the energy consumed per token. We therefore bound it, following the approach of the published assessments \citep{luccioni2023,ligozat2022}.
+
+\begin{enumerate}
+\item \emph{Weighting.} Tokens are weighted by their list price relative to an output token, as a proxy for compute. For Opus~5.5 and Sonnet~5.5 the published ratios are 1 for output, 0.25 for a five-minute cache write (0.40 for a one-hour write) and 0.01 for a cache read \citep{anthropicpricing}. With the five-minute ratios, the measured window comes to about 120\,M output-equivalent tokens (107\,M on Opus, 13\,M on Sonnet). Price includes margin and reflects demand, so the proxy is crude. To allow for it we carry an upper weighting into the ranges: one-hour writes and cache reads at 0.02, the ratio that applies to most other models, which gives about 220\,M. \todo{justify the proxy further, or replace it by a model of prefill and decoding cost}.
+\item \emph{Energy per token.} Between 0.5 and 5\,mWh per output-equivalent token, at the level of the data centre (cooling, idle capacity and other overheads included). The low end matches the public figures for mid-size models. Google measured 0.24\,Wh for the median text prompt to its Gemini assistant in May 2025, counting idle machines and data-centre overhead \citep{elsworth2025}. Epoch AI estimated about 0.3\,Wh for a typical ChatGPT query to GPT-4o, assuming 500 output tokens, which is about 0.6\,mWh per output token \citep{you2025epoch}. The high end allows for a larger frontier model and long contexts. On Epoch AI's figures, a query with 10\,000 input tokens takes about 2.5\,Wh and one with 100\,000 about 40\,Wh, when the input is not cached. \todo{an energy figure from the provider, if it will give one}.
+\item \emph{Carbon intensity.} Between 0.2 and 0.4\COe/kWh, the intensity of the electricity grid. Overheads are already in the energy figure. \todo{the region of the data centres used}.
+\item \emph{Extrapolation.} The unmeasured weeks were lighter than the measured ones. The repository received 321 commits before 24 September and 1\,996 after, and 219\,000 lines of transcription before against 432\,000 after; no Lean file was added before that date. Scaling the window by the share of transcription lines gives a factor of 1.5, by commits 1.2, and by time alone 2.1. We use 1.2 to 2.5, with 1.5 as the central value. \todo{a direct measure of the earlier weeks, if the account keeps any usage history}.
+\item \emph{Continuous integration.} Runner-hours times a share of server power between 20 and 100\,W per runner, overheads included, and the same grid intensity. \citet{benaben2024} describe how such a factor per core-hour is derived for a computing centre. \todo{a published figure for the power of a cloud virtual machine of this size}.
+\item \emph{Central estimate.} The central values are the list-price weighting, 2\,mWh per output-equivalent token, 0.3\COe/kWh and a factor of 1.5. They sit near the middle of each range and have no statistical meaning. The low and high ends of every range combine the extremes of all the factors.
+\item \emph{Scope.} Inference only in the main estimate. The manufacture of the hardware, which \citet{ligozat2022} insist should be counted, is brought in through a cross-check (Section~\ref{sec:results}). Training the models is left out.
+\end{enumerate}
+
+\section{Results}\label{sec:results}
+
+\begin{table}[h]\centering
+\begin{tabular}{lrr}
+\toprule
+Item & Energy (kWh) & Carbon (kgCO$_2$e)\\
+\midrule
+Inference, measured window (6 weeks) & 60 -- 1\,100 & 12 -- 440\\
+\quad central & 240 & 72\\
+Inference, whole project ($\times$1.2 to $\times$2.5) & 70 -- 2\,700 & 15 -- 1\,100\\
+\quad central ($\times$1.5) & 360 & 110\\
+Continuous integration ($\approx$\,280 runner-hours) & 6 -- 28 & 1 -- 11\\
+Laptop, website & 15 -- 30 & < 5\\
+\midrule
+Total, central estimate & $\approx$\,400 & $\approx$\,110\\
+\bottomrule
+\end{tabular}
+\caption{First estimate for the whole project, 7 August -- 7 November 2026. Ranges, not confidence intervals. The laptop's carbon is for its electricity on the French grid; its manufacture is excluded.}\label{tab:results}
+\end{table}
+
+
+\begin{figure}[h]\centering
+\begin{tikzpicture}
+\begin{axis}[rangechart, xmode=log, xmin=0.5, xmax=3000,
+  ytick={1,2,3,4,5}, ymin=0.5, ymax=5.5,
+  yticklabels={Inference{,} measured window, Inference{,} whole project, {With hardware (Mistral\\cross-check){,} whole project}, Continuous integration, {Laptop (electricity){,}\\website}},
+  xlabel={kgCO$_2$e (log scale)},
+  log ticks with fixed point, xtick={1,10,100,1000}]
+\addplot[draw=none] coordinates {(1,1)};
+\rangerow{1}{12}{440}{72}{12 -- 440 (72)}
+\rangerow{2}{15}{1100}{110}{15 -- 1\,100 (110)}
+\rangerow{3}{510}{940}{}{510 -- 940}
+\rangerow{4}{1}{11}{4}{1 -- 11 (4)}
+\rangerow{5}{0.5}{5}{}{< 5}
+\end{axis}
+\end{tikzpicture}
+\caption{Estimated carbon by item. Pale bars are ranges and dots the central values, which are also given in brackets. The Mistral cross-check counts the manufacture of the servers and has no central value of its own. The scale is logarithmic: each gridline is ten times the one before.}\label{fig:items}
+\end{figure}
+
+Inference dominates (Figure~\ref{fig:items}), and within it the cache reads (Figure~\ref{fig:tokens}). On every turn of a session the whole context is read again, and long sessions over long transcriptions multiply that cost. With list-price weights, cache reads make up 71\,\% of the output-equivalent tokens, cache writes 20\,\% and output 9\,\%. Under the upper weighting cache reads rise to 78\,\%. They would stop dominating only if a cache read cost far less than 1\,\% of an output token in energy. This is where sobriety would act first: shorter contexts, smaller models for simple tasks, fewer rebuilds.
+
+\begin{figure}[h]\centering
+\begin{tikzpicture}
+\begin{axis}[rangechart, xmin=0, xmax=240, ytick={1,2,3}, ymin=0.5, ymax=3.5,
+  yticklabels={{Output\\(11.3\,M tokens)}, {Cache writes\\(94.5\,M tokens)}, {Cache reads\\(8.5\,G tokens)}},
+  xlabel={Output-equivalent tokens, millions (measured window)}, xtick={0,50,100,150,200}]
+\addplot[draw=none] coordinates {(0,1)};
+\draw[markblue, line width=7pt] (axis cs:0,1) -- (axis cs:11.3,1);
+\node[anchor=west, font=\footnotesize] at (axis cs:11.3,1) {11.3};
+\draw[markblue, line width=7pt] (axis cs:0,2) -- (axis cs:23.6,2);
+\draw[inksec, line width=0.8pt] (axis cs:23.6,2) -- (axis cs:37.8,2);
+\draw[inksec, line width=0.8pt] (axis cs:37.8,1.85) -- (axis cs:37.8,2.15);
+\node[anchor=west, font=\footnotesize] at (axis cs:37.8,2) {23.6 (up to 37.8)};
+\draw[markblue, line width=7pt] (axis cs:0,3) -- (axis cs:85,3);
+\draw[inksec, line width=0.8pt] (axis cs:85,3) -- (axis cs:170,3);
+\draw[inksec, line width=0.8pt] (axis cs:170,2.85) -- (axis cs:170,3.15);
+\node[anchor=west, font=\footnotesize] at (axis cs:170,3) {85 (up to 170)};
+\end{axis}
+\end{tikzpicture}
+\caption{Tokens recorded on Opus~5.5 and Sonnet~5.5, by kind, weighted by list price relative to an output token. Bars use the list-price weights (1, 0.25, 0.01); the thin lines run to the upper weighting (one-hour cache writes at 0.40, cache reads at 0.02). Raw counts are under each label. Cache reads are 99\,\% of the raw tokens and 71 to 78\,\% of the weighted total.}\label{fig:tokens}
+\end{figure}
+
+
+\paragraph{A cross-check with hardware included.} Mistral AI's life-cycle assessment of its Mistral Large~2 model, made with Carbone~4 and ADEME, gives the marginal impact of inference for one 400-token response of its assistant: 1.14\,gCO$_2$e and 45\,mL of water \citep{mistral2025}. That figure counts the manufacture of the servers and all of their electricity, not only the accelerators. Applied per output-equivalent token, it gives 0.34 to 0.63\,t for the measured window and 0.5 to 0.9\,t for the project with the central factor, five to eight times the energy-only central estimate. The two figures differ in scope, model, response length and grid, so the gap leaves the energy range standing. It suggests that the energy-only estimate is the lower part of the full footprint, and that making the hardware may weigh as much as running it, or more.
+
+\section{Scale: the people who work on this corpus}
+
+The figure means little on its own. One point of comparison is the professional footprint of researchers in French laboratories, measured with the GES~1point5 tool. In a first analysis of more than a hundred laboratories, the average was 3.6\,tCO$_2$e a year per lab member, or 3.1\,t without the effects of aviation other than its CO$_2$ \citep{mariette2022}. A later study of 108 laboratories, which adds purchases, finds a median of 5.6\,t per person, about half of it from purchases \citep{depaepe2024}. Higher education and research will have to cut such footprints sharply to meet climate targets \citep{ligozat2024targets}. We take 2 to 5\,t a year for a researcher, around the average of \citet{mariette2022}. \todo{the per-person figures for mathematics and history from Labos 1point5; 1 to 3\,t for a doctoral student is a working hypothesis}.
+
+About ten to thirty people work on Grothendieck's manuscripts, mostly part time: the editors of the published transcriptions, the team that catalogued the fonds, and doctoral students. \todo{count them from the bibliography and theses.fr}. At 20 to 50\,\% of their time, their work on the subject weighs 4 to 75\,t a year.
+
+On these hypotheses the comparison is one of orders of magnitude, and its ranges are wide. The project's three months (central 0.11\,t) are a few percent of one researcher-year, and between 0.3\,\% and about half of one in the extreme cases. At the pace of the measured weeks the project would emit about 0.6\,t a year (0.1 to 3.6\,t). That is about 3\,\% of the community's footprint on the subject, taken at the geometric middle of its range (about 17\,t). The extremes run from 0.1\,\% to almost the same amount. If the manufacture of the hardware is counted, as in the Mistral cross-check, these shares grow several times. Figure~\ref{fig:scale} shows these ranges side by side.
+
+\begin{figure}[h]\centering
+\begin{tikzpicture}
+\begin{axis}[rangechart, xmode=log, xmin=0.05, xmax=200, ytick={1,2,3,4}, ymin=0.5, ymax=4.5,
+  yticklabels={{This project, a year at the pace\\of the measured weeks}, {The same, with hardware\\(Mistral cross-check)}, {One researcher-year}, {The community's work on\\the corpus, one year}},
+  xlabel={tCO$_2$e a year (log scale)},
+  log ticks with fixed point, xtick={0.1,1,10,100}]
+\addplot[draw=none] coordinates {(1,1)};
+\rangerow{1}{0.1}{3.6}{0.6}{0.1 -- 3.6 (0.6)}
+\rangerow{2}{2.8}{5.2}{}{2.8 -- 5.2}
+\rangerow{3}{2}{5}{3.6}{2 -- 5 (3.6)}
+\rangerow{4}{4}{75}{17}{4 -- 75 (17)}
+\end{axis}
+\end{tikzpicture}
+\caption{The project's footprint at its current pace, beside the professional footprint of researchers. The dot for one researcher-year is the average of 3.6\,t per lab member found by \citet{mariette2022}; the dot for the community is the geometric middle of its range. The ranges rest on hypotheses that remain to be checked (ten to thirty people, at 20 to 50\,\% of their time). The comparison is of orders of magnitude; it does not measure the value of the work.}\label{fig:scale}
+\end{figure}
+
+
+Divided by the 9\,414 pages, the inference of the whole project gives about 10\,g\,CO$_2$e per page (2 to 120\,g). That is an upper bound for transcription alone, since part of the computing went to the modernised readings, the Lean proofs and the articles. An expert transcription by hand, at an assumed two to five pages a day and about 200 working days a year, would carry 2 to 12\,kg per page if the whole professional footprint of the transcriber were allocated to it. \todo{the pace, to be asked of the editors}. The two figures should not be read as a ratio. The human figure allocates travel, buildings and purchases that serve all of a researcher's work, so it is not the cost of transcribing as such. And the two are not the same product. A machine page is a first reading, unchecked except for the quotations the author collated; a human edition is a verified text. The machine reading prepares the human work: someone still has to check every page, so its cost comes on top of the cost of an edition. These figures say nothing about whether the human work is too slow, and they give no ground for doing without it.
+
+\section{Limits}
+
+The energy per token of a frontier model is not published, and it is the largest source of uncertainty. Price is a crude proxy for compute. Less than half of the period was measured; the rest is extrapolated from activity in the repository. The manufacture of the hardware is only brought in through a cross-check, and training is left out. Water is left out too: the two published figures per response differ by more than a hundredfold (0.26\,mL for the median Gemini prompt, 45\,mL for a Mistral response of 400 tokens) \citep{elsworth2025,mistral2025}, and we have no basis for choosing between them. \todo{rebound: does a cheap first reading lead to reading more, and to more computing overall? \citet{morand2026} find that efficiency gains in training have not curbed its total impact}.
+
+\section{Conclusion}
+
+\todo{to be written by the author once the figures are checked}.
+
+\section*{Statement on the use of AI}
+\todo{the same form as the other articles of the project; check the target journal's policy on AI-assisted writing first}.
+
+\renewcommand{\bibfont}{\small\raggedright}
+\bibliographystyle{plainnat}
+\bibliography{article}
+\end{document}
