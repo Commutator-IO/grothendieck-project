@@ -22,6 +22,8 @@ interface Check {
   /** For a recording: the second of the video to listen from. */
   t?: number;
   q: string;
+  /** A Buffalo doubt judged not to bear on the mathematics (speech, an aside): hidden unless asked for. */
+  minor?: boolean;
 }
 interface Doc {
   id: string;
@@ -137,6 +139,7 @@ export function BourbakiReview() {
   const [docId, setDocId] = useState<string>('');
   const [checkId, setCheckId] = useState<string>('');
   const [copied, setCopied] = useState(false);
+  const [showMinor, setShowMinor] = useState(false);
 
   useEffect(() => {
     // no-store: the file is edited between sessions, and a cached copy would show answered checks again.
@@ -158,20 +161,24 @@ export function BourbakiReview() {
       </p>
     );
   if (!r) return <p className="mt-6 text-[14px] text-ink-500">Loading…</p>;
-  if (!r.docs.length) return <p className="mt-6 text-[14px] text-ink-600">No checks left: every doubtful reading has been answered.</p>;
+  const minorCount = r.docs.reduce((n, d) => n + d.checks.filter((c) => c.minor).length, 0);
+  const rv: Review = showMinor
+    ? r
+    : { ...r, docs: r.docs.map((d) => ({ ...d, checks: d.checks.filter((c) => !c.minor) })).filter((d) => d.checks.length) };
+  if (!rv.docs.length) return <p className="mt-6 text-[14px] text-ink-600">No checks left: every doubtful reading has been answered.</p>;
 
-  const doc = r.docs.find((d) => d.id === docId) ?? r.docs[0];
+  const doc = rv.docs.find((d) => d.id === docId) ?? rv.docs[0];
   const check = doc.checks.find((c) => c.id === checkId) ?? doc.checks[0];
   const set = (id: string, patch: Partial<Ans>) => {
     const next = { ...s, [id]: { ...s[id], ...patch } };
     setS(next);
     save(next);
   };
-  const total = r.docs.reduce((n, d) => n + d.checks.length, 0);
-  const answered = r.docs.reduce((n, d) => n + d.checks.filter((c) => s[c.id]?.mark).length, 0);
+  const total = rv.docs.reduce((n, d) => n + d.checks.length, 0);
+  const answered = rv.docs.reduce((n, d) => n + d.checks.filter((c) => s[c.id]?.mark).length, 0);
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(markdown(r, s));
+      await navigator.clipboard.writeText(markdown(rv, s));
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -197,11 +204,16 @@ export function BourbakiReview() {
         <button type="button" className={btn(false)} onClick={copy}>
           {copied ? 'Copied' : 'Copy all answers as Markdown'}
         </button>
+        {minorCount > 0 && (
+          <button type="button" className={btn(showMinor)} onClick={() => setShowMinor(!showMinor)}>
+            {showMinor ? 'Hide' : 'Show'} minor doubts ({minorCount})
+          </button>
+        )}
       </div>
 
       <div className="mt-4 grid gap-4 xl:grid-cols-[18rem_minmax(0,1fr)]">
         <nav aria-label="Rédactions" className="grid content-start gap-3">
-          {r.docs.map((d) => (
+          {rv.docs.map((d) => (
             <div key={d.id}>
               <button
                 type="button"

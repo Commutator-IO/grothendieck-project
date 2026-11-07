@@ -36,6 +36,10 @@ const plain = (s) => s.replace(/<!--[\s\S]*?-->/g, '').replace(/\s+/g, ' ').trim
 
 const docs = [];
 let doubts = 0;
+let paras = 0;
+const TRIAGE = existsSync(resolve(SRC, 'triage.json')) ? JSON.parse(readFileSync(resolve(SRC, 'triage.json'), 'utf8')) : {};
+let minors = 0;
+const MATH = /\$|[=→⊂∈≃≅×⊗∐∏]|\b(sheaf|sheaves|presheaf|presheaves|topos|topoi|functor|morphism|scheme|categor\w*|colimit|isomorph\w*|cohomolog\w*|homotop\w*|fibre|fiber|kernel|cokernel|epimorph\w*|monomorph\w*|adjoint|affine|subset|variety|torsor|stack|representab\w*|equivalence|theorem|lemma|proposition|counterexample|axiom|abelian|commutative|polynomial|tensor|quotient|topolog\w*|stalk|germ|injective|surjective|bijective|noetherian|integer|monoid|ordinal|cardinal|ideal|module|algebra|group|ring|limit|equation|formula|dimension)s?\b/i;
 let slips = 0;
 let boards = 0;
 let kept = 0;
@@ -78,15 +82,35 @@ for (const f of readdirSync(SRC).filter((x) => /^[\w-]{11}-\d+\.en\.md$/.test(x)
   };
   const checks = [];
 
-  // Doubtful hearings, in order; the time is that of the paragraph holding the mark.
+  // Doubtful hearings, one check per paragraph (one minute of listening answers all its marks).
+  // A paragraph is minor when none of its marks sits near mathematics: no formula and no
+  // mathematical word within a few words of the gap. Minor checks are hidden unless asked for.
   const stamps = [...body.matchAll(/\*\*\[(\d+:\d\d:\d\d)\]\*\*/g)].map((m) => [m.index, hms(m[1])]);
+  const byPara = new Map();
   for (const m of body.matchAll(/\[\?\]( *<!-- *whisper: *([\s\S]*?) *-->)?/g)) {
     const at = stamps.filter(([i]) => i < m.index).pop()?.[1] ?? 0;
-    const before = plain(body.slice(Math.max(0, m.index - 260), m.index)).slice(-220);
-    const heard = m[2] ? ` Whisper heard: « ${plain(m[2])} ».` : '';
-    const q = `Doubtful hearing in this minute: … ${before} [?]${heard} What does he say?`;
-    checks.push({ id: checkId(q, at), t: at, page: 0, batch: 0, q });
-    doubts++;
+    if (!byPara.has(at)) byPara.set(at, []);
+    byPara.get(at).push(m);
+  }
+  for (const [at, marks] of byPara) {
+    const parts = marks.map((m, k) => {
+      const before = plain(body.slice(Math.max(0, m.index - 200), m.index)).slice(-160);
+      const heard = m[2] ? ` (Whisper heard « ${plain(m[2])} »)` : '';
+      return `(${k + 1}) … ${before} [?]${heard}`;
+    });
+    const near = marks.map((m) => plain(body.slice(Math.max(0, m.index - 60), m.index + 30 + (m[0].length))));
+    const id = `b${video}-${side}-t${at}`;
+    // A model's reading of the paragraph, when transcripts-buffalo/triage.json has one, decides;
+    // otherwise a keyword test on the few words around each gap.
+    const minor = id in TRIAGE ? TRIAGE[id] === 'minor' : !near.some((w) => MATH.test(w));
+    const q =
+      marks.length === 1
+        ? `Doubtful hearing in this minute: ${parts[0].slice(4)} What does he say?`
+        : `${marks.length} doubtful hearings in this minute: ${parts.join(' ')} What does he say at each?`;
+    checks.push({ id, t: at, page: 0, batch: 0, q, ...(minor ? { minor: true } : {}) });
+    doubts += marks.length;
+    paras++;
+    if (minor) minors++;
   }
 
   // Probable oral slips on the boards of this side.
@@ -122,5 +146,5 @@ writeFileSync(
   JSON.stringify({ built: new Date().toISOString().slice(0, 10), docs: [...others, ...docs] }),
 );
 console.log(
-  `${docs.length} Buffalo sides: ${doubts} doubtful hearings, ${slips} probable oral slips, ${boards} uncertain board items; ${kept} checks kept their id`,
+  `${docs.length} Buffalo sides: ${doubts} doubtful hearings in ${paras} paragraphs (${minors} minor), ${slips} probable oral slips, ${boards} uncertain board items; ${kept} checks kept their id`,
 );
