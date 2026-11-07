@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import { BY_ID } from './content/catalogue.ts';
 import lettersRaw from './content/letters.json';
@@ -233,24 +233,233 @@ const letterCtx = (l: Letter, names: string): CommentContext => ({
   link: `https://grothendieck.commutator.io/#${l.folder}/${l.batch}`,
 });
 
-function Register({ picked }: { picked: string | null }) {
-  const rows = picked
-    ? RECORDS.filter((l) => (l.correspondent ?? 'Not named here') === picked)
-    : LETTERS;
+// ── The guide: search, filters with counts, a link per letter, shareable state ──
+
+/** The anchor of one letter: folder and pages, stable as long as the shelfmark is. */
+const anchorOf = (l: Letter) => `l-${l.folder}-p${l.pages.replace(/[^0-9a-z]+/gi, '-')}`;
+
+type Sort = 'shelf' | 'date';
+interface Filters {
+  q: string;
+  dir: Letter['direction'] | '';
+  how: Letter['treatment'] | '';
+  lang: string;
+  dated: '' | 'yes' | 'no';
+  sort: Sort;
+}
+const NO_FILTERS: Filters = { q: '', dir: '', how: '', lang: '', dated: '', sort: 'shelf' };
+
+function readHash(): { f: Filters; who: string | null } {
+  const p = new URLSearchParams(location.hash.replace(/^#/, '').replace(/^l-[^&]*&?/, ''));
+  const pick = <T extends string>(k: string, ok: readonly T[], d: T): T => {
+    const v = p.get(k) as T | null;
+    return v && ok.includes(v) ? v : d;
+  };
+  return {
+    f: {
+      q: p.get('q') ?? '',
+      dir: pick('dir', ['from', 'to', 'other', ''] as const, ''),
+      how: pick('how', ['full', 'summarised', 'named', ''] as const, ''),
+      lang: p.get('lang') ?? '',
+      dated: pick('dated', ['yes', 'no', ''] as const, ''),
+      sort: pick('sort', ['shelf', 'date'] as const, 'shelf'),
+    },
+    who: p.get('who'),
+  };
+}
+
+function writeHash(f: Filters, who: string | null) {
+  const p = new URLSearchParams();
+  if (f.q) p.set('q', f.q);
+  if (f.dir) p.set('dir', f.dir);
+  if (f.how) p.set('how', f.how);
+  if (f.lang) p.set('lang', f.lang);
+  if (f.dated) p.set('dated', f.dated);
+  if (f.sort !== 'shelf') p.set('sort', f.sort);
+  if (who) p.set('who', who);
+  const h = p.toString();
+  const next = `${location.pathname}${location.search}${h ? `#${h}` : ''}`;
+  if ((h ? `#${h}` : '') !== location.hash && !location.hash.startsWith('#l-')) history.replaceState(null, '', next);
+}
+
+const fold = (t: string) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const haystack = (l: Letter, names: string) =>
+  fold([names, l.summary, l.place ?? '', l.date ?? '', l.iso ?? '', `n° ${l.folder}`, l.folder, shortTitle(l.folder), l.where].join(' '));
+
+function matches(l: Letter, names: string, f: Filters, except?: keyof Filters) {
+  if (except !== 'dir' && f.dir && l.direction !== f.dir) return false;
+  if (except !== 'how' && f.how && l.treatment !== f.how) return false;
+  if (except !== 'lang' && f.lang && l.language !== f.lang) return false;
+  if (except !== 'dated' && f.dated === 'yes' && l.dating === 'none') return false;
+  if (except !== 'dated' && f.dated === 'no' && l.dating !== 'none') return false;
+  if (f.q) {
+    const h = haystack(l, names);
+    if (!fold(f.q).split(/\s+/).filter(Boolean).every((w) => h.includes(w))) return false;
+  }
+  return true;
+}
+
+/** Letters written on this day of the year, or the next ones to come round. */
+function OnThisDay() {
+  const today = new Date();
+  const md = (d: Date) => `${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const full = LETTERS.filter((l) => l.iso && l.iso.length >= 10);
+  const todays = full.filter((l) => (l.iso as string).slice(5, 10) === md(today));
+  let shown = todays;
+  let when = 'Written on this day';
+  if (!todays.length) {
+    for (let k = 1; k <= 366 && !shown.length; k++) {
+      const d = new Date(today);
+      d.setDate(d.getDate() + k);
+      shown = full.filter((l) => (l.iso as string).slice(5, 10) === md(d));
+      if (shown.length) when = `Next anniversary, ${d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}`;
+    }
+  }
+  if (!shown.length) return null;
+  return (
+    <div className="mt-6 rounded-[var(--radius-card)] border border-ink-200 bg-white px-4 py-3 text-[13px] leading-relaxed text-ink-700">
+      <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">{when}</p>
+      <ul className="mt-1">
+        {shown.map((l) => (
+          <li key={letterKey(l)}>
+            <a href={`#${anchorOf(l)}`} className="font-semibold text-ink-900 hover:text-brand-700">
+              {l.date}
+            </a>{' '}
+            · {l.direction === 'from' ? `his letter to ${who(l)}` : l.direction === 'to' ? `${who(l)} to him` : who(l)} · {l.summary.slice(0, 140)}
+            {l.summary.length > 140 ? '…' : ''}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function Chips<T extends string>({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: T | '';
+  options: { v: T; label: string; n: number }[];
+  onChange: (v: T | '') => void;
+}) {
+  return (
+    <div className="flex flex-wrap items-center gap-1.5">
+      <span className="w-20 shrink-0 text-[11px] font-semibold uppercase tracking-wide text-ink-400">{label}</span>
+      {options.map((o) => (
+        <button
+          key={o.v}
+          type="button"
+          aria-pressed={value === o.v}
+          disabled={!o.n && value !== o.v}
+          onClick={() => onChange(value === o.v ? '' : o.v)}
+          className={`rounded-full border px-2.5 py-0.5 text-[12px] ${
+            value === o.v ? 'border-ink-900 bg-ink-900 text-white' : 'border-ink-200 bg-white text-ink-700 hover:border-ink-400 disabled:opacity-40'
+          }`}
+        >
+          {o.label} <span className={`tabular ${value === o.v ? 'text-ink-200' : 'text-ink-400'}`}>{o.n}</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function Register({ picked, onPick, f, setF }: { picked: string | null; onPick: (c: string | null) => void; f: Filters; setF: (f: Filters) => void }) {
+  const namesOf = (l: Letter) => (picked ? [who(l)] : RECORDS.filter((r) => letterKey(r) === letterKey(l)).map(who)).join(', ');
+  const base = picked ? RECORDS.filter((l) => (l.correspondent ?? 'Not named here') === picked) : LETTERS;
+  const count = (k: keyof Filters, test: (l: Letter) => boolean) => base.filter((l) => matches(l, namesOf(l), f, k) && test(l)).length;
+  const rows = base
+    .filter((l) => matches(l, namesOf(l), f))
+    .sort((x, y) => (f.sort === 'date' ? (x.iso ?? '9999').localeCompare(y.iso ?? '9999') : 0));
+  const langs = [...new Set(LETTERS.map((l) => l.language))].sort((a, b) => (a === 'unknown' ? 1 : b === 'unknown' ? -1 : a.localeCompare(b)));
+  const active = picked !== null || JSON.stringify({ ...f, sort: 'shelf' }) !== JSON.stringify(NO_FILTERS);
+
+  const [target, setTarget] = useState<string | null>(() => (location.hash.startsWith('#l-') ? location.hash.slice(1) : null));
+  useEffect(() => {
+    const on = () => setTarget(location.hash.startsWith('#l-') ? location.hash.slice(1) : null);
+    window.addEventListener('hashchange', on);
+    return () => window.removeEventListener('hashchange', on);
+  }, []);
+  useEffect(() => {
+    if (target) document.getElementById(target)?.scrollIntoView({ block: 'center' });
+  }, [target]);
+
   return (
     <section className="mt-12">
       <H2 id="register">The register</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        {picked ? (
-          <>
-            {rows.length} {rows.length === 1 ? 'letter' : 'letters'} with {picked}.{' '}
-          </>
-        ) : (
-          <>Every letter once, in shelfmark order. </>
-        )}
         The date is as the letter writes it; « how given » says whether the transcription gives its
-        text, a summary, or only notes that it is there.
+        text, a summary, or only notes that it is there. Each line has its own link (¶), and the
+        filters are kept in the address, so a search can be shared.
       </p>
+
+      <div className="mt-4 space-y-2 rounded-[var(--radius-card)] border border-ink-200 bg-ink-50/60 px-4 py-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <input
+            type="search"
+            value={f.q}
+            onChange={(e) => setF({ ...f, q: e.target.value })}
+            placeholder="Search: a name, a subject, a place, a year, a folder (n° 31)"
+            aria-label="Search the register"
+            className="min-w-[16em] flex-1 rounded-md border border-ink-200 bg-white px-3 py-1.5 text-[13.5px] text-ink-900 placeholder:text-ink-400 focus:border-ink-500 focus:outline-none"
+          />
+          <label className="flex items-center gap-1.5 text-[12.5px] text-ink-600">
+            Order
+            <select value={f.sort} onChange={(e) => setF({ ...f, sort: e.target.value as Sort })} className="rounded-md border border-ink-200 bg-white px-2 py-1 text-[12.5px]">
+              <option value="shelf">by shelfmark</option>
+              <option value="date">by date</option>
+            </select>
+          </label>
+        </div>
+        <Chips
+          label="Direction"
+          value={f.dir}
+          options={(Object.keys(DIR) as Letter['direction'][]).map((d) => ({ v: d, label: DIR[d].label, n: count('dir', (l) => l.direction === d) }))}
+          onChange={(v) => setF({ ...f, dir: v })}
+        />
+        <Chips
+          label="How given"
+          value={f.how}
+          options={(Object.keys(TREAT) as Letter['treatment'][]).map((t) => ({ v: t, label: TREAT[t], n: count('how', (l) => l.treatment === t) }))}
+          onChange={(v) => setF({ ...f, how: v })}
+        />
+        <Chips
+          label="Language"
+          value={f.lang}
+          options={langs.map((g) => ({ v: g, label: LANG[g] ?? (g === 'unknown' ? 'not stated' : g), n: count('lang', (l) => l.language === g) }))}
+          onChange={(v) => setF({ ...f, lang: v })}
+        />
+        <Chips
+          label="Date"
+          value={f.dated}
+          options={[
+            { v: 'yes' as const, label: 'dated', n: count('dated', (l) => l.dating !== 'none') },
+            { v: 'no' as const, label: 'undated', n: count('dated', (l) => l.dating === 'none') },
+          ]}
+          onChange={(v) => setF({ ...f, dated: v })}
+        />
+        <p className="flex flex-wrap items-center gap-2 pt-1 text-[12.5px] text-ink-600" aria-live="polite">
+          <span>
+            <span className="tabular font-semibold text-ink-900">{rows.length}</span> of {base.length} {base.length === 1 ? 'letter' : 'letters'}
+            {picked && <> with <strong className="font-semibold">{picked}</strong></>}
+          </span>
+          {active && (
+            <button
+              type="button"
+              onClick={() => {
+                setF({ ...NO_FILTERS, sort: f.sort });
+                onPick(null);
+              }}
+              className="rounded border border-ink-200 bg-white px-2 py-0.5 text-[12px] text-ink-700 hover:border-ink-400"
+            >
+              Clear filters
+            </button>
+          )}
+        </p>
+      </div>
+
       <div className="mt-3 overflow-x-auto rounded-[var(--radius-card)] border border-ink-200 bg-white">
         <table className="w-full min-w-[760px] text-[12.5px]">
           <thead className="text-left text-[11px] uppercase tracking-wide text-ink-400">
@@ -264,24 +473,34 @@ function Register({ picked }: { picked: string | null }) {
           </thead>
           <tbody>
             {rows.map((l, i) => {
-              const others = RECORDS.filter((r) => letterKey(r) === letterKey(l)).map(who);
+              const names = namesOf(l);
+              const id = anchorOf(l);
               return (
-                <tr key={i} className="border-b border-ink-100 align-top last:border-0" {...commentData(letterCtx(l, (picked ? [who(l)] : others).join(', ')))}>
+                <tr
+                  key={i}
+                  id={id}
+                  className={`scroll-mt-20 border-b border-ink-100 align-top last:border-0 ${target === id ? 'bg-encours-50' : ''}`}
+                  {...commentData(letterCtx(l, names))}
+                >
                   <td className="whitespace-nowrap px-3 py-2">
                     <a href={`/fonds/#${l.folder}/${l.batch}`} className="tabular font-semibold text-ink-900 hover:text-brand-700" title={BY_ID.get(l.folder)?.title}>
                       n° {l.folder}
                     </a>
-                    <span className="tabular text-ink-400"> p. {l.pages}</span>
+                    <span className="tabular text-ink-400"> p. {l.pages}</span>{' '}
+                    <a href={`#${id}`} className="text-ink-300 hover:text-brand-700" title="Link to this letter" aria-label="Link to this letter">
+                      ¶
+                    </a>
                     <br />
                     <span className="text-[11.5px] text-ink-400">{shortTitle(l.folder).slice(0, 24)}</span>
                   </td>
                   <td className="px-2 py-2 text-ink-700">
                     {l.date ?? <span className="text-ink-400">{l.dating === 'inferred' ? `[${l.iso}]` : 's.d.'}</span>}
+                    {l.place && <span className="block text-[11.5px] text-ink-400">{l.place}</span>}
                   </td>
                   <td className="px-2 py-2 text-ink-700">
                     <span className="inline-block h-2 w-2 rounded-sm align-middle" style={{ background: DIR[l.direction].colour }} />{' '}
                     {l.direction === 'from' ? 'to ' : l.direction === 'to' ? 'from ' : ''}
-                    {(picked ? [who(l)] : others).join(', ')}
+                    {names}
                   </td>
                   <td className="whitespace-nowrap px-2 py-2 text-ink-500">
                     {TREAT[l.treatment]}
@@ -299,12 +518,18 @@ function Register({ picked }: { picked: string | null }) {
                     )}
                   </td>
                   <td className="px-2 py-2 text-ink-600">
-                    {l.summary}{' '}
-                    <CommentButton scope="letters" ctx={letterCtx(l, (picked ? [who(l)] : others).join(', '))} text={l.summary} />
+                    {l.summary} <CommentButton scope="letters" ctx={letterCtx(l, names)} text={l.summary} />
                   </td>
                 </tr>
               );
             })}
+            {!rows.length && (
+              <tr>
+                <td colSpan={5} className="px-3 py-6 text-center text-ink-400">
+                  No letter matches. Try fewer words, or clear the filters.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
@@ -314,7 +539,14 @@ function Register({ picked }: { picked: string | null }) {
 
 export function LettersPage() {
   const commentRoot = useComments<HTMLElement>('letters', 'Letters');
-  const [picked, setPicked] = useState<string | null>(null);
+  const init = useMemo(readHash, []);
+  const [picked, setPickedRaw] = useState<string | null>(init.who);
+  const [f, setF] = useState<Filters>(init.f);
+  useEffect(() => writeHash(f, picked), [f, picked]);
+  const setPicked = (c: string | null) => {
+    setPickedRaw(c);
+    if (c) document.getElementById('register')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
   const named = new Set(RECORDS.map((l) => l.correspondent).filter(Boolean)).size;
   const dated = LETTERS.filter((l) => l.dating === 'written').length;
   const from = LETTERS.filter((l) => l.direction === 'from').length;
@@ -354,9 +586,10 @@ export function LettersPage() {
           <Kpi value={named} label="named correspondents" />
         </div>
 
+        <OnThisDay />
         <ByYear />
         <Correspondents onPick={setPicked} picked={picked} />
-        <Register picked={picked} />
+        <Register picked={picked} onPick={setPicked} f={f} setF={setF} />
 
         <p className="mt-12 max-w-[44em] text-[12px] leading-relaxed text-ink-400">
           src/content/letters.json, built on {RAW.built} by reading the transcriptions' headers and
