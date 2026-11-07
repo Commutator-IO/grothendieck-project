@@ -14,6 +14,8 @@ import 'katex/dist/katex.min.css';
 
 export interface BoardItem {
   t: number;
+  /** When the chalk writes it (#109), from the taps on the tape; absent, the spoken time `t` is used. */
+  w?: number;
   kind: 'h' | 'p' | 'm' | 'cd';
   text: string;
   uncertain?: boolean;
@@ -121,12 +123,14 @@ const PAD_Y = 32; // py-4, top and bottom of a panel
 const PEEK = 0.28;
 const MAX_ITEMS = 12;
 
+const mmss = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s) % 60).padStart(2, '0')}`;
+
 export function Blackboard({ board, now, onSeek }: { board: Board; now: number; onSeek: (t: number) => void }) {
   const html = useMemo(
     () => board.items.map((i) => (i.kind === 'm' || i.kind === 'cd' ? tex(i.text, true) : prose(i.text))),
     [board],
   );
-  const shown = board.items.filter((i) => i.t <= now).length;
+  const shown = board.items.filter((i) => (i.w ?? i.t) <= now).length;
   const pane = useRef<HTMLDivElement>(null);
   const items = useRef<(HTMLButtonElement | null)[]>([]);
   // The panel height is the visible height of the board, measured.
@@ -253,8 +257,8 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
                     items.current[k] = el;
                   }}
                   type="button"
-                  onClick={() => onSeek(i.t)}
-                  title={`${Math.floor(i.t / 60)}:${String(i.t % 60).padStart(2, '0')}${i.uncertain ? ' · uncertain' : ''}`}
+                  onClick={() => onSeek(i.w ?? i.t)}
+                  title={`${mmss(i.w ?? i.t)}${i.w !== undefined && i.w !== i.t ? ` (written; said at ${mmss(i.t)})` : ''}${i.uncertain ? ' · uncertain' : ''}`}
                   className={`chalk block w-full text-left transition-opacity hover:opacity-100 ${k === shown - 1 ? 'opacity-100' : 'opacity-85'} ${
                     i.kind === 'h' ? 'mt-4 text-[26px] underline decoration-1 underline-offset-4' : 'mt-1.5 text-[20px] leading-snug'
                   } ${j === 0 ? '!mt-0' : ''} ${i.uncertain ? 'text-[#e9d9a8]' : 'text-[#eceee9]'}`}
