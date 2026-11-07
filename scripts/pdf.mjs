@@ -134,7 +134,17 @@ async function main() {
       // Recompiling an unchanged transcript costs seconds each and produces a
       // byte-identical file; skipping is what makes `npm run pdf` safe to run
       // after every batch.
-      const key = createHash('sha256').update(shared).update(await readFile(src)).digest('hex');
+      // A batch PDF also carries the figures redrawn from its \drawing marks (#73),
+      // so the folder's drawing sources and the map naming them are in its key.
+      const h = createHash('sha256').update(shared).update(await readFile(src));
+      const ddir = resolve(SOURCE, folder, 'drawings');
+      if (await exists(ddir)) {
+        for (const n of (await readdir(ddir)).filter((x) => /\.(tex|json)$/.test(x)).sort()) {
+          h.update(n);
+          h.update(await readFile(resolve(ddir, n)));
+        }
+      }
+      const key = h.digest('hex');
       const cached = resolve(CACHE, `${key}.pdf`);
       used.add(`${key}.pdf`);
       if ((await mtime(pdf)) > (await mtime(src))) {

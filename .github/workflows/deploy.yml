@@ -199,6 +199,21 @@ jobs:
           path: ~/.cache/Tectonic
           key: tectonic-${{ runner.os }}-v1
 
+      # The figures redrawn under #73, compiled from transcripts/*/drawings/*.tex
+      # into the SVGs the reading views show and the PDFs the batch PDFs include.
+      # Cached by the hash of each source, so only a new or changed figure costs
+      # a tectonic run.
+      - uses: actions/cache@v6
+        if: env.RENDER_TRANSCRIPTS == 'true'
+        with:
+          path: node_modules/.cache/drawings
+          key: drawings-v1-${{ hashFiles('transcripts/*/drawings/*.tex') }}
+          restore-keys: drawings-v1-
+
+      - name: Compile the redrawn figures
+        if: env.RENDER_TRANSCRIPTS == 'true'
+        run: npm run drawings
+
       # The compiled PDFs, by content (#123): scripts/pdf.mjs reuses a PDF whose
       # .tex and shared preamble are unchanged, so a deploy recompiles only the
       # transcriptions that changed instead of all of them (about 25 minutes).
@@ -208,7 +223,7 @@ jobs:
         if: env.RENDER_TRANSCRIPTS == 'true'
         with:
           path: node_modules/.cache/pdf
-          key: pdf-v1-${{ hashFiles('transcripts/**/*.tex', 'transcripts/preamble/**', 'transcripts/figures/**', 'scripts/pdf.mjs') }}
+          key: pdf-v1-${{ hashFiles('transcripts/**/*.tex', 'transcripts/**/drawings.json', 'transcripts/preamble/**', 'transcripts/figures/**', 'scripts/pdf.mjs') }}
           restore-keys: pdf-v1-
 
       # A transcript that fails to compile must not take the deploy with it:

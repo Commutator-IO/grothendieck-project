@@ -178,8 +178,25 @@
 
 % The transcriber's note, on the state of the page.
 \newcommand{\note}[1]{\par\smallskip{\small\color{gray!60!black}\textit{[#1]}}\par\smallskip}
-% A drawing of his, described by the transcriber rather than redrawn.
-\newcommand{\drawing}[1]{\par\smallskip{\small\color{gray!60!black}\textit{[Dessin : #1]}}\par\smallskip}
+% A drawing of his, described by the transcriber. Where #73 has redrawn it,
+% `npm run drawings` compiles the figure to drawings/<id>.pdf and writes
+% drawings/<jobname>.map.tex, which names the figure of the k-th \drawing of
+% this batch; the figure is then set above the description. Without those
+% files (no tectonic, or the switch off) the description stands alone.
+\RequirePackage{graphicx}
+\newcounter{grothDrawing}
+\newsavebox\grothDrawingBox
+\newcommand{\grothDrawingFile}[2]{\expandafter\gdef\csname grothDrawing@#1\endcsname{#2}}
+\AtBeginDocument{\IfFileExists{drawings/\jobname.map.tex}{\input{drawings/\jobname.map.tex}}{}}
+\newcommand{\drawing}[1]{\stepcounter{grothDrawing}\par\smallskip
+  \ifcsname grothDrawing@\arabic{grothDrawing}\endcsname
+    \IfFileExists{drawings/\csname grothDrawing@\arabic{grothDrawing}\endcsname.pdf}{%
+      \sbox\grothDrawingBox{\includegraphics{drawings/\csname grothDrawing@\arabic{grothDrawing}\endcsname.pdf}}%
+      \begin{center}\ifdim\wd\grothDrawingBox>\linewidth
+        \resizebox{\linewidth}{!}{\usebox\grothDrawingBox}\else\usebox\grothDrawingBox\fi
+      \\[2pt]{\scriptsize\color{gray}redessiné, non vérifié par un humain}\end{center}}{}%
+  \fi
+  {\small\color{gray!60!black}\textit{[Dessin : #1]}}\par\smallskip}
 
 % A marginal note of Grothendieck's, distinct from the body of the text.
 \newcommand{\marginal}[1]{\par\smallskip\noindent\hspace{1em}%

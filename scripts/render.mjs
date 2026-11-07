@@ -36,6 +36,7 @@
  * notion of what the formula says.
  */
 
+import { drawingMap } from './lib/drawing-map.mjs';
 import { copyFile, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { copyFileSync, existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { resolve, basename } from 'node:path';
@@ -1010,6 +1011,9 @@ export function readingPage({ meta, lang, name, html, extraStyle = '' }) {
   .tr-supplied, .tr-add { color: #38539d; }
   .tr-struck { text-decoration: line-through; color: #9d9787; }
   .tr-drawing::before { content: "✎ "; color: var(--ink4, #9d9787); }
+  .tr-drawing-fig { display: block; text-align: center; margin: .6em 0 .2em; }
+  .tr-drawing-fig img { max-width: 100%; height: auto; background: #fff; padding: 4px; border-radius: 4px; }
+  .tr-drawing-cap { display: block; font-size: .75em; color: var(--ink4, #9d9787); }
   .tr-note, .tr-marginal { display: block; margin: .4rem 0; padding-left: .7rem;
              border-left: 2px solid var(--rule); font-size: .88em; color: var(--ink3); }
   /* A list whose items carry his own labels prints those and nothing else.
@@ -1415,6 +1419,35 @@ function sourcePage(tex, file, edition) {
 
 // ---------------------------------------------------------------------------
 
+/**
+ * The figures redrawn under #73, set above the transcriber's description of
+ * each drawing. scripts/lib/drawing-map.mjs says which figure belongs to which
+ * \drawing; `npm run drawings` compiles them into drawings/<id>.svg beside
+ * the reading view. The k-th drawing span of the page is the k-th \drawing of
+ * the source; if the counts differ the page is left without figures rather
+ * than given the wrong ones.
+ */
+function withDrawings(html, folderDir, file, tex) {
+  const map = drawingMap(folderDir, file, tex);
+  if (!map.some(Boolean)) return html;
+  const open = '<span class="tr-note tr-drawing"';
+  if (html.split(open).length - 1 !== map.length) {
+    process.stderr.write(`  ⚠ ${file}: drawing marks and spans differ, figures left out\n`);
+    return html;
+  }
+  let k = 0;
+  return html.replaceAll(open, () => {
+    const d = map[k++];
+    if (!d) return open;
+    const partial = d.status === 'partial' ? ', partiel' : '';
+    return (
+      `<span class="tr-drawing-fig"><img src="drawings/${d.id}.svg" alt="" loading="lazy">` +
+      `<span class="tr-drawing-cap">Redessiné (#73${partial}), non vérifié par un humain</span></span>` +
+      open
+    );
+  });
+}
+
 async function main() {
   const only = process.argv.slice(2).filter((a) => !a.startsWith('--'));
 
@@ -1454,7 +1487,7 @@ async function main() {
       }
       const tex = await readFile(resolve(SOURCE, folder, file), 'utf8');
       try {
-        const html = render(tex, m[3]);
+        const html = withDrawings(render(tex, m[3]), resolve(SOURCE, folder), file, tex);
         await writeFile(resolve(OUT, folder, basename(file, '.tex') + '.html'), html, 'utf8');
         // The source travels with its rendering. `.tex` is the artifact that
         // matters — it is what gets cited, corrected and folded into a larger
