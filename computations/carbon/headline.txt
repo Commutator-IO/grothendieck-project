@@ -1,0 +1,40 @@
+# inputs from activity.txt
+measured tokens (project, catalogue weighting)	132.6 M
+measured tokens (project, high weighting)	241.4 M
+deleted subagents, low / central / high	34.2 / 62.5 / 172.9 M
+calibration min / median / max	0.67 / 1.22 / 1.87
+tokens used, low / central / high	166.8 / 195.1 / 414.3 M
+subagents at high weighting, median calibration	112.8 M
+
+# table tab:resultats (low / central / high)
+inference, measured window	83.4 / 390.2 / 2071.8 kWh	16.7 / 117.1 / 828.7 kg
+inference, whole project	100.1 / 585.3 / 5179.4 kWh	20.0 / 175.6 / 2071.8 kg
+continuous integration (unchanged)	5 -- 10 kWh	1.0 -- 4.2 kg
+laptop, website (unchanged)	15 -- 30 kWh	0.9 -- 1.8 kg
+total, central	614 kWh	178.9 kg
+
+# cross-check with Mistral Large 2 (1.14 g per 400-token answer)
+measured window	556 -- 1010 kg
+whole project (x1.5)	834 -- 1514 kg
+ratio to the central inference estimate	4.8 -- 8.6
+
+# figure fig:echelle and its paragraph (t per year at the pace of the measured weeks)
+project, one year	0.14 / 0.97 / 6.87 t
+with hardware (Mistral)	4.61 -- 8.38 t
+three months, central, share of a researcher-year (3.6 t)	0.049
+three months, extremes: low / 5 t, high / 2 t	0.0040 / 1.04
+one year, share of the group (7 t central; low / 25 t, high / 2 t)	0.139; 0.0055 / 3.44
+
+# per page and per theorem
+whole-project inference per page (9414 pages)	2.1 / 18.7 / 220 g
+transcription per page and Lean per theorem: already measured + estimated in activity.txt (0.30 / 2.76 / 23.39 g per page, 0.40 / 2.88 / 20.69 g per theorem), unchanged
+
+# table tab:jetons: messages up to 2026-11-07T17:43Z, de-duplicated by message id
+model	calls	out_M	cw_M	cr_G	eq_M	per call: cr / cw / out
+claude-haiku-5-5	27	0.029	0.24	0.0002	0.09	9080 / 8857 / 1076
+claude-opus-5-5	17602	11.971	86.80	8.6555	120.23	491731 / 4931 / 680
+claude-sonnet-5-5	1606	1.641	16.25	0.7017	12.72	436912 / 10119 / 1022
+all	19235	13.641	103.29	9.3574	133.04
+catalogue weighting: output 13.6 M, writes 25.8 M, reads 93.6 M; shares 0.103 / 0.194 / 0.703
+high weighting: total 242.1 M, writes 41.3 M, reads 187.2 M (share 0.773)
+cache reads, share of raw tokens	0.988
