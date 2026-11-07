@@ -7,4 +7,4 @@ Article (#121) : ce qu'ont coûté en énergie et en CO₂e la transcription et 
 - `article.bib` : bibliographie commune ; la revue applique son propre style CSL (Chicago auteur-date).
 - `review/` : rapport de relecture et vérification des références.
 
-Compiler avec `tectonic -X compile article.tex` (et `article-en.tex`). Chaque élément marqué « À vérifier » reste à la charge de l'auteur.
+Compiler avec `tectonic -X compile article.tex` (et `article-en.tex`). Plus aucun élément « À vérifier » (7 novembre 2026).
