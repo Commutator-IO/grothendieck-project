@@ -1,0 +1,115 @@
+% Draft, 7 November 2026 — issue #121. Every figure is a first, raw estimate to be checked against the logs.
+% Language: English, to reach the widest readership; a French summary follows the abstract.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french,english]{babel}
+\usepackage{lmodern,microtype,booktabs,amsmath}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[numbers]{natbib}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\todo}[1]{\textbf{[À vérifier : #1]}}
+\newcommand{\COe}{\,kgCO$_2$e}
+
+\title{What does it cost to read an archive with a language model?\\
+\large The energy and carbon footprint of a machine reading of Grothendieck's working notes}
+\author{Michel Hua}
+\date{Draft, 7 November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Between August and November 2026, a single researcher used commercial large language models to transcribe 9\,414 pages of Alexandre Grothendieck's mathematical working notes held at the University of Montpellier, to write modernised readings of them, to check some of their statements in the proof assistant Lean, and to draft several articles. This paper estimates what that work cost in energy and greenhouse-gas emissions. It relies on the token counts recorded by the tool during part of the period and on the run times of the continuous-integration service, and it borrows its method from the life-cycle assessments of language models published since 2022. The first estimate is of the order of a few hundred kilograms of CO$_2$e for three months, with an uncertainty of more than one order of magnitude. Almost all of it comes from model inference, and most of that from re-reading long contexts. We compare this figure with the professional footprint of the researchers who work on the same corpus, and we discuss what the comparison does and does not show.
+\end{abstract}
+
+\selectlanguage{french}
+\begin{abstract}
+\textit{Résumé.} D'août à novembre 2026, un chercheur seul a transcrit avec des modèles de langage commerciaux 9\,414 pages des notes de travail d'Alexandre Grothendieck conservées à l'université de Montpellier, en a rédigé des lectures modernisées, a vérifié certains de leurs énoncés en Lean et a écrit plusieurs articles. Cet article estime ce que ce travail a coûté en énergie et en gaz à effet de serre : de l'ordre de quelques centaines de kilogrammes d'équivalent CO$_2$ pour trois mois, à plus d'un ordre de grandeur près, presque entièrement dus à l'inférence des modèles. Il compare ce chiffre à l'empreinte professionnelle des chercheurs qui travaillent sur le même corpus.
+\end{abstract}
+\selectlanguage{english}
+
+\section{Why measure it}
+
+The digital sector accounted for about 3.7\,\% of global greenhouse-gas emissions in 2018, and its energy use was growing by about 9\,\% a year \citep{shift2018}. The Shift Project's 2025 report on artificial intelligence and data centres projects that the sector's footprint could reach 920\,MtCO$_2$e a year by 2030 \citep{shift2025}. The environmental cost of language models has been measured for their training \citep{luccioni2023,morand2026}, and the hidden impacts of AI applications, including those presented as serving the environment, have been analysed by life-cycle assessment \citep{ligozat2022}. A special issue of \emph{Humanités numériques} has brought the question of digital sobriety to the humanities \citep{baillot2025}.
+
+What is missing is the cost of a concrete scholarly use: one project, one corpus, from beginning to end. The question was put to this project directly. When the author asked the custodians of a mathematical archive for permission to read their documents with these tools, they objected to the use of commercial AI on scholarly archives. Their objection was ethical as much as environmental. The environmental part can be measured, and should be, before it is argued about.
+
+\section{The project}
+
+\todo{one paragraph: the fonds (178 folders, 16\,074 pages), what was produced (transcriptions of 164 folders, modernised readings, about 3\,500 Lean theorems, articles), the models used (Claude Opus~5.5, Sonnet~5.5, Haiku~5.5), the period (7 August -- 7 November 2026)}.
+
+\section{Data}
+
+\paragraph{Model usage.} The tool (Claude Code) writes one record per model call, with the number of input, output and cached tokens. It deletes its transcripts after a configurable delay, set to 14 days during the project. The records kept cover 24 September to 7 November 2026, about six of the thirteen weeks. De-duplicated by message, they give the totals of Table~\ref{tab:tokens}. Retention was raised on 7 November, so the rest of the project will be measured rather than extrapolated.
+
+\begin{table}[h]\centering
+\begin{tabular}{lrrr}
+\toprule
+Model & Output & Cache writes & Cache reads\\
+\midrule
+Opus 5.5 & 9.7\,M & 78.5\,M & 7.8\,G\\
+Sonnet 5.5 & 1.6\,M & 16\,M & 0.70\,G\\
+\bottomrule
+\end{tabular}
+\caption{Tokens recorded, 24 September -- 7 November 2026. Uncached input is negligible.}\label{tab:tokens}
+\end{table}
+
+\paragraph{Continuous integration.} The project's repository ran 2\,346 GitHub Actions workflows, mostly Lean builds against the mathlib library. A sample of 1\,000 runs took 194 hours of wall-clock time, so about 450 hours in all. \todo{replace with the billed runner minutes from the API}.
+
+\paragraph{Other.} The author's laptop, the hosting of the project's website, and the storage of the facsimiles, which are streamed from Montpellier rather than copied.
+
+\section{Method}
+
+The provider does not publish the energy consumed per token. We therefore bound it, following the approach of the published assessments \citep{luccioni2023,ligozat2022}.
+
+\begin{enumerate}
+\item \emph{Weighting.} Tokens are weighted by their relative price, used as a proxy for compute: output 1, cache write 0.25, cache read 0.02. This gives about 205\,M output-equivalent tokens over the measured window. \todo{justify the proxy, or replace it by a model of prefill and decoding cost}.
+\item \emph{Energy per token.} Between 0.5 and 5\,mWh per output-equivalent token. \todo{anchor the range in published per-query figures (Google 2025, Mistral 2025, Epoch AI) and cite them properly}.
+\item \emph{Carbon intensity.} Between 0.2 and 0.4\COe/kWh, data-centre overhead included. \todo{the region of the data centres used}.
+\item \emph{Computing hours.} For continuous integration, the footprint of an hour on a CPU core given by \citet{benaben2024}.
+\item \emph{Scope.} Inference only in the main estimate; manufacturing of the hardware and amortised training are discussed separately, as \citet{ligozat2022} recommend not leaving them out.
+\end{enumerate}
+
+\section{Results}
+
+\begin{table}[h]\centering
+\begin{tabular}{lrr}
+\toprule
+Item & Energy (kWh) & Carbon (\COe)\\
+\midrule
+Inference, measured window (6 weeks) & 100 -- 1\,000 & 20 -- 400\\
+Inference, whole project (×2 to ×3) & 200 -- 3\,000 & 40 -- 1\,200\\
+Continuous integration (≈ 450 h) & ≈ 45 & ≈ 15\\
+Laptop, website & a few & < 5\\
+\midrule
+Total, central estimate & ≈ 1\,000 & ≈ 300\\
+\bottomrule
+\end{tabular}
+\caption{First estimate. Ranges, not confidence intervals.}\label{tab:results}
+\end{table}
+
+Inference dominates, and within it the cache reads: on every turn of a session the whole context is read again, and long sessions over long transcriptions multiply that cost. This is where sobriety would act first: shorter contexts, smaller models for simple tasks, fewer rebuilds.
+
+\section{Scale: the people who work on this corpus}
+
+The figure means little on its own. One point of comparison is the professional footprint of researchers, measured in French laboratories with the GES~1point5 tool \citep{mariette2022}, and the reduction targets that higher education and research would have to meet \citep{ligozat2024targets}. \todo{the per-person figures by discipline from Labos 1point5; working hypothesis: 2 to 5\,t a year for a researcher, 1 to 3\,t for a doctoral student}.
+
+About ten to thirty people work on Grothendieck's manuscripts, mostly part time: the editors of the published transcriptions, the team that catalogued the fonds, and doctoral students. \todo{count them from the bibliography and theses.fr}. On these hypotheses, the project's three months weigh between a fraction of one researcher-year and one researcher-year, a few percent of the community's own footprint on the subject.
+
+Per page, the machine reading costs about 30\,g\,CO$_2$e (5 to 150\,g). An expert transcription by hand, at an assumed two to five pages a day, would carry several kilograms per page in professional footprint. \todo{the pace, to be asked of the editors}. The two are not the same product. A machine page is a first reading, unchecked except for the quotations collated by the author; a human edition is a verified text. The comparison prices a working tool that prepares human work. It does not say that the human work is too slow or could be done without.
+
+\section{Limits}
+
+The energy per token of a frontier model is not published, and it is the largest source of uncertainty. Price is a crude proxy for compute. Half of the period is extrapolated. Water use and the manufacturing of the hardware are left out of the main estimate. \todo{rebound: does a cheap first reading lead to reading more, and to more computing overall? See \citet{morand2026}}.
+
+\section{Conclusion}
+
+\todo{to be written by the author once the figures are checked}.
+
+\section*{Statement on the use of AI}
+\todo{the same form as the other articles of the project; check the target journal's policy on AI-assisted writing first}.
+
+\bibliographystyle{plainnat}
+\bibliography{article}
+\end{document}
