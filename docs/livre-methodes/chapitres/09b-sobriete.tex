@@ -1,0 +1,165 @@
+\chapter{Compter ce que coûte le calcul}\label{ch:sobriete}
+
+Un assistant consomme de l'électricité, et les machines qui le font tourner ont été
+fabriquées. On parle d'IA frugale, ou de sobriété numérique, pour l'idée simple qu'il faut
+le savoir avant de s'en servir beaucoup, et s'en servir moins quand on peut. Ce projet a
+fait le compte en novembre 2026, pour ses trois premiers mois (du 7 août au 7 novembre
+2026). Le détail, avec les sources et les calculs, est dans l'article sur le coût carbone
+du projet (\fichier{docs/carbon/article.tex}). On n'en reprend ici que la méthode et les
+ordres de grandeur, puis les gestes qui en découlent.
+
+\section{Où part l'énergie}
+
+Un modèle de langage dépense de l'énergie de deux façons. Il lit le texte qu'on lui
+soumet, d'un bloc, puis il écrit sa réponse, jeton après jeton. Pour ne pas tout relire, il
+garde de chaque conversation un résumé en mémoire, le cache, qu'il récupère au tour
+suivant. Une lecture depuis le cache coûte bien moins qu'une lecture neuve, mais elle n'est
+pas gratuite.
+
+Or un agent comme celui de ce livre renvoie au modèle, à chaque tour, toute la conversation
+depuis le début : les fichiers lus, les résultats des commandes, les réponses déjà
+données. Du 24 septembre au 7 novembre 2026, chaque appel au modèle principal a relu en
+moyenne environ 515\,000 jetons depuis le cache, en a écrit environ 5\,200 dans le cache
+et a produit environ 680 jetons de réponse. Pour un jeton écrit, il en a relu plus de
+sept cents.
+
+Le fournisseur ne publie pas l'énergie d'un jeton. On pondère donc les jetons par leur prix
+catalogue, en supposant que le prix suit à peu près le calcul. C'est grossier : le prix
+contient une marge et une stratégie commerciale. Avec cette pondération, sur la même
+fenêtre, les lectures en cache font 70\,\% du total, les écritures en cache 20\,\% et les
+réponses 10\,\%. Le coût d'une session tient donc moins à ce que le modèle écrit qu'à la
+longueur de ce qu'il relit.
+
+\section{Les chiffres du projet}
+
+L'outil de l'assistant enregistre une ligne par appel, avec ses jetons, mais il efface ses
+historiques après quatorze jours par défaut. Les enregistrements conservés couvraient, le
+7 novembre 2026, la période du 24 septembre au 7 novembre : 44 des 92 jours du projet. Le
+reste est extrapolé à partir de l'activité du dépôt (commits, lignes de transcription).
+Pour passer des jetons au carbone, on encadre deux facteurs : l'énergie par jeton (de 0,5
+à 5~mWh, d'après les chiffres publiés pour des modèles comparables) et l'intensité carbone
+de l'électricité (de 0,2 à 0,4~kg\,CO$_2$e par kWh, faute de savoir où sont les centres
+de données).
+
+\begin{itemize}
+  \item \textbf{L'inférence} domine tout. L'estimation centrale pour les trois mois est
+        d'environ 110~kg\,CO$_2$e, dans une fourchette de 15~kg à 1,1~t. Ce sont des bornes
+        obtenues en combinant les extrêmes de chaque facteur, et non des intervalles de
+        confiance.
+  \item \textbf{La fabrication du matériel} n'est pas dans ce chiffre. Un recoupement avec
+        l'analyse du cycle de vie publiée par Mistral AI pour son modèle Mistral Large~2
+        (\url{https://mistral.ai/news/our-contribution-to-a-global-environmental-standard-for-ai}),
+        qui compte la fabrication des serveurs, donne cinq à neuf fois plus.
+  \item \textbf{L'intégration continue} pèse peu. Au 7 novembre 2026, l'API de GitHub
+        donnait la durée de 2\,769 tâches, pour 1\,541 exécutions : 271,5~heures en tout,
+        dont 96\,\% pour le déploiement du site. Avec les coefficients publiés de la
+        méthode Cloud Carbon Footprint, cela fait de 1,0 à 4,2~kg\,CO$_2$e.
+  \item \textbf{L'eau} n'est pas estimée. Les deux chiffres publiés par réponse diffèrent de
+        plus d'un facteur cent (0,26~mL pour la requête médiane de Gemini chez Google,
+        45~mL pour une réponse de 400 jetons chez Mistral), et rien ne permet de choisir
+        entre eux.
+  \item \textbf{L'entraînement} des modèles est laissé de côté.
+\end{itemize}
+
+Pour donner une échelle, l'outil GES~1point5 trouve en moyenne 3,6~t\,CO$_2$e par an et
+par membre de laboratoire en France (Mariette et al., 2022,
+\url{https://doi.org/10.1088/2634-4505/ac84a4}). Les trois mois du projet en font quelques
+pour cent au centre de la fourchette, et beaucoup plus si l'on compte le matériel. Ce
+n'est pas rien. Ce n'est pas non plus ce qui décide, à lui seul, si un tel projet vaut
+d'être fait.
+
+\begin{regle}
+Un chiffre de consommation porte sa date, la fenêtre qu'il couvre et la façon dont il a
+été mesuré. Un chiffre extrapolé le dit, avec le facteur et ce qui le justifie.
+\end{regle}
+
+\section{Faire avec moins}
+
+Le compte montre où agir. Presque tout se joue dans la longueur des contextes, un peu dans
+le choix du modèle, très peu dans l'intégration continue.
+
+\paragraph{Des sessions courtes.} Une session qui a lu dix fichiers relit les dix à chaque
+tour, même quand le travail ne porte plus que sur l'un d'eux. On ouvre une session par
+lot, on la ferme quand le lot est commité, et l'on donne à l'agent l'extrait dont il a
+besoin plutôt que le fichier entier. Un sous-agent qui lit pour son compte et ne rend
+qu'une conclusion garde le contexte principal court ; plusieurs sous-agents lancés pour
+rien le rallongent d'autant.
+
+\paragraph{Le plus petit modèle qui suffit.} Renommer des fichiers, relancer une
+compilation, résumer une sortie de commande ne demandent pas le plus gros modèle. Le projet
+l'a peu fait : sur la fenêtre mesurée, le modèle principal a reçu 15\,556 appels, le modèle
+moyen 1\,584 et le petit 23, tous entre le 2 et le 7 novembre 2026. La marge est là.
+
+\paragraph{Ne pas refaire ce qui n'a pas changé.} Le déploiement recompilait à chaque envoi
+toutes les transcriptions en PDF, environ vingt-cinq minutes quand rien n'était en cache.
+L'issue \#123 a mis chaque PDF en cache sous l'empreinte de ses sources, sauté le
+déploiement pour les envois qui ne touchent pas au site et annulé les constructions
+dépassées. Le 7 novembre 2026, les 32 derniers déploiements réussis avaient pris
+2,5~minutes en moyenne. Le gain compte peu pour le carbone, puisque l'intégration continue
+pèse quelques kilogrammes. Il compte pour le principe, qui est le même que pour le cache du
+modèle : ne pas recalculer ce qu'on a déjà.
+
+\paragraph{Un plafond par semaine.} L'abonnement de l'assistant donne une allocation
+hebdomadaire. Le projet s'en fixe une part, suivie dans l'outil, et la dépasser demande
+une décision. Un plafond ne mesure pas l'énergie, mais il oblige
+à choisir ce qui passe en premier.
+
+\paragraph{Des images à la résolution qui suffit.} Une image coûte des jetons à proportion
+de sa taille. On lit une dactylographie à basse résolution et l'on garde les
+agrandissements pour les formules et les passages douteux.
+
+\paragraph{Un modèle plus petit, ou chez soi.} Un modèle ouvert hébergé par une université,
+ou un modèle de taille moyenne sur une infrastructure qu'on connaît, permettrait de savoir
+où l'électricité est produite et ce qu'elle émet. Le projet ne l'a pas essayé ; c'est la
+suite logique de la règle qui garde tout le travail dans le dépôt, en texte brut, sans
+dépendre d'un fournisseur.
+
+\section{Ne pas demander au modèle}
+
+La façon la plus sobre d'utiliser un modèle est de ne pas lui demander ce qu'un programme
+fait mieux. Compter des pages, des théorèmes ou des lots se fait par un script, qui coûte
+une fraction de seconde et donne le même résultat à chaque fois
+(chapitre~\ref{ch:publier}). Une date se lit sur la page ou dans le catalogue ; on ne la
+fait pas deviner. Un énoncé se vérifie dans Lean, qui répond oui ou non, plutôt qu'en
+reposant la question au modèle jusqu'à ce qu'il réponde la même chose deux fois. Chaque
+question qu'on ne pose pas est un contexte de plusieurs centaines de milliers de jetons
+qu'on ne relit pas.
+
+\section{L'effet rebond}
+
+Rendre une activité moins chère tend à la faire croître. Pour l'entraînement des modèles,
+Morand, Ligozat et Névéol trouvent que l'énergie et les impacts ont augmenté de façon
+exponentielle en dix ans, malgré un matériel plus efficace
+(\url{https://hal.science/hal-04839926v6}). Le projet en donne un exemple à sa petite
+échelle. La lecture par la machine a été assez bon marché pour qu'on lise tout : 9\,414
+pages en trois mois, presque deux fois les 5\,129 pages que les éditions faites à la main
+avaient établies. Le calcul n'a pas remplacé un travail qui se serait fait autrement ; il a
+servi à en faire davantage. Les 110~kg ne sont donc pas une économie : ils s'ajoutent.
+
+On en tire deux règles de conduite. Un coût par page faible ne justifie pas un usage, car
+c'est le total qui compte, et le total croît avec ce qu'on décide de lire. Le choix de ce
+qu'on fait lire à la machine se fait pour lui-même, avant de lancer les lots : une première
+lecture de tout un fonds a la valeur d'un inventaire, la même lecture refaite à chaque
+reconstruction n'en a guère.
+
+\section{Mesurer soi-même}
+
+Les mesures de ce chapitre se refont avec deux sources. Les journaux de l'assistant donnent
+les jetons par appel ; on allonge leur durée de conservation dès le début du projet, ce
+que celui-ci n'a fait que le 7 novembre 2026, d'où l'extrapolation. L'API de l'intégration
+continue donne la durée de chaque tâche. Un script dans le dépôt fait le compte, et
+l'article cite la date du relevé.
+
+\begin{terminal}
+# durée de chaque tâche d'une exécution de l'intégration continue
+gh api repos/<compte>/<dépôt>/actions/runs/<id>/jobs \
+  --jq '.jobs[] | [.name, .started_at, .completed_at] | @tsv'
+\end{terminal}
+
+\begin{outils}
+Les journaux de l'assistant pour les jetons ; \cmd{gh api} pour les durées de
+l'intégration continue ; la méthode Cloud Carbon Footprint
+(\url{https://www.cloudcarbonfootprint.org/docs/methodology}) pour convertir des heures de
+machine ; GES~1point5 pour comparer à l'empreinte d'un laboratoire ; \texttt{actions/cache}
+et un filtre de chemins pour ne pas tout reconstruire.
+\end{outils}

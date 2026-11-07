@@ -1,0 +1,112 @@
+\chapter{Le coût d'une page lue}\label{ch:cout}
+
+La grille du chapitre précédent pose des questions d'accès, de catalogue, de droits et de
+lecture. Il en manque une, que les détenteurs posent de plus en plus : combien coûte, en
+énergie et en carbone, une lecture par la machine ? L'objection faite à ces projets par
+les gardiens d'une archive mathématique (chapitre~\ref{ch:bourbaki}) tenait à l'éthique
+autant qu'aux ressources. La part des ressources peut se mesurer. Le projet Grothendieck
+l'a fait en novembre 2026, pour ses trois premiers mois (du 7 août au 7 novembre 2026) ;
+la méthode est dans \emph{Mathématiques outillées}, et le détail dans l'article sur le
+coût carbone du projet (\fichier{docs/carbon/article.tex}). Ce chapitre en tire ce qui
+regarde les fonds.
+
+\section{Un chiffre par page}
+
+Pour tout le projet, transcriptions, lectures modernisées, preuves Lean et articles
+compris, l'estimation centrale est d'environ 110~kg\,CO$_2$e, dans une fourchette de 15~kg
+à 1,1~t. Presque tout vient de l'inférence du modèle ; l'intégration continue compte pour
+1 à 4~kg. Divisée par les 9\,414 pages lues, l'inférence donne environ 12~g\,CO$_2$e par
+page, de 2 à 120~g selon les hypothèses. C'est un majorant pour la seule transcription,
+puisqu'une partie du calcul est allée au reste. Si l'on compte la fabrication des serveurs,
+il faut multiplier par cinq à neuf.
+
+Une page transcrite à la main par une ou un spécialiste porterait, à deux à cinq pages par
+jour et deux cents jours de travail par an, de 2 à 12~kg\,CO$_2$e, si l'on y imputait toute
+l'empreinte professionnelle de la personne (les 3,6~t par an et par membre de laboratoire
+trouvées par l'outil GES~1point5, Mariette et al., 2022,
+\url{https://doi.org/10.1088/2634-4505/ac84a4}). Le rythme est une hypothèse, que seuls les
+éditeurs peuvent confirmer.
+
+Les deux chiffres ne se divisent pas l'un par l'autre. Le chiffre humain impute des
+bâtiments, des voyages et des achats qui servent à tout le travail d'un chercheur. Surtout,
+les deux ne sont pas le même produit : une page lue par la machine est une première
+lecture, que personne n'a encore vérifiée contre le fac-similé ; une édition est un texte
+établi. La lecture par la machine prépare le travail humain, elle ne le remplace pas, et
+son coût s'ajoute à celui d'une édition.
+
+\section{D'une source à l'autre, le coût change}
+
+Le coût d'une page dépend moins de la page que de la manière dont on la lit. Le modèle
+relit à chaque tour tout ce qu'on lui a déjà donné : sur la fenêtre mesurée (du 24 septembre
+au 7 novembre 2026), chaque appel au modèle principal relisait en moyenne environ 515\,000
+jetons pour en écrire environ 680. La source décide de la taille de ce qu'on lui donne.
+
+\begin{description}
+  \item[La main.] Une dactylographie se lit en lots de quarante pages et en une passe ; un
+        brouillon de Grothendieck demande des lots de vingt, des tuiles à 700~dpi et une
+        seconde passe sur les agrandissements (chapitre~\ref{ch:montpellier}). Chaque image
+        de plus, chaque passe de plus, est relue aux tours suivants.
+  \item[La résolution.] On lit le texte à la plus basse résolution qui suffit (110~dpi
+        pour les rédactions dactylographiées) et l'on garde les agrandissements pour les
+        formules, les ajouts à la main et les lectures douteuses.
+  \item[Ce qui est déjà lu.] Une page transcrite et commitée ne se relit pas pour une autre
+        tâche : la lecture modernisée part de la transcription, pas de l'image. Une page
+        écrite au dos d'un document sans rapport est sautée.
+  \item[Le stockage.] Les fac-similés sont servis par le détenteur et lus en direct, non
+        copiés sur un serveur du projet. La copie de travail locale ne sert qu'à
+        transcrire. On évite ainsi un stockage en double, et c'est aussi ce que demandent
+        les droits.
+\end{description}
+
+\begin{regle}
+Avant de lancer les lots d'une source, on note dans son issue une estimation de ce que la
+lecture coûtera : le nombre de pages, la main, la résolution nécessaire, le nombre de
+passes. On la compare ensuite à ce que les journaux de l'assistant ont enregistré, avec la
+date du relevé.
+\end{regle}
+
+\section{Choisir ce qu'on lit}
+
+La machine a lu 9\,414 pages en trois mois, presque deux fois les 5\,129 pages que les
+éditions faites à la main avaient établies dans ce fonds. Sans elle, ces pages n'auraient
+pas été transcrites en trois mois. Le calcul n'a donc pas remplacé un travail qui se serait
+fait autrement : il a servi à lire davantage. C'est l'effet rebond, et il interdit de
+présenter un coût par page faible comme une économie. Le total croît avec ce qu'on décide
+de lire.
+
+La règle de sélection d'une source (chapitre~\ref{ch:premier-mois}) sert aussi à cela. Une
+première lecture de tout un fonds a une valeur, celle d'un inventaire du contenu, qui aide
+à choisir ce qu'il faudra éditer avec soin. La même lecture refaite pour une nouvelle mise
+en page, ou une transcription relue sans raison, n'en a guère. Les pages déjà éditées à la
+main n'ont pas à être relues par la machine ; on renvoie à l'édition.
+
+\section{Les inconnues}
+
+L'énergie par jeton d'un modèle commercial n'est pas publiée, ni l'emplacement des centres
+de données ; les fourchettes viennent de là. L'entraînement des modèles est laissé de côté.
+L'eau n'est pas estimée : les deux chiffres publiés par réponse diffèrent de plus d'un
+facteur cent (0,26~mL pour la requête médiane de Gemini chez Google, 45~mL pour une réponse
+de 400 jetons chez Mistral AI), et rien ne permet de choisir. Moins de la moitié de la
+période a été mesurée directement, parce que l'outil effaçait ses journaux après quatorze
+jours ; la conservation a été allongée le 7 novembre 2026.
+
+\section{Répondre à l'objection}
+
+Un chiffre ne répond qu'à la part environnementale d'une objection. Il ne dit rien de la
+part éthique : à qui profite l'outil, qui a consenti à ce que les archives soient lues par
+lui, ce que devient le texte. Un détenteur peut refuser pour ces raisons-là, et son refus
+vaut, quel que soit le nombre de grammes par page. Le projet peut seulement apporter à la
+discussion un compte daté, sa méthode, et la liste des gestes qui le font baisser.
+
+\begin{exemple}
+Trois mois de lecture d'un fonds de 9\,414 pages ont coûté de l'ordre de quelques pour cent
+de l'empreinte professionnelle annuelle d'un chercheur, et plusieurs fois plus avec le
+matériel. La plus grande part tient à la longueur des contextes relus, et non au nombre de
+pages. C'est sur elle qu'on agit d'abord.
+\end{exemple}
+
+\begin{outils}
+Les journaux de l'assistant et \cmd{gh api} pour mesurer (le détail est dans
+\emph{Mathématiques outillées}) ; l'issue de la source pour l'estimation et le relevé ;
+le fac-similé servi par le détenteur plutôt qu'une copie hébergée.
+\end{outils}
