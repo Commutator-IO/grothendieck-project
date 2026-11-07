@@ -9566,7 +9566,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: "matched",
     settle: "None needed for the match.",
-    lean: {"file": "lean/Grothendieck/IhesSGA6_2_3.lean", "found": "K₀ of a pretriangulated category defined as the free abelian group on objects modulo the triangle relations (Mathlib has none); proved: cl 0 = 0, isomorphic objects have equal classes, cl X[1] = −cl X and cl X[n] = (−1)ⁿ cl X, cl(X ⊞ Y) = cl X + cl Y, cl X − cl Y = cl(X ⊞ Y[1]), every element is the class of one object, the universal property, functoriality for triangulated functors, and the « if » half of the two-triangle criterion. The Euler identity Σ(−1)ⁱ dim Vⁱ = Σ(−1)ⁱ dim Hⁱ for a bounded complex of finite-dimensional vector spaces is proved in the same file. Not formalised: the « only if » half of the criterion, the Verdier-quotient sequence, K(C) ≅ K(D^b(C))."},
+    lean: {"file": "lean/Grothendieck/IhesSGA6_2_3.lean", "found": "K₀ of a pretriangulated category defined as the free abelian group on objects modulo the triangle relations (Mathlib has none); proved: cl 0 = 0, isomorphic objects have equal classes, cl X[1] = −cl X and cl X[n] = (−1)ⁿ cl X, cl(X ⊞ Y) = cl X + cl Y, cl X − cl Y = cl(X ⊞ Y[1]), every element is the class of one object, the universal property, functoriality for triangulated functors, and the « if » half of the two-triangle criterion. The Euler identity Σ(−1)ⁱ dim Vⁱ = Σ(−1)ⁱ dim Hⁱ for a bounded complex of finite-dimensional vector spaces is proved in the same file. Not formalised here: the « only if » half of the criterion, K(C) ≅ K(D^b(C)); the Verdier-quotient sequence is proved in IhesSGA6_2_3Verdier.lean."},
   },
   {
     id: "FG_IL_5_SGA6_2_3-class-equality-criterion",
@@ -9598,6 +9598,7 @@ export const FINDINGS: Finding[] = [
     status: "candidate",
     settle: "Check SGA 5 VIII, SGA 6 IV and Verdier’s thesis.",
     reach: "reachable",
+    lean: {"file": "lean/Grothendieck/IhesSGA6_2_3Verdier.lean", "found": "Holds as stated, with « épaisse »: for a triangulated category T (the octahedral axiom is used, through mathlib's calculus of fractions for the morphisms with cone in D), a triangulated subcategory D closed under direct summands, and any triangulated localization functor L : T → T/D for those morphisms (mathlib's Verdier quotient P.trW.Localization among them), K(T) → K(T/D) is surjective (map_surjective), the composite K(D) → K(T) → K(T/D) is zero (map_comp_map_ι), and its kernel is exactly the image of K(D) (ker_map_eq_range, exact, exact_localization). The proof builds the inverse K(T/D) → K(T)/im K(D), cl(L X) ↦ [X] (descQuotient): L X ≅ 0 iff X ∈ D, since a zero morphism with cone in D has cone Y ⊞ X[1] (isZero_map_iff); isomorphisms of T/D are roofs X → Y′ ← Y (cl_sub_cl_mem_range_of_iso); distinguished triangles of T/D are images of triangles of T. Thickness is needed for the exactness in the middle, not only to name the quotient: for D the complexes of even Euler characteristic in D^b(k), T/D = 0 while the image of K(D) in K(T) = ℤ is 2ℤ (Thomason, Compositio 105, 1997, Th. 2.1); surjectivity and the vanishing of the composite hold for any triangulated D. Not formalised: that counterexample."},
     onPage: "stated",
   },
   {

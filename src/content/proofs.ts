@@ -1584,4 +1584,15 @@ export const PROOFS: Proof[] = [
     lean: "lean/Grothendieck/IhesSGA6_2_3.lean",
     theorems: ["cl_obj₂", "lift", "lift_cl", "hom_ext", "cl_zero", "cl_eq_of_iso", "cl_of_isZero", "cl_shift_one", "cl_shift", "cl_biprod", "cl_sub", "cl_surjective", "cl_eq_of_iso_biprod", "map", "map_cl", "map_eq_of_iso", "sum_alternating_telescope", "sum_finrank_eq_sum_finrank_cohomology"],
   },
+  {
+    folder: "FG_IL_5_SGA6_2_3",
+    batch: 1,
+    page: "3",
+    name: "K(D) → K(T) → K(T/D) → 0 for a thick triangulated subcategory (view 3, « à vérifier »)",
+    statement: "For a thick triangulated subcategory D of a triangulated category T, the sequence K(D) → K(T) → K(T/D) → 0 is exact.",
+    found: "Holds as stated, with « épaisse »: for a triangulated category T (the octahedral axiom is used, through mathlib's calculus of fractions for the morphisms with cone in D), a triangulated subcategory D closed under direct summands, and any triangulated localization functor L : T → T/D for those morphisms (mathlib's Verdier quotient P.trW.Localization among them), K(T) → K(T/D) is surjective (map_surjective), the composite K(D) → K(T) → K(T/D) is zero (map_comp_map_ι), and its kernel is exactly the image of K(D) (ker_map_eq_range, exact, exact_localization). The proof builds the inverse K(T/D) → K(T)/im K(D), cl(L X) ↦ [X] (descQuotient): L X ≅ 0 iff X ∈ D, since a zero morphism with cone in D has cone Y ⊞ X[1] (isZero_map_iff); isomorphisms of T/D are roofs X → Y′ ← Y (cl_sub_cl_mem_range_of_iso); distinguished triangles of T/D are images of triangles of T. Thickness is needed for the exactness in the middle, not only to name the quotient: for D the complexes of even Euler characteristic in D^b(k), T/D = 0 while the image of K(D) in K(T) = ℤ is 2ℤ (Thomason, Compositio 105, 1997, Th. 2.1); surjectivity and the vanishing of the composite hold for any triangulated D. Not formalised: that counterexample.",
+    verdict: ["holds"],
+    lean: "lean/Grothendieck/IhesSGA6_2_3Verdier.lean",
+    theorems: ["map_surjective", "map_comp_map_ι", "isZero_map_iff", "cl_sub_cl_mem_of_trW", "cl_sub_cl_mem_of_isIso", "cl_sub_cl_mem_range_of_iso", "descQuotient", "descQuotient_map", "ker_map_eq_range", "exact", "exact_localization"],
+  },
 ];

@@ -92,6 +92,7 @@ import Grothendieck.Folder123Kostant
 import Grothendieck.Folder147
 import Grothendieck.IhesSGA6_1_5
 import Grothendieck.IhesSGA6_2_3
+import Grothendieck.IhesSGA6_2_3Verdier
 import Grothendieck.Upstream.AdjunctionIdempotent
 import Grothendieck.Upstream.ChoosePrimePowSubOne
 import Grothendieck.Upstream.CurryR1Space
