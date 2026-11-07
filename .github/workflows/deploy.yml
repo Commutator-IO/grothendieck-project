@@ -3,6 +3,14 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    # Commits that cannot change the site do not rebuild it (#123): the Lean
+    # proofs have their own workflow, and these folders are not read by the build.
+    paths-ignore:
+      - 'lean/**'
+      - 'computations/**'
+      - 'outreach/**'
+      - '.claude/**'
+      - '.vscode/**'
   # Checks also run on pull requests; only the deployment is reserved for
   # the main branch.
   pull_request:
@@ -20,15 +28,16 @@ permissions:
   pages: write
   id-token: write
 
-# One deployment at a time, without cancelling the one in flight.
-concurrency:
-  group: pages
-  cancel-in-progress: false
+# Concurrency is set per job (#123): a build made obsolete by a newer push is
+# cancelled, but a deployment in flight is never cut half-way.
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    concurrency:
+      group: build-${{ github.ref }}
+      cancel-in-progress: true
     # The switch for #31: whether the transcriptions are rendered into the
     # site at all. Off, nothing turns transcripts/*.tex into a reading view, a
     # TEI file, a PDF or a gallery page, so the deployed site carries none of
@@ -190,6 +199,18 @@ jobs:
           path: ~/.cache/Tectonic
           key: tectonic-${{ runner.os }}-v1
 
+      # The compiled PDFs, by content (#123): scripts/pdf.mjs reuses a PDF whose
+      # .tex and shared preamble are unchanged, so a deploy recompiles only the
+      # transcriptions that changed instead of all of them (about 25 minutes).
+      # The key changes with any transcription; restore-keys brings back the
+      # previous store, and the script prunes what is no longer used.
+      - uses: actions/cache@v6
+        if: env.RENDER_TRANSCRIPTS == 'true'
+        with:
+          path: node_modules/.cache/pdf
+          key: pdf-v1-${{ hashFiles('transcripts/**/*.tex', 'transcripts/preamble/**', 'transcripts/figures/**', 'scripts/pdf.mjs') }}
+          restore-keys: pdf-v1-
+
       # A transcript that fails to compile must not take the deploy with it:
       # the site is still worth publishing with one PDF missing, and the
       # manifest simply will not list that edition.
@@ -205,8 +226,18 @@ jobs:
       # figures and ImageMagick trims them. Unlike the transcripts' PDFs, a
       # failure here fails the deploy: an invalid submission file should not
       # be published as a valid one.
+      # Only what is missing, and without `apt-get update` unless the install
+      # needs it: the update alone took up to eleven minutes on a slow mirror (#123).
       - name: Install poppler and ImageMagick
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils imagemagick
+        run: |
+          need=""
+          command -v pdftoppm >/dev/null || need="$need poppler-utils"
+          { command -v magick || command -v convert; } >/dev/null || need="$need imagemagick"
+          if [ -n "$need" ]; then
+            sudo apt-get install -y -qq --no-install-recommends $need \
+              || { sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends $need; }
+          fi
+          pdftoppm -v 2>&1 | head -1
       # The Java tools the article step fetches from Maven Central, kept
       # between runs; the jTEI schema itself is committed (docs/study/schema).
       - uses: actions/cache@v6
@@ -217,6 +248,10 @@ jobs:
       # The second book (docs/livre-archives/) is compiled here when no PDF is committed, so
       # that /article/archives-toolbox.pdf exists before anyone has built it locally. A
       # failure leaves the deploy alone: tei.mjs copies the book only if the PDF exists.
+      - uses: actions/cache@v6
+        with:
+          path: docs/livre-archives/livre.pdf
+          key: livre-archives-${{ hashFiles('docs/livre-archives/**/*.tex', 'docs/livre-archives/**/*.bib', 'docs/livre-archives/**/*.sty') }}
       - name: Compile the second book if its PDF is not committed
         run: |
           if [ ! -f docs/livre-archives/livre.pdf ]; then
@@ -285,6 +320,9 @@ jobs:
   deploy:
     name: Deploy
     needs: build
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     # A pull request does not deploy; it only runs the checks.
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
