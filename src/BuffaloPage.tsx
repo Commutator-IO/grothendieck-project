@@ -129,7 +129,7 @@ type IndexItem =
   | { k: 'topic'; text: string }
   | { k: 'session'; text: string }
   | { k: 'side'; text: string }
-  | { k: 'entry'; v: string; t: number; ts: string; text: string; kind?: Kind; name?: string };
+  | { k: 'entry'; v: string; t: number; w?: number; ts: string; text: string; kind?: Kind; name?: string };
 type Kind = 'def' | 'thm' | 'prop' | 'ex' | 'cex' | 'rem' | 'q' | 'disc' | 'read';
 // The kinds of entry, labelled as in a course; the colours are those of the PDF.
 const KIND: Record<Kind, { label: string; color: string; italic?: boolean }> = {
@@ -213,13 +213,13 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
           <div
             key={n}
             className="group mt-1.5 grid grid-cols-[4.6rem_minmax(0,1fr)_1.5rem] gap-2 [contain-intrinsic-size:auto_2.4rem] [content-visibility:auto]"
-            {...commentData({ kind: 'lecture', label: `Buffalo, ${course}, ${i.ts}`, ref: i.ts, link: `https://www.youtube.com/watch?v=${i.v}&t=${i.t}s` })}
+            {...commentData({ kind: 'lecture', label: `Buffalo, ${course}, ${i.ts}`, ref: i.ts, link: `https://www.youtube.com/watch?v=${i.v}&t=${i.w ?? i.t}s` })}
           >
             <button
               type="button"
-              onClick={() => onPlay(i.v, i.t)}
-              aria-current={playing?.id === i.v && playing.t === i.t ? 'true' : undefined}
-              title="Play the tape from here"
+              onClick={() => onPlay(i.v, i.w ?? i.t)}
+              aria-current={playing?.id === i.v && playing.t === (i.w ?? i.t) ? 'true' : undefined}
+              title={i.w !== undefined ? `Play the tape from ${hms(i.w)}, when the chalk starts (said at ${i.ts})` : 'Play the tape from here'}
               className="tabular self-start rounded px-1 py-0.5 text-left font-mono text-[12px] text-brand-600 hover:bg-brand-50 aria-[current=true]:bg-brand-100"
             >
               {i.ts}

@@ -11,10 +11,12 @@
  * (a tape side), \video{id}, \entree{seconds}{h:mm:ss}{statement} — and the statements'
  * mathematics is passed through for KaTeX. \bibitem{key} and \cite{key} give the numbered references. Anything else in a statement raises.
  */
+import { burstsByVideo, setWritingTimes } from './lib/chalk.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
+const bursts = burstsByVideo();
 const COURSES = { topos: 'buffalo-topos', ag: 'buffalo-ag', groups: 'buffalo-groupes' };
 
 /** The balanced {…} argument starting at s[i] === '{'; returns [content, index after]. */
@@ -98,6 +100,13 @@ for (const [id, dir] of Object.entries(COURSES)) {
     }
     re.lastIndex = i;
   }
+  // Chalk timing (#109): an entry is played from when he starts writing it, where the chalk
+  // shows it, and from when he says it otherwise. Entries are grouped by video, in order.
+  let timed = 0;
+  for (const v of new Set(items.filter((x) => x.k === 'entry').map((x) => x.v))) {
+    timed += setWritingTimes(items.filter((x) => x.k === 'entry' && x.v === v), bursts.get(v));
+  }
+  console.log(`${id}: ${timed} entries timed by the chalk`);
   out[id] = { pdf: `/article/${dir}.pdf`, entries: items.filter((x) => x.k === 'entry').length, items, refs: refsHtml };
   console.log(`${id}: ${out[id].entries} entries, ${items.filter((x) => x.k === 'topic').length} topics`);
 }
