@@ -90,9 +90,11 @@ import Grothendieck.Folder94
 import Grothendieck.Folder98
 import Grothendieck.Folder123Kostant
 import Grothendieck.Folder147
+import Grothendieck.IhesSGA6_1_4
 import Grothendieck.IhesSGA6_1_5
 import Grothendieck.IhesSGA6_2_3
 import Grothendieck.IhesSGA6_2_3Verdier
+import Grothendieck.IhesSGA6_2_4
 import Grothendieck.Ihes2ILL5
 import Grothendieck.Upstream.AdjunctionIdempotent
 import Grothendieck.Upstream.ChoosePrimePowSubOne
