@@ -79,7 +79,15 @@ const idFromHash = () => {
 export function ReviewPage() {
   const snippets = useSnippets();
   const relay = useFacsimileProxy();
-  const [answers, setAnswers] = useState<Record<string, Answer>>(loadAnswers);
+  // Answers to checks no longer in the queue were sent and applied (review-answered.json):
+  // drop them from this browser so they are neither counted nor sent again.
+  const [answers, setAnswers] = useState<Record<string, Answer>>(() => {
+    const stored = loadAnswers();
+    const live = new Set(ITEMS.map((i) => i.id));
+    const kept = Object.fromEntries(Object.entries(stored).filter(([k]) => live.has(k)));
+    if (Object.keys(kept).length !== Object.keys(stored).length) saveAnswers(kept);
+    return kept;
+  });
   const [kind, setKind] = useState<Filter>('all');
   const [id, setId] = useState<string>(() => idFromHash() ?? ITEMS.find((i) => !loadAnswers()[i.id])?.id ?? ITEMS[0].id);
   const [pane, setPane] = useState(true);
