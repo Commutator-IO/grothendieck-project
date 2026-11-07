@@ -130,7 +130,7 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     id: 'article-effective',
     title: "Non-effective finite equivalence relations on finite schemes over a field: Venken's example checked, and a second one",
     lang: 'English',
-    what: "The problem he gave at Buffalo on 11 July 1973, first asked in FGA (1961): is every finite equivalence relation on a finite scheme over a field effective? No: Venken had answered it in 1971, in a corollary of a note on flat descent (a local Artin algebra of dimension 33). The note checks his example by machine and gives a second one, of length 15 in two variables, from Raicu's relation on the plane, certified over every field.",
+    what: "The problem he gave at Buffalo on 11 July 1973, first asked in FGA (1961): is every finite equivalence relation on a finite scheme over a field effective? No: Venken had answered it in 1971, in a corollary of a note on flat descent (a local Artin algebra of dimension 33). The note checks his example by machine and gives a second one, of length 15 (16 in characteristic 2) in two variables, from Raicu's relation on the plane, certified over every field.",
     pdf: '/article/grothendieck-effective.pdf',
     src: 'docs/effective/article.tex',
   },

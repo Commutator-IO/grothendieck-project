@@ -45,7 +45,7 @@ those over Q. Each listed prime was checked directly with `full.py`, as were all
 
 `raicu/scan.py` is `full.py` with the exponents of Z = V(f1^a, f2^b, f3^c) read from the variable
 EXP. Among the 16 triples with entries at most 3 tried over F3 (`raicu/scan-out.txt`), the smallest
-with a gap is (2, 2, 2): Z = V(f1², f2², f3²), of length 15 (against 27 for (3, 3, 2)), with
+with a gap is (2, 2, 2): Z = V(f1², f2², f3²), of length 15 in characteristic ≠ 2 and 16 in characteristic 2, where f2² = x1²x2² + x2⁴ (Hilbert function 1,2,3,4,3,2 resp. 1,2,3,4,3,2,1) (against 27 for (3, 3, 2)), with
 dim (I+K)_5 = 52 > 51 = dim (J+K)_5. `raicu/certify_scan.py` (EXP=2,2,2) finds the pivot primes over Q
 to be 2, 3, 5, 7, 13, 41, 61; each was checked directly, with the same gap, and the witness
 (x1y2 − x2y1)y2³ lies in (I+K)_5 and not in (J+K)_5 over Q, F2 and F3 (`raicu/out-length15.txt`).
