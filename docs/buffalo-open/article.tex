@@ -1,0 +1,220 @@
+% The open problems of Grothendieck's 1973 Buffalo lectures, and what became of them — standalone sub-article.
+% Sources: the recordings (« Erwin Schulhoff » YouTube channel, a pseudonym) and the edition's index of results;
+% quotations from the recordings are kept to a few words. pdfLaTeX. Compile: tectonic -X compile article.tex.
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype,amssymb,mathtools,booktabs,tabularx,array}
+\usepackage[margin=2.7cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{problem}{Problem}
+\theoremstyle{remark}
+\newtheorem*{status}{Status}
+\newcommand{\q}[1]{\guillemotleft\,#1\,\guillemotright}
+\newcommand{\ts}[3]{\href{https://www.youtube.com/watch?v=#1&t=#2}{#3}}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\own}{\textsuperscript{(e)}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\title[The open problems of the Buffalo lectures]{The open problems of Grothendieck's 1973 Buffalo lectures,\\ and what became of them}
+\author{Michel Hua}
+\address{Commutator, Paris, France}
+\email{michel@commutator.io}
+\thanks{ORCID 0009-0002-8304-0683.}
+\date{7 November 2026}
+\subjclass[2020]{01A60; 18F10, 18C35, 14A15, 14L15}
+\keywords{Grothendieck, Buffalo 1973, topoi, accessible categories, algebraic theories, fpqc descent, group schemes, open problems}
+
+\begin{document}
+\begin{abstract}
+In the spring and summer of 1973 Grothendieck gave three courses at the State University of New York at Buffalo, on topos theory, on algebraic geometry and on group schemes, whose recordings are online. In them he states some twenty questions he does not know how to answer, conjectures, and problems he hands to the audience. We list them from the recordings, with the time at which each is asked, and say what has become of each in the literature. Most are settled: some as he expected, several against his expectation (a characterisation of presheaf topoi, the non-existence of a right adjoint $f^!$, the descent of non-quasi-compact immersions, the colimits of accessible categories), one by Perrin in 1976, one only up to set theory, and one, the effectivity of finite equivalence relations, in a companion note. A few, mostly about algebraic theories over a fixed base, look open as he phrased them.
+\end{abstract}
+\maketitle
+
+\section{The lectures and the method}
+
+The recordings are on a YouTube channel under the pseudonym \q{Erwin Schulhoff}: four videos for the topos course (April--July 1973) and two each for algebraic geometry and for group schemes. The edition has made an index of results for each course, with the second at which each statement is made, and reconstructed the blackboards \cite{repo}. For this note we searched the transcripts for the places where he says that something is not known, that he cannot prove it, that he expects or suspects it, or where he calls it a conjecture or a problem; we kept the ones he frames as questions, and dropped asides and routine omissions. Each problem below gives the video and the time (a link to that second), how he frames it, and its status, with the references we checked. Where we give an argument of our own, not found in the literature, it is marked \own.
+
+Two cautions. The transcripts are first passes from captions and Whisper, unchecked by a human, and a few exchanges with the room are hard to attribute. And he corrected himself: on 10 July he retracted several claims of 2 July on algebraic theories (the transitivity of strict cogeneration, a two-step construction, a criterion by strict cogenerators), recorded in the edition's list of corrections \cite{corr}. We report the question as finally posed.
+
+\section{Topoi}
+
+Video 2 of the topos course is \texttt{PqCQM3Pcl6Q} unless stated.
+
+\begin{problem}[\ts{PqCQM3Pcl6Q}{1h26m22s}{1:26:22} and \ts{PqCQM3Pcl6Q}{7h31m23s}{7:31:23}]\label{p:presheaf}
+Are the presheaf topoi $\widehat C$ exactly the topoi that share all the exactness properties of $\Set$, including those involving infinite limits: arbitrary sums and products distributive, and arbitrary products of epimorphisms epimorphic?
+\end{problem}
+He suspects it, says it should not be too hard, and returns to it later as a characterisation of what he calls essential topoi, at least when they have generators.
+
+\begin{status}
+False as stated. Presheaf topoi are characterised by a generating set of indecomposable projective objects (Bunge \cite{bunge}). The right class for his two conditions is larger: Lucyshyn-Wright proved that the totally distributive categories with a set of generators are exactly the essential subtopoi of presheaf topoi \cite{lw}, and both conditions pass to any essential subtopos $s\colon E\to\widehat C$, since $s^*$ preserves products, sums and epimorphisms and $s^*s_!\cong 1$\own. A candidate counterexample is the topos of sheaves on $[0,1]$ with the Scott topology: as a quasi-injective topos \cite{jj} it is totally distributive \cite[1.5.4]{lw}, and its frame of subterminals has no completely prime element but the top, so it is not a presheaf topos\own; the quasi-injectivity should be checked in \cite{jj} before the example is relied on. His \q{essential} is not the essential geometric morphism of later usage. Whether his two conditions alone are equivalent to total distributivity among Grothendieck topoi we have not found stated.
+\end{status}
+
+\begin{problem}[\ts{PqCQM3Pcl6Q}{4h5m50s}{4:05:50}]\label{p:fshriek}
+For a morphism of topoi $f$, can $f_*$ have a right adjoint $f^!$ on sheaves of sets without $f$ being an equivalence?
+\end{problem}
+He has \q{a feeling} that it cannot, and concludes that the notation $f^!$ has no reason to exist for topoi.
+
+\begin{status}
+False, even for an open dense immersion, his own test case. For the open point $j$ of the Sierpiński space, $j_*$ is the diagonal $A\mapsto(A\to A)$ and has the right adjoint $\Gamma$\own; more generally $\Gamma\colon \widehat C\to\Set$ has a right adjoint when $C$ has a terminal object. These are the local geometric morphisms of Johnstone and Moerdijk \cite{jm}.
+\end{status}
+
+\begin{problem}[\ts{PqCQM3Pcl6Q}{5h18m59s}{5:18:59}]\label{p:classifying}
+Every type of algebraic structure, in a broad sense, should have a classifying topos with a universal model, added axioms should correspond to subtopoi, and the homotopy type of the classifying topos should be a classifying space of the structure.
+\end{problem}
+A programme, which he says he has checked on a dozen or two examples.
+
+\begin{status}
+Carried out for geometric theories: every geometric theory has a classifying topos with a generic model (Joyal--Reyes; Makkai--Reyes \cite{mr}; Hakim for rings and local rings \cite{hakim}), quotient theories correspond to subtopoi (Caramello \cite{caramello}), and for groups and categories the classifying topos has the weak homotopy type of the classifying space (Moerdijk \cite{moerdijk}). The restriction is that \q{structure} means geometric theory.
+\end{status}
+
+\begin{problem}[\ts{PqCQM3Pcl6Q}{8h38m47s}{8:38:47}, \ts{PqCQM3Pcl6Q}{8h46m26s}{8:46:26}]\label{p:exactness}
+Can every exactness property be written as \q{every $D$-functor $I\to C$ factors through a given $D$-functor $I\to I'$}? Is \q{every semigroup object is a monoid} an exactness property?
+\end{problem}
+A discussion with the room after the session; who says what is not always clear.
+
+\begin{status}
+Formalised by Jacqmin and Janelidze as exactness sequents of sketches, which cover first-order properties, among them \q{every internal monoid is a group}, and not higher-order ones such as having enough projectives \cite{jacqmin}. \q{Every semigroup object is a monoid} holds only in the trivial category: the left-zero multiplication $X\times X\to X$ is associative, and a unit $e\colon 1\to X$ for it forces $X\cong 1$\own.
+\end{status}
+
+Two further questions are answered on the spot. Asked for a criterion characterising sober spaces (\ts{PqCQM3Pcl6Q}{1h55m37s}{1:55:37}), he says he knows none that can be read off the topos, since a space and its sobrification have the same sheaves; the intrinsic criteria are standard \cite{stone}. And the universal problem for torsors under a group $G$ of a topos $S$ (\texttt{ORG14LNb5gE}, \ts{ORG14LNb5gE}{3h15m58s}{3:15:58}) he solves at once with the topos of $G$-objects of $S$, as in Giraud \cite{giraud}.
+
+\section{Algebraic theories relative to a class of limits}
+
+For a class $D$ of limits and colimits, he considers the 2-category $\Cat_D$ of categories with $D$-limits and $D$-functors, and calls a theory algebraic if it is obtained from a set $I$ of base objects by stepwise rules: the free $D$-envelope, adjoining arrows, imposing axioms.
+
+\begin{problem}[\ts{PqCQM3Pcl6Q}{8h34m57s}{8:34:57}]\label{p:representable}
+Are the algebraic theories relative to $D$ exactly the theories $C\mapsto \operatorname{Hom}_D(R,C)$ 2-represented by objects $R$ of $\Cat_D$?
+\end{problem}
+\begin{status}
+Settled: yes for small $R$, which is his own argument and the modern presentation of small categories with limits by generators and relations (sketches, essentially algebraic theories \cite[ch.~3]{ar}); no in general. For $D$ the small limits, $R=\Set$ is representable, with $\Set^{\mathrm{op}}$ as its category of models in $\Set$, which is not accessible, while stepwise theories have locally presentable categories of models; he gives this example himself on 10 July. For $D$ all small limits the algebraic $R$ are, up to duality, the opposites of locally presentable categories, the form Gabriel--Ulmer duality gives \cite{gu}.
+\end{status}
+
+\begin{problem}[\ts{PqCQM3Pcl6Q}{10h3m6s}{10:03:06}]\label{p:envelope}
+For which $D$ are the envelope problem (the free $D$-completion of a category) and the localisation problem in $\Cat_D$ solvable? He knows them for finite limits and for topoi, and not for additive, abelian or Karoubian categories.
+\end{problem}
+\begin{status}
+Settled for every small class $D$ by Kelly's transfinite constructions and two-dimensional monad theory \cite{kelly, bkp}, with explicit answers: the idempotent completion for Karoubian categories, the biproduct completion of the free preadditive category for additive ones, the free abelian category of Freyd and Adelman \cite{freyd, adelman}, the exact completion of Carboni and Celia Magno \cite{ccm}. For a large class, such as all small limits, the answers depend on size, as he noted on 10 July: localisations of large categories need not be locally small.
+\end{status}
+
+\begin{problem}[\texttt{4gynb9uTEE4}, \ts{4gynb9uTEE4}{2h3m54s}{2:03:54} and \ts{4gynb9uTEE4}{2h10m23s}{2:10:23}]\label{p:three}
+\q{Problem three}: is $I\to R$ basic if and only if every strictly full subcategory of $R$ stable under $D$-limits and containing the image of $I$ is $R$ itself? And, conjecturally, can $I$ be enlarged so that no arrows remain to be adjoined, only axioms?
+\end{problem}
+\begin{status}
+The direct implication holds; the converse fails for $D$ all small limits, with $R=\Set$ and $I=\{2\}$, since every set is an equaliser of maps between powers of $2$ but $\Set$ is not algebraic\own; for essentially small $D$ the equivalence holds, everything being small. The second question has a positive answer in the locally presentable case by Gabriel--Ulmer: taking for $I$ the opposite of the $\lambda$-presentable objects, three steps suffice \cite{gu}, \cite[1.39, 1.46]{ar}. For a fixed base $I$ the question \q{basic if and only if strong generator} seems open as he phrased it, and so does the length of the closure.
+\end{status}
+
+Around these he asks whether faithfulness of $\operatorname{Hom}_D(R,C)\to C^I$ for all $C$ suffices for algebraicity (\ts{PqCQM3Pcl6Q}{9h39m31s}{9:39:31}, \ts{PqCQM3Pcl6Q}{10h0m19s}{10:00:19}). It does not: a large lattice, raised from the room, and more cleanly $\Set$ with $I=\{2\}$. His hope of a bound on the number of limit operations (\ts{PqCQM3Pcl6Q}{8h8m14s}{8:08:14}) he retracted himself on 10 July.
+
+\section{Accessible categories}
+
+\begin{problem}[\texttt{4gynb9uTEE4}, \ts{4gynb9uTEE4}{1h31m3s}{1:31:03}]\label{p:colim}
+Is a small 2-colimit in $\Cat$ of accessible categories accessible?
+\end{problem}
+\begin{status}
+No in general\own: a pushout of three small idempotent-complete categories (the free category on $u\to v\to w$ with an extra arrow $u\to w$, the chain $0<1<2$, and the free monoid on one generator, each functor accessible) is the one-object category with an idempotent $f=f^2$ that does not split, and accessible categories split idempotents. Directed colimits along accessible full embeddings are accessible (Paré--Rosický \cite{pr}). The limit side, which he recalls from SGA~4, is right in modern form \cite[5.1.6]{mp}.
+\end{status}
+
+\begin{problem}[\texttt{4gynb9uTEE4}, \ts{4gynb9uTEE4}{1h51m31s}{1:51:31}]\label{p:reflective}
+Is a full subcategory of an accessible category, stable under limits and with a left adjoint inclusion, accessible?
+\end{problem}
+\begin{status}
+Not decided by ZFC. It is true under Vopěnka's principle, and in ZFC when the inclusion is also accessible, the condition he proposed adding \cite[2.78, ch.~6]{ar}. Under weak Vopěnka's principle every limit-closed full subcategory of a locally presentable category is reflective \cite{art}, and Wilson showed that weak Vopěnka does not imply Vopěnka \cite{wilson}; in a model of the one without the other some such reflective subcategory is not locally presentable, hence, being complete, not accessible.
+\end{status}
+
+\begin{problem}[\texttt{4gynb9uTEE4}, \ts{4gynb9uTEE4}{4h48m17s}{4:48:17}]\label{p:dual}
+If $E$ and $E^{\mathrm{op}}$ are both accessible, is $E$ equivalent to the point?
+\end{problem}
+\begin{status}
+No. With the small colimits he assumes, $E$ and $E^{\mathrm{op}}$ are then locally presentable and $E$ is a preorder, a complete lattice (Gabriel--Ulmer \cite[Satz~7.13]{gu}); the two-element chain is a counterexample.
+\end{status}
+
+\section{Algebraic geometry and group schemes}
+
+\begin{problem}[\texttt{vuys5SNs2eQ}, \ts{vuys5SNs2eQ}{3h31m11s}{3:31:11}; see also \ts{vuys5SNs2eQ}{2h59m31s}{2:59:31}]\label{p:immersion}
+Do immersions that are not quasi-compact descend along a faithfully flat quasi-compact morphism? At 2:59:31: is descent of subschemes exact without retrocompactness? (\q{you asked for an open problem}).
+\end{problem}
+He believes the first but cannot prove it; his attempt by a filtered union of quasi-compact opens fails on his own example, the closed points of the line.
+
+\begin{status}
+Both are false. Open, closed and quasi-compact immersions descend along fpqc coverings, and immersions along fppf ones \cite[02L3, 02L6, 02L8, 02YM]{stacks}, \cite[Thm.~4.2]{rydh}. The disjoint union of the $\operatorname{Spec}\mathbf F_p$ mapped to $\operatorname{Spec}\mathbf Z$ is not an immersion, but becomes one after the faithfully flat base change $\operatorname{Spec}\prod_p\mathbf Z_{(p)}\to\operatorname{Spec}\mathbf Z$; the same subscheme answers the second question. The example is in a comment on Stacks tag 02YL (2026), which we checked; it is not refereed, and we found no earlier published counterexample. It is his own example of the closed points, read upstairs.
+\end{status}
+
+\begin{problem}[\texttt{3ULFIl\_2Wis}, \ts{3ULFIl_2Wis}{5h4m48s}{5:04:48}]\label{p:perrin}
+\q{The main conjecture}: a connected separable group scheme over a field is an extension of a group of finite type by an affine group, the quotient map faithfully flat and quasi-compact; equivalently a filtered limit of groups of finite type with affine transition maps.
+\end{problem}
+\begin{status}
+Proved by Perrin in his thesis \cite{perrin}: every quasi-compact group scheme over a field is a filtered limit of algebraic quotients with affine kernels and transition maps affine from some index on. Perrin's counterexample with abelian varieties of growing dimension is the phenomenon Grothendieck wanted to exclude at 5:11:21.
+\end{status}
+
+Asked for a characterisation of schemes among algebraic spaces (\ts{3ULFIl_2Wis}{6h39m12s}{6:39:12}), he answers that it would solve the representability problem, and no; there are only sufficient criteria \cite[03XX, 0ADD, 03JI, 0D2W]{stacks}. Smaller questions in the algebraic geometry course are settled: whether a Noetherian spectrum is the same as the ascending chain condition on primes (\texttt{51wmmpHand0}, 7:42; no, an infinite product of fields\own, and the radical-ideal criterion of Ohm and Pendleton \cite{ohm}); whether a scheme can have no closed point (\texttt{Oqhr-Gt66es}, 0:10; yes \cite[01IY]{stacks}), so that a unique closed point does not make a scheme local\own; whether a monoid scheme with a closed unit section is separated (\texttt{3ULFIl\_2Wis}, 3:56; no, adjoin a unit to a non-separated scheme with constant multiplication\own). Whether quasi-coherent sheaves descend along a universal effective epimorphism (6:27) is known only in the affine case, where descent holds exactly along pure ring maps \cite[08XA]{stacks}, \cite{mesablishvili}.
+
+\section{Effectivity}\label{sec:eff}
+
+At the end of the group-schemes course (\texttt{3ULFIl\_2Wis}, \ts{3ULFIl_2Wis}{6h59m50s}{6:59:50}), asked for open problems, he gives the effectivity of finite equivalence relations on a finite scheme over a field, posed in FGA in 1961, and says he suspects a negative answer. It is negative over every field, by a restriction of Raicu's relation on the plane to a local Artin scheme of length $27$; that answer is the subject of a companion note \cite{effective}.
+
+\section{Summary}
+
+\begin{table}[ht]
+\small
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}p{5.3cm}Y@{}}
+\toprule
+Problem & His stance & Status \\
+\midrule
+\ref{p:presheaf} presheaf topoi & suspects yes & false; essential subtopoi of $\widehat C$ \cite{lw} \\
+\ref{p:fshriek} $f^!$ & feels no & false; local morphisms \cite{jm} \\
+\ref{p:classifying} classifying topoi & programme & done for geometric theories \\
+\ref{p:exactness} exactness properties & open in discussion & formalised \cite{jacqmin}; semigroup case trivial\own \\
+\ref{p:representable} algebraic $=$ representable & aim & yes for small $R$, no in general \\
+\ref{p:envelope} envelopes, localisations & known in two cases & small $D$: yes \cite{kelly,bkp} \\
+\ref{p:three} problem three & neither direction proved & $\Rightarrow$ yes, $\Leftarrow$ no for all limits; fixed base open \\
+\ref{p:colim} colimits of accessible & question & no\own; directed full: yes \cite{pr} \\
+\ref{p:reflective} reflective subcategories & asks for a counterexample & independent of ZFC \cite{wilson} \\
+\ref{p:dual} $E$, $E^{\mathrm{op}}$ accessible & guesses the point & no: complete lattices \cite{gu} \\
+\ref{p:immersion} descent of immersions & believes yes & no (Stacks comment, 2026) \\
+\ref{p:perrin} structure of group schemes & main conjecture & Perrin 1976 \cite{perrin} \\
+\S\ref{sec:eff} effectivity & suspects no & no, over every field \cite{effective} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The problems that still look open are those on algebraic theories over a fixed base (Problem~\ref{p:three}), the equivalence of his two infinite exactness conditions with total distributivity (Problem~\ref{p:presheaf}), and the descent of quasi-coherent sheaves along non-affine universal effective epimorphisms. Of those he expected to be true, most turned out false.
+
+\subsection*{Use of language models}
+The questions were located in the transcripts, and the literature searched, with language models (Claude Opus~5.5, Anthropic), which also wrote a first draft of this text and the arguments marked \own, under the author's direction. The references were opened on their pages; the arguments marked \own\ have not been checked by a specialist.
+
+\begin{thebibliography}{99}
+\bibitem{adelman} M.~Adelman, Abelian categories over additive ones, \emph{J.\ Pure Appl.\ Algebra} 3 (1973), 103--117, \href{https://doi.org/10.1016/0022-4049(73)90026-1}{doi:10.1016/0022-4049(73)90026-1}.
+\bibitem{ar} J.~Adámek, J.~Rosický, \emph{Locally Presentable and Accessible Categories}, LMS Lecture Note Ser.~189, Cambridge University Press, 1994, \href{https://doi.org/10.1017/CBO9780511600579}{doi:10.1017/CBO9780511600579}.
+\bibitem{art} J.~Adámek, J.~Rosický, V.~Trnková, Are all limit-closed subcategories of locally presentable categories reflective?, in \emph{Categorical Algebra and its Applications}, LNM~1348, Springer, 1988, 1--18, \href{https://doi.org/10.1007/BFb0081345}{doi:10.1007/BFb0081345}.
+\bibitem{bkp} R.~Blackwell, G.~M.~Kelly, A.~J.~Power, Two-dimensional monad theory, \emph{J.\ Pure Appl.\ Algebra} 59 (1989), 1--41, \href{https://doi.org/10.1016/0022-4049(89)90160-6}{doi:10.1016/0022-4049(89)90160-6}.
+\bibitem{bunge} M.~C.~Bunge, Relative functor categories and categories of algebras, \emph{J.\ Algebra} 11 (1969), 64--101, \href{https://doi.org/10.1016/0021-8693(69)90102-1}{doi:10.1016/0021-8693(69)90102-1}.
+\bibitem{caramello} O.~Caramello, Lattices of theories, \href{https://arxiv.org/abs/0905.0299}{arXiv:0905.0299}; \emph{Theories, Sites, Toposes}, Oxford University Press, 2018.
+\bibitem{ccm} A.~Carboni, R.~Celia Magno, The free exact category on a left exact one, \emph{J.\ Austral.\ Math.\ Soc.\ Ser.~A} 33 (1982), 295--301, \href{https://doi.org/10.1017/S1446788700018735}{doi:10.1017/S1446788700018735}.
+\bibitem{corr} Commutator-IO, grothendieck-project, \texttt{docs/buffalo-corrections.md}: corrections found while formalising the Buffalo courses.
+\bibitem{effective} M.~Hua, A non-effective finite equivalence relation on a finite scheme over a field, after a question of Grothendieck, 2026, \url{https://grothendieck.commutator.io/article/grothendieck-effective.pdf}.
+\bibitem{freyd} P.~Freyd, Representations in abelian categories, in \emph{Proc.\ Conf.\ Categorical Algebra (La Jolla, 1965)}, Springer, 1966, 95--120, \href{https://doi.org/10.1007/978-3-642-99902-4_4}{doi:10.1007/978-3-642-99902-4\_4}.
+\bibitem{gu} P.~Gabriel, F.~Ulmer, \emph{Lokal präsentierbare Kategorien}, LNM~221, Springer, 1971, \href{https://doi.org/10.1007/BFb0059396}{doi:10.1007/BFb0059396}.
+\bibitem{giraud} J.~Giraud, \emph{Cohomologie non abélienne}, Grundlehren~179, Springer, 1971, \href{https://doi.org/10.1007/978-3-662-62103-5}{doi:10.1007/978-3-662-62103-5}.
+\bibitem{hakim} M.~Hakim, \emph{Topos annelés et schémas relatifs}, Springer, 1972, \href{https://doi.org/10.1007/978-3-662-59155-0}{doi:10.1007/978-3-662-59155-0}.
+\bibitem{jacqmin} P.-A.~Jacqmin, Z.~Janelidze, On stability of exactness properties under the pro-completion, \href{https://arxiv.org/abs/2002.02204}{arXiv:2002.02204}.
+\bibitem{jj} P.~T.~Johnstone, A.~Joyal, Continuous categories and exponentiable toposes, \emph{J.\ Pure Appl.\ Algebra} 25 (1982), 255--296, \href{https://doi.org/10.1016/0022-4049(82)90083-4}{doi:10.1016/0022-4049(82)90083-4}.
+\bibitem{jm} P.~T.~Johnstone, I.~Moerdijk, Local maps of toposes, \emph{Proc.\ London Math.\ Soc.~(3)} 58 (1989), 281--305, \href{https://doi.org/10.1112/plms/s3-58.2.281}{doi:10.1112/plms/s3-58.2.281}.
+\bibitem{stone} P.~T.~Johnstone, \emph{Stone Spaces}, Cambridge University Press, 1982.
+\bibitem{kelly} G.~M.~Kelly, A unified treatment of transfinite constructions for free algebras, free monoids, colimits, associated sheaves, and so on, \emph{Bull.\ Austral.\ Math.\ Soc.} 22 (1980), 1--83, \href{https://doi.org/10.1017/S0004972700006353}{doi:10.1017/S0004972700006353}.
+\bibitem{lw} R.~B.~B.~Lucyshyn-Wright, Totally distributive toposes, \emph{J.\ Pure Appl.\ Algebra} 216 (2012), 2425--2431, \href{https://doi.org/10.1016/j.jpaa.2012.03.018}{doi:10.1016/j.jpaa.2012.03.018}.
+\bibitem{mp} M.~Makkai, R.~Paré, \emph{Accessible Categories}, Contemp.\ Math.~104, AMS, 1989, \href{https://doi.org/10.1090/conm/104}{doi:10.1090/conm/104}.
+\bibitem{mr} M.~Makkai, G.~E.~Reyes, \emph{First Order Categorical Logic}, LNM~611, Springer, 1977, \href{https://doi.org/10.1007/BFb0066201}{doi:10.1007/BFb0066201}.
+\bibitem{mesablishvili} B.~Mesablishvili, Pure morphisms of commutative rings are effective descent morphisms for modules, \emph{Theory Appl.\ Categ.} 7 (2000), 38--42.
+\bibitem{moerdijk} I.~Moerdijk, \emph{Classifying Spaces and Classifying Topoi}, LNM~1616, Springer, 1995, \href{https://doi.org/10.1007/BFb0094441}{doi:10.1007/BFb0094441}.
+\bibitem{ohm} J.~Ohm, R.~L.~Pendleton, Rings with noetherian spectrum, \emph{Duke Math.\ J.} 35 (1968), 631--639, \href{https://doi.org/10.1215/S0012-7094-68-03565-5}{doi:10.1215/S0012-7094-68-03565-5}.
+\bibitem{pr} R.~Paré, J.~Rosický, Colimits of accessible categories, \emph{Math.\ Proc.\ Cambridge Philos.\ Soc.} 155 (2013), 47--50, \href{https://arxiv.org/abs/1110.0767}{arXiv:1110.0767}.
+\bibitem{perrin} D.~Perrin, Approximation des schémas en groupes, quasi compacts sur un corps, \emph{Bull.\ Soc.\ Math.\ France} 104 (1976), 323--335, \href{https://doi.org/10.24033/bsmf.1830}{doi:10.24033/bsmf.1830}.
+\bibitem{repo} Commutator-IO, grothendieck-project, \url{https://github.com/Commutator-IO/grothendieck-project}: index of results of the three courses (\texttt{docs/buffalo-*/index.tex}) and the Buffalo tab of \url{https://grothendieck.commutator.io}.
+\bibitem{rydh} D.~Rydh, Submersions and effective descent of étale morphisms, \emph{Bull.\ Soc.\ Math.\ France} 138 (2010), 181--230, \href{https://doi.org/10.24033/bsmf.2588}{doi:10.24033/bsmf.2588}.
+\bibitem{stacks} The Stacks Project Authors, \emph{The Stacks Project}, \url{https://stacks.math.columbia.edu}, tags as cited.
+\bibitem{wilson} T.~M.~Wilson, Weak Vopěnka's principle does not imply Vopěnka's principle, \emph{Adv.\ Math.} 363 (2020), 106986, \href{https://doi.org/10.1016/j.aim.2020.106986}{doi:10.1016/j.aim.2020.106986}.
+\end{thebibliography}
+\end{document}

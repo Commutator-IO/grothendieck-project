@@ -119,6 +119,14 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     src: 'docs/bnf-findings/article.tex',
   },
   {
+    id: 'article-buffalo-open',
+    title: "The open problems of Grothendieck's 1973 Buffalo lectures, and what became of them",
+    lang: 'English',
+    what: 'The questions, conjectures and problems he states in the topos, algebraic geometry and group-scheme courses, each with its second in the recordings and its status today: most settled, several against his expectation (presheaf topoi, f^!, descent of non-quasi-compact immersions, colimits of accessible categories), one by Perrin in 1976, one independent of ZFC; algebraic theories over a fixed base still look open.',
+    pdf: '/article/grothendieck-buffalo-open.pdf',
+    src: 'docs/buffalo-open/article.tex',
+  },
+  {
     id: 'article-effective',
     title: 'A non-effective finite equivalence relation on a finite scheme over a field, after a question of Grothendieck',
     lang: 'English',
