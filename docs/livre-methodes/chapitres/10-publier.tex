@@ -59,6 +59,64 @@ On peut donc combiner : le code et les données là où on les retrouve, une pr�
 sur arXiv ou HAL pour la citation. Il reste à vérifier, pour chaque plateforme, sa politique
 sur les textes écrits avec un modèle de langage ; elles diffèrent et changent vite.
 
+\section{Hexagon, à côté d'arXiv}
+
+Un texte écrit en grande partie avec un modèle de langage n'a pas toujours sa place dans une
+revue : celle-ci peut refuser par principe les textes écrits par une intelligence
+artificielle, et c'est arrivé à l'article d'histoire de ce projet. Il n'a pas non plus
+forcément sa place sur arXiv, si l'on hésite à s'en dire l'auteur. Hexagon
+(\url{https://hexagonmath.org}) est fait pour ce cas. François Charles, qui y participe, en
+a raconté l'origine au séminaire MIAM de la SMF le 5 novembre 2026
+(\url{https://www.youtube.com/watch?v=nOhZ5-wH5NY}, vers 17~min~36). En discutant d'un
+problème technique avec un modèle, il l'avait vu donner, sans qu'on le lui demande, la
+solution de problèmes ouverts posés par des collègues. Ce savoir-là, il ne pouvait ni le
+signer ni le publier comme le sien. D'où un site parallèle à arXiv, où l'on dépose comme
+\emph{contributeur} plutôt que comme auteur, avec des étiquettes qui disent honnêtement ce
+qu'on a compris du texte et ce qu'on n'a pas vérifié. Il le présente comme une expérience,
+qui peut nourrir la surproduction, mais qui laisse à arXiv les travaux dont on est
+vraiment l'auteur.
+
+Ce projet y a déposé son article sur les preuves Lean (Hexagon 2611.00125), et ses
+sous-articles sont préparés pour y aller, chacun avec une déclaration qui dit ce que le modèle a écrit, ce qui a été relu et ce qui a été
+vérifié en Lean. L'entrée Palomar de la section suivante est faite pour être
+rattachée à l'article Hexagon. Hexagon ne remplace ni la revue ni la prépublication : il donne une place
+publique et datée à ces textes, en attendant de savoir s'ils en méritent une autre.
+
+\section{Enregistrer une formalisation}
+
+Un dépôt GitHub montre des preuves Lean ; il ne dit pas lesquelles correspondent à
+l'article, ni contre quelle version de mathlib elles compilent. Un registre de
+formalisations comme Palomar (\url{https://palomar-registry.org}) le dit : chaque entrée
+relie un article à un dépôt, à un commit précis et à des énoncés vérifiés par la machine.
+On joint ensuite le lien de l'entrée à l'article.
+
+Le dépôt soumis n'est pas celui du projet. On en fait un dépôt à part, sous une licence que
+le registre accepte (Apache-2.0 ici, les fichiers du projet restant sous CC0), qui ne
+contient que les preuves de l'article et les lemmes généraux dont elles dépendent. Il
+épingle sa version de Lean et de mathlib, et compile dans le système de modules de Lean
+(\texttt{module}, \texttt{public import}, sections exposées). Le passage à ce système a son
+coût : sur 92 fichiers, cinq ont d'abord été mis de côté, faute d'un import direct ou
+parce qu'une preuve écrite dans le type d'une définition publique bloquait l'élaboration ;
+l'option \texttt{backward.proofsInPublic}, posée sur la seule définition en cause, les a
+fait revenir sans toucher à un énoncé.
+
+Trois fichiers décrivent l'entrée. \texttt{formalization.yaml} donne le titre, la
+description, les sources (l'article d'abord), la classification arXiv et MSC2020 et le
+périmètre. \texttt{Challenge.lean} énonce ce que le registre compare, avec les définitions
+dont l'énoncé a besoin ; \texttt{Solution.lean} le démontre. \texttt{comparator.json} nomme
+les théorèmes et les définitions à comparer, et un outil, Comparator, vérifie que l'énoncé
+du défi et celui de la solution sont les mêmes, sans \texttt{sorry} ni axiome ajouté.
+L'intégration continue du dépôt rejoue ces vérifications à chaque envoi : métadonnées et
+licence, compilation, énoncé contre solution, et le README qui renvoie au registre.
+
+On soumet alors le commit, le registre le relit, et l'entrée reçoit un identifiant et un
+numéro de version. Chaque correction donne une nouvelle version de la même entrée, pas une
+nouvelle entrée. La première version de ce projet ne comparait qu'un énoncé, la
+dichotomie des arrangements de pseudo-droites sans bigône ; c'était trop peu pour un
+article qui en démontre près d'une centaine, et la version suivante en compare un par
+dossier. Le lien de soumission et celui du suivi sont personnels : on ne les écrit ni dans
+le dépôt, ni dans une issue, ni dans l'article. Seul le lien public de l'entrée y figure.
+
 \section{Soumettre et réviser}
 
 On pose un tag sur la version soumise (chapitre~\ref{ch:depot}). À la révision, \cmd{git diff} depuis
@@ -68,7 +126,7 @@ révisée passe par la soumission existante.
 
 \begin{outils}
 \texttt{tectonic} et des scripts Node ou Python pour les chiffres et les figures ;
-GitHub Pages ou GitLab Pages pour le site ; arXiv ou HAL pour les prépublications qu'indexe Google
+GitHub Pages ou GitLab Pages pour le site ; Palomar et Comparator pour enregistrer une formalisation ; arXiv ou HAL pour les prépublications qu'indexe Google
 Scholar ; Zenodo ou OSF Preprints pour archiver une version avec un DOI ; la TEI et son
 validateur pour les revues d'humanités numériques.
 \end{outils}
