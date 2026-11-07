@@ -363,7 +363,27 @@ Page~78 gives the table of directions, the count $125 = 1 + 24 + 60 + 40$, and t
 
 \section{The combinatorial icosahedron and the hemi-icosahedron}\label{sec:comb}
 
-Folder~86 takes the icosahedron as a purely combinatorial object. Label its vertices $0, \dots, 11$, with $0$ and $11$ opposite and $1, \dots, 5$ and $6, \dots, 10$ the two pentagons of their neighbours; everything below is computed from the adjacency. For a face $\{x, y, z\}$, let $\mathrm o(x, y, z)$ be the third vertex of the other face bordering $\{x, y\}$, and let $\iota x$ be the antipode, the only vertex that is neither $x$ nor a neighbour of $x$ nor a neighbour of a neighbour. A \emph{flag} is an oriented triangle $(s, t, u)$; there are $120$. Figure~\ref{fig:triedre} shows the labelling. Two edges have the same \emph{direction} if they are equal or antipodal. For an edge $\{s, t\}$ with faces $\{s, t, u\}$, $\{s, t, v\}$, page~18 defines $\rho_0(s, t) = \{\mathrm o(s, u, t), \mathrm o(s, v, t)\}$: the side of the pentagon around $s$ opposite to $t$.
+Folder~86 takes the icosahedron as a purely combinatorial object. Label its vertices $0, \dots, 11$, with $0$ and $11$ opposite and $1, \dots, 5$ and $6, \dots, 10$ the two pentagons of their neighbours; everything below is computed from the adjacency. For a face $\{x, y, z\}$, let $\mathrm o(x, y, z)$ be the third vertex of the other face bordering $\{x, y\}$, and let $\iota x$ be the antipode, the only vertex that is neither $x$ nor a neighbour of $x$ nor a neighbour of a neighbour. A \emph{flag} is an oriented triangle $(s, t, u)$; there are $120$. Figure~\ref{fig:triedre} shows the labelling. Two edges have the same \emph{direction} if they are equal or antipodal. For an edge $\{s, t\}$ with faces $\{s, t, u\}$, $\{s, t, v\}$, page~18 defines $\rho_0(s, t) = \{\mathrm o(s, u, t), \mathrm o(s, v, t)\}$: the side of the pentagon around $s$ opposite to $t$ (Figure~\ref{fig:rho0}).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\small}]
+\coordinate (s) at (0,0);
+\coordinate (t) at (90:1.9); \coordinate (u) at (18:1.9); \coordinate (a) at (-54:1.9);
+\coordinate (b) at (-126:1.9); \coordinate (v) at (162:1.9);
+\fill[black!10] (s)--(t)--(u)--cycle; \fill[black!10] (s)--(t)--(v)--cycle;
+\draw[black!45] (t)--(u)--(a)--(b)--(v)--cycle;
+\foreach \p in {u,a,b,v} \draw[black!45] (s)--(\p);
+\draw[densely dashed] (s)--(a); \draw[densely dashed] (s)--(b);
+\draw[line width=1.6pt] (s)--(t);
+\draw[line width=1.6pt] (a)--(b);
+\foreach \p in {s,t,u,a,b,v} \fill (\p) circle (1.5pt);
+\node[below=3pt] at (s) {$s$}; \node[above] at (t) {$t$}; \node[right] at (u) {$u$};
+\node[left] at (v) {$v$};
+\node[below right] at (a) {$\mathrm o(s, u, t)$}; \node[below left] at (b) {$\mathrm o(s, v, t)$};
+\end{tikzpicture}
+\caption{The construction of page~18 at a vertex $s$, whose five neighbours form a pentagon. The edge $\{s, t\}$ (thick) borders the faces $\{s, t, u\}$ and $\{s, t, v\}$ (grey). Across $\{s, u\}$ the other face is $\{s, u, \mathrm o(s, u, t)\}$, and likewise across $\{s, v\}$; the two vertices so reached span the side of the pentagon opposite to $t$ (thick), which is $\rho_0(s, t)$.}\label{fig:rho0}
+\end{figure}
 
 \begin{theorem}[Grothendieck, \fac{86}, pp.~18--25]\label{thm:triedres}
 \leavevmode
