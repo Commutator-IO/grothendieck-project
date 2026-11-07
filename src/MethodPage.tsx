@@ -126,6 +126,14 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     pdf: '/article/grothendieck-forms.pdf',
     src: 'docs/forms/article.tex',
   },
+  {
+    id: 'article-algebra',
+    title: "Six short algebraic notes, after Grothendieck's working notes",
+    lang: 'English',
+    what: 'Folders 2, 22, 46, 153, 77 and 158, one section each: a Chern ring that is not the graded γ-ring, power series not formally smooth for the discrete topology, lifting non-abelian cocycles modulo 𝔪 (with Sylow and tame-inertia forms), co-operations on relative integer-valued polynomials, the universal discriminant of even rank modulo 4 as a square of a hafnian, and finite categories with simply connected elements.',
+    pdf: '/article/grothendieck-algebra.pdf',
+    src: 'docs/algebra/article.tex',
+  },
 ];
 
 /** The two books, in French: the tools first, then the sources they were used on. */
