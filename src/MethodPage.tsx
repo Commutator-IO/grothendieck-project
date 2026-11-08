@@ -88,8 +88,8 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
   },
 ];
 
-/** Single results of the edition, each written up as a standalone paper. */
-const SOUS_ARTICLES: typeof ARTICLES = [
+/** Standalone papers already deposited as preprints (Hexagon). */
+const PREPRINTS: typeof ARTICLES = [
   {
     id: 'article-bigon',
     title: 'A bigon-free dichotomy for pseudoline arrangements, after a note of Grothendieck',
@@ -111,6 +111,10 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     more: [{ label: 'Hexagon', href: 'https://hexagonmath.org/2611.00189v1' }],
     src: 'docs/tangent/article.tex',
   },
+];
+
+/** Single results of the edition, each written up as a standalone paper. */
+const SOUS_ARTICLES: typeof ARTICLES = [
   {
     id: 'article-buffalo-open',
     title: "The open problems of Grothendieck's 1973 Buffalo lectures, and what became of them",
@@ -278,6 +282,7 @@ export function MethodPage() {
         </header>
 
         <Articles />
+        <Articles id="preprints" title="Preprints" items={PREPRINTS} />
         <Articles id="drafts" title="Drafts" items={SOUS_ARTICLES} />
         <Articles id="books" title="The books" items={LIVRES} />
 
