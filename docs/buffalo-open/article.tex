@@ -36,7 +36,7 @@
 
 \begin{document}
 \begin{abstract}
-In the spring and summer of 1973 Grothendieck gave three courses at the State University of New York at Buffalo, on topos theory, on algebraic geometry and on group schemes, whose recordings are online. In them he asks some twenty questions he cannot answer, states conjectures, and hands problems to the audience. We list them from the recordings, with the second at which each is asked, and say what the literature has made of each. Most are settled. Several went against what he expected: his characterisation of presheaf topoi, whose two conditions instead characterise the essential subtopoi of presheaf topoi, the non-existence of a right adjoint $f^!$, the colimits of accessible categories, the descent of immersions that are not quasi-compact, and his doubt that quasi-coherent sheaves can be pulled back fully faithfully along universal effective epimorphisms. Perrin proved his main conjecture on group schemes in 1976, and the effectivity of finite equivalence relations had been answered by Venken in 1971, two years before he asked it. Some answers are ours; their proofs are given in an appendix. What still looks open concerns large classes of limits in his \q{problem three}, one question that depends on set theory, and descent along non-quasi-compact universal effective epimorphisms in ZFC.
+In the spring and summer of 1973 Grothendieck gave three courses at the State University of New York at Buffalo, on topos theory, on algebraic geometry and on group schemes, whose recordings are online. In them he asks some twenty questions he cannot answer, states conjectures, and hands problems to the audience. We list them from the recordings, with the second at which each is asked, and say what the literature has made of each. Most are settled. Several went against what he expected: his characterisation of presheaf topoi, whose two conditions instead characterise the essential subtopoi of presheaf topoi, the non-existence of a right adjoint $f^!$, the colimits of accessible categories, the descent of immersions that are not quasi-compact, and his doubt that quasi-coherent sheaves can be pulled back fully faithfully along universal effective epimorphisms. Perrin proved his main conjecture on group schemes in 1976, and the effectivity of finite equivalence relations had been answered by Venken in 1971, two years before he asked it. Some answers are ours; their proofs are given in an appendix and in companion articles. What still looks open concerns large classes of limits in his \q{problem three}, one question that depends on set theory, and descent along non-quasi-compact universal effective epimorphisms in ZFC.
 \end{abstract}
 \maketitle
 \enlargethispage{2pt}
@@ -111,7 +111,7 @@ Settled for every small class $D$ by Kelly's transfinite constructions and two-d
 \q{Problem three}: is $I\to R$ basic if and only if every strictly full subcategory of $R$ stable under $D$-limits and containing the image of $I$ is $R$ itself? And, conjecturally, can $I$ be enlarged so that no arrows remain to be adjoined, only axioms?
 \end{problem}
 \begin{status}
-Settled, except for large classes $D$\own. Write (G) for the condition of the problem; it holds exactly when the transfinite closure of $I$ under $D$-limits exhausts $R$, after $\rho$ steps when the shapes of $D$ have fewer than $\rho$ arrows \cite[\S3.5]{kellybook}. Assuming, as he does, that envelopes, localisations and the other constructions exist in $\Cat_D$, Appendix~\ref{app:three} proves that basic implies (G) for every $D$ (Theorem~\ref{t:basicG}), and that $I\to R$ is basic if and only if (G) holds and $R$ is algebraic over some base (Theorem~\ref{t:reduction}). For a small class $D$ every $R$ satisfying (G) is essentially small, hence algebraic, so the equivalence holds with the base fixed. For $D$ all small limits it fails: every set is an equaliser of two maps between powers of $2$, so $\{2\}\to\Set$ satisfies (G) after two steps, but $\Set$ is not algebraic, since $2$ is not presentable in $\Set^{\mathrm{op}}$ (\S\ref{app:three-all}). The second question has a positive answer in the locally presentable case by Gabriel--Ulmer: taking for $I$ the opposite of the $\lambda$-presentable objects, the category of models is the category of $\lambda$-continuous functors on $I$, so that only axioms remain to be imposed \cite{gu}. What remains open is the converse for large classes beyond these cases, such as finite limits with all colimits but no exactness condition, and whether the number of closure steps is bounded by a small ordinal when the shapes of $D$ are unbounded. Two related statements of the course on topoi (\texttt{ORG14LNb5gE}), that every object of a later stage is covered by images of earlier ones and that the finite products of a basic $I$ generate, are false as stated: adjoining an arrow $1\to1\sqcup1$ to $\Set$ gives $\Set\times\Set$, in which $(1,0)$ is not covered by the diagonal (\S\ref{app:three-topoi}).
+Settled, except for mixed large classes $D$\own; the proofs are in the companion article \cite{three}. Write (G) for the condition of the problem; it holds exactly when the transfinite closure of $I$ under $D$-limits and $D$-colimits exhausts $R$, after $\rho$ steps when the shapes of $D$ have fewer than $\rho$ arrows \cite[\S3.5]{kellybook}. Assuming, as he does, that envelopes, localisations and the other constructions exist in $\Cat_D$, basic implies (G) for every $D$, and $I\to R$ is basic if and only if (G) holds and $R$ is algebraic over some base \cite{three}. For a small class $D$ every $R$ satisfying (G) is essentially small, hence algebraic, so the equivalence holds with the base fixed; it also holds for Grothendieck topoi. For $D$ all small limits it fails: every set is an equaliser of two maps between powers of $2$, so $\{2\}\to\Set$ satisfies (G) after two steps, but $\Set$ is not algebraic, since $2$ is not presentable in $\Set^{\mathrm{op}}$. The statements about sets are checked in Lean, with the standard axioms only (\texttt{lean/\allowbreak Buffalo/\allowbreak ProblemThree.lean} in \cite{repo}): every set is in bijection with that equaliser, the saturation of $\{2\}$ under limits has every set at its second stage and no three-element set at its first, and $2$ is not $\kappa$-presentable in $\Set^{\mathrm{op}}$ for any regular $\kappa$; that $\Set$ is not algebraic, which uses Kelly's sketches, is not formalised. In an algebraic category the saturation stops after a small number of steps, so an example of Adámek and Rosický \cite[Example~6.38]{ar}, a colimit closure that needs a proper class of steps, gives a second counterexample, for all small colimits, and shows that the number of steps is not bounded in general \cite{three}. The second question has a positive answer in the locally presentable case by Gabriel--Ulmer: taking for $I$ the opposite of the $\lambda$-presentable objects, the category of models is the category of $\lambda$-continuous functors on $I$, so that only axioms remain to be imposed \cite{gu}. What remains open is the converse for mixed large classes, such as finite limits with all colimits but no exactness condition. Two related statements of the course on topoi (\texttt{ORG14LNb5gE}), that every object of a later stage is covered by images of earlier ones and that the finite products of a basic $I$ generate, are false as stated: adjoining an arrow $1\to1\sqcup1$ to $\Set$ gives $\Set\times\Set$, in which $(1,0)$ is not covered by the diagonal \cite{three}.
 \end{status}
 
 Around these he asks whether faithfulness of $\operatorname{Hom}_D(R,C)\to C^I$ for all $C$ suffices for algebraicity (\ts{PqCQM3Pcl6Q}{9h40m36s}{9:40:36}, \ts{PqCQM3Pcl6Q}{10h0m19s}{10:00:19}). It does not, as he reports himself later, citing an example he attributes to Isbell (the name is uncertain in the recording; \ts{4gynb9uTEE4}{2h3m54s}{2:03:54}). In the session itself he and the room arrive at lattices, and a large ordinal; $\Set$ with $I=\{2\}$ is another counterexample, faithfulness holding because every set is a limit of powers of $2$\own. His hope of a bound on the number of limit operations (\ts{PqCQM3Pcl6Q}{8h8m14s}{8:08:14}) he retracted himself on 10 July.
@@ -198,7 +198,7 @@ Problem & His stance & Status \\
 \end{tabularx}
 \end{table}
 
-The questions that still look open are the converse of problem three for large classes $D$ and the bound on its number of steps (Problem~\ref{p:three}), the status in ZFC alone of Problem~\ref{p:reflective}, and the effectivity of descent of quasi-coherent sheaves along non-quasi-compact universal effective epimorphisms in ZFC (Problem~\ref{p:qcoh}). Six of his expectations turned out wrong (Problems~\ref{p:presheaf}, \ref{p:fshriek}, \ref{p:colim}, \ref{p:dual}, \ref{p:immersion}, and his doubt in Problem~\ref{p:qcoh} about full faithfulness); his programme of classifying topoi, his main conjecture and his doubt about effectivity were borne out.
+The questions that still look open are the converse of problem three for mixed large classes $D$ (Problem~\ref{p:three}), the status in ZFC alone of Problem~\ref{p:reflective}, and the effectivity of descent of quasi-coherent sheaves along non-quasi-compact universal effective epimorphisms in ZFC (Problem~\ref{p:qcoh}). Six of his expectations turned out wrong (Problems~\ref{p:presheaf}, \ref{p:fshriek}, \ref{p:colim}, \ref{p:dual}, \ref{p:immersion}, and his doubt in Problem~\ref{p:qcoh} about full faithfulness); his programme of classifying topoi, his main conjecture and his doubt about effectivity were borne out.
 
 \subsection*{Use of language models}
 The questions were located in the transcripts, and the literature searched, with language models (Claude Opus~5.5, Anthropic), which also wrote a first draft of this text and the arguments marked \own, under the author's direction. The references were opened on their pages; the arguments marked \own\ have not been checked by a specialist.
@@ -397,222 +397,6 @@ The example is locally connected and satisfies (A) and (B), so it has the infini
 \medskip
 What is not addressed here: constructive versions without the axiom of choice; whether (B) with an abstract, non-canonical isomorphism suffices; and the precise meaning of \q{all exactness properties of $\Set$}.
 
-\section{Problem three}\label{app:three}
-
-This appendix proves the claims made under Problem~\ref{p:three}. Statements that are complete only once the standing hypothesis (H) below holds are said to hold under (H).
-
-\subsection{Definitions}
-
-Fix $D=(D',D'')$, two sets of small diagram shapes. The 2-category $\Delta=\Cat_D$ has as objects the locally small categories with limits of type $D'$ and colimits of type $D''$, as 1-cells the $D$-functors, which preserve both, and as 2-cells all natural transformations. Write $\operatorname{Hom}_D(R,C)$ for the category of $D$-functors $R\to C$.
-
-\begin{definition}[Hypothesis (H)]
-His \q{problems one and two solved} (\ts{4gynb9uTEE4}{2h4m30s}{2:04:30}): the following constructions exist in $\Delta$, each defined by its 2-universal property against every $C\in\Delta$.
-\begin{enumerate}
-\item The envelope $j\colon I\to\widetilde I$ of a small category $I$: restriction $\operatorname{Hom}_D(\widetilde I,C)\to\operatorname{Hom}(I,C)$ is an equivalence.
-\item The localisation $R\to R[\Sigma^{-1}]$ at a small set $\Sigma$ of arrows: $\operatorname{Hom}_D(R[\Sigma^{-1}],C)\to\operatorname{Hom}_D(R,C)$ is fully faithful, with essential image the functors that invert $\Sigma$.
-\item Equalising a small set of parallel pairs, defined in the same way.
-\item Adjoining a small set $H$ of arrows $h\colon a_h\to b_h$ between objects of $R$ (his rule~3, \ts{PqCQM3Pcl6Q}{8h20m37s}{8:20:37}): $R\to R\langle H\rangle$ with $\operatorname{Hom}_D(R\langle H\rangle,C)\simeq\{(\psi,\beta):\psi\in\operatorname{Hom}_D(R,C),\ \beta_h\colon\psi a_h\to\psi b_h\}$, whose morphisms are the transformations $\psi\to\psi'$ compatible with the $\beta$'s.
-\item 2-colimits of small chains, and 2-pushouts (used only in \S\ref{app:three-reduction}).
-\end{enumerate}
-\end{definition}
-
-\begin{definition}[Basic, algebraic]
-Let $I$ be a small discrete category and $i\colon I\to R$ a functor, with $R\in\Delta$. Then $i$ is \emph{basic} if there is a sequence $(R_\alpha)_{\alpha\le\gamma}$, indexed by a small ordinal $\gamma$, such that $R_0=\widetilde I$; each $R_\alpha\to R_{\alpha+1}$ is one of the steps (2), (3) or (4), with small data; at a limit ordinal $\lambda$, $R_\lambda$ is the 2-colimit in $\Delta$ of the $R_\beta$, $\beta<\lambda$; and there is an equivalence $R_\gamma\simeq R$ in $\Delta$ whose composite with $I\to\widetilde I\to R_\gamma$ is isomorphic to $i$. The category $R$ is \emph{algebraic} if some small discrete $I'\to R$ is basic.
-\end{definition}
-
-This is the meaning of \q{basic} on his board at \ts{4gynb9uTEE4}{2h0m40s}{2:00:40}.
-
-\begin{definition}[Condition (G) and saturation]
-Condition (G) for $i$: every strictly full subcategory $R'\subseteq R$ that contains $i(I)$ and is closed under the $D'$-limits and the $D''$-colimits of $R$ is all of $R$. The \emph{saturation} of $i$: $I_0$ is the repletion of $i(I)$; $I_{\alpha+1}$ is the repletion of $I_\alpha$ together with the limits of the $D'$-diagrams in $I_\alpha$ and the colimits of the $D''$-diagrams in $I_\alpha$; at limit ordinals, take unions.
-\end{definition}
-
-\subsection{Saturation and the number of steps}
-
-\begin{proposition}\label{b:sat}
-Condition (G) holds if and only if $\bigcup_{\alpha\in\mathrm{Ord}}I_\alpha=R$. If every shape in $D$ has fewer than $\rho$ arrows, for a regular cardinal $\rho$, then (G) holds if and only if $I_\rho=R$.
-\end{proposition}
-
-This is the bound of \cite[\S3.5, p.~45]{kellybook}.
-
-\begin{proof}
-The union $\bigcup_\alpha I_\alpha$ is replete and contains $i(I)$. It is closed under $D$-limits and $D$-colimits, because a diagram has a set of vertices and so lands in some $I_\alpha$; and it is contained in every $R'$ as in (G). For $\rho$: a diagram with fewer than $\rho$ vertices in $I_\rho$ lands in some $I_\alpha$ with $\alpha<\rho$, by regularity.
-\end{proof}
-
-For finitary $D$ at most $\omega$ steps are needed. For $R=\Set$, $I=\{2\}$ and $D$ all small limits, exactly two steps are needed: $I_2=\Set$ by Proposition~\ref{b:eq} below, but $I_1\neq\Set$, because no limit of a diagram of copies of $2$ has three elements. Indeed every map $2\to2$ commutes with the ternary operation $x+y+z$ of $\mathbf Z/2$, so a limit of copies of $2$, a set of compatible families, is closed under it; a three-element set $\{a,b,c\}$ closed under it has $a+b+c\in\{a,b,c\}$, say $a+b+c=a$, and then $b=c$. (This is \texttt{Buffalo.Topos.Part05.no\_limit\_of\_bools} in the edition's Lean files \cite{repo}.) Similarly, at the end of \cite[\S5.7, p.~100]{kellybook}, $\Cat_0$ is the colimit-closure of $\{2\}$, but the idempotent category is not a colimit of a diagram of copies of $2$, so one step does not suffice there either. For $D$ with shapes of unbounded size we know no bound by a small ordinal; he expected one, without proof (\ts{PqCQM3Pcl6Q}{8h8m14s}{8:08:14}).
-
-\begin{remark}\label{b:faith}
-Condition (G) implies that $\operatorname{Hom}_D(R,C)\to C^I$ is faithful: the objects $X$ on which two transformations agree form a replete class closed under $D$-limits and $D$-colimits, since arrows into a preserved limit, or out of a preserved colimit, are determined by their components. So (G) lies strictly between \q{basic} (Theorem~\ref{t:basicG}) and faithfulness, which is too weak, as recalled after Problem~\ref{p:three}.
-\end{remark}
-
-\subsection{Basic implies (G), for every $D$}
-
-\begin{lemma}\label{b:ff}
-The functor $i\colon I\to R$ satisfies (G) if and only if, for every fully faithful $D$-functor $u\colon B'\to R$ with $B'\in\Delta$ and every $i'\colon I\to B'$ with $ui'\cong i$, the functor $u$ is an equivalence.
-\end{lemma}
-
-\begin{proof}
-If the condition holds, take $B'=R'$ and $u$ the inclusion. $R'$ has $D$-limits and $D$-colimits computed in $R$, so $R'\in\Delta$ and $u$ is a $D$-functor; an equivalence onto a replete full subcategory forces $R'=R$. Conversely, the essential image of $u$ is replete and contains $i(I)$. It is closed under $D$-limits: a $D'$-diagram on objects $u(b_k)$ lifts to $B'$ because $u$ is fully faithful, and $u$ preserves its limit; colimits are dual. So by (G) the essential image is all of $R$.
-\end{proof}
-
-\begin{theorem}\label{t:basicG}
-Assume (H). If $i$ is basic, (G) holds. This holds for every $D$, small or not, and even for a small $I$ that is not discrete.
-\end{theorem}
-
-\begin{proof}
-We show by transfinite induction that (G) holds for $I\to R_\alpha$. At each stage let $u\colon B'\to R_\alpha$ be as in Lemma~\ref{b:ff}, without loss of generality the inclusion of a replete full subcategory.
-
-\emph{$\alpha=0$.} There is $i'\colon I\to B'$ with $ui'\cong j$. Extend $i'$ to a $D$-functor $r\colon\widetilde I\to B'$ with $rj\cong i'$. Then $urj\cong j=\mathrm{id}\circ j$, and full faithfulness of restriction to $I$ gives $ur\cong\mathrm{id}$. So $u$ is essentially surjective.
-
-\emph{Successor.} Let $F\colon R_\alpha\to R_{\alpha+1}$ be the step. Then $F^{-1}(B')$ is replete, contains $I$, and is closed under $D$-limits and $D$-colimits, because $F$ preserves them. By induction $F^{-1}(B')=R_\alpha$, so $F=uF'$ with $F'$ a $D$-functor.
-\begin{itemize}
-\item Localisation: $F'$ inverts $\Sigma$, because $u$ is fully faithful and so reflects isomorphisms. So $F'\cong rF$ for some $r\colon R_{\alpha+1}\to B'$. Then $urF\cong F$, hence $ur\cong\mathrm{id}$.
-\item Equalising: the same, since $u$ is faithful.
-\item Adjoining arrows: the universal arrows $\gamma_h\colon Fa_h\to Fb_h$ are $u(\beta'_h)$ for unique $\beta'_h$, because $u$ is full. So $(F',\beta')$ gives $r$ with $(urF,ur\gamma)\cong(F,\gamma)$, and therefore $ur\cong\mathrm{id}$, by the equivalence $\operatorname{Hom}_D(R_{\alpha+1},C)\simeq\{(\psi,\beta)\}$ with $C=R_{\alpha+1}$.
-\end{itemize}
-
-\emph{Limit ordinal.} Each $F_\beta\colon R_\beta\to R_\lambda$ factors as $uF'_\beta$ by induction. The coherence isomorphisms lift uniquely through the fully faithful $u$, so the $F'_\beta$ form a pseudo-cocone and induce $r\colon R_\lambda\to B'$. As before, $ur\cong\mathrm{id}$.
-
-\emph{End.} Condition (G) is invariant under an equivalence compatible with $I$.
-
-In every case the universal property is applied with target $B'$, which lies in $\Delta$.
-\end{proof}
-
-\subsection{Reduction of the converse to algebraicity}\label{app:three-reduction}
-
-\begin{lemma}\label{b:closure}
-Assume (H). Let $x$ lie in the closure of $i(I)$ in $R$ under $D$-limits and $D$-colimits. Then there are a basic $I\to S$, a $D$-functor $\Phi\colon S\to R$ with $\Phi|_I\cong i$, and an object $s\in S$ with $\Phi s\cong x$.
-\end{lemma}
-
-\begin{proof}
-By induction on the saturation stage of $x$. Let $x\cong\lim d$ with $d\colon J\to I_\beta$ a $D'$-diagram; the colimit case is dual.
-\begin{enumerate}
-\item For each vertex $d_k$, choose a triple $(S_k,\Phi_k,s_k)$ by induction.
-\item Form the amalgamated 2-sum of the $S_k$ over $\widetilde I$ (\ts{PqCQM3Pcl6Q}{9h21m6s}{9:21:06}). It is basic over $I$: the steps of each $S_k$, pushed out along $\widetilde I\to$ the sum, are again steps of the same kind.
-\item Adjoin the arrows of $d$, transported along $\Phi_ks_k\cong d_k$. They form a small set, because $J$ is small.
-\item Equalise the composition and identity relations. They hold in $R$, so $\Phi$ extends to each new stage.
-\item There is now a diagram $\tilde d$ in the last stage $S$ with $\Phi\tilde d\cong d$. Put $s=\lim\tilde d$; then $\Phi s\cong x$, since $\Phi$ preserves the limit.\qedhere
-\end{enumerate}
-\end{proof}
-
-\begin{theorem}\label{t:reduction}
-Assume (H). For $i\colon I\to R$, the functor $i$ is basic if and only if (G) holds and $R$ is algebraic.
-\end{theorem}
-
-\begin{proof}
-One direction is Theorem~\ref{t:basicG}. Conversely, let $I'\to R$ be basic, through a sequence $(R_\alpha)$ from $\widetilde{I'}$. By (G) and Proposition~\ref{b:sat}, every $x\in I'$ lies in the closure of $I$. Lemma~\ref{b:closure}, applied once to the small family $(x)_{x\in I'}$ and amalgamating over $\widetilde I$ as in its step~(2), gives $(S,\Phi)$ basic over $I$ and objects $s_x\in S$ with isomorphisms $c_x\colon x\cong\Phi s_x$. Then build:
-\begin{enumerate}
-\item $P=R\sqcup_{\widetilde{I'}}S$, the pseudo-pushout along $x\mapsto s_x$. It is basic over $I$: set $P_\alpha=R_\alpha\sqcup_{\widetilde{I'}}S$; then $P_0\simeq S$, the pushout of a localisation, of an equalisation or of an adjunction of arrows is a step of the same kind, as one checks on the descriptions of $\operatorname{Hom}_D(-,C)$, and pushouts commute with colimits of chains.
-\item Make the two composites $S\rightrightarrows P$, the $S$-leg $\iota_S$ and $\iota_R\Phi$, isomorphic. Let $T_\beta\colon S_\beta\to S$, $\beta\le\delta$, come from the basic sequence of $S$ over $I$. Let $M_\beta(C)$ be the category of pairs $(\chi,\varepsilon)$, with $\chi\in\operatorname{Hom}_D(P,C)$ and $\varepsilon\colon\chi\iota_ST_\beta\cong\chi\iota_R\Phi T_\beta$, whose morphisms are the transformations $\chi\to\chi'$ compatible with the $\varepsilon$'s. We build from $P$, by small steps, $Q_\beta\colon P\to P'_\beta$ and a universal $\varepsilon_\beta$, that is, such that $\sigma\mapsto(\sigma Q_\beta,\sigma\varepsilon_\beta)$ is an equivalence $\operatorname{Hom}_D(P'_\beta,C)\simeq M_\beta(C)$ for every $C$, compatibly with restriction $M_{\beta'}(C)\to M_\beta(C)$ for $\beta\le\beta'$.
-\begin{itemize}
-\item $\beta=0$, $S_0=\widetilde I$: adjoin arrows $e_k\colon\iota_S(k)\to\iota_R\Phi(k)$, $k\in I$, and their inverses, and equalise the inverse relations ($|I|$ data). This represents isomorphisms between the restrictions to $I$, which are the isomorphisms on $\widetilde I$, restriction $\operatorname{Hom}_D(\widetilde I,C)\to C^I$ being an equivalence.
-\item Localisation or equalisation: restriction $\operatorname{Hom}_D(S_{\beta+1},C)\to\operatorname{Hom}_D(S_\beta,C)$ is fully faithful, so $M_{\beta+1}(C)\to M_\beta(C)$ is an isomorphism, and $P'_{\beta+1}=P'_\beta$.
-\item Adjoining a set $H$ of arrows: by (H)(4), an isomorphism of $D$-functors on $S_{\beta+1}$ is an isomorphism of their restrictions to $S_\beta$ compatible with the arrows $h\in H$. So $P'_{\beta+1}$ is $P'_\beta$ with the two sides of the naturality square of $\varepsilon_\beta$ at each $h$ equalised ($|H|$ data).
-\item Limit $\lambda$: let $P'_\lambda$ be the 2-colimit of the $P'_\beta$. As $S_\lambda$ is the 2-colimit of the $S_\beta$, an isomorphism of $D$-functors on $S_\lambda$ is a compatible family of isomorphisms of their restrictions to the $S_\beta$, so $M_\lambda(C)$ is equivalent to the pseudo-limit of the $M_\beta(C)$, $\beta<\lambda$. So is $\operatorname{Hom}_D(P'_\lambda,C)$, of the equivalent chain $\operatorname{Hom}_D(P'_\beta,C)$; pseudo-limits of equivalent chains are equivalent, and $\varepsilon_\lambda$ is the image of $\mathrm{id}_{P'_\lambda}$.
-\end{itemize}
-Put $P'=P'_\delta$ and $e=\varepsilon_\delta$, an isomorphism $Q_\delta\iota_S\cong Q_\delta\iota_R\Phi$, since $T_\delta$ is an equivalence.
-\item For each $x\in I'$, equalise $e_{s_x}\circ\theta_x$ with the image of $c_x$, where $\theta$ is the isomorphism of the pushout ($|I'|$ data). Call the result $P^*$.
-\end{enumerate}
-A $D$-functor $P^*\to C$ is a tuple $(\psi\colon R\to C,\ \varphi\colon S\to C,\ \theta,\ e)$ satisfying these equations. Such a tuple is determined by $\psi$ up to unique isomorphism: one gets $\varphi\cong\psi\Phi$ through $e$, and $\theta$ is then forced. So restriction along the $R$-leg, $\operatorname{Hom}_D(P^*,C)\to\operatorname{Hom}_D(R,C)$, is an equivalence for every $C$. By the 2-Yoneda lemma, taking $C=R$ and $C=P^*$, the $R$-leg $R\to P^*$ is an equivalence, compatible with $I$ through the $e_i$. Every step used small data and the sequence has small length, so $i$ is basic.
-\end{proof}
-
-\begin{corollary}\label{b:cor}
-For a given $\Delta$ satisfying (H), Problem three has a positive answer if and only if every $R\in\Delta$ satisfying (G) for some small $I$ is algebraic.
-\end{corollary}
-
-\subsection{All small limits: the converse fails}\label{app:three-all}
-
-\begin{proposition}\label{b:eq}
-Every set $X$ is an equaliser of two maps between powers of $2$:
-\[X\cong\mathrm{Eq}\bigl(f,g\colon2^{P(X)}\rightrightarrows2^{P(P(X))\sqcup P(X)}\bigr),\]
-\[f(u)=\bigl(S\mapsto u(\textstyle\bigcap S),\ A\mapsto u(A^c)\bigr),\qquad g(u)=\bigl(S\mapsto\textstyle\bigwedge_{A\in S}u(A),\ A\mapsto\neg u(A)\bigr).\]
-\end{proposition}
-
-\begin{proof}
-The equaliser consists of the maps $u\colon P(X)\to2$ preserving arbitrary intersections and complements, the complete Boolean homomorphisms. For $x\in X$, evaluation $u_x(A)=[x\in A]$ is one, and distinct points give distinct $u_x$. Conversely, let $u$ be one, and $F=\{A:u(A)=1\}$. Then $X=\bigcap\varnothing\in F$, so $\varnothing=X^c\notin F$; and $F$ is closed under arbitrary intersections, so $\bigcap F\in F$ is nonempty. Pick $x\in\bigcap F$. If $A\in F$ then $x\in A$; if $x\in A$ then $x\notin A^c$, so $A^c\notin F$ and $A\in F$. Hence $u=u_x$, and $x$ is unique since $\{x\}\in F$.
-\end{proof}
-
-Hence, in $\Delta$ the complete categories, $\{2\}\to\Set$ satisfies (G), in two steps. Dually, in $\Delta$ the cocomplete categories, $\{2\}\to\Set^{\mathrm{op}}$ satisfies (G).
-
-\begin{proposition}\label{b:pres}
-In $\Set^{\mathrm{op}}$ the object $2$ is not $\lambda$-presentable for any regular cardinal $\lambda$.
-\end{proposition}
-
-\begin{proof}
-$\Set^{\mathrm{op}}(2,-)$ preserves $\lambda$-filtered colimits exactly when $P=\Set(-,2)$ sends $\lambda$-cofiltered limits of $\Set$ to colimits. Take the chain $A_\alpha=[\alpha,\lambda)$, $\alpha<\lambda$, with limit $\bigcap_\alpha A_\alpha=\varnothing$. Then $P(\varnothing)=1$, while $\varinjlim_\alpha P(A_\alpha)$ has at least two elements: the germs of $\varnothing$ and of $A_\alpha$ differ, since every $A_\beta$ is nonempty.
-\end{proof}
-
-\begin{proposition}\label{b:notalg}
-Let $\Delta$ be the cocomplete categories with cocontinuous functors. If $S$ is algebraic, every object of $S$ is $\mu$-presentable for some $\mu$. Hence $\Set^{\mathrm{op}}$ is not algebraic, and $\{2\}\to\Set^{\mathrm{op}}$ satisfies (G) without being basic. Dually, $\{2\}\to\Set$ is a counterexample for $D$ all small limits.
-\end{proposition}
-
-This is the counterexample he pointed to (\ts{4gynb9uTEE4}{3h43m0s}{3:43:00}, \ts{4gynb9uTEE4}{3h44m8s}{3:44:08}).
-
-\begin{proof}
-By induction along a basic sequence, $S\simeq\Phi\text{-}\mathrm{Alg}$ for a small sketch $(A,\Phi)$, with $\mathrm{Cocts}[\Phi\text{-}\mathrm{Alg},B]\simeq\Phi\text{-}\mathrm{Com}[A,B]$ for every cocomplete $B$, pseudo-naturally in $B$; at each step the sketch receives a functor from the previous one, along which restriction of comodels corresponds to restriction along the step. This is \cite[Thm~6.11]{kellybook}, by which $\Phi\text{-}\mathrm{Alg}$ is the reflective orthogonality class of a regulus in $[A^{\mathrm{op}},\Set]$ \cite[Thm~6.5]{kellybook}, together with \cite[Thm~5.56]{kellybook}: with $B$ cocomplete and $A$ small, left adjoints may be replaced by cocontinuous functors. The steps:
-\begin{itemize}
-\item envelope: $(I,\varnothing)$, which gives $\Set^I$;
-\item enlarging the sketch: given a small set of objects, pass to the closure $D_0$ of $K(A)$ under $\lambda$-small colimits for $\lambda$ large; it is small \cite[\S3.5]{kellybook}, and $\Phi\text{-}\mathrm{Alg}\simeq(D_0,\lambda\text{-colimits})\text{-}\mathrm{Alg}$ with the same comodels in every cocomplete $B$ \cite[Prop.~6.21, Cor.~6.22, Thm~6.23]{kellybook};
-\item inverting $\sigma\colon X\to Y$: enlarge so that $\sigma$ lies in $D_0$, then add the cylinder \q{$Y$, with leg $\sigma$, is the colimit of the one-object diagram $X$};
-\item equalising: invert $Y\to\mathrm{coeq}$;
-\item adjoining arrows: adjoin the arrow freely to $D_0$, keeping the same cylinders;
-\item chains: at a limit $\lambda$, let $A_\lambda$ be the pseudo-colimit in $\Cat$ of the sketches $A_\beta$, $\beta<\lambda$, small since $\lambda$ and the $A_\beta$ are, and $\Phi_\lambda$ the images of the cylinders of all the $\Phi_\beta$. A functor $A_\lambda\to B$ is a compatible family of functors $A_\beta\to B$, and it is a comodel if and only if each of them is, so $\Phi_\lambda\text{-}\mathrm{Com}[A_\lambda,B]$ is the pseudo-limit of the $\Phi_\beta\text{-}\mathrm{Com}[A_\beta,B]$. By induction this chain is equivalent, pseudo-naturally in $B$, to the chain $\operatorname{Hom}_D(S_\beta,B)$, whose pseudo-limit is $\operatorname{Hom}_D(S_\lambda,B)$; and $\Phi_\lambda\text{-}\mathrm{Com}[A_\lambda,B]\simeq\mathrm{Cocts}[\Phi_\lambda\text{-}\mathrm{Alg},B]$ by the theorems just cited. By the 2-Yoneda lemma, $B$ ranging over $\Delta$, $S_\lambda\simeq\Phi_\lambda\text{-}\mathrm{Alg}$, compatibly with the $S_\beta$.
-\end{itemize}
-In $\Phi\text{-}\mathrm{Alg}$ the cylinders are cones over diagrams of presheaves of size $<\lambda$, so the orthogonality class is closed in $[A^{\mathrm{op}},\Set]$ under $\lambda$-filtered colimits. Every presheaf on a small $A$ is a small colimit of finitely presentable representables, hence $\mu$-presentable for some $\mu\ge\lambda$; so every object of $\Phi\text{-}\mathrm{Alg}$ is $\mu$-presentable there. Proposition~\ref{b:pres} concludes.
-\end{proof}
-
-The fact behind this is that the algebraic categories are, up to duality, the locally presentable ones \cite{gu}, \cite[ch.~1]{ar}; the argument above uses only the results of \cite{kellybook} cited.
-
-\begin{remark}
-Propositions~\ref{b:eq} and~\ref{b:pres} are checked in Lean, with the standard axioms only: \texttt{lean/\allowbreak Buffalo/\allowbreak ProblemThree.lean} in \cite{repo}, with $\Set$ the types of a fixed universe. The file proves the bijection of every set with the equaliser of Proposition~\ref{b:eq}; that the saturation of $\{2\}$ under limits of small diagrams has every set at its second stage and no three-element set at its first, so that (G) holds in exactly two steps; and that $2$ is not $\kappa$-presentable in $\Set^{\mathrm{op}}$ for any regular $\kappa$, with Mathlib's notion of presentability and the chain of tails of $\kappa$. Proposition~\ref{b:notalg} is not formalised: neither the notions \q{basic} and \q{algebraic} nor hypothesis (H) are modelled, nor Kelly's sketches, so the conclusions that $\Set^{\mathrm{op}}$ is not algebraic and that $\{2\}\to\Set$ is not basic rest on the argument above.
-\end{remark}
-
-\subsection{Small $D$: the equivalence holds with the base fixed}
-
-\begin{theorem}\label{b:small}
-Let $D$ be a small set of shapes, each with fewer than $\rho$ arrows, $\rho$ regular. Assume (H), with the constructions applied to small categories and small data giving small categories, as he assumes (\ts{4gynb9uTEE4}{2h8m14s}{2:08:14}). Then for every small discrete $I$ and every $i\colon I\to R$, the functor $i$ is basic if and only if (G) holds. The base is fixed: $I$ is not enlarged to $\mathrm{Ob}\,R$.
-\end{theorem}
-
-\begin{proof}[First proof, by Theorem~\ref{t:reduction}]
-By Proposition~\ref{b:sat}, $R=I_\rho$. Each $I_\alpha$ has a small set of isomorphism classes, since there is only a small set of diagrams of each of the small set of shapes \cite[\S3.5]{kellybook}; so $R$ is essentially small. Its skeleton $R_s$ is algebraic over $\mathrm{Ob}\,R_s$, as he shows (\ts{PqCQM3Pcl6Q}{9h26m59s}{9:26:59}): from $\widetilde{\mathrm{Ob}\,R_s}$, adjoin the arrows of $R_s$, equalise the composition relations, and invert the comparison maps for the small set of $D$-diagrams; by the 2-Yoneda lemma the result is equivalent to $R$. Theorem~\ref{t:reduction} concludes.
-\end{proof}
-
-\begin{proof}[Second proof, direct]
-Build a chain $S_\beta$, $\beta\le\rho$, with $D$-functors $\Phi_\beta\colon S_\beta\to R$ extending $i$. Each successor step (a) adjoins a formal arrow $a\to b$ for every arrow $\Phi a\to\Phi b$ of $R$, and (b) equalises every pair that $\Phi$ identifies; both are small, because $S_\beta$ is small. Since $\rho$ is regular and the shapes are $\rho$-small, the 2-colimit $S_\rho$ can be computed in $\Cat$: diagrams and parallel pairs come from earlier stages, and a functor out of $S_\rho$ is a $D$-functor exactly when all its restrictions are. So $\Phi_\rho$ is fully faithful. Its essential image is closed under $D$-limits and $D$-colimits, since diagrams lift along a fully faithful functor; by (G) it is everything. A fully faithful, essentially surjective $D$-functor is an equivalence in $\Delta$.
-\end{proof}
-
-Where (H) is available for small $D$: when $D'=\varnothing$, or dually $D''=\varnothing$, \cite[Thm~5.35]{kellybook} (the free $\mathcal F$-cocompletion is small) and \cite[Thms~6.21--6.23]{kellybook} provide envelopes and localisations as small categories. For mixed small $D$, with $D'$ and $D''$ both nonempty, we have not found a reference; he asserts it without proof (\ts{PqCQM3Pcl6Q}{5h43m33s}{5:43:33}). The cases of finite limits with $I$ infinite but small, and of $\kappa$-small limits, fall under Theorem~\ref{b:small}: there is no counterexample with small $D$.
-
-\subsection{The topos case}\label{app:three-topoi}
-
-For topoi ($D'$ the finite limits, $D''$ all small colimits, together with Giraud's exactness conditions and the existence of a generating set), the course on topoi states that every object of $R_{\alpha+1}$ is covered by images of objects of $R_\alpha$ (\ts{ORG14LNb5gE}{1h51m23s}{1:51:23}), and, as a necessary condition, that if $I\to R$ is basic the finite products of the objects of $I$ generate $R$ (\ts{ORG14LNb5gE}{1h59m7s}{1:59:07}). Both are false as stated.
-\begin{itemize}
-\item Take $R_\alpha=\Set$ and adjoin one arrow $1\to1\sqcup1$. This gives the classifying topos of decompositions of $1$ into two summands, $R_{\alpha+1}=\Set\times\Set$, and the image of $\Set$ is the diagonal $\{(n,n)\}$. The object $(1,0)$ receives a map from $(n,n)$ only when $n=0$, so it is not covered.
-\item Take $I=\{x\}$. Start from the object classifier, invert $x\to1$, which gives $\Set$, then adjoin $1\to1\sqcup1$. This makes $\{(1,1)\}\to\Set\times\Set$ basic, but the finite products of $(1,1)$ are just $(1,1)$, which does not generate.
-\item Condition (G) does hold here, as Theorem~\ref{t:basicG} requires: pulling back $(\mathrm{inl},\mathrm{inr})\colon(1,1)\to(2,2)$ along $\mathrm{inl}$ gives $(1,0)$.
-\item An example of the same kind in $\mathbf Z/2$-sets: $Y=\mathbf Z/2\sqcup1$. There is no map $Y^n\to\mathbf Z/2$, yet $\mathbf Z/2=Y\times_{Y/\tau}1$, and the theory of torsors makes $\{Y\}$ basic.
-\end{itemize}
-The sufficient condition (\ts{ORG14LNb5gE}{2h0m13s}{2:00:13}) is not affected. The repaired statement is \q{basic if and only if (G)}. Every topos is algebraic (\ts{ORG14LNb5gE}{1h6m58s}{1:06:58}), so Theorem~\ref{t:reduction} gives (G)$\Rightarrow$basic, its proof using only constructions available for topoi: classifying topoi, 2-pushouts (\ts{ORG14LNb5gE}{1h23m42s}{1:23:42}) and subtopoi. For basic$\Rightarrow$(G), the proof of Theorem~\ref{t:basicG} needs the subcategory $B'$ to lie in $\Delta$. By Lemma~\ref{b:topos} one may take for $B'$ the closure of the image of $I$ under finite limits and small colimits, which lies in $\Delta$ and is contained in every $R'$ as in (G); the proof then shows that it is all of $R_\alpha$ at every stage, so (G) holds.
-
-\begin{lemma}\label{b:topos}
-Let $R$ be a Grothendieck topos and $K$ a small set of objects of $R$. The smallest replete full subcategory $B\subseteq R$ containing $K$ and closed under finite limits and small colimits is a Grothendieck topos, and its inclusion preserves finite limits and small colimits.
-\end{lemma}
-
-\begin{proof}
-Write $R=\mathrm{Sh}(C,J)$ with $C$ small, let $\mu\ge\aleph_0$ bound the number of arrows of $C$, and call a sheaf $X$ \emph{small} if $\sum_c|X(c)|<\kappa$, where $\kappa=(2^\theta)^+$ and $\theta\ge\mu$ is so large that the objects of $K$ are small. Then $\nu^\mu<\kappa$ for every $\nu<\kappa$, and:
-\begin{enumerate}
-\item[(a)] finite limits of small sheaves are small, being computed pointwise;
-\item[(b)] if $F$ is a presheaf with fewer than $\kappa$ elements, its sheafification $F^{++}$ is small: $F^+(c)$ is a colimit over at most $2^\mu$ sieves of sets $\mathrm{Match}(S,F)$ of cardinality at most $\nu^\mu$. Hence coproducts in $R$ of fewer than $\kappa$ small sheaves, and images of small sheaves, are small;
-\item[(c)] every element $x\in X(c)$ of a sheaf lies in a small subsheaf, the image of $a(yc)\to X$, by (b);
-\item[(d)] if the maps $s_l\to X$, $l\in L$, are jointly epimorphic and $W\subseteq X$ is small, then the images of the $s_l$ for fewer than $\kappa$ indices $l$ already contain $W$: for each element $w$ of $W$, choose a covering sieve on each member of which $w$ lifts to some $s_l$, and one such $l$ for each member.
-\end{enumerate}
-Let $S$ be the class of small objects of $B$, essentially a set, and $B_S$ the class of $X\in R$ on which the maps from objects of $S$ are jointly epimorphic. We show that $B\cap B_S$ contains $K$ and is closed under small colimits and finite limits; then $B\subseteq B_S$. It contains $K\subseteq S$, and the terminal object, which lies in $B$ and is small. A colimit in $R$ of objects of $B\cap B_S$ lies in $B$, and the maps from $S$ to it are jointly epimorphic, since the legs of a colimit are. Let $X\to Z\leftarrow Y$ be maps of $B\cap B_S$, and $W$ a small subsheaf of $X\times_ZY$; by (c) these cover it. Its images $W_X\subseteq X$ and $W_Y\subseteq Y$ are small by (b). By (d) and (b), there are $s_X\to X$ and $s_Y\to Y$ with $s_X,s_Y\in S$, coproducts of fewer than $\kappa$ objects of $S$, whose images contain $W_X$ and $W_Y$. Then $s_X\times_Zs_Y$ lies in $B$ and is small by (a), so it lies in $S$, and its image in $X\times_ZY$ is $\operatorname{im}(s_X)\times_Z\operatorname{im}(s_Y)\supseteq W$, epimorphisms being stable under pullback. So $X\times_ZY\in B_S$.
-
-Hence $S$ is a small generating set of $B$. Finite limits and small colimits of $B$ are computed in $R$, so coproducts in $B$ are disjoint and universal, equivalence relations are effective and quotients universal. By Giraud's theorem $B$ is a Grothendieck topos.
-\end{proof}
-
-\subsection{What remains open}
-Large classes $D$ beyond these cases: for instance $\Cat_D$ with $D'$ the finite limits and $D''$ all colimits, without exactness conditions, where $\{2\}\to\Set^{\mathrm{op}}$ satisfies (G) and we do not know whether $\Set^{\mathrm{op}}$ is algebraic; mixed large classes, for which problem one itself may fail; and whether the number of saturation steps is bounded by a small ordinal for unbounded $D$. By Corollary~\ref{b:cor}, the question for each $\Delta$ is exactly whether (G) for some small $I$ implies that $R$ is algebraic.
-
 \begin{thebibliography}{99}
 \bibitem{adelman} M.~Adelman, Abelian categories over additive ones, \emph{J.\ Pure Appl.\ Algebra} 3 (1973), 103--117, \href{https://doi.org/10.1016/0022-4049(73)90026-1}{doi:10.1016/0022-4049(73)90026-1}.
 \bibitem{ar} J.~Adámek, J.~Rosický, \emph{Locally Presentable and Accessible Categories}, LMS Lecture Note Ser.~189, Cambridge University Press, 1994, \href{https://doi.org/10.1017/CBO9780511600579}{doi:10.1017/CBO9780511600579}.
@@ -621,6 +405,7 @@ Large classes $D$ beyond these cases: for instance $\Cat_D$ with $D'$ the finite
 \bibitem{caramello} O.~Caramello, Lattices of theories, \href{https://arxiv.org/abs/0905.0299}{arXiv:0905.0299}; \emph{Theories, Sites, Toposes}, Oxford University Press, 2018.
 \bibitem{ccm} A.~Carboni, R.~Celia Magno, The free exact category on a left exact one, \emph{J.\ Austral.\ Math.\ Soc.\ Ser.~A} 33 (1982), 295--301, \href{https://doi.org/10.1017/S1446788700018735}{doi:10.1017/S1446788700018735}.
 \bibitem{venken} J.~Venken, Non effectivité de la descente de modules plats par un morphisme fini d'anneaux locaux artiniens, \emph{C.\ R.\ Acad.\ Sci.\ Paris Sér.~A} 272 (1971), A1553--A1554.
+\bibitem{three} M.~Hua, Grothendieck's \q{problem three}: generation under limits and algebraic theories relative to a class of limits, 2026, \url{https://grothendieck.commutator.io/article/grothendieck-problem-three.pdf}.
 \bibitem{effective} M.~Hua, Non-effective finite equivalence relations on finite schemes over a field: Venken's example checked, and a second one, 2026, \url{https://grothendieck.commutator.io/article/grothendieck-effective.pdf}.
 \bibitem{qcoh} M.~Hua, Descent of quasi-coherent sheaves along universal effective epimorphisms of schemes, 2026, \url{https://grothendieck.commutator.io/article/grothendieck-qcoh-descent.pdf}.
 \bibitem{fw} B.~Fawcett, R.~J.~Wood, Constructive complete distributivity.~I, \emph{Math.\ Proc.\ Cambridge Philos.\ Soc.} 107 (1990), 81--89, \href{https://doi.org/10.1017/S0305004100068377}{doi:10.1017/S0305004100068377}.
