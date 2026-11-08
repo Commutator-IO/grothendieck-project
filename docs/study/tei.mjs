@@ -840,9 +840,6 @@ copyFileSync(resolve(root, 'docs/loday-filtration/article.pdf'), resolve(served,
 copyFileSync(resolve(root, 'docs/buffalo-open/article.pdf'), resolve(served, 'grothendieck-buffalo-open.pdf'));
 copyFileSync(resolve(root, 'docs/polytopes/article.pdf'), resolve(served, 'grothendieck-polytopes.pdf'));
 copyFileSync(resolve(root, 'docs/moduli/article.pdf'), resolve(served, 'grothendieck-moduli.pdf'));
-copyFileSync(resolve(root, 'docs/forms/article.pdf'), resolve(served, 'grothendieck-forms.pdf'));
-copyFileSync(resolve(root, 'docs/algebra/article.pdf'), resolve(served, 'grothendieck-algebra.pdf'));
-copyFileSync(resolve(root, 'docs/pseudolines/article.pdf'), resolve(served, 'grothendieck-pseudolines.pdf'));
 // The carbon article (docs/carbon/), a draft: what the project cost in energy and CO2e.
 copyFileSync(resolve(root, 'docs/carbon/article.pdf'), resolve(served, 'grothendieck-carbon.pdf'));
 // The sixth, the statements read in Bourbaki rédactions and proved in Lean (docs/bourbaki-lean/).

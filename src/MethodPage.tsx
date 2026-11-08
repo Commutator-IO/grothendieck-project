@@ -171,30 +171,6 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     pdf: '/article/grothendieck-moduli.pdf',
     src: 'docs/moduli/article.tex',
   },
-  {
-    id: 'article-forms',
-    title: "Toward a geometry of forms: ordered and combinatorial structures in Grothendieck's notes of 1986",
-    lang: 'English',
-    what: 'Folders 156-1 to 156-4 and 121: a segment model is a bounded dense biorder, not necessarily total; the cuts of comparable pairs determine the order up to reversal; the sides of an arbitrary subset embed into a Stone space; saturated parts form an orthocomplemented lattice that need not be Boolean (a seven-element hexagon); coarsest cell decompositions in a tame Boolean algebra.',
-    pdf: '/article/grothendieck-forms.pdf',
-    src: 'docs/forms/article.tex',
-  },
-  {
-    id: 'article-algebra',
-    title: "Six short algebraic notes, after Grothendieck's working notes",
-    lang: 'English',
-    what: 'Folders 2, 22, 46, 153, 77 and 158, one section each: a Chern ring that is not the graded γ-ring, power series not formally smooth for the discrete topology, lifting non-abelian cocycles modulo 𝔪 (with Sylow and tame-inertia forms), co-operations on relative integer-valued polynomials, the universal discriminant of even rank modulo 4 as a square of a hafnian, and finite categories with simply connected elements.',
-    pdf: '/article/grothendieck-algebra.pdf',
-    src: 'docs/algebra/article.tex',
-  },
-  {
-    id: 'article-pseudolines',
-    title: "Pseudoline arrangements, continued: cells, skeleta and added pseudolines",
-    lang: 'English',
-    what: 'Folders 80 and 154, after the bigon-free dichotomy: the lattice criterion of page 26 refuted by five lines and replaced by the correct one (no two points carry every line), for any symmetric composition-closed set of sign vectors; the skeleton determines a bigon-free arrangement (faithful, lifting criterion, fullness when triangles have a fourth line, the rest through chirotopes); an added pseudoline is determined by its crossing order, and its generisations form a cube.',
-    pdf: '/article/grothendieck-pseudolines.pdf',
-    src: 'docs/pseudolines/article.tex',
-  },
 ];
 
 /** The two books, in French: the tools first, then the sources they were used on. */
