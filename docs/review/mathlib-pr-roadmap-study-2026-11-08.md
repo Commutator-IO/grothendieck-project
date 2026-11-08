@@ -224,7 +224,7 @@ any merged PR (list in § 3.6).
   localisation, all driven from inside mathlib (a few long series on presentable categories,
   derived categories and descent data account for a large share).
 - **Infrastructure** (data, meta, linters: 3,247 merged) is by nature on no roadmap. So are the
-  2023 port (about 7,000 merged PRs), golfing, deprecations and renames. Only 3,027 of the 6,001
+  2023 port (3,081 merged PRs labelled `mathlib-port`), golfing, deprecations and renames. Only 3,027 of the 6,001
   unmerged PRs have a `feat` title.
 - **Labelled downstream projects** feed mathlib without a roadmap file in mathlib: FLT, carleson,
   sphere-packing, infinity-cosmos, brownian and toric.
