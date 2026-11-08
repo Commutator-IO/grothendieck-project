@@ -144,6 +144,14 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     src: 'docs/problem-three/article.tex',
   },
   {
+    id: 'article-loday-filtration',
+    title: 'The rank filtration on the n-cycles of the symmetric group algebra: Loday’s filtration conjecture in a notebook of Quillen',
+    lang: 'English',
+    what: 'Draft, under review: in notebook 1983-6 (21 July 1983) Quillen writes the vanishing of the rank filtration F_i k(U_n) for i ≤ n/2 as the form of a conjecture of Loday. Exact computation for n ≤ 8: it holds for 2i < n, and fails at n = 6, i = 3 (dimension 15, with an explicit sum of 36 six-cycles) and at n = 8, i = 4 (dimension 1708). On our reading, the Amitsur–Levitzki argument of Loday–Quillen 1984, §6.14, proves the vanishing for the annihilator filtration, not the rank filtration; this needs a specialist’s check. The homological statement is not touched.',
+    pdf: '/article/grothendieck-loday-filtration.pdf',
+    src: 'docs/loday-filtration/article.tex',
+  },
+  {
     id: 'article-polytopes',
     title: "Regular polytopes realised over arbitrary rings, after Grothendieck's working notes",
     lang: 'English',

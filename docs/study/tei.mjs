@@ -836,6 +836,7 @@ copyFileSync(resolve(root, 'docs/tangent/article.pdf'), resolve(served, 'grothen
 copyFileSync(resolve(root, 'docs/effective/article.pdf'), resolve(served, 'grothendieck-effective.pdf'));
 copyFileSync(resolve(root, 'docs/qcoh-descent/article.pdf'), resolve(served, 'grothendieck-qcoh-descent.pdf'));
 copyFileSync(resolve(root, 'docs/problem-three/article.pdf'), resolve(served, 'grothendieck-problem-three.pdf'));
+copyFileSync(resolve(root, 'docs/loday-filtration/article.pdf'), resolve(served, 'grothendieck-loday-filtration.pdf'));
 copyFileSync(resolve(root, 'docs/buffalo-open/article.pdf'), resolve(served, 'grothendieck-buffalo-open.pdf'));
 copyFileSync(resolve(root, 'docs/polytopes/article.pdf'), resolve(served, 'grothendieck-polytopes.pdf'));
 copyFileSync(resolve(root, 'docs/moduli/article.pdf'), resolve(served, 'grothendieck-moduli.pdf'));

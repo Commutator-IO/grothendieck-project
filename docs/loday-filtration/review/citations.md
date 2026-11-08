@@ -1,0 +1,19 @@
+# Citation check: docs/loday-filtration/article.tex (8 November 2026)
+
+Metadata checked against Crossref (api.crossref.org), the zbMATH Open API (api.zbmath.org) and
+Semantic Scholar; each DOI was resolved (HTTP 302 from doi.org). zbMATH web pages answer 403 to
+scripts, so zbMATH data comes from the API.
+
+| key | reference | metadata | DOI | zbMATH | what the article uses it for | claim checked |
+|---|---|---|---|---|---|---|
+| lq | Loday, Quillen, Cyclic homology and the Lie algebra homology of matrices, Comment. Math. Helv. 59 (1984) 565–591 | Crossref, zbMATH: match | 10.1007/BF02566367 (resolves) | 0565.17006 | §§6.6–6.9 (Connes complex as primitive part), §6.12 (filtration F^{n−i}, F_j by duality, F_1, F_{n−1}), Prop. 6.13 (spectral sequence), §6.13 conjecture for 2i ≤ n, 6.14 and the remark on Procesi, Levitzki, Amitsur–Levitzki | Yes: pp. 588–590 read on the GDZ scan (PPN358147735_0059, IIIF images of pp. 588, 589, 590). The printed conjecture writes GL_i and GL; noted in the text. The phrase about Young diagrams in §6.12 is ambiguous and is not used as evidence either way. |
+| al | Amitsur, Levitzki, Minimal identities for algebras, Proc. AMS 1 (1950) 449–463 | Crossref, zbMATH, Semantic Scholar: match | 10.1090/S0002-9939-1950-0036751-9 (resolves; zbMATH lists the JSTOR DOI 10.2307/2032312 for the same paper) | 0040.01101 | the standard polynomial S_{2r} is an identity of r × r matrices | Standard content of the paper (the Amitsur–Levitzki theorem); the attribution is also the one made in lq p. 590. The PDF could not be downloaded (AMS returns HTML to scripts). The article does not rely on uniqueness of the degree-2r identity: dimension 1 is stated only as computed for (3,1), (5,2), (7,3). |
+| levitzki | Levitzki, A theorem on polynomial identities, Proc. AMS 1 (1950) 334–341 | Crossref, zbMATH: match | 10.1090/S0002-9939-1950-0035758-5 (resolves) | 0037.30604 | named by lq p. 590 as the source of the vanishing | Only as lq's attribution; the article's own argument uses "no identity of degree < 2r", classical. PDF not downloadable here. |
+| procesi | Procesi, The invariant theory of n × n matrices, Adv. Math. 19 (1976) 306–381 | Crossref, zbMATH, Semantic Scholar: match | 10.1016/0001-8708(76)90027-X (resolves) | 0331.15021 | trace identities of degree n correspond to the kernel of k[Σ_n] → End(V^{⊗n}) | Standard content; not reopened (ScienceDirect returns HTML to scripts). |
+| loday | Loday, Cyclic Homology, Grundlehren 301, Springer 1992; 2nd ed. 1998 | zbMATH 0780.18009 (1992, vol. 301) and 0885.18007 (1998); Crossref for the 1998 DOI | 10.1007/978-3-662-11389-9 (resolves) | 0780.18009, 0885.18007 | cited only in « What is not done »: Chapter 10 on the Loday–Quillen–Tsygan theorem; the book was not consulted | Chapter number from the zbMATH review as recorded in the local study; content not checked, and the article says so. |
+| clay | Clay Mathematics Institute, Quillen notebooks | URL https://www.claymath.org/online-resources/quillen-notebooks/ (as in src/content/quillen.json) | – | – | notebooks 1982-13, 1983-1, 1983-6, cited by PDF page | The three PDFs answer (HTTP 206 on a range request). Pages and dates from the local transcriptions (transcripts-quillen/, not versioned): 1983-6 p. 52 (19 July 1983), pp. 60–62 (21 July), p. 72 (letter of 22 July); 1983-1 pp. 36–40 (11 January 1983), 54–55, 62–64 (letter of 14 January); 1982-13 pp. 2–15 (22–26 November 1982), 45–46. Only three words are quoted (« Actual Loday conjecture »). |
+| repo | Commutator-IO, grothendieck-project, computations/loday-filtration | – | – | – | scripts | The directory is added in the same commit. |
+
+Dropped: Hanlon's papers (Invent. Math. 86, 1986; Trans. AMS 308, 1988; Michigan Math. J. 37, 1990)
+and Loday's Banach Center survey (1986), consulted for the local study but not about this statement;
+they are not cited. Kassis et al. is not cited.

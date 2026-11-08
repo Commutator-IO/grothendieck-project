@@ -1,0 +1,236 @@
+% The rank filtration on the n-cycles of the symmetric group algebra: Loday's filtration conjecture as stated in Quillen's notebook 1983-6, p. 61.
+% Draft under review. Compile: tectonic -X compile article.tex
+% Rights: the Quillen notebooks are in copyright (Clay Mathematics Institute; issue #36). This note describes
+% them in its own words, with notebook and page, and quotes at most a few words. No transcription is reproduced.
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype,amssymb,mathtools,booktabs}
+\usepackage[margin=2.7cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\q}[1]{\guillemotleft\,#1\,\guillemotright}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Prim}{\operatorname{Prim}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\nb}[2]{\href{https://www.claymath.org/library/Quillen/Working_papers/quillen\%20#1/#1-#2.pdf}{notebook~#1-#2}}
+
+\title[The rank filtration on the $n$-cycles]{The rank filtration on the $n$-cycles\\ of the symmetric group algebra:\\ Loday's filtration conjecture in a notebook of Quillen}
+\author{Michel Hua}
+\address{Commutator, Paris, France}
+\email{michel@commutator.io}
+\thanks{ORCID 0009-0002-8304-0683.}
+\date{8 November 2026}
+\subjclass[2020]{19D55; 17B56, 20C30, 16R10, 01A60}
+\keywords{cyclic homology, Lie algebra homology of matrices, rank filtration, Schur--Weyl duality, trace identities, Amitsur--Levitzki theorem, Quillen notebooks}
+
+\begin{document}
+\begin{abstract}
+The homology of the Lie algebras $\gl_i(A)$, for $i$ fixed, filters the cyclic homology of $A$. On the chains, this rank filtration becomes a filtration of the span $k(U_n)$ of the $n$-cycles in the group algebra of the symmetric group $\Sigma_n$: its $i$-th term is the intersection of $k(U_n)$ with the sum of the isotypic blocks whose Young diagrams have at most $i$ rows. On 21 July 1983, in his notebook 1983-6, Quillen wrote down as the form of a conjecture of Loday the vanishing of this intersection for $i \le n/2$. We compute these intersections exactly for $n \le 8$. They vanish whenever $2i < n$, and at $2i = n$ for $n = 2, 4$, but not for $n = 6$ and $n = 8$: the intersection has dimension $15$ for $(n, i) = (6, 3)$ and $1708$ for $(8, 4)$. We give an explicit element for $n = 6$, a signed sum of $36$ six-cycles, and the decomposition of the $15$-dimensional space under conjugation. Loday and Quillen's paper of 1984 states the same even bound, \S6.14, with an argument of Procesi through the Amitsur--Levitzki theorem. On our reading, that argument proves the vanishing for a different filtration, the annihilator of the image of $\gl_{n-j}$, and the stated equivalence with the rank filtration does not hold; this reading needs to be checked by a specialist. The homological statement behind the conjecture is not touched.
+\end{abstract}
+\maketitle
+
+\section{The setting}\label{sec:setting}
+
+Let $k$ be a field of characteristic zero and $n \ge 1$. For a partition $\lambda$ of $n$, write $V_\lambda$ for the irreducible representation of $\Sigma_n$ of shape $\lambda$, $\chi_\lambda$ for its character, $d_\lambda = \chi_\lambda(1)$ for its dimension and $\ell(\lambda)$ for the number of rows of its Young diagram. The group algebra decomposes into blocks,
+\[
+k[\Sigma_n] = \bigoplus_{\lambda \vdash n} B_\lambda, \qquad B_\lambda \cong \End(V_\lambda), \qquad B_\lambda = k[\Sigma_n]\, e_\lambda, \quad e_\lambda = \frac{d_\lambda}{n!} \sum_{g \in \Sigma_n} \chi_\lambda(g)\, g .
+\]
+
+\subsection*{Invariant theory}
+Let $V = k^i$. The algebra $\gl_i^{\otimes n} = \End(V^{\otimes n})$ carries the adjoint action of $\gl_i$, and $\Sigma_n$ acts on $V^{\otimes n}$ by permuting the factors, which gives an algebra map
+\[
+\rho_i \colon k[\Sigma_n] \to \End(V^{\otimes n}).
+\]
+By the first fundamental theorem of invariant theory its image is the algebra of invariants $(\gl_i^{\otimes n})^{\gl_i}$, and by Schur--Weyl duality its kernel is
+\[
+\ker \rho_i = \bigoplus_{\ell(\lambda) > i} B_\lambda .
+\]
+In particular $\rho_i$ is injective when $i \ge n$.
+
+\subsection*{The rank filtration}
+Let $k(\Sigma_n)$ be the space of functions on $\Sigma_n$. The trace pairing gives a map from the coinvariants,
+\[
+(\gl_i^{\otimes n})_{\gl_i} \to k(\Sigma_n), \qquad u \mapsto \bigl(\sigma \mapsto \operatorname{tr}(u\, \rho_i(\sigma))\bigr),
+\]
+well defined because $\rho_i(\sigma)$ commutes with the action of $\gl_i$. It is injective, since the coinvariants are dual to the invariants, and its image is the space of functions vanishing on $\ker \rho_i$.
+
+\begin{definition}
+Identify $k(\Sigma_n)$ with $k[\Sigma_n]$ by $\delta_\sigma \mapsto \sigma$. The \emph{rank filtration} of $k[\Sigma_n]$ is
+\[
+F_i k(\Sigma_n) = \text{the image of } (\gl_i^{\otimes n})_{\gl_i} = \bigoplus_{\ell(\lambda) \le i} B_\lambda, \qquad 0 = F_0 \subset F_1 \subset \cdots \subset F_n = k[\Sigma_n].
+\]
+\end{definition}
+
+The second equality holds because the pairing $\langle a, b\rangle = \tau(a b^*)$, with $\tau$ the coefficient of the identity and $b^* = \sum b_\sigma \sigma^{-1}$, is the $\delta$-pairing; the involution $*$ preserves each block, the blocks are orthogonal for it, and it is nondegenerate on each block. So the annihilator of $\bigoplus_{\ell(\lambda) > i} B_\lambda$ is $\bigoplus_{\ell(\lambda) \le i} B_\lambda$. The term $F_1$ is the line spanned by $\sum_\sigma \sigma$ and $F_{n-1}$ is the kernel of the sign character.
+
+Two conventions could change the formulas but not the dimensions computed below. Replacing $\sigma$ by $\sigma^{-1}$ in the pairing fixes each block. The sign twist $\sigma \mapsto \sgn(\sigma)\sigma$, which appears in Lie algebra homology, sends $B_\lambda$ to $B_{\lambda'}$, $\lambda'$ the conjugate partition, and so exchanges the condition $\ell(\lambda) \le i$ with $\lambda_1 \le i$; it maps the span of the $n$-cycles to itself.
+
+\subsection*{The $n$-cycles}
+Let $U_n \subset \Sigma_n$ be the set of the $(n-1)!$ cycles of length $n$, and $k(U_n) \subset k[\Sigma_n]$ their span (functions supported on $U_n$). It is stable under conjugation by $\Sigma_n$.
+
+\begin{definition}
+$F_i k(U_n) = k(U_n) \cap F_i k(\Sigma_n) = k(U_n) \cap \bigoplus_{\ell(\lambda) \le i} B_\lambda$.
+\end{definition}
+
+The reason for this space is the theorem of Loday--Quillen and Tsygan. The coinvariants of $\gl(A)$ acting on the Chevalley--Eilenberg complex of $\gl(A)$ form a Hopf algebra whose primitive part in degree $n$ is
+\[
+C_{n-1}(A) = \bigl(k(U_n) \otimes A^{\otimes n}\bigr) \otimes_{\Sigma_n} \sgn,
+\]
+the Connes complex of $A$, which computes the cyclic homology $HC_{n-1}(A)$ \cite[\S\S6.6--6.9]{lq}. The rank filtration of $\gl(A)$ by the $\gl_i(A)$ induces the filtration $F_i C_{n-1}(A)$ built from $F_i k(U_n)$ in the same way, and a spectral sequence that converges to cyclic homology \cite[Prop.~6.13]{lq}.
+
+An element $x \in k(U_n)$ lies in $F_i k(U_n)$ if and only if $x e_\lambda = 0$ for every $\lambda$ with $\ell(\lambda) > i$, since $1 = \sum_\lambda e_\lambda$.
+
+\section{The statement}\label{sec:statement}
+
+\subsection*{Quillen's notebook}
+Quillen's \nb{1983}{6}, of July 1983, published in facsimile by the Clay Mathematics Institute \cite{clay}, comes back several times to a conjecture of Loday on this filtration. Pages are those of the Clay PDF. On p.~52 (19 July 1983) he presents it as the additive analogue of a conjecture of Soulé on the weights of algebraic $K$-groups, notes that the upper bound follows from stability and that the lower bound is the real content, and writes that he does not yet have the right form of the conjecture.
+
+On pp.~60--61 (21 July 1983), with $n$ now the number of tensor factors, he defines $F_i k(\Sigma_n)$ as the image of the coinvariants of $\gl_i$ in the functions on $\Sigma_n$, as in Section~\ref{sec:setting}, and $F_i k(U_n)$ as its intersection with $k(U_n)$. He then records, in a box labelled \q{Actual Loday conjecture}, the statement
+\[
+F_i k(U_n) = 0 \quad \text{for } i \le n/2 .
+\]
+A first box on the same page gives the corresponding vanishing range for the filtered Connes complex. In his notebook 1983-1, in the summary of a letter to Loday of mid-January 1983 (pp.~62--64), the same filtration is described as the image of the representative functions of $V^{\otimes n}$ for $\dim V = i$, which is the definition used here.
+
+On pp.~62 and~72 (21--22 July; p.~72 is in the draft of a letter to Loday dated 22 July) he proves a weaker, homological statement. The Chern classes $c_m$ vanish on $\gl_i$ for $m > i$; assuming that the Chern character agrees with Connes' description of $\Prim H_n(\gl(A))$ in terms of differential forms, he deduces that the image of the homology of $F_p C$ in $\Prim H_n(\gl(A))$ vanishes for $p \le n/2$ (for smooth $A$ on p.~72). The letter presents this as a consequence of the conjecture as boxed.
+
+\subsection*{The published form}
+Loday and Quillen's paper \cite{lq}, published in 1984, contains the conjecture in \S\S6.12--6.14 (pp.~589--590). In \S6.12 they consider the filtration of cyclic homology induced by the rank filtration on $\gl(A)$. For $i \le n$ they regard the invariants $(\gl_i^{\otimes n})^{\gl_i}$ as a two-sided ideal $F^{n-i}$ of $k[\Sigma_n]$, with $F^n = 0$, $F^{n-1}$ the line spanned by $\sum \sgn(\sigma)\sigma$, $F^1$ the augmentation ideal and $F^0 = k[\Sigma_n]$; by duality they obtain an increasing filtration $F_j$ of $k[\Sigma_n]$ with $F_1$ the line spanned by $\sum \sigma$ and $F_{n-1}$ the kernel of the sign. They say that the $F_j$ are described by Young diagrams, and induce the filtration on $k[U_n]$ and on the Connes complex. Proposition~6.13 is the spectral sequence.
+
+They then propose, by analogy with Soulé's conjecture, the vanishing of $H_n(\gl_i(A)) \cap \Prim H_n(\gl(A)) = F_i HC_{n-1}(A)$ for $2i \le n$ (the printed text writes $GL_i$ and $GL$), and say that, translated into symmetric groups, it is equivalent to
+\[
+\text{(6.14)} \qquad F_i k[U_{2i+1}] = 0 \quad\text{and}\quad F_i k[U_{2i}] = 0,
+\]
+with the further expectation that $F_{i+1} k[U_{2i+1}]$ is one-dimensional, spanned by a signed sum of the $(2i+1)$-cycles. They add that these had been conjectures in the first draft, and that Procesi told them that the vanishing follows from a result of Levitzki on polynomial identities \cite{levitzki}, and the one-dimensional statement from the Amitsur--Levitzki theorem \cite{al}. For $n = 2i$, (6.14) is the even case of Quillen's box.
+
+\subsection*{Procesi's argument}
+As we understand it, the argument runs as follows. By the theory of trace identities \cite{procesi}, an element $\sum_\sigma a_\sigma \sigma$ of $\ker \rho_r$ is the same as a multilinear trace identity of degree $n$ for $r \times r$ matrices, $\sigma$ standing for the product of the traces of the monomials read along its cycles. If the element lies in $k(U_n)$, each $\sigma$ is an $n$-cycle and contributes a single trace, which can be written $\operatorname{tr}(f(X_1, \dots, X_{n-1})X_n)$ with $f$ multilinear of degree $n-1$. The identity holds for all $X_n$ only if $f$ is a polynomial identity of $r \times r$ matrices. There is none of degree less than $2r$, so
+\[
+k(U_n) \cap \ker \rho_r = k(U_n) \cap \bigoplus_{\ell(\lambda) > r} B_\lambda = 0 \qquad \text{for } n \le 2r,
+\]
+and for $n = 2r + 1$ the standard polynomial $S_{2r}$ of the Amitsur--Levitzki theorem gives the nonzero element $\operatorname{tr}(S_{2r}(X_1, \dots, X_{2r})X_{2r+1})$. This is a statement about the kernel of $\rho_r$, the sum of the blocks with \emph{more} than $r$ rows.
+
+\section{The computation}\label{sec:result}
+
+\begin{theorem}\label{thm:main}
+Over $\Q$, the dimension of $F_i k(U_n)$ for $1 \le i \le n/2$ and $n \le 8$ is zero except for
+\[
+\dim F_3 k(U_6) = 15, \qquad \dim F_4 k(U_8) = 1708 .
+\]
+In particular $F_i k(U_n) = 0$ whenever $2i < n \le 8$, and also for $(n, i) = (2, 1), (4, 2)$. As a representation of $\Sigma_6$ under conjugation, $F_3 k(U_6) \cong V_{(3,3)} \oplus V_{(3,1,1,1)}$, of dimensions $5 + 10$.
+\end{theorem}
+
+Table~\ref{tab:dims} gives the full range for $n \le 8$, the values with $i > n/2$ included for comparison.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+$n$ & $i=1$ & $i=2$ & $i=3$ & $i=4$ \\
+\midrule
+$4$ & $0$ & $0$ & $(5)$ & \\
+$5$ & $0$ & $0$ & $(12)$ & $(23)$ \\
+$6$ & $0$ & $0$ & $\mathbf{15}$ & $(100)$ \\
+$7$ & $0$ & $0$ & $0$ & $(444)$ \\
+$8$ & $0$ & $0$ & $0$ & $\mathbf{1708}$ \\
+\bottomrule
+\end{tabular}
+\medskip
+\caption{$\dim F_i k(U_n)$. Bold: failures of the vanishing for $i \le n/2$. In parentheses: $i > n/2$. For $n \le 3$ every entry with $i \le n/2$ is $0$.}\label{tab:dims}
+\end{table}
+
+\subsection*{The witness}
+Write a permutation $p$ of $\{0, \dots, 5\}$ in one-line notation $p(0)p(1)\cdots p(5)$. The element
+\[
+\begin{aligned}
+x = {}&{+}124053 - 124530 + 130452 - 135420 - 140253 - 143052 + 143520 + 145230 + 203451\\
+&{-}204153 - 234051 + 234510 + 241053 - 241530 - 253410 + 254130 - 301452 + 304251\\
+&{-}320451 + 325410 + 340152 - 345120 + 351420 - 354210 + 401532 - 403521 + 405123\\
+&{-}405231 + 420531 - 425013 - 430512 + 435021 - 450132 + 450213 - 451023 + 453012
+\end{aligned}
+\]
+of $\mathbb Z[\Sigma_6]$ is a sum of $36$ distinct six-cycles with coefficients $\pm 1$, so $x \ne 0$ and $x \in k(U_6)$. A direct multiplication in $\Q[\Sigma_6]$ gives
+\[
+x \cdot \sum_{g \in \Sigma_6} \chi_\lambda(g)\, g = 0 \qquad \text{for } \lambda = (3,1,1,1),\ (2,2,1,1),\ (2,1,1,1,1),\ (1^6),
+\]
+the four partitions of $6$ with more than three rows. Hence $x e_\lambda = 0$ for these $\lambda$, and $x \in F_3 k(U_6)$. Each of the four products has $36 \times 720$ terms; a machine checks them in a few seconds, without the scripts below.
+
+\subsection*{How it is computed}
+For a set $\Lambda$ of partitions, an element $x = \sum_{c \in U_n} x_c c$ satisfies $x e_\lambda = 0$ for all $\lambda \in \Lambda$ if and only if $Gx = 0$, where $G$ is the integer matrix indexed by $U_n$,
+\[
+G_{c, c'} = \sum_{\lambda \in \Lambda} d_\lambda\, \chi_\lambda(c^{-1}c') .
+\]
+Indeed $G$ is, up to the factor $n!$, the matrix of the right multiplication by $\sum_{\lambda \in \Lambda} e_\lambda$ followed by the projection to $k(U_n)$, and $x^{\mathsf T} G x$ is a positive multiple of $\sum_{\lambda \in \Lambda} \tau(x e_\lambda (x e_\lambda)^*)$, a sum of squared norms. So $F_i k(U_n)$ is the kernel of $G$ for $\Lambda = \{\lambda : \ell(\lambda) > i\}$, a matrix of size $(n-1)!$. Characters are computed by the Murnaghan--Nakayama rule and checked by $\sum_\lambda d_\lambda^2 = n!$ and column orthogonality.
+
+The ranks are certified as follows. Where $G$ has full rank modulo a prime ($1000003$ and $998244353$ were used), it has full rank over $\Q$ and the dimension is exactly $0$. For $(6, 3)$ the kernel is computed by exact elimination over $\Q$, and each of its $15$ basis vectors is checked by multiplication in $\Q[\Sigma_6]$ as above; $x$ is one of them. For $(8, 4)$, where $G$ has size $5040$, the dimension modulo both primes is at most $1708$, and the exact value comes from a second method: for each Young subgroup $\Sigma_\nu$ and $\varepsilon$ the trivial or the sign character, the dimension of the $(\Sigma_\nu, \varepsilon)$-isotypic part of the kernel is computed by fraction-free elimination over $\mathbb Z$ on orbit sums, and the multiplicities of the irreducible representations in the kernel are solved for from these dimensions through the Kostka numbers. The system has full rank and an integral nonnegative solution, of total dimension $1708$; it involves sixteen irreducible representations, among them $V_{(5,3)}$, $V_{(4,4)}$ and $V_{(2,2,2,2)}$ once each.
+
+The scripts are in the directory \texttt{computations/loday-filtration} of the repository \cite{repo}, with a README. On a laptop, \texttt{python3 witness.py 6 3} takes a few seconds and \texttt{python3 youngsub.py 8 4 R 24} about a minute and a half; the ranks for $n = 7, 8$ use a short C program.
+
+\subsection*{The chain level}
+Since $F_3 k(U_6) \ne 0$, the chain group $F_3 C_5(A) = (F_3 k(U_6) \otimes A^{\otimes 6}) \otimes_{\Sigma_6} \sgn$ is nonzero already for $A = k[t_1, \dots, t_6]$: the multilinear part of $A^{\otimes 6}$ in $t_1, \dots, t_6$ contains a copy of the regular representation of $\Sigma_6$. So the vanishing range for the filtered Connes complex, stated in Quillen's first box, also fails at $n = 6$ in the even case.
+
+\section{Two readings of the filtration}\label{sec:readings}
+
+The computation and Procesi's argument concern two different subspaces of $k(U_n)$. For $0 \le j \le n$ set
+\[
+F^{\mathrm{rk}}_j = k(U_n) \cap \bigoplus_{\ell(\lambda) \le j} B_\lambda, \qquad
+F^{\mathrm{ann}}_j = k(U_n) \cap \bigoplus_{\lambda_1 > n-j} B_\lambda .
+\]
+The first is the rank filtration of Section~\ref{sec:setting}, built from the image of $\gl_j$. The second is built from the annihilator of the image of $\gl_{n-j}$, taken with the sign twist, as in \S6.12 (see below). Both are increasing filtrations of $k(U_n)$ from $0$ to $k(U_n)$. They have the same terms for $j = 0, 1, n-1, n$: for $j = 1$ both are $0$, and for $j = n-1$ both are the elements of $k(U_n)$ whose coefficients add up to $0$, since all $n$-cycles have the same sign. They differ in between.
+
+The sign twist maps $F^{\mathrm{ann}}_j$ isomorphically onto $k(U_n) \cap \bigoplus_{\ell(\lambda) > n-j} B_\lambda = k(U_n) \cap \ker \rho_{n-j}$. So Procesi's argument, in the form of Section~\ref{sec:statement}, proves (6.14) for the second filtration: $F^{\mathrm{ann}}_i k[U_{2i}]$ and $F^{\mathrm{ann}}_i k[U_{2i+1}]$ correspond to intersections with $\ker \rho_r$ for $r = i$ and $r = i+1$, with $n \le 2r$ in both cases, and $F^{\mathrm{ann}}_{i+1} k[U_{2i+1}]$ is the case $n = 2r + 1$. The same computation as above, with $\Lambda = \{\lambda : \ell(\lambda) \le r\}$, agrees with this everywhere for $n \le 8$: $k(U_n) \cap \ker \rho_r = 0$ exactly when $n \le 2r$, and it has dimension $1$ for $(n, r) = (3, 1), (5, 2), (7, 3)$.
+
+The construction of \S6.12 fits the second reading. There $F^{n-i}$ is the image of $\gl_i$, viewed as a two-sided ideal of $k[\Sigma_n]$; since $F^{n-1}$ is the sign line, this ideal is $\bigoplus_{\lambda_1 \le i} B_\lambda$. If $F_j$ is the annihilator of $F^j$ for the $\delta$-pairing, then $F_j = \bigoplus_{\lambda_1 > n-j} B_\lambda$, whose intersection with $k(U_n)$ is $F^{\mathrm{ann}}_j$. This gives $F_1$ the line of $\sum \sigma$ and $F_{n-1}$ the kernel of the sign, as stated in \S6.12; the rank filtration of $k[\Sigma_n]$ has the same two terms, so these values do not distinguish the readings.
+
+The conjecture that (6.14) is said to translate is about $H_n(\gl_i(A))$, the image of $\gl_i$, and so about the rank filtration $F^{\mathrm{rk}}$, which is also the definition in Quillen's notebook. For that filtration the odd case of (6.14) holds in the computed range, and the even case fails at $n = 6$ and $n = 8$ (Theorem~\ref{thm:main}).
+
+All of this is our reading. If it is right, (6.14) is correct for the annihilator filtration, as Procesi's argument shows, and the stated equivalence with the vanishing for the rank filtration has a gap at even $n = 2i \ge 6$. We have not found the gap discussed elsewhere, but our search was limited (Section~\ref{sec:open}). The reading of \S6.12 involves identifications that the text leaves implicit, and it needs to be checked by a specialist of cyclic homology or of trace identities before anything more is concluded from it.
+
+\section{What is not touched}\label{sec:open}
+
+What Quillen proves on pp.~62 and~72 of 1983-6, that the image of the homology of $F_p C$ in $\Prim H_n(\gl(A))$ vanishes for $p \le n/2$ under the compatibility of the Chern character with Connes' isomorphism, concerns homology, and a nonzero chain group does not contradict it; this note says nothing against it. Nor do we decide whether
+\[
+H_n(\gl_i(A)) \cap \Prim H_n(\gl(A)) = F_i HC_{n-1}(A)
+\]
+vanishes for $2i = n \ge 6$, the form of the conjecture in \cite[\S6.13]{lq}. For the rank filtration this vanishing cannot be read off from the chains at $2i = n \ge 6$, while for $2i < n$ and $n \le 8$ the chains themselves vanish.
+
+\section{Quillen's other notebooks}\label{sec:notebooks}
+
+All the notebooks of 1982--1984 that we have transcribed were searched for the filtration, Young diagrams, the Amitsur--Levitzki theorem, Procesi and Soulé. The transcriptions are private, as the notebooks are in copyright.
+
+In \nb{1982}{13}, pp.~2--15 (22--26 November 1982), Quillen sets up the invariant theory for $\gl_n$: $k[\Sigma_p]$ maps onto the invariants of $\gl_n^{\otimes p}$, injectively when $n \ge p$, and the coinvariants decompose along conjugacy classes. The entries of 25--26 November and a letter to Loday dated 26 November sketch the identification of cyclic homology with the primitive part of the homology of $\gl(A)$, the Loday--Quillen--Tsygan theorem. Pages~45--46 (December) treat the mixed case of $\gl(V, W)$. All of this is in the stable range $n \ge p$, where $\rho_n$ is injective; the kernel, the Young-diagram filtration and any vanishing statement do not appear.
+
+In \nb{1983}{1} (January 1983), pp.~36--40 (11 January) consider the kernel of $k[\Sigma_p] \to \End(V^{\otimes p})$ and the Young diagrams with at most $\dim V$ rows; pp.~54--55 give the invariants of $\gl^{\otimes p}$ as functions on permutations; pp.~62--64, around a letter to Loday of 14 January, fix the filtration as the image from $\End(V^{\otimes n})$ with $\dim V = i$, and note that it is already nontrivial for the dual numbers. These are definitions; there is no vanishing claim.
+
+In \nb{1983}{6}, the statement is the one of Section~\ref{sec:statement}. Later notebooks of 1983 return to the letter to Loday (1983-8, p.~19; 1983-10, pp.~6 and~15; 1983-13, p.~16), but about the compatibility of the Chern character with Connes' isomorphism, not about the filtration. None of the transcribed notebooks proves, weakens or corrects the boxed statement. Notebooks of 1984 after May, of 1985 (1985-1 is indexed by the Clay on the Lie algebra cohomology of $\gl_n(A)$ and on invariants of $\gl_n$), and later ones on related subjects have not been read.
+
+\section{Lean}\label{sec:lean}
+
+Nothing here is formalised. A certificate that avoids Schur--Weyl duality, which is not in Mathlib, looks feasible for $(n, i) = (6, 3)$. For maps $I, J \colon \{1, \dots, 6\} \to \{1, 2, 3\}$, the class of $E_{I_1J_1} \otimes \cdots \otimes E_{I_6J_6}$ in the coinvariants of $\gl_3$ is, as a function on $\Sigma_6$, the indicator of the permutations $\sigma$ with $J = I \circ \sigma$ (with the conventions of Section~\ref{sec:setting}, up to $\sigma \mapsto \sigma^{-1}$). A certificate would be a list of integers $a_m$ and pairs $(I_m, J_m)$ with $\sum_m a_m \mathbf 1_{\{J_m = I_m \circ \sigma\}} = x$; the statement \q{$x \ne 0$, $x$ is supported on six-cycles and lies in the span of the image of $\gl_3$} then reduces to $720$ equalities of integers, with no representation theory. Since the image of $\gl_3$ has dimension $\sum_{\ell(\lambda) \le 3} d_\lambda^2 = 513$, some certificate has at most $513$ terms. We have not computed a sparse one, and the main risk is the time the Lean kernel takes on such a sum.
+
+\subsection*{What is not done}
+The computation stops at $n = 8$; whether the even case fails for every even $n \ge 6$ is not proved. The homological form of the conjecture at $2i = n$ is open here. Our reading of \S6.12 of \cite{lq} has not been checked by a specialist. Loday's book \cite{loday} treats the Loday--Quillen--Tsygan theorem in its Chapter~10; we have not been able to consult it, and do not know whether it restates (6.14) or the rank filtration. Our literature search (zbMATH, EuDML) found no statement of the vanishing for the rank filtration and no counterexample to it, but it was not exhaustive. The statement is not formalised in Lean.
+
+\subsection*{Use of language models}
+The pages of the notebooks were located and transcribed, the literature searched, and the scripts and a first draft of this text written with language models (Claude Opus~5.5, Anthropic), under the author's direction. The dimensions rest on the scripts, which anyone can rerun; the witness can be checked independently of them. The reading of \cite{lq} in Section~\ref{sec:readings} was made the same way and has not been checked by a specialist. The pages of \cite{lq} cited were read on the scan of the Göttingen digitisation centre; what was checked for each reference is listed in \texttt{docs/loday-filtration/review/citations.md} of the repository \cite{repo}.
+
+\begin{thebibliography}{9}
+\bibitem{al} A.~S.~Amitsur, J.~Levitzki, Minimal identities for algebras, \emph{Proc.\ Amer.\ Math.\ Soc.} 1 (1950), 449--463, \href{https://doi.org/10.1090/S0002-9939-1950-0036751-9}{doi:10.1090/S0002-9939-1950-0036751-9}.
+\bibitem{clay} Clay Mathematics Institute, Daniel Quillen's notebooks, \url{https://www.claymath.org/online-resources/quillen-notebooks/}; notebooks 1982-13, 1983-1 and 1983-6 cited by the page of the PDF.
+\bibitem{levitzki} J.~Levitzki, A theorem on polynomial identities, \emph{Proc.\ Amer.\ Math.\ Soc.} 1 (1950), 334--341, \href{https://doi.org/10.1090/S0002-9939-1950-0035758-5}{doi:10.1090/S0002-9939-1950-0035758-5}.
+\bibitem{loday} J.-L.~Loday, \emph{Cyclic Homology}, Grundlehren Math.\ Wiss.~301, Springer, 1992; 2nd ed.\ 1998, \href{https://doi.org/10.1007/978-3-662-11389-9}{doi:10.1007/978-3-662-11389-9}.
+\bibitem{lq} J.-L.~Loday, D.~Quillen, Cyclic homology and the Lie algebra homology of matrices, \emph{Comment.\ Math.\ Helv.} 59 (1984), 565--591, \href{https://doi.org/10.1007/BF02566367}{doi:10.1007/BF02566367}.
+\bibitem{procesi} C.~Procesi, The invariant theory of $n \times n$ matrices, \emph{Adv.\ Math.} 19 (1976), 306--381, \href{https://doi.org/10.1016/0001-8708(76)90027-X}{doi:10.1016/0001-8708(76)90027-X}.
+\bibitem{repo} Commutator-IO, grothendieck-project, \url{https://github.com/Commutator-IO/grothendieck-project}, directory \texttt{computations/loday-filtration}.
+\end{thebibliography}
+\end{document}
