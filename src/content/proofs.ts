@@ -1645,4 +1645,17 @@ export const PROOFS: Proof[] = [
     lean: "lean/Grothendieck/EffectiveVenken.lean",
     theorems: ["Grothendieck.EffectiveVenken.venken_not_effective", "Grothendieck.EffectiveVenken.not_effective", "Grothendieck.EffectiveVenken.mxy_tmul_w_not_mem", "Grothendieck.EffectiveVenken.invariants_eq", "Grothendieck.EffectiveVenken.venkenRel_le_ker_lmul", "Grothendieck.EffectiveVenken.map_comm_venkenRel_le", "Grothendieck.EffectiveVenken.map_p₁₃_le"],
   },
+  {
+    folder: "buffalo-1973",
+    batch: 1,
+    page: "video 3ULFIl_2Wis, 6:26:20",
+    cote: "Buffalo 1973",
+    href: "/article/grothendieck-buffalo-open.pdf",
+    name: "Theorem A, affine case: descent of morphisms of modules along a pure ring map",
+    statement: "Asked why the topology is not defined by all universal effective epimorphisms, Grothendieck answers that such morphisms are hard to characterise. Theorem A of the open-problems article says that pullback of quasi-coherent sheaves along a universal effective epimorphism is fully faithful into descent data. Affine case: for a ring map A → B such that N → B ⊗_A N ⇉ (B ⊗_A B) ⊗_A N is an equalizer for every A-module N (condition (c), equivalent by Stacks 0EUA to Spec B → Spec A being a universal effective epimorphism), base change Hom_A(M, N) → {g : B ⊗_A M → B ⊗_A N B-linear whose two base changes to (B ⊗_A B) ⊗_A M agree} is a bijection for all A-modules M and N.",
+    found: "Holds, with a shorter proof than the article's: a B-linear g is determined by m ↦ g(1 ⊗ m), and g is compatible exactly when this A-linear map lands in the equalizer of B ⊗ N ⇉ (B ⊗ B) ⊗ N, which is N by (c); no presentation of M is needed, and (c) is only used for N. Conversely, bijectivity for M = A alone gives (c) for N, so A → B is a descent morphism for modules exactly when (c) holds. (c) for all modules is also proved equivalent to A → B being pure (universally injective), the direction pure ⇒ (c) through the homotopy (b₁ ⊗ b₂) ⊗ n ↦ b₂ ⊗ [b₁ ⊗ n] into B ⊗ coker(N → B ⊗ N), as in Stacks 08WE. Not formalised: the equivalence of (c) with universal effective epimorphisms of affine schemes (Stacks 0EUA), effectivity of descent along pure maps (Stacks 08XA; Mesablishvili, TAC 7, 2000), the non-affine case of Theorem A, and Theorems B and C.",
+    verdict: "holds",
+    lean: "lean/Buffalo/QcohDescent.lean",
+    theorems: ["Buffalo.QcohDescent.descend_bijective", "Buffalo.QcohDescent.isEqualizer_iff_bijective", "Buffalo.QcohDescent.isEqualizer_of_injective", "Buffalo.QcohDescent.equalizerCondition_iff_isPure", "Buffalo.QcohDescent.descend_bijective_of_isPure", "Buffalo.QcohDescent.compatible_iff"],
+  },
 ];
