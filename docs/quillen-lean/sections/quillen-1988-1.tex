@@ -1,0 +1,33 @@
+\section[Notebook 1988-1: $\mathrm{Hom}_k(M, A)$ modulo commutators is the dual of $M$]{Notebook 1988-1: $\mathrm{Hom}_k(M, A)$ modulo commutators is the dual of $M$\protect\verifie{Notebook1988_1}}\label{sec:quillen-1988-1}
+
+\emph{Context.} In February 1988, \carnet{1988}{1} turns from the cyclic homology of algebra extensions to residues and duality. Quillen wants to reconstruct Cartier's construction of the Grothendieck residue symbol and Tate's one-dimensional residue through Hochschild cochains. For an $A$-module $M$ that is finite-dimensional over the ground field $k$, he identifies $\mathrm{Ext}^1_A(M, A)$ with derivations of $A$ into the bimodule $\mathrm{Hom}_k(M, A)$ modulo inner ones. To land in linear functionals on $M$, he needs to know the commutator quotient of that bimodule.
+
+\emph{The page.} On pages~71--72 (entry of 29 February 1988), Quillen computes $A \otimes_{A \otimes A} \mathrm{Hom}_k(M, A) = \mathrm{Hom}_k(M, A)/[A, \mathrm{Hom}_k(M, A)]$. He chooses a basis $m_j$ of $M$ with dual basis $\mu_j$, writes $\lambda = \sum_j \mu_j \otimes \lambda(m_j)$, and moves the coefficient $\lambda(m_j)$ from the right of the tensor sign to the left modulo commutators. The result is the functional $m \mapsto \sum_j \mu_j(\lambda(m_j) m)$, which he recognises as the trace of $M \xrightarrow{\lambda} A \xrightarrow{\cdot m} M$. He states it as a lemma: the map $\lambda \mapsto (m \mapsto \mathrm{tr}_M(x \mapsto \lambda(x) m))$ induces an isomorphism $\mathrm{Hom}_k(M, A)/[A, \mathrm{Hom}_k(M, A)] \cong M^*$. The following pages build from it the maps $\mathrm{Ext}^n_A(M, A) \to \mathrm{Hom}_A(\Omega^n_A, M^*)$.
+
+\emph{Intuition.} When $M$ is finite-dimensional, $\mathrm{Hom}_k(M, A) = M^* \otimes_k A$. Dividing by commutators glues the right action of $A$ (through $M$) to the left action (on the factor $A$), which is $M^* \otimes_A A = M^*$. The trace is the intrinsic way to write this identification without choosing a basis.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1988-1, pp.~71--72]\label{thm:quillen-1988-1}
+Let $k$ be a field, $A$ a $k$-algebra, and $M$ a left $A$-module that is finite-dimensional over $k$. Make $\mathrm{Hom}_k(M, A)$ an $A$-bimodule by $(a\lambda)(x) = a\lambda(x)$ and $(\lambda a)(x) = \lambda(ax)$, and let $[A, \mathrm{Hom}_k(M, A)]$ be the $k$-span of the $a\lambda - \lambda a$. The $k$-linear map
+\[
+  \Phi : \mathrm{Hom}_k(M, A) \to M^*, \qquad \Phi(\lambda)(m) = \mathrm{tr}_M\bigl(x \mapsto \lambda(x)\, m\bigr),
+\]
+is surjective with kernel $[A, \mathrm{Hom}_k(M, A)]$. Hence $\mathrm{Hom}_k(M, A)/[A, \mathrm{Hom}_k(M, A)] \cong M^*$.
+\end{theoreme}
+\end{encadre}
+
+\noindent The page assumes $A$ commutative, as everywhere in the residue entries. The argument does not use it, and the statement here is for any $k$-algebra.
+
+\begin{proof}
+Write $T_{\lambda, m}$ for $x \mapsto \lambda(x) m$ and $L_a$ for $x \mapsto ax$. Then $T_{a\lambda, m} = L_a \circ T_{\lambda, m}$ and $T_{\lambda a, m} = T_{\lambda, m} \circ L_a$, so $\Phi(a\lambda) = \Phi(\lambda a)$ because $\mathrm{tr}(fg) = \mathrm{tr}(gf)$. For $\mu \in M^*$ let $\iota(\mu)(x) = \mu(x) \cdot 1$. Then $T_{\iota(\mu), m}$ is the rank-one map $x \mapsto \mu(x) m$, whose trace is $\mu(m)$, so $\Phi \circ \iota = \mathrm{id}$ and $\Phi$ is surjective. Finally let $\lambda \in \mathrm{Hom}_k(M, A)$, choose a basis $m_j$ with dual basis $\mu_j$, and put $c_j = \lambda(m_j)$. Then $\lambda = \sum_j c_j\, \iota(\mu_j)$, and $\iota(\mu_j)\, c_j = \iota(\mu_j \circ L_{c_j})$. Applying $\Phi$ and the first step gives $\Phi(\lambda) = \sum_j \mu_j \circ L_{c_j}$. So
+\[
+  \lambda - \iota(\Phi(\lambda)) = \sum_j \bigl(c_j\, \iota(\mu_j) - \iota(\mu_j)\, c_j\bigr) \in [A, \mathrm{Hom}_k(M, A)],
+\]
+and if $\Phi(\lambda) = 0$ then $\lambda$ lies in the commutator subspace.
+\end{proof}
+
+\noindent The proof is the one on the page. The page computes the quotient through $M^* \otimes_A A$ and identifies the result with the trace. Here the trace is the definition and the basis appears only in the last step.
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1988_1.lean}{\texttt{Notebook1988\_1.\allowbreak{}lean}} defines $\Phi$ as \texttt{traceForm}, the two actions as \texttt{leftMul} and \texttt{rightMul}, the commutator subspace as \texttt{commutators}, and $\iota$ as \texttt{embed}. The first step is \texttt{traceForm\_leftMul}, the second \texttt{traceForm\_embed} and \texttt{traceForm\_surjective}, and the decomposition is \texttt{sub\_embed\_traceForm\_mem}. Theorem~\ref{thm:quillen-1988-1} is \texttt{ker\_traceForm} together with the isomorphism \texttt{quotientEquivDual}. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Lipman, \q{Residues and traces of differential forms via Hochschild homology}, \emph{Contemp. Math.}~61 (1987), Zbl~0606.14015, builds the residue from trace maps of this kind; the search did not locate the lemma there in this form. The identification $\mathrm{Hom}_k(M, A) \cong M^* \otimes_k A$ and the computation of $N \otimes_{A \otimes A^{o}} -$ on it are elementary, and the edition does not present the statement as new.}
