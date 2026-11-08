@@ -1,7 +1,12 @@
-% The mathematics in Grothendieck's last papers at the BnF (NAF 29093) — standalone sub-article (#37).
-% Description only: the BnF allows no transcription online without the heirs' authorisation, and
-% very short quotations; nothing below is quoted beyond a few words or a title.
-% pdfLaTeX. Compile: latexmk -pdf article.tex (or tectonic -X compile article.tex).
+% Quadratic forms over a base in Grothendieck's Géométrie élémentaire schématique (1992),
+% BnF NAF 29093 (3). Rewritten on 8 November 2026 as a mathematics article on that volume alone
+% (the earlier archival survey of the other boxes is in git history, commit cfa9d8f0).
+% Rights: the BnF allows no transcription of the fonds online without the heirs' authorisation,
+% and very short quotations. Nothing below reproduces the volume: its results are described in our
+% own words and notation, and at most a few words are quoted, with their folio.
+% NOT ON THE SITE until Michel approves (removed from the Method tab and docs/study/tei.mjs on
+% 8 November 2026).
+% Compile: tectonic -X compile article.tex
 \documentclass[11pt,a4paper]{amsart}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -10,100 +15,251 @@
 \usepackage[hidelinks]{hyperref}
 
 \newcommand{\q}[1]{\guillemotleft\,#1\,\guillemotright}
-\newcommand{\fac}[1]{\href{https://grothendieck.umontpellier.fr/}{folder~#1}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\PGL}{\mathrm{PGL}}
+\newcommand{\Ort}{\mathrm{O}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\Isom}{\operatorname{\underline{Isom}}}
+\newcommand{\Gm}{\mathbf{G}_{\mathrm m}}
+\newcommand{\Pj}{\mathbf{P}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\disc}{\operatorname{disc}}
+\newcommand{\status}[1]{\par\smallskip\noindent\textit{In the volume.} #1\par\smallskip}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\setlength{\emergencystretch}{2em}
 
-\title[The mathematics in Grothendieck's last papers]{The mathematics in Grothendieck's last papers:\\ a first description of the BnF fonds NAF~29093, 1991--2000}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}{Question}
+
+\title[Quadratic forms over a base in Grothendieck's 1992 volume]{Quadratic forms over a base in Grothendieck's\\ \emph{Géométrie élémentaire schématique} (1992)}
 \author{Michel Hua}
 \address{Commutator, Paris, France}
 \email{michel@commutator.io}
 \thanks{ORCID 0009-0002-8304-0683.}
-\date{7 November 2026}
-\subjclass[2020]{01A60; 14-03, 11E81}
-\keywords{Grothendieck, Lasserre, Bibliothèque nationale de France, manuscripts, quadratic forms, triality, EGA}
+\date{8 November 2026}
+\subjclass[2020]{11E08, 11E81, 14L15; 01A60}
+\keywords{quadratic forms over rings, half-discriminant, orthogonal group schemes, projective involutions, cross-ratio, EGA, Grothendieck}
 
 \begin{document}
 \begin{abstract}
-The papers Grothendieck wrote at Lasserre after 1987 entered the Bibliothèque nationale de France in 2023 as NAF~29093: forty-three boxes and about 22\,500 leaves, almost all of them filed under \emph{Réflexions sur la Vie et le Cosmos}, with a single volume presented as mathematical. They can be read only in the reading room. This note describes what three sessions there, in October and November 2026, found of mathematics in seven boxes. The 1992 volume, \emph{Géométrie élémentaire schématique}, is a continuous text of 549 leaves in the style of EGA on invertible modules, quadratic forms, discriminants and quadratic groups over a base; its subjects are those of two paragraphs announced in the 1965 plan of EGA~IV and never published, and the author calls it a chapter of the EGA. It is followed by a course on triality (1995), notes on a combinatorial geography (1996) and dated mathematics on paths on a chessboard and a cube (1997--1998). The physics of \emph{Esprit et Matière} and of the tenth part of \emph{Le Problème du Mal} uses classical mathematics, not the notions of his last mathematical texts. None of the boxes read returns to motives, to Teichmüller theory, to the geometry of forms of 1986 or to the pseudolines of the Montpellier notes.
+Among the papers Grothendieck wrote at Lasserre, now at the Bibliothèque nationale de France (NAF~29093), box~3 holds a continuous mathematical text of 549 leaves dated from 19 August to 1 October 1992, the \emph{Géométrie élémentaire schématique}. It treats invertible modules, $\varepsilon$-symmetric and quadratic forms, discriminants, orthogonal structures, smooth relative quadrics, involutions and projective involutions, and quadratic groups over an arbitrary base scheme, with statements numbered as in EGA; on one leaf the author presents it as a chapter of EGA. Its subjects are those of two paragraphs of EGA~IV announced in 1965 and never published. This article sets out, section by section, the mathematics the volume covers, stated in modern terms over an arbitrary base and without dividing by~$2$, and marks for each statement what is known of it: the section titles and a few statements were read in the reading room, the body of the first fourteen sections was not. Where Grothendieck's own earlier treatment survives (an EGA~V typescript kept at the IHÉS and the Montpellier folder~77), his statements are given; where it does not, the classical statement the section title names is given with its source in print, and is not attributed to him. We list what the volume appears to add to the printed theory, as claims about the literature, and the questions that can only be settled at the BnF.
 \end{abstract}
 \maketitle
 
-\section{The fonds}
+\section{Introduction}
 
-Grothendieck's mathematical working notes up to August 1991 are at the University of Montpellier, which publishes their facsimiles. The papers of the following years, written at Lasserre, entered the Bibliothèque nationale de France in 2023, bequeathed by their author and completed by a gift of his children, and are described by the Département des Manuscrits as NAF~29093, \emph{Fonds Alexandre Grothendieck. Œuvres.}, 1987--1999, forty-three boxes \cite{bnf-notice, bnf-cp}. The notices of the boxes count 22\,495 leaves, of which 15\,274 belong to \emph{Le Problème du Mal}. The boxes consulted are digitised but are served only in the reading room, after a request to the department; photographs were not allowed.
+\subsection{The volume}
+The papers of Grothendieck's last years entered the Bibliothèque nationale de France in 2023 and are described as NAF~29093, \emph{Fonds Alexandre Grothendieck. \OE uvres.}, 1987--1999, forty-three boxes \cite{bnf-notice}. Almost all of it is filed under \emph{Réflexions sur la Vie et le Cosmos}. Box~3 is the exception: the \emph{Géométrie élémentaire schématique}, 581 leaves according to the notice, of which 549 are a continuous text in eighteen sections and 32 are undated drafts. The text is written in ink on both sides of the leaves, dated session by session from 19 August to 1 October 1992 (about a dozen leaves a day), with almost no crossings-out; its statements are numbered on three levels as in EGA (for instance Proposition~15.1.17, f.~168v, and Corollary~15.3.4, f.~175r). The volume does not mention physics. It stops inside \S\,18.8 (f.~517v); the eighteenth section, announced in the table with cross-ratios in its title, is not finished. On f.~378 the author describes what he is writing as \q{un (très gros) chapitre des EGA}; the Département des Manuscrits allowed this quotation.
 
-The inventory files almost everything under \emph{Réflexions sur la Vie et le Cosmos}: \emph{La Clef des Songes} (boxes 1--2, 1987--1988), \emph{Structures de la Psyché} and \emph{Psyché et Structure} (4--7), \emph{Le Problème du Mal} (8--13, 16--33, 35--39, 1993--1998), \emph{Esprit et Matière} (14--15, 34, 1992--1996), \emph{Réflexions sur la Création} (41), the two \q{Gribouillis} (40, 42) and a box of notes and scribbles from August 1991 to February 1997 (43). One volume only is presented as mathematical, the \emph{Géométrie élémentaire schématique} (box~3).
+The boxes are digitised but served only in the reading room, and photographs are not allowed. The library's rule, given on 29 September 2026, is that no transcription may be put online without the heirs' authorisation, and that very short quotations are allowed. Accordingly nothing here reproduces the volume. Its results are described in our own words and notation, and quotations are kept to a few words with their folio.
 
-The library's rule is that no transcription of these papers may be put online without the authorisation of the heirs, and that very short quotations are allowed. What follows describes; it quotes only titles and a few words.
+\subsection{Its place}
+In a letter to Dieudonné of 29 September 1965, kept in the Montpellier fonds, Grothendieck gives the plan of the end of EGA~IV, with \q{24. Formes lisses, singularités quadratiques ordinaires} and \q{26. Résultant et discriminant} (folder~25, p.~134). Neither paragraph appeared; the printed EGA~IV stops at \S\,21. Two unpublished states of the subject survive before 1992. An EGA typescript kept at the IHÉS, undated (the IHÉS suggests 1969), whose heading is corrected by hand from IV to V, defines smooth forms and proves a smoothness criterion for quadratic forms over any base through a corrected discriminant \cite{ihes}. The Montpellier folder~77, begun in 1977, works with the same half-discriminant, proves its integrality by a graph expansion of the universal determinant (p.~68), and goes on to quadratic covers, affine quadrics and orthogonal groups over a base; folder~84 (around 1982--1986) treats binary forms and quadratic algebras over a base. The 1992 volume takes the subject up again from the beginning, in the language of EGA and without reference to any printed volume.
 
-\section{How the boxes were read}
+\subsection{What was read, and what this article can claim}\label{sub:evidence}
+The volume was consulted in two sessions, on 23 and 29 October 2026. What was read is: the table of contents (three unnumbered leaves), in which the titles of sections 1--8, 10, 14 and 18 were noted; the second pochette (\S\S\,15--16) and the third (\S\S\,17--18), leafed through, with the numbering, a few dates and the notation noted; and the 25 leaves of drafts. The first pochette, which holds \S\S\,1--14 (ff.~1--155), was read for its table only. The titles and folio ranges of \S\S\,9--13, 15--16 and 17 below are those of the BnF's notice of the box \cite{bnf-notice}. No statement of \S\S\,1--14 was read on the page.
 
-The boxes were requested in an order fixed by questions prepared from the Montpellier notes: did he return to motives after 1991, do the threads of the Montpellier folders go on, and what is the mathematics of the volume presented as such. Three sessions, on 23 and 29 October and 6 November 2026, read seven boxes, pochette by pochette, with a sheet of questions box by box \cite{repo}. For each pochette the reader noted dates in his hand, the share of mathematics (an estimate by eye), the subjects, the names cited and the answers to the questions. Table~\ref{tab:boxes} summarises them.
+This settles what the article can do. It cannot reconstruct Grothendieck's proofs of 1992, nor say which of the classical results below he states, proves or merely uses. It can say precisely what mathematics each section covers, because the titles and notation fix it, and it can give his own earlier statements where a surviving text has them. Each subsection of Section~\ref{sec:math} therefore opens with what is known of the section in the volume (marked \emph{title}, \emph{notice} or \emph{seen}), followed by statements labelled by their source: a printed reference, the IHÉS typescript, folder~77, or the present author, in which case the statement is ours and is proved or checked here.
 
-\begin{table}[ht]
-\small
-\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}p{4.2cm}lrY@{}}
-\toprule
-Box & Title (inventory) & Dates & Math. & What the pochettes read show \\
-\midrule
-3 & Géométrie élémentaire schématique & 19.8--1.10.1992 & 100\% & continuous EGA-style text, 18 sections; stops in \S\,18.8 \\
-43 & notes and scribbles, 1991--1997 & 1995--1996 & mixed & \emph{Trialité} (Nov.\ 1995); combinatorial geography (June 1996); physics notes \\
-40 & Gribouillis I & 24.10.1997--3.2.1998 & 95\% & paths on a chessboard and a cube; symmetric groups; \q{bitrialité projective} \\
-14 & Esprit et Matière, A--C & 1993--1996 & 5--80\% & Maxwell and Liénard--Wiechert; an axiomatics of cosmic space; Ricci curvature \\
-34 & Esprit et Matière, E & 1992--1996$^*$ & 10\% & physics calculations; powers of 3 \\
-35 & Le Problème du Mal X, IX--XIII & 1996--1997$^*$ & 20\% & Planck's law marked in blue (f.~887) \\
-39 & Le Problème du Mal, tables & 14.6.1998--4.1.2000 & 30\% & a physics text under the name of a table \\
-\bottomrule
-\end{tabularx}
-\caption{The boxes read in October and November 2026: the dates read in his hand in the pochettes consulted (with $^*$, the notice's dates), and an estimate by eye of the share of mathematics. Boxes 15, 41 and 42 are for the next session.}\label{tab:boxes}
-\end{table}
+\subsection{Why it matters}
+The layer the volume treats, quadratic forms on locally free modules over an arbitrary base, including the characteristic~$2$ fibres of odd rank, is now standard through Knus's book \cite{knus}, Conrad's appendix on orthogonal group schemes \cite{conrad}, and the study of quadratic and quaternion rings and their discriminants over an arbitrary base \cite{voight2011, voight2016, wood}. Conrad credits the half-discriminant, the device that makes the odd-rank theory work over $\Z$, to Grothendieck and Kneser independently \cite[\S\,C.1]{conrad}. The 1992 volume is the longest text by Grothendieck on this layer known to us, and more than half of it (\S\S\,15--18, ff.~156--549) is about involutions, projective involutions and quadratic groups, subjects that neither the EGA~IV plan nor the IHÉS typescript contains.
 
-\section{The 1992 volume: a chapter of EGA}
+The other mathematics of the fonds read in October and November 2026 (a course on triality of 1995, notes on a combinatorial geography of 1996, and dated work on paths on a chessboard and a cube of 1997--1998) is left for another occasion.
 
-The \emph{Géométrie élémentaire schématique} is entirely mathematical and does not mention physics; the general tables of the \emph{Réflexions} drawn up by Grothendieck (box~39) do not mention it, although the inventory describes it as auxiliary results for the Riemann--Lorentz structure. Its 549 leaves, written in ink on both sides of ordinary white paper, form eighteen sections dated session by session from 19 August to 1 October 1992, about a dozen leaves a day. They treat invertible modules, bilinear and quadratic forms, discriminants, smooth relative quadrics, projective involutions and quadratic groups over a base $S$. The text runs on with almost no crossings-out, reread with a felt pen, and its statements are numbered on three levels as in EGA (Proposition 15.1.17, f.~168v). The table announces a last section on quadratic groups and cross-ratios, but the text stops in \S\,18.8, \q{Dualités} (f.~517v); of the cross-ratios only computations among the scribbles remain. The other thirty-two leaves of the box are such scribbles.
+\subsection*{Conventions}
+$S$ is a scheme, $E$ a locally free $\cO_S$-module of finite rank $n$, $L$ an invertible $\cO_S$-module. A \emph{quadratic form} $q\colon E\to L$ is a map of sheaves with $q(cx)=c^2q(x)$ whose polar $b_q(x,y)=q(x+y)-q(x)-q(y)$ is bilinear; so $b_q(x,x)=2q(x)$, and nothing is divided by~$2$. Locally $q=\sum_{i\le j}a_{ij}x_ix_j$. The \emph{standard form} is $q_{2m}=x_1x_2+\dots+x_{2m-1}x_{2m}$ and $q_{2m+1}=x_0^2+q_{2m}$ \cite[Def.~C.1.2]{conrad}; the IHÉS typescript puts the square in the last variable, which changes nothing below.
 
-These subjects are those of two paragraphs that the 1965 plan of EGA~IV announced and that never appeared, on smooth forms and ordinary quadratic singularities, and on resultant and discriminant; the plan is in the Montpellier notes (\fac{25}, p.~134). Grothendieck had drafted part of them for EGA~V: typescripts kept at the IHÉS treat smooth quadratic forms over any base, with a corrected discriminant, half the usual one in odd rank, invertible exactly when the form is smooth, and define the resultant and the discriminant of a form of degree $n$ over any base \cite{ihes}. The subject returns in the Montpellier folders: \fac{77} (from 1977) defines the half-discriminant of a quadratic form of odd rank over any base, and \fac{84} (around 1982--1986) treats quadratic algebras and quadratic covers over any base without dividing by $2$. The half-discriminant statement of \fac{77} is among those proved in Lean in the companion paper \cite{hua2611}. The 1992 text takes these subjects up again in the language of EGA, without reference to any volume; on f.~378 he describes what he is writing as a very large chapter of the EGA, and he remarks on a point of terminology he had not thought of at the time of EGA and SGA (f.~156v). Seven years earlier, in \emph{Récoltes et semailles}, he spoke of a later chapter of the EGA only as one that never saw the light of day \cite{rs}.
+\section{The mathematics, section by section}\label{sec:math}
 
-The case recalls that of Ramanujan's \q{lost} notebook, found by Andrews in 1976 among Watson's papers at Trinity College: leaves of a last period, kept in a fonds and unread for half a century \cite{andrews1979}.
+\subsection{Invertible modules (\S\,1)}
+\status{Title only.}
+The section that opens the volume concerns invertible modules. The statement every later section needs is Kummer theory for $\mu_2$ in the fppf topology: the category of pairs $(N,\phi)$, $N$ invertible and $\phi\colon N^{\otimes2}\xrightarrow{\sim}\cO_S$, is equivalent to that of $\mu_2$-torsors, so that $H^1_{\mathrm{fppf}}(S,\mu_2)$ sits in $0\to\cO(S)^\times/\cO(S)^{\times2}\to H^1(S,\mu_2)\to\operatorname{Pic}(S)[2]\to0$. Square roots of a unit $\lambda$ form the torsor attached to $(\cO_S,\lambda^{-1})$. This torsor reappears below as the double cover of a quadratic form of odd rank (\S\,\ref{sub:covers}) and as the obstruction to lifting a projective involution (\S\,\ref{sub:projinv}).
 
-\section{Triality, geography, a chessboard}
+\subsection{$\varepsilon$-symmetric bilinear forms and adjunction (\S\S\,2--3)}
+\status{Titles only (\S\,2, $\varepsilon$-symmetric bilinear forms; \S\,3, adjunction).}
+For $\varepsilon\in\mu_2(S)$, a bilinear $B\colon E\times E\to L$ is $\varepsilon$-symmetric if $B(y,x)=\varepsilon B(x,y)$. Over a base where $2$ is not invertible three notions separate: $(-1)$-symmetric, alternating ($B(x,x)=0$), and polar of a quadratic form (symmetric with $B(x,x)\in 2\cdot L$). The polar of $q$ is symmetric; in characteristic~$2$ it is alternating. When $B$ is perfect, each $u\in\End(E)$ has an adjoint $u^*$ with $B(ux,y)=B(x,u^*y)$, and $u\mapsto u^*$ is an anti-involution of $\End(E)$. Knus's book is written in the generality of hermitian forms over rings with involution, which contains these \cite{knus}.
 
-Box~43 holds \emph{Trialité (vectorielle et projective)}, eighty-nine leaves written as a course from 8 to 20 November 1995, on the same paper and with the same care. Its stated motivation is a canonical abelian decomposition of physical space, identified with the real projective space $\mathbf P^3(\mathbf R)$. Its fifteen sections go from $\varepsilon$-bases of a module to vector and projective trialities, a combinatorial axiomatics of triality, bitrialities and triality over $\mathbf F_3$; the statements are numbered and dated, at about 170 words a page, and a submodule with its $\varepsilon$ corresponds to a set with a fixed-point-free involution.
+\subsection{Modules of rank $2$, with and without involution (\S\S\,4--6)}
+\status{Titles only: locally free modules of rank~$2$ (\S\,4), the same with an involution (\S\,5), and two modules $M^+_E$, $M^-_E$ regarded as quadratic modules (\S\,6).}
+For $E$ of rank~$2$ the determinant is a perfect alternating pairing $E\times E\to\det E$; the adjoint it defines is the canonical involution $u\mapsto\bar u=\tr(u)-u$ of $\End(E)$, with $u\bar u=\det(u)$. Two quadratic modules come with it, and they are the natural candidates for the $M_E^\pm$ of \S\,6, which we have not seen defined:
+\begin{enumerate}
+\item $(\End(E),\det)$, of rank~$4$, locally the form $x_1x_4-x_2x_3$, hence smooth in every characteristic;
+\item $(\End^0(E),\det)$, the trace-zero endomorphisms, of rank~$3$: on $\left(\begin{smallmatrix}x&y\\ z&-x\end{smallmatrix}\right)$ the determinant is $-(x^2+yz)$, a smooth ternary form, with half-discriminant a unit (compute with Theorem~\ref{thm:halfdisc}).
+\end{enumerate}
+Through (2), $\PGL(E)=\PGL_2$ acts on $\End^0(E)$ by conjugation preserving $\det$, which gives the isomorphism $\PGL_2\simeq\SO_3$ over $\Z$; Conrad gives it in this form \cite[Ex.~C.6.2]{conrad}. Through (1), $\GL(E)\times\GL(E)$ acts by $x\mapsto gxh^{-1}$, which gives $(\mathrm{SL}_2\times\mathrm{SL}_2)/\mu_2\simeq\SO_4$ \cite[Ex.~C.6.3]{conrad}. The same identification appears in Montpellier folder~82 ($\SO(3)\simeq$ the projective group of the line), dated around 1982.
 
-The same box holds notes on a \q{géographie combinatoire} (June 1996): finite \q{forestiers} sets whose elements play the part of geographical sectors. The sectors nest along a forest whose minimal vertices are localities, and each sector has for inhabitants the disjoint union of those of the localities it contains; a cube crossed by an ordered path appears. The vocabulary is not new, since the object axiomatised in \emph{Vers une géométrie des formes} (1986) is called a \q{contrée} and the graphs of the Teichmüller notes are geographical representations (\fac{146}), but the notion is another, and the words of 1986 do not occur in the leaves read.
+\subsection{Quadrics as products of projective lines (\S\S\,7, 12)}
+\status{Title of \S\,7 read with an uncertain word (an isomorphism between a product and a variety of quadrics); title of \S\,12 from the notice, ff.~109r--128r.}
+The classical statement is the Segre isomorphism over an arbitrary base: for $E_1,E_2$ of rank~$2$, the map $\Pj(E_1)\times_S\Pj(E_2)\to\Pj(E_1\otimes E_2)$ identifies the product with the quadric of rank-one tensors, the zero scheme of the determinant on $\operatorname{Hom}(E_1^\vee,E_2)\simeq E_1\otimes E_2$, a form of type (1) above, valued in $\det E_1\otimes\det E_2$. Conversely, for a smooth quadric surface $X=V(q)\subset\Pj^3_S$ the two rulings are defined only over the finite étale double cover $Z_q$ given by the centre of the even Clifford algebra, and accordingly $\SO(q)/\mu_2$ is the Weil restriction from $Z_q$ to $S$ of a form of $\PGL_2$ \cite[Ex.~C.6.3]{conrad}. Which of these the volume proves is not known.
 
-The first \q{Gribouillis} (box~40, October 1997 to February 1998) are, despite their title, continued statements and proofs dated to the day (24 October and 15 November 1997, 9, 15 and 27 January, 1 and 3 February 1998), with only a few pages of draft computation, about $95\%$ mathematics. They study moves on a chessboard that do not return to a square, with sub-squares of size~$3$, and paths on a cube, with the symmetric groups that act on them: $\mathfrak S_4$, plausibly the rotation group of the cube acting on its diagonals, $\mathfrak S_I$, $\mathfrak S_\rho$, and maps $\mathfrak S \to \mathfrak S$ and $\mathfrak S \to \operatorname{Aut}(\mathfrak S)$. A \q{bitrialité projective} is noted on 3 February 1998; an algorithm named after Azumaya is mentioned. There is no reference to the 1992 volume or to \emph{Trialité}, and no return of Teichmüller theory, of $M_{g,\nu}$, of dessins or of $\operatorname{Gal}(\bar{\mathbf Q}/\mathbf Q)$.
+\subsection{The canonical quadratic form (\S\,8)}
+\status{Title only.}
+Not identified. Two classical forms deserve the name over any base: the determinant on $\End(E)$ for $E$ of rank~$2$, and, for $E$ of rank~$4$, the Pfaffian $\operatorname{Pf}\colon\Lambda^2E\to\Lambda^4E$, defined over $\Z$ by $\omega\wedge\omega=2\operatorname{Pf}(\omega)$ (on $\sum_{i<j}a_{ij}e_i\wedge e_j$ it is $a_{12}a_{34}-a_{13}a_{24}+a_{14}a_{23}$), a smooth form of rank~$6$ whose polar is the wedge pairing and whose quadric is the Grassmannian of planes in~$E$. The leaves of drafts are full of exterior products, which favours the second; this is a hypothesis.
 
-\section{The mathematics of the physics}
+\subsection{Discriminants (\S\,9)}\label{sub:disc}
+\status{Notice: \S\,9, discriminants, ff.~36v--48v. Not read.}
+The polar $b_q$ is a map $E\to E^\vee\otimes L$; its determinant is a section $\disc(q)$ of $(\det E)^{\otimes-2}\otimes L^{\otimes n}$, the \emph{discriminant}. In even rank it is the right invariant. In odd rank it vanishes on every fibre of characteristic~$2$, and the following replaces it.
 
-The physics, which the inventory describes as a radical critique of modern physics, uses classical mathematics. In box~14 (\emph{Esprit et Matière}, sections A--C), the section \q{Maxwell II} revises his own earlier formulas in the light of those of Liénard and Wiechert, passes to the relativistic form with differential forms, and uses the Lorentz quadratic form, without defining it, to derive the wave equation of the potential; a margin note dated 3 January 1994 corrects a forgotten factor $1/c^2$ (f.~177v). It ends with a property he calls global ML, given by two conservation equations, and the decomposition of an open set into a product of three factors. Section~B, dated from 25 October 1993, sets an axiomatics (A1)--(A19) of cosmic space in a continuous Riemannian frame, about $5\%$ mathematics. Section~C, preparatory sheets, computes the Ricci curvature of a metric with a radial variable and states the existence and uniqueness of a torsion-free connection for which the metric is parallel, the Levi-Civita connection, in his words. In box~34 (section~E), the chapter titled \q{Le Champ est une trialité} puts physics calculations in fair copy without referring to the triality of 1995: the word there names the triad of gravitation, electromagnetism and radiation. A precise bridge does appear in the chapters on the Moon in the same box, where the field is written $E + iB$ and a quadratic form is defined by the exterior product, with the magnetic field dual to the electric one (f.~402): the algebra of quadratic forms and exterior products of the 1992 volume, applied to Maxwell's equations. The same box shows his arithmetic of powers of~$3$: $3^6 - 1 = 26 \cdot 28$ at f.~498, with $28 = 3^3 + 1$ joined to the lunar period.
+\begin{theorem}[half-discriminant]\label{thm:halfdisc}
+Let $n$ be odd and $Q=\sum_{i\le j}A_{ij}x_ix_j$ the universal form over $\Z[A_{ij}]$.
+\begin{enumerate}
+\item $\disc(Q)=2\,\delta'(Q)$ with $\delta'(Q)\in\Z[A_{ij}]$, and the content of $\delta'(Q)$ is~$1$.
+\item Specialising, every $q$ on $E$ of rank~$n$ has a half-discriminant $\delta'(q)\in\Gamma\bigl((\det E)^{\otimes-2}\otimes L^{\otimes n}\bigr)$, compatible with base change, with $\delta'(q\circ g)=(\det g)^2\delta'(q)$ for $g\in\GL(E)$, and $\delta'(q\oplus q')=\delta'(q)\disc(q')$ when $q'$ has even rank.
+\item $\delta'(q_{2m+1})=(-1)^m$.
+\end{enumerate}
+\end{theorem}
 
-In the tenth part of \emph{Le Problème du Mal} (box~35), the chapter titled after \q{la formule la plus belle} marks with a blue line in the margin, as he marks an important result, Planck's law for the spectral radiance (f.~887); the names cited are Feynman, Landau, de Broglie and Kastler. Its \q{table} in box~39 is in fact a developed physics text of 290 leaves, dated from 14 June 1998 to 4 January 2000, after the end date of the fonds as catalogued. A sheet of box~43 lists what he took for the errors of established physics, on the conservation of energy, the emission of photons and the Poynting vector.
+\noindent\emph{Sources.} In print: Conrad \cite[Prop.~C.1.4]{conrad}, by the defect of a form over a field of characteristic~$2$. In the IHÉS typescript: (1) is Lemma~16.5 (the content of $\disc(Q)$ is exactly $2$), and the section $\tilde d(q)$ of (2), which the typescript calls the \q{discriminant corrigé}, is Proposition~16.6 and Definition~16.7, with the product rule as Corollary~16.8, including the factor $2$ when both summands have odd rank \cite{ihes}. In folder~77, p.~68: $\disc(Q)$ is written as a sum over the graphs of permutations of $\{1,\dots,n\}$, and modulo~$2$ only the fixed-point-free involutions survive, which is impossible in odd size. The integrality has been checked in Lean for every odd $n$, by the route through alternating matrices \cite{hua2611}. For $n=3$ and $q=ax^2+by^2+cz^2+uyz+vxz+wxy$ one finds $\delta'(q)=4abc+uvw-au^2-bv^2-cw^2$, which is Voight's (half-)discriminant of a ternary form \cite[(3.2)]{voight2011}.
 
-The project is old: in 1986 he wrote to Yamashita that space-time is probably finite and the mathematical continuum only a convenient fiction, as Riemann would have said \cite{scharlau}. In the boxes read, the physics does not use his own notions of 1986--1996: no places or figures without points, no pseudolines, no signs on triples, no finite axiomatics of space.
+\begin{remark}[naming]\label{rem:naming}
+The typescript suggests a change of terminology: it proposes to call the classical $\disc(q)$ the \emph{determinant} of $q$, and to keep \emph{discriminant} for $\tilde d$, on the ground that $\tilde d$ is what generalises to the discriminant of a form of any degree, the subject of the announced \S\,26 \cite{ihes}. The 1992 volume has a remark of its own on terminology, a point he says he had not thought of in the time of EGA and SGA (f.~156v); what that point is was not noted.
+\end{remark}
 
-\section{Paper and dates}
+\subsection{Orthogonal structures (\S\,10)}\label{sub:orth}
+\status{Title read (\q{Digressions}, variations on orthogonal structures); notice: ff.~48v--69v. Not read.}
+Call $q$ \emph{smooth} if for every $s\in S$ the quadric $V(q_s)\subset\Pj(E_s^\vee)$ is smooth of dimension $n-2$ and $q_s\neq0$. At a geometric point this means that the radical of $b_q$ is $0$, or is a line on which $q$ is non-zero (characteristic~$2$, $n$ odd). Conrad calls this non-degenerate, SGA~7 calls it ordinary, Knus calls it regular or semi-regular \cite[\S\,C.1 and Rem.~C.1.1]{conrad}; folder~77 calls it regular.
 
-The paper is reused as in Montpellier: many sheets carry the letterhead of an estate agency; two sheets of fan-fold printer paper, printed with the output of a finite-element program in Fortran, serve as a wrapper for a group of pages, as reused listings do in \fac{154}. Such paper gives only a lower bound for the date of what is written on it. Part of the third pochette of box~14 is written on the back of a letter later than February 1996, outside the period 1992--1993 the notice gives for the box; box~39 runs to January 2000. The notices' dates are therefore those of the main texts, not of every sheet.
+\begin{theorem}[orthogonal group schemes]\label{thm:orth}
+Let $q\colon E\to\cO_S$ be smooth of rank $n$.
+\begin{enumerate}
+\item The functor $S'\mapsto\{g\in\GL(E_{S'}) : q\circ g=q\}$ is a closed subgroup scheme $\Ort(q)\subset\GL(E)$ of finite presentation. It is smooth if and only if $n$ is even or $2\in\cO_S^\times$, and then of relative dimension $n(n-1)/2$.
+\item For $n$ odd, $\Ort(q)=\mu_2\times\SO(q)$ with $\SO(q)=\ker\det$, and $\SO(q)$ is smooth.
+\item $\Isom(q_n,q)$ is an $\Ort_n$-torsor for the fppf topology, and $q\mapsto\Isom(q_n,q)$ is an equivalence between smooth forms of rank $n$ and $\Ort_n$-torsors. Hence isomorphism classes of pairs $(E,q)$, $E$ locally free of rank $n$ and $q$ smooth, are classified by $H^1_{\mathrm{fppf}}(S,\Ort_n)$.
+\end{enumerate}
+\end{theorem}
 
-\section{What remains}
+\noindent\emph{Sources.} (1) and (2): Conrad \cite[Thm.~C.1.5]{conrad}, through the orbit map $\GL(E)\to\{\text{smooth forms}\}$ and a tangent space computation. (3): stated in the IHÉS typescript (Remarques numbered 15.12, read as 16.12), the equivalence being said to follow from flat descent \cite{ihes}; the typescript also notes that $\Ort(q)$ is smooth near $s$ except exactly when $k(s)$ has characteristic~$2$ and $n$ is odd (16.13). The formalisation roadmap \cite{roadmap} sets out (1)--(3) on $\cO_S^n$ as targets.
 
-The question that led to the visit, whether he returned to motives after 1991, has no positive answer in the seven boxes read; the boxes of \emph{Le Problème du Mal} not read, and boxes 15, 41 and 42, may still change that. The next session is planned for section~D of \emph{Esprit et Matière} (box~15) and a survey of the second \q{Gribouillis} (box~42), to find the last dated mathematics. A fuller account would need the heirs' authorisation to quote, and a reading of \emph{Trialité} and of the 1992 volume by a specialist of quadratic forms over a base, whose subject is classical but whose text has had no reader.
+\subsection{The double covers of a form (\S\,11)}\label{sub:covers}
+\status{Notice: \S\,11, the coverings $\mathrm{Dis}(Q)$, ff.~69v--108v; the longest section of the first pochette. Not read.}
+Two classical double covers are attached to a smooth form, one for each parity, and they are what a covering of $S$ named after the discriminant can be.
+\begin{enumerate}
+\item \emph{Odd rank $n=2m+1$.} By Theorem~\ref{thm:halfdisc}(2), a $g\in\Isom(q_n,q)$ satisfies $(\det g)^2\delta'(q)=(-1)^m$ on $\cO_S^n$. So $\det$ maps the $\Ort_n$-torsor of Theorem~\ref{thm:orth}(3) to the $\mu_2$-torsor of square roots of $(-1)^m\delta'(q)^{-1}$, a finite locally free double cover of $S$, étale only where $2$ is invertible. It is the obstruction to reducing the torsor from $\Ort_n=\mu_2\times\SO_n$ to $\SO_n$. The IHÉS typescript notes this reduction, with $\mu_2=\Ort(n)/\SO(n)$, as the way to obtain local isotriviality in the bad case (16.13) \cite{ihes}; folder~77 introduces the cover of square roots of $\delta'(q)$ (p.~105).
+\item \emph{Even rank $n=2m$.} The centre $Z_q$ of the even Clifford algebra $C_0(q)$ is a finite étale $\cO_S$-algebra of rank~$2$, $C_0(q)$ is Azumaya over $Z_q$, and $\Ort(q)$ acts on $Z_q$ through its Galois group, which identifies $\Ort(q)/\SO(q)$ with $\Z/2$ \cite[Prop.~C.2.2 and \S\,C.2]{conrad}. When $2$ is invertible $Z_q$ is $\cO_S[t]/(t^2-(-1)^m\disc(q))$. Over $\Z$, $(-1)^m\disc$ of the universal form is congruent modulo~$4$ to the square of the hafnian of its off-diagonal coefficients, which yields an explicit free quadratic algebra $\cO_S[t]/(t^2-Bt-C)$ of discriminant $(-1)^m\disc(q)$ over any base. Folder~77 proves this congruence and uses it in this way; the roadmap \cite{roadmap} lists it as a target.
+\end{enumerate}
+Quadratic algebras over an arbitrary base, their discriminants and their relation to binary quadratic forms are the subject of Voight's and Wood's papers \cite{voight2016, wood}, after Bhargava's reformulation of Gauss composition over $\Z$ \cite{bhargava}; folder~84 treats the same correspondence between binary forms and quadratic algebras with an invertible module.
+
+\subsection{Smooth relative quadrics (\S\,13)}\label{sub:smooth}
+\status{Notice: \S\,13, smooth relative quadrics, ff.~128r--137v. Not read.}
+
+\begin{theorem}[smoothness criterion]\label{thm:smooth}
+For $q$ on $E$ of constant rank $n$ the following are equivalent: (i) $q$ is smooth; (ii) $\disc(q)$ (for $n$ even) or $\delta'(q)$ (for $n$ odd) is invertible; (iii) there is a surjective $S'\to S$ over which $q$ becomes isomorphic to $q_n$; (iii bis) the same with $S'\to S$ faithfully flat of finite presentation. If no residue field of characteristic~$2$ occurs together with odd rank, $S'\to S$ can be taken étale surjective, and finite étale locally on $S$.
+\end{theorem}
+
+\noindent\emph{Sources.} The IHÉS typescript states this as Theorem~16.9, with the étale refinement in 16.13, citing SGA~3, Exp.~XXIV, for the finite étale version \cite{ihes, sga3}. Its proof: $\Isom(q_n,q)$ is the fibre over $q$ of the orbit map $\GL(E)\to\mathcal Q(E)^*$ to the open scheme of forms with invertible (half-)discriminant; this map is faithfully flat by generic flatness and transitivity on geometric points; and over an algebraically closed field a form with non-zero half-discriminant is standard, by splitting off the radical line in characteristic~$2$. Conrad proves (i)$\Leftrightarrow$(ii) as part of Proposition~C.1.4(3), by the Witt-vector lift \cite{conrad}. The étale refinement fails in the excluded case. Over an imperfect field $k$ of characteristic~$2$ and $a\in k\smallsetminus k^2$, the form $at^2$ is smooth but becomes standard only over the inseparable extension $k(\sqrt a)$; the typescript gives this example (16.13).
+
+The same typescript begins with smooth forms of any degree $d$: $\phi\in\Gamma(\Sym^dE)$ is smooth when $V(\phi)\subset\Pj(E)$ is smooth over $S$ and $\phi$ is fibrewise non-zero, which by the Jacobian criterion means that $\phi$ and its partial derivatives generate an ideal containing a power of the augmentation ideal. It also introduces the corresponding singularities, the \emph{elementary} singular points of multiplicity $d$ \cite{ihes}. Whether the 1992 volume returns to forms of degree $d>2$ was not seen (Question~\ref{qu:degree}).
+
+\subsection{Orthogonal bifurcation (\S\,14)}
+\status{Title only (ff.~137v--155, between the end of \S\,13 in the notice and the start of the second pochette).}
+Not identified. We record the title and make no guess.
+
+\subsection{Involutions and reflections (\S\,15)}\label{sub:refl}
+\status{Seen (second pochette, ff.~156--245): statements numbered on three levels, for instance Proposition~15.1.17 (f.~168v) and Corollary~15.3.4 (f.~175r), dated 1 September 1992 at f.~190r. Notice: involutions, reflections. No statement read.}
+The basic object over any base, in any characteristic, is the reflection. Let $q\colon E\to\cO_S$ and let $v\in E(S)$ with $q(v)\in\cO(S)^\times$. Put $s_v(x)=x-b_q(x,v)\,q(v)^{-1}v$. Then $q\circ s_v=q$, $s_v^2=1$ and $\det s_v=-1$.
+
+\noindent\emph{Proof} (ours, elementary). With $t=b_q(x,v)/q(v)$, $q(x-tv)=q(x)-t\,b_q(x,v)+t^2q(v)=q(x)$. Next, $b_q(s_vx,v)=b_q(x,v)-2t\,q(v)=-b_q(x,v)$, so $s_v(s_vx)=x$. Finally $s_v=1-v\otimes\ell$ with $\ell(v)=2$, so $\det s_v=1-2$. In characteristic~$2$ the determinant is $1$ and $s_v$ is a transvection; there $\det$ does not detect $\Ort(q)/\SO(q)$ in even rank, and the Dickson invariant, defined through $Z_q$, takes its place \cite[(C.2.2)]{conrad}. Which properties of involutions in $\Ort(q)$ the section proves was not seen.
+
+\subsection{Projective involutions (\S\S\,16--17)}\label{sub:projinv}
+\status{Seen (\S\,16, ff.~246r--377v): projective bundles, the projective group, a set written $\mathrm{PsInv}(M)$, and at f.~297v a map from a set of involutions of a certain type (index not read) to the projective involutions, $\mathrm{Inv}_*(M)\to\mathrm{Invpr}(M)$. Notice: \S\,17, projective involutions, geometric study, ff.~378r--452v. The reading of $\mathrm{PsInv}$ below is a hypothesis.}
+Let $M$ be locally free of rank $r$, $P=\Pj(M)$, so that $\operatorname{Aut}_S(P)=\PGL(M)$. A \emph{projective involution} is $\gamma\in\PGL(M)(S)$ with $\gamma^2=1$. The following is our reconstruction of what a map $\mathrm{Inv}_*(M)\to\mathrm{Invpr}(M)$ can measure; we do not attribute it to the volume.
+
+\begin{proposition}\label{prop:lift}
+Let $\gamma$ be a projective involution of $\Pj(M)$.
+\begin{enumerate}
+\item Zariski-locally on $S$, $\gamma$ lifts to $u\in\GL(M)$, and then $u^2=\lambda\cdot1$ with $\lambda\in\cO^\times$. The lifts form a $\Gm$-torsor $T_\gamma$, and $u\mapsto u^2$ satisfies $(cu)^2=c^2u^2$.
+\item The lifts of $\gamma$ that are involutions of $M$ ($u^2=1$) form a $\mu_2$-torsor $I_\gamma$ for the fppf topology, namely the one attached by Kummer theory to $T_\gamma$ and the squaring map. Thus $\gamma$ lifts to an involution of $M$ over $S$ if and only if the class of $I_\gamma$ in $H^1_{\mathrm{fppf}}(S,\mu_2)$ vanishes, and two such lifts differ by $\pm1$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The sequence $1\to\Gm\to\GL(M)\to\PGL(M)\to1$ is exact for the Zariski topology on $M$ free, and $\gamma^2=1$ gives $u^2\in\Gm$. If $u$ and $u'=cu$ both square to $1$, then $c^2=1$. A unit $\lambda$ is fppf-locally a square, so lifts with square $1$ exist fppf-locally. The torsor of square roots of $\lambda$ along the transition functions of $T_\gamma$ is $I_\gamma$.
+\end{proof}
+
+Elements $u$ with $u^2$ a unit scalar, taken modulo $\Gm$, are thus the same as projective involutions, locally. This is our reading of $\mathrm{PsInv}(M)$. When $2$ is invertible and $u^2=1$, $M=M^+\oplus M^-$, and the fixed scheme of $\gamma$ is $\Pj(M^+)\sqcup\Pj(M^-)$. In characteristic~$2$, a lift with $u^2=1$ has $(u-1)^2=0$: it is unipotent and its fixed scheme is the projective bundle of $\ker(u-1)$ when that is a direct summand. A \emph{geometric study} in \S\,17 would be the study of these fixed loci and of their ranks over a base where both cases occur. Over fields, the involutions that Knus, Merkurjev, Rost and Tignol study are anti-automorphisms of central simple algebras \cite{kmrt}, a different notion from these elements of order~$2$ of $\PGL(M)$.
+
+\subsection{Quadratic groups and cross-ratios (\S\,18)}
+\status{Table: \S\,18 has \q{relations anharmoniques} (cross-ratios) in its title. Seen (ff.~453r--549r): finite monoids, monogenic groups, a notation $\mathrm{Scind}_S(\varepsilon)$ (perhaps the splittings of $\varepsilon$ over $S$), exterior products; \S\,18.8, on dualities, begins at f.~517v (18.8.2 at f.~532v), and the text stops inside it. Drafts (fourth pochette): references to \S\S\,18.7--18.11, one of them on divisors with cross-ratio relations, and a leaf on cross-ratio and duality computing in the algebra of matrices $\left(\begin{smallmatrix}a&b\\ c&d\end{smallmatrix}\right)$ with $a,d\in\Gamma(\cO_S)$, $b\in\Lambda$, $c\in\Lambda^{-1}$ for an invertible $\Lambda$; computations only, no numbered statement.}
+That algebra is $\End(\cO_S\oplus\Lambda)$, whose units act on the $\Pj^1$-bundle $\Pj(\cO_S\oplus\Lambda)$. So the planned end of the volume is the projective line over a base, with its group and its cross-ratio. The classical statement is the following. Three pairwise disjoint sections of a $\Pj^1$-bundle $P\to S$ (disjoint on every fibre) trivialise it, $P\simeq\Pj^1_S$ with the sections at $0,1,\infty$, uniquely. A fourth section disjoint from the three is then a unit $\lambda$ with $1-\lambda$ a unit, the cross-ratio, that is, a morphism $S\to\Pj^1\smallsetminus\{0,1,\infty\}$; and $\mathfrak S_4$ acts on the cross-ratio through $\mathfrak S_3$, by $\lambda\mapsto1-\lambda,1/\lambda,\dots$. Which divisors with cross-ratio relations he had in mind is not known; the sections that would say were not written. What \emph{quadratic groups} denotes is not settled either: orthogonal groups, or group schemes of rank~$2$ over $S$ such as $\mu_2$, $\Z/2$ and their twisted forms, whose classification over a base goes back to Tate and Oort \cite{tateoort}. The vocabulary of finite monoids and monogenic groups points to the second reading (Question~\ref{qu:quadgroups}).
+
+\section{What is new or different compared with print}\label{sec:new}
+
+The claims below are about the printed literature consulted, not about priority.
+
+\begin{enumerate}
+\item \emph{The text itself.} We know of no printed or online description of the mathematics of the 1992 volume beyond the BnF's notice and this project's own notes. In particular the attribution of the half-discriminant to Grothendieck in \cite[\S\,C.1]{conrad} rests, in print, on no text of his. Two unpublished texts of his on this layer can be read today, the IHÉS typescript and folder~77, and the 1992 volume is a third and much longer one.
+\item \emph{The shape of the theory.} In Conrad's appendix and in the roadmap \cite{roadmap}, the theory runs from forms to discriminants to orthogonal groups to Clifford algebras. The 1992 volume, judging by its table, starts lower: invertible modules, $\varepsilon$-symmetric forms valued in invertible modules, adjunction, and modules of rank~$2$ with involution all come before the discriminant (\S\S\,1--8, ff.~1--36). It also gives more than two thirds of its length to involutions, projective involutions and quadratic groups (\S\S\,15--18, about 390 of 549 leaves). No section on Clifford algebras appears among the titles known. Nothing in Conrad's Appendix~C, in the roadmap, or in Knus's book as far as we consulted it treats projective involutions of $\Pj(M)$ over a base as a subject (Proposition~\ref{prop:lift} is ours).
+\item \emph{Terminology.} The IHÉS typescript's proposal to rename the classical discriminant \q{déterminant} and keep \q{discriminant} for $\tilde d$ (Remark~\ref{rem:naming}) has not been adopted: Conrad keeps the discriminant for the determinant and calls $\tilde d$ the half-discriminant. Whether the 1992 volume keeps the proposal is part of Question~\ref{qu:disc}.
+\item \emph{The relative cross-ratio.} The planned end of the volume, cross-ratios over a base computed in $\End(\cO_S\oplus\Lambda)$, ties the quadratic theory to the projective line over a base, the object of $M_{0,4}$ and of his work of the 1980s on moduli of curves. The volume does not make this link in the leaves read; we note it as a direction the table points to, not as a result.
+\end{enumerate}
+
+\section{What remains open or unreadable}\label{sec:open}
+
+The first fourteen sections, the half that overlaps the IHÉS typescript, were not read beyond their titles, and the titles of \S\S\,9, 11, 12, 13, 15, 16 and 17 are known only from the notice. Two titles were read with an uncertain word (\S\,7, and in \S\,10 the word read as \q{moteur}). The last section is unfinished, and \S\S\,18.9--18.11 exist only as references in the drafts. Nothing in the volume can be checked from outside the reading room. The questions below are those a further session would have to answer, in this order.
+
+\begin{question}\label{qu:disc}
+\S\,9 (ff.~36v--48v) and \S\,11 (ff.~69v--108v): how is the discriminant normalised in odd rank? Is it the half-discriminant, is it proved integral, and by which argument (content of the universal determinant as in the typescript, a graph expansion as in folder~77, or a defect argument)? Where does it take its values, $(\det E)^{\otimes-2}\otimes L^{\otimes n}$ or some other module? Does the volume keep the typescript's \q{déterminant}?
+\end{question}
+
+\begin{question}
+\S\,13 (ff.~128r--137v): is there a theorem of the form of Theorem~\ref{thm:smooth}, with which topology for local triviality (fppf, étale, finite étale), and with the imperfect-field example?
+\end{question}
+
+\begin{question}
+\S\,10 (ff.~48v--69v): are $\Ort(q)$ and $\SO(q)$ defined as group schemes, are smoothness and the torsor classification stated, and how is $\SO$ defined in even rank over a base where $2$ is not invertible (Dickson invariant, Clifford centre, or something else)?
+\end{question}
+
+\begin{question}
+\S\S\,4--8 (ff.~1--36): what are $M^+_E$ and $M^-_E$? Which isomorphism between a product and a variety of quadrics does \S\,7 state? Which form is \emph{the} canonical quadratic form of \S\,8?
+\end{question}
+
+\begin{question}\label{qu:degree}
+Does the volume treat forms of degree $d>2$, the resultant, or the discriminant of a form of degree $d$ (the subject of the announced EGA~IV \S\,26)?
+\end{question}
+
+\begin{question}
+\S\,14 (ff.~137v--155): what is \emph{bifurcation orthogonale}?
+\end{question}
+
+\begin{question}
+\S\S\,15--17: what are $\mathrm{PsInv}(M)$ and $\mathrm{Inv}_*(M)$ exactly, what is the index $*$ at f.~297v, and does the map to $\mathrm{Invpr}(M)$ come with an obstruction in $H^1(S,\mu_2)$ as in Proposition~\ref{prop:lift}? What are the main statements around Proposition~15.1.17 (f.~168v)?
+\end{question}
+
+\begin{question}\label{qu:quadgroups}
+\S\,18: what is a \emph{quadratic group}, and what is $\mathrm{Scind}_S(\varepsilon)$? What does \S\,18.8 dualise?
+\end{question}
+
+\begin{question}
+f.~156v: which point of terminology does he regret not having seen in the time of EGA and SGA? f.~378: how many years does he say he had left the chapter aside?
+\end{question}
+
+The volume is a clean text with numbered statements, and a reader trained in quadratic forms over a base could read its first pochette in one or two sessions. The heirs' authorisation would be needed to quote its statements.
 
 \subsection*{Use of language models}
-The questions for the visits were prepared, and the notes taken in the reading room were organised and checked against the inventory, with language models (Claude Opus~5.5, Anthropic); the boxes were read by the author, in person, and the readings reported here are his. A first draft of this text was produced by the same models from those notes, under the author's direction.
+The questions for the sessions at the BnF were prepared, and the notes taken in the reading room organised, with language models (Claude Opus~5.5, Anthropic). The volume was read by the author, in person, and the readings reported here are his. The models also compared the notes with the IHÉS typescript, folder~77, Conrad's appendix and the formalisation roadmap, wrote Proposition~\ref{prop:lift} and the elementary computations of Section~\ref{sec:math} that carry no other source, checked the references against the publishers' records, and produced the text under the author's direction.
 
-\subsection*{Acknowledgements}
-The Département des Manuscrits of the Bibliothèque nationale de France served the boxes.
-
-\begin{thebibliography}{9}
-\bibitem{andrews1979} G.~E.~Andrews, An introduction to Ramanujan's ``lost'' notebook, \emph{Amer.\ Math.\ Monthly} 86 (1979), 89--108, \href{https://doi.org/10.1080/00029890.1979.11994743}{doi:10.1080/00029890.1979.11994743}.
-\bibitem{bnf-cp} Bibliothèque nationale de France, Les manuscrits du mathématicien Alexandre Grothendieck, \emph{Réflexions sur la Vie et le Cosmos}, \emph{Le Problème du Mal}, entrent à la BnF, press release, 29 September 2023, \url{https://www.bnf.fr/sites/default/files/2023-09/CP_Entree_du_fonds_Grothendieck_bnf.pdf}.
-\bibitem{bnf-notice} Bibliothèque nationale de France, Département des Manuscrits, NAF~29093, \emph{Fonds Alexandre Grothendieck. Œuvres.}, 1987--1999, 43 boxes, notice in \emph{Archives et manuscrits}, \url{https://archivesetmanuscrits.bnf.fr/ark:/12148/cc126317b}, read in October 2026.
-\bibitem{hua2611} M.~Hua, Grothendieck Montpellier. Énoncés des lectures modernisées démontrés, Hexagon preprint \href{https://hexagonmath.org/2611.00125v1}{hexagon:2611.00125v1}, 2026.
-\bibitem{ihes} Archives de l'IHÉS, fonds Grothendieck--Illusie, FG\_IL\_4\_EGA5\_3\_3, pp.~1--18, and FG\_IL\_4\_EGA5\_2\_3, pp.~1--10.
-\bibitem{repo} Commutator-IO, grothendieck-project, \url{https://github.com/Commutator-IO/grothendieck-project}: visit sheet \texttt{docs/bnf/fiche.tex}, notes of the sessions in issues \#37, \#97, \#98, \#118 and \#119.
-\bibitem{rs} A.~Grothendieck, \emph{Récoltes et semailles. Réflexions et témoignage sur un passé de mathématicien}, 2~vols., Gallimard, Paris, 2022.
-\bibitem{scharlau} W.~Scharlau, \emph{Who is Alexander Grothendieck? Anarchy, Mathematics, Spirituality, Solitude}, Part~3: Spirituality, transl.\ M.~Schneps, Grothendieck Circle, online, ch.~22, \url{https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/Spirituality/}.
+\begin{thebibliography}{99}
+\bibitem{bhargava} M.~Bhargava, Higher composition laws~I: A new view on Gauss composition, and quadratic generalizations, \emph{Ann.\ of Math.~(2)} 159 (2004), 217--250, \href{https://doi.org/10.4007/annals.2004.159.217}{doi:10.4007/annals.2004.159.217}.
+\bibitem{bnf-notice} Bibliothèque nationale de France, Département des Manuscrits, NAF~29093, \emph{Fonds Alexandre Grothendieck. \OE uvres.}, 1987--1999, 43 boxes; notice of box~3, \url{https://archivesetmanuscrits.bnf.fr/ark:/12148/cc126317b/cb5}, read in October 2026.
+\bibitem{conrad} B.~Conrad, Reductive group schemes, in \emph{Autour des schémas en groupes~I}, Panoramas et Synthèses 42--43, Société mathématique de France, 2014; Appendix~C, Orthogonal group schemes. Numbering as in the author's version, \url{https://math.stanford.edu/~conrad/papers/luminysga3.pdf}.
+\bibitem{hua2611} M.~Hua, Grothendieck Montpellier. Énoncés des lectures modernisées démontrés, Hexagon preprint \href{https://hexagonmath.org/2611.00125v1}{hexagon:2611.00125v1}, 2026; Lean file \texttt{lean/Grothendieck/Folder77.lean} of \url{https://github.com/Commutator-IO/grothendieck-project}.
+\bibitem{ihes} A.~Grothendieck, typescript for EGA (heading corrected from IV to V), \q{Formes lisses} and \q{Formes quadratiques lisses}, undated (\q{1969 ?} in the IHÉS record), 18 leaves; Archives de l'IHÉS, fonds Grothendieck--Illusie, FG\_IL\_4\_EGA5\_3\_3.
+\bibitem{kmrt} M.-A.~Knus, A.~Merkurjev, M.~Rost, J.-P.~Tignol, \emph{The Book of Involutions}, Amer.\ Math.\ Soc.\ Colloquium Publ.~44, 1998, \href{https://doi.org/10.1090/coll/044}{doi:10.1090/coll/044}.
+\bibitem{knus} M.-A.~Knus, \emph{Quadratic and Hermitian Forms over Rings}, Grundlehren der mathematischen Wissenschaften~294, Springer, 1991, \href{https://doi.org/10.1007/978-3-642-75401-2}{doi:10.1007/978-3-642-75401-2}.
+\bibitem{roadmap} M.~Hua, Roadmap: quadratic forms over a base, pull request TauCetiProject/TauCetiRoadmap\#1930 (open, November 2026), \url{https://github.com/TauCetiProject/TauCetiRoadmap/pull/1930}.
+\bibitem{sga3} M.~Demazure, A.~Grothendieck (eds.), \emph{Schémas en groupes~III: Structure des schémas en groupes réductifs} (SGA~3, exposés XIX--XXVI), Lecture Notes in Math.~153, Springer, 1970, \href{https://doi.org/10.1007/BFb0059027}{doi:10.1007/BFb0059027}.
+\bibitem{tateoort} J.~Tate, F.~Oort, Group schemes of prime order, \emph{Ann.\ Sci.\ École Norm.\ Sup.~(4)} 3 (1970), 1--21, \href{https://doi.org/10.24033/asens.1186}{doi:10.24033/asens.1186}.
+\bibitem{voight2011} J.~Voight, Characterizing quaternion rings over an arbitrary base, \emph{J.\ reine angew.\ Math.} 657 (2011), \href{https://doi.org/10.1515/crelle.2011.054}{doi:10.1515/crelle.2011.054}, \href{https://arxiv.org/abs/0904.4310}{arXiv:0904.4310} (equation numbering of the arXiv version).
+\bibitem{voight2016} J.~Voight, Discriminants and the monoid of quadratic rings, \emph{Pacific J.\ Math.} 283 (2016), 483--510, \href{https://doi.org/10.2140/pjm.2016.283.483}{doi:10.2140/pjm.2016.283.483}.
+\bibitem{wood} M.~M.~Wood, Gauss composition over an arbitrary base, \emph{Adv.\ Math.} 226 (2011), 1756--1771, \href{https://doi.org/10.1016/j.aim.2010.08.018}{doi:10.1016/j.aim.2010.08.018}.
 \end{thebibliography}
 \end{document}
