@@ -112,14 +112,6 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     src: 'docs/tangent/article.tex',
   },
   {
-    id: 'article-bnf',
-    title: "The mathematics in Grothendieck's last papers: a first description of the BnF fonds NAF 29093, 1991–2000",
-    lang: 'English',
-    what: 'Seven boxes read at the BnF in October and November 2026: the Géométrie élémentaire schématique of 1992, a chapter of EGA on quadratic forms over a base; Trialité (1995); a combinatorial geography (1996); dated mathematics on a chessboard and a cube (1997–1998); the classical mathematics of his physics. No return to motives, Teichmüller or pseudolines in the boxes read. A description only: nothing is quoted beyond a few words.',
-    pdf: '/article/grothendieck-bnf.pdf',
-    src: 'docs/bnf-findings/article.tex',
-  },
-  {
     id: 'article-buffalo-open',
     title: "The open problems of Grothendieck's 1973 Buffalo lectures, and what became of them",
     lang: 'English',
