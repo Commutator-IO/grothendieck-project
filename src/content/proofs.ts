@@ -1658,4 +1658,17 @@ export const PROOFS: Proof[] = [
     lean: "lean/Buffalo/QcohDescent.lean",
     theorems: ["Buffalo.QcohDescent.descend_bijective", "Buffalo.QcohDescent.isEqualizer_iff_bijective", "Buffalo.QcohDescent.isEqualizer_of_injective", "Buffalo.QcohDescent.equalizerCondition_iff_isPure", "Buffalo.QcohDescent.descend_bijective_of_isPure", "Buffalo.QcohDescent.compatible_iff"],
   },
+  {
+    folder: "buffalo-1973",
+    batch: 1,
+    page: "video 4gynb9uTEE4, 2:03:54",
+    cote: "Buffalo 1973",
+    href: "/article/grothendieck-buffalo-open.pdf",
+    name: "Problem three for all small limits: {2} → Set satisfies (G) in two steps, and 2 is not presentable in Setᵒᵖ",
+    statement: "Problem three asks whether I → R is basic exactly when condition (G) holds: every strictly full subcategory of R that contains the image of I and is stable under D-limits is R itself. The counterexample of the open-problems article (Appendix B, Propositions B.11–B.13), for D all small limits, is the edition's, not the lecturer's: every set X is the equaliser of two maps 2^P(X) ⇉ 2^(P(P(X)) ⊔ P(X)), so {2} → Set satisfies (G), the saturation reaching every set in exactly two steps; but 2 is not κ-presentable in Setᵒᵖ for any regular κ, so Setᵒᵖ is not algebraic and {2} → Set is not basic.",
+    found: "Proved: every set is in bijection with that equaliser, the complete Boolean homomorphisms P(X) → 2 (Proposition B.11); the second stage of the saturation of {2} under limits of small diagrams is every set, while a three-element set is not in the first, by the ternary-xor lemma no_limit_of_bools of the Buffalo topos files; condition (G) for {2} → Set; and 2 is not κ-presentable in Setᵒᵖ for any regular κ, hence not presentable, through the chain of tails [α, κ) whose intersection is empty (Proposition B.12, with Mathlib's IsCardinalPresentable). Not formalised: Proposition B.13, that the objects of an algebraic cocomplete category are presentable, which rests on Kelly's sketches and a coherence for chains the article only indicates; so the conclusions that Setᵒᵖ is not algebraic and that {2} → Set is not basic stay on paper, as do the notions basic and algebraic and the hypothesis (H).",
+    verdict: "partly proved",
+    lean: "lean/Buffalo/ProblemThree.lean",
+    theorems: ["Buffalo.ProblemThree.equivEqualizer", "Buffalo.ProblemThree.saturation_two", "Buffalo.ProblemThree.not_saturation_one", "Buffalo.ProblemThree.conditionG", "Buffalo.ProblemThree.not_isCardinalPresentable", "Buffalo.ProblemThree.not_isPresentable"],
+  },
 ];
