@@ -1,0 +1,27 @@
+\section[Notebook 1995-2: when $za + 1 - a$ is a unit of $R[z, z^{-1}]$]{Notebook 1995-2: when is $za + (1 - a)$ a unit of $R[z, z^{-1}]$?\protect\verifie{Notebook1995_2}}\label{sec:quillen-1995-2}
+
+\emph{Context.} In 1995 \carnet{1995}{2} works on the $K$-theory of nonunital rings: homotopy idempotents and their refinement to $A_\infty$-idempotents, perfect complexes that become contractible modulo an ideal, and a $K_0$ built from complexes of length one. In the entry of 1 July 1995, looking for a \q{good} $K_0$ of a nonunital ring inside a $K_1$ of Laurent polynomials, Quillen turns to the maps $K_0 R \to K_1(R[z, z^{-1}]) \to K_0 R$ of Bass's fundamental theorem and of the Atiyah--Bott proof of periodicity. The first map sends an idempotent $p$ to the unit $zp + 1 - p$.
+
+\emph{The page.} Quillen studies linear families $az + b$ that are invertible over $R[z, z^{-1}]$, and splits $R$ by an idempotent given by a residue. On page~65 (his page~329), a change of coordinates on the projective line reduces such a family to the form $za + (1 - a)$, and he notes that this element is invertible over $R[z, z^{-1}]$ if and only if $a(1 - a)$ is nilpotent. His proof of the direct implication multiplies by $z^{-1}a + (1 - a)$; for the converse he passes to the subring of Laurent polynomials invariant under $z \mapsto z^{-1}$, which is a polynomial ring in $z - 2 + z^{-1}$. The page argues for a matrix $a$, that is, in a ring that need not be commutative.
+
+\emph{Intuition.} When $a$ is idempotent, $za + 1 - a$ acts as $z$ on the image of $a$ and as $1$ on its kernel, and its inverse is $z^{-1}a + 1 - a$. The criterion says that it is enough for $a$ to be idempotent modulo nilpotents. The key identity is
+\[
+  \bigl(za + (1 - a)\bigr)\bigl(z^{-1}a + (1 - a)\bigr) = 1 + (z - 2 + z^{-1})\,a(1 - a),
+\]
+since $a^2 + (1 - a)^2 = 1 - 2a(1 - a)$. When $a(1 - a)$ is nilpotent the right-hand side is $1$ plus a nilpotent, hence a unit. Conversely, over a field the units of $k[z, z^{-1}]$ are the monomials $cz^n$, so $za + (1 - a)$ can only be a unit if $a = 0$ or $a = 1$, that is $a(1 - a) = 0$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1995-2, p.~65]\label{thm:quillen-1995-2}
+Let $R$ be a commutative ring and $a \in R$. The Laurent polynomial $za + (1 - a)$ is a unit of $R[z, z^{-1}]$ if and only if $a(1 - a)$ is nilpotent.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+If $a(1 - a)$ is nilpotent, the identity above shows that $(za + 1 - a)(z^{-1}a + 1 - a)$ is a unit, and so is each factor. Conversely, let $g$ be an inverse of $za + (1 - a)$, and choose $N \ge 0$ such that $z^N g$ is a polynomial $G$. Then $(aX + 1 - a)\,G = X^N$ in $R[X]$. A nilpotent element lies in every prime ideal, and conversely, so let $\mathfrak p$ be a prime ideal and reduce modulo $\mathfrak p$. In the domain $D = R/\mathfrak p$, write $\bar a X + \bar b$ for the reduction of $aX + (1 - a)$, and show by induction on $N$ that $(\bar aX + \bar b)\bar G = X^N$ forces $\bar a = 0$ or $\bar b = 0$. For $N = 0$, $\bar aX + \bar b$ is a unit of $D[X]$, hence of degree $0$, so $\bar a = 0$. For $N \ge 1$ and $\bar b \neq 0$, the constant term gives $\bar b\,\bar G(0) = 0$, so $\bar G = X\bar G_1$, and cancelling $X$ gives $(\bar aX + \bar b)\bar G_1 = X^{N-1}$. Hence $\bar a(1 - \bar a) = 0$, that is $a(1 - a) \in \mathfrak p$.
+\end{proof}
+
+\noindent The first implication is the one on the page. For the converse we do not use the invariant subring: the proof reduces modulo the prime ideals, where a unit $\bar a z + \bar b$ must be a monomial.
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1995_2.lean}{\texttt{Notebook1995\_2.\allowbreak{}lean}} defines \texttt{bott a} as \texttt{C a * T 1 + C (1 - a)} in \texttt{R[T;T⁻¹]}. The identity above is \texttt{bott\_mul\_invert}, which uses the involution \texttt{LaurentPolynomial.invert}. The two implications are \texttt{isUnit\_bott\_of\_isNilpotent} and \texttt{isNilpotent\_of\_isUnit\_bott}. The second goes to polynomials through \texttt{exists\_T\_pow} and \texttt{Polynomial.toLaurent\_injective}, and the lemma on domains is \texttt{eq\_zero\_or\_eq\_zero\_of\_mul\_eq\_X\_pow}. Theorem~\ref{thm:quillen-1995-2} is \texttt{isUnit\_bott\_iff}. Only the commutative case is formalised; the matrix case of the page is not. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Bass's map $p \mapsto zp + 1 - p$ comes from Atiyah--Bott, \q{On the periodicity theorem for complex vector bundles}, \emph{Acta Math.}~112 (1964), and from Bass, \emph{Algebraic $K$-theory} (1968). Over a commutative ring the criterion follows from the known description of the units of $R[z, z^{-1}]$, as recalled: they are monomials $uz^n$ plus nilpotents, locally for a decomposition of $1$ into orthogonal idempotents. The search (zbMATH titles on units of Laurent polynomial rings) did not locate the criterion in this form, and mathlib has no description of the units of Laurent polynomials. The statement is elementary, and the edition does not present it as new.}

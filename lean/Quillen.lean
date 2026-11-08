@@ -20,6 +20,7 @@ import Quillen.Notebook1982_13
 import Quillen.Notebook1983_4
 import Quillen.Notebook1983_10
 import Quillen.Notebook1988_1
+import Quillen.Notebook1995_2
 import Quillen.Upstream.GrothendieckGroup
 import Quillen.Upstream.IsPerfectNormalClosure
 import Quillen.Upstream.IsSimpleModuleTrace
