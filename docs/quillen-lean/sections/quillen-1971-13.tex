@@ -1,0 +1,25 @@
+\section[Notebook 1971-13: good submodules pass to quotients]{Notebook 1971-13: good submodules of a module over $A[z]$ pass to quotients\protect\verifie{Notebook1971_13}}\label{sec:quillen-1971-13}
+
+\emph{Context.} In November 1971, \carnet{1971}{13} works towards the homotopy property $K_*(A) \cong K_*(A[z])$ of the $K$-theory of coherent modules, first for a field (3 November), then for a noetherian ring (12 November). For a finitely generated $A[z]$-module $E$, Quillen calls a finitely generated $A$-submodule $L \subset E$ \emph{good} if $L$ generates $E$ over $A[z]$ and $z^{-1}L \subset L$, where $z^{-1}L$ is the set of $e \in E$ such that $ze \in L$. Such an $L$ gives a resolution $0 \to A[z] \otimes_A z^{-1}L \to A[z] \otimes_A L \to E \to 0$ (page~15), and the point is to replace $E$ by the pair $(L, z^{-1}L)$; for this he needs to know how good submodules behave in exact sequences.
+
+\emph{The page.} On page~13 (entry of 10 November 1971), Quillen states a lemma: if $E' \subset E$ is an $A[z]$-submodule, $E'' = E/E'$, $L$ is good for $E$ and $L' = L \cap E'$ generates $E'$, then $L'$ is good for $E'$ and the image $L''$ of $L$ is good for $E''$. The first half and the generation of $E''$ are immediate. For the inclusion $z^{-1}L'' \subset L''$, he writes $ze = l + e'$ with $l \in L$ and $e' \in E'$, uses the generation of $E'$ by $L'$ to write $e' = l' + z e'_1$, and concludes from $z(e - e'_1) = l + l' \in L$. Page~14 draws corollaries for filtered modules.
+
+\emph{Intuition.} The condition $z^{-1}L \subset L$ says that $L$ is closed under \q{division by $z$} inside $E$. To show that $L + E'$ is closed under it as well, one has to absorb the part of $e'$ that is not divisible by $z$, and this is where $L \cap E'$ must generate $E'$: modulo $z E'$, every element of $E'$ is in $L \cap E'$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1971-13, p.~13]\label{thm:quillen-1971-13}
+Let $A$ be a commutative ring, $E$ an $A$-module, $z$ an $A$-linear endomorphism of $E$, $L \subset E$ a submodule such that $z^{-1}L \subset L$, and $E' \subset E$ a submodule such that $zE' \subset E'$ and $E' \subset \sum_{n \ge 0} z^n (L \cap E')$. If $e \in E$ and $ze \in L + E'$, then $e \in L + E'$. Equivalently, the image $L''$ of $L$ in $E/E'$ satisfies $z^{-1}L'' \subset L''$ for the endomorphism of $E/E'$ induced by $z$.
+\end{theoreme}
+\end{encadre}
+
+\noindent An $A[z]$-module is the same thing as an $A$-module with an endomorphism $z$; the statement drops the finiteness hypotheses of the page, which play no role in the lemma.
+
+\begin{proof}
+First, $E' \subset (L \cap E') + zE'$: an element $z^n l'$ with $l' \in L \cap E'$ is $l'$ if $n = 0$, and $z(z^{n-1}l')$ with $z^{n-1} l' \in E'$ if $n \ge 1$, since $E'$ is stable under $z$. Write $ze = l + e'$ with $l \in L$, $e' \in E'$, and then $e' = l' + z e'_1$ with $l' \in L \cap E'$, $e'_1 \in E'$. Then $z(e - e'_1) = l + l' \in L$, so $e - e'_1 \in z^{-1}L \subset L$, and $e = (e - e'_1) + e'_1 \in L + E'$.
+\end{proof}
+
+\noindent The proof is the one on the page; only the first step, which the page states in one line (\q{as $L'$ generates $E'$}), is spelled out.
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1971_13.lean}{\texttt{Notebook1971\_13.\allowbreak{}lean}} takes $z$ in \texttt{Module.End A E} and writes the generation hypothesis as \texttt{GeneratesUnder z (L ⊓ E') E'}. The first step is \texttt{le\_sup\_map\_of\_generates}; Theorem~\ref{thm:quillen-1971-13} is \texttt{mem\_sup\_of\_smul\_mem\_sup}, and its form in the quotient, with \texttt{Submodule.mkQ} and \texttt{Submodule.mapQ}, is \texttt{comap\_map\_mkQ\_le}. The easy half of the page's lemma, $z^{-1}(L \cap E') \cap E' \subset L \cap E'$, is \texttt{comap\_inf\_le}. The axioms used are the three usual axioms of mathlib.
+
+\litterature{the homotopy property $G(A) \cong G(A[z])$ for a noetherian ring is published in Quillen, \q{Higher algebraic $K$-theory~I}, \emph{Lecture Notes in Math.}~341 (1973); the search did not locate the lemma of page~13 in this form, and the 1973 proof was not reread to see whether it passes through good submodules. The statement is elementary, and the edition does not present it as new.}
