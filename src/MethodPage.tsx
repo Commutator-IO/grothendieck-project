@@ -278,7 +278,7 @@ export function MethodPage() {
         </header>
 
         <Articles />
-        <Articles id="sub-articles" title="Sub-articles" items={SOUS_ARTICLES} />
+        <Articles id="drafts" title="Drafts" items={SOUS_ARTICLES} />
         <Articles id="books" title="The books" items={LIVRES} />
 
         <section className="mt-16 max-w-[48em] text-[15px] leading-relaxed text-ink-700">
