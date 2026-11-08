@@ -195,17 +195,26 @@ jobs:
         id: tectonic-bin
         with:
           path: ~/tectonic-bin
-          key: tectonic-bin-0.17.0-${{ runner.os }}
+          key: tectonic-bin-0.17.0-${{ runner.os }}-v2
 
+      # First GitHub releases, then, if they keep failing, the same version from
+      # conda-forge through micromamba (both served from anaconda.org), installed
+      # as a self-contained environment whose binary finds its own libraries.
       - name: Install tectonic
         run: |
-          if [ ! -x ~/tectonic-bin/tectonic ]; then
-            mkdir -p ~/tectonic-bin
-            curl -fsSL --retry 8 --retry-all-errors --retry-delay 15 \
-              https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.17.0/tectonic-0.17.0-x86_64-unknown-linux-gnu.tar.gz \
-              | tar -xz -C ~/tectonic-bin
+          if [ ! -x ~/tectonic-bin/bin/tectonic ]; then
+            mkdir -p ~/tectonic-bin/bin
+            if ! curl -fsSL --retry 3 --retry-all-errors --retry-delay 10 \
+                 https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.17.0/tectonic-0.17.0-x86_64-unknown-linux-gnu.tar.gz \
+                 | tar -xz -C ~/tectonic-bin/bin; then
+              echo "GitHub releases unavailable; installing tectonic from conda-forge"
+              rm -rf ~/tectonic-bin && mkdir -p ~/mm
+              curl -fsSL --retry 5 --retry-all-errors https://micro.mamba.pm/api/micromamba/linux-64/latest \
+                | tar -xj -C ~/mm bin/micromamba
+              ~/mm/bin/micromamba create -y -q -p ~/tectonic-bin -c conda-forge tectonic=0.17.0
+            fi
           fi
-          sudo cp ~/tectonic-bin/tectonic /usr/local/bin/
+          sudo ln -sf ~/tectonic-bin/bin/tectonic /usr/local/bin/tectonic
           tectonic --version
 
       - uses: actions/cache@v6
