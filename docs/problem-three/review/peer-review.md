@@ -13,8 +13,8 @@ A mathematics article (category theory). No data, statistics or reporting guidel
 | C1 | basic ⇒ (G), every D (Thm 3.2) | Lemma 3.1 and a transfinite induction over the steps of (H) |
 | C2 | basic ⇔ (G) + algebraic (Thm 4.2) | Lemma 4.1 (closure), a pushout and a transfinite construction of an isomorphism |
 | C3 | small D: basic ⇔ (G), base fixed (Thm 5.1) | two proofs: via C2, and directly |
-| C4 | topoi: basic ⇔ (G) (Thm 6.4) | Lemma 6.3 (closure is a topos) and C1, C2 |
-| C5 | two statements of the course on topoi are false (Prop 6.2) | explicit examples in Set × Set |
+| C4 | topoi: basic ⇔ (G) (Thm 6.3) | Lemma 6.2 (closure is a topos) and C1, C2 |
+| C5 | two statements of the course on topoi are false (Prop 6.1) | explicit examples in Set × Set |
 | C6 | Set: (G) in exactly two steps; Set not algebraic (Cor 7.2, Thm 7.5) | Props 7.1, 7.3, 7.4; Lean for 7.1–7.3 |
 | C7 | algebraic ⇒ bounded steps; AR 6.38 gives unbounded steps and a second counterexample (Prop 7.7, Cor 7.8) | Prop 7.4; AR Example 6.38 as described on MathOverflow |
 
@@ -22,7 +22,7 @@ Each central claim has a proof in the text. C6 is partly machine-checked; C7 res
 
 ## Major comments
 
-**M1. Hypothesis (H) for topoi was used silently.** *Location:* §6 and Thm 6.4. *Observation:* Thm 6.4 has no "(H)" in its statement, but its proof uses the free constructions, including 2-pushouts and 2-colimits of chains, which are limits of topoi read the other way. *Why it matters:* without them the reduction theorem does not apply. *Action taken:* §6 now says that these constructions are pullbacks and limits of chains of topoi, used from standard topos theory without proof. "What is not done" lists this.
+**M1. Hypothesis (H) for topoi was used silently.** *Location:* §6 and Thm 6.3. *Observation:* Thm 6.3 has no "(H)" in its statement, but its proof uses the free constructions, including 2-pushouts and 2-colimits of chains, which are limits of topoi read the other way. *Why it matters:* without them the reduction theorem does not apply. *Action taken:* §6 now says that these constructions are pullbacks and limits of chains of topoi, used from standard topos theory without proof. "What is not done" lists this.
 
 **M2. The example of Adámek and Rosický is cited second-hand.** *Location:* §7.3, Cor 7.8. *Observation:* the book was not opened. The example is known to us through Rosický's MathOverflow answer and Campion's exposition, which also notes that the book's example has a slightly different aim. *Why it matters:* Cor 7.8 and the answer to the question on bounds depend on it. *Action taken:* the text credits Rosický's answer and Campion's exposition, and "What is not done" says that the book was not accessible. *Remaining for the author:* read AR Example 6.38 in a library copy before submission.
 
@@ -31,7 +31,7 @@ Each central claim has a proof in the text. C6 is partly machine-checked; C7 res
 ## Minor comments
 
 - m1. *Kelly page reference.* The Buffalo article cited "§5.7, p. 100" for the remark on Cat₀ and {2}. In the TAC reprint the remark is at the end of §5.9 (between the running heads p. 101 and p. 103). The new article cites "end of §5.9". The Buffalo article's citation should be corrected when Appendix B is removed.
-- m2. *Codensity versus density.* Remark 2.6 first compared (G) with density (left adequate), but for limits the right comparison is codensity (right adequate). Corrected: codensity gives (G) for limits in one step, and {2} ⊂ Set satisfies (G) without being codense.
+- m2. *Codensity versus density.* Remark 2.5 first compared (G) with density (left adequate), but for limits the right comparison is codensity (right adequate). Corrected: codensity gives (G) for limits in one step, and {2} ⊂ Set satisfies (G) without being codense.
 - m3. *Three-element argument (Cor 7.2).* The phrase "say inside a product" was unclear. Rewritten to say that a limit of copies of 2 is a subset of a product closed under the coordinatewise ternary operation.
 - m4. *"Every topos is algebraic"* was only a citation of the lecture. A short argument was added (envelope of Ob C, arrows and relations, then the subtopos of flat J-continuous diagrams).
 - m5. *Enlarging the sketch (Prop 7.4).* The step was phrased obscurely. It now says why the closure D₀ contains the given objects: each is a small colimit of objects of K(A).
