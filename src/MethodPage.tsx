@@ -136,6 +136,14 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     src: 'docs/qcoh-descent/article.tex',
   },
   {
+    id: 'article-problem-three',
+    title: "Grothendieck's « problem three »: generation under limits and algebraic theories relative to a class of limits",
+    lang: 'English',
+    what: "His question at Buffalo on 2 July 1973: for a class D of limits and colimits, is a theory basic over a set I exactly when I generates it under D-limits and D-colimits? Basic implies generation for every D; basic is equivalent to generation plus algebraicity over some base; the two coincide for small D and for Grothendieck topoi. For all small limits the converse fails: {2} generates Set in two steps, checked in Lean, but Set is not algebraic, and an example of Adámek and Rosický shows that the number of steps is unbounded in general. Finite limits with all colimits stay open.",
+    pdf: '/article/grothendieck-problem-three.pdf',
+    src: 'docs/problem-three/article.tex',
+  },
+  {
     id: 'article-polytopes',
     title: "Regular polytopes realised over arbitrary rings, after Grothendieck's working notes",
     lang: 'English',
