@@ -1,0 +1,51 @@
+\section[Notebook 1973-3: Gaussian sums over a translate of a lattice]{Notebook 1973-3: the Gaussian sum over a translate of a lattice, and the invariant of the cross-ratio\protect\verifie{Notebook1973_3}}\label{sec:quillen-1973-3}
+
+\emph{Context.} In April 1973, \carnet{1973}{3} follows several threads around the $K$-theory of rings of integers and of curves: buildings and stability, vector bundles on curves and their slopes, lattice zeta functions. An entry of 26 April (pages~75--86) proposes to treat a lattice $M$ equipped with a positive definite quadratic form $q$ on $M_{\mathbf R}$ as a vector bundle over $\mathbf Z \cup \infty$, and to measure its \q{sections} by the theta series $\theta_E = \sum_{m \in M} e^{-\pi q(m)}$. The Poisson summation formula then plays the part of the Riemann--Roch theorem. An earlier entry, of 14 April (pages~20--27), computes the low-dimensional homology of $PGL_2(k)$ from its action on configurations of points of $\mathbf P^1_k$, which leads to the cross-ratio.
+
+\emph{The page: the theta inequality.} Quillen wants to compare $\theta_E$ with $\theta_{E'}\theta_{E''}$ for an exact sequence $0 \to E' \to E \to E'' \to 0$ of such bundles. Writing the sum over $M$ as a sum over $M''$ of sums over the fibres, he reduces the question to an inequality for a single lattice: the Gaussian sum over a translate $x + M$ should not exceed the sum over $M$. On page~79 he checks it on the line, for $M = \mathbf Z$ and $q(x) = \alpha x^2$: the Fourier expansion of $x \mapsto \sum_m e^{-\pi\alpha(x+m)^2}$ shows that its second derivative at $0$ is negative. On pages~80--81 he proves the general lemma: the Poisson formula writes the shifted sum as a cosine series with positive coefficients, $\cos \le 1$, with equality for every frequency exactly when $x \in M$. He concludes (page~81) that $\theta_E \le \theta_{E'}\theta_{E''}$, with equality if and only if the sequence splits orthogonally, and remarks (page~82) that over a finite field, where $\theta_E = q^{h^0(E)}$, equality is common without splitting.
+
+\emph{Intuition.} The function $f(x) = \sum_{m \in \mathbf Z} e^{-\pi\alpha(x+m)^2}$ is periodic. Its Fourier coefficients are those of the Gaussian, $\alpha^{-1/2} e^{-\pi n^2/\alpha}$, all positive. A function whose Fourier coefficients are all positive reaches its maximum where all the characters equal $1$ at once, at the integers, and only there.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1973-3, pp.~79--81, in dimension one]\label{thm:quillen-1973-3}
+Let $\alpha > 0$. For every real $x$,
+\[
+\sum_{m \in \mathbf Z} e^{-\pi\alpha(x+m)^2} \;\le\; \sum_{m \in \mathbf Z} e^{-\pi\alpha m^2},
+\]
+with equality if and only if $x \in \mathbf Z$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+By the Poisson summation formula, applied to the Gaussian $t \mapsto e^{-\pi\alpha(x+t)^2}$,
+\[
+\sum_{m \in \mathbf Z} e^{-\pi\alpha(x+m)^2} = \alpha^{-1/2} \sum_{n \in \mathbf Z} e^{-\pi n^2/\alpha} \cos(2\pi n x).
+\]
+Each term on the right is at most $e^{-\pi n^2/\alpha}$, and the right-hand side at $x = 0$ is $\alpha^{-1/2} \sum_n e^{-\pi n^2/\alpha}$, which the same formula identifies with $\sum_m e^{-\pi\alpha m^2}$. This gives the inequality. If $x \notin \mathbf Z$, the term $n = 1$ is strictly smaller, since $\cos(2\pi x) < 1$, so the inequality is strict. If $x \in \mathbf Z$, the left-hand sum is a reindexing of the right-hand one.
+\end{proof}
+
+\noindent The statement is the lemma of page~80 for $M = \mathbf Z$ and $q(x) = \alpha x^2$, which is also the case Quillen tests on page~79. The proof is his. The general lemma, for a lattice in $\mathbf R^n$, needs the Poisson formula over a lattice of $\mathbf R^n$, and the inequality $\theta_E \le \theta_{E'}\theta_{E''}$ follows from it as on page~81; neither is proved here.
+
+\emph{The page: the invariant of the cross-ratio.} On pages~22--25, Quillen lists the six values $z$, $1/z$, $1 - z$, $1/(1-z)$, $1 - 1/z$, $z/(z-1)$ that the cross-ratio of four points takes under the permutations of the points, observes that the Klein four-group acts trivially (a remark he attributes to Atiyah), and proposes the rational function
+\[
+w(z) = \frac{(z^2 - z + 1)^3}{z^2 (z - 1)^2},
+\]
+invariant under $z \mapsto 1 - z$ and $z \mapsto 1/z$, hence under $\Sigma_3$. It has triple zeros at the primitive sixth roots of unity and double poles at $0$, $1$, $\infty$, and takes the value $27/4$ on the orbit $\{-1, 1/2, 2\}$, whose stabilizer has order~$2$. He says that $z \mapsto w$ puts the $\Sigma_3$-orbits of $k - \{0, 1\}$ in bijection with $k$.
+
+\begin{proposition}[Quillen, notebook 1973-3, p.~25]\label{prop:quillen-1973-3}
+Let $k$ be a field and $z, z' \in k - \{0, 1\}$. Then $w(z') = w(z)$ if and only if $z'$ is one of $z$, $1/z$, $1 - z$, $1/(1-z)$, $z/(z-1)$, $(z-1)/z$.
+\end{proposition}
+
+\begin{proof}
+Clearing denominators, $w(z') - w(z)$ has numerator
+\[
+(z'^2 - z' + 1)^3 z^2 (z-1)^2 - (z^2 - z + 1)^3 z'^2 (z'-1)^2 = (z' - z)(z'z - 1)(z' + z - 1)(z'z - z' + 1)(z'z - z' - z)(z'z - z + 1),
+\]
+a polynomial identity. Each linear factor vanishes exactly at one of the six values.
+\end{proof}
+
+\noindent The proposition gives the injectivity on orbits; the surjectivity onto $k$, for $k$ algebraically closed, is not proved here.
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1973_3.lean}{\texttt{Notebook1973\_3.\allowbreak{}lean}} proves Theorem~\ref{thm:quillen-1973-3} under the names \texttt{gaussian\_shift\_le} (the inequality), \texttt{gaussian\_shift\_lt} (strict for $x \notin \mathbf Z$) and \texttt{gaussian\_shift\_eq\_iff} (the equality case). The Fourier side is \texttt{gaussian\_shift\_fourier}, derived from \texttt{Complex.tsum\_exp\_neg\_quadratic}, the form of the Poisson summation formula for Gaussians in mathlib; summability is \texttt{summable\_gaussian}. The function $w$ is \texttt{crossRatioInv}; its invariance is \texttt{crossRatioInv\_one\_sub} and \texttt{crossRatioInv\_inv}, the values $27/4$ are \texttt{crossRatioInv\_two}, \texttt{crossRatioInv\_neg\_one}, \texttt{crossRatioInv\_half}, the zeros \texttt{crossRatioInv\_eq\_zero\_iff}, the factorization \texttt{crossRatioInv\_sub\_factor}, and Proposition~\ref{prop:quillen-1973-3} is \texttt{crossRatioInv\_eq\_iff}. The axioms used are the three usual axioms of mathlib.
+
+\litterature{both statements are in the literature. The function $w$ is $j/256$ in terms of the Legendre parameter, $j(\lambda) = 2^8(\lambda^2 - \lambda + 1)^3/(\lambda^2(\lambda - 1)^2)$, a classical formula of the theory of elliptic curves; the value $27/4$ corresponds to $j = 1728$. The view of a Euclidean lattice as a vector bundle over $\operatorname{Spec}\mathbf Z \cup \infty$, with $\log\theta$ as $h^0$ and the Poisson formula as Riemann--Roch, is developed by G.~van der Geer and R.~Schoof, \emph{Selecta Math.} 6 (2000), 377--398, and by J.-B.~Bost, \emph{Theta invariants of Euclidean lattices and infinite-dimensional Hermitian vector bundles over arithmetic curves}, Progress in Math.~334, Birkhäuser, 2020, where the subadditivity of $h^0_\theta$ in short exact sequences, the inequality of page~81, is established; the edition has not checked the exact place. The coset inequality of the theorem is a standard tool of the Gaussian method of W.~Banaszczyk, \emph{Math. Ann.} 296 (1993), 625--635. In dimension one it also follows from the Jacobi triple product. The edition does not present either statement as new.}
