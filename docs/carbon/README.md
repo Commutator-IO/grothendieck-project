@@ -1,4 +1,4 @@
-# Le coût carbone d'une lecture d'archives par un modèle de langage
+# Transcrire Grothendieck avec un modèle de langage : combien de carbone ?
 
 Article (#121) : ce qu'ont coûté en énergie et en CO₂e la transcription et la lecture du fonds Grothendieck par des modèles de langage, comparé à l'empreinte des personnes qui éditent le même corpus.
 

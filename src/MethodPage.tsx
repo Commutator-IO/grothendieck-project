@@ -80,7 +80,7 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
   },
   {
     id: 'article-carbon',
-    title: "Le coût carbone d'une lecture d'archives par un modèle de langage",
+    title: "Transcrire Grothendieck avec un modèle de langage : combien de carbone ?",
     lang: 'French',
     what: 'Draft for Humanités numériques, in French: the tokens and CI hours the project used, a first estimate of their energy and CO₂e with its ranges, and a comparison with the professional footprint of the researchers who work on the same corpus. Figures marked « À vérifier » are provisional.',
     pdf: '/article/grothendieck-carbon.pdf',
