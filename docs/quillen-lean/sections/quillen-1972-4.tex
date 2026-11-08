@@ -1,0 +1,34 @@
+\section[Notebook 1972-4: from the microcanonical to the Gibbs distribution]{Notebook 1972-4: harmonic oscillators, from the microcanonical to the Gibbs distribution\protect\verifie{Notebook1972_4}}\label{sec:quillen-1972-4}
+
+\emph{Context.} In April 1972, between a run on the resolution theorem for higher $K$-theory (2 April) and a first candidate for an exact-sequence construction of $K$-theory (19 April), \carnet{1972}{4} contains two entries headed as a self-education in statistical mechanics (15 and 16 April). The first derives the ideal gas law, the adiabatics and the entropy of a monatomic ideal gas; the second asks how the Maxwell--Boltzmann--Gibbs measure $e^{-H/kT}\,dV/Z$ arises from a large number of almost independent copies of a Hamiltonian system, and works it out for harmonic oscillators.
+
+\emph{The page.} Take $N$ independent oscillators, with phase space $\mathbf R^{2N}$, Liouville measure $\omega = \prod dq_i\,dp_i$ and Hamiltonian $H = \sum_i (p_i^2 + q_i^2)/2$. Writing $\omega = dH \wedge \eta$, Quillen computes the Laplace transform $\int e^{-sH}\omega = (2\pi/s)^N$ and reads off the volume $(2\pi)^N E^{N-1}/(N-1)!$ of the shell $H = E$ (pp.~19--20). The same computation with a point mass in the first factor gives the image of the shell measure in the phase plane of the first oscillator; dividing by the volume of the shell, he obtains (p.~23) the probability density
+\[
+\frac{N-1}{2\pi E}\Bigl(1 - \frac{r^2}{2E}\Bigr)^{N-2}\,\mathrm{Heav}\Bigl(1 - \frac{r^2}{2E}\Bigr)\, r\,dr\,d\theta
+\]
+on the disc $r^2 \le 2E$. He notes that for fixed $E$ it concentrates at the origin as $N \to \infty$, since each oscillator then has average energy $E/N \to 0$, and passes instead to the limit $E = \lambda N$, where it becomes the Gibbs density $e^{-r^2/2\lambda}/(2\pi\lambda)$, marked with an exclamation sign (p.~24). On p.~25 the same ratio of shell volumes gives the law of the energy $E_1$ of the first oscillator, with limit $e^{-E_1/\lambda}/\lambda$ (the page carries an extra factor $1/2\pi$ coming from its normalisation of $\eta$). The entry continues with the general problem (the law of $X_1$ given $X_1 + \dots + X_N = E$ for independent identically distributed variables) by characteristic functions and Fourier inversion, which is left open.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1972-4, pp.~23--25]\label{thm:quillen-1972-4}
+Let $\lambda > 0$.
+\begin{enumerate}
+\item For every real $x$, $\dfrac{N-1}{N}\Bigl(1 - \dfrac xN\Bigr)^{N-2} \to e^{-x}$ as $N \to \infty$.
+\item For every real $r$,
+\[
+\frac{N-1}{2\pi\lambda N}\Bigl(1 - \frac{r^2}{2\lambda N}\Bigr)^{N-2}\,\mathbf 1_{\{r^2 \le 2\lambda N\}} \longrightarrow \frac{e^{-r^2/2\lambda}}{2\pi\lambda}.
+\]
+\item For every real $E_1$, $\dfrac{N-1}{\lambda N}\Bigl(1 - \dfrac{E_1}{\lambda N}\Bigr)^{N-2} \to \dfrac{e^{-E_1/\lambda}}{\lambda}$.
+\item For $E > 0$ and $N \ge 2$, $\displaystyle\int_0^E \frac{N-1}{E}\Bigl(1 - \frac uE\Bigr)^{N-2} du = 1$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\noindent Part~(2) is the limit of page~24 with the Heaviside factor written as an indicator; part~(3) is that of page~25 without the factor $1/2\pi$; part~(4) says that the finite-$N$ law of the energy of one oscillator is a probability law. The shell volume itself, which needs the coarea formula, is not formalised.
+
+\begin{proof}
+(1) Put $a_N = 1 - x/N$. Then $a_N \to 1$ and $a_N^N \to e^{-x}$; for $N \ge 2$ and $a_N \ne 0$, which holds for $N$ large, $a_N^{N-2} = a_N^N / a_N^2$, and $(N-1)/N \to 1$. (2) and (3) are (1) with $x = r^2/2\lambda$ and $x = E_1/\lambda$, after dividing by $2\pi\lambda$, resp.\ $\lambda$; in (2) the indicator equals $1$ as soon as $2\lambda N \ge r^2$. (4) The function $u \mapsto -(1 - u/E)^{N-1}$ is a primitive of the integrand, and takes the values $-1$ at $0$ and $0$ at $E$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1972_4.lean}{\texttt{Notebook1972\_4.\allowbreak{}lean}} proves part~(1) under the name \texttt{tendsto\_pred\_div\_mul\_one\_sub\_pow}, from mathlib's \texttt{Real.tendsto\_one\_add\_div\_pow\_exp}; parts~(2) and~(3) are \texttt{tendsto\_oscillator\_marginal} and \texttt{tendsto\_energy\_marginal}, and part~(4), with $N = m + 2$, is \texttt{integral\_energy\_marginal}.
+
+\litterature{the computation is classical. The equivalence of the microcanonical and canonical ensembles, of which this is the simplest instance, is the subject of A.~I. Khinchin, \emph{Mathematical foundations of statistical mechanics} (Dover, 1949), whose method, as we recall it, goes like the end of the entry through characteristic functions and a limit theorem (the book was not re-read for this section); limit theorems for the first coordinates of a point drawn uniformly from a high-dimensional symmetric set, of which the disc and the simplex here are instances, are of the kind collected by P.~Diaconis and D.~Freedman, \q{A dozen de Finetti-style results in search of a theory}, \emph{Ann.\ Inst.\ H.~Poincaré Probab.\ Statist.} 23 (1987), 397--423. The entry is an exercise of self-instruction, and the edition does not present it as new.}

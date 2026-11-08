@@ -1,0 +1,21 @@
+\section[Notebook 1972-11: extensions of finitely presented modules]{Notebook 1972-11: an extension of finitely presented modules is finitely presented\protect\verifie{Notebook1972_11}}\label{sec:quillen-1972-11}
+
+\emph{Context.} In December 1972, \carnet{1972}{11} works on the foundations of higher algebraic $K$-theory: a first proof of the resolution theorem (1~December), the embedding of an exact category into an abelian category of left exact functors (17~December), the $K'$-groups of graded and filtered rings (21~December). The run of 23~December, headed with Gersten's theorem and coherence, aims at the $K$-theory of the free algebra $k\langle X_1, \dots, X_n\rangle = T(V)$: Quillen shows that every left ideal of $T(V)$ is free, and wants the theorem on filtered rings with \q{noetherian} replaced by \q{coherent}. On the way he writes out a sorites on finitely presented modules and coherent rings (pp.~35--37).
+
+\emph{The page.} On page~36 (his page~3 of the run), for a short exact sequence $0 \to M' \to M \to M'' \to 0$ of left modules over a ring $A$, Quillen states and proves: (a)~if $M''$ is finitely presented and $M$ finitely generated, then $M'$ is finitely generated; (b)~if $M$ is finitely presented and $M'$ finitely generated, then $M''$ is finitely presented; (c)~if $M'$ and $M''$ are finitely presented, so is $M$. All three come from one diagram: a free module $A^p$ mapping onto $M''$, its kernel $K$, and the pull-back $X = M \times_{M''} A^p$, an extension of $A^p$ by $M'$, hence isomorphic to $M' \oplus A^p$, which maps onto $M$ with kernel $K$. He then proves the equivalence of three definitions of a coherent ring (pp.~36--37), using (a), (b) and (c).
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1972-11, p.~36, (c)]\label{thm:quillen-1972-11}
+Let $A$ be a ring and $0 \to M' \xrightarrow{f} M \xrightarrow{g} M'' \to 0$ an exact sequence of left $A$-modules. If $M'$ and $M''$ are finitely presented, then $M$ is finitely presented.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Since $M''$ is finitely generated, there is a surjection $\pi \colon A^n \to M''$; since $A^n$ is free, it lifts to $\sigma \colon A^n \to M$ with $g\sigma = \pi$. The map $\varphi \colon M' \oplus A^n \to M$, $(m', v) \mapsto f(m') + \sigma(v)$, is onto: given $m$, choose $v$ with $\pi(v) = g(m)$; then $g(m - \sigma v) = 0$, so $m - \sigma v = f(m')$ for some $m'$. The second projection sends $\ker\varphi$ onto $\ker\pi$ (if $\pi(v) = 0$, then $\sigma(v) = f(m')$ for some $m'$, and $(-m', v) \in \ker\varphi$), and injectively, since $f$ is injective. Now $\ker\pi$ is finitely generated, by~(a), because $M''$ is finitely presented; hence so is $\ker\varphi$. As $M' \oplus A^n$ is finitely presented, (b) applied to $\varphi$ shows that $M$ is finitely presented.
+\end{proof}
+
+\noindent This is the notebook's proof, with $\varphi$ in place of the pull-back $X$: both are the same extension of $A^n$ by $M'$, split because $A^n$ is free.
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1972_11.lean}{\texttt{Notebook1972\_11.\allowbreak{}lean}} proves Theorem~\ref{thm:quillen-1972-11} under the name \texttt{finitePresentation\_of\_exact}, for modules over an arbitrary (not necessarily commutative) ring, with \texttt{Module.FinitePresentation} as the notion of finite presentation and \texttt{Function.Exact} for exactness at $M$. The kernel step is \texttt{fg\_ker\_coprod}. Parts (a) and (b) of the page are already in mathlib, as \texttt{Module.FinitePresentation.fg\_ker} and \texttt{Module.finitePresentation\_of\_surjective}; part (c) is there, as far as the search went, only for split sequences (\texttt{Module.finitePresentation\_of\_split\_exact}) and for a projective quotient. The general statement may be worth proposing to mathlib.
+
+\litterature{the three statements are standard and older than the notebook: they are the usual sorites on finitely presented modules that precedes the theory of coherent rings (S.~U. Chase, \q{Direct products of modules}, \emph{Trans.\ Amer.\ Math.\ Soc.} 97 (1961), 457--473, for coherent rings; and the textbook treatments of finitely presented modules, not re-read for this section). The edition does not present them as new; what the Lean file adds is the general case of~(c) to the library.}
