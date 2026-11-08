@@ -303,6 +303,10 @@ Some of these closures hit roadmap topics: topos-theory basics (#21269), power o
 2026. They were closed for administrative reasons, not on their mathematics, and can be reopened
 from a fork.
 
+**Second pass.** The rejected PRs of the whole corpus, not just this sample, are counted, split by
+reason and read in `mathlib-rejected-prs-2026-11-08.md`: 421 rejected (7 %), 191 of them under the
+AI policy, and about 25 worth reviving.
+
 ## 5. The gaps this project ran into
 
 I searched these by regular expression over all titles and descriptions, then checked each hit by
