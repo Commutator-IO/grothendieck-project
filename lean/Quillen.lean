@@ -15,6 +15,7 @@ import Quillen.Notebook1972_4
 import Quillen.Notebook1972_11
 import Quillen.Notebook1973_3
 import Quillen.Notebook1973_5
+import Quillen.Notebook1982_7
 import Quillen.Notebook1982_13
 import Quillen.Notebook1983_4
 import Quillen.Notebook1983_10
