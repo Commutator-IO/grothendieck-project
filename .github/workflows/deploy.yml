@@ -189,8 +189,14 @@ jobs:
       # hence the explicit cache key.
       # Installed whatever the switch: the jTEI article below compiles with it too.
       - name: Install tectonic
+        # The installer downloads from GitHub releases, which answer 504 at times
+        # (8 November 2026): retry with a growing pause rather than fail the deploy.
         run: |
-          curl -fsSL https://drop-sh.fullyjustified.net | sh
+          for i in 1 2 3 4 5; do
+            curl -fsSL https://drop-sh.fullyjustified.net | sh && break
+            [ "$i" = 5 ] && exit 1
+            sleep $((i * 20))
+          done
           sudo mv tectonic /usr/local/bin/
           tectonic --version
 
