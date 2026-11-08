@@ -8,6 +8,8 @@ import Quillen.Notebook1970_15
 import Quillen.Notebook1971_4
 import Quillen.Notebook1971_11
 import Quillen.Notebook1971_11Central
+import Quillen.Notebook1973_5
+import Quillen.Notebook1982_13
 import Quillen.Notebook1983_4
 import Quillen.Notebook1983_10
 import Quillen.Upstream.GrothendieckGroup

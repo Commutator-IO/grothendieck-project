@@ -1,0 +1,44 @@
+\section[Notebook 1973-5: a partial order is the intersection of its linear extensions]{Notebook 1973-5: a partial order is the intersection of its linear extensions, and matrices supported on it\protect\verifie{Notebook1973_5}}\label{sec:quillen-1973-5}
+
+\emph{Context.} \carnet{1973}{5} (October 1973) works towards the $K$-spectrum of an exact category. On 8 and 9 October Quillen reads Wagoner's paper and compares the constructions of Wagoner and Volodin, both built from cosets of families of unipotent subgroups of $GL_n(A)$. Volodin's family consists of the finite intersections of the conjugates $\pi U \pi^{-1}$ of the upper unitriangular group by permutation matrices. On page~24 Quillen asserts that these are exactly the groups attached to the semi-standard flags of Wagoner, then marks the assertion \q{WRONG} with a counterexample on three letters. Pages~28--30 find the correct description.
+
+\emph{The page.} On page~28, for a set $X$ with a partial order $\le$ and two elements with $y \not\le x$, Quillen adds to $\le$ all the pairs $(u, v)$ such that $u \le x$ and $y \le v$, and checks in four cases each that the result is again transitive and antisymmetric; every mixed case would force $y \le x$. He concludes that a maximal partial order is linear, that every partial order is refined by a linear order (Zorn), and that every partial order is the intersection of the linear orders refining it. On page~29 he applies this to matrices: for a partial order $R$ on $\{1, \ldots, n\}$, the matrices whose $(i, j)$ entry vanishes unless $i \mathrel{R} j$ form a subring $M_R$, the intersection of a family of relations gives the intersection of the subrings, and therefore every $M_R$ is a finite intersection of conjugates of the ring of upper triangular matrices by permutations. Page~30 counts the partial orders on two and three points and observes that the orders coming from flags are those in which incomparability is an equivalence relation, which explains the failure of page~24.
+
+\emph{Intuition.} If $a \not\le b$, the enlargement of page~28 with $x = b$, $y = a$ forces $b$ below $a$; any linear order refining it puts $b$ strictly below $a$. So a pair that is not in the order is excluded by some linear extension.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1973-5, p.~28]\label{thm:quillen-1973-5}
+Let $\le$ be a partial order on a set $X$.
+\begin{enumerate}
+\item If $y \not\le x$, the relation $u \preceq v \iff (u \le v \text{ or } (u \le x \text{ and } y \le v))$ is a partial order containing $\le$, with $x \preceq y$.
+\item For all $a, b \in X$: $a \le b$ if and only if $a \le' b$ for every linear order $\le'$ containing $\le$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) Reflexivity is clear. If $u \preceq v \preceq w$, either both relations come from $\le$, or exactly one is of the second kind, and then $u \le x$, $y \le w$ by transitivity; if both are of the second kind, $y \le v \le x$, which is excluded. If $u \preceq v \preceq u$, either $u \le v \le u$, or one of the relations is of the second kind and one finds again $y \le x$ by composing the other three inequalities.
+
+(2) One direction is trivial. If $a \not\le b$, apply (1) with $x = b$, $y = a$ and extend $\preceq$ to a linear order $\le'$ (Szpilrajn). Then $b \le' a$; if also $a \le' b$, antisymmetry gives $a = b$, hence $a \le b$, a contradiction.
+\end{proof}
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1973-5, p.~29]\label{thm:quillen-1973-5-b}
+Let $A$ be a ring, $n$ a finite set and $R$ a relation on $n$; write $M_R$ for the set of matrices $(a_{ij})$ over $A$ with $a_{ij} = 0$ unless $i \mathrel{R} j$.
+\begin{enumerate}
+\item If $R$ is reflexive and transitive, $M_R$ is a subring of $M_n(A)$.
+\item For a family $(R_\nu)$, $M_{\bigcap_\nu R_\nu} = \bigcap_\nu M_{R_\nu}$.
+\item If $R$ is a partial order, $M_R = \bigcap M_{\le'}$, the intersection over the linear orders $\le'$ containing $R$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) The identity is supported on the diagonal, and sums and negatives preserve the support. If $i \not\mathrel{R} j$, each term $a_{ik} b_{kj}$ of $(ab)_{ij}$ vanishes: if $i \mathrel{R} k$ then $k \not\mathrel{R} j$ by transitivity, so $b_{kj} = 0$; otherwise $a_{ik} = 0$. (2) is immediate from the definition, and (3) follows from (2) and Theorem~\ref{thm:quillen-1973-5}.
+\end{proof}
+
+\noindent For a linear order on $\{1, \ldots, n\}$, $M_{\le'}$ is the conjugate of the upper triangular matrices by the permutation that sorts $\le'$; on the unipotent groups, (3) says that the group of matrices $I + N$ with $N$ supported off the diagonal on $R$ is a finite intersection of conjugates of the unitriangular group, which is the description of Volodin's family the page arrives at. This conjugation is not formalized.
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1973_5.lean}{\texttt{Notebook1973\_5.\allowbreak{}lean}} defines the enlarged relation under the name \texttt{adjoin} and proves part~(1) of Theorem~\ref{thm:quillen-1973-5} as \texttt{isPartialOrder\_adjoin}, \texttt{le\_adjoin} and \texttt{adjoin\_self}; part~(2) is \texttt{rel\_iff\_forall\_linear}, through \texttt{exists\_linear\_not\_rel}, using mathlib's extension theorem \texttt{extend\_partialOrder}. In Theorem~\ref{thm:quillen-1973-5-b}, $M_R$ is \texttt{matSupp}, part~(1) is the subring \texttt{matSubring}, part~(2) \texttt{matSupp\_iInf} and part~(3) \texttt{matSupp\_eq\_iInter}. The axioms used are the three usual axioms of mathlib.
+
+\litterature{the extension of a partial order to a linear order is E.~Szpilrajn, \q{Sur l'extension de l'ordre partiel}, \emph{Fund.\ Math.} 16 (1930), 386--389, and the description of a partial order as the intersection of its linear extensions is the starting point of the order dimension of B.~Dushnik and E.~W.~Miller, \q{Partially ordered sets}, \emph{Amer.\ J.\ Math.} 63 (1941), 600--610. Rings of matrices supported on a preorder are the structural matrix rings, or finite incidence algebras. The statements are classical; mathlib has the extension theorem but not the intersection. The notebook uses them to correct its own assertion on Volodin's subgroups, which A.~Suslin's comparison of the $K$-theories (\emph{Comm.\ Algebra} 9, 1981) handles through the same family.}

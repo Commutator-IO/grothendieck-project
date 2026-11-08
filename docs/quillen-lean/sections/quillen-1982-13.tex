@@ -1,0 +1,31 @@
+\section[Notebook 1982-13: the projections $1 - e(\eta_j)\,i(X_j)$]{Notebook 1982-13: the projections $1 - e(\eta_j)\,i(X_j)$ and the joint kernel of the contractions\protect\verifie{Notebook1982_13}}\label{sec:quillen-1982-13}
+
+\emph{Context.} \carnet{1982}{13} (22 November -- 30 December 1982) opens with the proof of Loday's conjecture on the Lie algebra homology of matrices, and continues with heat kernels, path integrals and the local index theorem, moment maps and the cohomology of gauge groups. On 23 December (pages~67--71) Quillen looks for a way to compute the equivariant cohomology of a manifold $M$ acted on by a compact connected group $G$ with differential forms. He conjectures that the complex $[\Omega(M) \otimes S(\mathfrak g^*)]^G$ does it, and reduces it to the Weil model $[\Omega(M) \otimes W(\mathfrak g)]_{\mathrm{basic}}$, provided $\Omega(M)$ is identified with the subspace of $\Lambda\mathfrak g^* \otimes \Omega(M)$ killed by all the contractions $i(X)$, $X \in \mathfrak g$, which act on both factors.
+
+\emph{The page.} On page~69 he treats the case $\dim \mathfrak g = 1$: the map $\alpha \mapsto \alpha - \eta \otimes i(X)\alpha$ lands in the kernel of $i(X)$. On page~70, for a basis $X_j$ of $\mathfrak g$ and the dual basis $\eta_j$, he considers the operators $1 - e(\eta_j)\,i(X_j)$ on $\Lambda\mathfrak g^* \otimes \Omega(M)$, where $e$ is exterior multiplication, expands the product of two of them, and concludes that they commute, are projections, and that $i(X_j)$ kills $1 - e(\eta_j)\,i(X_j)$; their product is therefore killed by all the $i(X_j)$, and gives the identification of $\Omega(M)$ with the joint kernel.
+
+\emph{Intuition.} Only the canonical anticommutation relations between the $e(\eta_j)$ and the $i(X_k)$ are used: $i(X_j)^2 = 0$, $e(\eta_j)\,i(X_j) + i(X_j)\,e(\eta_j) = 1$, and anticommutation of operators of different indices. The product $e_j i_j$ of two operators anticommuting with everything of index $k \ne j$ commutes with them.
+
+\emph{Notation.} Let $A$ be a ring and $(e_j)$, $(i_j)$ families of elements of $A$ indexed by a set $J$. We say they satisfy the \emph{anticommutation relations} if $i_j^2 = 0$ and $e_j i_j + i_j e_j = 1$ for every $j$, and if, for $j \ne k$, $e_j e_k = -e_k e_j$, $i_j i_k = -i_k i_j$ and $e_j i_k = -i_k e_j$. Put $P_j = 1 - e_j i_j$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1982-13, p.~70]\label{thm:quillen-1982-13}
+Under the anticommutation relations:
+\begin{enumerate}
+\item each $P_j$ is idempotent, $i_j P_j = 0$, and the $P_j$ commute pairwise;
+\item for distinct indices $j_1, \ldots, j_r$, the product $Q = P_{j_1} \cdots P_{j_r}$ is idempotent and $i_{j_s} Q = 0$ for every $s$;
+\item on every $A$-module $V$, the image of $Q$ is $\{v \in V \mid i_{j_s} v = 0 \text{ for } s = 1, \ldots, r\}$, and $Q$ is the identity on it.
+\end{enumerate}
+The relations hold for $e_j$ the left multiplication by vectors $v_j$ and $i_j$ the contraction by linear forms $f_j$ on an exterior algebra $\Lambda V$, when $f_k(v_j) = \delta_{jk}$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+From $i_j e_j = 1 - e_j i_j$ and $i_j^2 = 0$: $(e_j i_j)^2 = e_j (1 - e_j i_j) i_j = e_j i_j$, so $P_j^2 = P_j$; and $i_j P_j = i_j - (1 - e_j i_j) i_j = e_j i_j^2 = 0$. If $a$ and $b$ anticommute with $x$, then $ab\,x = -a\,x\,b = x\,ab$; hence $e_j i_j$, and $P_j$, commute with $e_k$ and $i_k$ for $k \ne j$, so $P_j$ commutes with $P_k$. In (2), $Q$ is a product of commuting idempotents, and $i_{j_s}$ commutes with the factors of index $\ne j_s$ and is killed by $P_{j_s}$. In (3), $i_{j_s} Q v = 0$; conversely, if all $i_{j_s} v = 0$, each $P_{j_s} v = v - e_{j_s} i_{j_s} v = v$, so $Qv = v$. On $\Lambda V$, $i_j^2 = 0$, left multiplications by vectors anticommute, so do contractions, and $i_f(v \wedge \omega) = f(v)\,\omega - v \wedge i_f\omega$ gives the mixed relations.
+\end{proof}
+
+\noindent The square $e_j^2 = 0$, true on the page, is not used. On $\Lambda\mathfrak g^* \otimes \Omega(M)$, with $e_j = e(\eta_j) \otimes 1$ and $i_j = i(X_j) \otimes 1 + \epsilon \otimes i(X_j)$, $\epsilon$ the parity operator on $\Lambda\mathfrak g^*$, the relations hold by the exterior-algebra case and the graded sign rule; this instance is not formalized. Nor is the final step of the page, that $\alpha \mapsto Q(1 \otimes \alpha)$ is a bijection from $\Omega(M)$ onto the joint kernel.
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1982_13.lean}{\texttt{Notebook1982\_13.\allowbreak{}lean}} states the relations as the structure \texttt{IsCAR} and defines $P_j$ as \texttt{proj} and $Q$, for a list of indices, as \texttt{prodProj}. Part~(1) of Theorem~\ref{thm:quillen-1982-13} is \texttt{idem\_proj}, \texttt{inc\_mul\_proj} and \texttt{commute\_proj}; part~(2) is \texttt{isIdempotentElem\_prodProj} and \texttt{inc\_mul\_prodProj}, for a list without repetition; part~(3) is \texttt{prodProj\_smul\_of\_inc} and \texttt{mem\_range\_prodProj\_iff}. The exterior-algebra instance is \texttt{exterior\_isCAR}, on \texttt{ExteriorAlgebra R V} with mathlib's contraction \texttt{CliffordAlgebra.contractLeft}. The axioms used are at most the three usual axioms of mathlib.
+
+\litterature{the Weil and Cartan models of equivariant cohomology go back to H.~Cartan's notes of 1950, reprinted in V.~Guillemin and S.~Sternberg, \emph{Supersymmetry and equivariant de Rham theory}, Springer, 1999. Their isomorphism by the operator $\exp(-\sum_j \theta^j \iota_j)$ is in V.~Mathai and D.~Quillen, \q{Superconnections, Thom classes, and equivariant differential forms}, \emph{Topology} 25 (1986), 85--110, and in J.~Kalkman, \emph{Comm.\ Math.\ Phys.} 153 (1993), 447--463, as one member of a family interpolating between the two models. The page's form, the product of the projections $1 - e(\eta_j)\,i(X_j)$ onto the joint kernel of contractions acting on both factors, was not found in this form in the sources consulted; the computation is elementary and the edition does not present it as new.}
