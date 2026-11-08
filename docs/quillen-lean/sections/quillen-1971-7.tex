@@ -23,3 +23,27 @@ Since $S$ is infinite, $S \sqcup S$ is in bijection with $S$; composing a biject
 Not formalized here are the vanishing of the higher homology of $M$ (Mather's trick, pages~15--16) and the homotopy statements of pages~17--19.
 
 \litterature{the statement is in print: S.~Schwede, \q{On the homotopy groups of symmetric spectra}, \emph{Geom.\ Topol.}~12 (2008), Lemma~5.2, proves that the classifying space of the monoid of injections of $\mathbf N$ is contractible, with a proof credited to N.~Strickland that uses the same transport ($c_t(f)\,t = t f$) together with a second injection; the paper notes before the lemma that $\operatorname{Hom}(M, A) = 0$ for every abelian group $A$. The search did not locate the case of an arbitrary infinite set stated separately, which follows by the same proof. The edition does not present the statement as new.}
+
+\subsection{The ordered variant: injective monotone self-maps of the rationals}\label{sec:quillen-1971-7-ord}
+
+\emph{The page.} In a later entry of the notebook (pages~21--24), Quillen turns from $\Sigma_\infty$ to $GL(R)$: he uses the category of finite linearly ordered sets and injective monotone maps, and replaces the infinite set $S$ by $\mathbf Q$ with its natural order, $M$ becoming the monoid of injective monotone maps $\mathbf Q \to \mathbf Q$. He then says (p.~23) that \q{the same argument used before works}: two such maps that agree on a non-empty interval have the same image in the group, since $\mathbf Q$ embeds into any interval; and the transport $u_*(\theta)$ is defined along an embedding $u$ whose image is an interval, as on page~14, and is again monotone. The conclusion is again $\pi_1 M = 0$.
+
+\emph{What has to be added.} The transport is monotone only because the image of $u$ is convex: a point off it lies below the whole image or above it, so leaving it fixed does not break the order. One also needs embeddings of $\mathbf Q$ onto an interval, and two of them with disjoint images; for a countable dense linear order without endpoints, Cantor's back-and-forth theorem gives order isomorphisms of $\mathbf Q$ with $\{x < a\}$ and with $\{x > a\}$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1971-7, p.~23]\label{thm:quillen-1971-7-ord}
+Let $\alpha$ be a countable dense linear order without endpoints, for instance $\mathbf Q$, and $M$ the monoid, under composition, of injective monotone (equivalently, strictly increasing) maps $\alpha \to \alpha$. Every monoid homomorphism from $M$ to a group is trivial.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Pick $a \in \alpha$. The rays $\{x < a\}$ and $\{x > a\}$ are again countable dense linear orders without endpoints, hence order-isomorphic to $\alpha$ (Cantor); this gives strictly increasing $t, s : \alpha \to \alpha$ with images $\{x < a\}$ and $\{x > a\}$, which are disjoint. For $f \in M$, the map $c(f)$, equal to $t f t^{-1}$ on the image of $t$ and to the identity elsewhere, is strictly increasing: on the image of $t$ it is a composite of strictly increasing maps with values in that image, every point off the image lies above the whole image, and the identity there preserves the order. The relations $c(f)\, t = t f$ and $c(f)\, s = s$ hold, and one concludes as for Theorem~\ref{thm:quillen-1971-7}.
+\end{proof}
+
+\noindent The statement holds as written; the only hypothesis on $\mathbf Q$ that the proof uses is the existence of $t$ and $s$ as above, and the Lean file proves the conclusion from that alone.
+
+\emph{Verification in Lean.} In the same file, \texttt{strictMonoMonoid α} is the submonoid of strictly monotone maps in \texttt{Function.End α} (for a linear order, the injective monotone maps). \texttt{transport\_strictMono} shows that transport along a strictly monotone map with order-convex image is strictly monotone; \texttt{strictMono\_monoidHom\_eq\_one\_of\_embeddings} draws the conclusion from any pair $t$, $s$ as in the proof; \texttt{exists\_disjoint\_strictMono} constructs them with mathlib's \texttt{Order.iso\_of\_countable\_dense}. Theorem~\ref{thm:quillen-1971-7-ord} is \texttt{strictMono\_monoidHom\_eq\_one}, and \texttt{rat\_monoidHom\_eq\_one} is the case of $\mathbf Q$ as an equality of homomorphisms. The axioms used are the three usual axioms of mathlib.
+
+Not formalized here are the vanishing of the higher homology of $M$ (page~24) and the comparison of homology over the category of finite ordered sets with homology over $M$ (pages~21--23).
+
+\litterature{the monoid of self-embeddings of $(\mathbf Q, <)$ is studied in model theory and universal algebra, for instance by M.~Behrisch, J.~K.~Truss and E.~Vargas-García (\emph{Studia Logica} 105 (2017), reconstruction of its topology) and by J.~K.~Truss and E.~Vargas-García (\emph{Algebra Logic} 60 (2021), on the action of the endomorphism monoid of the rationals); these were checked at the level of their abstracts and do not address homomorphisms to groups. A search of zbMATH, arXiv and the web did not locate the vanishing of the group completion, or the acyclicity of the classifying space, of this monoid stated in print; it follows from the proof of Schwede's Lemma~5.2 once the transport is taken along an embedding onto a ray. Elementary as it is, the edition does not present it as new.}

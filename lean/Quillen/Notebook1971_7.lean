@@ -121,4 +121,121 @@ theorem monoidHom_eq_one' [Infinite S] {G : Type*} [Group G] (φ : injMonoid S �
     φ = 1 :=
   MonoidHom.ext fun f => monoidHom_eq_one φ f
 
+/-! ## Notebook 1971-7, pp. 21–24: injective monotone self-maps of `ℚ`
+
+In an entry on `BGL(R)^+` built from the category of finite linearly ordered sets and injective
+monotone maps, Quillen takes `S = ℚ` and the monoid `M` of injective monotone self-maps of `S`,
+and shows (p. 23) that `π₁` of its one-object category vanishes, with the transport argument of
+p. 14 along an embedding whose image is an interval. We prove: for every countable dense linear
+order without endpoints (in particular `ℚ`), every monoid homomorphism from `M` to a group is
+trivial. For a linear order, the injective monotone maps are the strictly monotone ones.
+
+The key point beyond the unordered case: if the range of `t` is order-convex, the transport
+`t_*(f)` is again strictly monotone. Two embeddings with disjoint ranges are obtained from
+Cantor's back-and-forth isomorphisms `α ≃o Iio a` and `α ≃o Ioi a`.
+
+* `strictMonoMonoid α`: the strictly monotone self-maps of `α`, a submonoid of `Function.End α`;
+* `transport_strictMono`: transport along an embedding with convex range is strictly monotone;
+* `strictMono_monoidHom_eq_one_of_embeddings`: the conclusion, from a pair of such embeddings;
+* `strictMono_monoidHom_eq_one`: **every monoid homomorphism from `strictMonoMonoid α` to a group
+  is trivial**, for `α` countable, densely ordered, without endpoints and nonempty;
+* `rat_monoidHom_eq_one`: the case `α = ℚ` of the notebook.
+-/
+
+/-- The monoid of strictly monotone (for a linear order: injective monotone) self-maps of `α`,
+as a submonoid of `Function.End α`. -/
+def strictMonoMonoid (α : Type*) [Preorder α] : Submonoid (Function.End α) where
+  carrier := {f | StrictMono f}
+  one_mem' := strictMono_id
+  mul_mem' := fun {f g} hf hg => by
+    change StrictMono (f ∘ g)
+    exact hf.comp hg
+
+section Ordered
+
+variable {α : Type*} [LinearOrder α]
+
+theorem mem_strictMonoMonoid {f : Function.End α} : f ∈ strictMonoMonoid α ↔ StrictMono f :=
+  Iff.rfl
+
+/-- Transport along a strictly monotone `t` whose range is order-convex (every point off the
+range lies below all of it or above all of it) preserves strict monotonicity. -/
+theorem transport_strictMono {t f : α → α} (ht : StrictMono t) (hf : StrictMono f)
+    (hconv : ∀ y, (¬∃ a, t a = y) → (∀ a, y < t a) ∨ (∀ a, t a < y)) :
+    StrictMono (transport t f) := by
+  intro x y hxy
+  by_cases hx : ∃ a, t a = x
+  · obtain ⟨a, rfl⟩ := hx
+    rw [transport, ht.injective.extend_apply, comp_apply]
+    by_cases hy : ∃ b, t b = y
+    · obtain ⟨b, rfl⟩ := hy
+      rw [ht.injective.extend_apply, comp_apply]
+      exact ht (hf (ht.lt_iff_lt.1 hxy))
+    · rw [extend_apply' _ _ _ hy, id]
+      rcases hconv y hy with h | h
+      · exact absurd hxy (lt_asymm (h a))
+      · exact h _
+  · rw [transport_apply_of_not_mem f hx]
+    by_cases hy : ∃ b, t b = y
+    · obtain ⟨b, rfl⟩ := hy
+      rw [transport, ht.injective.extend_apply, comp_apply]
+      rcases hconv x hx with h | h
+      · exact h _
+      · exact absurd hxy (lt_asymm (h b))
+    · rwa [transport_apply_of_not_mem f hy]
+
+/-- If `α` has two strictly monotone self-maps with disjoint ranges, the first with order-convex
+range, then every monoid homomorphism from `strictMonoMonoid α` to a group is trivial. -/
+theorem strictMono_monoidHom_eq_one_of_embeddings {t s : α → α} (ht : StrictMono t)
+    (hs : StrictMono s) (hts : ∀ a b, t a ≠ s b)
+    (hconv : ∀ y, (¬∃ a, t a = y) → (∀ a, y < t a) ∨ (∀ a, t a < y))
+    {G : Type*} [Group G] (φ : strictMonoMonoid α →* G) (f : strictMonoMonoid α) : φ f = 1 := by
+  let T : strictMonoMonoid α := ⟨t, ht⟩
+  let Sm : strictMonoMonoid α := ⟨s, hs⟩
+  let c : strictMonoMonoid α := ⟨transport t f.1, transport_strictMono ht f.2 hconv⟩
+  have h1 : c * T = T * f := Subtype.ext (transport_comp_self ht.injective f.1)
+  have h2 : c * Sm = Sm := Subtype.ext (transport_comp_of_disjoint hts f.1)
+  have hc : φ c = 1 := by
+    have := congrArg φ h2
+    rw [map_mul] at this
+    exact mul_right_cancel (this.trans (one_mul _).symm)
+  have := congrArg φ h1
+  rw [map_mul, map_mul, hc, one_mul] at this
+  exact mul_left_cancel (this.symm.trans (mul_one _).symm)
+
+variable [Countable α] [DenselyOrdered α] [NoMinOrder α] [NoMaxOrder α] [Nonempty α]
+
+/-- A countable dense linear order without endpoints has two order embeddings into itself with
+disjoint ranges, the first onto an initial ray `Iio a`. -/
+theorem exists_disjoint_strictMono :
+    ∃ t s : α → α, StrictMono t ∧ StrictMono s ∧ (∀ a b, t a ≠ s b) ∧
+      ∀ y, (¬∃ a, t a = y) → (∀ a, y < t a) ∨ (∀ a, t a < y) := by
+  obtain ⟨a⟩ := ‹Nonempty α›
+  obtain ⟨e⟩ := Order.iso_of_countable_dense α (Set.Iio a)
+  obtain ⟨e'⟩ := Order.iso_of_countable_dense α (Set.Ioi a)
+  refine ⟨fun x => (e x : α), fun x => (e' x : α), fun x y h => e.strictMono h,
+    fun x y h => e'.strictMono h, fun x y h => ?_, fun y hy => Or.inr fun x => ?_⟩
+  · have h1 : (e x : α) < a := (e x).2
+    have h2 : a < (e' y : α) := (e' y).2
+    exact (lt_trans h1 h2).ne h
+  · -- `y` is not in `Iio a`, so `a ≤ y`
+    have hay : a ≤ y := by
+      by_contra hlt
+      exact hy ⟨e.symm ⟨y, not_le.1 hlt⟩, by simp⟩
+    exact lt_of_lt_of_le (e x).2 hay
+
+/-- **Quillen, notebook 1971-7, p. 23.** For a countable dense linear order `α` without endpoints
+(Quillen's case: `α = ℚ`), every monoid homomorphism from the monoid of injective monotone
+self-maps of `α` to a group is trivial: `π₁` of its one-object category vanishes. -/
+theorem strictMono_monoidHom_eq_one {G : Type*} [Group G] (φ : strictMonoMonoid α →* G)
+    (f : strictMonoMonoid α) : φ f = 1 := by
+  obtain ⟨t, s, ht, hs, hts, hconv⟩ := exists_disjoint_strictMono (α := α)
+  exact strictMono_monoidHom_eq_one_of_embeddings ht hs hts hconv φ f
+
+/-- **Quillen, notebook 1971-7, p. 23**, for `ℚ`, as an equality of homomorphisms. -/
+theorem rat_monoidHom_eq_one {G : Type*} [Group G] (φ : strictMonoMonoid ℚ →* G) : φ = 1 :=
+  MonoidHom.ext fun f => strictMono_monoidHom_eq_one φ f
+
+end Ordered
+
 end Quillen.Notebook1971_7
