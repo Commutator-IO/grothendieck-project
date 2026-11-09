@@ -357,3 +357,6 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 154 07-9 | disagreement | On the first spindle, which numbers are written at the left ends of the brown curves? | Only « 3 » and « 2 » readable | 1 to 5 at both ends, as in the transcription
 - [ ] 154 07-9 | reading | In the right half of the second spindle, are the broken brown curves continuous? | Drawn as pieces, approximate | Continuous curves 5→8, 4→7, 3→6, as the end numbers suggest
 - [ ] 154 07-13 | reading | Is the orange cross under the top spindle meant to sit on its light green line? | Kept above the line, as drawn | On the line
+- [ ] 154 04-10 | reading | In disk 3, how do the two strands crossing at the black point left of centre pair up? | The strand from the top turns to the lower right through the black points; the dotted strand from the upper right runs on to the lower left | The opposite pairing, but then the two would touch without crossing
+- [ ] 154 04-10 | reading | In disk 2, is the wavy ink part of the strand it lies on? | One strand | A separate ink stroke over a pencil line
+- [ ] 154 05-2 | reading | Where do the light orange curves go under the band? | Each drawn from the rim to the band's border; no pairing under the band | Single strands crossing the band
