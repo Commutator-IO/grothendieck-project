@@ -388,7 +388,7 @@ export function ReviewPage() {
                     {drawingClaims[item.id]}
                   </blockquote>
                 )}
-                {SHOW_READINGS && item.drawing && <Drawing key={item.id} cote={item.cote} id={item.drawing} />}
+                {SHOW_READINGS && item.drawing && <Drawing cote={item.cote} id={item.drawing} />}
                 {SHOW_READINGS && snippets?.[item.id] && <Reading s={snippets[item.id]} />}
                 {!SHOW_READINGS && ['ill', 'uncertain', 'add', 'supplied', 'drawing'].includes(item.kind) && (
                   <p className="mt-3 rounded-md bg-ink-50 px-3 py-2 text-[13px] text-ink-600">
@@ -514,8 +514,10 @@ export function ReviewPage() {
  * drawing not yet recompiled.
  */
 function Drawing({ cote, id }: { cote: string; id: string }) {
-  const [missing, setMissing] = useState(false);
   const src = `/transcripts/${cote}/drawings/${id}.svg`;
+  // Which src failed to load, so moving to another drawing clears it without remounting.
+  const [failed, setFailed] = useState<string | null>(null);
+  const missing = failed === src;
   return (
     <figure className="mt-3 rounded-md border border-ink-200 bg-white p-3">
       <figcaption className="text-[11px] font-semibold uppercase tracking-wider text-ink-400">
@@ -530,7 +532,7 @@ function Drawing({ cote, id }: { cote: string; id: string }) {
           <img
             src={src}
             alt={`Drawing ${id} of folder ${cote}, as redrawn`}
-            onError={() => setMissing(true)}
+            onError={() => setFailed(src)}
             className="mx-auto max-h-[45vh] w-auto max-w-full"
           />
         </a>
