@@ -194,6 +194,19 @@ export const PROOFS: Proof[] = [
     theorems: ['det3_eq_det', 'six_concurrent', 'six_not_two_pencils', 'six_no_II5', 'six_not_III6', 'six_has_II32', 'seven_has_II32'],
   },
   {
+    folder: '81',
+    batch: 2,
+    page: '31–39, 47',
+    name: 'Non-parallel decompositions and the ordered quartet; the proposition of page 39',
+    statement:
+      'Pages 34–38: two non-parallel binary decompositions (hemispheres covering X, non-empty, distinct; one hemisphere of each disjoint from one of the other) have a unique disjoint pair, and for a pairwise non-parallel family the relation (26), x < y iff x, y lie in different decompositions and Σˣ ∩ Σ^{σy} = ∅, is an order (« il faut vérifier que c’est transitif ») making C an ordered quartet. Page 39: in an ordered quartet, C_{≥x} and C_{≤x} are totally ordered. Page 47: a family of segments satisfying (σ₁)–(σ₃) is not recovered from its partition into cores (three parallel chords).',
+    found:
+      'Pages 34–38 hold for any family of subsets of a set, closedness unused: the disjoint pair is unique, (26) is a strict order reversed by σ, and x, y are comparable iff σx, y are not. The proposition of page 39 is false: three chords around a triangle give the six-element quartet with only cᵢ < cⱼ′ (i ≠ j), where C_{≥c₁} = {c₁, c₂′, c₃′} with c₂′, c₃′ incomparable (realised as a non-parallel family of a seven-point model of the disc, and as an abstract quartet). Every interval [x, z] of a quartet is a chain, condition a) alone sufficing; condition b), struck on page 38, does not follow from a). The NB of page 47 holds on the hexagon. Not formalised: the « Inversement » of page 38 (every quartet comes from a family), the maps of pages 2–4, the Version I tree lemma, the anglets of page 49.',
+    verdict: ['holds', 'false on the page'],
+    lean: 'lean/Grothendieck/Folder81.lean',
+    theorems: ['disjoint_unique', 'isQuartette_family', 'interval_comp', 'tripod_isQuartette', 'tripod_not_chain', 'page39_false', 'chords_family_not_chain', 'rev_not_of_comp', 'page47_cores'],
+  },
+  {
     folder: '90',
     batch: 1,
     page: '9',
