@@ -197,3 +197,24 @@ which only the transcription skill edits.
 - [ ] 78 01-1 | reading | Is the overinked knot just above A₄ a vertex? | No; ten vertices drawn, the bottom one unlabelled | Yes
 - [ ] 78 05-2 | reading | Which label is σ₀: the heavy one by its axis, or the lighter σ at the top of that axis? | The heavy one | The upper one
 - [ ] 78 05-4 | reading | Which long line is the axis and which the arrow a, and what are the second « 1 » and the « 0 » at the top? | As redrawn; D through the origin | 
+
+## Folders 119, 33, 34, 67, 81, 85, 86
+
+- [ ] 119 08-1 | reading | Is the bottom node labelled PB or PD? | PB, as in the transcription | PD, as it looks on the facsimile
+- [ ] 119 08-1 | reading | Is the vertical line from the top PB one arrow PB → PB « identité » through the EPC point? | One line, arrowheads at both ends | PB → EPC, then a separate EPC → PB
+- [ ] 119 08-10 | reading | Does a stroke run from the top vertex to the dot near the word « ce »? | Left out | Yes, a third triangle B–dot–E
+- [ ] 119 08-11 | reading | What are the upper-right label and the faint letter under the bottom vertex? | v′ and u | 
+- [ ] 119 08-12 | reading | Are the hidden edge of the centre-left tetrahedron and the inner diagonals of the left pyramid drawn on the page? | Drawn | Absent
+- [ ] 33 01-1 | reading | Is the sheet to be read turned 180°? | Yes: every letter then reads upright and matches the transcription | 
+- [ ] 33 01-1 | disagreement | Are there a vertical arrow crossing k → k′ beside the hatched circle, and a faint short arrow after A? | Yes, not named in the transcription | 
+- [ ] 33 08-1 | reading | Is there a fourth apex in the lozenge row, between X, Y and F? | Drawn | No apex there
+- [ ] 34 09-1 | disagreement | Is there an inclusion sign between X̄ and X̄|U? | Not visible, not drawn | ⊃, as in the transcription
+- [ ] 34 09-5 | reading | Is the short vertical stroke across X ⇐ X̃ under X_Ũ a plain stroke? | A plain stroke | An edge from X_Ũ downwards
+- [ ] 34 08-1 | strike | Is the group of oblique strokes with a V and S̄ at the right struck out? | Left out as struck | 
+- [ ] 67 01-2 | disagreement | Is the collar hatched? | No hatching visible, not drawn | Hatched, as in the transcription
+- [ ] 67 01-2 | reading | Which middle curve is Γ_i? | The open fourth curve | The closed second curve
+- [ ] 67 02-1 | disagreement | Is a point x marked? | Not found, not drawn | x marked, as in the transcription
+- [ ] 67 05-1 | reading | What colours are the felt-pen strokes? | Not visible on the grey scan, not rendered | 
+- [ ] 85 04-1 | strike | Is the upper sketch of oscillating curves struck out? | Left out as struck | 
+- [ ] 86 02-3 | disagreement | Where is the vertex v, and what is the second letter inside the pentagon? | v not identified, unlabelled; the letter read s | v, as in the transcription
+- [ ] 86 02-4 | disagreement | Is there a star of three lines a′, b, c with side a dotted? | Not found on the page | Present, as in the transcription
