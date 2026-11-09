@@ -65,16 +65,16 @@ Toutes les questions de ce bloc ont reçu réponse (#131, #132) et sont appliqu�
 
 ## Folder 74
 
-- [ ] 74 03-1 | reading | Do the hexagon's sides end in arrowheads? | Yes, small hooks read as arrowheads | No arrowheads, as in the earlier redraw
-- [ ] 74 03-5 | disagreement | Is the glyph a ξ or a pair of braces? | ξ, the same glyph as elsewhere on the page | Braces {1 2} … {i, i+2}, as in the transcription
-- [ ] 74 03-4 | disagreement | Where are the labels ξ12, ξ25, … and x1…x6? | ξ on the upper hexagon's vertices, x1…x6 on the lower | Pairs beside two hexagons on x1…x6, as in the transcription
-- [ ] 74 03-7 | disagreement | What are the labels? | τ, τ′, τ″ and their bars; no dotted diagonals visible | τ1, τ2, τ3 with dotted diagonals, as in the transcription
-- [ ] 74 04-3 | disagreement | Where is k, and which vertices is u joined to? | k at the bottom left; u joined to j, q, r | A rectangle i p q k, u joined to p, q, r
-- [ ] 74 06-6 | disagreement | Where are s and t? | Below the triangle, each joined to its own bold point | As in the transcription
+- [x] 74 03-1 | reading | Do the hexagon's sides end in arrowheads? | Yes, small hooks read as arrowheads | No arrowheads, as in the earlier redraw
+- [x] 74 03-5 | disagreement | Is the glyph a ξ or a pair of braces? | ξ, the same glyph as elsewhere on the page | Braces {1 2} … {i, i+2}, as in the transcription
+- [x] 74 03-4 | disagreement | Where are the labels ξ12, ξ25, … and x1…x6? | ξ on the upper hexagon's vertices, x1…x6 on the lower | Pairs beside two hexagons on x1…x6, as in the transcription
+- [x] 74 03-7 | disagreement | What are the labels? | τ, τ′, τ″ and their bars; no dotted diagonals visible | τ1, τ2, τ3 with dotted diagonals, as in the transcription
+- [x] 74 04-3 | disagreement | Where is k, and which vertices is u joined to? | k at the bottom left; u joined to j, q, r | A rectangle i p q k, u joined to p, q, r
+- [x] 74 06-6 | disagreement | Where are s and t? | Below the triangle, each joined to its own bold point | As in the transcription
 - [ ] 74 02-4 | disagreement | Which cone carries α, β, γ? | The left (first) cone; the 3×3 square stands by the second | As in the transcription
-- [ ] 74 07-4 | strike | Is the first sketch struck out? | Left out as struck | An abandoned start of the same chain, to draw
-- [ ] 74 07-9 | reading | Which strokes of the cube are dashed? | As redrawn | 
-- [ ] 74 06-4 | reading | Are the vertex letters placed right? | As redrawn | 
+- [x] 74 07-4 | strike | Is the first sketch struck out? | Left out as struck | An abandoned start of the same chain, to draw
+- [x] 74 07-9 | reading | Which strokes of the cube are dashed? | As redrawn | 
+- [x] 74 06-4 | reading | Are the vertex letters placed right? | As redrawn | 
 
 ## Folder 69
 
@@ -85,7 +85,7 @@ Toutes les questions de ce bloc ont reçu réponse (#131, #132) et sont appliqu�
 - [ ] 69 05-2 | reading | What are the end labels of the c and b fans? | Illegible, left out | 
 - [ ] 69 03-1 | disagreement | Where does the branch leave the bar, and are α, β written at its ends? | From the left end; α, β not visible | From the middle, with α, β, as in the transcription
 - [ ] 69 05-12 | disagreement | Is the second bracketed diagonal matrix (λ₁, λ₁⁻¹ … λ_r, λ_r⁻¹) a drawing to mark? | On the page, with no mark | 
-- [ ] 69 01-14 | disagreement | Is it a three-branch star? | A central triangle with two spikes at each vertex | A three-branch star, as in the transcription
+- [x] 69 01-14 | disagreement | Is it a three-branch star? | A central triangle with two spikes at each vertex | A three-branch star, as in the transcription
 - [ ] 69 05-3 | disagreement | How many points do the broken lines show? | About 4 and 3 | 3 and 2, as in the transcription
 - [ ] 69 06-4 | disagreement | What are the small prism's two upper labels? | Like 6 and 4′, left out | Primes, as in the transcription
 
