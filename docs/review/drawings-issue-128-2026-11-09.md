@@ -124,3 +124,15 @@ which only the transcription skill edits.
 - [ ] 57 07-1 | reading | Are the labels right? | As in the transcription | 
 - [ ] 57 01-1 | strike | Is the left-out part of the top row struck out on the page? | Left out as struck | 
 - [ ] 57 14-1 | disagreement | How many triangles are there? | Two | Four, as in the transcription
+
+## Folder 146
+
+- [ ] 146 04-6 | disagreement | Is the left figure a hexagon (two triangles side by side and their diagonals)? | A pentagon whose centre is joined to all five vertices | A hexagon, as in the transcription
+- [ ] 146 04-9 | disagreement | What does the figure show, and what are its labels? | A path of two edges through three points, middle label 0, left label a sideways ∞ (or 8); no large ellipse with ∞ in this region | A dessin 0 – 1 – 0 with a large ellipse carrying ∞, as in the transcription
+- [ ] 146 03-6 | strike | Are the ellipse, the sphere in lunes, the tetrahedron and the bottom-right sphere all struck out? | Left out as struck; only the small sphere, the arrows, the legends and D1 drawn | 
+- [ ] 146 03-6 | reading | Is the « ℤ » a letter, or the start of the zigzag stroke? | ℤ, as in the transcription | The start of the zigzag stroke
+- [ ] 146 04-4 | strike | Are the first D12 sphere and the label D2 struck out? | Left out as struck | 
+- [ ] 146 01-5 | disagreement | How many looped points are on the equator? | Five | Four, as in the transcription
+- [ ] 146 07-2 | disagreement | Which vertex does « a » label, and does the right side bend? | The right side bends at a vertex, which « a » labels | « a » at the top vertex, as in the transcription
+- [ ] 146 02-2 | reading | Is the top label Q+ or Q with a bar? | Q+, as in the transcription | Q̄
+- [ ] 146 04-14 | reading | Does the whole-page redraw match the overdrawn pencil? | As redrawn | 
