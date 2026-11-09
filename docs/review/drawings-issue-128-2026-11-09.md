@@ -218,3 +218,39 @@ which only the transcription skill edits.
 - [ ] 85 04-1 | strike | Is the upper sketch of oscillating curves struck out? | Left out as struck | 
 - [ ] 86 02-3 | disagreement | Where is the vertex v, and what is the second letter inside the pentagon? | v not identified, unlabelled; the letter read s | v, as in the transcription
 - [ ] 86 02-4 | disagreement | Is there a star of three lines a′, b, c with side a dotted? | Not found on the page | Present, as in the transcription
+
+## Folders with one or two partial drawings
+
+- [ ] 156-7 04-1 | disagreement | Is the first segment subdivided in two or in three? | Three pieces: two interior ticks, the mark near the right end a clear tick | Two pieces (« un segment subdivisé en deux »), as in the transcription
+- [ ] 76 01-1 | disagreement | Which arrow does the cross strike? | A stroke running from below D12 down towards D2 (perhaps D1→D2 or D12→D2) | The arrow D02 → D1, as in the transcription
+- [ ] 77 01-3 | reading | What is the label left of the vertical stroke? | f₃, so the vertical stroke is f₃ and the inked apex is not a vector tip; 1 − ζ and H_ζ not located | 1 − ζ there, with H_ζ near the apex
+- [ ] 77 05-1 | strike | The transcription calls the whole schema struck, but no strike stroke can be told apart: should it be drawn? | Drawn whole | Struck whole; or the three falling strokes are the strike
+- [ ] 147 04-5 | strike | Is this « schéma raturé » struck as a whole? | Drawn whole in ink, the crossing strokes taken as part of the contour | Struck whole; or the crossing strokes at the upper right are the strike
+- [ ] 136 02-1 | reading | Are the arrows « à double pointe » double chevrons, or heads at both ends? | Double chevrons along each stroke | Heads at both ends
+- [ ] 136 02-1 | reading | What is in the box? | g, g′, gh | g, g₁, …, g_k
+- [ ] 136 02-1 | strike | Are the three long oblique strokes strikes? | Yes, left out | They belong to the figure
+- [ ] 156-5 01-1 | disagreement | Does curve A surround x and z? | It only passes to their left, without closing | « entoure x et z », as in the transcription
+- [ ] 156-5 01-1 | reading | Is the long stroke from Φ joining curve A part of the figure? | Drawn, joining A at its kink | Part of the text line « Φ = {A, B, C …} »
+- [ ] 43 06-1 | disagreement | Where are the sketches on p. 107? | The left half of the page | « à droite », as in the transcription
+- [ ] 43 06-1 | reading | Is the short upright stroke before X the subscript 1? | « ∅ ≠ ′X » | X₁ ≠ ∅
+- [ ] 43 06-1 | reading | Is there a brace marked α_p? | Not found, left out | Yes
+- [ ] 43 04-1 | reading | Which small figure is « the parallelogram marked with a point »? | Both drawn: the small one next to A and the larger curved one lower left | A single parallelogram
+- [ ] 23 04-2 | reading | Is the struck letter X′ or X? | X, struck and left out; the prime belongs to the X′ written above it | « un X′ biffé »
+- [ ] 23 04-2 | reading | Where is the illegible word? | Just above the line, at the foot of the second diagonal | « sous le trait »
+- [ ] 12 08-2 | reading | Is Q″ at the upper right legible? | Only « Q′ + » drawn; the rest is cut by the sheet edge | Q′ + Q″
+- [ ] 15 11-1 | reading | Where is the ℚ? | Not located, left out (perhaps the lower-left loop) | ℚ in the second diagram
+- [ ] 73 01-5 | reading | Does u_{i+1} start at the vertex of u_i? | It starts above the overwritten label λ_{i+1}, leaving a gap | A continuous polygonal line
+- [ ] 73 01-5 | reading | What is the λ under the bottom side? | Left out: reads λ_{i+1}, perhaps λ_{i−1} | λ_{i+1}
+- [ ] 75 01-1 | reading | What is the vertex set? | Ten dotted vertices plus undotted junctions | A dozen vertices marked by a point
+- [ ] 76 01-2 | reading | Is the ladder framed? | A heavy bar above, a bracket below and to the left | « petite échelle encadrée »
+- [ ] 84 07-1 | reading | What are the primes of the labels? | L_i, E′_i, M′_i / L″_i, E″_i, M_i / L‴_i, E‴_i, M′_i / L′_i, E′_i, M_i; the bottom E may be E″_i | The transcription's L, L′, L″, L‴ scheme
+- [ ] 91 05-1 | reading | Is the faint pencil oval behind U_f part of the figure? | Drawn | Not mentioned in the transcription
+- [ ] 91 06-1 | reading | Where is y? | Not located: a J-like mark or a small o above the short segment | « sans doute x, y »
+- [ ] 117 02-1 | reading | Which ringed vertex is Y? | None carries a legible letter; left unlabelled | Y at the lower left
+- [ ] 137 03-1 | reading | What is the thin stroke with a point beside B^rés, and the label at the bottom? | Stroke drawn, meaning unclear; label B^rés (looks like B^{rés.le}) | 
+- [ ] 137 03-1 | strike | Is the long oblique stroke a strike? | Yes, left out | Part of the scheme
+- [ ] 156-7 05-1 | reading | Is x a separate letter above the cross? | The cross itself; the raised x near the lower arc belongs to the legend | « une croix x »
+- [ ] 156-9 06-1 | reading | Where is C, and which stroke is C → 1? | C where the arrows from a and b′ meet; C → 1 the long vertical stroke | A slanted arrow from the label C, as in the earlier redraw
+- [ ] 158 04-2 | reading | Does « Σ¹X » above the cones belong to this drawing or to 04-1? | Drawn in neither | 
+- [ ] 100 01-4 | reading | Is the long upper stroke the top of the region or the bottom of the frame above? | The top of the region | The bottom of the frame
+- [ ] 121 03-1 | reading | Are the U″ rings, the I/II dumbbell and the 1°)–6°) sequence right? | Kept from the earlier redraw, off by 1 to 3 units; only the two dumbbells redrawn | 
