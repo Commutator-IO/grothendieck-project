@@ -68,6 +68,9 @@ Toutes les questions de ce bloc ont reçu réponse (#131, #132) et sont appliqu�
 - [x] 74 03-1 | reading | Do the hexagon's sides end in arrowheads? | Yes, small hooks read as arrowheads | No arrowheads, as in the earlier redraw
 - [x] 74 03-5 | disagreement | Is the glyph a ξ or a pair of braces? | ξ, the same glyph as elsewhere on the page | Braces {1 2} … {i, i+2}, as in the transcription
 - [x] 74 03-4 | disagreement | Where are the labels ξ12, ξ25, … and x1…x6? | ξ on the upper hexagon's vertices, x1…x6 on the lower | Pairs beside two hexagons on x1…x6, as in the transcription
+- [ ] 74 03-4 | reading | Is the upper figure a graph on the six pairs, with edges between the labels and no hexagon? | Yes: bold ζ12–ζ25, ζ34–ζ24, ζ15–ζ16; thin ζ12–ζ34, ζ25–ζ34, ζ15–ζ24, ζ16–ζ24, doubled strokes drawn twice | A hexagon with dots at its vertices, as in the earlier redraw
+- [ ] 74 03-4 | reading | In the lower figure, is x1 joined to x4 (and not to x2)? | Yes: x1–x4 and x2–x6 are the long lines, only a short stroke points from x1 towards x2 | A closed hexagon with chords x1–x4 and x2–x6
+- [ ] 74 03-4 | reading | What follows the « = » after x4, x3, x5 and under x6? | ζ, with its indices overwritten and left out | The pairs of the right-hand column
 - [x] 74 03-7 | disagreement | What are the labels? | τ, τ′, τ″ and their bars; no dotted diagonals visible | τ1, τ2, τ3 with dotted diagonals, as in the transcription
 - [x] 74 04-3 | disagreement | Where is k, and which vertices is u joined to? | k at the bottom left; u joined to j, q, r | A rectangle i p q k, u joined to p, q, r
 - [x] 74 06-6 | disagreement | Where are s and t? | Below the triangle, each joined to its own bold point | As in the transcription
