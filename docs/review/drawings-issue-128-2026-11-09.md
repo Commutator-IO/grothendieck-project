@@ -291,3 +291,20 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 154 04-6 | reading | What is the legend before « (a′,b′) »? | « ou », as in the transcription | Another short word or sign
 - [ ] 154 04-6 | reading | In the right figure, do the two red strands meet exactly at the black point? | Each drawn straight to the black point, with a slight bend there | Straight strands crossing just below the point
 - [ ] 154 04-8 | reading | Are the faint pencil lines (a guide above ω_D, a line along the right red strand, a short stroke by the left one) part of the figure? | Drawn in pencil | Guides, to leave out
+
+## Folders 81, 85, 86: the large drawings redrawn
+
+- [ ] 81 01-2 | strike | Is the heavily zigzagged OK disk (row 2, second disk) hatched or struck out? | Four chords, the region between the two long diagonals hatched up to the right-hand vertical | A struck disk, not drawn
+- [ ] 81 01-2 | reading | What are the dark centres of the two small disks in « ou ( … ) » (row 2)? | Left: four chords with a small hatched quadrilateral; right: four chords through a point | Left: chords through one point with a filled blob
+- [ ] 81 01-2 | disagreement | Is the vertical axis of the right-hand figure arrowed? | No visible head; only the horizontal axis has a hook | « deux axes fléchés », as in the transcription
+- [ ] 81 01-2 | reading | How are the crossing curves at the right grouped? | The upper disk with 3 chords and 2 arcs, the lower closed curve with 5 crossing arcs, 2 long curves (one arrowed), 4 lines | Another grouping of the strokes
+- [ ] 81 01-1 | reading | Is the region of the disk with three chords (row 3, second disk) hatched, or scribbled out? | A hatched polygon bounded by the three chords and the curved fourth side | A loose zigzag scribbling-out
+- [ ] 85 05-2 | disagreement | What is the middle node of 1 → S22? | F2, as it looks on the page | Z2, as in the transcription
+- [ ] 85 05-2 | disagreement | What is the bottom of the small diamond? | F2, as it looks on the page | E2, as in the transcription
+- [ ] 85 05-2 | disagreement | Is there a node A′3 at the start of the dashed lower square? | Drawn and labelled A′3 | Missing from the transcription's list of vertices
+- [ ] 85 05-2 | disagreement | Is the label S̃3 or S̃3 = S3 × S′2? | S̃3 = S3 × S′2, as written on the page | S̃3 alone, as in the transcription
+- [ ] 85 05-3 | disagreement | What is the middle group of the row « D3 ↔ ? ↔ D3 ↔ S3 × S″2 »? | A3, as read on the page | S3, as in the transcription
+- [ ] 85 05-3 | reading | Do the V-shaped arrows (S3 × S″2 and A4 → S5, D3 → A5) go down to a turning point and back up? | Yes, as drawn | Straight edges
+- [ ] 85 05-3 | reading | What is the right-hand label of the rectangle S2 — S3 — ?, overwritten on the page? | S3 × S′3, as in the transcription | S3 × D′3
+- [ ] 86 01-1 | disagreement | Is the left back vertex of C1 and C2 v′ or u′? | v′, as in the transcription and needed by Π_{t,u} = Π_{s′,v′} | The page writes u′ on both sides
+- [ ] 86 01-1 | reading | What are the small c-shaped mark at the centre of C2 and the two small marks below s′ and above t′? | Left out, not legible | Letters to be read
