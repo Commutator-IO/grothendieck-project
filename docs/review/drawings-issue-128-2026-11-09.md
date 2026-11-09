@@ -400,3 +400,23 @@ Ces cases restent ouvertes tant que la réponse n'est pas reportée dans `drawin
 - [ ] 154 06-17 | reading | Do the two crossings lie on the light green line? | On it | Slightly off it
 - [ ] 154 06-18 | reading | Do the red crossings of the colour figure lie on the blackened line? | On it | About 0.7 mm above it
 - [ ] 154 06-18 | reading | Is the edge set of the pencil parallelepiped right? | 25 edges between 12 vertices | Fewer edges: some strokes are erased lines
+
+## Folder 154, last pass
+
+- [ ] 154 05-8 | reading | Do the two arcs from the top end on the right spindle strand, or cross it and run on a little? | They end at one shared point on the strand | They cross and continue about 1 mm past it
+- [ ] 154 05-8 | reading | Do the two zigzag strands meet three times? | Yes: each bends at both spindle strands, so they cross three times, as the ink shows | The figure is not a pseudoline arrangement
+- [ ] 154 05-4 | reading | Is the label under the fan σ_s? | σ_s | « a f s »
+- [ ] 154 05-6 | reading | In the left disk, in what order do the strands end on β and α? | On β, top to bottom: E2, E1, the arch, E3; on α: the arch, E7, E6 | Another order among the strands that end close together
+- [ ] 154 05-6 | reading | How many strands are in the small centre disk? | Nine, drawn as chords | Another number: the bundles could not be separated
+- [ ] 154 05-7 | reading | Where does the strand from the top-left rim of the upper disk end? | On the bottom black arc, next to the vertical strand | On the rim below the arc
+- [ ] 154 05-7 | reading | Where do the strands of the first small disk go? | Three strands fan from the top to the left, bottom and right arcs, plus an arch joining the left and right arcs | Another pairing: the bundle is tight
+- [ ] 154 05-7 | disagreement | Is the first small disk's rim green? | Green, as on the facsimile | No colour given (« deux petits disques du même type »)
+- [ ] 154 07-2 | reading | In the left disk, near the right rim, do two red strands cross twice? | They cross twice, as on the page | One meeting is only a touch, or the strands pair differently at one crossing
+- [ ] 154 07-2 | reading | In the same disk, do three red strands pass through one point with a dark dot? | A triple point | Two crossings close together
+- [ ] 154 07-2 | reading | In the left disk, does one red strand end free just short of the rim? | It ends free | Meant to reach the rim
+- [ ] 154 07-2 | reading | In the half-disk, does the near-horizontal red strand pass through two triple points and start inside the rim? | Two triple points, start inside the rim | It meets the rim, and the crossings are separate pairs
+- [ ] 154 09-1 | disagreement | Is the lower-right red rectangle cut in two by a light green band? | Two red boxes joined by light-green pieces of their sides, the bottom line drawn separately | « coupé en deux par une bande vert clair », as in the transcription
+- [ ] 154 09-1 | reading | In the small red disk at the centre, what is the first right-hand number? | Read 5′, 4′, 3′, 2′ from top to bottom | 1′
+- [ ] 154 09-1 | reading | Is the second red stroke along the lower-right rim of the top-middle disk the rim drawn twice, or an extra strand end? | Not drawn | The rim drawn twice, or a strand end
+- [ ] 154 08-8 | reading | Are the net lines orange in two families, with dark brown ink over parts of them, dots at the crossings and arrowheads? | The current file draws ten brown straight lines | Orange lines with dark-ink zigzag paths, dots and arrowheads, as on the facsimile
+- [ ] 154 08-8 | reading | Is the right-hand strand B7 one curved strand, or two meeting at the P6 crossing? | Not yet drawn | Possibly two
