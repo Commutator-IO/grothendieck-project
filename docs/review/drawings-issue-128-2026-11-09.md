@@ -371,3 +371,32 @@ Ces cases restent ouvertes tant que la réponse n'est pas reportée dans `drawin
 - [x] 70 07-1 | reading | Are σ₁ and σ₂ placed right? | Placed after the transcription; on the page they run into the formulas | 
 - [x] 70 01-3 | reading | Are the matrix entries where the page has them, with the struck ones left out? | As redrawn | 
 - [x] 154 04-3 | reading | Does the red X cross on the dark green line? | Yes, snapped onto it | 
+
+## Folder 154, later passes
+
+- [ ] 154 09-7 | reading | Just right of the left node, under the blue stroke, where do the strands go? | Two arcs from the left node and one from the left end of the black segment reach the upper right node; a short strand from the left node ends on the blue stroke | The third upper arc comes from the left node
+- [ ] 154 09-7 | reading | Is the lowest braid strand one curve? | One strand along the bottom edge, from the blue stroke to the lower right node | Two pieces, leaving the crop and coming back
+- [ ] 154 08-16 | disagreement | Is the letter in F′ δ or δ′? | δ, no prime visible | δ′, as in the transcription
+- [ ] 154 08-16 | disagreement | Is the label at the right end D or D_i? | D (the crop may cut an index) | D_i, as in the transcription
+- [ ] 154 08-16 | reading | Is there a t in F next to the star mark? | Drawn | Only δ and s, as in the transcription
+- [ ] 154 08-6 | disagreement | Is the orientation of L written ω_L or ϖ_L? | ϖ_L: a bar is visible | ω_L, as in the transcription
+- [ ] 154 08-14 | reading | Which labels go round the middle point of the right sketch? | β′ above, γ′ at the lower right, α′ below, as in the transcription | Both upper glyphs β′
+- [ ] 154 07-6 | disagreement | How many branches has the blue star? | Seven | Eight (« étoile bleue à huit branches »), as in the transcription
+- [ ] 154 07-6 | disagreement | Is the last figure a hexagon? | A pentagon: five green vertices, five blue rays | « hexagone vert », as in the transcription
+- [ ] 154 07-6 | reading | Near the centre of the first figure, do the blue, green and orange stubs stop short on purpose, or should they meet? | Gaps of 0.45 mm round one computed point | Edges meeting at the point
+- [ ] 154 07-6 | reading | Does the green edge from the top-left free end reach the upper green vertex? | Joined to the vertex | A free end, 1.6 mm short
+- [ ] 154 07-1 | reading | In the green disk, is the upper-left red corner inside the disk or on the rim? | Inside the disk | On the rim
+- [ ] 154 07-1 | reading | In the green disk, from which top-right rim point does the right-hand red curve start? | The top point, passing next to the upper-right one | The upper-right point
+- [ ] 154 07-1 | reading | At the hexagon's corner 5, do both thin orange lines pass through the corner? | One through the corner, one ending at it | Both through the corner
+- [ ] 154 07-1 | reading | Are the two faint orange strokes in the middle band an X? | An X on the faint orange line | Two separate strokes
+- [ ] 154 06-8 | reading | Is the central pencil of the D/D̄ figure three or four orange lines? | Four | Three, the fourth top end a doubled stroke
+- [ ] 154 06-8 | reading | Are the three orange lines of the right crossings concurrent on the brown line? | Concurrent at one point of the brown line | Three nearby pairwise crossings
+- [ ] 154 06-8 | reading | Which middle labels carry a bar? | r, r̄, t̄, t above; r′, s′, t′ below | Bars on other letters
+- [ ] 154 06-8 | strike | Is the label left of ā in the top version overwritten? | Left out | A second ā or ā′
+- [ ] 154 06-11 | reading | What are the marks on the green arcs: tildes or dashes? | ~3, 2~, 1~, ′3, 1− | 2–, 1– with dashes
+- [ ] 154 06-11 | reading | Is the upper tangent pencil circle a circle? | A slightly narrower ellipse, as on the page | A circle
+- [ ] 154 06-12 | reading | Should the pencil lines from the black dots reach the lower end dots? | They stop short, as on the page | Meant to end on the dots
+- [ ] 154 06-17 | reading | Are the arrowed marks inside the top contour « 7 » and « 4 », and is there a second « 4 » under the 2 in the bottom figure? | Left out | Region or arc labels, to draw
+- [ ] 154 06-17 | reading | Do the two crossings lie on the light green line? | On it | Slightly off it
+- [ ] 154 06-18 | reading | Do the red crossings of the colour figure lie on the blackened line? | On it | About 0.7 mm above it
+- [ ] 154 06-18 | reading | Is the edge set of the pencil parallelepiped right? | 25 edges between 12 vertices | Fewer edges: some strokes are erased lines
