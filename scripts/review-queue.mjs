@@ -25,6 +25,12 @@
  * only when the build may show transcriptions (VITE_RENDER_TRANSCRIPTS), so a
  * build with the switch off carries none of them. A snippet is at most fifteen
  * words.
+ *   src/content/review-drawings.json  the two readings of each doubtful drawing
+ *
+ * The doubtful drawings of #128 come from their own list,
+ * docs/review/drawings-issue-128-2026-11-09.md, one item per open box (kind
+ * `drawing`). Their readings describe the redrawn figure and the
+ * transcription, so they sit apart like the snippets, under the same switch.
  *
  * A box covers either named places (« 105 « 06/09/82 » », « 109 pp. 9–10 »)
  * — one item each, read only while the box is unchecked — or a kind of error
@@ -302,6 +308,7 @@ function push(it, snip) {
     claim: it.claim ?? null,
     details: it.details ?? null,
     context: it.context ?? null,
+    ...(it.drawing ? { drawing: it.drawing } : {}),
     link: `/fonds/#${it.cote}/${batch}/${edition}${page ? `/p${page}` : ''}`,
   });
   if (snip) snippets[id] = snip;
@@ -851,10 +858,78 @@ for (const raw of body.split('\n')) {
   skipped.push(`${n}: ${text.slice(0, 100)}`);
 }
 
+/* ---------- the doubtful drawings of #128 ---------- */
+
+// « - [ ] <cote> <id> | <type> | <question> | <current reading> | <alternative reading> »:
+// the drawing's record (transcripts/<cote>/drawings/drawings.json) gives its
+// batch, its archive page (the reading view's and the facsimile's page number)
+// and where it stands on the page.
+const DRAWINGS = join(ROOT, 'docs/review/drawings-issue-128-2026-11-09.md');
+const drawingClaims = {};
+const DRAWING_TYPE = { reading: 'A doubtful reading', disagreement: 'Drawing and transcription disagree', strike: 'What is struck out' };
+const DRAWING_ASK = {
+  disagreement: [C('The drawing is right', 'right'), C('The transcription is right', 'other'), C('Neither', 'other', 'What the page has')],
+  reading: [C('Yes, as redrawn', 'right'), C('No', 'other', 'What the page has')],
+  strike: [C('Yes, as redrawn', 'right'), C('No', 'other', 'What the page has')],
+};
+/** Where a box [x0, y0, x1, y1], in fractions of the page from its top left, stands. */
+function placeOf([x0, y0, x1, y1]) {
+  if (x1 - x0 > 0.7 && y1 - y0 > 0.6) return 'over most of the page';
+  const third = (a, b, names) => names[Math.min(2, Math.floor(((a + b) / 2) * 3))];
+  const v = third(y0, y1, ['top', 'middle', 'bottom']);
+  const h = x1 - x0 > 0.6 ? null : third(x0, x1, ['left', 'centre', 'right']);
+  return v === 'middle' ? `in the middle of the page${h && h !== 'centre' ? `, on the ${h}` : ''}` : `at the ${v}${h && h !== 'centre' ? ` ${h}` : ''} of the page`;
+}
+const drawingRecords = new Map();
+function drawingRecord(cote, id) {
+  if (!drawingRecords.has(cote)) {
+    const f = join(T, cote, 'drawings', 'drawings.json');
+    drawingRecords.set(cote, existsSync(f) ? JSON.parse(readFileSync(f, 'utf8')).drawings : []);
+  }
+  return drawingRecords.get(cote).find((r) => r.id === id) ?? null;
+}
+if (existsSync(DRAWINGS)) {
+  const seen = new Map();
+  for (const raw of readFileSync(DRAWINGS, 'utf8').split('\n')) {
+    const box = /^\s*- \[([ xX])\]\s+(\S+)\s+(\S+)\s*\|(.*)$/.exec(raw);
+    if (!box) continue;
+    const [, mark, cote, did, rest] = box;
+    // The n-th question on a drawing, ticked boxes counted, so an id outlives the answers before it.
+    const nth = (seen.get(`${cote}/${did}`) ?? 0) + 1;
+    seen.set(`${cote}/${did}`, nth);
+    if (mark !== ' ') continue;
+    const [type, question, current, alternative] = rest.split('|').map((x) => x.trim());
+    const rec = isCote(cote) ? drawingRecord(cote, did) : null;
+    if (!rec || !DRAWING_ASK[type] || !question) {
+      skipped.push(`#128 ${cote} ${did}: ${rec ? `unknown type « ${type} »` : 'no such drawing in drawings.json'}`);
+      continue;
+    }
+    const page = rec.archive_page ?? null;
+    const id = `drawing-${cote}-${did}-${nth}`;
+    push({
+      id,
+      section: `Drawings to check (#128) · ${DRAWING_TYPE[type]}`,
+      kind: 'drawing',
+      cote,
+      batch: rec.batch,
+      page,
+      drawing: did,
+      prompt: question,
+      hint: `Look at the drawing ${did} ${page ? `on p. ${page} of the facsimile` : 'on the facsimile'}${rec.bbox ? `, ${placeOf(rec.bbox)}` : ''}, and compare it with the redrawn figure.`,
+      choices: DRAWING_ASK[type],
+      details: `Drawing ${did} of folder ${cote}, redrawn for #128 (status « ${rec.status} »).`,
+      context: 'The answer goes in the drawing’s record (transcripts/<cote>/drawings/drawings.json), not in the transcription.',
+    }, null);
+    // The two readings, held back with the snippets (#31): they describe the figure and the transcription.
+    if (items.at(-1)?.id === id) drawingClaims[id] = `Current reading: ${current || '—'}${alternative ? ` — Alternative: ${alternative}` : ''}`;
+  }
+}
+
 writeFileSync(
   join(ROOT, 'src/content/review-queue.json'),
   `${JSON.stringify({ $why: 'Open checks of issue #35, one per spot of a page, built by scripts/review-queue.mjs from the issue body and the transcriptions. The current readings are in review-snippets.json, loaded only when the build shows transcriptions.', built: new Date().toISOString().slice(0, 10), items }, null, 1)}\n`,
 );
 writeFileSync(join(ROOT, 'src/content/review-snippets.json'), `${JSON.stringify(snippets, null, 1)}\n`);
-console.error(`${items.length} items, ${Object.keys(snippets).length} with a snippet.`);
+writeFileSync(join(ROOT, 'src/content/review-drawings.json'), `${JSON.stringify(drawingClaims, null, 1)}\n`);
+console.error(`${items.length} items, ${Object.keys(snippets).length} with a snippet, ${Object.keys(drawingClaims).length} doubtful drawings (#128).`);
 if (skipped.length) console.error(`Not turned into items (no single spot of a page):\n  ${skipped.join('\n  ')}`);

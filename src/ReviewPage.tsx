@@ -56,20 +56,29 @@ const KIND_NAME: Record<ReviewKind, string> = {
   unproved: 'Stated without proof?',
   paper: 'Printed side of reused paper',
   quoted: 'Words quoted outside the edition',
+  drawing: 'Doubtful drawing',
 };
 
-function useSnippets(): Record<string, Snippet> | null {
-  const [s, setS] = useState<Record<string, Snippet> | null>(null);
+/**
+ * A file held back with the transcriptions (#31). Its loader is `null` in a
+ * build with the switch off, so that the import is dead code and the file is
+ * not in the bundle.
+ */
+function useHeld<T>(load: (() => Promise<{ default: unknown }>) | null): T | null {
+  const [s, setS] = useState<T | null>(null);
   useEffect(() => {
-    if (!SHOW_READINGS) return;
+    if (!load) return;
     let alive = true;
-    import('./content/review-snippets.json').then((m) => alive && setS(m.default as Record<string, Snippet>));
+    load().then((m) => alive && setS(m.default as T));
     return () => {
       alive = false;
     };
-  }, []);
+  }, [load]);
   return s;
 }
+const loadSnippets = SHOW_READINGS ? () => import('./content/review-snippets.json') : null;
+/** The two readings of each doubtful drawing of #128: they describe the figure and the transcription. */
+const loadDrawingClaims = SHOW_READINGS ? () => import('./content/review-drawings.json') : null;
 
 const idFromHash = () => {
   const h = decodeURIComponent(location.hash.slice(1));
@@ -77,7 +86,8 @@ const idFromHash = () => {
 };
 
 export function ReviewPage() {
-  const snippets = useSnippets();
+  const snippets = useHeld<Record<string, Snippet>>(loadSnippets);
+  const drawingClaims = useHeld<Record<string, string>>(loadDrawingClaims);
   const relay = useFacsimileProxy();
   // Answers to checks no longer in the queue were sent and applied (review-answered.json):
   // drop them from this browser so they are neither counted nor sent again.
@@ -217,7 +227,11 @@ export function ReviewPage() {
               that need a reader of French handwriting. Each is one spot of a page, shown beside Montpellier’s
               facsimile, with a plain question and its answers as buttons. A few, under « For mathematicians », ask
               instead whether an argument or a reference of the edition holds. Your answers stay in this browser until
-              you send them as a prefilled GitHub issue.
+              you send them as a prefilled GitHub issue. Under « Doubtful drawing », the drawings redrawn for{' '}
+              <a className="text-brand-700 underline" href="https://github.com/Commutator-IO/grothendieck-project/issues/128">
+                issue #128
+              </a>{' '}
+              that the redraw could not settle alone are put beside the page in the same way.
             </p>
             <p className="mt-2 text-[13px] text-ink-500">
               {done} of {ITEMS.length} answered · built from #35 on {QUEUE.built}
@@ -368,10 +382,19 @@ export function ReviewPage() {
                     {item.claim}
                   </blockquote>
                 )}
+                {SHOW_READINGS && item.drawing && drawingClaims?.[item.id] && (
+                  <blockquote className="mt-3 rounded-md border-l-4 border-brand-300 bg-ink-50 px-3 py-2 text-[14.5px] leading-relaxed text-ink-800">
+                    <span className="block text-[11px] font-semibold uppercase tracking-wider text-ink-400">The two readings</span>
+                    {drawingClaims[item.id]}
+                  </blockquote>
+                )}
+                {SHOW_READINGS && item.drawing && <Drawing key={item.id} cote={item.cote} id={item.drawing} />}
                 {SHOW_READINGS && snippets?.[item.id] && <Reading s={snippets[item.id]} />}
-                {!SHOW_READINGS && ['ill', 'uncertain', 'add', 'supplied'].includes(item.kind) && (
+                {!SHOW_READINGS && ['ill', 'uncertain', 'add', 'supplied', 'drawing'].includes(item.kind) && (
                   <p className="mt-3 rounded-md bg-ink-50 px-3 py-2 text-[13px] text-ink-600">
-                    The transcriptions are not shown on the site at the moment, so the passage is not quoted here.
+                    {item.drawing
+                      ? 'The transcriptions and the redrawn figures are not shown on the site at the moment, so neither is shown here: compare the facsimile with the question.'
+                      : 'The transcriptions are not shown on the site at the moment, so the passage is not quoted here.'}
                   </p>
                 )}
                 <p className="mt-3 text-[13.5px] text-ink-700">
@@ -381,7 +404,7 @@ export function ReviewPage() {
                 <details className="mt-2 text-[12.5px] text-ink-500">
                   <summary className="cursor-pointer select-none">Details</summary>
                   <p className="mt-1">
-                    From #35, « {item.section} »{item.details ? ':' : '.'}
+                    From {item.drawing ? '' : '#35, '}« {item.section} »{item.details ? ':' : '.'}
                   </p>
                   {item.details && <p className="mt-1 text-ink-600">{item.details}</p>}
                   {item.context && <p className="mt-1">{item.context}</p>}
@@ -481,6 +504,41 @@ export function ReviewPage() {
       </div>
       {pane && source === 'montpellier' && <FacsimilePane open={facsimile} onClose={() => setPane(false)} onBatch={setPaneBatch} />}
     </>
+  );
+}
+
+/**
+ * The drawing as redrawn (#128), to compare with the facsimile beside. Its SVG
+ * is compiled by `npm run drawings` only when the build shows transcriptions
+ * (#31), so it is shown only then, and may still be missing or stale for a
+ * drawing not yet recompiled.
+ */
+function Drawing({ cote, id }: { cote: string; id: string }) {
+  const [missing, setMissing] = useState(false);
+  const src = `/transcripts/${cote}/drawings/${id}.svg`;
+  return (
+    <figure className="mt-3 rounded-md border border-ink-200 bg-white p-3">
+      <figcaption className="text-[11px] font-semibold uppercase tracking-wider text-ink-400">
+        The drawing {id} as redrawn
+      </figcaption>
+      {missing ? (
+        <p className="mt-1 text-[13px] text-ink-600">
+          This drawing is not yet compiled for the site: compare the two readings above with the facsimile.
+        </p>
+      ) : (
+        <a href={src} target="_blank" rel="noopener" className="mt-2 block">
+          <img
+            src={src}
+            alt={`Drawing ${id} of folder ${cote}, as redrawn`}
+            onError={() => setMissing(true)}
+            className="mx-auto max-h-[45vh] w-auto max-w-full"
+          />
+        </a>
+      )}
+      {!missing && (
+        <p className="mt-1 text-[12px] text-ink-500">Compare it with the page in the facsimile beside; click to open it full size.</p>
+      )}
+    </figure>
   );
 }
 

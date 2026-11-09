@@ -9,7 +9,7 @@ import { REPO, shortQuote } from './report.ts';
  * and then only GitHub's own form opens, for the reader to submit or not.
  */
 
-export type ReviewKind = 'ill' | 'uncertain' | 'add' | 'supplied' | 'date' | 'letter' | 'argument' | 'reference' | 'hypothesis' | 'imprecise' | 'unproved' | 'paper' | 'quoted';
+export type ReviewKind = 'ill' | 'uncertain' | 'add' | 'supplied' | 'date' | 'letter' | 'argument' | 'reference' | 'hypothesis' | 'imprecise' | 'unproved' | 'paper' | 'quoted' | 'drawing';
 
 export interface ReviewItem {
   id: string;
@@ -32,6 +32,8 @@ export interface ReviewItem {
   /** #35's own wording of the check. */
   details: string | null;
   context: string | null;
+  /** A doubtful drawing of #128: its id in transcripts/<cote>/drawings/drawings.json. */
+  drawing?: string;
   /** The reading view at that page, on this site. */
   link: string;
 }
@@ -108,7 +110,7 @@ const plain = (s: string) => s.replace(/«\s*/g, '"').replace(/\s*»/g, '"');
 
 /** One answer as a Markdown list item. A proposed reading is cut to fifteen words. */
 export function answerLine(it: ReviewItem, a: Answer): string {
-  const where = [`folder ${it.cote}`, batchName(it.batch), it.page ? `p. ${it.page}` : null].filter(Boolean).join(', ');
+  const where = [`folder ${it.cote}`, it.drawing ? `drawing ${it.drawing} (#128)` : null, batchName(it.batch), it.page ? `p. ${it.page}` : null].filter(Boolean).join(', ');
   const parts = [`- \`${it.id}\` — ${where} — **${plain(answerName(it, a))}**`];
   if (a.reading?.trim()) parts.push(`: « ${plain(shortQuote(a.reading, 15))} »`);
   const lines = [parts.join(''), `  - Asked: ${plain(it.prompt)}`];
@@ -120,7 +122,7 @@ export function answerLine(it: ReviewItem, a: Answer): string {
 const HEAD = (n: number) =>
   [
     `Answers from the review page (${SITE}/review/) to #35, checked against Montpellier's facsimile.`,
-    `${n} answer${n === 1 ? '' : 's'}. Each line: item, folder, batch, page, the answer chosen (a page, a verdict), the reading proposed (fifteen words at most), then the question asked and the reader's note.`,
+    `${n} answer${n === 1 ? '' : 's'}. Each line: item, folder (and drawing, for #128), batch, page, the answer chosen (a page, a verdict), the reading proposed (fifteen words at most), then the question asked and the reader's note.`,
     '',
   ].join('\n');
 
