@@ -360,3 +360,9 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 154 04-10 | reading | In disk 3, how do the two strands crossing at the black point left of centre pair up? | The strand from the top turns to the lower right through the black points; the dotted strand from the upper right runs on to the lower left | The opposite pairing, but then the two would touch without crossing
 - [ ] 154 04-10 | reading | In disk 2, is the wavy ink part of the strand it lies on? | One strand | A separate ink stroke over a pencil line
 - [ ] 154 05-2 | reading | Where do the light orange curves go under the band? | Each drawn from the rim to the band's border; no pairing under the band | Single strands crossing the band
+- [ ] 154 02-7 | reading | In the lower left of disk C, are there two separate strands, or a straight strand with a stroke ending on it at its apex? | Two separate strands | One straight strand, the other stroke ending on it
+- [ ] 154 02-7 | reading | What are the dark green labels by the two arrows near the gluing point, and the middle sign between p and q at the top of D? | Left out; the middle sign read « ? » | Sign pairs such as p:q; the middle sign a « J » or a mirrored p
+- [ ] 154 02-7 | reading | Which way does the arc on D's right rim point? | Arrowhead at the upper end | Pointing down, as in the earlier redraw
+- [ ] 154 02-6 | disagreement | What are the labels around the star? | Read upright: p−1, q, p≥1, q≥3 on one side, p′−1, q′, p′≥1, q′≥3 on the other | b, b−1, b+1, b±2, as in the transcription
+- [ ] 154 02-6 | disagreement | What are the two labels under the V on the green line? | 4 and 4, the same glyph as the 4s of the spindles | b, as in the transcription
+- [ ] 154 02-6 | reading | In the right group, does the third line of the pencil at Q pass through the crossing of the other two? | Drawn concurrent | Not concurrent, a gap of about 1 unit
