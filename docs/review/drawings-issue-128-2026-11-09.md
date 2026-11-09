@@ -136,3 +136,33 @@ which only the transcription skill edits.
 - [ ] 146 07-2 | disagreement | Which vertex does « a » label, and does the right side bend? | The right side bends at a vertex, which « a » labels | « a » at the top vertex, as in the transcription
 - [ ] 146 02-2 | reading | Is the top label Q+ or Q with a bar? | Q+, as in the transcription | Q̄
 - [ ] 146 04-14 | reading | Does the whole-page redraw match the overdrawn pencil? | As redrawn | 
+
+## Folder 79
+
+- [ ] 79 15-10 | disagreement | How many triangles are there round the vertex? | Seven triangles, eight spokes, one sector open on the left | Six triangles, as in the transcription
+- [ ] 79 15-12 | disagreement | Is it a pentagon with all its diagonals? | A hexagon (short top side) with two interlaced triangles; the stroke from the lower left vertex stops short of the right side | A pentagon with all vertices joined, as in the transcription
+- [ ] 79 14-2 | disagreement | How are s, t, u, v joined, and where are the small circles? | A path s – u – v – t of three segments, one small circle beside each segment | s, t joined to u, v, small circles marking the vertices, as in the transcription
+- [ ] 79 14-2 | strike | Is the scribbled trial under the schema struck out? | Left out as struck | 
+- [ ] 79 14-3 | reading | Is A₀ a label on a side? | A₀ placed at the lower left after the transcription | The scrawl there reads « A d … » and may be text
+- [ ] 79 15-5 | reading | What are the labels of the rhombus and of the far-right quadrilateral (crop widened)? | Rhombus labels left out; lower left vertex of the far-right quadrilateral read s′ | An overinked letter by the rhombus; a mark (perhaps λ) above s′
+- [ ] 79 15-7 | reading | Are s, t, λ⁻¹s, λ⁻¹t written round the dotted square? | Left out: sideways, small, not legible | Written sideways at the sides of the square
+- [ ] 79 15-3 | reading | How many superposed strokes are in the lower figure? | Two strokes from the upper point to the lower t, one bent through the end of s–t | Uncertain: overinked
+- [ ] 79 15-3 | strike | Is the short stroke right of the column struck out? | Left out as struck | 
+- [ ] 79 15-13 | reading | Does the faint circle pass through λt = t′? | Drawn whole, through λt = t′ | 
+
+## Folder 127
+
+- [ ] 127 01-4 | disagreement | In what order are T′ → T and X′ → X, and does T′ – T carry an arrowhead? | X′ → X above T′ – T, with no visible arrowhead on T′ – T | T′ → T above X′ → X, as in the transcription
+- [ ] 127 01-2 | disagreement | Is X_n → X a plain arrow? | Like Y_n, a hooked stroke ending at the brace | A plain arrow, as in the transcription
+- [ ] 127 01-2 | reading | Are the labels G_n and U_n? | G_n, U_n, as in the transcription | They read like G_{U_n} and U_{nn}
+- [ ] 127 01-2 | strike | Is the word after « Ass U^ » struck out? | Left out as struck | 
+- [ ] 127 01-3 | reading | What are the labels beside X′ in the right sketch? | x₀, x′₀, by analogy with the left sketch | Small overinked marks, prime placement unclear
+- [ ] 127 01-1 | reading | Is the last letter of the pencil formula T_y? | T_y | A T with a curl
+- [ ] 127 01-8 | reading | Are the bottom sketches right? | Schematic | 
+
+## Folder 148
+
+- [ ] 148 04-1 | disagreement | Is there a region label A_{∞1}? | Not found: five A-labels seen | Listed by the transcription
+- [ ] 148 04-2 | disagreement | How many ringed vertices and nested red curves are there? | Eleven ringed vertices, eight closed red curves | Nine and nine, as in the transcription
+- [ ] 148 02-1 | reading | What colour are the long arc and the edge from the left vertex? | Arc red-brown, edge plain ink | The arc may be a stain; the earlier redraw drew the edge red-brown
+- [ ] 148 01-4 | reading | Which four small triangles form the heavy rhombus? | Not singled out; seven heavy small triangles drawn thick | 
