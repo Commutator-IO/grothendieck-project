@@ -72,8 +72,39 @@ Pour le point~2, on note $x = (p, q)$, $y = (r, s)$, avec $ps - qr = 1$. Chacun 
 \end{proof}
 
 \begin{remarque}
-L'hypothèse \q{semi-local} de la page n'est pas nécessaire : l'énoncé tient sur tout anneau commutatif, et la démonstration n'utilise ni les corps résiduels ni le lemme de colinéarité de la page~276. Il suffit des voisins $y + sx$ d'un seul type, ceux pour lesquels $x \wedge z = 1$. L'énoncé dit aussi que, dans le cas exceptionnel, le seul sommet autre que $\dot x$ qui ait la même étoile est $\sigma(\dot x)$ : la question que la page laisse ouverte (\q{il n'est pas vrai nécessairement \dots}) est donc tranchée dans ce cadre algébrique, où l'étoile est prise type par type. La transcription signale à la page~277 la conclusion $\alpha - \beta \in \pm(\alpha - \beta)$, qui doit se lire $\alpha + \beta \in \pm(\alpha - \beta)$ ; la démonstration ci-dessus ne passe pas par elle. L'involution $a$ de la page~278 est l'élément $\sigma$ de l'énoncé précédent, et la matrice $A$ réalise le déterminant $-1$ annoncé, sur tout anneau exceptionnel ; pour $\mathbf Z/4$ c'est la matrice que la lecture vérifie. Le lemme combinatoire de la page~275 (deux sommets distincts de même étoile forment un double cône) n'est pas formalisé.
+L'hypothèse \q{semi-local} de la page n'est pas nécessaire : l'énoncé tient sur tout anneau commutatif, et la démonstration n'utilise ni les corps résiduels ni le lemme de colinéarité de la page~276. Il suffit des voisins $y + sx$ d'un seul type, ceux pour lesquels $x \wedge z = 1$. L'énoncé dit aussi que, dans le cas exceptionnel, le seul sommet autre que $\dot x$ qui ait la même étoile est $\sigma(\dot x)$ : la question que la page laisse ouverte (\q{il n'est pas vrai nécessairement \dots}) est donc tranchée dans ce cadre algébrique, où l'étoile est prise type par type. La transcription signale à la page~277 la conclusion $\alpha - \beta \in \pm(\alpha - \beta)$, qui doit se lire $\alpha + \beta \in \pm(\alpha - \beta)$ ; la démonstration ci-dessus ne passe pas par elle. L'involution $a$ de la page~278 est l'élément $\sigma$ de l'énoncé précédent, et la matrice $A$ réalise le déterminant $-1$ annoncé, sur tout anneau exceptionnel ; pour $\mathbf Z/4$ c'est la matrice que la lecture vérifie. Le lemme combinatoire de la page~275 (deux sommets distincts de même étoile forment un double cône, figure~\ref{fig:79-double-cone}) n'est pas formalisé.
 \end{remarque}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm, pt/.style={circle, fill, inner sep=1.3pt}, lab/.style={font=\scriptsize, inner sep=1pt}, hid/.style={densely dashed, black!45}]
+\coordinate (s) at (0,1.7); \coordinate (sp) at (0,-1.7);
+\coordinate (t0) at (0.94,-0.48);
+\coordinate (t1) at (1.52,0.19);
+\coordinate (t2) at (0.00,0.60);
+\coordinate (t3) at (-1.52,0.19);
+\coordinate (t4) at (-0.94,-0.48);
+\draw (t0) -- (t1);
+\draw[hid] (t1) -- (t2);
+\draw[hid] (t2) -- (t3);
+\draw (t3) -- (t4);
+\draw (t4) -- (t0);
+\draw (s) -- (t0); \draw (sp) -- (t0);
+\draw (s) -- (t1); \draw (sp) -- (t1);
+\draw[hid] (s) -- (t2); \draw[hid] (sp) -- (t2);
+\draw (s) -- (t3); \draw (sp) -- (t3);
+\draw (s) -- (t4); \draw (sp) -- (t4);
+\node[pt] at (t0) {}; \node[lab] at (1.11,-0.70) {$t_1$};
+\node[pt] at (t1) {}; \node[lab] at (1.80,0.34) {$t_2$};
+\node[pt] at (t2) {}; \node[lab] at (0.3,0.95) {$t_3$};
+\node[pt] at (t3) {}; \node[lab] at (-1.80,0.34) {$t_4$};
+\node[pt] at (t4) {}; \node[lab] at (-1.11,-0.70) {$t_5$};
+\node[pt] at (s) {}; \node[pt] at (sp) {};
+\node[lab, above] at (s) {$s$}; \node[lab, below] at (sp) {$s'$};
+\end{tikzpicture}
+\caption{Le lemme du double cône de la page~275 : sur une surface triangulée fermée, deux sommets distincts $s$ et $s'$ qui ont la même étoile, ici le cycle $t_1 \cdots t_5$ de leurs voisins, sont les deux pointes d'une bipyramide sur ce cycle, qui est alors toute la surface (si elle est connexe) ; avec un cycle de quatre sommets, c'est l'octaèdre. Ce lemme n'est pas formalisé ici. Figure de l'édition ; Grothendieck dessine à la page~275 une bipyramide sur un pentagone (\lot{79}{14}{275}).}
+\label{fig:79-double-cone}
+\end{figure}
 
 \begin{enonce}[Pages 19 et 20, distance au plus $3$\piste{79-semilocal-diameter-three}]
 Soit $R$ un anneau commutatif qui n'a qu'un nombre fini d'idéaux maximaux.

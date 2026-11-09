@@ -6,7 +6,7 @@ La cote 80, \emph{Systèmes de pseudo-droites}, n'est pas datée de sa main ; l'
 \emph{Théorème : supposons qu'il n'existe pas deux sommets tels que les ps.\ droites passent par l'un d'eux [\dots]. Supposons de plus que K ne contienne pas de sous-arrangement du type $\mathrm{II}_5$ ; elle est de l'un des types suivants : $\mathrm{III}_6$, $\mathrm{IV}_7$.}
 \end{quote}
 
-\noindent Pour le réfuter, des droites suffisent. On écrit une droite $u_0x + u_1y + u_2z = 0$ du plan projectif comme un triplet d'entiers $u$ ; trois droites $u, v, w$ sont concourantes si et seulement si le déterminant de la matrice de lignes $u, v, w$ est nul. Toutes les vérifications deviennent alors des calculs finis sur des entiers.
+\noindent Pour le réfuter, des droites suffisent (figure~\ref{fig:80-contre-exemple}). On écrit une droite $u_0x + u_1y + u_2z = 0$ du plan projectif comme un triplet d'entiers $u$ ; trois droites $u, v, w$ sont concourantes si et seulement si le déterminant de la matrice de lignes $u, v, w$ est nul. Toutes les vérifications deviennent alors des calculs finis sur des entiers.
 
 \begin{encadre}
 \begin{contrexemple}[Énoncé de l'édition, page 24]
@@ -21,6 +21,37 @@ les trois dernières passant respectivement par $A$, $B$ et $C$. Cet arrangement
 \begin{proof}
 Les triplets sont $(0, 1, 0)$, $(1, 1, -1)$, $(1, 0, 0)$, $(2, -1, 0)$, $(3, -1, -3)$ et $(5, -1, 1)$. Parmi les vingt triples de droites, trois seulement ont un déterminant nul : $\{AB, CA, a\}$, $\{AB, BC, b\}$ et $\{BC, CA, c\}$, qui concourent en $A$, $B$ et $C$. Deux droites distinctes sont toujours non proportionnelles, puisque chacune forme avec l'autre et une troisième un déterminant non nul. Un sommet est l'intersection de deux droites, et une droite y passe si elle est l'une des deux ou si elle forme avec elles un triple concourant. Chaque point triple porte trois droites et chaque point double deux, et deux points triples distincts ont une droite commune, un côté du triangle : deux sommets portent au plus cinq droites, jamais six. Cinq droites parmi six en omettent une. Si c'est un côté, disons $BC$, les droites $AB$, $CA$ et $a$ restent et concourent en $A$ ; si c'est $a$, il reste $AB$, $BC$ et $b$, qui concourent en $B$, et de même pour $b$ et $c$. Enfin il y a trois points triples et non quatre, et six droites et non sept. En Lean, ces assertions sont décidées par calcul sur les entiers.
 \end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.35cm, y=1cm, pt/.style={circle, fill, inner sep=1.4pt}, lab/.style={font=\scriptsize, inner sep=1pt}]
+\begin{scope}
+\clip (-1.3,-1.6) rectangle (2.3,2.6);
+\draw (-3,0) -- (4,0);
+\draw (-3,4) -- (4,-3);
+\draw (0,-3) -- (0,4);
+\draw (-2,-4) -- (2,4);
+\draw (0,-3) -- (2.2,3.6);
+\draw (-1,-4) -- (0.6,4);
+\end{scope}
+\node[pt] at (0,0) {}; \node[pt] at (1,0) {}; \node[pt] at (0,1) {};
+\node[lab, fill=white] at (-0.17,-0.2) {$A$}; \node[lab, fill=white] at (1.17,0.2) {$B$}; \node[lab, fill=white] at (-0.17,1.2) {$C$};
+\node[lab] at (2.5,0) {$AB$}; \node[lab] at (2.45,-1.45) {$BC$}; \node[lab] at (0,-1.8) {$CA$};
+\node[lab] at (1.3,2.8) {$a$}; \node[lab] at (1.87,2.8) {$b$}; \node[lab] at (0.32,2.8) {$c$};
+\node[font=\small] at (0.5,-2.3) {le contre-exemple};
+\begin{scope}[xshift=6.2cm, x=1cm]
+\coordinate (P) at (0,0); \coordinate (Q) at (2,0); \coordinate (R) at (0.6,2.2); \coordinate (S) at (0.85,0.75);
+\begin{scope}
+\clip (-1.1,-1.6) rectangle (3.1,2.6);
+\foreach \u/\v in {P/Q,P/R,P/S,Q/R,Q/S,R/S} \draw ($(\u)!-3!(\v)$) -- ($(\u)!4!(\v)$);
+\end{scope}
+\foreach \v in {P,Q,R,S} \node[pt] at (\v) {};
+\node[font=\small] at (1,-2.3) {$\mathrm{III}_6$};
+\end{scope}
+\end{tikzpicture}
+\caption{À gauche, les six droites du contre-exemple, tracées d'après leurs équations : trois points triples seulement, $A$, $B$ et $C$, aucun couple de sommets par lesquels passent toutes les droites, et trois droites concourantes parmi cinq quelconques. À droite, $\mathrm{III}_6$, le quadrangle complet, qui a quatre points triples. Figure de l'édition ; Grothendieck dessine aux pages~22 à~28 les faisceaux et les arrangements cruciaux qu'il nomme (\lot{80}{2}{22}, \lot{80}{2}{24}).}
+\label{fig:80-contre-exemple}
+\end{figure}
 
 \begin{remarque}
 Le contre-exemple contient un $\mathrm{II}'_{3,2}$, trois pseudo-droites par un point et deux par un autre sans droite de jonction : les cinq droites $AB$, $CA$, $a$, $b$, $c$ n'ont qu'un triple concourant, $\{AB, CA, a\}$. La forme encadrée de la page~24, et la version corrigée par la lecture où l'on exclut aussi $\mathrm{II}'_{3,2}$, ne sont donc pas atteintes. La lecture corrige aussi la parenthèse de la page parce que $\mathrm{IV}_7$ contient lui aussi un $\mathrm{II}'_{3,2}$, et cela se vérifie de la même façon : pour le carré $A = (0, 0)$, $B = (1, 0)$, $C = (1, 1)$, $D = (0, 1)$, avec $E = AB \cap CD$ et $F = AD \cap BC$ à l'infini, les sept droites $AB$, $BC$, $CD$, $DA$, $AC$, $BD$, $EF$ ont six points triples, et parmi elles $AB$, $AD$, $AC$, $BD$, $EF$ n'ont que le triple $\{AB, AD, AC\}$.
