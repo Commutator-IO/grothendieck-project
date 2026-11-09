@@ -880,6 +880,13 @@ function placeOf([x0, y0, x1, y1]) {
   const h = x1 - x0 > 0.6 ? null : third(x0, x1, ['left', 'centre', 'right']);
   return v === 'middle' ? `in the middle of the page${h && h !== 'centre' ? `, on the ${h}` : ''}` : `at the ${v}${h && h !== 'centre' ? ` ${h}` : ''} of the page`;
 }
+/** The batch of a folder whose transcription carries \\page{n}. */
+function batchOfPage(cote, n) {
+  for (const f of readdirSync(join(T, cote)).filter((x) => /^batch-\d+\.fr\.tex$/.test(x)).sort()) {
+    if (readFileSync(join(T, cote, f), 'utf8').includes(`\\page{${n}}`)) return Number(f.match(/\d+/)[0]);
+  }
+  return null;
+}
 const drawingRecords = new Map();
 function drawingRecord(cote, id) {
   if (!drawingRecords.has(cote)) {
@@ -899,6 +906,25 @@ if (existsSync(DRAWINGS)) {
     seen.set(`${cote}/${did}`, nth);
     if (mark !== ' ') continue;
     const [type, question, current, alternative] = rest.split('|').map((x) => x.trim());
+    // A figure the transcription describes in a note but has not marked yet: « <cote> p<N> | missing | … ».
+    const unmarked = type === 'missing' && /^p\d+$/.test(did) && isCote(cote) ? Number(did.slice(1)) : null;
+    if (unmarked && question) {
+      const batch = batchOfPage(cote, unmarked);
+      push({
+        id: `drawing-${cote}-${did}-${nth}`,
+        section: 'Figures to mark and redraw (#128) · priority',
+        kind: 'drawing',
+        cote,
+        batch,
+        page: unmarked,
+        prompt: question,
+        hint: `Look at p. ${unmarked} of the facsimile. The transcription describes this figure in a note (« ${current} ») but does not mark it as a drawing yet, so it has no redrawn figure: it is to be marked and redrawn first.`,
+        choices: [C('Yes, as described', 'right'), C('No', 'other', 'What the page has')],
+        details: `Figure of folder ${cote}, p. ${unmarked}, wanted for the reading book « Vers une géométrie des formes ».`,
+        context: 'The answer guides the \\drawing mark in the transcription and the redraw in transcripts/<cote>/drawings/.',
+      }, null);
+      continue;
+    }
     const rec = isCote(cote) ? drawingRecord(cote, did) : null;
     if (!rec || !DRAWING_ASK[type] || !question) {
       skipped.push(`#128 ${cote} ${did}: ${rec ? `unknown type « ${type} »` : 'no such drawing in drawings.json'}`);

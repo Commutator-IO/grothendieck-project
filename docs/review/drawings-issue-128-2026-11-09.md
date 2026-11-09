@@ -16,6 +16,19 @@ The last field is empty when there is no alternative. Tick a box when its answer
 goes in the drawing's record in `transcripts/<cote>/drawings/drawings.json`, not in the transcription,
 which only the transcription skill edits.
 
+## En priorité : figures du livre « Vers une géométrie des formes » à marquer et redessiner
+
+Ces figures sont décrites par une note de la transcription, sans marque `\drawing` : elles n'ont donc pas encore de dessin. Le livre de lecture les signale par un cadre « Figure à redessiner ». Pour chacune, dire si la description correspond à la page ; la figure sera ensuite marquée dans la transcription et redessinée (type `missing`, identifiant `p<page>`).
+
+- [ ] 156-2 p2 | missing | Is there a sketch above the line, linked to Ẇ_t (the tubular neighbourhood, its interior and its boundary)? | petit croquis au-dessus de la ligne, relié à Ẇ_t par un trait |
+- [ ] 156-2 p4 | missing | Is there a small circle marked with two points under the note? | un petit cercle marqué de deux points |
+- [ ] 156-5 p27 | missing | Does the sketch show the product I × I′ with the parts S, S′ of 𝓛 and the corner K? | croquis : S et S′ parties de 𝓛, K au coin inférieur gauche |
+- [ ] 156-6 p35 | missing | Is the small circle before « de ce type » a disk with a marked point? | un petit cercle contenant un signe, sans doute le disque à point marqué |
+- [ ] 156-6 p88 | missing | Is there a small triangle with a point marked near a vertex, and a small circle at the end of the parenthesis? | un petit triangle, un point marqué près d'un sommet ; un petit cercle |
+- [ ] 156-7 p8 | missing | Is the margin drawing a rhombus containing a circle cut by a vertical diameter, with small crosses around? | losange contenant un cercle coupé par un diamètre vertical, petites croix autour |
+- [ ] 156-7 p69 | missing | Are there three sketches on the left: for b) a segment X and a point Y at its end; for c) two segments X, Y apart, « ou » end to end? | trois petits croquis de segments et de points |
+- [ ] 156-7 p71 | missing | Does the sentence end on a subdivided segment with points a₁, a₂, …, aₙ? | un segment subdivisé, points a₁, …, aₙ |
+
 ## En priorité : pages citées par les preuves de l'article Lean
 
 Toutes les questions de ce bloc ont reçu réponse (#131, #132) et sont appliquées. Les cases cochées restent ici pour garder les identifiants des questions ; les dessins à revoir après ces réponses sont en tête de « Folder 154 ».
