@@ -42,9 +42,9 @@ Pourquoi : 80 03-1, p. 44 : l'heptagone des sommets fléchés, dans la section 8
 - [x] 154 01-7 | reading | Does the snapped drawing still match the page? | As redrawn | 
 - [x] 154 06-8 | reading | Does the snapped drawing still match the page? | As redrawn | 
 - [x] 154 08-3 | reading | Does the snapped drawing still match the page? | As redrawn | 
-- [ ] 154 08-4 | reading | Does the snapped drawing still match the page? | As redrawn | 
+- [x] 154 08-4 | reading | Does the snapped drawing still match the page? | As redrawn | 
 - [ ] 154 02-6 | reading | Does the snapped drawing still match the page? | As redrawn | 
-- [ ] 154 07-4 | reading | Should these nearby stroke ends meet at one corner? | Merged into one corner | Separate ends
+- [x] 154 07-4 | reading | Should these nearby stroke ends meet at one corner? | Merged into one corner | Separate ends
 - [ ] 154 06-16 | reading | Should these nearby stroke ends meet at one corner? | Merged into one corner | Separate ends
 - [x] 154 02-5 | reading | At the four antipodal blue marks, are the strands paired right? | The two near-vertical strands and the two near-horizontal ones meet only at the marks | 
 - [x] 154 02-9 | reading | On the right, near the small yellow region, which strand continues which? | The upper-left strand goes on to the lower-right rim, the top strand to the dark green arc; one strand ends at that crossing | 
