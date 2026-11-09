@@ -104,10 +104,10 @@ Toutes les questions de ce bloc ont reçu réponse (#131, #132) et sont appliqu�
 
 ## Folder 144
 
-- [ ] 144 03-8 | reading | In which sense do the small rotation arrows of the frames turn? | Not drawn: their senses are not legible | 
-- [ ] 144 07-9 | reading | In the crowded centre, which nodes do the short strokes join? | As redrawn | 
-- [ ] 144 07-10 | disagreement | What is the index on M′^! → M′? | 6 | σ
-- [ ] 144 07-11 | disagreement | Is there a node M under Z^!_{0ρ} = M(j̄)? | Yes, read M | Not in the transcription's list
+- [x] 144 03-8 | reading | In which sense do the small rotation arrows of the frames turn? | Not drawn: their senses are not legible | 
+- [x] 144 07-9 | reading | In the crowded centre, which nodes do the short strokes join? | As redrawn | 
+- [x] 144 07-10 | disagreement | What is the index on M′^! → M′? | 6 | σ
+- [x] 144 07-11 | disagreement | Is there a node M under Z^!_{0ρ} = M(j̄)? | Yes, read M | Not in the transcription's list
 - [ ] 144 09-3 | reading | Is the stack of boxes read right from the overinked sketch? | As redrawn, hatching as a pattern on one face | 
 - [ ] 144 07-2 | reading | Which of ũ, ṽ, ρ̃, σ̃ is each turned label? | A reading, uncertain | 
 - [ ] 144 03-4 | disagreement | How many triangles carry a frame label? | Nine; τ₀τ∞r occurs twice | Ten, as in the transcription
@@ -128,11 +128,11 @@ Toutes les questions de ce bloc ont reçu réponse (#131, #132) et sont appliqu�
 
 ## Folder 57
 
-- [ ] 57 08-4 | reading | Are the strokes of the dense sketch groups right? | Redrawn group by group, approximate | 
-- [ ] 57 08-6 | reading | Are the strokes of the dense sketch groups right? | Redrawn group by group, approximate | 
-- [ ] 57 07-1 | reading | Are the labels right? | As in the transcription | 
-- [ ] 57 01-1 | strike | Is the left-out part of the top row struck out on the page? | Left out as struck | 
-- [ ] 57 14-1 | disagreement | How many triangles are there? | Two | Four, as in the transcription
+- [x] 57 08-4 | reading | Are the strokes of the dense sketch groups right? | Redrawn group by group, approximate | 
+- [x] 57 08-6 | reading | Are the strokes of the dense sketch groups right? | Redrawn group by group, approximate | 
+- [x] 57 07-1 | reading | Are the labels right? | As in the transcription | 
+- [x] 57 01-1 | strike | Is the left-out part of the top row struck out on the page? | Left out as struck | 
+- [x] 57 14-1 | disagreement | How many triangles are there? | Two | Four, as in the transcription
 
 ## Folder 146
 
@@ -190,7 +190,7 @@ Toutes les questions de ce bloc ont reçu réponse (#131, #132) et sont appliqu�
 
 ## Folders 45, 72, 78, 80, 87
 
-- [ ] 80 01-2 | reading | Are the solids of this whole page right (sphere as contour, equator and meridian; pyramid over bipyramid; the five inked octahedron vertices and eight edges; the square/hexagon polyhedron)? | As redrawn; the cube with grid lines schematic; pencil cubes and calculations left out | 
+- [x] 80 01-2 | reading | Are the solids of this whole page right (sphere as contour, equator and meridian; pyramid over bipyramid; the five inked octahedron vertices and eight edges; the square/hexagon polyhedron)? | As redrawn; the cube with grid lines schematic; pencil cubes and calculations left out | 
 - [ ] 80 04-1 | reading | What are the labels D, D′, Γ, Γ′, and does Γ pass through u? | Labels not legible; Γ passes close to u, not forced through it | 
 - [ ] 45 02-1 | reading | Is the right set of elements drawn on this whole sheet? | Reference lines, turned text and the isolated heavy letters (B, R, H, H1) left out | 
 - [ ] 45 03-1 | reading | Is the lower horizontal line a reference line from (i″), or the strike-out of « réalisations de T₁ en Γ₁ et T₁ »? | A reference line, kept | A strike-out, to leave out
@@ -216,7 +216,7 @@ Toutes les questions de ce bloc ont reçu réponse (#131, #132) et sont appliqu�
 - [ ] 33 08-1 | reading | Is there a fourth apex in the lozenge row, between X, Y and F? | Drawn | No apex there
 - [ ] 34 09-5 | reading | Is the short vertical stroke across X ⇐ X̃ under X_Ũ a plain stroke? | A plain stroke | An edge from X_Ũ downwards
 - [ ] 34 08-1 | strike | Is the group of oblique strokes with a V and S̄ at the right struck out? | Left out as struck | 
-- [ ] 67 01-2 | disagreement | Is the collar hatched? | No hatching visible, not drawn | Hatched, as in the transcription
+- [x] 67 01-2 | disagreement | Is the collar hatched? | No hatching visible, not drawn | Hatched, as in the transcription
 - [ ] 67 01-2 | reading | Which middle curve is Γ_i? | The open fourth curve | The closed second curve
 - [ ] 67 02-1 | disagreement | Is a point x marked? | Not found, not drawn | x marked, as in the transcription
 - [ ] 67 05-1 | reading | What colours are the felt-pen strokes? | Not visible on the grey scan, not rendered | 
@@ -294,8 +294,8 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 81 01-2 | reading | What are the dark centres of the two small disks in « ou ( … ) » (row 2)? | Left: four chords with a small hatched quadrilateral; right: four chords through a point | Left: chords through one point with a filled blob
 - [ ] 81 01-2 | disagreement | Is the vertical axis of the right-hand figure arrowed? | No visible head; only the horizontal axis has a hook | « deux axes fléchés », as in the transcription
 - [ ] 81 01-2 | reading | How are the crossing curves at the right grouped? | The upper disk with 3 chords and 2 arcs, the lower closed curve with 5 crossing arcs, 2 long curves (one arrowed), 4 lines | Another grouping of the strokes
-- [ ] 81 01-1 | reading | Is the region of the disk with three chords (row 3, second disk) hatched, or scribbled out? | A hatched polygon bounded by the three chords and the curved fourth side | A loose zigzag scribbling-out
-- [ ] 85 05-2 | disagreement | What is the middle node of 1 → S22? | F2, as it looks on the page | Z2, as in the transcription
+- [x] 81 01-1 | reading | Is the region of the disk with three chords (row 3, second disk) hatched, or scribbled out? | A hatched polygon bounded by the three chords and the curved fourth side | A loose zigzag scribbling-out
+- [x] 85 05-2 | disagreement | What is the middle node of 1 → S22? | F2, as it looks on the page | Z2, as in the transcription
 - [ ] 85 05-2 | disagreement | What is the bottom of the small diamond? | F2, as it looks on the page | E2, as in the transcription
 - [ ] 85 05-2 | disagreement | Is there a node A′3 at the start of the dashed lower square? | Drawn and labelled A′3 | Missing from the transcription's list of vertices
 - [ ] 85 05-2 | disagreement | Is the label S̃3 or S̃3 = S3 × S′2? | S̃3 = S3 × S′2, as written on the page | S̃3 alone, as in the transcription
