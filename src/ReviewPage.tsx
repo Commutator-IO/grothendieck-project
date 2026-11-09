@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
 import { Footer, Header } from './components/Frame.tsx';
 import { BnfReview } from './components/BnfReview.tsx';
 import { BourbakiReview } from './components/BourbakiReview.tsx';
@@ -385,7 +387,7 @@ export function ReviewPage() {
                 {SHOW_READINGS && item.drawing && drawingClaims?.[item.id] && (
                   <blockquote className="mt-3 rounded-md border-l-4 border-brand-300 bg-ink-50 px-3 py-2 text-[14.5px] leading-relaxed text-ink-800">
                     <span className="block text-[11px] font-semibold uppercase tracking-wider text-ink-400">The two readings</span>
-                    {drawingClaims[item.id]}
+                    <InlineMath text={drawingClaims[item.id]} />
                   </blockquote>
                 )}
                 {SHOW_READINGS && item.drawing && <Drawing cote={item.cote} id={item.drawing} />}
@@ -556,6 +558,35 @@ function Reading({ s }: { s: Snippet }) {
       {s.glueAfter ? '' : ' '}
       <Tex text={s.after} />
     </blockquote>
+  );
+}
+
+/**
+ * The two readings of a doubtful drawing are plain text in which labels are
+ * written with TeX sub- and superscripts (L″_i, R^{∞,1}_r, Π_{t,u}). Each such
+ * label is set with KaTeX; the rest stays text.
+ */
+const LABEL = /[\p{L}∞!∘][′″‴]*(?:[_^](?:\{[^{}]*\}|[\p{L}\p{N}′″‴]+))+/gu;
+const PRIMES: Record<string, string> = { '′': "'", '″': "''", '‴': "'''" };
+function InlineMath({ text }: { text: string }) {
+  const parts: (string | { tex: string })[] = [];
+  let last = 0;
+  for (const m of text.matchAll(LABEL)) {
+    if (m.index > last) parts.push(text.slice(last, m.index));
+    parts.push({ tex: m[0].replace(/[′″‴]/g, (c) => PRIMES[c]) });
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return (
+    <>
+      {parts.map((p, i) =>
+        typeof p === 'string' ? (
+          p
+        ) : (
+          <span key={i} dangerouslySetInnerHTML={{ __html: katex.renderToString(p.tex, { throwOnError: false, strict: 'ignore' }) }} />
+        ),
+      )}
+    </>
   );
 }
 
