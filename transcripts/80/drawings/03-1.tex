@@ -1,10 +1,11 @@
 % Drawing 80/03-1 -- folder 80, batch 03, archive page 44 (PDF page 45).
 % Transcription: à gauche du texte, un dessin : un heptagone aux côtés fléchés, sommets en pointillé, avec « $u_0(i) = i+1$ » et une flèche courbe au centre. « $d_i$ » est ajouté au-dessus de « bijection », « de $\vec{I}_i$ » est \uncertain{lu}. Au-dessus de « circulaire, i.e. transitive », une insertion : « (\ill{} par $i_\alpha = u_0^\alpha(i_0)$) ». « $\nu = \nu_s$ » est écrit dans la marge gauche, en face de (28)
-% Kind: heptagon with arrowed sides. Method 2 (schematic redraw from the facsimile). Status: partial.
-% Notes: Six sides drawn as arrows going round counter-clockwise on the page: top to upper left, down the left, along the bottom, up to the right corner, up to the upper right corner, back to the top. The six corners are computed once as the meeting points of consecutive sides, and each side lies on the line between its two corners, cut short where he left the corner open (the top, the lower left and lower right corners). The dotted points (mostly in pairs) outside the corners are placed as read, with the dash above the top corner; i under the top corner and u_0(i) = i+1 at \small (Michel's size), the curved arrow at the centre. Still differs: six arrowed sides and six corners are on the page, where the transcription says a heptagon; the seventh vertex is presumably implied by the dotted points, which are not joined. Redrawn 2026-11-09 (issue 128): to check again.
+% Kind: hexagon with arrowed sides and dotted external bisectors. Method 2 (schematic redraw from the facsimile). Status: ok.
+% Notes: A hexagon. Six sides drawn as arrows going round counter-clockwise on the page: top to upper left, down the left, along the bottom, up to the right corner, up to the upper right corner, back to the top. The six corners are computed once as the meeting points of consecutive sides read on the page, and every side is drawn between them, so the hexagon closes exactly; its proportions are those of the page (a regular hexagon fitted to the six corners misses them, and the pairs of dots, by up to 6 mm, so it is not imposed). At each corner the external bisector is dotted: drawn outwards along the bisector of the corner's angle, it carries the pair of dots he set outside that corner. The two dotted marks on the top corner, just inside it, are drawn as two points; i under them, u_0(i) = i+1 at \small and the curved arrow at the centre as before. Revised 2026-11-09 after Michel's check (#132): Michel: the drawing is right (not a heptagon); « also two dotted marks on the top vertex; it should be a hexagon with the six external bisectors dotted ». Redrawn so: the hexagon closed at its six exact corners (the sides were cut short at three of them), the six external bisectors dotted, the two marks on the top corner.
 % Coordinates: 1 unit = 1 mm = 1/100 of the crop width (bbox in page fractions: [0.12, 0.3, 0.42, 0.45]).
 % Redrawn by Claude (claude-opus-5-5), issue #73, 2026-11-09; not checked by a human; not compiled (no TeX in the session).
 % Revised 2026-11-07 after Michel's check: labels enlarged.
+% Revised 2026-11-09 after Michel's check (#132): a hexagon (not a heptagon), closed at six exact corners, with the six external bisectors dotted and the two dotted marks on the top corner.
 % Rights: reproduces part of the work -- behind RENDER_TRANSCRIPTS, never published by itself.
 \documentclass[tikz,border=3pt]{standalone}
 \usepackage{amsmath,amssymb}
@@ -12,25 +13,30 @@
 \tikzset{pencil/.style={black!45}, struck/.style={black!35}, mark/.style={circle,draw,inner sep=1.3pt}, pt/.style={circle,fill,inner sep=0.9pt}, opt/.style={circle,draw,fill=white,inner sep=1.1pt}}
 \begin{document}
 \begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\scriptsize]
-\draw[-{Stealth[length=2mm]}] (50.7,-4.3) -- (30.2,-20.6);
-\draw[-{Stealth[length=2mm]}] (30.4,-22.6) -- (33.4,-49.1);
-\draw[-{Stealth[length=2mm]}] (35.5,-52.1) -- (72,-52.1);
-\draw[-{Stealth[length=2mm]}] (75.1,-51.7) -- (83,-36.9);
-\draw[-{Stealth[length=2mm]}] (83,-35.2) -- (79.7,-19.9);
-\draw[-{Stealth[length=2mm]}] (79.7,-19.9) -- (55.6,-4.6);
-\node[pt] at (19.4,-18.3) {};
-\node[pt] at (22.9,-20.1) {};
-\node[pt] at (83.9,-18.2) {};
-\node[pt] at (88.5,-15) {};
-\node[pt] at (83.7,-34.1) {};
-\node[pt] at (88.9,-37.7) {};
-\node[pt] at (94.4,-38.8) {};
-\node[pt] at (74.9,-58) {};
-\node[pt] at (77.2,-62.7) {};
-\node[pt] at (28.8,-59.4) {};
-\node[pt] at (25.9,-61.9) {};
-\draw (52.1,-3) -- (53.3,-2.9);
-\node[inner sep=1pt] at (52.4,-8.8) {\small $i$};
+% the six corners, computed once as the meeting points of consecutive sides read on the page; every side drawn between them
+\coordinate (v0) at (52.79,-2.28);
+\coordinate (v1) at (30.04,-20.37);
+\coordinate (v2) at (33.97,-52.30);
+\coordinate (v3) at (74.17,-52.30);
+\coordinate (v4) at (83.08,-35.93);
+\coordinate (v5) at (79.96,-19.80);
+\draw[-{Stealth[length=2mm]}] (v0) -- (v1);
+\draw[-{Stealth[length=2mm]}] (v1) -- (v2);
+\draw[-{Stealth[length=2mm]}] (v2) -- (v3);
+\draw[-{Stealth[length=2mm]}] (v3) -- (v4);
+\draw[-{Stealth[length=2mm]}] (v4) -- (v5);
+\draw[-{Stealth[length=2mm]}] (v5) -- (v0);
+% the six external bisectors, dotted: from each corner outwards along the bisector of its angle
+\draw[dotted, line width=0.8pt, shorten <=1.5mm] (v0) -- (52.09,11.70);
+\draw[dotted, line width=0.8pt, shorten <=1.5mm] (v1) -- (17.08,-15.07);
+\draw[dotted, line width=0.8pt, shorten <=1.5mm] (v2) -- (24.69,-62.79);
+\draw[dotted, line width=0.8pt, shorten <=1.5mm] (v3) -- (81.33,-64.34);
+\draw[dotted, line width=0.8pt, shorten <=1.5mm] (v4) -- (96.92,-38.07);
+\draw[dotted, line width=0.8pt, shorten <=1.5mm] (v5) -- (91.56,-11.95);
+% the two dotted marks on the top corner, inside it, then i
+\node[pt] at (52.89,-4.28) {};
+\node[pt] at (53.02,-7.08) {};
+\node[inner sep=1pt] at (52.49,-10.48) {\small $i$};
 \node[inner sep=1pt] at (41.5,-21.6) {\small $u_0(i)=i+1$};
 \draw[-{Stealth[length=2mm]}] plot[smooth, tension=0.55] coordinates {(62.7,-36) (64.9,-30.2) (63.3,-25.7) (59.5,-23.3) (55,-23.8) (51.1,-26)};
 \end{tikzpicture}
