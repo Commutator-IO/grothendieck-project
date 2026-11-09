@@ -424,3 +424,52 @@ Réponses reportées dans `drawings.json` ou dans la transcription ; les cases s
 - [ ] 154 09-1 | disagreement | Is the lower-right red rectangle cut in two by a light green band? | Two red boxes joined by light-green pieces of their sides, the bottom line drawn separately | « coupé en deux par une bande vert clair », as in the transcription
 - [ ] 154 09-1 | reading | In the small red disk at the centre, what is the first right-hand number? | Read 5′, 4′, 3′, 2′ from top to bottom | 1′
 - [ ] 154 09-1 | reading | Is the second red stroke along the lower-right rim of the top-middle disk the rim drawn twice, or an extra strand end? | Not drawn | The rim drawn twice, or a strand end
+
+## Folder 154, schematic drawings redrawn (9 November, evening)
+
+- [ ] 154 09-2 | disagreement | Are the lobes of the figure of eight pseudoline arrangements? In each lobe two strands cross twice, at the two black dots | Drawn as on the page, crossing twice, so neither lobe is an arrangement | Each pair crosses once, a dot read as a touching point
+- [ ] 154 09-1 | reading | Rim numbers of the top disk (the transcription reads only 1, 1', 2', 4', 5) | 1 (twice), 1', 2, 3, 4, 5 on the left; 2', 3', 4' on the right | 2, 3, 4, 3' unread
+- [ ] 154 09-1 | disagreement | A pencil circle with a dot and a horizontal line, below the α/β half-disk, is not in the transcription | Drawn | Omit it
+- [ ] 154 09-1 | reading | Numbers on the arcs of the small a/b disk | 2, 3, 4, 5 on the left; 1', 4', 3', 2' on the right | 1–5 and 1'–5', as in the transcription
+- [ ] 154 09-2 | reading | Numbers of the middle disk (the transcription gives 0'–5' without 2') | 0, 1 at the top and inside; 2–5 on the left; 0', 1' at the bottom; 4', 5' twice round the bay; 3', 2' on the right | As in the transcription
+- [ ] 154 09-2 | reading | Rim marks of the pencil disk | α (twice), 1, 2, 3, 4, 5, 1', 2', 3', 5' | The transcription's list, which includes 4'
+- [ ] 154 08-17 | reading | Top-left label over the first vertical | 1, overwritten on w' | 1 alone
+- [ ] 154 08-17 | strike | Scribbles at the right end of the glued x/y form | Read as struck, not drawn | Marks to draw
+- [ ] 154 08-15 | reading | Label right of the middle line of the stacked rectangles | w' | u'
+- [ ] 154 08-15 | reading | Lower-left label at the a level | a' (?), a smudge | No label
+- [ ] 154 08-10 | reading | Does the lower bank of the top spindle join the middle bank on the right before the tip? | It joins it | It runs separately to the tip
+- [ ] 154 08-7 | disagreement | Is the sectored disk cut by eight rays? | 6 lines through the centre, 12 rays | 8 rays, as in the transcription
+- [ ] 154 08-7 | reading | The second region sign (« 3 à longue queue ») | ζ | b or 5 (earlier pass), or another glyph
+- [ ] 154 08-7 | reading | Strands of the small green disks, the faint disks at the right edge and the disk at the bottom right | Read from the crop | Other continuations at the dense crossings
+- [ ] 154 08-2 | disagreement | Seventh letter below the rectangle | D (H G F E D C D A, as written) | An uncertain letter, as in the transcription
+- [ ] 154 08-2 | strike | Wavy hatched stroke from C/G to B/E, and the scribble left of B/C, in the top diagram | Struck, left out | Part of the diagram, to draw
+- [ ] 154 08-2 | reading | Route of C between the C/G and B/C crossings (overinked) | Through the B/C point | Another route
+- [ ] 154 07-8 | reading | Top-left label of the pencil rectangle | 1 | 5
+- [ ] 154 07-8 | reading | Labels on the violet disk | 0, 0′ | Other digits
+- [ ] 154 07-8 | strike | Faint « 10 6 5 » inside the disk with two green arcs, and the scribble below the ξ circle | Struck, left out | Text to draw
+- [ ] 154 08-1 | reading | Which pencil line continues which in the left disk and the lower circle; the ink path between the hub and the first star | As drawn | Other continuations
+- [ ] 154 08-5 | reading | Long faint lines of the arrangement; the three dashed lines | Drawn straight | Slightly curved, other continuations
+- [ ] 154 08-4 | reading | Middle network of pencil arrows | Still schematic, main lines placed approximately | To redraw strand by strand
+- [ ] 154 09-3 | reading | Overwritten label under the second D in the upper oval | D | x or y
+- [ ] 154 09-3 | disagreement | « deux croix vert clair » at the top right | Three light green lines with two crossings, plus a small green cross below the banner | Two separate crosses, as in the transcription
+- [ ] 154 09-5 | reading | Digits beside the left spindles | 1, 1, 1, 0 above; 0, 3, 2, 1 below | Other digits
+- [ ] 154 09-5 | reading | Where do the strands D, D′, D″ cross the stacked arcs? | Approximate | Another crossing order
+- [ ] 154 09-6 | disagreement | Region numbers (the transcription lists 12, 14, 15, 17, 21, 24, 27) | A second 12 near 17 | A single 12
+- [ ] 154 09-7 | reading | Overinked digit in the middle of the braid lens | Left out | 2 or 3
+- [ ] 154 09-8 | reading | Does the lower-left strand of the left disk run on into the middle disk? | Yes, to its right contact; one strand starts on another near the top | It ends on the left rim
+- [ ] 154 09-8 | reading | The two right-disk strands from the upper-left contact | Two strands, one ending on the right rim | A third strand (dropped because it would cross another twice)
+- [ ] 154 09-8 | disagreement | Pencil « deux petits triangles » of the transcription | Not found on the crop | Present but faint
+- [ ] 154 09-9 | reading | Labels round the half-crowned disk | 3, 4′, 5 left; 2′ top; 1′, 2′, 3′ bottom; 4′, 5′ right; 4′, 3′, 2′ outside upper right | Right-hand labels 4, 5 unprimed
+- [ ] 154 09-9 | reading | Top-left label group « 1 5′ 4′ » and small top digits « 1′ 1 1 3 » | Not reproduced | As read
+- [ ] 154 05-9 | reading | Which stroke continues which in the knot at the lower left of the bowl, and in the lower half of the square? | As redrawn | Other pairings
+- [ ] 154 05-9 | disagreement | Faint pencil curved triangle and vase, not in the transcription | Drawn | Leave them out
+- [ ] 154 07-2 | reading | In the large disk's lower half, are B6 and the end of Q3 separate pieces ending on Q1? | Ending on Q1 | Continuations of other strands
+- [ ] 154 07-2 | disagreement | Two strands of the small disk's right group cross twice, and many pairs in the large disk cross more than once | Drawn as on the page | A simple arrangement
+- [ ] 154 07-2 | disagreement | « croisement orange posé sur une droite verte »: the green line is not in the crop | Crossing drawn, line not drawn | The line is below the crop
+- [ ] 154 07-3 | reading | Pencil digits next to the arrows | 4, 3, 2, =5 | 1 to 5, as in the transcription
+- [ ] 154 07-3 | disagreement | Two thick red arcs « sur le bord » of the disk | The thick parts are the ends of one chord inside the rim | On the rim, as in the transcription
+- [ ] 154 07-3 | reading | Is the red X on the black line two curves touching at one point of the line? | Touching | A crossing
+- [ ] 154 07-5 | reading | In the column of disks, do the orange and red strands only touch at the tangency? | Touching, no exchange | They cross
+- [ ] 154 07-5 | reading | Bump disk: two strands start side by side at the left notch and both end at the right notch; the vertical lens's upper ends are separate | As redrawn | Other pairings
+- [ ] 154 07-7 | reading | Is each yellow wedge bounded by the two strands through its marked point and the outer rim? | As redrawn | Bounded by the green dip curve
+- [ ] 154 07-7 | reading | Placement and count of the + and − signs | 7 +, 3 − | + above, − below, as in the transcription
