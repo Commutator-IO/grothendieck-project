@@ -106,3 +106,21 @@ which only the transcription skill edits.
 - [ ] 144 07-7 | disagreement | Is there a label Π′ in the second row? | Yes | Not in the transcription's list
 - [ ] 144 07-8 | disagreement | What is the overwritten middle node? | S | Not in the transcription's list
 - [ ] 144 04-5 | disagreement | Do the three equator dots carry labels 0, 1, ∞? | No legible label | 0, 1, ∞, as in the transcription
+
+## Folder 83
+
+- [ ] 83 01-6 | disagreement | How are the triangle's vertices labelled? | v₁ at the top, v₂ on the left, v₀ on the right; the centre unlabelled under a blot; no u or u₀ on the figure | u₀ at the top and u, as in the transcription, which omits v₀
+- [ ] 83 04-1 | reading | Is this the schema meant by the mark (the words yzt/ztx, xyz/yzt, xyz/txy joined by two strokes, middle of p. 75)? | Yes, relocated there from the brackets under a formula | 
+- [ ] 83 10-3 | reading | Do the cube's edges stop short of the corners on the page? | As redrawn | 
+- [ ] 83 10-4 | reading | Do the cube's edges stop short of the corners on the page? | As redrawn | 
+- [ ] 83 11-4 | disagreement | Are « f, f′ » above the cube labels of the figure, and is there a diagonal i? | Words of the text line (« Si f, f′ sont »); only a letter i in the back face | Labels f, f′ and a diagonal i, as in the transcription
+- [ ] 83 03-2 | disagreement | Is there a star of diagonals inside the pentagon? | Only fragments | A star of diagonals, as in the transcription
+- [ ] 83 01-5 | reading | Is there a vertex labelled t, and what is at the vertex v₃? | Strokes lead to a vertex t; v₃ placed after the transcription | 
+
+## Folder 57
+
+- [ ] 57 08-4 | reading | Are the strokes of the dense sketch groups right? | Redrawn group by group, approximate | 
+- [ ] 57 08-6 | reading | Are the strokes of the dense sketch groups right? | Redrawn group by group, approximate | 
+- [ ] 57 07-1 | reading | Are the labels right? | As in the transcription | 
+- [ ] 57 01-1 | strike | Is the left-out part of the top row struck out on the page? | Left out as struck | 
+- [ ] 57 14-1 | disagreement | How many triangles are there? | Two | Four, as in the transcription
