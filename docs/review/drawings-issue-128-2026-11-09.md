@@ -16,16 +16,26 @@ The last field is empty when there is no alternative. Tick a box when its answer
 goes in the drawing's record in `transcripts/<cote>/drawings/drawings.json`, not in the transcription,
 which only the transcription skill edits.
 
+## En priorité : pages citées par les preuves de l'article Lean
+
+Ces dessins sont sur des pages dont dépendent des énoncés démontrés de `docs/lean/` ; leur lecture est à trancher d'abord.
+
+- [ ] 84 07-1 | reading | What are the primes of the labels? | L_i, E′_i, M′_i / L″_i, E″_i, M_i / L‴_i, E‴_i, M′_i / L′_i, E′_i, M_i; the bottom E may be E″_i | The transcription's L, L′, L″, L‴ scheme
+- [ ] 86 02-4 | disagreement | Is there a star of three lines a′, b, c with side a dotted? | Not found on the page | Present, as in the transcription
+- [ ] 70 04-6 | disagreement | What are the proportions of the rectangle? | About 3:4 | Golden, as in the transcription
+- [ ] 70 04-5 | reading | Do s₁ and s″₃ carry a bar on the page? | Barred, as in the transcription | No bar visible
+- [ ] 70 04-8 | disagreement | How is the top vertex labelled? | s′₀ | As in the transcription
+- [ ] 78 05-4 | reading | Which long line is the axis and which the arrow a, and what are the second « 1 » and the « 0 » at the top? | As redrawn; D through the origin | 
+
+Pourquoi, dans l'ordre : 84 07-1, p. 125 : les primes du diagramme donnent les coordonnées du produit tiré, dont l'article Lean prend le signe −b ; 86 02-4, p. 31 : la page du tableau des drapeaux et des trois involutions, comparées dans la section 86 ; 70 04-6, p. 75 : la page des douze sommets de l'icosaèdre sur ℤ[α] ; 70 04-5, p. 74 : les générateurs ; les barres notent s − o, la notation de l'énoncé sur 𝐅₅ ; 70 04-8, p. 78 : la page de l'énoncé de la conique sur 𝐅₅ ; 78 05-4, p. 95 : le polygone d'invariant α = −2 sur deux droites parallèles.
+
 ## Folder 70
 
 - [ ] 70 04-1 | strike | Is everything left out of this drawing struck out on the page? | Left out as struck: the wavy scribble along the top, the inked blot inside the triangle, the overwritten strokes right of the σ₀ line, four faint erased lines | 
 - [ ] 70 04-3 | strike | Is everything left out of this drawing struck out on the page? | Left out as struck: the formulas over the left trihedron, the zigzag "hatched plane", a scribbled Z and W, the sinusoid | The sinusoid belongs to the drawing
 - [ ] 70 04-2 | reading | Is the solid triangle a deliberate fill? | A deliberate fill, drawn filled | A strike-out, to leave out
-- [ ] 70 04-5 | reading | Do s₁ and s″₃ carry a bar on the page? | Barred, as in the transcription | No bar visible
 - [ ] 70 03-1 | disagreement | What follows « ≤ » on the page? | One index, read j+1 | « j−1, j+1 », as in the transcription
-- [ ] 70 04-8 | disagreement | How is the top vertex labelled? | s′₀ | As in the transcription
 - [ ] 70 05-1 | disagreement | Is there an s₂ label on the polyhedron? | No s₂ visible | s₂ as in the transcription
-- [ ] 70 04-6 | disagreement | What are the proportions of the rectangle? | About 3:4 | Golden, as in the transcription
 - [ ] 70 06-1 | disagreement | What is struck in this sketch? | One sign only | The whole sketch
 - [ ] 70 07-1 | reading | Are σ₁ and σ₂ placed right? | Placed after the transcription; on the page they run into the formulas | 
 - [ ] 70 01-3 | reading | Are the matrix entries where the page has them, with the struck ones left out? | As redrawn | 
@@ -196,7 +206,6 @@ which only the transcription skill edits.
 - [ ] 87 01-1 | reading | What are the small signs inside the hatched region? | Not read; one may be a letter, possibly C | 
 - [ ] 78 01-1 | reading | Is the overinked knot just above A₄ a vertex? | No; ten vertices drawn, the bottom one unlabelled | Yes
 - [ ] 78 05-2 | reading | Which label is σ₀: the heavy one by its axis, or the lighter σ at the top of that axis? | The heavy one | The upper one
-- [ ] 78 05-4 | reading | Which long line is the axis and which the arrow a, and what are the second « 1 » and the « 0 » at the top? | As redrawn; D through the origin | 
 
 ## Folders 119, 33, 34, 67, 81, 85, 86
 
@@ -217,7 +226,6 @@ which only the transcription skill edits.
 - [ ] 67 05-1 | reading | What colours are the felt-pen strokes? | Not visible on the grey scan, not rendered | 
 - [ ] 85 04-1 | strike | Is the upper sketch of oscillating curves struck out? | Left out as struck | 
 - [ ] 86 02-3 | disagreement | Where is the vertex v, and what is the second letter inside the pentagon? | v not identified, unlabelled; the letter read s | v, as in the transcription
-- [ ] 86 02-4 | disagreement | Is there a star of three lines a′, b, c with side a dotted? | Not found on the page | Present, as in the transcription
 
 ## Folders with one or two partial drawings
 
@@ -243,7 +251,6 @@ which only the transcription skill edits.
 - [ ] 73 01-5 | reading | What is the λ under the bottom side? | Left out: reads λ_{i+1}, perhaps λ_{i−1} | λ_{i+1}
 - [ ] 75 01-1 | reading | What is the vertex set? | Ten dotted vertices plus undotted junctions | A dozen vertices marked by a point
 - [ ] 76 01-2 | reading | Is the ladder framed? | A heavy bar above, a bracket below and to the left | « petite échelle encadrée »
-- [ ] 84 07-1 | reading | What are the primes of the labels? | L_i, E′_i, M′_i / L″_i, E″_i, M_i / L‴_i, E‴_i, M′_i / L′_i, E′_i, M_i; the bottom E may be E″_i | The transcription's L, L′, L″, L‴ scheme
 - [ ] 91 05-1 | reading | Is the faint pencil oval behind U_f part of the figure? | Drawn | Not mentioned in the transcription
 - [ ] 91 06-1 | reading | Where is y? | Not located: a J-like mark or a small o above the short segment | « sans doute x, y »
 - [ ] 117 02-1 | reading | Which ringed vertex is Y? | None carries a legible letter; left unlabelled | Y at the lower left
