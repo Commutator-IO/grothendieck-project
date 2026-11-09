@@ -39,24 +39,24 @@ Pourquoi : 80 03-1, p. 44 : l'heptagone des sommets fléchés, dans la section 8
 ## Folder 154
 
 - [x] 154 02-2 | reading | Do the three orange lines meet at the apex of the dashed arc? | Yes, with a black point drawn there | 
-- [ ] 154 01-7 | reading | Does the snapped drawing still match the page? | As redrawn | 
-- [ ] 154 06-8 | reading | Does the snapped drawing still match the page? | As redrawn | 
-- [ ] 154 08-3 | reading | Does the snapped drawing still match the page? | As redrawn | 
+- [x] 154 01-7 | reading | Does the snapped drawing still match the page? | As redrawn | 
+- [x] 154 06-8 | reading | Does the snapped drawing still match the page? | As redrawn | 
+- [x] 154 08-3 | reading | Does the snapped drawing still match the page? | As redrawn | 
 - [ ] 154 08-4 | reading | Does the snapped drawing still match the page? | As redrawn | 
 - [ ] 154 02-6 | reading | Does the snapped drawing still match the page? | As redrawn | 
 - [ ] 154 07-4 | reading | Should these nearby stroke ends meet at one corner? | Merged into one corner | Separate ends
 - [ ] 154 06-16 | reading | Should these nearby stroke ends meet at one corner? | Merged into one corner | Separate ends
-- [ ] 154 02-5 | reading | At the four antipodal blue marks, are the strands paired right? | The two near-vertical strands and the two near-horizontal ones meet only at the marks | 
-- [ ] 154 02-9 | reading | On the right, near the small yellow region, which strand continues which? | The upper-left strand goes on to the lower-right rim, the top strand to the dark green arc; one strand ends at that crossing | 
-- [ ] 154 02-9 | disagreement | How many small triangles are there near the rim? | Five orange wedges at the rim, plus five small regions inside | Six, as in the transcription
-- [ ] 154 02-14 | reading | In the lower isolated disk, are the strands paired right, and are the pencil ticks rightly left out? | As redrawn | 
-- [ ] 154 09-4 | reading | In the left disk, is the dashed path a closed loop along the strands, with three triple points? | Yes | 
-- [ ] 154 09-7 | disagreement | Which labels does the orange disk carry? | Also 4, 4′, 5′, 6, 7, 7′, 8, 9′ | Only 1, 2, 3, 1′, 2′, 3′, 5, 6′, 8′, 9, as in the transcription
-- [ ] 154 09-7 | disagreement | How many blue arcs has the pencil circle? | Three, plus a pencil arrowhead on the right | Four, as in the transcription
-- [ ] 154 09-7 | disagreement | In what order do the small disk's labels run, from the top? | 1, 0, 4, 5, …, 9, as in the sequence written above it | 9, 0, 1, 2, 3, 4, as in the transcription
-- [ ] 154 02-15 | reading | In disk A, does the short solid strand from the top rim end where D₁ crosses the dashed strand? | Yes | 
-- [ ] 154 02-15 | reading | In disk B, does a short solid stroke run from D₀ to the right-hand dashed strand, closing the hatched region? | Yes | 
-- [ ] 154 02-15 | reading | In disk D, does a solid strand start on the lower dashed strand, cross D₀ once and reach the bottom rim? | Yes | 
+- [x] 154 02-5 | reading | At the four antipodal blue marks, are the strands paired right? | The two near-vertical strands and the two near-horizontal ones meet only at the marks | 
+- [x] 154 02-9 | reading | On the right, near the small yellow region, which strand continues which? | The upper-left strand goes on to the lower-right rim, the top strand to the dark green arc; one strand ends at that crossing | 
+- [x] 154 02-9 | disagreement | How many small triangles are there near the rim? | Five orange wedges at the rim, plus five small regions inside | Six, as in the transcription
+- [x] 154 02-14 | reading | In the lower isolated disk, are the strands paired right, and are the pencil ticks rightly left out? | As redrawn | 
+- [x] 154 09-4 | reading | In the left disk, is the dashed path a closed loop along the strands, with three triple points? | Yes | 
+- [x] 154 09-7 | disagreement | Which labels does the orange disk carry? | Also 4, 4′, 5′, 6, 7, 7′, 8, 9′ | Only 1, 2, 3, 1′, 2′, 3′, 5, 6′, 8′, 9, as in the transcription
+- [x] 154 09-7 | disagreement | How many blue arcs has the pencil circle? | Three, plus a pencil arrowhead on the right | Four, as in the transcription
+- [x] 154 09-7 | disagreement | In what order do the small disk's labels run, from the top? | 1, 0, 4, 5, …, 9, as in the sequence written above it | 9, 0, 1, 2, 3, 4, as in the transcription
+- [x] 154 02-15 | reading | In disk A, does the short solid strand from the top rim end where D₁ crosses the dashed strand? | Yes | 
+- [x] 154 02-15 | reading | In disk B, does a short solid stroke run from D₀ to the right-hand dashed strand, closing the hatched region? | Yes | 
+- [x] 154 02-15 | reading | In disk D, does a solid strand start on the lower dashed strand, cross D₀ once and reach the bottom rim? | Yes | 
 - [ ] 154 05-1 | reading | Are the grey pencil lines strands of the arrangements, or the underdrawing? | Not yet decided; the drawing is left as it was | 
 
 ## Folder 74
