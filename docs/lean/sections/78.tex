@@ -55,7 +55,7 @@ Pour $n = 4$, $(1 - U(U + 1))(U + 1) + U(U^2 + U - 1) = 1 - U - U^2$, qui vaut $
 \begin{enonce}[Pages 84, 85 et 94 à 99, existence des $2p$-gones en bande\piste{78-strip-2p-gon}]
 Soit $k$ un anneau non nul de caractéristique $p$.
 \begin{enumerate}
-\item Pour $m \in \mathbb Z$, $s_{2m} = (-m, m)$ et $s_{2m+1} = (1 + m, -m)$ : les sommets pairs sont sur la droite $x + y = 0$, les impairs sur la droite parallèle $x + y = 1$, et $f_{-2}(x, y) = (x + y)(x + y - 1)$.
+\item Pour $m \in \mathbb Z$, $s_{2m} = (-m, m)$ et $s_{2m+1} = (1 + m, -m)$ : les sommets pairs sont sur la droite $x + y = 0$, les impairs sur la droite parallèle $x + y = 1$ (figure~\ref{fig:78-bande}), et $f_{-2}(x, y) = (x + y)(x + y - 1)$.
 \item $u_{-2}^n = \mathrm{id}$ si et seulement si $2p$ divise $n$, ce qui équivaut à $F_n(-2) = 0$ ; $u_{-2}$ est d'ordre $2p$, et $s_n = s_m$ si et seulement si $2p$ divise $n - m$.
 \item Trois sommets consécutifs ne sont jamais alignés : le déterminant de $(s_{n+1} - s_n, s_{n-1} - s_n)$ vaut $1$. La partie linéaire $(x, y) \mapsto (-2x - y, x)$ est de déterminant~$1$.
 \item Pour le polygone impropre, $v^{2m}$ est la translation de vecteur $m\,(1, -1)$, $t_{2m} = (m, -m)$ et $t_{2m+1} = (m + 1, -m)$, sur les deux mêmes droites ; $v^n = \mathrm{id}$ si et seulement si $2p$ divise $n$, $v$ est d'ordre $2p$, $t_n = t_m$ si et seulement si $2p$ divise $n - m$, trois sommets consécutifs ne sont pas alignés (déterminant $\pm 1$), $\sigma_1 v \sigma_1 = v^{-1}$, et la partie linéaire $(x, y) \mapsto (-y, -x)$ est de déterminant $-1$.
@@ -71,6 +71,64 @@ Soit $k$ un anneau non nul de caractéristique $p$.
 
 4) $v(1 - y + m, -x - m) = (x + m + 1, y - m - 1)$ et $v(x + m, y - m) = (1 - y + m, -x - m)$ donnent par récurrence $v^{2m}(x, y) = (x + m, y - m)$ et $v^{2m+1}(x, y) = (1 - y + m, -x - m)$. Les sommets s'en déduisent, et l'on raisonne comme en 2) : $t_{2m} = (0, 0)$ si et seulement si $p \mid m$, $t_{2m+1} \neq (0, 0)$, et $v^{2m}$ est l'identité dès que $m = 0$ dans $k$. Les déterminants se calculent sur les sommets : les vecteurs sont $(1, 0)$ et $(0, 1)$ en un sommet pair, $(0, -1)$ et $(-1, 0)$ en un sommet impair.
 \end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.5cm, y=1.5cm, pt/.style={circle, fill, inner sep=1.2pt}, lab/.style={font=\scriptsize, inner sep=1.5pt}]
+\begin{scope}[yshift=0cm]
+\draw[black!35] (-5,0) -- (5.6,0); \draw[black!35] (-5,1) -- (5.6,1);
+\node[lab, black!55, anchor=west] at (5.7,0) {$x + y = 0$}; \node[lab, black!55, anchor=west] at (5.7,1) {$x + y = 1$};
+\draw[thick] (4,0) -- (-3,1) -- (2,0) -- (-1,1) -- (0,0) -- (1,1) -- (-2,0) -- (3,1) -- (-4,0);
+\node[pt] at (4,0) {};
+\node[lab, below] at (4,0) {$s_{-4}$};
+\node[pt] at (-3,1) {};
+\node[lab, above] at (-3,1) {$s_{-3}$};
+\node[pt] at (2,0) {};
+\node[lab, below] at (2,0) {$s_{-2}$};
+\node[pt] at (-1,1) {};
+\node[lab, above] at (-1,1) {$s_{-1}$};
+\node[pt] at (0,0) {};
+\node[lab, below] at (0,0) {$s_{0}$};
+\node[pt] at (1,1) {};
+\node[lab, above] at (1,1) {$s_{1}$};
+\node[pt] at (-2,0) {};
+\node[lab, below] at (-2,0) {$s_{2}$};
+\node[pt] at (3,1) {};
+\node[lab, above] at (3,1) {$s_{3}$};
+\node[pt] at (-4,0) {};
+\node[lab, below] at (-4,0) {$s_{4}$};
+\node[font=\small, anchor=east] at (-5.2,0.5) {$\alpha = -2$};
+\end{scope}
+\begin{scope}[yshift=-2.6cm]
+\draw[black!35] (-5,0) -- (5.6,0); \draw[black!35] (-5,1) -- (5.6,1);
+\node[lab, black!55, anchor=west] at (5.7,0) {$x + y = 0$}; \node[lab, black!55, anchor=west] at (5.7,1) {$x + y = 1$};
+\draw[thick] (-4,0) -- (-3,1) -- (-2,0) -- (-1,1) -- (0,0) -- (1,1) -- (2,0) -- (3,1) -- (4,0) -- (5,1);
+\node[pt] at (-4,0) {};
+\node[lab, below] at (-4,0) {$t_{-4}$};
+\node[pt] at (-3,1) {};
+\node[lab, above] at (-3,1) {$t_{-3}$};
+\node[pt] at (-2,0) {};
+\node[lab, below] at (-2,0) {$t_{-2}$};
+\node[pt] at (-1,1) {};
+\node[lab, above] at (-1,1) {$t_{-1}$};
+\node[pt] at (0,0) {};
+\node[lab, below] at (0,0) {$t_{0}$};
+\node[pt] at (1,1) {};
+\node[lab, above] at (1,1) {$t_{1}$};
+\node[pt] at (2,0) {};
+\node[lab, below] at (2,0) {$t_{2}$};
+\node[pt] at (3,1) {};
+\node[lab, above] at (3,1) {$t_{3}$};
+\node[pt] at (4,0) {};
+\node[lab, below] at (4,0) {$t_{4}$};
+\node[pt] at (5,1) {};
+\node[lab, above] at (5,1) {$t_{5}$};
+\node[font=\small, anchor=east] at (-5.2,0.5) {impropre};
+\end{scope}
+\end{tikzpicture}
+\caption{Les deux polygones en bande de l'énoncé, sur $\mathbf Z$, dans les coordonnées $(x - y,\ x + y)$ du repère $(s_0, s_1, s_{-1})$, où les deux droites sont horizontales. En haut, $s_n = u_{-2}^n(0, 0)$ : $s_{2m} = (-m, m)$ et $s_{2m+1} = (1 + m, -m)$ vont et viennent de part et d'autre de $s_0$, les pairs sur $x + y = 0$, les impairs sur $x + y = 1$. En bas, le polygone impropre $t_n = v^n(0, 0)$ avance en zigzag d'un seul côté, sur les deux mêmes droites. En caractéristique $p$, les deux suites sont périodiques de période $2p$ et l'on obtient un $2p$-gone dans la bande. Figure de l'édition ; Grothendieck dessine à la page~95 les axes, la droite $D$ de direction $a$ et les points $s_0$, $-s_0$ (\lot{78}{5}{95}).}
+\label{fig:78-bande}
+\end{figure}
 
 Le polygone d'invariant $\alpha = -2$, dessiné sur $\mathbf Q$ dans les coordonnées $(x - y,\ x + y)$ : les sommets pairs sur la droite $x + y = 0$, les impairs sur $x + y = 1$, de $s_{-2}$ à $s_5$. Sur $\mathbf Q$ il ne se referme pas ; en caractéristique $p$, $s_{n + 2p} = s_n$ et c'est un $2p$-gone.
 \begin{center}
