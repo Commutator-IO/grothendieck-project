@@ -178,3 +178,22 @@ which only the transcription skill edits.
 - [ ] 138 06-12 | disagreement | Is there an « X~ » or an « a » near the hexagon? | No, even with the frame widened | Yes, as in the transcription
 - [ ] 138 07-5 | reading | Does the label read 1/2 or 1/3? | 1/2 | 1/3, as in the earlier note
 - [ ] 138 04-6 | reading | What is the overinked first label beside D₁₂? | Not set; reads « D₀₂ » or « D₁₂ » | 
+
+## Folders 45, 72, 78, 80, 87
+
+- [ ] 80 01-2 | reading | Are the solids of this whole page right (sphere as contour, equator and meridian; pyramid over bipyramid; the five inked octahedron vertices and eight edges; the square/hexagon polyhedron)? | As redrawn; the cube with grid lines schematic; pencil cubes and calculations left out | 
+- [ ] 80 03-1 | disagreement | Is it a heptagon? | A hexagon with six arrowed sides; the seventh vertex only suggested by dots outside it | A heptagon, as in the transcription
+- [ ] 80 04-1 | reading | What are the labels D, D′, Γ, Γ′, and does Γ pass through u? | Labels not legible; Γ passes close to u, not forced through it | 
+- [ ] 45 02-1 | reading | Is the right set of elements drawn on this whole sheet? | Reference lines, turned text and the isolated heavy letters (B, R, H, H1) left out | 
+- [ ] 45 03-1 | reading | Is the lower horizontal line a reference line from (i″), or the strike-out of « réalisations de T₁ en Γ₁ et T₁ »? | A reference line, kept | A strike-out, to leave out
+- [ ] 45 03-1 | disagreement | Where does the large curve « triviale » end? | At (i″), running down the left of (iii′) and just above (iii) | At (iii), as in the transcription
+- [ ] 45 04-1 | strike | Is the whole sketch struck out? | Struck; the scribble not drawn; the top mark and the label left of the stroke (x⁴?) not read | 
+- [ ] 72 05-1 | reading | Is this the network meant (relocated: four rising and four descending lines, a centre node, a rounded frame)? | As redrawn; the index couples at the nodes left out | 
+- [ ] 72 02-3 | disagreement | Are there dots L₁, …, L_i and L′₂, …, L′_i? | No: a single dot between L_i and L_{i+1}; a struck τ on L₀–L′₁ left out | L₁, …, L_i, as in the transcription
+- [ ] 72 02-2 | reading | What are the small marks along the upper branch (a τ-like sign, a short heavy stroke)? | Not read | 
+- [ ] 87 02-2 | strike | Is the horizontal stroke above the diamond (heavy cross at its left end, small arrowheads, a crossed x) part of the struck first attempt? | Left out as struck | Part of the diagram, to draw
+- [ ] 87 02-1 | disagreement | How many segments leave the central point? | Five, two of them inked heavily | Four, as in the transcription
+- [ ] 87 01-1 | reading | What are the small signs inside the hatched region? | Not read; one may be a letter, possibly C | 
+- [ ] 78 01-1 | reading | Is the overinked knot just above A₄ a vertex? | No; ten vertices drawn, the bottom one unlabelled | Yes
+- [ ] 78 05-2 | reading | Which label is σ₀: the heavy one by its axis, or the lighter σ at the top of that axis? | The heavy one | The upper one
+- [ ] 78 05-4 | reading | Which long line is the axis and which the arrow a, and what are the second « 1 » and the « 0 » at the top? | As redrawn; D through the origin | 
