@@ -343,3 +343,12 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 154 02-4 | reading | Where are the borders of the hatched regions t′, T and t? | t′ left of the line going down left from the central vertex; T the triangle under the vertex down to the green line; t right of the vertex above the generisation | Other borders
 - [ ] 154 02-4 | reading | Is the right small bar broken where the middle line crosses it? | Broken, as on the page | One continuous bar
 - [ ] 154 02-8 | reading | Do the short pencil dashes in the upper faces join vertices? | Not drawn | Further dashed edges from map vertices to dual vertices
+- [ ] 154 06-1 | disagreement | Is it a map with pentagonal and hexagonal faces? | A ribbon graph: a wheel with five spokes (green vertices in orange disks, edges as green bands with brown borders), with the blue dual | « faces pentagonales et hexagonales », as in the transcription
+- [ ] 154 06-1 | reading | Are the two short gaps in the brown face sides, where green spokes end, on the page? | Gaps kept | The sides are continuous
+- [ ] 154 06-2 | reading | In the top-right disk, is the bent strand one pseudoline or two strands? | One bent pseudoline | Two separate strands
+- [ ] 154 06-2 | reading | Does the oval in the centre carry a chord? | No chord: an empty oval with a brown dot | A brown chord across it, as in the earlier redraw
+- [ ] 154 06-2 | reading | In the large disk, how many green curves are there, and where do they gather? | A pencil of 8 curves through one point of the lower-left rim and one near the top | Another count or other ends
+- [ ] 154 06-2 | reading | Are there rim numbers 12 and 14 near the top right? | No: only the transcription's numbers | 12 and 14 present
+- [ ] 154 06-4 | reading | In the middle-right, lower-right and bottom figures, does the line pass through the crossing? | Drawn concurrent | The line passes just beside the crossing
+- [ ] 154 06-4 | reading | Is there a y′ at the top of the vertical axis of the frame? | No: x and y only | y′ there
+- [ ] 154 06-6 | reading | In the right figure, does the short black piece on the green line end on a red leg? | Drawn where it is, not on a leg | It belongs to the left leg of the right crossing
