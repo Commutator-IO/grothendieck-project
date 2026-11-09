@@ -166,3 +166,15 @@ which only the transcription skill edits.
 - [ ] 148 04-2 | disagreement | How many ringed vertices and nested red curves are there? | Eleven ringed vertices, eight closed red curves | Nine and nine, as in the transcription
 - [ ] 148 02-1 | reading | What colour are the long arc and the edge from the left vertex? | Arc red-brown, edge plain ink | The arc may be a stain; the earlier redraw drew the edge red-brown
 - [ ] 148 01-4 | reading | Which four small triangles form the heavy rhombus? | Not singled out; seven heavy small triangles drawn thick | 
+
+## Folder 138
+
+- [ ] 138 07-6 | reading | How many triangles make up the triangulated pentagon? | Not readable; drawn as rays plus a ring of chords | 
+- [ ] 138 06-14 | reading | Are the nested pencil curves drawn over the typed notice right? | As redrawn, typed text and signature left out | 
+- [ ] 138 03-6 | disagreement | Is the long curve one stroke with an arrowhead at each end? | One stroke, arrowheads at X₂ and at the top node « X~(p,q,r;n) » | Two arrows, as in the transcription
+- [ ] 138 06-50 | strike | Are the left-out parts of the framed sketches struck out? | Left out as struck | 
+- [ ] 138 07-8 | reading | Are the inner cells right? | Approximate | 
+- [ ] 138 04-8 | disagreement | What do the labels read, and is « 1/2 » an « h »? | « −j » and « −j̄ », with a minus sign; « 1/2 » looks like « h » | j and j̄, and 1/2, as in the transcription
+- [ ] 138 06-12 | disagreement | Is there an « X~ » or an « a » near the hexagon? | No, even with the frame widened | Yes, as in the transcription
+- [ ] 138 07-5 | reading | Does the label read 1/2 or 1/3? | 1/2 | 1/3, as in the earlier note
+- [ ] 138 04-6 | reading | What is the overinked first label beside D₁₂? | Not set; reads « D₀₂ » or « D₁₂ » | 
