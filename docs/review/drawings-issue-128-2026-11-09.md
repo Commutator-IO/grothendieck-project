@@ -334,3 +334,12 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 154 04-9 | reading | At the left, where the dashed rows cross D near x, which dashes belong to D1 and which to D2? | Each dash drawn from its own ink, not assigned | Continuous dashed pseudolines through x
 - [ ] 154 05-5 | reading | Is the black oval of the upper drawing centred on the crossing of the middle pair? | The crossing on the line, the oval at its own position, 1.3 mm below | The oval centred on the crossing
 - [ ] 154 05-5 | reading | What are the left-hand pencil arrows of the lower drawing and the upside-down « g »? | Two pencil curves with arrowheads, plus a label « g » | An arrow ↔ legend
+- [ ] 154 01-3 | reading | Near the centre, two strands from the top make a tight knot: one crossing, or a touch and then a crossing? | Drawn close together, crossing once | They share a short stretch
+- [ ] 154 01-3 | reading | How many rays are there, and how do red and yellow alternate? | 10 red and 20 yellow, two yellow between neighbouring red rays | About 28, alternating, as in the earlier record
+- [ ] 154 01-12 | reading | How far does the faint pencil hatching of the top sector extend? | 7 strokes and a boundary arc | A whole hatched sector
+- [ ] 154 01-13 | reading | In the star at D (margin), is the black point the vertex, or only the tail of the arrow? | The vertex, at the meeting point | The tail of the arrow, apart from the vertex
+- [ ] 154 01-13 | disagreement | What is the label of the lower marginal point? | a′ | a, as in the transcription
+- [ ] 154 01-13 | reading | At the foot, which dashed arc ends on which brown line? | The outer on the upper line, the inner on the lower | The other way round
+- [ ] 154 02-4 | reading | Where are the borders of the hatched regions t′, T and t? | t′ left of the line going down left from the central vertex; T the triangle under the vertex down to the green line; t right of the vertex above the generisation | Other borders
+- [ ] 154 02-4 | reading | Is the right small bar broken where the middle line crosses it? | Broken, as on the page | One continuous bar
+- [ ] 154 02-8 | reading | Do the short pencil dashes in the upper faces join vertices? | Not drawn | Further dashed edges from map vertices to dual vertices
