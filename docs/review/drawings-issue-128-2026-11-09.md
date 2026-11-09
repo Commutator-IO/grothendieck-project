@@ -308,3 +308,11 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 85 05-3 | reading | What is the right-hand label of the rectangle S2 — S3 — ?, overwritten on the page? | S3 × S′3, as in the transcription | S3 × D′3
 - [ ] 86 01-1 | disagreement | Is the left back vertex of C1 and C2 v′ or u′? | v′, as in the transcription and needed by Π_{t,u} = Π_{s′,v′} | The page writes u′ on both sides
 - [ ] 86 01-1 | reading | What are the small c-shaped mark at the centre of C2 and the two small marks below s′ and above t′? | Left out, not legible | Letters to be read
+- [ ] 154 02-10 | reading | In the band at the centre right, which ends pair up where the lower-left chord meets the chord from the left rim? | The lower-left chord crosses the left chord at a grazing angle and goes to the right rim; the left chord goes to the lower right rim | The two are swapped and only touch
+- [ ] 154 02-11 | disagreement | How many regions are next to the rim? | Four next to the rim, plus four small inner ones | « cinq régions voisines du bord », as in the transcription
+- [ ] 154 02-12 | reading | What colour are the short segments joining the ends of D and D′ in the first disk? | Grey-blue, drawn blue | Green, as in the transcription
+- [ ] 154 02-12 | reading | Is the dark doubled vertical stroke in the third disk a chord? | A chord from the top rim stopping on the diagonal chord | A correction of D′, not a chord
+- [ ] 154 02-13 | reading | What is the blue-grey dotted stroke in the third disk? | A dashed pencil line | A struck or erased chord
+- [ ] 154 02-16 | reading | How many arrows go with each number 1–4? | Two per number, both ways along the rim | One per number
+- [ ] 154 01-1 | reading | In the lower disk, do the two strands meeting near the bottom cross or only touch? | They cross | They touch without crossing
+- [ ] 154 01-2 | reading | Several strands stop a little short of the rim on the page: should they? | Drawn to the rim | Drawn stopping short, as on the page
