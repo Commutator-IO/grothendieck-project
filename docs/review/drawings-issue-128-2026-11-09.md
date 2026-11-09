@@ -324,3 +324,13 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 154 07-16 | disagreement | What are the side labels of the middle sphere? | « 1 » left, « −1 » right, as read on the page | −1 left, +1 right, as in the earlier record
 - [ ] 154 06-13 | reading | What is the label on the top side of the left square? | « (3) » | « (2) », as in the earlier redraw
 - [ ] 154 07-4 | reading | Where do the two upper dashed orange fan edges end? | On the bent dashed blue side, where the green dashed edges begin | At separate points off the blue side
+- [ ] 154 03-7 | reading | Should the first stretch of the right figure's green line join the first orange-ringed point? | Drawn joined to the point | Drawn with a gap, as on the page
+- [ ] 154 03-7 | reading | Does the left dark green segment reach the point of concurrence? | Drawn stopping short, as on the page | Ended on the point (« relie le point de concours à un sommet »)
+- [ ] 154 03-8 | disagreement | What are the upside-down annotations around the green circle? | Left 1/2 and γ, right 1/2 and 1 | « 1/2, 1/1, 1 », as in the transcription; the left sign may be λ
+- [ ] 154 03-8 | reading | Where does the hexagon's diagonal end? | Where it meets the right side | At the dot just left of the vertex 3, with the vertex there
+- [ ] 154 03-8 | reading | Is the curl at the hexagon's top vertex a label « 2 »? | A plain vertex, no label | A label « 2 »
+- [ ] 154 04-9 | strike | Is the second, scribbled δ1 beside the vertex δ1 overwritten? | Left out as overwritten | A label, to keep
+- [ ] 154 04-9 | reading | Is the middle red « pair » three strokes, or one pseudoline pair with a redrawn branch? | Three strokes | One pair, the branch a redrawing
+- [ ] 154 04-9 | reading | At the left, where the dashed rows cross D near x, which dashes belong to D1 and which to D2? | Each dash drawn from its own ink, not assigned | Continuous dashed pseudolines through x
+- [ ] 154 05-5 | reading | Is the black oval of the upper drawing centred on the crossing of the middle pair? | The crossing on the line, the oval at its own position, 1.3 mm below | The oval centred on the crossing
+- [ ] 154 05-5 | reading | What are the left-hand pencil arrows of the lower drawing and the upside-down « g »? | Two pencil curves with arrowheads, plus a label « g » | An arrow ↔ legend
