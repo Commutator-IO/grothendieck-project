@@ -18,7 +18,7 @@ which only the transcription skill edits.
 
 ## En priorité : pages citées par les preuves de l'article Lean
 
-Les dessins encore sans réponse qui sont sur des pages dont dépendent des énoncés de `docs/lean/`, dans l'ordre où les trancher. Les six de la liste précédente ont reçu leur réponse dans #131 et sont en bas, en attente d'application.
+Les dessins encore sans réponse qui sont sur des pages dont dépendent des énoncés de `docs/lean/`, dans l'ordre où les trancher. Les réponses de #131 sont appliquées et leurs cases cochées, en bas de la liste.
 
 - [ ] 80 03-1 | disagreement | Is it a heptagon? | A hexagon with six arrowed sides; the seventh vertex only suggested by dots outside it | A heptagon, as in the transcription
 - [ ] 72 05-1 | reading | Is this the network meant (relocated: four rising and four descending lines, a centre node, a rounded frame)? | As redrawn; the index couples at the nodes left out | 
@@ -27,8 +27,11 @@ Les dessins encore sans réponse qui sont sur des pages dont dépendent des éno
 - [ ] 154 03-8 | disagreement | What are the upside-down annotations around the green circle? | Left 1/2 and γ, right 1/2 and 1 | « 1/2, 1/1, 1 », as in the transcription; the left sign may be λ
 - [ ] 154 03-8 | reading | Where does the hexagon's diagonal end? | Where it meets the right side | At the dot just left of the vertex 3, with the vertex there
 - [ ] 154 03-8 | reading | Is the curl at the hexagon's top vertex a label « 2 »? | A plain vertex, no label | A label « 2 »
+- [ ] 154 08-6 | disagreement | Is the orientation of L written ω_L or ϖ_L? | ϖ_L: a bar is visible | ω_L, as in the transcription
+- [ ] 154 08-8 | reading | Are the net lines orange in two families, with dark brown ink over parts of them, dots at the crossings and arrowheads? | The current file draws ten brown straight lines | Orange lines with dark-ink zigzag paths, dots and arrowheads, as on the facsimile
+- [ ] 154 08-8 | reading | Is the right-hand strand B7 one curved strand, or two meeting at the P6 crossing? | Not yet drawn | Possibly two
 
-Pourquoi : 80 03-1, p. 44 : l'heptagone des sommets fléchés, dans la section 80 dont le contre-exemple est vérifié en Lean ; 72 05-1, p. 93 : le réseau de losanges, dans les pages que la section 72 démontre ; 154 01-12, p. 18 : la page de la conjecture « l'ordre cyclique détermine la position » ; 34 09-1, p. 167 : la page citée pour la monodromie modérée ; 154 03-8, p. 56 : la monodromie diédrale des pages 55 à 63, énoncé encadré dans l'article Lean (trois questions).
+Pourquoi : 80 03-1, p. 44 : l'heptagone des sommets fléchés, dans la section 80 dont le contre-exemple est vérifié en Lean ; 72 05-1, p. 93 : le réseau de losanges, dans les pages que la section 72 démontre ; 154 01-12, p. 18 : la page de la conjecture « l'ordre cyclique détermine la position » ; 34 09-1, p. 167 : la page citée pour la monodromie modérée ; 154 03-8, p. 56 : la monodromie diédrale des pages 55 à 63, énoncé encadré dans l'article Lean (trois questions) ; 154 08-6 et 08-8, pp. 150 et 152 : les pages qui précèdent le cube des générisations de la page 153, démontré dans l'article Lean.
 
 ## Folder 70
 
@@ -352,9 +355,9 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 154 02-6 | disagreement | What are the two labels under the V on the green line? | 4 and 4, the same glyph as the 4s of the spindles | b, as in the transcription
 - [ ] 154 02-6 | reading | In the right group, does the third line of the pencil at Q pass through the crossing of the other two? | Drawn concurrent | Not concurrent, a gap of about 1 unit
 
-## Déjà répondu dans #131, en attente d'application
+## Répondu dans #131, appliqué
 
-Ces cases restent ouvertes tant que la réponse n'est pas reportée dans `drawings.json` ; elles passent en fin de file.
+Réponses reportées dans `drawings.json` ou dans la transcription ; les cases sont cochées.
 
 - [x] 84 07-1 | reading | What are the primes of the labels? | L_i, E′_i, M′_i / L″_i, E″_i, M_i / L‴_i, E‴_i, M′_i / L′_i, E′_i, M_i; the bottom E may be E″_i | The transcription's L, L′, L″, L‴ scheme
 - [x] 86 02-4 | disagreement | Is there a star of three lines a′, b, c with side a dotted? | Not found on the page | Present, as in the transcription
@@ -379,7 +382,6 @@ Ces cases restent ouvertes tant que la réponse n'est pas reportée dans `drawin
 - [ ] 154 08-16 | disagreement | Is the letter in F′ δ or δ′? | δ, no prime visible | δ′, as in the transcription
 - [ ] 154 08-16 | disagreement | Is the label at the right end D or D_i? | D (the crop may cut an index) | D_i, as in the transcription
 - [ ] 154 08-16 | reading | Is there a t in F next to the star mark? | Drawn | Only δ and s, as in the transcription
-- [ ] 154 08-6 | disagreement | Is the orientation of L written ω_L or ϖ_L? | ϖ_L: a bar is visible | ω_L, as in the transcription
 - [ ] 154 08-14 | reading | Which labels go round the middle point of the right sketch? | β′ above, γ′ at the lower right, α′ below, as in the transcription | Both upper glyphs β′
 - [ ] 154 07-6 | disagreement | How many branches has the blue star? | Seven | Eight (« étoile bleue à huit branches »), as in the transcription
 - [ ] 154 07-6 | disagreement | Is the last figure a hexagon? | A pentagon: five green vertices, five blue rays | « hexagone vert », as in the transcription
@@ -418,5 +420,3 @@ Ces cases restent ouvertes tant que la réponse n'est pas reportée dans `drawin
 - [ ] 154 09-1 | disagreement | Is the lower-right red rectangle cut in two by a light green band? | Two red boxes joined by light-green pieces of their sides, the bottom line drawn separately | « coupé en deux par une bande vert clair », as in the transcription
 - [ ] 154 09-1 | reading | In the small red disk at the centre, what is the first right-hand number? | Read 5′, 4′, 3′, 2′ from top to bottom | 1′
 - [ ] 154 09-1 | reading | Is the second red stroke along the lower-right rim of the top-middle disk the rim drawn twice, or an extra strand end? | Not drawn | The rim drawn twice, or a strand end
-- [ ] 154 08-8 | reading | Are the net lines orange in two families, with dark brown ink over parts of them, dots at the crossings and arrowheads? | The current file draws ten brown straight lines | Orange lines with dark-ink zigzag paths, dots and arrowheads, as on the facsimile
-- [ ] 154 08-8 | reading | Is the right-hand strand B7 one curved strand, or two meeting at the P6 crossing? | Not yet drawn | Possibly two
