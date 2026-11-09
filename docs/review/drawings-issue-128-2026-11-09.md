@@ -356,18 +356,18 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 
 Ces cases restent ouvertes tant que la réponse n'est pas reportée dans `drawings.json` ; elles passent en fin de file.
 
-- [ ] 84 07-1 | reading | What are the primes of the labels? | L_i, E′_i, M′_i / L″_i, E″_i, M_i / L‴_i, E‴_i, M′_i / L′_i, E′_i, M_i; the bottom E may be E″_i | The transcription's L, L′, L″, L‴ scheme
-- [ ] 86 02-4 | disagreement | Is there a star of three lines a′, b, c with side a dotted? | Not found on the page | Present, as in the transcription
-- [ ] 70 04-6 | disagreement | What are the proportions of the rectangle? | About 3:4 | Golden, as in the transcription
-- [ ] 70 04-5 | reading | Do s₁ and s″₃ carry a bar on the page? | Barred, as in the transcription | No bar visible
-- [ ] 70 04-8 | disagreement | How is the top vertex labelled? | s′₀ | As in the transcription
-- [ ] 78 05-4 | reading | Which long line is the axis and which the arrow a, and what are the second « 1 » and the « 0 » at the top? | As redrawn; D through the origin | 
-- [ ] 70 04-1 | strike | Is everything left out of this drawing struck out on the page? | Left out as struck: the wavy scribble along the top, the inked blot inside the triangle, the overwritten strokes right of the σ₀ line, four faint erased lines | 
-- [ ] 70 04-3 | strike | Is everything left out of this drawing struck out on the page? | Left out as struck: the formulas over the left trihedron, the zigzag "hatched plane", a scribbled Z and W, the sinusoid | The sinusoid belongs to the drawing
-- [ ] 70 04-2 | reading | Is the solid triangle a deliberate fill? | A deliberate fill, drawn filled | A strike-out, to leave out
-- [ ] 70 03-1 | disagreement | What follows « ≤ » on the page? | One index, read j+1 | « j−1, j+1 », as in the transcription
-- [ ] 70 05-1 | disagreement | Is there an s₂ label on the polyhedron? | No s₂ visible | s₂ as in the transcription
-- [ ] 70 06-1 | disagreement | What is struck in this sketch? | One sign only | The whole sketch
-- [ ] 70 07-1 | reading | Are σ₁ and σ₂ placed right? | Placed after the transcription; on the page they run into the formulas | 
-- [ ] 70 01-3 | reading | Are the matrix entries where the page has them, with the struck ones left out? | As redrawn | 
-- [ ] 154 04-3 | reading | Does the red X cross on the dark green line? | Yes, snapped onto it | 
+- [x] 84 07-1 | reading | What are the primes of the labels? | L_i, E′_i, M′_i / L″_i, E″_i, M_i / L‴_i, E‴_i, M′_i / L′_i, E′_i, M_i; the bottom E may be E″_i | The transcription's L, L′, L″, L‴ scheme
+- [x] 86 02-4 | disagreement | Is there a star of three lines a′, b, c with side a dotted? | Not found on the page | Present, as in the transcription
+- [x] 70 04-6 | disagreement | What are the proportions of the rectangle? | About 3:4 | Golden, as in the transcription
+- [x] 70 04-5 | reading | Do s₁ and s″₃ carry a bar on the page? | Barred, as in the transcription | No bar visible
+- [x] 70 04-8 | disagreement | How is the top vertex labelled? | s′₀ | As in the transcription
+- [x] 78 05-4 | reading | Which long line is the axis and which the arrow a, and what are the second « 1 » and the « 0 » at the top? | As redrawn; D through the origin | 
+- [x] 70 04-1 | strike | Is everything left out of this drawing struck out on the page? | Left out as struck: the wavy scribble along the top, the inked blot inside the triangle, the overwritten strokes right of the σ₀ line, four faint erased lines | 
+- [x] 70 04-3 | strike | Is everything left out of this drawing struck out on the page? | Left out as struck: the formulas over the left trihedron, the zigzag "hatched plane", a scribbled Z and W, the sinusoid | The sinusoid belongs to the drawing
+- [x] 70 04-2 | reading | Is the solid triangle a deliberate fill? | A deliberate fill, drawn filled | A strike-out, to leave out
+- [x] 70 03-1 | disagreement | What follows « ≤ » on the page? | One index, read j+1 | « j−1, j+1 », as in the transcription
+- [x] 70 05-1 | disagreement | Is there an s₂ label on the polyhedron? | No s₂ visible | s₂ as in the transcription
+- [x] 70 06-1 | disagreement | What is struck in this sketch? | One sign only | The whole sketch
+- [x] 70 07-1 | reading | Are σ₁ and σ₂ placed right? | Placed after the transcription; on the page they run into the formulas | 
+- [x] 70 01-3 | reading | Are the matrix entries where the page has them, with the struck ones left out? | As redrawn | 
+- [x] 154 04-3 | reading | Does the red X cross on the dark green line? | Yes, snapped onto it | 
