@@ -18,7 +18,7 @@ which only the transcription skill edits.
 
 ## En priorité : pages citées par les preuves de l'article Lean
 
-Les dessins encore sans réponse qui sont sur des pages dont dépendent des énoncés de `docs/lean/`, dans l'ordre où les trancher. Les réponses de #131 sont appliquées et leurs cases cochées, en bas de la liste.
+Toutes les questions de ce bloc ont reçu réponse (#131, #132) et sont appliquées. Les cases cochées restent ici pour garder les identifiants des questions ; les dessins à revoir après ces réponses sont en tête de « Folder 154 ».
 
 - [x] 80 03-1 | disagreement | Is it a heptagon? | A hexagon with six arrowed sides; the seventh vertex only suggested by dots outside it | A heptagon, as in the transcription
 - [x] 72 05-1 | reading | Is this the network meant (relocated: four rising and four descending lines, a centre node, a rounded frame)? | As redrawn; the index couples at the nodes left out | 
@@ -31,7 +31,6 @@ Les dessins encore sans réponse qui sont sur des pages dont dépendent des éno
 - [x] 154 08-8 | reading | Are the net lines orange in two families, with dark brown ink over parts of them, dots at the crossings and arrowheads? | The current file draws ten brown straight lines | Orange lines with dark-ink zigzag paths, dots and arrowheads, as on the facsimile
 - [x] 154 08-8 | reading | Is the right-hand strand B7 one curved strand, or two meeting at the P6 crossing? | Not yet drawn | Possibly two
 
-Pourquoi : 80 03-1, p. 44 : l'heptagone des sommets fléchés, dans la section 80 dont le contre-exemple est vérifié en Lean ; 72 05-1, p. 93 : le réseau de losanges, dans les pages que la section 72 démontre ; 154 01-12, p. 18 : la page de la conjecture « l'ordre cyclique détermine la position » ; 34 09-1, p. 167 : la page citée pour la monodromie modérée ; 154 03-8, p. 56 : la monodromie diédrale des pages 55 à 63, énoncé encadré dans l'article Lean (trois questions) ; 154 08-6 et 08-8, pp. 150 et 152 : les pages qui précèdent le cube des générisations de la page 153, démontré dans l'article Lean.
 
 ## Folder 70
 
@@ -57,6 +56,11 @@ Pourquoi : 80 03-1, p. 44 : l'heptagone des sommets fléchés, dans la section 8
 - [x] 154 02-15 | reading | In disk A, does the short solid strand from the top rim end where D₁ crosses the dashed strand? | Yes | 
 - [x] 154 02-15 | reading | In disk B, does a short solid stroke run from D₀ to the right-hand dashed strand, closing the hatched region? | Yes | 
 - [x] 154 02-15 | reading | In disk D, does a solid strand start on the lower dashed strand, cross D₀ once and reach the bottom rim? | Yes | 
+- [ ] 154 08-8 | reading | Does the spindle redrawn from the crop (mango-shaped outline, pointed at both ends, the net as read) match the page now? | As redrawn on 9 November after #132 | 
+- [ ] 154 08-4 | reading | Does the sphere redrawn from the crop match the page? | As redrawn on 9 November after #134 | 
+- [ ] 154 02-6 | disagreement | What are the labels around the star? | Read upright: p−1, q, p≥1, q≥3 on one side, p′−1, q′, p′≥1, q′≥3 on the other | b, b−1, b+1, b±2, as in the transcription
+- [ ] 154 02-6 | disagreement | What are the two labels under the V on the green line? | 4 and 4, the same glyph as the 4s of the spindles | b, as in the transcription
+- [ ] 154 02-6 | reading | In the right group, does the third line of the pencil at Q pass through the crossing of the other two? | Drawn concurrent | Not concurrent, a gap of about 1 unit
 - [ ] 154 05-1 | reading | Are the grey pencil lines strands of the arrangements, or the underdrawing? | Not yet decided; the drawing is left as it was | 
 
 ## Folder 74
@@ -351,9 +355,6 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 154 02-7 | reading | In the lower left of disk C, are there two separate strands, or a straight strand with a stroke ending on it at its apex? | Two separate strands | One straight strand, the other stroke ending on it
 - [ ] 154 02-7 | reading | What are the dark green labels by the two arrows near the gluing point, and the middle sign between p and q at the top of D? | Left out; the middle sign read « ? » | Sign pairs such as p:q; the middle sign a « J » or a mirrored p
 - [ ] 154 02-7 | reading | Which way does the arc on D's right rim point? | Arrowhead at the upper end | Pointing down, as in the earlier redraw
-- [ ] 154 02-6 | disagreement | What are the labels around the star? | Read upright: p−1, q, p≥1, q≥3 on one side, p′−1, q′, p′≥1, q′≥3 on the other | b, b−1, b+1, b±2, as in the transcription
-- [ ] 154 02-6 | disagreement | What are the two labels under the V on the green line? | 4 and 4, the same glyph as the 4s of the spindles | b, as in the transcription
-- [ ] 154 02-6 | reading | In the right group, does the third line of the pencil at Q pass through the crossing of the other two? | Drawn concurrent | Not concurrent, a gap of about 1 unit
 
 ## Répondu dans #131, appliqué
 
