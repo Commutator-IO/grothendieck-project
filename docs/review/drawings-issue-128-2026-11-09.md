@@ -281,3 +281,13 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 79 15-4 | strike | Which λt is the struck one? | The one at the vertex is kept; the one under it and the scribble to its right left out | The right-hand one is the kept label
 - [ ] 34 08-2 | strike | Is the label i struck, or only the scribble before it? | i in ink, the scribble left out | i struck as well
 - [ ] 136 05-1 | strike | With the struck stroke removed, the second Φ′ has no stroke from k: is that right? | As on the page | The struck stroke redrew the k–Φ′ stroke and should be kept
+
+## Folder 154, further passes
+
+- [ ] 154 03-5 | strike | Is the wavy red stroke right of the lower network (loops over a straight line) a strike-out or a deliberate wavy line? | Drawn as the plain straight line | Wavy, or left out as struck
+- [ ] 154 03-5 | reading | Against the right rim, which strand of the circle doubles back where? | Strands traced up to the rim; the doubling back not reproduced | Strands with cusps or curls inside the tangle
+- [ ] 154 03-5 | reading | Is the tiny red tick at the top left part of the figure? | Drawn as a small red curve | A stray mark, to leave out
+- [ ] 154 03-5 | reading | Is the left pencil sketch (two faint lines meeting at a dot) part of the figure? | Drawn in pencil | A guide sketch, to leave out
+- [ ] 154 04-6 | reading | What is the legend before « (a′,b′) »? | « ou », as in the transcription | Another short word or sign
+- [ ] 154 04-6 | reading | In the right figure, do the two red strands meet exactly at the black point? | Each drawn straight to the black point, with a slight bend there | Straight strands crossing just below the point
+- [ ] 154 04-8 | reading | Are the faint pencil lines (a guide above ω_D, a line along the right red strand, a short stroke by the left one) part of the figure? | Drawn in pencil | Guides, to leave out
