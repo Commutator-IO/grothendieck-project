@@ -316,3 +316,11 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 154 02-16 | reading | How many arrows go with each number 1–4? | Two per number, both ways along the rim | One per number
 - [ ] 154 01-1 | reading | In the lower disk, do the two strands meeting near the bottom cross or only touch? | They cross | They touch without crossing
 - [ ] 154 01-2 | reading | Several strands stop a little short of the rim on the page: should they? | Drawn to the rim | Drawn stopping short, as on the page
+- [ ] 154 06-15 | reading | Do the four doubled pairs cross exactly on the green rim, or just outside it, under the black detour? | On the rim | Just outside the rim
+- [ ] 154 06-15 | reading | Does the black reinforcement at the lower left loop round the left crossing? | Drawn straight through it | A small loop, as at the other three crossings
+- [ ] 154 06-14 | reading | Is the thin dark green diagonal across the right of the band part of the figure? | Drawn | A stray stroke from another figure, to leave out
+- [ ] 154 06-16 | reading | On which vertical does the lower right black bar end? | The left one of the two | The right one: the ink stops between the two
+- [ ] 154 06-16 | reading | Are the short red stubs at the right dark points of the band ends, or strands crossing through the point? | One stub ending at the point | A strand crossing through the point
+- [ ] 154 07-16 | disagreement | What are the side labels of the middle sphere? | « 1 » left, « −1 » right, as read on the page | −1 left, +1 right, as in the earlier record
+- [ ] 154 06-13 | reading | What is the label on the top side of the left square? | « (3) » | « (2) », as in the earlier redraw
+- [ ] 154 07-4 | reading | Where do the two upper dashed orange fan edges end? | On the bent dashed blue side, where the green dashed edges begin | At separate points off the blue side
