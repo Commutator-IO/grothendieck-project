@@ -352,3 +352,8 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 154 06-4 | reading | In the middle-right, lower-right and bottom figures, does the line pass through the crossing? | Drawn concurrent | The line passes just beside the crossing
 - [ ] 154 06-4 | reading | Is there a y′ at the top of the vertical axis of the frame? | No: x and y only | y′ there
 - [ ] 154 06-6 | reading | In the right figure, does the short black piece on the green line end on a red leg? | Drawn where it is, not on a leg | It belongs to the left leg of the right crossing
+- [ ] 154 07-14 | reading | Two strands of the half-disk cross twice (near the middle and again at a dot), which a pseudoline arrangement should not do: is it a slip on the page? | Drawn as on the page, crossing twice | The lower ends are swapped, so they only touch at that dot
+- [ ] 154 07-14 | reading | Where are the small « 1 » and « 2 » marks at the two base vertices? | One « 1 » at the left vertex, one « 2 » at the right | Each vertex carries both
+- [ ] 154 07-9 | disagreement | On the first spindle, which numbers are written at the left ends of the brown curves? | Only « 3 » and « 2 » readable | 1 to 5 at both ends, as in the transcription
+- [ ] 154 07-9 | reading | In the right half of the second spindle, are the broken brown curves continuous? | Drawn as pieces, approximate | Continuous curves 5→8, 4→7, 3→6, as the end numbers suggest
+- [ ] 154 07-13 | reading | Is the orange cross under the top spindle meant to sit on its light green line? | Kept above the line, as drawn | On the line
