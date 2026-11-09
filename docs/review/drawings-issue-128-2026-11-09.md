@@ -18,31 +18,23 @@ which only the transcription skill edits.
 
 ## En priorité : pages citées par les preuves de l'article Lean
 
-Ces dessins sont sur des pages dont dépendent des énoncés démontrés de `docs/lean/` ; leur lecture est à trancher d'abord.
+Les dessins encore sans réponse qui sont sur des pages dont dépendent des énoncés de `docs/lean/`, dans l'ordre où les trancher. Les six de la liste précédente ont reçu leur réponse dans #131 et sont en bas, en attente d'application.
 
-- [ ] 84 07-1 | reading | What are the primes of the labels? | L_i, E′_i, M′_i / L″_i, E″_i, M_i / L‴_i, E‴_i, M′_i / L′_i, E′_i, M_i; the bottom E may be E″_i | The transcription's L, L′, L″, L‴ scheme
-- [ ] 86 02-4 | disagreement | Is there a star of three lines a′, b, c with side a dotted? | Not found on the page | Present, as in the transcription
-- [ ] 70 04-6 | disagreement | What are the proportions of the rectangle? | About 3:4 | Golden, as in the transcription
-- [ ] 70 04-5 | reading | Do s₁ and s″₃ carry a bar on the page? | Barred, as in the transcription | No bar visible
-- [ ] 70 04-8 | disagreement | How is the top vertex labelled? | s′₀ | As in the transcription
-- [ ] 78 05-4 | reading | Which long line is the axis and which the arrow a, and what are the second « 1 » and the « 0 » at the top? | As redrawn; D through the origin | 
+- [ ] 80 03-1 | disagreement | Is it a heptagon? | A hexagon with six arrowed sides; the seventh vertex only suggested by dots outside it | A heptagon, as in the transcription
+- [ ] 72 05-1 | reading | Is this the network meant (relocated: four rising and four descending lines, a centre node, a rounded frame)? | As redrawn; the index couples at the nodes left out | 
+- [ ] 154 01-12 | reading | How far does the faint pencil hatching of the top sector extend? | 7 strokes and a boundary arc | A whole hatched sector
+- [ ] 34 09-1 | disagreement | Is there an inclusion sign between X̄ and X̄|U? | Not visible, not drawn | ⊃, as in the transcription
+- [ ] 154 03-8 | disagreement | What are the upside-down annotations around the green circle? | Left 1/2 and γ, right 1/2 and 1 | « 1/2, 1/1, 1 », as in the transcription; the left sign may be λ
+- [ ] 154 03-8 | reading | Where does the hexagon's diagonal end? | Where it meets the right side | At the dot just left of the vertex 3, with the vertex there
+- [ ] 154 03-8 | reading | Is the curl at the hexagon's top vertex a label « 2 »? | A plain vertex, no label | A label « 2 »
 
-Pourquoi, dans l'ordre : 84 07-1, p. 125 : les primes du diagramme donnent les coordonnées du produit tiré, dont l'article Lean prend le signe −b ; 86 02-4, p. 31 : la page du tableau des drapeaux et des trois involutions, comparées dans la section 86 ; 70 04-6, p. 75 : la page des douze sommets de l'icosaèdre sur ℤ[α] ; 70 04-5, p. 74 : les générateurs ; les barres notent s − o, la notation de l'énoncé sur 𝐅₅ ; 70 04-8, p. 78 : la page de l'énoncé de la conique sur 𝐅₅ ; 78 05-4, p. 95 : le polygone d'invariant α = −2 sur deux droites parallèles.
+Pourquoi : 80 03-1, p. 44 : l'heptagone des sommets fléchés, dans la section 80 dont le contre-exemple est vérifié en Lean ; 72 05-1, p. 93 : le réseau de losanges, dans les pages que la section 72 démontre ; 154 01-12, p. 18 : la page de la conjecture « l'ordre cyclique détermine la position » ; 34 09-1, p. 167 : la page citée pour la monodromie modérée ; 154 03-8, p. 56 : la monodromie diédrale des pages 55 à 63, énoncé encadré dans l'article Lean (trois questions).
 
 ## Folder 70
 
-- [ ] 70 04-1 | strike | Is everything left out of this drawing struck out on the page? | Left out as struck: the wavy scribble along the top, the inked blot inside the triangle, the overwritten strokes right of the σ₀ line, four faint erased lines | 
-- [ ] 70 04-3 | strike | Is everything left out of this drawing struck out on the page? | Left out as struck: the formulas over the left trihedron, the zigzag "hatched plane", a scribbled Z and W, the sinusoid | The sinusoid belongs to the drawing
-- [ ] 70 04-2 | reading | Is the solid triangle a deliberate fill? | A deliberate fill, drawn filled | A strike-out, to leave out
-- [ ] 70 03-1 | disagreement | What follows « ≤ » on the page? | One index, read j+1 | « j−1, j+1 », as in the transcription
-- [ ] 70 05-1 | disagreement | Is there an s₂ label on the polyhedron? | No s₂ visible | s₂ as in the transcription
-- [ ] 70 06-1 | disagreement | What is struck in this sketch? | One sign only | The whole sketch
-- [ ] 70 07-1 | reading | Are σ₁ and σ₂ placed right? | Placed after the transcription; on the page they run into the formulas | 
-- [ ] 70 01-3 | reading | Are the matrix entries where the page has them, with the struck ones left out? | As redrawn | 
 
 ## Folder 154
 
-- [ ] 154 04-3 | reading | Does the red X cross on the dark green line? | Yes, snapped onto it | 
 - [ ] 154 02-2 | reading | Do the three orange lines meet at the apex of the dashed arc? | Yes, with a black point drawn there | 
 - [ ] 154 01-7 | reading | Does the snapped drawing still match the page? | As redrawn | 
 - [ ] 154 06-8 | reading | Does the snapped drawing still match the page? | As redrawn | 
@@ -192,13 +184,11 @@ Pourquoi, dans l'ordre : 84 07-1, p. 125 : les primes du diagramme donnent les c
 ## Folders 45, 72, 78, 80, 87
 
 - [ ] 80 01-2 | reading | Are the solids of this whole page right (sphere as contour, equator and meridian; pyramid over bipyramid; the five inked octahedron vertices and eight edges; the square/hexagon polyhedron)? | As redrawn; the cube with grid lines schematic; pencil cubes and calculations left out | 
-- [ ] 80 03-1 | disagreement | Is it a heptagon? | A hexagon with six arrowed sides; the seventh vertex only suggested by dots outside it | A heptagon, as in the transcription
 - [ ] 80 04-1 | reading | What are the labels D, D′, Γ, Γ′, and does Γ pass through u? | Labels not legible; Γ passes close to u, not forced through it | 
 - [ ] 45 02-1 | reading | Is the right set of elements drawn on this whole sheet? | Reference lines, turned text and the isolated heavy letters (B, R, H, H1) left out | 
 - [ ] 45 03-1 | reading | Is the lower horizontal line a reference line from (i″), or the strike-out of « réalisations de T₁ en Γ₁ et T₁ »? | A reference line, kept | A strike-out, to leave out
 - [ ] 45 03-1 | disagreement | Where does the large curve « triviale » end? | At (i″), running down the left of (iii′) and just above (iii) | At (iii), as in the transcription
 - [ ] 45 04-1 | strike | Is the whole sketch struck out? | Struck; the scribble not drawn; the top mark and the label left of the stroke (x⁴?) not read | 
-- [ ] 72 05-1 | reading | Is this the network meant (relocated: four rising and four descending lines, a centre node, a rounded frame)? | As redrawn; the index couples at the nodes left out | 
 - [ ] 72 02-3 | disagreement | Are there dots L₁, …, L_i and L′₂, …, L′_i? | No: a single dot between L_i and L_{i+1}; a struck τ on L₀–L′₁ left out | L₁, …, L_i, as in the transcription
 - [ ] 72 02-2 | reading | What are the small marks along the upper branch (a τ-like sign, a short heavy stroke)? | Not read | 
 - [ ] 87 02-2 | strike | Is the horizontal stroke above the diamond (heavy cross at its left end, small arrowheads, a crossed x) part of the struck first attempt? | Left out as struck | Part of the diagram, to draw
@@ -217,7 +207,6 @@ Pourquoi, dans l'ordre : 84 07-1, p. 125 : les primes du diagramme donnent les c
 - [ ] 33 01-1 | reading | Is the sheet to be read turned 180°? | Yes: every letter then reads upright and matches the transcription | 
 - [ ] 33 01-1 | disagreement | Are there a vertical arrow crossing k → k′ beside the hatched circle, and a faint short arrow after A? | Yes, not named in the transcription | 
 - [ ] 33 08-1 | reading | Is there a fourth apex in the lozenge row, between X, Y and F? | Drawn | No apex there
-- [ ] 34 09-1 | disagreement | Is there an inclusion sign between X̄ and X̄|U? | Not visible, not drawn | ⊃, as in the transcription
 - [ ] 34 09-5 | reading | Is the short vertical stroke across X ⇐ X̃ under X_Ũ a plain stroke? | A plain stroke | An edge from X_Ũ downwards
 - [ ] 34 08-1 | strike | Is the group of oblique strokes with a V and S̄ at the right struck out? | Left out as struck | 
 - [ ] 67 01-2 | disagreement | Is the collar hatched? | No hatching visible, not drawn | Hatched, as in the transcription
@@ -326,9 +315,6 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 154 07-4 | reading | Where do the two upper dashed orange fan edges end? | On the bent dashed blue side, where the green dashed edges begin | At separate points off the blue side
 - [ ] 154 03-7 | reading | Should the first stretch of the right figure's green line join the first orange-ringed point? | Drawn joined to the point | Drawn with a gap, as on the page
 - [ ] 154 03-7 | reading | Does the left dark green segment reach the point of concurrence? | Drawn stopping short, as on the page | Ended on the point (« relie le point de concours à un sommet »)
-- [ ] 154 03-8 | disagreement | What are the upside-down annotations around the green circle? | Left 1/2 and γ, right 1/2 and 1 | « 1/2, 1/1, 1 », as in the transcription; the left sign may be λ
-- [ ] 154 03-8 | reading | Where does the hexagon's diagonal end? | Where it meets the right side | At the dot just left of the vertex 3, with the vertex there
-- [ ] 154 03-8 | reading | Is the curl at the hexagon's top vertex a label « 2 »? | A plain vertex, no label | A label « 2 »
 - [ ] 154 04-9 | strike | Is the second, scribbled δ1 beside the vertex δ1 overwritten? | Left out as overwritten | A label, to keep
 - [ ] 154 04-9 | reading | Is the middle red « pair » three strokes, or one pseudoline pair with a redrawn branch? | Three strokes | One pair, the branch a redrawing
 - [ ] 154 04-9 | reading | At the left, where the dashed rows cross D near x, which dashes belong to D1 and which to D2? | Each dash drawn from its own ink, not assigned | Continuous dashed pseudolines through x
@@ -336,7 +322,6 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 154 05-5 | reading | What are the left-hand pencil arrows of the lower drawing and the upside-down « g »? | Two pencil curves with arrowheads, plus a label « g » | An arrow ↔ legend
 - [ ] 154 01-3 | reading | Near the centre, two strands from the top make a tight knot: one crossing, or a touch and then a crossing? | Drawn close together, crossing once | They share a short stretch
 - [ ] 154 01-3 | reading | How many rays are there, and how do red and yellow alternate? | 10 red and 20 yellow, two yellow between neighbouring red rays | About 28, alternating, as in the earlier record
-- [ ] 154 01-12 | reading | How far does the faint pencil hatching of the top sector extend? | 7 strokes and a boundary arc | A whole hatched sector
 - [ ] 154 01-13 | reading | In the star at D (margin), is the black point the vertex, or only the tail of the arrow? | The vertex, at the meeting point | The tail of the arrow, apart from the vertex
 - [ ] 154 01-13 | disagreement | What is the label of the lower marginal point? | a′ | a, as in the transcription
 - [ ] 154 01-13 | reading | At the foot, which dashed arc ends on which brown line? | The outer on the upper line, the inner on the lower | The other way round
@@ -366,3 +351,23 @@ A whole figure that is crossed out is drawn in ink without its crossing-out stro
 - [ ] 154 02-6 | disagreement | What are the labels around the star? | Read upright: p−1, q, p≥1, q≥3 on one side, p′−1, q′, p′≥1, q′≥3 on the other | b, b−1, b+1, b±2, as in the transcription
 - [ ] 154 02-6 | disagreement | What are the two labels under the V on the green line? | 4 and 4, the same glyph as the 4s of the spindles | b, as in the transcription
 - [ ] 154 02-6 | reading | In the right group, does the third line of the pencil at Q pass through the crossing of the other two? | Drawn concurrent | Not concurrent, a gap of about 1 unit
+
+## Déjà répondu dans #131, en attente d'application
+
+Ces cases restent ouvertes tant que la réponse n'est pas reportée dans `drawings.json` ; elles passent en fin de file.
+
+- [ ] 84 07-1 | reading | What are the primes of the labels? | L_i, E′_i, M′_i / L″_i, E″_i, M_i / L‴_i, E‴_i, M′_i / L′_i, E′_i, M_i; the bottom E may be E″_i | The transcription's L, L′, L″, L‴ scheme
+- [ ] 86 02-4 | disagreement | Is there a star of three lines a′, b, c with side a dotted? | Not found on the page | Present, as in the transcription
+- [ ] 70 04-6 | disagreement | What are the proportions of the rectangle? | About 3:4 | Golden, as in the transcription
+- [ ] 70 04-5 | reading | Do s₁ and s″₃ carry a bar on the page? | Barred, as in the transcription | No bar visible
+- [ ] 70 04-8 | disagreement | How is the top vertex labelled? | s′₀ | As in the transcription
+- [ ] 78 05-4 | reading | Which long line is the axis and which the arrow a, and what are the second « 1 » and the « 0 » at the top? | As redrawn; D through the origin | 
+- [ ] 70 04-1 | strike | Is everything left out of this drawing struck out on the page? | Left out as struck: the wavy scribble along the top, the inked blot inside the triangle, the overwritten strokes right of the σ₀ line, four faint erased lines | 
+- [ ] 70 04-3 | strike | Is everything left out of this drawing struck out on the page? | Left out as struck: the formulas over the left trihedron, the zigzag "hatched plane", a scribbled Z and W, the sinusoid | The sinusoid belongs to the drawing
+- [ ] 70 04-2 | reading | Is the solid triangle a deliberate fill? | A deliberate fill, drawn filled | A strike-out, to leave out
+- [ ] 70 03-1 | disagreement | What follows « ≤ » on the page? | One index, read j+1 | « j−1, j+1 », as in the transcription
+- [ ] 70 05-1 | disagreement | Is there an s₂ label on the polyhedron? | No s₂ visible | s₂ as in the transcription
+- [ ] 70 06-1 | disagreement | What is struck in this sketch? | One sign only | The whole sketch
+- [ ] 70 07-1 | reading | Are σ₁ and σ₂ placed right? | Placed after the transcription; on the page they run into the formulas | 
+- [ ] 70 01-3 | reading | Are the matrix entries where the page has them, with the struck ones left out? | As redrawn | 
+- [ ] 154 04-3 | reading | Does the red X cross on the dark green line? | Yes, snapped onto it | 
