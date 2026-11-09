@@ -6,7 +6,7 @@ La cote 70, \emph{Réalisations géométriques de structures combinatoires (viei
 \[
 \sigma_0(x, y, z) = \bigl(1 - (x + y + z), y, z\bigr), \quad \sigma_1(x, y, z) = (y + \alpha' z, x - \alpha' z, z), \quad \sigma_2(x, y, z) = (x, z, y),
 \]
-et $\iota(x, y, z) = (\alpha' - x, 1 - \alpha' - y, 1 - \alpha' - z)$. Les douze sommets sont, dans cet ordre, $s_0 = 0$, $s_1 = e_1$, $s_2 = e_2$, $s_3 = e_3$, $s'_3 = (\alpha', -\alpha', 1)$, $s''_3 = (0, -\alpha', 1)$ et leurs images par $\iota$. On pose
+et $\iota(x, y, z) = (\alpha' - x, 1 - \alpha' - y, 1 - \alpha' - z)$. Les douze sommets sont, dans cet ordre, $s_0 = 0$, $s_1 = e_1$, $s_2 = e_2$, $s_3 = e_3$, $s'_3 = (\alpha', -\alpha', 1)$, $s''_3 = (0, -\alpha', 1)$ et leurs images par $\iota$ (figure~\ref{fig:70-icosaedre}). On pose
 \[
 q_0 = x^2 + y^2 + z^2 - \alpha yz + zx + xy, \qquad q = q_0 - (x + y + z),
 \]
@@ -26,6 +26,69 @@ Supposons $\alpha^2 + \alpha - 1 = 0$ dans $R$.
 \begin{proof}
 Chaque point est une identité polynomiale en $\alpha$ et en les coordonnées, vraie modulo $\alpha^2 + \alpha - 1$ : on l'écrit comme combinaison de la relation $\alpha^2 + \alpha - 1 = 0$, de coefficient $-2 - \alpha$ ou $-1 - \alpha$ pour $q(\iota s_0)$, $q(\iota s_1)$, $q(\iota s_2)$, $q(\iota s_3)$, $\pm 1$ pour $\sigma_1$, $-\alpha$ ou $1 + \alpha$ pour quatre des arêtes, nul ailleurs. Pour le point~4, $(2 + \alpha)(1 - \alpha) = 1$ et $(1 + \alpha)\alpha = 1$. Pour le point~5, la première coordonnée de $\iota(p) - p - (\alpha', \alpha, \alpha)$ vaut $-2x$, les deux autres $2(1 - y)$ et $2(1 - z)$.
 \end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm, hid/.style={densely dashed, black!40}, face/.style={fill=black!8}, pt/.style={circle, fill, inner sep=1.2pt}, hidpt/.style={circle, draw=black!50, fill=white, inner sep=1.1pt}, lab/.style={font=\scriptsize, inner sep=0.5pt}]
+\coordinate (v0) at (-2.54,-0.38);
+\coordinate (v1) at (0.65,-0.38);
+\coordinate (v2) at (-0.45,-2.96);
+\coordinate (v3) at (-0.71,2.49);
+\coordinate (v4) at (-2.50,-1.68);
+\coordinate (v5) at (2.66,-1.68);
+\coordinate (v6) at (2.54,0.38);
+\coordinate (v7) at (-0.65,0.38);
+\coordinate (v8) at (0.45,2.96);
+\coordinate (v9) at (0.71,-2.49);
+\coordinate (v10) at (2.50,1.68);
+\coordinate (v11) at (-2.66,1.68);
+\draw (v0) -- (v1);
+\draw (v0) -- (v2);
+\draw (v0) -- (v3);
+\draw (v0) -- (v4);
+\draw (v0) -- (v11);
+\draw (v1) -- (v2);
+\draw (v1) -- (v3);
+\draw (v1) -- (v5);
+\draw (v1) -- (v10);
+\draw (v2) -- (v4);
+\draw (v2) -- (v5);
+\draw (v2) -- (v9);
+\draw (v3) -- (v8);
+\draw (v3) -- (v10);
+\draw (v3) -- (v11);
+\draw[hid] (v4) -- (v7);
+\draw[hid] (v4) -- (v9);
+\draw (v4) -- (v11);
+\draw[hid] (v5) -- (v6);
+\draw (v5) -- (v9);
+\draw (v5) -- (v10);
+\draw[hid] (v6) -- (v7);
+\draw[hid] (v6) -- (v8);
+\draw[hid] (v6) -- (v9);
+\draw[hid] (v6) -- (v10);
+\draw[hid] (v7) -- (v8);
+\draw[hid] (v7) -- (v9);
+\draw[hid] (v7) -- (v11);
+\draw (v8) -- (v10);
+\draw[hid] (v8) -- (v11);
+\fill[face] (v0) -- (v1) -- (v2) -- cycle;
+\node[pt] at (v0) {}; \node[lab] at (-3.03,-0.45) {$s_0$};
+\node[pt] at (v1) {}; \node[lab] at (1.09,-0.63) {$s_1$};
+\node[pt] at (v2) {}; \node[lab] at (-0.53,-3.45) {$s_2$};
+\node[pt] at (v3) {}; \node[lab] at (-0.85,2.97) {$s_3$};
+\node[pt] at (v4) {}; \node[lab] at (-2.92,-1.96) {$s'_3$};
+\node[pt] at (v5) {}; \node[lab] at (3.08,-1.95) {$s''_3$};
+\node[hidpt] at (v6) {}; \node[lab] at (3.03,0.45) {$\iota s_0$};
+\node[hidpt] at (v7) {}; \node[lab] at (-1.09,0.63) {$\iota s_1$};
+\node[pt] at (v8) {}; \node[lab] at (0.53,3.45) {$\iota s_2$};
+\node[pt] at (v9) {}; \node[lab] at (0.85,-2.97) {$\iota s_3$};
+\node[pt] at (v10) {}; \node[lab] at (2.92,1.96) {$\iota s'_3$};
+\node[pt] at (v11) {}; \node[lab] at (-3.08,1.95) {$\iota s''_3$};
+\end{tikzpicture}
+\caption{Les douze sommets des pages~74 et~75 sur $\mathbf R$, pour $\alpha = (\sqrt 5 - 1)/2$, dessinés par l'édition dans la métrique de $q_0$ : la face $(s_0, s_1, s_2)$ est grisée, les arêtes cachées sont en tirets. Les trente arêtes sont les paires à distance $q_0 = 1$, et $\iota$ envoie chaque sommet sur le sommet opposé. Grothendieck dessine l'icosaèdre en perspective, puis projeté dans un triangle, à la page~74 (\lot{70}{4}{74}).}
+\label{fig:70-icosaedre}
+\end{figure}
 
 \begin{enonce}[Pages 93 et 94, fidélité en toute caractéristique\piste{70-icosahedron-integral-faithful}]
 Soit $R$ un anneau commutatif non nul où $\alpha^2 + \alpha - 1 = 0$. Alors
