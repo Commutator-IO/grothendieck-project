@@ -20,16 +20,16 @@ which only the transcription skill edits.
 
 Les dessins encore sans réponse qui sont sur des pages dont dépendent des énoncés de `docs/lean/`, dans l'ordre où les trancher. Les réponses de #131 sont appliquées et leurs cases cochées, en bas de la liste.
 
-- [ ] 80 03-1 | disagreement | Is it a heptagon? | A hexagon with six arrowed sides; the seventh vertex only suggested by dots outside it | A heptagon, as in the transcription
-- [ ] 72 05-1 | reading | Is this the network meant (relocated: four rising and four descending lines, a centre node, a rounded frame)? | As redrawn; the index couples at the nodes left out | 
-- [ ] 154 01-12 | reading | How far does the faint pencil hatching of the top sector extend? | 7 strokes and a boundary arc | A whole hatched sector
-- [ ] 34 09-1 | disagreement | Is there an inclusion sign between X̄ and X̄|U? | Not visible, not drawn | ⊃, as in the transcription
-- [ ] 154 03-8 | disagreement | What are the upside-down annotations around the green circle? | Left 1/2 and γ, right 1/2 and 1 | « 1/2, 1/1, 1 », as in the transcription; the left sign may be λ
-- [ ] 154 03-8 | reading | Where does the hexagon's diagonal end? | Where it meets the right side | At the dot just left of the vertex 3, with the vertex there
-- [ ] 154 03-8 | reading | Is the curl at the hexagon's top vertex a label « 2 »? | A plain vertex, no label | A label « 2 »
-- [ ] 154 08-6 | disagreement | Is the orientation of L written ω_L or ϖ_L? | ϖ_L: a bar is visible | ω_L, as in the transcription
-- [ ] 154 08-8 | reading | Are the net lines orange in two families, with dark brown ink over parts of them, dots at the crossings and arrowheads? | The current file draws ten brown straight lines | Orange lines with dark-ink zigzag paths, dots and arrowheads, as on the facsimile
-- [ ] 154 08-8 | reading | Is the right-hand strand B7 one curved strand, or two meeting at the P6 crossing? | Not yet drawn | Possibly two
+- [x] 80 03-1 | disagreement | Is it a heptagon? | A hexagon with six arrowed sides; the seventh vertex only suggested by dots outside it | A heptagon, as in the transcription
+- [x] 72 05-1 | reading | Is this the network meant (relocated: four rising and four descending lines, a centre node, a rounded frame)? | As redrawn; the index couples at the nodes left out | 
+- [x] 154 01-12 | reading | How far does the faint pencil hatching of the top sector extend? | 7 strokes and a boundary arc | A whole hatched sector
+- [x] 34 09-1 | disagreement | Is there an inclusion sign between X̄ and X̄|U? | Not visible, not drawn | ⊃, as in the transcription
+- [x] 154 03-8 | disagreement | What are the upside-down annotations around the green circle? | Left 1/2 and γ, right 1/2 and 1 | « 1/2, 1/1, 1 », as in the transcription; the left sign may be λ
+- [x] 154 03-8 | reading | Where does the hexagon's diagonal end? | Where it meets the right side | At the dot just left of the vertex 3, with the vertex there
+- [x] 154 03-8 | reading | Is the curl at the hexagon's top vertex a label « 2 »? | A plain vertex, no label | A label « 2 »
+- [x] 154 08-6 | disagreement | Is the orientation of L written ω_L or ϖ_L? | ϖ_L: a bar is visible | ω_L, as in the transcription
+- [x] 154 08-8 | reading | Are the net lines orange in two families, with dark brown ink over parts of them, dots at the crossings and arrowheads? | The current file draws ten brown straight lines | Orange lines with dark-ink zigzag paths, dots and arrowheads, as on the facsimile
+- [x] 154 08-8 | reading | Is the right-hand strand B7 one curved strand, or two meeting at the P6 crossing? | Not yet drawn | Possibly two
 
 Pourquoi : 80 03-1, p. 44 : l'heptagone des sommets fléchés, dans la section 80 dont le contre-exemple est vérifié en Lean ; 72 05-1, p. 93 : le réseau de losanges, dans les pages que la section 72 démontre ; 154 01-12, p. 18 : la page de la conjecture « l'ordre cyclique détermine la position » ; 34 09-1, p. 167 : la page citée pour la monodromie modérée ; 154 03-8, p. 56 : la monodromie diédrale des pages 55 à 63, énoncé encadré dans l'article Lean (trois questions) ; 154 08-6 et 08-8, pp. 150 et 152 : les pages qui précèdent le cube des générisations de la page 153, démontré dans l'article Lean.
 
@@ -38,7 +38,7 @@ Pourquoi : 80 03-1, p. 44 : l'heptagone des sommets fléchés, dans la section 8
 
 ## Folder 154
 
-- [ ] 154 02-2 | reading | Do the three orange lines meet at the apex of the dashed arc? | Yes, with a black point drawn there | 
+- [x] 154 02-2 | reading | Do the three orange lines meet at the apex of the dashed arc? | Yes, with a black point drawn there | 
 - [ ] 154 01-7 | reading | Does the snapped drawing still match the page? | As redrawn | 
 - [ ] 154 06-8 | reading | Does the snapped drawing still match the page? | As redrawn | 
 - [ ] 154 08-3 | reading | Does the snapped drawing still match the page? | As redrawn | 
