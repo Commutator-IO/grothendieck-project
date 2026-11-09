@@ -261,3 +261,23 @@ Pourquoi, dans l'ordre : 84 07-1, p. 125 : les primes du diagramme donnent les c
 - [ ] 158 04-2 | reading | Does « Σ¹X » above the cones belong to this drawing or to 04-1? | Drawn in neither | 
 - [ ] 100 01-4 | reading | Is the long upper stroke the top of the region or the bottom of the frame above? | The top of the region | The bottom of the frame
 - [ ] 121 03-1 | reading | Are the U″ rings, the I/II dumbbell and the 1°)–6°) sequence right? | Kept from the earlier redraw, off by 1 to 3 units; only the two dumbbells redrawn | 
+
+## Struck material in drawings marked ok
+
+A whole figure that is crossed out is drawn in ink without its crossing-out strokes. A struck sketch beside other drawings is left out entirely. The first questions ask whether that rule is right.
+
+- [ ] 43 10-1 | strike | The whole page is crossed out: should the schema be drawn at all? | Drawn in ink, the strike strokes left out | Leave the figure out, or mark it struck
+- [ ] 142 06-3 | strike | The figure is crossed out by zigzags: should it be drawn? | Drawn in ink, the zigzags left out | Not drawn
+- [ ] 156-1 02-1 | strike | The « figure barrée » is crossed by four strokes: should it be drawn? | The circle x, y, I, J in ink | Not drawn
+- [ ] 156-6 04-2 | strike | This diagram, crossed by three oblique strokes, is redone fair as 04-3: should it be drawn? | The hexagon in ink | Not drawn
+- [ ] 7 04-1 | strike | Is the zigzag a strike over a frame, or part of the sketch? | Frame, loop and ticks in ink; the zigzag taken as the strike | The whole sketch is struck: nothing drawn
+- [ ] 78 07-3 | strike | The square is covered by strike loops: should it be drawn? | X_s, X′_s → S in ink | Not drawn
+- [ ] 74 05-4 | reading | What lies under the hatching? | Three rows « point → point » | Another count or kind of rows, or nothing to draw
+- [ ] 119 08-7 | strike | Is the square outline itself struck, or only its contents? | The whole left square left out | The empty square, in ink
+- [ ] 154 07-15 | strike | Are the a⁺, b⁺ above the scribbled copy struck too? | Left out with the copy | Kept in ink
+- [ ] 146 04-13 | reading | Is the lower-left label of the right triangle scribbled out, like the ∞? | Left out | It reads 0 and is not struck
+- [ ] 156-6 04-6 | strike | Is the ⇔ between At 11′ and « At 11 … fini » struck, or only overinked? | Not struck: drawn in ink, as in the transcription's array | Struck, to leave out
+- [ ] 144 07-3 | reading | Where does the arrow to uu′(a) start? | From u(a), the transcription's triangle | From the struck u′(a) at mid height
+- [ ] 79 15-4 | strike | Which λt is the struck one? | The one at the vertex is kept; the one under it and the scribble to its right left out | The right-hand one is the kept label
+- [ ] 34 08-2 | strike | Is the label i struck, or only the scribble before it? | i in ink, the scribble left out | i struck as well
+- [ ] 136 05-1 | strike | With the struck stroke removed, the second Φ′ has no stroke from k: is that right? | As on the page | The struck stroke redrew the k–Φ′ stroke and should be kept
