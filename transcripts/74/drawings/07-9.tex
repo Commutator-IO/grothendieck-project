@@ -1,9 +1,9 @@
 % Drawing 74/07-9 -- folder 74, batch 07, archive page 133 (PDF page 134).
 % Transcription: un cube en perspective, une face en traits épais, des arêtes en pointillé.
 % Kind: cube in perspective. Method 2 (schematic redraw from the facsimile). Status: partial.
-% Notes: A cube: one face in thick strokes, the other edges in dotted strokes forming the outline, crossing diagonals inside. The dotted strokes are approximate.
+% Notes: A cube: the front face in thick strokes (its top edge thin), the back drawn as a curved outline from the left vertex over the top vertex to the upper right one, then in dashes down the right side and back to the front face; a hidden vertex in the middle joined to the four front corners, to the top vertex and to the left one (the hidden edges dashed, as on the page). Every edge is drawn between the same vertex points, so the lines meeting at the hidden vertex meet exactly there. Still differs: which strokes are dashed and which solid is a reading (several are faint), the outline is drawn as smooth curves through the vertices, and the short strokes outside the outline at the right are not drawn. Nothing is struck. Redrawn 2026-11-09 (issue 128): to check again.
 % Coordinates: 1 unit = 1 mm = 1/100 of the crop width (bbox in page fractions: [0.54, 0.41, 0.68, 0.48]).
-% Redrawn by Claude (claude-opus-5-5), issue #73, 2026-11-07; not checked by a human; not compiled (no TeX in the session).
+% Redrawn by Claude (claude-opus-5-5), issue #73, 2026-11-09; not checked by a human; not compiled (no TeX in the session).
 % Rights: reproduces part of the work -- behind RENDER_TRANSCRIPTS, never published by itself.
 \documentclass[tikz,border=3pt]{standalone}
 \usepackage{amsmath,amssymb}
@@ -11,12 +11,22 @@
 \tikzset{pencil/.style={black!45}, struck/.style={black!35}, mark/.style={circle,draw,inner sep=1.3pt}, pt/.style={circle,fill,inner sep=0.9pt}, opt/.style={circle,draw,fill=white,inner sep=1.1pt}}
 \begin{document}
 \begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\scriptsize]
-\draw[very thick] (25.7,-38.5) -- (65.7,-32.8) -- (65.7,-58.5) -- (25.7,-58.5) -- cycle;
-\draw[dashed] (11.4,-47) -- (28.6,-24.2) -- (54.3,-12.8) -- (85.7,-27) -- (85.7,-44.2) -- (65.7,-58.5);
-\draw[dashed] (11.4,-47) -- (25.7,-58.5);
-\draw[dashed] (54.3,-12.8) -- (25.7,-38.5);
-\draw[dashed] (54.3,-12.8) -- (65.7,-32.8);
-\draw (40,-27) -- (57.1,-49.9);
-\draw (57.1,-24.2) -- (34.3,-49.9);
+\draw[very thick] (26,-30) -- (29,-58);
+\draw[very thick] (29,-58) -- (68,-57);
+\draw[very thick] (68,-57) -- (67,-31);
+\draw (26,-30) -- (67,-31);
+\draw plot[smooth, tension=0.55] coordinates {(11,-47) (19,-32) (33,-19) (55,-12)};
+\draw plot[smooth, tension=0.55] coordinates {(55,-12) (70,-11.5) (84,-16)};
+\draw plot[smooth, tension=0.55] coordinates {(11,-47) (18,-54) (29,-58)};
+\draw (55,-12) -- (67,-31);
+\draw[dashed] (84,-16) -- (88,-45);
+\draw[dashed] (88,-45) -- (68,-57);
+\draw[dashed] (46,-37) -- (68,-57);
+\draw[dashed] (46,-37) -- (29,-58);
+\draw[dashed] (46,-37) -- (55,-12);
+\draw[dashed] (46,-37) -- (84,-16);
+\draw (46,-37) -- (26,-30);
+\draw (46,-37) -- (67,-31);
+\draw (46,-37) -- (11,-47);
 \end{tikzpicture}
 \end{document}
