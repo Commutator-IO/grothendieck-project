@@ -473,3 +473,15 @@ Réponses reportées dans `drawings.json` ou dans la transcription ; les cases s
 - [ ] 154 07-5 | reading | Bump disk: two strands start side by side at the left notch and both end at the right notch; the vertical lens's upper ends are separate | As redrawn | Other pairings
 - [ ] 154 07-7 | reading | Is each yellow wedge bounded by the two strands through its marked point and the outer rim? | As redrawn | Bounded by the green dip curve
 - [ ] 154 07-7 | reading | Placement and count of the + and − signs | 7 +, 3 − | + above, − below, as in the transcription
+
+## Folders 156-3 and 156-4, sketches marked and vectorised (9 November, evening)
+
+- [ ] 156-3 01-1 | disagreement | Is the sketch of p. 3 two points joined by one line, or two short vertical strokes joined by two curved strokes? | Two strokes joined by a doubled line, as on the page | Two points joined by one line, as in the note
+- [ ] 156-3 01-2 | disagreement | Same sketch on p. 4, where the lower line does not reach the left stroke | Drawn as on the page | Identical to p. 3
+- [ ] 156-3 02-1 | reading | Glyph at the right end of the second arc | b | a
+- [ ] 156-3 02-1 | reading | Label at the lower end of the arc x, which leaves the band at the same point as arc a | x | t
+- [ ] 156-4 03-3 | reading | Primes of the first top and bottom nodes (one prime each on the crop) | F̄″, Ḡ″, as in the transcription | F̄′, Ḡ′
+- [ ] 156-4 03-3 | reading | Third top node: a bar and a small arrow, no clear prime | F̄′, as in the transcription | F⃗ or F̄
+- [ ] 156-4 03-4 | reading | Does the middle bottom node carry a tilde as well as the bar? | Ḡ | G̃ with a bar
+- [ ] 156-4 03-5 | strike | Is the F′ at the far left of the cube, joined by a double stroke to the hatched scribble, part of that struck insertion? | Left out as struck | The middle F′ of the cube
+- [ ] 156-4 04-1 | strike | Is the subdivision sign between F and F′ struck, or only overwritten? | Struck, not drawn | Drawn as ≼
