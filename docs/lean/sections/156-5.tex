@@ -1,0 +1,86 @@
+\section[Cote 156-5 : le recollement des ultra-topologies]{Cote 156-5 : le recollement des ultra-topologies\protect\verifie[\leanblobmain]{Folder156_5}}\label{sec:156-5}
+
+La cote 156-5, chapitre~V de \emph{Vers une géométrie des formes}, \q{Algèbre des figures}, quarante-huit pages datées de sa main du 14 au 18~juin 1986, s'écrit entre la première mouture de l'\emph{Analysis situs} (cote~156-4, section~\ref{sec:156-4}) et la deuxième (cote~156-6). Elle construit le modèle ensembliste des axiomes C\,1 à C\,8 de la première mouture. Une \emph{figure} d'un ensemble $L$ est une famille admissible de parties de $L$ : tout point d'un membre est dans un plus petit membre, et tout membre $A$ a une strate ouverte $A^\circ = A \smallsetminus \bigcup_{B \subsetneq A} B$ non vide (\lot{156-5}{1}{3}). Une \emph{sous-figure} est une partie de la famille stable par passage aux membres plus petits, une \emph{multiplicité} une figure qui a un plus grand membre, et deux figures sont \emph{compatibles} si elles sont sous-figures d'une même figure (\lot{156-5}{1}{7}, \lot{156-5}{1}{11}). Le 18~juin, la page~36 change de langage : \q{le point de vue des ultra-topologies est peut-être le plus pratique}. Une ultra-topologie est une topologie où toute réunion de fermés est fermée, une topologie d'Alexandrov, et une figure n'est plus qu'une partie $S \subset L$ munie d'une telle topologie, les membres étant les adhérences des points (\lot{156-5}{2}{36}). Le dernier problème du dossier, prolonger à toute une figure la subdivision d'une sous-figure (axiome C\,7), devient celui de recoller deux topologies le long d'un fermé (\lot{156-5}{2}{38}).
+
+\noindent\emph{Conventions.} Une ultra-topologie sur $S$ est codée par son préordre de spécialisation, $x \leq y$ si $x \in \overline{\{y\}}$. Les fermés sont les parties stables vers le bas, l'adhérence d'une partie $A$ est l'ensemble des $x$ situés sous un point de $A$, et une topologie est plus fine qu'une autre quand son préordre est plus petit. On fixe un espace $(S, \tau)$ d'Alexandrov, un fermé $T$, l'ouvert $U = S \smallsetminus T$, et une ultra-topologie $\tau'_0$ sur $T$ plus fine que la topologie induite. On note $\mathfrak T$ l'ensemble des ultra-topologies sur $S$ plus fines que $\tau$ qui induisent $\tau'_0$ sur $T$ : ce sont les subdivisions de la figure $(S, \tau)$ qui induisent la subdivision donnée de la sous-figure $T$.
+
+\subsection*{La connexité des multiplicités}
+
+L'axiome C\,4 de la première mouture demande que deux multiplicités situées dans des composantes connexes différentes de l'ensemble ordonné $\mathcal M$ des multiplicités soient compatibles (\lot{156-4}{4}{64}). Le dossier veut le rendre vide en montrant que $\mathcal M$ est connexe.
+
+\begin{enonce}[Page 13]
+\q{Si $\operatorname{card} L \geq 1$, alors les $X \in \mathcal M$ qui ont un élément minimal sont dans une même comp.\ connexe. Donc si l'on se borne aux figures ou multiplicités \emph{finies} [\dots] $\mathcal M$ est connexe. Donc l'axiome C\,4 [\dots] est automatique.} La page~14 étend la connexité aux figures infinies (\lot{156-5}{1}{13}, \lot{156-5}{1}{14}).
+\end{enonce}
+
+\begin{encadre}
+\begin{contrexemple}[Énoncé de la page 13]
+Soit $L$ un ensemble qui a deux points distincts $x \neq y$. Alors $\{L\}$ et $\{\{x\}\}$ sont des multiplicités finies, $\{L\}$ est seule dans sa composante connexe de $\mathcal M$, et $\{L\}$ et $\{\{x\}\}$ ne sont pas compatibles. L'ensemble $\mathcal M$ n'est donc pas connexe, et l'axiome C\,4 est en défaut dans le modèle ensembliste.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+Les deux familles sont admissibles : la strate ouverte de $L$ dans $\{L\}$ est $L$, non vide, et celle de $\{x\}$ dans $\{\{x\}\}$ est $\{x\}$. Si $\{L\}$ est une sous-figure d'une famille $G$, tout membre de $G$ est contenu dans $L$, donc appartient à $\{L\}$, et $G = \{L\}$. Si une multiplicité $G$ est une sous-figure de $\{L\}$, elle est contenue dans $\{L\}$ et non vide, puisqu'elle a un plus grand membre, et $G = \{L\}$. Ainsi $\{L\}$ n'est comparable dans $\mathcal M$ qu'à elle-même, et sa composante connexe est réduite à $\{L\}$ ; elle ne contient pas $\{\{x\}\}$, puisque $y \notin \{x\}$ donne $L \neq \{x\}$. Enfin une figure $H$ dont $\{L\}$ et $\{\{x\}\}$ seraient des sous-figures serait égale à $\{L\}$ et contiendrait $\{x\}$, ce qui est exclu.
+\end{proof}
+
+\begin{remarque}
+L'argument de la page relie $\{L\}$ aux autres multiplicités par la famille $\{\{x\}, L \smallsetminus \{x\}\}$, qui n'a pas de plus grand élément et ne contient pas $L$. La multiplicité $\{A, \{x\}, A \cup \{x\}\}$ de la page~12 et le produit $F \boxtimes G$ de la page~14 ne sont pas admissibles : leur plus grand membre est réunion de membres strictement plus petits, et sa strate ouverte est vide. Le contre-exemple vaut déjà pour un ensemble $L$ à deux points et des figures finies, le cas que la page tient pour suffisant. La lecture modernisée montre de plus que $\mathcal M$ est connexe pour les figures finies à membres finis d'un ensemble $L$ infini ; ce point n'est pas formalisé.
+\end{remarque}
+
+\subsection*{La subdivision prolongée comme topologie recollée}
+
+La page~38 pose le problème : trouver une topologie $\tau''$ sur $S$ entre $\tau'_0$ et $\tau$, \q{situation mixte} entre topologies initiales et finales. Les pages~39 à~41 construisent la topologie dont les fermés sont les $X$ tels que $X \cap U$ est fermé pour $\tau$, $X \cap T$ fermé pour $\tau'_0$, et $\overline{X \cap U}^{(\tau)} \cap T \subset X$ (\lot{156-5}{2}{40}, \lot{156-5}{3}{41}).
+
+\begin{theoreme}[Grothendieck, pages 40 à 45, \emph{lemme du recollement}]
+Soit $\tau'$ le préordre sur $S$ défini par : pour $x, y \in T$, $x \leq_{\tau'} y$ si et seulement si $x \leq_{\tau'_0} y$ ; pour $y \in U$, $x \leq_{\tau'} y$ si et seulement si $x \leq_\tau y$ ; jamais un point de $U$ sous un point de $T$. Alors $\tau'$ est un préordre, il appartient à $\mathfrak T$, et toute topologie de $\mathfrak T$ est plus fine que $\tau'$ : $\tau'$ est la moins fine des topologies de $\mathfrak T$. De plus, une partie de $S$ est fermée pour $\tau$ si et seulement si elle est fermée pour $\tau'$ et que sa trace sur $T$ est fermée pour $\tau|_T$.
+\end{theoreme}
+
+\begin{proof}
+La réflexivité est immédiate. Pour la transitivité, soient $x \leq_{\tau'} y \leq_{\tau'} z$. Si $z \in T$, alors $y \in T$ et $y \leq_{\tau'_0} z$, donc $x \in T$ et $x \leq_{\tau'_0} y$, d'où $x \leq_{\tau'_0} z$. Si $z \in U$, alors $y \leq_\tau z$ ; et $x \leq_{\tau'} y$ entraîne $x \leq_\tau y$, directement si $y \in U$, parce que $\tau'_0$ est plus fine que $\tau$ si $y \in T$ ; d'où $x \leq_\tau z$. Ce dernier argument montre aussi que $\tau'$ est plus fine que $\tau$, et sur $T$ le préordre $\tau'$ est par définition celui de $\tau'_0$. Soit $\tau'' \in \mathfrak T$, et $x \leq_{\tau''} y$. Si $y \in T$, alors $x \leq_\tau y$, et $x \in T$ parce que $T$ est fermé pour $\tau$ ; comme $\tau''$ induit $\tau'_0$, on a $x \leq_{\tau'_0} y$, donc $x \leq_{\tau'} y$. Si $y \in U$, $x \leq_{\tau} y$ suffit. Enfin un fermé $X$ de $\tau$ est fermé pour la topologie plus fine $\tau'$, et sa trace sur $T$ l'est pour $\tau|_T$. Réciproquement, soient $X$ ainsi, $y \in X$ et $x \leq_\tau y$ : si $y \in U$, $x \leq_{\tau'} y$ donne $x \in X$ ; si $y \in T$, alors $x \in T$ et la trace donne $x \in X$.
+\end{proof}
+
+\begin{encadre}
+\begin{theoreme}[Grothendieck, page 48, \emph{la condition évidente}]
+Une topologie $\tau'' \in \mathfrak T$ est égale à $\tau'$ si et seulement si, pour toute partie $A \subset U$, l'adhérence de $A$ pour $\tau''$ est son adhérence pour $\tau$. Il suffit de le demander pour les points de $U$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Pour $A \subset U$, l'adhérence de $A$ est la réunion de celles de ses points, et l'adhérence d'un point $y$ est l'ensemble des $x \leq y$ ; la condition sur les parties équivaut donc à celle sur les points, $x \leq_{\tau''} y \Leftrightarrow x \leq_\tau y$ pour tout $y \in U$. Elle est vraie pour $\tau'$ par définition. Si $\tau''$ la vérifie, le préordre de $\tau''$ est déjà contenu dans celui de $\tau'$ par le lemme. Inversement, soit $x \leq_{\tau'} y$ : si $x, y \in T$, alors $x \leq_{\tau'_0} y$, donc $x \leq_{\tau''} y$ parce que $\tau''$ induit $\tau'_0$ ; si $y \in U$, alors $x \leq_\tau y$, donc $x \leq_{\tau''} y$ par la condition.
+\end{proof}
+
+\subsection*{\q{C'est ultra faux}}
+
+Les pages~41 et~42 avaient énoncé une autre caractérisation de $\tau'$, notée e) : (i) $\tau'$ est dans $\mathfrak T$ ; (ii), (iii) elle induit $\tau$ sur $U$ et y donne le même ensemble ordonné quotient ; (iv) la topologie $\tau$ est finale pour $(S, \tau') \to S$ et $(T, \tau|_T) \to S$. La marge de la page~42 dit \q{C'est faux}, celle de la page~47 \q{c'est faux !!}, et la page~48 \q{C'est ultra faux}, sur un croquis où $I'$ a trois éléments et $I$ deux (\lot{156-5}{3}{42}, \lot{156-5}{3}{47}, \lot{156-5}{3}{48}). La forme explicite qui suit est celle de la lecture modernisée.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,>=stealth]
+\foreach \i/\X/\lab in {0/0/{$\tau$}, 1/3.6/{$\tau'$}, 2/7.2/{$\tau''$}} {
+  \node (a\i) at (\X,0) {$a$};
+  \node (c\i) at (\X+1.4,0) {$c$};
+  \node (b\i) at (\X+0.7,1.3) {$b$};
+  \node at (\X+0.7,-0.75) {\lab};
+}
+\draw[->] (a0) -- (b0); \draw[->] (c0) -- (b0); \draw[<->] (a0) -- (c0);
+\draw[->] (a1) -- (b1); \draw[->] (c1) -- (b1);
+\draw[->] (a2) -- (b2);
+\end{tikzpicture}
+\caption{Les trois préordres du contre-exemple de la page~48 sur $S = \{a, b, c\}$, $T = \{a, c\}$ ; une flèche $x \to y$ signifie $x \leq y$, c'est-à-dire $x \in \overline{\{y\}}$. À gauche $\tau$, où $a$ et $c$ sont équivalents ; au milieu la topologie recollée $\tau'$ ; à droite la concurrente $\tau''$, où $c$ est isolé. Figure de l'édition ; Grothendieck dessine $I'$ au-dessus de $I$, un point isolé relié à $b$ par un trait épais hachuré, et une flèche $a \to b$ (\lot{156-5}{3}{48}).}
+\label{fig:156-5-ultrafaux}
+\end{figure}
+
+\begin{encadre}
+\begin{contrexemple}[Énoncé e) des pages 41 et 42, réfuté page 48]
+Sur $S = \{a, b, c\}$, soient $T = \{a, c\}$, $\tau$ le préordre où $a$ et $c$ sont équivalents et inférieurs à $b$, $\tau'_0$ l'ordre discret sur $T$, et $\tau''$ l'ordre où $a < b$ et $c$ est isolé (figure~\ref{fig:156-5-ultrafaux}). Ces données vérifient les hypothèses du lemme du recollement. La topologie $\tau''$ appartient à $\mathfrak T$, induit $\tau$ sur $U = \{b\}$, et $\tau$ est finale pour $(S, \tau'') \to S$ et $(T, \tau|_T) \to S$ : une partie de $S$ est fermée pour $\tau$ si et seulement si elle l'est pour $\tau''$ et que sa trace sur $T$ l'est pour $\tau|_T$. Pourtant $\tau'' \neq \tau'$ : l'adhérence de $\{b\}$ est $S$ pour $\tau$ et $\tau'$, et $\{a, b\}$ pour $\tau''$.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+Le préordre recollé est $x \leq_{\tau'} y$ si et seulement si $x = y$ ou $y = b$ : c'est l'ordre $a < b$, $c < b$. Dans $\tau''$, $c \not\leq b$, alors que $c \leq_\tau b$. Les autres conditions portent sur trois points et huit parties ; en Lean elles sont vérifiées par énumération exhaustive dans le noyau. Pour (iv), par exemple, $\{a, b\}$ est fermée pour $\tau''$, mais sa trace $\{a\}$ sur $T$ ne l'est pas pour $\tau|_T$, où $c \leq a$.
+\end{proof}
+
+\begin{remarque}
+La page~48 conclut juste après le croquis par la condition évidente, encadrée ci-dessus, et la lecture la démontre ; la formalisation confirme les deux gestes de la page. Le lemme et la condition valent pour des préordres quelconques, sans hypothèse de finitude. Dans le langage des figures, la condition est la réunion des conditions c) et d) de la page~31, que le dossier croyait chacune suffisante (\lot{156-5}{2}{31}) ; la marge de la page~42, \q{C'est une condition que j'avais d'abord oubliée à la page~31 !}, le dit. La subdivision prolongée $F' = G' \cup (F \smallsetminus G)$ de la page~29 reprend la formule de C\,4 dans la première version des axiomes de la première mouture (\lot{156-4}{3}{47}). Le recollement d'un ouvert et d'un fermé complémentaire est, pour les topos, celui de SGA~4, exposé~IV, §~9 \cite{sga4-1} ; la page ne fait pas le rapprochement.
+\end{remarque}
+
+Ne sont pas démontrés ici : la proposition~1 et le dictionnaire avec les ensembles ordonnés (pages~1 à~5) ; les propositions sur les sous-figures et la compatibilité (pages~6 à~11) et les axiomes C\,1 à C\,3 ; le raffinement, la subdivision et la figure intersection (pages~19 à~29) ; le corollaire de la page~31 et ses contre-exemples ; l'ensemble ordonné $K$ de la page~35 ; les corollaires homotopiques de la page~46.

@@ -34,6 +34,11 @@ import Grothendieck.Folder156_1
 import Grothendieck.Folder156_2
 import Grothendieck.Folder156_3
 import Grothendieck.Folder156_4
+import Grothendieck.Folder156_5
+import Grothendieck.Folder156_6
+import Grothendieck.Folder156_7
+import Grothendieck.Folder156_8
+import Grothendieck.Folder156_9
 import Grothendieck.Folder158
 import Grothendieck.Folder16
 import Grothendieck.Folder160

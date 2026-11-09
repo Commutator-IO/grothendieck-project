@@ -584,6 +584,71 @@ export const PROOFS: Proof[] = [
     theorems: ["middle_iff", "order_of_cuts", "cmp_alone_insufficient", "btwLe_reading_fails"],
   },
   {
+    folder: '156-5',
+    batch: 1,
+    page: '11–14, 36–48',
+    name: 'The connectedness of the multiplicities; the gluing of ultra-topologies',
+    statement:
+      'Page 13: the multiplicities 𝓜 of a set L (admissible figures with a greatest member) form one connected component, at least for finite figures, so the axiom C 4 of the first mouture is automatic. Pages 40–48: for T closed in an Alexandrov space (S, τ) and τ′₀ finer than τ on T, the glued topology τ′ is the least fine topology finer than τ inducing τ′₀ on T, and a topology τ″ of that set equals τ′ iff it gives every part of U = S ∖ T its τ-closure; the characterisation e) of pp. 41–42 is « ultra faux » (p. 48).',
+    found:
+      'The gluing lemma and the closing condition of p. 48 hold for arbitrary preorders, and the three-point model S = {a, b, c}, T = {a, c} refutes e) as page 48 says. The connectedness claimed on pp. 12–14 is false for every L with two points, finite figures included: {L} is alone in its component and incompatible with {{x}}, so C 4 fails in the set-theoretic model; the multiplicities used on pp. 12 and 14 are not admissible. Not formalised: the connectedness for finite figures with finite members of an infinite L, the dictionary with ordered sets (pp. 1–5), refinement and subdivision (pp. 19–29).',
+    verdict: ['holds', 'false on the page'],
+    lean: 'lean/Grothendieck/Folder156_5.lean',
+    theorems: ['sameComp_univ', 'not_compatible_univ', 'not_C4', 'glue_isPreorder', 'glue_admits', 'le_glue', 'glue_downClosed_iff', 'eq_glue_iff', 'eq_glue_iff_closure', 'threePoint_e_false'],
+  },
+  {
+    folder: '156-6',
+    batch: 2,
+    page: '40, 44–50',
+    name: 'Inverse images of closed parts; spécieuses families; At 8 in the trivial ateliers',
+    statement:
+      'Page 49: for ordered sets I, I′, φ ↦ φ⁻¹ from increasing maps I → I′ to maps of closed (down-closed) parts 𝔓_f(I′) → 𝔓_f(I) is injective, with image the maps commuting with arbitrary unions and intersections. Page 40: a family of parts of I stable under subsets is spécieuse iff it is 𝔓(I′) for some I′ ⊂ I, binary unions sufficing « du moins si I est fini ». Pages 49–50: At 8 is « des plus restrictives » for the trivial atelier ≪ = ≤.',
+    found:
+      'The lemma holds for I′ ordered and only then: the struck « pré » of p. 49 is needed (two equivalent points, identity and swap have the same inverse image), though existence needs no antisymmetry; arbitrary unions cannot be weakened to finite ones (I′ = ℕ, a closed set with no generic point, the « sobrifié » of the margin). The restriction « si I est fini » of p. 40 is needed (finite parts of ℕ). At 8 holds in a trivial atelier iff its order is discrete; the « successeur » paraphrase of p. 49 is strictly weaker. Not formalised: the Proposition of p. 41, the théorème-scholie of pp. 32–33, the ateliers themselves.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder156_6.lean',
+    theorems: ['pull_iSup₂', 'pull_iInf₂', 'pull_injective', 'exists_pull', 'not_pull_injective_preorder', 'topOnly_sInf', 'topOnly_sup', 'topOnly_bot', 'topOnly_ne_pull', 'specious_iff', 'finset_mem_of_union', 'specious_of_union', 'finite_parts_not_specious', 'at8_iff', 'at8_iff_discrete', 'at8Cover_not_at8'],
+  },
+  {
+    folder: '156-7',
+    batch: 4,
+    page: '80–83, 97–98',
+    name: 'Supports as parts of a set of points; the two-strand string; the orthomodular law fails',
+    statement:
+      'Page 80: under Supp¹_P (X ∥ Y iff |X| ∩ |Y| = ∅) and Supp²_P (every point is some |X|), A ↦ |A| is an order isomorphism of the supports onto 𝔓(P), taking the cosupport to the complement. Pages 81–83: in the two-strand string the singletons are supports and the lattice of supports is not distributive. Pages 97–98: Lemme 3, S ∥ S′ ⇒ S′ = (S ∨ S′) ∩ ∁S, is « faux », by the graph A′ − A − B − B′.',
+    found:
+      'All three passages hold as stated. Page 80 holds for any relation, and the surjectivity the page leaves unwritten comes from Supp²_P. The two-strand string needs only strands without least element (neither density nor extremities); for two 3-chains {(0, 2)} is not a support. The graph of p. 98 is the disjointness graph of the edition’s seven-element model of 156-4: the same hexagon, which is not even orthomodular. Not formalised: Σ_𝔉 ≃ Σ_𝓜 (p. 61), the lemmas of pp. 76–79 under their own hypotheses, the uniqueness of P (p. 81), the theorem of p. 93 on interiors.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder156_7.lean',
+    theorems: ['orth_iff', 'img_cosupp', 'supp_eq', 'img_supp', 'subset_supp_iff', 'supp_subset_supp_iff', 'supportsIso', 'supportsIso_cosupp', 'ficelle_supp_singleton', 'ficelle_finite_not_supp', 'ficelle_mem_supp', 'ficelle_not_distrib', 'ficelle_not_supp1', 'ficelle_img_ssubset', 'coe_cosuppP', 'path_supports', 'path_lemma3_false'],
+  },
+  {
+    folder: '156-8',
+    batch: 1,
+    page: '7–10, 89–102',
+    name: 'The axioms of a magasin; interior supports and the « canular » of page 102',
+    statement:
+      'Pages 7–10: the axioms Mag 1–4 of a magasin (incidence ≤, refinement ≪, interior disjointness |∘|) and their first consequences, prop. 1₀, prop. 2, cor. 1–3, prop. 3 and the NB of p. 10. Pages 99–101: for the magasin of an ordered set L under Hyp. H, supp°{P_a} = {P_a}. Page 102, for a < b > c without H: supp°{P_a} = {P_a, P_b} and supp°(S̃_{a,b}) = 𝓜 ≠ Omb(S_{a,b}), « Canular ».',
+    found:
+      'The consequences hold in the reading’s form, and the drawing of the NB of p. 10 is a six-element model of the axioms. Two forms of the page are too strong, as the reading says: the margin’s converse of prop. 2 and cor. 3 with interior incidence both fail in a six-cell model of two plane segments. On p. 102 the computation for the point is wrong: supp°{P_a} = {P_a}, though L violates H; the one for the interval is right, so lemma 1 fails for intervals, not points. A two-element antichain shows H cannot be dropped for points. Not formalised: Mag 1–4 for the magasin of an ordered set (p. 91), lemma 1 for intervals under H, pp. 92–93 and 97–98.',
+    verdict: ['holds', 'false on the page'],
+    lean: 'lean/Grothendieck/Folder156_8.lean',
+    theorems: ['compat_mono', 'dis_of_compat', 'le_of_compat_of_intLe', 'eq_of_compat_of_intLe', 'ref_iff_le_of_compat', 'intLe_trans', 'intLe_of_ref_of_ref', 'twoSegments_isMagasin', 'twoSegments_not_compat', 'twoSegments_cor3_as_transcribed', 'subSegment_isMagasin', 'subSegment_nb', 'supp_pt', 'can_cosupp_pa', 'can_supp_pa', 'can_cosupp_pb', 'can_supp_segment', 'can_not_hypH', 'anti_supp_pa'],
+  },
+  {
+    folder: '156-9',
+    batch: 6,
+    page: '107–112',
+    name: 'A finite spatios that is not orthomodular',
+    statement:
+      'Lemme 1 of p. 108: for b ≤ c, some b* disjoint from b has b ∨ b* = c iff b ∨ (∁b ∧ c) = c, and ∁b ∧ c is the largest such b*. Page 110 asks whether every spatios (complete ortholattice of supports) satisfies this orthomodular law, whether a finite one does, and whether one that does is Boolean, and answers « J’en doute fort ! ». Page 107 asks whether transposes that commute with the complements are inverse isomorphisms.',
+    found:
+      'Both doubts of p. 110 are right: on four points, the path 0 − 1 − 2 − 3 gives the spatios O₆, not orthomodular (the hexagon already found in 156-4), and the pairs {0, 1}, {2, 3} give MO₂, orthomodular but not distributive. The question of p. 107 has a positive answer for any posets with order-reversing involutions, without suprema or a Boolean hypothesis. Not formalised: the corollary of p. 108 (Foulis–Holland), Atmagsupp 1 ⇔ orthomodularity (p. 116), the correspondences with a transpose (pp. 89–99).',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder156_9.lean',
+    theorems: ['lemme1', 'lemme1_max', 'transpose_inverse', 'o6_supports', 'o6_spatios', 'o6_not_orthomodular', 'mo2_supports', 'mo2_spatios', 'mo2_orthomodular', 'mo2_not_distrib'],
+  },
+  {
     folder: '77',
     batch: 4,
     page: '68–71, 87, 94–98, 117–124',
