@@ -519,7 +519,27 @@ function Drawing({ cote, id }: { cote: string; id: string }) {
   const src = `/transcripts/${cote}/drawings/${id}.svg`;
   // Which src failed to load, so moving to another drawing clears it without remounting.
   const [failed, setFailed] = useState<string | null>(null);
+  // A drawing compiled after the page loaded (npm run drawings) shows up on its own:
+  // while it is missing, probe it every few seconds, bypassing the browser's cache,
+  // and once it loads show it under a fresh URL.
+  const [fresh, setFresh] = useState<{ src: string; n: number } | null>(null);
   const missing = failed === src;
+  useEffect(() => {
+    if (!missing) return;
+    let n = 0;
+    const timer = window.setInterval(() => {
+      const probe = new Image();
+      const k = ++n;
+      probe.onload = () => {
+        window.clearInterval(timer);
+        setFresh({ src, n: Date.now() + k });
+        setFailed(null);
+      };
+      probe.src = `${src}?retry=${Date.now()}`;
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [missing, src]);
+  const shown = fresh?.src === src ? `${src}?v=${fresh.n}` : src;
   return (
     <figure className="mt-3 rounded-md border border-ink-200 bg-white p-3">
       <figcaption className="text-[11px] font-semibold uppercase tracking-wider text-ink-400">
@@ -527,12 +547,12 @@ function Drawing({ cote, id }: { cote: string; id: string }) {
       </figcaption>
       {missing ? (
         <p className="mt-1 text-[13px] text-ink-600">
-          This drawing is not yet compiled for the site: compare the two readings above with the facsimile.
+          This drawing is not yet compiled for the site: compare the two readings above with the facsimile. It will appear here by itself once compiled (npm run drawings).
         </p>
       ) : (
-        <a href={src} target="_blank" rel="noopener" className="mt-2 block">
+        <a href={shown} target="_blank" rel="noopener" className="mt-2 block">
           <img
-            src={src}
+            src={shown}
             alt={`Drawing ${id} of folder ${cote}, as redrawn`}
             onError={() => setFailed(src)}
             className="mx-auto max-h-[45vh] w-auto max-w-full"
