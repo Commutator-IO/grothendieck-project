@@ -467,6 +467,19 @@ export const PROOFS: Proof[] = [
     theorems: ['covers_of_locallyCompact', 'covers_of_hypG', 'toOpens_injective_of_covers', 'coversEquiv', 'existsUnique_opens_prod'],
   },
   {
+    folder: '161-6',
+    batch: 1,
+    page: '3–8, 12, 14, 21',
+    name: 'The golden number and the six axes of the icosahedron',
+    statement:
+      'Pages 3–4: the triangle u, x, x′ is equilateral iff cos α = cos θ/(1 − cos θ), which has a solution for θ ≥ π/3, and θ = 2π/5 gives cos α = 1/√5. Page 6 (stopped, completed by the reading): the rotation r carries the cap of u to the cap of x₀, by the identities (A) c(1 − cos 2π/5) = cos 2π/5 and (B) c(1 + cos π/5) = cos π/5. Pages 14 and 12: η = ζ + ζ⁻¹ has trace and norm −1 in ℤ[1/5][ζ₅], so η² + η − 1 = 0. Page 21: generators x, y of two of the six axes satisfy B′(x, y)² = (1/5) Q(x) Q(y), cos′(D_i, D_j) = −6/5, and the margin writes c² + c − 1 = 0 for c = cos′(D_i, D_j). Pages 7–8: 30 edges at minimal distance, 20 faces.',
+    found:
+      'The existence condition must be strict, θ > π/3: at π/3 the only solution is α = 0. (A), (B) and the golden equation hold, over any commutative ring for the trace and norm, with 2 cos(2π/5) = φ⁻¹. The equiangularity holds without division, 5 B′(x_i, x_j)² = Q(x_i) Q(x_j), over any ring with t² = t + 1, characteristic 5 included (where the axes are isotropic). The margin of page 21 is false: c = −6/5 gives c² + c − 1 = −19/25; the golden relation is that of η. Three such lines over a field force 5 to be a square, so none exist over ℚ and the « localement » of page 21 must adjoin √5. The counts hold over ℤ[√5] by decide; the antipodal map is a graph automorphism that is not a rotation (pages 8–9, corrected by the reading; the order 120 is card_aut of folder 86). Not formalised: |Γ′| = 60, Γ′ ≃ 𝔄₅, the six relations beyond (A) and (B), a)–c) of page 21.',
+    verdict: ['holds', 'false on the page'],
+    lean: 'lean/Grothendieck/Folder161_6.lean',
+    theorems: ['exists_alpha_iff', 'cos_alpha', 'identity_A', 'identity_B', 'trace_norm', 'eta_eq_inv_goldenRatio', 'axes_equiangular', "cos'_axes", 'margin_false', 'edges_card', 'faces_card', 'vert_neg', 'isSquare_five_of_three_lines', 'no_three_rat_lines'],
+  },
+  {
     folder: '11',
     batch: 3,
     page: '50–56',

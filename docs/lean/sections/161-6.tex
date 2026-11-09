@@ -1,0 +1,141 @@
+\section[Cote 161-6 : le nombre d'or et les six axes de l'icosaèdre]{Cote 161-6 : le nombre d'or et les six axes de l'icosaèdre\protect\verifie[\leanblobmain]{Folder161_6}}\label{sec:161-6}
+
+La cote 161-6, \emph{Graphes, icosaèdre [etc.] : notes manuscrites (s.d.)}, trente-trois pages que l'inventaire date \q{[à partir de 1973-vers 1977]}, réunit trois sujets sur des feuillets volants. Le premier est l'icosaèdre régulier. Une mise au net à l'encre le construit à partir de deux vecteurs unitaires orthogonaux $u$, $v$ et de l'angle $\theta = 2\pi/5$ (\lot{161-6}{1}{3}, \lot{161-6}{1}{4}), démontre que ses rotations sont au nombre de soixante (\lot{161-6}{1}{8}), puis le réduit à son graphe (\lot{161-6}{1}{10}). Deux pages calculent le nombre $2\cos(2\pi/5)$ dans l'anneau des racines cinquièmes de l'unité (\lot{161-6}{1}{14}, \lot{161-6}{1}{12}). La page~21 transporte l'icosaèdre sur une base quelconque, relativement à une forme quadratique (\lot{161-6}{2}{21}). On démontre ici ce qui, dans ces pages, est un calcul fini : la condition d'existence du triangle équilatéral, l'équation du nombre d'or et la fin du calcul de la page~6, l'équiangularité des six axes et le décompte des sommets, arêtes et faces. Les graphes sur les surfaces des pages~24 à~33 et le produit de frames des pages~12, 13 et~15 ne sont pas traités.
+
+\noindent\emph{Le nombre d'or, pour commencer.} Le nombre d'or $\varphi = (1 + \sqrt5)/2$ est la racine positive de $t^2 = t + 1$ ; son inverse $\varphi^{-1} = \varphi - 1 = (\sqrt5 - 1)/2$ est racine de $t^2 + t - 1 = 0$. Il apparaît dans le pentagone régulier : le rapport de la diagonale au côté y vaut $\varphi$, et $2\cos(2\pi/5) = \varphi^{-1}$. Comme cinq faces de l'icosaèdre se rencontrent en chaque sommet, le pentagone des voisins d'un sommet fait entrer $\varphi$ dans toutes les mesures du solide. La mise au net ne le nomme jamais : il y figure sous la forme de l'équation $\eta^2 + \eta - 1 = 0$, avec $\eta = 2\cos(2\pi/5)$ ; la page~12 l'écrit $\gamma$, la page~21 $\gamma$ et $c$.
+
+\noindent\emph{Conventions.} $E = \mathbb R^3$, de produit scalaire $B'(x, y) = x \cdot y$, de forme quadratique $Q(x) = x \cdot x$ et de forme polaire $B = 2B'$. Pour deux droites $D$, $D'$ engendrées par $x$ et $y$, on pose avec la page~12 $\cos'(D, D') = B(x, y)^2/(Q(x)Q(y)) - 2$, qui vaut $2\cos 2\alpha$ si $\alpha$ est l'angle des deux droites, défini au signe près. Les douze sommets sont pris, à similitude près, aux points
+\[
+(0, \pm 1, \pm\varphi), \qquad (\pm 1, \pm\varphi, 0), \qquad (\pm\varphi, 0, \pm 1),
+\]
+et les six axes sont les droites qui joignent deux sommets opposés, engendrées par $(0, 1, \pm\varphi)$, $(1, \pm\varphi, 0)$, $(\pm\varphi, 0, 1)$.
+
+\subsection*{Le triangle équilatéral et l'angle $\alpha$ (pages 3 à 6)}
+
+Sur la sphère unité, la page~3 trace le grand cercle issu de $u$ dans la direction $v$, $x(\alpha) = u\cos\alpha + v\sin\alpha$, et le même cercle tourné d'un angle $\theta$ autour de $u$. Les points $u$, $x$ et $x'$ obtenus à l'abscisse $\alpha$ forment un triangle isocèle, équilatéral si et seulement si
+\[
+(1')\qquad \cos\alpha = \frac{\cos\theta}{1 - \cos\theta}.
+\]
+La marge de la page~4 conclut qu'une solution existe pour $\theta \geq \pi/3$ (\lot{161-6}{1}{4}).
+
+\begin{enonce}[Pages 3 et 4, forme corrigée par la lecture]
+Pour $0 < \theta \leq \pi$, il existe $\alpha$ avec $0 < \alpha < \pi$ et $\cos\alpha = \cos\theta/(1 - \cos\theta)$ si et seulement si $\theta > \pi/3$. Pour $\theta = 2\pi/5$, on a $\cos(2\pi/5) = (\sqrt5 - 1)/4$, la solution est $\cos\alpha = 1/\sqrt5$, et $\cos 2\alpha = -3/5$.
+\end{enonce}
+
+\begin{proof}
+Sur $[0, \pi]$, le cosinus est strictement décroissant, donc $\cos\theta < 1$ et $1 - \cos\theta > 0$. Si $\alpha$ existe, $\cos\alpha < 1$, d'où $\cos\theta < 1 - \cos\theta$, soit $\cos\theta < 1/2 = \cos(\pi/3)$ et $\theta > \pi/3$. Réciproquement, si $\theta > \pi/3$, alors $\cos\theta < 1/2$ et le quotient $q = \cos\theta/(1 - \cos\theta)$ est $< 1$ ; comme $\cos\theta \geq -1$, il est $\geq -1/2 > -1$. On prend $\alpha = \arccos q$, qui est dans $]0, \pi[$. Pour $\theta = 2\pi/5$, $\cos(2\pi/5) = 2\cos^2(\pi/5) - 1$ avec $\cos(\pi/5) = (1 + \sqrt5)/4$, ce qui donne $(\sqrt5 - 1)/4$ ; alors $q = (\sqrt5 - 1)/(5 - \sqrt5) = 1/\sqrt5$, car $(\sqrt5 - 1)\sqrt5 = 5 - \sqrt5$. Enfin $2/5 - 1 = -3/5$.
+\end{proof}
+
+\noindent En Lean : \texttt{exists\_alpha\_iff}, \texttt{cos\_two\_pi\_div\_five}, \texttt{cos\_alpha} et \texttt{cos\_two\_alpha}. L'inégalité doit être stricte : pour $\theta = \pi/3$, $q = 1$ et la seule solution est $\alpha = 0$, où le triangle se réduit à un point. C'est la correction que porte la lecture.
+
+Les douze points sont alors $\pm u$ et $\pm x_i$, $x_i = u\cos\alpha + v_i\sin\alpha$, les $v_i$ étant les cinq directions tangentes d'angles $i\theta$ (figure~\ref{fig:161-6-calotte}). La page~5 veut montrer que la rotation $r = R_{w,\alpha} \circ R_{u,-\theta/2}$ envoie la calotte de sommet $u$ sur la calotte de sommet $x_0$. La page~6 vérifie la première des six relations nécessaires et s'arrête sur la troisième (\lot{161-6}{1}{6}). La lecture achève le calcul. Les coordonnées selon $w$ concordent d'elles-mêmes, et les autres se ramènent, avec $c = \cos\alpha$, à deux identités :
+\[
+\text{(A)}\quad c\,\bigl(1 - \cos\tfrac{2\pi}{5}\bigr) = \cos\tfrac{2\pi}{5}, \qquad \text{(B)}\quad c\,\bigl(1 + \cos\tfrac{\pi}{5}\bigr) = \cos\tfrac{\pi}{5}.
+\]
+
+\begin{enonce}[Page 6, achevée par la lecture]
+Pour $c = 1/\sqrt5$, les identités (A) et (B) sont vraies.
+\end{enonce}
+
+\begin{proof}
+(A) est la relation (1$'$), $c = \cos\theta/(1 - \cos\theta)$, multipliée par $1 - \cos\theta$. Pour (B), $\cos(\pi/5) = (1 + \sqrt5)/4$, et l'identité s'écrit $(5 + \sqrt5)/(4\sqrt5) = (1 + \sqrt5)/4$, soit $5 + \sqrt5 = \sqrt5 + 5$.
+\end{proof}
+
+\noindent En Lean : \texttt{identity\_A} et \texttt{identity\_B}. La réduction des six relations à (A) et (B) est celle de la lecture ; elle n'est pas formalisée. C'est seulement à cet endroit que $\theta = 2\pi/5$ intervient : la page~5 note que la construction des calottes vaut pour tout $\theta = 2\pi/m$.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm, pt/.style={circle, fill, inner sep=1.2pt}, lab/.style={font=\scriptsize, inner sep=1pt}]
+\foreach \i in {0,...,4} {
+  \coordinate (x\i) at ({90+72*\i}:2);
+  \coordinate (y\i) at ({270+72*\i}:2);
+}
+\coordinate (u) at (0,0);
+\draw[black!40, dashed] (y0) -- (y1) -- (y2) -- (y3) -- (y4) -- cycle;
+\fill[black!7] (u) -- (x0) -- (x1) -- cycle;
+\draw (x0) -- (x1) -- (x2) -- (x3) -- (x4) -- cycle;
+\foreach \i in {0,...,4} \draw (u) -- (x\i);
+\draw (x0) -- (y3) -- (x1) -- (y4) -- (x2) -- (y0) -- (x3) -- (y1) -- (x4) -- (y2) -- cycle;
+\foreach \i in {0,...,4} {
+  \node[pt] at (x\i) {}; \node[lab] at ({90+72*\i}:2.35) {$x_{\i}$};
+  \node[pt, black!55] at (y\i) {}; \node[lab, black!60] at ({270+72*\i}:2.38) {$x'_{\i}$};
+}
+\node[pt] at (u) {}; \node[lab, fill=white] at (0.28,0.22) {$u$};
+\end{tikzpicture}
+\caption{L'icosaèdre de la page~4 vu le long de l'axe $u$, $u' = -u$ caché derrière $u$. En noir, la calotte de sommet $u$, les cinq points $x_i$ en ordre circulaire, et les dix arêtes $\{x_i, x'_{i \pm 2}\}$ de la ceinture ; en tireté, le pentagone des $x'_i = -x_i$ de la face cachée. Grisé, le triangle icosaédral $\{u, x_0, x_1\}$. Figure dessinée pour cette section : les dessins de la cote (croquis du carnet, pages~16 à~19 ; perspective en marge de la page~21) ne sont pas vectorisés.}
+\label{fig:161-6-calotte}
+\end{figure}
+
+\subsection*{L'équation du nombre d'or (pages 14 et 12)}
+
+Les pages~14 et~12, à lire dans cet ordre, travaillent sur $\mathbb Z[\tfrac15]$, dans l'anneau $B = A[T]/(1 + T + T^2 + T^3 + T^4)$ des racines primitives cinquièmes de l'unité. Elles posent $\eta = \zeta + \zeta^{-1}$, $\eta' = \zeta^2 + \zeta^{-2}$, calculent la trace et la norme et en tirent \q{L'équation de $\gamma$ est donc $\gamma^2 + \gamma - 1 = 0$} (\lot{161-6}{1}{14}, \lot{161-6}{1}{12}).
+
+\begin{enonce}[Pages 14 et 12]
+Soit $A$ un anneau commutatif et $\zeta \in A$ tel que $1 + \zeta + \zeta^2 + \zeta^3 + \zeta^4 = 0$. Alors $\zeta^5 = 1$, et, pour $\eta = \zeta + \zeta^4$ et $\eta' = \zeta^2 + \zeta^3$,
+\[
+\eta + \eta' = -1, \qquad \eta\eta' = -1, \qquad \eta^2 + \eta - 1 = 0, \qquad \eta' = \eta^2 - 2, \qquad \eta = \eta'^2 - 2.
+\]
+Sur $\mathbb R$, avec $\zeta = e^{2i\pi/5}$, $\eta = 2\cos(2\pi/5) = \varphi^{-1} = (\sqrt5 - 1)/2$.
+\end{enonce}
+
+\begin{proof}
+$\zeta^5 - 1 = (\zeta - 1)(1 + \zeta + \dots + \zeta^4) = 0$, donc $\zeta^{-1} = \zeta^4$ et $\zeta^{-2} = \zeta^3$. La trace est $\zeta + \zeta^2 + \zeta^3 + \zeta^4 = -1$. La norme est $\zeta^3 + \zeta^4 + \zeta^6 + \zeta^7 = \zeta^3 + \zeta^4 + \zeta + \zeta^2 = -1$. Un polynôme unitaire de degré~$2$ dont $\eta$ et $\eta'$ sont les racines est $t^2 - (\eta + \eta')t + \eta\eta' = t^2 + t - 1$. Enfin $\eta^2 = \zeta^2 + 2\zeta^5 + \zeta^8 = \eta' + 2$, et de même $\eta'^2 = \zeta^4 + 2 + \zeta = \eta + 2$. Sur $\mathbb R$, la valeur de $\cos(2\pi/5)$ vient de l'énoncé précédent, et $\varphi^{-1} = \varphi - 1$.
+\end{proof}
+
+\noindent En Lean : \texttt{trace\_norm}, \texttt{eta\_eq\_inv\_goldenRatio} et \texttt{eta\_golden}, avec le nombre d'or \texttt{Real.goldenRatio} de mathlib. L'énoncé ne demande aucune hypothèse sur l'anneau, ni que $5$ y soit inversible : c'est le passage à $\vartheta_5$, étale, qui l'exige. La lecture relie ce calcul à celui de la page~6, qu'il achève : (A) et (B) se ramènent à $\eta^2 + \eta - 1 = 0$. Les pages ne font pas ce lien.
+
+\subsection*{Les six axes équiangulaires (page 21)}
+
+La page~21 écrit \q{icosaèdre projectif --- icosaèdre} : ce qui se transporte sur une base, ce sont les six droites qui joignent les sommets opposés. La page calcule $\cos\alpha = \gamma/(2 - \gamma) = \frac15(2\gamma + 1) = 1/\sqrt5$, encadre $B(x, y)^2 = \frac45 Q(x)Q(y)$, puis $B'(x, y)^2 = \frac15 Q(x)Q(y)$ pour des générateurs $x$, $y$ de deux droites distinctes, et note $\cos'(D_i, D_j) = -6/5$ (\lot{161-6}{2}{21}).
+
+\begin{encadre}
+\begin{enonce}[Page 21, sur tout anneau où $t^2 = t + 1$]
+Soit $R$ un anneau commutatif et $t \in R$ avec $t^2 = t + 1$. Les six vecteurs
+\[
+(0, 1, t),\ (0, 1, -t),\ (1, t, 0),\ (1, -t, 0),\ (t, 0, 1),\ (-t, 0, 1)
+\]
+ont tous $Q = t + 2$, et deux d'entre eux, distincts, vérifient $5\,B'(x_i, x_j)^2 = Q(x_i)Q(x_j)$. Sur $\mathbb R$, avec $t = \varphi$, les six axes de l'icosaèdre font donc deux à deux le même angle, de cosinus $\pm 1/\sqrt5$, et $\cos'(D_i, D_j) = -6/5$ pour $i \neq j$.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+On a $B'(x_i, x_j) = \pm t$ ou $\pm(1 - t^2) = \mp t$, donc $B'(x_i, x_j)^2 = t^2$ dans tous les cas. Or $(t + 2)^2 = t^2 + 4t + 4 = 5t + 5 = 5t^2$. Sur $\mathbb R$, $Q > 0$, $B'^2/(QQ) = 1/5$ et $\cos' = 4/5 - 2 = -6/5$.
+\end{proof}
+
+\noindent En Lean : \texttt{axis\_norm}, \texttt{axes\_equiangular} et \texttt{cos'\_axes}. Sur un corps où $\gamma^2 + \gamma - 1 = 0$ et $5 \neq 0$, la page a raison : $2 - \gamma \neq 0$ et $\gamma/(2 - \gamma) = (2\gamma + 1)/5$ (\texttt{page21\_cos\_alpha}). L'énoncé est écrit sans division, ce que la forme $B'^2 = \frac15 QQ$ de la page masque. Il vaut donc sur $\mathbb Z[\varphi]$, et aussi en caractéristique~$5$, où $t = 3$ et $Q(x_i) = 0$ : les six axes y sont isotropes, comme dans la cote~70 (section~\ref{sec:70}). Six est le nombre maximal de droites équiangulaires dans un espace euclidien de dimension~$3$. L'énoncé n'en dit rien.
+
+En marge des énoncés a) à c), la page écrit \q{$c^2 + c - 1 = 0$} pour la constante $c = \cos'(D_i, D_j)$.
+
+\begin{contrexemple}[Marge de la page 21]
+La constante $c = \cos'(D_i, D_j) = -6/5$ n'est pas racine de $t^2 + t - 1$ : $c^2 + c - 1 = -19/25$.
+\end{contrexemple}
+
+\noindent En Lean : \texttt{margin\_false}. C'est $\eta = 2\cos(2\pi/5)$ qui vérifie l'équation du nombre d'or. Il sert à calculer $\cos\alpha$, mais il n'est pas l'invariant d'une paire d'axes. La lecture y voit la trace d'une autre définition de l'icosaèdre local, où la constante serait un nombre d'or, et que le calcul de la même page ne soutient pas.
+
+La lecture propose une définition de l'icosaèdre relatif : six sous-modules de rang~$1$, localement facteurs directs, avec $B'(x_i, x_j)^2 = \frac15 Q(x_i)Q(x_j)$, sur une base où $2$ et~$5$ sont inversibles. Elle remarque que \q{localement} doit adjoindre $\sqrt5$.
+
+\begin{enonce}[Énoncé de l'édition, d'après la lecture de la page 21]
+Sur un corps $K$, si trois vecteurs $x_1$, $x_2$, $x_3$ vérifient $Q(x_i) \neq 0$ et $5\,B'(x_i, x_j)^2 = Q(x_i)Q(x_j)$ pour les trois paires, alors $5$ est un carré dans $K$. En particulier, il n'existe pas trois telles droites dans $\mathbb Q^3$.
+\end{enonce}
+
+\begin{proof}
+Les hypothèses donnent $5 \neq 0$ et $b_{ij} = B'(x_i, x_j) \neq 0$. Le produit des trois relations donne $125\,(b_{12}b_{13}b_{23})^2 = (Q(x_1)Q(x_2)Q(x_3))^2$, et $r = Q(x_1)Q(x_2)Q(x_3)/(5\,b_{12}b_{13}b_{23})$ vérifie $r^2 = 5$. Sur $\mathbb Q$, $5$ n'est pas un carré, puisque $5$ n'est pas un carré d'entier.
+\end{proof}
+
+\noindent En Lean : \texttt{isSquare\_five\_of\_three\_lines} et \texttt{no\_three\_rat\_lines}. Les énoncés a), b) et c) de la page, existence locale, conjugaison locale par $\mathrm{SO}(Q)$ et groupe d'isotropie fini étale à fibres $\mathfrak A_5$, ne sont pas démontrés ici.
+
+\subsection*{Sommets, arêtes, faces (pages 7 à 9)}
+
+La page~7 définit les arêtes comme les paires de points de l'icosaèdre à distance minimale, et les faces comme les triples deux à deux reliés (\lot{161-6}{1}{7}).
+
+\begin{enonce}[Pages 7 et 8]
+Les douze sommets sont sur une même sphère. Entre deux sommets distincts, le carré de la distance prend trois valeurs, $4$, $6 + 2\sqrt5$ et $10 + 2\sqrt5$, la dernière pour deux sommets opposés. Chaque sommet a cinq voisins à la distance minimale ; il y a trente arêtes et vingt faces. L'application $x \mapsto -x$ permute les sommets et les arêtes, et son déterminant vaut $-1$.
+\end{enonce}
+
+\begin{proof}
+On calcule dans $\mathbb Z[\sqrt5]$, en coordonnées doublées ($2\varphi = 1 + \sqrt5$), où l'égalité est décidable. Les cent quarante-quatre carrés de distances et les décomptes sont vérifiés par énumération dans le noyau de Lean (\texttt{decide}). En coordonnées doublées, les trois distances sont $16$, $24 + 8\sqrt5$ et $40 + 8\sqrt5$, c'est-à-dire quatre fois les valeurs de l'énoncé.
+\end{proof}
+
+\noindent En Lean : \texttt{vert\_norm}, \texttt{d2\_values}, \texttt{nbrs\_card}, \texttt{edges\_card}, \texttt{faces\_card}, \texttt{vert\_neg} et \texttt{det\_neg\_one}. Les pages~8 et~9 demandent de \q{montrer que \emph{tout} automorphisme du graphe est dans $\Gamma'$}, le groupe des soixante rotations. La lecture corrige en $\Gamma$, d'ordre $120$ : l'antipodie $-1$ est un automorphisme du graphe des arêtes, mais elle n'est pas une rotation. Que ce graphe ait exactement $120$ automorphismes est vérifié pour l'icosaèdre combinatoire de la cote~86 (section~\ref{sec:86}, \texttt{card\_aut}). L'identification des deux modèles n'est pas formalisée.
+
+Ne sont pas démontrés ici : la transitivité simple de $\Gamma'$ sur les soixante arêtes orientées et $|\Gamma'| = 60$ (pages~7 et~8) ; les six relations de la page~6 au-delà de leur réduction à (A) et (B) ; l'isomorphisme $\Gamma' \simeq \mathfrak A_5$ par les cinq triples d'axes orthogonaux (page~18) ; les \q{systèmes cohérents} d'ordres circulaires de la page~10 ; les invariants de l'inversion sur $\mu_5^*$ et le quotient $\vartheta_n$ (page~14) ; les énoncés a) à c) de la page~21 ; la somme de frames des pages~15, 13 et~12 ; le produit de topos de la page~22 ; les plongements de graphes dans les surfaces (pages~24 à~30) et les graphes à groupe transitif (pages~32 et~33).
