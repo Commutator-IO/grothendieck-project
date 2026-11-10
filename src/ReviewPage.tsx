@@ -384,7 +384,7 @@ export function ReviewPage() {
                     {item.claim}
                   </blockquote>
                 )}
-                {SHOW_READINGS && item.drawing && drawingClaims?.[item.id] && (
+                {SHOW_READINGS && drawingClaims?.[item.id] && (
                   <blockquote className="mt-3 rounded-md border-l-4 border-brand-300 bg-ink-50 px-3 py-2 text-[14.5px] leading-relaxed text-ink-800">
                     <span className="block text-[11px] font-semibold uppercase tracking-wider text-ink-400">The two readings</span>
                     <InlineMath text={drawingClaims[item.id]} />

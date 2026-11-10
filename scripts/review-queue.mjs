@@ -918,11 +918,15 @@ if (existsSync(DRAWINGS)) {
         batch,
         page: unmarked,
         prompt: question,
-        hint: `Look at p. ${unmarked} of the facsimile. The transcription describes this figure in a note (« ${current} ») but does not mark it as a drawing yet, so it has no redrawn figure: it is to be marked and redrawn first.`,
-        choices: [C('Yes, as described', 'right'), C('No', 'other', 'What the page has')],
+        hint: `Look at p. ${unmarked} of the facsimile. This figure has no \\drawing mark and no redrawn figure yet.`,
+        choices: alternative
+          ? [C('The current reading is right', 'right'), C('The alternative is right', 'other'), C('Neither', 'other', 'What the page has')]
+          : [C('Yes, as described', 'right'), C('No', 'other', 'What the page has')],
         details: `Figure of folder ${cote}, p. ${unmarked}, wanted for the reading book « Vers une géométrie des formes ».`,
         context: 'The answer guides the \\drawing mark in the transcription and the redraw in transcripts/<cote>/drawings/.',
       }, null);
+      // The readings describe the page, so they are held back with the snippets (#31).
+      if (items.at(-1)?.id === `drawing-${cote}-${did}-${nth}`) drawingClaims[`drawing-${cote}-${did}-${nth}`] = `Current reading: ${current || '—'}${alternative ? ` — Alternative: ${alternative}` : ''}`;
       continue;
     }
     const rec = isCote(cote) ? drawingRecord(cote, did) : null;
