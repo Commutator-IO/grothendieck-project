@@ -463,16 +463,16 @@ Réponses reportées dans `drawings.json` ou dans la transcription ; les cases s
 - [ ] 154 07-8 | strike | Faint « 10 6 5 » inside the disk with two green arcs, and the scribble below the ξ circle | Struck, left out | Text to draw
 - [ ] 154 08-1 | reading | Which pencil line continues which in the left disk and the lower circle; the ink path between the hub and the first star | As drawn | Other continuations
 - [ ] 154 08-5 | reading | Long faint lines of the arrangement; the three dashed lines | Drawn straight | Slightly curved, other continuations
-- [ ] 154 08-4 | reading | Middle network of pencil arrows | Still schematic, main lines placed approximately | To redraw strand by strand
+- [x] 154 08-4 | reading | Middle network of pencil arrows | Still schematic, main lines placed approximately | To redraw strand by strand
 - [ ] 154 09-3 | reading | Overwritten label under the second D in the upper oval | D | x or y
 - [ ] 154 09-3 | disagreement | « deux croix vert clair » at the top right | Three light green lines with two crossings, plus a small green cross below the banner | Two separate crosses, as in the transcription
 - [ ] 154 09-5 | reading | Digits beside the left spindles | 1, 1, 1, 0 above; 0, 3, 2, 1 below | Other digits
 - [ ] 154 09-5 | reading | Where do the strands D, D′, D″ cross the stacked arcs? | Approximate | Another crossing order
 - [ ] 154 09-6 | disagreement | Region numbers (the transcription lists 12, 14, 15, 17, 21, 24, 27) | A second 12 near 17 | A single 12
 - [ ] 154 09-7 | reading | Overinked digit in the middle of the braid lens | Left out | 2 or 3
-- [ ] 154 09-8 | reading | Does the lower-left strand of the left disk run on into the middle disk? | Yes, to its right contact; one strand starts on another near the top | It ends on the left rim
-- [ ] 154 09-8 | reading | The two right-disk strands from the upper-left contact | Two strands, one ending on the right rim | A third strand (dropped because it would cross another twice)
-- [ ] 154 09-8 | disagreement | Pencil « deux petits triangles » of the transcription | Not found on the crop | Present but faint
+- [x] 154 09-8 | reading | Does the lower-left strand of the left disk run on into the middle disk? | Yes, to its right contact; one strand starts on another near the top | It ends on the left rim
+- [x] 154 09-8 | reading | The two right-disk strands from the upper-left contact | Two strands, one ending on the right rim | A third strand (dropped because it would cross another twice)
+- [x] 154 09-8 | disagreement | Pencil « deux petits triangles » of the transcription | Not found on the crop | Present but faint
 - [ ] 154 09-9 | reading | Labels round the half-crowned disk | 3, 4′, 5 left; 2′ top; 1′, 2′, 3′ bottom; 4′, 5′ right; 4′, 3′, 2′ outside upper right | Right-hand labels 4, 5 unprimed
 - [ ] 154 09-9 | reading | Top-left label group « 1 5′ 4′ » and small top digits « 1′ 1 1 3 » | Not reproduced | As read
 - [ ] 154 05-9 | reading | Which stroke continues which in the knot at the lower left of the bowl, and in the lower half of the square? | As redrawn | Other pairings
@@ -526,3 +526,18 @@ Réponses reportées dans `drawings.json` ou dans la transcription ; les cases s
 - [ ] 81 03-7 | disagreement | What stands at the top and foot of the band on p. 53 (also 03-8)? | A pair of opposite arrows, one above the other | A double arrow, as in the note
 - [ ] 81 01-5 | reading | How is the tangle at the lower left of the p. 10 polygon to be read? | A small circle, two long obliques, a thin triangle and a curve | Another grouping of the strokes
 - [ ] 81 02-3 | reading | Is the first sign of the p. 26 legend ⊃ or a hooked arrow like the others? | ⊃, as the transcription reads | ↩, written like the other hooks
+
+## Folder 154, the three drawings completed on 10 November (07-7, 08-4, 09-8)
+
+- [ ] 154 07-7 | reading | Lower disk of the bottom-left pair: is the strand that turns a corner at the left one strand? | One strand with a corner; both stubs of the two crossing strokes drawn | Two separate strands that cross there
+- [ ] 154 07-7 | reading | Lower disk of the bottom-left pair: is the yellow region at the lower left one region, crossed by the cornered strand? | One region between two strands and the rim | Two regions, only one of them yellow
+- [ ] 154 07-7 | reading | Do the two disks of the bottom-left pair touch? | No, about 1.5 mm apart, as on the page | Tangent, as in the other figures of eight
+- [ ] 154 07-7 | reading | Top-right figure, upper disk: what are the thick red strokes from the top point to the two black marked crossings? | Thick parts of the two lens strands | Separate short strokes over the lens strands
+- [ ] 154 08-4 | reading | Middle network: which heavy stroke ends are arrowheads? | 18 arrowheads, only where barbs are visible | More (several heavy ends could be blunt arrowheads) or fewer
+- [ ] 154 08-4 | reading | Middle network: does the left arrow run on, faintly, to the marked crossing of the star? | Drawn as a thin pencil line reaching the star's dotted crossing | An unrelated faint mark; the arrow stops at its dot
+- [ ] 154 09-8 | reading | Is the arch over the first contact one strand with the lower-left strand of the left disk and the bottom strand of the middle and right disks? | Yes, one strand through all three disks, ending at the top of the right rim | Separate strands meeting at the feet of the arch
+- [ ] 154 09-8 | reading | Do two long strands cross twice at the first contact (the kite straddling the rims)? | Once in the left disk and once in the middle disk, the kite yellow | A single crossing, the kite being an effect of the overlapping rims
+- [ ] 154 09-8 | reading | Do neighbouring disks overlap in a narrow lens? | Yes, rims overlapping by about 1 mm at both contacts, as on the page | Disks glued along a common arc
+- [ ] 154 09-8 | reading | Is the strip between the two rims at the first contact yellow? | Yellow below the kite (two pieces), white above it | The whole strip is orange overpainting of the middle rim, not regions
+- [ ] 154 09-8 | disagreement | Where are the pencil « deux petits triangles » of the transcription? | Not found as triangles; four short pencil strokes beside red strands, drawn as underdrawing | Small triangles these strokes form with the strands, or marks no longer visible
+- [ ] 154 09-8 | disagreement | Right figure: is the main line light green, cut by four red lines? | A red horizontal line through the crossings, a light green line above and a second one climbing through the second crossing | The main line is light green, as in the transcription
