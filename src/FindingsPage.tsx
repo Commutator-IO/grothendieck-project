@@ -542,7 +542,7 @@ const proofCtx = (p: (typeof PROOFS)[number]): CommentContext => ({
 
 function ProvedInLean() {
   const link = 'text-brand-700 underline decoration-brand-200 underline-offset-2';
-  // Ten cards at a time, as the list below: seventy-three folders already.
+  // Ten cards at a time, as the list below: ninety-two folders already.
   const [page, setPage] = useState(0);
   const shown = PROOFS.slice(page * PAGE, (page + 1) * PAGE);
   const turn = (p: number) => {
@@ -603,7 +603,7 @@ function ProvedInLean() {
 // Longue Marche §1–37, Pursuing Stacks I, the Dérivateurs, the Esquisse — are left
 // out). Counts are read from FINDINGS, so the table follows the rows as they change.
 const MANUSCRIPTS = [
-  { title: 'Vers une géométrie des formes', when: 'June–July 1986', cotes: ['156-1', '156-2', '156-3', '156-4', '156-5', '156-6', '156-7', '156-8'], note: 'the manuscript of the letter to Yamashita, 9 July 1986' },
+  { title: 'Vers une géométrie des formes', when: 'June–July 1986', cotes: ['156-1', '156-2', '156-3', '156-4', '156-5', '156-6', '156-7', '156-8', '156-9'], note: 'the manuscript of the letter to Yamashita, 9 July 1986' },
   { title: 'La Longue Marche, after § 37', when: 'from 1981', cotes: ['140-2', '140-3', '140-4'], note: 'not transcribed yet; § 1–37 edited by Malgoire (1995)' },
   { title: 'Complexe de De Rham à puissances divisées', when: '1975–1976', cotes: ['136'], note: 'notes for a 1976 lecture at the IHÉS' },
   { title: 'Teichmülleries', when: '1981–1983', cotes: ['144'], note: '' },

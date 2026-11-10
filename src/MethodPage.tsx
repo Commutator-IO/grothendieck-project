@@ -494,7 +494,7 @@ export function MethodPage() {
               Where a modernised reading states something crisp in commutative algebra, finite
               combinatorics, elementary category theory or homotopical algebra, the statement is
               proved in the Lean proof assistant against mathlib, as the reading gives it, with no
-              hypothesis added: seventy-three folders so far, every theorem checked by the kernel on
+              hypothesis added: ninety-two folders so far, every theorem checked by the kernel on
               each change and resting on Lean's standard axioms only. A proof checks the reading's
               mathematics, never its fidelity to the page. It has found what it is meant to find:
               a false gloss (158), a hypothesis a reading had dropped (114), and once a statement

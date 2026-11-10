@@ -30,6 +30,12 @@ const VERDICT = {
 const IHES = {
   'ihes-sga6-1-5': 'FG_IL_5_SGA6_1_5',
   'ihes-sga6-2-3': 'FG_IL_5_SGA6_2_3',
+  'ihes-2ill5': '2ILL5',
+};
+// A section that is not on a folder of the fonds: the label of its row, and the prefix its
+// title loses. Its verdict is that of the card of its Lean file (see byLean below).
+const HORS_FONDS = {
+  'effective-venken': ['Buffalo 1973', 'La question de Buffalo : '],
 };
 
 const verdicts = {};
@@ -44,6 +50,12 @@ for (const m of proofs.matchAll(/folder: "([^"]+)",[\s\S]*?verdict: (\[[^\]]*\]|
   (doubleQuoted[m[1]] ??= []).push(...[...m[2].matchAll(/"([^"]+)"/g)].map((v) => v[1]));
 }
 for (const [folder, vs] of Object.entries(doubleQuoted)) verdicts[folder] ??= vs;
+// The verdicts of the cards of one Lean file, for a section whose cards share their folder
+// with cards of other files (the Buffalo lectures).
+const byLean = {};
+for (const m of proofs.matchAll(/verdict: (\[[^\]]*\]|'[^']+'|"[^"]+"),\s*lean: ['"]lean\/Grothendieck\/([^'"]+)\.lean['"]/g)) {
+  (byLean[m[2]] ??= []).push(...[...m[1].matchAll(/['"]([^'"]+)['"]/g)].map((v) => v[1]));
+}
 
 /** The argument of \cmd[...] with balanced brackets, starting at the [. */
 function bracketArg(s, start) {
@@ -65,18 +77,27 @@ for (const m of article.matchAll(/\\part\{([^}]*(?:\{[^}]*\}[^}]*)*)\}|\\input\{
   if (name.includes('/') || name === 'reste') continue;
   const tex = readFileSync(resolve(here, 'sections', name + '.tex'), 'utf8');
   const short = bracketArg(tex, tex.indexOf('\\section[') + '\\section'.length);
-  const bare = short.replace(/^(Cote [^:]+|Rédaction Bourbaki [^:]+|IHÉS [^:]+) : /, '');
+  const horsFonds = HORS_FONDS[name];
+  const bare = horsFonds
+    ? short.slice(short.startsWith(horsFonds[1]) ? horsFonds[1].length : 0)
+    : short.replace(/^(Cote [^:]+|Rédaction Bourbaki [^:]+|IHÉS [^:]+) : /, '');
   const statement = bare.charAt(0).toLocaleUpperCase('fr') + bare.slice(1);
   const cote = name.startsWith('bourbaki-')
     ? `Bourbaki ${name.slice(9)}`
-    : IHES[name]
+    : name.startsWith('ihes-sga6-')
       ? `IHÉS SGA\\,6 ${name.slice(10).replace('-', '/')}`
-      : name;
+      : IHES[name]
+        ? `IHÉS ${IHES[name]}`
+        : horsFonds
+          ? horsFonds[0]
+          : name;
   const [, base = '\\leanblob', file] = tex.match(/\\verifie(?:\[([^\]]*)\])?\{([^}]+)\}/);
-  const vs = [...new Set(verdicts[IHES[name] ?? name] ?? [])];
+  const vs = [...new Set((horsFonds ? byLean[file] : verdicts[IHES[name] ?? name]) ?? [])];
+  // The label is the section's own, which is not always its file name.
+  const label = tex.match(/\\label\{(sec:[^}]+)\}/)?.[1] ?? `sec:${name}`;
   if (!vs.length || vs.some((v) => !VERDICT[v])) throw new Error(`verdict of ${name}: ${vs}`);
   rows.push(
-    `${cote} & ${statement} & ${vs.map((v) => VERDICT[v]).join(' ; ')} & \\href{${base}/${file}.lean}{\\texttt{\\detokenize{${file}}}} & \\ref{sec:${name}}\\\\`,
+    `${cote} & ${statement} & ${vs.map((v) => VERDICT[v]).join(' ; ')} & \\href{${base}/${file}.lean}{\\texttt{\\detokenize{${file}}}} & \\ref{${label}}\\\\`,
   );
 }
 // Parts with no section of their own (the empty ones) leave a heading with no row.
