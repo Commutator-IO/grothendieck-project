@@ -191,17 +191,17 @@ A first look at the page images found the alternative likely here; these are fas
 - [ ] 12 p89 batch-05:321 | reading | head of line 7 | « Z-libre » | « gpe libre »
 - [ ] 12 p89 batch-05:324 | reading | where does « k[t]/P k[t] » belong, and what is associated to P ? | « P en [ill.] [ill.]. À tout tel P, on associe : k[t]/P k[t]. (V, f), dont … » | « P en module k[t]/P k[t]. À tout tel P est associé un (V, f), dont … »
 - [ ] 12 p89 batch-05:328 | reading | two short lines in the left margin | [illisible] | « k un corps ou non »
-- [ ] 12 p90 batch-05:341 | reading | first line | « via la fonction car. modifiée » | « via le pol. car. modifié »
-- [ ] 12 p90 batch-05:348 | reading | the looped insertion under R(N,k) → 1 + k[[t]]^+ : first word, and a minus sign in the denominator ? | « compatible avec … l'anti-« additif » φ(t) ↦ 1/φ(t) » | « composé avec l'aut. « additif » φ(t) ↦ 1/φ(−t) »
-- [ ] 12 p90 batch-05:351 | reading | boxed margin note, lines 1–2 | « en fait, [illisible] les fonctions rationnelles » | « en fait, à valeur(s) dans les fonctions rationnelles »
-- [ ] 12 p90 batch-05:357 | reading | the sentence after « En effet » | « la connaissance de la fonction rationnelle à numérateur 1 dans k[t] [ill.] facilement [ill.] » | « la connaissance de la série formelle permet de reconstituer la fonction rationnelle L, donc »
-- [ ] 12 p90 batch-05:381 | reading | last lines | « on trouve inversement L par exp(…). D… » | « on peut inverser cet homomorphisme par exp(…). Donc »
-- [ ] 12 p91 batch-05:397 | reading | after « la fonction L de » : is the long word struck ? | « (X, F) [struck word] à coeff. dans F, sur F_p » | « X, compactifiable sur F_p, à coeff. dans F »
-- [ ] 12 p91 batch-05:402 | reading | three places in the lower half | « on considère cette fonction L comme l'image » ; « F vient d'un motif » ; « suivant les poids en » | « car essentiellement cette fonction L est l'image » ; « F est un motif » ; « suivant des poids en des »
-- [ ] 12 p92 batch-05:415 | reading | the first words of the insertion above line 2 (its « de poids ρ » is settled), and the exponent of H (twice) | « F localement constant » ; H^i | « F constant tordu » ; H^{i−ρ}
-- [ ] 12 p92 batch-05:420 | reading | two places | « donc on a la connaissance » ; « Frobenius dans ceux-ci » | « dans ce cas la connaissance » ; « Frobenius dedans »
-- [ ] 12 p92 batch-05:444 | reading | slanted margin bottom left | « le poids [ill.] filtration [ill.] cf. N° 12 » | « le poids ici n'est pas la bonne filtration cf N° 12 »
-- [ ] 12 p93 batch-05:463 | reading | slanted margin, top left | fragments « filtration … poids … niveau » | « peut se raffiner, en regardant une autre filtration que par le poids, savoir le niveau … »
-- [ ] 12 p93 batch-05:466 | reading | the paragraph « Si F = Q_ℓ(0) » | « … [ill.] des fonctions ζ … est [ill.] équivalente : celle de π_0(X̄) comme [ill.] fondamentale » | « donc si on s'occupe des fonctions ζ … est essentiellement équivalente : celle de π_0(X̄) comme Frob-ensemble »
-- [ ] 12 p93 batch-05:477 | reading | last lines : the short word, and is the F struck ? | « plus [illisible] la connaissance de ζ(X, F) » | « plus par la connaissance de ζ(X) »
-- [ ] 12 p94 batch-05:487 | reading | condition on F (twice) | « lct. constant » | « ct tordu » (constant tordu)
+- [x] 12 p90 batch-05:341 | reading | first line | « via la fonction car. modifiée » | « via le pol. car. modifié »
+- [x] 12 p90 batch-05:348 | reading | the looped insertion under R(N,k) → 1 + k[[t]]^+ : first word, and a minus sign in the denominator ? | « compatible avec … l'anti-« additif » φ(t) ↦ 1/φ(t) » | « composé avec l'aut. « additif » φ(t) ↦ 1/φ(−t) »
+- [x] 12 p90 batch-05:351 | reading | boxed margin note, lines 1–2 | « en fait, [illisible] les fonctions rationnelles » | « en fait, à valeur(s) dans les fonctions rationnelles »
+- [x] 12 p90 batch-05:357 | reading | the sentence after « En effet » | « la connaissance de la fonction rationnelle à numérateur 1 dans k[t] [ill.] facilement [ill.] » | « la connaissance de la série formelle permet de reconstituer la fonction rationnelle L, donc »
+- [x] 12 p90 batch-05:381 | reading | last lines | « on trouve inversement L par exp(…). D… » | « on peut inverser cet homomorphisme par exp(…). Donc »
+- [x] 12 p91 batch-05:397 | reading | after « la fonction L de » : is the long word struck ? | « (X, F) [struck word] à coeff. dans F, sur F_p » | « X, compactifiable sur F_p, à coeff. dans F »
+- [x] 12 p91 batch-05:402 | reading | three places in the lower half | « on considère cette fonction L comme l'image » ; « F vient d'un motif » ; « suivant les poids en » | « car essentiellement cette fonction L est l'image » ; « F est un motif » ; « suivant des poids en des »
+- [x] 12 p92 batch-05:415 | reading | the first words of the insertion above line 2 (its « de poids ρ » is settled), and the exponent of H (twice) | « F localement constant » ; H^i | « F constant tordu » ; H^{i−ρ}
+- [x] 12 p92 batch-05:420 | reading | two places | « donc on a la connaissance » ; « Frobenius dans ceux-ci » | « dans ce cas la connaissance » ; « Frobenius dedans »
+- [x] 12 p92 batch-05:444 | reading | slanted margin bottom left | « le poids [ill.] filtration [ill.] cf. N° 12 » | « le poids ici n'est pas la bonne filtration cf N° 12 »
+- [x] 12 p93 batch-05:463 | reading | slanted margin, top left | fragments « filtration … poids … niveau » | « peut se raffiner, en regardant une autre filtration que par le poids, savoir le niveau … »
+- [x] 12 p93 batch-05:466 | reading | the paragraph « Si F = Q_ℓ(0) » | « … [ill.] des fonctions ζ … est [ill.] équivalente : celle de π_0(X̄) comme [ill.] fondamentale » | « donc si on s'occupe des fonctions ζ … est essentiellement équivalente : celle de π_0(X̄) comme Frob-ensemble »
+- [x] 12 p93 batch-05:477 | reading | last lines : the short word, and is the F struck ? | « plus [illisible] la connaissance de ζ(X, F) » | « plus par la connaissance de ζ(X) »
+- [x] 12 p94 batch-05:487 | reading | condition on F (twice) | « lct. constant » | « ct tordu » (constant tordu)
