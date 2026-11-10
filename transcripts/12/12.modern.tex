@@ -24,6 +24,26 @@
 %   sequence and Hodge III 8.2.4: the box [max(0,i-n+1), min(i,n)], level
 %   <= min(i, 2n-1-i)), its sharpness, the literature searched on 2026-10-24,
 %   and a footnote on the relative case. Not formalised.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-10 — brought into line with
+%   the corrected transcriptions of pp. 22-94 (#66, #138, #139: about 140
+%   readings changed on the facsimile). pp. 43-50: the letter is the xi of
+%   p. 36 on the page itself, not zeta; pp. 46-49: the invariant is the
+%   underlined gamma, not Gamma; pp. 56, 58, 70: the lower-case gothic g, now
+%   read as the Lie algebra of the l-adic image of Galois; p. 58: his answer on
+%   the algebraic part (all over a finite field, zero otherwise) given and
+%   qualified; pp. 75-78: A^fixe, the fixed part of A over S (largest constant
+%   abelian subscheme), not a trace from a misread A^tr, and the computation
+%   (Lang, Lang-Neron, torsion of its F_p-bar points) rewritten for it; p. 73:
+%   T_mot(A) is R^1 of the dual abelian scheme; p. 68: the reduction is to
+%   Spec Z and, in the geometric case, to Spec F_p, so the old objection goes;
+%   p. 63: the Tate formula with Q_X(0); p. 49: « coh. alg ! », not « Cast. ok ! »;
+%   pp. 85-94: the weight is rho, pseudo-ample forms, the modified
+%   characteristic polynomial and the automorphism phi(t) -> 1/phi(-t),
+%   « F constant tordu » with H^{i-rho} (sign checked), the margins on weight,
+%   filtration and level, the « Frob-ensemble »; pp. 22-41: duality formula and
+%   « ess. affine » (p. 23), M^+_l target (p. 24), sub-objects of R^j f_!
+%   (p. 31), coniveau for X smooth (p. 41). Keywords unchanged. Unchecked by a
+%   human.
 %
 % Scope. Of the 167 leaves, about 125 carry his hand or a typescript of his.
 % The rest (EGA IV galleys, a Bourbaki exposé, an English typescript on Brauer
@@ -74,15 +94,20 @@
 %   - p. 92's « cf. N° 12 » is §12 of pp. 42-51; p. 121's « 2) » continues the
 %     « (1) » of p. 115 and the « (2°) » of p. 119.
 %   - the D_i of pp. 34-35 is the level of p. 2 extended to mixed motives, and
-%     the xi of p. 36 is the zeta of pp. 43-57.
+%     the zeta still read on pp. 53 and 57 is the xi of p. 36 (pp. 43-50 write
+%     xi themselves since the 2026-11 corrections).
 %
 % NOTATION fixed for the folder:
 %   - weights: Q(-1) is effective of weight 2 EVERYWHERE; M(n) = M (x) Q(n).
 %     In the abstract part the Tate object is written Lambda(-1), of degree p
 %     (p = 2 in geometry); pp. 152-154 write it Lambda(1), pp. 155-166
 %     Lambda(-i): the first is renormalised (footnoted at p. 152).
-%   - xi = cl Q(-1) = cl of the affine line, the Lefschetz class, for his xi
-%     (p. 36) and his zeta (pp. 43-57); zeta is kept for zeta functions (p. 93).
+%   - xi = cl Q(-1) = cl of the affine line, the Lefschetz class: his xi of
+%     p. 36 and pp. 43-50, and the zeta read on pp. 53 and 57; zeta is kept for
+%     zeta functions (p. 93).
+%   - underlined gamma^i(X) (pp. 46-49) the object, gamma_i(X) its class;
+%     g_l (lower-case gothic, pp. 56, 58, 70) the Lie algebra of the l-adic
+%     image of Galois, g_M its motive.
 %   - categories \mathcal{M}^+(X), \mathcal{M}(X); their Grothendieck rings
 %     \mathbf{M}^+(X), \mathbf{M}(X) (plain M on the pages).
 %   - H^i_c, Rf_! for his H^i_!, R^i_! f.
@@ -107,24 +132,30 @@
 %           D_i cap Sigma^+_j and the quotient D_i/D_{i-1} recomputed.
 %   p. 36   « Ext^i = 0 » (doubtful reading) cannot hold: Kummer extensions.
 %   p. 45   « dual des H^j »: by Lefschetz beta'_j = cl H^j.
-%   pp. 48-49 the questions (isogenous jacobians; Gamma_i = 0 => unirational;
-%           Gamma_n = 0 => ruled) have negative answers in char 0 too
-%           (Riemann-Hurwitz; Enriques surfaces). « Cast. ok ! » overclaims.
+%   p. 41   the coniveau bound holds in every degree, X smooth (not proper).
+%   pp. 48-49 the questions (isogenous jacobians; gamma_i = 0 => unirational;
+%           gamma_n = 0 => ruled) have negative answers in char 0 too
+%           (Riemann-Hurwitz; Enriques surfaces, the « coh. alg ! » case).
+%   p. 58   « nulle » for the algebraic part off finite fields is too strong
+%           (central weight cocharacter, homotheties).
 %   p. 50   Gr_i -> Gr_alpha.
 %   p. 52   effectivity by integrality: only => is known.
 %   pp. 63-64, 70 absolute cohomology over F_p-bar: p. 63's vanishing plus
 %           Leray contradicts the non-zero H^{2j+1} of pp. 64/70; left open.
-%   p. 63   R^i -> R^{2i}.
-%   p. 68   the reduction from Spec Z to its closed points is not formal.
+%   p. 63   R^i f_* Q(0) -> R^{2i} f_* Q(i).
+%   p. 68   only the geometric case (Spec F_p) is checked; Spec Z left.
 %   p. 72   case i = 1: -2 <= rho <= 0, not <= 1.
 %   p. 73   T_mot(A) = R^1f_*Q(1) has weight -1, not 1.
 %   p. 81   H^1(C,A) finite (conj.), not 0; H^2(C,A) =/= 0 in general;
 %           H^1(K_x,A) finite in its prime-to-p part only.
-%   p. 86   B = Hom(M'(x)M'', Q(-p)), not Q(p).
+%   pp. 75-78 H^1(F_p, M) = (M (x) Q/Z)^pi only up to a finite quotient.
+%   p. 86   B = Hom(M'(x)M'', Q(-rho)), not Q(rho).
 %   p. 88   (iv) and (vii), not (vi); orthogonality of isotypic parts needs
 %           M_alpha self-dual up to twist (supplied).
 %   p. 90   L : R(N,k) -> 1 + t k[[t]] is not injective: nilpotent classes
 %           die; injective on automorphisms.
+%   pp. 92-93 h^i(F) = (-1)^rho H^{i-rho}; the weights of H^{2n}_c, H^{2n-1}_c
+%           shifted by rho.
 %   p. 100  the answer to « inj ? » is no (computed).
 %   p. 106  descent: proper surjective maps suffice (SGA 4 Vbis).
 %   p. 108  C) 2): the page's bounds lack j; + 2j supplied (B's argument);
@@ -147,8 +178,8 @@
 % of the paper planned p. 98; the composition of p. 101; §6 of p. 114; Prop. 1
 % of p. 132 in the case R^n j_*(Q_l) (« à traiter…!! »); the purity question
 % and the « Pb » of p. 141; the verification of p. 166; the « partie
-% algébrique » of the fundamental pro-motive (p. 58); the injectivity question
-% of p. 51.
+% algébrique » of the fundamental pro-motive (p. 58: all over a finite field,
+% « je pense » zero otherwise, unargued); the injectivity question of p. 51.
 
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
@@ -312,9 +343,9 @@ comme « envisagés dans les notes sur les \emph{Motifs} ». Et le « 2) » de l
 page 121 est la suite du « (1) » de la page 115 et du « (2°) » de la page 119.
 
 Enfin, la filtration $D_{i}$ des pages 34 et 35 est le niveau de la page 2,
-étendu aux motifs qui ne sont plus semi-simples ; et la lettre $\xi$ de la page
-36 et la lettre $\zeta$ des pages 43 à 57 désignent le même élément, la classe
-du motif de Lefschetz.
+étendu aux motifs qui ne sont plus semi-simples ; et la lettre $\zeta$ des pages
+53 et 57 désigne le même élément que le $\xi$ de la page 36, repris aux pages 43
+à 50 : la classe du motif de Lefschetz.
 
 \subsection*{Les conventions, valables pour tout le dossier}
 
@@ -326,9 +357,13 @@ du motif de Lefschetz.
   $p$ ($p = 2$ en géométrie) ; les pages 152 à 154 l'écrivent $\Lambda(1)$ et les
   pages 155 à 166 $\Lambda(-i)$ : on a renormalisé les premières.
   \item $\xi = \operatorname{cl}\mathbb{Q}(-1)$ est la classe de Lefschetz, qui
-  est aussi l'image de la droite affine ; on l'écrit $\xi$ partout, là où les
-  pages 43 à 57 écrivent $\zeta$. La lettre $\zeta$ est réservée aux fonctions
-  zêta (page 93).
+  est aussi l'image de la droite affine ; c'est la lettre des pages 36 et 43 à
+  50, et on l'écrit $\xi$ aussi aux pages 53 et 57, où se lit un $\zeta$. La
+  lettre $\zeta$ est réservée aux fonctions zêta (page 93).
+  \item $\underline{\gamma}^{i}(X)$, souligné comme sur les pages 46 à 49, est le
+  motif dont $\gamma_{i}(X)$ est la classe ; $\mathfrak{g}_{\ell}$, gothique
+  minuscule comme aux pages 56, 58 et 70, est l'algèbre de Lie de l'image
+  $\ell$-adique de Galois, et $\mathfrak{g}_{M}$ le motif qui la porte.
   \item Les catégories de motifs sont $\mathcal{M}^{+}(X)$ (effectifs) et
   $\mathcal{M}(X)$ ; leurs anneaux de Grothendieck sont notés
   $\mathbf{M}^{+}(X)$ et $\mathbf{M}(X)$, là où les pages écrivent un $M$ droit.
@@ -368,7 +403,8 @@ l'article planifié page 98 ; la composition annoncée page 101 ; le paragraphe 
 de la page 114 ; le cas de la Proposition 1 de la page 132 qu'il laisse « à
 traiter…!! » ; la question de pureté et le « Pb » de la page 141 ; la
 vérification de la page 166 ; la « partie algébrique » du pro-motif
-fondamental (page 58).
+fondamental (page 58), dont il pense seulement qu'elle est nulle hors des corps
+finis.
 
 \pagerange{1}{18}
 \section*{I. Esquisse d'une théorie des motifs (pages 1 à 18)}
@@ -768,16 +804,20 @@ demandées ici reste conjecturale.}
 $\mathbb{Q}$-linéaire $\mathcal{M}^{+}(X)$ des motifs effectifs, munie d'un
 produit tensoriel commutatif et unitaire, exact à droite, d'unité
 $\mathbf{1}_{X} = \mathbb{Q}_{X}(0)$, et sa catégorie dérivée bornée
-$D^{b}(\mathcal{M}^{+}(X))$ avec $\overset{L}{\otimes}$. Un morphisme
+$D^{b}(\mathcal{M}^{+}(X))$ avec $\overset{L}{\otimes}$.\footnote{La page note
+ce produit dérivé par un $\otimes$ souligné de deux traits, sans le $L$.} Un morphisme
 $f \colon X \to Y$ donne un foncteur exact $f^{*}$, compatible au produit
 tensoriel ; si $f$ est de type fini, et propre ou $Y$ excellent, un foncteur
 $Rf_{*}$, avec transitivité et formule de projection
 \[
 Rf_{*}(M \otimes Lf^{*}N) \simeq Rf_{*}(M) \otimes N .
 \]
-Il note en marge qu'il faudra aussi tout le formulaire de dualité, avec $f^{!}$
-et $Rf_{!}$. Pour $X = \varprojlim X_{i}$, limite filtrante à morphismes de
-transition affines, $\mathcal{M}^{+}(X) \simeq \varinjlim \mathcal{M}^{+}(X_{i})$,
+Il note en marge qu'il faudra aussi la formule de dualité entre $Rf_{*}$,
+$f^{*}$, $f^{!}$ et $Rf_{!}$, et le formulaire standard qui relie tous ces
+foncteurs. Pour $X = \varprojlim X_{i}$, limite d'un système projectif filtrant
+essentiellement affine,\footnote{« ess.\ affine » : les morphismes de transition
+sont affines à partir d'un certain rang, ce qui suffit pour que la limite
+existe et soit un préschéma.} $\mathcal{M}^{+}(X) \simeq \varinjlim \mathcal{M}^{+}(X_{i})$,
 et $Rf_{*}$ commute au passage à la limite : on se ramène aux préschémas de type
 fini sur $\mathbb{Z}$.
 
@@ -790,8 +830,12 @@ T_{\ell} \colon \mathcal{M}^{+}(X) \longrightarrow \mathcal{M}_{\ell}(X)
 \]
 vers les $\mathbb{Q}_{\ell}$-faisceaux constructibles, compatible au produit
 tensoriel et aux unités, exact, fidèle mais non pleinement fidèle, compatible à
-$f^{*}$, à $Rf_{*}$, à la formule de Künneth, et qui s'étend aux catégories
-dérivées.\footnote{Un paragraphe sur un foncteur $T_{\infty}$ vers les Modules
+$f^{*}$, à $Rf_{*}$, à la formule de Künneth --- et, ajoute la marge, à $f^{!}$,
+à $Rf_{!}$ et au résidu ---, et qui s'étend aux catégories
+dérivées.\footnote{Le but du foncteur est écrit $\mathcal{M}^{+}_{\ell}(X)$ dans
+la formule et $\mathcal{M}_{\ell}(X)$ dans la définition qui suit ; un
+$\mathbb{Q}_{\ell}$-faisceau n'ayant pas de condition d'effectivité, on garde
+$\mathcal{M}_{\ell}(X)$. Un paragraphe sur un foncteur $T_{\infty}$ vers les Modules
 cohérents, pour $X$ de type fini sur $\mathbb{Q}$, est encadré puis barré sur la
 page 25. La marge de la même page observe que l'existence de $T_{\ell}$ exclut
 la solution triviale $\mathcal{M}^{+}(X) = 0$.}
@@ -828,7 +872,8 @@ $\mathcal{M}(X)$ comme pseudo-limite inductive de la suite $\mathcal{M}^{+}
 $\mathbb{Q}(-1)$ devient inversible d'inverse $\mathbb{Q}(1)$. Tout objet de
 $\mathcal{M}(X)$ s'écrit $M_{n}(n)$ avec $M_{n}$ effectif pour $n$ assez grand,
 et $M_{n}(n) \simeq M_{n+1}(n+1)$ équivaut à $M_{n+1} \simeq M_{n}(-1)$ ;
-$\mathcal{M}^{+}(X)$ est une sous-catégorie pleine épaisse de $\mathcal{M}(X)$, et
+$\mathcal{M}^{+}(X)$ est une sous-catégorie abélienne épaisse de $\mathcal{M}(X)$,
+l'appartenance à $\mathcal{M}^{+}(X)$ se vérifiant fibre par fibre, et
 $T_{\ell}$ s'étend de façon unique. Dans $\mathcal{M}(X)$ il y a des
 $\underline{\operatorname{Hom}}$ et des $R\underline{\operatorname{Hom}}$, adjoints
 au produit tensoriel et compatibles à $T_{\ell}$.
@@ -845,7 +890,7 @@ plus généralement, pour $u \in \operatorname{End}(M)$,
 \qquad
 \det(1 - t\,T_{\ell}(u)) = \det(1 - t\,T_{\ell'}(u)) \in \mathbb{Q}[t] ,
 \]
-la seconde égalité se déduisant de la première appliquée aux $\wedge^{n}u$.
+la seconde égalité se déduisant de la première appliquée aux $\wedge^{i}u$.
 L'argument est celui qu'on donne aujourd'hui : $u$ est un élément de
 $\operatorname{Hom}(\mathbf{1}_{X}, M^{\vee} \otimes M)$, la contraction
 $M^{\vee} \otimes M \to \mathbf{1}_{X}$ en fait un $c(u) \in
@@ -865,7 +910,7 @@ $\leqslant i$ forment une filtration exhaustive,\footnote{Il écrit d'abord
 les indices en haut, $\mathcal{M}^{+i}(X)$, puis note quatre fois en marge
 « indices en bas » et passe aux indices inférieurs à la page 33 ; on les met en
 bas partout.} dont l'appartenance se vérifie fibre à fibre, en un point fermé
-suffisant quand $X$ est de type fini --- et, sur un corps fini, par les valeurs
+suffisant quand $X$ est de type fini sur $\mathbb{Z}$ --- et, sur un corps fini, par les valeurs
 absolues du Frobenius. Elle est locale, compatible à $f^{*}$, et
 \[
 R^{j}f_{!} \colon \mathcal{M}^{+}_{i}(X) \longrightarrow \mathcal{M}^{+}_{i+j}(Y) ,
@@ -874,13 +919,16 @@ ce qui est, transcrit, le théorème principal de Weil II.\footnote{Pour les
 $\mathbb{Q}_{\ell}$-faisceaux mixtes, que $R^{j}f_{!}$ augmente les poids d'au
 plus $j$ est le théorème de Deligne (« La conjecture de Weil II », 1980). La
 page le pose comme exigence.} Sur un corps algébriquement clos,
-$\mathcal{M}^{+}_{i}(k)$ est engendrée, par extensions, par des sous-quotients de
-motifs $R^{j}f_{!}(\mathbf{1}_{X})$.\footnote{La page dit les
-$R^{i}f_{!}(\mathbb{Z}\cdot\mathbf{1}_{X})$ « pour $X$ si on veut projectif lisse
-de dim $\leqslant j$ ». Pour $X$ projectif et lisse, $R^{i}f_{!}$ est pur de poids
-$i$ ; les poids $< i$ demandent d'autres degrés ou des $X$ non propres. Les
-indices de la phrase ne se lisent pas sûrement, et on n'en garde que le
-principe.} La filtration est multiplicative, $\mathcal{M}^{+}_{i} \otimes
+$\mathcal{M}^{+}_{i}(k)$ est engendrée par les sous-objets des motifs
+$R^{j}f_{!}(\mathbf{1}_{X})$, $j \leqslant i$, pour $X$ projectif et lisse de
+dimension $\leqslant j$ : tout objet a une filtration dont les facteurs sont
+isomorphes à de tels sous-objets.\footnote{La page dit « sous-espaces » et
+écrit $R^{j}f_{!}(\mathbb{Z}\,\mathbf{1}_{X})$, le $\mathbb{Z}$ biffé ; la
+borne $j \leqslant i$ est implicite --- pour $X$ projectif et lisse,
+$R^{j}f_{!}$ est pur de poids $j$. Se borner aux $X$ de dimension
+$\leqslant j$ ne coûte rien : pour une section hyperplane $Y$ de $X$ de
+dimension $n > j$, la restriction $H^{j}(X) \to H^{j}(Y)$ est injective
+(Lefschetz faible).} La filtration est multiplicative, $\mathcal{M}^{+}_{i} \otimes
 \mathcal{M}^{+}_{k} \subset \mathcal{M}^{+}_{i+k}$, et $\mathbb{Q}(-1)$ est de
 poids $2$ ; mieux, $M \in \mathcal{M}^{+}_{i}$ si et seulement si $M(-j) \in
 \mathcal{M}^{+}_{i+2j}$. Elle se prolonge donc à $\mathcal{M}(X)$ en une filtration
@@ -910,7 +958,8 @@ La filtration par le « type dimensionnel » $D_{i}$ est la plus petite filtrati
 épaisse qui majore celle par le poids et qui soit stable par $\otimes\,
 \mathbb{Q}(-1)$ : $D_{i}(\mathcal{M}^{+}(X))$ est formée des objets qui, localement
 pour la topologie étale, sont extensions d'objets $M(-j)$ avec $M \in
-\mathcal{M}^{+}_{i}(X)$ et $j \geqslant 0$. Sur les motifs semi-simples sur un
+\mathcal{M}^{+}_{i}(X)$ et $j \geqslant 0$ --- du moins fibre par fibre, et
+la minimalité n'est dite que pour $X = \operatorname{Spec} K$ un corps. Sur les motifs semi-simples sur un
 corps, c'est exactement le niveau de la page 2 ; la filtration $D_{i}$ l'étend aux
 motifs qui ne sont plus semi-simples. Elle est stable par image inverse, et
 \[
@@ -918,7 +967,8 @@ R^{j}f_{!}\bigl(D_{i}\mathcal{M}^{+}(X)\bigr) \subset D_{i+j}\mathcal{M}^{+}(Y) 
 \]
 l'analogue pour $R^{j}f_{*}$ restant marqué d'un point d'interrogation, avec
 cette seule certitude que $R^{j}f_{*}$ envoie les poids $\leqslant i$ dans les
-poids $\leqslant i+2j$. Elle est stable par torsion --- $M \in D_{i}$ entraîne
+poids $\leqslant i+2j$ : c'est, note la marge, ce qui distingue formellement
+les filtrations $D_{i}$ et $\mathcal{M}_{i}$. Elle est stable par torsion --- $M \in D_{i}$ entraîne
 $M(-j) \in D_{i}$, « pas $D_{i+j}$ !! » ---, se prolonge à $\mathcal{M}(X)$, est
 multiplicative, $D_{i} \otimes D_{j} \subset D_{i+j}$, avec $\mathbb{Q}(-j) \in D_{0}$
 pour tout $j$, et
@@ -1018,8 +1068,8 @@ plus bas $\sigma_{0}(X)$ et $\sigma_{1}(X)$ ; il ne le fait pas.
 
 Restent les opérations. Pour la dualité, $\mathbb{Q}(-i) \otimes
 \bigl[\mathcal{M}^{+}_{i}\bigr]^{\vee} \subset \mathcal{M}^{+}_{i}$, et $x \mapsto
-\check{x}\,\xi^{i}$ est une involution de $\mathbf{M}_{i}$ ; la théorie devrait
-montrer qu'elle est l'identité, c'est-à-dire que $\check{x} = \xi^{-i}x$ sur la
+\check{x}\,\xi^{i}$ définit, de proche en proche, une involution de
+$\sigma_{i}$ ; la théorie projective devrait montrer qu'elle est l'identité, c'est-à-dire que $\check{x} = \xi^{-i}x$ sur la
 partie de poids $i$.\footnote{C'est l'existence, pour tout motif pur $M$ de poids
 $i$, d'un isomorphisme $M^{\vee} \simeq M(i)$, c'est-à-dire d'une forme non
 dégénérée $M \otimes M \to \mathbb{Q}(-i)$ : une polarisation. Sur les $h^{i}(X)$
@@ -1048,12 +1098,17 @@ où $X^{(p)}$ est l'ensemble des points de codimension $p$ et $H^{*}(x) =
 sont nuls hors du secteur $0 \leqslant p \leqslant q$, et la marge souligne qu'on
 utilise le terme $E_{1}$, non $E_{2}$.\footnote{Cette suite spectrale est celle
 qu'étudieront Bloch et Ogus (1974). La page écrit $\mathbb{Z}_{\ell}$ dans l'une de
-ses deux lignes de définition, $\mathbb{Q}_{\ell}$ partout ailleurs.} Elle
-provient d'une suite spectrale de motifs, au moins à partir de $E_{2}$ --- sinon
-il faudrait des ind-motifs, ou des filtrations finies convenables par des fermés.
-Si $X$ est projective et lisse --- « hypothèse essentielle ! » ---, le cran
-$\geqslant p$ de la filtration aboutissement de $H^{i}$ est de niveau
-$\leqslant i-2p$ : c'est l'image, par des morphismes de Gysin, de la cohomologie
+ses deux lignes de définition, $\mathbb{Q}_{\ell}$ partout ailleurs.} On veut
+qu'elle provienne d'une suite spectrale de motifs, au moins à partir de $E_{2}$ --- sinon
+il faudrait des ind-motifs, ou une filtration finie convenable de $X$ par des fermés.
+Si $X$ est lisse --- « hypothèse essentielle, même si $X$ de dim.\ 1 ! », dit la
+marge, où « projectif » est biffé ---, le cran $\geqslant p$ de la filtration
+aboutissement de $H^{i}$ est de niveau $\leqslant i-2p$ :\footnote{La page
+le dit du « morceau en dim $n$ », c'est-à-dire de $H^{n}$, avec la borne
+$n-2p$ ; l'argument vaut en tout degré. La propreté n'est pas nécessaire : la
+cohomologie $H^{j}$ d'une variété lisse est de niveau $\leqslant j$ (page 50),
+et le morphisme de Gysin part d'une résolution, propre sur $X$, d'un fermé de
+codimension $p$ --- résolution que le dossier suppose partout.} c'est l'image, par des morphismes de Gysin, de la cohomologie
 de degré $i-2p$ de variétés de dimension $n-p$, tordue par $\mathbb{Q}(-p)$. Le
 feuillet 57, barré et hors de sa place, reprend ce point pour $i = n$ : les
 $\operatorname{gr}^{p}H^{n}$ sont de niveau pur $n-2p$ et de poids
@@ -1105,19 +1160,23 @@ et un homomorphisme naturel
 \mathbb{Z}^{(\sigma_{n} \sqcup \xi\sigma_{n-1} \sqcup \xi^{2}\sigma_{n-2} \sqcup \cdots)} ,
 \]
 où $\xi^{a}\sigma_{n-a}$ est de poids $n+a$ et où les $\sigma_{k} = \sigma_{k}(K)$
-sont les ensembles d'éléments primitifs des pages 39 et 40.\footnote{Les pages 43
-à 57 écrivent $\zeta$ pour ce qu'on note ici $\xi$ ; c'est le même élément, celui
-de la page 36. La page 43 donne une première version de ce paragraphe, barrée.}
+sont les ensembles d'éléments primitifs des pages 39 et 40.\footnote{La lettre
+qui multiplie les $\mathbf{M}^{+}$ aux pages 43 à 50 est le $\xi$ défini page 36,
+écrit d'une main crochue. La page 43 donne une première version de ce paragraphe,
+barrée.}
 À $X$ de dimension $\leqslant n$ est ainsi attaché un invariant
 $\gamma_{n}(X) + \xi\gamma_{n-1}(X) + \xi^{2}\gamma_{n-2}(X) + \cdots$, avec
 $\gamma_{j}(X) \in \mathbb{Z}^{(\sigma_{j}(K))}$. On l'obtient à partir des
 composantes de poids pur $\beta_{k}(X)$ de Serre pour $k \geqslant n$ : un tel
 $\beta_{k}$ s'écrit $\xi^{k-n}\beta'_{2n-k}$ avec $\beta'_{2n-k}$ de poids $2n-k$,
-et $\gamma_{2n-k}$ est, au signe $(-1)^{k}$ près, la composante primitive de
-$\beta'_{2n-k}$. Par construction ce sont des \emph{invariants $n$-birationnels}.
+et $\gamma_{2n-k}$ est, au signe $(-1)^{k}$ près, la composante \emph{bipure} de
+$\beta'_{2n-k}$, c'est-à-dire sa composante primitive au sens du
+niveau.\footnote{Un élément de $\sigma_{j}$ est un simple de poids $j$ qui n'est
+pas multiple de $\xi$, donc de niveau $j$ : « bipur » de type $j$ et
+« primitif » disent ici la même chose.} Par construction ce sont des \emph{invariants $n$-birationnels}.
 Si $X$ est projective et lisse, $\beta'_{j} = \operatorname{cl}H^{j}(X)$ pour
 $0 \leqslant j \leqslant n$, par le théorème de Lefschetz fort, et $\gamma_{j}(X)$
-est la composante primitive --- au sens du niveau --- de $H^{j}(X)$.\footnote{La
+est la composante bipure de $H^{j}(X)$.\footnote{La
 page dit « le dual (lecture incertaine) des $H^{j}$ ». Par Lefschetz,
 $H^{2n-j}(X) \simeq H^{j}(X)(j-n)$ ; c'est donc $H^{j}$ lui-même qu'on trouve, et
 comme $H^{j}$ est autodual à torsion près, les deux lectures donnent la même
@@ -1130,9 +1189,11 @@ invariant birationnel dans $D_{i}/D_{i-1}$, qui provient de
 $\mathcal{M}^{+}_{(i)}$, d'où un élément de $\mathbb{Z}^{(\sigma_{i}(K))}$ :
 c'est $\gamma_{i}(X)$. Mieux encore, $K$ étant parfait, soit
 \[
-\Gamma^{i}(X) \subset \varinjlim_{U} H^{i}(U, \mathbb{Q}(0))
+\underline{\gamma}^{i}(X) \subset \varinjlim_{U} H^{i}(U, \mathbb{Q}(0))
 \]
-le plus grand sous-motif \emph{bipur} de type $i$ ; c'est un motif semi-simple,
+le plus grand sous-motif \emph{bipur} de type $i$ ;\footnote{La page souligne la
+lettre $\gamma$ : l'objet $\underline{\gamma}^{i}(X)$ a pour classe l'invariant
+$\gamma_{i}(X)$ qui précède.} c'est un motif semi-simple,
 fonctoriel en $X$ --- ou en son corps de fonctions ---, nul pour les morphismes
 non dominants et \emph{injectif} pour les morphismes dominants, parce que
 $H^{i}(X) \to H^{i}(X')$ est injectif pour $X' \to X$ propre et surjectif entre
@@ -1140,23 +1201,29 @@ variétés lisses.\footnote{La page écrit ici $\mathcal{M}^{+}(X)$ et $\sigma_{
 là où les pages voisines ont $\mathcal{M}^{+}(K)$, $\sigma_{i}(K)$ ; on a corrigé.
 Le « TMB » qui introduit le cas non dominant est lu tel quel.}
 
-Suivent des questions de « fidélité » de ce foncteur. Si deux corps de fonctions
-$R$, $R'$ ont des systèmes $(\Gamma_{i})$ isomorphes, chacun
-s'immerge-t-il dans une extension transcendante pure de l'autre ? Deux exemples
+Suivent des questions de « fidélité » de ce foncteur. Pour deux extensions de
+type fini $R$, $R'$ de $K$, il aimerait que tout système d'homomorphismes
+$\underline{\gamma}_{i}(R) \to \underline{\gamma}_{i}(R')$ provienne d'un
+$K$-homomorphisme $R \hookrightarrow R'(\delta_{1}, \ldots, \delta_{N})$, et que
+des systèmes $(\underline{\gamma}_{i})$ isomorphes entraînent que $R$ et $R'$
+sont « équivalents » : que chacun s'envoie dans une extension transcendante pure
+de l'autre.\footnote{La page écrit $R'[\delta_{1}, \ldots, \delta_{N}]$ ; entre
+corps, il s'agit du corps des fractions rationnelles.} Deux exemples
 précisent la question :
 \begin{enumerate}
   \item si deux courbes $C$, $C'$ lisses, complètes, connexes sur $K$
   algébriquement clos ont des jacobiennes reliées par un homomorphisme à noyau
   fini, existe-t-il une application rationnelle dominante $C' \times
   \mathbb{A}^{N} \dashrightarrow C$ ?
-  \item si les $\Gamma_{i}$ sont nuls pour $i > 0$ --- par exemple si la
+  \item si les $\underline{\gamma}_{i}$ sont nuls pour $i > 0$ --- par exemple si la
   cohomologie d'une variété projective lisse est entièrement algébrique ---, la
-  variété est-elle unirationnelle ? Et pour une surface --- « Cast.\ ok ! ».
+  variété est-elle unirationnelle ? Et pour une surface, où il note entre
+  crochets « coh.\ alg ! » ?
 \end{enumerate}
 Et une remarque : si l'on néglige les variétés réglées, le seul invariant
-cohomologique qui reste est $\Gamma_{n}$ ; a-t-on un isomorphisme entre
+cohomologique qui reste est $\underline{\gamma}_{n}$ ; a-t-on un isomorphisme entre
 $\operatorname{gr}_{n}L(K)$, modulo le sous-groupe « réglé » $\xi\operatorname{gr}_{n-1}
-L(K)$, et $\mathbb{Z}^{(\sigma_{n}(K))}$ ? En particulier, si $\Gamma_{n}(X) = 0$,
+L(K)$, et $\mathbb{Z}^{(\sigma_{n}(K))}$ ? En particulier, si $\underline{\gamma}_{n}(X) = 0$,
 $X$ est-elle réglée ? Pour une surface dont le $H^{2}$ est algébrique, la marge
 répond : « Non en car.\ $p > 0$ », avec $E \times E$ pour $E$ supersingulière.
 
@@ -1168,12 +1235,13 @@ même genre $g \geqslant 2$, une application dominante $C' \to C$ est de degré 
 par Riemann--Hurwitz, donc un isomorphisme. Or il existe des courbes de genre $2$
 non isomorphes à jacobiennes isogènes (par exemple isogènes à un même produit
 $E \times E$). (2) et la remarque : une surface d'Enriques complexe a $H^{1} = 0$
-et $H^{2}$ entièrement algébrique, donc $\Gamma_{1} = \Gamma_{2} = 0$ ; elle n'est
+et $H^{2}$ entièrement algébrique, donc $\underline{\gamma}_{1} = \underline{\gamma}_{2} = 0$ ; elle n'est
 pas réglée, étant de dimension de Kodaira nulle, ni unirationnelle, son groupe
 fondamental étant d'ordre $2$ (une variété unirationnelle complexe est
 simplement connexe, Serre 1959). Le critère de Castelnuovo demande $q = P_{2} =
-0$, et $H^{2}$ algébrique ne donne que $q = p_{g} = 0$ : le « Cast.\ ok ! » de la
-page va trop vite.} C'est ce que la théorie des invariants birationnels
+0$, et $H^{2}$ algébrique ne donne que $q = p_{g} = 0$ : le cas des surfaces à
+cohomologie algébrique, que la page signale, est précisément celui où la
+question échoue.} C'est ce que la théorie des invariants birationnels
 stables a précisé depuis.\footnote{Larsen et Lunts (2003) ont montré, en
 caractéristique nulle, que le quotient de $L(K)$ par l'idéal engendré par la
 classe de la droite affine est l'anneau libre sur les classes de rationalité
@@ -1234,7 +1302,8 @@ Pour $i \geqslant 1$ : soit $\xi^{\beta}$ la plus grande puissance telle que
 $E(\beta)$ soit de degré $i-1$ ou $i$ selon la parité de $\alpha$ ; on demande
 $E(\beta)$ effectif. Enfin, pour $E$ semi-simple, la composante $E_{i}$ de niveau
 $i$ se caractérise « de façon purement combinatoire en termes de Frobenius » ; le
-bas de la page 54, qui le montrait sur un corps fini, est barré.
+bas de la page 54, qui le montrait sur un corps fini, le cas général s'en
+déduisant par image inverse si l'on connaît tous les Frobenius, est barré.
 
 \pagerange{55}{58}
 \subsection*{14) Invariants de Galois, théorèmes de commutation, et le motif de Lie (pages 55, 56 et 58)}
@@ -1268,40 +1337,61 @@ complet dès que $\mathcal{U}^{i}(X)$ est semi-simple, ce qui est l'hypothèse
 caractérise ainsi, note-t-il, ce ne sont ni les classes algébriques elles-mêmes
 ni l'image de $\Pi$, mais seulement les $\mathbb{Q}_{\ell}$-espaces qu'elles
 engendrent et l'algèbre enveloppante. Passant à la limite sur les extensions
-finies de $K$, on remplace $\Pi$ par l'image $\mathfrak{G}_{\ell}$ de Galois et
-les cycles de $X$ par ceux de $X_{\overline{K}}$. Et une question, restée ouverte
-sous cette forme : comment caractériser l'image de $\mathfrak{G}_{\ell}$ dans
-$\operatorname{End}(H^{i})$ ? Ce doit être une algèbre de Lie
-réductive.\footnote{La réductivité est une conséquence de la semi-simplicité
+finies de $K$, on remplace $\Pi$ par l'algèbre de Lie $\mathfrak{g}_{\ell}$ de
+son image $\ell$-adique, et les cycles de $X$ par ceux de
+$X_{\overline{K}}$ : les invariants sous $\mathfrak{g}_{\ell}$ sont les invariants
+sous un sous-groupe ouvert de $\Pi$, c'est-à-dire après une extension finie de
+$K$.\footnote{La page écrit un $\mathfrak{g}$ gothique minuscule, qui ne note
+plus le groupe $\operatorname{Gal}$, écrit en toutes lettres page 55. L'image de
+$\Pi$ dans $\operatorname{GL}(H^{i}(X_{\overline{K}}, \mathbb{Q}_{\ell}))$ est un
+sous-groupe fermé, donc un groupe de Lie $\ell$-adique (Cartan), et
+$\mathfrak{g}_{\ell}$ en est l'algèbre de Lie ; c'est elle qui a une algèbre
+enveloppante et dont on peut demander qu'elle soit réductive.} Et une
+question, restée ouverte sous cette forme : comment caractériser l'image de
+$\mathfrak{g}_{\ell}$ dans $\operatorname{End}(H^{i})$, qu'on peut voir, par la
+dualité de Poincaré, comme plongée dans $H^{2n-i} \otimes H^{i}(n)$ ? Ce doit
+être une sous-algèbre de Lie réductive.\footnote{La réductivité est une conséquence de la semi-simplicité
 conjecturée. La question de l'image elle-même est aujourd'hui celle de la
 conjecture de Mumford--Tate et de ses analogues, ouverte en général.}
 
 La page 58 tire de là un objet. Pour un motif $M$ sur $K$, semi-simple, l'image
-de $\mathfrak{G}_{\ell}$ dans $\operatorname{End}(M_{\ell}) = \check{M}_{\ell}
-\otimes M_{\ell}$ doit provenir d'un motif $\mathfrak{G}_{M} \subset \check{M}
+de $\mathfrak{g}_{\ell}$ dans $\operatorname{End}(M_{\ell}) = \check{M}_{\ell}
+\otimes M_{\ell}$ doit provenir d'un motif $\mathfrak{g}_{M} \subset \check{M}
 \otimes M$, indépendant de $\ell$, qui est un motif en algèbres de Lie ; quand
 $M$ grandit on obtient un pro-motif en algèbres de Lie canonique, qu'il appelle
 le \emph{pro-motif fondamental}, et qui doit pouvoir se construire à partir de la
-seule catégorie des motifs avec ses structures habituelles.\footnote{C'est
+seule catégorie des motifs avec ses structures tensorielles.\footnote{C'est
 l'algèbre de Lie du groupe de Galois motivique vue comme objet de la catégorie :
 le groupe de Galois motivique opère sur sa propre algèbre de Lie par l'action
 adjointe, qui est donc une représentation, c'est-à-dire un (pro-)motif ; sa
 réalisation est $\operatorname{Lie} G_{M} \subset \operatorname{End}(\omega(M))$.
 Dans le vocabulaire de Deligne (1989-1990), c'est l'algèbre de Lie du groupe
 fondamental de la catégorie tannakienne. Que l'image de Galois l'atteigne est une
-forme de la conjecture de Tate.} Quelle en est la « partie algébrique » ? La fin
-de la page, sur le cas d'un corps fini, est barrée et ne se lit qu'en fragments.
+forme de la conjecture de Tate.} Quelle en est la « partie algébrique » ? Sur
+un corps fini, répond-il entre crochets, c'est tout, le pro-motif n'étant
+lui-même que $\mathbb{Z}(0)$ ; dans tout autre cas, il pense qu'elle est
+nulle.\footnote{Sur $\mathbb{F}_{q}$, l'image de Galois est engendrée
+topologiquement par le Frobenius, et son algèbre de Lie est une droite
+engendrée par le logarithme d'une puissance du Frobenius, contenue dans
+$\mathbb{Q}_{\ell}[\mathrm{Frob}]$, l'algèbre engendrée par un endomorphisme
+algébrique ; une droite de classes algébriques, de motif $\mathbb{Q}(0)$, ce qui
+s'accorde avec la page. Dans les autres cas, si « partie algébrique » désigne
+les éléments invariants, « nulle » est trop fort tel quel : le cocaractère des
+poids est central, et l'image de Galois contient un sous-groupe ouvert des
+homothéties, au moins pour les variétés abéliennes (Bogomolov, 1980) ; ceci est
+de nous. Les deux dernières lignes de la page sont barrées et ne se lisent
+qu'en fragments.}
 
 \pagerange{59}{59}
 \subsection*{15) La cohomologie absolue : les exigences (page 59)}
 
-En plus des foncteurs relatifs $R^{i}f_{*}$, il faut des foncteurs « absolus »
-$H^{i}(X, M)$, provenant d'un foncteur de catégories triangulées
+En plus des foncteurs relatifs $R^{*}f_{*}$, il faut des foncteurs « absolus »
+$H^{*}(X, M) = (H^{i}(X, M))_{i}$, provenant d'un foncteur de catégories triangulées
 \[
 R\Gamma_{X} \colon D^{b}(\mathcal{M}^{+}(X)) \longrightarrow D^{b}(\mathrm{Ab}) ,
 \]
-qui commutent aux limites projectives filtrantes de préschémas à morphismes de
-transition affines --- ce qui ramène au cas de type fini sur $\mathbb{Z}$ --- et
+qui commutent aux limites essentiellement affines de préschémas quasi-compacts
+et quasi-séparés --- ce qui ramène au cas de type fini sur $\mathbb{Z}$ --- et
 satisfont la transitivité : pour $f \colon X \to Y$ de type fini, $R\Gamma_{X} =
 R\Gamma_{Y} \circ Rf_{*}$, d'où une suite spectrale de Leray
 $H^{p}(Y, R^{q}f_{*}M) \Rightarrow H^{p+q}(X, M)$.\footnote{C'est ce qu'on appelle
@@ -1320,16 +1410,17 @@ n'entrent pas ici.
 \pagerange{61}{64}
 \subsection*{Les propriétés demandées (pages 61 à 64)}
 
-On veut $H^{i}(X, M) = 0$ pour $i < 0$ et $H^{0}(X, M) = \operatorname{Hom}(
-\mathbb{Q}_{X}(0), M)$. Rien n'empêche d'introduire des hyper-Ext,
+On veut $H^{i}(X, M) = 0$ pour $i < 0$, donc $H^{0}(X, -)$ exact à gauche, et
+$H^{0}(X, M) = \operatorname{Hom}(\mathbb{Q}_{X}(0), M)$ fonctoriellement. Rien n'empêche d'introduire des hyper-Ext,
 \[
 \operatorname{Ext}^{i}(X ; M, N) = \mathbb{H}^{i}\bigl(X,
 R\underline{\operatorname{Hom}}(M, N)\bigr) ,
 \]
 avec $\operatorname{Ext}^{0} = \operatorname{Hom}$, et l'on espère que
 $\operatorname{Ext}^{1}$ classe les extensions de $M$ par $N$ ; on aimerait que
-les $\operatorname{Ext}^{*}$ soient ceux de la catégorie des motifs, mais il a des
-doutes pour $i > 0$, peut-être faut-il passer aux Ind-motifs. Il
+les $\operatorname{Ext}^{*}$ soient ceux de la catégorie des motifs, c'est-à-dire
+ses foncteurs dérivés, mais il doute que les $\operatorname{Ext}^{i}$, $i > 0$,
+soient effaçables --- peut-être le sont-ils dans la catégorie des Ind-motifs. Il
 note les suites spectrales $H^{p}(X, H^{q}(M^{\bullet})) \Rightarrow
 \mathbb{H}^{*}(X, M^{\bullet})$ et $H^{p}(X, \underline{\operatorname{Ext}}^{q}(M,N))
 \Rightarrow \operatorname{Ext}^{*}(X ; M, N)$.\footnote{Que la cohomologie
@@ -1337,7 +1428,7 @@ motivique soit un groupe d'extensions dans une catégorie abélienne de motifs
 mixtes est l'une des conjectures de Beilinson ; elle reste ouverte. La page pose
 la question et ne la tranche pas.}
 
-Puis la comparaison $\ell$-adique : les flèches
+Puis la comparaison $\ell$-adique : les morphismes de $\partial$-foncteurs
 \[
 H^{i}(X, M) \otimes_{\mathbb{Q}} \mathbb{Q}_{\ell} \longrightarrow
 H^{i}(X, T_{\ell}(M)) ,
@@ -1348,7 +1439,9 @@ H^{i}(X, T_{\ell}(M)) ,
 doivent être des isomorphismes pour $X$ de type fini sur $\mathbb{Z}$, et
 $H^{*}(X, M)$ un $\mathbb{Q}$-espace de dimension finie. En particulier, sur un
 corps algébriquement clos, $H^{i}(k, M) = 0$ pour $i > 0$ et tout
-motif.\footnote{Ces exigences ne sont pas celles de la cohomologie motivique de
+motif ; mais, ajoute-t-il, pour $X$ de type fini sur $k$, même projectif et
+lisse, on n'a plus de relations aussi précises, comme le montre le calcul
+explicite sur $\overline{\mathbb{F}}_{p}$.\footnote{Ces exigences ne sont pas celles de la cohomologie motivique de
 Voevodsky : sur $\mathbb{C}$, $H^{1}_{\mathcal{M}}(\mathbb{C}, \mathbb{Q}(1)) =
 \mathbb{C}^{*} \otimes \mathbb{Q}$ n'est pas nul, et sur $\mathbb{F}_{p}$,
 $H^{1}_{\mathcal{M}}(\mathbb{F}_{p}, \mathbb{Q}(0)) = 0$ alors que la page 68
@@ -1364,9 +1457,13 @@ a^{i}(X) \otimes_{\mathbb{Z}} \mathbb{Q} \;\simeq\;
 H^{2i}(X, \mathbb{Q}_{\ell}(i)) \bigr] ,
 \]
 où $a^{i}(X)$ est le groupe des classes de cycles de codimension
-$i$.\footnote{La page 63 donne d'abord $a^{i}(X) \otimes \mathbb{Q} \simeq
-\Gamma_{k}(R^{i}f_{*}\mathbb{Q}_{X}(i))$, avec l'exposant $i$ là où la formule
-encadrée de la page 64 porte $2i$ ; on lit $2i$.} Pour $j \neq 2i$, l'image de
+$i$.\footnote{La page 63 donne d'abord $a^{i}(X) \otimes_{\mathbb{Z}} \mathbb{Q}
+\simeq \Gamma_{k}(R^{i}f_{*}\mathbb{Q}_{X}(0))$, en précisant sous le
+$\mathbb{Q}$ : « pas $\mathbb{Q}_{\ell}$ ». Les classes de cycles de codimension
+$i$ vivent dans $R^{2i}f_{*}\mathbb{Q}_{X}(i)$, de poids $0$, et
+$\Gamma_{k}(R^{i}f_{*}\mathbb{Q}_{X}(0))$, de poids $i$, est nul pour $i > 0$ ;
+on lit la formule encadrée de la page 64, qui porte $2i$ et la torsion
+$(i)$.} Pour $j \neq 2i$, l'image de
 $H^{j}(X, \mathbb{Q}(i))$ dans la cohomologie $\ell$-adique est nulle, pour une
 raison de poids.
 
@@ -1386,16 +1483,20 @@ $i > 0$ et la suite spectrale de Leray donneraient $H^{2j+1}(X, \mathbb{Q}(j)) =
 \operatorname{Hom}(\mathbf{1}, R^{2j+1}f_{*}\mathbb{Q}(j)) = 0$, puisque
 $R^{2j+1}f_{*}\mathbb{Q}(j)$ est de poids $1$.\footnote{La tension est entre deux
 définitions de la cohomologie absolue sur $\overline{\mathbb{F}}_{p}$ : directement,
-ou comme limite inductive des cohomologies sur les corps finis. Le dossier ne la
-remarque pas et ne la tranche pas ; on la signale sans la résoudre.}
+ou comme limite inductive des cohomologies sur les corps finis. Le dossier
+sent la difficulté --- c'est le « on n'a plus de relations aussi précises » de
+la page 63 --- sans voir que l'annulation sur le point et la suite de Leray
+interdisent la table ; il ne la tranche pas, et on la signale sans la
+résoudre.}
 
 \pagerange{66}{68}
 \subsection*{La dualité absolue (pages 66 et 68)}
 
-Soit $X$ régulier de dimension $n$, de type fini sur $\mathbb{Z}$. Le motif
-dualisant est $\mathbb{Q}(n)[2n+1]$, et pour deux motifs constructibles $M$,
-$M^{*} = R\underline{\operatorname{Hom}}(M, \mathbb{Q}(n))$, les complexes
-$R\Gamma_{X}(M)$ et $R\Gamma_{c}(X, M^{*})$ doivent être duaux ; les coefficients
+Soit $X$ régulier de dimension $n$, de type fini sur $\mathbb{Z}$. Le complexe
+de motifs dualisant canonique est $\mathbb{Q}(n)[2n+1]$, et pour deux complexes
+de motifs $M$, $M^{*} = R\underline{\operatorname{Hom}}(M, \mathbb{Q}(n))$ duaux
+pour lui, les complexes $R\Gamma_{X}(M)$ et $R\Gamma_{c}(X, M^{*})$ doivent être
+duaux, le support étant propre sur $\operatorname{Spec}\mathbb{Z}$ ; les coefficients
 étant rationnels, sans Tor, cela revient à
 \[
 H^{i}(X, M) \ \text{dual de}\ \operatorname{Ext}_{c}^{2n+1-i}(X ; M, \mathbb{Q}(n)) ,
@@ -1405,18 +1506,18 @@ H^{i}_{c}(X, M) \ \text{dual de}\ \operatorname{Ext}^{2n+1-i}(X ; M, \mathbb{Q}(
 et les deux coïncident si $X$ est propre sur $\operatorname{Spec}\mathbb{Z}$.
 C'est la forme motivique de la dualité d'Artin--Verdier : pour $n = 1$, le
 dualisant $\mathbb{Q}(1)[3]$ est $\mathbb{G}_{m}[2]$ à coefficients rationnels.
-Par la dualité relative, il la ramène au cas $X = \operatorname{Spec}\mathbb{Z}$,
-puis au cas $X = \operatorname{Spec}\mathbb{F}_{p}$, où il s'agit de la dualité
+Par la dualité relative, il la ramène au même énoncé pour $X =
+\operatorname{Spec}\mathbb{Z}$ et, dans le cas géométrique --- $X$ de type fini
+sur $\mathbb{F}_{p}$ ---, pour $X = \operatorname{Spec}\mathbb{F}_{p}$, où il s'agit de la dualité
 entre $H^{i}(\mathbb{F}_{p}, M)$ et $H^{1-i}(\mathbb{F}_{p}, M^{*})$ par le
 cup-produit et $H^{1}(\mathbb{F}_{p}, \mathbb{Q}(0)) \simeq \mathbb{Q}$ ; il suffit
 de la vérifier $\ell$-adiquement, où c'est la trivialité que $H^{i}(\hat{\mathbb{Z}},
 V)$ et $H^{1-i}(\hat{\mathbb{Z}}, V^{*})$ sont duaux --- invariants et coinvariants
-d'un seul endomorphisme.\footnote{Le premier pas est la dualité relative ; le
-second ne peut pas être formel : la dualité d'Artin--Verdier pour
-$\operatorname{Spec}\mathbb{Z}$ contient de la théorie du corps de classes global
-et ne se ramène pas aux seuls points fermés. La page écrit « et lui-même le cas
-géométrique », sans argument. La marge ajoute « à développer au sujet des
-cup-produits à coefficients abstraits ».}
+d'un seul endomorphisme.\footnote{Seul le cas géométrique est ainsi vérifié.
+Le cas de $\operatorname{Spec}\mathbb{Z}$, la dualité d'Artin--Verdier à
+coefficients motiviques, contient de la théorie du corps de classes global ;
+la page le pose et ne le traite pas. La marge ajoute « à développer sans doute
+pour le cup-produit en cohomologie “absolue” ».}
 
 \pagerange{70}{72}
 \subsection*{Sur un corps fini : la suite de Hochschild--Serre et les poids (pages 70 et 72)}
@@ -1437,12 +1538,22 @@ si l'action est semi-simple, donc encore à $a^{j}(X) \otimes
 \mathbb{Q}_{\ell}$.\footnote{La conjecture de Tate sur les corps finis est ouverte
 en général ; elle est démontrée pour les diviseurs sur les variétés abéliennes
 (Tate, 1966), cas dont la page 77 va se servir.} Passant à la limite sur les
-extensions $k_{n}$, on obtient $0$ hors des degrés $2j$, $2j+1$, et $a^{j}(\overline{X})
-\otimes \mathbb{Q}_{\ell}$ dans les deux, non canoniquement pour le second : c'est
-la table de la page 64.
+extensions $k_{n}$, on obtient $0$ hors des degrés $2j$, $2j+1$ ; en degré $2j$,
+les invariants $H^{2j}(\overline{X}, \mathbb{Q}_{\ell}(j))^{\mathfrak{g}}$ sous
+l'algèbre de Lie $\mathfrak{g}$ de l'image de Galois --- la lettre des pages 56
+et 58 ---, c'est-à-dire $a^{j}(\overline{X}) \otimes \mathbb{Q}_{\ell}$ ; et le
+même groupe en degré $2j+1$, mais pas canoniquement en termes de
+$\overline{X}/\overline{\mathbb{F}}_{p}$ : c'est la table de la page 64. La marge
+dit pourquoi : remplacer $k$ par $k_{n}$ multiplie par $1/n$ l'isomorphisme
+obtenu.\footnote{L'isomorphisme de degré $2j+1$ passe par le générateur
+canonique de $H^{1}(\hat{\mathbb{Z}}, \mathbb{Q}_{\ell}) = \operatorname{Hom}(
+\hat{\mathbb{Z}}, \mathbb{Q}_{\ell})$, qui envoie le Frobenius sur $1$ ; par
+restriction à $n\hat{\mathbb{Z}}$, il devient $n$ fois le générateur de
+l'extension $k_{n}$. Les isomorphismes ne sont donc pas compatibles dans la
+limite, et seul le groupe limite est déterminé.}
 
 La page 72 fait le compte des poids pour $S$ lisse de dimension $n$, de type
-fini sur $\mathbb{F}_{p}$, et $M$ pur de poids $\rho$. Dans la suite de
+fini sur $\mathbb{F}_{p}$, et $M$ un motif constant tordu pur de poids $\rho$. Dans la suite de
 Hochschild--Serre, $H^{i-1}(\overline{S}, \overline{M}_{\ell})_{\pi}$ a ses poids
 entre $\rho + i - 1$ et $\rho + \inf(2i-2, 2n)$, et $H^{i}(\overline{S},
 \overline{M}_{\ell})^{\pi}$ entre $\rho + i$ et $\rho + \inf(2i, 2n)$ ; il faut le
@@ -1468,14 +1579,16 @@ type fini sur $\mathbb{Z}$, sur lequel $A_{K}$ s'étend en un schéma abélien $
 et $A_{K}(K) = A(S)$ est de type fini par le théorème de
 Mordell--Weil--Néron--Lang. Le motif
 \[
-T_{\mathrm{mot}}(A) = R^{1}f_{*}\mathbb{Q}_{A}(1) ,
+T_{\mathrm{mot}}(A) = R^{1}f^{*}_{*}\mathbb{Q}_{A^{*}}(1) ,
 \]
-pour $f \colon A \to S$, est pur de poids $-1$ ; il redonne $A_{K}$ à isogénie
-près, par les conjectures de Tate.\footnote{La page le dit « pur de poids $1$ ».
-$R^{1}f_{*}$ est de poids $1$ et la torsion par $\mathbb{Q}(1)$ retire $2$ : le
-poids est $-1$, celui d'un module de Tate, et c'est ce poids que le raisonnement
-suivant utilise, puisqu'il annule $H^{0}$. Sa réalisation $\ell$-adique est
-$V_{\ell}$ de la variété duale, isogène à $A$.} On attend donc
+pour $f^{*} \colon A^{*} \to S$ le schéma abélien dual, est un motif constant
+tordu sur $S$, pur de poids $-1$ ; il redonne $A_{K}$ à isogénie près, par les
+conjectures de Tate.\footnote{La page le dit « pur de poids $1$ ».
+$R^{1}f^{*}_{*}$ est de poids $1$ et la torsion par $\mathbb{Q}(1)$ retire $2$ :
+le poids est $-1$, celui d'un module de Tate, et c'est ce poids que le
+raisonnement suivant utilise, puisqu'il annule $H^{0}$. Comme
+$H^{1}(A^{*}_{\bar{s}}, \mathbb{Q}_{\ell}) \simeq V_{\ell}(A_{\bar{s}})(-1)$, sa
+réalisation $\ell$-adique est bien $V_{\ell}(A)$.} On attend donc
 \[
 A(S) \otimes_{\mathbb{Z}} \mathbb{Q} \;\simeq\; H^{1}(S, T_{\mathrm{mot}}(A)) ,
 \]
@@ -1489,7 +1602,7 @@ cette heuristique. Elle est conjecturale.} La suite de Kummer $0 \to
 0 \longrightarrow A(S) \otimes \mathbb{Q}_{\ell} \longrightarrow
 H^{1}(S, V_{\ell}A) \longrightarrow V_{\ell}\bigl(H^{1}(S, A)\bigr) \longrightarrow 0 ,
 \]
-et le résultat escompté équivaut vraisemblablement à
+et le résultat escompté équivaut moralement à
 \[
 H^{1}(S, A)(\ell) \ \text{fini pour } \ell \text{ premier aux caractéristiques
 résiduelles de } S .
@@ -1500,12 +1613,56 @@ Tate--Šafarevič.\footnote{Ouverte en général. Pour les courbes elliptiques s
 $\mathbb{Q}$ de rang analytique $\leqslant 1$, elle résulte des travaux de
 Gross--Zagier et Kolyvagin (vers 1988-1990).}
 
-Pour $S$ de type fini sur $\mathbb{F}_{p}$, les suites de Leray pour $S \to
-\operatorname{Spec}\mathbb{F}_{p}$ et de Kummer, jointes à la suite $0 \to
-A^{\mathrm{tr}} \to R^{0}f_{*}A \to M \to 0$ où $A^{\mathrm{tr}}$ est la trace
-de $A$ sur $\mathbb{F}_{p}$ et $M = H^{0}(\overline{S}, \overline{A})/
-H^{0}(\overline{\mathbb{F}}_{p}, \overline{A}^{\mathrm{tr}})$ un $\pi$-module de
-type fini sur $\mathbb{Z}$, donnent le diagramme qu'il nomme (D) :
+Soit maintenant $S$ de type fini sur $\mathbb{F}_{p}$, $f \colon S \to
+\operatorname{Spec}\mathbb{F}_{p}$, et $\pi = \operatorname{Gal}(
+\overline{\mathbb{F}}_{p}/\mathbb{F}_{p})$. Le faisceau étale $R^{0}f_{*}A$ sur
+$\operatorname{Spec}\mathbb{F}_{p}$ est le $\pi$-module $H^{0}(\overline{S},
+\overline{A}) = A(\overline{S})$. Il contient la \emph{partie fixe} de $A$ sur
+$S$ : le plus grand sous-schéma abélien \emph{constant} $B \times S \subset A$,
+$B$ variété abélienne sur $\mathbb{F}_{p}$, dont les points sont les points
+« fixes », ceux qui ne varient pas avec le point de $S$. Notons
+$A^{\mathrm{fixe}}$ le sous-faisceau correspondant, de sections
+$B(\overline{\mathbb{F}}_{p})$ ;
+le quotient
+\[
+0 \longrightarrow A^{\mathrm{fixe}} \longrightarrow R^{0}f_{*}A \longrightarrow M
+\longrightarrow 0 ,
+\qquad
+M = H^{0}(\overline{S}, \overline{A})/H^{0}(\overline{\mathbb{F}}_{p},
+\overline{A}^{\mathrm{fixe}}) ,
+\]
+est un $\pi$-module de type fini sur $\mathbb{Z}$.\footnote{La page écrit
+$A^{\mathrm{fixe}}$ et met sous l'accolade « partie fixe (points fixes) de la
+V.A. $A$ sur $S$ ». Que $M$ soit de type fini est le théorème de Lang--Néron
+(1959) pour le corps des fonctions de $\overline{S}$ sur
+$\overline{\mathbb{F}}_{p}$ ; il suppose $S$ géométriquement intègre, ce
+qu'on peut admettre ici. La variété $B$ est l'image, isogène à elle, de ce que
+Chow et Lang appellent la $K/k$-trace de $A$ ; le « théorème de la partie
+fixe » de Deligne (Hodge II, 1971) porte le même nom en théorie de Hodge. Le
+rapprochement est de nous, le nom est celui de la page.} Deux propriétés de
+la partie fixe font tout le calcul. D'une part, $B$ étant une variété
+abélienne sur un corps fini, donc connexe, $H^{1}(\mathbb{F}_{p}, B) = 0$ par
+le théorème de Lang ; et $H^{2}(\mathbb{F}_{p}, B) = 0$, $\hat{\mathbb{Z}}$
+étant de dimension cohomologique $1$ pour les modules de torsion. La suite
+longue donne donc
+\[
+0 \to B(\mathbb{F}_{p}) \to H^{0}(S, A) \to M^{\pi} \to 0 ,
+\qquad
+H^{1}(\mathbb{F}_{p}, R^{0}f_{*}A) \simeq H^{1}(\mathbb{F}_{p}, M) ,
+\]
+avec $B(\mathbb{F}_{p})$ fini, et $H^{1}(\mathbb{F}_{p}, M)$ fini lui aussi : c'est
+le conoyau de $(M \otimes \mathbb{Q})^{\pi} \to (M \otimes \mathbb{Q}/\mathbb{Z})^{\pi}$,
+l'action de $\pi$ sur $M$ se faisant à travers un quotient fini.\footnote{La
+page écrit $H^{1}(\mathbb{F}_{p}, M) = (M \otimes \mathbb{Q}/\mathbb{Z})^{\pi}$,
+qui n'est vrai qu'à ce quotient près, et, au milieu de la suite, « $f_{*}(M)$ »
+pour $f_{*}(A)$.} D'autre part, $B(\overline{\mathbb{F}}_{p})$ est un groupe de
+torsion divisible --- tout point d'une variété abélienne sur un corps fini est
+d'ordre fini ---, donc $B(\overline{\mathbb{F}}_{p}) \otimes
+\mathbb{Q}_{\ell}/\mathbb{Z}_{\ell} = 0$ et $H^{0}(\overline{S}, \overline{A})
+\otimes \mathbb{Q}_{\ell}/\mathbb{Z}_{\ell} \simeq M \otimes
+\mathbb{Q}_{\ell}/\mathbb{Z}_{\ell}$ : la partie fixe ne laisse aucune trace
+après tensorisation. Avec la suite de Kummer sur $S$ et sur $\overline{S}$, on
+obtient le diagramme qu'il nomme (D) :
 
 \begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
 0 \arrow[r] & H^{0}(S, A) \otimes \mathbb{Q}_{\ell}/\mathbb{Z}_{\ell} \arrow[r] \arrow[d] & H^{1}(S, {}_{\ell^{\infty}}A) \arrow[r] \arrow[d] & H^{1}(S, A)(\ell) \arrow[r] \arrow[d] & 0 \\
@@ -1513,12 +1670,18 @@ type fini sur $\mathbb{Z}$, donnent le diagramme qu'il nomme (D) :
 \end{tikzcd}
 
 La première flèche verticale est un isomorphisme modulo des groupes finis,
-$H^{0}(S, A) \simeq M^{\pi}$ et $H^{0}(\overline{S}, \overline{A}) \otimes
-\mathbb{Q}_{\ell}/\mathbb{Z}_{\ell} \simeq M \otimes \mathbb{Q}_{\ell}/\mathbb{Z}_{\ell}$
-étant standard. Et la suite de Leray, avec $H^{1}(\mathbb{F}_{p},
-A^{\mathrm{tr}}) = 0$ par Lang et $H^{1}(\mathbb{F}_{p}, M)$ fini --- il s'agit de
-la cohomologie étale, c'est-à-dire galoisienne de $\hat{\mathbb{Z}}$, insiste-t-il
----, montre que la dernière flèche verticale est bijective à noyau fini près :
+par les deux déterminations $H^{0}(S, A) \simeq M^{\pi}$ (au groupe fini
+$B(\mathbb{F}_{p})$ près) et $H^{0}(\overline{S}, \overline{A}) \otimes
+\mathbb{Q}_{\ell}/\mathbb{Z}_{\ell} \simeq M \otimes \mathbb{Q}_{\ell}/\mathbb{Z}_{\ell}$,
+qu'il dit standard. Et la suite de Leray pour $f$,
+\[
+0 \to H^{1}(\mathbb{F}_{p}, R^{0}f_{*}A) \to H^{1}(S, A) \to
+H^{0}(\mathbb{F}_{p}, R^{1}f_{*}A) = H^{1}(\overline{S}, \overline{A})^{\pi} \to 0 ,
+\]
+où le premier terme est fini, puisque $H^{1}(\mathbb{F}_{p}, A^{\mathrm{fixe}}) = 0$
+par Lang et que $H^{1}(\mathbb{F}_{p}, M)$ est fini --- il s'agit de la
+cohomologie étale, c'est-à-dire galoisienne de $\hat{\mathbb{Z}}$, insiste-t-il
+---, montre que la dernière flèche verticale est surjective à noyau fini :
 \[
 H^{1}(S, A)(\ell) \longrightarrow H^{1}(\overline{S}, \overline{A})(\ell)^{\pi} .
 \]\footnote{La phrase de la page 76 qui établit ce point s'arrête sur « et le »,
@@ -1546,7 +1709,7 @@ H^{2}(S, T_{\ell}(A)) \simeq H^{1}(\overline{S}, T_{\ell}(\overline{A}))_{\pi}
 \simeq \operatorname{End}(J) \otimes \mathbb{Q}_{\ell} ,
 \]
 les classes de correspondances divisorielles sur $S \times S$, qui ne sont pas
-nulles.\footnote{Ici rien n'est conjectural : l'isomorphisme
+nulles.\footnote{La page écrit $C \times C$, la courbe étant ici $S$. Ici rien n'est conjectural : l'isomorphisme
 $\operatorname{End}(J) \otimes \mathbb{Q}_{\ell} \simeq
 \operatorname{End}_{\pi}(V_{\ell}J)$ et la semi-simplicité qui identifie invariants
 et coinvariants sont les théorèmes de Tate (1966).}
@@ -1581,17 +1744,19 @@ H^{2}_{x}(C, A) \longrightarrow H^{2}(C, A)
 --- l'injectivité à gauche vient de ce que $A(\mathcal{O}^{h}_{x}) =
 A(K^{h}_{x})$ --- et l'excision $H^{2}_{x}(C, A) \simeq H^{1}(K_{x}, A)$, dual de
 $A^{*}(K_{x})$ par la dualité locale de Tate, donnent : $H^{1}(U, A)(\ell)$ est fini
-pour $\ell \neq p$, dès que $H^{1}(C, A)(\ell)$ l'est. Il se demande si l'on peut
-généraliser au cas d'une variété régulière dont on enlève un diviseur
+pour $\ell \neq p$, dès que $H^{1}(C, A)(\ell)$ l'est. Cela peut se généraliser,
+note-t-il, au cas d'un $X$ régulier dont on enlève un diviseur
 régulier.\footnote{La page va plus vite, et trop : elle affirme $H^{i}(C, A) = 0$
 pour $i \geqslant 2$ « des conjectures de Weil », et « sans doute, utilisant Tate »,
-$H^{1}(C, A) = 0$, d'où $H^{1}(U, A) \simeq H^{2}_{x}(C, A)$, « groupe fini !
+$H^{1}(C, A) = 0$, d'où $H^{1}(U, A) \simeq H^{2}_{x}(C, A)$ ; puis, d'une ligne
+soulignée deux fois, « c'est donc essentiellement un $p$-groupe, … groupe fini !
 OK ». Trois corrections. $H^{1}(C, A)$ est le groupe de Tate--Šafarevič, fini
 conjecturalement mais non nul en général. $H^{2}(C, A)$ n'est pas nul : par la
 dualité de Milne, il est dual de $A^{*}(K)$ --- et la page 77 de ce dossier le
 montre elle-même, avec $H^{2}(S, T_{\ell}(A)) \neq 0$ pour $A = J \times S$. Enfin
-$H^{1}(K_{x}, A)$, dual du groupe profini $A^{*}(K_{x})$, n'est fini que dans sa
-partie première à $p$. L'argument ci-dessus n'a besoin d'aucun des trois
+$H^{1}(K_{x}, A)$, dual du groupe profini $A^{*}(K_{x})$, est bien, à un groupe
+fini près, un $p$-groupe, comme le dit la ligne soulignée, mais un $p$-groupe
+infini : seule sa partie première à $p$ est finie, et c'est elle qui sert. L'argument ci-dessus n'a besoin d'aucun des trois
 énoncés fautifs.}
 
 \pagerange{83}{83}
@@ -1602,8 +1767,8 @@ donne : $H^{0}(X, \mathbb{Q}_{\ell}(1)) = 0$ ; $H^{1}(X, \mathbb{Q}_{\ell}(1)) =
 \mathcal{O}(X)^{*} \otimes \mathbb{Q}_{\ell}$ ; $H^{2}(X, \mathbb{Q}_{\ell}(1))$
 extension de $T_{\ell}(H^{2}(X, \mathbb{G}_{m}))$ par $\operatorname{Pic}(X) \otimes
 \mathbb{Q}_{\ell}$ ; $H^{3}(X, \mathbb{Q}_{\ell}(1)) \simeq T_{\ell}(H^{3}(X,
-\mathbb{G}_{m}))$, qui peut valoir $\mathbb{Z}_{\ell}$, par exemple pour un modèle
-d'un corps de fonctions d'une variable sur $\mathbb{F}_{p}$ ; et il demande si
+\mathbb{G}_{m}))$, qui peut valoir $\mathbb{Z}_{\ell}$, par exemple pour le modèle
+canonique d'un corps de fonctions d'une variable sur $\mathbb{F}_{p}$ ; et il demande si
 $H^{i}(X, \mathbb{Q}_{\ell}(1)) = T_{\ell}(H^{i}(X, \mathbb{G}_{m}))$ est nul pour
 $i \geqslant 4$.\footnote{L'annulation de $H^{0}$ vient de ce que $X$, de type fini
 sur $\mathbb{Z}$, n'a qu'un nombre fini de racines de l'unité ; celle de
@@ -1621,16 +1786,16 @@ sur un corps fini, $\operatorname{Br}(C) = 0$ par la théorie du corps de classe
 C'est le point 17 du plan, et la première mouture de la positivité ; la seconde
 est aux pages 157 à 166. Le théorème étant « géométrique », on se place sur un
 corps $k$ algébriquement clos, et l'on ne considère que des motifs semi-simples
-purs de poids $p$. Pour un tel $M$, les formes $M \times M \to \mathbb{Q}(-p)$
+purs de poids $\rho$. Pour un tel $M$, les formes $M \times M \to \mathbb{Q}(-\rho)$
 sont les éléments de
 \[
 \mathcal{L}(M) = \Gamma_{k}\bigl(\underline{\operatorname{Hom}}(M \otimes M,
-\mathbb{Q}(-p))\bigr) ,
+\mathbb{Q}(-\rho))\bigr) ,
 \]
 $\Gamma_{k} = \operatorname{Hom}(\mathbf{1}, -)$, le $\underline{\operatorname{Hom}}$
 étant bien de poids $0$ ; c'est un $\mathbb{Q}$-espace de dimension finie, dans
 lequel on considère le sous-espace $\mathcal{L}^{s}(M)$ des formes symétriques si
-$p$ est pair, alternées si $p$ est impair. Le produit tensoriel des formes donne
+$\rho$ est pair, alternées si $\rho$ est impair. Le produit tensoriel des formes donne
 des injections $\mathcal{L}^{s}(M) \otimes \mathcal{L}^{s}(N) \to \mathcal{L}^{s}(M
 \otimes N)$, non bijectives en général --- le produit de deux formes de même
 symétrie est symétrique, de symétries opposées antisymétrique ---, et
@@ -1638,14 +1803,14 @@ symétrie est symétrique, de symétries opposées antisymétrique ---, et
 \mathcal{L}^{s}(M' \oplus M'') \simeq \mathcal{L}^{s}(M') \times \mathcal{L}^{s}(M'')
 \times \mathcal{B}(M', M'') ,
 \qquad
-\mathcal{B}(M', M'') = \operatorname{Hom}(M' \otimes M'', \mathbb{Q}(-p)) .
+\mathcal{B}(M', M'') = \operatorname{Hom}(M' \otimes M'', \mathbb{Q}(-\rho)) .
 \]\footnote{La page écrit $\mathcal{L}^{s}(M' \times M'')$ pour la somme directe et
-$\mathbb{Q}(p)$ dans $\mathcal{B}$, là où la page 85 a $\mathbb{Q}(-p)$ ; les
-formes sont à valeurs dans $\mathbb{Q}(-p)$.}
+$\mathbb{Q}(\rho)$ dans $\mathcal{B}$, là où la page 85 a $\mathbb{Q}(-\rho)$ ; les
+formes sont à valeurs dans $\mathbb{Q}(-\rho)$.}
 
-On se donne dans $\mathcal{L}^{s}(M)$ un cône convexe $\mathcal{L}^{+}(M)$ ---
-ses éléments sont les formes \emph{positives}, ceux de son intérieur les formes
-\emph{amples} --- soumis à huit axiomes :
+On se donne dans $\mathcal{L}^{s}(M)$ un cône convexe fermé $\mathcal{L}^{+}(M)$ ---
+ses éléments sont les formes \emph{pseudo-amples}, ceux de son intérieur les formes
+\emph{amples}, dit la marge --- soumis à huit axiomes :
 \begin{enumerate}
   \item[(i)] $\mathcal{L}^{+}(M)$ est d'intérieur non vide ;
   \item[(ii)] un élément de $\mathcal{L}^{+}(M)$ est intérieur si et seulement s'il
@@ -1655,26 +1820,27 @@ ses éléments sont les formes \emph{positives}, ceux de son intérieur les form
   \item[(iv)] si $M \to N$ est injectif, il envoie formes amples sur formes amples ;
   en particulier la restriction d'une forme ample à $M$ est non dégénérée, et
   $N = M \oplus M^{\perp}$ ;
-  \item[(v)] la somme directe de deux formes amples est ample ;
+  \item[(v)] la somme directe de deux formes pseudo-amples (resp.\ amples) est
+  pseudo-ample (resp.\ ample) ;
   \item[(vi)] le produit tensoriel de deux formes amples est ample ;
-  \item[(vii)] si $p = 0$, de sorte que $M$ est essentiellement un
+  \item[(vii)] si $\rho = 0$, de sorte que $M$ est essentiellement un
   $\mathbb{Q}$-espace vectoriel de dimension finie, les formes amples sont les
   formes définies positives ;
   \item[(viii)] $\mathcal{L}^{s}$ d'un motif de Tate est $\mathbb{Q}$, et les formes
   amples y sont les nombres strictement positifs.
 \end{enumerate}
 De (vi) et (viii) il résulte que l'isomorphisme $\mathcal{L}^{s}(M) \simeq
-\mathcal{L}^{s}(M(n))$ respecte les cônes ; de (iv) et (vii), que si $p = 0$ une
+\mathcal{L}^{s}(M(n))$ respecte les cônes ; de (iv) et (vii), que si $\rho = 0$ une
 forme ample sur $M$ induit une forme définie positive sur $\Gamma_{k}M$, par
 restriction au sous-motif $\Gamma_{k}M \otimes \mathbf{1} \subset M$.\footnote{La
 page renvoie à (iv) et (vi) --- lecture incertaine ; l'argument demande (iv) et
 (vii).} Enfin, décomposant $M$ en composantes isotypiques $M_{\alpha}$, on a
 $\mathcal{L}^{s}(M) \simeq \bigoplus_{\alpha}\mathcal{L}^{s}(M_{\alpha})$, et il suffit
-d'étudier les formes positives sur les morceaux isotypiques $I \otimes_{A} V$, où
+d'étudier les formes pseudo-amples --- « positives », dit ici la page --- sur les morceaux isotypiques $I \otimes_{A} V$, où
 $I$ est simple, $A = \operatorname{End}(I)$ un corps gauche, et $V$ un $A$-espace
 vectoriel.\footnote{La décomposition suppose qu'il n'y ait pas de forme non nulle
 entre deux composantes isotypiques distinctes, c'est-à-dire que chaque
-$M_{\alpha}$ soit isomorphe à son dual tordu $M_{\alpha}^{\vee}(-p)$ --- ce que
+$M_{\alpha}$ soit isomorphe à son dual tordu $M_{\alpha}^{\vee}(-\rho)$ --- ce que
 donne une polarisation. L'hypothèse n'est pas écrite.}
 
 Ces axiomes sont ceux que satisfont les formes de polarisation des structures de
@@ -1690,34 +1856,45 @@ la parenté est de nous.}
 \pagerange{89}{91}
 \subsection*{Le dictionnaire algébrique (pages 89 à 91)}
 
-Soit $k$ un anneau et $\mathcal{C}$ la catégorie des $k[t]$-modules projectifs de
-type fini sur $k$, c'est-à-dire des couples $(V, f)$ d'un tel module et d'un
-endomorphisme --- des $k[\mathbb{N}]$-modules. Elle donne un $\lambda$-anneau
-$R(\mathbb{N}; k)$, qui pour $k$ un corps est le $\mathbb{Z}$-module libre sur les
-classes des $k[t]/(P)$, $P$ unitaire irréductible, le polynôme caractéristique de
-$(k[t]/(P), t)$ étant $P$. Il préfère $Q(t) = t^{d}P(1/t) = \det(1 - tf)$, et
-obtient
+Soit $k$ un anneau --- un corps ou non, précise la marge --- et $\mathcal{C}$ la
+catégorie des $k[t]$-modules projectifs de rang fini sur $k$, c'est-à-dire des
+couples $(V, f)$ d'un tel module et d'un endomorphisme --- des
+$k[\mathbb{N}]$-modules. Elle donne un $\lambda$-anneau $R(\mathbb{N}; k)$, qui
+pour $k$ un corps est le groupe libre sur les classes des $k[t]$-modules
+simples, ou encore sur les polynômes unitaires irréductibles $P$, envoyés sur
+$k[t]/P\,k[t]$ ; à tout $P$, irréductible ou non, est associé un $(V, f)$ de
+polynôme caractéristique $P$. Il préfère le polynôme caractéristique
+\emph{modifié} $Q(t) = t^{d}P(1/t) = \det(1 - tf)$, de terme constant $1$, et
+obtient un homomorphisme de groupes, des sommes vers les produits,
 \[
 R(\mathbb{N}; k) \longrightarrow 1 + t\,k[[t]] ,
 \qquad
 (V, f) \longmapsto L(V, f) = \frac{1}{\det(1 - tf)} ,
 \]
-homomorphisme de $\lambda$-anneaux vers le groupe multiplicatif $1 + t\,k[[t]]$, dont
-l'image est formée de fonctions rationnelles valant $1$ en $0$. Il le dit injectif
-pour $k$ un corps. Il l'est sur le sous-anneau engendré par les $(V, f)$ avec $f$
+à valeurs, note la marge, dans les fonctions rationnelles valant $1$ en $0$.
+Composé avec l'automorphisme « additif » $\varphi(t) \mapsto 1/\varphi(-t)$ de
+$1 + t\,k[[t]]$, qui envoie $L(V, f)$ sur $\det(1 + tf)$, c'est un homomorphisme
+de $\lambda$-anneaux.\footnote{L'anneau $1 + t\,k[[t]]$, muni de sa structure
+de $\lambda$-anneau, est l'anneau des grands vecteurs de Witt, que la page ne
+nomme pas ; $\varphi(t) \mapsto 1/\varphi(-t)$ fait passer de la convention
+où l'élément de rang $1$ attaché à $a$ est $1/(1 - at)$ à celle où il est
+$1 + at$. L'image de $(V, f)$ est alors $\lambda_{t}(V, f) = \sum_{i}
+\operatorname{Tr}(\wedge^{i}f)\,t^{i}$, et la compatibilité aux opérations
+$\lambda$ se lit sur les puissances extérieures.} Il le dit injectif pour $k$ un corps : la série formelle
+redonne la fonction rationnelle $L$, donc, $k[t]$ étant factoriel, les
+multiplicités des $P$. Il ne l'est que sur le sous-anneau engendré par les $(V, f)$ avec $f$
 inversible, et c'est le seul cas qui servira --- le Frobenius opère
 inversiblement sur la cohomologie ; mais les classes où $f$ est nilpotent ont
 $L = 1$, et forment le noyau.\footnote{La page affirme l'injectivité sans
 restriction, par factorialité de $k[t]$ ; l'argument oublie le facteur $P = t$,
 pour lequel $Q = 1$. Que le quotient de l'anneau des endomorphismes par celui des
 nilpotents s'identifie aux vecteurs de Witt rationnels est un théorème
-d'Almkvist (1974). L'anneau $1 + t\,k[[t]]$ est l'anneau des grands vecteurs de
-Witt, que la page ne nomme pas.} La dérivée logarithmique
+d'Almkvist (1974).} La dérivée logarithmique
 \[
 \Lambda(V, f) = \frac{L'(V, f)}{L(V, f)} = \sum_{n \geqslant 1}
 (\operatorname{Tr} f^{n})\, t^{n-1}
 \]
-permet, en caractéristique nulle, de retrouver $L = \exp \int_{0}^{t} \Lambda$ ;
+permet, en caractéristique nulle, d'inverser cet homomorphisme par $L = \exp \int_{0}^{t} \Lambda$ ;
 $\Lambda$ est alors injectif sur les classes à $f$ inversible, ce qu'il cesse d'être
 en caractéristique $p > 0$.
 
@@ -1725,42 +1902,63 @@ en caractéristique $p > 0$.
 \subsection*{Ce que la fonction $L$ sait de la cohomologie (pages 91 à 94)}
 
 Par la formule des traces de Lefschetz--Weil--Grothendieck, la connaissance de la
-fonction $L$ de $(X, F)$ sur $\mathbb{F}_{p}$ équivaut à celle de l'élément
+fonction $L$ de $X$, compactifiable sur $\mathbb{F}_{p}$, à coefficients dans
+$F$, équivaut à celle de l'élément
 \[
 \chi(F) = \sum_{i} (-1)^{i} \operatorname{cl} H^{i}_{c}(\overline{X}, \overline{F})
 \in R(\mathbb{N}; \mathbb{Q}_{\ell}) ,
 \]
-$f$ étant le Frobenius. Si l'on admet les conjectures de Weil et que $F$ vient
-d'un motif, $\chi(F)$ se décompose suivant les poids en $\sum (-1)^{i}h^{i}(F)$, et
-$L(X, F)$ équivaut aux $h^{i}(F)$ --- les zéros et pôles se groupant par valeur
-absolue ; si $X$ est complète et lisse et $F$ lisse et pur, $h^{i}(F) =
-H^{i}(\overline{X}, \overline{F})$ avec son Frobenius.
+$f$ étant le Frobenius : $L(X, F)$ est, essentiellement, l'image de $\chi(F)$.
+Si l'on admet les conjectures de Weil et que $F$ provient d'un
+motif,\footnote{La page dit : « $F$ est un motif ».} $\chi(F)$ se décompose
+suivant les poids en $\sum (-1)^{i}\underline{h}^{i}(F)$, la composante
+$\underline{h}^{i}(F)$ étant de poids $i$, et $L(X, F)$ équivaut aux
+$\underline{h}^{i}(F)$ --- les zéros et pôles se groupant par valeur absolue. Si
+$X$ est complète et lisse et $F$ constant tordu, pur de poids $\rho$,
+$H^{j}(\overline{X}, \overline{F})$ est pur de poids $j + \rho$, d'où
+\[
+\underline{h}^{i}(F) = (-1)^{\rho}\operatorname{cl}H^{i-\rho}(\overline{X}, \overline{F})
+\]
+comme $\mathbb{N}$-modules : dans ce cas $L(X, F)$ équivaut à la connaissance
+des $H^{i-\rho}(\overline{X}, \overline{F})$ avec l'opération du Frobenius
+dedans.\footnote{La page écrit $\underline{h}^{i}(F) = H^{i-\rho}(\overline{X},
+\overline{F})$, sans le signe ; avec $\chi(F) = \sum_{j}(-1)^{j}\operatorname{cl}
+H^{j}$ et $\chi(F) = \sum_{i}(-1)^{i}\underline{h}^{i}(F)$, les deux membres
+diffèrent de $(-1)^{\rho}$, ce qui ne change rien à la conclusion.}
 
 Pour $U \subset X$ à complémentaire de dimension $< n$, les $L(U, F|U)$ ne
-diffèrent de $L(X, F)$, pour $F$ pur de poids $p$, que par des fonctions de
-poids $\leqslant 2n-2+p$ : $L(X, F)$ modulo ces fonctions est un \emph{invariant
+diffèrent de $L(X, F)$, pour $F$ pur de poids $\rho$, que par des fonctions de
+poids $\leqslant 2n-2+\rho$ : $L(X, F)$ modulo ces fonctions est un \emph{invariant
 birationnel}, et équivaut à la connaissance de $\operatorname{cl}H^{2n}_{c} -
-\operatorname{cl}H^{2n-1}_{c}$ modulo les poids bas. Pour $X$ lisse, connexe, de
-dimension $n$, $H^{2n}_{c}(X, F)$ est dual de $H^{0}(X, \check{F})(n)$ et
-$H^{2n-1}_{c}(X, F)$ de $H^{1}(X, \check{F}(n))$, qui a en général des poids
-$2n-1$ et $2n-2$. Pour $F = \mathbb{Q}_{\ell}$, la connaissance birationnelle
-grossière de la fonction zêta équivaut, modulo les conjectures de Tate, à celle
-de $\pi_{0}(\overline{X})$ comme ensemble galoisien et de l'Albanese de $X$. Une
-analyse plus fine, par le niveau et non seulement par le poids, doit récupérer
-$\zeta(X)$ modulo les $\zeta(Y)$, $\dim Y < n$, c'est-à-dire les « invariants
-birationnels fondamentaux » relativement à $\mathbb{F}_{p}$, « envisagés dans les
-notes sur les \emph{Motifs} » : ce sont ceux du paragraphe 12, pages 42 à 51, que
-la marge de la page 92 appelle son « N° 12 ».\footnote{Un passage encadré et
+\operatorname{cl}H^{2n-1}_{c}$ modulo la même chose. La marge prévient que le
+poids n'est pas ici la bonne filtration, et renvoie à son « N° 12 ». Pour $X$
+une variété lisse de dimension $n$ --- affine si l'on veut ---, $H^{2n}_{c}(X, F)$
+est dual de $H^{0}(X, \check{F})(n)$, donc purement de poids $2n + \rho$, et
+$H^{2n-1}_{c}(X, F)$ de $H^{1}(X, \check{F}(n))$, de sorte qu'il a en général
+des poids $2n-1+\rho$ et $2n-2+\rho$.\footnote{La page écrit les poids $2n$,
+$2n-1$ et $2n-2$, c'est-à-dire le cas $\rho = 0$ du paragraphe suivant ; pour
+$F$ de poids $\rho$, tout est décalé de $\rho$, comme dans la borne
+$2n - 2 + \rho$ qu'elle vient d'écrire.} Cela peut se raffiner, ajoute une
+autre note, en regardant une autre filtration que le poids : le niveau. Pour $F
+= \mathbb{Q}_{\ell}(0)$, c'est-à-dire pour les fonctions zêta habituelles, la
+connaissance « birationnelle » grossière de $\zeta$ équivaut essentiellement,
+modulo les conjectures de Tate, à celle de $\pi_{0}(\overline{X})$ comme
+ensemble muni de l'action du Frobenius --- « Frob-ensemble » --- et de
+l'Albanese de $X$ sur $\mathbb{F}_{p}$. Une analyse plus fine, par le niveau et
+non seulement par le poids, doit récupérer davantage par la connaissance de
+$\zeta(X)$ modulo les $\zeta(Y)$, $\dim Y < n$ : les « invariants birationnels
+fondamentaux » relativement à $\mathbb{F}_{p}$, « envisagés dans les notes sur
+les \emph{Motifs} ». Ce sont ceux du paragraphe 12, pages 42 à 51, le
+« N° 12 » de la marge de la page 92.\footnote{Un passage encadré et
 annulé de la page 92 commençait le même calcul pour une fibration $f \colon X \to
-Y$, avec les ouverts denses de $Y$ ; les marges obliques des pages 92 et 93 sont
-en grande partie perdues.}
+Y$, avec les ouverts denses de $Y$.}
 
 Il propose enfin un programme : pour $f \colon X \to Y$ lisse et propre et $F$
-localement constant, la connaissance de $L(X, F)$ modulo les $L(f^{-1}(Y'), F)$,
+constant tordu, la connaissance de $L(X, F)$ modulo les $L(f^{-1}(Y'), F)$,
 $Y'$ parcourant les fermés stricts de $Y$, permet-elle de récupérer les invariants
 birationnels fondamentaux de la fibre générique sur le corps des fonctions de
 $Y$ ? Et dans quelle mesure faut-il supposer $f$ lisse et propre et $F$
-localement constant ? Le programme n'est pas repris.
+constant tordu ? Le programme n'est pas repris.
 
 \pagerange{96}{100}
 \section*{IX. Poids et niveaux d'espaces de cohomologie $\ell$-adiques (pages 95 à 100)}
