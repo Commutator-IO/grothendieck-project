@@ -379,5 +379,12 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # With the reading views on, the artifact is ~175 MB in ~7,000 files
+      # (10 MB with them off) and Pages stays in « syncing_files » for more than
+      # the action's default ten minutes (run of 10 November 2026: timeout at
+      # 16:20 after 10 min). The deployment itself is not slow to fail, only to
+      # finish, so the wait is lengthened to half an hour.
       - id: deployment
         uses: actions/deploy-pages@v5
+        with:
+          timeout: 1800000
