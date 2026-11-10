@@ -509,3 +509,20 @@ Réponses reportées dans `drawings.json` ou dans la transcription ; les cases s
 - [ ] 156-7 01-3 | disagreement | Is the diameter vertical, with small crosses around? | Oblique (the quadrilateral's diagonal), two crosses, right and below | A vertical diameter and small crosses around, as in the note
 - [ ] 156-7 01-3 | reading | What is the small mark inside the quadrilateral, left of the circle? | Left out, unread | A tick or a small letter to add
 - [ ] 156-7 04-3 | reading | Is the last label aₙ? | aₙ, after the text | a_m
+
+## Folders 81 and 161-6, sketches marked and redrawn (10 November)
+
+- [ ] 161-6 01-5 | disagreement | In what cyclic order do the decagon's vertices run on p. 18? | A₁, A′₃, A₀, A′₂, A₄, A′₁, A₃, A′₀, A₂, A′₄ (bottom vertex A₃, left vertex A₂) | A₁, A′₃, A₀, A′₂, A₄, A′₁, A₂, A′₀, A₃, A′₄, as in the transcription's note
+- [ ] 161-6 01-5 | reading | Is the upper-right letter left as α₀, not rewritten into A₀? | α₀ | A₀
+- [ ] 161-6 01-2 | disagreement | How many strokes leave the centre of the p. 12 circle? | Six: five about 72° apart and an extra horizontal one to the left | Five, as in the note
+- [ ] 161-6 01-4 | disagreement | Do u₁ and the circled u₀ sit in the innermost of three nested ovals? | Three ovals, both letters in the innermost | The two innermost ovals carry u₁ and u₀, as in the note
+- [ ] 161-6 01-4 | reading | How many vertices has the graph with rings and crosses on p. 16 (not redrawn)? | Eight: a square inside a square, corners joined | Six, as in the note
+- [ ] 161-6 02-3 | disagreement | What crosses the first circle of p. 21? | A bundle of three or four near-coincident strokes from the top, and a separate oblique double stroke | Two nearly coincident diameters, as in the note
+- [ ] 161-6 02-2 | reading | Which strokes of the margin icosahedron are edges? | 10 vertices (6 on the outline, 4 inside), 21 edges, three hidden ones at the right, two of them dashed | Another reading of the heavily inked strokes
+- [ ] 161-6 02-6 | disagreement | Is the second « disque » on p. 25 a full circle? | A rounded domain bounded in part by the first disc | Two adjoining discs
+- [ ] 161-6 02-8 | reading | Should the doubtful « dans le » in the inner disc be drawn? | Left out, as text of the marginal note | Set inside the inner disc
+- [ ] 81 03-2 | disagreement | How many points does the p. 42 circle carry, and which are full? | 21: 7 full, 14 open (the grey point at the lower left drawn open) | About twenty, with another full/open split
+- [ ] 81 03-4 | disagreement | On which side of the text is the p. 47 circle with three chords? | At the left, in the margin | At the right, as in the note
+- [ ] 81 03-7 | disagreement | What stands at the top and foot of the band on p. 53 (also 03-8)? | A pair of opposite arrows, one above the other | A double arrow, as in the note
+- [ ] 81 01-5 | reading | How is the tangle at the lower left of the p. 10 polygon to be read? | A small circle, two long obliques, a thin triangle and a curve | Another grouping of the strokes
+- [ ] 81 02-3 | reading | Is the first sign of the p. 26 legend ⊃ or a hooked arrow like the others? | ⊃, as the transcription reads | ↩, written like the other hooks
