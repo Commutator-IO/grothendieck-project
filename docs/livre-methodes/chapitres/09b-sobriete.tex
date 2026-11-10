@@ -30,6 +30,15 @@ fenêtre, les lectures en cache font 70\,\% du total, les écritures en cache 20
 réponses 10\,\%. Le coût d'une session tient donc moins à ce que le modèle écrit qu'à la
 longueur de ce qu'il relit.
 
+Ce silence n'est pas propre à un fournisseur. L'indice de transparence des modèles de
+fondation de 2025 (Wan et al., \url{https://arxiv.org/abs/2512.10169}) note treize
+entreprises sur ce qu'elles publient de leur modèle phare. Dix d'entre elles, dont celle
+qui fournit les modèles de ce projet, ne donnent aucune des informations clés sur l'impact
+environnemental de la construction de leurs modèles. Quelques-unes publient l'impact d'une
+requête moyenne ; les auteurs jugent que cela ne suffit pas pour connaître le coût cumulé
+de l'usage, puisque la plupart ne disent pas combien de requêtes elles servent. C'est
+pourquoi tous les chiffres qui suivent sont des fourchettes.
+
 \section{Les chiffres du projet}
 
 L'outil de l'assistant enregistre une ligne par appel, avec ses jetons, mais il efface ses
@@ -38,7 +47,9 @@ historiques après quatorze jours par défaut. Les enregistrements conservés co
 reste est extrapolé à partir de l'activité du dépôt (commits, lignes de transcription).
 Les historiques des sous-agents lancés avant le 1\textsuperscript{er} novembre avaient été
 effacés ; leurs jetons sont estimés d'après leur nombre d'appels d'outils et la taille
-finale de leur contexte, et ajoutés aux jetons mesurés (environ moitié plus).
+finale de leur contexte, et ajoutés aux jetons mesurés (environ moitié plus). Ils font à
+eux seuls un tiers de l'estimation centrale : sans eux, elle serait d'environ 120~kg au
+lieu de 180.
 Pour passer des jetons au carbone, on encadre deux facteurs : l'énergie par jeton (de 0,5
 à 5~mWh, d'après les chiffres publiés pour des modèles comparables) et l'intensité carbone
 de l'électricité (de 0,2 à 0,4~kg\,CO$_2$e par kWh, faute de savoir où sont les centres
@@ -64,12 +75,40 @@ de données).
   \item \textbf{L'entraînement} des modèles est laissé de côté.
 \end{itemize}
 
+L'article répartit aussi l'inférence par activité, sur la fenêtre mesurée (du 24 septembre
+au 7 novembre 2026), en rattachant chaque appel à ce que faisait la session. Le classement
+est heuristique. La transcription du fonds en prend 16\,\%, les lectures modernisées
+4\,\%, les preuves Lean 16\,\%, les autres archives 12\,\% ; les articles (18\,\%), le
+site (15\,\%) et le pilotage des sessions (16\,\%) font ensemble environ la moitié. Une
+page transcrite coûte ainsi de 3 à 12~g\,CO$_2$e en valeur centrale, selon qu'on part des
+journaux de la fenêtre (6\,898 pages, de 0,3 à 23~g aux bornes) ou des douze passes
+mesurées le 25 septembre 2026 (de 2 à 69~g aux bornes). Un théorème ou un lemme Lean coûte
+environ 3~g (de 0,4 à 21~g), pour les 6\,685 que comptait le dépôt le 7 novembre 2026.
+
+Un compte en carbone laisse de côté ce qu'il ne sait pas convertir, ici l'eau. Or le
+climat n'est pas la seule limite. Le cadre des limites planétaires, dans sa mise à jour
+de 2015 (Steffen et al., \url{https://doi.org/10.1126/science.1259855}), suit neuf
+processus dont dépend la stabilité du système Terre ; le changement climatique en est un,
+l'eau douce un autre. Un chiffre en kilogrammes de CO$_2$e renseigne sur le premier et ne
+dit rien du second.
+
 Pour donner une échelle, l'outil GES~1point5 trouve en moyenne 3,6~t\,CO$_2$e par an et
 par membre de laboratoire en France (Mariette et al., 2022,
 \url{https://doi.org/10.1088/2634-4505/ac84a4}). Les trois mois du projet en font quelques
 pour cent au centre de la fourchette, et beaucoup plus si l'on compte le matériel. Ce
 n'est pas rien. Ce n'est pas non plus ce qui décide, à lui seul, si un tel projet vaut
 d'être fait.
+
+L'autre échelle est celle de l'objectif. L'Accord de Paris (2015, article~2) vise à
+contenir l'élévation de la température moyenne « nettement en dessous de 2~°C par rapport
+aux niveaux préindustriels », en poursuivant l'action pour la limiter à 1,5~°C. Millar et
+al. (2017, \url{https://doi.org/10.1038/ngeo3031}) ont chiffré ce que cela laisse : pour
+limiter le réchauffement à 1,5~°C en 2100, avec une réduction ambitieuse des facteurs
+autres que le CO$_2$, le cumul des émissions nettes de CO$_2$ après 2015 a peu de chances d'être inférieur à
+250~GtC et peu de chances de dépasser 540~GtC. Ce sont des milliards de tonnes de carbone,
+et non de CO$_2$ ; le chiffre date de 2017, et ce qui a été émis depuis 2015 est à en
+retrancher. Devant un tel total, les 180~kg d'un projet ne se voient pas. Mais on peut le
+dire de chaque usage pris seul, et le budget est une somme.
 
 \begin{regle}
 Un chiffre de consommation porte sa date, la fenêtre qu'il couvre et la façon dont il a
@@ -90,8 +129,9 @@ rien le rallongent d'autant.
 
 \paragraph{Le plus petit modèle qui suffit.} Renommer des fichiers, relancer une
 compilation, résumer une sortie de commande ne demandent pas le plus gros modèle. Le projet
-l'a peu fait : sur la fenêtre mesurée, le modèle principal a reçu 15\,556 appels, le modèle
-moyen 1\,584 et le petit 23, tous entre le 2 et le 7 novembre 2026. La marge est là.
+l'a peu fait : sur la fenêtre mesurée, sous-agents effacés non comptés, le modèle principal
+a reçu 17\,602 appels, le modèle moyen 1\,606 et le petit 27, ces derniers tous entre le 2
+et le 7 novembre 2026. La marge est là.
 
 \paragraph{Ne pas refaire ce qui n'a pas changé.} Le déploiement recompilait à chaque envoi
 toutes les transcriptions en PDF, environ vingt-cinq minutes quand rien n'était en cache.
@@ -103,9 +143,10 @@ pèse quelques kilogrammes. Il compte pour le principe, qui est le même que pou
 modèle : ne pas recalculer ce qu'on a déjà.
 
 \paragraph{Un plafond par semaine.} L'abonnement de l'assistant donne une allocation
-hebdomadaire. Le projet s'en fixe une part, suivie dans l'outil, et la dépasser demande
-une décision. Un plafond ne mesure pas l'énergie, mais il oblige
-à choisir ce qui passe en premier.
+hebdomadaire. Depuis le 18 octobre 2026, le projet s'en fixe une part, suivie dans l'outil,
+et la dépasser demande une décision ; elle a été prise deux fois. Le plafond servait
+d'abord à partager l'abonnement avec d'autres travaux. Il ne mesure pas l'énergie, mais il
+oblige à choisir ce qui passe en premier.
 
 \paragraph{Des images à la résolution qui suffit.} Une image coûte des jetons à proportion
 de sa taille. On lit une dactylographie à basse résolution et l'on garde les
@@ -128,6 +169,15 @@ reposant la question au modèle jusqu'à ce qu'il réponde la même chose deux f
 question qu'on ne pose pas est un contexte de plusieurs centaines de milliers de jetons
 qu'on ne relit pas.
 
+Les gestes de la section précédente règlent des paramètres : la longueur d'une session, la
+taille d'un modèle, la résolution d'une image. Donella Meadows a dressé en 1999 une liste
+de douze points où l'on peut intervenir sur un système, rangés par effet croissant
+(\emph{Leverage Points: Places to Intervene in a System},
+\url{https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/}).
+Les paramètres y viennent au dernier rang ; les buts du système sont au troisième à partir
+du haut. Décider de ce qu'on demande au modèle touche au but. Cela ne dispense pas de
+régler les paramètres, mais c'est par là qu'il faut commencer.
+
 \section{L'effet rebond}
 
 Rendre une activité moins chère tend à la faire croître. Pour l'entraînement des modèles,
@@ -138,6 +188,14 @@ exponentielle en dix ans, malgré un matériel plus efficace
 pages en trois mois, presque deux fois les 5\,129 pages que les éditions faites à la main
 avaient établies. Le calcul n'a pas remplacé un travail qui se serait fait autrement ; il a
 servi à en faire davantage. Les 180~kg ne sont donc pas une économie : ils s'ajoutent.
+
+Cela compte parce que les trajectoires qui tiennent l'objectif ne reposent pas sur la
+seule efficacité. Rogelj et al. (2018, \url{https://doi.org/10.1038/s41558-018-0091-3})
+ont étudié, avec six modèles, des scénarios qui ramènent le réchauffement médian sous
+1,5~°C en 2100. Ceux qui y parviennent ont trois traits : un abandon rapide des énergies
+fossiles pour une énergie bas carbone, une consommation d'énergie réduite, et du CO$_2$
+retiré de l'atmosphère. La baisse de la consommation y figure pour elle-même. Un usage qui
+s'ajoute va dans l'autre sens, quelle que soit son efficacité.
 
 On en tire deux règles de conduite. Un coût par page faible ne justifie pas un usage, car
 c'est le total qui compte, et le total croît avec ce qu'on décide de lire. Le choix de ce
