@@ -260,6 +260,8 @@ export interface PublishedEdition {
   /** How far the shelfmark correspondence can be trusted. */
   mapping: 'certain' | 'likely' | 'unmapped';
   note: string;
+  /** French originals held elsewhere (IHÉS item references), when the edition is a translation. */
+  originals?: string[];
   /**
    * The edition's own files, where they exist and can be framed.
    *
