@@ -226,7 +226,7 @@ people's uncommitted files. Add only this folder's path:
 ```bash
 git add transcripts/<cote>/drawings
 git commit -m "Issue 73: drawings of folder <cote> vectorised (<n> drawings: <ok> ok, <partial> partial, <failed> failed)" \
-  -m "Co-Authored-By: …" -m "Claude-Session: …"   # the attribution lines of the session
+  -m "Co-Authored-By: …"   # the model's attribution line; never a Claude-Session line (it links to a private session)
 git pull --rebase --autostash origin main && git push origin main
 ```
 
