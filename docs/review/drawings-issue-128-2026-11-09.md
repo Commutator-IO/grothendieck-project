@@ -20,14 +20,15 @@ which only the transcription skill edits.
 
 Ces figures sont décrites par une note de la transcription, sans marque `\drawing` : elles n'ont donc pas encore de dessin. Le livre de lecture les signale par un cadre « Figure à redessiner ». Pour chacune, dire si la description correspond à la page ; la figure sera ensuite marquée dans la transcription et redessinée (type `missing`, identifiant `p<page>`).
 
-- [ ] 156-2 p2 | missing | Is there a sketch above the line, linked to Ẇ_t (the tubular neighbourhood, its interior and its boundary)? | petit croquis au-dessus de la ligne, relié à Ẇ_t par un trait |
-- [ ] 156-2 p4 | missing | Is there a small circle marked with two points under the note? | un petit cercle marqué de deux points |
-- [ ] 156-5 p27 | missing | Does the sketch show the product I × I′ with the parts S, S′ of 𝓛 and the corner K? | croquis : S et S′ parties de 𝓛, K au coin inférieur gauche |
-- [ ] 156-6 p35 | missing | Is the small circle before « de ce type » a disk with a marked point? | un petit cercle contenant un signe, sans doute le disque à point marqué |
-- [ ] 156-6 p88 | missing | Is there a small triangle with a point marked near a vertex, and a small circle at the end of the parenthesis? | un petit triangle, un point marqué près d'un sommet ; un petit cercle |
-- [ ] 156-7 p8 | missing | Is the margin drawing a rhombus containing a circle cut by a vertical diameter, with small crosses around? | losange contenant un cercle coupé par un diamètre vertical, petites croix autour |
-- [ ] 156-7 p69 | missing | Are there three sketches on the left: for b) a segment X and a point Y at its end; for c) two segments X, Y apart, « ou » end to end? | trois petits croquis de segments et de points |
-- [ ] 156-7 p71 | missing | Does the sentence end on a subdivided segment with points a₁, a₂, …, aₙ? | un segment subdivisé, points a₁, …, aₙ |
+- [x] 156-2 p2 | missing | Is there a sketch above the line, linked to Ẇ_t (the tubular neighbourhood, its interior and its boundary)? | petit croquis au-dessus de la ligne, relié à Ẇ_t par un trait |
+- [x] 156-2 p4 | missing | Is there a small circle marked with two points under the note? | un petit cercle marqué de deux points |
+- [ ] 156-5 p27 | missing | Is the « croquis » of the note anything other than the arrow diagram S ↪ 𝓛 ↩ S′ already set in the text? | No sketch: the note describes the tikz-cd diagram of the text; K appears only in the formula K = Im(S∩T → I×J) | A separate sketch of I × I′ with the corner K, to mark and redraw
+- [ ] 156-7 p77 | missing | Is there a small overwritten triangle linked to a circled (2) in the margin of the last line? | No sketch seen: the looped descender of the « f » of « fait » and faint grey traces | A pencil renvoi sign, as the note says
+- [x] 156-6 p35 | missing | Is the small circle before « de ce type » a disk with a marked point? | un petit cercle contenant un signe, sans doute le disque à point marqué |
+- [x] 156-6 p88 | missing | Is there a small triangle with a point marked near a vertex, and a small circle at the end of the parenthesis? | un petit triangle, un point marqué près d'un sommet ; un petit cercle |
+- [x] 156-7 p8 | missing | Is the margin drawing a rhombus containing a circle cut by a vertical diameter, with small crosses around? | losange contenant un cercle coupé par un diamètre vertical, petites croix autour |
+- [x] 156-7 p69 | missing | Are there three sketches on the left: for b) a segment X and a point Y at its end; for c) two segments X, Y apart, « ou » end to end? | trois petits croquis de segments et de points |
+- [x] 156-7 p71 | missing | Does the sentence end on a subdivided segment with points a₁, a₂, …, aₙ? | un segment subdivisé, points a₁, …, aₙ |
 
 ## En priorité : pages citées par les preuves de l'article Lean
 
@@ -498,3 +499,13 @@ Réponses reportées dans `drawings.json` ou dans la transcription ; les cases s
 - [ ] 156-4 03-4 | reading | Does the middle bottom node carry a tilde as well as the bar? | Ḡ | G̃ with a bar
 - [ ] 156-4 03-5 | strike | Is the F′ at the far left of the cube, joined by a double stroke to the hatched scribble, part of that struck insertion? | Left out as struck | The middle F′ of the cube
 - [ ] 156-4 04-1 | strike | Is the subdivision sign between F and F′ struck, or only overwritten? | Struck, not drawn | Drawn as ≼
+
+## Folders 156-2, 156-6 and 156-7, figures marked and redrawn (10 November)
+
+- [ ] 156-2 01-5 | reading | Is this a sketch (a thin hatched wedge, the neighbourhood W_t) or a struck word under a double strike? | Drawn as a sketch | No drawing; a struck illegible word in the text
+- [ ] 156-6 02-1 | reading | Is the small chevron before the central point a sign or a pen start? | A chevron beside a heavy point | The point alone
+- [ ] 156-6 05-3 | disagreement | Where is the point on the triangle? | On the left side, about its middle | Near a vertex, as in the note
+- [ ] 156-6 05-4 | reading | Are the top and bottom marks on the circle two marked points, or the start and join of the pen stroke? | Two points, open at the top and full at the bottom | A plain circle, as in the text
+- [ ] 156-7 01-3 | disagreement | Is the diameter vertical, with small crosses around? | Oblique (the quadrilateral's diagonal), two crosses, right and below | A vertical diameter and small crosses around, as in the note
+- [ ] 156-7 01-3 | reading | What is the small mark inside the quadrilateral, left of the circle? | Left out, unread | A tick or a small letter to add
+- [ ] 156-7 04-3 | reading | Is the last label aₙ? | aₙ, after the text | a_m
