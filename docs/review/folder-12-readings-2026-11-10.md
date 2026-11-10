@@ -20,7 +20,7 @@ the transcription then gains a `% Revised` line naming the issue that carried th
 
 On 10 November the readings that a second look at the page found sure were applied in `transcripts/12` (#66) and
 their boxes ticked; where a question named a sure place together with likely ones, the applied place is ticked
-and the rest stays open in a box of its own, so section 2 now has 20 boxes. On 11 November the remaining alternatives were adopted at Michel's request, after his 30 answers (#138, #139) chose the alternative every time, except a control sample of 26 boxes left open for the review page.
+and the rest stays open in a box of its own, so section 2 now has 20 boxes. On 11 November the remaining alternatives were adopted at Michel's request, after his 30 answers (#138, #139) chose the alternative every time, except a control sample of 26 boxes left open for the review page. Michel answered these 26 controls on the facsimile in #140 and #141, the alternative right every time, and they are ticked.
 
 ## 1. A letter or a word written the same way over several pages
 
@@ -48,7 +48,7 @@ A first look at the page images found the alternative clear here, in whole or fo
 - [x] 12 p42 batch-03:110b | reading | § 12, first lines | « le groupe … décomposition … par × » | « le gpe … découpage … pour ⊗ »
 - [x] 12 p56 batch-03:362 | reading | word before « dans H^{2n−i} ⊗ H^i(n) » | « prolongée » | « Plongée »
 - [x] 12 p58 batch-03:397 | reading | the adjective after « ses structures » | « structures habituelles » | « structures tensorielles »
-- [ ] 12 p58 batch-03:397b | reading | the first sentence | « On peut par l'image provenir » | « On pense que l'image provient »
+- [x] 12 p58 batch-03:397b | reading | the first sentence | « On peut par l'image provenir » | « On pense que l'image provient »
 - [x] 12 p63 batch-04:184 | reading | NB, line 1 : the sign in the parenthesis | « (ou projectif lisse) » | « (= projectif lisse) »
 - [x] 12 p63 batch-04:185 | reading | NB, lines 2–3 | « [four words unread] telles relations précises » | « on n'a plus de telles relations précises »
 - [x] 12 p70 batch-04:294 | reading | the verb after « coeff. finis, on » | « on a » | « on trouve »
@@ -62,7 +62,7 @@ A first look at the page images found the alternative clear here, in whole or fo
 A first look at the page images found the alternative likely here; these are fast cursive, and the facsimile decides.
 
 - [x] 12 p22 batch-02:117 | reading | margin, top left : third line | « en tirer [illisible] les constructions des foncteurs » | « en termes des données construire des foncteurs »
-- [ ] 12 p22 batch-02:133 | reading | words after « compatible avec ⊗ » : in the margin or in the line ? | « (Cond. de transitivité.) » in the margin | « [On a transitivité. » in the line
+- [x] 12 p22 batch-02:133 | reading | words after « compatible avec ⊗ » : in the margin or in the line ? | « (Cond. de transitivité.) » in the margin | « [On a transitivité. » in the line
 - [x] 12 p23 batch-02:142 | reading | margin, first line | « le formulaire de dualité » | « la formule de dualité »
 - [x] 12 p23 batch-02:144 | reading | margin, last lines | « les formules d'Alexander reliant tous ces foncteurs » | « le formulaire standard reliant tous ces foncteurs »
 - [x] 12 p23 batch-02:151 | reading | two words after « filtrant » (twice) | « à morph. affines » | « ess. affine »
@@ -71,122 +71,122 @@ A first look at the page images found the alternative likely here; these are fas
 - [x] 12 p24 batch-02:178 | reading | word between « catégorie » and « des » | (nothing) | « formée »
 - [x] 12 p24 batch-02:181 | reading | word after « négligeant » | [illisible] | « précisément »
 - [x] 12 p25 batch-02:186 | reading | margin top left, last line | « avec [illisible] etc. » | « avec résidu etc. » (and a short word, « hom » ?, after « f^! »)
-- [ ] 12 p25 batch-02:202 | reading | margin, third line | « la chose triviale » | « le choix trivial » (or « le choix limite »)
+- [x] 12 p25 batch-02:202 | reading | margin, third line | « la chose triviale » | « le choix trivial » (or « le choix limite »)
 - [x] 12 p25 batch-02:203 | reading | margin : word before R^*f_* ; anything unread after « ℓ, » ? | « que R^*f_*… pour f, ℓ, [ill.] ce qui » | « qu'on ait R^*f_*… pour f, ℓ, ce qui »
 - [x] 12 p26 batch-02:222 | reading | is there a word between « échéant » and « (X sur Q) » ? | [illisible] | nothing
 - [x] 12 p26 batch-02:227 | reading | « connexes … » | « connexes et non vides » | « connexes non vides »
 - [x] 12 p26 batch-02:232 | reading | verb before « l'hyp « projectif » » | « oublie » | « enlève »
-- [ ] 12 p27 batch-02:252 | reading | anything between « inductive » and « des » ? | « de [illisible] des » | « des »
+- [x] 12 p27 batch-02:252 | reading | anything between « inductive » and « des » ? | « de [illisible] des » | « des »
 - [x] 12 p27 batch-02:255 | reading | end of the chain of M^+ | « → ⋯ » | a full stop
 - [x] 12 p27 batch-02:257 | reading | after « inversible, » | « d'inverse Q(1) [illisible] » | « soit Q(1) son inverse » ; and « pour » after « s'écrire, »
 - [x] 12 p27 batch-02:260 | reading | margin bottom left | « sous-catégorie pleine épaisse abélienne de M(X) ; [illisible] » | « une sous-catégorie abélienne épaisse de M(X) ; l'appartenance à M^+(X) se vérifie fibre par fibre … »
 - [x] 12 p28 batch-02:268 | reading | word before lim→ | [illisible] | « Pseudo »
-- [ ] 12 p28 batch-02:269 | reading | sentence squeezed after the closing bracket | « T_ℓ s'étend à M(X), de façon unique à isom unique près, compatible avec ⊗. Les foncteurs [ill.] » | « Les foncteurs T_ℓ s'étendent à M(X), de façon unique, de façon à rester compatibles avec ⊗. »
+- [x] 12 p28 batch-02:269 | reading | sentence squeezed after the closing bracket | « T_ℓ s'étend à M(X), de façon unique à isom unique près, compatible avec ⊗. Les foncteurs [ill.] » | « Les foncteurs T_ℓ s'étendent à M(X), de façon unique, de façon à rester compatibles avec ⊗. »
 - [x] 12 p29 batch-02:313 | reading | words before the first boxed formula | « et on désire que » | « et je dis que l'on a »
 - [x] 12 p29 batch-02:317 | reading | exponent of Λ and the last word of the line | « Λ^n u, la formule » | « Λ^i u, le fait »
 - [x] 12 p30 batch-02:354 | reading | where does the small « sur Z » belong ? | « fibre sur Z par fibre » | « X de t.f. sur Z »
 - [x] 12 p30 batch-02:356 | reading | word after « (Pour » | [illisible] | « ceux-ci »
-- [ ] 12 p31 batch-02:364 | reading | after the struck lines | « [ill.] compatible [ill.] f^* » | « Compatible avec f^* »
+- [x] 12 p31 batch-02:364 | reading | after the struck lines | « [ill.] compatible [ill.] f^* » | « Compatible avec f^* »
 - [x] 12 p31 batch-02:373 | reading | « sous-… » (twice) | « sous-quotients » | « sous-espaces »
 - [x] 12 p31 batch-02:375 | reading | is the Z before 1_X struck ? and the exponent of R | « R^i f_!(Z·1_X) » | « R^j f_!(1_X) », Z struck
 - [x] 12 p31 batch-02:379 | reading | opening of the bracket | « on sait que tout » | « au sens que tout »
 - [x] 12 p32 batch-02:405 | reading | verb | « permet de prolonger » | « peut se prolonger »
-- [ ] 12 p32 batch-02:407 | reading | two words before « la filtration déjà » | « on ait » | « ce soit »
+- [x] 12 p32 batch-02:407 | reading | two words before « la filtration déjà » | « on ait » | « ce soit »
 - [x] 12 p32 batch-02:413 | reading | « … on prend j assez grand … que » | « si … tel que » | « où … pour que »
 - [x] 12 p33 batch-02:437 | reading | first line | « mais [illisible] par l'inclusion » | « mais on fera (fait) attention que l'inclusion »
 - [x] 12 p33 batch-02:455 | reading | sign before M_i(X)/M_{i−1}(X) | « = » | « ≃ »
 - [x] 12 p33 batch-02:458 | reading | word after « sont » | [illisible] | « tous »
-- [ ] 12 p33 batch-02:463 | reading | words before « équiv. can. … à G_0(X) » | « on [illisible] » | « en particulier tous »
+- [x] 12 p33 batch-02:463 | reading | words before « équiv. can. … à G_0(X) » | « on [illisible] » | « en particulier tous »
 - [x] 12 p34 batch-02:480 | reading | line 3 | « qui se loc. étale [(dans …, … fibre par fibre)] [ill.] objets » | « qui se dévissent loc. étale (du moins fibre par fibre) en objets »
 - [x] 12 p34 batch-02:501 | reading | left margin, first words | [illisible] | « cela distingue »
 - [x] 12 p35 batch-02:521 | reading | first word(s) of the page | « en utilisant » | « induisant »
 - [x] 12 p35 batch-02:526 | reading | after « pour j » | « qui [illisible] » | « grand »
-- [ ] 12 p35 batch-02:540 | reading | opening of the parenthesis : the sense is reversed | « par une formule aussi simple » | « pas de formule aussi simple »
+- [x] 12 p35 batch-02:540 | reading | opening of the parenthesis : the sense is reversed | « par une formule aussi simple » | « pas de formule aussi simple »
 - [x] 12 p35 batch-02:551 | reading | two letters before « tordu » (twice) | « est tordu » | « ct tordu » (constant tordu)
 - [x] 12 p36 batch-02:558 | reading | word before « cette catégorie » | [illisible] | « sur »
 - [x] 12 p36 batch-02:561 | reading | two short words before « une « catégorie tensorielle » | « C'est » | « On a »
 - [x] 12 p36 batch-02:572 | reading | is « libre » on the page ? | « est un Z-module libre admettant comme base » | « comme Z-module admet comme base »
-- [ ] 12 p36 batch-02:575 | reading | after « injective » | « [illisible] des objets simples » | « sur l'ens. de ces objets simples »
+- [x] 12 p36 batch-02:575 | reading | after « injective » | « [illisible] des objets simples » | « sur l'ens. de ces objets simples »
 - [x] 12 p36 batch-02:578 | reading | after « résulte » | [illisible] | « du fait »
 - [x] 12 p37 batch-02:587 | reading | « on a(ura) … un diagramme … » | « on a … [illisible] » | « on aura … comm. »
 - [x] 12 p37 batch-02:594 | reading | sentence around Σ^+_{(i)}(X) | « M_i(X) se définit en termes [ill.] Σ^+_{(i)}(X) et Σ_i(X), d'une partie [ill.], d'où » | « M_i^+(X) se définit en termes d'une partie Σ^+_{(i)}(X) de Σ_i(X), d'où »
 - [x] 12 p38 batch-02:629 | reading | small words under M_0(X)[ξ] and over the ⊗ below | « (ξ de degré 1) », the rest unread | « de d° 0 » under M_0(X), « de degré 1 » under ξ
-- [ ] 12 p38 batch-02:641 | reading | small formula at the right edge after « défini par » | [illisible] | « u, v ↦ ξ^{-1}uv »
+- [x] 12 p38 batch-02:641 | reading | small formula at the right edge after « défini par » | [illisible] | « u, v ↦ ξ^{-1}uv »
 - [x] 12 p38 batch-02:644 | reading | anything between « classe » and « dans » ? | [illisible] | nothing
 - [x] 12 p39 batch-02:667 | reading | first word under the formula | « (donc on a » | « alors on a »
 - [x] 12 p39 batch-02:699 | reading | N.B., first line | « [ill.] on voit [ill.] la structure additive » | « Du pt de vue de la structure additive, »
 - [x] 12 p39 batch-02:701 | reading | word after « connaissance » | [illisible] | « de »
-- [ ] 12 p39 batch-02:709 | reading | small note right of « les applications » | « x, y ↦ [ill.] définies par [ill.] » | « u, v ↦ uv, défini par »
+- [x] 12 p39 batch-02:709 | reading | small note right of « les applications » | « x, y ↦ [ill.] définies par [ill.] » | « u, v ↦ uv, défini par »
 - [x] 12 p40 batch-02:721 | reading | two gaps in the sentence on the involution | [illisible], [illisible] | « de proche en proche » ; « sur σ_i »
 - [x] 12 p40 batch-02:722 | reading | verb, and the word after « théorie » | « résulterait de la théorie [illisible] » | « résultera de la théorie projective »
 - [x] 12 p41 batch-03:78 | reading | title, word before « géométriques » | « ou » | « Cas »
 - [x] 12 p41 batch-03:82 | reading | first line after the struck word | « une variété lisse sur le corps alg. clos » | « non singulière sur k alg. clos »
-- [ ] 12 p41 batch-03:86 | reading | margin note, first word | « utilisation du » | « attention »
+- [x] 12 p41 batch-03:86 | reading | margin note, first word | « utilisation du » | « attention »
 - [x] 12 p41 batch-03:94 | reading | under the inductive limit | « U ouvert dense de x̄ » | « U ouvert ≠ ∅ de x̄ »
 - [x] 12 p41 batch-03:96 | reading | « On … que cette suite spectrale provien… » : known or wanted ? | « On sait que … provient » | « On veut que … provienne »
 - [x] 12 p41 batch-03:96b | reading | end of the parenthesis and the small insertion | « passer aux filtrations finies convenables … [en dehors de …] » | « prendre une filtration finie convenable … » ; insertion « en dim n » after « Le morceau »
 - [x] 12 p41 batch-03:96c | reading | margin right : « essentielle … si X de dim 1 » | « ! ou si » | « , même si » ; is « projectif » struck or underlined, and is « lisse » there ?
-- [ ] 12 p41 batch-03:96d | reading | last sentence | « On voit que [ill.] [ill.] exactement » | « On veut que ce soit exactement »
+- [x] 12 p41 batch-03:96d | reading | last sentence | « On voit que [ill.] [ill.] exactement » | « On veut que ce soit exactement »
 - [x] 12 p43 batch-03:120 | reading | after « σ cl(X), on » | « [illisible] les » | « a des »
 - [x] 12 p44 batch-03:152 | reading | « on trouve un(e) … dans Z^(…) … un invariant » | « un « type » » ; « i.e. » | « une image » ; « donc »
 - [x] 12 p45 batch-03:159 | reading | first words of the page | « i.e. des » | « où chaque »
 - [x] 12 p45 batch-03:163 | reading | underlined word after « la composante » | « primitive » | « bipure »
-- [ ] 12 p45 batch-03:167 | reading | two places in the last paragraph | « le dual des H^j » ; « la composante primitive des H^j » | « la classe dans H^j » ; « la composante j-bipure dans H^j »
+- [x] 12 p45 batch-03:167 | reading | two places in the last paragraph | « le dual des H^j » ; « la composante primitive des H^j » | « la classe dans H^j » ; « la composante j-bipure dans H^j »
 - [x] 12 p46 batch-03:183 | reading | sign between the two terms of the bracket | « + » | a comma (the + is struck)
 - [x] 12 p47 batch-03:193 | reading | four places in the definition of the invariant | « on peut le supposer » ; « morphisme » ; « ([ill.] surjectif) » ; « comme on le sait bien » | « ce qu'on peut supposer » ; « hom. » ; « (donc surjectif) » under « propre » ; « comme il est bien connu »
 - [x] 12 p47–48 batch-03:196 | reading | the « Question » sentence | « On aimerait, pour deux … extensions de type …, … provenant d'un K-homom. » | « On aimerait que tout système d'homs … provienne d'un K-homom. »
 - [x] 12 p48 batch-03:199 | reading | first sentence | « R'[t_1, …, t_N] » ; « à des systèmes » ; « s'immerge » | « R'[δ_1, …, δ_N] » ; « et des (du) système(s) » ; « s'envoie »
-- [ ] 12 p48 batch-03:201 | reading | words in the loop under « sur K alg. clos » | « ([ill.] [ill.]) telles que » | « (supposons que »
+- [x] 12 p48 batch-03:201 | reading | words in the loop under « sur K alg. clos » | « ([ill.] [ill.]) telles que » | « (supposons que »
 - [x] 12 p48 batch-03:208 | reading | last bracket of the page | « Cast. ok ! » | « coh. alg ! »
 - [x] 12 p49 batch-03:212 | reading | verb | « Trouve-t-on » | « Trouvons-nous »
 - [x] 12 p52 batch-03:274 | reading | second paragraph | « voir » (twice) ; « permettent de décrire » | « via » (twice) ; « peuvent se décrire »
 - [x] 12 p53 batch-03:316 | reading | small N.B. between cases 1) and 2) | « des variantes de l'unité [… I 1 !] » | « des racines de l'unité [leur produit étant ±1 !] »
-- [ ] 12 p54 batch-03:323 | reading | word before « caractériser » | « pouvons-nous » | « comment »
+- [x] 12 p54 batch-03:323 | reading | word before « caractériser » | « pouvons-nous » | « comment »
 - [x] 12 p54 batch-03:327 | reading | last two lines of the page ; are they struck ? | « Le cas général [ill.] [ill.], si on connaît tous les Frobenius [ill.] » | « Le cas général s'en déduit par image inverse, si on connaît tous les Frobenius ∈ π_1 »
 - [x] 12 p58 batch-03:399 | reading | the bracket on the « partie algébrique » ; is its last clause struck or underlined ? | « ce pro-motif n'étant lui-même autre … en tout autre cas, on … que Z(0) ! ; [struck] il paraît qu'il est une … » | « c'est tout – le pro-motif n'étant lui-même autre que Z(0) ! ; en tout autre cas, je pense qu'il est nul … »
 - [x] 12 p59 batch-03:406 | reading | exponents on lines 1, 4 and after the triangulated functor | R^i f_*, H^i(X,M) | R^* f_*, H^*(X,M)
 - [x] 12 p59 batch-03:418 | reading | 1°) | « lim essentielles filtrantes de préschémas à pr. quasi proj. affines » | « lim essentiellement affines de préschémas q.c. q.s. »
-- [ ] 12 p59 batch-03:421 | reading | last word of the page | « est » | « de » (type fini, next page)
+- [x] 12 p59 batch-03:421 | reading | last word of the page | « est » | « de » (type fini, next page)
 - [x] 12 p61 batch-04:118 | reading | 3°), three lines | « on a [ill.] … et H^0 est exact [ill.] en M. De plus, dans fonctoriel » | « on veut que … donc H^0(X,M) est exact à g. De plus, isom fonctoriel »
 - [x] 12 p62 batch-04:140 | reading | the doubt on the Ext^i | « doutes pour les Ext^i (i>0) [ill.] pour être dans la catégorie des Ind-motifs ???] Possibles » | « doute que les Ext^i (i>0) soient [peut-être dans la catégorie des Ind-motifs ???] effaçables »
 - [x] 12 p62 batch-04:154 | reading | words above the struck line of 4°) | « bien le ℓ-foncteur » | « des hom de ∂-foncteurs »
 - [x] 12 p63 batch-04:179 | reading | verb | « on aurait » | « on aura »
-- [ ] 12 p63 batch-04:189 | reading | « Le th. de Tate … en énonçant » | « peut se reformuler de façon précise » | « peut se reformuler et se préciser »
+- [x] 12 p63 batch-04:189 | reading | « Le th. de Tate … en énonçant » | « peut se reformuler de façon précise » | « peut se reformuler et se préciser »
 - [x] 12 p63 batch-04:191 | reading | last formula : the small words by the arrow, and the twist of Q_X | label « ét. pr. Q_ℓ » on the arrow ; Q_X(i) | « pas Q_ℓ » pointing at Q ; Q_X(0)
 - [x] 12 p64 batch-04:196 | reading | lines 2–3 | « simplifiant les notations (f : …). Une autre façon de l'écrire » | « morphisme structural f : X → Spec k. Une autre façon est celle-ci »
 - [x] 12 p64 batch-04:220 | reading | last paragraph | « dans (X projectif …) » ; « c'est les cycles » | « alors (si X projectif …) » ; « ce sont les cycles algébriques à coeff. rationnels »
 - [x] 12 p66 batch-04:233 | reading | lines 2 and 4 | « (constructibles) » ; « par le couplage de motifs dualisants » | « (complexes de) » ; « pour le complexe de motifs dualisants »
-- [ ] 12 p66 batch-04:236 | reading | the NB in brackets ; the circled word above the line | « est régulier de dim n, dans Q(n)[2n+1], c'est le dualisant à valeurs dans » ; circled « foncteur » | « est régulier partout de dim n, alors c'est la dualité à valeurs dans Q(n)[2n+1] » ; circled « partout »
+- [x] 12 p66 batch-04:236 | reading | the NB in brackets ; the circled word above the line | « est régulier de dim n, dans Q(n)[2n+1], c'est le dualisant à valeurs dans » ; circled « foncteur » | « est régulier partout de dim n, alors c'est la dualité à valeurs dans Q(n)[2n+1] » ; circled « partout »
 - [x] 12 p66 batch-04:245 | reading | phrase in quotation marks under R_!Γ_X(M^*) | « supposer qu'on sait que Z » | « support propre (compact) sur Spec Z »
 - [x] 12 p68 batch-04:264 | reading | first line | « cas choisi pour X = Spec Z, et lui-même le cas géométrique » | « = (même) énoncé pour X = Spec Z, et dans le cas géométrique »
 - [x] 12 p68 batch-04:277 | reading | two verbs | « en utilisant le foncteur » ; « Cela revient à » | « en appliquant » ; « Cela ramène à »
 - [x] 12 p68 batch-04:279 | reading | slanted margin note, left | « à développer au sujet des cup-produits à coeff. « abstraits » » | « à développer sans doute pour le cup-produit en cohomologie « absolue » »
-- [ ] 12 p68 batch-04:283 | reading | the bracket | « pour un vectoriel [ill.] … sur lequel » | « pour des vectoriels … sur lesquels » ; hat on the Z ?
+- [x] 12 p68 batch-04:283 | reading | the bracket | « pour un vectoriel [ill.] … sur lequel » | « pour des vectoriels … sur lesquels » ; hat on the Z ?
 - [x] 12 p70 batch-04:325 | reading | third case of the last formula | « [struck] si i = 2j+1, mais pas canoniquement isomorphe à … X/F̄ ! » | « id. si i = 2j+1, mais pas canoniquement en termes de X̄/F̄ ! » (or « X̄, K̄ »)
 - [x] 12 p70 batch-04:330 | reading | small N.B. bottom left | « Remplaçons k par [three words unread] l'isom. obtenu par lim » | « Remplacer k par k_n revient à multiplier l'isom obtenu par 1/n »
 - [x] 12 p72,73 batch-04:335 | reading | the same two short words after « motif » on both pages | [illisible] | « ct tordu » (constant tordu)
 - [x] 12 p73 batch-04:379 | reading | index of Q in R^1 f_* | « Q_A(1) » | « Q_{A^*}(1) »
-- [ ] 12 p74 batch-04:390 | reading | is « pour » struck ? | « pour nous suggèrent » | « nous suggèrent »
+- [x] 12 p74 batch-04:390 | reading | is « pour » struck ? | « pour nous suggèrent » | « nous suggèrent »
 - [x] 12 p74 batch-04:396 | reading | line above the Kummer sequence | « Considérons [ill.] [ill.] (aux [three words unread] ×) » | « Considérons (pour ℓ premier aux car. résiduelles de X) »
 - [x] 12 p74 batch-04:403 | reading | place of ℓ^ν on the third term | after the parenthesis (cokernel) | under the left of H^1 (kernel)
 - [x] 12 p74 batch-04:412 | reading | adverb | « vraisemblablement » | « moralement »
 - [x] 12 p75 batch-04:419 | reading | first lines | « on a » ; sequence ending on a struck term | « on aura » ; « → 0 » before the struck term
-- [ ] 12 p75 batch-04:443 | reading | letter in the middle term of the last sequence | « f_*(M) » | « f_*(A) »
+- [x] 12 p75 batch-04:443 | reading | letter in the middle term of the last sequence | « f_*(M) » | « f_*(A) »
 - [x] 12 p77 batch-04:482 | reading | parenthesis on line 1 | « donc le T_ℓ ou H^2 » | « dont le T_ℓ est H^2 »
 - [x] 12 p77 batch-04:491 | reading | two places | « sur S × S » ; « qui n'est pas nul » | « sur C × C » ; « qui est non nul »
 - [x] 12 p78 batch-04:504 | reading | underlined words right of the isomorphism | « sauf à noyau fini » | « surj. à noyau fini »
 - [x] 12 p78 batch-04:526 | reading | slanted note bottom left | « les seuls cas qui restent » | « les seuls invariants qui restent »
-- [ ] 12 p81 batch-05:114 | reading | before the exact sequence | « alors » | « alors on a : »
+- [x] 12 p81 batch-05:114 | reading | before the exact sequence | « alors » | « alors on a : »
 - [x] 12 p81 batch-05:132 | reading | the two lines under the Tate duality : is the second one struck, or underlined twice ? | both struck, fragments | first struck ; second « c'est donc essentiellement un p-groupe, … groupe fini ! OK. »
 - [x] 12 p81 batch-05:137 | reading | last sentence : a question or a statement ? | « Peut-on généraliser au cas d'une variété X régulière dont on enlève » | « Peut se généraliser au cas où on prend X régulier dont (auquel) on enlève »
 - [x] 12 p83 batch-05:141 | reading | word after « Calculs » | « sur » | « pour »
 - [x] 12 p83 batch-05:162 | reading | two places | « modèle [illisible] » ; « = fini » | « modèle can. » ; « = gpe fini »
-- [ ] 12 p85 batch-05:187b | reading | first words | « Le théorème » | « La théorie »
+- [x] 12 p85 batch-05:187b | reading | first words | « Le théorème » | « La théorie »
 - [x] 12 p85 batch-05:205 | reading | sentence before « L^s(M). Noter » | « Soit ce que nous notons » | « Cet espace sera noté »
 - [x] 12 p86 batch-05:227 | reading | words above the struck ones ; is « fermé » struck ? | « on [illisible] L^s(M) un cône convexe [struck : fermé] » | « on a dans L^s(M) un cône convexe fermé »
 - [x] 12 p86 batch-05:234 | reading | slanted margin note | « sont dites positives » | « sont dites pseudo-amples »
 - [x] 12 p88 batch-05:289 | reading | first words of the paragraph | « En décomposant » | « Si on décompose »
-- [ ] 12 p88 batch-05:298 | reading | heavy letter after ⊗_A and before « un vectoriel » | M | V (written over an M)
+- [x] 12 p88 batch-05:298 | reading | heavy letter after ⊗_A and before « un vectoriel » | M | V (written over an M)
 - [x] 12 p89 batch-05:312 | reading | small word above the second struck word of line 3 | (nothing) | « rang » : « proj. de rang fini sur k »
 - [x] 12 p89 batch-05:321 | reading | head of line 7 | « Z-libre » | « gpe libre »
 - [x] 12 p89 batch-05:324 | reading | where does « k[t]/P k[t] » belong, and what is associated to P ? | « P en [ill.] [ill.]. À tout tel P, on associe : k[t]/P k[t]. (V, f), dont … » | « P en module k[t]/P k[t]. À tout tel P est associé un (V, f), dont … »
