@@ -81,6 +81,8 @@ function useHeld<T>(load: (() => Promise<{ default: unknown }>) | null): T | nul
 const loadSnippets = SHOW_READINGS ? () => import('./content/review-snippets.json') : null;
 /** The two readings of each doubtful drawing of #128: they describe the figure and the transcription. */
 const loadDrawingClaims = SHOW_READINGS ? () => import('./content/review-drawings.json') : null;
+/** A place of folder 12 where another reading is possible (#66): the place, our reading, the alternative. */
+const loadReadingClaims = SHOW_READINGS ? () => import('./content/review-readings.json') : null;
 
 const idFromHash = () => {
   const h = decodeURIComponent(location.hash.slice(1));
@@ -90,6 +92,7 @@ const idFromHash = () => {
 export function ReviewPage() {
   const snippets = useHeld<Record<string, Snippet>>(loadSnippets);
   const drawingClaims = useHeld<Record<string, string>>(loadDrawingClaims);
+  const readingClaims = useHeld<Record<string, { where: string; ours: string; alternative: string }>>(loadReadingClaims);
   const relay = useFacsimileProxy();
   // Answers to checks no longer in the queue were sent and applied (review-answered.json):
   // drop them from this browser so they are neither counted nor sent again.
@@ -233,7 +236,12 @@ export function ReviewPage() {
               <a className="text-brand-700 underline" href="https://github.com/Commutator-IO/grothendieck-project/issues/128">
                 issue #128
               </a>{' '}
-              that the redraw could not settle alone are put beside the page in the same way.
+              that the redraw could not settle alone are put beside the page in the same way. Under « Doubtful reading »,
+              the places of folder 12 where another reading is possible (
+              <a className="text-brand-700 underline" href="https://github.com/Commutator-IO/grothendieck-project/issues/66">
+                issue #66
+              </a>
+              ) are asked one by one.
             </p>
             <p className="mt-2 text-[13px] text-ink-500">
               {done} of {ITEMS.length} answered · built from #35 on {QUEUE.built}
@@ -392,6 +400,15 @@ export function ReviewPage() {
                 )}
                 {SHOW_READINGS && item.drawing && <Drawing cote={item.cote} id={item.drawing} />}
                 {SHOW_READINGS && snippets?.[item.id] && <Reading s={snippets[item.id]} />}
+                {SHOW_READINGS && readingClaims?.[item.id] && (
+                  <Entry
+                    rows={[
+                      ['Place', readingClaims[item.id].where],
+                      ['Our reading', readingClaims[item.id].ours],
+                      ['Alternative', readingClaims[item.id].alternative],
+                    ]}
+                  />
+                )}
                 {!SHOW_READINGS && ['ill', 'uncertain', 'add', 'supplied', 'drawing'].includes(item.kind) && (
                   <p className="mt-3 rounded-md bg-ink-50 px-3 py-2 text-[13px] text-ink-600">
                     {item.drawing
@@ -406,7 +423,7 @@ export function ReviewPage() {
                 <details className="mt-2 text-[12.5px] text-ink-500">
                   <summary className="cursor-pointer select-none">Details</summary>
                   <p className="mt-1">
-                    From {item.drawing ? '' : '#35, '}« {item.section} »{item.details ? ':' : '.'}
+                    From {item.drawing || /\(#\d+\)/.test(item.section) ? '' : '#35, '}« {item.section} »{item.details ? ':' : '.'}
                   </p>
                   {item.details && <p className="mt-1 text-ink-600">{item.details}</p>}
                   {item.context && <p className="mt-1">{item.context}</p>}

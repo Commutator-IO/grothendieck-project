@@ -31,6 +31,12 @@
  * docs/review/drawings-issue-128-2026-11-09.md, one item per open box (kind
  * `drawing`). Their readings describe the redrawn figure and the
  * transcription, so they sit apart like the snippets, under the same switch.
+ *   src/content/review-readings.json  the place and the two readings of each reading of folder 12
+ *
+ * The readings of folder 12 to check on the facsimile (#66) come from
+ * docs/review/folder-12-readings-2026-11-10.md, one item per open box (kind
+ * `uncertain`): the item carries the page and the line of the file, and what
+ * quotes the transcription sits apart, under the same switch.
  *
  * A box covers either named places (« 105 « 06/09/82 » », « 109 pp. 9–10 »)
  * — one item each, read only while the box is unchecked — or a kind of error
@@ -955,11 +961,58 @@ if (existsSync(DRAWINGS)) {
   }
 }
 
+/* ---------- the readings of folder 12 (#66) ---------- */
+
+// « - [ ] <cote> p<pages> batch-<NN>:<line> | reading | <where> | <our reading> | <alternative reading> »:
+// one place of a transcription where another reading is possible, to check on
+// the facsimile. The place, our reading and the alternative quote the
+// transcription, so they sit apart like the snippets (#31); the item itself
+// carries only the page and the line of the file.
+const READINGS = join(ROOT, 'docs/review/folder-12-readings-2026-11-10.md');
+const readingClaims = {};
+if (existsSync(READINGS)) {
+  let heading = '';
+  for (const raw of readFileSync(READINGS, 'utf8').split('\n')) {
+    const h = /^##\s+(?:\d+\.\s*)?(.*)$/.exec(raw);
+    if (h) heading = h[1];
+    const box = /^\s*- \[([ xX])\]\s+(\S+)\s+p([\d,–-]+)\s+batch-(\d+):(\d+)([a-z]?)\s*\|(.*)$/.exec(raw);
+    if (!box || box[1] !== ' ') continue;
+    const [, , cote, pp, bb, line, letter, rest] = box;
+    const [type, where, ours, alternative] = rest.split('|').map((x) => x.trim());
+    const batch = Number(bb);
+    const file = `transcripts/${cote}/batch-${bb}.fr.tex`;
+    if (type !== 'reading' || !ours || !alternative || !isCote(cote) || !lines(cote, batch)) {
+      skipped.push(`#66 ${cote} ${file}:${line}: ${type === 'reading' ? 'no such batch, or a reading is missing' : `unknown type « ${type} »`}`);
+      continue;
+    }
+    const ps = pp.split(',').flatMap((r) => {
+      const [a, b] = r.split(/[–-]/).map(Number);
+      return b > a ? Array.from({ length: b - a + 1 }, (_, i) => a + i) : [a];
+    });
+    const id = `reading-${cote}-${batch}-${line}${letter}`;
+    push({
+      id,
+      section: `Readings of folder ${cote} to check on the facsimile (#66) · ${heading}`,
+      kind: 'uncertain',
+      cote,
+      batch,
+      page: ps[0],
+      prompt: ps.length > 1 ? `Which of the two readings do the pages have (${pagesText(ps)})?` : 'Which of the two readings does the page have at this place?',
+      hint: `${facsimileAt(ps)}, at the place named with the two readings.`,
+      choices: [C('Our reading is right', 'right'), C('The alternative is right', 'other'), C('Neither', 'other', 'What the page has')],
+      details: `${file}:${line}. Our reading, and another possible reading to check on the facsimile.`,
+      context: 'The answer is applied in the transcription, with a % Revised line naming the issue that carried it.',
+    }, null);
+    if (items.at(-1)?.id === id) readingClaims[id] = { where, ours, alternative };
+  }
+}
+
 writeFileSync(
   join(ROOT, 'src/content/review-queue.json'),
   `${JSON.stringify({ $why: 'Open checks of issue #35, one per spot of a page, built by scripts/review-queue.mjs from the issue body and the transcriptions. The current readings are in review-snippets.json, loaded only when the build shows transcriptions.', built: new Date().toISOString().slice(0, 10), items }, null, 1)}\n`,
 );
 writeFileSync(join(ROOT, 'src/content/review-snippets.json'), `${JSON.stringify(snippets, null, 1)}\n`);
 writeFileSync(join(ROOT, 'src/content/review-drawings.json'), `${JSON.stringify(drawingClaims, null, 1)}\n`);
-console.error(`${items.length} items, ${Object.keys(snippets).length} with a snippet, ${Object.keys(drawingClaims).length} doubtful drawings (#128).`);
+writeFileSync(join(ROOT, 'src/content/review-readings.json'), `${JSON.stringify(readingClaims, null, 1)}\n`);
+console.error(`${items.length} items, ${Object.keys(snippets).length} with a snippet, ${Object.keys(drawingClaims).length} doubtful drawings (#128), ${Object.keys(readingClaims).length} readings of folder 12 (#66).`);
 if (skipped.length) console.error(`Not turned into items (no single spot of a page):\n  ${skipped.join('\n  ')}`);

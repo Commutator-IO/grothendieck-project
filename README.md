@@ -282,7 +282,10 @@ The queue is built by `scripts/review-queue.mjs` from
 [`docs/review/issue-35.md`](docs/review/issue-35.md), the archived checklist of
 issue #35, into `src/content/review-queue.json` (and the few words of current
 reading around each spot into `review-snippets.json`, which the rights switch
-leaves out). An answer is applied at the source only once a person has checked
+leaves out). The readings of folder 12 to check on the facsimile (#66) come
+from [`docs/review/folder-12-readings-2026-11-10.md`](docs/review/folder-12-readings-2026-11-10.md),
+one question per open box; their place and their two readings go into
+`review-readings.json`, left out by the same switch. An answer is applied at the source only once a person has checked
 it on the facsimile: the `.tex` is corrected, or confirmed, and gains a
 `% Revised` line saying what was checked and in which issue, which becomes a `<change>` in the
 TEI. The item is then recorded in `src/content/review-answered.json` — applied,
