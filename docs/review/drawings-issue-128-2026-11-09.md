@@ -22,8 +22,8 @@ Ces figures sont décrites par une note de la transcription, sans marque `\drawi
 
 - [x] 156-2 p2 | missing | Is there a sketch above the line, linked to Ẇ_t (the tubular neighbourhood, its interior and its boundary)? | petit croquis au-dessus de la ligne, relié à Ẇ_t par un trait |
 - [x] 156-2 p4 | missing | Is there a small circle marked with two points under the note? | un petit cercle marqué de deux points |
-- [ ] 156-5 p27 | missing | Is the « croquis » of the note anything other than the arrow diagram S ↪ 𝓛 ↩ S′ already set in the text? | No sketch: the note describes the tikz-cd diagram of the text; K appears only in the formula K = Im(S∩T → I×J) | A separate sketch of I × I′ with the corner K, to mark and redraw
-- [ ] 156-7 p77 | missing | Is there a small overwritten triangle linked to a circled (2) in the margin of the last line? | No sketch seen: the looped descender of the « f » of « fait » and faint grey traces | A pencil renvoi sign, as the note says
+- [x] 156-5 p27 | missing | Is the « croquis » of the note anything other than the arrow diagram S ↪ 𝓛 ↩ S′ already set in the text? | No sketch: the note describes the tikz-cd diagram of the text; K appears only in the formula K = Im(S∩T → I×J) | A separate sketch of I × I′ with the corner K, to mark and redraw
+- [x] 156-7 p77 | missing | Is there a small overwritten triangle linked to a circled (2) in the margin of the last line? | No sketch seen: the looped descender of the « f » of « fait » and faint grey traces | A pencil renvoi sign, as the note says
 - [x] 156-6 p35 | missing | Is the small circle before « de ce type » a disk with a marked point? | un petit cercle contenant un signe, sans doute le disque à point marqué |
 - [x] 156-6 p88 | missing | Is there a small triangle with a point marked near a vertex, and a small circle at the end of the parenthesis? | un petit triangle, un point marqué près d'un sommet ; un petit cercle |
 - [x] 156-7 p8 | missing | Is the margin drawing a rhombus containing a circle cut by a vertical diameter, with small crosses around? | losange contenant un cercle coupé par un diamètre vertical, petites croix autour |

@@ -26,10 +26,10 @@ and the rest stays open in a box of its own, so section 2 now has 20 boxes.
 
 Each of these is one question for all the pages it names: the answer is applied at every place.
 
-- [ ] 12 p43–50 batch-03:134 | reading | the hooked letter multiplying M^+_{(i−1)}(K) etc. : is it the ξ defined on p. 36 ? | ζ | ξ
-- [ ] 12 p47–49 batch-03:191 | reading | the invariant of pp. 47–49 : capital Γ or the γ of p. 46 ? | Γ^i, Γ_i | γ^i, γ_i (underlined)
+- [x] 12 p43–50 batch-03:134 | reading | the hooked letter multiplying M^+_{(i−1)}(K) etc. : is it the ξ defined on p. 36 ? | ζ | ξ
+- [x] 12 p47–49 batch-03:191 | reading | the invariant of pp. 47–49 : capital Γ or the γ of p. 46 ? | Γ^i, Γ_i | γ^i, γ_i (underlined)
 - [ ] 12 p56,58,70 batch-03:355 | reading | the gothic letter for the Lie algebra | capital 𝔊 (and 𝔍 on p. 70) | lower-case 𝔤
-- [ ] 12 p75,76,78 batch-04:439 | reading | exponent of A, and the words under the brace | « A^{tr} » ; « [illisible] de la V.A. A sur S » | « A^{fixe} » ; « partie fixe (points fixes) de la V.A. A sur S »
+- [x] 12 p75,76,78 batch-04:439 | reading | exponent of A, and the words under the brace | « A^{tr} » ; « [illisible] de la V.A. A sur S » | « A^{fixe} » ; « partie fixe (points fixes) de la V.A. A sur S »
 - [x] 12 p85–88,92 batch-05:188 | reading | the letter of the weight in § 17 and § 18 | p | ρ
 
 ## 2. Places where the alternative looked clear on the page
@@ -40,7 +40,7 @@ A first look at the page images found the alternative clear here, in whole or fo
 - [ ] 12 p22 batch-02:122b | reading | the words after « M ⊗ N » | « pour M, N ∈ D^b » | « en M, N ∈ Ob D^b »
 - [x] 12 p24 batch-02:176 | reading | target of T_ℓ in the displayed formula | « M_ℓ(X) » | « M_ℓ^+(X) »
 - [x] 12 p24 batch-02:180 | reading | is « projectifs » on the page ? | « systèmes projectifs ℓ-adiques » | « systèmes ℓ-adiques »
-- [ ] 12 p29 batch-02:306 | reading | parenthesis after « spectre d'un corps » | « (qu'on peut supposer si on veut, alg. clos) » | « (fini si on veut, ou clôture alg. d'un tel) »
+- [x] 12 p29 batch-02:306 | reading | parenthesis after « spectre d'un corps » | « (qu'on peut supposer si on veut, alg. clos) » | « (fini si on veut, ou clôture alg. d'un tel) »
 - [x] 12 p34 batch-02:485 | reading | parenthesis after « on prend » | ([illisible]) | « (du moins pour X = Spec K d'un corps) »
 - [ ] 12 p34 batch-02:485b | reading | the words around « X = Spec K » in the parenthesis, and the word after « filtration » | « (du moins pour … d'un corps) », words doubtful ; « minimale » | the same words, certain ; « minimum »
 - [x] 12 p37 batch-02:609 | reading | sign after « on aura » | [illisible] | « = », i.e. « même »
@@ -63,11 +63,11 @@ A first look at the page images found the alternative likely here; these are fas
 
 - [ ] 12 p22 batch-02:117 | reading | margin, top left : third line | « en tirer [illisible] les constructions des foncteurs » | « en termes des données construire des foncteurs »
 - [ ] 12 p22 batch-02:133 | reading | words after « compatible avec ⊗ » : in the margin or in the line ? | « (Cond. de transitivité.) » in the margin | « [On a transitivité. » in the line
-- [ ] 12 p23 batch-02:142 | reading | margin, first line | « le formulaire de dualité » | « la formule de dualité »
+- [x] 12 p23 batch-02:142 | reading | margin, first line | « le formulaire de dualité » | « la formule de dualité »
 - [ ] 12 p23 batch-02:144 | reading | margin, last lines | « les formules d'Alexander reliant tous ces foncteurs » | « le formulaire standard reliant tous ces foncteurs »
-- [ ] 12 p23 batch-02:151 | reading | two words after « filtrant » (twice) | « à morph. affines » | « ess. affine »
-- [ ] 12 p23 batch-02:162 | reading | last two lines of the page | « X, Y [ill.] de t.f. sur S, [ill.] définis par … de la façon habituelle, si » | « X, Y de t.f. sur S sont définis par (X_i), (Y_i), si on prend des »
-- [ ] 12 p24 batch-02:167 | reading | indices of f, X, Y on line 2 | « on a pour f_i : X_i → Y_i » | « on aura pour f_{i₀} : X_{i₀} → Y_{i₀} »
+- [x] 12 p23 batch-02:151 | reading | two words after « filtrant » (twice) | « à morph. affines » | « ess. affine »
+- [x] 12 p23 batch-02:162 | reading | last two lines of the page | « X, Y [ill.] de t.f. sur S, [ill.] définis par … de la façon habituelle, si » | « X, Y de t.f. sur S sont définis par (X_i), (Y_i), si on prend des »
+- [x] 12 p24 batch-02:167 | reading | indices of f, X, Y on line 2 | « on a pour f_i : X_i → Y_i » | « on aura pour f_{i₀} : X_{i₀} → Y_{i₀} »
 - [ ] 12 p24 batch-02:178 | reading | word between « catégorie » and « des » | (nothing) | « formée »
 - [ ] 12 p24 batch-02:181 | reading | word after « négligeant » | [illisible] | « précisément »
 - [ ] 12 p25 batch-02:186 | reading | margin top left, last line | « avec [illisible] etc. » | « avec résidu etc. » (and a short word, « hom » ?, after « f^! »)
