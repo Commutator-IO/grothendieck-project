@@ -63,6 +63,11 @@ function textOf(fragment) {
     .replace(/<div class="tr-demo-diag"[^>]*><\/div>/g, '')
     // The TEI view's link to its own XML: page furniture, not text of the batch.
     .replace(/<p class="tei-source">[\s\S]*?<\/p>/g, '')
+    // A redrawn figure (#73) and its caption: the .tex view draws it above the
+    // transcriber's description, the TEI view does not yet. It is an image,
+    // not text of the batch; the description beside it is compared as usual,
+    // and the figures are counted apart (see `figures` below).
+    .replace(/<span class="tr-drawing-fig">[\s\S]*?<\/span><\/span>/g, '')
     .replace(/<span class="tr-cd" data-cols="(\d+)" data-arrows="([^"]*)">/g,
       (_, c, a) => ` ⟦diagram ${c} cols ${a}⟧ `)
     .replace(/<span class="tr-pic" data-picture="([0-9a-f]+)">/g, (_, h) => ` ⟦picture ${h}⟧ `)
@@ -240,6 +245,7 @@ let files = 0;
 let pagesChecked = 0;
 let pagesDiffer = 0;
 let katexTotal = 0;
+let figuresOnlyTex = 0;
 let problems = 0;
 
 for (const folder of folders.sort((a, b) => a.localeCompare(b, 'en', { numeric: true }))) {
@@ -307,18 +313,26 @@ for (const folder of folders.sort((a, b) => a.localeCompare(b, 'en', { numeric: 
 
     for (const m of await insertionCounts(folder, name)) lines.push(`  insertions miscounted — ${m}`);
 
+    // Figures only the .tex view draws: reported, never a failure, so that the
+    // switch to the TEI view cannot lose them unseen.
+    const figures = (article(texHtml).match(/<span class="tr-drawing-fig">/g) ?? []).length -
+      (article(teiHtml).match(/<span class="tr-drawing-fig">/g) ?? []).length;
+    figuresOnlyTex += Math.max(0, figures);
+    const figNote = figures > 0 ? `, ${figures} redrawn figure(s) only in the .tex view` : '';
     const counts = `${a.pages.length} page segment(s), ${formulas(article(teiHtml)).length} formulas`;
     if (lines.length) {
       problems++;
-      process.stdout.write(`✗ ${folder}/${name} — ${counts}\n${lines.join('\n')}\n`);
+      process.stdout.write(`✗ ${folder}/${name} — ${counts}${figNote}\n${lines.join('\n')}\n`);
     } else {
-      process.stdout.write(`✓ ${folder}/${name} — ${counts}, identical text, 0 KaTeX errors\n`);
+      process.stdout.write(`✓ ${folder}/${name} — ${counts}, identical text, 0 KaTeX errors${figNote}\n`);
     }
   }
 }
 
 process.stdout.write(
   `\n${files} batch(es) · ${pagesChecked} page segments · ${pagesDiffer} differ · ` +
-    `${katexTotal} KaTeX error(s) in the TEI views\n`,
+    `${katexTotal} KaTeX error(s) in the TEI views` +
+    (figuresOnlyTex ? ` · ${figuresOnlyTex} redrawn figure(s) the TEI view does not draw yet` : '') +
+    '\n',
 );
 process.exit(problems ? 1 : 0);
