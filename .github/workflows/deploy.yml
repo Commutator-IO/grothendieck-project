@@ -222,6 +222,22 @@ jobs:
           path: ~/.cache/Tectonic
           key: tectonic-${{ runner.os }}-v1
 
+      # Only what is missing, and without `apt-get update` unless the install
+      # needs it: the update alone took up to eleven minutes on a slow mirror (#123).
+      # Needed first by the redrawn figures below (pdftocairo turns each PDF into
+      # an SVG); the jTEI article step after them uses it again. Run before the
+      # figures on 10 November 2026 it was missing: all 915 failed with
+      # « spawn pdftocairo ENOENT » and the site showed no figure.
+      - name: Install poppler and ImageMagick
+        run: |
+          need=""
+          command -v pdftoppm >/dev/null || need="$need poppler-utils"
+          { command -v magick || command -v convert; } >/dev/null || need="$need imagemagick"
+          if [ -n "$need" ]; then
+            sudo apt-get install -y -qq --no-install-recommends $need \
+              || { sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends $need; }
+          fi
+          pdftoppm -v 2>&1 | head -1
       # The figures redrawn under #73, compiled from transcripts/*/drawings/*.tex
       # into the SVGs the reading views show and the PDFs the batch PDFs include.
       # Cached by the hash of each source, so only a new or changed figure costs
@@ -264,18 +280,6 @@ jobs:
       # figures and ImageMagick trims them. Unlike the transcripts' PDFs, a
       # failure here fails the deploy: an invalid submission file should not
       # be published as a valid one.
-      # Only what is missing, and without `apt-get update` unless the install
-      # needs it: the update alone took up to eleven minutes on a slow mirror (#123).
-      - name: Install poppler and ImageMagick
-        run: |
-          need=""
-          command -v pdftoppm >/dev/null || need="$need poppler-utils"
-          { command -v magick || command -v convert; } >/dev/null || need="$need imagemagick"
-          if [ -n "$need" ]; then
-            sudo apt-get install -y -qq --no-install-recommends $need \
-              || { sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends $need; }
-          fi
-          pdftoppm -v 2>&1 | head -1
       # The Java tools the article step fetches from Maven Central, kept
       # between runs; the jTEI schema itself is committed (docs/study/schema).
       - uses: actions/cache@v6

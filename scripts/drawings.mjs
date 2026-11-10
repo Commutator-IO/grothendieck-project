@@ -98,3 +98,7 @@ for (const folder of folders) {
 await rm(work, { recursive: true, force: true });
 console.log(`${folders.length} folders: ${built} drawings compiled, ${reused} reused from the cache, ${failed.length} failed`);
 for (const f of failed) console.log(`  ⚠ ${f}`);
+// On the runner a run in which not one figure compiled or came from the cache means a
+// missing tool (tectonic, pdftocairo), not a bad figure: fail the deploy instead of
+// publishing the descriptions alone.
+if (process.env.CI && failed.length && !built && !reused) process.exit(1);
