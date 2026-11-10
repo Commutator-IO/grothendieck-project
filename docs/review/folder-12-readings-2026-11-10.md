@@ -181,7 +181,7 @@ A first look at the page images found the alternative likely here; these are fas
 - [x] 12 p81 batch-05:137 | reading | last sentence : a question or a statement ? | « Peut-on généraliser au cas d'une variété X régulière dont on enlève » | « Peut se généraliser au cas où on prend X régulier dont (auquel) on enlève »
 - [x] 12 p83 batch-05:141 | reading | word after « Calculs » | « sur » | « pour »
 - [x] 12 p83 batch-05:162 | reading | two places | « modèle [illisible] » ; « = fini » | « modèle can. » ; « = gpe fini »
-- [ ] 12 p85 batch-05:187 | reading | first words | « Le théorème » | « La théorie »
+- [ ] 12 p85 batch-05:187b | reading | first words | « Le théorème » | « La théorie »
 - [x] 12 p85 batch-05:205 | reading | sentence before « L^s(M). Noter » | « Soit ce que nous notons » | « Cet espace sera noté »
 - [x] 12 p86 batch-05:227 | reading | words above the struck ones ; is « fermé » struck ? | « on [illisible] L^s(M) un cône convexe [struck : fermé] » | « on a dans L^s(M) un cône convexe fermé »
 - [x] 12 p86 batch-05:234 | reading | slanted margin note | « sont dites positives » | « sont dites pseudo-amples »
