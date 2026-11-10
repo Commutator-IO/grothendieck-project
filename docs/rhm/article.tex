@@ -19,6 +19,9 @@
 % mathématiques (smf.emath.fr, « Instructions pour les auteurs »), copiés
 % dans ce répertoire : smfart.cls, rhm.sty, smfthm.sty, smfhyperref.sty,
 % smfenum.sty, rhmunsrtnat.bst. Compilé sous XeTeX (tectonic), d'où fontspec.
+% Version Hexagon (article-hexagon.tex, qui définit \hexagon et \ams) : classe amsart,
+% sans la maquette de la revue, pour pdfLaTeX ; les renvois « cote, lot, page » y ouvrent
+% le PDF de Montpellier, et les fichiers Lean y sont des liens vers le dépôt.
 \ifdefined\ams\else
 \ifdefined\hal
 % Version HAL : classe générale de la SMF, sans le complément de la revue ;
@@ -38,13 +41,23 @@
 \special{papersize=155mm,240mm}
 \fi
 \fi
+\ifdefined\hexagon
+% pdfLaTeX : les caractères du texte (latin accentué, « », œ, °, º, ‘ ’, …) sont tous
+% couverts par inputenc utf8 et le codage T1 ; aucune police système.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\else
 \usepackage{fontspec}
+\fi
 \usepackage[english,main=french]{babel}
 \usepackage{microtype}
 \usepackage{booktabs,longtable,array}
 \usepackage{amssymb}
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{tikz}
+% Sous pdfLaTeX, babel-french rend actifs ; : ! ? ; TikZ en a besoin tels quels.
+\ifdefined\hexagon\usetikzlibrary{babel}\fi
 \usepackage{xurl}
 \usepackage[hidelinks]{hyperref}
 
@@ -58,7 +71,20 @@
 \newcommand{\cote}[1]{\mbox{n\textsuperscript{o}\,#1}}
 % Une pièce du fonds Grothendieck--Illusie de l'IHÉS, par sa cote et la page de la numérisation.
 \newcommand{\ihes}[2]{IHÉS, #1, p.~#2}
+\ifdefined\hexagon
+% Hexagon : le renvoi ouvre le PDF de la cote chez l'université, à la page du fichier,
+% qui est la page d'archive plus une (page de garde). Pour « 124--129 », la première.
+\makeatletter
+\def\RHM@first#1--#2\@nil{#1}
+\DeclareRobustCommand{\lot}[3]{\begingroup\edef\RHM@pdfpage{\the\numexpr\RHM@first#3--\@nil+1\relax}\href{https://grothendieck.umontpellier.fr/#1.pdf\#page=\RHM@pdfpage}{#1, lot #2, p.~#3}\endgroup}
+\makeatother
+% Un fichier Lean : un lien vers le dépôt, aucun code dans l'archive déposée.
+\newcommand{\leanfile}[1]{\href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/#1.lean}{\nolinkurl{lean/Grothendieck/#1.lean}}}
+\newcommand{\palomar}{\href{https://palomar-registry.org/entry.html?id=PALOMAR-2026-11-07-000003}{PALOMAR-2026-11-07-000003}}
+\else
 \newcommand{\lot}[3]{\href{https://grothendieck.commutator.io/\##1/#2/p#3}{#1, lot #2, p.~#3}}
+\newcommand{\leanfile}[1]{\nolinkurl{lean/Grothendieck/#1.lean}}
+\fi
 \newcommand{\autocite}[1]{\citealp{hua2026#1}}
 \newcommand{\moanswer}{\citealp{cisinski2026mo}}
 % Likewise without the masked entries anon2026a/b and cisinski2026moanon.
@@ -75,7 +101,11 @@
 \date{Octobre 2026}
 \keywords{Alexandre Grothendieck, manuscrits de travail, archives mathématiques, chronologie, pratique d'écriture, théorie des topos, algèbre homotopique, transcription assistée par machine}
 \altkeywords{Alexandre Grothendieck, working manuscripts, mathematical archives, chronology, writing practice, topos theory, homotopical algebra, machine-assisted transcription}
+\ifdefined\hexagon
+\subjclass[2020]{01A60; 01A70, 14-03, 18-03}
+\else
 \subjclass{01A60, 01A70, 14-03, 18-03}
+\fi
 
 
 \begin{document}
@@ -393,7 +423,7 @@ Les transcriptions et les lectures modernisées sur lesquelles repose cet articl
 \section*{Sources et données}
 \begingroup\sloppy
 
-Le fonds : Université de Montpellier, \emph{Archives Grothendieck}, \url{https://grothendieck.umontpellier.fr/}. Les lettres de comparaison : Archives de l'IHÉS, fonds Grothendieck--Illusie [\citealp{ihesillusie}], séries 1ILL (lettres à Illusie, copies de lettres à Breen : 1ILL21, 1ILL23, 1ILL31, 1ILL34, 1ILL35, 1ILL41, 1ILL44), 2ILL (papiers de Grothendieck : 2ILL3, 2ILL5, 2ILL9), FG\_IL\_1 (correspondance avec Illusie, 1985--1991, et la lettre ouverte d'avril 1988 sur le prix Crafoord, FG\_IL\_1\_3\_37), FG\_IL\_4 et FG\_IL\_5 (écrits pour EGA et SGA, lettres à Dieudonné et à Verdier), citées par leur cote et la page de la numérisation ; elles ont été lues, sur le serveur de numérisations que l'Institut rend accessible en ligne, pour les comparaisons des sections~\ref{sub:seance}, \ref{sub:homotopie}, \ref{sub:programme} à~\ref{sub:rupture}, \ref{sec:bnf} et~\ref{sec:discussion}.  Les registres, les preuves Lean (répertoire \texttt{lean/}), les transcriptions, les lectures modernisées et les sources de cet article sont dans le dépôt public \url{https://github.com/Commutator-IO/grothendieck-project}. Les transcriptions et les lectures modernisées y sont des documents de travail, sans valeur d'édition, pour lesquels l'auteur ne détient pas l'autorisation des ayants droit ; elles sont retirées à leur demande. Les lettres inédites, de Grothendieck ou à lui, sont citées par courts extraits, à des fins d'étude, au titre du droit de courte citation, et aucune n'est reproduite en entier. Sur le site du projet \url{https://grothendieck.commutator.io}, chaque référence de la forme \mot{cote, lot, page} de cet article ouvre le fac-similé de Montpellier à la page citée, et aucune image du fonds n'y est conservée. Les passages des conférences et entretiens cités sont établis sur leurs sous-titres automatiques, et ceux qui restaient incertains ont été vérifiés à l'écoute.\par\endgroup
+Le fonds : Université de Montpellier, \emph{Archives Grothendieck}, \url{https://grothendieck.umontpellier.fr/}. Les lettres de comparaison : Archives de l'IHÉS, fonds Grothendieck--Illusie [\citealp{ihesillusie}], séries 1ILL (lettres à Illusie, copies de lettres à Breen : 1ILL21, 1ILL23, 1ILL31, 1ILL34, 1ILL35, 1ILL41, 1ILL44), 2ILL (papiers de Grothendieck : 2ILL3, 2ILL5, 2ILL9), FG\_IL\_1 (correspondance avec Illusie, 1985--1991, et la lettre ouverte d'avril 1988 sur le prix Crafoord, FG\_IL\_1\_3\_37), FG\_IL\_4 et FG\_IL\_5 (écrits pour EGA et SGA, lettres à Dieudonné et à Verdier), citées par leur cote et la page de la numérisation ; elles ont été lues, sur le serveur de numérisations que l'Institut rend accessible en ligne, pour les comparaisons des sections~\ref{sub:seance}, \ref{sub:homotopie}, \ref{sub:programme} à~\ref{sub:rupture}, \ref{sec:bnf} et~\ref{sec:discussion}.  Les registres, les preuves Lean (répertoire \texttt{lean/}), les transcriptions, les lectures modernisées et les sources de cet article sont dans le dépôt public \url{https://github.com/Commutator-IO/grothendieck-project}. \ifdefined\hexagon Les preuves Lean de l'annexe [\autocite{b}] sont enregistrées au registre Palomar sous l'entrée \palomar. \fi Les transcriptions et les lectures modernisées y sont des documents de travail, sans valeur d'édition, pour lesquels l'auteur ne détient pas l'autorisation des ayants droit ; elles sont retirées à leur demande. Les lettres inédites, de Grothendieck ou à lui, sont citées par courts extraits, à des fins d'étude, au titre du droit de courte citation, et aucune n'est reproduite en entier. \ifdefined\hexagon Chaque référence de la forme \mot{cote, lot, page} de cet article ouvre le PDF de la cote sur le site de l'université, à la page du fichier qui porte la page citée (la page d'archive plus une, pour la page de garde) ; le site du projet, \url{https://grothendieck.commutator.io}, ne conserve aucune image du fonds. \else Sur le site du projet \url{https://grothendieck.commutator.io}, chaque référence de la forme \mot{cote, lot, page} de cet article ouvre le fac-similé de Montpellier à la page citée, et aucune image du fonds n'y est conservée. \fi Les passages des conférences et entretiens cités sont établis sur leurs sous-titres automatiques, et ceux qui restaient incertains ont été vérifiés à l'écoute.\par\endgroup
 
 \bibliographystyle{rhmunsrtnat}
 \bibliography{article}
@@ -524,7 +554,7 @@ Soient $k$ un corps, $B = k[X_0, X_1, \dots]$, $A_n = B[T]/(T^{n+1})$, $J_n = (X
 
 (ii) Soit $A^p \to A^q \to M \to 0$ une présentation. Le produit tensoriel étant exact à droite, $A_n^p \to A_n^q \to M_n \to 0$ est exacte. Par le lemme de Schanuel, appliqué à $M_n \simeq A_n/J_n$, l'idéal $J_n$ est alors engendré par au plus $p + 1$ éléments, pour tout $n$ ; c'est faux dès que $n + 1 > p + 1$ d'après~(i). $\square$
 
-\medskip La lettre affirme que les générateurs sont indépendants sur $B$ dans $J_n/TJ_n$, ce qui est faux ($X_0 \cdot X_1T \in TJ_n$) ; l'argument ci-dessus, qui passe par $k$, ne l'utilise pas. Ni la complétude de $A = B[[T]]$, ni la surjectivité de $A \to A_n$, ni la compatibilité des isomorphismes ne servent. Fichier \nolinkurl{lean/Grothendieck/Folder37.lean}, théorèmes \texttt{Jn\_spanRank}, \texttt{Mn\_finitePresentation} et \texttt{no\_finitePresentation\_inducing}.
+\medskip La lettre affirme que les générateurs sont indépendants sur $B$ dans $J_n/TJ_n$, ce qui est faux ($X_0 \cdot X_1T \in TJ_n$) ; l'argument ci-dessus, qui passe par $k$, ne l'utilise pas. Ni la complétude de $A = B[[T]]$, ni la surjectivité de $A \to A_n$, ni la compatibilité des isomorphismes ne servent. Fichier \leanfile{Folder37}, théorèmes \texttt{Jn\_spanRank}, \texttt{Mn\_finitePresentation} et \texttt{no\_finitePresentation\_inducing}.
 
 \subsection*{Le théorème des arrangements cruciaux (cote~80, p.~24)}
 
@@ -565,7 +595,7 @@ a : y = 2x, \qquad b : y = 3x - 3, \qquad c : y = 5x + 1,
 
 \medskip\noindent\emph{Démonstration.} Écrivons la droite $u_0x + u_1y + u_2z = 0$ du plan projectif comme le triplet $(u_0, u_1, u_2)$ ; trois droites sont concourantes si et seulement si le déterminant de leurs triplets est nul. Les six triplets sont $(0, 1, 0)$, $(1, 1, -1)$, $(1, 0, 0)$, $(2, -1, 0)$, $(3, -1, -3)$ et $(5, -1, 1)$. Des vingt triples de droites, trois seulement ont un déterminant nul, $\{AB, CA, a\}$, $\{AB, BC, b\}$ et $\{BC, CA, c\}$, qui concourent en $A$, $B$ et $C$. Deux droites distinctes ne sont jamais proportionnelles, puisque chacune forme avec l'autre et une troisième un déterminant non nul. Un point triple porte trois droites, un point double deux, et deux points triples distincts ont en commun un côté du triangle : deux sommets portent au plus cinq droites, jamais six. Cinq droites parmi les six en omettent une. Si c'est un côté, disons $BC$, il reste $AB$, $CA$ et $a$, qui concourent en $A$ ; si c'est $a$, il reste $AB$, $BC$ et $b$, qui concourent en $B$, et de même pour $b$ et~$c$. Enfin il y a trois points triples et non quatre, et six droites et non sept. $\square$
 
-\medskip Un arrangement de droites est un arrangement de pseudo-droites, et le contre-exemple vaut pour l'énoncé de la page tel qu'il est écrit. Il contient pourtant cinq droites, $AB$, $CA$, $a$, $b$ et $c$, dont un seul triple est concourant, $\{AB, CA, a\}$ : trois droites par un point et deux par un autre, sans la droite qui les joint. Une version du théorème qui exclurait aussi cette configuration n'est pas atteinte. Le contre-exemple est dû au projet ; ses assertions sont décidées par calcul sur les entiers dans le noyau de Lean. Fichier \nolinkurl{lean/Grothendieck/Folder80.lean}, théorèmes \texttt{six\_concurrent}, \texttt{six\_distinct}, \texttt{six\_not\_two\_pencils}, \texttt{six\_no\_II5}, \texttt{six\_not\_III6} et \texttt{six\_has\_II32}. Les pseudo-droites en général n'y sont pas formalisées.
+\medskip Un arrangement de droites est un arrangement de pseudo-droites, et le contre-exemple vaut pour l'énoncé de la page tel qu'il est écrit. Il contient pourtant cinq droites, $AB$, $CA$, $a$, $b$ et $c$, dont un seul triple est concourant, $\{AB, CA, a\}$ : trois droites par un point et deux par un autre, sans la droite qui les joint. Une version du théorème qui exclurait aussi cette configuration n'est pas atteinte. Le contre-exemple est dû au projet ; ses assertions sont décidées par calcul sur les entiers dans le noyau de Lean. Fichier \leanfile{Folder80}, théorèmes \texttt{six\_concurrent}, \texttt{six\_distinct}, \texttt{six\_not\_two\_pencils}, \texttt{six\_no\_II5}, \texttt{six\_not\_III6} et \texttt{six\_has\_II32}. Les pseudo-droites en général n'y sont pas formalisées.
 
 \subsection*{Produits finis sans asphéricité (cote~118, p.~35)}
 
@@ -579,6 +609,6 @@ Cisinski range parmi des conditions équivalentes sur $A$ [\citealp{cisinski2006
 
 (ii) La condition~(g) est la stabilité établie en~(i). Pour~(c), prenons $X = Y = a$, le $G$-ensemble régulier $G$. Le foncteur canonique est $(G \times G)/\!/G \to G/\!/G \times G/\!/G$, l'identité sur les objets et $k \mapsto (k, k)$ sur les flèches. Dans le but, $G \times G$ agit librement et transitivement sur $G \times G$, qui forme une seule composante. Dans la source, $k$ envoie $(g, h)$ sur $(kg, kh)$ et conserve $g^{-1}h$ : il y a une composante par élément de $G$. Pour $s \neq 1$, les objets $(1, 1)$ et $(1, s)$ sont dans une même composante du but et dans deux composantes de la source, et le foncteur n'est pas bijectif sur les composantes. Si $G = 1$, les orbites sont des points, les stabilisateurs sont triviaux et le foncteur canonique est l'identité. $\square$
 
-\medskip L'énoncé~(i) est celui de la page ; l'énoncé~(ii) est de l'édition, qui rapproche l'exemple de la proposition imprimée. Lean démontre l'un et l'autre dans le modèle tronqué ; le passage de ce modèle aux équivalences faibles des nerfs n'est pas formalisé. Interrogé sur MathOverflow, Cisinski a confirmé que l'implication (g)~$\Rightarrow$~(c) demande une hypothèse supplémentaire, par exemple que $A$ soit déjà une catégorie test, et que la suite de l'ouvrage n'en dépend pas [\moanswer]. La page de 1983 porte déjà cette réserve, puisque la stabilité par produits n'y donne l'asphéricité totale que jointe à l'asphéricité de $A$. Fichier \nolinkurl{lean/Grothendieck/Folder118.lean} ; les théorèmes \texttt{isWeq\_iff\_bijective}, \texttt{isWeq\_prod}, \texttt{isWeq\_pi} et \texttt{answer\_page\_35} donnent~(i), \texttt{g\_not\_imp\_c}, avec les témoins \texttt{not\_isWeqOver\_regular} et \texttt{not\_isWeqOver\_point}, et \texttt{condition\_c\_iff\_subsingleton} donnent~(ii).
+\medskip L'énoncé~(i) est celui de la page ; l'énoncé~(ii) est de l'édition, qui rapproche l'exemple de la proposition imprimée. Lean démontre l'un et l'autre dans le modèle tronqué ; le passage de ce modèle aux équivalences faibles des nerfs n'est pas formalisé. Interrogé sur MathOverflow, Cisinski a confirmé que l'implication (g)~$\Rightarrow$~(c) demande une hypothèse supplémentaire, par exemple que $A$ soit déjà une catégorie test, et que la suite de l'ouvrage n'en dépend pas [\moanswer]. La page de 1983 porte déjà cette réserve, puisque la stabilité par produits n'y donne l'asphéricité totale que jointe à l'asphéricité de $A$. Fichier \leanfile{Folder118} ; les théorèmes \texttt{isWeq\_iff\_bijective}, \texttt{isWeq\_prod}, \texttt{isWeq\_pi} et \texttt{answer\_page\_35} donnent~(i), \texttt{g\_not\_imp\_c}, avec les témoins \texttt{not\_isWeqOver\_regular} et \texttt{not\_isWeqOver\_point}, et \texttt{condition\_c\_iff\_subsingleton} donnent~(ii).
 
 \end{document}
