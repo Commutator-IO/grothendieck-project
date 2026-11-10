@@ -32,7 +32,7 @@ def main():
     ap = add_path_args(argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter))
     ap.add_argument('cote')
     ap.add_argument('ids', nargs='*', help='only rebuild the previews of these drawings')
-    ap.add_argument('--model', default='claude-opus-5-5', help='model named in the headers (default claude-opus-5-5)')
+    ap.add_argument('--model', default='claude-fable-5-2', help='model named in the headers (default claude-fable-5-2; claude-opus-5-5 is the other model allowed)')
     ap.add_argument('--date', default=datetime.date.today().isoformat())
     ap.add_argument('--compiled', action='store_true', help='say in the headers that the TikZ was compiled (after compile_tikz.py passed)')
     a = ap.parse_args()

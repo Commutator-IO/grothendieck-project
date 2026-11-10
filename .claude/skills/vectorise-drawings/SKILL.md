@@ -5,9 +5,14 @@ description: Extracts and vectorises the drawings of a transcribed folder of the
 
 # Vectorising the drawings of a folder
 
-**Runs on Opus 5.5, and on nothing else**, like every skill of this project.
+**Runs on Fable 5.2 or on Opus 5.5, and on nothing else.** This is the one
+skill of the project that is not tied to Opus 5.5 alone: on 10 November 2026
+the two models redrew the same six drawings blind (154/05-2, 154/06-2,
+74/03-4, 69/06-8, 142/06-15, 156-9/06-1) from the same crops and brief, and
+the editor, shown the two sets side by side without their names, preferred
+those of Fable 5.2 (#128). Neither model marked a drawing `ok` wrongly.
 Reading a pencil sketch off a 300 dpi crop is a visual-attention task. Put
-the model in the headers (`build.py --model`, default `claude-opus-5-5`) and
+the model in the headers (`build.py --model`, default `claude-fable-5-2`) and
 in the closing message. On any other model, stop and say which model the
 session is on.
 
