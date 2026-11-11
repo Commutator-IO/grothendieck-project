@@ -968,9 +968,13 @@ if (existsSync(DRAWINGS)) {
 // the facsimile. The place, our reading and the alternative quote the
 // transcription, so they sit apart like the snippets (#31); the item itself
 // carries only the page and the line of the file.
-const READINGS = join(ROOT, 'docs/review/folder-12-readings-2026-11-10.md');
+// One file per folder: docs/review/folder-<cote>-readings-<date>.md.
+const readingFiles = readdirSync(join(ROOT, 'docs/review'))
+  .filter((f) => /^folder-[\w-]+-readings-[\d-]+\.md$/.test(f))
+  .sort()
+  .map((f) => join(ROOT, 'docs/review', f));
 const readingClaims = {};
-if (existsSync(READINGS)) {
+for (const READINGS of readingFiles) {
   let heading = '';
   for (const raw of readFileSync(READINGS, 'utf8').split('\n')) {
     const h = /^##\s+(?:\d+\.\s*)?(.*)$/.exec(raw);
@@ -1014,5 +1018,5 @@ writeFileSync(
 writeFileSync(join(ROOT, 'src/content/review-snippets.json'), `${JSON.stringify(snippets, null, 1)}\n`);
 writeFileSync(join(ROOT, 'src/content/review-drawings.json'), `${JSON.stringify(drawingClaims, null, 1)}\n`);
 writeFileSync(join(ROOT, 'src/content/review-readings.json'), `${JSON.stringify(readingClaims, null, 1)}\n`);
-console.error(`${items.length} items, ${Object.keys(snippets).length} with a snippet, ${Object.keys(drawingClaims).length} doubtful drawings (#128), ${Object.keys(readingClaims).length} readings of folder 12 (#66).`);
+console.error(`${items.length} items, ${Object.keys(snippets).length} with a snippet, ${Object.keys(drawingClaims).length} doubtful drawings (#128), ${Object.keys(readingClaims).length} readings to check (#66).`);
 if (skipped.length) console.error(`Not turned into items (no single spot of a page):\n  ${skipped.join('\n  ')}`);
