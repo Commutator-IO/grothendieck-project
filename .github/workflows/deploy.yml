@@ -228,14 +228,24 @@ jobs:
       # an SVG); the jTEI article step after them uses it again. Run before the
       # figures on 10 November 2026 it was missing: all 915 failed with
       # « spawn pdftocairo ENOENT » and the site showed no figure.
+      # The Ubuntu mirrors sometimes fail to resolve on the runner (run of 11
+      # November 2026: « Temporary failure resolving security.ubuntu.com »,
+      # thirteen minutes of retries, then exit 100): short timeouts, a few
+      # attempts with an update between them, and a ceiling on the step.
       - name: Install poppler and ImageMagick
+        timeout-minutes: 15
         run: |
           need=""
           command -v pdftoppm >/dev/null || need="$need poppler-utils"
           { command -v magick || command -v convert; } >/dev/null || need="$need imagemagick"
           if [ -n "$need" ]; then
-            sudo apt-get install -y -qq --no-install-recommends $need \
-              || { sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends $need; }
+            APT="sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20"
+            for try in 1 2 3; do
+              $APT install -y -qq --no-install-recommends $need && break
+              [ "$try" = 3 ] && exit 1
+              sleep 30
+              $APT update -qq || true
+            done
           fi
           pdftoppm -v 2>&1 | head -1
       # The figures redrawn under #73, compiled from transcripts/*/drawings/*.tex
