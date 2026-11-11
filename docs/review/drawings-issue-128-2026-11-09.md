@@ -70,12 +70,12 @@ Toutes les questions de ce bloc ont reçu réponse (#131, #132) et sont appliqu�
 - [x] 154 02-15 | reading | In disk A, does the short solid strand from the top rim end where D₁ crosses the dashed strand? | Yes | 
 - [x] 154 02-15 | reading | In disk B, does a short solid stroke run from D₀ to the right-hand dashed strand, closing the hatched region? | Yes | 
 - [x] 154 02-15 | reading | In disk D, does a solid strand start on the lower dashed strand, cross D₀ once and reach the bottom rim? | Yes | 
-- [ ] 154 08-8 | reading | Does the spindle redrawn from the crop (mango-shaped outline, pointed at both ends, the net as read) match the page now? | As redrawn on 9 November after #132 | 
-- [ ] 154 08-4 | reading | Does the sphere redrawn from the crop match the page? | As redrawn on 9 November after #134 | 
-- [ ] 154 02-6 | disagreement | What are the labels around the star? | Read upright: p−1, q, p≥1, q≥3 on one side, p′−1, q′, p′≥1, q′≥3 on the other | b, b−1, b+1, b±2, as in the transcription
-- [ ] 154 02-6 | disagreement | What are the two labels under the V on the green line? | 4 and 4, the same glyph as the 4s of the spindles | b, as in the transcription
-- [ ] 154 02-6 | reading | In the right group, does the third line of the pencil at Q pass through the crossing of the other two? | Drawn concurrent | Not concurrent, a gap of about 1 unit
-- [ ] 154 05-1 | reading | Are the grey pencil lines strands of the arrangements, or the underdrawing? | Not yet decided; the drawing is left as it was | 
+- [x] 154 08-8 | reading | Does the spindle redrawn from the crop (mango-shaped outline, pointed at both ends, the net as read) match the page now? | As redrawn on 9 November after #132 | 
+- [x] 154 08-4 | reading | Does the sphere redrawn from the crop match the page? | As redrawn on 9 November after #134 | 
+- [x] 154 02-6 | disagreement | What are the labels around the star? | Read upright: p−1, q, p≥1, q≥3 on one side, p′−1, q′, p′≥1, q′≥3 on the other | b, b−1, b+1, b±2, as in the transcription
+- [x] 154 02-6 | disagreement | What are the two labels under the V on the green line? | 4 and 4, the same glyph as the 4s of the spindles | b, as in the transcription
+- [x] 154 02-6 | reading | In the right group, does the third line of the pencil at Q pass through the crossing of the other two? | Drawn concurrent | Not concurrent, a gap of about 1 unit
+- [x] 154 05-1 | reading | Are the grey pencil lines strands of the arrangements, or the underdrawing? | Not yet decided; the drawing is left as it was | 
 
 ## Folder 74
 
@@ -97,11 +97,11 @@ Toutes les questions de ce bloc ont reçu réponse (#131, #132) et sont appliqu�
 
 - [ ] 69 04-5 | reading | Does the whole-page redraw match the page, including the arrowed parallelogram kept from the earlier redraw? | As redrawn | 
 - [ ] 69 04-8 | reading | Are the large polyhedron and the middle figure read right from the overdrawn strokes? | As redrawn | 
-- [ ] 69 06-12 | reading | Is the faint plane outline rightly left out? | Left out | To draw
+- [x] 69 06-12 | reading | Is the faint plane outline rightly left out? | Left out | To draw
 - [ ] 69 01-10 | reading | Are D₆ and D₇ right, and where is w‴? | D₆, D₇ approximate; w‴ not located | 
 - [ ] 69 05-2 | reading | What are the end labels of the c and b fans? | Illegible, left out | 
 - [ ] 69 03-1 | disagreement | Where does the branch leave the bar, and are α, β written at its ends? | From the left end; α, β not visible | From the middle, with α, β, as in the transcription
-- [ ] 69 05-12 | disagreement | Is the second bracketed diagonal matrix (λ₁, λ₁⁻¹ … λ_r, λ_r⁻¹) a drawing to mark? | On the page, with no mark | 
+- [x] 69 05-12 | disagreement | Is the second bracketed diagonal matrix (λ₁, λ₁⁻¹ … λ_r, λ_r⁻¹) a drawing to mark? | On the page, with no mark | 
 - [x] 69 01-14 | disagreement | Is it a three-branch star? | A central triangle with two spikes at each vertex | A three-branch star, as in the transcription
 - [ ] 69 05-3 | disagreement | How many points do the broken lines show? | About 4 and 3 | 3 and 2, as in the transcription
 - [ ] 69 06-4 | disagreement | What are the small prism's two upper labels? | Like 6 and 4′, left out | Primes, as in the transcription
@@ -153,15 +153,15 @@ Toutes les questions de ce bloc ont reçu réponse (#131, #132) et sont appliqu�
 
 ## Folder 146
 
-- [ ] 146 04-6 | disagreement | Is the left figure a hexagon (two triangles side by side and their diagonals)? | A pentagon whose centre is joined to all five vertices | A hexagon, as in the transcription
+- [x] 146 04-6 | disagreement | Is the left figure a hexagon (two triangles side by side and their diagonals)? | A pentagon whose centre is joined to all five vertices | A hexagon, as in the transcription
 - [ ] 146 04-9 | disagreement | What does the figure show, and what are its labels? | A path of two edges through three points, middle label 0, left label a sideways ∞ (or 8); no large ellipse with ∞ in this region | A dessin 0 – 1 – 0 with a large ellipse carrying ∞, as in the transcription
 - [ ] 146 03-6 | strike | Are the ellipse, the sphere in lunes, the tetrahedron and the bottom-right sphere all struck out? | Left out as struck; only the small sphere, the arrows, the legends and D1 drawn | 
 - [ ] 146 03-6 | reading | Is the « ℤ » a letter, or the start of the zigzag stroke? | ℤ, as in the transcription | The start of the zigzag stroke
-- [ ] 146 04-4 | strike | Are the first D12 sphere and the label D2 struck out? | Left out as struck | 
+- [x] 146 04-4 | strike | Are the first D12 sphere and the label D2 struck out? | Left out as struck | 
 - [ ] 146 01-5 | disagreement | How many looped points are on the equator? | Five | Four, as in the transcription
-- [ ] 146 07-2 | disagreement | Which vertex does « a » label, and does the right side bend? | The right side bends at a vertex, which « a » labels | « a » at the top vertex, as in the transcription
+- [x] 146 07-2 | disagreement | Which vertex does « a » label, and does the right side bend? | The right side bends at a vertex, which « a » labels | « a » at the top vertex, as in the transcription
 - [ ] 146 02-2 | reading | Is the top label Q+ or Q with a bar? | Q+, as in the transcription | Q̄
-- [ ] 146 04-14 | reading | Does the whole-page redraw match the overdrawn pencil? | As redrawn | 
+- [x] 146 04-14 | reading | Does the whole-page redraw match the overdrawn pencil? | As redrawn | 
 
 ## Folder 79
 
@@ -189,7 +189,7 @@ Toutes les questions de ce bloc ont reçu réponse (#131, #132) et sont appliqu�
 ## Folder 148
 
 - [ ] 148 04-1 | disagreement | Is there a region label A_{∞1}? | Not found: five A-labels seen | Listed by the transcription
-- [ ] 148 04-2 | disagreement | How many ringed vertices and nested red curves are there? | Eleven ringed vertices, eight closed red curves | Nine and nine, as in the transcription
+- [x] 148 04-2 | disagreement | How many ringed vertices and nested red curves are there? | Eleven ringed vertices, eight closed red curves | Nine and nine, as in the transcription
 - [ ] 148 02-1 | reading | What colour are the long arc and the edge from the left vertex? | Arc red-brown, edge plain ink | The arc may be a stain; the earlier redraw drew the edge red-brown
 - [ ] 148 01-4 | reading | Which four small triangles form the heavy rhombus? | Not singled out; seven heavy small triangles drawn thick | 
 
@@ -493,8 +493,8 @@ Réponses reportées dans `drawings.json` ou dans la transcription ; les cases s
 - [ ] 156-3 01-1 | disagreement | Is the sketch of p. 3 two points joined by one line, or two short vertical strokes joined by two curved strokes? | Two strokes joined by a doubled line, as on the page | Two points joined by one line, as in the note
 - [ ] 156-3 01-2 | disagreement | Same sketch on p. 4, where the lower line does not reach the left stroke | Drawn as on the page | Identical to p. 3
 - [ ] 156-3 02-1 | reading | Glyph at the right end of the second arc | b | a
-- [ ] 156-3 02-1 | reading | Label at the lower end of the arc x, which leaves the band at the same point as arc a | x | t
-- [ ] 156-4 03-3 | reading | Primes of the first top and bottom nodes (one prime each on the crop) | F̄″, Ḡ″, as in the transcription | F̄′, Ḡ′
+- [x] 156-3 02-1 | reading | Label at the lower end of the arc x, which leaves the band at the same point as arc a | x | t
+- [x] 156-4 03-3 | reading | Primes of the first top and bottom nodes (one prime each on the crop) | F̄″, Ḡ″, as in the transcription | F̄′, Ḡ′
 - [ ] 156-4 03-3 | reading | Third top node: a bar and a small arrow, no clear prime | F̄′, as in the transcription | F⃗ or F̄
 - [ ] 156-4 03-4 | reading | Does the middle bottom node carry a tilde as well as the bar? | Ḡ | G̃ with a bar
 - [ ] 156-4 03-5 | strike | Is the F′ at the far left of the cube, joined by a double stroke to the hatched scribble, part of that struck insertion? | Left out as struck | The middle F′ of the cube
@@ -521,23 +521,23 @@ Réponses reportées dans `drawings.json` ou dans la transcription ; les cases s
 - [ ] 161-6 02-2 | reading | Which strokes of the margin icosahedron are edges? | 10 vertices (6 on the outline, 4 inside), 21 edges, three hidden ones at the right, two of them dashed | Another reading of the heavily inked strokes
 - [ ] 161-6 02-6 | disagreement | Is the second « disque » on p. 25 a full circle? | A rounded domain bounded in part by the first disc | Two adjoining discs
 - [ ] 161-6 02-8 | reading | Should the doubtful « dans le » in the inner disc be drawn? | Left out, as text of the marginal note | Set inside the inner disc
-- [ ] 81 03-2 | disagreement | How many points does the p. 42 circle carry, and which are full? | 21: 7 full, 14 open (the grey point at the lower left drawn open) | About twenty, with another full/open split
-- [ ] 81 03-4 | disagreement | On which side of the text is the p. 47 circle with three chords? | At the left, in the margin | At the right, as in the note
-- [ ] 81 03-7 | disagreement | What stands at the top and foot of the band on p. 53 (also 03-8)? | A pair of opposite arrows, one above the other | A double arrow, as in the note
+- [x] 81 03-2 | disagreement | How many points does the p. 42 circle carry, and which are full? | 21: 7 full, 14 open (the grey point at the lower left drawn open) | About twenty, with another full/open split
+- [x] 81 03-4 | disagreement | On which side of the text is the p. 47 circle with three chords? | At the left, in the margin | At the right, as in the note
+- [x] 81 03-7 | disagreement | What stands at the top and foot of the band on p. 53 (also 03-8)? | A pair of opposite arrows, one above the other | A double arrow, as in the note
 - [ ] 81 01-5 | reading | How is the tangle at the lower left of the p. 10 polygon to be read? | A small circle, two long obliques, a thin triangle and a curve | Another grouping of the strokes
-- [ ] 81 02-3 | reading | Is the first sign of the p. 26 legend ⊃ or a hooked arrow like the others? | ⊃, as the transcription reads | ↩, written like the other hooks
+- [x] 81 02-3 | reading | Is the first sign of the p. 26 legend ⊃ or a hooked arrow like the others? | ⊃, as the transcription reads | ↩, written like the other hooks
 
 ## Folder 154, the three drawings completed on 10 November (07-7, 08-4, 09-8)
 
-- [ ] 154 07-7 | reading | Lower disk of the bottom-left pair: is the strand that turns a corner at the left one strand? | One strand with a corner; both stubs of the two crossing strokes drawn | Two separate strands that cross there
-- [ ] 154 07-7 | reading | Lower disk of the bottom-left pair: is the yellow region at the lower left one region, crossed by the cornered strand? | One region between two strands and the rim | Two regions, only one of them yellow
-- [ ] 154 07-7 | reading | Do the two disks of the bottom-left pair touch? | No, about 1.5 mm apart, as on the page | Tangent, as in the other figures of eight
-- [ ] 154 07-7 | reading | Top-right figure, upper disk: what are the thick red strokes from the top point to the two black marked crossings? | Thick parts of the two lens strands | Separate short strokes over the lens strands
-- [ ] 154 08-4 | reading | Middle network: which heavy stroke ends are arrowheads? | 18 arrowheads, only where barbs are visible | More (several heavy ends could be blunt arrowheads) or fewer
-- [ ] 154 08-4 | reading | Middle network: does the left arrow run on, faintly, to the marked crossing of the star? | Drawn as a thin pencil line reaching the star's dotted crossing | An unrelated faint mark; the arrow stops at its dot
-- [ ] 154 09-8 | reading | Is the arch over the first contact one strand with the lower-left strand of the left disk and the bottom strand of the middle and right disks? | Yes, one strand through all three disks, ending at the top of the right rim | Separate strands meeting at the feet of the arch
-- [ ] 154 09-8 | reading | Do two long strands cross twice at the first contact (the kite straddling the rims)? | Once in the left disk and once in the middle disk, the kite yellow | A single crossing, the kite being an effect of the overlapping rims
-- [ ] 154 09-8 | reading | Do neighbouring disks overlap in a narrow lens? | Yes, rims overlapping by about 1 mm at both contacts, as on the page | Disks glued along a common arc
-- [ ] 154 09-8 | reading | Is the strip between the two rims at the first contact yellow? | Yellow below the kite (two pieces), white above it | The whole strip is orange overpainting of the middle rim, not regions
-- [ ] 154 09-8 | disagreement | Where are the pencil « deux petits triangles » of the transcription? | Not found as triangles; four short pencil strokes beside red strands, drawn as underdrawing | Small triangles these strokes form with the strands, or marks no longer visible
-- [ ] 154 09-8 | disagreement | Right figure: is the main line light green, cut by four red lines? | A red horizontal line through the crossings, a light green line above and a second one climbing through the second crossing | The main line is light green, as in the transcription
+- [x] 154 07-7 | reading | Lower disk of the bottom-left pair: is the strand that turns a corner at the left one strand? | One strand with a corner; both stubs of the two crossing strokes drawn | Two separate strands that cross there
+- [x] 154 07-7 | reading | Lower disk of the bottom-left pair: is the yellow region at the lower left one region, crossed by the cornered strand? | One region between two strands and the rim | Two regions, only one of them yellow
+- [x] 154 07-7 | reading | Do the two disks of the bottom-left pair touch? | No, about 1.5 mm apart, as on the page | Tangent, as in the other figures of eight
+- [x] 154 07-7 | reading | Top-right figure, upper disk: what are the thick red strokes from the top point to the two black marked crossings? | Thick parts of the two lens strands | Separate short strokes over the lens strands
+- [x] 154 08-4 | reading | Middle network: which heavy stroke ends are arrowheads? | 18 arrowheads, only where barbs are visible | More (several heavy ends could be blunt arrowheads) or fewer
+- [x] 154 08-4 | reading | Middle network: does the left arrow run on, faintly, to the marked crossing of the star? | Drawn as a thin pencil line reaching the star's dotted crossing | An unrelated faint mark; the arrow stops at its dot
+- [x] 154 09-8 | reading | Is the arch over the first contact one strand with the lower-left strand of the left disk and the bottom strand of the middle and right disks? | Yes, one strand through all three disks, ending at the top of the right rim | Separate strands meeting at the feet of the arch
+- [x] 154 09-8 | reading | Do two long strands cross twice at the first contact (the kite straddling the rims)? | Once in the left disk and once in the middle disk, the kite yellow | A single crossing, the kite being an effect of the overlapping rims
+- [x] 154 09-8 | reading | Do neighbouring disks overlap in a narrow lens? | Yes, rims overlapping by about 1 mm at both contacts, as on the page | Disks glued along a common arc
+- [x] 154 09-8 | reading | Is the strip between the two rims at the first contact yellow? | Yellow below the kite (two pieces), white above it | The whole strip is orange overpainting of the middle rim, not regions
+- [x] 154 09-8 | disagreement | Where are the pencil « deux petits triangles » of the transcription? | Not found as triangles; four short pencil strokes beside red strands, drawn as underdrawing | Small triangles these strokes form with the strands, or marks no longer visible
+- [x] 154 09-8 | disagreement | Right figure: is the main line light green, cut by four red lines? | A red horizontal line through the crossings, a light green line above and a second one climbing through the second crossing | The main line is light green, as in the transcription
