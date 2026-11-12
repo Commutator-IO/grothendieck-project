@@ -10,6 +10,7 @@ import Quillen.Notebook1970_1
 import Quillen.Notebook1970_5
 import Quillen.Notebook1970_11
 import Quillen.Notebook1970_15
+import Quillen.Notebook1971_1
 import Quillen.Notebook1971_2
 import Quillen.Notebook1971_2Normalizer
 import Quillen.Notebook1971_3

@@ -1,0 +1,21 @@
+\section[Notebook 1971-1: two binomial congruences]{Notebook 1971-1: two binomial congruences and a product in characteristic $p$\protect\verifie{Notebook1971_1}}\label{sec:quillen-1971-1}
+
+\emph{Context.} Around the new year 1971, \carnet{1971}{1} computes the cohomology of a metacyclic $p$-group $\langle x, y\rangle$ with $xyx^{-1} = y^{1+p}$ by its Hochschild--Serre spectral sequence.
+
+\emph{The page, p.~3.} To rule out a central extension, Quillen computes modulo $p^3$, for $p$ odd, $(1 + p + \beta p^2)^p \equiv 1 + p(p + \beta p^2) + p\frac{p-1}{2}(p + \beta p^2)^2 \equiv 1 + p^2$.
+
+\emph{The page, pp.~6--7.} Restricting a representation to $\langle y\rangle$, he uses $(1 + p)^a \equiv 1 + ap \pmod{p^2}$, and then computes a total Chern class as $\prod_{a=0}^{p-1}(1 + (1 + ap)c) = (1 + c)^p = 1 + c^p$ in characteristic~$p$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1971-1, pp.~3, 6--7]\label{thm:quillen-1971-1}
+\emph{(i)} For every odd natural number $p$ and every integer $\beta$, $(1 + p + \beta p^2)^p \equiv 1 + p^2 \pmod{p^3}$; for $p = 2$ the left side is $\equiv 1 \pmod 8$ and the congruence fails. \emph{(ii)} $(1 + p)^a \equiv 1 + ap \pmod{p^2}$ for all natural numbers $p$, $a$. \emph{(iii)} In a commutative ring of prime characteristic $p$, $\prod_{a=0}^{p-1}(1 + (1 + ap)c) = 1 + c^p$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+In $\mathbf Z$, $x^3$ divides $(1+x)^n - 1 - nx - \binom n2x^2$, by induction on $n$. With $x = p + \beta p^2$: $x^3$ and $\binom p2 x^2 = p\frac{p-1}{2}x^2$ are divisible by $p^3$ when $p$ is odd, and $px \equiv p^2$. For $p = 2$, $(3 + 4\beta)^2 = 8(1 + 3\beta + 2\beta^2) + 1$. (ii) is the same expansion modulo $x^2$. (iii) In characteristic $p$, $1 + ap = 1$ and $(1 + c)^p = 1 + c^p$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1971_1.lean}{\texttt{Notebook1971\_1.\allowbreak{}lean}} proves (i) as \texttt{pow\_congr\_odd} and \texttt{not\_pow\_congr\_two}, (ii) as \texttt{one\_add\_pow\_congr}, (iii) as \texttt{prod\_one\_add}, with the expansions \texttt{three\_terms} and \texttt{two\_terms}. The number $p$ of (i) need not be prime. The cohomology and the Chern classes are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary binomial congruences. The edition does not present them as new.}

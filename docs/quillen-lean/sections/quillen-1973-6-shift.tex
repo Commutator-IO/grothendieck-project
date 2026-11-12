@@ -1,0 +1,19 @@
+\section[Notebook 1973-6: shift equivalences]{Notebook 1973-6: inverses of finite filtration, and two stabilisation lemmas\protect\verifie{Notebook1973_6}}\label{sec:quillen-1973-6-shift}
+
+\emph{Context.} After Serre's course, the last pages of \carnet{1973}{6} take up Williams' problem on shift equivalence. Quillen considers objects $A$ of a category with an endomorphism $f_A$, and maps $r \colon A \to B$ commuting with the endomorphisms that admit $r' \colon B \to A$, also commuting, with $r'r = f_A^m$ and $rr' = f_B^m$, which he calls isomorphisms of filtration $\le m$.
+
+\emph{The pages.} On page~64 he checks that such an $r$ has filtration $\le m + 1$ as well, with inverse $f_Ar'$; that filtrations add under composition; and that two inverses $r'$, $r''$ of filtrations $m$, $n$ satisfy $f_A^mr'' = f_A^nr'$, the usual uniqueness of an inverse. On page~67, if $f_A = r'r$ and $f_B = rr'$, then $r$ is an isomorphism of filtration $\le 1$. For the examples he uses that a self-map $f$ of a finite set is a bijection of $f^nA$ for $n$ large, and that on a finitely generated free abelian group $f$ is injective on $f^nA$ for $n$ large, since the kernels of $f^n$ stabilise.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1973-6, pp.~64, 67]\label{thm:quillen-1973-6-shift}
+In any category, with composition written from right to left: \emph{(i)} if $r'$ is an inverse of filtration $m$ of $r$, then $f_Ar'$ is one of filtration $m+1$; \emph{(ii)} if $r'$, $s'$ are inverses of filtration $m$, $n$ of $r \colon A \to B$, $s \colon B \to C$, then $r's'$ is one of filtration $m + n$ of $sr$; \emph{(iii)} two inverses $r'$, $r''$ of $r$ of filtrations $m$, $n$ satisfy $f_A^mr'' = f_A^nr'$; \emph{(iv)} if $f_A = r'r$ and $f_B = rr'$, then $r'$ is an inverse of filtration $1$ of $r$. Moreover \emph{(v)} a self-map of a finite set is a bijection of the image of some iterate $f^n$ onto itself, and \emph{(vi)} an endomorphism of a Noetherian module is injective on the image of some $f^n$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(i)--(iv) are the computations of the page, for instance $r's'sr = r'f_B^nr = r'rf_A^n = f_A^{m+n}$ and $f_A^mr'' = r'rr'' = r'f_B^n = f_A^nr'$. (v) The images of the iterates decrease, so their cardinalities stabilise; once $f^{n+1}A = f^nA$, $f$ maps the finite set $f^nA$ onto itself, hence bijectively. (vi) For $n$ large, $\ker f^n \cap f^nA = 0$ (Fitting); if $f(x) = f(y)$ with $x, y \in f^{n}A$, then $x - y \in \ker f \cap f^{n}A = 0$.
+\end{proof}
+
+\emph{Verification in Lean.} The section \texttt{ShiftEquivalence} of \href{\leanblobmain/Notebook1973_6.lean}{\texttt{Notebook1973\_6.\allowbreak{}lean}} proves (i)--(iv) as \texttt{IsARInv.succ}, \texttt{IsARInv.comp}, \texttt{IsARInv.unique} and \texttt{isARInv\_one\_of\_factor}, for a structure \texttt{IsARInv} holding the four equations, with diagrammatic composition $\gg$ and the iterate \texttt{iPow}; the section \texttt{Examples} proves (v) as \texttt{exists\_bijOn\_range\_iterate} and (vi) as \texttt{exists\_injOn\_range\_pow}, from mathlib's \texttt{Module.End.eventually\_disjoint\_ker\_pow\_range\_pow}. The page's goal, that shift equivalence implies strong shift equivalence over $\mathbf Z$, is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Shift and strong shift equivalence are Williams' (Ann.\ of Math.\ 98, 1973); the checks are elementary, and their equivalence over $\mathbf Z$ is in Williams' paper. The edition does not present them as new.}
