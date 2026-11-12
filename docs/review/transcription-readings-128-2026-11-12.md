@@ -243,11 +243,11 @@ Two rules held throughout:
 - [ ] 161-2 · b. 3 · p. 49 · current: note (class t) · proposed: tikz-cd A × Π_n … · source: gsmallB-report — not yet looked at
 - [ ] 161-2 · b. 3 · p. 51 · current: base-change sketches (class t) · proposed: two tikz-cd · source: rmisc-report — not yet looked at
 - [ ] 161-2 · b. 3 · p. 52 · current: marginal sketch (class t) · proposed: tikz-cd M → N, A → B, f, g, Y ← X · source: rmisc-report — not yet looked at
-- [ ] 161-6 · b. 1 · p. 12 · current: « cinq rayons » · proposed: six strokes · source: g1616-report — not yet looked at
-- [ ] 161-6 · b. 1 · p. 16 · current: graph on six vertices; u_1, u_0 in the two innermost ovals · proposed: eight vertices (the cube); both in the innermost of three · source: g1616-report — not yet looked at
-- [ ] 161-6 · b. 1 · p. 17 · current: vectors u, v from the centre · proposed: the heavy stroke runs from 0 to u, v starts at u · source: g1616-report — not yet looked at
-- [ ] 161-6 · b. 1 · p. 18 · current: A_2 … A_3 in the cyclic order · proposed: A_3 at the bottom, A_2 at the left · source: g1616-report; drawings.json 01-5 — not yet looked at
-- [ ] 161-6 · b. 1 · p. 19 · current: « trois vecteurs issus d'un point », « un décagone » · proposed: two ink figures of four strokes each; eight corners · source: g1616-report — not yet looked at
+- [x] 161-6 · b. 1 · p. 12 · current: « cinq rayons » · proposed: six strokes · source: g1616-report — APPLIED: five rays and a sixth horizontal stroke at 250 dpi; note completed.
+- [x] 161-6 · b. 1 · p. 16 · current: graph on six vertices; u_1, u_0 in the two innermost ovals · proposed: eight vertices (the cube); both in the innermost of three · source: g1616-report — APPLIED: the graph has eight vertices (two nested squares joined at their corners), and u_1 and the ringed 0 are both inside the innermost of three ovals (300 dpi); note corrected.
+- [x] 161-6 · b. 1 · p. 17 · current: vectors u, v from the centre · proposed: the heavy stroke runs from 0 to u, v starts at u · source: g1616-report — APPLIED: confirmed at 250 dpi; note corrected.
+- [x] 161-6 · b. 1 · p. 18 · current: A_2 … A_3 in the cyclic order · proposed: A_3 at the bottom, A_2 at the left · source: g1616-report; drawings.json 01-5 — APPLIED: A_3 at the bottom and A_2 at the left at 200 dpi; note corrected (the mark already has this order).
+- [x] 161-6 · b. 1 · p. 19 · current: « trois vecteurs issus d'un point », « un décagone » · proposed: two ink figures of four strokes each; eight corners · source: g1616-report — APPLIED in part: two ink figures of four strokes each; note corrected, « un décagone » replaced by « un polygone au crayon » (the corners under the ink were not counted in this pass).
 - [ ] 162-5 · b. 2 · p. 21 · current: \marginal (class t) · proposed: tikz-cd X_2 ⇛ X_1 ⇉ X_0 with curved arrows up · source: rmisc-report — not yet looked at
 
 ## Readings that change the mathematics: for /modernize-grothendieck and /find-novelty
