@@ -49,9 +49,9 @@ Two rules held throughout:
 - [ ] 45 · b. 3 · p. 52 · current: « triviale » and the large curve ending at (iii) · proposed: « triviale » beside (iii′) ⇒ (iii); the curve runs to (i″) · source: gsmallA-report, gsmallA-settled — not yet looked at
 - [ ] 46 · b. 2 · p. 30 · current: note on the Frobenius square (class t) · proposed: tikz-cd X ← U over X ← U with Fr_X, Fr_U · source: gsmallA-report — not yet looked at
 - [ ] 53 · b. 2 · p. 31 · current: \marginal and note on A ⊗ A (class t) · proposed: tikz-cd A ← A ⊗ A ⇉ k, ε · source: gsmallA-report — not yet looked at
-- [ ] 57 · b. 7 · p. 138 · current: « un troisième croquis du même triangle, isolé au bas de la page » · proposed: no such sketch in that part of the page · source: drawings.json 07-2 — not yet looked at
-- [ ] 57 · b. 8 · p. 141 · current: asterisk on the first cross of the upper row · proposed: the heavy cross is the first of the lower row · source: drawings.json 08-1 — not yet looked at
-- [ ] 57 · b. 14 · p. 267 · current: « quatre triangles adjacents » · proposed: two triangles sharing the vertex (Michel, #136) · source: drawings.json 14-1 — not yet looked at
+- [ ] 57 · b. 7 · p. 138 · current: « un troisième croquis du même triangle, isolé au bas de la page » · proposed: no such sketch in that part of the page · source: drawings.json 07-2 — OPEN: at the 30 dpi page view the lower half is written upside down and holds a triangle sketch at the right; whether it is the « troisième croquis » is not settled.
+- [x] 57 · b. 8 · p. 141 · current: asterisk on the first cross of the upper row · proposed: the heavy cross is the first of the lower row · source: drawings.json 08-1 — APPLIED: at 350 dpi the heavy cross is the first of the lower row; \note after the mark.
+- [x] 57 · b. 14 · p. 267 · current: « quatre triangles adjacents » · proposed: two triangles sharing the vertex (Michel, #136) · source: drawings.json 14-1 — APPLIED: two triangles at 150 dpi; \note after the mark.
 - [ ] 58 · b. 3 · p. 60 · current: « diagonale » · proposed: an oblique line off the origin · source: gmid-report — not yet looked at
 - [ ] 58 · b. 4 · p. 64 · current: vertical stroke through the circle · proposed: runs along its right edge · source: gmid-report — not yet looked at
 - [ ] 62 · b. 2 · p. 24 · current: a dot between 0 and 1 · proposed: no dot (paper speck) · source: osmall-report — not yet looked at
