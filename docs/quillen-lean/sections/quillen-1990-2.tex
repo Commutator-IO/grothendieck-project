@@ -1,0 +1,20 @@
+\section[Notebook 1990-2: the exact order of the corrected Karoubi operator]{Notebook 1990-2: the exact order of $\tilde\kappa$; the first Green operator\protect\verifie{Notebook1990_2}}\label{sec:quillen-1990-2}
+
+\emph{Context.} On pages~2--3 of \carnet{1990}{2} Quillen corrects the Karoubi operator $\kappa$, which satisfies $\kappa^{n(n+1)} = 1 + N$ with $N^2 = 0$ and $\kappa N = N$, to $\tilde\kappa = \kappa - cN$ of finite order; on page~99 he writes a first Green operator for $1 - \sigma$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1990-2, pp.~2--3, 99]\label{thm:quillen-1990-2}
+\begin{enumerate}
+\item In a $\mathbf Q$-algebra, let $\kappa$, $N$ commute, $N^2 = 0$, $\kappa N = N$. Then $(\kappa - cN)^j = \kappa^j - jcN$ for all $j$ and $c \in \mathbf Q$. If $\kappa^m = 1 + N$ and $N \ne 0$, then $(\kappa - cN)^m = 1$ iff $mc = 1$; in particular $\tilde\kappa = \kappa - N/(n(n+1))$ has $\tilde\kappa^{n(n+1)} = 1$.
+\item In any ring, $(1 - \sigma)\sum_{j<n}j\sigma^{n-1-j} = n - \sum_{i<n}\sigma^i$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) By induction, since $\kappa^jN = N\kappa = N$ and $N^2 = 0$; then $(\kappa - cN)^m = 1 + (1 - mc)N$. (2) By induction on $n$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1990_2.lean}{\texttt{Notebook1990\_2.\allowbreak{}lean}} proves \texttt{pow\_sub\_smul}, \texttt{pow\_eq\_one\_iff}, \texttt{pow\_eq\_one} and \texttt{one\_sub\_mul\_green}. The canonical Green operator of p.~11 is in \S\ref{sec:quillen-1990-3}, its independence of $n$ in \S\ref{sec:quillen-1990-2-green}. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary; the edition does not present it as new.}

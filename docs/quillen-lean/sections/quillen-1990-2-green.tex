@@ -1,0 +1,17 @@
+\section[Notebook 1990-2: the Green operator does not depend on the period]{Notebook 1990-2: the canonical Green operator does not depend on the period\protect\verifie{Notebook1990_2Green}}\label{sec:quillen-1990-2-green}
+
+\emph{Context.} On page~14 of \carnet{1990}{2} Quillen checks that the projection $P$ and the Green operator $Q$ of $1 - \kappa$ (\S\ref{sec:quillen-1990-3}) do not depend on the period $n$ chosen with $\kappa^n = 1$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1990-2, p.~14]\label{thm:quillen-1990-2-green}
+In a $\mathbf Q$-algebra, put $P_n = \frac1n\sum_{j<n}\kappa^j$ and $Q_n = \frac1n\sum_{j<n}(\frac{n-1}2 - j)\kappa^j$. If $\kappa^m = 1$ and $k \ge 1$, then $P_{km} = P_m$ and $Q_{km} = Q_m$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Write $j < km$ as $j = qm + r$ with $q < k$, $r < m$; then $\kappa^j = \kappa^r$, and $\sum_{q<k}(\frac{km-1}2 - qm - r) = k(\frac{m-1}2 - r)$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1990_2Green.lean}{\texttt{Notebook1990\_2Green.\allowbreak{}lean}} proves \texttt{proj\_mul} and \texttt{green\_mul}, for the operators of \texttt{Notebook1990\_3}, through \texttt{sum\_range\_mul\_smul}. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary; the edition does not present it as new.}

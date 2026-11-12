@@ -1,0 +1,19 @@
+\section[Notebook 1973-6: the index over double cosets]{Notebook 1973-6: the index of a subgroup as a sum over double cosets\protect\verifie{Notebook1973_6Doset}}\label{sec:quillen-1973-6-doset}
+
+\emph{Context.} On page~61 of \carnet{1973}{6} Quillen counts the index of a subgroup $\Gamma'$ of finite index of $\Gamma$ through the orbits of a finite subgroup $\Gamma_P$ on $\Gamma/\Gamma'$, a sum of ratios of orders of stabilisers.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1973-6, p.~61]\label{thm:quillen-1973-6-doset}
+Let $K$ be a subgroup of finite index of a group $G$ and $H$ a finite subgroup. Then
+\[ [G : K] = \sum_{HgK} \frac{\lvert H\rvert}{\lvert H \cap gKg^{-1}\rvert}, \]
+the sum over the double cosets $HgK$, one representative $g$ for each; each term is the index $[H : H \cap gKg^{-1}]$, and in this form $H$ need not be finite.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+$H$ acts on $G/K$; its orbits are the double cosets, and the stabiliser of $gK$ is $H \cap gKg^{-1}$, since $hgK = gK$ iff $g^{-1}hg \in K$. Sum the orbit--stabiliser formula over the orbits.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1973_6Doset.lean}{\texttt{Notebook1973\_6Doset.\allowbreak{}lean}} proves \texttt{stabilizer\_eq}, \texttt{index\_eq\_sum} and \texttt{index\_eq\_sum\_index}, the orbits being indexed by mathlib's quotient by the orbit relation. The count itself is mathlib's \texttt{MulAction.card\_eq\_sum\_card\_group\_div\_card\_stabilizer}; the file identifies the stabilisers. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (orbit--stabiliser; Mackey's double cosets); the edition does not present it as new.}

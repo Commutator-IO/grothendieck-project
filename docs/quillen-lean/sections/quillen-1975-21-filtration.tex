@@ -1,0 +1,17 @@
+\section[Notebook 1975-21: splitting a filtration]{Notebook 1975-21: splitting a filtration indexed by a finite poset\protect\verifie{Notebook1975_21Filtration}}\label{sec:quillen-1975-21-filtration}
+
+\emph{Context.} On pages~37--38 of \carnet{1975}{21} Quillen splits a lattice homomorphism from the order ideals of a finite poset to the subspaces of a vector space by choosing complements; Birkhoff duality on morphisms, from the same notebook, is \S\ref{sec:quillen-1975-21}.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1975-21, pp.~37--38]\label{thm:quillen-1975-21-filtration}
+Let $J$ be a finite poset, $L$ a modular complete lattice (the submodules of a module) and $W$ a lattice homomorphism from the order ideals of $J$ to $L$ with $W(\varnothing) = 0$. For each $j$, let $V_j$ satisfy $V_j + W(\{<j\}) = W(\{\le j\})$ and $V_j \cap W(\{<j\}) = 0$. Then $W(Z) = \sum_{j \in Z}V_j$ for every order ideal $Z$, and the $V_j$ are independent.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+By induction on $Z$: for $j$ maximal in $Z$, $Z' = Z \setminus \{j\}$ is an order ideal, $Z = Z' \cup \{\le j\}$ and $\{<j\} \subset Z'$, so $W(Z) = W(Z') + V_j$. Moreover $\{\le j\} \cap Z' \subset \{<j\}$, so $V_j \cap W(Z') = V_j \cap W(\{\le j\}) \cap W(Z') \subset V_j \cap W(\{<j\}) = 0$; in a modular lattice, this disjointness and the independence over $Z'$ give the independence over $Z$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1975_21Filtration.lean}{\texttt{Notebook1975\_21Filtration.\allowbreak{}lean}} proves \texttt{iSup\_eq} and \texttt{iSupIndep\_V} for any modular complete lattice, and \texttt{submodule}, the page's case. The equality $W(Z) = \sum V_j$ uses only the joins; the independence uses the meets. The existence of the complements over a field is mathlib's. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary (distributive filtrations split); the edition does not present it as new.}

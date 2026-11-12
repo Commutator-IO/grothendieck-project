@@ -1,0 +1,17 @@
+\section[Notebook 1971-12: Kaloujnine's theorem]{Notebook 1971-12: Kaloujnine's theorem $[A_r, A_s] \le A_{r+s}$\protect\verifie{Notebook1971_12Kaloujnine}}\label{sec:quillen-1971-12-kaloujnine}
+
+\emph{Context.} On pages~21 and~34 of \carnet{1971}{12} Quillen states Kaloujnine's theorem on the automorphisms that act trivially on the successive quotients of a sequence of normal subgroups, and proves it by the three-subgroup lemma in the semidirect product of $G$ by its automorphisms.
+
+\begin{encadre}
+\begin{theoreme}[Kaloujnine; Quillen, notebook 1971-12, p.~34]\label{thm:quillen-1971-12-kaloujnine}
+Let $(G_i)_{i \ge 0}$ be normal subgroups of a group $G$, and for $r \ge 0$ let $A_r$ be the set of automorphisms $\theta$ of $G$ with $\theta(G_i) = G_i$ and $\theta(x)x^{-1} \in G_{i+r}$ for all $i$ and all $x \in G_i$. Then $A_r$ is a subgroup and $[A_r, A_s] \le A_{r+s}$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Work in the group of permutations of the set $G$, which contains the left translations $L_g$ and the automorphisms, with $\theta L_g\theta^{-1} = L_{\theta(g)}$; hence $[L_x, \theta] = L_{x\theta(x)^{-1}}$, a translation by an element of $G_{i+r}$ when $x \in G_i$ and $\theta \in A_r$. For $\theta \in A_r$, $\varphi \in A_s$ and $g \in G_i$, the Hall--Witt identity writes $[L_g, [\theta, \varphi]]$ as a product of conjugates of $[\varphi, [L_{g^{-1}}, \theta^{-1}]]$ and $[\theta^{-1}, [\varphi^{-1}, L_g]]$, both translations by elements of $G_{i+r+s}$; as $G_{i+r+s}$ is normal and stable under $\theta$, $\varphi$, the result is a translation by an element of $G_{i+r+s}$, which is $[\theta,\varphi](g)g^{-1}$ up to inversion.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1971_12Kaloujnine.lean}{\texttt{Notebook1971\_12Kaloujnine.\allowbreak{}lean}} defines \texttt{A} and proves \texttt{commutator\_le}. The semidirect product of the page is replaced by the permutation group of $G$, in which it embeds; no monotonicity of the $G_i$ is used. The corollary of p.~21 (nilpotency of the automorphisms of a nilpotent group trivial on the abelianisation) is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical: Kaloujnine (1953); P.~Hall, Illinois J. Math. 2 (1958). The edition does not present it as new.}

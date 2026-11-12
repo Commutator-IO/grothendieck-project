@@ -1,0 +1,22 @@
+\section[Notebook 1989-4: powers to first order]{Notebook 1989-4: powers to first order; graded commutators; the modular operator\protect\verifie{Notebook1989_4}}\label{sec:quillen-1989-4}
+
+\emph{Context.} On page~38 of \carnet{1989}{4} Quillen expands powers of $a - da\,d$ to first order; on pages~14 and~18 he uses the graded commutator $[z, \theta] = z\theta + \theta z$, and on page~34 the modular operator of a faithful trace functional on matrices.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1989-4, pp.~14, 18, 34, 38]\label{thm:quillen-1989-4}
+In any ring:
+\begin{enumerate}
+\item if $exe = 0$ for every $x$, then $(a + e)^{n+1} = a^{n+1} + \sum_{k=0}^na^{n-k}ea^k$;
+\item with $X = z\theta + \theta z$, $zX - Xz = z^2\theta - \theta z^2$; if $z^2 = 1$, $zX = Xz = \theta + z\theta z$;
+\item for an invertible matrix $T$ over a commutative ring, $\operatorname{tr}(Tyx) = \operatorname{tr}(Tx\,TyT^{-1})$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) By induction: $(a^n + S_n)(a + e) = a^{n+1} + a^ne + S_na$, since $S_ne = 0$. (2) Expansion. (3) Cyclicity of the trace.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1989_4.lean}{\texttt{Notebook1989\_4.\allowbreak{}lean}} proves \texttt{add\_pow\_first\_order}, \texttt{commutator\_graded}, \texttt{mul\_graded\_of\_sq} and \texttt{trace\_modular}. The page applies (1) to $e = -da\,d$. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary; the edition does not present it as new.}

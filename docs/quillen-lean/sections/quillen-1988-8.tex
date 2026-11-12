@@ -1,0 +1,21 @@
+\section[Notebook 1988-8: the cyclic word count]{Notebook 1988-8: the cyclic word count; traces on a twisted product; a gauge transformation\protect\verifie{Notebook1988_8}}\label{sec:quillen-1988-8}
+
+\emph{Context.} On page~16 of \carnet{1988}{8} Quillen counts the words in two matrices cyclically under the trace, the identity behind the trace form of \S\ref{sec:quillen-1988-5}; on page~10 he notes that traces vanish on the twisted part of a crossed product, and on page~21 he conjugates $\mathrm{diag}(F, -F)$ by a rotation.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1988-8, pp.~10, 16, 21]\label{thm:quillen-1988-8}
+\begin{enumerate}
+\item For square matrices $A$, $B$ over a commutative ring, let $P_{k,l}$ be the sum of the words with $k$ letters $A$ and $l$ letters $B$. Then $(k+1)\operatorname{tr}P_{k+1,l} = (k+l+1)\operatorname{tr}(AP_{k,l})$.
+\item If $\tau$ is additive with $\tau(ab) = \tau(ba)$ and $\varepsilon t = -t\varepsilon$, then $2\tau(t^n\varepsilon) = 0$ for $n \ge 1$; hence $\tau(t^n\varepsilon) = 0$ with values in a $\mathbf Q$-vector space.
+\item If $F^2 = 1$ and $c$, $s$ are scalars with $c^2 + s^2 = 1$, then $g = \begin{pmatrix}c & -sF\\ sF & c\end{pmatrix}$ has inverse $\begin{pmatrix}c & sF\\ -sF & c\end{pmatrix}$ and $g\,\mathrm{diag}(F, -F)\,g^{-1} = \begin{pmatrix}(c^2-s^2)F & 2cs\\ 2cs & (s^2-c^2)F\end{pmatrix}$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) $P_{k,l}$ is the coefficient of $s^k$ in $(sA + B)^{k+l}$; take the coefficient of $s^k$ in $\frac d{ds}\operatorname{tr}(sA + B)^{k+l+1} = (k+l+1)\operatorname{tr}(A(sA + B)^{k+l})$ (\S\ref{sec:quillen-1988-5}). (2) $\varepsilon t^n = (-1)^nt^n\varepsilon$; for $n$ odd, $\tau(t^n\varepsilon) = \tau(\varepsilon t^n) = -\tau(t^n\varepsilon)$; for $n$ even, move one $t$ around: $\tau(t^n\varepsilon) = \tau(t^{n-1}\varepsilon t) = -\tau(t^n\varepsilon)$. (3) Direct computation.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1988_8.lean}{\texttt{Notebook1988\_8.\allowbreak{}lean}} defines $P_{k,l}$ as the coefficient, proves its recursion by the first letter (\texttt{P\_succ\_succ} and the edge cases), and proves \texttt{trace\_word\_count}, \texttt{two\_nsmul\_trace\_pow\_mul}, \texttt{trace\_pow\_mul}, \texttt{gauge\_mul\_inv} and \texttt{gauge\_conj}. The identity (1) holds over any commutative ring, without division; in (2), $\varepsilon^2 = 1$ is not needed. In (3) the page writes the factors $F$ on the off-diagonal of the result; with $g$ as above they cancel, since $F^2 = 1$. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (cyclicity of the trace); the edition does not present it as new.}

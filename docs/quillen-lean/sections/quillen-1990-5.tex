@@ -1,0 +1,21 @@
+\section[Notebook 1990-5: full idempotents; the splitting lemma]{Notebook 1990-5: full idempotents; the splitting lemma; $e = (1 + \varepsilon)/2$\protect\verifie{Notebook1990_5}}\label{sec:quillen-1990-5}
+
+\emph{Context.} On page~26 of \carnet{1990}{5} Quillen characterises the full idempotents, on pages~27--28 he forms the idempotent $(1 + \varepsilon)/2$ of a grading, and on page~67 he uses the splitting lemma for a short exact sequence.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1990-5, pp.~26--28, 67]\label{thm:quillen-1990-5}
+\begin{enumerate}
+\item Let $e$ be an idempotent of a ring $R$. Then $ReR = R$ (some $\sum_ia_ieb_i = 1$) iff some $(Re)^n$ maps onto $R$ as left $R$-modules; every $R$-linear $\varphi : Re \to R$ is $x \mapsto x\varphi(e)$.
+\item If $i : E' \to E$ is injective, $p : E \to E''$ surjective, $pi = 0$, and $ik + hp = 1$, then $ki = 1$, $ph = 1$ and $kh = 0$.
+\item In a $\mathbf Q$-algebra with $\varepsilon^2 = F^2 = 1$ and $\varepsilon F = -F\varepsilon$, $e = (1 + \varepsilon)/2$ is idempotent, $FeF = 1 - e$ and $eFe = 0$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) If $\sum a_ieb_i = 1$, $(v_i) \mapsto \sum v_ib_i$ is onto, the image of $(ra_ie)_i$ being $r$. Conversely $\varphi(e) = \varphi(e\cdot e) = e\varphi(e)$, so $\varphi(re) = re\varphi(e)$; writing $1 = f(v)$ with $v_i = r_ie$ gives $1 = \sum_ir_ieb_i$. (2) Apply $ik + hp = 1$ to $i(x)$, to $h(y)$, and use $pi = 0$ with the injectivity of $i$ and surjectivity of $p$. (3) Expansion.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1990_5.lean}{\texttt{Notebook1990\_5.\allowbreak{}lean}} proves \texttt{hom\_apply\_eq\_mul}, \texttt{full\_iff\_exists\_surjective}, \texttt{splitting} and \texttt{half\_one\_add}. The page works with right modules $eR$; the statement is the same in the opposite ring. The isomorphism $\mathrm{End}(eR) \cong eRe$ of the page is not formalised beyond the description of the maps $Re \to R$. Only $pi = 0$ is used of the exactness. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (Morita theory; the splitting lemma); the edition does not present it as new.}
