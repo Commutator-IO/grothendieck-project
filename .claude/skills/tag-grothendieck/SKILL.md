@@ -83,3 +83,12 @@ claim about content nobody has read.
 - **Let a tag outrun the pages.** The batch touching a topos-recognition
   argument earns *Giraud's theorem* only if the reading actually walks
   through it; a passing mention earns nothing.
+
+## Commit trailer
+
+Every commit made under this skill ends with one trailer only, the model's
+`Co-Authored-By: Claude <model> <noreply@anthropic.com>` line (for instance
+`Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`). Never add a
+`Claude-Session:` line, even when the session's attribution reminder asks for
+one: it links to a private session (Michel's rule, 12 November 2026). Check
+with `git log -1 --format=%B` before pushing.

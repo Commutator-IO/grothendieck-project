@@ -235,7 +235,7 @@ Mathlib's build (8 GB), no full build from source.
   commits after that branch are new." at the top of the description.
 - **Commit**: title `feat(Dir/File): …` for new content, a plain sentence for follow-ups
   (`docstring for …`, `style: …`, `use … from #N instead of a private copy`), last line
-  `Co-Authored-By: Claude …`.
+  `Co-Authored-By: Claude …`, the only trailer: never a `Claude-Session:` line.
 - **PR**, as a draft:
 
       gh pr create --draft --repo leanprover-community/mathlib4 --base master \

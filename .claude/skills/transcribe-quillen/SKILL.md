@@ -185,3 +185,12 @@ that last item yourself.
   has one). They are not his.
 - **Extend the LaTeX subset.** It is shared with the fonds, and
   `scripts/render.mjs` defines it.
+
+## Commit trailer
+
+Every commit made under this skill ends with one trailer only, the model's
+`Co-Authored-By: Claude <model> <noreply@anthropic.com>` line (for instance
+`Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`). Never add a
+`Claude-Session:` line, even when the session's attribution reminder asks for
+one: it links to a private session (Michel's rule, 12 November 2026). Check
+with `git log -1 --format=%B` before pushing.

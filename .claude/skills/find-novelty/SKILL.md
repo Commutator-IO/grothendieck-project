@@ -178,3 +178,12 @@ was checked against the facsimile, and what was not.
   `\uncertain{}` carries the statement, say so in `basis` and drop the status
   to `unsearched` at best.
 - **Set `confirmed`.** Only a person may, and no pass of this skill is one.
+
+## Commit trailer
+
+Every commit made under this skill ends with one trailer only, the model's
+`Co-Authored-By: Claude <model> <noreply@anthropic.com>` line (for instance
+`Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`). Never add a
+`Claude-Session:` line, even when the session's attribution reminder asks for
+one: it links to a private session (Michel's rule, 12 November 2026). Check
+with `git log -1 --format=%B` before pushing.

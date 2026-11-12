@@ -173,7 +173,8 @@ for `Λ`.
   commit on top (`git rebase origin/<branch>` of your unpushed commits only), then push.
 - Message: `<Name>: review of <date> — <what changed, finding by finding>` (for example
   `GrothendieckTeichmuller: review of 31 Oct. — …`); other commits `<Name>: <what changed>`. Last
-  line: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
+  line: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`, the only trailer: never a
+  `Claude-Session:` line.
 - Repair every finding of the round in one commit, P3s included: a P3 left for later is carried to
   the next review and keeps the round open (#1059 rounds 3–4, #1058 round 4).
 - Keep the PR description current (title, scope, sources, AI assistance naming the model, a call
