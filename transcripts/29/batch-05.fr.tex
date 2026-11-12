@@ -68,6 +68,9 @@
 %
 % Pass: Opus 5 (claude-opus-5), 2026-08-24 — first pass, unchecked against the pages by a human.
 % Revised: Fable 5.2 (claude-fable-5-2), 2026-11-12 — \drawing mark added for the sketch of the left margin of p. 87 (D_0 = X_0 cut by D_1 and D_2), described only in a note (issue 128); the note is kept, the text is unchanged.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-12 — read again on the facsimile (#145, from the drawings pass of #128), not checked by a reader.
+% Applied: p. 86, the cube read in full on the facsimile and set as tikzcd (class t), replacing
+% the face and the note that called it illegible.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -311,19 +314,22 @@ ramifié), alors \ill{} le morphisme
 est \ill{} \ill{} (resp.\ non ramifié), et peut être \ill{} de ce fait des
 voisinages infinitésimaux de tous ordres,
 
-\begin{tikzcd}
-X \times_{S} S' \arrow[r] \arrow[d] & X \arrow[d] \\
-S' \arrow[r] & S
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+ & T_{o} \arrow[dl] \arrow[d, hook] & & T_{o} \times_{S} S' \arrow[ll] \arrow[dl] \arrow[dd, hook, bend left=20] & T_{o} \times_{X} X' = T'_{o} \arrow[l, "\text{n.r.}"'] \arrow[dl] \arrow[dd, dashed, "\text{n.r.}"] \\
+X \arrow[d] & T \arrow[dl] & X \times_{S} S' \arrow[ll] \arrow[d] & X' \arrow[l, "\text{n.r.}"] \arrow[dl] & \\
+S & & S' \arrow[ll] & T \times_{S} S' \arrow[l] \arrow[ull] & T' \arrow[l]
 \end{tikzcd}
 
 \[ T_{o \cdot X} X' = T'_{o} \]
 
-\note{La page dessine ici, au crayon et très serré, un cube dont le carré
-ci-dessus n'est qu'une face : les autres sommets portent $T_{o}$, $T_{o}
-\times_{S} S'$, $T'$ et deux étiquettes qui ne se lisent pas. Trois flèches
-portent la mention « n.r. » (non ramifié) et un sommet est barré d'une croix. Le
-cube n'est pas reproduit : l'essentiel de ses étiquettes est illisible, et le
-dessiner reviendrait à affirmer ce qu'on n'a pas lu.}
+\note{La page dessine ici, à l'encre et très serré, un cube dont le carré
+$X \times_{S} S' \to X$, $S' \to S$ est une face ; relu sur le fac-similé, ses
+étiquettes se lisent toutes, et il est donné ci-dessus tel qu'il est tracé. La
+flèche $X' \to S'$ est appuyée ; $X'$ est écrit en gras par-dessus une première
+lettre (le sommet « barré d'une croix » d'une première lecture) ; l'inclusion
+$T_{o} \times_{S} S' \hookrightarrow T \times_{S} S'$ passe derrière $X'$. Les deux
+flèches $T_o \times_S S' \to X \times_S S'$ et $T \times_S S' \to T$ ont une pointe
+peu visible.}
 
 dans $T'$ \ill{}. Alors $f^{*}(\mathcal{F}) = \varinjlim_{n} \xi'_{n}$ \ill{},
 si $F$ est un faisceau \ill{}
