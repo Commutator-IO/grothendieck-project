@@ -6,6 +6,8 @@ import Quillen.Notebook1968_15
 import Quillen.Notebook1968_16
 import Quillen.Notebook1969_1
 import Quillen.Notebook1969_4
+import Quillen.Notebook1970_5
+import Quillen.Notebook1970_11
 import Quillen.Notebook1970_15
 import Quillen.Notebook1971_2
 import Quillen.Notebook1971_3
@@ -20,6 +22,7 @@ import Quillen.Notebook1971_12Cover
 import Quillen.Notebook1971_13
 import Quillen.Notebook1972_2
 import Quillen.Notebook1972_4
+import Quillen.Notebook1972_6
 import Quillen.Notebook1972_11
 import Quillen.Notebook1973_3
 import Quillen.Notebook1973_5

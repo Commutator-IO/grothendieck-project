@@ -1,0 +1,19 @@
+\section[Notebook 1972-6: denominators of $B_{2s}/4s$]{Notebook 1972-6: the denominators of $B_{2s}/4s$ and the valuations of $p^t - 1$\protect\verifie{Notebook1972_6}}\label{sec:quillen-1972-6}
+
+\emph{Context.} On pages~34 to~40 and~49 to~55 of \carnet{1972}{6} Quillen studies the image of the $J$-homomorphism in the $K$-theory of $\mathbf Z$. Its order in degree $4s - 1$ is the denominator $m(2s)$ of $B_{2s}/4s$, Adams' number, which he compares with the orders $p^{2s} - 1$ of $K_{4s-1}(\mathbf F_p)$.
+
+\emph{The page.} On page~40, under a heading on number theory, he writes $m(2s) = \prod_\ell \ell^{m_\ell(2s)}$, with $m_\ell(t) = v_\ell(p^t - 1)$ for $\ell$ odd and $p$ a generator of $\mathbf Z_\ell^\times$, equal to $0$ if $\ell - 1 \nmid t$ and to $v_\ell(t) + 1$ if $\ell - 1 \mid t$, and $m_2(t) = v_2(3^t - 1)$, equal to $1$ for $t$ odd and to $v_2(t) + 2$ for $t$ even. He tabulates $m(2s)$ for $s = 1, \ldots, 5$: $24$, $240$, $504$, $480$, $264$. His Bernoulli numbers are the topologists' ones, $B_s$ for our $B_{2s}$, with $B_2 = 1/6$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1972-6, p.~40]\label{thm:quillen-1972-6}
+\emph{(i)} $v_2(3^t - 1) = 1$ for $t$ odd and $v_2(3^t - 1) = v_2(t) + 2$ for $t \ge 2$ even. \emph{(ii)} Let $\ell$ be an odd prime and $p \ge 2$ an integer whose class modulo $\ell$ has order $\ell - 1$ and with $p^{\ell - 1} \not\equiv 1 \pmod{\ell^2}$, that is, a generator of $(\mathbf Z/\ell^2)^\times$. For $t \ge 1$, $v_\ell(p^t - 1) = 0$ if $\ell - 1 \nmid t$ and $v_\ell(p^t - 1) = v_\ell(t) + 1$ if $\ell - 1 \mid t$. \emph{(iii)} The denominators of $B_{2s}/4s$ for $s = 1, \ldots, 5$ are $24$, $240$, $504$, $480$ and $264$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(i) For $t$ odd, $3^t \equiv 3 \pmod 4$, so $3^t - 1 \equiv 2 \pmod 4$. For $t$ even, the $2$-adic lifting of the exponent gives $v_2(3^t - 1) + 1 = v_2(4) + v_2(2) + v_2(t)$. (ii) If $\ell \mid p^t - 1$, the order $\ell - 1$ of $p$ modulo $\ell$ divides $t$. If $t = (\ell - 1)s$, put $x = p^{\ell - 1}$: then $v_\ell(x - 1) = 1$ by hypothesis, and the lifting of the exponent for odd $\ell$ gives $v_\ell(x^s - 1) = 1 + v_\ell(s) = 1 + v_\ell(t)$, since $\ell \nmid \ell - 1$. (iii) $B_2 = 1/6$, $B_4 = -1/30$, $B_6 = 1/42$, $B_8 = -1/30$, $B_{10} = 5/66$, computed from the recursion, and $B_{10}/20 = 1/264$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1972_6.lean}{\texttt{Notebook1972\_6.\allowbreak{}lean}} proves (i) as \texttt{padicValNat\_three\_pow\_sub\_one\_odd} and \texttt{padicValNat\_three\_pow\_sub\_one\_even}, (ii) as \texttt{padicValNat\_pow\_sub\_one\_of\_not\_dvd} and \texttt{padicValNat\_pow\_sub\_one\_of\_dvd}, from mathlib's lifting the exponent lemmas (\texttt{padicValNat.pow\_two\_sub\_one}, \texttt{padicValNat.pow\_sub\_pow}), and (iii) as \texttt{den\_bernoulli\_div}, with mathlib's \texttt{bernoulli}. The generator hypothesis is stated through its two consequences used in the proof. The identity $m(2s) = \prod_\ell \ell^{m_\ell(2s)}$ for every $s$ (von Staudt--Clausen and the numerators) is not formalised; for $s \le 5$ it can be checked on the table. The axioms used are the three usual axioms of mathlib.
+
+\litterature{All of this is classical: Adams, \emph{On the groups $J(X)$}~IV (Topology~5, 1966), for $m(2s)$ and its $\ell$-adic valuations, and the lifting of the exponent. The edition does not present it as new.}

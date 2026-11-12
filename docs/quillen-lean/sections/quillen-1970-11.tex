@@ -1,0 +1,19 @@
+\section[Notebook 1970-11: the 2-parts of $|GL_n(\mathbf F_q)|$ and $|N|$]{Notebook 1970-11: the 2-parts of $|GL_n(\mathbf F_q)|$ and of $|N|$ for $q \equiv 3 \bmod 4$\protect\verifie{Notebook1970_11}}\label{sec:quillen-1970-11}
+
+\emph{Context.} In \carnet{1970}{11} Quillen computes the mod~$\ell$ cohomology of $GL_n(\mathbf F_q)$ through subgroups of index prime to $\ell$. Page~17 takes up the exceptional case $\ell = 2$, $q \equiv 3 \pmod 4$, with the subgroup $N = (\Sigma_m \wr (\mathrm{Gal} \ltimes \mathbf F_{q^2}^\times)) \times (\mathbf F_q^\times)^e$ of $GL_n(\mathbf F_q)$, $n = 2m + e$, $e \in \{0, 1\}$.
+
+\emph{The page.} He writes $|GL_n(\mathbf F_q)| = q^{n(n-1)/2}\prod_{i=1}^n (q^i - 1)$ and $|N| = m!\,(2(q^2 - 1))^m (q - 1)^e$, and says that they have the same power of~$2$, since $v_2(q^i - 1) = 1$ for $i$ odd and $v_2(q^{2i} - 1) = v_2(i) + v_2(q^2 - 1)$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1970-11, p.~17]\label{thm:quillen-1970-11}
+Let $q \equiv 3 \pmod 4$. Then $v_2(q^k - 1) = 1$ for $k$ odd, and $v_2(q^{2i} - 1) = v_2(i) + v_2(q^2 - 1)$ for $i \ge 1$ (this for every odd $q > 1$). For $n = 2m + e$, $e \in \{0,1\}$, the integers $q^{n(n-1)/2}\prod_{i=1}^n (q^i - 1)$ and $m!\,(2(q^2-1))^m (q-1)^e$ have the same $2$-adic valuation.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+For $k$ odd, $q^k \equiv 3 \pmod 4$. For the even exponents, the $2$-adic lifting of the exponent gives $v_2(q^{2i} - 1) + 1 = v_2(q + 1) + v_2(q - 1) + v_2(2i)$, and $v_2(q+1) + v_2(q-1) = v_2(q^2 - 1)$. In $\prod_{i=1}^{n}$ there are $m + e$ odd exponents and the even exponents $2, 4, \ldots, 2m$, so its valuation is $m + e + v_2(m!) + m\,v_2(q^2 - 1)$; this is the valuation of $m!\,(2(q^2 - 1))^m(q-1)^e$, since $v_2(q - 1) = 1$. The power of $q$ is odd.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1970_11.lean}{\texttt{Notebook1970\_11.\allowbreak{}lean}} proves the theorem as \texttt{padicValNat\_pow\_odd\_sub\_one}, \texttt{padicValNat\_pow\_even\_sub\_one} and \texttt{padicValNat\_card\_GL\_eq}, the products written over $i < n$ with exponent $i + 1$. The orders of $GL_n(\mathbf F_q)$ and of $N$, and the cohomology, are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The valuations are the lifting of the exponent lemma, and the comparison is the standard count showing that $N$ has odd index (compare Quillen, \emph{On the cohomology and $K$-theory of the general linear groups over a finite field}, Ann.\ of Math.\ 96, 1972). The edition does not present it as new.}

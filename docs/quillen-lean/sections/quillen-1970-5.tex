@@ -1,0 +1,23 @@
+\section[Notebook 1970-5: the index of $N_n$ in $O_n(\mathbf F_q)$ is odd]{Notebook 1970-5: the index of $N_n(\mathbf F_q)$ in $O_n(\mathbf F_q)$ is odd when $4 \mid q - 1$\protect\verifie{Notebook1970_5}}\label{sec:quillen-1970-5}
+
+\emph{Context.} On pages~65 to~68 of \carnet{1970}{5} Quillen studies the mod~$2$ cohomology of the orthogonal groups $O_n(\mathbf F_q)$, $q$ odd, through the subgroups $N_n(\mathbf F_q) = (\Sigma_m \wr O_2(\mathbf F_q)) \times (\mathbf Z/2)^\varepsilon$, $n = 2m + \varepsilon$.
+
+\emph{The page.} On page~67 he writes the quotients of the orders,
+\[
+\frac{|O_{2m+1}|}{|N_{2m+1}|} = q^{m^2}\prod_{j=1}^m \frac{q^{2j} - 1}{2j(q - 1)}, \qquad \frac{|O_{2m}|}{|N_{2m}|} = q^{m(m-1)}\,\frac{q^m - 1}{m(q-1)}\prod_{j=1}^{m-1}\frac{q^{2j}-1}{2j(q-1)},
+\]
+says that they are prime to~$2$ when $4 \mid q - 1$, and concludes that $N_n(\mathbf F_q)$ then contains a Sylow $2$-subgroup of $O_n(\mathbf F_q)$, a result he attributes to Chevalley.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1970-5, p.~67]\label{thm:quillen-1970-5}
+Let $q \equiv 1 \pmod 4$, $q > 1$. Then $v_2(q^k - 1) = v_2(q - 1) + v_2(k)$ for $k \ge 1$; the integers $\prod_{j=1}^m (q^{2j} - 1)$ and $2^m\,m!\,(q-1)^m$ have the same $2$-adic valuation; and, for $m \ge 1$, so do $(q^m - 1)\prod_{j=1}^{m-1}(q^{2j}-1)$ and $m(q-1)\cdot 2^{m-1}(m-1)!\,(q-1)^{m-1}$. For $q = 3$, $m = 1$ the first equality fails.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+The first formula is the $2$-adic lifting of the exponent, valid when $4 \mid q - 1$. It gives $v_2(q^{2j} - 1) = v_2(q-1) + 1 + v_2(j) = v_2(2j(q-1))$ for each factor, and $v_2(q^m - 1) = v_2(m(q-1))$; summing, and using $\sum_{j \le m} v_2(j) = v_2(m!)$, gives both equalities. For $q = 3$, $v_2(3^2 - 1) = 3$ while $v_2(2 \cdot 1 \cdot 2) = 2$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1970_5.lean}{\texttt{Notebook1970\_5.\allowbreak{}lean}} proves the theorem as \texttt{padicValNat\_pow\_sub\_one} (from mathlib's \texttt{Int.two\_pow\_sub\_pow'}), \texttt{padicValNat\_factor}, \texttt{padicValNat\_odd\_index}, \texttt{padicValNat\_even\_index} and \texttt{not\_padicValNat\_odd\_index\_three}. It compares valuations of numerator and denominator, and does not claim that the quotients are integers, which is the group theory of the page. The orders of the orthogonal groups and the Sylow statement are not formalised; the powers of $q$ are odd. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The arithmetic is the lifting of the exponent lemma; the Sylow statement is in Carter and Fong, \emph{The Sylow $2$-subgroups of the finite classical groups} (J.\ Algebra~1, 1964), and the page refers to Chevalley. The edition does not present it as new.}
