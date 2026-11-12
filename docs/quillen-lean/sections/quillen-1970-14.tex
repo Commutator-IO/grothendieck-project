@@ -1,0 +1,22 @@
+\section[Notebook 1970-14: the Euler characteristic of the Tits building]{Notebook 1970-14: the Euler characteristic of the Tits building of $GL_n(\mathbf F_q)$\protect\verifie{Notebook1970_14}}\label{sec:quillen-1970-14}
+
+\emph{Context.} On page~4 of \carnet{1970}{14} Quillen computes the Euler characteristic of the poset of proper nonzero subspaces of $\mathbf F_q^n$ (the Tits building) by counting its simplices, the flags $0 < W_1 < \cdots < W_d < V$. A flag has a type, the composition $(s_0, \ldots, s_d)$ of $n$ given by the successive dimensions, and the flags of a given type are counted by the $q$-multinomial coefficient. The page writes the alternating sum, lists the values $q + 1$, $1 - q^3$, $1 + q^6$ for $n = 2, 3, 4$, and concludes that the building should be a bouquet of $q^{n(n-1)/2}$ spheres of dimension $n - 2$, which it then proves by induction.
+
+\emph{Intuition.} Write $[m]! = \prod_{b=1}^m (q^b - 1)$ and let $F(n)$ be the sum over all compositions $c$ of $n$ of $(-1)^{\ell(c)}[n]!/\prod_a [c_a]!$. Splitting off the first part $s$ gives $F(n) = -\sum_{s=1}^n \binom{n}{s}_q F(n - s)$, and the $q$-binomial theorem at $t = -1$ shows that $(-1)^n q^{n(n-1)/2}$ satisfies the same recursion.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1970-14, p.~4]\label{thm:quillen-1970-14}
+Let $q$ be an element of a field with $q^b \ne 1$ for $b \ge 1$, and $[m]! = \prod_{b=1}^m (q^b - 1)$. For $n \ge 1$,
+\[
+\sum_{d=1}^{n-1} (-1)^{d+1} \sum_{\substack{s_0, \ldots, s_d > 0\\ s_0 + \cdots + s_d = n}} \frac{[n]!}{\prod_{a=0}^d [s_a]!} = 1 + (-1)^n q^{n(n-1)/2}.
+\]
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+First, $\binom{n}{k}_q [k]!\,[n-k]! = [n]!$ for the Gaussian binomial defined by the $q$-Pascal rule, by induction on $n$: the two terms of the rule contribute $[n]!(q^{k+1} - 1)$ and $q^{k+1}[n]!(q^{n-k} - 1)$, whose sum is $[n+1]!$. In particular $\binom{n}{k}_q = \binom{n}{n-k}_q$. The compositions of $n + 1$ are the lists $(s + 1, c)$ with $c$ a composition of $n - s$, $0 \le s \le n$, so $F(n+1) = -\sum_{s=0}^{n}\binom{n+1}{s+1}_q F(n - s)$. By strong induction $F(m) = (-1)^m q^{\binom m2}$: the identity $\sum_{k=0}^{N}(-1)^k q^{\binom k2}\binom Nk_q = 0$ for $N \ge 1$, read backwards with the symmetry, isolates the term $k = 0$. Finally the left side of the statement is $F(n)$ minus the term of the one-part composition, which is $-1$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1970_14.lean}{\texttt{Notebook1970\_14.\allowbreak{}lean}} proves the theorem as \texttt{euler\_characteristic}, the sum running over mathlib's \texttt{Composition n} with at least two blocks, and the full sum as \texttt{sum\_compositions}; the product formula is \texttt{qBinomial\_mul\_qf}, in any commutative ring, for the Gaussian binomial of the library's \texttt{Upstream/QBinomial} (written for notebook 1970-15). The hypothesis on $q$ covers $\mathbf Q(q)$, hence the identity of rational functions of the page, and every prime power in $\mathbf Q$. The topology (the building, its order complex and the count of flags of a type) is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical: the Solomon--Tits theorem (L.~Solomon, 1969) gives the homotopy type of the building, a bouquet of $q^{n(n-1)/2}$ spheres, and the Euler characteristic follows; the alternating sum of $q$-multinomials is the $q$-analogue of the count of the faces of a simplex. The edition does not present it as new.}

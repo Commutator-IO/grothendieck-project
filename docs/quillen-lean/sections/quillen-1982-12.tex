@@ -1,0 +1,17 @@
+\section[Notebook 1982-12: $(\gamma^1\cdots\gamma^m)^2$]{Notebook 1982-12: $(\gamma^1\cdots\gamma^m)^2 = (-1)^{m(m-1)/2}$\protect\verifie{Notebook1982_12}}\label{sec:quillen-1982-12}
+
+\emph{Context.} On page~88 of \carnet{1982}{12} Quillen sets up the spinor module of an even-dimensional Euclidean space, with Clifford generators $\gamma^1, \ldots, \gamma^{2n}$ of an orthonormal basis and the chirality operator $\gamma^{2n+1} = \gamma^1\cdots\gamma^{2n}$, and uses $(\gamma^{2n+1})^2 = (-1)^{2n(2n-1)/2} = (-1)^n$ and the anticommutation of $\gamma^{2n+1}$ with the $\gamma^i$, before computing supertraces.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1982-12, p.~88]\label{thm:quillen-1982-12}
+In a ring, let $e_0, e_1, \ldots$ satisfy $e_i^2 = 1$ and $e_ie_j = -e_je_i$ for $i \ne j$, and $P_m = e_0\cdots e_{m-1}$. Then $P_m^2 = (-1)^{m(m-1)/2}$; for $m = 2n$, $P_{2n}^2 = (-1)^n$ and $P_{2n}$ anticommutes with $e_i$, $i < 2n$. More precisely $e_iP_m = (-1)^{m-1}P_me_i$ for $i < m$ and $e_iP_m = (-1)^mP_me_i$ for $i \ge m$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+The commutation rules follow by moving $e_i$ across the factors one at a time. Then $P_{m+1}^2 = P_me_mP_me_m = (-1)^mP_m^2e_m^2 = (-1)^mP_m^2$, and $\binom{m+1}{2} = \binom m2 + m$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1982_12.lean}{\texttt{Notebook1982\_12.\allowbreak{}lean}} proves the theorem as \texttt{prod\_mul\_prod}, \texttt{prod\_mul\_prod\_even}, \texttt{mul\_prod\_even}, \texttt{mul\_prod\_of\_lt} and \texttt{mul\_prod\_of\_le}, from the relations alone, in any ring. The traces on the spinor module (pp.~88--89) are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Standard (Lawson and Michelsohn, \emph{Spin geometry}, ch.~I, \S 5, the volume element). The edition does not present it as new.}

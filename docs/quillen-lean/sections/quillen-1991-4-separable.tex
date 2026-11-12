@@ -1,0 +1,17 @@
+\section[Notebook 1991-4: the separability element of $M_n(K)$]{Notebook 1991-4: the separability element of $M_n(K)$\protect\verifie{Notebook1991_4Separable}}\label{sec:quillen-1991-4-separable}
+
+\emph{Context.} On pages~51 to~58 of \carnet{1991}{4} Quillen works with separable algebras through an element $z = \sum x_i \otimes y_i$ of $A \otimes A$ that commutes with $A$ for the bimodule structure, $(a \otimes 1)z = z(1 \otimes a)$, and with $\sum x_iy_i = 1$. For the matrix algebra he takes $z = \frac1n\sum_{i,j} e_{ij} \otimes e_{ji}$, which is moreover symmetric.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1991-4, pp.~51--58]\label{thm:quillen-1991-4-separable}
+Let $K$ be a commutative ring and $s = \sum_{i,j} e_{ij} \otimes e_{ji}$ in $M_n(K) \otimes_K M_n(K)$. Then $(a \otimes 1)s = s(1 \otimes a)$ for every matrix $a$, $\sum_{i,j} e_{ij}e_{ji} = n \cdot 1$, $s$ is fixed by the flip and $s^2 = 1$. If $n$ is invertible in $K$, $z = n^{-1}s$ satisfies $(a \otimes 1)z = z(1 \otimes a)$, $m(z) = 1$ and is symmetric.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Both sides of the first identity are linear in $a$, and for $a = e_{kl}$ both equal $\sum_j e_{kj} \otimes e_{jl}$, by $e_{ij}e_{kl} = \delta_{jk}e_{il}$. Then $\sum_{i,j}e_{ij}e_{ji} = \sum_{i,j}e_{ii} = n \cdot 1$; the flip exchanges the two indices of summation; and $(e_{ij} \otimes e_{ji})s = e_{ii} \otimes e_{jj}$, whose sum is $1 \otimes 1$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1991_4Separable.lean}{\texttt{Notebook1991\_4Separable.\allowbreak{}lean}} proves the statement as \texttt{tmul\_one\_mul\_s}, \texttt{mul\_s}, \texttt{comm\_s}, \texttt{s\_mul\_s} and \texttt{separability\_idempotent}, for any finite index type, with mathlib's \texttt{Matrix.single} and \texttt{Algebra.TensorProduct}. The trace form of the page and the group-algebra analogue are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (DeMeyer and Ingraham, \emph{Separable algebras over commutative rings}, LNM~181, 1971, ch.~II). Mathlib has separable field extensions, not separability idempotents. The edition does not present it as new.}

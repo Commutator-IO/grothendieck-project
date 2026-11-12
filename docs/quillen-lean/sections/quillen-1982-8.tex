@@ -1,0 +1,23 @@
+\section[Notebook 1982-8: the symmetrised cyclic products vanish]{Notebook 1982-8: the symmetrisation of $1/((z_1 - z_2)\cdots(z_n - z_1))$ vanishes for $n \ge 3$\protect\verifie{Notebook1982_8}}\label{sec:quillen-1982-8}
+
+\emph{Context.} On page~63 of \carnet{1982}{8} Quillen computes $\log\langle 0|S|0\rangle = \log\det(1 - K) = -\sum_n \operatorname{tr}(K^n)/n$ for a fermion in an abelian background field, and needs that only $n = 2$ contributes. The trace of $K^n$ is an integral against the cyclic function $\varphi = 1/((z_1 - z_2)(z_2 - z_3)\cdots(z_n - z_1))$ with a symmetric numerator, so what matters is the symmetrisation of $\varphi$. The page observes that the reversal $z_i \mapsto z_{n+1-i}$ only gives the odd case and does not see at first why $n = 4$ vanishes; it then argues with the Vandermonde product: $\omega\varphi$ would be an antisymmetric polynomial of degree less than $\binom n2$, for $n \ge 3$. In the non-abelian case only the cyclic symmetry is left and no vanishing follows.
+
+\emph{Intuition.} The proof here is a different one, by partial fractions. Inserting a point $y$ between $a$ and $b$ in a cyclic product multiplies it by $(a - b)/((a - y)(y - b)) = 1/(a - y) - 1/(b - y)$; summed over the gaps of a cycle, these differences telescope to $0$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1982-8, p.~63]\label{thm:quillen-1982-8}
+Let $z_1, \ldots, z_n$ be distinct elements of a field, $n \ge 3$. Then
+\[
+\sum_{\sigma \in \mathfrak S_n} \frac{1}{(z_{\sigma 1} - z_{\sigma 2})(z_{\sigma 2} - z_{\sigma 3})\cdots(z_{\sigma n} - z_{\sigma 1})} = 0.
+\]
+For $n = 2$ the sum is $-2/(z_1 - z_2)^2$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+For a path $a, c_1, \ldots, c_k, b$ write $P(a; c; b) = 1/((a - c_1)\cdots(c_k - b))$. By induction on $k$, the sum of $P$ over the $k + 1$ ways of inserting $y$ into $c$ is $P(a; c; b)\,(1/(a - y) - 1/(b - y))$. Order the permutations by inserting $z_1$ into the orderings of the others: inserting it in front or at the end gives the same cycle, and the other insertions sum to $0$ by the identity with $a = b$; so the sum is the sum over the orderings with $z_1$ in front. Insert $z_2$ into the orderings of $z_3, \ldots, z_n$ (at least one point, as $n \ge 3$): the insertions run over all the gaps of the cycle starting at $z_1$, and the identity with $a = b = z_1$ gives $0$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1982_8.lean}{\texttt{Notebook1982\_8.\allowbreak{}lean}} proves the theorem as \texttt{sum\_permutations\_cyc}, the sum running over \texttt{List.permutations} of a list without repetition (its $n!$ orderings), and the case $n = 2$ as \texttt{sum\_permutations\_cyc\_two}; the telescoping identity is \texttt{sum\_insert\_path}. The page's Vandermonde argument is not formalised (mathlib has no « antisymmetric implies divisible by the Vandermonde product »), nor the traces of $K^n$. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical in substance: the vanishing of the connected current correlators of order $n \ge 3$ of a free fermion in two dimensions (the bosonization behind the page), and, in the same algebraic form, the « $U(1)$ decoupling » identity for Parke--Taylor factors (Kleiss and Kuijf, 1989), proved by the same partial fractions. The edition does not present it as new.}

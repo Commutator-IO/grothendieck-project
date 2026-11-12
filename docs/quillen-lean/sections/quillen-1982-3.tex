@@ -1,0 +1,19 @@
+\section[Notebook 1982-3: products $\prod(1 + a_n)$]{Notebook 1982-3: $\prod(1 + a_n)$ converges if and only if $\sum a_n$ does\protect\verifie{Notebook1982_3}}\label{sec:quillen-1982-3}
+
+\emph{Context.} On page~18 of \carnet{1982}{3}, and again on page~35, Quillen uses the criterion for infinite products with non-negative terms: $\prod(1 + a_n)$ converges if and only if $\sum a_n < \infty$, to control the convergence of the products defining his determinants.
+
+\emph{Intuition.} Expanding the product, $1 + \sum_{i \in s} a_i \le \prod_{i \in s}(1 + a_i) \le \exp\sum_{i \in s} a_i$.
+
+\begin{encadre}
+\begin{theoreme}[Notebook 1982-3, p.~18]\label{thm:quillen-1982-3}
+For real $a_i \ge 0$, the product $\prod(1 + a_i)$ converges (unconditionally) if and only if $\sum a_i$ converges; for a sequence, the partial products $\prod_{i<N}(1 + a_i)$ converge if and only if $\sum a_i$ converges. The limit is then at least $1$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+If $\sum a_i$ converges, the product does, by the upper bound (mathlib). Conversely, the finite products of factors $\ge 1$ grow with the set of indices and are bounded by the limit (eventually, for the unconditional product), so the partial sums are bounded by the lower bound, and a series of non-negative terms with bounded partial sums converges.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1982_3.lean}{\texttt{Notebook1982\_3.\allowbreak{}lean}} proves the lower bound as \texttt{one\_add\_sum\_le\_prod}, the criterion as \texttt{multipliable\_one\_add\_iff} and the sequential form as \texttt{tendsto\_prod\_range\_iff}; the direct implication is mathlib's \texttt{Real.multipliable\_one\_add\_of\_summable}. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (Knopp, \emph{Theory and application of infinite series}, ch.~VII). Mathlib has the direct implication only. The edition does not present it as new.}

@@ -1,0 +1,19 @@
+\section[Notebook 1971-12: marks along a normal $p$-step]{Notebook 1971-12: marks along a normal $p$-step\protect\verifie{Notebook1971_12Marks}}\label{sec:quillen-1971-12-marks}
+
+\emph{Context.} On pages~27 to~33 of \carnet{1971}{12} Quillen studies the Burnside ring of a finite group $G$ and its marks $\varphi_H(X) = \lvert X^H\rvert$ modulo a prime $p$. On pages~28 and~30 he uses that the marks of two subgroups agree modulo $p$ when one is normal in the other with a $p$-group as quotient; iterating the step identifies the marks modulo $p$ with those of subgroups of index prime to $p$ in their normaliser.
+
+\emph{Intuition.} If $H \lhd H'$, the group $H'/H$ acts on $X^H$, and its fixed points there are $X^{H'}$. A $p$-group acting on a finite set has a number of fixed points congruent to the size of the set modulo $p$.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen, notebook 1971-12, pp.~28, 30]\label{thm:quillen-1971-12-marks}
+Let a group $G$ act on a finite set $X$ and let $N \lhd G$ with $G/N$ a $p$-group. Then $G/N$ acts on $X^N$ with fixed points $X^G$, and $\lvert X^G\rvert \equiv \lvert X^N\rvert \pmod p$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+For $x \in X^N$, $n \in N$ and $g \in G$, $n g x = g (g^{-1}ng) x = gx$, so $G$ preserves $X^N$, and $N$ acts trivially on it, which gives the action of $G/N$; its fixed points are the points fixed by all of $G$. The congruence is the fixed-point congruence for the $p$-group $G/N$ on the finite set $X^N$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1971_12Marks.lean}{\texttt{Notebook1971\_12Marks.\allowbreak{}lean}} constructs the action (\texttt{quotientAction}), the bijection $(X^N)^{G/N} \simeq X^G$ (\texttt{fixedPointsQuotientEquiv}) and proves the congruence as \texttt{card\_fixedPoints\_modEq}, from mathlib's \texttt{IsPGroup.card\_modEq\_card\_fixedPoints}. $G$ need not be finite. The companion fact of page~28, $(G/H)^H \simeq N_G(H)/H$, is mathlib's \texttt{Sylow.fixedPointsMulLeftCosetsEquivQuotient}. The Burnside ring is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (A.~Dress, \emph{A characterisation of solvable groups}, Math.~Z.~110, 1969, on the prime ideals of the Burnside ring; tom Dieck, \emph{Transformation groups and representation theory}, LNM~766, ch.~1). The edition does not present it as new.}

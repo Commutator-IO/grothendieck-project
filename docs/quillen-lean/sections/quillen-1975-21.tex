@@ -1,0 +1,19 @@
+\section[Notebook 1975-21: Birkhoff duality on morphisms]{Notebook 1975-21: Birkhoff duality on morphisms\protect\verifie{Notebook1975_21}}\label{sec:quillen-1975-21}
+
+\emph{Context.} On pages~37 to~50 of \carnet{1975}{21} Quillen describes filtrations of a vector space indexed by a finite poset $J$ as lattice homomorphisms from the lattice $\mathrm{Cl}(J)$ of closed (lower) subsets of $J$ to the lattice of subspaces. On pages~41 to~48 he works out « some sorites » on finite distributive lattices: every such lattice is $\mathrm{Cl}$ of its poset of irreducibles, and a morphism $u$ between two of them comes from a map between the posets of irreducibles in the other direction, constructed through the left adjoint $v(y) = \inf\{x \mid y \le u(x)\}$.
+
+\emph{Intuition.} For $b \in \beta$, the lower sets $Z$ of $\alpha$ with $b \in u(Z)$ are closed under finite intersections, since $u$ preserves them; their intersection is a principal set ${\downarrow}f(b)$, and $u(Z) = f^{-1}(Z)$.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen, notebook 1975-21, pp.~41--48]\label{thm:quillen-1975-21}
+Let $\alpha$ be a finite partial order and $\beta$ a preorder. Every map $u$ from the lower sets of $\alpha$ to the lower sets of $\beta$ preserving $\emptyset$, the whole set, unions and intersections is $Z \mapsto f^{-1}(Z)$ for a unique monotone $f \colon \beta \to \alpha$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Every lower set $Z$ is the finite union of the ${\downarrow}a$, $a \in Z$, so $b \in u(Z)$ if and only if $b \in u({\downarrow}a)$ for some $a \in Z$; applied to $Z = \alpha$, the set $S_b = \{a \mid b \in u({\downarrow}a)\}$ is not empty. If $a, a' \in S_b$, then $b \in u({\downarrow}a \cap {\downarrow}a')$, so some $c \le a, a'$ lies in $S_b$; a minimal element $f(b)$ of the finite set $S_b$ is therefore its least element. Then $b \in u(Z)$ if and only if $f(b) \in Z$. Monotonicity: if $b' \le b$, then $b' \in u({\downarrow}f(b))$, a lower set, so $f(b') \le f(b)$. Uniqueness: if $f^{-1} = g^{-1}$ on lower sets, $b \in g^{-1}({\downarrow}g(b)) = f^{-1}({\downarrow}g(b))$ gives $f(b) \le g(b)$, and symmetrically.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1975_21.lean}{\texttt{Notebook1975\_21.\allowbreak{}lean}} defines the preimage as a bounded lattice homomorphism (\texttt{comap}) and proves the theorem as \texttt{exists\_unique\_comap}, with \texttt{comap\_injective}; the map $f$ is \texttt{dual u}, the least element of $S_b$. Only $\alpha$ is finite. Mathlib has Birkhoff's representation on objects (\texttt{Mathlib/Order/Birkhoff.lean}, with « TODO: extend to morphisms »); the categorical equivalence between finite posets and finite distributive lattices is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (G.~Birkhoff, 1937; the duality between finite ordered sets and finite distributive lattices, on objects and morphisms, is in Davey and Priestley, \emph{Introduction to Lattices and Order}, ch.~5). A gap in mathlib, and a possible contribution to it. The edition does not present it as new.}

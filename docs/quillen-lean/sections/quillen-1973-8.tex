@@ -1,0 +1,19 @@
+\section[Notebook 1973-8: $t + t^2 + t^4 + \cdots$ inverts $t + t^2$]{Notebook 1973-8: $\chi(t) = t + t^2 + t^4 + \cdots$ inverts $t \mapsto t + t^2$\protect\verifie{Notebook1973_8}}\label{sec:quillen-1973-8}
+
+\emph{Context.} On pages~61 and~62 of \carnet{1973}{8} Quillen recalls Wu's determination of the Stiefel--Whitney classes of a manifold by the Steenrod squares, and rewrites it with the antipode $\chi(Sq)$ of the total square. On a class $t$ of degree one, $Sq(t) = t + t^2$, and the page gives $\chi(Sq)(t) = t + t^2 + t^4 + \cdots$, so that $Sq(\chi(Sq)\,t) = t$.
+
+\emph{Intuition.} In characteristic $2$ squaring is additive, so the square of $\sum_k t^{2^k}$ is $\sum_k t^{2^{k+1}}$: adding the series to its square leaves only $t$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1973-8, p.~62]\label{thm:quillen-1973-8}
+In the ring of formal power series $R[[t]]$ over a commutative ring of characteristic~$2$, the series $\chi = \sum_{k \ge 0} t^{2^k}$ satisfies $\chi + \chi^2 = t$, and it is the only series without constant term with this property.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+In characteristic $2$, $f^2$ is obtained from $f$ by replacing $t$ by $t^2$ and squaring the coefficients; the coefficients of $\chi$ are $0$ and $1$. So the coefficient of $t^n$ in $\chi + \chi^2$ is $[n = 2^k] + [n = 2^{k+1}]$: it is $1$ for $n = 1$, $1 + 1 = 0$ for $n = 2^{k}$ with $k \ge 1$, and $0$ otherwise. For uniqueness, $(f - g)(1 + f + g) = (f + f^2) - (g + g^2)$, and $1 + f + g$ is invertible when $f, g$ have no constant term.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1973_8.lean}{\texttt{Notebook1973\_8.\allowbreak{}lean}} proves the identity as \texttt{chi\_add\_chi\_sq}, from mathlib's Frobenius formula for power series (\texttt{PowerSeries.map\_frobenius\_expand}), and uniqueness as \texttt{eq\_chi\_of\_add\_sq} (\texttt{eq\_of\_add\_sq\_eq} in any commutative ring). The Steenrod algebra and Wu's formula are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (Milnor, \emph{The Steenrod algebra and its dual}, 1958, for the conjugation; the series is the compositional inverse of $t + t^2$ over $\mathbf F_2$). The edition does not present it as new.}
