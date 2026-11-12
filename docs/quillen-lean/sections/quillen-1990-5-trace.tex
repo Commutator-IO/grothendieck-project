@@ -1,0 +1,21 @@
+\section[Notebook 1990-5: $\operatorname{tr}(g^{-1}dg)$ modulo commutators]{Notebook 1990-5: $\operatorname{tr}(g^{-1}dg)$ is additive modulo commutators\protect\verifie{Notebook1990_5Trace}}\label{sec:quillen-1990-5-trace}
+
+\emph{Context.} On page~68 of \carnet{1990}{5} Quillen uses that $g \mapsto \operatorname{tr}(g^{-1}dg)$ is a homomorphism modulo commutators; on page~48, the derivation attached to a bimodule extension.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1990-5, pp.~48, 68]\label{thm:quillen-1990-5-trace}
+\begin{enumerate}
+\item In a ring with a derivation $\delta$, for units $u$, $v$: $(uv)^{-1}\delta(uv) = v^{-1}(u^{-1}\delta u)v + v^{-1}\delta v$.
+\item For invertible $g_1$, $g_2 \in M_n(E)$, $E$ a ring with a derivation $d$ applied entrywise, $\operatorname{tr}((g_1g_2)^{-1}d(g_1g_2)) - \operatorname{tr}(g_1^{-1}dg_1) - \operatorname{tr}(g_2^{-1}dg_2)$ lies in the additive subgroup $[E, E]$ spanned by the $ab - ba$.
+\item For a map of $R$-bimodules $\pi : M \to R$ and $\xi$ with $\pi(\xi) = 1$, $D(x) = x\xi - \xi x$ takes values in $\operatorname{Ker}\pi$ and $D(xy) = xD(y) + D(x)y$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) Leibniz. (2) By (1) in $M_n(E)$, the difference is $\operatorname{tr}(PQ) - \operatorname{tr}(QP)$ with $P = g_2^{-1}$, $Q = g_1^{-1}dg_1\,g_2$, which is $\sum_{i,j}(P_{ij}Q_{ji} - Q_{ji}P_{ij})$. (3) Expansion.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1990_5Trace.lean}{\texttt{Notebook1990\_5Trace.\allowbreak{}lean}} proves \texttt{logDeriv\_mul}, \texttt{trace\_mul\_sub\_mem}, \texttt{matDeriv\_mul}, \texttt{trace\_logDeriv\_mul} and \texttt{derivation\_of\_lift}. The derivation is ungraded: on the page $d$ is the differential of $\Omega E$ on elements of degree~$0$, which is all that enters. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (the logarithmic derivative; $K_1 \to HC_0$ of $\Omega^1$); the edition does not present it as new.}

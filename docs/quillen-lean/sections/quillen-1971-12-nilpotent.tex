@@ -1,0 +1,23 @@
+\section[Notebook 1971-12: Kaloujnine's corollary]{Notebook 1971-12: automorphisms trivial on $G^{\mathrm{ab}}$ form a nilpotent group\protect\verifie{Notebook1971_12Nilpotent}}\label{sec:quillen-1971-12-nilpotent}
+
+\emph{Context.} On page~21 of \carnet{1971}{12}, after Kaloujnine's theorem (section~\ref{sec:quillen-1971-12-kaloujnine}), Quillen draws its classical corollary for nilpotent groups.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1971-12, p.~21]\label{thm:quillen-1971-12-nilpotent}
+Let $G$ be a group, $\Gamma_0 = G$, $\Gamma_{i+1} = [\Gamma_i, G]$ its lower central series.
+\begin{enumerate}
+\item For an antitone sequence of normal subgroups $G_i$ with $G_0 = G$ and some $G_c = 1$, the group $A_1$ of automorphisms preserving the $G_i$ and trivial on each $G_i/G_{i+1}$ is nilpotent.
+\item Conjugation by an element of $\Gamma_k$ lies in $A_{k+1}$ (for the lower central series); hence $[\Gamma_j, \Gamma_i] \le \Gamma_{i+j+1}$.
+\item An automorphism $\theta$ lies in $A_1$ for the lower central series iff $\theta(g)g^{-1} \in [G, G]$ for all $g$.
+\item Hence, if $G$ is nilpotent, the automorphisms inducing the identity on $G^{\mathrm{ab}}$ form a nilpotent group.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) By Kaloujnine's theorem the $n$-th term of the lower central series of $A_1$ lies in $A_{n+1}$, and $A_r = 1$ once $G_r = 1$. (2) By induction on $k$: $c_g \in A_1$ since $gxg^{-1}x^{-1} \in [\Gamma_i, G]$; then $c_{[x,g]} = [c_x, c_g] \in [A_{k+1}, A_1] \le A_{k+2}$. (3) By induction on $i$ over the generators $[p, q]$ of $\Gamma_{i+1}$: modulo $\Gamma_{i+2}$, $\theta(p)p^{-1}$ is central and $\theta(q)q^{-1} \in \Gamma_1$ commutes with $p$ by~(2), so $\theta[p, q] \equiv [p, q]$; the elements with $\theta(x)x^{-1} \in \Gamma_{i+2}$ form a subgroup.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1971_12Nilpotent.lean}{\texttt{Notebook1971\_12Nilpotent.\allowbreak{}lean}} proves \texttt{isNilpotent\_A\_one}, \texttt{conj\_mem\_A}, \texttt{commutator\_lowerCentralSeries\_le}, \texttt{mem\_A\_one\_iff} and \texttt{isNilpotent\_trivialOnAb}, importing Kaloujnine's theorem. Triviality on $G^{\mathrm{ab}}$ is stated as $\theta(g)g^{-1} \in [G, G]$. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (Kaloujnine; P.~Hall); $[\Gamma_i, \Gamma_j] \le \Gamma_{i+j}$ is textbook but absent from mathlib, derived here from Kaloujnine's theorem. The edition does not present it as new.}

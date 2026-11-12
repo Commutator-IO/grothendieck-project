@@ -1,0 +1,17 @@
+\section[Notebook 1990-2: endomorphisms of a split extension]{Notebook 1990-2: endomorphisms of a split extension of complexes\protect\verifie{Notebook1990_2Split}}\label{sec:quillen-1990-2-split}
+
+\emph{Context.} On pages~64--67 of \carnet{1990}{2} Quillen classifies the lifts of an endomorphism $L$ of an exact sequence $0 \to X \to E \to Y \to 0$ of complexes, split as graded modules, by homotopies $LS = [d, g]$; on page~71 he uses annihilating idempotents.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1990-2, pp.~64--67, 71]\label{thm:quillen-1990-2-split}
+In a ring, let $ph = 1 = ki$, $ik + hp = 1$, $kh = 0$, $di = id$, $dp = pd$, and $S = kdh$. Then $pi = 0$, $iS = [d, h]$, $Sp = -[d, k]$. If $Li = iL$, $pL = Lp$, $dL = Ld$: $[L, S] = [d, kLh]$; if $LS = [d, g]$, then $J = Lh - ig$, $I = Lk + gp$ satisfy $pJ = L$, $iI + Jp = L$, $Ii = L$, $[d, J] = [d, I] = 0$; conversely if $pJ = L$ and $[d, J] = 0$, $g = kLh - kJ$ satisfies $ig = Lh - J$ and $LS = [d, g]$. Moreover, for idempotents $e$, $f$ with $ef = fe = 0$, $1 - e - f$ is an idempotent with $(1 - e - f)e = (1 - e - f)f = 0$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Expansions using the relations: e.g. $iS = (1 - hp)dh = dh - hdph = dh - hd$, and $[d, J] = L[d, h] - i[d, g] = LiS - iLS = 0$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1990_2Split.lean}{\texttt{Notebook1990\_2Split.\allowbreak{}lean}} proves \texttt{p\_mul\_i}, \texttt{iS\_eq}, \texttt{Sp\_eq}, \texttt{commutator\_L\_S}, \texttt{of\_homotopy}, \texttt{homotopy\_of} and \texttt{annihilating}. Everything lives in one ring (endomorphisms of $X \oplus E \oplus Y$) with ungraded commutators; the graded signs are not formalised. The page's hypothesis that $L$ is a map of complexes is the hypothesis $dL = Ld$. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (extensions of complexes classified by maps $Y \to \Sigma X$); the edition does not present it as new.}

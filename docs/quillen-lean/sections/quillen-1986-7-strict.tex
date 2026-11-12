@@ -1,0 +1,21 @@
+\section[Notebook 1986-7: the strict-sum lemma]{Notebook 1986-7: the strict-sum lemma\protect\verifie{Notebook1986_7Strict}}\label{sec:quillen-1986-7-strict}
+
+\emph{Context.} On page~56 of \carnet{1986}{7}, on the way to the Durfee and Jacobi identities, Quillen sums $q^{i_1 + \dots + i_s}$ over the strictly increasing sequences of positive integers.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1986-7, p.~56]\label{thm:quillen-1986-7-strict}
+Let $D_s \in R[[q]]$, over any commutative ring, have as $N$-th coefficient the number of $s$-element sets of positive integers with sum $N$, so that $D_s = \sum_{0<i_1<\dots<i_s}q^{i_1+\dots+i_s}$. Then $(1 - q^{s+1})D_{s+1} = q^{s+1}D_s$, $D_0 = 1$, and
+\[
+(1 - q)(1 - q^2)\cdots(1 - q^s)\,D_s = q^{s(s+1)/2},
+\]
+the product being a unit: $D_s = q^{s(s+1)/2}/\prod_{i=1}^s(1 - q^i)$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Let $E_s$ count the $s$-element sets of naturals ($0$ allowed). Removing $0$ gives $E_{s+1} = D_{s+1} + D_s$ coefficientwise; adding $1$ to every element gives $D_s(N + s) = E_s(N)$, and $D_s(N) = 0$ for $N < s$. So $D_{s+1} = q^{s+1}(D_{s+1} + D_s)$; induct on $s$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1986_7Strict.lean}{\texttt{Notebook1986\_7Strict.\allowbreak{}lean}} proves \texttt{count\_succ}, \texttt{count\_shift}, \texttt{one\_sub\_mul\_D}, \texttt{prod\_mul\_D} and \texttt{isUnit\_prod}; the sets are \texttt{Finset}s of $\{0, \dots, N\}$. The Durfee identity of pp.~55--56 is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (partitions into $s$ distinct parts; Euler); the edition does not present it as new.}

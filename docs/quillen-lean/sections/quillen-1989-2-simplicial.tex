@@ -1,0 +1,17 @@
+\section[Notebook 1989-2: the cyclic bar construction]{Notebook 1989-2: the cyclic bar construction of a group\protect\verifie{Notebook1989_2Simplicial}}\label{sec:quillen-1989-2-simplicial}
+
+\emph{Context.} On pages~94--95 of \carnet{1989}{2} Quillen compares the cyclic bar construction of a group (attributed there, after R.~Cohen, to Waldhausen) with a simplicial set on $G \times G^n$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1989-2, pp.~94--95]\label{thm:quillen-1989-2-simplicial}
+Let $G$ be a group. On $G^{n+1}$ let $d_i(g_0, \dots, g_n) = (\dots, g_ig_{i+1}, \dots)$ for $i < n$ and $d_n(g_0, \dots, g_n) = (g_ng_0, g_1, \dots, g_{n-1})$; on $G \times G^n$ let $d_0(x, g) = (g_1^{-1}xg_1, g_2, \dots, g_n)$, $d_i$ multiply $g_ig_{i+1}$, and $d_n$ drop $g_n$. Then $\Phi(x, g_1, \dots, g_n) = ((g_1\cdots g_n)^{-1}x, g_1, \dots, g_n)$ is a bijection commuting with every face.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+The inverse is $(g_0, g) \mapsto (g_1\cdots g_n\,g_0, g)$. For $d_0$: $(g_2\cdots g_n)^{-1}g_1^{-1}xg_1 = (g_1\cdots g_n)^{-1}xg_1$; inner faces keep the total product; for $d_n$: $g_n(g_1\cdots g_n)^{-1}x = (g_1\cdots g_{n-1})^{-1}x$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1989_2Simplicial.lean}{\texttt{Notebook1989\_2Simplicial.\allowbreak{}lean}} proves \texttt{$\Phi$\_bijective}, \texttt{$\Phi$\_face\_zero}, \texttt{$\Phi$\_face\_inner} and \texttt{$\Phi$\_face\_last}, with tuples \texttt{Fin n} $\to G$, products \texttt{Fin.partialProd} and inner faces \texttt{Fin.contractNth}. The simplicial identities and degeneracies are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (Waldhausen's cyclic bar construction; Goodwillie, Burghelea); the edition does not present it as new.}

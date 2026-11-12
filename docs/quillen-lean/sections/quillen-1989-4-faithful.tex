@@ -1,0 +1,17 @@
+\section[Notebook 1989-4: faithful functionals on matrices]{Notebook 1989-4: faithful functionals on a matrix algebra\protect\verifie{Notebook1989_4Faithful}}\label{sec:quillen-1989-4-faithful}
+
+\emph{Context.} On page~28 of \carnet{1989}{4} Quillen describes the faithful functionals on $M_n(k)$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1989-4, p.~28]\label{thm:quillen-1989-4-faithful}
+For $T \in M_n(K)$, $K$ a field, the functional $x \mapsto \operatorname{tr}(Tx)$ is faithful (for every $a \ne 0$ some $\operatorname{tr}(T\alpha a) \ne 0$) iff $T$ is invertible.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+If $T$ is invertible and $a_{ij} \ne 0$, take $\alpha = T^{-1}E_{ji}$: $\operatorname{tr}(E_{ji}a) = a_{ij}$. If $T$ is singular, a row vector $v \ne 0$ with $vT = 0$ gives the matrix $a$ with all rows $v$, $aT = 0$, and $\operatorname{tr}(T\alpha a) = \operatorname{tr}(\alpha aT) = 0$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1989_4Faithful.lean}{\texttt{Notebook1989\_4Faithful.\allowbreak{}lean}} proves \texttt{faithful\_iff}. The description of every functional as $\operatorname{tr}(T\,\cdot)$ is not restated. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical; the edition does not present it as new.}

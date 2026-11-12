@@ -1,0 +1,17 @@
+\section[Notebook 1987-12: Tor of cyclic modules]{Notebook 1987-12: $\operatorname{Tor}_1(A/I, A/J) \cong (I \cap J)/IJ$\protect\verifie{Notebook1987_12}}\label{sec:quillen-1987-12}
+
+\emph{Context.} On page~81 of \carnet{1987}{12} Quillen computes $\operatorname{Tor}_1$ of two cyclic modules; on page~63 of \carnet{1990}{5} he uses the case $J = I$, $\operatorname{Tor}_1(R/I, R/I) \cong I/I^2$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1987-12, p.~81; notebook 1990-5, p.~63]\label{thm:quillen-1987-12}
+Let $I$, $J$ be ideals of a commutative ring $A$. The kernel of $(A/I) \otimes_A J \to (A/I) \otimes_A A$ is isomorphic to $(I \cap J)/IJ$. For $J = I$ the map is zero, and $(A/I) \otimes_A I \cong I/I^2$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Every element of $(A/I) \otimes J \cong J/IJ$ is $1 \otimes y$, zero iff $y \in IJ$; its image $\bar y \in A/I$ vanishes iff $y \in I$. So $x \mapsto 1 \otimes x$ maps $I \cap J$ onto the kernel, with kernel $IJ$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1987_12.lean}{\texttt{Notebook1987\_12.\allowbreak{}lean}} proves \texttt{range\_g}, \texttt{ker\_g}, \texttt{kernel\_equiv}, \texttt{lTensor\_self\_eq\_zero} and \texttt{tensor\_self\_equiv} (with mathlib's \texttt{Ideal.Cotangent} for $I/I^2$). The identification of this kernel with $\operatorname{Tor}_1$ (long exact sequence) and the two-sided noncommutative version of 1990-5 are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical; mathlib has the vanishing criterion \texttt{injective\_lTensor\_quotient\_iff\_inf\_eq\_mul}, not the isomorphism. The edition does not present it as new.}

@@ -1,0 +1,20 @@
+\section[Notebook 1989-4: powers in a square-zero extension]{Notebook 1989-4: powers in the square-zero extension of a cup product\protect\verifie{Notebook1989_4Square}}\label{sec:quillen-1989-4-square}
+
+\emph{Context.} On pages~53--54 of \carnet{1989}{4} Quillen forms, from two derivations $X$, $Y$, the square-zero extension with product $a_1 * a_2 = a_1a_2 + Xa_1\,Ya_2$, and computes the powers $a^{*n}$ (boxed).
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1989-4, p.~54]\label{thm:quillen-1989-4-square}
+Let $E$ be a ring, $X$, $Y$ additive maps $E \to E$ satisfying the Leibniz rule, and on $E \times E$ put $(a, m)*(b, n) = (ab, an + mb + Xa\,Yb)$. This product is associative with unit $(1, 0)$, and
+\[
+(a, 0)^{*(n+2)} = \Bigl(a^{n+2},\ \sum_{i+j+k=n}a^i(Xa)a^j(Ya)a^k\Bigr).
+\]
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Associativity is the Leibniz rule for $X$ and $Y$. Then $Y(a^{m+1}) = \sum_{j+k=m}a^j(Ya)a^k$, and $(a, 0)*(a^{n+2}, S_n) = (a^{n+3}, aS_n + Xa\,Y(a^{n+2}))$; split $\sum_{i+j+k=n+1}$ by $i = 0$ or $i \ge 1$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1989_4Square.lean}{\texttt{Notebook1989\_4Square.\allowbreak{}lean}} proves \texttt{star\_assoc}, \texttt{star\_one}, \texttt{one\_star}, \texttt{Y\_pow}, \texttt{starPow\_fst} and \texttt{starPow\_snd}. On the page the second components lie in $M \otimes_A N$; here in $E$, which is enough for the identity, the page itself noting that one may suppose the cocycle a cup product of two derivations. The exponential version of p.~55 is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary; the edition does not present it as new.}

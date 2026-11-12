@@ -1,0 +1,21 @@
+\section[Notebook 1989-4: the cyclic operator is homotopic to 1]{Notebook 1989-4: $(bs + sb)\psi = \psi - \psi^\lambda$\protect\verifie{Notebook1989_4Cochain}}\label{sec:quillen-1989-4-cochain}
+
+\emph{Context.} On pages~70--71 of \carnet{1989}{4} Quillen shows that the cyclic operator acts on Hochschild cochains by a map homotopic to the identity, with homotopy $s$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1989-4, p.~71]\label{thm:quillen-1989-4-cochain}
+Let $A$ be a monoid, $M$ an abelian group, and for cochains $\psi : A^{m} \to M$ let $(s\psi)(a_1, \dots, a_{m-1}) = \psi(1, a_1, \dots, a_{m-1})$, $b'$ the alternating sum of the inner faces and $b = b' + (-1)^m\,(\text{crossover } a_ma_0)$. For $\psi : A^{n+1} \to M$, $n \ge 1$, and
+\[
+\psi^\lambda(a_0, \dots, a_n) = (-1)^{n-1}\psi(1, a_na_0, a_1, \dots, a_{n-1}) + (-1)^n\psi(a_n, a_0, \dots, a_{n-1}),
+\]
+one has $b's + sb' = 1$ and $(bs + sb)\psi = \psi - \psi^\lambda$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+In $(sb'\psi)(a)$ the face at $0$ gives $\psi(a)$ and the others give $-(b's\psi)(a)$. The crossover of $bs\psi$ is $(-1)^n\psi(1, a_na_0, a_1, \dots)$, that of $sb\psi$ is $(-1)^{n+1}\psi(a_n, a_0, \dots)$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1989_4Cochain.lean}{\texttt{Notebook1989\_4Cochain.\allowbreak{}lean}} proves \texttt{s\_b'}, \texttt{b'\_s\_add\_s\_b'} and \texttt{bs\_add\_sb}, with cochains on \texttt{Fin m} $\to A$; neither identity needs $\psi$ normalised. \emph{Correction}: the intermediate box of p.~70 gives the two crossover terms with the signs $(-1)^{n+1}$ and $(-1)^n$; the lines above it and the box of p.~71 give $(-1)^n$ and $(-1)^{n+1}$, which is what holds (the slip may be the transcription's). The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical in cyclic cohomology (Connes; Loday); the edition does not present it as new.}
