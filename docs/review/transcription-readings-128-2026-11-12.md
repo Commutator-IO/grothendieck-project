@@ -155,8 +155,8 @@ Two rules held throughout:
 - [ ] 137 · b. 2 · p. 39 · current: « une colonne de petits complexes » (class t) · proposed: five lines of running text along the margin · source: rmisc-report — not yet looked at
 - [x] 138 · b. 4 · p. 77 · current: j, j̄ (« signes douteux ») · proposed: −j, −j̄ · source: drawings.json 04-8 — APPLIED: −j above and −j̄ below at 150 dpi; \note after the mark.
 - [x] 140-1 · b. 1 · p. 18 · current: five curves · proposed: four · source: omidB-report — APPLIED: four curves counted at 400 dpi where they leave the common point; note corrected (the mark, which says cinq, is followed by the note's correction).
-- [ ] 141 · b. 1 · p. 9 · current: « deux points marqués » · proposed: three · source: gmid-report; drawings.json 01-2 — not yet looked at
-- [ ] 141 · b. 1 · p. 14 · current: labels of the back arc · proposed: 2, 1, 3 (review line kept) · source: gmid-report — not yet looked at
+- [x] 141 · b. 1 · p. 9 · current: « deux points marqués » · proposed: three · source: gmid-report; drawings.json 01-2 — APPLIED: three heavy points at 250 dpi; note corrected.
+- [ ] 141 · b. 1 · p. 14 · current: labels of the back arc · proposed: 2, 1, 3 (review line kept) · source: gmid-report — OPEN: the review line of #128 on these digits is still open; not re-read here.
 - [x] 142 · b. 3 · p. 51 · current: incisions from P_ε at the top · proposed: from the bottom pole P_ε′ · source: drawings.json 03-2 — APPLIED: confirmed (the heavy strokes rise from P_ε′ at the bottom to the holes); \note after the mark.
 - [x] 142 · b. 3 · p. 52 · current: « le graphe d'un octaèdre » · proposed: a triangular bipyramid (five vertices) · source: drawings.json 03-3 — APPLIED: confirmed (P_ε, P_ε′, Q_i, Q_j, Q_k: five vertices); \note after the mark. Changes the mathematics: see below.
 - [x] 142 · b. 6 · p. 107 · current: « β relevé » once · proposed: twice · source: drawings.json 06-7 — APPLIED: confirmed; \note after the mark.
@@ -235,9 +235,9 @@ Two rules held throughout:
 - [ ] 156-1 · b. 2 · p. 25 · current: marginal figure x, t, y (class t) · proposed: tikz-cd x ⇄ y with t · source: gsmallB-report — not yet looked at
 - [x] 156-4 · b. 3 · p. 51 · current: third top node F̄′ · proposed: F⃗ (Michel, #142) · source: drawings.json 03-3, t83-settled — APPLIED: at 350 dpi F̄′ ≃ F′ ⊂ F⃗ ≃ F over Ḡ′ ≃ G′ ⊂ Ḡ ≃ G; \note after the mark (the mark's F̄″, Ḡ″ and F̄′ corrected there).
 - [x] 156-4 · b. 4 · p. 72 · current: sign « surchargé et barré » · proposed: overwritten, not struck · source: drawings.json 04-1 — APPLIED: confirmed at 350 dpi; \note after the mark.
-- [ ] 156-6 · b. 5 · p. 88 · current: point « près d'un sommet » · proposed: on the left side, about its middle · source: drawings.json 05-3 — not yet looked at
-- [ ] 156-7 · b. 1 · p. 8 · current: « diamètre vertical, avec de petites croix » · proposed: oblique diameter (the diagonal); two crosses · source: drawings.json 01-3 — not yet looked at
-- [ ] 156-7 · b. 4 · p. 70 · current: first segment « subdivisé en deux » · proposed: two interior ticks (three pieces) · source: drawings.json 04-1 — not yet looked at
+- [x] 156-6 · b. 5 · p. 88 · current: point « près d'un sommet » · proposed: on the left side, about its middle · source: drawings.json 05-3 — APPLIED: on the left side, about its middle (500 dpi); note corrected.
+- [x] 156-7 · b. 1 · p. 8 · current: « diamètre vertical, avec de petites croix » · proposed: oblique diameter (the diagonal); two crosses · source: drawings.json 01-3 — APPLIED: oblique diameter on the diagonal, two crosses (400 dpi); note corrected.
+- [x] 156-7 · b. 4 · p. 70 · current: first segment « subdivisé en deux » · proposed: two interior ticks (three pieces) · source: drawings.json 04-1 — APPLIED: two interior ticks (450 dpi); \note after the mark.
 - [ ] 158 · b. 4 · p. 61 · current: bottom-left diagram B, C, ∘, β, γ (class t) · proposed: not in the transcription; tikz-cd proposed · source: gsmallB-report — not yet looked at
 - [ ] 161-2 · b. 3 · p. 47 · current: mark below the ovals · proposed: may be the letter V (review line) · source: osmall-report — not yet looked at
 - [ ] 161-2 · b. 3 · p. 49 · current: note (class t) · proposed: tikz-cd A × Π_n … · source: gsmallB-report — not yet looked at
