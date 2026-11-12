@@ -70,6 +70,9 @@
 % 23 May 1961 on its verso, written to him (writer not identified), as
 % checked on the facsimile by Michel Hua (#63–65).
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-20 — dates checked on the facsimile by Michel Hua (#74–76): « Compléments SGA / 1960 » (p. 143) is a label, not a date of writing, so the outline no longer dates the old stratum « 1959 et 1960 » but « de 1959 à 1961 environ », from the letter to Serre (1959) and the letter of 23 May 1961 on the verso of p. 149.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-12 — transcription corrected on the facsimile (#145):
+%   p. 86, the base-change cube is now read and stated (T'_o = T_o x_X X' -> T_o x_S S' unramified by
+%   base change, T' sought over T x_S S'); p. 183, the path x ... a is a zigzag of opposite-arrow pairs.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -2214,21 +2217,42 @@ $\underline{\mathbb{Z}}$ est douteux ; la lecture qui suit n'en dépend pas.}
 \section*{Images inverses et voisinages infinitésimaux (page 86)}
 
 Un feuillet d'une écriture très fine, sur un papier que traverse le tapuscrit
-du verso ; la plus grande partie n'en est pas lisible et cette lecture n'y
-supplée pas. Il s'en dégage une question plutôt qu'un énoncé : l'image
-inverse d'un module quasi-cohérent est quasi-cohérente, celle d'un module plat
-est plate, et il faut vérifier que cela respecte la notion voulue ; puis, si
-$X' \to X \times_{S} S'$ est non ramifié, il en va de même du morphisme induit
-sur les espaces tangents, et l'on peut passer aux voisinages infinitésimaux de
-tous ordres.
+du verso ; une partie du texte n'en est pas lisible et cette lecture n'y
+supplée pas. Il commence par une vérification : l'image inverse d'un module
+quasi-cohérent est quasi-cohérente, celle d'un module plat est plate, et il
+faut s'assurer que cela respecte la notion voulue. Puis vient la situation que
+dessine un cube, dont toutes les étiquettes se lisent.
 
-\begin{tikzcd}
-X \times_{S} S' \arrow[r] \arrow[d] & X \arrow[d] \\
-S' \arrow[r] & S
+On se donne un morphisme $X \to S$, un changement de base $S' \to S$, un
+morphisme non ramifié $X' \to X \times_{S} S'$, et, au-dessus de $S$, un
+épaississement $T_{o} \hookrightarrow T$ avec un morphisme $T_{o} \to X$. Posons
+\[
+  T'_{o} \;=\; T_{o} \times_{X} X' \;=\; (T_{o} \times_{S} S')
+  \times_{X \times_{S} S'} X' .
+\]
+La seconde écriture montre que $T'_{o} \to T_{o} \times_{S} S'$ est le
+changement de base de $X' \to X \times_{S} S'$ le long de
+$T_{o} \times_{S} S' \to X \times_{S} S'$ : il est donc non ramifié, ce que la
+page marque « n.r. ». Elle cherche ensuite, en pointillé et marqué « n.r. »
+lui aussi, un $T'$ au-dessus de l'épaississement $T_{o} \times_{S} S'
+\hookrightarrow T \times_{S} S'$ qui prolonge $T'_{o}$, et parle de
+« voisinages infinitésimaux de tous ordres ».
+
+\begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
+ & T_{o} \arrow[dl] \arrow[d, hook] & & T_{o} \times_{S} S' \arrow[ll] \arrow[dl] \arrow[dd, hook, bend left=20] & T'_{o} \arrow[l, "\text{n.r.}"'] \arrow[dl] \arrow[dd, dashed, "\text{n.r.}"] \\
+X \arrow[d] & T \arrow[dl] & X \times_{S} S' \arrow[ll] \arrow[d] & X' \arrow[l, "\text{n.r.}"] \arrow[dl] & \\
+S & & S' \arrow[ll] & T \times_{S} S' \arrow[l] \arrow[ull] & T' \arrow[l]
 \end{tikzcd}
 
-Le cube au crayon dont ce carré n'est qu'une face n'est pas reproduit : comme
-le dit la transcription, le dessiner reviendrait à affirmer ce qu'on n'a pas lu.
+\footnote{Le cube est donné tel que la transcription le relève sur le
+fac-similé, à l'encre et très serré ; deux pointes, celles de
+$T_{o} \times_{S} S' \to X \times_{S} S'$ et de $T \times_{S} S' \to T$, y sont
+peu visibles. La page écrit $T'_{o}$ « $T_{o \cdot X} X'$ » et le morphisme
+non ramifié « $T_{o \cdot X} X' \to T_{o \cdot S} S'$ » : le point est sa
+notation du produit fibré, que le cube rend sûre. Le texte qui suit le cube est en grande
+partie illisible : comment $T'$ est construit, et avec quelle unicité, la page
+ne le laisse pas lire --- contrairement au cas étale, un morphisme non ramifié
+ne se prolonge pas de façon unique le long d'un épaississement.}
 
 \pagerange{87}{89}
 \section*{Le $\pi_{1}$ modéré d'un schéma formel le long de sa fibre spéciale (pages 87 et 89)}
@@ -4661,8 +4685,16 @@ La page 183 est un feuillet en travers, couvert de tracés sans ordre de
 lecture : le diagramme $\overline{K}_{0} \leftleftarrows \overline{K}_{1}
 \Lleftarrow \overline{K}_{2}$ avec les mentions « fini » et « groupe
 topologique discret » ; la formule d'équivalence des données de descente de la
-page 180 ; l'anneau $k[[s,t]]$ ; un chemin d'arêtes de $x$ à $a$ dont les
-flèches ne vont pas toutes dans le même sens ; et, encadré, un symbole
+page 180 ; l'anneau $k[[s,t]]$ ; un chemin de $x$ à $a$ dont chaque pas est une
+paire de flèches opposées, marquée $u_{n}, u_{n-1}, \ldots, u_{1}$,
+\[
+  x \underset{u_{n}}{\rightleftarrows} \cdot
+  \underset{u_{n-1}}{\rightleftarrows} \cdot \; \cdots \;
+  \underset{u_{1}}{\rightleftarrows} a ,
+\]
+trois paires étant tracées\footnote{Relu sur le fac-similé : la transcription
+y voyait d'abord des flèches simples de sens variés ; ce sont des paires
+opposées à chaque pas. La page ne dit pas ce que sont les $u_{i}$.} ; et, encadré, un symbole
 $\pi_{1}^{\#}(S,a)$ surmonté de « $S$ connexe ». Le croisillon est tracé deux
 fois de la même façon, donc c'est une notation ; rien sur la feuille n'en fixe
 le sens, et cette lecture ne le conjecture pas.
