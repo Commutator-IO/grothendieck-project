@@ -12,6 +12,11 @@
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-20 — readings checked on the facsimile by Michel Hua (#74–76): p. 45, the illegible mark after « ce sont les » read as « éléments de », with a note that the line runs on further than transcribed, and the doubtful « modulaire » confirmed; p. 48, « des schémas ayant une car > 0 » read in place of an illegible mark and « de »; p. 55, « famille génératrice ont » read after « à petites », the reading given as approximate, with a note quoting it, the rest still unread; p. 46, the doubtful « comme », which the reader could not tell, left as it was.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-21 — readings checked on the facsimile by Michel Hua (#81): p. 58, « sous- » before « catégorie pleine » is on the page, his insertion, not supplied by the transcriber; now given as his addition.
 % Revised: Fable 5.2 (claude-fable-5-2), 2026-11-12 — \drawing mark added for the sketch of p. 47 (two overlapping ovals $Z'$, $Z''$) described only inside the marginal note, so that it can be vectorised (issue 128); the note is kept, the text is unchanged.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-12 — read again on the facsimile (#145, from the drawings pass of #128), not checked by a reader.
+% Applied: p. 49, the vertical arrow under A_{Pi_n} has a head at both ends (tikzcd style changed from Rightarrow to leftrightarrow; note completed).
+% p. 51, the two base-change sketches set as tikzcd (class t), every label read.
+% p. 52, the marginal sketch M -> N, A -> B, f, g, Y <- X set as tikzcd (class t; f and g bare letters), replacing a \marginal that held the transcriber's description.
+% p. 47, the mark below the ovals is the letter V (note after the mark).
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -441,6 +446,7 @@ $\bigcap_{\alpha} B_{\bar{I}_{\alpha}} = \bigcap_{\alpha}$ \ill{}}
     deux ovales $Z'$, $Z''$ se recouvrant, la région commune marquée $I$, une
     flèche vers le bas}
 \drawing{sous les mots encerclés « Topos non cohérent », un croquis : deux ovales « $Z'$ » et « $Z''$ » qui se recouvrent, la région commune marquée « $I$ » ; au-dessus, entre les deux, « $W$ » ; au-dessous, un trait terminé par une pointe vers le bas.}
+\note{relu sur le fac-similé : la marque sous les ovales est la lettre « $V$ », comme $W$ au-dessus ; une courbe partie de $W$ descend à travers la région commune et repasse sous les ovales}
 
     Plus généralement, soit $B$ un topos, $V$ et $W$ deux sous-\ill{},
     considérons $T = T_{B}$, et $T_{V}$ et $T_{W}$, \ill{} à foncteurs
@@ -567,7 +573,7 @@ premier (y inclus $\mathbb{Q}$) \struck{\ill{}}
 
     \begin{tikzcd}[column sep=small, row sep=small]
     A \times \Pi_{n} \arrow[d] & A_{j} \arrow[dl] \\
-    A_{\Pi_{n}} \arrow[d, Rightarrow] & \\
+    A_{\Pi_{n}} \arrow[d, leftrightarrow] & \\
     \Pi_{n} &
     \end{tikzcd}
 
@@ -580,7 +586,7 @@ premier (y inclus $\mathbb{Q}$) \struck{\ill{}}
     \note{le diagramme est un croquis : $A \times \Pi_{n}$ au-dessus de
     $A_{\Pi_{n}}$, une double flèche vers $\Pi_{n}$, $A_{j}$ tombant sur
     $A_{\Pi_{n}}$ ; les deux flèches obliques de $\Pi_{n} \amalg \Pi_{n}$
-    vers $\Pi_{n}$ ne sont pas rendues}
+    vers $\Pi_{n}$ ne sont pas rendues. Relu sur le fac-similé : la flèche sous $A_{\Pi_{n}}$ porte une pointe à chaque bout (le trait est repassé ; qu'il soit double n'est pas sûr)}
     soit $\Pi_{n,j} \subset \Pi_{n}$ plus grand ss-objet pour lequel
     $i_{n,j}$ un épi. Comment avec l'objet de base \emph{dans
     $\varepsilon$}
@@ -653,12 +659,20 @@ $U_{n} = A^{n}$
 \[
   Y \longleftarrow X
 \]
-\[
-  M \to M_{i}, \qquad Y \leftarrow Y_{i}, \qquad Z \to Y, \quad N \text{ plat}
-  \qquad\qquad M \to M_{i}, \quad A \to A_{i}, \quad N \text{ plat}, \quad B
-\]
-\note{deux croquis de changement de base, sans flèches complètes ; le second
-porte « $N$ plat » sur une verticale au-dessus de $B$}
+\note{deux croquis de changement de base, relus sur le fac-similé ; dans le premier, la flèche $M \to M_{i}$ est en pointillé, $M$ et $Y$ sont joints par un court trait, et « $N$ plat » est accroché sous $Y_{i}$ ; dans le second, « $N$ plat » est sur une verticale au-dessus de $B$, et un trait va de sous $A$ à $B$}
+
+\begin{tikzcd}
+M \arrow[r, dashed] \arrow[d, no head] & M_{i} \\
+Y & Y_{i} \arrow[l] \arrow[d, no head] \\
+Z \arrow[u] & N \text{ plat}
+\end{tikzcd}
+
+\begin{tikzcd}
+M \arrow[r] & M_{i} & \\
+A \arrow[r] \arrow[drr, no head] & A_{i} & N \text{ plat} \arrow[d, no head] \\
+& & B
+\end{tikzcd}
+
 
 \marginal{$M$ \emph{fid plat} est-ce typique ? — encerclé}
 
@@ -722,8 +736,14 @@ suffisant
 \marginal{en regard des trois derniers : ne \uncertain{passent pas à la
 lim. ind. filtrante}, donc pas typiques}
 
-\marginal{à gauche, un croquis : $M \to N$ au-dessus de $A \to B$, $f$ et
-$g$, $Y \leftarrow X$}
+\note{à gauche, un croquis, relu sur le fac-similé ($f$ et $g$ sont des lettres seules, sous $A$ et sous $B$, sans flèche ; le trait sous $M$ est épais) :}
+
+\begin{tikzcd}[row sep=small]
+M \arrow[r] \arrow[d, no head] & N \arrow[d, no head] \\
+A \arrow[r] & B \\
+f & g \\
+Y & X \arrow[l]
+\end{tikzcd}
 
 \[
   X_{\mathrm{mod}} = \widehat{\mathrm{Mod}^{\circ}_{\mathrm{pf}}}
