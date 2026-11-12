@@ -143,8 +143,8 @@ Two rules held throughout:
 - [ ] 121 · b. 3 · p. 41 · current: right diagram (class t) · proposed: ∂V_1 = V_10 → V_0, ↓ V_1 · source: gsmallB-report — not yet looked at
 - [ ] 121 · b. 3 · p. 42 · current: level-2 schemas (class t) · proposed: three tikz-cd; π_{2,1,2} and ∂π_{2,1,1} · source: rmisc-report — not yet looked at
 - [ ] 121 · b. 3 · p. 46 · current: staircases (class t) · proposed: two tikz-cd, and the display ∂(∂_j V_i°) · source: rmisc-report — not yet looked at
-- [ ] 127 · b. 1 · p. 4 · current: label G_n by the brace · proposed: G_{U_n}; X_n, Y_n hooked strokes · source: gsmallB-report — not yet looked at
-- [ ] 127 · b. 1 · p. 11 · current: T′ → T above X′ → X · proposed: below it, no visible arrowhead · source: gsmallB-report; drawings.json 01-4 — not yet looked at
+- [x] 127 · b. 1 · p. 4 · current: label G_n by the brace · proposed: G_{U_n}; X_n, Y_n hooked strokes · source: gsmallB-report — APPLIED in part: at 250 dpi the label reads G with a subscript like U_n, set \uncertain{G_{U_n}} in a \note after the mark; the hooked strokes of X_n, Y_n not added (they are the ↪ of the tikzcd already).
+- [ ] 127 · b. 1 · p. 11 · current: T′ → T above X′ → X · proposed: below it, no visible arrowhead · source: gsmallB-report; drawings.json 01-4 — OPEN: the sheet is written turned; at 250 dpi T′ ↓ T stands to the left of X′ → X in the scan, and which is « above » depends on the turn; the arrowhead of T′ → T is faint, not absent. Not settled.
 - [ ] 129 · b. 5 · p. 99 · current: two ladders (class t) · proposed: both the same filtration, braces; display proposed · source: gsmallB-report, rmisc-report — not yet looked at
 - [ ] 129 · b. 6 · p. 107 · current: « un triangle C → C, u ↑, C → » (class t) · proposed: tikz-cd C –F→ C, u, V · source: gsmallB-report — not yet looked at
 - [ ] 129 · b. 6 · p. 107 · current: pencil of rays · proposed: twelve rays and a separate tick · source: osmall-report — not yet looked at
