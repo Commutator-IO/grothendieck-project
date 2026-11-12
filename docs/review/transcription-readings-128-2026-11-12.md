@@ -122,10 +122,10 @@ Two rules held throughout:
 - [x] 85 · b. 5 · p. 95 · current: E_2 at the foot of the diamond; vertex list; S̃_3 · proposed: F_2; a node A′_3; S̃_3 = S_3 × S′_2 · source: g31-report, g31-settled — APPLIED in part: F_2 confirmed at 400 dpi (\note after the mark). Not checked: the node A′_3 and the full label S̃_3 = S_3 × S′_2.
 - [ ] 85 · b. 5 · p. 95 · current: lower perspective lattice only in a note · proposed: a figure no mark covers · source: drawings.json 05-2 — NOT APPLIED (drawing work, not a reading): a figure that no \drawing mark covers is for the vectorising skill.
 - [x] 85 · b. 5 · p. 97 · current: middle group of D_3 ↔ ? ↔ D_3 ↔ S_3 × S″_2 read S_3 · proposed: A_3 · source: g31-report, g31-settled — APPLIED: A_3 at 300 dpi; \note after the mark.
-- [ ] 86 · b. 1 · p. 6 · current: outer letter a″ · proposed: c′ · source: g67-report — not yet looked at
-- [ ] 86 · b. 1 · p. 7 · current: pencil frame « un cube » · proposed: not legible as a cube · source: g67-report — not yet looked at
-- [ ] 86 · b. 2 · p. 29 · current: margin sketch of the diagram of p. 31 (class t) · proposed: tikz-cd proposed, to check against p. 31 · source: g67-report — not yet looked at
-- [ ] 86 · b. 2 · p. 30 · current: « le sommet du bas » · proposed: the lower left vertex · source: g67-report — not yet looked at
+- [x] 86 · b. 1 · p. 6 · current: outer letter a″ · proposed: c′ · source: g67-report — APPLIED: c′ at 150 dpi (the six outer letters a, c′, b′, b, c, a′); note corrected.
+- [ ] 86 · b. 1 · p. 7 · current: pencil frame « un cube » · proposed: not legible as a cube · source: g67-report — OPEN: at 120 dpi the pencil lines round the right icosahedron make a square frame with oblique strokes at two corners; whether it is a cube in perspective is not settled.
+- [ ] 86 · b. 2 · p. 29 · current: margin sketch of the diagram of p. 31 (class t) · proposed: tikz-cd proposed, to check against p. 31 · source: g67-report — OPEN (class t): the reading is not complete (g67 itself says the arrows cannot all be followed); not set.
+- [x] 86 · b. 2 · p. 30 · current: « le sommet du bas » · proposed: the lower left vertex · source: g67-report — APPLIED: τ = t_0 at the lower left vertex (250 dpi); note corrected.
 - [ ] 87 · b. 2 · p. 29 · current: « quatre segments » · proposed: five (two heavy, three thin) · source: gmid-report, gmid-settled; drawings.json 02-1 — not yet looked at
 - [ ] 87 · b. 2 · p. 30 · current: « pentagone » · proposed: six corners · source: gmid-report — not yet looked at
 - [ ] 87 · b. 2 · p. 40 · current: hatched fan and bar with heavy ends · proposed: not in the transcription · source: omidA-report — not yet looked at
