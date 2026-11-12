@@ -1,0 +1,19 @@
+\section[Notebook 1986-2: the cocycle $\mathrm{tr}(a_0[F, a_1])$]{Notebook 1986-2: the cocycle $\operatorname{tr}(a_0[F, a_1])$ and $\operatorname{tr}(F[F,a][F,b]) = 2\operatorname{tr}(a[F,b])$\protect\verifie{Notebook1986_2}}\label{sec:quillen-1986-2}
+
+\emph{Context.} On pages~65 and~70 of \carnet{1986}{2} Quillen considers, for an operator $F$, the bilinear form $\tau(a_0, a_1) = \operatorname{tr}(a_0[F, a_1])$, the character of a $1$-summable Fredholm module in Connes' theory.
+
+\emph{The page.} He notes that $\tau$ is a Hochschild cocycle, that it is cyclic when $\operatorname{tr}[F, a] = 0$ for all $a$, in particular when $F^2 = 1$, and that then $\operatorname{tr}(F[F, a_0][F, a_1]) = 2\operatorname{tr}(a_0[F, a_1])$; he relates it to the $2$-form $\operatorname{tr} F(dF)^2$ on involutions.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen, notebook 1986-2, pp.~65, 70]\label{thm:quillen-1986-2}
+Let $F$, $a_0$, $a_1$, $a_2$ be square matrices over a commutative ring and $\tau(a_0, a_1) = \operatorname{tr}(a_0[F, a_1])$. Then $\tau(a_0a_1, a_2) - \tau(a_0, a_1a_2) + \tau(a_2a_0, a_1) = 0$ and $\tau(a_0, a_1) = -\tau(a_1, a_0)$. If $F^2 = 1$, then $\operatorname{tr}(F[F, a][F, b]) = 2\operatorname{tr}(a[F, b])$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+With $[F, a_1a_2] = [F, a_1]a_2 + a_1[F, a_2]$ the first sum is $\operatorname{tr}(a_2a_0[F,a_1]) - \operatorname{tr}(a_0[F, a_1]a_2) = 0$ by cyclicity of the trace; cyclicity also gives the antisymmetry, since traces of commutators vanish in finite dimension. If $F^2 = 1$, $F[F, a] = a - FaF$, and $\operatorname{tr}((a - FaF)(Fb - bF)) = \operatorname{tr}(aFb) - \operatorname{tr}(abF) - \operatorname{tr}(Fab) + \operatorname{tr}(FaFbF) = 2\operatorname{tr}(aFb) - 2\operatorname{tr}(abF)$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1986_2.lean}{\texttt{Notebook1986\_2.\allowbreak{}lean}} proves the theorem as \texttt{tau\_hochschild}, \texttt{tau\_cyclic} and \texttt{trace\_F\_comm\_comm}, for \texttt{Matrix n n R}. In finite dimension the cyclicity needs no hypothesis on $F$; the infinite-dimensional setting of the page (trace-class commutators), where the hypothesis matters, and the $2$-form on involutions are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Connes, \emph{Non-commutative differential geometry} (Publ.\ IHÉS 62, 1985), for the character of a Fredholm module and the normalisation $\operatorname{tr}(F[F,a][F,b])$. The edition does not present it as new.}

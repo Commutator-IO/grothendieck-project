@@ -1,0 +1,19 @@
+\section[Notebook 1984-16: a homotopy to an invertible operator]{Notebook 1984-16: a contracting homotopy to an invertible operator kills cohomology\protect\verifie{Notebook1984_16}}\label{sec:quillen-1984-16}
+
+\emph{Context.} On pages~19 and~20 of \carnet{1984}{16} Quillen shows that the Witten cohomology of the $S^1$-invariant forms on a manifold with a free circle action vanishes, the algebraic heart of the localisation theorem of Atiyah and Bott.
+
+\emph{The page.} For $d_a = d + a\iota_X$, $a \ne 0$, and a connection form $\theta$, the anticommutator $d_a\theta + \theta d_a$ is multiplication by $d\theta + a$, which is invertible because $d\theta$ is nilpotent; so $\theta$, rescaled, is a contracting homotopy.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1984-16, pp.~19--20]\label{thm:quillen-1984-16}
+Let $D$, $T$, $N$ be endomorphisms of a module over a commutative ring $R$ and $a$ a unit of $R$, with $D^2 = 0$, $DT + TD = N + a$, $N$ nilpotent and $ND = DN$. Then $\ker D = \operatorname{im} D$. More generally, $\delta^2 = 0$ and $\delta K + K\delta = u$ with $u$ invertible and commuting with $\delta$ give $\ker\delta = \operatorname{im}\delta$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+If $\delta x = 0$ then $ux = \delta Kx$, so $x = u^{-1}\delta Kx = \delta(u^{-1}Kx)$. In the first statement $u = N + a$ is invertible, a unit plus a commuting nilpotent element, and commutes with $D$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1984_16.lean}{\texttt{Notebook1984\_16.\allowbreak{}lean}} proves the theorem as \texttt{ker\_eq\_range\_witten} and \texttt{ker\_eq\_range\_of\_homotopy}, in \texttt{Module.End R M}, with mathlib's \texttt{IsNilpotent.isUnit\_add\_right\_of\_commute}. The forms, the circle action and the identity $[d_a, \theta] = d\theta + a$ are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Atiyah and Bott, \emph{The moment map and equivariant cohomology} (Topology~23, 1984); the algebraic step is standard. The edition does not present it as new.}
