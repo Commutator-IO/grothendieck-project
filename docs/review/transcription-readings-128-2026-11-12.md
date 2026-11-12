@@ -154,7 +154,7 @@ Two rules held throughout:
 - [ ] 136 · b. 17 · p. 337 · current: « hexagone de flèches » · proposed: a diamond of four nodes and four arrows (17-2, 17-3) · source: drawings.json 17-2 — not yet looked at
 - [ ] 137 · b. 2 · p. 39 · current: « une colonne de petits complexes » (class t) · proposed: five lines of running text along the margin · source: rmisc-report — not yet looked at
 - [ ] 138 · b. 4 · p. 77 · current: j, j̄ (« signes douteux ») · proposed: −j, −j̄ · source: drawings.json 04-8 — not yet looked at
-- [ ] 140-1 · b. 1 · p. 18 · current: five curves · proposed: four · source: omidB-report — not yet looked at
+- [x] 140-1 · b. 1 · p. 18 · current: five curves · proposed: four · source: omidB-report — APPLIED: four curves counted at 400 dpi where they leave the common point; note corrected (the mark, which says cinq, is followed by the note's correction).
 - [ ] 141 · b. 1 · p. 9 · current: « deux points marqués » · proposed: three · source: gmid-report; drawings.json 01-2 — not yet looked at
 - [ ] 141 · b. 1 · p. 14 · current: labels of the back arc · proposed: 2, 1, 3 (review line kept) · source: gmid-report — not yet looked at
 - [x] 142 · b. 3 · p. 51 · current: incisions from P_ε at the top · proposed: from the bottom pole P_ε′ · source: drawings.json 03-2 — APPLIED: confirmed (the heavy strokes rise from P_ε′ at the bottom to the holes); \note after the mark.
