@@ -59,9 +59,9 @@ Two rules held throughout:
 - [ ] 64 · b. 1 · p. 13 · current: « une flèche courbe au-dessus de s » · proposed: two arrows: a straight one left above a, a curved one down right of s · source: gmid-report; drawings.json 01-5 — not yet looked at
 - [ ] 64 · b. 2 · p. 39 · current: « une petite figure en croix portant les lettres x, X » · proposed: a column of letters and rotated writing, no figure · source: gmid-report — not yet looked at
 - [ ] 64 · b. 3 · p. 41 · current: two pencilled matrices in the left margin · proposed: (0 1 / 1 0), (1 0 / 0 1), if not transcribed · source: gmid-report — not yet looked at
-- [ ] 67 · b. 3 · p. 50 · current: « le pôle ∞ » of the third sphere · proposed: ∞ on the back of the equator; the pole unlabelled · source: g67-report — not yet looked at
-- [ ] 67 · b. 3 · p. 56 · current: letter x by the first sketch · proposed: no letter x (a cross in the oval); four hatching strokes · source: g67-report, o67-report — not yet looked at
-- [ ] 67 · b. 4 · p. 70 · current: branches ζ, ζ̄ from b · proposed: they do not start from b · source: o67-report — not yet looked at
+- [x] 67 · b. 3 · p. 50 · current: « le pôle ∞ » of the third sphere · proposed: ∞ on the back of the equator; the pole unlabelled · source: g67-report — APPLIED: at 350 dpi, crop turned 180°, ∞ stands by a point on the back of the equator and the pole has no letter; note corrected.
+- [x] 67 · b. 3 · p. 56 · current: letter x by the first sketch · proposed: no letter x (a cross in the oval); four hatching strokes · source: g67-report, o67-report — APPLIED: a small cross in the dashed oval, no x; four hatching strokes (300 dpi); note corrected.
+- [x] 67 · b. 4 · p. 70 · current: branches ζ, ζ̄ from b · proposed: they do not start from b · source: o67-report — APPLIED: at 150 dpi the branches leave from beside b (a blot) and from the curve right of it, not from b; note corrected.
 - [ ] 69 · b. 1 · p. 11 · current: « w‴ » in the description of D₇ · proposed: not on the page as a further vertex; D₇ has seven vertices · source: gmid-report — not yet looked at
 - [ ] 69 · b. 1 · p. 16 · current: « une étoile à trois branches dont chaque bout porte un petit triangle » · proposed: a central triangle whose vertices each carry two spikes (Michel, #135) · source: drawings.json 01-14 — not yet looked at
 - [ ] 69 · b. 4 · p. 61 · current: « des arcs issus d'un sommet » · proposed: arcs join both the upper and the lower vertex to each of the five points · source: gmid-report — not yet looked at
