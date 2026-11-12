@@ -35,6 +35,7 @@ interface Folder {
 const HAND = handRaw as unknown as {
   built: string;
   folders: Folder[];
+  redrawn: { total: number; ok: number };
   abbreviations: { form: string; n: number }[];
 };
 const FOLDERS = HAND.folders;
@@ -543,7 +544,8 @@ export function HandPage() {
           <Kpi value={n(t.struck)} label="strike-outs" help={`and ${n(t.add)} insertions`} />
           <Kpi value={n(t.marginal)} label="margin notes" />
           <Kpi value={n(t.diagrams)} label="commutative diagrams" help="set in tikz-cd, read from his drawing" />
-          <Kpi value={n(t.drawings)} label="drawings" help="figures described in a note, not redrawn" />
+          <Kpi value={n(t.drawings)} label="drawings" help="figures marked in the transcriptions" />
+          <Kpi value={n(HAND.redrawn.total)} label="drawings redrawn" help={`in TikZ from the facsimile, ${n(HAND.redrawn.ok)} marked ok, the rest partial; none checked by a human`} />
         </div>
 
         <InHisWords />
