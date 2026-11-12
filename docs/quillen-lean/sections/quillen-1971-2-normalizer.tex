@@ -1,0 +1,17 @@
+\section[Notebooks 1971-2 and 1975-10: $\Sigma_{n-1}$ is self-normalizing]{Notebooks 1971-2 and 1975-10: $\Sigma_{n-1}$ is its own normalizer in $\Sigma_n$\protect\verifie{Notebook1971_2Normalizer}}\label{sec:quillen-1971-2-normalizer}
+
+\emph{Context.} On page~14 of \carnet{1971}{2} Quillen proves that the transfer $H_*(\Sigma_{m\ell+1}, \mathrm{sgn}/\ell) \to H_*(\Sigma_{m\ell}, \mathrm{sgn}/\ell)$ is an isomorphism, by a double-coset argument in which every intersection $H \cap xHx^{-1}$, $H = \Sigma_{n-1}$, is a $\Sigma_{n-2}$ unless $x$ normalizes $H$, which, he notes, does not happen outside $H$, since $\Sigma_{n-1}$ is its own normalizer in $\Sigma_n$. Page~7 of \carnet{1975}{10} opens with the same remark, for the universal $\Sigma_n$-space with orbit types $\Sigma_n$ and $\Sigma_n/\Sigma_{n-1}$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1971-2, p.~14; notebook 1975-10, p.~7]\label{thm:quillen-1971-2-normalizer}
+Let $\alpha$ be a finite set with at least three elements and $a \in \alpha$. The normalizer in the symmetric group of the stabilizer of $a$ is the stabilizer of $a$. For two elements the statement fails.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Let $g$ normalize $H = \mathrm{Stab}(a)$, and suppose $a' = g^{-1}a \ne a$. Choose $c \notin \{a, a'\}$. The transposition $(a'\,c)$ fixes $a$, so $g(a'\,c)g^{-1}$ fixes $a$; but it sends $a$ to $g(c) \ne a$. For two elements the stabilizer is trivial and its normalizer is the whole group.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1971_2Normalizer.lean}{\texttt{Notebook1971\_2Normalizer.\allowbreak{}lean}} proves the theorem as \texttt{normalizer\_stabilizer}, for \texttt{Equiv.Perm α} with $|\alpha| \ge 3$, and the failure for two elements as \texttt{normalizer\_stabilizer\_two}. The homology and the double cosets are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical: a point stabilizer of a $2$-transitive group is self-normalizing. The edition does not present it as new.}

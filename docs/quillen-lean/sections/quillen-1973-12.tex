@@ -1,0 +1,19 @@
+\section[Notebook 1973-12: the kernel of $GL_m(A) \to GL_m(A/I)$ for $I^2 = 0$]{Notebook 1973-12: the kernel of $GL_m(A) \to GL_m(A/I)$ for $I^2 = 0$\protect\verifie{Notebook1973_12}}\label{sec:quillen-1973-12}
+
+\emph{Context.} On page~48 of \carnet{1973}{12} Quillen shows that $K_*(A) \otimes \mathbf Z[1/p] \cong K_*(A/I) \otimes \mathbf Z[1/p]$ for a nilpotent two-sided ideal $I$ with $p^rI = 0$, and deduces that $K_*(A) \otimes \mathbf Z[1/n] \cong K_*(A[t]) \otimes \mathbf Z[1/n]$ when $nA = 0$.
+
+\emph{The page.} After reducing to $I^2 = 0$ he writes the exact sequence $0 \to N \to GL_m(A) \to GL_m(A/I) \to 0$, with $N$ isomorphic to the additive group of matrices with entries in $I$; hence $p^rN = 0$, the homology of $N$ vanishes after inverting $p$, and $GL_m(A) \to GL_m(A/I)$ is a homology isomorphism after inverting $p$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1973-12, p.~48]\label{thm:quillen-1973-12}
+Let $J$ be a two-sided ideal of a ring $R$ with $xy = 0$ for $x, y \in J$ (for $R = M_m(A)$: $J = M_m(I)$ with $I^2 = 0$). Then the units $u$ with $u - 1 \in J$ form a subgroup $N$, and $u \mapsto u - 1$ is an isomorphism from $N$ onto the additive group of $J$; if $nJ = 0$ then $u^n = 1$ on $N$. If $uv - 1$ and $vu - 1$ lie in $J$, then $u$ is a unit, so units lift modulo $J$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+For $x, y \in J$, $(1 + x)(1 + y) = 1 + x + y$ and $(1 + x)(1 - x) = 1$. If $uv = 1 + x$ and $vu = 1 + y$ with $x, y \in J$, then $v(1 - x)$ is a right inverse and $(1 - y)v$ a left inverse of $u$, and they coincide. If $I^2 = 0$, a product of two matrices with entries in $I$ is $0$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1973_12.lean}{\texttt{Notebook1973\_12.\allowbreak{}lean}} proves the theorem as \texttt{kernel}, \texttt{kernelEquiv}, \texttt{pow\_eq\_one\_of\_kernel} and \texttt{isUnit\_of\_lift}, for a \texttt{TwoSidedIdeal} of square zero, and the matrix case as \texttt{matrix\_sq\_zero}, with mathlib's \texttt{TwoSidedIdeal.matrix}. The identification of $N$ with the kernel of reduction modulo $I$ is the definition $u - 1 \in M_m(I)$. The homology and the $K$-theory are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (for instance Weibel, \emph{The $K$-book}, for the nilpotent extension argument). The edition does not present it as new.}

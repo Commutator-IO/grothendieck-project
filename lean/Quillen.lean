@@ -11,6 +11,7 @@ import Quillen.Notebook1970_5
 import Quillen.Notebook1970_11
 import Quillen.Notebook1970_15
 import Quillen.Notebook1971_2
+import Quillen.Notebook1971_2Normalizer
 import Quillen.Notebook1971_3
 import Quillen.Notebook1971_4
 import Quillen.Notebook1971_7
@@ -21,6 +22,7 @@ import Quillen.Notebook1971_11Central
 import Quillen.Notebook1971_12
 import Quillen.Notebook1971_12Cover
 import Quillen.Notebook1971_13
+import Quillen.Notebook1972_1
 import Quillen.Notebook1972_2
 import Quillen.Notebook1972_4
 import Quillen.Notebook1972_6
@@ -28,6 +30,7 @@ import Quillen.Notebook1972_11
 import Quillen.Notebook1973_3
 import Quillen.Notebook1973_5
 import Quillen.Notebook1973_6
+import Quillen.Notebook1973_12
 import Quillen.Notebook1974_16
 import Quillen.Notebook1982_7
 import Quillen.Notebook1982_13

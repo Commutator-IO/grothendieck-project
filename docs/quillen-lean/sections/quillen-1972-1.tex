@@ -1,0 +1,19 @@
+\section[Notebook 1972-1: a transposition acts on $A_n$ by an outer automorphism]{Notebook 1972-1: a transposition acts on $A_n$ by an outer automorphism\protect\verifie{Notebook1972_1}}\label{sec:quillen-1972-1}
+
+\emph{Context.} On page~25 of \carnet{1972}{1} Quillen asks whether a transposition $\sigma$ acts on $A_n \subset \Sigma_n$ by an outer automorphism, in view of the extension $A_n \to \Sigma_n \to \mathbf Z/2$ and its cohomology.
+
+\emph{The page.} He answers yes: if $\sigma x\sigma^{-1} = yxy^{-1}$ for all $x \in A_n$, then $y^{-1}\sigma$ lies in the \q{center of $A_n$}, hence is the identity. Since $y \in A_n$ and $\sigma$ is odd, $y^{-1}\sigma$ is not in $A_n$; what the argument uses is that the centralizer of $A_n$ in $\Sigma_n$ is trivial, which holds for $n \ge 4$. For $n = 3$ the answer is still yes, because $A_3$ is abelian and $\sigma$ inverts it.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen, notebook 1972-1, p.~25]\label{thm:quillen-1972-1}
+For $n \ge 4$, a permutation of $n$ letters that commutes with every even permutation is the identity. For $n \ge 3$ and a transposition $\sigma$, there is no $y \in A_n$ with $\sigma x \sigma^{-1} = yxy^{-1}$ for every $x \in A_n$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Let $g$ commute with $A_n$ and suppose $g(a) \ne a$. Choose $c, d$ distinct and outside $\{a, g(a)\}$, and let $k = (g(a)\,d)(g(a)\,c)$, an even permutation fixing $a$ and sending $g(a)$ to $c$. Then $kg(a) = c$ while $gk(a) = g(a)$, a contradiction. If $\sigma$ acted as $y$, then $y^{-1}\sigma$ would commute with $A_n$, so $\sigma = y$ would be even. For $n = 3$, every $y \in A_3$ commutes with the $3$-cycle $c$, while $\sigma c\sigma^{-1} = c^{-1} \ne c$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1972_1.lean}{\texttt{Notebook1972\_1.\allowbreak{}lean}} proves the theorem as \texttt{eq\_one\_of\_commute\_alternating} (the argument of mathlib's \texttt{alternatingGroup.center\_eq\_bot}, for a permutation that need not be even), \texttt{not\_inner\_swap} for $|\alpha| \ge 4$, and \texttt{not\_inner\_swap\_three} for $n = 3$ by computation. The cohomological question of the page is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical: for $n \ne 6$, $\mathrm{Aut}(A_n) = \Sigma_n$ for $n \ge 4$, and conjugation by an odd permutation is outer. Mathlib has the triviality of the center of $A_n$ for $n \ge 4$, not of its centralizer in $\Sigma_n$. The edition does not present it as new.}
