@@ -67,12 +67,12 @@ Two rules held throughout:
 - [ ] 69 · b. 4 · p. 61 · current: « des arcs issus d'un sommet » · proposed: arcs join both the upper and the lower vertex to each of the five points · source: gmid-report — not yet looked at
 - [ ] 69 · b. 5 · p. 96 · current: second diagonal matrix (λ₁, λ₁⁻¹, …) unmentioned · proposed: present on the page (Michel, #142) · source: drawings.json 05-12 — not yet looked at
 - [ ] 70 · b. 4 · p. 70 · current: trihedron u, V, W · proposed: v lowercase (Michel, #131) · source: drawings.json 04-3 — not yet looked at
-- [ ] 71 · b. 1 · p. 2 · current: « deux cercles sécants » · proposed: two lobes sharing a median arc, Γ′₁, Γ′₂, Γ′₃, lower point y · source: g67-report — not yet looked at
-- [ ] 71 · b. 1 · p. 10 · current: « un croquis au crayon » (class t) · proposed: two tikz-cd diagrams and a formula (rmisc) · source: g67-report, rmisc-report — not yet looked at
-- [ ] 71 · b. 2 · p. 21 · current: thin arcs 1, 2 joining x and y · proposed: each thin line goes from its point of the base to the opposite vertex; x, y ends of a short heavy stroke · source: g67-report, o67-report; drawings.json 02-1 — not yet looked at
-- [ ] 71 · b. 2 · p. 23 · current: thin contour · proposed: inside along the left branch, outside at the bottom · source: g67-report — not yet looked at
-- [ ] 71 · b. 2 · p. 29 · current: two sketches · proposed: about a dozen · source: g67-report — not yet looked at
-- [ ] 71 · b. 2 · p. 31 · current: « à six côtés » · proposed: seven sides · source: g67-report; drawings.json 02-6 — not yet looked at
+- [x] 71 · b. 1 · p. 2 · current: « deux cercles sécants » · proposed: two lobes sharing a median arc, Γ′₁, Γ′₂, Γ′₃, lower point y · source: g67-report — APPLIED: two lobes bounded by three arcs (250 dpi); note corrected.
+- [ ] 71 · b. 1 · p. 10 · current: « un croquis au crayon » (class t) · proposed: two tikz-cd diagrams and a formula (rmisc) · source: g67-report, rmisc-report — OPEN (class t): at 300 dpi the lower half (B_H E_H, f, B_G E, f*(E) → E, f*f_!(f*E) → f*E, Ē ≃) reads as rmisc says, but the top left node of the first diagram is not legible (rmisc reads G/H from the mathematics, not from the page) and the first letter before f*(E) looks like h; the diagram is not set.
+- [x] 71 · b. 2 · p. 21 · current: thin arcs 1, 2 joining x and y · proposed: each thin line goes from its point of the base to the opposite vertex; x, y ends of a short heavy stroke · source: g67-report, o67-report; drawings.json 02-1 — APPLIED: confirmed at 250 dpi; note corrected.
+- [ ] 71 · b. 2 · p. 23 · current: thin contour · proposed: inside along the left branch, outside at the bottom · source: g67-report — OPEN: at 250 dpi the thin contour runs outside the heavy one on the lower left branch; inside or outside elsewhere not settled.
+- [x] 71 · b. 2 · p. 29 · current: two sketches · proposed: about a dozen · source: g67-report — APPLIED: about fourteen sketches on the 50 dpi page view; note completed.
+- [x] 71 · b. 2 · p. 31 · current: « à six côtés » · proposed: seven sides · source: g67-report; drawings.json 02-6 — APPLIED: seven corners counted at 400 dpi (one inner corner at the lower left); note corrected.
 - [ ] 73 · b. 1 · p. 14 · current: labels of the vertex figure · proposed: also s_{i+1} · source: g67-report — not yet looked at
 - [ ] 73 · b. 1 · p. 16 · current: foot sketch, one angle · proposed: two angles · source: g67-report — not yet looked at
 - [ ] 73 · b. 1 · p. 18 · current: segments from s_0 to all vertices · proposed: only to s_2, s_4, s_7 · source: g67-report; drawings.json 01-17 — not yet looked at
