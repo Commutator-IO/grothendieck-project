@@ -1,0 +1,29 @@
+\section[1983, Lecture Notes 15 (Patterson): the ball and the hyperboloid]{1983, Lecture Notes 15 (Patterson): the ball and the hyperboloid\protect\verifie{Notebook1983_LectureNotes15}}\label{sec:quillen-1983-ln15}
+
+\emph{Context.} The \dossier{1983-Lecture\%20Notes\%2015\%20Patterson}{file \q{Lecture Notes 15 Patterson}} contains Quillen's notes of a lecture of S.~J.~Patterson on Kleinian groups. The notes begin with the ball model of hyperbolic space $\mathbf H^{N+1}$: the unit ball $B^{N+1}$ with the metric $(1 - \|x\|^2)^{-2}\|dx\|^2$. The mathematics is that of the lecture.
+
+\emph{The page.} Page~1 introduces the function
+\[
+  L(w, w') = \frac{\|w - w'\|^2}{(1 - \|w\|^2)(1 - \|w'\|^2)},
+\]
+a map $p$ from the ball to $\mathbf R \times \mathbf R^{N+1}$ and the quadratic form $q(y, x) = y^2 - \|x\|^2$. It states that $q(p(x)) = 1$ and that $1 + 2L(x, x') = q(p(x), p(x'))$, the value of the bilinear form of $q$. Since $L$ determines the distance (the notes give $\sinh^2 d = L$), the isometries of the ball come from the orthogonal group $O(1, N + 1)$ of $q$. In the transcription, the map is $p(x) = \bigl(\tfrac12\,(1 + \|x\|^2)/(1 - \|x\|^2),\ x/(1 - \|x\|^2)\bigr)$.
+
+\emph{Intuition.} With $r = \|x\|$, the point $\bigl((1 + r^2)/(1 - r^2),\ 2x/(1 - r^2)\bigr)$ lies on the hyperboloid $y^2 - \|u\|^2 = 1$, because $(1 + r^2)^2 - 4r^2 = (1 - r^2)^2$: this is the stereographic projection of the ball onto the upper sheet. The map as written is half of it, and for that map the two identities are off by a factor $4$.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen's notes of a lecture of Patterson, 1983, p.~1]\label{thm:quillen-1983-ln15}
+Let $E$ be a real inner product space. For $x \in E$ with $\|x\| \ne 1$ put $P(x) = \bigl((1 + \|x\|^2)/(1 - \|x\|^2),\ 2x/(1 - \|x\|^2)\bigr) \in \mathbf R \times E$, and let $q\bigl((y, u), (y', u')\bigr) = yy' - \langle u, u'\rangle$. Then for $x$, $x'$ of norm different from $1$,
+\[
+  q(P(x), P(x)) = 1 \qquad\text{and}\qquad 1 + 2L(x, x') = q(P(x), P(x')).
+\]
+For $p = \tfrac12 P$, the map as written in the notes, $q(p(x), p(x)) = \tfrac14$ and $1 + 2L(x, x') = 4\,q(p(x), p(x'))$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Put $s = 1 - \|x\|^2$ and $s' = 1 - \|x'\|^2$. Then $q(P(x), P(x')) = \bigl((2 - s)(2 - s') - 4\langle x, x'\rangle\bigr)/(ss')$. The numerator is $ss' + 2\bigl(2 - s - s' - 2\langle x, x'\rangle\bigr) = ss' + 2\bigl(\|x\|^2 + \|x'\|^2 - 2\langle x, x'\rangle\bigr) = ss' + 2\|x - x'\|^2$. For $x' = x$ this gives $1$. The statements on $p$ follow, since $q$ is bilinear.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1983_LectureNotes15.lean}{\texttt{Notebook1983\_\allowbreak{}LectureNotes15.\allowbreak{}lean}} defines \texttt{L}, and the two components \texttt{pT} and \texttt{pS} of $P$. The identities of Theorem~\ref{thm:quillen-1983-ln15} are \texttt{q\_p} and \texttt{one\_add\_two\_L}, and those for the map as written are \texttt{q\_half\_p} and \texttt{one\_add\_two\_L\_half}. The hypothesis is $\|x\|^2 \ne 1$, so that the identities hold outside the unit sphere and not only in the ball. The hyperbolic metric, the formula $\sinh^2 d = L$ and the statement on the isometry group are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The passage from the ball model to the hyperboloid model is standard (see for instance Ratcliffe, \emph{Foundations of hyperbolic manifolds}, as recalled). The factor is a matter of normalisation in notes taken during a lecture; the handwriting has not been re-read against the facsimile on this point. The edition does not present the statement as new.}

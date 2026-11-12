@@ -1,0 +1,44 @@
+\section[1983, Lecture Notes 8 (Witten): two trace inequalities]{1983, Lecture Notes 8 (Witten): two trace inequalities\protect\verifie{Notebook1983_LectureNotes8}}\label{sec:quillen-1983-ln8}
+
+\emph{Context.} The \dossier{1983-Lecture\%20Notes\%208\%20Witten}{file \q{Lecture Notes 8 Witten}} contains Quillen's notes of a lecture of Edward Witten, of December 1983, on mass inequalities in quantum chromodynamics. The principle is that the measure on gauge fields is positive, so that an inequality which holds for every fixed background field $A$ holds after integration. For a fixed $A$ the quantities compared are traces of finite matrices built from the quark propagator. The mathematics is that of the lecture.
+
+\emph{The pages.} On page~4, the pion and rho propagators in a background field are written $\operatorname{Tr}(SS^*)$ and $\operatorname{Tr}(S\,\Gamma\,S^*\,\Gamma)$, where $S$ is a $12 \times 12$ matrix and $\Gamma = \gamma_\mu\gamma_5$. The notes say that $\Gamma^2 = 1$, so that the first is at least the second \q{by linear algebra}; this is the inequality $m_\pi \le m_\rho$ of Weingarten. On page~6, a difference of squared masses is reduced to $\operatorname{Tr}(E\,M_\mu\,E\,M_\mu^*)$ with $E \ge 0$, which the notes expand in an eigenbasis of $E$ as $\sum \lambda_i\lambda_j\,|\langle i|M_\mu|j\rangle|^2 \ge 0$.
+
+\emph{Intuition.} On matrices, $\langle S, T\rangle = \operatorname{Tr}(ST^*)$ is a hermitian inner product, and $S \mapsto USV$ preserves its norm when $U$ and $V$ are unitary. The first inequality is then the Cauchy--Schwarz inequality between $S$ and $\Gamma S\Gamma$. It needs $\Gamma$ unitary, and $\Gamma^2 = 1$ alone does not give it: a matrix with $\Gamma^2 = 1$ is unitary exactly when it is hermitian. The gamma matrices of the lecture are hermitian up to the usual conventions, so the hypothesis is implicit on the page. For the second inequality, write $E = B^2$ with $B$ hermitian; then $\operatorname{Tr}(EMEM^*) = \operatorname{Tr}(CC^*)$ with $C = BMB$.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen's notes of a lecture of Witten, 1983, p.~4]\label{thm:quillen-1983-ln8-a}
+Let $S$ be a complex $n \times n$ matrix and $U$, $V$ unitary $n \times n$ matrices. Then $\operatorname{Re}\operatorname{Tr}(S\,V\,S^*\,U) \le \operatorname{Tr}(SS^*)$. In particular, if $\Gamma$ is hermitian and $\Gamma^2 = 1$, then $\operatorname{Tr}(S\,\Gamma\,S^*\,\Gamma)$ is real and
+\[
+  \operatorname{Tr}(S\,\Gamma\,S^*\,\Gamma) \le \operatorname{Tr}(SS^*).
+\]
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+For all $S$, $T$, $0 \le \operatorname{Tr}\bigl((S - T)(S - T)^*\bigr) = \operatorname{Tr}(SS^*) - 2\operatorname{Re}\operatorname{Tr}(ST^*) + \operatorname{Tr}(TT^*)$, because $\operatorname{Tr}(TS^*)$ is the conjugate of $\operatorname{Tr}(ST^*)$. Take $T = U^*SV^*$. Then $ST^* = SVS^*U$, and $TT^* = U^*SV^*VS^*U = U^*SS^*U$ has the trace of $SS^*$. Hence $2\operatorname{Re}\operatorname{Tr}(SVS^*U) \le 2\operatorname{Tr}(SS^*)$. If $\Gamma$ is hermitian with $\Gamma^2 = 1$, it is unitary, and the conjugate of $\operatorname{Tr}(S\Gamma S^*\Gamma)$ is $\operatorname{Tr}(\Gamma S\Gamma S^*) = \operatorname{Tr}(S\Gamma S^*\Gamma)$.
+\end{proof}
+
+\begin{contrexemple}[the edition's]\label{cex:quillen-1983-ln8}
+The hypothesis $\Gamma^2 = 1$ alone does not suffice. For
+\[
+  \Gamma = \begin{pmatrix} 1 & 3 \\ 0 & -1 \end{pmatrix}, \qquad S = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix},
+\]
+one has $\Gamma^2 = 1$, $\operatorname{Tr}(SS^*) = 2$ and $\operatorname{Tr}(S\,\Gamma\,S^*\,\Gamma) = 7$.
+\end{contrexemple}
+
+\begin{encadre}
+\begin{theoreme}[After Quillen's notes of a lecture of Witten, 1983, p.~6]\label{thm:quillen-1983-ln8-b}
+Let $E$ be a positive semidefinite complex $n \times n$ matrix and $M$ a complex $n \times n$ matrix. Then $\operatorname{Tr}(E\,M\,E\,M^*)$ is real and nonnegative.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Let $B$ be the positive semidefinite square root of $E$; it is hermitian and $B^2 = E$. By cyclicity of the trace, $\operatorname{Tr}(B^2MB^2M^*) = \operatorname{Tr}\bigl((BMB)(BM^*B)\bigr) = \operatorname{Tr}(CC^*)$ with $C = BMB$, and $\operatorname{Tr}(CC^*) = \sum_{i,j}|C_{ij}|^2$.
+\end{proof}
+
+\noindent The notes prove the second inequality in an eigenbasis of $E$. The square root avoids the choice of a basis and gives the same sum of squares.
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1983_LectureNotes8.lean}{\texttt{Notebook1983\_\allowbreak{}LectureNotes8.\allowbreak{}lean}} works with square complex matrices (\texttt{Matrix n n} over the complex numbers) and states the inequalities on real parts. The polarisation inequality is \texttt{re\_trace\_mul\_conjTranspose\_le}. Theorem~\ref{thm:quillen-1983-ln8-a} is \texttt{re\_trace\_unitary\_le}, \texttt{re\_trace\_involution\_le} and \texttt{im\_trace\_involution}; Counterexample~\ref{cex:quillen-1983-ln8} is \texttt{not\_re\_trace\_le\_of\_sq\_eq\_one}. Theorem~\ref{thm:quillen-1983-ln8-b} is \texttt{re\_trace\_posSemidef\_nonneg} and \texttt{im\_trace\_posSemidef}, with the square root \texttt{CFC.sqrt} of mathlib. Nothing of the physics is formalised: neither the propagators, nor the identity $S(x, 0) = \gamma_5 S(0, x)^*\gamma_5$ which puts the traces in this form, nor the integration over gauge fields. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The inequalities of the lecture are those of Weingarten (\emph{Phys.\ Rev.\ Lett.}~51 (1983)), Witten (\emph{Phys.\ Rev.\ Lett.}~51 (1983)) and Vafa--Witten, as recalled; the notes cite the paper of Vafa and Witten. The two matrix statements are the Cauchy--Schwarz inequality for the Hilbert--Schmidt inner product and the positivity of $\operatorname{Tr}(CC^*)$. The edition does not present them as new; the counterexample only records that the page's \q{$\Gamma^2 = 1$} is used together with hermiticity.}

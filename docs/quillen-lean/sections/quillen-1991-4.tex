@@ -1,0 +1,21 @@
+\section[Notebook 1991-4: $J \cap K = JK + KJ$ for comaximal ideals]{Notebook 1991-4: $J \cap K = JK + KJ$ for comaximal two-sided ideals\protect\verifie{Notebook1991_4}}\label{sec:quillen-1991-4}
+
+\emph{Context.} \carnet{1991}{4}, of the summer of 1991, belongs to the period of the work of Cuntz and Quillen on quasi-free algebras. On pages~20 to~34 Quillen constructs an explicit lifting for the surjection of a tensor algebra $R = T(V)$ onto a product of two algebras. The kernel $I$ of this surjection is the intersection of two two-sided ideals of $R$ whose sum is $R$.
+
+\emph{The page.} On page~20 (his page~424) he recalls, to compute $I$, that for two-sided ideals $J$, $K$ of a ring $R$ with $R = J + K$ one has $J \cap K = JK + KJ$. The inclusion $\supset$ is clear, and for the other he multiplies $J \cap K$ by $R$ written in terms of $J$ and $K$. The ring $T(V)$ is not commutative, so $JK$ and $KJ$ are different ideals and both are needed.
+
+\emph{Intuition.} In a commutative ring, comaximal ideals satisfy $J \cap K = JK$: write $1 = j + k$ and $x = xj + xk$; if $x$ lies in both ideals, each term is a product of an element of $J$ and an element of $K$. Without commutativity the same line gives $xj \in KJ$ and $xk \in JK$, in this order, whence the sum of the two products.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1991-4, p.~20]\label{thm:quillen-1991-4}
+Let $J$ and $K$ be two-sided ideals of a ring $R$ such that $J + K = R$. Then $J \cap K = JK + KJ$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+The products $JK$ and $KJ$ lie in $J$ and in $K$, because both ideals are two-sided. Conversely write $1 = j + k$ with $j \in J$, $k \in K$, and let $x \in J \cap K$. Then $x = xk + xj$, with $xk \in JK$ since $x \in J$, and $xj \in KJ$ since $x \in K$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1991_4.lean}{\texttt{Notebook1991\_4.\allowbreak{}lean}} proves Theorem~\ref{thm:quillen-1991-4} as \texttt{inf\_eq\_mul\_sup\_mul}, for left ideals \texttt{J K : Ideal R} of a semiring with the instances \texttt{J.IsTwoSided} and \texttt{K.IsTwoSided}, and the commutative case as \texttt{inf\_eq\_mul\_of\_comm}. The computation of the kernel $I$ in the tensor algebra, for which the page uses the statement, is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The statement is standard in noncommutative ring theory (the Chinese remainder theorem for two-sided ideals), and the page recalls it as known. Mathlib has the commutative case (\texttt{Ideal.mul\_eq\_inf\_of\_coprime}); we did not find the two-sided one. The edition does not present it as new.}

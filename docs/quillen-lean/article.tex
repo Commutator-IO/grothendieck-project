@@ -21,6 +21,8 @@
 \newcommand{\q}[1]{“#1”}
 % Quillen's notebooks (Clay Mathematics Institute): one PDF per notebook.
 \newcommand{\carnet}[2]{\href{https://www.claymath.org/library/Quillen/Working_papers/quillen\%20#1/#1-#2.pdf}{notebook~#1-#2}}
+% The files of 1983 that carry a title instead of a number (notes of lectures, review notes).
+\newcommand{\dossier}[2]{\href{https://www.claymath.org/library/Quillen/Working_papers/quillen\%201983/#1.pdf}{#2}}
 % The file of the checked proof, once per section. The links point to main.
 \newcommand{\leanblobmain}{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Quillen}
 \newcommand{\verifie}[1]{\footnote{Proof checked: \href{\leanblobmain/#1.lean}{\texttt{lean/Quillen/\detokenize{#1}.lean}}.}}
@@ -53,18 +55,18 @@
 \maketitle
 
 \begin{abstract}
-\noindent Daniel Quillen's research notebooks, from 1968 to 2003, are online at the Clay Mathematics Institute. This document picks out twenty-one precise statements in them, in general topology, linear algebra, group theory, representation theory, category theory, combinatorics, order theory, commutative algebra, analysis and the analysis of theta functions, and proves them. Each proof follows a proof checked in the Lean~4 proof assistant \cite{lean4}, with its mathlib library \cite{mathlib2020}, and is written to be read without Lean. For each statement, the document says where it comes from, what it means, how it is proved, what is not formalized, and what is known of its presence in the literature. All twenty-one statements are correct. Several hold under weaker hypotheses than those of the page or of the expected proof, one fails for $p = 2$, as the page suggests, and most are classical but absent from mathlib; the summary table gives the verdict for each.
+\noindent Daniel Quillen's research notebooks, from 1968 to 2003, are online at the Clay Mathematics Institute. This document picks out thirty-one precise statements in them, in general topology, linear algebra, group theory, representation theory, category theory, combinatorics, order theory, commutative algebra, analysis and the analysis of theta functions, and proves them. Each proof follows a proof checked in the Lean~4 proof assistant \cite{lean4}, with its mathlib library \cite{mathlib2020}, and is written to be read without Lean. For each statement, the document says where it comes from, what it means, how it is proved, what is not formalized, and what is known of its presence in the literature. All thirty-one statements hold in the form proved; where the page, as transcribed, needs a hypothesis, a factor or a surjection in place of an isomorphism, the section says so. Four of them come from Quillen's notes of lectures by other mathematicians, and are attributed accordingly. Several hold under weaker hypotheses than those of the page or of the expected proof, one fails for $p = 2$, as the page suggests, and most are classical but absent from mathlib; the summary table gives the verdict for each.
 \end{abstract}
 
 \tableofcontents
 
 \section*{Introduction}\addcontentsline{toc}{section}{Introduction}
 
-\emph{The notebooks.} Daniel Quillen (1940--2011) kept working notebooks all his life, dated, in which he tries out ideas, redoes computations and notes statements. The Clay Mathematics Institute has digitized them and publishes them at \url{https://www.claymath.org/library/Quillen/}: several hundred notebooks, from 1968 to 2003, one PDF per notebook. This document cites each notebook by its year and number, in the form \q{notebook 1968-14, p.~27}, where the page is that of the PDF; each citation points to the Clay PDF.
+\emph{The notebooks.} Daniel Quillen (1940--2011) kept working notebooks all his life, dated, in which he tries out ideas, redoes computations and notes statements. The Clay Mathematics Institute has digitized them and publishes them at \url{https://www.claymath.org/library/Quillen/}: several hundred notebooks, from 1968 to 2003, one PDF per notebook. This document cites each notebook by its year and number, in the form \q{notebook 1968-14, p.~27}, where the page is that of the PDF; each citation points to the Clay PDF. Some files of 1983 hold notes that Quillen took at lectures of other mathematicians, or review notes; they carry a title instead of a number and are cited by it, and a statement taken from notes of a lecture is attributed to the lecture.
 
 \emph{The rule on rights.} The notebooks are protected by copyright. This document quotes almost nothing from them, a few words at most; it states each result in its own terms and refers to the page of the facsimile, which anyone can consult. The transcriptions made for this work remain private.
 
-\emph{The method.} The notebooks were read in three stages. First, the precise statements are located: lemmas, propositions, identities, questions asked. Each statement is then the object of a literature search. Most of what one reads in the notebooks is found again in Quillen's published papers, on homotopical algebra, group cohomology and algebraic $K$-theory, cobordism, superconnections, determinants and cyclic cohomology; those statements are not taken up here. Finally, only the precise statements that the search did not find in print, or whose printed form does not match the page, are formalized. Four statements of this document are in that case. The others, in notebooks 1968-1, 1968-13 (restriction of representations), 1968-15 and~16, 1970-15, 1971-4 and 1983-4, are classical and found in the literature; they are formalized because the pages rely on them and mathlib does not have them. The red lozenge \textcolor{piste}{\ensuremath{\blacklozenge}}, in the title of a section, marks the four notebooks in which a proved statement is a candidate lead: the search did not find it in print in this form, which does not establish it as new.
+\emph{The method.} The notebooks were read in three stages. First, the precise statements are located: lemmas, propositions, identities, questions asked. Each statement is then the object of a literature search. Most of what one reads in the notebooks is found again in Quillen's published papers, on homotopical algebra, group cohomology and algebraic $K$-theory, cobordism, superconnections, determinants and cyclic cohomology; those statements are not taken up here. Finally, only the precise statements that the search did not find in print, or whose printed form does not match the page, are formalized. Four statements of this document are in that case. The others, in notebooks 1968-1, 1968-13 (restriction of representations), 1968-15 and~16, 1969-1, 1969-4, 1970-15, 1971-4, 1971-8, 1972-11 (transverse subobjects), 1983-4 and 1991-4, and in the lecture and review notes of 1983, are classical and found in the literature; they are formalized because the pages rely on them and mathlib does not have them. The red lozenge \textcolor{piste}{\ensuremath{\blacklozenge}}, in the title of a section, marks the four notebooks in which a proved statement is a candidate lead: the search did not find it in print in this form, which does not establish it as new.
 
 \emph{What Lean guarantees.} Each section cites, in a footnote to its title, the Lean file that contains its proofs, in the \texttt{lean/Quillen/} library of the project, one file per notebook. Lean mechanically checks that a statement holds under the hypotheses as written. It does not guarantee that the statement faithfully renders the page, nor that it is new. A statement that the page formulates carries the name of Quillen, the notebook and the page; when the proof establishes more, we say \q{after}; a form that the edition adds (a generalization, an answer to a question, an intermediate lemma) is called the edition's statement.
 
@@ -84,21 +86,31 @@ Notebook & Statement & Verdict & Lean file & \S\\
 1968-13, p.~4 & Restriction of representations is full if and only if $f$ is surjective & classical, found; equivalence if and only if $f$ is bijective & \href{\leanblobmain/Notebook1968_13Rep.lean}{\texttt{Notebook1968\_13Rep}} & \ref{sec:quillen-1968-13-rep}\\
 1968-14, pp.~27--28 & Compact preimages of closed sets away from $A$ & confirmed; more general (neither local compactness, nor $\sigma$-compactness, nor $A$ closed) & \href{\leanblobmain/Notebook1968_14.lean}{\texttt{Notebook1968\_14}} & \ref{sec:quillen-1968-14}\\
 1968-15, p.~28; 1968-16, pp.~1--2 & $E(n, A)$ perfect for $n \ge 3$; Whitehead's lemma & classical, found; over any unital ring & \href{\leanblobmain/Notebook1968_15.lean}{\texttt{Notebook1968\_15}}, \href{\leanblobmain/Notebook1968_16.lean}{\texttt{\_16}} & \ref{sec:quillen-1968-15}\\
+1969-1, p.~54 & $\sum_i X_i^q \prod_{j \ne i}(1 - aX_j)/(X_i - X_j) = a^{n-1-q}$ & classical, found (Lagrange interpolation); with the case $a = 0$ & \href{\leanblobmain/Notebook1969_1.lean}{\texttt{Notebook1969\_1}} & \ref{sec:quillen-1969-1}\\
+1969-4, p.~45 & $(p^j)!/p^{(p^j-1)/(p-1)} \equiv (-1)^j$ modulo $p$ & classical, found (Legendre, Wilson); also for $p = 2$ & \href{\leanblobmain/Notebook1969_4.lean}{\texttt{Notebook1969\_4}} & \ref{sec:quillen-1969-4}\\
 1970-15, pp.~21--22 & Möbius function of the lattice of subspaces & classical, found; Gauss's binomial theorem & \href{\leanblobmain/Notebook1970_15.lean}{\texttt{Notebook1970\_15}} & \ref{sec:quillen-1970-15}\\
 1971-4, pp.~24--25 & A commutative monoid in its Grothendieck group: flat functor & classical, found; flat and final & \href{\leanblobmain/Notebook1971_4.lean}{\texttt{Notebook1971\_4}} & \ref{sec:quillen-1971-4}\\
 1971-7, pp.~14, 23 & The monoid of injections of an infinite set has trivial group completion; so does that of monotone injections of $\mathbf Q$ & classical, found (Schwede, for $\mathbf N$); for any infinite set; ordered case not located, for any countable dense order & \href{\leanblobmain/Notebook1971_7.lean}{\texttt{Notebook1971\_7}} & \ref{sec:quillen-1971-7}\\
+1971-8, p.~8 & $(G \times G)/\langle\!\langle \Delta G\rangle\!\rangle \cong G_{\mathrm{ab}}$ & classical; elementary & \href{\leanblobmain/Notebook1971_8.lean}{\texttt{Notebook1971\_8}} & \ref{sec:quillen-1971-8}\\
 1971-11, pp.~68--71 & Automorphisms of order $p$ trivial on $\Omega_1$; quotient $P/\Omega_1(P)$ of a $p$-central $p$-group & confirmed; more general (neither finiteness nor bijectivity); false for $p = 2$; quotient: found (González-Sánchez--Weigel) & \href{\leanblobmain/Notebook1971_11.lean}{\texttt{Notebook1971\_11}}, \href{\leanblobmain/Notebook1971_11Central.lean}{\texttt{Central}} & \ref{sec:quillen-1971-11}\\
+1971-12, pp.~23--24 & An abelian group with $FV = VF = p^d$, $F = p^{d+r}$ is $p^dM \oplus M[p^d]$ & not located as a stated lemma; elementary, $p$ need not be prime & \href{\leanblobmain/Notebook1971_12.lean}{\texttt{Notebook1971\_12}} & \ref{sec:quillen-1971-12}\\
 1971-13, p.~13 & Good submodules over $A[z]$ pass to quotients & not located; elementary, without finiteness & \href{\leanblobmain/Notebook1971_13.lean}{\texttt{Notebook1971\_13}} & \ref{sec:quillen-1971-13}\\
 1972-2, pp.~20--21, 46 & Splitting $R^{(S)} = V \oplus Q$ adapted to an endomorphism; an integral over a triangle & splitting not located, elementary, without finite rank; integral elementary & \href{\leanblobmain/Notebook1972_2.lean}{\texttt{Notebook1972\_2}} & \ref{sec:quillen-1972-2}\\
 1972-4, pp.~23--25 & Marginal of $N$ harmonic oscillators at total energy $\lambda N$: limit is the Gibbs density & classical, found (Khinchin); with the normalisation of the finite-$N$ law & \href{\leanblobmain/Notebook1972_4.lean}{\texttt{Notebook1972\_4}} & \ref{sec:quillen-1972-4}\\
 1972-11, p.~36 & An extension of finitely presented modules is finitely presented & classical, found; over any ring; in mathlib only for split sequences & \href{\leanblobmain/Notebook1972_11.lean}{\texttt{Notebook1972\_11}} & \ref{sec:quillen-1972-11}\\
+1972-11, p.~9 & Transverse subobjects: $A + B = X$ iff $X \to X/A \times X/B$ is onto & classical; onto, not an isomorphism as transcribed & \href{\leanblobmain/Notebook1972_11.lean}{\texttt{Notebook1972\_11}} & \ref{sec:quillen-1972-11-transverse}\\
 1973-3, pp.~25, 79--81 & Gaussian sum over a translate of $\mathbf Z$ is maximal on $\mathbf Z$; fibres of the $\Sigma_3$-invariant of the cross-ratio & classical, found ($j/256$; Banaszczyk, Bost); dimension one, with the equality case & \href{\leanblobmain/Notebook1973_3.lean}{\texttt{Notebook1973\_3}} & \ref{sec:quillen-1973-3}\\
 1973-5, pp.~28--29 & A partial order is the intersection of its linear extensions; matrices supported on it & classical, found (Szpilrajn; Dushnik--Miller); with the subring of matrices supported on a preorder & \href{\leanblobmain/Notebook1973_5.lean}{\texttt{Notebook1973\_5}} & \ref{sec:quillen-1973-5}\\
 1982-7, pp.~33--34 & A symmetric matrix with non-positive off-diagonal entries and a positive $v$ with $Av \ge 0$ is positive semidefinite & classical, found (Zariski's lemma; $M$-matrices); hypothesis $v^{t}Av \ge 0$ of the page refuted & \href{\leanblobmain/Notebook1982_7.lean}{\texttt{Notebook1982\_7}} & \ref{sec:quillen-1982-7}\\
 1982-13, p.~70 & The projections $1 - e(\eta_j)\,i(X_j)$ onto the joint kernel of the contractions & partly found (Mathai--Quillen; Kalkman); from the anticommutation relations alone, in any ring & \href{\leanblobmain/Notebook1982_13.lean}{\texttt{Notebook1982\_13}} & \ref{sec:quillen-1982-13}\\
 1983-4, pp.~71--72 & Cohomological equation of $\theta\partial_x - \partial_y$ on the torus & classical, found; both directions, for every irrational $\theta$ & \href{\leanblobmain/Notebook1983_4.lean}{\texttt{Notebook1983\_4}} & \ref{sec:quillen-1983-4}\\
 1983-10, p.~31 & Traces of odd powers of $P - Q$ & question of the page; answer in finite dimension, over any commutative ring & \href{\leanblobmain/Notebook1983_10.lean}{\texttt{Notebook1983\_10}} & \ref{sec:quillen-1983-10}\\
+1983, Lecture Notes 3 (Kirwan), p.~2 & Increasing ratios $v_j/v_{j+1}$ give $v_0^{n-1}v_n \le v_1^n$ & classical; notes of a lecture; Alexandrov--Fenchel not formalized & \href{\leanblobmain/Notebook1983_LectureNotes3.lean}{\texttt{Notebook1983\_LectureNotes3}} & \ref{sec:quillen-1983-ln3}\\
+1983, Lecture Notes 8 (Witten), pp.~4, 6 & $\operatorname{Tr}(S\Gamma S^*\Gamma) \le \operatorname{Tr}(SS^*)$; $\operatorname{Tr}(EMEM^*) \ge 0$ for $E \ge 0$ & classical (Cauchy--Schwarz); notes of a lecture; $\Gamma$ hermitian needed besides $\Gamma^2 = 1$ & \href{\leanblobmain/Notebook1983_LectureNotes8.lean}{\texttt{Notebook1983\_LectureNotes8}} & \ref{sec:quillen-1983-ln8}\\
+1983, Lecture Notes 15 (Patterson), p.~1 & $1 + 2L(x, x') = q(p(x), p(x'))$ from the ball to the hyperboloid & classical; notes of a lecture; holds for twice the map as transcribed & \href{\leanblobmain/Notebook1983_LectureNotes15.lean}{\texttt{Notebook1983\_LectureNotes15}} & \ref{sec:quillen-1983-ln15}\\
+1983, Review Getzler material, p.~7 & Composition of Cayley transforms: $Z = (1 - X)^{-1}(X + Y)(1 + XY)^{-1}(1 - X)$ & confirmed; elementary, in any ring, with $1 - Z$ invertible & \href{\leanblobmain/Notebook1983_ReviewGetzler.lean}{\texttt{Notebook1983\_ReviewGetzler}} & \ref{sec:quillen-1983-getzler}\\
 1988-1, pp.~71--72 & $\mathrm{Hom}_k(M, A)$ modulo commutators is the dual of $M$, through the trace & partly found (Lipman); for any $k$-algebra, not only commutative & \href{\leanblobmain/Notebook1988_1.lean}{\texttt{Notebook1988\_1}} & \ref{sec:quillen-1988-1}\\
+1991-4, p.~20 & $J \cap K = JK + KJ$ for two-sided ideals with $J + K = R$ & classical, found; in mathlib only for commutative rings & \href{\leanblobmain/Notebook1991_4.lean}{\texttt{Notebook1991\_4}} & \ref{sec:quillen-1991-4}\\
 1995-2, p.~65 & $za + (1 - a)$ is a unit of $R[z, z^{-1}]$ iff $a(1 - a)$ is nilpotent & not located in this form; elementary, commutative case & \href{\leanblobmain/Notebook1995_2.lean}{\texttt{Notebook1995\_2}} & \ref{sec:quillen-1995-2}\\
 \bottomrule
 \end{longtable}}
@@ -109,21 +121,31 @@ Notebook & Statement & Verdict & Lean file & \S\\
 \input{sections/quillen-1968-13-rep}
 \input{sections/quillen-1968-14}
 \input{sections/quillen-1968-15}
+\input{sections/quillen-1969-1}
+\input{sections/quillen-1969-4}
 \input{sections/quillen-1970-15}
 \input{sections/quillen-1971-4}
 \input{sections/quillen-1971-7}
+\input{sections/quillen-1971-8}
 \input{sections/quillen-1971-11}
+\input{sections/quillen-1971-12}
 \input{sections/quillen-1971-13}
 \input{sections/quillen-1972-2}
 \input{sections/quillen-1972-4}
 \input{sections/quillen-1972-11}
+\input{sections/quillen-1972-11-transverse}
 \input{sections/quillen-1973-3}
 \input{sections/quillen-1973-5}
 \input{sections/quillen-1982-7}
 \input{sections/quillen-1982-13}
 \input{sections/quillen-1983-4}
 \input{sections/quillen-1983-10}
+\input{sections/quillen-1983-ln3}
+\input{sections/quillen-1983-ln8}
+\input{sections/quillen-1983-ln15}
+\input{sections/quillen-1983-getzler}
 \input{sections/quillen-1988-1}
+\input{sections/quillen-1991-4}
 \input{sections/quillen-1995-2}
 
 \section*{Statement on the use of artificial intelligence}\addcontentsline{toc}{section}{Statement on the use of artificial intelligence}

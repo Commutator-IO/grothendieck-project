@@ -1,0 +1,21 @@
+\section[1983, Lecture Notes 3 (Kirwan): from increasing ratios to $v_0^{n-1}v_n \le v_1^n$]{1983, Lecture Notes 3 (Kirwan): from increasing ratios to $v_0^{\,n-1}v_n \le v_1^{\,n}$\protect\verifie{Notebook1983_LectureNotes3}}\label{sec:quillen-1983-ln3}
+
+\emph{Context.} Among the files of 1983 are notes that Quillen took at lectures of other mathematicians. The \dossier{1983-Lecture\%20Notes\%203\%20Kirwan}{file \q{Lecture Notes 3 Kirwan}} records a talk of Frances Kirwan, of February 1983, on the proof of the Alexandrov--Fenchel inequalities through algebraic geometry. The mathematics is that of the lecture, not Quillen's own.
+
+\emph{The page.} For two convex bodies $K_1$, $K_2$ of $\mathbf R^n$, the volume of $\lambda_1K_1 + \lambda_2K_2$ is a polynomial in $\lambda_1$, $\lambda_2$ whose coefficients, up to binomial factors, are the mixed volumes $v_0, \dots, v_n$. Page~2 states the Alexandrov--Fenchel inequalities in the form $v_0/v_1 \le v_1/v_2 \le \dots \le v_{n-1}/v_n$, and notes that they imply $(v_0/v_1)^n \le v_0/v_n$, that is $v_0^{\,n-1}v_n \le v_1^{\,n}$. With $K_2$ a ball this is the isoperimetric inequality, which is the motivation given on the page.
+
+\emph{Intuition.} The quotient $v_0/v_n$ is the product of the $n$ ratios $v_0/v_1, \dots, v_{n-1}/v_n$, and the first is the smallest.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen's notes of a lecture of Kirwan, 1983, p.~2]\label{thm:quillen-1983-ln3}
+Let $n \ge 1$ and let $v_0, \dots, v_n$ be positive real numbers such that $v_j\,v_{j+2} \le v_{j+1}^2$ for $0 \le j \le n - 2$, that is, $v_0/v_1 \le v_1/v_2 \le \dots \le v_{n-1}/v_n$. Then $(v_0/v_1)^n \le v_0/v_n$, and $v_0^{\,n-1}v_n \le v_1^{\,n}$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+First $v_0v_{k+1} \le v_1v_k$ for $k \le n - 1$, by induction on $k$: this is an equality for $k = 0$, and $v_0v_{k+2}v_k \le v_0v_{k+1}^2 \le v_1v_kv_{k+1}$, where the second inequality is the induction hypothesis; divide by $v_k$. Then $v_0^{\,k}v_k \le v_1^{\,k}v_0$ for $k \le n$, by induction on $k$: $v_0^{\,k+1}v_{k+1} = v_0^{\,k}(v_0v_{k+1}) \le v_0^{\,k}v_1v_k \le v_1^{\,k+1}v_0$. For $k = n$ this is the first inequality of the statement, and the second after division by $v_0$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1983_LectureNotes3.lean}{\texttt{Notebook1983\_\allowbreak{}LectureNotes3.\allowbreak{}lean}} takes a sequence \texttt{v} of real numbers indexed by the natural numbers, positive up to index $n$, with the hypothesis written without division. The two inductions are \texttt{mul\_le\_mul\_of\_ratios} and \texttt{pow\_mul\_le\_pow\_mul}, and the two conclusions of Theorem~\ref{thm:quillen-1983-ln3} are \texttt{div\_pow\_le\_div} and \texttt{pow\_pred\_mul\_le\_pow}. The Alexandrov--Fenchel inequalities themselves, mixed volumes and the isoperimetric inequality are not formalised; mathlib has no mixed volumes. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The inequalities are those of Alexandrov and Fenchel (1930s), and the proof presented in the lecture is that of Khovanskii and Teissier, as recalled. The implication proved here is the standard passage from a log-concave sequence to its extreme terms. The edition does not present it as new.}

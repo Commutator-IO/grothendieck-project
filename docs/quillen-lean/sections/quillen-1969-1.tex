@@ -1,0 +1,31 @@
+\section[Notebook 1969-1: a Lagrange identity for push-forwards]{Notebook 1969-1: a Lagrange interpolation identity for push-forwards\protect\verifie{Notebook1969_1}}\label{sec:quillen-1969-1}
+
+\emph{Context.} \carnet{1969}{1}, of January 1969, works on complex cobordism: projective bundles, Riemann--Roch, and the formal group law $F$ of a complex-oriented cohomology theory. On pages~49 to~54 Quillen computes the push-forward $f_*\xi^q$ along the projective bundle $f : \mathbf P E \to X$ of a sum $E = L_1 + \dots + L_n$ of line bundles, where $\xi$ is the first Chern class of $\mathcal O(1)$. With $X_i$ the Chern class of the dual of $L_i$ and $I$ the inverse of the formal group law, he finds (p.~52) that $f_*\xi^q$ is the sum over $i$ of $X_i^q / \prod_{j \ne i} F(X_i, IX_j)$.
+
+\emph{The page.} On page~54 (his page~9) he takes the law $F(X, Y) = X + Y - aXY$, for which $F(X, IY) = (X - Y)/(1 - aY)$, and evaluates the sum. He writes it as a Lagrange interpolation of the polynomial $a^{n-1}Z^q$ at the point $Z = 1/a$, and concludes that $f_*\xi^q = a^{n-1-q}$ for $0 \le q \le n - 1$. For $a = 0$ this is ordinary cohomology and for $a = 1$ it is $K$-theory, and he notes that the old formulas are recovered.
+
+\emph{Intuition.} A polynomial $P$ of degree less than $n$ is determined by its values at $n$ distinct points $X_1, \dots, X_n$:
+\[
+  P(Z) = \sum_{i=1}^n P(X_i) \prod_{j \ne i} \frac{Z - X_j}{X_i - X_j}.
+\]
+Take $P = Z^q$ and $Z = 1/a$, and multiply by $a^{n-1}$: each factor $1/a - X_j$ becomes $1 - aX_j$, and the left-hand side becomes $a^{n-1-q}$. The argument divides by $a$. For $a = 0$ the identity still holds, with the convention $0^0 = 1$: the sum of the $X_i^q / \prod_{j \ne i}(X_i - X_j)$ is the coefficient of $Z^{n-1}$ in the interpolation polynomial of $Z^q$, that is $1$ for $q = n - 1$ and $0$ for $q < n - 1$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1969-1, p.~54]\label{thm:quillen-1969-1}
+Let $K$ be a field, $X_1, \dots, X_n$ distinct elements of $K$, $a \in K$ and $0 \le q \le n - 1$. Then
+\[
+  \sum_{i=1}^n X_i^q \prod_{j \ne i} \frac{1 - aX_j}{X_i - X_j} = a^{\,n-1-q},
+\]
+where $a^0 = 1$ also for $a = 0$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Suppose $a \ne 0$. The polynomial $Z^q$ has degree $q < n$, so the interpolation formula applies; at $Z = a^{-1}$ it reads $a^{-q} = \sum_i X_i^q \prod_{j \ne i} (a^{-1} - X_j)/(X_i - X_j)$. For each $i$ the product has $n - 1$ factors and $(1 - aX_j) = a\,(a^{-1} - X_j)$, so the sum of the statement is $a^{n-1}$ times this one, that is $a^{n-1}a^{-q} = a^{n-1-q}$, since $q \le n - 1$. Suppose $a = 0$. The interpolation formula, read on the coefficient of $Z^{n-1}$, says that for a polynomial $P$ of degree less than $n$ this coefficient is $\sum_i P(X_i)/\prod_{j \ne i}(X_i - X_j)$, because each basis polynomial $\prod_{j \ne i}(Z - X_j)/(X_i - X_j)$ has degree $n - 1$ and leading coefficient $1/\prod_{j \ne i}(X_i - X_j)$. For $P = Z^q$ the coefficient is $1$ if $q = n - 1$ and $0$ otherwise, which is $0^{\,n-1-q}$.
+\end{proof}
+
+\noindent The case $a = 0$ is the one of ordinary cohomology. The page obtains it by putting $a = 0$ in the final formula; the interpolation at $1/a$ does not cover it, and the proof above treats it separately.
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1969_1.lean}{\texttt{Notebook1969\_1.\allowbreak{}lean}} states the identity for a finite set \texttt{s} of indices and a map \texttt{v} injective on \texttt{s}, with $n$ the cardinality of \texttt{s}. Theorem~\ref{thm:quillen-1969-1} is \texttt{sum\_pow\_mul\_prod\_eq\_pow}. The case $a \ne 0$ uses \texttt{Lagrange.eq\_interpolate} of mathlib, evaluated at $a^{-1}$. The case $a = 0$ is \texttt{sum\_pow\_mul\_prod\_eq\_zero\_pow}, from \texttt{Lagrange.coeff\_eq\_sum}. The push-forward, the projective bundle and the formal group law are not formalised: only the algebraic identity is. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The push-forward formula is in Quillen's published papers on cobordism and formal groups (\emph{Bull.\ Amer.\ Math.\ Soc.}~75 (1969), in residue form, and \emph{Adv.\ Math.}~7 (1971), \S 1, as recalled), and the identity is a classical consequence of Lagrange interpolation. It is formalised here because the page rests on it. The edition does not present it as new.}

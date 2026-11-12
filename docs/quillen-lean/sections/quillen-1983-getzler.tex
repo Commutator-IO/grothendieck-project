@@ -1,0 +1,33 @@
+\section[1983, Review Getzler material: composition of Cayley transforms]{1983, Review Getzler material: composition of Cayley transforms\protect\verifie{Notebook1983_ReviewGetzler}}\label{sec:quillen-1983-getzler}
+
+\emph{Context.} The \dossier{1983-Review\%20Getzler\%20material}{file \q{Review Getzler material}} of 1983 contains seven leaves in which Quillen reviews, for himself, the supersymmetric path-integral approach to the index theorem of Friedan--Windey and Getzler. The fermionic part leads to orthogonal transformations of a real vector space, which he writes as Cayley transforms $(1 + X)/(1 - X)$ of skew forms $X$.
+
+\emph{The pages.} On pages~6 and~7 he asks for the composition law: which $Z$ has for Cayley transform the product of those of $X$ and $Y$? The matrices $X$ and $Y$ do not commute, and the first attempts are left unfinished; the margin of page~6 says \q{subtle}. The last line of page~7 gives
+\[
+  Z = \frac{1}{1 - X}\,(X + Y)\,\frac{1}{1 + XY}\,(1 - X).
+\]
+
+\emph{Intuition.} When $X$ and $Y$ commute this is $Z = (X + Y)/(1 + XY)$, the addition formula of the hyperbolic tangent, since the Cayley transform of $\tanh t$ is $e^{2t}$. In general the two identities
+\[
+  (1 - X)(1 - Y) = (1 + XY) - (X + Y), \qquad (1 + X)(1 + Y) = (1 + XY) + (X + Y)
+\]
+give $1 - Z$ and $1 + Z$ as products, and the factor $(1 + XY)^{-1}(1 - X)$ common to both cancels in the Cayley transform.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, 1983, Review Getzler material, p.~7]\label{thm:quillen-1983-getzler}
+Let $X$ and $Y$ be elements of a ring such that $1 - X$, $1 - Y$ and $1 + XY$ are invertible, and put $Z = (1 - X)^{-1}(X + Y)(1 + XY)^{-1}(1 - X)$. Then $1 - Z$ is invertible and
+\[
+  (1 + X)(1 - X)^{-1}\,(1 + Y)(1 - Y)^{-1} = (1 + Z)(1 - Z)^{-1}.
+\]
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Put $u = 1 - X$, $v = 1 - Y$, $w = 1 + XY$, so that $X + Y = w - uv$ and $(1 + X)(1 + Y) = w + (X + Y)$. Then $Z = u^{-1}(w - uv)w^{-1}u = 1 - vw^{-1}u$, so $1 - Z = vw^{-1}u$ is invertible with inverse $u^{-1}wv^{-1}$. Also $1 + Z = u^{-1}\bigl(w + (X + Y)\bigr)w^{-1}u = u^{-1}(1 + X)(1 + Y)w^{-1}u$. Hence $(1 + Z)(1 - Z)^{-1} = u^{-1}(1 + X)(1 + Y)v^{-1}$. Finally $1 + X = 2 - u$ commutes with $u^{-1}$, which gives the left-hand side.
+\end{proof}
+
+\noindent The page does not state the hypothesis on $1 + XY$ nor the invertibility of $1 - Z$; for skew-symmetric real matrices $X$, $Y$ the first two hypotheses always hold, and the third is the condition that the product of the two rotations has no eigenvalue $-1$.
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1983_ReviewGetzler.lean}{\texttt{Notebook1983\_\allowbreak{}ReviewGetzler.\allowbreak{}lean}} defines \texttt{cayley X} and \texttt{cayleySum X Y} (the element $Z$) with \texttt{Ring.inverse}, in any ring. The formulas for $1 - Z$ and $1 + Z$ are \texttt{one\_sub\_cayleySum} and \texttt{one\_add\_cayleySum}, stated with units \texttt{u}, \texttt{v}, \texttt{w} of the ring. Theorem~\ref{thm:quillen-1983-getzler} is \texttt{isUnit\_one\_sub\_cayleySum} and \texttt{cayley\_mul\_cayley}. The link with orthogonal transformations and skew forms is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{In the commuting case the formula is the addition law of $\tanh$. We did not search the literature for the noncommutative form beyond a recollection that composition laws of this kind appear for Cayley parametrisations of rotations; the identity is elementary, and the edition does not present it as new.}

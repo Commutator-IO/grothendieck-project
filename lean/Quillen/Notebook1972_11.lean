@@ -29,6 +29,21 @@ notebook's route:
   sequence is exact;
 * `finitePresentation_of_exact`: (c), the extension of a finitely presented module by a finitely
   presented module is finitely presented.
+
+## P. 9: transverse subobjects
+
+On p. 9 (his p. 5) the notebook recalls when two subobjects `A`, `B` of `X` are called
+transverse, by four equivalent conditions: `A + B = X`; a condition on the map
+`X → X/A × X/B`; `B → X/A` is onto; `A → X/B` is onto. In the transcription the second condition
+is written as an isomorphism; an isomorphism would also force `A ∩ B = 0`. The section
+`Transverse` proves, for submodules of a module:
+
+* `sup_eq_top_iff_surjective_right`, `sup_eq_top_iff_surjective_left`: `A + B = X` iff
+  `B → X/A` is onto, iff `A → X/B` is onto;
+* `sup_eq_top_iff_surjective_prod`: `A + B = X` iff `X → X/A × X/B` is onto;
+* `injective_prod_iff`, `bijective_prod_iff`: that map is injective iff `A ∩ B = 0`, and
+  bijective iff `A` and `B` are complements; so the equivalence of the page holds with
+  « onto » in the second condition, not with « isomorphism ».
 -/
 
 namespace Quillen.Notebook1972_11
@@ -97,5 +112,81 @@ theorem finitePresentation_of_exact [Module.FinitePresentation R M']
     exact ⟨(m', v), by rw [LinearMap.coprod_apply, hm', sub_add_cancel]⟩
   exact Module.finitePresentation_of_surjective (f.coprod σ) hsurj
     (fg_ker_coprod f g σ hf H hgσ)
+
+section Transverse
+
+variable {X : Type*} [AddCommGroup X] [Module R X] (A B : Submodule R X)
+
+/-- `A + B = X` if and only if `B → X/A` is onto. -/
+theorem sup_eq_top_iff_surjective_right :
+    A ⊔ B = ⊤ ↔ Surjective (A.mkQ ∘ₗ B.subtype) := by
+  constructor
+  · intro h y
+    obtain ⟨x, rfl⟩ := A.mkQ_surjective y
+    obtain ⟨a, ha, b, hb, rfl⟩ := Submodule.mem_sup.mp (h ▸ Submodule.mem_top : x ∈ A ⊔ B)
+    refine ⟨⟨b, hb⟩, ?_⟩
+    simp [ha]
+  · intro h
+    rw [eq_top_iff]
+    intro x _
+    obtain ⟨b, hb⟩ := h (A.mkQ x)
+    have hx : x - b ∈ A := by
+      rw [← Submodule.Quotient.eq]
+      exact hb.symm
+    have : x = (x - b) + b := by abel
+    rw [this]
+    exact Submodule.add_mem_sup hx b.2
+
+/-- `A + B = X` if and only if `A → X/B` is onto. -/
+theorem sup_eq_top_iff_surjective_left :
+    A ⊔ B = ⊤ ↔ Surjective (B.mkQ ∘ₗ A.subtype) := by
+  rw [sup_comm]
+  exact sup_eq_top_iff_surjective_right B A
+
+/-- **Quillen, notebook 1972-11, p. 9.** `A + B = X` if and only if the map `X → X/A × X/B` is
+onto. -/
+theorem sup_eq_top_iff_surjective_prod :
+    A ⊔ B = ⊤ ↔ Surjective (A.mkQ.prod B.mkQ) := by
+  constructor
+  · intro h y
+    obtain ⟨x, hx⟩ := A.mkQ_surjective y.1
+    obtain ⟨x', hx'⟩ := B.mkQ_surjective y.2
+    obtain ⟨a, ha, b, hb, hab⟩ :=
+      Submodule.mem_sup.mp (h ▸ Submodule.mem_top : x - x' ∈ A ⊔ B)
+    refine ⟨x - a, Prod.ext ?_ ?_⟩
+    · show A.mkQ (x - a) = y.1
+      rw [map_sub, hx, Submodule.mkQ_apply, (Submodule.Quotient.mk_eq_zero A).mpr ha, sub_zero]
+    · have : x - a = x' + b := by
+        rw [eq_sub_iff_add_eq] at hab
+        rw [sub_eq_iff_eq_add, ← hab]
+        abel
+      show B.mkQ (x - a) = y.2
+      rw [this, map_add, hx', Submodule.mkQ_apply, (Submodule.Quotient.mk_eq_zero B).mpr hb,
+        add_zero]
+  · intro h
+    rw [eq_top_iff]
+    intro x _
+    obtain ⟨z, hz⟩ := h (A.mkQ x, 0)
+    have h1 : A.mkQ z = A.mkQ x := congrArg Prod.fst hz
+    have h2 : B.mkQ z = 0 := congrArg Prod.snd hz
+    have hxz : x - z ∈ A := by
+      rw [← Submodule.Quotient.eq]
+      exact h1.symm
+    have hzB : z ∈ B := by simpa using h2
+    have : x = (x - z) + z := by abel
+    rw [this]
+    exact Submodule.add_mem_sup hxz hzB
+
+/-- The map `X → X/A × X/B` is injective if and only if `A ∩ B = 0`. -/
+theorem injective_prod_iff : Injective (A.mkQ.prod B.mkQ) ↔ A ⊓ B = ⊥ := by
+  rw [← LinearMap.ker_eq_bot, LinearMap.ker_prod, Submodule.ker_mkQ, Submodule.ker_mkQ]
+
+/-- The map `X → X/A × X/B` is an isomorphism if and only if `A` and `B` are complements:
+transversality `A + B = X` alone gives only surjectivity. -/
+theorem bijective_prod_iff : Bijective (A.mkQ.prod B.mkQ) ↔ IsCompl A B := by
+  rw [Bijective, injective_prod_iff, ← sup_eq_top_iff_surjective_prod, isCompl_iff,
+    disjoint_iff, codisjoint_iff]
+
+end Transverse
 
 end Quillen.Notebook1972_11

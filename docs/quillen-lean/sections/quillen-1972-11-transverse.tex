@@ -1,0 +1,21 @@
+\section[Notebook 1972-11: transverse subobjects]{Notebook 1972-11: transverse subobjects\protect\verifie{Notebook1972_11}}\label{sec:quillen-1972-11-transverse}
+
+\emph{Context.} In the first pages of \carnet{1972}{11} Quillen filters objects in two directions, and asks that the two filtrations be transverse. On page~9 (his page~5) he recalls what this means for two subobjects $A$, $B$ of an object $X$ of an abelian category, with the diagram of the nine quotients of $X$ by $A$, $B$, $A \cap B$ and $A + B$.
+
+\emph{The page.} He lists four conditions and says that they are equivalent: $A + B = X$; a condition on the map $X \to X/A \times X/B$; $B \to X/A$ is onto; $A \to X/B$ is onto. When they hold, $A$ and $B$ are called transverse in $X$. In the transcription the second condition is written as an isomorphism $X \xrightarrow{\sim} X/A \times X/B$.
+
+\emph{Intuition.} The kernel of $X \to X/A \times X/B$ is $A \cap B$. The map is onto exactly when every pair of classes $(x \bmod A,\ y \bmod B)$ has a common representative, that is, when $x - y$ always lies in $A + B$. So surjectivity is the condition $A + B = X$, and injectivity is the independent condition $A \cap B = 0$. With an isomorphism the second condition would say that $X = A \oplus B$, which is stronger than the three others: in $X = \mathbf Z$, $A = B = X$ are transverse and the map to $X/A \times X/B = 0$ is not injective.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen, notebook 1972-11, p.~9]\label{thm:quillen-1972-11-transverse}
+Let $A$ and $B$ be submodules of a module $X$. The following are equivalent: \emph{(i)} $A + B = X$; \emph{(ii)} the map $X \to X/A \times X/B$ is surjective; \emph{(iii)} $B \to X/A$ is surjective; \emph{(iv)} $A \to X/B$ is surjective. The map of \emph{(ii)} is injective if and only if $A \cap B = 0$, and bijective if and only if $X = A \oplus B$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(i) $\Rightarrow$ (iii): write $x = a + b$; then $x$ and $b$ have the same class modulo $A$. (iii) $\Rightarrow$ (i): if $b \in B$ has the class of $x$ modulo $A$, then $x = (x - b) + b$. (iv) is (iii) with $A$ and $B$ exchanged. (i) $\Rightarrow$ (ii): given $x$ and $y$, write $x - y = a + b$; then $z = x - a = y + b$ has the class of $x$ modulo $A$ and of $y$ modulo $B$. (ii) $\Rightarrow$ (i): given $x$, take $z$ with the class of $x$ modulo $A$ and of $0$ modulo $B$; then $x = (x - z) + z$ with $x - z \in A$ and $z \in B$. The kernel of the map of (ii) is $A \cap B$.
+\end{proof}
+
+\emph{Verification in Lean.} The section \texttt{Transverse} of the file \href{\leanblobmain/Notebook1972_11.lean}{\texttt{Notebook1972\_11.\allowbreak{}lean}} proves the equivalences as \texttt{sup\_eq\_top\_iff\_surjective\_right}, \texttt{sup\_eq\_top\_iff\_surjective\_left} and \texttt{sup\_eq\_top\_iff\_surjective\_prod}, with \texttt{A.mkQ.prod B.mkQ} for the map to the product, and the last sentence as \texttt{injective\_prod\_iff} and \texttt{bijective\_prod\_iff}, with \texttt{IsCompl A B}. The statement is proved for modules over a ring, not in an abelian category. The axioms used are the three usual axioms of mathlib.
+
+\litterature{This is the elementary form of the Chinese remainder theorem for two submodules. Mathlib has the equivalence of (i) and (iii) (\texttt{Submodule.map\_mkQ\_eq\_top}); we did not find there the statement on the map to the product. We say \q{after} because the theorem replaces the isomorphism of the transcription by a surjection; the handwriting has not been re-read against the facsimile on this point, and the sign may be an arrow rather than an isomorphism. The edition does not present the statement as new.}

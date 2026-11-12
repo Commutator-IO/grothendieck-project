@@ -1,0 +1,28 @@
+\section[Notebook 1971-12: a group with $FV = VF = p^d$ and $F = p^{d+r}$]{Notebook 1971-12: an abelian group with $FV = VF = p^d$ and $F = p^{d+r}$\protect\verifie{Notebook1971_12}}\label{sec:quillen-1971-12}
+
+\emph{Context.} In September 1971, \carnet{1971}{12} considers the $K$-groups $K_nA$ of a ring $A$ of characteristic $p$, with the map $F$ induced by the Frobenius and its transfer $V$. On page~22 he finds $VF = p^d$, where $p^d$ is the rank of $A$ over its subring of $p$-th powers, and he argues on pages~22 and~23 that $FV$ is also multiplication by $p^d$. He wants to combine this with a conjecture, that $K_nA$ has high $\gamma$-filtration for $n$ large, which would make $F$ act through high powers of $p$.
+
+\emph{The page.} He isolates the essential case as a lemma on abelian groups (page~23, his page~2). Let $M$ be an abelian group with two endomorphisms $F$, $V$ such that $FV = VF = p^d$ and $F = p^{d+r}$ with $r > 0$. Then $M = M' \oplus M''$, where $M' = p^dM$ is the largest $p$-divisible subgroup and $M''$, the subgroup of elements killed by $p^d$, is the $p$-torsion subgroup. So $M$ is the sum of a $\mathbf Z[1/p]$-module and a group of exponent $p^d$. The proof, on page~24, shows that $p^d(x - p^rVx) = 0$, splits $M$ by the operator $1 - p^rV$, which is an automorphism of $M''$, and iterates $x = p^rVx$ on its kernel.
+
+\emph{Intuition.} Since $F$ is multiplication by $p^{d+r}$, the relation $FV = p^d$ reads $p^d\,(1 - p^rV) = 0$: up to elements killed by $p^d$, every $x$ equals $p^rVx$, hence $p^{2r}V^2x$, and so on, so that $x$ is divisible by arbitrarily high powers of $p$ up to such elements. The relation $VF = p^d$ reads $p^d = V \circ p^{d+r}$: what is killed by $p^{d+r}$ is already killed by $p^d$, so the torsion cannot grow.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1971-12, p.~23]\label{thm:quillen-1971-12}
+Let $M$ be an abelian group, $p \ge 1$, $d \ge 0$ and $r > 0$ integers, and $F$, $V$ endomorphisms of $M$ such that $FV = VF = p^d$ and $F = p^{d+r}$. Then:
+\begin{enumerate}
+\item[\emph{(a)}] $M = p^dM \oplus M[p^d]$, where $M[p^d]$ is the subgroup of elements killed by $p^d$;
+\item[\emph{(b)}] every element of $M$ killed by a power of $p$ is killed by $p^d$;
+\item[\emph{(c)}] $p^dM = p^sM$ for all $s \ge d$, and $p^dM$ contains every subgroup $D$ such that $D \subset pD$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+For all $x$, $p^dx = FVx = p^{d+r}Vx$, so $t(x) = x - p^rVx$ is killed by $p^d$. By induction on $n$, $x = t_n + p^{nr}V^nx$ with $p^dt_n = 0$: apply the identity to $V^nx$ and multiply by $p^{nr}$. (b) If $p^{d+r}x = 0$, in particular if $p^sx = 0$ with $s \le d + r$, then $p^dx = VFx = V(p^{d+r}x) = 0$; if $p^sx = 0$ with $s > d + r$, apply this to $p^{s-d-r}x$ to get $p^{s-r}x = 0$, and conclude by induction on $s$. (c) Multiply $x = t_n + p^{nr}V^nx$ by $p^d$: $p^dx = p^{d+nr}V^nx$, which lies in $p^sM$ as soon as $nr \ge s - d$. If $D \subset pD$ then $D \subset p^dD \subset p^dM$. (a) Take $n = d$: since $dr \ge d$, $x = t_d + p^{dr}V^dx$ lies in $M[p^d] + p^dM$. If $x = p^dy$ and $p^dx = 0$, then $p^{2d}y = 0$, so $p^dy = 0$ by (b), that is $x = 0$.
+\end{proof}
+
+\noindent The proof of the page splits $M$ as the kernel of $1 - p^rV$ plus $M[p^d]$, using that $1 - p^rV$ is invertible on $M[p^d]$, where $p^rV$ is nilpotent. The proof above iterates the same identity on every element and does not use that inverse. Neither proof uses that $p$ is prime.
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1971_12.lean}{\texttt{Notebook1971\_12.\allowbreak{}lean}} takes two additive endomorphisms \texttt{F}, \texttt{V} of an additive commutative group \texttt{M}, with the three hypotheses written pointwise. The identity is \texttt{nsmul\_sub\_eq\_zero} and its iteration \texttt{exists\_decomp}. Part~(b) is \texttt{nsmul\_eq\_zero\_of\_pow\_nsmul}, part~(c) is \texttt{exists\_nsmul\_eq} and \texttt{le\_range\_of\_divisible}, and part~(a) is \texttt{isCompl\_range\_ker}, which says that the image and the kernel of multiplication by $p^d$ are complementary subgroups. The application to $K$-theory is not formalised; on the page it depends on a conjecture that Quillen names as such. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The search did not locate the lemma as a stated result; it is elementary, of the kind used for Frobenius and Verschiebung on groups killed by, or divisible by, powers of $p$. The consequence drawn on the page, that $K_nA$ would be the sum of a $\mathbf Z[1/p]$-module and a group of exponent $p^d$, is conditional on the conjecture. The edition does not present the lemma as new.}

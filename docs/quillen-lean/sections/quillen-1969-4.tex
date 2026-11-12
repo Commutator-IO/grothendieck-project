@@ -1,0 +1,30 @@
+\section[Notebook 1969-4: $(p^j)!$ divided by its power of $p$]{Notebook 1969-4: $(p^j)!$ divided by its power of $p$, modulo $p$\protect\verifie{Notebook1969_4}}\label{sec:quillen-1969-4}
+
+\emph{Context.} \carnet{1969}{4}, of March 1969, contains among other things a study of formal group laws of height one and of characteristic numbers in $K$-theory. On page~44 Quillen recalls a theorem of Adams on the Chern character and states a lemma: if $f$ is a root of $X^{p-1} = p$, the power series $(1 - e^{-fX})/(fX)$ is $p$-integral and congruent modulo $p$ to $\sum_{j \ge 0} (-1)^j X^{p^j - 1}$.
+
+\emph{The page.} The proof is on page~45. The coefficient of $X^{n-1}$ is, up to sign, $f^{n-1}/n!$, of valuation $(n-1)/(p-1) - v(n!)$. Quillen notes that this is positive unless $n = p^j$, in which case $v(n!) = (n-1)/(p-1)$. It remains to find the residue modulo $p$ of $(p^j)!/p^r$, with $r = (p^j - 1)/(p - 1)$. He splits the integers up to $p^j$ into those prime to $p$ and those divisible by $p$, cites Wilson for the first, and finds by induction that $(p^j)!/p^{1 + p + \dots + p^{j-1}} \equiv (-1)^j$ modulo $p$.
+
+\emph{Intuition.} Among the integers from $1$ to $pm$, the multiples of $p$ are $p, 2p, \dots, mp$, with product $p^m\,m!$. The others fall into $m$ blocks $pk + 1, \dots, pk + p - 1$, each congruent modulo $p$ to $1, \dots, p - 1$, with product $(p-1)! \equiv -1$ by Wilson's theorem. Hence
+\[
+  (pm)! = p^m \cdot m! \cdot U_m, \qquad U_m \equiv (-1)^m \pmod p.
+\]
+With $m = p^{j-1}$ this passes from $(p^{j-1})!$ to $(p^j)!$, and each step contributes a sign $(-1)^{p^{j-1}}$, which is $-1$ modulo $p$ (for $p = 2$, $-1 = 1$).
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1969-4, p.~45]\label{thm:quillen-1969-4}
+Let $p$ be a prime and $j \ge 0$. The $p$-adic valuation of $(p^j)!$ is $r = (p^j - 1)/(p - 1) = 1 + p + \dots + p^{j-1}$, and
+\[
+  \frac{(p^j)!}{p^{\,r}} \equiv (-1)^j \pmod p.
+\]
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+By induction on $m$, $(pm)! = p^m\,m!\,U_m$, where $U_m$ is the product of the integers up to $pm$ that are prime to $p$: passing from $m$ to $m + 1$ multiplies the factorial by $(pm + 1)\cdots(pm + p - 1)$ and by $p(m + 1)$. Each block $(pk + 1)\cdots(pk + p - 1)$ is congruent to $(p - 1)! \equiv -1$ modulo $p$, so $U_m \equiv (-1)^m$. We show by induction on $j$ that $(p^j)! = p^{r_j} a_j$ with $r_j = 1 + \dots + p^{j-1}$ and $a_j \equiv (-1)^j$. For $j = 0$, $a_0 = 1$. For the step, $(p^{j+1})! = p^{p^j}\,(p^j)!\,U_{p^j} = p^{p^j + r_j}\,a_j U_{p^j}$, and $a_jU_{p^j} \equiv (-1)^j(-1)^{p^j} = (-1)^{j+1}$ modulo $p$, since $p^j$ is odd when $p$ is odd and $-1 = 1$ modulo $2$. As $a_j$ is not divisible by $p$, the valuation of $(p^j)!$ is $r_j$, and $r_j = (p^j - 1)/(p - 1)$ is the sum of the geometric progression.
+\end{proof}
+
+\noindent The page writes the sign of one step as $(-1)^{p^{j-1}}$ and concludes $(-1)^j$, which supposes $p$ odd. The statement also holds for $p = 2$, where it says that $(2^j)!/2^{2^j - 1}$ is odd.
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1969_4.lean}{\texttt{Notebook1969\_4.\allowbreak{}lean}} defines \texttt{block p m}, the product of $pm + 1, \dots, pm + p - 1$, and \texttt{primeToPart p m}, the number $U_m$. The splitting is \texttt{factorial\_mul}, and the congruences are \texttt{block\_zmod}, from \texttt{ZMod.wilsons\_lemma} of mathlib, and \texttt{primeToPart\_zmod}. The induction is \texttt{exists\_factorial\_pow\_eq}. The two parts of Theorem~\ref{thm:quillen-1969-4} are \texttt{padicValNat\_factorial\_pow} and \texttt{factorial\_pow\_div\_zmod}; in the second the quotient is the quotient of natural numbers, and the congruence is an equality in \texttt{ZMod p}. The lemma on the power series $(1 - e^{-fX})/(fX)$, and the claim that the valuation is positive when $n$ is not a power of $p$, are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The valuation is Legendre's formula, which mathlib has in general (\texttt{sub\_one\_mul\_padicValNat\_factorial}). The residue of the part of $n!$ prime to $p$ is classical (generalisations of Wilson's theorem; see for instance Granville, \q{Binomial coefficients modulo prime powers}, 1997, as recalled). The statement is formalised because the lemma of the page rests on it. The edition does not present it as new.}
