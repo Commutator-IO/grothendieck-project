@@ -161,11 +161,11 @@ Two rules held throughout:
 - [x] 142 · b. 3 · p. 52 · current: « le graphe d'un octaèdre » · proposed: a triangular bipyramid (five vertices) · source: drawings.json 03-3 — APPLIED: confirmed (P_ε, P_ε′, Q_i, Q_j, Q_k: five vertices); \note after the mark. Changes the mathematics: see below.
 - [x] 142 · b. 6 · p. 107 · current: « β relevé » once · proposed: twice · source: drawings.json 06-7 — APPLIED: confirmed; \note after the mark.
 - [x] 142 · b. 6 · p. 109 · current: (a_1^- a_1^+)^{-1} · proposed: (a_1^{--} a_1^{-+}) · source: drawings.json 06-9, t142-settled — APPLIED: confirmed at 450 dpi, crop turned 180° (a₁⁻⁻ a₁⁻⁺, no exponent −1); \note after the mark.
-- [ ] 144 · b. 3 · p. 54 · current: « dix triangles-repères » · proposed: nine · source: drawings.json 03-4 — not yet looked at
-- [ ] 144 · b. 7 · p. 125 · current: M^{!∘}, M^∘ plain · proposed: underlined · source: drawings.json 07-1 — not yet looked at
-- [ ] 144 · b. 7 · p. 133 · current: list of the cube · proposed: adds Π′ in the second row · source: drawings.json 07-7 — not yet looked at
-- [ ] 144 · b. 7 · p. 135 · current: list of the variant · proposed: adds S (overwritten middle node) · source: drawings.json 07-8 — not yet looked at
-- [ ] 144 · b. 7 · p. 139 · current: middle line of the fair copy · proposed: adds a node M under Z^!_{0ρ} (Michel, #135) · source: drawings.json 07-11 — not yet looked at
+- [x] 144 · b. 3 · p. 54 · current: « dix triangles-repères » · proposed: nine · source: drawings.json 03-4 — APPLIED: nine labelled triangles at 120 dpi, as the list gives; \note after the mark.
+- [ ] 144 · b. 7 · p. 125 · current: M^{!∘}, M^∘ plain · proposed: underlined · source: drawings.json 07-1 — OPEN: at 160 dpi an underline under M^{!∘} and M^∘ cannot be told from the edges that run beneath them.
+- [ ] 144 · b. 7 · p. 133 · current: list of the cube · proposed: adds Π′ in the second row · source: drawings.json 07-7 — OPEN: not looked at in this pass (very pale pencil sketch).
+- [ ] 144 · b. 7 · p. 135 · current: list of the variant · proposed: adds S (overwritten middle node) · source: drawings.json 07-8 — OPEN: not looked at in this pass.
+- [ ] 144 · b. 7 · p. 139 · current: middle line of the fair copy · proposed: adds a node M under Z^!_{0ρ} (Michel, #135) · source: drawings.json 07-11 — OPEN: not looked at in this pass (Michel's reading, #135, is recorded in drawings.json 07-11).
 - [x] 146 · b. 1 · p. 19 · current: « quatre petits cercles fléchés » · proposed: five · source: drawings.json 01-5 — APPLIED: five arrowed loops counted; \note after the mark.
 - [x] 146 · b. 2 · p. 23 · current: Q_+ at the top, Q_- at the bottom · proposed: Q_- at the top, Q_+ at the bottom · source: drawings.json 02-2, t83-settled — APPLIED: at 600 dpi the top label is Q with a bare dash (no vertical stroke), the bottom one Q with a +; \note after the mark.
 - [x] 146 · b. 4 · p. 65 · current: « un hexagone (deux triangles accolés …) » · proposed: a pentagon whose centre is joined to its five vertices (Michel, #142) · source: drawings.json 04-6 — APPLIED: confirmed (five vertices, centre joined to each); \note after the mark.
