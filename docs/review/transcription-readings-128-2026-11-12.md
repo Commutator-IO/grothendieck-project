@@ -110,10 +110,10 @@ Two rules held throughout:
 - [ ] 81 · b. 3 · p. 42 · current: « une vingtaine » of points · proposed: 21: 7 full, 14 open (Michel, #142) · source: drawings.json 03-2 — NOT APPLIED (no misreading): « une vingtaine » is true of 21; the mark gives the exact count.
 - [x] 81 · b. 3 · p. 47 · current: figure « à droite » · proposed: at the left, in the margin (Michel, #143) · source: drawings.json 03-4 — APPLIED: the circle with three chords is in the left margin (35 dpi page view); note corrected.
 - [x] 81 · b. 3 · p. 53 · current: « une double flèche » · proposed: a pair of opposite arrows one above the other (Michel, #143) · source: drawings.json 03-7 — APPLIED: pairs of opposite arrows, one above the other (250 dpi); note corrected.
-- [ ] 83 · b. 1 · p. 15 · current: labels u, u_0; v_0 omitted · proposed: v_0 at the right vertex; an overinked u at the centre; no u_0 · source: drawings.json 01-6, t83-settled — not yet looked at
-- [ ] 83 · b. 3 · p. 52 · current: « son étoile de diagonales intérieures » · proposed: short broken strokes and dots only · source: drawings.json 03-2 — not yet looked at
-- [ ] 83 · b. 11 · p. 204 · current: diagonal i; f, f′ labels · proposed: no diagonal i (a letter); f, f′ are words of the text · source: drawings.json 11-4 — not yet looked at
-- [ ] 83 · b. 11 · p. 212 · current: vertex C · proposed: C′ · source: drawings.json 11-6 — not yet looked at
+- [x] 83 · b. 1 · p. 15 · current: labels u, u_0; v_0 omitted · proposed: v_0 at the right vertex; an overinked u at the centre; no u_0 · source: drawings.json 01-6, t83-settled — APPLIED: v_0 at the right vertex, an overinked u at the centre, no u_0 (300 dpi); \note after the mark.
+- [x] 83 · b. 3 · p. 52 · current: « son étoile de diagonales intérieures » · proposed: short broken strokes and dots only · source: drawings.json 03-2 — APPLIED: confirmed at 400 dpi; \note after the mark.
+- [x] 83 · b. 11 · p. 204 · current: diagonal i; f, f′ labels · proposed: no diagonal i (a letter); f, f′ are words of the text · source: drawings.json 11-4 — APPLIED: confirmed (f, f′ in the text line « Si f, f′ sont adjacentes … »); \note after the mark.
+- [ ] 83 · b. 11 · p. 212 · current: vertex C · proposed: C′ · source: drawings.json 11-6 — OPEN: at 200 dpi the corner meant is not told apart from the edge letter c beside it; not settled.
 - [x] 85 · b. 1 · p. 5 · current: two lines and the arc ρ_i · proposed: a third ray from the crossing; ρ_i runs to it · source: g31-report — APPLIED: three strokes from the crossing at 250 dpi; note corrected.
 - [x] 85 · b. 2 · p. 33 · current: fork labels · proposed: four labels 1, 0, J′, J · source: g31-report — APPLIED: 1, 0, J (a hook) and J′ at 300 dpi; note corrected.
 - [x] 85 · b. 2 · p. 35 · current: circle points · proposed: four points · source: g31-report — APPLIED: four points counted; note corrected.
