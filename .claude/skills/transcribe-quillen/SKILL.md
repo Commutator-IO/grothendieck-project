@@ -23,11 +23,13 @@ public repository stays git-ignored and is only a working copy.
 Since 2026-09-30 the user's instruction is to transcribe nothing yet. Run this
 skill only when they ask for a specific notebook in so many words.
 
-**Runs on Opus 5.5, and on nothing else** — the same rule as
-`/transcribe-grothendieck`, for the same reason: this is a sustained visual
-attention task, and the file's header must say which model read the pages.
-Opus 5.5 (`claude-opus-5-5`) only; on anything else, stop and say which model
-the session is on.
+**Runs on Opus 5.5 or on Fable 5.2, and on nothing else.** This is a
+sustained visual attention task, and the file's header must say which model
+read the pages. Until 12 November 2026 the rule was Opus 5.5 only, as for
+`/transcribe-grothendieck`; on that day the editor kept the twelve notebooks
+transcribed on Fable 5.2 (1971-8 to 1973-12, quillen-project #1) and widened
+the rule. Opus 5.5 (`claude-opus-5-5`) or Fable 5.2 (`claude-fable-5-2`); on
+anything else, stop and say which model the session is on.
 
 ## What this produces
 
@@ -143,7 +145,7 @@ The file opens like this:
 % Mathematics Institute), read on the private mirror archives/quillen/….
 % Luke's index entry consulted: yes.
 % Not for distribution: the notebooks are in copyright (#36).
-% Pass: Opus 5.5 (claude-opus-5-5), <date> — first pass, unchecked against the pages by a human.
+% Pass: <model, e.g. Fable 5.2 (claude-fable-5-2)>, <date> — first pass, unchecked against the pages by a human.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/quillen}
 

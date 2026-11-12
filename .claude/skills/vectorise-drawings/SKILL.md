@@ -5,8 +5,9 @@ description: Extracts and vectorises the drawings of a transcribed folder of the
 
 # Vectorising the drawings of a folder
 
-**Runs on Fable 5.2 or on Opus 5.5, and on nothing else.** This is the one
-skill of the project that is not tied to Opus 5.5 alone: on 10 November 2026
+**Runs on Fable 5.2 or on Opus 5.5, and on nothing else.** With
+`/transcribe-quillen` it is one of the two skills of the project that are
+not tied to Opus 5.5 alone: on 10 November 2026
 the two models redrew the same six drawings blind (154/05-2, 154/06-2,
 74/03-4, 69/06-8, 142/06-15, 156-9/06-1) from the same crops and brief, and
 the editor, shown the two sets side by side without their names, preferred
