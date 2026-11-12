@@ -1,0 +1,19 @@
+\section[Notebook 1970-1: the polynomial of a finite additive subgroup is additive]{Notebook 1970-1: the polynomial of a finite additive subgroup of a field is additive\protect\verifie{Notebook1970_1}}\label{sec:quillen-1970-1}
+
+\emph{Context.} In \carnet{1970}{1} Quillen studies the mod~$2$ homology of the symmetric groups through the Dickson invariants. The Stiefel--Whitney classes $w_{2^a - 2^i}$ of the regular representation of $(\mathbf Z/2)^a$ are the coefficients of $\prod_{v \in V}(X - v)$, where $V$ is the dual of $(\mathbf Z/2)^a$ inside the cohomology.
+
+\emph{The page.} On pages~11 and~15--16 he uses that this product is $\sum_i w_{2^a - 2^i}X^{2^i}$, an additive function of $X$, and defines with it the operation $\Gamma(e(L)) = \sum_i w_{2^a-2^i}\,e(L)^{2^i}$ on Euler classes of line bundles.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen, notebook 1970-1, pp.~11, 15--16]\label{thm:quillen-1970-1}
+Let $V$ be a finite additive subgroup of a field $K$ and $P_V = \prod_{v \in V}(X - v)$. Then $P_V$ is monic of degree $|V|$, $P_V(X + v) = P_V(X)$ for $v \in V$, and $P_V(x + y) = P_V(x) + P_V(y)$ for all $x, y \in K$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Translation by $v \in V$ permutes the factors. For fixed $x$, the polynomial $R(Y) = P_V(Y + x) - P_V(Y) - P_V(x)$ has degree less than $|V|$, since $P_V(Y + x)$ and $P_V(Y)$ are monic of the same degree, and it vanishes at every $v \in V$: $P_V(v + x) = P_V(x)$ and $P_V(v) = 0$. So $R = 0$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1970_1.lean}{\texttt{Notebook1970\_1.\allowbreak{}lean}} proves the theorem as \texttt{subgroupPoly\_monic}, \texttt{natDegree\_subgroupPoly}, \texttt{subgroupPoly\_comp\_X\_add\_C} and \texttt{subgroupPoly\_add}, for an \texttt{AddSubgroup} with a \texttt{Fintype} instance. No hypothesis on the characteristic is used. That the coefficients sit only in degrees $p^i$ (Ore's $p$-polynomials), and the cohomology, are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical: Ore, \emph{On a special class of polynomials} (Trans.\ AMS 35, 1933), and Dickson's invariants; mathlib has the case $V = \mathbf F_q$ through $X^q - X$, not the general one. The edition does not present it as new.}

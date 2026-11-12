@@ -1,0 +1,19 @@
+\section[Notebooks 1970-11 and 1974-2: the digit-sum bound]{Notebooks 1970-11 and 1974-2: a nonzero multiple of $p^d - 1$ has digit sum at least $d(p-1)$\protect\verifie{Notebook1970_11}}\label{sec:quillen-1970-11-digits}
+
+\emph{Context.} On pages~20 to~22 of \carnet{1970}{11} Quillen looks for the first invariant of $\mathbf F_q^\times$, $q = p^r$, in the cohomology of the additive group $\mathbf F_q$ with coefficients in $\bar{\mathbf F}_p$. A monomial has degree $\sum_a (2n_a - \varepsilon_a)$ and weight $\sum_a n_ap^a$, with $\varepsilon_a \in \{0, 1\}$ and $\varepsilon_a = 0$ when $n_a = 0$, and it is invariant when $p^r - 1$ divides the weight. Pages~21 and~22 are crossed out by a diagonal stroke and marked to be ignored; the statement they prove holds. In \carnet{1974}{2}, page~26, the same count appears for the characters of $\mathbf F_{p^d}^\times$ in $\Lambda^i \otimes \Gamma_j$: an invariant needs $a_0, \ldots, a_{d-1} \ge 0$ with $\sum a_i = i + j$ and $\sum a_ip^i \equiv 0 \pmod{p^d - 1}$, and Quillen notes that this forces $i + j \ge d(p-1)$.
+
+\emph{The page.} The argument of 1970-11 is a cyclic carrying: if $n_a \ge p$, replace $n_a$ by $n_a - p$ and $n_{a+1}$ by $n_{a+1} + 1$, the index read modulo $r$; the weight is unchanged modulo $p^r - 1$ and the degree drops. At the end all $n_a \le p - 1$, the weight is then $p^r - 1$, so every $n_a = p - 1$, and the first invariant is in degree $r(2p - 3)$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1970-11, pp.~21--22; notebook 1974-2, p.~26]\label{thm:quillen-1970-11-digits}
+Let $p \ge 2$ and $d \ge 0$. \emph{(i)} If $a_0, \ldots, a_{d-1} \ge 0$ are not all zero and $p^d - 1$ divides $\sum a_ip^i$, then $\sum a_i \ge d(p - 1)$. \emph{(ii)} If moreover $\varepsilon_i \in \{0, 1\}$, with $\varepsilon_i = 0$ when $a_i = 0$, then $\sum (2a_i - \varepsilon_i) \ge d(2p - 3)$, with equality for $a_i = p - 1$, $\varepsilon_i = 1$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(i) By induction on $\sum a_i$. If some $a_i \ge p$, the carry described above keeps the family nonzero and $\sum a_ip^i$ modulo $p^d - 1$ (it changes by $p^{i+1} - p^{i+1}$, or by $1 - p^d$ when $i = d - 1$), and lowers $\sum a_i$ by $p - 1$; the claim for the new family gives it for the old. If all $a_i \le p - 1$, then $0 < \sum a_ip^i \le \sum (p-1)p^i = p^d - 1$, so $\sum a_ip^i = p^d - 1$; then $\sum (p - 1 - a_i)p^i = 0$, every $a_i = p - 1$ and $\sum a_i = d(p-1)$. (ii) $\sum(2a_i - \varepsilon_i) \ge 2\sum a_i - d \ge 2d(p-1) - d$.
+\end{proof}
+
+\emph{Verification in Lean.} The second part of the file \href{\leanblobmain/Notebook1970_11.lean}{\texttt{Notebook1970\_11.\allowbreak{}lean}} proves (i) as \texttt{le\_sum\_of\_dvd}, by the carrying of the page (\texttt{carry}, \texttt{val\_carry}, \texttt{sum\_carry}) and the base case \texttt{base}, with the digits indexed by \texttt{Fin d}, and (ii) as \texttt{le\_degree} and \texttt{degree\_extremal}. The cohomology and the characters are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The bound is an elementary fact on base-$p$ digits: the least digit sum of a nonzero multiple of $p^d - 1$ is $d(p-1)$; the character count of 1974-2 is that of Quillen, \emph{On the cohomology and $K$-theory of the general linear groups over a finite field} (Ann.\ of Math.\ 96, 1972). The edition does not present it as new.}
