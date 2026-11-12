@@ -97,14 +97,14 @@ Two rules held throughout:
 - [ ] 79 · b. 15 · p. 285 · current: ρ⁻¹(s) · proposed: λ⁻¹(s) · source: drawings.json 15-8 — not yet looked at
 - [ ] 79 · b. 15 · p. 286 · current: « une étoile de six triangles » · proposed: seven triangles (eight spokes, one sector open) · source: drawings.json 15-10 — not yet looked at
 - [ ] 79 · b. 15 · p. 290 · current: « un pentagone dont tous les sommets sont joints » · proposed: a hexagon with two interlaced triangles · source: drawings.json 15-12 — not yet looked at
-- [ ] 80 · b. 1 · p. 12 · current: six pseudo-lines, regions 4_1 … 4_6 · proposed: five lines and a short stroke; no 4_4 · source: g31-report; drawings.json 01-5 — not yet looked at
-- [ ] 80 · b. 1 · p. 13 · current: double primes at the upper corners of the left square · proposed: −1 and +1 · source: g31-report — not yet looked at
-- [ ] 80 · b. 1 · p. 20 · current: six marked points in configuration (5) · proposed: seven · source: g31-report — not yet looked at
-- [ ] 80 · b. 2 · p. 22 · current: dashed line joining the two vertices · proposed: through the lower vertex only · source: g31-report; drawings.json 02-6 — not yet looked at
-- [ ] 80 · b. 2 · p. 24 · current: two ringed points · proposed: three (the diagonal points) · source: g31-report — not yet looked at
-- [ ] 80 · b. 3 · p. 44 · current: « un heptagone » · proposed: a hexagon (Michel, #132) · source: drawings.json 03-1 — not yet looked at
-- [ ] 80 · b. 3 · p. 53 · current: « une sixième droite » · proposed: the six lines are three sides and three concurrent lines · source: g31-report — not yet looked at
-- [ ] 80 · b. 3 · p. 57 · current: small triangle at the centre; four dots · proposed: a square cut by its two diagonals; five dots · source: g31-report; drawings.json 03-7 — not yet looked at
+- [x] 80 · b. 1 · p. 12 · current: six pseudo-lines, regions 4_1 … 4_6 · proposed: five lines and a short stroke; no 4_4 · source: g31-report; drawings.json 01-5 — APPLIED: confirmed at 200 dpi (five lines and a short stroke; no 4_4); note corrected.
+- [x] 80 · b. 1 · p. 13 · current: double primes at the upper corners of the left square · proposed: −1 and +1 · source: g31-report — APPLIED: at 600 dpi the corners carry digits (« −1 », written as if twice, and « 1 » with a stroke read +), not primes; note corrected, both flagged \uncertain.
+- [x] 80 · b. 1 · p. 20 · current: six marked points in configuration (5) · proposed: seven · source: g31-report — APPLIED: seven dots counted; note corrected.
+- [x] 80 · b. 2 · p. 22 · current: dashed line joining the two vertices · proposed: through the lower vertex only · source: g31-report; drawings.json 02-6 — APPLIED: confirmed; note corrected.
+- [x] 80 · b. 2 · p. 24 · current: two ringed points · proposed: three (the diagonal points) · source: g31-report — APPLIED: three ringed points; note corrected.
+- [x] 80 · b. 3 · p. 44 · current: « un heptagone » · proposed: a hexagon (Michel, #132) · source: drawings.json 03-1 — APPLIED: six sides and six corners counted; \note set after the mark.
+- [x] 80 · b. 3 · p. 53 · current: « une sixième droite » · proposed: the six lines are three sides and three concurrent lines · source: g31-report — APPLIED: confirmed (triangle a, b, c and three lines through d); note corrected.
+- [x] 80 · b. 3 · p. 57 · current: small triangle at the centre; four dots · proposed: a square cut by its two diagonals; five dots · source: g31-report; drawings.json 03-7 — APPLIED: confirmed (square cut by its two diagonals; five dots); note corrected.
 - [ ] 81 · b. 1 · p. 11 · current: « deux axes fléchés », three disks OK · proposed: only the horizontal axis has a head; four disks marked OK/ok · source: drawings.json 01-2, t83-settled — not yet looked at
 - [ ] 81 · b. 2 · p. 26 · current: first sign of the legend ⊃ · proposed: a hooked arrow (Michel, #143) · source: drawings.json 02-3 — not yet looked at
 - [ ] 81 · b. 3 · p. 42 · current: « une vingtaine » of points · proposed: 21: 7 full, 14 open (Michel, #142) · source: drawings.json 03-2 — not yet looked at
@@ -253,4 +253,5 @@ Two rules held throughout:
 ## Readings that change the mathematics: for /modernize-grothendieck and /find-novelty
 
 - **76 p. 11** (batch 1): the arrow barred by a cross in the lattice of flags for n = 2 is D_02 → D_2, not D_02 → D_1. `76.modern.tex` (about l. 593) says « La flèche D_{02} → D_1 est barrée … : il n'y a pas de restriction de D_{0,2} vers D_{1} ». With D_02 → D_2 crossed, that gloss no longer holds, and by the page's own rule (D_I → D_J epi when J ⊂ I has the same top element) D_02 → D_2 is an epimorphism: the cross is more likely a cancellation of the stroke than a statement. To be rewritten by /modernize-grothendieck; no finding of `src/content/findings.ts` cites this arrow (checked by grep on 76).
+- **80 pp. 12 and 57** (batches 1 and 3): five pseudo-lines (not six; regions 4_1, 4_2, 4_3, 4_5, 4_6, no 4_4) on p. 12; on p. 57 the six lines meet in a central square cut by its two diagonals, not a small triangle. `80.modern.tex` l. 698–699 and l. 1659 repeat the old readings (« six pseudo-droites … six régions 4_1, …, 4_6 », « un petit triangle entouré de triangles »); to be corrected by /modernize-grothendieck. p. 44: the cyclic figure of « u_0(i) = i+1 » is a hexagon, not a heptagon (check the modern reading if it draws a count from it).
 
