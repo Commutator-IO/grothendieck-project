@@ -47,7 +47,7 @@ Two rules held throughout:
 - [ ] 43 · b. 6 · p. 107 · current: sketches « à droite » · proposed: in the left half of the page · source: g148-report, g148-settled; drawings.json 06-1 — OPEN: at the 30 dpi page view the sketches could not be told from the strike-throughs; not settled.
 - [ ] 43 · b. 9 · p. 177 · current: list of class names and groups · proposed: adds « multiplicatif séparable », « unipotent k-connexe », a second « multiplicatif k-connexe », more instances of groups · source: r148-report — OPEN: not looked at in this pass.
 - [ ] 45 · b. 3 · p. 52 · current: « triviale » and the large curve ending at (iii) · proposed: « triviale » beside (iii′) ⇒ (iii); the curve runs to (i″) · source: gsmallA-report, gsmallA-settled — not yet looked at
-- [ ] 46 · b. 2 · p. 30 · current: note on the Frobenius square (class t) · proposed: tikz-cd X ← U over X ← U with Fr_X, Fr_U · source: gsmallA-report — not yet looked at
+- [x] 46 · b. 2 · p. 30 · current: note on the Frobenius square (class t) · proposed: tikz-cd X ← U over X ← U with Fr_X, Fr_U · source: gsmallA-report — APPLIED (class t): at 500 dpi X, U over X ← U with Fr_X and Fr_U; no arrow on the top row (gsmallA's U → X there is not on the page); set as tikzcd after the note.
 - [ ] 53 · b. 2 · p. 31 · current: \marginal and note on A ⊗ A (class t) · proposed: tikz-cd A ← A ⊗ A ⇉ k, ε · source: gsmallA-report — not yet looked at
 - [ ] 57 · b. 7 · p. 138 · current: « un troisième croquis du même triangle, isolé au bas de la page » · proposed: no such sketch in that part of the page · source: drawings.json 07-2 — OPEN: at the 30 dpi page view the lower half is written upside down and holds a triangle sketch at the right; whether it is the « troisième croquis » is not settled.
 - [x] 57 · b. 8 · p. 141 · current: asterisk on the first cross of the upper row · proposed: the heavy cross is the first of the lower row · source: drawings.json 08-1 — APPLIED: at 350 dpi the heavy cross is the first of the lower row; \note after the mark.
@@ -135,7 +135,7 @@ Two rules held throughout:
 - [ ] 106 · b. 1 · p. 2 · current: « presque aucun n'est étiqueté » (class t) · proposed: most carry letters; tikz-cd for the centre and top left · source: gsmallB-report, rmisc-report — not yet looked at
 - [ ] 106 · b. 1 · p. 7 · current: note (class t) · proposed: two tikz-cd · source: gsmallB-report — not yet looked at
 - [ ] 106 · b. 1 · p. 15 · current: note (class t) · proposed: two tikz-cd · source: gsmallB-report — not yet looked at
-- [ ] 107 · b. 1 · p. 14 · current: « trois traits parallèles joignant X_{n-2} à X_{n-1} » (class t) · proposed: a triple arrow · source: gsmallB-report — not yet looked at
+- [ ] 107 · b. 1 · p. 14 · current: « trois traits parallèles joignant X_{n-2} à X_{n-1} » (class t) · proposed: a triple arrow · source: gsmallB-report — OPEN (class t): at 300 dpi three parallel strokes join X_{n−2} to X_{n−1}, but no arrowheads can be seen on them; not set as a triple arrow.
 - [ ] 117 · b. 1 · p. 2 · current: 2-cells x ⇉ y (class t) · proposed: tikz-cd with a 2-arrow · source: gsmallB-report — not yet looked at
 - [ ] 118 · b. 1 · p. 18 · current: note (class t) · proposed: tikz-cd u, y, u′, y′ · source: gsmallB-report — not yet looked at
 - [ ] 118 · b. 1 · p. 19 · current: base-change cube (class t) · proposed: tikz-cd with crossing over · source: gsmallB-report — not yet looked at
@@ -232,7 +232,7 @@ Two rules held throughout:
 - [ ] 154 · b. 9 · p. 172 · current: small triangles · proposed: four short pencil strokes (Michel, #143) · source: drawings.json 09-8 — OPEN: not looked at in this pass.
 - [x] 154 · b. 9 · p. 173 · current: « un cercle vert clair »; petals; corners · proposed: a ring of 8 bars and 8 lenses; sixteen petals; sixteen radial bars · source: r154b-report — APPLIED: ring of eight bars and eight lenses, sixteen radial bars, sixteen petals (80 dpi); note completed.
 - [ ] 154 · b. 9 · p. 175 · current: grey dashed line · proposed: two dark green and one blue dashed lines · source: r154b-report — OPEN: not looked at in this pass.
-- [ ] 156-1 · b. 2 · p. 25 · current: marginal figure x, t, y (class t) · proposed: tikz-cd x ⇄ y with t · source: gsmallB-report — not yet looked at
+- [x] 156-1 · b. 2 · p. 25 · current: marginal figure x, t, y (class t) · proposed: tikz-cd x ⇄ y with t · source: gsmallB-report — APPLIED (class t): at 450 dpi x, t, y and both arrowheads read; set as tikzcd after the note.
 - [x] 156-4 · b. 3 · p. 51 · current: third top node F̄′ · proposed: F⃗ (Michel, #142) · source: drawings.json 03-3, t83-settled — APPLIED: at 350 dpi F̄′ ≃ F′ ⊂ F⃗ ≃ F over Ḡ′ ≃ G′ ⊂ Ḡ ≃ G; \note after the mark (the mark's F̄″, Ḡ″ and F̄′ corrected there).
 - [x] 156-4 · b. 4 · p. 72 · current: sign « surchargé et barré » · proposed: overwritten, not struck · source: drawings.json 04-1 — APPLIED: confirmed at 350 dpi; \note after the mark.
 - [x] 156-6 · b. 5 · p. 88 · current: point « près d'un sommet » · proposed: on the left side, about its middle · source: drawings.json 05-3 — APPLIED: on the left side, about its middle (500 dpi); note corrected.
@@ -248,7 +248,7 @@ Two rules held throughout:
 - [x] 161-6 · b. 1 · p. 17 · current: vectors u, v from the centre · proposed: the heavy stroke runs from 0 to u, v starts at u · source: g1616-report — APPLIED: confirmed at 250 dpi; note corrected.
 - [x] 161-6 · b. 1 · p. 18 · current: A_2 … A_3 in the cyclic order · proposed: A_3 at the bottom, A_2 at the left · source: g1616-report; drawings.json 01-5 — APPLIED: A_3 at the bottom and A_2 at the left at 200 dpi; note corrected (the mark already has this order).
 - [x] 161-6 · b. 1 · p. 19 · current: « trois vecteurs issus d'un point », « un décagone » · proposed: two ink figures of four strokes each; eight corners · source: g1616-report — APPLIED in part: two ink figures of four strokes each; note corrected, « un décagone » replaced by « un polygone au crayon » (the corners under the ink were not counted in this pass).
-- [ ] 162-5 · b. 2 · p. 21 · current: \marginal (class t) · proposed: tikz-cd X_2 ⇛ X_1 ⇉ X_0 with curved arrows up · source: rmisc-report — not yet looked at
+- [x] 162-5 · b. 2 · p. 21 · current: \marginal (class t) · proposed: tikz-cd X_2 ⇛ X_1 ⇉ X_0 with curved arrows up · source: rmisc-report — APPLIED (class t): at 400 dpi three arrows down and two curved up between X_2 and X_1, two down and one curved up between X_1 and X_0, all solid (as rmisc reads, not gsmallB's dashed version); set as an array in the \marginal, since the renderer's tikz-cd subset has no shifted parallel arrows.
 
 ## Readings that change the mathematics: for /modernize-grothendieck and /find-novelty
 
