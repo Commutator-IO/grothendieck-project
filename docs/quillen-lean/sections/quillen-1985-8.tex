@@ -1,0 +1,17 @@
+\section[Notebook 1985-8: the series of $(1 - x)^{-1/2}$]{Notebook 1985-8: $\sum_k \binom{2k}{k}x^k/4^k = (1 - x)^{-1/2}$\protect\verifie{Notebook1985_8}}\label{sec:quillen-1985-8}
+
+\emph{Context.} On page~37 of \carnet{1985}{8} Quillen uses the generating series $\sum_{k \ge 0}\binom{2k}{k}x^k/4^k = (1 - x)^{-1/2}$, with $\binom{2k}{k}/4^k = \prod_{j=1}^k(1 - 1/2j)$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1985-8, p.~37]\label{thm:quillen-1985-8}
+As formal power series over $\mathbf Q$, $\bigl(\sum_{k \ge 0}\binom{2k}{k}x^k/4^k\bigr)^2(1 - x) = 1$; equivalently $\sum_{i+j=n}\binom{2i}{i}\binom{2j}{j} = 4^n$ for every $n$. Moreover $\binom{2k}{k}/4^k = \prod_{j=1}^k(1 - 1/2j)$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Let $c_k = \binom{2k}{k}$ and $s_n = \sum_{i+j=n}c_ic_j$. By symmetry $2\sum_{i+j=n}ic_ic_j = ns_n$. Applied to $n + 1$, and with $(i+1)c_{i+1} = 2(2i+1)c_i$, it gives $(n+1)s_{n+1} = 2\sum_{i+j=n}2(2i+1)c_ic_j = 4(ns_n + s_n)$, so $s_{n+1} = 4s_n$ and $s_n = 4^n$. The coefficient of $x^n$ in the square of the series is $s_n/4^n = 1$. The product formula follows from $c_{k+1}/4c_k = (2k+1)/(2k+2)$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1985_8.lean}{\texttt{Notebook1985\_8.\allowbreak{}lean}} proves the theorem as \texttt{centralSeries\_sq\_mul}, with mathlib's \texttt{PowerSeries.invUnitsSub}, \texttt{sum\_centralBinom\_mul} and \texttt{centralBinom\_div\_four\_pow}. The analytic statement for $|x| < 1$ is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (Graham, Knuth and Patashnik, \emph{Concrete Mathematics}, (5.39) and the binomial series). Mathlib has the central binomial coefficients and bounds on them, not the convolution identity. The edition does not present it as new.}
