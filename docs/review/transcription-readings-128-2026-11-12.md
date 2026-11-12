@@ -157,10 +157,10 @@ Two rules held throughout:
 - [ ] 140-1 · b. 1 · p. 18 · current: five curves · proposed: four · source: omidB-report — not yet looked at
 - [ ] 141 · b. 1 · p. 9 · current: « deux points marqués » · proposed: three · source: gmid-report; drawings.json 01-2 — not yet looked at
 - [ ] 141 · b. 1 · p. 14 · current: labels of the back arc · proposed: 2, 1, 3 (review line kept) · source: gmid-report — not yet looked at
-- [ ] 142 · b. 3 · p. 51 · current: incisions from P_ε at the top · proposed: from the bottom pole P_ε′ · source: drawings.json 03-2 — not yet looked at
-- [ ] 142 · b. 3 · p. 52 · current: « le graphe d'un octaèdre » · proposed: a triangular bipyramid (five vertices) · source: drawings.json 03-3 — not yet looked at
-- [ ] 142 · b. 6 · p. 107 · current: « β relevé » once · proposed: twice · source: drawings.json 06-7 — not yet looked at
-- [ ] 142 · b. 6 · p. 109 · current: (a_1^- a_1^+)^{-1} · proposed: (a_1^{--} a_1^{-+}) · source: drawings.json 06-9, t142-settled — not yet looked at
+- [x] 142 · b. 3 · p. 51 · current: incisions from P_ε at the top · proposed: from the bottom pole P_ε′ · source: drawings.json 03-2 — APPLIED: confirmed (the heavy strokes rise from P_ε′ at the bottom to the holes); \note after the mark.
+- [x] 142 · b. 3 · p. 52 · current: « le graphe d'un octaèdre » · proposed: a triangular bipyramid (five vertices) · source: drawings.json 03-3 — APPLIED: confirmed (P_ε, P_ε′, Q_i, Q_j, Q_k: five vertices); \note after the mark. Changes the mathematics: see below.
+- [x] 142 · b. 6 · p. 107 · current: « β relevé » once · proposed: twice · source: drawings.json 06-7 — APPLIED: confirmed; \note after the mark.
+- [x] 142 · b. 6 · p. 109 · current: (a_1^- a_1^+)^{-1} · proposed: (a_1^{--} a_1^{-+}) · source: drawings.json 06-9, t142-settled — APPLIED: confirmed at 450 dpi, crop turned 180° (a₁⁻⁻ a₁⁻⁺, no exponent −1); \note after the mark.
 - [ ] 144 · b. 3 · p. 54 · current: « dix triangles-repères » · proposed: nine · source: drawings.json 03-4 — not yet looked at
 - [ ] 144 · b. 7 · p. 125 · current: M^{!∘}, M^∘ plain · proposed: underlined · source: drawings.json 07-1 — not yet looked at
 - [ ] 144 · b. 7 · p. 133 · current: list of the cube · proposed: adds Π′ in the second row · source: drawings.json 07-7 — not yet looked at
@@ -254,4 +254,6 @@ Two rules held throughout:
 
 - **76 p. 11** (batch 1): the arrow barred by a cross in the lattice of flags for n = 2 is D_02 → D_2, not D_02 → D_1. `76.modern.tex` (about l. 593) says « La flèche D_{02} → D_1 est barrée … : il n'y a pas de restriction de D_{0,2} vers D_{1} ». With D_02 → D_2 crossed, that gloss no longer holds, and by the page's own rule (D_I → D_J epi when J ⊂ I has the same top element) D_02 → D_2 is an epimorphism: the cross is more likely a cancellation of the stroke than a statement. To be rewritten by /modernize-grothendieck; no finding of `src/content/findings.ts` cites this arrow (checked by grep on 76).
 - **80 pp. 12 and 57** (batches 1 and 3): five pseudo-lines (not six; regions 4_1, 4_2, 4_3, 4_5, 4_6, no 4_4) on p. 12; on p. 57 the six lines meet in a central square cut by its two diagonals, not a small triangle. `80.modern.tex` l. 698–699 and l. 1659 repeat the old readings (« six pseudo-droites … six régions 4_1, …, 4_6 », « un petit triangle entouré de triangles »); to be corrected by /modernize-grothendieck. p. 44: the cyclic figure of « u_0(i) = i+1 » is a hexagon, not a heptagon (check the modern reading if it draws a count from it).
+- **142 p. 52** (batch 3): the graph along whose cycles the isomorphisms (30) compose is a triangular bipyramid (two poles P_ε, P_ε′, three Q_i on the equator; five vertices), not an octahedron. `142.modern.tex` l. 1065 says « le long des cycles du graphe de l'octaèdre (deux pôles, trois Q_i) »: the parenthesis is right, the name is not; to be corrected by /modernize-grothendieck (and any finding of `findings.ts` on folder 142 that names the octahedron should be checked by /find-novelty).
+- **142 p. 109** (batch 6): the inscription in the loop above the circle of 1 is (a₁⁻⁻ a₁⁻⁺), not (a₁⁻ a₁⁺)⁻¹. Only the \drawing description carried it; the modern reading does not quote it (grep), nothing to rewrite unless it is drawn on later.
 
