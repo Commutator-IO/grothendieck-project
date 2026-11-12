@@ -114,14 +114,14 @@ Two rules held throughout:
 - [ ] 83 · b. 3 · p. 52 · current: « son étoile de diagonales intérieures » · proposed: short broken strokes and dots only · source: drawings.json 03-2 — not yet looked at
 - [ ] 83 · b. 11 · p. 204 · current: diagonal i; f, f′ labels · proposed: no diagonal i (a letter); f, f′ are words of the text · source: drawings.json 11-4 — not yet looked at
 - [ ] 83 · b. 11 · p. 212 · current: vertex C · proposed: C′ · source: drawings.json 11-6 — not yet looked at
-- [ ] 85 · b. 1 · p. 5 · current: two lines and the arc ρ_i · proposed: a third ray from the crossing; ρ_i runs to it · source: g31-report — not yet looked at
-- [ ] 85 · b. 2 · p. 33 · current: fork labels · proposed: four labels 1, 0, J′, J · source: g31-report — not yet looked at
-- [ ] 85 · b. 2 · p. 35 · current: circle points · proposed: four points · source: g31-report — not yet looked at
-- [ ] 85 · b. 3 · p. 49 · current: two closed triangles · proposed: a zigzag of four strokes with small arrows · source: g31-report — not yet looked at
-- [ ] 85 · b. 5 · p. 91 · current: Z → Z³ → Z³ in a note · proposed: optional display formula · source: g31-report — not yet looked at
-- [ ] 85 · b. 5 · p. 95 · current: E_2 at the foot of the diamond; vertex list; S̃_3 · proposed: F_2; a node A′_3; S̃_3 = S_3 × S′_2 · source: g31-report, g31-settled — not yet looked at
-- [ ] 85 · b. 5 · p. 95 · current: lower perspective lattice only in a note · proposed: a figure no mark covers · source: drawings.json 05-2 — not yet looked at
-- [ ] 85 · b. 5 · p. 97 · current: middle group of D_3 ↔ ? ↔ D_3 ↔ S_3 × S″_2 read S_3 · proposed: A_3 · source: g31-report, g31-settled — not yet looked at
+- [x] 85 · b. 1 · p. 5 · current: two lines and the arc ρ_i · proposed: a third ray from the crossing; ρ_i runs to it · source: g31-report — APPLIED: three strokes from the crossing at 250 dpi; note corrected.
+- [x] 85 · b. 2 · p. 33 · current: fork labels · proposed: four labels 1, 0, J′, J · source: g31-report — APPLIED: 1, 0, J (a hook) and J′ at 300 dpi; note corrected.
+- [x] 85 · b. 2 · p. 35 · current: circle points · proposed: four points · source: g31-report — APPLIED: four points counted; note corrected.
+- [x] 85 · b. 3 · p. 49 · current: two closed triangles · proposed: a zigzag of four strokes with small arrows · source: g31-report — APPLIED: a zigzag of strokes with small arrows at 250 dpi; note corrected.
+- [ ] 85 · b. 5 · p. 91 · current: Z → Z³ → Z³ in a note · proposed: optional display formula · source: g31-report — NOT APPLIED: optional (the maps are already given in the note); nothing misread.
+- [x] 85 · b. 5 · p. 95 · current: E_2 at the foot of the diamond; vertex list; S̃_3 · proposed: F_2; a node A′_3; S̃_3 = S_3 × S′_2 · source: g31-report, g31-settled — APPLIED in part: F_2 confirmed at 400 dpi (\note after the mark). Not checked: the node A′_3 and the full label S̃_3 = S_3 × S′_2.
+- [ ] 85 · b. 5 · p. 95 · current: lower perspective lattice only in a note · proposed: a figure no mark covers · source: drawings.json 05-2 — NOT APPLIED (drawing work, not a reading): a figure that no \drawing mark covers is for the vectorising skill.
+- [x] 85 · b. 5 · p. 97 · current: middle group of D_3 ↔ ? ↔ D_3 ↔ S_3 × S″_2 read S_3 · proposed: A_3 · source: g31-report, g31-settled — APPLIED: A_3 at 300 dpi; \note after the mark.
 - [ ] 86 · b. 1 · p. 6 · current: outer letter a″ · proposed: c′ · source: g67-report — not yet looked at
 - [ ] 86 · b. 1 · p. 7 · current: pencil frame « un cube » · proposed: not legible as a cube · source: g67-report — not yet looked at
 - [ ] 86 · b. 2 · p. 29 · current: margin sketch of the diagram of p. 31 (class t) · proposed: tikz-cd proposed, to check against p. 31 · source: g67-report — not yet looked at
