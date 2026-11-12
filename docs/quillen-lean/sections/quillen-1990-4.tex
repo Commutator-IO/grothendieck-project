@@ -1,0 +1,17 @@
+\section[Notebook 1990-4: separability makes derivations inner]{Notebook 1990-4: a separability element makes derivations inner\protect\verifie{Notebook1990_4}}\label{sec:quillen-1990-4}
+
+\emph{Context.} On pages~13--14 of \carnet{1990}{4} Quillen shows, from a separability element $e = \sum_ix_i \otimes y_i$, that every derivation is inner.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1990-4, pp.~13--14]\label{thm:quillen-1990-4}
+Let $A$ be an algebra over a commutative ring $k$, $e = \sum_ix_i\otimes y_i \in A \otimes_k A$ with $\sum_ix_iy_i = 1$ and $ae = ea$ for all $a$, and $D : A \to A$ a $k$-linear map with $D(ab) = aD(b) + D(a)b$. Then $D(a) = ac - ca$ with $c = \sum_ix_iD(y_i)$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Apply $x \otimes y \mapsto xD(y)$ to $ae = ea$: $\sum_iax_iD(y_i) = \sum_ix_iD(y_ia) = \sum_ix_iy_iD(a) + \sum_ix_iD(y_i)a = D(a) + ca$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1990_4.lean}{\texttt{Notebook1990\_4.\allowbreak{}lean}} proves \texttt{eq\_inner}, for an additive Leibniz map of any ring with the image identity as hypothesis, and \texttt{eq\_inner\_of\_comm}, from $ae = ea$ in $A \otimes_k A$. The matrix separability element is \S\ref{sec:quillen-1991-4-separable}. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (separable algebras have vanishing Hochschild cohomology in degree one); the edition does not present it as new.}

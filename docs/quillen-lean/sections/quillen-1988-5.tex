@@ -1,0 +1,17 @@
+\section[Notebook 1988-5: the cyclic counting lemma]{Notebook 1988-5: the cyclic counting lemma in trace form\protect\verifie{Notebook1988_5}}\label{sec:quillen-1988-5}
+
+\emph{Context.} On pages~87--88 of \carnet{1988}{5} Quillen counts words in two letters up to cyclic permutation; in trace form the count is the derivative of a trace of powers.
+
+\begin{encadre}
+\begin{theoreme}[after Quillen, notebook 1988-5, pp.~87--88]\label{thm:quillen-1988-5}
+For square matrices $A$, $B$ over a commutative ring, $\frac{d}{ds}\operatorname{tr}((sA + B)^{m+1}) = (m + 1)\operatorname{tr}(A(sA + B)^m)$ as polynomials in $s$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+For a matrix $M$ of polynomials, $(M^n)' = \sum_{i<n}M^iM'M^{n-1-i}$ by the Leibniz rule; by cyclicity each term has trace $\operatorname{tr}(M'M^{n-1})$. Apply this to $M = sA + B$, with $M' = A$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1988_5.lean}{\texttt{Notebook1988\_5.\allowbreak{}lean}} proves \texttt{map\_derivative\_pow}, \texttt{trace\_map\_derivative\_pow} and \texttt{derivative\_trace\_pow}. The coefficientwise form, $k$ times the trace of the words of bidegree $(k, p)$ equals $k + p$ times the trace of $A$ times the words of bidegree $(k - 1, p)$, is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (cyclicity of the trace); the edition does not present it as new.}

@@ -1,0 +1,21 @@
+\section[Notebook 1986-7: inverse Toeplitz determinants; Newton]{Notebook 1986-7: the inverse of a unipotent Toeplitz matrix; Newton's identity for the Chern character\protect\verifie{Notebook1986_7Series}}\label{sec:quillen-1986-7-series}
+
+\emph{Context.} Computing degeneracy classes, Quillen inverts the total Chern class, $c(Q) = 1/c(S)$, through determinants of Toeplitz matrices (pages~28--29 of \carnet{1986}{7}); on page~45 he recovers the Chern character from the logarithmic derivative of $c_t$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1986-7, pp.~28--29, 45]\label{thm:quillen-1986-7-series}
+Let $R$ be a commutative ring.
+\begin{enumerate}
+\item If $(1 + c_1T + c_2T^2 + \cdots)(1 + b_1T + b_2T^2 + \cdots) = 1$ in $R[[T]]$, then $(-1)^nb_n$ is the determinant of the $n \times n$ matrix with entries $c_{j-i+1}$ for $i \le j + 1$ (with $c_0 = 1$) and $0$ below the subdiagonal: $c_1$ on the diagonal, $1$ under it.
+\item For $c_t = \prod_j(1 + x_jt)$ in $R[[t]]$, $t\,\frac{d}{dt}c_t = c_t\sum_{d\ge1}(-1)^{d-1}p_dt^d$, with $p_d = \sum_j x_j^d$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) The lower triangular Toeplitz matrices $T_c = (c_{i-j})$ and $T_b = (b_{i-j})$ of size $n + 1$ are inverse to each other, since their product is the Toeplitz matrix of the product series. As $\det T_c = 1$, $T_b$ is the adjugate of $T_c$, so $b_n$ is the cofactor of the entry $(0, n)$, that is $(-1)^n$ times the minor obtained by deleting the first row and the last column; this minor is the transpose of the matrix of the statement. (2) For one factor, $(1 + xt)\sum_{d\ge1}(-1)^{d-1}x^dt^d = xt$, which is $t$ times the derivative of $1 + xt$; the general case follows by the Leibniz rule, by induction on the number of factors.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1986_7Series.lean}{\texttt{Notebook1986\_7Series.\allowbreak{}lean}} proves (1) as \texttt{neg\_one\_pow\_mul\_coeff\_eq\_det}, through \texttt{toeplitz\_mul\_toeplitz} and mathlib's \texttt{adjugate\_fin\_succ\_eq\_det\_submatrix}, and (2) as \texttt{X\_mul\_derivative\_prod}; no division by integers is needed in this form. The Durfee identity and the strict-sum lemma of pages~55--56 are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical: (1) is the determinantal expression of the inverse of a power series (Wronski; in the language of symmetric functions, $h_n = \det(e_{1-i+j})$, Macdonald, \emph{Symmetric functions and Hall polynomials}, I, \S2); (2) is Newton's identity. The edition does not present them as new.}

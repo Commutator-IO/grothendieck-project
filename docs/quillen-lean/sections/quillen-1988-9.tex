@@ -1,0 +1,25 @@
+\section[Notebooks 1984-13 to 1989-4: Beta integrals]{Notebooks 1984-13, 1988-5, 1988-7, 1988-9, 1989-4: Beta integrals with integer exponents\protect\verifie{Notebook1988_9}}\label{sec:quillen-1988-9}
+
+\emph{Context.} The normalising constants of Quillen's Chern--Simons and cyclic-cocycle formulas are Beta integrals $\int_0^1(t^2 - t)^kt^\ell\,dt$; they recur on page~3 of \carnet{1984}{13}, pages~53 and~85 of \carnet{1988}{5}, page~13 of \carnet{1988}{7}, page~72 of \carnet{1988}{9}, and, over a $2$-simplex, page~56 of \carnet{1989}{4}.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebooks 1984-13, 1988-5, 1988-7, 1988-9, 1989-4]\label{thm:quillen-1988-9}
+For natural numbers $a$, $b$, $i$, $j$, $k$, $\ell$, $m$, $q$:
+\begin{enumerate}
+\item $\int_0^1 t^a(1 - t)^b\,dt = a!\,b!/(a + b + 1)!$;
+\item (1988-9) $\int_0^1(t^2 - t)^kt^\ell\,dt = (-1)^kk!\,(k + \ell)!/(2k + \ell + 1)!$;
+\item (1988-5) $\frac1{k!}\int_0^1(t^2 - t)^k\,dt = (-1)^kk!/(2k + 1)!$ and $\frac1{(q+k)!}\int_0^1t^q(t^2 - t)^k\,dt = (-1)^kk!/(q + 2k + 1)!$;
+\item (1984-13) $\int_0^1(t^2 - t)^m\,t\,dt/m! = (-1)^m(m + 1)!/(2m + 2)!$ and $\int_0^1(t^2 - t)^m\,dt/m! = (-1)^mm!/(2m + 1)!$;
+\item (1988-7) $\int_0^1(m + 1)(t^2 - t)^m\,dt = (-1)^m(m + 1)!\,m!/(2m + 1)!$ and $\int_0^\infty e^{-t^2}t^{2m+1}\,dt = m!/2$;
+\item (1989-4) $\int_0^1\int_0^{1-t_1}(1 - t_1 - t_2)^it_1^jt_2^k\,dt_2\,dt_1 = i!\,j!\,k!/(i + j + k + 2)!$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) By induction on $b$: $t^a(1 - t)^{b+1} = t^a(1 - t)^b - t^{a+1}(1 - t)^b$, and $\frac{a!\,b!}{(a+b+1)!} - \frac{(a+1)!\,b!}{(a+b+2)!} = \frac{a!\,(b+1)!}{(a+b+2)!}$; for $b = 0$ the integral is $1/(a + 1)$. (2)--(5) follow from $(t^2 - t)^k = (-1)^kt^k(1 - t)^k$, and the Gaussian integral from mathlib's $\int_0^\infty x^qe^{-x^p}dx = \frac1p\Gamma(\frac{q+1}p)$. (6) The substitution $t_2 = (1 - t_1)u$ gives $\int_0^c(c - x)^ix^k\,dx = c^{i+k+1}\,i!\,k!/(i + k + 1)!$, and (1) again in $t_1$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1988_9.lean}{\texttt{Notebook1988\_9.\allowbreak{}lean}} proves (1) as \texttt{integral\_pow\_mul\_one\_sub\_pow}, without the Gamma function, then \texttt{integral\_sq\_sub\_pow\_mul\_pow}, \texttt{notebook1988\_5\_first} and \texttt{\_second}, \texttt{notebook1984\_13\_first} and \texttt{\_second} (written with $k = m + 1$), \texttt{notebook1988\_7\_beta}, \texttt{notebook1988\_7\_gauss}, \texttt{integral\_scaled} and \texttt{integral\_simplex}. The simplex integral is stated as an iterated integral, not as an integral over the simplex with its measure. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (Euler's Beta integral); mathlib has the complex Beta function and its Gamma formula, but not this real form with natural exponents. The edition does not present them as new.}

@@ -1,0 +1,20 @@
+\section[Notebooks 1990-2, 1990-3: rigid triple; Green operator]{Notebooks 1990-2 and 1990-3: the rigid triple in $S_n$; the Green operator of $\mathbf Z/n$\protect\verifie{Notebook1990_3}}\label{sec:quillen-1990-3}
+
+\emph{Context.} Page~2 of \carnet{1990}{3} opens with a rigid triple in the symmetric group: an $n$-cycle, a transposition and their product, an $(n - 1)$-cycle. Page~18, and page~11 of \carnet{1990}{2}, invert $1 - \kappa$ for $\kappa^n = 1$ on the complement of the invariants.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebooks 1990-2, p.~11, and 1990-3, pp.~2, 18]\label{thm:quillen-1990-3}
+\begin{enumerate}
+\item Let $\gamma$ be a cycle moving all $n \ge 3$ points of a finite set, and $x \ne y$. Then $\gamma\circ(x\ y)$ is a cycle moving $n - 1$ points if and only if $\gamma x = y$ or $\gamma y = x$.
+\item In a $\mathbf Q$-algebra, let $\kappa^n = 1$, $n \ge 1$, $P = \frac1n\sum_{j<n}\kappa^j$ and $G = \frac1n\sum_{j<n}(\frac{n-1}2 - j)\kappa^j$. Then $G(1 - \kappa) = (1 - \kappa)G = 1 - P$, $P(1 - \kappa) = 0$, $P^2 = P$ and $PG = GP = 0$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) If $\gamma x = y$, then $\gamma(x\ y) = (y\ \gamma y)\gamma$, and swapping $y$ with its image splits it off the cycle, which remains a cycle on the other points as $\gamma^2y \ne y$ (here $n \ge 3$). Conversely, a cycle moving $n - 1$ points has a fixed point $z$; since $\gamma$ has none, $z \in \{x, y\}$, and $\gamma y = x$ or $\gamma x = y$. (2) The sum $\sum_{j<m}(c - j)\kappa^j(1 - \kappa)$ telescopes to $c - (c - m)\kappa^m - \sum_{j<m}\kappa^{j+1}$; take $m = n$, $c = \frac{n-1}2$. $P\kappa = P$ gives the rest, with $\sum_{j<n}(\frac{n-1}2 - j) = 0$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1990_3.lean}{\texttt{Notebook1990\_3.\allowbreak{}lean}} proves (1) as \texttt{isCycle\_mul\_swap\_iff}, the direct implication through mathlib's \texttt{Equiv.Perm.IsCycle.swap\_mul} and \texttt{support\_swap\_mul\_eq}, and (2) as \texttt{green\_mul\_one\_sub}, \texttt{green\_commute}, \texttt{proj\_mul\_one\_sub}, \texttt{proj\_idem}, \texttt{proj\_mul\_green} and \texttt{green\_mul\_proj}, in any $\mathbf Q$-algebra. Rigidity of the triple, and the application of $G$ to cyclic homology, are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical: (1) is the cut-and-join rule for a transposition times a cycle; (2) is the standard Green operator of a finite cyclic group. The edition does not present them as new.}

@@ -1,0 +1,21 @@
+\section[Notebook 1988-4: Cuntz--Krieger matrix units]{Notebook 1988-4: Cuntz--Krieger matrix units; the $\mathcal O_2$ relations as a unitary block\protect\verifie{Notebook1988_4}}\label{sec:quillen-1988-4}
+
+\emph{Context.} Reading Cuntz and Krieger, Quillen writes on page~59 of \carnet{1988}{4} the matrix units of a Cuntz--Krieger algebra, and on page~60 the relations of $\mathcal O_2$ in matrix form.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1988-4, pp.~59--60]\label{thm:quillen-1988-4}
+In a ring with involution:
+\begin{enumerate}
+\item let $(s_i)$ satisfy $s_j^*s_l = 0$ for $j \ne l$, let $P_k = s_ks_k^*$ be pairwise orthogonal idempotents, $Q_j = s_j^*s_j$, and $P_kQ_j = P_k$ when $(j, k)$ is an edge of a graph $\Gamma$. Then for $(j, k) \in \Gamma$, $(s_iP_ks_j^*)(s_lP_ns_m^*) = \delta_{jl}\delta_{kn}\,s_iP_ks_m^*$;
+\item if $s_0^*s_0 = s_1^*s_1 = 1$, $s_0^*s_1 = 0$ and $s_0s_0^* + s_1s_1^* = 1$, the row $(s_0\ s_1)$ and the column $(s_0^*\ s_1^*)^t$ are inverse to each other.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) The middle factor $s_j^*s_l$ is $0$ for $j \ne l$, and $Q_j$ for $j = l$; then $P_kQ_jP_n = P_kP_n = \delta_{kn}P_k$. (2) The product row times column is $s_0s_0^* + s_1s_1^*$; the product column times row has entries $s_i^*s_j$, where $s_1^*s_0 = (s_0^*s_1)^* = 0$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1988_4.lean}{\texttt{Notebook1988\_4.\allowbreak{}lean}} proves \texttt{matrixUnit\_mul} (only the edge condition of the left factor is used, and no property of the involution), \texttt{row\_mul\_col} and \texttt{col\_mul\_row}. The $C^*$-algebras themselves are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (Cuntz--Krieger, \emph{Invent. Math.} 56 (1980); Cuntz, \emph{Comm. Math. Phys.} 57 (1977)); the edition does not present it as new.}

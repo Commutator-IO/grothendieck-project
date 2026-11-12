@@ -1,0 +1,21 @@
+\section[Notebook 1989-3: powers of a block matrix]{Notebook 1989-3: powers of a block matrix with a zero corner; an involution\protect\verifie{Notebook1989_3}}\label{sec:quillen-1989-3}
+
+\emph{Context.} On pages~99--100 of \carnet{1989}{3} Quillen computes the powers of a block matrix $\begin{pmatrix}A & B\\ C & 0\end{pmatrix}$ by a three-term recursion, and writes an involution in block form.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1989-3, pp.~99--100]\label{thm:quillen-1989-3}
+Over any ring:
+\begin{enumerate}
+\item let $P_0 = 0$, $P_1 = 1$, $P_{n+2} = AP_{n+1} + BCP_n$. Then $\begin{pmatrix}A & B\\ C & 0\end{pmatrix}^{n+1} = \begin{pmatrix}P_{n+2} & P_{n+1}B\\ CP_{n+1} & CP_nB\end{pmatrix}$, with rectangular blocks;
+\item if $b$, $c$ commute with $z$ and $bc = cb = 1 - z^2$, then $\begin{pmatrix}z & b\\ c & -z\end{pmatrix}^2 = 1$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) By induction on $n$, multiplying on the left by the block matrix. (2) Direct computation.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1989_3.lean}{\texttt{Notebook1989\_3.\allowbreak{}lean}} proves \texttt{fromBlocks\_pow\_succ} and \texttt{involution}. The page's $P_n$ is our $P_{n+1}$ (so that $P_{-1} = 0$ needs no special case). The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary (a noncommutative Chebyshev recursion); the edition does not present it as new.}

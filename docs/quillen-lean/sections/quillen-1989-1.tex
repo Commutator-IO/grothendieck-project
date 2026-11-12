@@ -1,0 +1,20 @@
+\section[Notebook 1989-1: the idempotent-lifting polynomial]{Notebook 1989-1: the idempotent-lifting polynomial; a unit of $\mathbf Q[x]/(x^{2n-1} - 1)$\protect\verifie{Notebook1989_1}}\label{sec:quillen-1989-1}
+
+\emph{Context.} On page~9 of \carnet{1989}{1} Quillen lifts idempotents modulo a nilpotent ideal with the normalised primitive of $(t - t^2)^n$; on page~72 he needs an odd sum of powers of a root of unity to be invertible.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1989-1, pp.~9, 72]\label{thm:quillen-1989-1}
+\begin{enumerate}
+\item Let $f(x) = \int_0^x(t - t^2)^n\,dt\big/\int_0^1(t - t^2)^n\,dt \in \mathbf R[x]$. Then $f(0) = 0$, $f(1) = 1$, $f(x) + f(1 - x) = 1$, and $(x^2 - x)^{n+1}$ divides $f^2 - f$.
+\item In a commutative $\mathbf Q$-algebra, if $x^{2n-1} = 1$ with $n \ge 1$, then $\sum_{j<n}x^{2j+1}$ is a unit.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) The primitive $F$ of $(x - x^2)^n$ vanishing at $0$ is divisible by $x^{n+1}$; $F(x) + F(1 - x)$ has zero derivative, hence equals $F(1) = \int_0^1(t - t^2)^n\,dt > 0$. So $f = F/F(1)$ satisfies $f(1 - x) = 1 - f(x)$, and $f^2 - f = -f(x)f(1 - x)$ is divisible by $x^{n+1}(1 - x)^{n+1}$. (2) Put $m = 2n - 1$ and $N = \sum_{k<m}x^k$. Then $xN = N$, so $N^2 = mN$; $(1 + x)\sum_{j<n}x^{2j} = \sum_{k<2n}x^k = 1 + N$, and $(1 + N)(1 - N/(m + 1)) = 1$. Finally $x$ is a unit since $x^m = 1$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1989_1.lean}{\texttt{Notebook1989\_1.\allowbreak{}lean}} proves (1) as \texttt{liftPoly\_eval\_zero}, \texttt{liftPoly\_eval\_one}, \texttt{liftPoly\_symm} and \texttt{liftPoly\_sq\_sub\_dvd}, with an explicit primitive \texttt{F} and the fundamental theorem of calculus for $F(1) > 0$, and (2) as \texttt{isUnit\_sum\_odd\_pow}. The page's argument for (2) goes through the roots of unity; the one here is algebraic. The value $F(1) = (n!)^2/(2n + 1)!$ is \S\ref{sec:quillen-1988-9}, (1); the use of $f$ to lift idempotents is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical: lifting idempotents modulo a nilpotent ideal by a polynomial is standard (see e.g.\ Lam, \emph{A first course in noncommutative rings}, \S21); (2) is elementary. The edition does not present them as new.}

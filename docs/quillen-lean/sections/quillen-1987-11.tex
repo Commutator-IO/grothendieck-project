@@ -1,0 +1,17 @@
+\section[Notebook 1987-11: the binomial series at a nilpotent]{Notebook 1987-11: the binomial series $(1 - \alpha)^{-1/2}$ at a nilpotent element\protect\verifie{Notebook1987_11}}\label{sec:quillen-1987-11}
+
+\emph{Context.} On page~77 of \carnet{1987}{11} Quillen normalises an involution by the series $\sum_k\binom{2k}{k}\alpha^k/4^k$ for $(1 - \alpha)^{-1/2}$, with $\alpha$ small.
+
+\begin{encadre}
+\begin{theoreme}[after Quillen, notebook 1987-11, p.~77]\label{thm:quillen-1987-11}
+Let $A$ be a $\mathbf Q$-algebra and $\alpha \in A$ with $\alpha^N = 0$. Then $s = \sum_{k<N}\binom{2k}{k}4^{-k}\alpha^k$ satisfies $s^2(1 - \alpha) = 1$. If moreover $u^2 = 1 - \alpha$ and $u$ commutes with $\alpha$, then $F = us$ satisfies $F^2 = 1$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Let $P \in \mathbf Q[X]$ be the truncation in degrees $< N$ of $\sum_k\binom{2k}k X^k/4^k$. Its square times $1 - X$ agrees with $1$ in degrees $< N$, since the formal identity $(\sum_k\binom{2k}kX^k/4^k)^2(1 - X) = 1$ holds (\S\ref{sec:quillen-1985-8}) and coefficients of degree $< N$ of a product depend only on the truncations. Hence $X^N$ divides $P^2(1 - X) - 1$; evaluating at $\alpha$ gives the first claim. For the second, $u$, $s$ and $\alpha$ commute, and $F^2 = u^2s^2 = (1 - \alpha)s^2 = 1$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1987_11.lean}{\texttt{Notebook1987\_11.\allowbreak{}lean}} proves \texttt{sq\_mul\_one\_sub} and \texttt{involution}, importing \texttt{Notebook1985\_8} for the formal identity; the algebra need not be commutative. The analytic case ($\alpha$ of norm $< 1$) is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (the binomial series); the edition does not present it as new.}

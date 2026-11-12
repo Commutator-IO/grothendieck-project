@@ -1,0 +1,17 @@
+\section[Notebook 1988-3: the operator $(x^2-1)\partial + 4x$]{Notebook 1988-3: the operator $(x^2 - 1)\partial_x + 4x$ on polynomials\protect\verifie{Notebook1988_3}}\label{sec:quillen-1988-3}
+
+\emph{Context.} On pages~46--47 of \carnet{1988}{3} Quillen studies the operator $L = (x^2 - 1)\partial_x + 4x$ on polynomials, computes it on monomials and asks for its image.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1988-3, pp.~46--47]\label{thm:quillen-1988-3}
+On $\mathbf R[x]$, the operator $L = (x^2 - 1)\partial_x + 4x$ sends $x^n$ to $(n + 4)x^{n+1} - nx^{n-1}$, is injective, and its image is the kernel of the linear form $\varphi(q) = \int_{-1}^1 q(x)(x^2 - 1)\,dx$, a hyperplane since $\varphi(1) = -4/3$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+The coefficient of $x^{N+1}$ in $Lp$ is $(N + 4)p_N - (N + 2)p_{N+2}$. For $N$ the degree of $p \ne 0$ it is $(N + 4)$ times the leading coefficient, so $Lp \ne 0$. Next, $(x^2 - 1)Lp = ((x^2 - 1)^2p)'$, and $(x^2 - 1)^2$ vanishes at $\pm1$, so $\varphi(Lp) = 0$. Conversely, let $\varphi(q) = 0$, of degree $d + 1$: subtracting a multiple of $L(x^d)$, whose coefficient of $x^{d+1}$ is $d + 4$, lowers the degree without leaving the kernel; one reaches a constant $c$ with $\varphi(c) = -4c/3 = 0$, so $c = 0$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1988_3.lean}{\texttt{Notebook1988\_3.\allowbreak{}lean}} proves \texttt{L\_X\_pow}, \texttt{L\_injective}, \texttt{phi\_L}, \texttt{phi\_one} and \texttt{mem\_range\_iff}, by induction on the degree. The page's use of $L$ (inverting it on the hyperplane) is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary: $(x^2 - 1)L = \partial_x\circ(x^2 - 1)^2$; the edition does not present it as new.}
