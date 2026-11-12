@@ -46,6 +46,7 @@ import Quillen.Notebook1983_ReviewGetzler
 import Quillen.Notebook1984_16
 import Quillen.Notebook1986_2
 import Quillen.Notebook1988_1
+import Quillen.Notebook1988_1Cocycle
 import Quillen.Notebook1991_4
 import Quillen.Notebook1995_2
 import Quillen.Upstream.GrothendieckGroup

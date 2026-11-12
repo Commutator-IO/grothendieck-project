@@ -1,0 +1,19 @@
+\section[Notebook 1988-1: the cocycle $\mathrm{tr}(x[y, \rho])$]{Notebook 1988-1: the cocycle $\operatorname{tr}(x[y, \rho])$ attached to an extension\protect\verifie{Notebook1988_1Cocycle}}\label{sec:quillen-1988-1-cocycle}
+
+\emph{Context.} On pages~73 to~77 of \carnet{1988}{1}, after the lemma of Section~\ref{sec:quillen-1988-1}, Quillen builds maps from $\mathrm{Ext}$ groups to duals of Hochschild homology by cocycles $(a_0, \ldots, a_n) \mapsto \operatorname{tr}_M(a_0[a_1, h]\cdots[a_n, h])$, with $h$ a $k$-linear splitting.
+
+\emph{The page.} For $n = 1$ and $A$ commutative, an extension of $M$ by $M$ is described by a $k$-linear endomorphism $\rho$ of $M$, and the cocycle $\varphi(x, y) = \operatorname{tr}(x[y, \rho])$ gives a map $\mathrm{Ext}^1_A(M, M) \to (\Omega^1_A)^*$: it is a derivation in its second variable, so that $x\,dy \mapsto \varphi(x, y)$ is well defined, and it does not change when $\rho$ is changed by an $A$-linear endomorphism.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen, notebook 1988-1, pp.~73--77]\label{thm:quillen-1988-1-cocycle}
+Let $\rho, \sigma, x, y, z$ be square matrices over a commutative ring and $\varphi_\rho(x, y) = \operatorname{tr}(x[y, \rho])$. If $xz = zx$ then $\varphi_\rho(x, yz) = \varphi_\rho(xy, z) + \varphi_\rho(xz, y)$. Moreover $\varphi_\rho(x, 1) = 0$, $\varphi_\rho(x, y) = -\varphi_\rho(y, x)$, and $\varphi_{\rho + \sigma}(x, y) = \varphi_\rho(x, y)$ if $\sigma$ commutes with $y$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Expanding, the first identity reduces to $\operatorname{tr}(xy\rho z) = \operatorname{tr}(xzy\rho)$ and $\operatorname{tr}(x\rho yz) = \operatorname{tr}(xz\rho y)$, which follow from the cyclicity of the trace and $zx = xz$. The other statements are immediate.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1988_1Cocycle.lean}{\texttt{Notebook1988\_1Cocycle.\allowbreak{}lean}} proves the theorem as \texttt{phi\_mul\_right}, \texttt{phi\_one}, \texttt{phi\_antisymm} and \texttt{phi\_add\_of\_commute}, for \texttt{Matrix n n k}, the elements of $A$ acting as commuting matrices on $M = k^n$. The $\mathrm{Ext}$ groups, the Kähler differentials and the residue are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The shape is that of Connes' character of a Fredholm module, $\operatorname{tr}(a_0[F, a_1]\cdots[F, a_n])$ (Publ.\ IHÉS 62, 1985), and the Hochschild route to the residue is Lipman's (\emph{Residues and traces of differential forms via Hochschild homology}, Contemp.\ Math.\ 61, 1987); for $n = 1$ the identities are elementary. The edition does not present them as new.}
