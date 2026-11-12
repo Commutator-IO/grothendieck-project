@@ -152,6 +152,28 @@ Alors $N(u_*)$ est une droite, engendrée par un multiplicateur $\lambda$ tel qu
 Les côtés sont non nuls. Le polygone est fermé ; pour $i$ pair, $u_{i-1}$ est vertical comme $u_1$ et $u_i$ est porté par la droite $s_0s_i$ ; pour $i$ impair, $u_i$ est vertical et $s_i$ est sur la droite $s_0s_{i-1}$, qui porte $u_{i-1}$. Le critère du théorème~\ref{thm:73-critere} donne un $\lambda \in N(u_*)$ avec $\lambda_0 = 0$ et $\lambda_1 = 1$, et $\lambda_i \neq 0$ pour $1 \leqslant i \leqslant 8$ puisque $s_i \neq s_0$ : l'abscisse de $s_i$, pour $i \geqslant 3$, est un produit de $\beta_j$ non nuls. Comme $u_0 \wedge u_1 = 1$ et que $u_4 \neq u_1$ (l'abscisse de $u_4$ est $(\beta_2 - 1)\beta_1 \neq 0$), le polygone n'est pas un triangle parcouru trois fois, et $\dim N(u_*) \neq 2$ par le théorème~\ref{thm:73-hyperspecial} ; donc $\dim N(u_*) = 1$.
 \end{proof}
 
-Lean : \texttt{nonagon}, \texttt{nonagon\_multSpace}. La lecture le vérifiait numériquement \q{pour des valeurs génériques des paramètres} ; il vaut pour toutes les valeurs qu'autorise la page, sur tout corps. On est dans le cas spécial~II, en $i = 0$.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.5cm, y=1.5cm, every node/.style={font=\small}, pt/.style={circle, fill, inner sep=1.1pt}]
+\coordinate (s0) at (0,0); \coordinate (s1) at (1,0); \coordinate (s2) at (1,1);
+\coordinate (s3) at (2,2); \coordinate (s4) at (2,0.8); \coordinate (s5) at (3.2,1.28);
+\coordinate (s6) at (3.2,-0.6); \coordinate (s7) at (1.6,-0.3); \coordinate (s8) at (1.6,-1.2);
+% Les droites issues de s_0 qui portent u_2, u_4 et u_6.
+\draw[black!45, dashed] (s0) -- (2.25,2.25);
+\draw[black!45, dashed] (s0) -- (3.5,1.4);
+\draw[black!45, dashed] (s0) -- (3.5,-0.656);
+\draw[thick] (s0) -- (s1) -- (s2) -- (s3) -- (s4) -- (s5) -- (s6) -- (s7) -- (s8) -- cycle;
+\foreach \p in {s0,s1,s2,s3,s4,s5,s6,s7,s8} \node[pt] at (\p) {};
+\node[left=2pt] at (s0) {$s_0$}; \node[below=2pt] at (s1) {$s_1$}; \node[left=2pt] at (s2) {$s_2$};
+\node[above=2pt] at (s3) {$s_3$}; \node[below right=1pt] at (s4) {$s_4$}; \node[right=2pt] at (s5) {$s_5$};
+\node[right=2pt] at (s6) {$s_6$}; \node[above=2pt] at (s7) {$s_7$}; \node[below=2pt] at (s8) {$s_8$};
+\node[right=1pt] at (1,0.45) {$u_1$}; \node[right=1pt] at (2,1.45) {$u_3$};
+\node[right=1pt] at (3.2,0.3) {$u_5$}; \node[right=1pt] at (1.6,-0.78) {$u_7$};
+\end{tikzpicture}
+\caption{L'ennéagone du théorème~\ref{thm:73-enneagone} pour $\beta_1 = 2$, $\beta_2 = 8/5$, $\beta_3 = 1/2$, $y_4 = 4/5$, $y_6 = -3/5$, $y_8 = -6/5$. Les côtés $u_1$, $u_3$, $u_5$, $u_7$ sont verticaux ; les côtés $u_2$, $u_4$, $u_6$ sont portés par des droites issues de $s_0$ (en tirets), et $u_8$ revient en $s_0$. C'est la condition~b) du théorème~\ref{thm:73-critere} : la paire de directions de $\{u_{i-1}, u_i\}$ est celle de $\{u_1, u_{0i}\}$. Figure de l'édition, d'après le croquis de la page~18.}
+\label{fig:73-enneagone}
+\end{figure}
+
+La figure~\ref{fig:73-enneagone} le dessine pour un choix de paramètres. Lean : \texttt{nonagon}, \texttt{nonagon\_multSpace}. La lecture le vérifiait numériquement \q{pour des valeurs génériques des paramètres} ; il vaut pour toutes les valeurs qu'autorise la page, sur tout corps. On est dans le cas spécial~II, en $i = 0$.
 
 Ne sont pas démontrés ici : l'équation du second degré du pentagone (page~19) et la formule de Gauss ; le foncteur $\mathrm{Polg}_n$ de la page~1 ; l'énoncé du plan projectif sur $\operatorname{Spec}\mathbf{Z}$.
