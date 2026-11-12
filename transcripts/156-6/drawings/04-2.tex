@@ -1,35 +1,24 @@
 % Drawing 156-6/04-2 -- folder 156-6, batch 04, archive page 73 (PDF page 74).
 % Transcription: schéma (barré) : un hexagone $F, H, G$ en haut, $F', K', G'$ en bas, avec $K$ et $H'$ au centre ; flèches à crochet pour les $\leq$ ($F \to H$, $G \to H$, $K \to F$, $K \to G$, $K' \to F'$, $K' \to G'$, $F' \to H'$, $G' \to H'$) et flèches verticales pour les $\ll$ ($F' \to F$, $G' \to G$, $H' \to H$, $K' \to K$). Il est repris au propre page 74
 % Kind: struck hexagon of inclusions F, H, G / F', K', G' with K, H' in the centre. Method 2 (schematic redraw from the facsimile). Status: ok.
-% Notes: F, H, G at the top, F', K', G' at the bottom, K and H' in the centre; arrows for <= (F -> H, G -> H, K -> F, K -> G, K' -> F', K' -> G', F' -> H', G' -> H') and upward arrows for << (F' -> F, G' -> G, H' -> H, K' -> K). Hooked arrows (for <=) are drawn as plain arrows, vertical arrows (for <<) likewise; the kind of arrow is said here. Omitted as struck: the three long oblique strokes that cross out the whole diagram (it is redone fair on p. 74, drawing 04-3); the diagram under them is drawn in ink, as the transcription records it. Issue 128, 2026-11-09: struck material left out after a fresh check of the facsimile (struck-out material is not drawn). Redrawn 2026-11-09 (issue 128): to check again.
+% Notes: Redrawn 2026-11-12 after Michel's answer (#146): the figure is a cube, the arrows for <= are hooked, the struck figure is drawn as under the strike; set in 3D with TikZ (unprimed face on top, primed face below, << as the vertical edges). Earlier note: F, H, G at the top, F', K', G' at the bottom, K and H' in the centre; arrows for <= (F -> H, G -> H, K -> F, K -> G, K' -> F', K' -> G', F' -> H', G' -> H') and upward arrows for << (F' -> F, G' -> G, H' -> H, K' -> K). Hooked arrows (for <=) are drawn as plain arrows, vertical arrows (for <<) likewise; the kind of arrow is said here. Omitted as struck: the three long oblique strokes that cross out the whole diagram (it is redone fair on p. 74, drawing 04-3); the diagram under them is drawn in ink, as the transcription records it. Issue 128, 2026-11-09: struck material left out after a fresh check of the facsimile (struck-out material is not drawn). Redrawn 2026-11-09 (issue 128): to check again.
 % Coordinates: 1 unit = 1 mm = 1/100 of the crop width (bbox in page fractions: [0.18, 0.54, 0.52, 0.69]).
 % Redrawn by Claude (claude-opus-5-5), issue #73, 2026-11-07; not checked by a human; not compiled (no TeX in the session).
 % Rights: reproduces part of the work -- behind RENDER_TRANSCRIPTS, never published by itself.
 \documentclass[tikz,border=3pt]{standalone}
 \usepackage{amsmath,amssymb}
-\usetikzlibrary{patterns,arrows.meta}
-\tikzset{pencil/.style={black!45}, struck/.style={black!35}, mark/.style={circle,draw,inner sep=1.3pt}, pt/.style={circle,fill,inner sep=0.9pt}, opt/.style={circle,draw,fill=white,inner sep=1.1pt}}
+\usetikzlibrary{arrows.meta}
 \begin{document}
-\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\scriptsize]
-\node[inner sep=1pt] at (43,-14) {\scriptsize $F$};
-\node[inner sep=1pt] at (69,-6) {\scriptsize $H$};
-\node[inner sep=1pt] at (86,-17) {\scriptsize $G$};
-\node[inner sep=1pt] at (62,-28) {\scriptsize $K$};
-\node[inner sep=1pt] at (71,-35) {\scriptsize $H'$};
-\node[inner sep=1pt] at (41,-45) {\scriptsize $F'$};
-\node[inner sep=1pt] at (83,-46) {\scriptsize $G'$};
-\node[inner sep=1pt] at (61,-57) {\scriptsize $K'$};
-\draw[-{Stealth[length=2mm]}] (51,-11) -- (64,-7);
-\draw[-{Stealth[length=2mm]}] (82,-14) -- (74,-8);
-\draw[-{Stealth[length=2mm]}] (56,-28) -- (47,-19);
-\draw[-{Stealth[length=2mm]}] (66,-26) -- (79,-21);
-\draw[-{Stealth[length=2mm]}] (56,-54) -- (45,-48);
-\draw[-{Stealth[length=2mm]}] (67,-54) -- (79,-48);
-\draw[-{Stealth[length=2mm]}] (48,-44) -- (68,-36);
-\draw[-{Stealth[length=2mm]}] (82,-40) -- (74,-38);
-\draw[-{Stealth[length=2mm]}] (43,-34) -- (43,-23);
-\draw[-{Stealth[length=2mm]}] (86,-40) -- (86,-25);
-\draw[-{Stealth[length=2mm]}] (69,-29) -- (69,-12);
-\draw[-{Stealth[length=2mm]}] (62,-50) -- (62,-35);
+\begin{tikzpicture}[x={(2.6cm,0cm)}, y={(1.25cm,0.95cm)}, z={(0cm,2.3cm)}, font=\small,
+  inc/.style={{Hooks[right]}-{Stealth[length=1.6mm]}, shorten <=3pt, shorten >=3pt},
+  ll/.style={-{Stealth[length=1.6mm]}, shorten <=3pt, shorten >=3pt}]
+% Unprimed face (z = 1) and primed face (z = 0): K, F, G, H at the corners (0,0), (1,0), (0,1), (1,1).
+\node (K) at (0,0,1) {$K$}; \node (F) at (1,0,1) {$F$}; \node (G) at (0,1,1) {$G$}; \node (H) at (1,1,1) {$H$};
+\node (K') at (0,0,0) {$K'$}; \node (F') at (1,0,0) {$F'$}; \node (G') at (0,1,0) {$G'$}; \node (H') at (1,1,0) {$H'$};
+% <= : hooked arrows in each face.
+\draw[inc] (K) -- (F); \draw[inc] (K) -- (G); \draw[inc] (F) -- (H); \draw[inc] (G) -- (H);
+\draw[inc] (K') -- (F'); \draw[inc] (K') -- (G'); \draw[inc] (F') -- (H'); \draw[inc] (G') -- (H');
+% << : from the primed face up to the unprimed one.
+\draw[ll] (K') -- (K); \draw[ll] (F') -- (F); \draw[ll] (G') -- (G); \draw[ll] (H') -- (H);
 \end{tikzpicture}
 \end{document}

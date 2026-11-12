@@ -224,25 +224,6 @@ export function ReviewPage() {
         <main className="mx-auto max-w-6xl px-4 py-8 sm:px-5">
           <header className="max-w-[48em]">
             <h1 className="titre text-[30px] leading-tight text-ink-900">Review against the facsimile</h1>
-            <p className="mt-2 text-[14.5px] leading-relaxed text-ink-700">
-              The open checks of{' '}
-              <a className="text-brand-700 underline" href="https://github.com/Commutator-IO/grothendieck-project/issues/35">
-                issue #35
-              </a>{' '}
-              that need a reader of French handwriting. Each is one spot of a page, shown beside Montpellier’s
-              facsimile, with a plain question and its answers as buttons. A few, under « For mathematicians », ask
-              instead whether an argument or a reference of the edition holds. Your answers stay in this browser until
-              you send them as a prefilled GitHub issue. Under « Doubtful drawing », the drawings redrawn for{' '}
-              <a className="text-brand-700 underline" href="https://github.com/Commutator-IO/grothendieck-project/issues/128">
-                issue #128
-              </a>{' '}
-              that the redraw could not settle alone are put beside the page in the same way. Under « Doubtful reading »,
-              the places of folder 12 where another reading is possible (
-              <a className="text-brand-700 underline" href="https://github.com/Commutator-IO/grothendieck-project/issues/66">
-                issue #66
-              </a>
-              ) are asked one by one.
-            </p>
             <p className="mt-2 text-[13px] text-ink-500">
               {done} of {ITEMS.length} answered · built from #35 on {QUEUE.built}
             </p>
