@@ -1,0 +1,19 @@
+\section[Notebook 1974-3: the Bézout partner of small degree]{Notebook 1974-3: the unique Bézout partner of degree less than $\deg f$\protect\verifie{Notebook1974_3}}\label{sec:quillen-1974-3}
+
+\emph{Context.} In February 1974, on pages~4 to~6 of \carnet{1974}{3}, Quillen proves that the ordered set of unimodular subspaces of $k[t]^2$ is contractible (a statement he notes is equivalent to Nagao's theorem), by retracting the subspaces whose lines have denominators of degree $n + 1$ onto those of degree at most $n$. A line other than the base line is spanned by $(f, g)$, with $f, g \in k[t]$ coprime and $f \ne 0$.
+
+\emph{The page.} On page~5 he proves that there is a unique pair $(f', g')$ with $fg' - f'g = 1$ and $\deg f' < \deg f$: Bézout gives some pair, adding a multiple of $(f, g)$ reduces $\deg f'$, and a second pair would give $f \mid \bar f'$ with $\deg \bar f' < \deg f$. A clause \q{and in fact $\deg f' = n - 1$} is struck out; it is false in general.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1974-3, p.~5]\label{thm:quillen-1974-3}
+Let $k$ be a field and $f, g \in k[t]$ coprime with $f \ne 0$. There is a unique pair $(f', g')$ with $fg' - f'g = 1$ and $\deg f' < \deg f$. For $f = t^2$, $g = 1$ this pair is $(-1, 0)$, so $\deg f' = 0 \ne \deg f - 1$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Write $af + bg = 1$ and $-b = qf + f'$ with $\deg f' < \deg f$; then $(f', a - qg)$ works. If $(f'_1, g'_1)$ also works, $f(g'_1 - g') = (f'_1 - f')g$, so $f$ divides $f'_1 - f'$, whose degree is less than $\deg f$; hence $f'_1 = f'$, and then $g'_1 = g'$ since $f \ne 0$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1974_3.lean}{\texttt{Notebook1974\_3.\allowbreak{}lean}} proves the theorem as \texttt{exists\_unique\_bezout}, with \texttt{IsCoprime} and \texttt{Polynomial.degree}, and the example as \texttt{not\_degree\_eq\_pred}. The poset and its contractibility are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary (the normalised Bézout identity; Nagao's theorem itself is in Serre, \emph{Arbres, amalgames, $SL_2$}, chapter~II). The edition does not present it as new.}

@@ -1,0 +1,17 @@
+\section[Notebook 1972-9: additive polynomials]{Notebook 1972-9: an additive polynomial in characteristic $p$ has only monomials $X^{p^i}$\protect\verifie{Notebook1972_9}}\label{sec:quillen-1972-9}
+
+\emph{Context.} On pages~66 and~67 of \carnet{1972}{9} Quillen considers additive polynomial maps between vector spaces in characteristic $p$, and says that they are sums of $p^i$-homogeneous pieces. The one-variable statement behind this is that a polynomial with $f(X + Y) = f(X) + f(Y)$ involves only the monomials $X^{p^i}$.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen, notebook 1972-9, p.~66]\label{thm:quillen-1972-9}
+Let $K$ be a field of prime characteristic $p$ and $f \in K[X]$ with $f(X + Y) = f(X) + f(Y)$ in $K[X, Y]$. If the coefficient $f_n$ of $X^n$ is nonzero, then $n$ is a power of $p$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+The coefficient of $Y^a$ in $f(X + Y)$ is the Hasse derivative $D^{(a)}f$; the identity says that $D^{(a)}f$ is the constant $f_a$ for $a \ge 1$, and that $f_0 = 0$. Taking the coefficient of $X^{n-a}$ gives $\binom na f_n = 0$ for $0 < a < n$. If $n$ is not a power of $p$, some $\binom na$ with $0 < a < n$ is prime to $p$ (Lucas), so $f_n = 0$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1972_9.lean}{\texttt{Notebook1972\_9.\allowbreak{}lean}} proves the theorem as \texttt{eq\_pow\_of\_coeff\_ne\_zero}, with the identity written in $K[X][Y]$ as \texttt{IsAdditivePoly} and the steps \texttt{hasseDeriv\_eq\_C}, \texttt{coeff\_zero\_eq\_zero} and \texttt{choose\_mul\_coeff}; Lucas's theorem is mathlib's \texttt{Choose.eq\_pow\_multiplicity\_of\_choose\_modEq\_zero\_nat}. The several-variable form and the inverse up to Frobenius of the page are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical: Ore's $p$-polynomials (Trans.\ AMS 35, 1933). The edition does not present it as new.}

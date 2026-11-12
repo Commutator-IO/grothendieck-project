@@ -27,11 +27,13 @@ import Quillen.Notebook1972_1
 import Quillen.Notebook1972_2
 import Quillen.Notebook1972_4
 import Quillen.Notebook1972_6
+import Quillen.Notebook1972_9
 import Quillen.Notebook1972_11
 import Quillen.Notebook1973_3
 import Quillen.Notebook1973_5
 import Quillen.Notebook1973_6
 import Quillen.Notebook1973_12
+import Quillen.Notebook1974_3
 import Quillen.Notebook1974_16
 import Quillen.Notebook1982_7
 import Quillen.Notebook1982_13
