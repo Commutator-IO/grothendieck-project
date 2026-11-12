@@ -233,8 +233,8 @@ Two rules held throughout:
 - [x] 154 · b. 9 · p. 173 · current: « un cercle vert clair »; petals; corners · proposed: a ring of 8 bars and 8 lenses; sixteen petals; sixteen radial bars · source: r154b-report — APPLIED: ring of eight bars and eight lenses, sixteen radial bars, sixteen petals (80 dpi); note completed.
 - [ ] 154 · b. 9 · p. 175 · current: grey dashed line · proposed: two dark green and one blue dashed lines · source: r154b-report — OPEN: not looked at in this pass.
 - [ ] 156-1 · b. 2 · p. 25 · current: marginal figure x, t, y (class t) · proposed: tikz-cd x ⇄ y with t · source: gsmallB-report — not yet looked at
-- [ ] 156-4 · b. 3 · p. 51 · current: third top node F̄′ · proposed: F⃗ (Michel, #142) · source: drawings.json 03-3, t83-settled — not yet looked at
-- [ ] 156-4 · b. 4 · p. 72 · current: sign « surchargé et barré » · proposed: overwritten, not struck · source: drawings.json 04-1 — not yet looked at
+- [x] 156-4 · b. 3 · p. 51 · current: third top node F̄′ · proposed: F⃗ (Michel, #142) · source: drawings.json 03-3, t83-settled — APPLIED: at 350 dpi F̄′ ≃ F′ ⊂ F⃗ ≃ F over Ḡ′ ≃ G′ ⊂ Ḡ ≃ G; \note after the mark (the mark's F̄″, Ḡ″ and F̄′ corrected there).
+- [x] 156-4 · b. 4 · p. 72 · current: sign « surchargé et barré » · proposed: overwritten, not struck · source: drawings.json 04-1 — APPLIED: confirmed at 350 dpi; \note after the mark.
 - [ ] 156-6 · b. 5 · p. 88 · current: point « près d'un sommet » · proposed: on the left side, about its middle · source: drawings.json 05-3 — not yet looked at
 - [ ] 156-7 · b. 1 · p. 8 · current: « diamètre vertical, avec de petites croix » · proposed: oblique diameter (the diagonal); two crosses · source: drawings.json 01-3 — not yet looked at
 - [ ] 156-7 · b. 4 · p. 70 · current: first segment « subdivisé en deux » · proposed: two interior ticks (three pieces) · source: drawings.json 04-1 — not yet looked at
