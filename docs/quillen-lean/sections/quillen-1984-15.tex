@@ -1,0 +1,17 @@
+\section[Notebook 1984-15: pair symmetry of a curvature tensor]{Notebook 1984-15: pair symmetry of a curvature tensor, and the factor $2$\protect\verifie{Notebook1984_15}}\label{sec:quillen-1984-15}
+
+\emph{Context.} On page~55 of \carnet{1984}{15} Quillen rederives the symmetry $R_{ijkl} = R_{klij}$ of a tensor skew in $(i, j)$ and in $(k, l)$ that satisfies the cyclic identity, by adding four cyclic identities.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1984-15, p.~55]\label{thm:quillen-1984-15}
+Let $R_{ijkl}$ take values in an abelian group, with $R_{ijkl} = -R_{jikl} = -R_{ijlk}$ and $R_{ijkl} + R_{jkil} + R_{kijl} = 0$. Then $2R_{ijkl} = 2R_{klij}$; hence $R_{ijkl} = R_{klij}$ when the group has no $2$-torsion. Over $\mathbf F_2$, on four indices, the tensor equal to $1$ exactly when $i, j, k, l$ are distinct and $0 \in \{i, j\}$ satisfies the hypotheses, alternating included, but $R_{0123} = 1 \neq 0 = R_{2301}$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Write the cyclic identity at $(i, j, k, l)$, $(j, k, l, i)$, $(k, l, i, j)$, $(l, i, j, k)$, normalise each term by the two skew symmetries, and add the first two and subtract the last two: everything cancels but $2R_{ijkl} - 2R_{klij}$. The counterexample is checked by enumeration; on three indices, a computation over $\mathbf F_2$ shows that pair symmetry still holds.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1984_15.lean}{\texttt{Notebook1984\_15.\allowbreak{}lean}} proves the theorem as \texttt{two\_smul\_pair\_symm}, \texttt{pair\_symm} and, for the counterexample, \texttt{isCurvature\_R₂} and \texttt{not\_pair\_symm\_zmod\_two} (by \texttt{decide}). The page works over the real numbers, where the factor $2$ is harmless. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (Kobayashi and Nomizu, \emph{Foundations of differential geometry}, I, ch.~V, \S 2). That the factor $2$ cannot be dropped in characteristic~$2$ is the edition's remark; the counterexample was not looked for in print. The edition does not present the statement as new.}

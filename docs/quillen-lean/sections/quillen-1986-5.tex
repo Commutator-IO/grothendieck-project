@@ -1,0 +1,20 @@
+\section[Notebook 1986-5: a four-fold embedding and a circle integral]{Notebook 1986-5: a four-fold embedding and $\int_0^{2\pi}(2\sin\frac\theta2)^{2k}\,d\theta$\protect\verifie{Notebook1986_5}}\label{sec:quillen-1986-5}
+
+\emph{Context.} On page~17 of \carnet{1986}{5} Quillen embeds an operator $A$ with $A^2 + B^2 = 1$ as the compression of a symmetry $\varepsilon$ by an isometry $j$; on page~31 he needs the moments of $\lvert 1 - e^{i\theta}\rvert$ on the circle.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1986-5, pp.~17, 31]\label{thm:quillen-1986-5}
+\begin{enumerate}
+\item Over a commutative ring in which $2$ is invertible, if $A^2 + B^2 = 1$, the column $j = \bigl(\frac{A+1}2, \frac B2, \frac{A-1}2, \frac B2\bigr)$ and $\varepsilon = \operatorname{diag}(1, 1, -1, -1)$ satisfy $j^tj = 1$ and $j^t\varepsilon j = A$.
+\item For $k \in \mathbf N$, $\int_0^{2\pi} (2\sin\frac\theta2)^{2k}\,d\theta = 2\pi\binom{2k}k$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) Expand. (2) Substitute $\theta = 2x$: the integral is $2\cdot 4^k\int_0^\pi \sin^{2k}x\,dx = 2\pi\, 4^k\prod_{i<k}\frac{2i+1}{2i+2}$ (Wallis), and $4^k\prod_{i<k}\frac{2i+1}{2i+2} = \binom{2k}k$ by induction, from $(k+1)\binom{2k+2}{k+1} = 2(2k+1)\binom{2k}k$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1986_5.lean}{\texttt{Notebook1986\_5.\allowbreak{}lean}} proves (1) as \texttt{dot\_self} and \texttt{dot\_eps} (with $A$, $B$ commuting, the transpose standing for the adjoint) and (2) as \texttt{integral\_two\_sin\_half\_pow}, with \texttt{four\_pow\_mul\_prod}, from mathlib's \texttt{integral\_sin\_pow\_even}. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary; (2) is the classical value $\int_0^{2\pi}\lvert 1 - e^{i\theta}\rvert^{2k}\,d\theta = 2\pi\binom{2k}k$. The edition does not present them as new.}

@@ -1,0 +1,21 @@
+\section[Notebooks 1982-2 and 1982-6: the Faddeev--LeVerrier recursion]{Notebooks 1982-2 and 1982-6: the Faddeev--LeVerrier recursion, with Jacobi's formula\protect\verifie{Notebook1982_6}}\label{sec:quillen-1982-6}
+
+\emph{Context.} On page~22 of \carnet{1982}{2} and page~17 of \carnet{1982}{6} Quillen expands the Fredholm determinant $\det(1 - tK)$ and the adjugate of $1 - tK$ in powers of $t$ and uses the recursions linking the coefficients (Plemelj--Smithies formulas). Here the finite-dimensional form is proved, over any commutative ring.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebooks 1982-2, p.~22, and 1982-6, p.~17]\label{thm:quillen-1982-6}
+Let $K$ be a square matrix over a commutative ring, $\det(1 - tK) = \sum_k \Delta_k t^k$ and $\operatorname{adj}(1 - tK) = \sum_k C_kt^k$. Then $\Delta_0 = 1$, $C_0 = 1$ and, for $k \ge 0$,
+\[
+C_{k+1} = KC_k + \Delta_{k+1}\cdot 1, \qquad (k + 1)\,\Delta_{k+1} = -\operatorname{tr}(KC_k).
+\]
+More generally (Jacobi's formula), for a square matrix $M$ over $R[t]$, $(\det M)' = \operatorname{tr}(\operatorname{adj}(M)\,M')$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Jacobi's formula: differentiate the Leibniz expansion of $\det M$ by the product rule; the term in which column $i$ is differentiated is the determinant of $M$ with column $i$ replaced by its derivative, which by Cramer's rule is $\sum_j \operatorname{adj}(M)_{ij} M'_{ji}$. The first recursion is the coefficient of $t^{k+1}$ in $(1 - tK)\operatorname{adj}(1 - tK) = \det(1 - tK)\cdot 1$; the second is the coefficient of $t^k$ in Jacobi's formula for $M = 1 - tK$, $M' = -K$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1982_6.lean}{\texttt{Notebook1982\_6.\allowbreak{}lean}} proves Jacobi's formula as \texttt{derivative\_det} and the recursions as \texttt{Delta\_zero}, \texttt{Cmat\_zero}, \texttt{Cmat\_succ} and \texttt{succ\_mul\_Delta\_succ}. Mathlib has only the derivative of $\det(1 + tM)$ at $t = 0$ (\texttt{Matrix.derivative\_det\_one\_add\_X\_smul}). The Fredholm (trace-class) version is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical: Le~Verrier (1840), Faddeev and Sominsky; for Fredholm determinants, the Plemelj--Smithies formulas (Smithies, \emph{Integral equations}, 1958; Simon, \emph{Trace ideals}, ch.~5). Not in mathlib. The edition does not present it as new.}

@@ -1,0 +1,17 @@
+\section[Notebook 1987-5: $\mathbf Z[1/p] + \mathbf Z_p = \mathbf Q_p$]{Notebook 1987-5: $\mathbf Z[1/p] + \mathbf Z_p = \mathbf Q_p$ and $\mathbf Z[1/p] \cap \mathbf Z_p = \mathbf Z$\protect\verifie{Notebook1987_5}}\label{sec:quillen-1987-5}
+
+\emph{Context.} On page~64 of \carnet{1987}{5} Quillen uses the decomposition of the $p$-adic numbers into $p$-adic integers and rationals with a power of $p$ as denominator, the two meeting in $\mathbf Z$ (the local form of $\mathbf Q + \prod_p\mathbf Z_p = \mathbf A_f$, $\mathbf Q \cap \prod_p\mathbf Z_p = \mathbf Z$).
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1987-5, p.~64]\label{thm:quillen-1987-5}
+Let $p$ be a prime. Every $x \in \mathbf Q_p$ is $m/p^k + z$ with $m \in \mathbf Z$, $k \in \mathbf N$, $z \in \mathbf Z_p$; and if $m/p^k \in \mathbf Z_p$ then $p^k \mid m$, so that $\mathbf Z[1/p] \cap \mathbf Z_p = \mathbf Z$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Choose $k$ with $p^kx \in \mathbf Z_p$ and an integer $m \equiv p^kx \pmod{p^k\mathbf Z_p}$; then $x - m/p^k \in \mathbf Z_p$. Conversely $\lvert m\rvert_p = \lvert m/p^k\rvert_p\,p^{-k} \le p^{-k}$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1987_5.lean}{\texttt{Notebook1987\_5.\allowbreak{}lean}} proves the theorem as \texttt{exists\_eq\_add}, \texttt{dvd\_of\_norm\_div\_le\_one} and \texttt{inter\_eq\_int}, with mathlib's \texttt{PadicInt.appr}. The adelic statement is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical and elementary (e.g.\ the strong approximation for $\mathbf Q$, Cassels and Fröhlich, \emph{Algebraic number theory}, ch.~II). The edition does not present it as new.}

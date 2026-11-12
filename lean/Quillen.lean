@@ -40,6 +40,8 @@ import Quillen.Notebook1974_3
 import Quillen.Notebook1974_16
 import Quillen.Notebook1975_21
 import Quillen.Notebook1982_3
+import Quillen.Notebook1982_5
+import Quillen.Notebook1982_6
 import Quillen.Notebook1982_7
 import Quillen.Notebook1982_8
 import Quillen.Notebook1982_12
@@ -50,11 +52,18 @@ import Quillen.Notebook1983_LectureNotes3
 import Quillen.Notebook1983_LectureNotes8
 import Quillen.Notebook1983_LectureNotes15
 import Quillen.Notebook1983_ReviewGetzler
+import Quillen.Notebook1984_6
+import Quillen.Notebook1984_15
 import Quillen.Notebook1984_16
 import Quillen.Notebook1985_8
 import Quillen.Notebook1986_2
+import Quillen.Notebook1986_5
+import Quillen.Notebook1986_7
+import Quillen.Notebook1987_5
 import Quillen.Notebook1988_1
 import Quillen.Notebook1988_1Cocycle
+import Quillen.Notebook1988_2
+import Quillen.Notebook1988_7
 import Quillen.Notebook1991_4
 import Quillen.Notebook1991_4Separable
 import Quillen.Notebook1995_2

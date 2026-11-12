@@ -1,0 +1,21 @@
+\section[Notebook 1982-5: complementary minors, the $K_1$ pairing, parametrices]{Notebook 1982-5: complementary minors, the pairing $g \mapsto \tau(g^{-1}, g)$, parametrices\protect\verifie{Notebook1982_5}}\label{sec:quillen-1982-5}
+
+\emph{Context.} In \carnet{1982}{5}, among determinant-line computations, three algebraic steps recur. On page~15 the determinant of the compression of $T^{-1}$ to a subspace is compared with that of the complementary compression of $T$ (the same identity reappears in \carnet{1985}{1}, pp.~7--9). On pages~55--56 a skew cyclic $1$-cocycle $\tau$ on an algebra is evaluated on $(g^{-1}, g)$ for invertible $g$. On pages~41 and~60 a parametrix $P$ of an operator $D$, with errors $K_0 = 1 - PD$ and $K_1 = 1 - DP$, is improved to one with errors $K_0^n$ and $K_1^n$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1982-5, pp.~15, 41, 55--56, 60]\label{thm:quillen-1982-5}
+\begin{enumerate}
+\item (Jacobi.) Over a commutative ring, if $M = \begin{psmallmatrix} A & B\\ C & D\end{psmallmatrix}$ is invertible, then $\det M \cdot \det\bigl((M^{-1})_{22}\bigr) = \det A$.
+\item Let $A$ be a ring, $k$ an abelian group and $\tau : A \times A \to k$ with $\tau(x, y) = -\tau(y, x)$ and $\tau(ax, y) - \tau(x, ya) + \tau(xy, a) = 0$. Then $g \mapsto \tau(g^{-1}, g)$ is a homomorphism $A^\times \to k$. The coboundaries $\tau(x, y) = \varphi(xy) - \varphi(yx)$ satisfy the hypotheses and give the zero homomorphism.
+\item In a ring, if $PD = 1 - K_0$ and $DP = 1 - K_1$, then $P_n = \sum_{k=1}^n (-1)^{k-1}\binom nk (PD)^{k-1}P$ satisfies $P_nD = 1 - K_0^n$ and $DP_n = 1 - K_1^n$; $P_2 = P + K_0P$. If moreover $DQ = 1 - p_1$, then $P - Q = Pp_1 - K_0Q$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) From $MM^{-1} = 1$ in blocks, $M\begin{psmallmatrix} 1 & (M^{-1})_{12}\\ 0 & (M^{-1})_{22}\end{psmallmatrix} = \begin{psmallmatrix} A & 0\\ C & 1\end{psmallmatrix}$; take determinants of the triangular blocks. (2) The cocycle identity at $(a, x, y) = (h^{-1}, g^{-1}, gh)$ reads $\tau((gh)^{-1}, gh) - \tau(g^{-1}, g) + \tau(h, h^{-1}) = 0$, and $\tau(h, h^{-1}) = -\tau(h^{-1}, h)$. (3) $P_nD = \sum (-1)^{k-1}\binom nk (PD)^k = 1 - (1 - PD)^n$, and $D(PD)^{k-1}P = (DP)^k$ gives the other side; the last identity is $P(1 - DQ) - (1 - PD)Q$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1982_5.lean}{\texttt{Notebook1982\_5.\allowbreak{}lean}} proves (1) as \texttt{complementary\_minor}, (2) as \texttt{pairing\_mul}, \texttt{pairing} (a monoid homomorphism to \texttt{Multiplicative k}), \texttt{coboundary\_isCocycle} and \texttt{pairing\_coboundary}, and (3) as \texttt{parametrix\_mul}, \texttt{mul\_parametrix}, \texttt{Pn\_two} and \texttt{sub\_eq\_of\_parametrices}. No linearity of $\tau$ is used, nor commutativity in (3). The Fredholm determinants and the trace-class setting are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{All classical: Jacobi's complementary minor theorem (Gantmacher, \emph{Theory of matrices}, I, ch.~I, \S 4; mathlib has the Schur complement but not this statement), the pairing of odd cyclic cocycles with $K_1$ (Connes, \emph{Non-commutative differential geometry}, 1985), and the iteration of a parametrix in Fredholm theory. The edition does not present them as new.}

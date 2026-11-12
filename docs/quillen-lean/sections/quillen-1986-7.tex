@@ -1,0 +1,20 @@
+\section[Notebook 1986-7: triangular idempotents; antisymmetrisation]{Notebook 1986-7: triangular idempotents are orthogonal; antisymmetrisation over the Vandermonde\protect\verifie{Notebook1986_7}}\label{sec:quillen-1986-7}
+
+\emph{Context.} On page~50 of \carnet{1986}{7} Quillen has idempotents $e_0, \ldots, e_n$ summing to $1$ with $e_te_s = 0$ for $t < s$, wants $e_ie_j = 0$ for all $i \ne j$, and looks for a better argument than an induction. On page~25 he computes the Gysin map of the full flag bundle $(BU_1)^n \to BU_n$ by antisymmetrising monomials against the Vandermonde product.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1986-7, pp.~25, 50]\label{thm:quillen-1986-7}
+\begin{enumerate}
+\item In a ring, let $(e_i)$ be idempotents indexed by a finite linearly ordered set, with $\sum_i e_i = 1$ and $e_te_s = 0$ for $t < s$. Then $e_ie_j = 0$ for all $i \ne j$: the $e_i$ form a complete family of orthogonal idempotents.
+\item Over a commutative ring, $\sum_\sigma \operatorname{sgn}(\sigma)\prod_i u_{\sigma i}^{a_i} = \det(u_i^{a_j})$; it vanishes when two exponents coincide, and for $a_i = i$ it equals $\prod_{i<j}(u_j - u_i)$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) Multiplying $\sum_k e_k = 1$ on the right by $e_j$ and using $e_ke_j = 0$ for $k < j$ gives $\sum_{k > j} e_ke_j = 0$. For $j < i$ multiply on the left by $e_i$: the terms $k > i$ vanish, the term $k = i$ is $e_ie_j$, and the terms $j < k < i$ vanish by induction on $i$. (2) The first identity is the Leibniz formula; then a determinant with two equal columns vanishes, and the last case is Vandermonde's determinant.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1986_7.lean}{\texttt{Notebook1986\_7.\allowbreak{}lean}} proves (1) as \texttt{sum\_gt\_mul\_eq\_zero}, \texttt{mul\_eq\_zero\_of\_gt} and \texttt{completeOrthogonalIdempotents} (mathlib's structure), and (2) as \texttt{antisymm\_eq\_det}, \texttt{antisymm\_eq\_zero} and \texttt{antisymm\_vandermonde}. The argument for (1) is still an induction. The Gysin map itself, and the divisibility of an antisymmetric polynomial by the Vandermonde product, are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary: (1) is folklore of idempotent decompositions; (2) is the classical alternant (Macdonald, \emph{Symmetric functions and Hall polynomials}, I, \S 3). The edition does not present them as new.}

@@ -1,0 +1,20 @@
+\section[Notebook 1984-6: fermions and Clifford generators; a symplectic block lemma]{Notebook 1984-6: Clifford generators from a fermion; a symplectic block lemma\protect\verifie{Notebook1984_6}}\label{sec:quillen-1984-6}
+
+\emph{Context.} On page~2 of \carnet{1984}{6} Quillen passes from a fermionic creation--annihilation pair to the two Clifford generators it defines; on pages~48--49 he analyses a symplectic matrix $\begin{psmallmatrix} A & B\\ C & D\end{psmallmatrix}$ with $B$ invertible (a Bogoliubov transformation, as in Berezin's treatment).
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1984-6, pp.~2, 48--49]\label{thm:quillen-1984-6}
+\begin{enumerate}
+\item In a ring, let $a^2 = 0$, $(a^*)^2 = 0$, $aa^* + a^*a = 1$, and let $i$ be central with $i^2 = -1$. Then $\gamma_1 = a^* + a$ and $\gamma_2 = i(a^* - a)$ satisfy $\gamma_1^2 = \gamma_2^2 = 1$, $\gamma_1\gamma_2 + \gamma_2\gamma_1 = 0$ and $i\gamma_1\gamma_2 = a^*a - aa^* = 2a^*a - 1$.
+\item Over a commutative ring, let $A, B, C, D$ be square matrices with $B$ invertible, $AB^t + BA^t = 0$, $D^tB + B^tD = 0$ and $CB^t + DA^t = 1$. Then $B^{-1}A$ and $DB^{-1}$ are skew-symmetric and $(B^{-1})^t = C - DB^{-1}A$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) Expand, using $i$ central. (2) $A^t = -B^{-1}AB^t$, so $(B^{-1}A)^t = A^t(B^t)^{-1} = -B^{-1}A$; likewise $D^t = -B^tDB^{-1}$ gives $(DB^{-1})^t = -DB^{-1}$; multiplying $CB^t + DA^t = 1$ on the right by $(B^t)^{-1}$ gives $C - DB^{-1}A = (B^t)^{-1}$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1984_6.lean}{\texttt{Notebook1984\_6.\allowbreak{}lean}} proves (1) as \texttt{gamma₁\_sq}, \texttt{gamma₂\_sq}, \texttt{gamma\_anticomm} and \texttt{i\_gamma\_gamma}, and (2) as \texttt{inv\_mul\_skew}, \texttt{mul\_inv\_skew} and \texttt{transpose\_inv\_eq}. Only three of the block relations of the page are needed for (2). The Gaussian kernels built from these matrices are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Standard: (1) is the Clifford form of one fermionic mode; (2) is in substance in Berezin, \emph{The method of second quantization} (1966). The edition does not present them as new.}
