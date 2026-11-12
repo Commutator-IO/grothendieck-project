@@ -22,13 +22,13 @@ Two rules held throughout:
   label of the page was read; otherwise the item stays open.
 
 
-## Summary (2026-11-12)
+## Summary (2026-11-12, after the second pass)
 
 - **226 places collected** (several reports name the same place; they are merged on one line).
-- **130 applied** (121 in full, 9 in part), each checked on the facsimile first; one `% Revised: Opus 5.5 …` line per batch touched, followed by an `% Applied:` account.
-- **18 not applied** because the page does not contradict the transcription (the report refines a drawing, or the transcription already says what the page shows).
-- **78 left open**: 25 looked at and not settled on the page (each line says why); 53 not looked at in this pass (folders 1, 5, 12, 14, 15, 23, 27, 33, 45, 53, 58, 62, 75, 104, 105, 106, 117, 118, 121, 129, 137, 147, 150, 158, 161-2, and some places of 43, 64, 69, 144, 154). Most of the class-t replacements are among these: they need every label read before they are set.
-- **Class t set** (every label read on the page): 19 p. 32 (Leitfaden, tikzcd corrected), 29 p. 86 (cube of base change, tikzcd), 46 p. 30 (Frobenius square, tikzcd), 156-1 p. 25 (circle x, t, y, tikzcd), 162-5 p. 21 (semi-simplicial schema, array: the renderer has no shifted arrows).
+- **175 applied** (157 in full, 18 in part), each checked on the facsimile first; one `% Revised: Opus 5.5 …` line per batch touched, followed by an `% Applied:` account. The second pass of the same day (lines marked « #145, second pass ») looked at the 53 places the first pass had not opened and at 8 of the 25 it had left unsettled: 45 applied, 7 not applied, 9 left open.
+- **25 not applied** because the page does not contradict the transcription (the report refines a drawing, or the transcription already says what the page shows).
+- **26 left open**: 17 looked at in the first pass and not settled (43 p. 61, 69 p. 61, 71 pp. 10, 23, 74 pp. 44, 77, 76 p. 28, 79 p. 285, 86 pp. 7, 29, 127 p. 11, 135 p. 4, 141 p. 14, 144 p. 125, 154 pp. 144, 147, 168); 9 looked at in the second pass and not settled (15 p. 224, 69 p. 11, 75 p. 5, 117 p. 2, 118 p. 19, 121 pp. 1, 42, 46, 154 p. 175). Each line says why.
+- **Class t set** (every label read on the page): 19 p. 32 (Leitfaden, tikzcd corrected), 29 p. 86 (cube of base change, tikzcd), 46 p. 30 (Frobenius square, tikzcd), 156-1 p. 25 (circle x, t, y, tikzcd), 162-5 p. 21 (semi-simplicial schema, array: the renderer has no shifted arrows); second pass: 5 p. 17 (two tikzcd), 27 p. 19 (pmatrix), 53 p. 31 (array), 62 p. 56 (struck array), 105 p. 26 (middle schema), 106 p. 7 (first figure), 121 p. 41, 129 p. 107, 158 p. 61, 161-2 pp. 51 (two), 52 (tikzcd); 161-2 p. 49 corrected (a head at both ends).
 
 ## Places
 
@@ -269,6 +269,17 @@ Two rules held throughout:
 - **19 p. 32** (batch 2): the Leitfaden (dependency tree of the numbered sections) has 4 depending on 3 and 7 on both 4 and 6 (strokes 3–4, 4–7, 6–7), not 4 under 3 with 7 under 6 only. `19.modern.tex` l. 1008–1013 copies the old tikzcd; to be replaced by /modernize-grothendieck.
 - **29 p. 86** (batch 5): the cube of base change is now set in full (T_o ↪ T, T_o ×_S S′ ↪ T ×_S S′, X′ → X ×_S S′ « n.r. », T′_o = T_o ×_X X′ → T_o ×_S S′ « n.r. », T′_o ⇢ T′ « n.r. »). `29.modern.tex` l. 2224–2232 says the cube is not reproduced because its labels are illegible; /modernize-grothendieck can now state the situation the cube draws (the base change of the unramified X′ → X ×_S S′ along T_o ↪ T).
 - **29 p. 183** (batch 10): the path from x to a is a zigzag of pairs of opposite arrows, not a chain x → · → … → a; check the modern reading if it quotes the chain.
+
+From the second pass (#145, same day):
+
+- **148 p. 17** (batch 1): the red strokes on the ink tetrahedron are, on each face, the medial triangle and the segments from each vertex to the midpoint of its opposite side, stopping there; not a barycentric subdivision. This is what the count on the page counts: 4 vertices, 6 edge midpoints and 12 midpoints of the medial sides (three per face) make the 4 + 6 + 12 = 22 vertices. `148.modern.tex` l. 514–516 says the map is drawn « à partir d'un tétraèdre tronqué et de sa subdivision barycentrique »; /modernize-grothendieck should describe the subdivision the page draws (the margin's own « subdivision barycentrique » is his word for it, and stays quoted as his).
+- **45 p. 52** (batch 3): the large curve marked « triviale » runs from (iii′) to (i″), passing above (iii); it marks the implication (iii′) ⇒ (i″) as trivial. `45.modern.tex` l. 1326–1336 gives the scheme and its footnote names the two « triviale » arrows without saying between which conditions; it can now say this one.
+- **137 p. 39** (batch 2): the left margin is not a column of complexes but the end of the sentence « On pourrait aussi travailler dans des complexes de cochaînes : le plus, … »: with C_i = (0 → ⋯ → 0 → k → k → ⋯) the maps go C_i ← C_{i+1}, so one must take the opposite of the category of cochain complexes, « mais on la retrouvera … de façon plus élégante ». Many words are \uncertain; `137.modern.tex` does not mention the remark, and may add it as a footnote with the transcription's doubts.
+- **106 p. 15** (batch 1): in the margin figure the two arcs i, i′ run from y down to ȳ (beside α : ȳ → y), not from ȳ to x; (⋆⋆) as the text states it (i, i′ sections of f) is unchanged, but `106.modern.tex` should not draw the figure as sections y → x if it quotes it.
+- **161-2 p. 49** (batch 3): the vertical arrow A_{Π_n} — Π_n has a head at both ends (set leftrightarrow, no longer Rightarrow); `161-2.modern.tex` does not quote it (grep).
+- **70 p. 70** (batch 4): the right trihedron is u, v, w, lowercase; `70.modern.tex` l. 1417 (« Les lettres U, V, W sont surchargées ») concerns the left one and is unaffected.
+
+The other readings of the second pass correct descriptions of figures, set diagrams the notes already described, or confirm the transcription; they leave the modern readings as they stand (checked by grep on 5, 53, 105, 129, 161-2 for the diagrams set).
 
 For /find-novelty: no entry of `src/content/findings.ts` was found to quote these places (grep on folders 19, 29, 76, 80, 142, 148 for the octahedron graph, the Leitfaden, D_02, the pseudo-line counts and the nested curves); the four findings of folder 142 (Galois image, Teichmüller category, leaf order, missing opening) do not use the graph of p. 52. The other applied readings correct descriptions of figures, labels or positions and leave the mathematics as the modern readings state it (checked by grep for 85, 135, 138, 146, 154: the modern readings already have −j, −j̄ (138) and do not quote E_2, Ω D, ω_L or the legend of p. 72).
 
