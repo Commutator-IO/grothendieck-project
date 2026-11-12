@@ -1,0 +1,19 @@
+\section[Notebook 1971-2: unique $p$-divisibility from the Adams operation]{Notebook 1971-2: unique $p$-divisibility from an automorphism killed by $(\psi - p)\cdots(\psi - p^n)$\protect\verifie{Notebook1971_2}}\label{sec:quillen-1971-2}
+
+\emph{Context.} On page~12 of \carnet{1971}{2}, on 3~February 1971, Quillen proves that the higher $K$-groups of a perfect ring of characteristic $p$ are uniquely $p$-divisible.
+
+\emph{The page.} The Frobenius of the ring induces an automorphism of $K_i$, which is the Adams operation $\Psi^p$, and every $x \in K_i$, $i > 0$, is killed by $(\Psi^p - p)\cdots(\Psi^p - p^n)$ for some $n$ (taken as known on the page). With $F_n$ the set of elements killed by this product, $F_{n-1} \subseteq F_n$ and $\Psi^p = p^n$ on $F_n/F_{n-1}$; since $\Psi^p$ is an automorphism, each quotient is uniquely $p$-divisible, hence so is the union.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1971-2, p.~12]\label{thm:quillen-1971-2}
+Let $M$ be an abelian group, $\psi$ an automorphism of $M$ and $p$ a natural number. If every element of $M$ is killed by $(\psi - p)(\psi - p^2)\cdots(\psi - p^n)$ for some $n$, then $M$ is uniquely $p$-divisible: $x \mapsto px$ is bijective.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Let $P_n = (\psi - p)\cdots(\psi - p^n)$ and $F_n = \ker P_n$. Since all these operators commute with $\psi$ and $\psi^{-1}$, $F_n$ is stable under $\psi$ and $\psi^{-1}$, $F_{n-1} \subseteq F_n$, and $(\psi - p^n)F_n \subseteq F_{n-1}$. We show by induction on $n$ that multiplication by $p$ is bijective on $F_n$. If $x \in F_n$ and $px = 0$, then $y = (\psi - p^n)x \in F_{n-1}$ and $py = 0$, so $y = 0$ by induction; then $\psi x = p^nx = 0$ and $x = 0$. If $x \in F_n$, write $(\psi - p^n)x = p^n w$ with $w \in F_{n-1}$, by induction; then $\psi x = p^n(x + w)$ and $x = p\,\psi^{-1}(p^{n-1}(x + w))$, with $\psi^{-1}(p^{n-1}(x+w)) \in F_n$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1971_2.lean}{\texttt{Notebook1971\_2.\allowbreak{}lean}} proves Theorem~\ref{thm:quillen-1971-2} as \texttt{bijective\_nsmul}, with $\psi$ and its inverse given as elements of the ring \texttt{Module.End ℤ M}, and the induction step as \texttt{bijOn\_ker}. The proof works inside $F_n$ instead of on the quotients $F_n/F_{n-1}$. The $K$-theoretic input (the Frobenius is $\Psi^p$, and the local vanishing of the product) is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The theorem on $K$-groups of perfect rings is folklore in the later literature, and its algebraic step is elementary; we did not find this step stated as a lemma. The edition does not present it as new.}

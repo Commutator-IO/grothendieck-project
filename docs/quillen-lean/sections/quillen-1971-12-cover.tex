@@ -1,0 +1,21 @@
+\section[Notebook 1971-12: a ring is not a finite union of cosets]{Notebook 1971-12: a ring is not a finite union of cosets of ideals with infinite quotients\protect\verifie{Notebook1971_12Cover}}\label{sec:quillen-1971-12-cover}
+
+\emph{Context.} On pages~17 to~20 of \carnet{1971}{12} Quillen shows that a closed subset of small dimension of an affine space over a ring can be avoided by a section, choosing the coordinates $a_1, a_2, \ldots$ one at a time so that each hyperplane $X_1 = a_1$ cuts down the dimension.
+
+\emph{The page.} Page~19 treats the case where all residue fields of the commutative ring $A$ are infinite. If no good $a_1$ existed, $A$ would be a finite union of cosets $a_i + \mathfrak q_i$ of prime ideals. The page shows that this is impossible: one may assume the $\mathfrak q_i$ maximal; each $A/\mathfrak q_i$ is then infinite, so one can choose a class modulo each $\mathfrak q_i$ avoiding the finitely many $a_i$ attached to it, and the Chinese remainder theorem gives an element outside all the cosets.
+
+\emph{Intuition.} B.~H.~Neumann's lemma says that if a group is a finite union of cosets of subgroups, one of the subgroups has finite index. Here every quotient $A/\mathfrak q_i$ is infinite, so no such covering exists; the hypothesis on residue fields serves only to make the quotients infinite, since a finite nonzero quotient would have a finite residue field.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen, notebook 1971-12, p.~19]\label{thm:quillen-1971-12-cover}
+\emph{(i)} In any ring $A$, a finite family of cosets $a_i + I_i$ of left ideals with $A/I_i$ infinite does not cover $A$. \emph{(ii)} If $A$ is commutative and every residue field $A/\mathfrak m$, $\mathfrak m$ maximal, is infinite, a finite family of cosets $a_i + \mathfrak q_i$ of proper ideals does not cover $A$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(i) If the cosets covered $A$, Neumann's lemma applied to the additive group would give an $I_i$ of finite index, against the hypothesis. (ii) A proper ideal $\mathfrak q$ lies in a maximal ideal $\mathfrak m$, and $A/\mathfrak q$ maps onto the infinite field $A/\mathfrak m$; apply (i).
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1971_12Cover.lean}{\texttt{Notebook1971\_12Cover.\allowbreak{}lean}} proves (i) as \texttt{not\_cover\_of\_infinite}, from mathlib's \texttt{AddSubgroup.exists\_finiteIndex\_of\_leftCoset\_cover}, and (ii) as \texttt{not\_cover}. The conclusion is stated as the existence of $x$ with $x - a_i \notin I_i$ for all $i$. The page's route through maximal ideals and the Chinese remainder theorem is replaced by Neumann's lemma. The geometric statement the page proves with it is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Neumann's lemma (1954) is in mathlib, and the corollary for vector spaces over infinite fields too (\texttt{Subspace.biUnion\_ne\_univ\_of\_ne\_top}); the form for rings is a routine consequence, of the same kind as prime avoidance. The edition does not present it as new.}

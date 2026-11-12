@@ -1,0 +1,31 @@
+\section[Notebook 1973-6: commutators of elementary matrices; a Sylow reduction]{Notebook 1973-6: commutators of elementary matrices, and a Sylow reduction\protect\verifie{Notebook1973_6}}\label{sec:quillen-1973-6}
+
+\emph{Context.} \carnet{1973}{6} holds Quillen's notes of Serre's course on trees, in the autumn of 1973, followed by his own pages on shift equivalence. Two short arguments of the course are checked here.
+
+\emph{The page, p.~30.} To show that $SL_3(\mathbf Z)$ has Serre's property (FA), the page writes two commutator relations between the elementary matrices $\bar e_{ij} = 1 + e_{ij}$, for $i, j, k$ distinct: $(\bar e_{ij}, \bar e_{jk}) = \bar e_{ik}$ and $(\bar e_{ij}, \bar e_{kj}) = \bar e_{ik}^{-1}$, with $(a, b) = aba^{-1}b^{-1}$. It then places the six matrices on a hexagon, in the order $\bar e_{12}, \bar e_{13}, \bar e_{23}, \bar e_{21}, \bar e_{31}, \bar e_{32}$, and notes that each commutes with its neighbours and is the commutator of its two neighbours. The first relation is the usual Steinberg relation. The second cannot hold as written: $\bar e_{ij}$ and $\bar e_{kj}$ lie in the same column, $e_{ij}e_{kj} = e_{kj}e_{ij} = 0$, and they commute. The relation that holds is $(\bar e_{ij}, \bar e_{ki}) = \bar e_{kj}^{-1}$; the hexagon needs only the first one.
+
+\emph{The page, p.~45.} In the proof of Brown's theorem that an integer dividing the length of every orbit of a finite group divides the Euler characteristic, the page reduces to a Sylow $p$-subgroup $H$: if $p^k$ divides $[G : G_x]$, it divides $[H : H_x]$, because $[G:G_x]$ divides $[G : H_x] = [G : H][H : H_x]$ and $[G : H]$ is prime to $p$.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen, notebook 1973-6, p.~30]\label{thm:quillen-1973-6-a}
+Let $R$ be a commutative ring, $i, j, k$ distinct indices, $a, b \in R$, and $t_{ij}(a) = 1 + a e_{ij}$. Then $(t_{ij}(a), t_{jk}(b)) = t_{ik}(ab)$; $t_{ij}(a)$ commutes with $t_{kj}(b)$ and with $t_{ik}(b)$, so that $(t_{ij}(a), t_{kj}(b)) = 1$, which is not $t_{ik}(-1)$ if $R \ne 0$; and $(t_{ij}(a), t_{ki}(b)) = t_{kj}(-ba)$. For $3 \times 3$ matrices, each matrix of the hexagon commutes with the next one and is the commutator, in one order or the other, of its two neighbours.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Put $x = ae_{ij}$ and $y = be_{jk}$. Then $x^2 = y^2 = yx = 0$ and $xy = ab\,e_{ik}$, $xyx = 0$; expanding, $(1+x)(1+y)(1-x)(1-y) = 1 + xy$. For $y = be_{ki}$ instead, $xy = 0$, $yx = ba\,e_{kj}$ and $yxy = 0$, and the same expansion gives $1 - yx$. Two elementary matrices in the same row or the same column have products $0$ in both orders, so they commute. The hexagon is the six instances of the first relation: $\bar e_{12} = (\bar e_{13}, \bar e_{32})$, $\bar e_{13} = (\bar e_{12}, \bar e_{23})$, $\bar e_{23} = (\bar e_{21}, \bar e_{13})$, and so on, and consecutive matrices share a row or a column.
+\end{proof}
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1973-6, p.~45]\label{thm:quillen-1973-6-b}
+Let $H$ be a Sylow $p$-subgroup of a finite group $G$ and $K$ a subgroup. If $p^k$ divides $[G : K]$, then $p^k$ divides $[H : H \cap K]$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+$[G : K]$ divides $[G : H \cap K] = [H : H \cap K]\,[G : H]$, and $[G:H]$ is prime to $p$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1973_6.lean}{\texttt{Notebook1973\_6.\allowbreak{}lean}} proves Theorem~\ref{thm:quillen-1973-6-a} with mathlib's \texttt{Matrix.transvection}, as \texttt{transvection\_commutator}, \texttt{transvection\_commute\_col}, \texttt{transvection\_commute\_row}, \texttt{transvection\_commutator\_col}, \texttt{not\_second\_relation}, \texttt{transvection\_commutator'} and, for the hexagon, \texttt{hexagon\_commute} and \texttt{hexagon\_commutator}; the commutators are written out as products, the inverse of $t_{ij}(a)$ being $t_{ij}(-a)$. The first relation was already in the library for units over any ring (Section~\ref{sec:quillen-1968-15}). Theorem~\ref{thm:quillen-1973-6-b} is \texttt{pow\_dvd\_relIndex\_of\_sylow}. The property (FA), the trees and Brown's theorem are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Both statements are classical: the commutator relations are Steinberg's relations for $SL_n$, and the hexagon argument is in Serre's \emph{Arbres, amalgames, $SL_2$} (I, \S 6); the Sylow reduction is the first step of Brown's proof (Invent.\ Math.\ 27, 1974). The point of the section is the second relation of p.~30, which fails as transcribed and is replaced by the one that holds. The edition does not present anything here as new.}

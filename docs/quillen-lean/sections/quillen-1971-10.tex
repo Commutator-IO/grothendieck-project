@@ -1,0 +1,31 @@
+\section[Notebook 1971-10: commutators of displaced elements; Artin--Schreier]{Notebook 1971-10: commutators of displaced elements, and the Artin--Schreier equation\protect\verifie{Notebook1971_10}}\label{sec:quillen-1971-10}
+
+\emph{Context.} \carnet{1971}{10} opens, on 6~June 1971, with a proof that the commutator subgroup of the group $G$ of compactly supported diffeomorphisms of $\mathbf R$ is perfect, and continues with Kummer theory for $BGL(k)^+$ over an algebraically closed field $k$ of characteristic $p$.
+
+\emph{The page, p.~1.} Quillen calls a diffeomorphism elementary when it is supported on two disjoint intervals and inverse to itself under a transport from one to the other; the elementary elements generate a normal subgroup $E \subseteq (G, G)$. Given $g_1, g_2$ supported in an interval $K$, he takes $u$, $v$ moving $K$ off itself in opposite directions; then $g_1 \cdot u g_1^{-1}u^{-1}$ and $g_2 \cdot v g_2^{-1} v^{-1}$ are elementary and their commutator is still $(g_1, g_2)$. Hence $(G,G) \subseteq (E,E)$, so $E = (G,G)$ and $E$ is perfect. The geometry only provides elements that commute: $a' = ug_1^{-1}u^{-1}$ is supported in $uK$, $b' = vg_2^{-1}v^{-1}$ in $vK$, and $K$, $uK$, $vK$ are disjoint.
+
+\emph{The page, p.~8.} In a direct proof of Lang's theorem for $GL_n$, the page solves $x^q - x + a = 0$ in $k$, $q$ a power of $p$.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen, notebook 1971-10, p.~1]\label{thm:quillen-1971-10}
+Let $G$ be a group. \emph{(i)} If $a'$ commutes with $b$ and $b'$, and $b'$ commutes with $a$, then $(aa', bb') = (a, b)$. \emph{(ii)} Let $E$ be a subgroup such that every pair $g_1, g_2$ admits $a'$, $b'$ as in (i), for $a = g_1$, $b = g_2$, with $g_1a'$ and $g_2b'$ in $E$. Then $(G, G) \subseteq (E, E)$; if moreover $E \subseteq (G, G)$, then $E = (G, G)$ and $(E, E) = E$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(i) Since $a'$ commutes with $bb'$, $aa'bb'a'^{-1}a^{-1}b'^{-1}b^{-1} = abb'a^{-1}b'^{-1}b^{-1}$, and since $b'$ commutes with $a$ this is $aba^{-1}b^{-1}$. (ii) By (i) every commutator $(g_1, g_2)$ is the commutator $(g_1a', g_2b')$ of two elements of $E$. If $E \subseteq (G,G)$, then $(G,G) \subseteq (E,E) \subseteq E \subseteq (G,G)$.
+\end{proof}
+
+\begin{encadre}
+\begin{proposition}[Notebook 1971-10, p.~8]\label{prop:quillen-1971-10}
+Over an algebraically closed field $k$, every $y$ is of the form $x^q - x$ for $q \ge 2$. If $k$ has characteristic $p$ and $p \mid q$, the equation $x^q - x = y$ has exactly $q$ solutions.
+\end{proposition}
+\end{encadre}
+
+\begin{proof}
+$X^q - X - y$ has degree $q \ge 1$, hence a root. In characteristic $p$ with $p \mid q$ its derivative is $-1$, so it is separable and has $q$ distinct roots.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1971_10.lean}{\texttt{Notebook1971\_10.\allowbreak{}lean}} proves Theorem~\ref{thm:quillen-1971-10} as \texttt{commutator\_mul\_mul}, \texttt{commutator\_le\_commutator} and \texttt{eq\_commutator\_of\_le}, for any group and any subgroup $E$ (normality is not needed), and Proposition~\ref{prop:quillen-1971-10} as \texttt{exists\_pow\_sub\_eq} and \texttt{card\_rootSet\_pow\_sub}. The diffeomorphisms, their supports and Lang's theorem are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The displacement argument is the standard one for groups of compactly supported homeomorphisms and diffeomorphisms (Epstein, Compositio Math.\ 22, 1970; Mather, Comment.\ Math.\ Helv.\ 49, 1974, who proves the stronger statement that the group is perfect). The Artin--Schreier statement is classical. The edition does not present either as new.}

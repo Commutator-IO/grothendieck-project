@@ -1,0 +1,19 @@
+\section[Notebook 1971-3: the swindle that makes $g$ a commutator]{Notebook 1971-3: the swindle that makes a compactly supported homeomorphism a commutator\protect\verifie{Notebook1971_3}}\label{sec:quillen-1971-3}
+
+\emph{Context.} On page~32 of \carnet{1971}{3} Quillen starts to read Mather's theorem that the group $G$ of compactly supported homeomorphisms of $\mathbf R^n$ has the homology of a point. He first shows that $G$ is perfect.
+
+\emph{The page.} Take $g$ supported in a ball $B_0$, balls $B_1, B_2, \ldots$ disjoint and shrinking to a point, $z \in G$ moving each $B_i$ onto $B_{i+1}$, $\sigma(x) = zxz^{-1}$, and the infinite product $T = \sigma(g)\sigma^2(g)\cdots$, which converges in $G$. Then $\sigma^{-1}(T) = gT$, and the page concludes that $g$ is a commutator, with the formula $g = T^{-1}z^{-1}Tz$. From $z^{-1}Tz = gT$ one gets $g = z^{-1}TzT^{-1} = (z^{-1}, T)$ instead; the page's expression is $T^{-1}gT$, the conjugate of $g$ by $T$. It is also a commutator, and it equals $g$ only when $g$ and $T$ commute. The conclusion of the page stands.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen, notebook 1971-3, pp.~32--33]\label{thm:quillen-1971-3}
+Let $g, z, T$ be elements of a group with $T = z(gT)z^{-1}$. Then $g = (z^{-1}, T)$, so $g$ is a commutator, and $T^{-1}z^{-1}Tz = T^{-1}gT$, which equals $g$ if and only if $g$ commutes with $T$. In the symmetric group on three letters there are $g, z, T$ with $T = z(gT)z^{-1}$ and $T^{-1}z^{-1}Tz \ne g$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+The hypothesis is $z^{-1}Tz = gT$, whence $g = z^{-1}TzT^{-1}$ and $T^{-1}z^{-1}Tz = T^{-1}(gT)$. For the example take $z = (1\,2)$, $T = (0\,1)$ and $g = z^{-1}TzT^{-1}$, a $3$-cycle, which does not commute with the transposition $T$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1971_3.lean}{\texttt{Notebook1971\_3.\allowbreak{}lean}} proves Theorem~\ref{thm:quillen-1971-3} as \texttt{eq\_commutator}, \texttt{mem\_commutator}, \texttt{page\_formula\_eq}, \texttt{page\_formula\_eq\_iff} and \texttt{page\_formula\_ne} (the example is checked by \texttt{decide}). It also proves the abelian form of the question of page~34, \texttt{hom\_eq\_one}: if $x \mapsto x\sigma(x)^{-1}$ is onto for an endomorphism $\sigma$, a homomorphism to an abelian group invariant under $\sigma$ is trivial. The construction of $T$ (convergence of the infinite product) is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The swindle is classical (Mather, Topology 10, 1971, for the acyclicity of the group of compactly supported homeomorphisms of $\mathbf R^n$). The section records only that the formula of the page is a conjugate of the commutator that the hypothesis gives. The edition does not present anything here as new.}
