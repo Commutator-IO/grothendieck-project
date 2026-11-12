@@ -192,10 +192,10 @@ Two rules held throughout:
 - [ ] 150 · b. 4 · p. 72 · current: strokes from the centre · proposed: only the middle stroke starts at the centre · source: gsmallB-report — not yet looked at
 - [ ] 151 · b. 3 · p. 53 · current: generators to a and b · proposed: the one to b is dashed; the one to a has a gap · source: omidB-report — not yet looked at
 - [ ] 151 · b. 3 · p. 58 · current: labels X_i, X_i^*, R_ij et C_ij · proposed: C_ij not in the sketch · source: gmid-report — not yet looked at
-- [ ] 152 · b. 1 · p. 1 · current: « sept rayons » · proposed: four inked rays · source: omidB-report — not yet looked at
-- [ ] 152 · b. 1 · p. 1 · current: « chacun des deux cadres est suivi d'un petit cercle … » · proposed: both small circles inside the first frame · source: rmisc-report — not yet looked at
-- [ ] 152 · b. 1 · p. 3 · current: « deux disques reliés par une arête »; five discs · proposed: that pair is at the foot; five discs of the right half unmentioned; two vertices of the dual tree · source: gmid-report — not yet looked at
-- [ ] 152 · b. 1 · p. 10 · current: « trois cordes » · proposed: eight · source: gmid-report; drawings.json 01-4 — not yet looked at
+- [x] 152 · b. 1 · p. 1 · current: « sept rayons » · proposed: four inked rays · source: omidB-report — APPLIED: at 500 dpi four ink strokes leave the centre; the other lines are long pencil lines across the sheet; \note set before the mark (its record keeps « sept »).
+- [x] 152 · b. 1 · p. 1 · current: « chacun des deux cadres est suivi d'un petit cercle … » · proposed: both small circles inside the first frame · source: rmisc-report — APPLIED: confirmed (both small circles inside the first frame, at the ends of its two lines; nothing after the second frame, a faint circle under it); note rewritten.
+- [x] 152 · b. 1 · p. 3 · current: « deux disques reliés par une arête »; five discs · proposed: that pair is at the foot; five discs of the right half unmentioned; two vertices of the dual tree · source: gmid-report — APPLIED: confirmed at 80 dpi (the linked pair is at the foot; five smaller discs at the right; two heavy points with a stroke each inside the large disc); note rewritten.
+- [x] 152 · b. 1 · p. 10 · current: « trois cordes » · proposed: eight · source: gmid-report; drawings.json 01-4 — APPLIED: eight chords counted; note corrected.
 - [ ] 154 · b. 1 · p. 4 · current: figure « en haut à droite » · proposed: mid-height of the right half · source: drawings.json 01-4 — not yet looked at
 - [ ] 154 · b. 1 · p. 11 · current: three points between r and t · proposed: four marked points: r, two unnamed, t · source: g154-report — not yet looked at
 - [ ] 154 · b. 1 · p. 19 · current: points a and a′ · proposed: the lower marginal point is a′ · source: drawings.json 01-13, t154a-settled — not yet looked at
