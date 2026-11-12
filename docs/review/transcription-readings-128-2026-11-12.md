@@ -126,9 +126,9 @@ Two rules held throughout:
 - [ ] 86 · b. 1 · p. 7 · current: pencil frame « un cube » · proposed: not legible as a cube · source: g67-report — OPEN: at 120 dpi the pencil lines round the right icosahedron make a square frame with oblique strokes at two corners; whether it is a cube in perspective is not settled.
 - [ ] 86 · b. 2 · p. 29 · current: margin sketch of the diagram of p. 31 (class t) · proposed: tikz-cd proposed, to check against p. 31 · source: g67-report — OPEN (class t): the reading is not complete (g67 itself says the arrows cannot all be followed); not set.
 - [x] 86 · b. 2 · p. 30 · current: « le sommet du bas » · proposed: the lower left vertex · source: g67-report — APPLIED: τ = t_0 at the lower left vertex (250 dpi); note corrected.
-- [ ] 87 · b. 2 · p. 29 · current: « quatre segments » · proposed: five (two heavy, three thin) · source: gmid-report, gmid-settled; drawings.json 02-1 — not yet looked at
-- [ ] 87 · b. 2 · p. 30 · current: « pentagone » · proposed: six corners · source: gmid-report — not yet looked at
-- [ ] 87 · b. 2 · p. 40 · current: hatched fan and bar with heavy ends · proposed: not in the transcription · source: omidA-report — not yet looked at
+- [x] 87 · b. 2 · p. 29 · current: « quatre segments » · proposed: five (two heavy, three thin) · source: gmid-report, gmid-settled; drawings.json 02-1 — APPLIED: five segments at 450 dpi; \note after the mark.
+- [x] 87 · b. 2 · p. 30 · current: « pentagone » · proposed: six corners · source: gmid-report — APPLIED: six corners at 300 dpi; note corrected.
+- [ ] 87 · b. 2 · p. 40 · current: hatched fan and bar with heavy ends · proposed: not in the transcription · source: omidA-report — NOT APPLIED (drawing work): figures with no mark are for the vectorising skill; the note already says « plusieurs petits croquis ».
 - [ ] 104 · b. 1 · p. 1 · current: « deux, trois puis quatre marques » · proposed: 3, 4, 5 marks counting the ends · source: gmid-report — not yet looked at
 - [ ] 104 · b. 1 · p. 3 · current: four figures · proposed: six (a segment and an open rectangle besides) · source: gmid-report — not yet looked at
 - [ ] 105 · b. 2 · p. 26 · current: arrow diagrams in a note (class t) · proposed: tikz-cd for the upper two thirds · source: gsmallB-report, rmisc-report — not yet looked at
