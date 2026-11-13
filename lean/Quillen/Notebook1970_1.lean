@@ -65,16 +65,12 @@ theorem subgroupPoly_add (x y : K) :
       C ((subgroupPoly V).eval x)).degree <
       (Finset.univ.map (Function.Embedding.subtype (· ∈ V))).card := by
     rw [Finset.card_map, Finset.card_univ]
-    have h1 : ((subgroupPoly V).comp (X + C x) - subgroupPoly V).degree < Fintype.card V := by
-      by_cases h0 : (subgroupPoly V).comp (X + C x) - subgroupPoly V = 0
-      · rw [h0, degree_zero]; exact WithBot.bot_lt_coe _
-      · have hd : ((subgroupPoly V).comp (X + C x)).degree = (subgroupPoly V).degree := by
-          rw [degree_eq_natDegree hm.ne_zero, degree_eq_natDegree hP.ne_zero,
-            natDegree_comp, natDegree_X_add_C, mul_one]
-        have := degree_sub_lt_left hd hm.ne_zero (by rw [hm.leadingCoeff, hP.leadingCoeff])
-        rwa [hd, degree_eq_natDegree hP.ne_zero, natDegree_subgroupPoly] at this
-    refine lt_of_le_of_lt (degree_sub_le _ _) (max_lt h1 ?_)
-    exact lt_of_le_of_lt degree_C_le (by exact_mod_cast hcard)
+    have hd : ((subgroupPoly V).comp (X + C x)).degree = (subgroupPoly V).degree := by
+      rw [degree_eq_natDegree hm.ne_zero, degree_eq_natDegree hP.ne_zero,
+        natDegree_comp, natDegree_X_add_C, mul_one]
+    have h1 := degree_sub_lt_left hd hm.ne_zero (by rw [hm.leadingCoeff, hP.leadingCoeff])
+    rw [hd, degree_eq_natDegree hP.ne_zero, natDegree_subgroupPoly] at h1
+    exact (degree_sub_le _ _).trans_lt (max_lt h1 (degree_C_le.trans_lt (by exact_mod_cast hcard)))
   have hR := eq_zero_of_degree_lt_of_eval_finset_eq_zero _ hdeg fun v hv => by
     obtain ⟨⟨w, hw⟩, -, rfl⟩ := Finset.mem_map.mp hv
     have := congrArg (eval x) (subgroupPoly_comp_X_add_C V hw)

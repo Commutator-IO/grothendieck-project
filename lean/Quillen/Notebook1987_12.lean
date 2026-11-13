@@ -47,17 +47,13 @@ noncomputable def g : ↥(I ⊓ J) →ₗ[A] (A ⧸ I) ⊗[A] J :=
 theorem range_g : LinearMap.range (g I J) = LinearMap.ker (J.subtype.lTensor (A ⧸ I)) := by
   ext z
   rw [LinearMap.mem_range, LinearMap.mem_ker]
-  constructor
-  · rintro ⟨x, rfl⟩
-    exact (lTensor_one_tmul_eq_zero_iff I J _).mpr x.2.1
-  · intro hz
-    obtain ⟨y, rfl⟩ := exists_one_tmul I J z
-    exact ⟨⟨y, (lTensor_one_tmul_eq_zero_iff I J y).mp hz, y.2⟩, rfl⟩
+  refine ⟨fun ⟨x, hx⟩ => hx ▸ (lTensor_one_tmul_eq_zero_iff I J _).mpr x.2.1, fun hz => ?_⟩
+  obtain ⟨y, rfl⟩ := exists_one_tmul I J z
+  exact ⟨⟨y, (lTensor_one_tmul_eq_zero_iff I J y).mp hz, y.2⟩, rfl⟩
 
 theorem ker_g :
     LinearMap.ker (g I J) = Submodule.comap (I ⊓ J).subtype (I * J : Submodule A A) := by
   ext x
-  rw [LinearMap.mem_ker, Submodule.mem_comap]
   exact one_tmul_eq_zero_iff I J _
 
 /-- **Notebook 1987-12, p. 81**: the kernel of `(A/I) ⊗ J → (A/I) ⊗ A`, which is
