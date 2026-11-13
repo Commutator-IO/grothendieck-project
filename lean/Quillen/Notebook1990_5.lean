@@ -82,23 +82,13 @@ theorem splitting {i : E' →ₗ[S] E} {p : E →ₗ[S] E''} {h : E'' →ₗ[S] 
   have hs' : ∀ x, i (k x) + h (p x) = x := fun x => by
     simpa using LinearMap.congr_fun hs x
   have hpi' : ∀ x, p (i x) = 0 := fun x => by simpa using LinearMap.congr_fun hpi x
-  have hph : ∀ y, p (h y) = y := by
-    intro y
+  have hph : ∀ y, p (h y) = y := fun y => by
     obtain ⟨z, rfl⟩ := hp y
-    have := congrArg p (hs' z)
-    rwa [map_add, hpi', zero_add] at this
-  refine ⟨?_, ?_, ?_⟩
-  · ext x
-    apply hi
-    have := hs' (i x)
-    rw [hpi', map_zero, add_zero] at this
-    simpa using this
-  · ext y; simpa using hph y
-  · ext y
-    apply hi
-    have := hs' (h y)
-    rw [hph, add_eq_right] at this
-    simpa using this
+    simpa [hpi'] using congrArg p (hs' z)
+  refine ⟨LinearMap.ext fun x => hi ?_, LinearMap.ext fun y => by simpa using hph y,
+    LinearMap.ext fun y => hi ?_⟩
+  · simpa [hpi'] using hs' (i x)
+  · simpa [hph] using hs' (h y)
 
 end Splitting
 
@@ -112,14 +102,13 @@ theorem half_one_add (hε : ε * ε = 1) (hF : F * F = 1) (hεF : ε * F = -(F *
       F * ((2⁻¹ : ℚ) • (1 + ε)) * F = 1 - (2⁻¹ : ℚ) • (1 + ε) ∧
       (2⁻¹ : ℚ) • (1 + ε) * F * ((2⁻¹ : ℚ) • (1 + ε)) = 0 := by
   have h1 : (1 + ε) * (1 + ε) = (2 : ℚ) • (1 + ε) := by
-    have : (1 + ε) * (1 + ε) = 1 + ε + ε * ε + ε := by noncomm_ring
-    rw [this, hε, two_smul]; abel
+    rw [show (1 + ε) * (1 + ε) = 1 + ε + ε * ε + ε by noncomm_ring, hε, two_smul]; abel
   have h2 : F * (1 + ε) * F = 1 - ε := by
-    have : F * (1 + ε) * F = F * F + F * (ε * F) := by noncomm_ring
-    rw [this, hεF, mul_neg, ← mul_assoc, hF, one_mul, sub_eq_add_neg]
+    rw [show F * (1 + ε) * F = F * F + F * (ε * F) by noncomm_ring, hεF, mul_neg, ← mul_assoc,
+      hF, one_mul, sub_eq_add_neg]
   have h3 : (1 + ε) * F * (1 + ε) = 0 := by
-    have : (1 + ε) * F * (1 + ε) = F + F * ε + ε * F + ε * F * ε := by noncomm_ring
-    rw [this, hεF, neg_mul, mul_assoc, hε, mul_one]; abel
+    rw [show (1 + ε) * F * (1 + ε) = F + F * ε + ε * F + ε * F * ε by noncomm_ring, hεF,
+      neg_mul, mul_assoc, hε, mul_one]; abel
   refine ⟨?_, ?_, ?_⟩
   · unfold IsIdempotentElem
     rw [smul_mul_smul, h1, smul_smul]; norm_num

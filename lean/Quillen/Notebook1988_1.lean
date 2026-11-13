@@ -76,19 +76,11 @@ def commutators : Submodule k (M →ₗ[k] A) :=
 /-- Quillen's map `Hom_k(M, A) → M*`, `l ↦ (m ↦ tr_M (x ↦ l x • m))`. -/
 noncomputable def traceForm : (M →ₗ[k] A) →ₗ[k] Module.Dual k M :=
   LinearMap.mk₂ k (fun l m => LinearMap.trace k M (op k l m))
-    (fun l l' m => by
-      rw [← map_add]; congr 1; ext x
-      simp only [op_apply, LinearMap.add_apply, add_smul])
+    (fun l l' m => by rw [← map_add]; congr 1; ext x; simp [add_smul])
+    (fun c l m => by rw [← map_smul]; congr 1; ext x; simp [smul_assoc])
+    (fun l m m' => by rw [← map_add]; congr 1; ext x; simp [smul_add])
     (fun c l m => by
-      rw [← map_smul]; congr 1; ext x
-      simp only [op_apply, LinearMap.smul_apply, smul_assoc])
-    (fun l m m' => by
-      rw [← map_add]; congr 1; ext x
-      simp only [op_apply, LinearMap.add_apply, smul_add])
-    (fun c l m => by
-      rw [← map_smul]; congr 1; ext x
-      simp only [op_apply, LinearMap.smul_apply]
-      exact smul_comm _ _ _)
+      rw [← map_smul]; congr 1; ext x; simpa using smul_comm _ _ _)
 
 lemma traceForm_apply (l : M →ₗ[k] A) (m : M) :
     traceForm k l m = LinearMap.trace k M (op k l m) := rfl
@@ -100,20 +92,18 @@ lemma rightMul_embed (a : A) (μ : Module.Dual k M) :
 theorem traceForm_leftMul (a : A) (l : M →ₗ[k] A) :
     traceForm k (leftMul k a l) = traceForm k (rightMul k a l) := by
   ext m
-  have h1 : op k (leftMul k a l) m = smulEnd k a * op k l m := by
-    ext x; simp [mul_smul]
-  have h2 : op k (rightMul k a l) m = op k l m * smulEnd k a := by
-    ext x; simp
-  rw [traceForm_apply, traceForm_apply, h1, h2, LinearMap.trace_mul_comm]
+  rw [traceForm_apply, traceForm_apply,
+    show op k (leftMul k a l) m = smulEnd k a * op k l m by ext x; simp [mul_smul],
+    show op k (rightMul k a l) m = op k l m * smulEnd k a by ext x; simp,
+    LinearMap.trace_mul_comm]
 
 variable [FiniteDimensional k M]
 
 /-- `traceForm` retracts the embedding `μ ↦ (x ↦ μ x • 1)`. -/
 theorem traceForm_embed (μ : Module.Dual k M) : traceForm k (embed k (A := A) μ) = μ := by
   ext m
-  have : op k (embed k (A := A) μ) m = μ.smulRight m := by
-    ext x; simp [algebraMap_smul]
-  rw [traceForm_apply, this, LinearMap.trace_smulRight]
+  rw [traceForm_apply, show op k (embed k (A := A) μ) m = μ.smulRight m by
+    ext x; simp [algebraMap_smul], LinearMap.trace_smulRight]
 
 theorem traceForm_surjective : Function.Surjective (traceForm k (A := A) (M := M)) :=
   fun μ => ⟨embed k μ, traceForm_embed k μ⟩
@@ -142,8 +132,7 @@ theorem sub_embed_traceForm_mem (l : M →ₗ[k] A) :
 theorem ker_traceForm : LinearMap.ker (traceForm k (A := A) (M := M)) = commutators k := by
   apply le_antisymm
   · intro l hl
-    have := sub_embed_traceForm_mem k l
-    rwa [LinearMap.mem_ker.mp hl, map_zero, sub_zero] at this
+    simpa [LinearMap.mem_ker.mp hl] using sub_embed_traceForm_mem k l
   · rw [commutators, Submodule.span_le]
     rintro _ ⟨⟨a, l⟩, rfl⟩
     simp [LinearMap.mem_ker, traceForm_leftMul]

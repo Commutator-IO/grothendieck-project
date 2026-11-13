@@ -115,9 +115,8 @@ theorem trace_posSemidef_eq {E : Matrix n n ℂ} (hE : E.PosSemidef) (M : Matrix
     ⟨CFC.sqrt E, (CFC.sqrt_nonneg E).posSemidef.1,
       (CFC.sqrt_mul_sqrt_self E hE.nonneg).symm⟩
   refine ⟨B * M * B, ?_⟩
-  have : B * B * M * (B * B) * Mᴴ = B * (B * M * B * (B * Mᴴ)) := by
-    simp only [mul_assoc]
-  rw [this, trace_mul_comm]
+  rw [show B * B * M * (B * B) * Mᴴ = B * (B * M * B * (B * Mᴴ)) by simp only [mul_assoc],
+    trace_mul_comm]
   simp only [conjTranspose_mul, hB.eq, mul_assoc]
 
 /-- **Quillen, 1983 lecture notes 8 (Witten), p. 6.** For `E` positive semidefinite and any `M`,
@@ -125,14 +124,12 @@ theorem trace_posSemidef_eq {E : Matrix n n ℂ} (hE : E.PosSemidef) (M : Matrix
 theorem re_trace_posSemidef_nonneg {E : Matrix n n ℂ} (hE : E.PosSemidef) (M : Matrix n n ℂ) :
     0 ≤ (E * M * E * Mᴴ).trace.re := by
   obtain ⟨C, hC⟩ := trace_posSemidef_eq hE M
-  rw [hC]
-  exact re_trace_mul_conjTranspose_self_nonneg C
+  exact hC ▸ re_trace_mul_conjTranspose_self_nonneg C
 
 /-- For `E` positive semidefinite, `Tr (E M E M*)` is real. -/
 theorem im_trace_posSemidef {E : Matrix n n ℂ} (hE : E.PosSemidef) (M : Matrix n n ℂ) :
     (E * M * E * Mᴴ).trace.im = 0 := by
   obtain ⟨C, hC⟩ := trace_posSemidef_eq hE M
-  rw [hC]
-  exact (Complex.nonneg_iff.mp (posSemidef_self_mul_conjTranspose C).trace_nonneg).2.symm
+  exact hC ▸ (Complex.nonneg_iff.mp (posSemidef_self_mul_conjTranspose C).trace_nonneg).2.symm
 
 end Quillen.Notebook1983_LectureNotes8

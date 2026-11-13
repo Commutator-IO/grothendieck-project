@@ -45,13 +45,12 @@ theorem padicValNat_eq_one {ℓ n : ℕ} [Fact ℓ.Prime] (hn : n ≠ 0) (h1 : �
 theorem padicValNat_three_pow_sub_one_odd {t : ℕ} (ht : Odd t) :
     padicValNat 2 (3 ^ t - 1) = 1 := by
   obtain ⟨k, rfl⟩ := ht
-  have hpos : 1 ≤ 3 ^ (2 * k + 1) := Nat.one_le_pow _ _ (by norm_num)
   have hlt : 1 < 3 ^ (2 * k + 1) := Nat.one_lt_pow (by omega) (by norm_num)
   refine padicValNat_eq_one (Nat.sub_ne_zero_of_lt hlt) ?_ ?_
-  · rw [← ZMod.natCast_eq_zero_iff, Nat.cast_sub hpos]
+  · rw [← ZMod.natCast_eq_zero_iff, Nat.cast_sub hlt.le]
     simp only [Nat.cast_pow, Nat.cast_ofNat, Nat.cast_one]
     rw [show (3 : ZMod 2) = 1 from rfl, one_pow, sub_self]
-  · rw [show (2 : ℕ) ^ 2 = 4 by norm_num, ← ZMod.natCast_eq_zero_iff, Nat.cast_sub hpos]
+  · rw [show (2 : ℕ) ^ 2 = 4 by norm_num, ← ZMod.natCast_eq_zero_iff, Nat.cast_sub hlt.le]
     simp only [Nat.cast_pow, Nat.cast_ofNat, Nat.cast_one]
     rw [pow_succ, pow_mul, show (3 : ZMod 4) ^ 2 = 1 from rfl, one_pow, one_mul]
     decide
@@ -61,8 +60,7 @@ for `t ≠ 0`. -/
 theorem padicValNat_three_pow_sub_one_even {t : ℕ} (ht : Even t) (h0 : t ≠ 0) :
     padicValNat 2 (3 ^ t - 1) = padicValNat 2 t + 2 := by
   have h := padicValNat.pow_two_sub_one (x := 3) (n := t) (by norm_num) (by decide) h0 ht
-  have h4 : padicValNat 2 (3 + 1) = 2 := by
-    rw [show (3 + 1 : ℕ) = 2 ^ 2 by norm_num, padicValNat.prime_pow]
+  have h4 : padicValNat 2 (3 + 1) = 2 := padicValNat.prime_pow 2
   have h2 : padicValNat 2 (3 - 1) = 1 := by simp
   omega
 
@@ -78,9 +76,8 @@ has order `ℓ − 1`, then `v_ℓ(p^t − 1) = 0` unless `ℓ − 1 ∣ t`. -/
 theorem padicValNat_pow_sub_one_of_not_dvd {p t : ℕ} (hp : 1 ≤ p)
     (hord : orderOf (p : ZMod ℓ) = ℓ - 1) (ht : ¬ (ℓ - 1) ∣ t) :
     padicValNat ℓ (p ^ t - 1) = 0 := by
-  refine padicValNat.eq_zero_of_not_dvd fun h => ht ?_
-  rw [← hord]
-  exact orderOf_dvd_of_pow_eq_one ((dvd_pow_sub_one_iff hp).mp h)
+  exact padicValNat.eq_zero_of_not_dvd fun h =>
+    ht (hord ▸ orderOf_dvd_of_pow_eq_one ((dvd_pow_sub_one_iff hp).mp h))
 
 /-- **Quillen, notebook 1972-6, p. 40, `ℓ` odd, `ℓ − 1 ∣ t`.** If `ℓ` is odd, the class of `p`
 modulo `ℓ` has order `ℓ − 1` and `p^{ℓ−1} ≢ 1` modulo `ℓ²` (that is, `p` generates `(ℤ/ℓ²)^×`),
@@ -95,12 +92,8 @@ theorem padicValNat_pow_sub_one_of_dvd (hodd : Odd ℓ) {p t : ℕ} (hp : 2 ≤ 
   have hx : 1 < p ^ (ℓ - 1) := Nat.one_lt_pow (by omega) (by omega)
   have hdvd : ℓ ∣ p ^ (ℓ - 1) - 1 := by
     rw [dvd_pow_sub_one_iff (by omega), ← hord]; exact pow_orderOf_eq_one _
-  have hndvd : ¬ ℓ ∣ p ^ (ℓ - 1) := by
-    intro h
-    have : ℓ ∣ 1 := by
-      have := Nat.dvd_sub h hdvd
-      rwa [Nat.sub_sub_self hx.le] at this
-    exact hℓ.out.one_lt.ne' (Nat.dvd_one.mp this)
+  have hndvd : ¬ ℓ ∣ p ^ (ℓ - 1) := fun h =>
+    hℓ.out.not_dvd_one (Nat.sub_sub_self hx.le ▸ Nat.dvd_sub h hdvd)
   have h1 : padicValNat ℓ (p ^ (ℓ - 1) - 1) = 1 := padicValNat_eq_one (by omega) hdvd hsq
   have key := padicValNat.pow_sub_pow (p := ℓ) hodd hx (by simpa using hdvd) hndvd hs
   rw [one_pow, h1] at key

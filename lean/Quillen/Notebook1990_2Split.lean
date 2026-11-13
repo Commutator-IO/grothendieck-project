@@ -37,12 +37,10 @@ structure Split (d i p h k : R) : Prop where
   dp : d * p = p * d
 
 theorem p_mul_i (H : Split d i p h k) : p * i = 0 := by
-  have h1 : p * (i * k + h * p) * i = p * i := by rw [H.ik_hp, mul_one]
   have h2 : p * (i * k + h * p) * i = p * i + p * i := by
     simp only [mul_add, add_mul, mul_assoc, H.ki, mul_one]
     rw [← mul_assoc p h, H.ph, one_mul]
-  have := h1.symm.trans h2
-  simpa using this
+  simpa using (show p * (i * k + h * p) * i = p * i by rw [H.ik_hp, mul_one]).symm.trans h2
 
 /-- `iS = [d, h]` for `S = kdh`. -/
 theorem iS_eq (H : Split d i p h k) : i * (k * d * h) = d * h - h * d := by
@@ -82,8 +80,6 @@ theorem of_homotopy (H : Split d i p h k) {L g : R} (hLi : L * i = i * L) (hpL :
     p * J = L ∧ i * I + J * p = L ∧ I * i = L ∧ d * J = J * d ∧ d * I = I * d := by
   intro J I
   have hpi := p_mul_i H
-  have hS := iS_eq H
-  have hSp := Sp_eq H
   refine ⟨?_, ?_, ?_, ?_, ?_⟩
   · simp only [J, mul_sub, ← mul_assoc, hpL, hpi, zero_mul, sub_zero]
     rw [mul_assoc, H.ph, mul_one]
@@ -94,7 +90,7 @@ theorem of_homotopy (H : Split d i p h k) {L g : R} (hLi : L * i = i * L) (hpL :
   · -- `[d, J] = L[d, h] − i[d, g] = LiS − iLS = 0`
     simp only [J]
     have e1 : d * (L * h) - L * h * d = L * (i * (k * d * h)) := by
-      rw [hS, ← mul_assoc, hdL]; noncomm_ring
+      rw [iS_eq H, ← mul_assoc, hdL]; noncomm_ring
     have e2 : d * (i * g) - i * g * d = i * (L * (k * d * h)) := by
       rw [hg, ← mul_assoc, H.di]; noncomm_ring
     have : L * (i * (k * d * h)) = i * (L * (k * d * h)) := by rw [← mul_assoc, hLi, mul_assoc]
@@ -105,7 +101,7 @@ theorem of_homotopy (H : Split d i p h k) {L g : R} (hLi : L * i = i * L) (hpL :
   · -- `[d, I] = L[d, k] + [d, g]p = −LSp + LSp = 0`
     simp only [I]
     have e1 : d * (L * k) - L * k * d = -(L * (k * d * h * p)) := by
-      rw [hSp, ← mul_assoc, hdL]; noncomm_ring
+      rw [Sp_eq H, ← mul_assoc, hdL]; noncomm_ring
     have e2 : d * (g * p) - g * p * d = L * (k * d * h) * p := by
       rw [hg, mul_assoc g p d, ← H.dp]; noncomm_ring
     rw [← sub_eq_zero]
@@ -133,8 +129,7 @@ theorem homotopy_of (H : Split d i p h k) {L J : R} (hLi : L * i = i * L) (hpL :
     rw [e, hig, ← mul_assoc, ← hLi, mul_assoc, iS_eq H]
     calc L * (d * h - h * d) = (d * L) * h - L * h * d := by rw [hdL]; noncomm_ring
       _ = d * (L * h - J) - (L * h - J) * d := by rw [mul_sub d, hdJ]; noncomm_ring
-  have := congrArg (k * ·) key
-  simpa only [← mul_assoc, H.ki, one_mul] using this
+  simpa only [← mul_assoc, H.ki, one_mul] using congrArg (k * ·) key
 
 /-- **Notebook 1990-2, p. 71**: for idempotents with `ef = fe = 0`, `1 − e − f` is idempotent and
 kills `e` and `f`. -/
