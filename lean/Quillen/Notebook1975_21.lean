@@ -75,15 +75,13 @@ theorem mem_iff_exists (Z : LowerSet α) (b : β) :
   simp [mem_finset_sup]
 
 theorem exists_mem (b : β) : ∃ a, b ∈ u (LowerSet.Iic a) := by
-  have : b ∈ u ⊤ := by rw [map_top]; trivial
-  obtain ⟨a, -, ha⟩ := (mem_iff_exists u ⊤ b).mp this
+  obtain ⟨a, -, ha⟩ := (mem_iff_exists u ⊤ b).mp (by rw [map_top]; trivial)
   exact ⟨a, ha⟩
 
 theorem exists_le_le (b : β) {a a' : α} (h : b ∈ u (LowerSet.Iic a))
     (h' : b ∈ u (LowerSet.Iic a')) : ∃ c, c ≤ a ∧ c ≤ a' ∧ b ∈ u (LowerSet.Iic c) := by
-  have : b ∈ u (LowerSet.Iic a ⊓ LowerSet.Iic a') := by
-    rw [map_inf]; exact ⟨h, h'⟩
-  obtain ⟨c, ⟨hc, hc'⟩, hb⟩ := (mem_iff_exists u _ b).mp this
+  obtain ⟨c, ⟨hc, hc'⟩, hb⟩ := (mem_iff_exists u (LowerSet.Iic a ⊓ LowerSet.Iic a') b).mp
+    (by rw [map_inf]; exact ⟨h, h'⟩)
   exact ⟨c, hc, hc', hb⟩
 
 /-- `f b` is the least `a` with `b ∈ u(↓a)`. -/
@@ -97,10 +95,7 @@ theorem least_le (b : β) {a : α} (h : b ∈ u (LowerSet.Iic a)) : least u b �
   obtain ⟨c, hc, hca, hb⟩ := exists_le_le u b (least_mem u b) h
   have hmin := (wellFounded_lt.has_min {a | b ∈ u (LowerSet.Iic a)}
     (exists_mem u b)).choose_spec.2 c hb
-  have : c = least u b := by
-    by_contra hne
-    exact hmin (lt_of_le_of_ne hc hne)
-  exact this ▸ hca
+  exact eq_of_le_of_not_lt hc hmin ▸ hca
 
 theorem least_mono : Monotone (least u) := fun b' b h =>
   least_le u b' ((u (LowerSet.Iic (least u b))).lower h (least_mem u b))
@@ -119,10 +114,8 @@ omit [Fintype α] in
 theorem comap_injective : Function.Injective (comap : (β →o α) → _) := by
   intro f g h
   ext b
-  have h1 : b ∈ comap f (LowerSet.Iic (f b)) := by simp
-  have h2 : b ∈ comap g (LowerSet.Iic (g b)) := by simp
-  rw [h] at h1
-  rw [← h] at h2
+  have h1 : b ∈ comap g (LowerSet.Iic (f b)) := by rw [← h]; simp
+  have h2 : b ∈ comap f (LowerSet.Iic (g b)) := by rw [h]; simp
   exact le_antisymm (by simpa using h2) (by simpa using h1)
 
 /-- **Birkhoff duality on morphisms** (notebook 1975-21, pp. 41-48): a bounded lattice

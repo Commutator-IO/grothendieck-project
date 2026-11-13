@@ -51,9 +51,8 @@ theorem exists_eq_smul_of_isAlgClosed [IsAlgClosed k] [FiniteDimensional k S] (g
 
 omit [Module k S] [IsScalarTower k A S] [Module k T] [IsScalarTower k A T] in
 /-- Schur's lemma: a linear map between non-isomorphic simple modules is zero. -/
-theorem eq_zero_of_isEmpty_linearEquiv (h : IsEmpty (S ≃ₗ[A] T)) (f : S →ₗ[A] T) : f = 0 := by
-  by_contra hf
-  exact h.false (.ofBijective f (bijective_of_ne_zero hf))
+theorem eq_zero_of_isEmpty_linearEquiv (h : IsEmpty (S ≃ₗ[A] T)) (f : S →ₗ[A] T) : f = 0 :=
+  of_not_not fun hf => h.false (.ofBijective f (bijective_of_ne_zero hf))
 
 /-- If `S` and `T` are not isomorphic, some element of `A` acts with trace `1` on `S` and trace `0`
 on `T`. By density for `S × T`, whose endomorphisms are diagonal and scalar, the map acting as a
@@ -93,9 +92,7 @@ theorem exists_trace_eq_one_and_trace_eq_zero [IsAlgClosed k] [FiniteDimensional
     ext s; simpa [f] using congr(($ha (s, 0)).1)
   have hT : toModuleEnd k T a = 0 := by
     ext t; simpa [f] using congr(($ha (0, t)).2)
-  refine ⟨a, ?_, ?_⟩
-  · rw [hS, trace_smulRight, hφ]
-  · rw [hT, map_zero]
+  exact ⟨a, by rw [hS, trace_smulRight, hφ], by rw [hT, map_zero]⟩
 
 /-- Over an algebraically closed field, in any characteristic, two finite-dimensional simple
 modules with the same trace function are isomorphic. -/
@@ -103,8 +100,8 @@ theorem nonempty_linearEquiv_of_trace_eq [IsAlgClosed k] [FiniteDimensional k S]
     [FiniteDimensional k T]
     (h : ∀ a : A, trace k S (toModuleEnd k S a) = trace k T (toModuleEnd k T a)) :
     Nonempty (S ≃ₗ[A] T) := by
-  by_contra hne
-  obtain ⟨a, h1, h0⟩ := exists_trace_eq_one_and_trace_eq_zero (k := k) (not_nonempty_iff.mp hne)
+  by_contra! hne
+  obtain ⟨a, h1, h0⟩ := exists_trace_eq_one_and_trace_eq_zero (k := k) hne
   exact one_ne_zero (h1.symm.trans ((h a).trans h0))
 
 /-- For a finite-dimensional algebra `A`, simple modules are automatically finite-dimensional,

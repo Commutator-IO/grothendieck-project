@@ -65,9 +65,7 @@ theorem exists_linear_not_rel (r : α → α → Prop) [IsPartialOrder α r] {x 
   have := isPartialOrder_adjoin r h
   obtain ⟨s, hs, hle⟩ := extend_partialOrder (adjoin r x y)
   refine ⟨s, hs, (le_adjoin r x y).trans hle, fun hyx => ?_⟩
-  have hxy : s x y := hle x y (adjoin_self r x y)
-  have : x = y := antisymm hxy hyx
-  exact h (this ▸ refl x)
+  exact h (antisymm (hle x y (adjoin_self r x y)) hyx ▸ refl x)
 
 /-- **Quillen, notebook 1973-5, p. 28.** Every partial order is the intersection of the linear
 orders refining it. -/

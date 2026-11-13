@@ -65,29 +65,19 @@ def A (r : ℕ) : Subgroup (MulAut G) where
   mul_mem' := by
     rintro θ φ ⟨hθ1, hθ2⟩ ⟨hφ1, hφ2⟩
     refine ⟨fun i x => (hφ1 i x).trans (hθ1 i _), fun i x hx => ?_⟩
-    have h1 := hθ2 i (φ x) ((hφ1 i x).mp hx)
-    have h2 := hφ2 i x hx
-    have : (θ * φ) x * x⁻¹ = (θ (φ x) * (φ x)⁻¹) * (φ x * x⁻¹) := by
-      simp [mul_assoc]
-    rw [this]
-    exact (F (i + r)).mul_mem h1 h2
+    rw [show (θ * φ) x * x⁻¹ = (θ (φ x) * (φ x)⁻¹) * (φ x * x⁻¹) by simp [mul_assoc]]
+    exact (F (i + r)).mul_mem (hθ2 i (φ x) ((hφ1 i x).mp hx)) (hφ2 i x hx)
   inv_mem' := by
     rintro θ ⟨hθ1, hθ2⟩
     refine ⟨fun i x => ?_, fun i x hx => ?_⟩
     · rw [hθ1 i ((θ⁻¹) x)]; simp
-    · have hy : θ⁻¹ x ∈ F i := by rw [hθ1 i]; simpa using hx
-      have := hθ2 i (θ⁻¹ x) hy
-      have hx' : θ (θ⁻¹ x) = x := by simp
-      rw [hx'] at this
-      have := (F (i + r)).inv_mem this
-      simpa using this
+    · simpa using (F (i + r)).inv_mem (hθ2 i (θ⁻¹ x) (by rw [hθ1 i]; simpa using hx))
 
 variable {F}
 
 theorem A_inv_apply {r : ℕ} {θ : MulAut G} (hθ : θ ∈ A F r) {i : ℕ} {x : G} (hx : x ∈ F i) :
     x * (θ x)⁻¹ ∈ F (i + r) := by
-  have := (F (i + r)).inv_mem (hθ.2 i x hx)
-  simpa using this
+  simpa using (F (i + r)).inv_mem (hθ.2 i x hx)
 
 /-- `[L_x, θ] = L_y` with `y ∈ G_{i+r}` for `x ∈ G_i`, `θ ∈ A_r`. -/
 theorem commutator_L_mem {r : ℕ} {θ : MulAut G} (hθ : θ ∈ A F r) {i : ℕ} {x : G}
@@ -125,15 +115,13 @@ theorem commutator_le [hF : ∀ i, (F i).Normal] (r s : ℕ) : ⁅A F r, A F s�
         (T φ)⁻¹ * (T θ)⁻¹ = L (θ (g * n₁ * g⁻¹) * θ (φ n₂)) := by
       ext x; simp [mul_assoc]
     rw [hR] at key
-    have key' := L_injective key
     have h1 : θ (g * n₁ * g⁻¹) ∈ F (i + (r + s)) := by
       rw [← hθ.1]
       exact (hF _).conj_mem n₁ (by rwa [← add_assoc]) g
     have h2 : θ (φ n₂) ∈ F (i + (r + s)) := by
-      rw [← hθ.1, ← hφ.1]
-      rwa [show i + (r + s) = i + s + r by omega]
+      rwa [← hθ.1, ← hφ.1, show i + (r + s) = i + s + r by omega]
     have := (F (i + (r + s))).mul_mem h1 h2
-    rw [← key'] at this
+    rw [← L_injective key] at this
     simpa using (F (i + (r + s))).inv_mem this
 
 end Quillen.Notebook1971_12Kaloujnine

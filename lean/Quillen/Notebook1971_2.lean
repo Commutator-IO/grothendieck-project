@@ -50,8 +50,7 @@ theorem P_succ_apply (n : ℕ) (x : M) :
 theorem P_succ_eq_zero {n : ℕ} {x : M} (hx : P ψ p n x = 0) : P ψ p (n + 1) x = 0 := by
   have hc : Commute (ψ - (p : Module.End ℤ M) ^ (n + 1)) (P ψ p n) :=
     commute_P ((Commute.refl ψ).sub_left ((Nat.cast_commute p ψ).pow_left _)) n
-  have : P ψ p (n + 1) = (ψ - (p : Module.End ℤ M) ^ (n + 1)) * P ψ p n := hc.symm.eq
-  rw [this, Module.End.mul_apply, hx, map_zero]
+  rw [show P ψ p (n + 1) = _ * P ψ p n from hc.symm.eq, Module.End.mul_apply, hx, map_zero]
 
 /-- Surjectivity of `p` on a subset stable under `nsmul` gives surjectivity of every power. -/
 theorem exists_pow_nsmul {S : Set M} (hS : ∀ x ∈ S, ∃ z ∈ S, p • z = x) (k : ℕ) :
@@ -69,12 +68,9 @@ theorem bijOn_ker (h1 : ψ * ψ' = 1) (h2 : ψ' * ψ = 1) (n : ℕ) :
     (∀ x, P ψ p n x = 0 → p • x = 0 → x = 0) ∧
       (∀ x, P ψ p n x = 0 → ∃ z, P ψ p n z = 0 ∧ p • z = x) := by
   have hψ' : Commute ψ' ψ := h2.trans h1.symm
-  have inv : ∀ x, ψ' (ψ x) = x := fun x => by
-    rw [← Module.End.mul_apply, h2, Module.End.one_apply]
+  have inv : ∀ x, ψ' (ψ x) = x := fun x => by rw [← Module.End.mul_apply, h2, Module.End.one_apply]
   induction n with
-  | zero =>
-    refine ⟨fun x hx _ => hx, fun x hx => ⟨0, map_zero _, ?_⟩⟩
-    rw [smul_zero]; exact hx.symm
+  | zero => exact ⟨fun x hx _ => hx, fun x hx => ⟨0, map_zero _, (smul_zero _).trans hx.symm⟩⟩
   | succ n ih =>
     obtain ⟨ihi, ihs⟩ := ih
     set c : Module.End ℤ M := (p : Module.End ℤ M) ^ (n + 1)
@@ -85,9 +81,7 @@ theorem bijOn_ker (h1 : ψ * ψ' = 1) (h2 : ψ' * ψ = 1) (n : ℕ) :
         refine ihi _ hx ?_
         rw [← map_nsmul, hpx, map_zero]
       have hψx : ψ x = 0 := by
-        rw [LinearMap.sub_apply, sub_eq_zero, hc, pow_succ, ← smul_smul, hpx,
-          smul_zero] at hy
-        exact hy
+        rwa [LinearMap.sub_apply, sub_eq_zero, hc, pow_succ, ← smul_smul, hpx, smul_zero] at hy
       rw [← inv x, hψx, map_zero]
     · intro x hx
       obtain ⟨w, hw, hw'⟩ := exists_pow_nsmul (S := {z | P ψ p n z = 0})
@@ -105,13 +99,10 @@ such that every `x` is killed by `(ψ - p) (ψ - p²) ⋯ (ψ - pⁿ)` for some 
 theorem bijective_nsmul (h1 : ψ * ψ' = 1) (h2 : ψ' * ψ = 1)
     (hloc : ∀ x : M, ∃ n, P ψ p n x = 0) :
     Function.Bijective fun x : M => p • x := by
-  constructor
-  · intro x y hxy
-    have hxy' : p • (x - y) = 0 := by simp only at hxy; rw [smul_sub, hxy, sub_self]
-    obtain ⟨n, hn⟩ := hloc (x - y)
-    exact sub_eq_zero.mp ((bijOn_ker h1 h2 n).1 _ hn hxy')
-  · intro x
-    obtain ⟨n, hn⟩ := hloc x
+  refine ⟨fun x y hxy => ?_, fun x => ?_⟩
+  · obtain ⟨n, hn⟩ := hloc (x - y)
+    exact sub_eq_zero.mp ((bijOn_ker h1 h2 n).1 _ hn (by rw [smul_sub]; exact sub_eq_zero.2 hxy))
+  · obtain ⟨n, hn⟩ := hloc x
     obtain ⟨z, -, hz⟩ := (bijOn_ker h1 h2 n).2 x hn
     exact ⟨z, hz⟩
 

@@ -96,13 +96,8 @@ theorem natDegree_pow_sub (q : ℕ) (hq : 2 ≤ q) (y : K) :
 the form `x ^ q - x`, for `q ≥ 2`. -/
 theorem exists_pow_sub_eq [IsAlgClosed K] (q : ℕ) (hq : 2 ≤ q) (y : K) :
     ∃ x : K, x ^ q - x = y := by
-  obtain ⟨x, hx⟩ := IsAlgClosed.exists_root (X ^ q - X - C y : K[X]) (by
-    rw [degree_eq_natDegree, natDegree_pow_sub q hq y]
-    · exact_mod_cast (by omega : q ≠ 0)
-    · intro h0
-      have := natDegree_pow_sub q hq y
-      rw [h0, natDegree_zero] at this
-      omega)
+  obtain ⟨x, hx⟩ := IsAlgClosed.exists_root (X ^ q - X - C y : K[X])
+    (degree_ne_of_natDegree_ne (n := 0) (by rw [natDegree_pow_sub q hq y]; omega))
   exact ⟨x, by simpa [sub_eq_zero] using hx⟩
 
 /-- In characteristic `p` with `p ∣ q`, `q ≥ 2`, over an algebraically closed field, the
@@ -113,10 +108,8 @@ theorem card_rootSet_pow_sub [IsAlgClosed K] (p : ℕ) [CharP K p] (q : ℕ) (hp
     Fintype.card ((X ^ q - X - C y : K[X]).rootSet K) = q := by
   have hq0 : (q : K) = 0 := (CharP.cast_eq_zero_iff K p q).mpr hpq
   have hsep : (X ^ q - X - C y : K[X]).Separable := by
-    rw [Polynomial.separable_def]
-    have hd : derivative (X ^ q - X - C y : K[X]) = -1 := by
-      simp [derivative_X_pow, hq0]
-    rw [hd]
+    rw [separable_def, show derivative (X ^ q - X - C y : K[X]) = -1 by
+      simp [derivative_X_pow, hq0]]
     exact isCoprime_one_right.neg_right
   rw [card_rootSet_eq_natDegree hsep (IsAlgClosed.splits _), natDegree_pow_sub q hq y]
 
