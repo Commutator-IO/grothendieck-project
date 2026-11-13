@@ -91,17 +91,12 @@ def omega1 : Subgroup P := closure {x : P | x ^ p = 1}
 instance omega1_normal : (omega1 p P).Normal where
   conj_mem n hn g := by
     induction hn using closure_induction with
-    | mem x hx =>
-      apply Subgroup.subset_closure
-      change (g * x * g⁻¹) ^ p = 1
-      rw [conj_pow, show x ^ p = 1 from hx, mul_one, mul_inv_cancel]
+    | mem x hx => exact subset_closure (show (g * x * g⁻¹) ^ p = 1 by
+        rw [conj_pow, show x ^ p = 1 from hx, mul_one, mul_inv_cancel])
     | one => simp
     | mul a b _ _ ha hb =>
-      rw [show g * (a * b) * g⁻¹ = (g * a * g⁻¹) * (g * b * g⁻¹) by group]
-      exact mul_mem ha hb
-    | inv a _ ha =>
-      rw [show g * a⁻¹ * g⁻¹ = (g * a * g⁻¹)⁻¹ by group]
-      exact inv_mem ha
+      exact (show g * a * g⁻¹ * (g * b * g⁻¹) = g * (a * b) * g⁻¹ by group) ▸ mul_mem ha hb
+    | inv a _ ha => exact (show (g * a * g⁻¹)⁻¹ = g * a⁻¹ * g⁻¹ by group) ▸ inv_mem ha
 
 variable {p P}
 
@@ -137,8 +132,7 @@ theorem conj_commutator_pow_eq_one_aux (hp : p.Prime) (hp2 : p ≠ 2) (n : ℕ) 
   have : Fact p.Prime := ⟨hp⟩
   by_cases htop : zpowers x = ⊤
   · -- `x` generates `P`, which is then commutative.
-    have hg : g ∈ zpowers x := htop ▸ mem_top g
-    obtain ⟨i, rfl⟩ := mem_zpowers_iff.mp hg
+    obtain ⟨i, rfl⟩ := mem_zpowers_iff.mp (htop ▸ mem_top g)
     rw [(Commute.zpow_self x i).eq]
     simp
   · obtain ⟨M, hM, hxM⟩ := (eq_top_or_exists_le_coatom (zpowers x)).resolve_left htop
@@ -151,22 +145,14 @@ theorem conj_commutator_pow_eq_one_aux (hp : p.Prime) (hp2 : p ≠ 2) (n : ℕ) 
     have hlt : Nat.card M < n := by
       rw [← hn, ← card_top (G := P)]
       exact card_lt_of_lt hM.lt_top
-    have hcM : ∀ z : M, z ^ p = 1 → z ∈ center M := by
-      intro z hz
-      rw [mem_center_iff]
-      intro w
-      have hz' : (z : P) ^ p = 1 := by
-        have := congrArg Subtype.val hz
-        simpa using this
-      exact Subtype.ext (mem_center_iff.mp (hc _ hz') w)
+    have hcM : ∀ z : M, z ^ p = 1 → z ∈ center M := fun z hz => mem_center_iff.2 fun w =>
+      Subtype.ext (mem_center_iff.mp (hc _ (by simpa using congrArg Subtype.val hz)) w)
     have hupp : ((g * x * g⁻¹) ^ p) ^ p = 1 := by rw [hup, hx]
     generalize g * x * g⁻¹ = u at huM hup hupp ⊢
     -- The induction hypothesis in `M`, for the elements `u` and `x⁻¹`.
     have hdM := ih _ hlt M rfl (hP.to_subgroup M) hcM ⟨u, huM⟩ ⟨x⁻¹, inv_mem hxM'⟩
       (Subtype.ext (by simpa using hupp))
-    have hdp : (x⁻¹ * u * x * u⁻¹) ^ p = 1 := by
-      have := congrArg Subtype.val hdM
-      simpa using this
+    have hdp : (x⁻¹ * u * x * u⁻¹) ^ p = 1 := by simpa using congrArg Subtype.val hdM
     have hdc := mem_center_iff.mp (hc _ hdp)
     rw [mul_pow_eq_of_commutator_pow hp hp2 (d := x⁻¹ * u * x * u⁻¹) (by group)
       (hdc u).symm (hdc x⁻¹).symm hdp, hup, inv_pow, mul_inv_cancel]
@@ -208,9 +194,9 @@ theorem pCentral_quotient (hp : p.Prime) (hp2 : p ≠ 2) (hP : IsPGroup p P)
 `p`-group, `Ω₁(P) ≤ Z(P)` implies `Ω₁(P / Ω₁(P)) ≤ Z(P / Ω₁(P))`. -/
 theorem omega1_quotient_le_center (hp : p.Prime) (hp2 : p ≠ 2) (hP : IsPGroup p P)
     (h : omega1 p P ≤ center P) :
-    omega1 p (P ⧸ omega1 p P) ≤ center (P ⧸ omega1 p P) := by
-  have hc : ∀ z : P, z ^ p = 1 → z ∈ center P := fun z hz => h (Subgroup.subset_closure hz)
-  exact (closure_le _).mpr fun y hy => pCentral_quotient hp hp2 hP hc y hy
+    omega1 p (P ⧸ omega1 p P) ≤ center (P ⧸ omega1 p P) :=
+  (closure_le _).mpr fun y hy =>
+    pCentral_quotient hp hp2 hP (fun _ hz => h (Subgroup.subset_closure hz)) y hy
 
 end Quotient
 

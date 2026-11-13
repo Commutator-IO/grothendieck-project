@@ -55,33 +55,23 @@ theorem exists_isCompl_le_ker {M N : Type*} [AddCommGroup M] [Module R M] [AddCo
   -- `K|_V : V → range K` is surjective; lift `K|_W : W → range K` through it.
   let f : V →ₗ[R] range K := (K ∘ₗ V.subtype).codRestrict (range K) fun v => mem_range_self K _
   let g : W →ₗ[R] range K := (K ∘ₗ W.subtype).codRestrict (range K) fun w => mem_range_self K _
-  have hf : Function.Surjective f := by
-    rintro ⟨y, hy⟩
-    obtain ⟨v, hv, rfl⟩ := mem_map.1 (hK hy)
-    exact ⟨⟨v, hv⟩, rfl⟩
+  have hf : Function.Surjective f := fun ⟨_, hy⟩ =>
+    let ⟨v, hv, e⟩ := mem_map.1 (hK hy); ⟨⟨v, hv⟩, Subtype.ext e⟩
   obtain ⟨h, hh⟩ := Module.projective_lifting_property f g hf
   have hKh : ∀ w : W, K (h w) = K w := fun w =>
     congrArg Subtype.val (LinearMap.congr_fun hh w)
   -- The complement: `Q = {w - h w | w ∈ W}`.
   refine ⟨range (W.subtype - V.subtype ∘ₗ h), ⟨?_, ?_⟩, ?_⟩
   · rw [disjoint_iff_inf_le]
-    rintro x ⟨hxV, hxQ⟩
-    obtain ⟨w, rfl⟩ := mem_range.1 hxQ
-    simp only [LinearMap.sub_apply, coe_comp, Function.comp_apply, subtype_apply] at hxV ⊢
-    have hwV : (w : M) ∈ V := by
-      have := V.add_mem hxV (h w).2
-      rwa [sub_add_cancel] at this
-    have hw0 : (w : M) = 0 := (disjoint_iff_inf_le.1 hVW.disjoint) ⟨hwV, w.2⟩
-    have : w = 0 := Subtype.ext hw0
+    rintro x ⟨hxV, w, rfl⟩
+    have : w = 0 := Subtype.ext <| (disjoint_iff_inf_le.1 hVW.disjoint)
+      ⟨by simpa using V.add_mem hxV (h w).2, w.2⟩
     simp [this]
-  · rw [codisjoint_iff, eq_top_iff]
-    intro m _
-    have hm : m ∈ V ⊔ W := by rw [hVW.sup_eq_top]; trivial
+  · rw [codisjoint_iff, eq_top_iff, ← hVW.sup_eq_top]
+    rintro _ hm
     obtain ⟨v, hv, w, hw, rfl⟩ := mem_sup.1 hm
-    have h1 : v + (h ⟨w, hw⟩ : M) ∈ V := V.add_mem hv (h _).2
-    have h2 : (w - (h ⟨w, hw⟩ : M)) ∈ range (W.subtype - V.subtype ∘ₗ h) :=
-      ⟨⟨w, hw⟩, rfl⟩
-    have := add_mem_sup h1 h2
+    have := add_mem_sup (V.add_mem hv (h ⟨w, hw⟩).2)
+      (mem_range.2 ⟨⟨w, hw⟩, rfl⟩ : w - (h ⟨w, hw⟩ : M) ∈ range (W.subtype - V.subtype ∘ₗ h))
     rwa [add_add_sub_cancel] at this
   · rintro x ⟨w, rfl⟩
     simp [hKh]
@@ -91,9 +81,7 @@ generated: it is `K(V)`. -/
 theorem fg_range_of_isCompl {M N : Type*} [AddCommGroup M] [Module R M] [AddCommGroup N]
     [Module R N] (K : M →ₗ[R] N) {V Q : Submodule R M} (hVQ : IsCompl V Q) (hV : V.FG)
     (hQ : Q ≤ ker K) : (range K).FG := by
-  have : range K = V.map K := by
-    rw [← Submodule.map_top, ← hVQ.sup_eq_top, Submodule.map_sup, le_ker_iff_map.1 hQ, sup_bot_eq]
-  rw [this]
+  rw [← Submodule.map_top, ← hVQ.sup_eq_top, Submodule.map_sup, le_ker_iff_map.1 hQ, sup_bot_eq]
   exact hV.map K
 
 variable {S : Type*}
@@ -116,28 +104,15 @@ theorem exists_finite_supported (K : (S →₀ R) →ₗ[R] (S →₀ R)) (hK : 
       range K ≤ Finsupp.supported R R U := by
   classical
   obtain ⟨G, hG⟩ := hK
-  have hGK : ∀ g ∈ G, ∃ x, K x = g := fun g hg => by
-    have : g ∈ range K := hG ▸ subset_span hg
-    exact mem_range.1 this
-  choose x hx using hGK
+  choose x hx using fun g (hg : g ∈ G) => mem_range.1 (hG ▸ subset_span hg : g ∈ range K)
   let U : Set S := ↑(G.attach.biUnion fun g => (g : S →₀ R).support ∪ (x g g.2).support)
-  refine ⟨U, Finset.finite_toSet _, ?_, ?_⟩
-  · rw [← hG, span_le]
-    intro g hg
-    refine ⟨x g hg, ?_, hx g hg⟩
-    show x g hg ∈ Finsupp.supported R R U
-    rw [Finsupp.mem_supported]
-    intro s hs
+  have hU : ∀ g (hg : g ∈ G) s, s ∈ g.support ∨ s ∈ (x g hg).support → s ∈ U := fun g hg s hs => by
     simp only [U, Finset.coe_biUnion, Finset.mem_coe, Finset.mem_attach, Set.iUnion_true,
       Set.mem_iUnion, Finset.coe_union, Set.mem_union]
-    exact ⟨⟨g, hg⟩, Or.inr hs⟩
-  · rw [← hG, span_le]
-    intro g hg
-    rw [SetLike.mem_coe, Finsupp.mem_supported]
-    intro s hs
-    simp only [U, Finset.coe_biUnion, Finset.mem_coe, Finset.mem_attach, Set.iUnion_true,
-      Set.mem_iUnion, Finset.coe_union, Set.mem_union]
-    exact ⟨⟨g, hg⟩, Or.inl hs⟩
+    exact ⟨⟨g, hg⟩, hs⟩
+  refine ⟨U, Finset.finite_toSet _, ?_, ?_⟩ <;> rw [← hG, span_le] <;> intro g hg
+  · exact ⟨x g hg, (Finsupp.mem_supported _ _).2 fun s hs => hU g hg s (.inr hs), hx g hg⟩
+  · exact (Finsupp.mem_supported _ _).2 fun s hs => hU g hg s (.inl hs)
 
 /-- **Quillen, notebook 1972-2, pp. 20–21.** An endomorphism `K` of the free module `R^(S)` over
 any ring admits a decomposition `R^(S) = V ⊕ Q` with `V` finitely generated, `K(Q) = 0` and
@@ -146,15 +121,12 @@ any ring admits a decomposition `R^(S) = V ⊕ Q` with `V` finitely generated, `
 theorem exists_splitting_iff (K : (S →₀ R) →ₗ[R] (S →₀ R)) :
     (∃ V Q : Submodule R (S →₀ R), IsCompl V Q ∧ V.FG ∧ Q ≤ ker K ∧ V.map K ≤ V) ↔
       (range K).FG := by
-  constructor
-  · rintro ⟨V, Q, hVQ, hV, hQ, -⟩
-    exact fg_range_of_isCompl K hVQ hV hQ
-  · intro hK
-    obtain ⟨U, hU, hKU, hKU'⟩ := exists_finite_supported K hK
-    have : Module.Projective R (Finsupp.supported R R Uᶜ) :=
-      Module.Projective.of_equiv (Finsupp.supportedEquivFinsupp Uᶜ).symm
-    obtain ⟨Q, hVQ, hQ⟩ := exists_isCompl_le_ker K (isCompl_supported U) hKU
-    exact ⟨_, Q, hVQ, fg_supported hU, hQ, (map_le_range).trans hKU'⟩
+  refine ⟨fun ⟨V, Q, hVQ, hV, hQ, _⟩ => fg_range_of_isCompl K hVQ hV hQ, fun hK => ?_⟩
+  obtain ⟨U, hU, hKU, hKU'⟩ := exists_finite_supported K hK
+  have : Module.Projective R (Finsupp.supported R R Uᶜ) :=
+    Module.Projective.of_equiv (Finsupp.supportedEquivFinsupp Uᶜ).symm
+  obtain ⟨Q, hVQ, hQ⟩ := exists_isCompl_le_ker K (isCompl_supported U) hKU
+  exact ⟨_, Q, hVQ, fg_supported hU, hQ, (map_le_range).trans hKU'⟩
 
 /-- **Quillen, notebook 1972-2, p. 22.** Over a noetherian ring, every endomorphism of finite rank
 of `R^(S)` (image in `R^(T)` for a finite `T ⊂ S`) splits as in `exists_splitting_iff`. -/
@@ -170,11 +142,9 @@ map `e_i ↦ i`. -/
 theorem not_exists_splitting_of_not_isNoetherianRing (hR : ¬ IsNoetherianRing R) :
     ∃ (S : Type u) (K : (S →₀ R) →ₗ[R] R),
       ¬ ∃ V Q : Submodule R (S →₀ R), IsCompl V Q ∧ V.FG ∧ Q ≤ ker K := by
-  have : ∃ I : Submodule R R, ¬ I.FG := by
-    by_contra h
-    push Not at h
+  obtain ⟨I, hI⟩ : ∃ I : Submodule R R, ¬ I.FG := by
+    by_contra! h
     exact hR ⟨h⟩
-  obtain ⟨I, hI⟩ := this
   refine ⟨I, Finsupp.linearCombination R (Subtype.val : I → R), ?_⟩
   rintro ⟨V, Q, hVQ, hV, hQ⟩
   apply hI
@@ -219,9 +189,9 @@ theorem integral_inner {a b x : ℝ} (ha : -1 < a) (hb : -1 < b) (hb0 : b ≠ 0)
       simpa using ((hasDerivAt_id y).const_mul b).const_add (1 + a * x)
     convert (h1.inv hne).const_mul (-(1 / b)) using 1
     field_simp
-  have hcont : ContinuousOn (fun y => ((1 + a * x + b * y) ^ 2)⁻¹) (Set.uIcc 0 (1 - x)) := by
-    refine ContinuousOn.inv₀ (by fun_prop) fun y hy => (pow_pos (hpos y hy) 2).ne'
-  rw [integral_eq_sub_of_hasDerivAt hderiv (hcont.intervalIntegrable)]
+  have hcont : ContinuousOn (fun y => ((1 + a * x + b * y) ^ 2)⁻¹) (Set.uIcc 0 (1 - x)) :=
+    ContinuousOn.inv₀ (by fun_prop) fun y hy => (pow_pos (hpos y hy) 2).ne'
+  rw [integral_eq_sub_of_hasDerivAt hderiv hcont.intervalIntegrable]
   simp only [mul_zero, add_zero]
   ring
 
@@ -263,10 +233,10 @@ theorem integral_simplex {a b : ℝ} (ha : -1 < a) (hb : -1 < b) (ha0 : a ≠ 0)
     convert this using 1
     field_simp
   have hcont : ContinuousOn
-      (fun x => (1 / b) * (1 / (1 + a * x) - 1 / (1 + a * x + b * (1 - x)))) (Set.uIcc 0 1) := by
-    refine ContinuousOn.mul continuousOn_const (ContinuousOn.sub ?_ ?_)
-    · exact ContinuousOn.div continuousOn_const (by fun_prop) fun x hx => (hpos1 x hx).ne'
-    · exact ContinuousOn.div continuousOn_const (by fun_prop) fun x hx => (hpos2 x hx).ne'
+      (fun x => (1 / b) * (1 / (1 + a * x) - 1 / (1 + a * x + b * (1 - x)))) (Set.uIcc 0 1) :=
+    continuousOn_const.mul <|
+      (continuousOn_const.div (by fun_prop) fun x hx => (hpos1 x hx).ne').sub
+        (continuousOn_const.div (by fun_prop) fun x hx => (hpos2 x hx).ne')
   rw [integral_eq_sub_of_hasDerivAt hderiv hcont.intervalIntegrable]
   simp only [G, mul_one, mul_zero, add_zero, sub_self, log_one, zero_div, sub_zero]
   have hba : b - a ≠ 0 := sub_ne_zero.2 (Ne.symm hab)
