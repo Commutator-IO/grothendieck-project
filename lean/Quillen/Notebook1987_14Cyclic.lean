@@ -67,10 +67,8 @@ theorem rotation_of_cyclic {n : ℕ} {h : Fin (n + 1) → Fin (n + 1)} (hh : IsC
     have hyx : y ≠ x := by
       rintro rfl
       -- `h y + 1 = h y` forces `n = 0`, so `x + 1 = x`
-      apply hyx1
-      have : (1 : Fin (n + 1)) = 0 := by
-        have := congrArg (· - h y) hy; simpa using this.symm
-      rw [this, add_zero]
+      exact hyx1 (by
+        rw [show (1 : Fin (n + 1)) = 0 by simpa using (congrArg (· - h y) hy).symm, add_zero])
     have hs := hh.2 _ _ _ (sbtw_succ hyx hyx1)
     rw [hy] at hs
     have h1 : h (x + 1) ≠ h x := fun e => (by
@@ -108,31 +106,19 @@ theorem emb_injective : Function.Injective fun p : Fin (n + 2) × Fin (n + 1) =>
   have hr : r = r' := by
     by_contra hne
     -- `last + r'` is a value of `emb r s`
-    have hv : Fin.last (n + 1) + r' - r ≠ Fin.last (n + 1) := by
-      intro e
-      apply hne
-      have := congrArg (· + r) e
-      simp only [sub_add_cancel] at this
-      exact (add_left_cancel this).symm
+    have hv : Fin.last (n + 1) + r' - r ≠ Fin.last (n + 1) := fun e =>
+      hne (by simpa using (congrArg (· + r) e).symm)
     obtain ⟨y, hy⟩ := Fin.exists_castSucc_eq.mpr hv
-    have := last_add_not_mem r' s' (y - s)
-    rw [← h] at this
-    apply this
-    simp only [emb, sub_add_cancel, hy, sub_add_cancel]
+    exact last_add_not_mem r' s' (y - s) (by rw [← h]; simp only [emb, sub_add_cancel, hy])
   subst hr
-  have := congrFun h 0
-  simp only [emb, zero_add, add_left_inj, Fin.castSucc_inj] at this
-  rw [this]
+  simpa [emb] using congrFun h 0
 
 theorem exists_emb {f : Fin (n + 1) → Fin (n + 2)} (hf : IsCyclic f) :
     ∃ r s, emb r s = f := by
   -- a value `p` missed by `f`
   obtain ⟨p, hp⟩ : ∃ p, p ∉ Set.range f := by
-    by_contra hc
-    push Not at hc
-    have hs : Function.Surjective f := fun p => hc p
-    have := Fintype.card_le_of_surjective f hs
-    simp at this
+    by_contra! hc
+    simpa using Fintype.card_le_of_surjective f fun p => hc p
   set r := p - Fin.last (n + 1)
   have hne : ∀ x, f x - r ≠ Fin.last (n + 1) := fun x e =>
     hp ⟨x, by rw [← sub_add_cancel (f x) r, e]; exact add_sub_cancel _ _⟩
@@ -140,12 +126,9 @@ theorem exists_emb {f : Fin (n + 1) → Fin (n + 2)} (hf : IsCyclic f) :
   have hh : ∀ x, (h x).castSucc = f x - r := fun x => Fin.castSucc_castPred _ _
   have hcyc : IsCyclic h := by
     refine ⟨fun x y e => hf.1 ?_, fun a b c habc => ?_⟩
-    · have := congrArg Fin.castSucc e
-      rw [hh, hh] at this
-      simpa using this
+    · simpa [hh] using congrArg Fin.castSucc e
     · rw [← sbtw_castSucc, hh, hh, hh]
-      have := sbtw_add (-r) (hf.2 _ _ _ habc)
-      simpa [sub_eq_add_neg] using this
+      simpa [sub_eq_add_neg] using sbtw_add (-r) (hf.2 _ _ _ habc)
   refine ⟨r, h 0, funext fun x => ?_⟩
   simp only [emb, ← rotation_of_cyclic hcyc x, hh, sub_add_cancel]
 

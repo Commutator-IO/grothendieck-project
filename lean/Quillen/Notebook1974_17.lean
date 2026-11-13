@@ -67,11 +67,7 @@ theorem commute_blockHom {k l : Fin r} (h : k ≠ l) (M N : Matrix ι ι A) :
   congr 1
   funext m
   simp only [Pi.mulSingle_apply]
-  by_cases hk : m = k
-  · subst hk; simp [h]
-  · by_cases hl : m = l
-    · subst hl; simp [hk]
-    · simp [hk, hl]
+  split_ifs <;> simp_all
 
 theorem commute_blockUnit {k l : Fin r} (h : k ≠ l) (α β : (Matrix ι ι A)ˣ) :
     Commute (blockUnit k α) (blockUnit l β) :=
@@ -107,8 +103,7 @@ theorem blockPerm_conj (e : Perm (Fin r)) (k : Fin r) (α : (Matrix ι ι A)ˣ) 
   by_cases hm : m = m'
   · subst hm
     simp only [ite_true, Pi.mulSingle_apply]
-    have : (e m = k) ↔ (m = e⁻¹ k) := by
-      rw [Perm.eq_inv_iff_eq]
+    have : (e m = k) ↔ (m = e⁻¹ k) := Perm.eq_inv_iff_eq.symm
     by_cases h : e m = k
     · simp [this.mp h]
     · have h' : ¬ m = e⁻¹ k := fun h' => h (this.mpr h')
