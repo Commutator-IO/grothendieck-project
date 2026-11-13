@@ -92,16 +92,15 @@ theorem pw_append (x : List X) : ∀ (y z w : List X), pw (k := k) x (y ++ z) w 
     pw x y (z ++ w) + pw (x ++ y) z w
   | [], z, w => by simp [pw]
   | v :: y, z, w => by
-    simp only [List.cons_append, pw, List.append_assoc, pw_append (x ++ [v]) y z w]
-    simp only [List.nil_append]
+    simp only [List.cons_append, pw, List.append_assoc, pw_append (x ++ [v]) y z w,
+      List.nil_append]
     abel
 
 /-- `p ∘ b' = 0`. -/
 theorem p_b' : p k X ∘ₗ b' k X = 0 := by
   apply Finsupp.lhom_ext'
-  intro q
+  rintro ⟨x, y, z, w⟩
   apply LinearMap.ext_ring
-  obtain ⟨x, y, z, w⟩ := q
   simp only [LinearMap.comp_apply, Finsupp.lsingle_apply, LinearMap.zero_apply]
   rw [show (single (x, y, z, w) (1 : k)) = e4 x y z w from rfl, b'_e4, map_add, map_sub, p_e3,
     p_e3, p_e3, pw_append]
@@ -141,12 +140,9 @@ theorem exact_at_middle : LinearMap.range (b' k X) = LinearMap.ker (p k X) := by
   · rintro _ ⟨c, rfl⟩
     rw [LinearMap.mem_ker, ← LinearMap.comp_apply, p_b', LinearMap.zero_apply]
   · intro c hc
-    rw [LinearMap.mem_ker] at hc
     refine ⟨h k X c, ?_⟩
-    have := LinearMap.congr_fun (b'_h_add_s_p (k := k) (X := X)) c
-    simp only [LinearMap.add_apply, LinearMap.comp_apply, hc, map_zero, add_zero,
-      LinearMap.id_apply] at this
-    exact this
+    simpa only [LinearMap.add_apply, LinearMap.comp_apply, LinearMap.mem_ker.1 hc, map_zero,
+      add_zero, LinearMap.id_apply] using LinearMap.congr_fun (b'_h_add_s_p (k := k) (X := X)) c
 
 /-- … and `p` is onto, split by `s`. -/
 theorem p_surjective : Function.Surjective (p k X) := fun c =>

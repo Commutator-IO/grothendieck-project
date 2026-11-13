@@ -38,17 +38,12 @@ variable {X V : Type*} [TopologicalSpace X] [TopologicalSpace.MetrizableSpace X]
 of the sequence is a cluster point of the sequence. -/
 theorem mapClusterPt_of_mem_closure_range {u : ℕ → X} {y : X} (hy : y ∈ closure (range u))
     (hy' : y ∉ range u) : MapClusterPt y atTop u := by
-  rw [mapClusterPt_iff_frequently]
-  intro s hs
-  rw [frequently_atTop]
-  intro N
+  refine mapClusterPt_iff_frequently.2 fun s hs => frequently_atTop.2 fun N => ?_
   have hfin : IsClosed (u '' Iio N) := ((finite_Iio N).image u).isClosed
   have hyN : y ∉ u '' Iio N := fun h => hy' (image_subset_range _ _ h)
   have ht : s ∩ (u '' Iio N)ᶜ ∈ 𝓝 y := inter_mem hs (hfin.isOpen_compl.mem_nhds hyN)
   obtain ⟨_, ⟨hzs, hzN⟩, ⟨n, rfl⟩⟩ := mem_closure_iff_nhds.mp hy _ ht
-  refine ⟨n, ?_, hzs⟩
-  by_contra hn
-  exact hzN ⟨n, by simpa using hn, rfl⟩
+  exact ⟨n, not_lt.1 fun hn => hzN ⟨n, hn, rfl⟩, hzs⟩
 
 /-- If `f⁻¹ B` is compact for every closed `B` disjoint from `A`, then for every sequence `v`
 in `V` the sequence `f ∘ v` has a cluster point in `X`. Otherwise its set of values is closed,
@@ -56,20 +51,13 @@ discrete and disjoint from `A`, and its preimage, compact, would give a cluster 
 theorem exists_mapClusterPt (hf : Continuous f) (hfA : ∀ v, f v ∉ A)
     (h : ∀ B, IsClosed B → Disjoint B A → IsCompact (f ⁻¹' B)) (v : ℕ → V) :
     ∃ y, MapClusterPt y atTop (f ∘ v) := by
-  by_contra hno
-  simp only [not_exists] at hno
-  have hB : IsClosed (range (f ∘ v)) := by
-    refine isClosed_of_closure_subset fun y hy => ?_
-    by_contra hy'
-    exact hno y (mapClusterPt_of_mem_closure_range hy hy')
-  have hBA : Disjoint (range (f ∘ v)) A := by
-    rw [Set.disjoint_left]
-    rintro _ ⟨n, rfl⟩
-    exact hfA (v n)
-  have hK := h _ hB hBA
+  by_contra! hno
+  have hB : IsClosed (range (f ∘ v)) := isClosed_of_closure_subset fun y hy =>
+    of_not_not fun hy' => hno y (mapClusterPt_of_mem_closure_range hy hy')
+  have hBA : Disjoint (range (f ∘ v)) A := Set.disjoint_left.2 (by rintro _ ⟨n, rfl⟩; exact hfA _)
   have hle : map v atTop ≤ 𝓟 (f ⁻¹' range (f ∘ v)) :=
     le_principal_iff.mpr (Filter.mem_map.mpr (Eventually.of_forall fun n => ⟨n, rfl⟩))
-  obtain ⟨w, -, hw⟩ := hK hle
+  obtain ⟨w, -, hw⟩ := h _ hB hBA hle
   exact hno _ (MapClusterPt.continuousAt_comp hf.continuousAt hw)
 
 /-- If `f⁻¹ B` is compact for every closed `B` disjoint from `A`, then the closure of the image
@@ -95,8 +83,8 @@ theorem isCompact_closure_range (hf : Continuous f) (hfA : ∀ v, f v ∉ A)
           simp [hxv, dist_comm]
       _ ≤ 1 / ((φ k : ℝ) + 1) := (hdist (φ k)).le
       _ ≤ 1 / ((k : ℝ) + 1) := by gcongr
-  refine ⟨y, ?_, φ, hφ, hlim'⟩
-  exact mem_closure_of_tendsto hlim (Eventually.of_forall fun k => ⟨v (φ k), rfl⟩)
+  exact ⟨y, mem_closure_of_tendsto hlim (Eventually.of_forall fun k => ⟨v (φ k), rfl⟩), φ, hφ,
+    hlim'⟩
 
 /-- If `f⁻¹ B` is compact for every closed `B` disjoint from `A`, then `f` is proper as a map to
 `Aᶜ`. -/
@@ -106,18 +94,12 @@ theorem isProperMap_codRestrict (hf : Continuous f) (hfA : ∀ v, f v ∉ A)
   rw [isProperMap_iff_isCompact_preimage]
   refine ⟨hf.codRestrict hfA, fun K hK => ?_⟩
   have hK' : IsCompact (Subtype.val '' K) := hK.image continuous_subtype_val
-  have hdisj : Disjoint (Subtype.val '' K) A := by
-    rw [Set.disjoint_left]
-    rintro _ ⟨y, -, rfl⟩
-    exact y.2
+  have hdisj : Disjoint (Subtype.val '' K) A :=
+    Set.disjoint_left.2 (by rintro _ ⟨y, -, rfl⟩; exact y.2)
   have heq : codRestrict f Aᶜ hfA ⁻¹' K = f ⁻¹' (Subtype.val '' K) := by
     ext w
-    simp only [mem_preimage, mem_image]
-    constructor
-    · intro hw; exact ⟨_, hw, rfl⟩
-    · rintro ⟨y, hy, hyw⟩
-      have : y = codRestrict f Aᶜ hfA w := Subtype.ext hyw
-      rwa [← this]
+    exact ⟨fun hw => ⟨_, hw, rfl⟩,
+      fun ⟨y, hy, hyw⟩ => by rwa [mem_preimage, ← (Subtype.ext hyw : y = codRestrict f Aᶜ hfA w)]⟩
   rw [heq]
   exact h _ hK'.isClosed hdisj
 
