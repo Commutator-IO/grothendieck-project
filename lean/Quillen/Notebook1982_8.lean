@@ -133,8 +133,7 @@ theorem sum_permutations_cyc (L : List K) (hL : L.Nodup) (hn : 3 ≤ L.length) :
     obtain ⟨d, l'', rfl⟩ : ∃ d l'', l = d :: l'' := by
       match l, hperm.length_eq with
       | d :: l'', _ => exact ⟨d, l'', rfl⟩
-    have hl'' : l'' ≠ [] := by
-      intro h; subst h; simpa using hperm.length_eq
+    have hl'' : l'' ≠ [] := fun h => by subst h; simpa using hperm.length_eq
     exact sum_insert_cyc x d l'' hl'' ((hperm.cons x).nodup_iff.mpr hL)
   rw [map_congr_left hsum]
   exact sum_permutations'_cons_cyc x y (c :: us) (cons_ne_nil _ _) hL

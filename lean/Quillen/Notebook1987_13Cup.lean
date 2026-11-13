@@ -83,14 +83,12 @@ theorem coboundary_cup (p q : ℕ) (φ ψ : (ℕ → A) → A) (hφ : DependsOn 
     rw [shift_merge_add, hφ (merge (p + k) a) a fun j hj => merge_apply_of_lt (by omega) a,
       mul_smul_comm, smul_smul, ← pow_add, add_assoc]
   rw [sum_congr rfl h1, sum_congr rfl h2, shift_shift, shift_shift 1 p, add_comm 1 p]
-  have h4 : shift p a q = a (p + q) := by simp [shift, add_comm]
-  have h5 : shift p a 0 = a p := by simp [shift]
-  rw [h4, h5]
+  rw [show shift p a q = a (p + q) by simp [shift, add_comm],
+    show shift p a 0 = a p by simp [shift]]
   simp only [add_mul, mul_add, smul_add, sum_mul, mul_sum, smul_sum, mul_assoc, smul_mul_assoc,
     mul_smul_comm, smul_smul, ← pow_add]
-  have e1 : (-1 : ℤ) ^ (p + q + 1) = (-1) ^ (p + (q + 1)) := by ring
-  have e2 : (-1 : ℤ) ^ (p + 1) = -(-1) ^ p := by ring
-  rw [e1, e2, neg_smul]
+  rw [show (-1 : ℤ) ^ (p + q + 1) = (-1) ^ (p + (q + 1)) by ring,
+    show (-1 : ℤ) ^ (p + 1) = -(-1) ^ p by ring, neg_smul]
   abel
 
 /-- A derivation of the (noncommutative) ring `A` into itself. -/
@@ -131,10 +129,8 @@ theorem section_XY {X Y : A → A} (hX : IsDerivation X) (hY : IsDerivation Y) (
 `bX = 0`, so `b(X ∪ Y) = 0` by the Leibniz rule. -/
 theorem coboundary_cup_derivations {X Y : A → A} (hX : IsDerivation X) (hY : IsDerivation Y)
     (a : ℕ → A) : b 2 (cup 1 (fun a => X (a 0)) (fun a => Y (a 0))) a = 0 := by
-  have hb : ∀ (Z : A → A), IsDerivation Z → ∀ a : ℕ → A, b 1 (fun a => Z (a 0)) a = 0 := by
-    intro Z hZ a
-    simp only [b, shift, merge, sum_range_one]
-    simp [hZ.leibniz]
+  have hb : ∀ (Z : A → A), IsDerivation Z → ∀ a : ℕ → A, b 1 (fun a => Z (a 0)) a = 0 :=
+    fun Z hZ a => by simp [b, shift, merge, hZ.leibniz]
   rw [show (2 : ℕ) = 1 + 1 from rfl, coboundary_cup 1 1 _ _ (fun a a' h => by rw [h 0 one_pos]) a]
   simp only [cup, hb X hX, hb Y hY, zero_mul, mul_zero, smul_zero, add_zero]
 
