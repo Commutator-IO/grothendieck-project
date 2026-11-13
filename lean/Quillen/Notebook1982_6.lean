@@ -35,10 +35,8 @@ variable {n : Type*} [Fintype n] [DecidableEq n] {R : Type*} [CommRing R]
 theorem derivative_det (M : Matrix n n R[X]) :
     derivative M.det = trace (M.adjugate * M.map derivative) := by
   have key : ∀ i, (M.updateCol i (fun r => derivative (M r i))).det
-      = ∑ j, M.adjugate i j * derivative (M j i) := by
-    intro i
-    rw [← cramer_apply, cramer_eq_adjugate_mulVec]
-    rfl
+      = ∑ j, M.adjugate i j * derivative (M j i) := fun i => by
+    rw [← cramer_apply, cramer_eq_adjugate_mulVec]; rfl
   have hR : trace (M.adjugate * M.map derivative)
       = ∑ i, (M.updateCol i (fun r => derivative (M r i))).det := by
     simp only [trace, diag_apply, mul_apply, map_apply, key]

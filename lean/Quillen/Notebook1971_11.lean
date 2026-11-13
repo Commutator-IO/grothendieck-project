@@ -38,17 +38,13 @@ by `p ^ (k + 1)` is sent to an element killed by `p ^ k`. -/
 theorem sub_one_nsmul_eq_zero_of_nsmul {p : ℕ} (θ : AddMonoid.End B)
     (h1 : ∀ b : B, p • b = 0 → θ b = b) {k : ℕ} {b : B} (hb : p ^ (k + 1) • b = 0) :
     p ^ k • ((θ - 1) b) = 0 := by
-  have hk : p • (p ^ k • b) = 0 := by rw [← mul_nsmul, ← pow_succ]; exact hb
-  have := h1 _ hk
   change p ^ k • (θ b - b) = 0
-  rw [nsmul_sub, ← map_nsmul θ, this, sub_self]
+  rw [nsmul_sub, ← map_nsmul θ, h1 _ (by rw [← mul_nsmul, ← pow_succ]; exact hb), sub_self]
 
 /-- A finite sum of endomorphisms is evaluated term by term. -/
 theorem sum_apply (s : Finset ℕ) (f : ℕ → AddMonoid.End B) (b : B) :
-    (∑ i ∈ s, f i) b = ∑ i ∈ s, f i b := by
-  induction s using Finset.induction_on with
-  | empty => rfl
-  | insert a s ha ih => rw [Finset.sum_insert ha, Finset.sum_insert ha, ← ih]; rfl
+    (∑ i ∈ s, f i) b = ∑ i ∈ s, f i b :=
+  AddMonoidHom.finsetSum_apply f s b
 
 /-- The binomial expansion of `θ ^ p = (1 + δ) ^ p`, evaluated at `b`, with `δ = θ - 1`. -/
 theorem pow_apply_eq_sum (θ : AddMonoid.End B) (n : ℕ) (b : B) :
@@ -100,10 +96,7 @@ theorem nsmul_sub_one_eq_zero {p : ℕ} (hp : p.Prime) (hp3 : 3 ≤ p)
     rw [Finset.sum_eq_add (0 : ℕ) 1 (by norm_num)] at hexp
     · simp only [Nat.choose_zero_right, pow_zero, AddMonoid.End.coe_one, id_eq, one_smul,
         Nat.choose_one_right, pow_one] at hexp
-      have : p • δ c = 0 := by
-        have := congrArg (· - c) hexp
-        simpa using this.symm
-      exact this
+      simpa using (congrArg (· - c) hexp).symm
     · intro m hm hm01
       have hm2 : 2 ≤ m := by omega
       have hmp : m ≤ p := by simpa [Nat.lt_succ_iff] using Finset.mem_range.mp hm
@@ -120,11 +113,7 @@ theorem addEquiv_nsmul_sub_one_eq_zero {p : ℕ} (hp : p.Prime) (hp3 : 3 ≤ p)
     (hB : ∀ b : B, ∃ k : ℕ, p ^ k • b = 0) (θ : B ≃+ B) (hθ : ∀ b, θ^[p] b = b)
     (h1 : ∀ b : B, p • b = 0 → θ b = b) (b : B) : p • (θ b - b) = 0 := by
   let φ : AddMonoid.End B := θ.toAddMonoidHom
-  have hφp : φ ^ p = 1 := by
-    ext c
-    rw [AddMonoid.End.coe_pow]
-    exact hθ c
-  exact nsmul_sub_one_eq_zero hp hp3 hB φ hφp h1 b
+  exact nsmul_sub_one_eq_zero hp hp3 hB φ (by ext c; rw [AddMonoid.End.coe_pow]; exact hθ c) h1 b
 
 /-- For `p = 2` the lemma fails: on `ZMod 8`, negation has order 2, fixes the elements killed
 by 2 (namely `0` and `4`), and `2 • (θ 1 - 1) = -4 ≠ 0`. -/

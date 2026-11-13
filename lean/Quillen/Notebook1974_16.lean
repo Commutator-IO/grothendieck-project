@@ -60,13 +60,9 @@ theorem le_perfectRadical {H : Subgroup G} (hH : ⁅H, H⁆ = H) : H ≤ perfect
   le_iSup (fun H : {H : Subgroup G // ⁅H, H⁆ = H} => (H : Subgroup G)) ⟨H, hH⟩
 
 /-- The largest perfect subgroup is normal: its conjugates are perfect. -/
-theorem perfectRadical_normal : (perfectRadical G).Normal := by
-  constructor
-  intro n hn g
-  have hmap : ((perfectRadical G).map (MulAut.conj g).toMonoidHom) ≤ perfectRadical G := by
-    apply le_perfectRadical
-    rw [← map_commutator, commutator_perfectRadical]
-  exact hmap ⟨n, hn, rfl⟩
+theorem perfectRadical_normal : (perfectRadical G).Normal :=
+  ⟨fun n hn g => le_perfectRadical (H := (perfectRadical G).map (MulAut.conj g).toMonoidHom)
+    (by rw [← map_commutator, commutator_perfectRadical]) ⟨n, hn, rfl⟩⟩
 
 section Central
 
@@ -103,11 +99,8 @@ theorem commutator_comap_le (hc : f.ker ≤ center E) {N : Subgroup Q} {M' : Sub
 variable {f}
 
 theorem exists_of_map_eq {N : Subgroup Q} {M' : Subgroup E} (hM' : M'.map f = N) :
-    ∀ x ∈ N.comap f, ∃ m ∈ M', f m = f x := by
-  intro x hx
-  rw [mem_comap, ← hM'] at hx
-  obtain ⟨m, hm, hmx⟩ := hx
-  exact ⟨m, hm, hmx⟩
+    ∀ x ∈ N.comap f, ∃ m ∈ M', f m = f x := fun x hx => by
+  rwa [mem_comap, ← hM'] at hx
 
 /-- `f(⁅f⁻¹ N, f⁻¹ N⁆) = N` for `f` onto and `N` perfect. -/
 theorem map_commutator_comap (hf : Function.Surjective f) {N : Subgroup Q} (hN : ⁅N, N⁆ = N) :
@@ -128,9 +121,8 @@ theorem eq_commutator_comap (hc : f.ker ≤ center E) {N : Subgroup Q} {M' : Sub
     (hM' : ⁅M', M'⁆ = M') (hmap : M'.map f = N) :
     M' = ⁅N.comap f, N.comap f⁆ := by
   have hle : M' ≤ N.comap f := by rw [← hmap]; exact le_comap_map f M'
-  refine le_antisymm ?_ ?_
-  · rw [← hM']; exact commutator_mono hle hle
-  · rw [← hM']; exact commutator_comap_le f hc (exists_of_map_eq hmap)
+  refine le_antisymm ?_ ?_ <;> rw [← hM']
+  exacts [commutator_mono hle hle, commutator_comap_le f hc (exists_of_map_eq hmap)]
 
 end Central
 

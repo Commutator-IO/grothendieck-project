@@ -66,9 +66,7 @@ theorem L_injective : Function.Injective L := by
   have h := coeff_L_succ p p.natDegree
   rw [hp, coeff_zero, coeff_eq_zero_of_natDegree_lt (by omega : p.natDegree < p.natDegree + 2),
     mul_zero, sub_zero] at h
-  have hlc : p.coeff p.natDegree ≠ 0 := leadingCoeff_ne_zero.mpr hp0
-  have : ((p.natDegree : ℝ) + 4) ≠ 0 := by positivity
-  exact mul_ne_zero this hlc h.symm
+  exact mul_ne_zero (by positivity) (leadingCoeff_ne_zero.mpr hp0) h.symm
 
 /-- The linear form `phi(q) = ∫₋₁¹ q(x)(x² − 1) dx`. -/
 noncomputable def phi (q : ℝ[X]) : ℝ := ∫ x in (-1 : ℝ)..1, q.eval x * (x ^ 2 - 1)
@@ -135,7 +133,6 @@ theorem mem_range_iff (q : ℝ[X]) : (∃ p, L p = q) ↔ phi q = 0 := by
       · have hMe : M = e := by omega
         subst hMe
         rw [coeff_L_succ, coeff_X_pow, coeff_X_pow, ite_eq_left rfl, ite_eq_right (by omega)]
-        have : ((M : ℝ) + 4) ≠ 0 := by positivity
         simp only [c]
         field_simp
         ring
