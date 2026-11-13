@@ -73,10 +73,9 @@ theorem padicValNat_pow_odd_sub_one (hq : q % 4 = 3) {k : ℕ} (hk : Odd k) :
 theorem padicValNat_pow_even_sub_one (hq1 : 1 < q) (hodd : ¬ 2 ∣ q) {i : ℕ} (hi : i ≠ 0) :
     padicValNat 2 (q ^ (2 * i) - 1) = padicValNat 2 i + padicValNat 2 (q ^ 2 - 1) := by
   have h := padicValNat.pow_two_sub_one hq1 hodd (n := 2 * i) (by omega) (even_two_mul i)
-  have h2 : q ^ 2 - 1 = (q + 1) * (q - 1) := by
-    rw [← Nat.sq_sub_sq, one_pow]
   rw [padicValNat.mul (by omega) hi, padicValNat.self (by norm_num)] at h
-  rw [h2, padicValNat.mul (by omega) (by omega)]
+  rw [show q ^ 2 - 1 = (q + 1) * (q - 1) by rw [← Nat.sq_sub_sq, one_pow],
+    padicValNat.mul (by omega) (by omega)]
   omega
 
 /-- The 2-adic valuation of `∏_{i=1}^{2m} (q^i − 1)` for `q ≡ 3 mod 4`. -/
@@ -91,13 +90,12 @@ theorem padicValNat_prod_even (hq : q % 4 = 3) (m : ℕ) :
   induction m with
   | zero => simp
   | succ m ih =>
-    have e1 : padicValNat 2 (q ^ (2 * m + 1) - 1) = 1 :=
-      padicValNat_pow_odd_sub_one hq ⟨m, rfl⟩
     have e2 : padicValNat 2 (q ^ (2 * m + 1 + 1) - 1) =
         padicValNat 2 (m + 1) + padicValNat 2 (q ^ 2 - 1) := by
       rw [show 2 * m + 1 + 1 = 2 * (m + 1) by ring]
       exact padicValNat_pow_even_sub_one hq1 hodd (by omega)
-    rw [show 2 * (m + 1) = 2 * m + 1 + 1 by ring, sum_range_succ, sum_range_succ, ih, e1, e2,
+    rw [show 2 * (m + 1) = 2 * m + 1 + 1 by ring, sum_range_succ, sum_range_succ, ih,
+      padicValNat_pow_odd_sub_one hq ⟨m, rfl⟩, e2,
       Nat.factorial_succ, padicValNat.mul (by omega) (Nat.factorial_ne_zero m)]
     ring
 
@@ -138,9 +136,7 @@ theorem geom (p d : ℕ) (hp : 1 ≤ p) : ∑ i : Fin d, (p - 1) * p ^ (i : ℕ)
   | succ d ih =>
     rw [sum_range_succ, mul_add, ih, pow_succ]
     have h1 : 1 ≤ p ^ d := Nat.one_le_pow _ _ hp
-    zify [h1, hp, Nat.one_le_pow (d) p hp, (Nat.one_le_pow (d+1) p hp)]
-    have : 1 ≤ p ^ d * p := by nlinarith
-    push_cast [this]
+    zify [h1, hp, (by nlinarith : 1 ≤ p ^ d * p)]
     ring
 
 /-- Base case: digits at most `p - 1`. -/
@@ -166,9 +162,8 @@ theorem base {p d : ℕ} (hp : 2 ≤ p) (a : Fin d → ℕ) (ha : a ≠ 0) (hle 
       nlinarith
   have hz : ∑ i : Fin d, (p - 1 - a i) * p ^ (i : ℕ) = 0 := by omega
   have hall : ∀ i, a i = p - 1 := fun i => by
-    have := (sum_eq_zero_iff.mp hz) i (mem_univ i)
-    have hp0 : p ^ (i : ℕ) ≠ 0 := by positivity
-    have := (mul_eq_zero.mp this).resolve_right hp0
+    have := (mul_eq_zero.mp ((sum_eq_zero_iff.mp hz) i (mem_univ i))).resolve_right
+      (by positivity)
     have := hle i
     omega
   simp [hall]
@@ -180,10 +175,7 @@ def carry (p : ℕ) {d : ℕ} (a : Fin d → ℕ) (i j : Fin d) : Fin d → ℕ 
 theorem carry_add {p d : ℕ} (a : Fin d → ℕ) (i j : Fin d) (hi : p ≤ a i) (k : Fin d) :
     carry p a i j k + (Pi.single i p : Fin d → ℕ) k = a k + (Pi.single j 1 : Fin d → ℕ) k := by
   unfold carry
-  have : (Pi.single i p : Fin d → ℕ) k ≤ a k := by
-    by_cases h : k = i
-    · subst h; simpa using hi
-    · simp [h]
+  have : (Pi.single i p : Fin d → ℕ) k ≤ a k := by obtain rfl | h := eq_or_ne k i <;> simp [*]
   omega
 
 theorem sum_carry {p d : ℕ} (a : Fin d → ℕ) (i j : Fin d) (hi : p ≤ a i) :
@@ -216,20 +208,16 @@ theorem le_sum_of_dvd {p d : ℕ} (hp : 2 ≤ p) (a : Fin d → ℕ) (ha : a ≠
     have hne : carry p a i j ≠ 0 := fun h => by
       have h2 := carry_add a i j hi j
       rw [show carry p a i j j = 0 from congrFun h j] at h2
-      by_cases hij : j = i
-      · rw [hij, Pi.single_eq_same, Pi.single_eq_same] at h2
-        omega
-      · rw [Pi.single_eq_of_ne hij, Pi.single_eq_same] at h2
-        omega
+      rcases eq_or_ne j i with hij | hij <;> simp [hij] at h2
+      omega
     have hdvd' : (p ^ d - 1) ∣ val p (carry p a i j) := by
       have hv := val_carry a i j hi
       have hpow : (p ^ d - 1) ∣ p ^ ((i : ℕ) + 1) - p ^ (j : ℕ) := by
         by_cases hlt : (i : ℕ) + 1 < d
-        · have : (j : ℕ) = (i : ℕ) + 1 := Nat.mod_eq_of_lt hlt
-          rw [this, Nat.sub_self]; exact dvd_zero _
+        · rw [show (j : ℕ) = (i : ℕ) + 1 from Nat.mod_eq_of_lt hlt, Nat.sub_self]
+          exact dvd_zero _
         · have h1 : (i : ℕ) + 1 = d := by have := i.isLt; omega
-          have : (j : ℕ) = 0 := by simp [j, h1]
-          rw [this, h1, pow_zero]
+          rw [show (j : ℕ) = 0 by simp [j, h1], h1, pow_zero]
       have hle : p ^ (j : ℕ) ≤ p ^ ((i : ℕ) + 1) :=
         Nat.pow_le_pow_right (by omega) (Nat.mod_le _ _)
       have : val p (carry p a i j) = val p a - (p ^ ((i : ℕ) + 1) - p ^ (j : ℕ)) := by omega
@@ -256,9 +244,7 @@ theorem le_degree {p r : ℕ} (hp : 2 ≤ p) (n ε : Fin r → ℕ) (hn : n ≠ 
   have h2 : ∑ a, (2 * n a - ε a) + ∑ a, ε a = 2 * ∑ a, n a := by
     rw [← sum_add_distrib, mul_sum]
     exact sum_congr rfl fun a _ => Nat.sub_add_cancel (hle a)
-  have h3 : ∑ a, ε a ≤ r := by
-    calc ∑ a, ε a ≤ ∑ _a : Fin r, 1 := sum_le_sum fun a _ => hε a
-      _ = r := by simp
+  have h3 : ∑ a, ε a ≤ r := (sum_le_sum fun a _ => hε a).trans (by simp)
   have h4 : r * (2 * p - 3) + r = 2 * (r * (p - 1)) := by
     rcases Nat.exists_eq_add_of_le hp with ⟨c, rfl⟩
     rw [show 2 * (2 + c) - 3 = 2 * c + 1 by omega, show 2 + c - 1 = c + 1 by omega]
@@ -269,9 +255,8 @@ theorem le_degree {p r : ℕ} (hp : 2 ≤ p) (n ε : Fin r → ℕ) (hn : n ≠ 
 theorem degree_extremal {p r : ℕ} (hp : 2 ≤ p) :
     (p ^ r - 1) ∣ val p (fun _ : Fin r => p - 1) ∧
       ∑ _a : Fin r, (2 * (p - 1) - 1) = r * (2 * p - 3) := by
-  refine ⟨?_, ?_⟩
-  · rw [val, geom p r (by omega)]
-  · simp only [sum_const, card_univ, Fintype.card_fin, smul_eq_mul]
-    congr 1; omega
+  refine ⟨by rw [val, geom p r (by omega)], ?_⟩
+  simp only [sum_const, card_univ, Fintype.card_fin, smul_eq_mul]
+  congr 1; omega
 
 end Quillen.Notebook1970_11

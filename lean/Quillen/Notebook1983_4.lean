@@ -124,9 +124,7 @@ theorem IsDiophantine.symbol_ne_zero (hθ : IsDiophantine θ) {p : ℤ × ℤ} (
     symbol θ p ≠ 0 := by
   obtain ⟨c, hc, N, h⟩ := hθ.lower_bound
   intro h0
-  have := h p hp
-  rw [h0, norm_zero, zero_mul] at this
-  linarith
+  linarith [h p hp, show ‖symbol θ p‖ * weight p ^ N = 0 by simp [h0]]
 
 /-- (⇐) For Diophantine `θ` and rapidly decreasing `b` with `b (0, 0) = 0`, the family
 `b / symbol θ` (zero at the origin) is rapidly decreasing. -/
@@ -178,8 +176,7 @@ theorem exists_not_mem_range_of_not_isDiophantine (hirr : Irrational θ)
   have hσpos : ∀ j, 0 < σ j := fun j => by
     rw [hσ]
     exact abs_pos.2 ((hirr.mul_intCast (hq0 j)).sub_intCast _).ne_zero
-  have hm1 : ∀ j, (1 : ℝ) ≤ |((q j).1 : ℝ)| := fun j => by
-    exact_mod_cast Int.one_le_abs (hq0 j)
+  have hm1 : ∀ j, (1 : ℝ) ≤ |((q j).1 : ℝ)| := fun j => mod_cast Int.one_le_abs (hq0 j)
   -- `σ j * |m|^(2j) < 1 / (j + 1)`
   have hq' : ∀ j, σ j * |((q j).1 : ℝ)| ^ (2 * j) < 1 / ((j : ℝ) + 1) := fun j => by
     rw [hσ, ← lt_div_iff₀ (by have := hm1 j; positivity)]
@@ -213,11 +210,7 @@ theorem exists_not_mem_range_of_not_isDiophantine (hirr : Irrational θ)
     rw [hbdef, Set.indicator_of_mem (Set.mem_range_self j), norm_div, Complex.norm_real,
       Real.norm_eq_abs, abs_of_nonneg (Real.sqrt_nonneg _)]
     exact Real.div_sqrt
-  have hb0 : b 0 = 0 := by
-    rw [hbdef]
-    by_cases h : (0 : ℤ × ℤ) ∈ Set.range q
-    · rw [Set.indicator_of_mem h, symbol_zero, zero_div]
-    · exact Set.indicator_of_notMem h _
+  have hb0 : b 0 = 0 := by simp [hbdef]
   refine ⟨b, ?_, hb0, ?_⟩
   · -- `b` is rapidly decreasing
     intro k
@@ -261,10 +254,8 @@ theorem exists_not_mem_range_of_not_isDiophantine (hirr : Irrational θ)
     have hs := Real.sqrt_pos.2 (hσpos j)
     have hsq := Real.sq_sqrt (hσpos j).le
     -- `√σ ‖a‖ = 1`
-    have h3 : Real.sqrt (σ j) * ‖a (q j)‖ = 1 := by
-      have : Real.sqrt (σ j) * (Real.sqrt (σ j) * ‖a (q j)‖) = Real.sqrt (σ j) * 1 := by
-        rw [← mul_assoc, ← sq, hsq, h2, mul_one]
-      exact mul_left_cancel₀ hs.ne' this
+    have h3 : Real.sqrt (σ j) * ‖a (q j)‖ = 1 :=
+      mul_left_cancel₀ hs.ne' (by rw [← mul_assoc, ← sq, hsq, h2, mul_one])
     have h4 : 1 ≤ Real.sqrt (σ j) * C := by
       rw [← h3]; gcongr
     have h5 : 1 ≤ σ j * C ^ 2 := by
@@ -278,14 +269,11 @@ rapidly decreasing families with vanishing `(0, 0)` coefficient iff `θ` is Diop
 theorem surjective_iff_isDiophantine (hirr : Irrational θ) :
     (∀ b : ℤ × ℤ → ℂ, IsRapidDecay b → b 0 = 0 →
       ∃ a : ℤ × ℤ → ℂ, IsRapidDecay a ∧ ∀ p, symbol θ p * a p = b p) ↔ IsDiophantine θ := by
-  constructor
-  · intro h
-    by_contra hθ
-    obtain ⟨b, hb, hb0, hno⟩ := exists_not_mem_range_of_not_isDiophantine hirr hθ
-    obtain ⟨a, ha, hab⟩ := h b hb hb0
-    exact hno a ha hab
-  · intro hθ b hb hb0
-    exact ⟨_, hθ.isRapidDecay_div hb hb0, hθ.symbol_mul_div hb0⟩
+  refine ⟨fun h => of_not_not fun hθ => ?_,
+    fun hθ b hb hb0 => ⟨_, hθ.isRapidDecay_div hb hb0, hθ.symbol_mul_div hb0⟩⟩
+  obtain ⟨b, hb, hb0, hno⟩ := exists_not_mem_range_of_not_isDiophantine hirr hθ
+  obtain ⟨a, ha, hab⟩ := h b hb hb0
+  exact hno a ha hab
 
 /-- A Liouville number is not Diophantine. -/
 theorem not_isDiophantine_of_liouville {x : ℝ} (hx : Liouville x) :
