@@ -75,8 +75,7 @@ theorem gaussian_shift_fourier {α : ℝ} (hα : 0 < α) (x : ℝ) :
     push_cast
     ring
   have hts : Summable t := by
-    refine Summable.of_norm ?_
-    refine (summable_gaussian ha).congr fun n => ?_
+    refine Summable.of_norm ((summable_gaussian ha).congr fun n => ?_)
     rw [ht]
     simp only [norm_mul, norm_exp_ofReal_mul_I, mul_one, Complex.norm_real, Real.norm_eq_abs,
       abs_of_pos (Real.exp_pos _)]
@@ -94,9 +93,7 @@ theorem gaussian_shift_fourier {α : ℝ} (hα : 0 < α) (x : ℝ) :
     funext n
     rw [ofReal_exp]
     congr 1
-    have hI : I * (-I * (x : ℂ)) = x := by
-      calc I * (-I * (x : ℂ)) = -(I * I) * x := by ring
-        _ = x := by rw [I_mul_I]; ring
+    have hI : I * (-I * (x : ℂ)) = x := by linear_combination -(x : ℂ) * I_sq
     rw [hI, ha_def]
     push_cast
     rw [div_inv_eq_mul]
@@ -172,15 +169,10 @@ exactly on the lattice: `∑ exp(-π α (x + m)²) = ∑ exp(-π α m²)` iff `x
 theorem gaussian_shift_eq_iff {α : ℝ} (hα : 0 < α) (x : ℝ) :
     ∑' m : ℤ, Real.exp (-π * α * (x + m) ^ 2) = ∑' m : ℤ, Real.exp (-π * α * (m : ℝ) ^ 2) ↔
       ∃ k : ℤ, x = k := by
-  constructor
-  · intro h
-    by_contra hx
-    exact (gaussian_shift_lt hα fun k hk => hx ⟨k, hk⟩).ne h
-  · rintro ⟨k, rfl⟩
-    have := (Equiv.addLeft k).tsum_eq (fun m : ℤ => Real.exp (-π * α * (m : ℝ) ^ 2))
-    rw [← this]
-    refine tsum_congr fun m => ?_
-    simp
+  refine ⟨fun h => by_contra fun hx => (gaussian_shift_lt hα fun k hk => hx ⟨k, hk⟩).ne h, ?_⟩
+  rintro ⟨k, rfl⟩
+  rw [← (Equiv.addLeft k).tsum_eq (fun m : ℤ => Real.exp (-π * α * (m : ℝ) ^ 2))]
+  exact tsum_congr fun m => by simp
 
 /-! ## The `Σ₃`-invariant of the cross-ratio -/
 
@@ -202,11 +194,7 @@ theorem crossRatioInv_inv (z : K) : crossRatioInv z⁻¹ = crossRatioInv z := by
   rcases eq_or_ne z 1 with rfl | hz1
   · simp [crossRatioInv]
   have hz1' : z - 1 ≠ 0 := sub_ne_zero.mpr hz1
-  have hz1'' : z⁻¹ - 1 ≠ 0 := by
-    rw [sub_ne_zero]
-    intro h
-    apply hz1
-    rw [← inv_inv z, h, inv_one]
+  have hz1'' : z⁻¹ - 1 ≠ 0 := sub_ne_zero.mpr fun h => hz1 (by rw [← inv_inv z, h, inv_one])
   unfold crossRatioInv
   rw [div_eq_div_iff (by simp [hz, hz1'']) (by simp [hz, hz1'])]
   field_simp

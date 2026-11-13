@@ -61,26 +61,14 @@ theorem qBinomial_pascal' (q : R) (b : ℕ) : ∀ a : ℕ,
       rw [qBinomial_self, qBinomial_self, qBinomial_eq_zero_of_lt q (by omega : b + 1 < b + 1 + 1)]
       ring
     | succ a iha =>
-      have e1 : a + 1 + (b + 1) + 1 = (a + b + 2) + 1 := by omega
-      have e2 : a + 1 + (b + 1) = a + b + 2 := by omega
-      have e3 : a + (b + 1) + 1 = a + b + 2 := by omega
-      have e4 : a + (b + 1) = a + b + 1 := by omega
-      have e5 : a + 1 + b + 1 = a + b + 2 := by omega
-      have e6 : a + 1 + b = a + b + 1 := by omega
-      rw [e1, e2]
-      rw [e3, e4] at iha
+      rw [show a + 1 + (b + 1) + 1 = a + b + 2 + 1 by omega,
+        show a + 1 + (b + 1) = a + b + 2 by omega]
+      rw [show a + (b + 1) + 1 = a + b + 2 by omega, show a + (b + 1) = a + b + 1 by omega] at iha
       have hb := ihb (a + 1)
-      rw [e5, e6] at hb
-      have p1 : qBinomial q (a + b + 2 + 1) (b + 1 + 1) =
-          qBinomial q (a + b + 2) (b + 1) + q ^ (b + 1 + 1) * qBinomial q (a + b + 2) (b + 1 + 1) :=
-        qBinomial_succ_succ q _ _
-      have p2 : qBinomial q (a + b + 2) (b + 1) =
-          qBinomial q (a + b + 1) b + q ^ (b + 1) * qBinomial q (a + b + 1) (b + 1) :=
-        qBinomial_succ_succ q _ _
-      have p3 : qBinomial q (a + b + 2) (b + 1 + 1) =
-          qBinomial q (a + b + 1) (b + 1) + q ^ (b + 1 + 1) * qBinomial q (a + b + 1) (b + 1 + 1) :=
-        qBinomial_succ_succ q _ _
-      linear_combination p1 + hb - q ^ (a + 1) * p2 + q ^ (b + 1 + 1) * iha - p3
+      rw [show a + 1 + b + 1 = a + b + 2 by omega, show a + 1 + b = a + b + 1 by omega] at hb
+      linear_combination qBinomial_succ_succ q (a + b + 2) (b + 1) + hb -
+        q ^ (a + 1) * qBinomial_succ_succ q (a + b + 1) b + q ^ (b + 1 + 1) * iha -
+        qBinomial_succ_succ q (a + b + 1) (b + 1)
 
 /-- The second `q`-Pascal recursion in a form valid for all `m, t`:
 `q^t [m + 1, t + 1] = q^m [m, t] + q^t [m, t + 1]`. -/
@@ -101,8 +89,7 @@ def durfee (q : R) (m n : ℕ) : R :=
 theorem durfee_zero_left (q : R) (n : ℕ) : durfee q 0 n = 1 := by simp [durfee]
 
 theorem durfee_zero_right (q : R) (m : ℕ) : durfee q m 0 = 1 := by
-  rw [durfee, sum_range_succ']
-  rw [sum_eq_zero fun s _ => by rw [qBinomial_zero_succ, mul_zero]]
+  rw [durfee, sum_range_succ', sum_eq_zero fun s _ => by rw [qBinomial_zero_succ, mul_zero]]
   simp
 
 /-- The recursion of the Durfee sum, matching the first `q`-Pascal recursion of `[m + n, m]`. -/
@@ -175,10 +162,9 @@ theorem qBinomial_mul_qfac (q : R) (a : ℕ) : ∀ b : ℕ,
     | zero => simp [qfac]
     | succ b ihb =>
       have ih2 := iha (b + 1)
-      rw [show a + (b + 1) = a + 1 + b by omega] at ih2
+      rw [show a + (b + 1) = a + 1 + b by omega, qfac_succ q b] at ih2
       rw [show a + 1 + (b + 1) = (a + 1 + b) + 1 by omega, qBinomial_succ_succ, qfac_succ q b,
         qfac_succ q a, qfac_succ q (a + 1 + b)]
-      rw [qfac_succ q b] at ih2
       rw [qfac_succ q a] at ihb
       linear_combination (1 - q ^ (b + 1)) * ihb + q ^ (b + 1) * (1 - q ^ (a + 1)) * ih2
 
@@ -210,9 +196,7 @@ theorem X_pow_dvd_qBinomial_sub (a s : ℕ) :
     exact (isUnit_qfac a).mul_left_cancel (by linear_combination this)
   have h2 : qBinomial (X : R⟦X⟧) (a + s) s = T * (qfac X s)⁻¹ʳ := by
     rw [← h1, Ring.mul_inverse_cancel_right _ _ (isUnit_qfac s)]
-  have h3 : (X : R⟦X⟧) ^ (a + 1) ∣ T - 1 := by
-    apply X_pow_dvd_prod_sub_one
-    intro i _
+  have h3 : (X : R⟦X⟧) ^ (a + 1) ∣ T - 1 := X_pow_dvd_prod_sub_one _ _ fun i _ => by
     rw [show (1 : R⟦X⟧) - X ^ (a + i + 1) - 1 = -X ^ (a + i + 1) by ring]
     exact (dvd_neg).mpr (pow_dvd_pow _ (by omega))
   rw [h2, show T * (qfac (X : R⟦X⟧) s)⁻¹ʳ - (qfac X s)⁻¹ʳ = (T - 1) * (qfac X s)⁻¹ʳ by ring]
@@ -229,8 +213,7 @@ theorem coeff_inverse_qfac {N M : ℕ} (h : N ≤ M) :
   have hright : (X : R⟦X⟧) ^ (M + 1) ∣ durfee X M M -
       ∑ s ∈ range (M + 1), (X : R⟦X⟧) ^ (s * s) * ((qfac X s)⁻¹ʳ) ^ 2 := by
     rw [durfee, ← sum_sub_distrib]
-    apply dvd_sum
-    intro s hs
+    refine dvd_sum fun s hs => ?_
     have hs' : s ≤ M := Nat.lt_succ_iff.mp (mem_range.mp hs)
     obtain ⟨a, rfl⟩ := Nat.exists_eq_add_of_le' hs'
     have hd := X_pow_dvd_qBinomial_sub (R := R) a s
@@ -266,8 +249,7 @@ theorem coeff_inverse_qfac_eq_card {N M : ℕ} (h : N ≤ M) :
   have hmul : (PowerSeries.mk fun n ↦ (#(Nat.Partition.restricted n (· ≤ M)) : R)) *
       qfac (X : R⟦X⟧) M = 1 := by
     rw [heq, qfac, ← prod_mul_distrib]
-    apply prod_eq_one
-    intro i hi
+    refine prod_eq_one fun i hi => ?_
     rw [mem_range] at hi
     simp only [show i + 1 ≤ M by omega, ite_true, pow_mul]
     exact WithPiTopology.tsum_pow_mul_one_sub_of_constantCoeff_eq_zero (by simp)
