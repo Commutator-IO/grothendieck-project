@@ -68,10 +68,9 @@ theorem mul_self_ext_inc (h : IsCAR e i) (j : ι) : e j * i j * (e j * i j) = e 
 /-- **Quillen, notebook 1982-13, p. 70.** Each `1 - e(ηⱼ) i(Xⱼ)` is a projection. -/
 theorem idem_proj (h : IsCAR e i) (j : ι) : IsIdempotentElem (proj e i j) := by
   unfold IsIdempotentElem proj
-  have := mul_self_ext_inc h j
   calc (1 - e j * i j) * (1 - e j * i j)
       = 1 - e j * i j - e j * i j + e j * i j * (e j * i j) := by noncomm_ring
-    _ = 1 - e j * i j := by rw [this]; abel
+    _ = 1 - e j * i j := by rw [mul_self_ext_inc h j]; abel
 
 /-- **Quillen, notebook 1982-13, p. 70.** `i(Xⱼ) (1 - e(ηⱼ) i(Xⱼ)) = 0`. -/
 theorem inc_mul_proj (h : IsCAR e i) (j : ι) : i j * proj e i j = 0 := by
@@ -94,10 +93,9 @@ theorem commute_proj_inc (h : IsCAR e i) {j k : ι} (hjk : j ≠ k) : Commute (p
 
 /-- **Quillen, notebook 1982-13, p. 70.** The operators `1 - e(ηⱼ) i(Xⱼ)` commute pairwise. -/
 theorem commute_proj (h : IsCAR e i) (j k : ι) : Commute (proj e i j) (proj e i k) := by
-  by_cases hjk : j = k
-  · rw [hjk]
-  · exact (Commute.one_right _).sub_right
-      ((commute_proj_ext h hjk).mul_right (commute_proj_inc h hjk))
+  obtain rfl | hjk := eq_or_ne j k
+  exacts [Commute.refl _, (Commute.one_right _).sub_right
+    ((commute_proj_ext h hjk).mul_right (commute_proj_inc h hjk))]
 
 /-- The product of the projections `P j`, `j ∈ l`. -/
 def prodProj (e i : ι → A) (l : List ι) : A := (l.map (proj e i)).prod
@@ -152,12 +150,9 @@ theorem prodProj_smul_of_inc (l : List ι) {v : M} (hv : ∀ k ∈ l, i k • v 
 /-- **Quillen, notebook 1982-13, p. 70.** On a module, the image of the product of the
 projections `1 - e(ηⱼ) i(Xⱼ)` is the joint kernel of the contractions `i(Xⱼ)`. -/
 theorem mem_range_prodProj_iff (h : IsCAR e i) {l : List ι} (hl : l.Nodup) (v : M) :
-    (∃ w : M, prodProj e i l • w = v) ↔ ∀ k ∈ l, i k • v = 0 := by
-  constructor
-  · rintro ⟨w, rfl⟩ k hk
-    rw [← mul_smul, inc_mul_prodProj h hl hk, zero_smul]
-  · intro hv
-    exact ⟨v, prodProj_smul_of_inc l hv⟩
+    (∃ w : M, prodProj e i l • w = v) ↔ ∀ k ∈ l, i k • v = 0 :=
+  ⟨by rintro ⟨w, rfl⟩ k hk; rw [← mul_smul, inc_mul_prodProj h hl hk, zero_smul],
+    fun hv => ⟨v, prodProj_smul_of_inc l hv⟩⟩
 
 /-! ### The exterior algebra -/
 
@@ -186,25 +181,18 @@ theorem contr_extMul_add (f : Module.Dual R V) (v : V) :
 theorem exterior_isCAR [DecidableEq ι] (v : ι → V) (f : ι → Module.Dual R V)
     (hfv : ∀ j k, f k (v j) = if j = k then 1 else 0) :
     IsCAR (fun j => extMul (R := R) (v j)) (fun j => contr (f j)) where
-  inc_sq j := by
-    refine LinearMap.ext fun x => ?_
-    exact CliffordAlgebra.contractLeft_contractLeft (Q := 0) (d := f j) x
-  anticomm_self j := by
-    rw [add_comm, contr_extMul_add]
-    simp [hfv]
+  inc_sq j := LinearMap.ext fun x => CliffordAlgebra.contractLeft_contractLeft (Q := 0) (d := f j) x
+  anticomm_self j := by rw [add_comm, contr_extMul_add]; simp [hfv]
   ext_anticomm j k _ := by
     refine LinearMap.ext fun x => ?_
     change ExteriorAlgebra.ι R (v j) * (ExteriorAlgebra.ι R (v k) * x) =
       -(ExteriorAlgebra.ι R (v k) * (ExteriorAlgebra.ι R (v j) * x))
     rw [← mul_assoc, ← mul_assoc, ← neg_mul, eq_neg_of_add_eq_zero_left
       (ExteriorAlgebra.ι_add_mul_swap (v j) (v k))]
-  inc_anticomm j k _ := by
-    refine LinearMap.ext fun x => ?_
-    exact CliffordAlgebra.contractLeft_comm (Q := 0) (d := f j) (d' := f k) x
-  ext_inc_anticomm j k hjk := by
-    have := contr_extMul_add (R := R) (f k) (v j)
-    simp only [hfv, hjk, ↓reduceIte, zero_smul] at this
-    exact eq_neg_of_add_eq_zero_right this
+  inc_anticomm j k _ :=
+    LinearMap.ext fun x => CliffordAlgebra.contractLeft_comm (Q := 0) (d := f j) (d' := f k) x
+  ext_inc_anticomm j k hjk := eq_neg_of_add_eq_zero_right <| by
+    simpa only [hfv, hjk, ↓reduceIte, zero_smul] using contr_extMul_add (R := R) (f k) (v j)
 
 end Exterior
 

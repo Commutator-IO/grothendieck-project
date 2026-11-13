@@ -47,29 +47,19 @@ theorem isCycle_mul_swap_iff {γ : Perm α} (hγ : γ.IsCycle) (hs : γ.support 
   have hmove : ∀ z, γ z ≠ z := fun z => mem_support.mp (hs ▸ mem_univ z)
   constructor
   · rintro ⟨-, hcard⟩
-    have hne : (γ * swap x y).support ≠ univ := by
-      intro h
-      rw [h, card_univ] at hcard
-      omega
     obtain ⟨z, hz⟩ : ∃ z, z ∉ (γ * swap x y).support := by
-      by_contra h
-      push Not at h
-      exact hne (eq_univ_of_forall h)
+      by_contra! h
+      rw [eq_univ_of_forall h, card_univ] at hcard
+      omega
     rw [notMem_support, mul_apply] at hz
     by_cases hzx : z = x
-    · subst hzx
-      rw [swap_apply_left] at hz
-      exact Or.inr hz
+    · subst hzx; exact Or.inr (by rwa [swap_apply_left] at hz)
     by_cases hzy : z = y
-    · subst hzy
-      rw [swap_apply_right] at hz
-      exact Or.inl hz
-    rw [swap_apply_of_ne_of_ne hzx hzy] at hz
-    exact absurd hz (hmove z)
+    · subst hzy; exact Or.inl (by rwa [swap_apply_right] at hz)
+    exact absurd (by rwa [swap_apply_of_ne_of_ne hzx hzy] at hz) (hmove z)
   · -- reduce to `γ x = y`
     have key : ∀ a, (γ * swap a (γ a)).IsCycle ∧
-        #(γ * swap a (γ a)).support = Fintype.card α - 1 := by
-      intro a
+        #(γ * swap a (γ a)).support = Fintype.card α - 1 := fun a => by
       rw [mul_swap_eq_swap_mul]
       have h1 : γ (γ a) ≠ γ a := hmove (γ a)
       have h2 : γ (γ (γ a)) ≠ γ a := fun h => sq_apply_ne hγ hs hn a (γ.injective h)
@@ -115,21 +105,13 @@ theorem green_mul_one_sub {n : ℕ} (hn : 0 < n) {κ : A} (hκ : κ ^ n = 1) :
     rw [sum_range_succ, sum_range_succ', hκ, pow_zero]
   rw [green, smul_mul_assoc, hsum, hshift, hκ, proj]
   have hn' : (n : ℚ) ≠ 0 := by exact_mod_cast hn.ne'
-  rw [smul_sub, smul_sub, smul_smul, smul_smul]
-  have : 1 / (n : ℚ) * ((n - 1) / 2) - 1 / n * ((n - 1) / 2 - n) = 1 := by field_simp; ring
-  have e : (1 / (n : ℚ) * ((n - 1) / 2)) • (1 : A) - (1 / (n : ℚ) * (((n : ℚ) - 1) / 2 - n)) • 1 = 1 := by
-    rw [← sub_smul, this, one_smul]
-  calc _ = ((1 / (n : ℚ) * ((n - 1) / 2)) • (1 : A) - (1 / (n : ℚ) * (((n : ℚ) - 1) / 2 - n)) • 1) -
-        (1 / (n : ℚ)) • ∑ j ∈ range n, κ ^ j := by abel
-    _ = _ := by rw [e]
+  match_scalars <;> field_simp
+  ring
 
 lemma proj_idem {n : ℕ} (hn : 0 < n) {κ : A} (hκ : κ ^ n = 1) : proj n κ * proj n κ = proj n κ := by
-  have h : proj n κ * κ = proj n κ := by
-    have := proj_mul_one_sub n hκ
-    rw [mul_sub, mul_one, sub_eq_zero] at this
-    exact this.symm
-  have hpow : ∀ j, proj n κ * κ ^ j = proj n κ := by
-    intro j
+  have h : proj n κ * κ = proj n κ :=
+    (sub_eq_zero.mp (by simpa [mul_sub] using proj_mul_one_sub n hκ)).symm
+  have hpow : ∀ j, proj n κ * κ ^ j = proj n κ := fun j => by
     induction j with
     | zero => simp
     | succ j ih => rw [pow_succ, ← mul_assoc, ih, h]
@@ -153,25 +135,18 @@ theorem green_commute (n : ℕ) (κ : A) : Commute (1 - κ) (green n κ) :=
 
 /-- **Notebook 1990-2, p. 11**: `P G = 0`, because `Σ_{j<n} ((n − 1)/2 − j) = 0`. -/
 theorem proj_mul_green {n : ℕ} (hn : 0 < n) {κ : A} (hκ : κ ^ n = 1) : proj n κ * green n κ = 0 := by
-  have h : proj n κ * κ = proj n κ := by
-    have := proj_mul_one_sub n hκ
-    rw [mul_sub, mul_one, sub_eq_zero] at this
-    exact this.symm
-  have hpow : ∀ j, proj n κ * κ ^ j = proj n κ := by
-    intro j
+  have h : proj n κ * κ = proj n κ :=
+    (sub_eq_zero.mp (by simpa [mul_sub] using proj_mul_one_sub n hκ)).symm
+  have hpow : ∀ j, proj n κ * κ ^ j = proj n κ := fun j => by
     induction j with
     | zero => simp
     | succ j ih => rw [pow_succ, ← mul_assoc, ih, h]
   have hsum : ∑ j ∈ range n, (((n : ℚ) - 1) / 2 - j) = 0 := by
     rw [sum_sub_distrib, sum_const, card_range, nsmul_eq_mul]
-    have := Finset.sum_range_id_mul_two n
-    have h2 : (∑ j ∈ range n, (j : ℚ)) * 2 = n * (n - 1) := by
-      exact_mod_cast (by rw [← Nat.cast_sum, ← Nat.cast_ofNat, ← Nat.cast_mul, this,
-        Nat.cast_mul, Nat.cast_sub (by omega)]; simp)
+    have h2 := congrArg (Nat.cast : ℕ → ℚ) (Finset.sum_range_id_mul_two n)
+    push_cast [Nat.cast_sub (show 1 ≤ n by omega)] at h2
     linarith
-  rw [green, mul_smul_comm, mul_sum]
-  simp only [mul_smul_comm, hpow]
-  rw [← sum_smul, hsum, zero_smul, smul_zero]
+  simp only [green, mul_smul_comm, mul_sum, hpow, ← sum_smul, hsum, zero_smul, smul_zero]
 
 /-- **Notebook 1990-2, p. 11**: `G P = 0`. -/
 theorem green_mul_proj {n : ℕ} (hn : 0 < n) {κ : A} (hκ : κ ^ n = 1) : green n κ * proj n κ = 0 := by

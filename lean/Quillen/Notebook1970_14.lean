@@ -115,15 +115,12 @@ theorem C_succ (n : ℕ) :
     · simp at hsum
     · have hx := hpos x (by simp)
       simp only [List.sum_cons] at hsum
-      refine ⟨x - 1, by omega, t, ⟨fun y hy => hpos y (by simp [hy]), by omega⟩, ?_⟩
-      rw [Nat.sub_add_cancel hx]
+      exact ⟨x - 1, by omega, t, ⟨fun y hy => hpos y (by simp [hy]), by omega⟩,
+        by rw [Nat.sub_add_cancel hx]⟩
   · rintro ⟨s, hs, t, ⟨hpos, hsum⟩, rfl⟩
-    refine ⟨fun y hy => ?_, ?_⟩
-    · rcases List.mem_cons.mp hy with rfl | hy
-      · omega
-      · exact hpos y hy
-    · simp only [List.sum_cons]
-      omega
+    refine ⟨fun y hy => ?_, by simp only [List.sum_cons]; omega⟩
+    rcases List.mem_cons.mp hy with rfl | hy
+    exacts [by omega, hpos y hy]
 
 /-- `F m = ∑_{c ⊨ m} (−1)^{ℓ(c)} qf m / ∏ qf(c_a)`. -/
 noncomputable def F (q : K) (m : ℕ) : K := ∑ l ∈ C m, w q m l
@@ -133,10 +130,8 @@ theorem F_eq_sum_compositions (q : K) (m : ℕ) :
   rw [F, C, sum_image fun c _ d _ h => Composition.ext h]
 
 include hq in
-theorem prod_ne_zero' (l : List ℕ) : (l.map (qf q)).prod ≠ 0 := by
-  rw [Ne, List.prod_eq_zero_iff]
-  simp only [List.mem_map, not_exists, not_and]
-  exact fun x _ h => qf_ne_zero hq x h
+theorem prod_ne_zero' (l : List ℕ) : (l.map (qf q)).prod ≠ 0 :=
+  List.prod_ne_zero (by simp [qf_ne_zero hq])
 
 include hq in
 theorem w_cons (n s : ℕ) (hs : s ≤ n) (l : List ℕ) :
@@ -158,10 +153,7 @@ theorem F_succ (n : ℕ) :
     refine sum_congr rfl fun l _ => ?_
     simp only [Function.Embedding.coeFn_mk]
     rw [w_cons hq n s (by simpa [Nat.lt_succ_iff] using hs), neg_mul]
-  · intro s _ s' _ hss'
-    simp only [Function.onFun]
-    rw [disjoint_left]
-    intro l h1 h2
+  · refine fun s _ s' _ hss' => disjoint_left.mpr fun l h1 h2 => ?_
     simp only [mem_map, Function.Embedding.coeFn_mk] at h1 h2
     obtain ⟨a, _, rfl⟩ := h1
     obtain ⟨b, _, hb⟩ := h2
@@ -224,9 +216,8 @@ theorem euler_characteristic {n : ℕ} (hn : 0 < n) :
     have := c.length_pos_of_pos hn
     omega
   rw [hsingle, sum_singleton, Composition.single_length, Composition.single_blocks] at htot
-  have h := qf_ne_zero hq n
   simp only [List.map_cons, List.map_nil, List.prod_cons, List.prod_nil, mul_one, pow_one,
-    neg_one_mul, neg_div, div_self h] at htot
+    neg_one_mul, neg_div, div_self (qf_ne_zero hq n)] at htot
   linear_combination htot
 
 end Quillen.Notebook1970_14
