@@ -1,0 +1,22 @@
+\section[Notebook 1989-5: Cuntz's polynomial and two homomorphisms]{Notebook 1989-5: $(1 - \lambda)W(\lambda) = 1 - N(\lambda)/(n + 1)$; the difference of two homomorphisms\protect\verifie{Notebook1989_5}}\label{sec:quillen-1989-5}
+
+\emph{Context.} On pages~95, 107--108 and~124 of \carnet{1989}{5} Quillen uses a polynomial of Cuntz to invert $1 - \lambda$ on the non-invariant part when $\lambda^{n+1} = 1$, inverts $1 + \lambda$ for odd $n$, and studies the half-difference of two ring homomorphisms.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1989-5, pp.~95, 107, 124]\label{thm:quillen-1989-5}
+\begin{enumerate}
+\item With $W(x) = \frac{1}{n+1}\sum_{j \le n}(\frac n2 - j)x^j$ and $N(x) = \sum_{j \le n}x^j$, $(1 - x)W(x) = 1 - \frac{N(x)}{n + 1} + \frac{n}{2(n+1)}(x^{n+1} - 1)$ in $\mathbf Q[x]$; so $(1 - \lambda)W(\lambda) = 1 - N(\lambda)/(n + 1)$ for $\lambda^{n+1} = 1$ in any $\mathbf Q$-algebra.
+\item In a ring where $2$ is invertible, if $\lambda^n = 1$ with $n$ odd, then $1 + \lambda$ is a unit with inverse $\frac12\sum_{i<n}(-\lambda)^i$.
+\item For ring homomorphisms $u, v : A \to R$, $q = u - v$ and $\rho = u + v$: $q(xy) = q(x)u(y) + v(x)q(y) = u(x)q(y) + q(x)v(y)$, $2q(xy) = \rho(x)q(y) + q(x)\rho(y)$ and $q(xy) = u(x)q(y) + q(x)u(y) - q(x)q(y)$ (the page's formulas for $(u - v)/2$, $(u + v)/2$ multiplied out).
+\item If $1 + X$ and $1 - X$ are units and $g = (1 + X)(1 - X)^{-1}$, then $a - g^{-1}ag = (1 + X)^{-1}\cdot 2(Xa - aX)\cdot(1 - X)^{-1}$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) $W = W' - \frac{n}{2(n+1)}N$ with $(n + 1)W'(x) = \sum(n - j)x^j$, and $(1 - x)\sum(n - j)x^j = n + 1 - N(x)$ by induction; $(1 - x)N(x) = 1 - x^{n+1}$. (2) $(1 + \lambda)\sum_{i<n}(-\lambda)^i = 1 - (-\lambda)^n = 2$. (3) Expand. (4) $1 + X$ and $1 - X$ commute; multiply by $1 + X$ on the left and $1 - X$ on the right.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1989_5.lean}{\texttt{Notebook1989\_5.\allowbreak{}lean}} proves \texttt{one\_sub\_mul\_S}, \texttt{one\_sub\_mul\_W'}, \texttt{W\_eq}, \texttt{one\_sub\_mul\_W}, \texttt{one\_sub\_mul\_aeval\_W}, \texttt{one\_add\_mul\_inv}, \texttt{one\_add\_inv\_mul}, \texttt{q\_mul\_left}, \texttt{q\_mul\_right}, \texttt{q\_mul\_}$\rho$, \texttt{q\_mul} and \texttt{sub\_conj}, the last ones in noncommutative rings and without dividing by $2$. These are short identities, collected because the pages rely on them. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical or elementary (Cuntz's homotopy polynomial; Cayley transform); the edition does not present them as new.}

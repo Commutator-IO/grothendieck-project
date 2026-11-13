@@ -1,0 +1,22 @@
+\section[Notebook 1988-9: the Chern--Simons values of an idempotent]{Notebook 1988-9: $(2n)!/n!$ grows like $n!\,4^n$\protect\verifie{Notebook1988_9Growth}}\label{sec:quillen-1988-9-growth}
+
+\emph{Context.} On pages~94--97 of \carnet{1988}{9}, in the discussion of entire cyclic cohomology, Quillen computes the values of a Chern--Simons cocycle on the idempotent of $\mathbf C + \mathbf Ce$ and observes that the chain of the idempotent has coefficients $(2n)!/n!$, which he estimates as growing roughly like $n!\,2^n$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1988-9, pp.~95--97, corrected]\label{thm:quillen-1988-9-growth}
+For every $n$:
+\begin{enumerate}
+\item $(2n + 1)\,\frac{1}{n!}\int_0^1(t^2 - t)^n\,dt = (-1)^n\,n!/(2n)!$ and $(n + 1)!/(2n + 2)! = n!/(2\,(2n + 1)!)$;
+\item $(2n)!/n! = n!\binom{2n}{n}$, and $n!\,2^n \le (2n)!/n! \le n!\,4^n \le (2n + 1)\,(2n)!/n!$;
+\item $\bigl((2n)!/n!\bigr)/(n!\,2^n) \to \infty$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) The Beta integral gives $\int_0^1(t^2 - t)^n\,dt = (-1)^n(n!)^2/(2n + 1)!$ (section~\ref{sec:quillen-1988-9}). (2) $2^n \le \binom{2n}{n}$ by induction from $(n + 1)\binom{2n+2}{n+1} = 2(2n + 1)\binom{2n}{n}$; $\binom{2n}{n} \le 4^n \le (2n + 1)\binom{2n}{n}$ are in mathlib. (3) The ratio is at least $2^n/(2n + 1) \ge n/3$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1988_9Growth.lean}{\texttt{Notebook1988\_9Growth.\allowbreak{}lean}} proves \texttt{chernSimons\_value}, \texttt{factorial\_ratio}, \texttt{factorial\_div\_eq}, \texttt{two\_pow\_le\_centralBinom}, \texttt{factorial\_div\_bounds} and \texttt{tendsto\_ratio}. \emph{Correction}: the page's estimate $n!\,2^n$ is only a lower bound; the growth is that of $n!\,4^n$ up to a factor $2n + 1$ (the slip may be the transcription's); the conclusion that the idempotent pairs with slowly growing cochains is unaffected. The cocycle itself and entire cyclic cohomology are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (central binomial coefficients; Connes's entire cyclic cohomology for the context); the edition does not present it as new.}

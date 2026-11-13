@@ -1,0 +1,17 @@
+\section[Notebook 1987-14: cyclic embeddings]{Notebook 1987-14: $k(k - 1)$ cyclic embeddings of $\{1, \dots, k - 1\}$ in $\{1, \dots, k\}$\protect\verifie{Notebook1987_14Cyclic}}\label{sec:quillen-1987-14-cyclic}
+
+\emph{Context.} On page~45 of \carnet{1987}{14}, to see that a natural map between cyclic tensor powers is unique up to a scalar, Quillen notes that the cyclic-order-preserving embeddings of a cyclic set with $k - 1$ elements into one with $k$ elements form a torsor under $\mathbf Z/k \times \mathbf Z/(k - 1)$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1987-14, p.~45]\label{thm:quillen-1987-14-cyclic}
+Let $k \ge 2$, and give $\mathbf Z/(k-1)$ and $\mathbf Z/k$ their cyclic orders. Every injective map $f : \mathbf Z/(k-1) \to \mathbf Z/k$ preserving the cyclic order is $f(x) = \iota(x + s) + r$ for a unique pair $(r, s) \in \mathbf Z/k \times \mathbf Z/(k-1)$, where $\iota$ is the inclusion of $\{0, \dots, k-2\}$; every such map preserves the cyclic order. Hence there are $k(k - 1)$ of them.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Rotations and $\iota$ preserve the cyclic order. Given $f$, it misses one value $p$; after the rotation by $r = p - (k - 1)$ it lands in $\{0, \dots, k - 2\}$ and becomes a cyclic bijection $h$ of $\mathbf Z/(k-1)$. Such an $h$ is a rotation: if $h(x + 1) \ne h(x) + 1$, the preimage $y$ of $h(x) + 1$ lies cyclically after $x + 1$, and its image would lie strictly between $h(x)$ and $h(x) + 1$. The pair $(r, s)$ is recovered from the missing value and from $f(0)$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1987_14Cyclic.lean}{\texttt{Notebook1987\_14Cyclic.\allowbreak{}lean}} proves \texttt{isCyclic\_emb}, \texttt{rotation\_of\_cyclic}, \texttt{emb\_injective}, \texttt{exists\_emb} and \texttt{card\_isCyclic}, with $k = n + 2$, maps $\mathrm{Fin}(n+1) \to \mathrm{Fin}(n+2)$ and mathlib's circular order on $\mathrm{Fin}$. For $k = 1$ the count is $1$ (the empty map), not $k(k-1)$. The use of the torsor for maps of derived tensor powers is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary (the findings call it so); the edition does not present it as new.}

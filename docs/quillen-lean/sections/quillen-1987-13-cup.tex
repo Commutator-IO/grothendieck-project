@@ -1,0 +1,22 @@
+\section[Notebook 1987-13: the cup product of Hochschild cochains]{Notebook 1987-13: $b(\varphi \cup \psi) = b\varphi \cup \psi + (-1)^p\varphi \cup b\psi$\protect\verifie{Notebook1987_13Cup}}\label{sec:quillen-1987-13-cup}
+
+\emph{Context.} On pages~71--74 of \carnet{1987}{13} Quillen writes the cup product of Hochschild cochains, checks its Leibniz rule, and computes the cup square of a derivation and the first-order deformations given by two derivations.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1987-13, pp.~72--74]\label{thm:quillen-1987-13-cup}
+Let $A$ be a ring, and for functions $\varphi$ of $p$ arguments in $A$ with values in $A$ let $(\varphi \cup \psi)(a_1, \dots, a_{p+q}) = \varphi(a_1, \dots, a_p)\,\psi(a_{p+1}, \dots, a_{p+q})$ and $b$ the Hochschild coboundary. Then:
+\begin{enumerate}
+\item $b(\varphi \cup \psi) = b\varphi \cup \psi + (-1)^p\varphi \cup b\psi$, with no linearity needed;
+\item for a derivation $X$ and $f = X \circ X$, $f(a_1a_2) = f(a_1)a_2 + 2X(a_1)X(a_2) + a_1f(a_2)$, so $X \cup X = -\tfrac12 bf$ when $2$ is invertible; and $X \cup Y$ is a cocycle for derivations $X, Y$;
+\item for $X = [c, \cdot\,]$ inner and $Y$ a derivation, $s(a) = a + hcY(a)$ is a homomorphism from $A$ to $A[h]/h^2$ with the product $a_1 * a_2 = a_1a_2 + hX(a_1)Y(a_2)$; and $s(a) = a + hXY(a)$ gives $s(a_1)s(a_2) - s(a_1a_2) = -h(Xa_1\,Ya_2 + Ya_1\,Xa_2)$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) In $b(\varphi \cup \psi)$, the faces contracting inside the first $p$ arguments, with the left action, give $b\varphi \cup \psi$ except for its last term; the face contracting $a_p a_{p+1}$ cancels it against the first term of $\varphi \cup b\psi$; the rest is $(-1)^p\varphi \cup b\psi$. (2) and (3) are the Leibniz rule applied twice, in a noncommutative ring.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1987_13Cup.lean}{\texttt{Notebook1987\_13Cup.\allowbreak{}lean}} proves \texttt{coboundary\_cup}, \texttt{sq\_derivation\_mul}, \texttt{cup\_self\_eq}, \texttt{coboundary\_cup\_derivations}, \texttt{inner\_section} and \texttt{section\_XY}; cochains are functions of sequences depending only on their first $p$ terms, and the coefficients are in $A$ itself (the page's cochains with values in two bimodules and their tensor product are not formalised, nor the identification of the cup product with the Yoneda product). The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (Gerstenhaber, 1963); the edition does not present it as new.}

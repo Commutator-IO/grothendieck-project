@@ -1,0 +1,17 @@
+\section[Notebook 1987-14: the kernel of the contraction by (1, ..., 1)]{Notebook 1987-14: $\dim\operatorname{Ker}(\iota_v : \Lambda^q K^k \to \Lambda^{q-1}K^k) = \binom{k-1}{q}$\protect\verifie{Notebook1987_14}}\label{sec:quillen-1987-14}
+
+\emph{Context.} On page~49 of \carnet{1987}{14}, computing a Koszul-type complex attached to $k$ factors $A \otimes^L_P$, Quillen needs the kernel of the contraction of $\Lambda^q(K^k)$ by the vector $(1, \dots, 1)$, and identifies it with $\Lambda^q(K^{k-1})$.
+
+\begin{encadre}
+\begin{theoreme}[after Quillen, notebook 1987-14, p.~49]\label{thm:quillen-1987-14}
+Let $M$ be a vector space of finite dimension $k$ over a field $K$, $d$ a nonzero linear form on $M$, and $d\lrcorner$ the contraction on the exterior algebra. Then $d\lrcorner$ maps $\Lambda^{q+1}M$ to $\Lambda^q M$, the complex $\cdots \to \Lambda^{q+2}M \to \Lambda^{q+1}M \to \Lambda^qM \to \cdots \to \Lambda^0M \to 0$ is exact, the image of $d\lrcorner$ on $\Lambda^{q+1}M$ has dimension $\binom{k-1}{q}$ and its kernel $\binom{k-1}{q+1}$. In particular this holds for the contraction with $(1, \dots, 1)$, that is with $d = \sum x_i$ on $K^k$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Choose $m$ with $d(m) = 1$. The identity $d\lrcorner(m \wedge x) + m \wedge (d\lrcorner x) = d(m)x = x$ shows that every $x$ with $d\lrcorner x = 0$ is $d\lrcorner(m \wedge x)$; and $d\lrcorner d\lrcorner = 0$. Rank and nullity at $\Lambda^{q+1}M$ give $\binom{k}{q+1} = \dim\operatorname{Im}_{q+1} + \dim\operatorname{Im}_q$, with $\dim\operatorname{Im}_0 = 1$; Pascal's rule gives $\dim\operatorname{Im}_q = \binom{k-1}{q}$ by induction.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1987_14.lean}{\texttt{Notebook1987\_14.\allowbreak{}lean}} proves \texttt{contractLeft\_mem}, \texttt{ker\_contr}, \texttt{range\_contr\_zero}, \texttt{finrank\_range\_contr}, \texttt{finrank\_ker\_contr} and \texttt{finrank\_ker\_sum}, with mathlib's contraction on the Clifford algebra of the zero quadratic form and its exterior powers. Only $d \ne 0$ matters, not the value $d(v) = k$. The isomorphism with $\Lambda^q(K^{k-1})$ is given only through dimensions, and the homological computation that uses it on the page is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (exactness of the Koszul complex of a nonzero linear form); the edition does not present it as new.}

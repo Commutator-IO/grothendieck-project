@@ -1,0 +1,22 @@
+\section[Notebook 1989-2: Whitehead matrices and triples]{Notebook 1989-2: Whitehead's identity and the category of triples\protect\verifie{Notebook1989_2Whitehead}}\label{sec:quillen-1989-2-whitehead}
+
+\emph{Context.} On pages~28 and~30 of \carnet{1989}{2} Quillen reduces the action of inner automorphisms on cyclic homology to elementary $2 \times 2$ matrices; on page~84 he composes homotopy equivalence data and checks associativity.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1989-2, pp.~28, 30, 84]\label{thm:quillen-1989-2-whitehead}
+Let $A$ be any ring, $z, a \in A$ and $u$ a unit. Then:
+\begin{enumerate}
+\item $u_z(a) = \begin{pmatrix}a & az\\ 0 & 0\end{pmatrix}$ is multiplicative and equals $\begin{pmatrix}1 & -z\\ 0 & 1\end{pmatrix}\begin{pmatrix}a & 0\\ 0 & 0\end{pmatrix}\begin{pmatrix}1 & z\\ 0 & 1\end{pmatrix}$;
+\item $\operatorname{diag}(u, u^{-1})\operatorname{diag}(a, 0)\operatorname{diag}(u, u^{-1})^{-1} = \operatorname{diag}(uau^{-1}, 0)$ and $\begin{pmatrix}1 & u\\ 0 & 1\end{pmatrix}\begin{pmatrix}1 & 0\\ -u^{-1} & 1\end{pmatrix}\begin{pmatrix}1 & u\\ 0 & 1\end{pmatrix} = \begin{pmatrix}0 & u\\ -u^{-1} & 0\end{pmatrix}$, whose square is $-1$;
+\item for $d \in A$, if $u, v$ and $u', v'$ commute with $d$ and $vu = 1 + dh + hd$, $v'u' = 1 + dh' + h'd$, then $(u'u, vv', h + vh'u)$ has the same property, and this composition is associative with unit $(1, 1, 0)$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Matrix multiplication, and for (3) $vv'u'u = v(1 + dh' + h'd)u = vu + d(vh'u) + (vh'u)d$ since $u$, $v$ commute with $d$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1989_2Whitehead.lean}{\texttt{Notebook1989\_2Whitehead.\allowbreak{}lean}} proves \texttt{uz\_mul}, \texttt{uz\_conj}, \texttt{diag\_conj}, \texttt{whitehead}, \texttt{whitehead\_sq}, \texttt{comp\_spec}, \texttt{id\_spec} and \texttt{comp\_assoc}, in one ring (the page's triples live in endomorphism rings of complexes; the grading is not formalised). These are short identities, collected because the pages rely on them. The axioms used are among the three usual axioms of mathlib.
+
+\litterature{Classical (Whitehead's lemma; Connes, 1985; Gugenheim, Lambe and Stasheff for the perturbation context); the edition does not present them as new.}

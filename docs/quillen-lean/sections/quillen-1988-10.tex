@@ -1,0 +1,17 @@
+\section[Notebook 1988-10: the identities of the cyclic bicomplex]{Notebook 1988-10: $Nb = b'N$, $b(1 - t) = (1 - t)b'$\protect\verifie{Notebook1988_10}}\label{sec:quillen-1988-10}
+
+\emph{Context.} On pages~69--70 of \carnet{1988}{10}, as corollaries of an exact sequence of comodules over the tensor coalgebra, Quillen obtains the two identities that make Connes's cyclic bicomplex a double complex.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1988-10, pp.~69--70]\label{thm:quillen-1988-10}
+Let $A$ be a ring and, on $A^{\otimes(n+1)}$, let $d_i(a_0, \dots, a_n) = (a_0, \dots, a_ia_{i+1}, \dots, a_n)$ for $i < n$, $d_n(a_0, \dots, a_n) = (a_na_0, a_1, \dots, a_{n-1})$, $b' = \sum_{i<n}(-1)^id_i$, $b = b' + (-1)^nd_n$, $t(a_0, \dots, a_n) = (-1)^n(a_n, a_0, \dots, a_{n-1})$ and $N = \sum_{j \le n}t^j$. Then $Nb = b'N$ and $b(1 - t) = (1 - t)b'$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+From the relations $d_0t = \pm d_n$ and $d_{i+1}t = -td_i$ one gets $t^jd_i = \pm d_{i-j}t^j$ for $j \le i$ and $t^{i+1+k}d_i = \pm d_{n-k}t^{i+k}$; in $Nb$ and $b'N$ the double sums over $(j, i)$ then correspond term by term under the bijection $(j, i) \mapsto (j, i - j)$ for $j \le i$, $(j, i) \mapsto (j - 1, n + 1 - j + i)$ for $i < j$. The second identity follows from the same relations: $t$ carries the faces of $b$ other than $d_0$ to those of $b't$, and $d_0$ to the last face.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1988_10.lean}{\texttt{Notebook1988\_10.\allowbreak{}lean}} proves \texttt{face\_rot\_zero}, \texttt{face\_rot\_succ}, \texttt{T\_pow\_dual\_le}, \texttt{T\_pow\_dual\_gt}, \texttt{one\_sub\_T\_b} and \texttt{b\_N}, in transposed form: on cochains, functions of sequences with values in an abelian group, where the operators act by precomposition; an identity of operators holds on all elementary tensors if and only if its transpose holds on all such functions, so the two forms are equivalent. Quillen's derivation from the cotensor exact sequence is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (Connes, 1985; Loday, \emph{Cyclic homology}); their derivation from a cotensor exact sequence was not located; the edition does not present the identities as new.}

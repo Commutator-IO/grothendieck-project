@@ -1,0 +1,21 @@
+\section[Notebook 1986-7: the Durfee identity]{Notebook 1986-7: $\prod_{i>0}(1 - q^i)^{-1} = \sum_s q^{s^2}/(q)_s^2$\protect\verifie{Notebook1986_7Durfee}}\label{sec:quillen-1986-7-durfee}
+
+\emph{Context.} On pages~55--56 of \carnet{1986}{7}, after Quillen's notes of a conversation with Graeme Segal, the Poincaré series of a conjectured decomposition of $H^*(BU)$ leads to the identity of the Durfee square, of which he records two proofs.
+
+\begin{encadre}
+\begin{theoreme}[after Quillen, notebook 1986-7, pp.~55--56]\label{thm:quillen-1986-7-durfee}
+Let $R$ be a commutative ring, $[n, s]_q$ the Gaussian binomial coefficients and $(q)_s = (1 - q)\cdots(1 - q^s)$. For all $m, n$,
+\[
+\sum_{s} q^{s^2}[m, s]_q\,[n, s]_q = [m + n, m]_q
+\]
+in $R[q]$. Consequently, in $R[[q]]$, for $N \le M$ the $N$-th coefficients of $1/(q)_M$ and of $\sum_{s\le M} q^{s^2}/(q)_s^2$ agree, and the number of partitions of $N$ is the $N$-th coefficient of $\sum_{s \le N} q^{s^2}/(q)_s^2$: that is, $\prod_{i>0}(1 - q^i)^{-1} = \sum_{s \ge 0} q^{s^2}/(q)_s^2$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+The finite identity (the Durfee square of a partition in an $m \times n$ box) follows by induction on $m + n$ from the two $q$-Pascal recursions: both sides satisfy $F(m + 1, n + 1) = F(m, n + 1) + q^{m+1}F(m + 1, n)$, the left one after a telescoping of the sum. From $[a + b, b]_q\,(q)_a(q)_b = (q)_{a+b}$, the power series $[a + s, s]_q$ agrees with $1/(q)_s$ below degree $a + 1$; take $m = n = M$. Finally $1/(q)_M$ is the generating function of the partitions with parts at most $M$, which below degree $M + 1$ are all partitions.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1986_7Durfee.lean}{\texttt{Notebook1986\_7Durfee.\allowbreak{}lean}} proves \texttt{qBinomial\_pascal'}, \texttt{durfee\_succ\_succ}, \texttt{sum\_durfee}, \texttt{qBinomial\_mul\_qfac}, \texttt{coeff\_inverse\_qfac} and \texttt{card\_partition}, with the $q$-binomials of the project's \texttt{Upstream/QBinomial} and mathlib's generating function of restricted partitions. The infinite product is handled degree by degree; neither the Jacobi triple product proof nor the cohomological conjecture is formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (the Durfee square; Hardy and Wright, ch.~XIX; the finite form is a case of the $q$-Vandermonde identity); the edition does not present it as new.}

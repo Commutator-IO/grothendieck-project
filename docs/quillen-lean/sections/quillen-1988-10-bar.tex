@@ -1,0 +1,17 @@
+\section[Notebook 1988-10: the contracting homotopy for T(V)]{Notebook 1988-10: $b'h + sp = 1$ for the tensor algebra\protect\verifie{Notebook1988_10Bar}}\label{sec:quillen-1988-10-bar}
+
+\emph{Context.} On pages~54--55 of \carnet{1988}{10} Quillen proves that the bimodules of noncommutative differentials of a tensor algebra are free, first through derivations, then by an explicit contracting homotopy.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1988-10, pp.~54--55]\label{thm:quillen-1988-10-bar}
+Let $R = T(V)$ over a commutative ring $k$, with $V$ free. Let $b' : R^{\otimes 4} \to R^{\otimes 3}$ be the bar differential, $p : R^{\otimes 3} \to R \otimes V \otimes R$ the bimodule map $p(x, v_1\cdots v_n, y) = \sum_i(xv_1\cdots v_{i-1}, v_i, v_{i+1}\cdots v_ny)$, and $s$, $h$ the bimodule maps with $s(1, v, 1) = (1, v, 1)$ and $h(1, v_1\cdots v_n, 1) = (1, v_1\cdots v_n, 1, 1) - \sum_i(v_1\cdots v_{i-1}, v_i, v_{i+1}\cdots v_n, 1)$. Then $pb' = 0$, $ps = 1$ and $b'h + sp = 1$; hence $R^{\otimes 4} \to R^{\otimes 3} \to R \otimes V \otimes R \to 0$ is exact.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+On a basis element $(x, w, y)$, the terms of $b'h$ coming from the sum telescope: $b'\bigl(\sum_i(xv_{<i}, v_i, v_{>i}, y)\bigr) = (xw, 1, y) - (x, w, y) + sp(x, w, y)$, by induction on the length of $w$; and $b'(x, w, 1, y) = (xw, 1, y)$. The identity $pb' = 0$ reduces to $p(x, yz, w) = p(x, y, zw) + p(xy, z, w)$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1988_10Bar.lean}{\texttt{Notebook1988\_10Bar.\allowbreak{}lean}} proves \texttt{pw\_append}, \texttt{p\_b'}, \texttt{p\_s}, \texttt{b'\_gw}, \texttt{b'\_h\_add\_s\_p}, \texttt{exact\_at\_middle} and \texttt{p\_surjective}. $V$ is free on a type of letters, so $R^{\otimes n}$ is the free module on $n$-tuples of words; the maps are defined on that basis, outer factors included. The first proof (through derivations) and the corollary for $R^{\otimes 3} \to R^{\otimes 2} \to R \otimes V$ are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (freeness of $\Omega^1$ of a tensor algebra; Cuntz and Quillen, 1995); the explicit homotopy as written was not located; the edition does not present it as new.}

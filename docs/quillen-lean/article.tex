@@ -55,7 +55,7 @@
 \maketitle
 
 \begin{abstract}
-\noindent Daniel Quillen's research notebooks, from 1968 to 2003, are online at the Clay Mathematics Institute. This document picks out one hundred precise statements in them, in general topology, linear algebra, group theory, representation theory, category theory, combinatorics, order theory, commutative algebra, analysis and the analysis of theta functions, and proves them. Each proof follows a proof checked in the Lean~4 proof assistant \cite{lean4}, with its mathlib library \cite{mathlib2020}, and is written to be read without Lean. For each statement, the document says where it comes from, what it means, how it is proved, what is not formalized, and what is known of its presence in the literature. All one hundred statements hold in the form proved; where the page, as transcribed, needs a hypothesis, a factor, a surjection in place of an isomorphism or a corrected formula, the section says so. Four of them come from Quillen's notes of lectures by other mathematicians, and are attributed accordingly. Several hold under weaker hypotheses than those of the page or of the expected proof, one fails for $p = 2$, as the page suggests, one needs $2$ to be cancellable (with a counterexample in characteristic~$2$), and most are classical but absent from mathlib; the summary table gives the verdict for each.
+\noindent Daniel Quillen's research notebooks, from 1968 to 2003, are online at the Clay Mathematics Institute. This document picks out one hundred and ten precise statements in them, in general topology, linear algebra, group theory, representation theory, category theory, combinatorics, order theory, commutative algebra, analysis and the analysis of theta functions, and proves them. Each proof follows a proof checked in the Lean~4 proof assistant \cite{lean4}, with its mathlib library \cite{mathlib2020}, and is written to be read without Lean. For each statement, the document says where it comes from, what it means, how it is proved, what is not formalized, and what is known of its presence in the literature. All one hundred and ten statements hold in the form proved; where the page, as transcribed, needs a hypothesis, a factor, a surjection in place of an isomorphism or a corrected formula, the section says so. Four of them come from Quillen's notes of lectures by other mathematicians, and are attributed accordingly. Several hold under weaker hypotheses than those of the page or of the expected proof, one fails for $p = 2$, as the page suggests, one needs $2$ to be cancellable (with a counterexample in characteristic~$2$), and most are classical but absent from mathlib; the summary table gives the verdict for each.
 \end{abstract}
 
 \tableofcontents
@@ -66,7 +66,7 @@
 
 \emph{The rule on rights.} The notebooks are protected by copyright. This document quotes almost nothing from them, a few words at most; it states each result in its own terms and refers to the page of the facsimile, which anyone can consult. The transcriptions made for this work remain private.
 
-\emph{The method.} The notebooks were read in three stages. First, the precise statements are located: lemmas, propositions, identities, questions asked. Each statement is then the object of a literature search. Most of what one reads in the notebooks is found again in Quillen's published papers, on homotopical algebra, group cohomology and algebraic $K$-theory, cobordism, superconnections, determinants and cyclic cohomology; those statements are not taken up here. Finally, only the precise statements that the search did not find in print, or whose printed form does not match the page, are formalized. Four statements of this document are in that case. The others, in notebooks 1968-1, 1968-13 (restriction of representations), 1968-15 and~16, 1969-1, 1969-4, 1970-1, 1970-5, 1970-11, 1970-14, 1970-15, 1971-1, 1971-2, 1971-3, 1971-4, 1971-8, 1971-10, 1971-12 (cosets of ideals, marks, Kaloujnine's theorem and its corollary), 1972-1, 1972-6, 1972-9, 1972-11 (transverse subobjects), 1973-6, 1973-8, 1973-12, 1974-2, 1974-3, 1974-16, 1975-10, 1975-21, 1982-2, 1982-3, 1982-5, 1982-6, 1982-8, 1982-12, 1983-4, 1984-6, 1984-13, 1984-15, 1984-16, 1985-8, 1986-2, 1986-5, 1986-7, 1987-5, 1987-11, 1987-12, 1987-13, 1988-1 (the cocycle), 1988-2, 1988-3, 1988-4, 1988-5, 1988-7, 1988-8, 1988-9, 1989-1, 1989-2, 1989-3, 1989-4, 1990-2, 1990-3, 1990-4, 1990-5 and 1991-4, and in the lecture and review notes of 1983, are classical and found in the literature; they are formalized because the pages rely on them and mathlib does not have them. The red lozenge \textcolor{piste}{\ensuremath{\blacklozenge}}, in the title of a section, marks the four notebooks in which a proved statement is a candidate lead: the search did not find it in print in this form, which does not establish it as new.
+\emph{The method.} The notebooks were read in three stages. First, the precise statements are located: lemmas, propositions, identities, questions asked. Each statement is then the object of a literature search. Most of what one reads in the notebooks is found again in Quillen's published papers, on homotopical algebra, group cohomology and algebraic $K$-theory, cobordism, superconnections, determinants and cyclic cohomology; those statements are not taken up here. Finally, only the precise statements that the search did not find in print, or whose printed form does not match the page, are formalized. Four statements of this document are in that case. The others, in notebooks 1968-1, 1968-13 (restriction of representations), 1968-15 and~16, 1969-1, 1969-4, 1970-1, 1970-5, 1970-11, 1970-14, 1970-15, 1971-1, 1971-2, 1971-3, 1971-4, 1971-8, 1971-10, 1971-12 (cosets of ideals, marks, Kaloujnine's theorem and its corollary), 1972-1, 1972-6, 1972-9, 1972-11 (transverse subobjects), 1973-6, 1973-8, 1973-12, 1974-2, 1974-3, 1974-16, 1974-17, 1975-10, 1975-21, 1982-2, 1982-3, 1982-5, 1982-6, 1982-8, 1982-12, 1983-4, 1984-6, 1984-13, 1984-15, 1984-16, 1985-8, 1986-2, 1986-5, 1986-7, 1987-5, 1987-11, 1987-12, 1987-13, 1987-14, 1988-1 (the cocycle), 1988-2, 1988-3, 1988-4, 1988-5, 1988-7, 1988-8, 1988-9, 1988-10, 1989-1, 1989-2, 1989-3, 1989-4, 1989-5, 1990-2, 1990-3, 1990-4, 1990-5 and 1991-4, and in the lecture and review notes of 1983, are classical and found in the literature; they are formalized because the pages rely on them and mathlib does not have them. The red lozenge \textcolor{piste}{\ensuremath{\blacklozenge}}, in the title of a section, marks the four notebooks in which a proved statement is a candidate lead: the search did not find it in print in this form, which does not establish it as new.
 
 \emph{What Lean guarantees.} Each section cites, in a footnote to its title, the Lean file that contains its proofs, in the \texttt{lean/Quillen/} library of the project, one file per notebook. Lean mechanically checks that a statement holds under the hypotheses as written. It does not guarantee that the statement faithfully renders the page, nor that it is new. A statement that the page formulates carries the name of Quillen, the notebook and the page; when the proof establishes more, we say \q{after}; a form that the edition adds (a generalization, an answer to a question, an intermediate lemma) is called the edition's statement.
 
@@ -126,6 +126,7 @@ Notebook & Statement & Verdict & Lean file & \S\\
 1973-12, p.~48 & For $I^2 = 0$, $\ker(GL_m(A) \to GL_m(A/I)) \cong (M_m(I), +)$, and units lift & classical; any ring, square-zero two-sided ideal & \href{\leanblobmain/Notebook1973_12.lean}{\texttt{Notebook1973\_12}} & \ref{sec:quillen-1973-12}\\
 1974-3, p.~5 & A unique $(f', g')$ with $fg' - f'g = 1$ and $\deg f' < \deg f$ & elementary; struck clause $\deg f' = n - 1$ false & \href{\leanblobmain/Notebook1974_3.lean}{\texttt{Notebook1974\_3}} & \ref{sec:quillen-1974-3}\\
 1974-16, pp.~5--6 & The largest perfect subgroup; the unique perfect subgroup over a perfect $N$ in a central extension & classical; uniqueness without surjectivity & \href{\leanblobmain/Notebook1974_16.lean}{\texttt{Notebook1974\_16}} & \ref{sec:quillen-1974-16}\\
+1974-17, p.~3 & $(\alpha, \beta) = (\alpha\sigma\alpha^{-1}\sigma^{-1}, \beta\tau\beta^{-1}\tau^{-1})$ in $GL_{3n}(A)$, $\sigma, \tau$ even block permutations & classical (Whitehead lemma); any ring & \href{\leanblobmain/Notebook1974_17.lean}{\texttt{Notebook1974\_17}} & \ref{sec:quillen-1974-17}\\
 1975-21, pp.~41--48 & A bounded lattice homomorphism of lower sets is the preimage along a unique monotone map & classical (Birkhoff duality on morphisms); mathlib TODO; only the source finite & \href{\leanblobmain/Notebook1975_21.lean}{\texttt{Notebook1975\_21}} & \ref{sec:quillen-1975-21}\\
 1975-21, pp.~37--38 & Complements $V_j$ of $W(\{<j\})$ in $W(\{\le j\})$ split $W$: $W(Z) = \sum_{j\in Z}V_j$, independent & elementary; any modular lattice & \href{\leanblobmain/Notebook1975_21Filtration.lean}{\texttt{Notebook1975\_21Filtration}} & \ref{sec:quillen-1975-21-filtration}\\
 1982-3, p.~18 & $\prod(1 + a_n)$ converges iff $\sum a_n$ does, $a_n \ge 0$ & classical; mathlib has one direction & \href{\leanblobmain/Notebook1982_3.lean}{\texttt{Notebook1982\_3}} & \ref{sec:quillen-1982-3}\\
@@ -150,10 +151,14 @@ Notebook & Statement & Verdict & Lean file & \S\\
 1986-7, pp.~25, 50 & Idempotents with $\sum e_i = 1$, $e_te_s = 0$ for $t < s$ are orthogonal; antisymmetrisation $= \det(u_i^{a_j})$ & elementary; alternants & \href{\leanblobmain/Notebook1986_7.lean}{\texttt{Notebook1986\_7}} & \ref{sec:quillen-1986-7}\\
 1986-7, pp.~28--29, 45 & $(-1)^nb_n$ is a Toeplitz--Hessenberg determinant for $(\sum c_iT^i)^{-1} = \sum b_iT^i$; $t\,c_t'/c_t = \sum(-1)^{d-1}p_dt^d$ & classical (Wronski; Newton); any commutative ring & \href{\leanblobmain/Notebook1986_7Series.lean}{\texttt{Notebook1986\_7Series}} & \ref{sec:quillen-1986-7-series}\\
 1986-7, p.~56 & $\prod_{i=1}^s(1 - q^i)\sum_{0<i_1<\dots<i_s}q^{i_1+\dots+i_s} = q^{s(s+1)/2}$ & classical (Euler); any commutative ring & \href{\leanblobmain/Notebook1986_7Strict.lean}{\texttt{Notebook1986\_7Strict}} & \ref{sec:quillen-1986-7-strict}\\
+1986-7, pp.~55--56 & $\sum_sq^{s^2}[m, s]_q[n, s]_q = [m + n, m]_q$; $\prod_{i>0}(1 - q^i)^{-1} = \sum_sq^{s^2}/(q)_s^2$ & classical (Durfee square); any commutative ring & \href{\leanblobmain/Notebook1986_7Durfee.lean}{\texttt{Notebook1986\_7Durfee}} & \ref{sec:quillen-1986-7-durfee}\\
 1987-5, p.~64 & $\mathbf Z[1/p] + \mathbf Z_p = \mathbf Q_p$, $\mathbf Z[1/p] \cap \mathbf Z_p = \mathbf Z$ & classical, elementary & \href{\leanblobmain/Notebook1987_5.lean}{\texttt{Notebook1987\_5}} & \ref{sec:quillen-1987-5}\\
 1987-11, p.~77 & $s = \sum_{k<N}\binom{2k}k4^{-k}\alpha^k$ satisfies $s^2(1 - \alpha) = 1$ for $\alpha^N = 0$; $F = us$ an involution & classical (binomial series); any $\mathbf Q$-algebra & \href{\leanblobmain/Notebook1987_11.lean}{\texttt{Notebook1987\_11}} & \ref{sec:quillen-1987-11}\\
 1987-12, p.~81; 1990-5, p.~63 & $\operatorname{Ker}((A/I)\otimes J \to A/I) \cong (I \cap J)/IJ$; for $J = I$, $I/I^2$ & classical; the identification with $\operatorname{Tor}_1$ not formalised & \href{\leanblobmain/Notebook1987_12.lean}{\texttt{Notebook1987\_12}} & \ref{sec:quillen-1987-12}\\
 1987-13, pp.~41--42 & $\operatorname{Ker}N = \operatorname{Im}(1 - \sigma)$, $\operatorname{Im}N = \operatorname{Ker}(1 - \sigma)$ for $\sigma^n = 1$, $n$ invertible & classical (averaging) & \href{\leanblobmain/Notebook1987_13.lean}{\texttt{Notebook1987\_13}} & \ref{sec:quillen-1987-13}\\
+1987-13, pp.~72--74 & $b(\varphi \cup \psi) = b\varphi \cup \psi + (-1)^p\varphi \cup b\psi$; $X \cup X = -\frac12 b(X^2)$; first-order deformations & classical (Gerstenhaber); no linearity needed & \href{\leanblobmain/Notebook1987_13Cup.lean}{\texttt{Notebook1987\_13Cup}} & \ref{sec:quillen-1987-13-cup}\\
+1987-14, p.~49 & $\dim\operatorname{Ker}(\iota_v : \Lambda^qK^k \to \Lambda^{q-1}K^k) = \binom{k-1}{q}$ for $v = (1, \dots, 1)$ & classical (Koszul); any nonzero form & \href{\leanblobmain/Notebook1987_14.lean}{\texttt{Notebook1987\_14}} & \ref{sec:quillen-1987-14}\\
+1987-14, p.~45 & The cyclic embeddings $\mathbf Z/(k-1) \to \mathbf Z/k$ are $k(k-1)$, a $\mathbf Z/k \times \mathbf Z/(k-1)$-torsor & elementary; $k \ge 2$ & \href{\leanblobmain/Notebook1987_14Cyclic.lean}{\texttt{Notebook1987\_14Cyclic}} & \ref{sec:quillen-1987-14-cyclic}\\
 1988-1, pp.~71--72 & $\mathrm{Hom}_k(M, A)$ modulo commutators is the dual of $M$, through the trace & partly found (Lipman); for any $k$-algebra, not only commutative & \href{\leanblobmain/Notebook1988_1.lean}{\texttt{Notebook1988\_1}} & \ref{sec:quillen-1988-1}\\
 1988-1, pp.~73--77 & $\operatorname{tr}(x[y,\rho])$ is a derivation in $y$ and depends only on $\rho$ modulo $A$-linear maps & elementary; matrices & \href{\leanblobmain/Notebook1988_1Cocycle.lean}{\texttt{Notebook1988\_1Cocycle}} & \ref{sec:quillen-1988-1-cocycle}\\
 1988-2, pp.~45, 62; 1988-4, p.~6 & The GNS product on $A \otimes B \otimes A$ is associative; a surjective $\partial$ with $\partial(x)y = x\partial(y)$ is injective & elementary; any linear $\rho$ & \href{\leanblobmain/Notebook1988_2.lean}{\texttt{Notebook1988\_2}} & \ref{sec:quillen-1988-2}\\
@@ -163,14 +168,19 @@ Notebook & Statement & Verdict & Lean file & \S\\
 1988-7, pp.~30, 33 & The index idempotent $(p; x^n)(\tilde q, x^n)$ for $qp = 1 - x$, $pq = 1 - y$; $(F - \varepsilon)^2$ central in $\langle F, \varepsilon\rangle$ & classical (Milnor; Connes); any ring & \href{\leanblobmain/Notebook1988_7.lean}{\texttt{Notebook1988\_7}} & \ref{sec:quillen-1988-7}\\
 1988-8, pp.~10, 16, 21 & $(k+1)\operatorname{tr}P_{k+1,l} = (k+l+1)\operatorname{tr}(AP_{k,l})$ for the word sums; $2\tau(t^n\varepsilon) = 0$; a gauge conjugation & classical (cyclicity); any commutative ring & \href{\leanblobmain/Notebook1988_8.lean}{\texttt{Notebook1988\_8}} & \ref{sec:quillen-1988-8}\\
 1988-9, p.~72; 1984-13, pp.~3--4; 1988-5, pp.~53, 85; 1988-7, p.~13; 1989-4, p.~56 & $\int_0^1t^a(1 - t)^bdt = a!\,b!/(a + b + 1)!$ and its consequences; $\int_0^\infty e^{-t^2}t^{2m+1}dt = m!/2$; the simplex integral & classical (Euler); not in mathlib in this real form & \href{\leanblobmain/Notebook1988_9.lean}{\texttt{Notebook1988\_9}} & \ref{sec:quillen-1988-9}\\
+1988-9, pp.~95--97 & Chern--Simons values $(-1)^nn!/(2n)!$; $n!\,4^n \le (2n + 1)(2n)!/n!$, $(2n)!/n! \le n!\,4^n$ & classical; the page's $n!\,2^n$ corrected & \href{\leanblobmain/Notebook1988_9Growth.lean}{\texttt{Notebook1988\_9Growth}} & \ref{sec:quillen-1988-9-growth}\\
+1988-10, pp.~54--55 & $pb' = 0$, $ps = 1$, $b'h + sp = 1$ for $R = T(V)$: $R^{\otimes 4} \to R^{\otimes 3} \to R \otimes V \otimes R \to 0$ exact & classical; explicit homotopy not located & \href{\leanblobmain/Notebook1988_10Bar.lean}{\texttt{Notebook1988\_10Bar}} & \ref{sec:quillen-1988-10-bar}\\
+1988-10, pp.~69--70 & $Nb = b'N$ and $b(1 - t) = (1 - t)b'$ & classical (Connes); transposed form on cochains & \href{\leanblobmain/Notebook1988_10.lean}{\texttt{Notebook1988\_10}} & \ref{sec:quillen-1988-10}\\
 1989-1, pp.~9, 72 & The idempotent-lifting polynomial: $(x^2 - x)^{n+1} \mid f^2 - f$; $\sum_{j<n}x^{2j+1}$ a unit when $x^{2n-1} = 1$ & classical; algebraic proof of the second & \href{\leanblobmain/Notebook1989_1.lean}{\texttt{Notebook1989\_1}} & \ref{sec:quillen-1989-1}\\
 1989-2, pp.~76--80 & The perturbation lemma: $d_M + pXi$, $X = (1 - \delta h)^{-1}\delta$, squares to zero; new chain maps and homotopy & classical (Brown; Gugenheim); side conditions only for $p'i' = 1$ & \href{\leanblobmain/Notebook1989_2.lean}{\texttt{Notebook1989\_2}} & \ref{sec:quillen-1989-2}\\
 1989-2, pp.~94--95 & $\Phi(x, g) = ((g_1\cdots g_n)^{-1}x, g)$ is a bijection onto the cyclic bar construction commuting with the faces & classical (Waldhausen) & \href{\leanblobmain/Notebook1989_2Simplicial.lean}{\texttt{Notebook1989\_2Simplicial}} & \ref{sec:quillen-1989-2-simplicial}\\
+1989-2, pp.~28, 30, 84 & $u_z(a)$ conjugate to $\operatorname{diag}(a, 0)$; Whitehead's identity; composition of triples $vu = 1 + [d, h]$ & classical; short identities & \href{\leanblobmain/Notebook1989_2Whitehead.lean}{\texttt{Notebook1989\_2Whitehead}} & \ref{sec:quillen-1989-2-whitehead}\\
 1989-3, pp.~99--100 & Powers of the block matrix $(A\ B;\ C\ 0)$ by $P_{n+2} = AP_{n+1} + BCP_n$; the involution $(z\ b;\ c\ {-z})$ & elementary; any ring & \href{\leanblobmain/Notebook1989_3.lean}{\texttt{Notebook1989\_3}} & \ref{sec:quillen-1989-3}\\
 1989-4, pp.~14, 18, 34, 38 & $(a + e)^{n+1} = a^{n+1} + \sum a^{n-k}ea^k$ when $exe = 0$; graded commutators; the modular operator & elementary & \href{\leanblobmain/Notebook1989_4.lean}{\texttt{Notebook1989\_4}} & \ref{sec:quillen-1989-4}\\
 1989-4, p.~28 & $x \mapsto \operatorname{tr}(Tx)$ is faithful on $M_n(K)$ iff $T$ is invertible & classical & \href{\leanblobmain/Notebook1989_4Faithful.lean}{\texttt{Notebook1989\_4Faithful}} & \ref{sec:quillen-1989-4-faithful}\\
 1989-4, pp.~53--54 & $a^{*(n+2)} = a^{n+2} + \sum_{i+j+k=n}a^i(Xa)a^j(Ya)a^k$ for $a_1 * a_2 = a_1a_2 + Xa_1\,Ya_2$ & elementary; the product is associative & \href{\leanblobmain/Notebook1989_4Square.lean}{\texttt{Notebook1989\_4Square}} & \ref{sec:quillen-1989-4-square}\\
 1989-4, pp.~70--71 & $(bs + sb)\psi = \psi - \psi^\lambda$ on Hochschild cochains & classical (Connes); signs of the box of p.~70 corrected & \href{\leanblobmain/Notebook1989_4Cochain.lean}{\texttt{Notebook1989\_4Cochain}} & \ref{sec:quillen-1989-4-cochain}\\
+1989-5, pp.~95, 107, 124 & Cuntz's polynomial: $(1 - \lambda)W(\lambda) = 1 - N(\lambda)/(n + 1)$; $1 + \lambda$ a unit; $u - v$ for two homomorphisms; Cayley & classical or elementary; noncommutative rings & \href{\leanblobmain/Notebook1989_5.lean}{\texttt{Notebook1989\_5}} & \ref{sec:quillen-1989-5}\\
 1990-2, pp.~2--3, 99 & $(\kappa - cN)^m = 1$ iff $mc = 1$ when $\kappa^m = 1 + N$; $(1 - \sigma)\sum j\sigma^{n-1-j} = n - \sum\sigma^i$ & elementary; any $\mathbf Q$-algebra & \href{\leanblobmain/Notebook1990_2.lean}{\texttt{Notebook1990\_2}} & \ref{sec:quillen-1990-2}\\
 1990-2, p.~14 & $P_{km} = P_m$, $Q_{km} = Q_m$ for the Green operator of $1 - \kappa$, $\kappa^m = 1$ & elementary & \href{\leanblobmain/Notebook1990_2Green.lean}{\texttt{Notebook1990\_2Green}} & \ref{sec:quillen-1990-2-green}\\
 1990-2, pp.~64--67, 71 & For a split extension, $S = kdh$: $iS = [d, h]$, $[L, S] = [d, kLh]$, and lifts $J = Lh - ig$ from $LS = [d, g]$ & classical; ungraded commutators & \href{\leanblobmain/Notebook1990_2Split.lean}{\texttt{Notebook1990\_2Split}} & \ref{sec:quillen-1990-2-split}\\
@@ -230,6 +240,7 @@ Notebook & Statement & Verdict & Lean file & \S\\
 \input{sections/quillen-1973-12}
 \input{sections/quillen-1974-3}
 \input{sections/quillen-1974-16}
+\input{sections/quillen-1974-17}
 \input{sections/quillen-1975-21}
 \input{sections/quillen-1975-21-filtration}
 \input{sections/quillen-1982-3}
@@ -254,10 +265,14 @@ Notebook & Statement & Verdict & Lean file & \S\\
 \input{sections/quillen-1986-7}
 \input{sections/quillen-1986-7-series}
 \input{sections/quillen-1986-7-strict}
+\input{sections/quillen-1986-7-durfee}
 \input{sections/quillen-1987-5}
 \input{sections/quillen-1987-11}
 \input{sections/quillen-1987-12}
 \input{sections/quillen-1987-13}
+\input{sections/quillen-1987-13-cup}
+\input{sections/quillen-1987-14}
+\input{sections/quillen-1987-14-cyclic}
 \input{sections/quillen-1988-1}
 \input{sections/quillen-1988-1-cocycle}
 \input{sections/quillen-1988-2}
@@ -267,14 +282,19 @@ Notebook & Statement & Verdict & Lean file & \S\\
 \input{sections/quillen-1988-7}
 \input{sections/quillen-1988-8}
 \input{sections/quillen-1988-9}
+\input{sections/quillen-1988-9-growth}
+\input{sections/quillen-1988-10-bar}
+\input{sections/quillen-1988-10}
 \input{sections/quillen-1989-1}
 \input{sections/quillen-1989-2}
 \input{sections/quillen-1989-2-simplicial}
+\input{sections/quillen-1989-2-whitehead}
 \input{sections/quillen-1989-3}
 \input{sections/quillen-1989-4}
 \input{sections/quillen-1989-4-faithful}
 \input{sections/quillen-1989-4-square}
 \input{sections/quillen-1989-4-cochain}
+\input{sections/quillen-1989-5}
 \input{sections/quillen-1990-2}
 \input{sections/quillen-1990-2-green}
 \input{sections/quillen-1990-2-split}

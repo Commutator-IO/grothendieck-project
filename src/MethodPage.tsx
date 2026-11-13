@@ -65,7 +65,7 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
     id: 'article-quillen-lean',
     title: "Daniel Quillen's Notebooks: Statements Proved in Lean",
     lang: 'English',
-    what: "One hundred statements from Quillen's research notebooks (Clay Mathematics Institute), from general topology and linear algebra to representation theory, commutative algebra and theta functions, proved in Lean and written out without it. All one hundred hold in the form proved; several under weaker hypotheses than the page's, one fails for p = 2, one needs 2 to be cancellable, and four come from his notes of lectures. The notebooks are in copyright: everything is stated in the paper's own words, with notebook and page.",
+    what: "One hundred and ten statements from Quillen's research notebooks (Clay Mathematics Institute), from general topology and linear algebra to representation theory, commutative algebra and theta functions, proved in Lean and written out without it. All one hundred and ten hold in the form proved; several under weaker hypotheses than the page's, one fails for p = 2, one needs 2 to be cancellable, and four come from his notes of lectures. The notebooks are in copyright: everything is stated in the paper's own words, with notebook and page.",
     pdf: '/article/quillen-lean.pdf',
     src: 'docs/quillen-lean/article.tex',
   },
