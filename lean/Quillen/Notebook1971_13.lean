@@ -50,7 +50,7 @@ theorem le_sup_map_of_generates {z : Module.End A E} {L' E' : Submodule A E}
     refine map_mono ?_
     -- `z ^ k` maps `L'` into `E'`, since `L' ⊂ E'` and `E'` is `z`-stable.
     induction k with
-    | zero => rw [pow_zero, Module.End.one_eq_id, map_id]; exact hL'
+    | zero => simpa [Module.End.one_eq_id] using hL'
     | succ j ih =>
       rw [pow_succ', Module.End.mul_eq_comp, map_comp]
       exact (map_mono ih).trans hE'
@@ -71,10 +71,7 @@ theorem mem_sup_of_smul_mem_sup {z : Module.End A E} {L E' : Submodule A E}
     rw [map_sub, ← hze, ← hy']
     convert L.add_mem hl (mem_inf.1 hl').1 using 1
     abel
-  have hmem : e - e₁ ∈ L := hL hz
-  have : e = (e - e₁) + e₁ := by abel
-  rw [this]
-  exact add_mem_sup hmem he₁
+  simpa using add_mem_sup (hL hz) he₁
 
 /-- **Quillen, notebook 1971-13, p. 13**, in the quotient: the image `L''` of `L` in `E ⧸ E'`
 satisfies `z⁻¹L'' ⊂ L''` for the endomorphism of `E ⧸ E'` induced by `z`. -/

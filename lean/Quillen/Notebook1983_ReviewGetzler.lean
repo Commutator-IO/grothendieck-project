@@ -66,8 +66,7 @@ theorem one_sub_cayleySum_eq_unit : 1 - cayleySum X Y = ↑(v * w⁻¹ * u) := b
 
 omit hv hw in
 theorem inv_mul_one_add_comm : (↑u⁻¹ : R) * (1 + X) = (1 + X) * ↑u⁻¹ := by
-  have h : 1 + X = 1 + 1 - ↑u := by rw [hu]; abel
-  rw [h]
+  rw [show 1 + X = 1 + 1 - ↑u by rw [hu]; abel]
   simp [mul_sub, sub_mul, mul_add, add_mul]
 
 theorem cayley_mul_cayley_units :
@@ -85,21 +84,16 @@ end units
 
 /-- If `1 - X`, `1 - Y` and `1 + X Y` are units, so is `1 - Z`. -/
 theorem isUnit_one_sub_cayleySum {X Y : R} (hX : IsUnit (1 - X)) (hY : IsUnit (1 - Y))
-    (hXY : IsUnit (1 + X * Y)) : IsUnit (1 - cayleySum X Y) := by
-  obtain ⟨u, hu⟩ := hX
-  obtain ⟨v, hv⟩ := hY
-  obtain ⟨w, hw⟩ := hXY
-  rw [one_sub_cayleySum_eq_unit hu hv hw]
-  exact Units.isUnit _
+    (hXY : IsUnit (1 + X * Y)) : IsUnit (1 - cayleySum X Y) :=
+  let ⟨_, hu⟩ := hX; let ⟨_, hv⟩ := hY; let ⟨_, hw⟩ := hXY
+  one_sub_cayleySum_eq_unit hu hv hw ▸ Units.isUnit _
 
 /-- **Quillen, 1983 « Review Getzler material », p. 7.** In a ring where `1 - X`, `1 - Y` and
 `1 + X Y` are invertible, the product of the Cayley transforms of `X` and `Y` is the Cayley
 transform of `Z = (1 - X)⁻¹ (X + Y) (1 + X Y)⁻¹ (1 - X)`. -/
 theorem cayley_mul_cayley {X Y : R} (hX : IsUnit (1 - X)) (hY : IsUnit (1 - Y))
-    (hXY : IsUnit (1 + X * Y)) : cayley X * cayley Y = cayley (cayleySum X Y) := by
-  obtain ⟨u, hu⟩ := hX
-  obtain ⟨v, hv⟩ := hY
-  obtain ⟨w, hw⟩ := hXY
-  exact cayley_mul_cayley_units hu hv hw
+    (hXY : IsUnit (1 + X * Y)) : cayley X * cayley Y = cayley (cayleySum X Y) :=
+  let ⟨_, hu⟩ := hX; let ⟨_, hv⟩ := hY; let ⟨_, hw⟩ := hXY
+  cayley_mul_cayley_units hu hv hw
 
 end Quillen.Notebook1983_ReviewGetzler

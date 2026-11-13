@@ -81,8 +81,7 @@ theorem comp_spec {u v h u' v' h' : A} (t : IsTriple d u v h) (t' : IsTriple d u
     noncomm_ring
 
 /-- The identity triple `(1, 1, 0)`. -/
-theorem id_spec : IsTriple d 1 1 0 := by
-  refine ⟨?_, ?_, ?_⟩ <;> simp
+theorem id_spec : IsTriple d 1 1 0 := by simp [IsTriple]
 
 /-- **Associativity** (p. 84): `(h + vh'u) + (vv')h''(u'u) = h + v(h' + v'h''u')u`. -/
 theorem comp_assoc (u v h u' v' h' h'' : A) :

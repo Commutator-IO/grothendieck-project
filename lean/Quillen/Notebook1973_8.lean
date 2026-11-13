@@ -38,10 +38,7 @@ theorem coeff_chi (n : ℕ) : coeff n (chi : R⟦X⟧) = if ∃ k, n = 2 ^ k the
 theorem coeff_chi_sq [CharP R 2] (n : ℕ) :
     coeff n ((chi : R⟦X⟧) ^ 2) = if 2 ∣ n then coeff (n / 2) (chi : R⟦X⟧) else 0 := by
   rw [← map_frobenius_expand 2 two_ne_zero, coeff_map, coeff_expand]
-  split_ifs with h
-  · rw [coeff_chi]
-    split_ifs <;> simp [frobenius]
-  · simp
+  split_ifs with h <;> simp [coeff_chi, frobenius]
 
 /-- **Quillen, notebook 1973-8, p. 62**: `χ + χ² = t` in characteristic `2`. -/
 theorem chi_add_chi_sq [CharP R 2] : (chi : R⟦X⟧) + chi ^ 2 = X := by
@@ -53,22 +50,16 @@ theorem chi_add_chi_sq [CharP R 2] : (chi : R⟦X⟧) + chi ^ 2 = X := by
     simp
   rw [ite_eq_right h1]
   by_cases hp : ∃ k, n = 2 ^ k
-  · obtain ⟨k, rfl⟩ := hp
-    obtain ⟨j, rfl⟩ : ∃ j, k = j + 1 := ⟨k - 1, by
-      rcases k with _ | k
-      · simp at h1
-      · simp⟩
+  · obtain ⟨_ | j, rfl⟩ := hp
+    · simp at h1
     rw [ite_eq_left ⟨j + 1, rfl⟩, ite_eq_left (dvd_pow_self 2 (by omega)), coeff_chi,
       ite_eq_left ⟨j, by rw [pow_succ, Nat.mul_div_cancel _ (by norm_num)]⟩]
-    have : (2 : R) = 0 := CharP.cast_eq_zero R 2
-    rw [← one_add_one_eq_two] at this
-    exact this
+    exact CharTwo.add_self_eq_zero 1
   · rw [ite_eq_right hp]
     split_ifs with h2
-    · rw [coeff_chi, ite_eq_right]
-      · simp
-      rintro ⟨j, hj⟩
-      exact hp ⟨j + 1, by rw [pow_succ, ← hj, Nat.div_mul_cancel h2]⟩
+    · rw [coeff_chi, ite_eq_right fun ⟨j, hj⟩ => hp ⟨j + 1, by
+        rw [pow_succ, ← hj, Nat.div_mul_cancel h2]⟩]
+      simp
     · simp
 
 /-- Uniqueness: a series `f` without constant term with `f + f² = t` is `χ`. The argument:
@@ -76,13 +67,11 @@ theorem chi_add_chi_sq [CharP R 2] : (chi : R⟦X⟧) + chi ^ 2 = X := by
 theorem eq_of_add_sq_eq {f g : R⟦X⟧} (hf : constantCoeff f = 0) (hg : constantCoeff g = 0)
     (h : f + f ^ 2 = g + g ^ 2) : f = g := by
   have hu : IsUnit (1 + f + g) := isUnit_iff_constantCoeff.mpr (by simp [hf, hg])
-  have : (f - g) * (1 + f + g) = 0 := by linear_combination h
-  exact sub_eq_zero.mp ((hu.mul_left_eq_zero).mp this)
+  exact sub_eq_zero.mp (hu.mul_left_eq_zero.mp (by linear_combination h))
 
 theorem constantCoeff_chi : constantCoeff (chi : R⟦X⟧) = 0 := by
-  rw [← coeff_zero_eq_constantCoeff_apply, coeff_chi, ite_eq_right]
-  rintro ⟨k, hk⟩
-  exact absurd hk.symm (pow_ne_zero k two_ne_zero)
+  rw [← coeff_zero_eq_constantCoeff_apply, coeff_chi,
+    ite_eq_right fun ⟨k, hk⟩ => pow_ne_zero k two_ne_zero hk.symm]
 
 theorem eq_chi_of_add_sq [CharP R 2] {f : R⟦X⟧} (hf : constantCoeff f = 0)
     (h : f + f ^ 2 = X) : f = chi :=

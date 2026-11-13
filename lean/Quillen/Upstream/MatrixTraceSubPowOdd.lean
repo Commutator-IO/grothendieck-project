@@ -28,26 +28,21 @@ variable {R : Type*} [Ring R] {P Q : R}
 `P - P Q P`. -/
 theorem sub_sq_commute_left (hP : IsIdempotentElem P) (hQ : IsIdempotentElem Q) :
     Commute ((P - Q) ^ 2) P := by
-  have hP' : P * P = P := hP
-  have hQ' : Q * Q = Q := hQ
   unfold Commute SemiconjBy
-  simp only [sq, sub_mul, mul_sub, mul_assoc, hP', hQ']
-  simp only [← mul_assoc, hP']
+  simp only [sq, sub_mul, mul_sub, mul_assoc, hP.eq, hQ.eq]
+  simp only [← mul_assoc, hP.eq]
   abel
 
 /-- `(P - Q)²` commutes with `Q` when `P` and `Q` are idempotent. -/
 theorem sub_sq_commute_right (hP : IsIdempotentElem P) (hQ : IsIdempotentElem Q) :
     Commute ((P - Q) ^ 2) Q := by
-  have h := sub_sq_commute_left hQ hP
-  rwa [← neg_sub, neg_sq] at h
+  simpa only [← neg_sub P Q, neg_sq] using sub_sq_commute_left hQ hP
 
 /-- `(P - Q) (P - Q)² = (P - Q) - (P Q P - Q P Q)` when `P` and `Q` are idempotent. -/
 theorem sub_mul_sub_sq (hP : IsIdempotentElem P) (hQ : IsIdempotentElem Q) :
     (P - Q) * (P - Q) ^ 2 = (P - Q) - (P * Q * P - Q * P * Q) := by
-  have hP' : P * P = P := hP
-  have hQ' : Q * Q = Q := hQ
-  simp only [sq, sub_mul, mul_sub, mul_assoc, hP', hQ']
-  simp only [← mul_assoc, hP', hQ']
+  simp only [sq, sub_mul, mul_sub, mul_assoc, hP.eq, hQ.eq]
+  simp only [← mul_assoc, hP.eq, hQ.eq]
   abel
 
 end IsIdempotentElem
@@ -61,14 +56,12 @@ equal `tr (D P Q)`, by cyclicity of the trace. -/
 theorem trace_mul_mul_mul_eq_of_isIdempotentElem {P Q D : Matrix n n R}
     (hP : IsIdempotentElem P) (hQ : IsIdempotentElem Q) (hDP : Commute D P)
     (hDQ : Commute D Q) : trace (D * P * Q * P) = trace (D * Q * P * Q) := by
-  have hP' : P * P = P := hP
-  have hQ' : Q * Q = Q := hQ
   have e1 : trace (D * P * Q * P) = trace (D * P * Q) := by
     rw [trace_mul_comm, ← Matrix.mul_assoc, ← Matrix.mul_assoc, ← hDP.eq, Matrix.mul_assoc D,
-      hP']
+      hP.eq]
   have e2 : trace (D * Q * P * Q) = trace (D * Q * P) := by
     rw [trace_mul_comm, ← Matrix.mul_assoc, ← Matrix.mul_assoc, ← hDQ.eq, Matrix.mul_assoc D,
-      hQ']
+      hQ.eq]
   have e3 : trace (D * Q * P) = trace (D * P * Q) := by
     rw [trace_mul_comm, ← Matrix.mul_assoc, ← hDP.eq]
   rw [e1, e2, e3]
@@ -80,8 +73,8 @@ power of `P - Q` is `tr P - tr Q`. No hypothesis on the characteristic. -/
 theorem trace_sub_pow_odd_of_isIdempotentElem {P Q : Matrix n n R} (hP : IsIdempotentElem P)
     (hQ : IsIdempotentElem Q) (k : ℕ) :
     trace ((P - Q) ^ (2 * k + 1)) = trace P - trace Q := by
-  have hpow : ∀ k : ℕ, (P - Q) ^ (2 * k + 1) = ((P - Q) ^ 2) ^ k * (P - Q) := by
-    intro k; rw [pow_succ, pow_mul]
+  have hpow : ∀ k : ℕ, (P - Q) ^ (2 * k + 1) = ((P - Q) ^ 2) ^ k * (P - Q) := fun k => by
+    rw [pow_succ, pow_mul]
   induction k with
   | zero => simp [trace_sub]
   | succ k ih =>

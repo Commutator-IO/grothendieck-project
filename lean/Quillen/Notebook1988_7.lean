@@ -28,15 +28,13 @@ open Matrix
 variable {R : Type*} [Ring R] {p q x y : R}
 
 theorem mul_x (hx : q * p = 1 - x) (hy : p * q = 1 - y) : p * x = y * p := by
-  have ex : x = 1 - q * p := by rw [hx]; abel
-  have ey : y = 1 - p * q := by rw [hy]; abel
-  rw [ex, ey]
+  obtain rfl : x = 1 - q * p := by rw [hx]; abel
+  obtain rfl : y = 1 - p * q := by rw [hy]; abel
   noncomm_ring
 
 theorem x_mul (hx : q * p = 1 - x) (hy : p * q = 1 - y) : x * q = q * y := by
-  have ex : x = 1 - q * p := by rw [hx]; abel
-  have ey : y = 1 - p * q := by rw [hy]; abel
-  rw [ex, ey]
+  obtain rfl : x = 1 - q * p := by rw [hx]; abel
+  obtain rfl : y = 1 - p * q := by rw [hy]; abel
   noncomm_ring
 
 /-- `q̃ = (1 + x + ⋯ + x^{2n−1}) q`. -/
@@ -47,10 +45,9 @@ theorem qt_mul (hx : q * p = 1 - x) (n : ℕ) : qt q x n * p = 1 - x ^ (2 * n) :
 
 theorem mul_qt (hx : q * p = 1 - x) (hy : p * q = 1 - y) (n : ℕ) :
     p * qt q x n = 1 - y ^ (2 * n) := by
-  have hs : SemiconjBy p x y := mul_x hx hy
   rw [qt, ← mul_assoc, Finset.mul_sum]
-  have : ∀ k, p * x ^ k = y ^ k * p := fun k => (hs.pow_right k).eq
-  simp_rw [this]
+  simp_rw [show ∀ k, p * x ^ k = y ^ k * p from
+    fun k => (SemiconjBy.pow_right (mul_x hx hy) k).eq]
   rw [← Finset.sum_mul, mul_assoc, hy, geom_sum_mul_neg]
 
 /-- The column `(p; xⁿ)`. -/
@@ -83,23 +80,21 @@ variable {F ε : R}
 
 theorem sub_sq_eq (hF : F * F = 1) (hε : ε * ε = 1) :
     (F - ε) * (F - ε) = 2 - F * ε - ε * F := by
-  have : (F - ε) * (F - ε) = F * F + ε * ε - F * ε - ε * F := by noncomm_ring
-  rw [this, hF, hε, one_add_one_eq_two]
+  rw [show (F - ε) * (F - ε) = F * F + ε * ε - F * ε - ε * F by noncomm_ring, hF, hε,
+    one_add_one_eq_two]
 
 theorem commute_sub_sq_left (hF : F * F = 1) (hε : ε * ε = 1) :
     Commute F ((F - ε) * (F - ε)) := by
   rw [Commute, SemiconjBy, sub_sq_eq hF hε]
-  have e1 : F * (2 - F * ε - ε * F) = 2 * F - (F * F) * ε - F * ε * F := by noncomm_ring
-  have e2 : (2 - F * ε - ε * F) * F = 2 * F - F * ε * F - ε * (F * F) := by noncomm_ring
-  rw [e1, e2, hF]
+  simp only [mul_sub, sub_mul, ← mul_assoc, hF, one_mul]
+  simp only [mul_assoc, hF, mul_one]
   noncomm_ring
 
 theorem commute_sub_sq_right (hF : F * F = 1) (hε : ε * ε = 1) :
     Commute ε ((F - ε) * (F - ε)) := by
   rw [Commute, SemiconjBy, sub_sq_eq hF hε]
-  have e1 : ε * (2 - F * ε - ε * F) = 2 * ε - ε * F * ε - (ε * ε) * F := by noncomm_ring
-  have e2 : (2 - F * ε - ε * F) * ε = 2 * ε - F * (ε * ε) - ε * F * ε := by noncomm_ring
-  rw [e1, e2, hε]
+  simp only [mul_sub, sub_mul, ← mul_assoc, hε, one_mul]
+  simp only [mul_assoc, hε, mul_one]
   noncomm_ring
 
 end Involutions
