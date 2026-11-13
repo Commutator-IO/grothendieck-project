@@ -37,13 +37,9 @@ theorem lowerCentralSeries_le (F : ℕ → Subgroup G) [∀ i, (F i).Normal] (n 
     exact (Subgroup.commutator_mono ih le_rfl).trans (commutator_le (F := F) (n + 1) 1)
 
 theorem A_eq_bot (F : ℕ → Subgroup G) (h0 : F 0 = ⊤) {r : ℕ} (hr : F r = ⊥) : A F r = ⊥ := by
-  rw [eq_bot_iff]
-  intro θ hθ
-  rw [Subgroup.mem_bot]
+  refine eq_bot_iff.2 fun θ hθ => Subgroup.mem_bot.2 ?_
   ext x
-  have := hθ.2 0 x (by rw [h0]; trivial)
-  rw [zero_add, hr, Subgroup.mem_bot, mul_inv_eq_one] at this
-  simpa using this
+  simpa [h0, hr, mul_inv_eq_one] using hθ.2 0 x
 
 /-- **Kaloujnine's corollary**, general form: `A_1` is nilpotent when `G_0 = G` and `G_c = 1`. -/
 theorem isNilpotent_A_one (F : ℕ → Subgroup G) [∀ i, (F i).Normal] (hF : Antitone F)
@@ -64,17 +60,13 @@ theorem conj_mem_A_one (g : G) : MulAut.conj g ∈ A (Γ G) 1 := by
   · simp only [MulAut.conj_apply]
     exact ⟨fun h => (inferInstance : (Γ G i).Normal).conj_mem x h g, fun h => by
       simpa [mul_assoc] using (inferInstance : (Γ G i).Normal).conj_mem _ h g⁻¹⟩
-  · rw [Γ_succ]
-    have := Subgroup.commutator_mem_commutator hx (Subgroup.mem_top g)
-    have := (⁅Γ G i, ⊤⁆ : Subgroup G).inv_mem this
-    simpa [commutatorElement_def, mul_assoc] using this
+  · simpa [commutatorElement_def, mul_assoc] using
+      (Γ G (i + 1)).inv_mem (Subgroup.commutator_mem_commutator hx (Subgroup.mem_top g))
 
 /-- Conjugation by an element of `Γ_k` lies in `A_{k+1}`. -/
 theorem conj_mem_A (k : ℕ) : (Γ G k).map MulAut.conj ≤ A (Γ G) (k + 1) := by
   induction k with
-  | zero =>
-    rintro _ ⟨g, -, rfl⟩
-    exact conj_mem_A_one g
+  | zero => exact fun _ ⟨g, _, h⟩ => h ▸ conj_mem_A_one g
   | succ k ih =>
     rw [Γ_succ, Subgroup.map_commutator]
     refine (Subgroup.commutator_mono ih ?_).trans (commutator_le (F := Γ G) (k + 1) 1)
@@ -82,11 +74,9 @@ theorem conj_mem_A (k : ℕ) : (Γ G k).map MulAut.conj ≤ A (Γ G) (k + 1) := 
     exact conj_mem_A_one g
 
 /-- `⁅Γ_j, Γ_i⁆ ≤ Γ_{i+j+1}` (with `Γ_0 = G`), from Kaloujnine's theorem. -/
-theorem commutator_lowerCentralSeries_le (i j : ℕ) : ⁅Γ G j, Γ G i⁆ ≤ Γ G (i + (j + 1)) := by
-  rw [Subgroup.commutator_le]
-  intro x hx y hy
-  have h := (conj_mem_A j ⟨x, hx, rfl⟩).2 i y hy
-  simpa [commutatorElement_def, mul_assoc] using h
+theorem commutator_lowerCentralSeries_le (i j : ℕ) : ⁅Γ G j, Γ G i⁆ ≤ Γ G (i + (j + 1)) :=
+  Subgroup.commutator_le.2 fun x hx y hy => by
+    simpa [commutatorElement_def, mul_assoc] using (conj_mem_A j ⟨x, hx, rfl⟩).2 i y hy
 
 theorem comm_mod {N : Subgroup G} [N.Normal] {z w : G} (h : ⁅z, w⁆ ∈ N) :
     ((z : G ⧸ N) * w = w * z) := by
@@ -131,8 +121,7 @@ theorem mem_succ_of_trivial {θ : MulAut G} (hθ : ∀ g, θ g * g⁻¹ ∈ Γ G
         simp [commutatorElement_def, hmk, hinv]
       simp only [commutatorElement_def, hmk, hinv, mul_inv_rev]
       rw [hcomm] at hBC
-      have hA' : ∀ w : G ⧸ N, (a : G ⧸ N) * w = w * a := by
-        rintro ⟨w⟩; exact hA w
+      have hA' : ∀ w : G ⧸ N, (a : G ⧸ N) * w = w * a := fun w => QuotientGroup.induction_on w hA
       calc (a : G ⧸ N) * p * (b * q) * ((p : G ⧸ N)⁻¹ * (a : G ⧸ N)⁻¹) *
             ((q : G ⧸ N)⁻¹ * (b : G ⧸ N)⁻¹)
           = (a : G ⧸ N) * ((p : G ⧸ N) * (b * q) * (p : G ⧸ N)⁻¹) * (a : G ⧸ N)⁻¹ *
@@ -163,20 +152,13 @@ theorem mem_A_one_iff {θ : MulAut G} :
   refine ⟨fun h g => h.2 0 g (Subgroup.mem_top g), fun h => ?_⟩
   have h' : ∀ g, θ g * g⁻¹ ∈ Γ G 1 := h
   have hinv : ∀ g, θ⁻¹ g * g⁻¹ ∈ Γ G 1 := fun g => by
-    have := (Γ G 1).inv_mem (h' (θ⁻¹ g))
-    convert this using 1
-    have : θ (θ⁻¹ g) = g := by simp
-    rw [this]; group
+    convert (Γ G 1).inv_mem (h' (θ⁻¹ g)) using 1
+    rw [show θ (θ⁻¹ g) = g by simp]; group
   have hle : ∀ i, Γ G (i + 1) ≤ Γ G i := fun i =>
     Subgroup.lowerCentralSeries_antitone ⊤ (Nat.le_succ i)
   refine ⟨fun i x => ⟨fun hx => ?_, fun hx => ?_⟩, fun i x hx => mem_succ_of_trivial h' i x hx⟩
-  · have := (Γ G i).mul_mem (hle i (mem_succ_of_trivial h' i x hx)) hx
-    simpa using this
-  · have h1 := hle i (mem_succ_of_trivial hinv i _ hx)
-    have := (Γ G i).mul_mem h1 hx
-    have e : θ⁻¹ (θ x) = x := by simp
-    rw [e] at this
-    simpa using this
+  · simpa using (Γ G i).mul_mem (hle i (mem_succ_of_trivial h' i x hx)) hx
+  · simpa using (Γ G i).mul_mem (hle i (mem_succ_of_trivial hinv i _ hx)) hx
 
 /-- **Notebook 1971-12, p. 21**: for a nilpotent group, the automorphisms trivial on the
 abelianization (`θ(g)g⁻¹ ∈ [G, G]` for all `g`) form a nilpotent group. -/

@@ -34,9 +34,7 @@ theorem mem_filter_iff (pos : Bool) (s N : ℕ) (S : Finset ℕ) :
     S ∈ ((range (N + 1)).powersetCard s).filter (fun S => (pos → 0 ∉ S) ∧ S.sum id = N) ↔
       S.card = s ∧ (pos → 0 ∉ S) ∧ S.sum id = N := by
   simp only [mem_filter, mem_powersetCard]
-  constructor
-  · rintro ⟨⟨-, h1⟩, h2⟩; exact ⟨h1, h2⟩
-  · rintro ⟨h1, h2⟩; exact ⟨⟨subset_range_of_sum h2.2, h1⟩, h2⟩
+  exact ⟨fun ⟨⟨_, h1⟩, h2⟩ => ⟨h1, h2⟩, fun ⟨h1, h2⟩ => ⟨⟨subset_range_of_sum h2.2, h1⟩, h2⟩⟩
 
 /-- Sets containing `0` or not: `e_{s+1}(N) = d_{s+1}(N) + d_s(N)`. -/
 theorem count_succ (s N : ℕ) : count false (s + 1) N = count true (s + 1) N + count true s N := by
@@ -95,8 +93,7 @@ theorem count_shift (s M : ℕ) : count true s (M + s) = count false s M := by
     simp only [sum_const, smul_eq_mul, mul_one, hS.1] at this
     simp only [id] at hS ⊢
     omega
-  · intro S _
-    ext x; simp
+  · exact fun S _ => by ext x; simp
   · intro S hS
     rw [mem_coe, mem_filter_iff] at hS
     ext x
@@ -172,12 +169,11 @@ theorem prod_mul_D (s : ℕ) :
   | succ s ih =>
     rw [prod_range_succ, mul_assoc, one_sub_mul_D, mul_left_comm, ih, ← pow_add]
     congr 1
-    have : (s + 1) * (s + 1 + 1) = s * (s + 1) + 2 * (s + 1) := by ring
-    rw [this, Nat.add_mul_div_left _ _ two_pos, add_comm]
+    rw [show (s + 1) * (s + 1 + 1) = s * (s + 1) + 2 * (s + 1) by ring,
+      Nat.add_mul_div_left _ _ two_pos, add_comm]
 
 /-- The product `(1 − q)⋯(1 − q^s)` is a unit, so `D s = q^{s(s+1)/2} / ((1 − q)⋯(1 − q^s))`. -/
 theorem isUnit_prod (s : ℕ) : IsUnit (∏ i ∈ range s, (1 - X ^ (i + 1) : R⟦X⟧)) := by
-  rw [isUnit_iff_constantCoeff, map_prod]
-  simp
+  simp [isUnit_iff_constantCoeff]
 
 end Quillen.Notebook1986_7Strict
