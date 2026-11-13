@@ -39,13 +39,7 @@ theorem stabilizer_eq (g : G) :
   rw [mem_stabilizer_iff, Subgroup.mem_subgroupOf, mem_conj]
   change ((h * g : G) : G ⧸ K) = g ↔ _
   rw [QuotientGroup.eq]
-  constructor
-  · intro hk
-    have := K.inv_mem hk
-    simpa [mul_assoc] using this
-  · intro hk
-    have := K.inv_mem hk
-    simpa [mul_assoc] using this
+  constructor <;> intro hk <;> simpa [mul_assoc] using K.inv_mem hk
 
 /-- A representative in `G` of an `H`-orbit on `G ⧸ K`. -/
 noncomputable def rep (ω : orbitRel.Quotient H (G ⧸ K)) : G := Quotient.out (Quotient.out ω)

@@ -62,8 +62,8 @@ theorem page_formula_eq_iff {g z T : G} (hT : T = z * (g * T) * z⁻¹) :
 /-- **The formula of the page does not hold in general**: in `S₃`, with `z = (1 2)`,
 `T = (0 1)` and `g = z⁻¹ T z T⁻¹`, one has `T = z (g T) z⁻¹` but `T⁻¹ z⁻¹ T z ≠ g`. -/
 theorem page_formula_ne :
-    ∃ g z T : Equiv.Perm (Fin 3), T = z * (g * T) * z⁻¹ ∧ T⁻¹ * z⁻¹ * T * z ≠ g := by
-  refine ⟨Equiv.swap 1 2 * Equiv.swap 0 1 * Equiv.swap 1 2 * Equiv.swap 0 1,
+    ∃ g z T : Equiv.Perm (Fin 3), T = z * (g * T) * z⁻¹ ∧ T⁻¹ * z⁻¹ * T * z ≠ g :=
+  ⟨Equiv.swap 1 2 * Equiv.swap 0 1 * Equiv.swap 1 2 * Equiv.swap 0 1,
     Equiv.swap 1 2, Equiv.swap 0 1, by decide, by decide⟩
 
 /-- **Quillen, notebook 1971-3, p. 34, the abelian case.** If `x ↦ x σ(x)⁻¹` is onto, every
@@ -73,7 +73,6 @@ theorem hom_eq_one {A : Type*} [CommGroup A] (σ : G →* G)
     φ = 1 := by
   ext y
   obtain ⟨x, rfl⟩ := hσ y
-  have : φ (σ x) = φ x := DFunLike.congr_fun hφ x
-  simp [map_mul, map_inv, this]
+  simp [show φ (σ x) = φ x from DFunLike.congr_fun hφ x]
 
 end Quillen.Notebook1971_3

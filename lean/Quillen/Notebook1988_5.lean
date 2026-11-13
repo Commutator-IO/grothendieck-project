@@ -35,10 +35,7 @@ lemma D_mul (M N : Matrix ι ι R[X]) : D (M * N) = D M * N + M * D N := by
 theorem map_derivative_pow (M : Matrix ι ι R[X]) (n : ℕ) :
     D (M ^ n) = ∑ i ∈ range n, M ^ i * D M * M ^ (n - 1 - i) := by
   induction n with
-  | zero =>
-    rw [pow_zero, range_zero, sum_empty]
-    ext i j
-    by_cases h : i = j <;> simp [one_apply, h]
+  | zero => ext i j; by_cases h : i = j <;> simp [one_apply, h]
   | succ n ih =>
     rw [pow_succ, D_mul, ih, sum_range_succ (fun i => M ^ i * D M * M ^ (n + 1 - 1 - i)), sum_mul,
       show n + 1 - 1 - n = 0 by omega, pow_zero, Matrix.mul_one]
@@ -64,12 +61,8 @@ theorem trace_map_derivative_pow (M : Matrix ι ι R[X]) (n : ℕ) :
 theorem derivative_trace_pow (A B : Matrix ι ι R) (m : ℕ) :
     derivative (trace (((X : R[X]) • A.map C + B.map C) ^ (m + 1))) =
       (m + 1 : R[X]) * trace (A.map C * ((X : R[X]) • A.map C + B.map C) ^ m) := by
-  have htr : ∀ M : Matrix ι ι R[X], derivative (trace M) = trace (D M) := by
-    intro M
-    simp [trace]
-  have hD : D ((X : R[X]) • A.map C + B.map C) = A.map C := by
-    ext i j
-    simp
-  rw [htr, trace_map_derivative_pow, hD]
+  have hD : D ((X : R[X]) • A.map C + B.map C) = A.map C := by ext; simp
+  rw [show ∀ M : Matrix ι ι R[X], derivative (trace M) = trace (D M) from fun M => by simp [trace],
+    trace_map_derivative_pow, hD]
 
 end Quillen.Notebook1988_5

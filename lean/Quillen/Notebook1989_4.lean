@@ -31,7 +31,7 @@ theorem add_pow_first_order {a e : A} (he : ∀ x : A, e * x * e = 0) (n : ℕ) 
     rw [pow_succ, ih, Finset.sum_range_succ' _ (n + 1)]
     have hz : (∑ k ∈ Finset.range (n + 1), a ^ (n - k) * e * a ^ k) * e = 0 := by
       rw [Finset.sum_mul]
-      exact Finset.sum_eq_zero fun k _ => by simp only [mul_assoc]; rw [← mul_assoc e, he, mul_zero]
+      exact Finset.sum_eq_zero fun k _ => by rw [mul_assoc, mul_assoc, ← mul_assoc e, he, mul_zero]
     have hs : (∑ k ∈ Finset.range (n + 1), a ^ (n - k) * e * a ^ k) * a =
         ∑ k ∈ Finset.range (n + 1), a ^ (n + 1 - (k + 1)) * e * a ^ (k + 1) := by
       rw [Finset.sum_mul]
@@ -56,10 +56,9 @@ theorem commutator_graded :
 
 /-- **Notebook 1989-4**: if `z² = 1`, then `z(zθ + θz) = (zθ + θz)z = θ + zθz`. -/
 theorem mul_graded_of_sq {z} (hz : z * z = 1) :
-    z * (z * θ + θ * z) = θ + z * θ * z ∧ (z * θ + θ * z) * z = θ + z * θ * z := by
-  constructor
-  · rw [mul_add, ← mul_assoc, hz, one_mul, mul_assoc]
-  · rw [add_mul, mul_assoc θ, hz, mul_one, add_comm]
+    z * (z * θ + θ * z) = θ + z * θ * z ∧ (z * θ + θ * z) * z = θ + z * θ * z :=
+  ⟨by rw [mul_add, ← mul_assoc, hz, one_mul, mul_assoc],
+    by rw [add_mul, mul_assoc θ, hz, mul_one, add_comm]⟩
 
 end Graded
 
@@ -72,10 +71,10 @@ variable {n k : Type*} [Fintype n] [DecidableEq n] [CommRing k]
 /-- **Notebook 1989-4, p. 34**: for invertible `T`, `tr(T(yx)) = tr(T(x · TyT⁻¹))`. -/
 theorem trace_modular {T : Matrix n n k} (hT : IsUnit T.det) (x y : Matrix n n k) :
     trace (T * (y * x)) = trace (T * (x * (T * y * T⁻¹))) := by
-  have : T * (x * (T * y * T⁻¹)) = (T * x * T * y) * T⁻¹ := by simp only [Matrix.mul_assoc]
-  have h2 : T⁻¹ * (T * x * T * y) = x * (T * y) := by
-    simp only [← Matrix.mul_assoc, nonsing_inv_mul _ hT, Matrix.one_mul]
-  rw [this, trace_mul_comm _ T⁻¹, h2, trace_mul_comm x, Matrix.mul_assoc]
+  rw [show T * (x * (T * y * T⁻¹)) = (T * x * T * y) * T⁻¹ by simp only [Matrix.mul_assoc],
+    trace_mul_comm _ T⁻¹, show T⁻¹ * (T * x * T * y) = x * (T * y) by
+      simp only [← Matrix.mul_assoc, nonsing_inv_mul _ hT, Matrix.one_mul],
+    trace_mul_comm x, Matrix.mul_assoc]
 
 end Modular
 

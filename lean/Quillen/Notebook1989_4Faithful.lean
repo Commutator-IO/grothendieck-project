@@ -23,35 +23,22 @@ variable {K : Type*} [Field K] {n : Type*} [Fintype n] [DecidableEq n]
 /-- **Notebook 1989-4, p. 28**: `x ↦ tr(Tx)` is faithful on `Mₙ(K)` iff `T` is invertible. -/
 theorem faithful_iff (T : Matrix n n K) :
     (∀ a : Matrix n n K, a ≠ 0 → ∃ α : Matrix n n K, trace (T * α * a) ≠ 0) ↔ IsUnit T := by
-  constructor
-  · intro h
-    by_contra hT
+  refine ⟨fun h => ?_, fun hT a ha => ?_⟩
+  · by_contra hT
     rw [isUnit_iff_isUnit_det, isUnit_iff_ne_zero, not_not] at hT
     obtain ⟨v, hv, hvT⟩ := exists_vecMul_eq_zero_iff.mpr hT
+    obtain ⟨j, hj⟩ := Function.ne_iff.mp hv
     let a : Matrix n n K := Matrix.of fun _ j => v j
-    have ha : a ≠ 0 := by
-      intro h0
-      apply hv
-      funext j
-      obtain ⟨i⟩ : Nonempty n := by
-        by_contra hn
-        exact hv (funext fun j => (hn ⟨j⟩).elim)
-      simpa [a] using congrFun (congrFun h0 i) j
     have haT : a * T = 0 := by
       ext i j
-      have := congrFun hvT j
-      simpa [a, mul_apply, vecMul, dotProduct] using this
-    obtain ⟨α, hα⟩ := h a ha
-    apply hα
-    rw [trace_mul_comm, ← Matrix.mul_assoc, haT, Matrix.zero_mul, trace_zero]
-  · intro hT a ha
-    obtain ⟨i, j, hij⟩ : ∃ i j, a i j ≠ 0 := by
-      by_contra hn
-      push Not at hn
-      exact ha (Matrix.ext hn)
+      simpa [a, mul_apply, vecMul, dotProduct] using congrFun hvT j
+    obtain ⟨α, hα⟩ := h a fun h0 => hj (by simpa [a] using congrFun (congrFun h0 j) j)
+    exact hα (by rw [trace_mul_comm, ← Matrix.mul_assoc, haT, Matrix.zero_mul, trace_zero])
+  · obtain ⟨i, j, hij⟩ : ∃ i j, a i j ≠ 0 := by
+      contrapose! ha
+      exact Matrix.ext ha
     refine ⟨T⁻¹ * single j i 1, ?_⟩
-    rw [← Matrix.mul_assoc, Matrix.mul_nonsing_inv _ ((isUnit_iff_isUnit_det T).mp hT),
+    rwa [← Matrix.mul_assoc, Matrix.mul_nonsing_inv _ ((isUnit_iff_isUnit_det T).mp hT),
       Matrix.one_mul, trace_single_mul, one_smul]
-    exact hij
 
 end Quillen.Notebook1989_4Faithful

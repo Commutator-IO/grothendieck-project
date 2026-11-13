@@ -36,7 +36,7 @@ an element of `M`. -/]
 theorem exists_of_mul_eq_of (x : GrothendieckGroup M) :
     ∃ b a : M, of b * x = of a := by
   obtain ⟨⟨a, b⟩, h⟩ := (Localization.monoidOf (⊤ : Submonoid M)).surj x
-  exact ⟨b, a, by rw [mul_comm]; exact h⟩
+  exact ⟨b, a, (mul_comm _ _).trans h⟩
 
 /-- Any two elements of the Grothendieck group are translates of a common element by elements
 of `M`. -/
@@ -46,11 +46,8 @@ theorem exists_of_mul_eq_and_of_mul_eq (g₁ g₂ : GrothendieckGroup M) :
     ∃ (g : GrothendieckGroup M) (m₁ m₂ : M), of m₁ * g = g₁ ∧ of m₂ * g = g₂ := by
   obtain ⟨b₁, a₁, h₁⟩ := exists_of_mul_eq_of g₁
   obtain ⟨b₂, a₂, h₂⟩ := exists_of_mul_eq_of g₂
-  refine ⟨(of (b₁ * b₂))⁻¹, b₂ * a₁, b₁ * a₂, ?_, ?_⟩
-  · rw [map_mul, map_mul, ← h₁, mul_inv_eq_iff_eq_mul]
-    ac_rfl
-  · rw [map_mul, map_mul, ← h₂, mul_inv_eq_iff_eq_mul]
-    ac_rfl
+  refine ⟨(of (b₁ * b₂))⁻¹, b₂ * a₁, b₁ * a₂, ?_, ?_⟩ <;>
+    simp only [map_mul, ← h₁, ← h₂, mul_inv_eq_iff_eq_mul] <;> ac_rfl
 
 /-- Two elements of `M` have the same image in the Grothendieck group iff they become equal after
 multiplication by an element of `M`. -/

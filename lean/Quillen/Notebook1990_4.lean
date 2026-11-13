@@ -31,9 +31,7 @@ theorem eq_inner (D : A →+ A) (hD : ∀ a b, D (a * b) = a * D b + D a * b)
   have h := hsep a
   simp only [hD, mul_add, sum_add_distrib, ← mul_assoc] at h
   rw [← sum_mul, hxy, one_mul] at h
-  rw [mul_sum, sum_mul]
-  simp only [← mul_assoc]
-  rw [h]
+  simp only [mul_sum, sum_mul, ← mul_assoc, h]
   abel
 
 end Ring
@@ -48,12 +46,8 @@ theorem eq_inner_of_comm (D : A →ₗ[k] A) (hD : ∀ a b, D (a * b) = a * D b 
     (hxy : ∑ i ∈ s, x i * y i = 1)
     (he : ∀ a : A, ∑ i ∈ s, (a * x i) ⊗ₜ[k] y i = ∑ i ∈ s, x i ⊗ₜ[k] (y i * a)) (a : A) :
     D a = a * (∑ i ∈ s, x i * D (y i)) - (∑ i ∈ s, x i * D (y i)) * a := by
-  -- the map `x ⊗ y ↦ x D(y)`
-  let φ : A ⊗[k] A →ₗ[k] A := TensorProduct.lift ((LinearMap.mul k A).compl₂ D)
-  have hφ : ∀ u v : A, φ (u ⊗ₜ v) = u * D v := fun u v => by simp [φ]
   refine eq_inner s x y D.toAddMonoidHom hD hxy (fun b => ?_) a
-  have := congrArg φ (he b)
-  simpa only [map_sum, hφ, LinearMap.toAddMonoidHom_coe] using this
+  simpa using congrArg (TensorProduct.lift ((LinearMap.mul k A).compl₂ D)) (he b)
 
 end Algebra
 

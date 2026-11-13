@@ -54,8 +54,7 @@ theorem one_add_two_L {x x' : E} (hx : ‖x‖ ^ 2 ≠ 1) (hx' : ‖x'‖ ^ 2 �
     1 + 2 * L x x' = pT x * pT x' - ⟪pS x, pS x'⟫ := by
   have h : 1 - ‖x‖ ^ 2 ≠ 0 := sub_ne_zero.mpr (Ne.symm hx)
   have h' : 1 - ‖x'‖ ^ 2 ≠ 0 := sub_ne_zero.mpr (Ne.symm hx')
-  rw [L, pT, pT, pS, pS, inner_smul_left, inner_smul_right, norm_sub_sq_real]
-  simp only [conj_trivial]
+  rw [L, pT, pT, pS, pS, real_inner_smul_left, real_inner_smul_right, norm_sub_sq_real]
   field_simp
   ring
 
@@ -64,15 +63,13 @@ theorem one_add_two_L {x x' : E} (hx : ‖x‖ ^ 2 ≠ 1) (hx' : ‖x'‖ ^ 2 �
 theorem q_half_p {x : E} (hx : ‖x‖ ^ 2 ≠ 1) :
     (pT x / 2) ^ 2 - ‖(1 / 2 : ℝ) • pS x‖ ^ 2 = 1 / 4 := by
   rw [norm_smul, mul_pow, Real.norm_eq_abs, sq_abs]
-  have := q_p hx
-  linear_combination (1 / 4 : ℝ) * this
+  linear_combination (1 / 4 : ℝ) * q_p hx
 
 /-- With the map as written in the notes, `1 + 2 L (x, x') = 4 q (p x, p x')`. -/
 theorem one_add_two_L_half {x x' : E} (hx : ‖x‖ ^ 2 ≠ 1) (hx' : ‖x'‖ ^ 2 ≠ 1) :
     1 + 2 * L x x' =
       4 * (pT x / 2 * (pT x' / 2) - ⟪(1 / 2 : ℝ) • pS x, (1 / 2 : ℝ) • pS x'⟫) := by
-  rw [inner_smul_left, inner_smul_right, one_add_two_L hx hx']
-  simp only [conj_trivial]
+  rw [real_inner_smul_left, real_inner_smul_right, one_add_two_L hx hx']
   ring
 
 end Quillen.Notebook1983_LectureNotes15

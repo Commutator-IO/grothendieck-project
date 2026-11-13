@@ -39,7 +39,7 @@ theorem mul_pow_eq_of_commute_commutator {u v d : G} (hd : v * u = d * u * v)
   | zero => simp
   | succ n ih =>
     have hc : (n + 1).choose 2 = n + n.choose 2 := by
-      rw [show (2 : ℕ) = 1 + 1 from rfl, Nat.choose_succ_succ, Nat.choose_one_right]
+      rw [Nat.choose_succ_succ', Nat.choose_one_right]
     set c := n.choose 2
     calc (u * v) ^ (n + 1) = u ^ n * v ^ n * (d ^ c * u) * v := by
           rw [pow_succ, ih]; simp only [mul_assoc]
@@ -61,6 +61,5 @@ theorem mul_pow_eq_of_commute_commutator {u v d : G} (hd : v * u = d * u * v)
 theorem mul_pow_eq_mul_pow_of_commute_commutator {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2)
     {u v d : G} (hd : v * u = d * u * v) (hdu : Commute d u) (hdv : Commute d v)
     (hdp : d ^ p = 1) : (u * v) ^ p = u ^ p * v ^ p := by
-  have h2p : 2 < p := lt_of_le_of_ne hp.two_le (Ne.symm hp2)
-  obtain ⟨k, hk⟩ := hp.dvd_choose_self two_ne_zero h2p
+  obtain ⟨k, hk⟩ := hp.dvd_choose_self two_ne_zero (hp.two_le.lt_of_ne' hp2)
   rw [mul_pow_eq_of_commute_commutator hd hdu hdv, hk, pow_mul, hdp, one_pow, mul_one]
