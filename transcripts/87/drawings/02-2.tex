@@ -1,23 +1,17 @@
 % Drawing 87/02-2 -- folder 87, batch 02, archive page 39 (PDF page 40).
 % Transcription: croquis en marge gauche ; au-dessus, un premier croquis du même losange, raturé
-% Kind: diamond x, y, y', z (Hasse diagram) with a struck first sketch. Method 2 (schematic redraw from the facsimile). Status: partial.
-% Notes: The diamond in the left margin: x on the left, arrows to y' (upper) and y (lower), and from each an arrow to z on the right, labels at \small as in the tikzcd of the transcription; each arrow lies on the line between the centres of the two labels it joins. Left out, following the convention for strike-outs: the first sketch above it, heavily struck with zigzag hatching, and the horizontal stroke just above the diamond (starting at a heavy cross, with two small arrowheads and a crossed x on it), read as part of the struck first attempt. Still differs: on the page the two upper arrows run 1 to 2 units above the label-to-label lines. Redrawn 2026-11-09 (issue 128): to check again.
-% Coordinates: 1 unit = 1 mm = 1/100 of the crop width (bbox in page fractions: [0.13, 0.28, 0.34, 0.45]).
-% Redrawn by Claude (claude-opus-5-5), issue #73, 2026-11-09; not checked by a human; not compiled (no TeX in the session).
+% Kind: diamond x, y', y, z (Hasse diagram), set as a tikz-cd diagram. Method 2 (set in LaTeX from the facsimile). Status: ok.
+% Notes: Set in tikz-cd, as the editor asked (#148): x on the left, arrows to y' (upper) and y (lower), and from each an arrow to z on the right; all four labels are read on the 400 dpi colour crop, and the diagram is the tikzcd the transcription sets just above the mark. A tikz-cd layout is canonical: it keeps the shape of the margin sketch (a diamond lying on its side, arrows from left to right), not its exact geometry. Left out, following the convention for strike-outs: the first sketch above it, heavily struck with zigzag hatching, and the horizontal stroke just above the diamond (a heavy cross at its left end, two small arrowheads), read as part of the struck first attempt (confirmed by the editor, #148).
+% Coordinates: none (canonical tikz-cd layout; bbox in page fractions: [0.13, 0.28, 0.34, 0.45]).
+% Set by Claude (claude-opus-5-5), issues #73 and #148, 2026-11-13; layout checked against the crop by eye; not compiled (no TeX in the session).
 % Rights: reproduces part of the work -- behind RENDER_TRANSCRIPTS, never published by itself.
-\documentclass[tikz,border=3pt]{standalone}
+\documentclass[border=3pt]{standalone}
 \usepackage{amsmath,amssymb}
-\usetikzlibrary{patterns,arrows.meta}
-\tikzset{pencil/.style={black!45}, struck/.style={black!35}, mark/.style={circle,draw,inner sep=1.3pt}, pt/.style={circle,fill,inner sep=0.9pt}, opt/.style={circle,draw,fill=white,inner sep=1.1pt}}
+\usepackage{tikz-cd}
 \begin{document}
-\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\scriptsize]
-\node[inner sep=1pt] at (12.8,-94) {\small $x$};
-\node[inner sep=1pt] at (45.6,-82.4) {\small $y'$};
-\node[inner sep=1pt] at (46,-105.6) {\small $y$};
-\node[inner sep=1pt] at (81,-93) {\small $z$};
-\draw[-{Stealth[length=2mm]}] (19.4,-91.7) -- (36.7,-85.5);
-\draw[-{Stealth[length=2mm]}] (19.4,-96.3) -- (40,-103.5);
-\draw[-{Stealth[length=2mm]}] (58.3,-86.2) -- (71.1,-90);
-\draw[-{Stealth[length=2mm]}] (54,-102.7) -- (73.3,-95.8);
-\end{tikzpicture}
+\begin{tikzcd}[column sep=small, row sep=small]
+  & y' \arrow[dr] & \\
+  x \arrow[ur] \arrow[dr] & & z \\
+  & y \arrow[ur] &
+\end{tikzcd}
 \end{document}
