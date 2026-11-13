@@ -61,12 +61,9 @@ theorem face_rot_succ {n i : ℕ} (hi : i ≤ n) (a : ℕ → A) :
     face (n + 1) (i + 1) (rot (n + 1) a) = rot n (face (n + 1) i a) := by
   funext j
   rcases Nat.lt_or_ge i n with h | h
-  · have h1 : i + 1 < n + 1 := by omega
-    have h2 : i < n + 1 := by omega
-    simp only [face, h1, h2, ↓reduceIte, rot, merge]
+  · simp only [face, show i + 1 < n + 1 by omega, show i < n + 1 by omega, ↓reduceIte, rot, merge]
     split_ifs <;> first | omega | rfl | (congr 1 <;> omega) | (congr 2 <;> omega) | simp_all
-  · have : i = n := by omega
-    subst this
+  · obtain rfl : i = n := by omega
     simp only [face, lt_self_iff_false, Nat.lt_succ_self, ↓reduceIte, rot, merge, lastFace]
     split_ifs <;> first | omega | rfl | (congr 1; omega) | (congr 2; omega) | simp_all
 
@@ -150,8 +147,8 @@ theorem one_sub_T_b (n : ℕ) (f : Cochain A G) :
     b n f - T (n + 1) (b n f) = b' n f - b' n (T n f) := by
   -- `T b = (−1)^{n+1} δ_{n+1} + b' T`
   have hTb : T (n + 1) (b n f) = ((-1 : ℤ) ^ (n + 1)) • dual n (n + 1) f + b' n (T n f) := by
-    rw [b, sum_range_succ', map_add, map_sum, map_zsmul, T_dual_zero, pow_zero, one_smul, b']
-    rw [add_comm]
+    rw [b, sum_range_succ', map_add, map_sum, map_zsmul, T_dual_zero, pow_zero, one_smul, b',
+      add_comm]
     congr 1
     refine sum_congr rfl fun i hi => ?_
     rw [map_zsmul, T_dual_succ (Nat.lt_succ_iff.mp (mem_range.mp hi)), smul_neg, pow_succ,
