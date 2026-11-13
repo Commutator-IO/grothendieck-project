@@ -30,7 +30,7 @@ theorem eq_one_of_commute_alternating (hα4 : 4 ≤ Fintype.card α) {g : Perm �
     (hg : ∀ k ∈ alternatingGroup α, k * g = g * k) : g = 1 := by
   rw [← support_eq_empty_iff, Finset.eq_empty_iff_forall_notMem]
   intro a ha
-  have hab : g a ≠ a := by rw [← mem_support]; exact ha
+  have hab : g a ≠ a := mem_support.1 ha
   have : 2 ≤ (({a, g a} : Finset α)ᶜ).card := by
     rw [← Nat.add_le_add_iff_left, Finset.card_add_card_compl, Finset.card_pair hab.symm]
     exact hα4
@@ -40,16 +40,12 @@ theorem eq_one_of_commute_alternating (hα4 : 4 ≤ Fintype.card α) {g : Perm �
     Finset.mem_singleton] at hc hd
   let k := swap (g a) d * swap (g a) c
   have hka : k a = a := by
-    simp only [coe_mul, Function.comp_apply, k]
-    rw [swap_apply_of_ne_of_ne (x := a) hab.symm hc.1.symm]
-    rw [swap_apply_of_ne_of_ne hab.symm hd.1.symm]
+    simp only [coe_mul, Function.comp_apply, k, swap_apply_of_ne_of_ne hab.symm hc.1.symm,
+      swap_apply_of_ne_of_ne hab.symm hd.1.symm]
   have hkga : k (g a) = c := by
-    simp only [coe_mul, Function.comp_apply, swap_apply_left, k]
-    rw [swap_apply_of_ne_of_ne hc.2 hcd]
+    simp only [coe_mul, Function.comp_apply, swap_apply_left, k, swap_apply_of_ne_of_ne hc.2 hcd]
   have hk : k ∈ alternatingGroup α := by simp [k, hc.2.symm, hd.2.symm]
-  have := congrArg (fun f : Perm α => f a) (hg k hk)
-  simp only [coe_mul, Function.comp_apply, hka, hkga] at this
-  exact hc.2 this
+  exact hc.2 (by simpa [hka, hkga] using congrArg (fun f : Perm α => f a) (hg k hk))
 
 /-- **Quillen, notebook 1972-1, p. 25.** For `|α| ≥ 4` and `a ≠ b`, there is no `y ∈ A_n` with
 `(a b) x (a b)⁻¹ = y x y⁻¹` for every `x ∈ A_n`: the transposition acts on `A_n` by an outer
@@ -66,7 +62,7 @@ theorem not_inner_swap (hα4 : 4 ≤ Fintype.card α) {a b : α} (hab : a ≠ b)
       _ = y⁻¹ * swap a b * k := by group
   have hs : swap a b = y := by
     rw [← mul_left_cancel_iff (a := y⁻¹), hc, inv_mul_cancel]
-  have := (mem_alternatingGroup).mp hy
+  have := mem_alternatingGroup.mp hy
   rw [← hs, sign_swap hab] at this
   exact absurd this (by decide)
 

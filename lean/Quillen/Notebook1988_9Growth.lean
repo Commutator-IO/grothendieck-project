@@ -31,8 +31,6 @@ theorem chernSimons_value (n : ℕ) :
   have h := Quillen.Notebook1988_9.integral_sq_sub_pow_mul_pow n 0
   simp only [pow_zero, mul_one, add_zero] at h
   rw [h, show 2 * n + 1 = (2 * n) + 1 from rfl, factorial_succ]
-  have : (n ! : ℝ) ≠ 0 := by positivity
-  have : ((2 * n) ! : ℝ) ≠ 0 := by positivity
   push_cast
   field_simp
 
@@ -40,8 +38,6 @@ theorem chernSimons_value (n : ℕ) :
 theorem factorial_ratio (n : ℕ) :
     ((n + 1) ! : ℚ) / (2 * n + 2) ! = n ! / (2 * (2 * n + 1) !) := by
   rw [show 2 * n + 2 = (2 * n + 1) + 1 from rfl, factorial_succ (2 * n + 1), factorial_succ n]
-  have : (n ! : ℚ) ≠ 0 := by positivity
-  have : ((2 * n + 1) ! : ℚ) ≠ 0 := by positivity
   push_cast
   field_simp
   ring
@@ -58,8 +54,6 @@ theorem two_pow_le_centralBinom : ∀ n : ℕ, 2 ^ n ≤ centralBinom n
   | n + 1 => by
     have h := succ_mul_centralBinom_succ n
     have ih := two_pow_le_centralBinom n
-    have : 2 * (n + 1) * 2 ^ n ≤ (n + 1) * centralBinom (n + 1) := by
-      rw [h]; nlinarith
     rw [pow_succ]
     nlinarith
 
@@ -74,10 +68,7 @@ theorem factorial_div_bounds (n : ℕ) :
   exact Nat.mul_le_mul_left _ (four_pow_le_two_mul_add_one_mul_centralBinom n)
 
 theorem three_mul_two_pow : ∀ n : ℕ, n * (2 * n + 1) ≤ 3 * 2 ^ n
-  | 0 => by norm_num
-  | 1 => by norm_num
-  | 2 => by norm_num
-  | 3 => by norm_num
+  | 0 | 1 | 2 | 3 => by norm_num
   | n + 4 => by
     have ih := three_mul_two_pow (n + 3)
     rw [pow_succ]
@@ -85,8 +76,8 @@ theorem three_mul_two_pow : ∀ n : ℕ, n * (2 * n + 1) ≤ 3 * 2 ^ n
 
 theorem le_div_pow (n : ℕ) : (n : ℝ) / 3 ≤ (2 : ℝ) ^ n / (2 * n + 1) := by
   rw [div_le_div_iff₀ (by norm_num) (by positivity)]
-  have := three_mul_two_pow n
-  have : ((n * (2 * n + 1) : ℕ) : ℝ) ≤ ((3 * 2 ^ n : ℕ) : ℝ) := by exact_mod_cast this
+  have : ((n * (2 * n + 1) : ℕ) : ℝ) ≤ ((3 * 2 ^ n : ℕ) : ℝ) := by
+    exact_mod_cast three_mul_two_pow n
   push_cast at this
   linarith
 
@@ -96,8 +87,8 @@ theorem tendsto_ratio :
     Tendsto (fun n : ℕ => (((2 * n) ! / n ! : ℕ) : ℝ) / (n ! * 2 ^ n)) atTop atTop := by
   have hlow : ∀ n : ℕ, (2 : ℝ) ^ n / (2 * n + 1) ≤ (((2 * n) ! / n ! : ℕ) : ℝ) / (n ! * 2 ^ n) := by
     intro n
-    have h := (factorial_div_bounds n).2.2
-    have h' : (n ! : ℝ) * 4 ^ n ≤ (2 * n + 1) * (((2 * n) ! / n ! : ℕ) : ℝ) := by exact_mod_cast h
+    have h' : (n ! : ℝ) * 4 ^ n ≤ (2 * n + 1) * (((2 * n) ! / n ! : ℕ) : ℝ) := by
+      exact_mod_cast (factorial_div_bounds n).2.2
     have h4 : (4 : ℝ) ^ n = 2 ^ n * 2 ^ n := by rw [← mul_pow]; norm_num
     rw [div_le_div_iff₀ (by positivity) (by positivity)]
     nlinarith [pow_pos (two_pos : (0 : ℝ) < 2) n, (factorial_pos n : 0 < n !)]

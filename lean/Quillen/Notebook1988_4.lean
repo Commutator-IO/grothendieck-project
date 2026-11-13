@@ -41,9 +41,7 @@ theorem matrixUnit_mul (s : ι → A) (Γ : ι → ι → Prop)
         s i * ((s k * star (s k)) * (star (s j) * s j) * (s n * star (s n))) * star (s m) := by
       simp only [mul_assoc]
     rw [this, hPQ j k hjk, hP]
-    by_cases hkn : k = n
-    · simp [hkn]
-    · simp [hkn]
+    by_cases hkn : k = n <;> simp [hkn]
   · have : s i * (s k * star (s k)) * star (s j) * (s l * (s n * star (s n)) * star (s m)) =
         s i * (s k * star (s k)) * (star (s j) * s l) * (s n * star (s n)) * star (s m) := by
       simp only [mul_assoc]
@@ -72,9 +70,7 @@ theorem row_mul_col (h : s₀ * star s₀ + s₁ * star s₁ = 1) : row s₀ s�
 `s₀* s₁ = 0`. -/
 theorem col_mul_row (h₀ : star s₀ * s₀ = 1) (h₁ : star s₁ * s₁ = 1) (h₀₁ : star s₀ * s₁ = 0) :
     col s₀ s₁ * row s₀ s₁ = 1 := by
-  have h₁₀ : star s₁ * s₀ = 0 := by
-    have := congrArg star h₀₁
-    rwa [star_mul, star_star, star_zero] at this
+  have h₁₀ : star s₁ * s₀ = 0 := by simpa using congrArg star h₀₁
   ext i j
   fin_cases i <;> fin_cases j <;> simp [row, col, h₀, h₁, h₀₁, h₁₀, Matrix.mul_apply]
 

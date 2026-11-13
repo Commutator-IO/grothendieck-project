@@ -41,12 +41,9 @@ theorem three_terms (x : ℤ) (n : ℕ) :
   | succ n ih =>
     obtain ⟨q, hq⟩ := ih
     refine ⟨(n.choose 2 : ℕ) + q * (1 + x), ?_⟩
-    have h2 : ((n + 1).choose 2 : ℤ) = (n.choose 2 : ℕ) + n := by
-      rw [Nat.choose_succ_succ, Nat.choose_one_right]; push_cast; ring
-    have hpow : (1 + x) ^ (n + 1) = (1 + x) * (1 + x) ^ n := by ring
-    rw [hpow, h2]
-    have : (1 + x) ^ n = x ^ 3 * q + 1 + n * x + (n.choose 2 : ℕ) * x ^ 2 := by linarith
-    rw [this]; push_cast; ring
+    rw [Nat.choose_succ_succ, Nat.choose_one_right, pow_succ']
+    push_cast
+    linear_combination (1 + x) * hq
 
 /-- `x²` divides `(1 + x)^n − 1 − n x`. -/
 theorem two_terms (x : ℤ) (n : ℕ) : x ^ 2 ∣ (1 + x) ^ n - 1 - n * x := by
@@ -62,11 +59,9 @@ theorem pow_congr_odd {p : ℕ} (hp : Odd p) (β : ℤ) :
   have hx : (1 + ((2 * k + 1 : ℕ) : ℤ) + β * ((2 * k + 1 : ℕ) : ℤ) ^ 2) = 1 + x := by
     simp only [x]; ring
   have hchoose : ((2 * k + 1).choose 2 : ℤ) = (2 * k + 1 : ℕ) * k := by
-    rw [Nat.choose_two_right]
-    have : (2 * k + 1) * (2 * k + 1 - 1) / 2 = (2 * k + 1) * k := by
-      rw [show 2 * k + 1 - 1 = 2 * k by omega, show (2 * k + 1) * (2 * k) = 2 * ((2 * k + 1) * k)
-        by ring, Nat.mul_div_cancel_left _ (by norm_num)]
-    rw [this]; push_cast; ring
+    rw [Nat.choose_two_right, Nat.add_sub_cancel, show (2 * k + 1) * (2 * k) =
+      2 * ((2 * k + 1) * k) by ring, Nat.mul_div_cancel_left _ two_pos]
+    push_cast; ring
   obtain ⟨q, hq⟩ := three_terms x (2 * k + 1)
   rw [hx, Int.modEq_iff_dvd]
   refine ⟨-(q * (1 + β * (2 * k + 1 : ℕ)) ^ 3) - β - k * (1 + β * (2 * k + 1 : ℕ)) ^ 2, ?_⟩

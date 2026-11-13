@@ -32,12 +32,12 @@ structure IsFermion (a b j : A) : Prop where
   j_sq : j * j = -1
 
 theorem gamma₁_sq (h : IsFermion a b j) : (b + a) * (b + a) = 1 := by
-  have e : (b + a) * (b + a) = b * b + (a * b + b * a) + a * a := by noncomm_ring
-  rw [e, h.a_sq, h.b_sq, h.car, zero_add, add_zero]
+  rw [show (b + a) * (b + a) = b * b + (a * b + b * a) + a * a by noncomm_ring, h.a_sq, h.b_sq,
+    h.car, zero_add, add_zero]
 
 lemma sub_sq (h : IsFermion a b j) : (b - a) * (b - a) = -1 := by
-  have e : (b - a) * (b - a) = b * b - (a * b + b * a) + a * a := by noncomm_ring
-  rw [e, h.a_sq, h.b_sq, h.car, zero_sub, add_zero]
+  rw [show (b - a) * (b - a) = b * b - (a * b + b * a) + a * a by noncomm_ring, h.a_sq, h.b_sq,
+    h.car, zero_sub, add_zero]
 
 theorem gamma₂_sq (h : IsFermion a b j) : (j * (b - a)) * (j * (b - a)) = 1 := by
   rw [mul_assoc, ← mul_assoc (b - a), ← h.central (b - a), mul_assoc, sub_sq h, ← mul_assoc,
@@ -46,9 +46,8 @@ theorem gamma₂_sq (h : IsFermion a b j) : (j * (b - a)) * (j * (b - a)) = 1 :=
 
 theorem gamma_anticomm (h : IsFermion a b j) :
     (b + a) * (j * (b - a)) + (j * (b - a)) * (b + a) = 0 := by
-  rw [← mul_assoc, ← h.central, mul_assoc, mul_assoc, ← mul_add]
-  have e : (b + a) * (b - a) + (b - a) * (b + a) = 2 * (b * b) - 2 * (a * a) := by noncomm_ring
-  rw [e, h.a_sq, h.b_sq]
+  rw [← mul_assoc, ← h.central, mul_assoc, mul_assoc, ← mul_add, show (b + a) * (b - a) +
+    (b - a) * (b + a) = 2 * (b * b) - 2 * (a * a) by noncomm_ring, h.a_sq, h.b_sq]
   simp
 
 /-- `iγ₁γ₂ = a*a − aa* = 2a*a − 1`. -/
@@ -59,8 +58,7 @@ theorem i_gamma_gamma (h : IsFermion a b j) :
     have e : (b + a) * (b - a) = b * b - a * a + (a * b - b * a) := by noncomm_ring
     rw [e, h.a_sq, h.b_sq]
     noncomm_ring
-  · have : a * b = 1 - b * a := by rw [← h.car]; abel
-    rw [this]
+  · rw [show a * b = 1 - b * a by rw [← h.car]; abel]
     noncomm_ring
 
 end Fermion

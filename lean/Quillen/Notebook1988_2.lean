@@ -96,10 +96,8 @@ theorem injective_of_surjective (d : P → D)
     (hbal : ∀ x y, d x • y = MulOpposite.op (d y) • x) (hd : Function.Surjective d) :
     Function.Injective d := by
   obtain ⟨y, hy⟩ := hd 1
-  have key : ∀ x, x = d x • y := fun x => by
-    rw [hbal, hy, MulOpposite.op_one, one_smul]
-  intro x x' h
-  rw [key x, key x', h]
+  have key : ∀ x, x = d x • y := fun x => by rw [hbal, hy, MulOpposite.op_one, one_smul]
+  exact fun x x' h => by rw [key x, key x', h]
 
 end Differential
 

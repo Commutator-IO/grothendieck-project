@@ -33,15 +33,10 @@ theorem star_assoc (hX : ∀ a b, X (a * b) = X a * b + a * X b)
     (hY : ∀ a b, Y (a * b) = Y a * b + a * Y b) (u v w : E × E) :
     star X Y (star X Y u v) w = star X Y u (star X Y v w) := by
   simp only [star, Prod.mk.injEq, hX, hY]
-  constructor
-  · rw [mul_assoc]
-  · noncomm_ring
+  exact ⟨mul_assoc _ _ _, by noncomm_ring⟩
 
 theorem map_one_eq_zero (hY : ∀ a b, Y (a * b) = Y a * b + a * Y b) : Y 1 = 0 := by
-  have := hY 1 1
-  simp only [mul_one, one_mul] at this
-  have h2 : Y 1 + Y 1 - Y 1 = Y 1 - Y 1 := by rw [← this]
-  simpa using h2
+  simpa using hY 1 1
 
 theorem star_one (hY : ∀ a b, Y (a * b) = Y a * b + a * Y b) (u : E × E) :
     star X Y u (1, 0) = u := by
@@ -49,12 +44,7 @@ theorem star_one (hY : ∀ a b, Y (a * b) = Y a * b + a * Y b) (u : E × E) :
 
 theorem one_star (hX : ∀ a b, X (a * b) = X a * b + a * X b) (u : E × E) :
     star X Y (1, 0) u = u := by
-  have : X 1 = 0 := by
-    have := hX 1 1
-    simp only [mul_one, one_mul] at this
-    have h2 : X 1 + X 1 - X 1 = X 1 - X 1 := by rw [← this]
-    simpa using h2
-  simp [star, this]
+  simp [star, map_one_eq_zero X hX]
 
 /-- `a^{*n}`, as `a * (a * ⋯ (a * 1))`. -/
 def starPow (a : E) : ℕ → E × E
