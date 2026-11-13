@@ -62,25 +62,18 @@ section Transvections
 theorem commutator_formula {A : Type*} [Ring A] {x y : A} (hxx : x * x = 0) (hyy : y * y = 0)
     (hyx : y * x = 0) (hxyx : x * y * x = 0) :
     (1 + x) * (1 + y) * (1 - x) * (1 - y) = 1 + x * y := by
-  have h : (1 + x) * (1 + y) * (1 - x) * (1 - y) = 1 + x * y - x * x - y * x - x * y * x - y * y
-      - x * y * y + x * x * y + y * x * y + x * y * x * y := by noncomm_ring
-  have e1 : x * y * y = 0 := by rw [mul_assoc, hyy, mul_zero]
-  have e2 : x * x * y = 0 := by rw [hxx, zero_mul]
-  have e3 : y * x * y = 0 := by rw [hyx, zero_mul]
-  have e4 : x * y * x * y = 0 := by rw [hxyx, zero_mul]
-  rw [h, e4, e1, e2, e3, hxyx, hxx, hyy, hyx]; abel
+  have e : x * y * y = 0 := by rw [mul_assoc, hyy, mul_zero]
+  simp only [add_mul, mul_add, sub_mul, mul_sub, one_mul, mul_one, hxx, hyy, hyx, hxyx, e,
+    zero_mul]
+  abel
 
 /-- The commutator of `1 + x` and `1 + y` in a ring, when `x² = y² = x y = y x y = 0`. -/
 theorem commutator_formula' {A : Type*} [Ring A] {x y : A} (hxx : x * x = 0) (hyy : y * y = 0)
     (hxy : x * y = 0) (hyxy : y * x * y = 0) :
     (1 + x) * (1 + y) * (1 - x) * (1 - y) = 1 - y * x := by
-  have h : (1 + x) * (1 + y) * (1 - x) * (1 - y) = 1 + x * y - x * x - y * x - x * y * x - y * y
-      - x * y * y + x * x * y + y * x * y + x * y * x * y := by noncomm_ring
-  have e1 : x * y * y = 0 := by rw [hxy, zero_mul]
-  have e2 : x * x * y = 0 := by rw [hxx, zero_mul]
-  have e4 : x * y * x * y = 0 := by rw [hxy, zero_mul, zero_mul]
-  have e5 : x * y * x = 0 := by rw [hxy, zero_mul]
-  rw [h, e4, e1, e2, hyxy, e5, hxx, hyy, hxy]; abel
+  simp only [add_mul, mul_add, sub_mul, mul_sub, one_mul, mul_one, hxx, hyy, hxy, hyxy,
+    zero_mul]
+  abel
 
 variable {n R : Type*} [Fintype n] [DecidableEq n] [CommRing R]
 
@@ -160,13 +153,9 @@ def hexagon (R : Type*) [CommRing R] (m : Fin 6) : Matrix (Fin 3) (Fin 3) R :=
 
 /-- **The hexagon of p. 30, first half.** Each matrix commutes with the next one. -/
 theorem hexagon_commute (m : Fin 6) : Commute (hexagon R m) (hexagon R (m + 1)) := by
-  fin_cases m
-  · exact transvection_commute_row (by decide) (by decide) _ _
-  · exact transvection_commute_col (by decide) (by decide) _ _
-  · exact transvection_commute_row (by decide) (by decide) _ _
-  · exact transvection_commute_col (by decide) (by decide) _ _
-  · exact transvection_commute_row (by decide) (by decide) _ _
-  · exact (transvection_commute_col (by decide) (by decide) _ _).symm
+  fin_cases m <;> first
+    | exact transvection_commute_row (by decide) (by decide) _ _
+    | exact transvection_commute_col (by decide) (by decide) _ _
 
 /-- **The hexagon of p. 30, second half.** Each matrix is the commutator of its two
 neighbours `ē_{m-1}` and `ē_{m+1}`, in a suitable order. -/
@@ -251,25 +240,19 @@ theorem IsARInv.comp {r : A ⟶ B} {r' : B ⟶ A} {s : B ⟶ D} {s' : D ⟶ B} {
   comm := by rw [Category.assoc, k.comm, ← Category.assoc, h.comm, Category.assoc]
   comm' := by rw [Category.assoc, h.comm', ← Category.assoc, k.comm', Category.assoc]
   left := by
-    calc (r ≫ s) ≫ s' ≫ r' = r ≫ (s ≫ s') ≫ r' := by simp
-      _ = (r ≫ iPow fB n) ≫ r' := by rw [k.left, Category.assoc]
-      _ = iPow fA n ≫ r ≫ r' := by rw [comm_ipow h.comm, Category.assoc]
-      _ = iPow fA (m + n) := by rw [h.left, ← ipow_add, add_comm]
+    rw [Category.assoc, ← Category.assoc s, k.left, ← Category.assoc, comm_ipow h.comm,
+      Category.assoc, h.left, ← ipow_add, add_comm]
   right := by
-    calc (s' ≫ r') ≫ r ≫ s = s' ≫ (r' ≫ r) ≫ s := by simp
-      _ = s' ≫ iPow fB m ≫ s := by rw [h.right]
-      _ = s' ≫ s ≫ iPow fD m := by rw [comm_ipow k.comm]
-      _ = iPow fD (m + n) := by rw [← Category.assoc, k.right, ← ipow_add, add_comm]
+    rw [Category.assoc, ← Category.assoc r', h.right, ← comm_ipow k.comm, ← Category.assoc,
+      k.right, ← ipow_add, add_comm]
 
 /-- **p. 64, check 3.** Two inverses `r'`, `r''` of filtrations `m`, `n` satisfy
 `r'' ≫ f_A^m = r' ≫ f_A^n` (the page's `f_A^m r'' = f_A^n r'`). -/
 theorem IsARInv.unique {r : A ⟶ B} {r' r'' : B ⟶ A} {m n : ℕ}
     (h : IsARInv fA fB r r' m) (k : IsARInv fA fB r r'' n) :
     r'' ≫ iPow fA m = r' ≫ iPow fA n := by
-  calc r'' ≫ iPow fA m = r'' ≫ r ≫ r' := by rw [h.left]
-    _ = (r'' ≫ r) ≫ r' := by simp
-    _ = iPow fB n ≫ r' := by rw [k.right]
-    _ = r' ≫ iPow fA n := (comm_ipow h.comm' n).symm
+  rw [← h.left, ← Category.assoc, k.right]
+  exact (comm_ipow h.comm' n).symm
 
 /-- **p. 67.** If `f_A = r ≫ r'`, then with `f_B = r' ≫ r` the map `r` is an isomorphism of
 filtration `≤ 1` with inverse `r'`. -/
@@ -288,34 +271,13 @@ section Examples
 `range f^[n]` onto itself for some `n`. -/
 theorem exists_bijOn_range_iterate {α : Type*} [Finite α] (f : α → α) :
     ∃ n, Set.BijOn f (Set.range f^[n]) (Set.range f^[n]) := by
-  have hsub : ∀ n, Set.range f^[n + 1] ⊆ Set.range f^[n] := by
-    rintro n _ ⟨x, rfl⟩
-    exact ⟨f x, by rw [Function.iterate_succ_apply]⟩
-  have himage : ∀ n, f '' Set.range f^[n] = Set.range f^[n + 1] := by
-    intro n
-    rw [← Set.range_comp, ← Function.iterate_succ']
-  have hle : ∀ n, (Set.range f^[n + 1]).ncard ≤ (Set.range f^[n]).ncard := fun n =>
-    Set.ncard_le_ncard (hsub n)
-  obtain ⟨n, hn⟩ : ∃ n, (Set.range f^[n + 1]).ncard = (Set.range f^[n]).ncard := by
-    by_contra! h
-    have : ∀ n, (Set.range f^[n]).ncard + n ≤ (Set.range f^[0]).ncard := by
-      intro n
-      induction n with
-      | zero => simp
-      | succ n ih => have := lt_of_le_of_ne (hle n) (h n); omega
-    have := this ((Set.range f^[0]).ncard + 1)
-    omega
-  have heq : Set.range f^[n + 1] = Set.range f^[n] :=
-    Set.eq_of_subset_of_ncard_le (hsub n) hn.ge
-  refine ⟨n, ?_⟩
-  have hmaps : Set.MapsTo f (Set.range f^[n]) (Set.range f^[n]) := by
-    intro x hx
-    rw [← heq, ← himage]
-    exact Set.mem_image_of_mem f hx
-  rw [← (Set.toFinite _).surjOn_iff_bijOn_of_mapsTo hmaps]
-  intro y hy
-  rw [← heq, ← himage] at hy
-  exact hy
+  obtain ⟨n, hn⟩ := WellFoundedLT.antitone_chain_condition (f := fun n => Set.range f^[n])
+    (antitone_nat_of_succ_le fun n => by
+      rintro _ ⟨x, rfl⟩; exact ⟨f x, by rw [Function.iterate_succ_apply]⟩)
+  have heq : f '' Set.range f^[n] = Set.range f^[n] := by
+    rw [← Set.range_comp, ← Function.iterate_succ', ← hn (n + 1) n.le_succ]
+  exact ⟨n, ((Set.toFinite _).surjOn_iff_bijOn_of_mapsTo
+    (Set.mapsTo_iff_image_subset.2 heq.subset)).1 heq.symm.subset⟩
 
 /-- **p. 67, finitely generated free abelian groups**, for any Noetherian module: an
 endomorphism `f` is injective on `range f^n` for `n` large, since `ker f^n` stabilises. -/
@@ -323,13 +285,10 @@ theorem exists_injOn_range_pow {R M : Type*} [Ring R] [AddCommGroup M] [Module R
     [IsNoetherian R M] (f : Module.End R M) :
     ∃ n, Set.InjOn f (LinearMap.range (f ^ n)) := by
   obtain ⟨n, hn⟩ := Filter.eventually_atTop.mp f.eventually_disjoint_ker_pow_range_pow
-  have hd := hn (n + 1) (by omega)
-  refine ⟨n + 1, fun x hx y hy hxy => ?_⟩
-  have hz : x - y ∈ LinearMap.ker (f ^ (n + 1)) := by
-    rw [LinearMap.mem_ker, pow_succ, Module.End.mul_apply, map_sub, hxy, sub_self, map_zero]
-  have hz' : x - y ∈ LinearMap.range (f ^ (n + 1)) := Submodule.sub_mem _ hx hy
-  have := hd.le_bot ⟨hz, hz'⟩
-  exact sub_eq_zero.mp this
+  refine ⟨n + 1, fun x hx y hy hxy => sub_eq_zero.mp
+    ((hn (n + 1) (by omega)).le_bot ⟨?_, Submodule.sub_mem _ hx hy⟩)⟩
+  rw [SetLike.mem_coe, LinearMap.mem_ker, pow_succ, Module.End.mul_apply, map_sub, hxy, sub_self,
+    map_zero]
 
 end Examples
 

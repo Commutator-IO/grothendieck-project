@@ -52,15 +52,13 @@ def transvectionUnit {i j : n} (h : i ≠ j) (a : A) : (Matrix n n A)ˣ where
   val := 1 + single i j a
   inv := 1 + single i j (-a)
   val_inv := by
-    have h0 : single i j a * single i j (-a) = (0 : Matrix n n A) :=
-      single_mul_single_of_ne (h := h.symm) ..
-    rw [add_mul, mul_add, mul_add, one_mul, mul_one, one_mul, h0, add_zero, add_assoc,
-      ← single_add, neg_add_cancel, single_zero, add_zero]
+    rw [add_mul, mul_add, mul_add, one_mul, mul_one, one_mul,
+      single_mul_single_of_ne (h := h.symm), add_zero, add_assoc, ← single_add, neg_add_cancel,
+      single_zero, add_zero]
   inv_val := by
-    have h0 : single i j (-a) * single i j a = (0 : Matrix n n A) :=
-      single_mul_single_of_ne (h := h.symm) ..
-    rw [add_mul, mul_add, mul_add, one_mul, mul_one, one_mul, h0, add_zero, add_assoc,
-      ← single_add, add_neg_cancel, single_zero, add_zero]
+    rw [add_mul, mul_add, mul_add, one_mul, mul_one, one_mul,
+      single_mul_single_of_ne (h := h.symm), add_zero, add_assoc, ← single_add, add_neg_cancel,
+      single_zero, add_zero]
 
 @[simp] theorem transvectionUnit_val {i j : n} (h : i ≠ j) (a : A) :
     ((transvectionUnit h a : (Matrix n n A)ˣ) : Matrix n n A) = 1 + single i j a := rfl
@@ -101,16 +99,9 @@ theorem isPerfect_elementarySubgroup (h3 : 3 ≤ Fintype.card n) :
   refine le_antisymm (Subgroup.commutator_le.2 fun g hg h hh => ?_) ((Subgroup.closure_le _).2 ?_)
   · exact mul_mem (mul_mem (mul_mem hg hh) (inv_mem hg)) (inv_mem hh)
   rintro g ⟨i, j, hij, a, rfl⟩
-  obtain ⟨k, hki, hkj⟩ : ∃ k, k ≠ i ∧ k ≠ j := by
-    by_contra hcon
-    push Not at hcon
-    have hsub : (Finset.univ : Finset n) ⊆ {i, j} := fun x _ => by
-      by_cases hx : x = i
-      · simp [hx]
-      · simp [hcon x hx]
-    have := (Finset.card_le_card hsub).trans (Finset.card_insert_le _ _)
-    rw [Finset.card_univ, Finset.card_singleton] at this
-    omega
+  obtain ⟨k, -, hk⟩ := Finset.exists_mem_notMem_of_card_lt_card (s := {i, j}) (t := .univ)
+    (by have := Finset.card_le_two (a := i) (b := j); rw [Finset.card_univ]; omega)
+  obtain ⟨hki, hkj⟩ : k ≠ i ∧ k ≠ j := by simpa using hk
   rw [← mul_one a, ← commutator_transvectionUnit hki.symm hkj hij a 1]
   exact Subgroup.commutator_mem_commutator (transvectionUnit_mem_elementarySubgroup _ a)
     (transvectionUnit_mem_elementarySubgroup _ 1)
@@ -177,19 +168,17 @@ theorem blockLowerUnit_single (i j : n) (a : A) :
 
 theorem blockUpperUnit_sum_mem_elementarySubgroup {ι : Type*} (s : Finset ι)
     (f : ι → Matrix n n A) (hf : ∀ i, blockUpperUnit (f i) ∈ elementarySubgroup (n ⊕ n) A) :
-    blockUpperUnit (∑ i ∈ s, f i) ∈ elementarySubgroup (n ⊕ n) A := by
-  classical
-  induction s using Finset.induction_on with
-  | empty => rw [Finset.sum_empty, blockUpperUnit_zero]; exact one_mem _
-  | insert i s hi ih => rw [Finset.sum_insert hi, blockUpperUnit_add]; exact mul_mem (hf i) ih
+    blockUpperUnit (∑ i ∈ s, f i) ∈ elementarySubgroup (n ⊕ n) A :=
+  Finset.sum_induction _ (fun B : Matrix n n A => blockUpperUnit B ∈ elementarySubgroup (n ⊕ n) A)
+    (fun _ _ hB hC => by rw [blockUpperUnit_add]; exact mul_mem hB hC)
+    (by rw [blockUpperUnit_zero]; exact one_mem _) fun i _ => hf i
 
 theorem blockLowerUnit_sum_mem_elementarySubgroup {ι : Type*} (s : Finset ι)
     (f : ι → Matrix n n A) (hf : ∀ i, blockLowerUnit (f i) ∈ elementarySubgroup (n ⊕ n) A) :
-    blockLowerUnit (∑ i ∈ s, f i) ∈ elementarySubgroup (n ⊕ n) A := by
-  classical
-  induction s using Finset.induction_on with
-  | empty => rw [Finset.sum_empty, blockLowerUnit_zero]; exact one_mem _
-  | insert i s hi ih => rw [Finset.sum_insert hi, blockLowerUnit_add]; exact mul_mem (hf i) ih
+    blockLowerUnit (∑ i ∈ s, f i) ∈ elementarySubgroup (n ⊕ n) A :=
+  Finset.sum_induction _ (fun B : Matrix n n A => blockLowerUnit B ∈ elementarySubgroup (n ⊕ n) A)
+    (fun _ _ hB hC => by rw [blockLowerUnit_add]; exact mul_mem hB hC)
+    (by rw [blockLowerUnit_zero]; exact one_mem _) fun i _ => hf i
 
 /-- `[[1, B], [0, 1]]` is elementary: it is the product of the `1 + B_ij e_{i, n+j}`. -/
 theorem blockUpperUnit_mem_elementarySubgroup (B : Matrix n n A) :
