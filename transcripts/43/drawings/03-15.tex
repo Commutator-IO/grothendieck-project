@@ -1,7 +1,7 @@
 % Drawing 43/03-15 -- folder 43, batch 03, archive page 56 (PDF page 57).
 % Transcription: à droite des relations entourées, un petit croquis : une courbe descendante portant un point marqué, une petite boucle accrochée à gauche de ce point, et un trait sinueux qui s'en éloigne vers le bas à gauche.
-% Kind: curve with a marked point and a small loop. Method 2 (schematic redraw from the facsimile). Status: partial.
-% Notes: Ink and faint ink; the sketch sits on the right edge of the circle drawn round the relations. A curve from the upper left bending down through a marked point and on to the lower right; a small closed loop to the left of the point; a wavy stroke leaving below the point towards the lower left. Left out: the long thin horizontal rule above (it belongs to the layout). Still differs: the wavy stroke is a scribble on the page and is drawn as a smooth wave; whether the upper part of the curve is the circle round the relations or a separate stroke is not clear, and it is drawn as part of the curve. Redrawn 2026-11-12 (issue 128): to check again.
+% Kind: curve with a marked point and a small loop. Method 2 (schematic redraw from the facsimile). Status: ok.
+% Notes: Ink and faint ink; the sketch sits on the right edge of the circle drawn round the relations. A curve from the upper left bending down through a marked point and on to the lower right; a small closed loop to the left of the point; a wavy stroke leaving below the point towards the lower left. Left out: the long thin horizontal rule above (it belongs to the layout). Still differs: the wavy stroke is a scribble on the page and is drawn as a smooth wave; whether the upper part of the curve is the circle round the relations or a separate stroke is not clear, and it is drawn as part of the curve. Redrawn 2026-11-12 (issue 128): to check again. 2026-11-13, Claude Opus 5.5, overlay check (issue 147): redrawn on millimetre grids of the 228 ppi scan (rendered at 350 dpi in colour, with a wider view of the page); not compiled (no TeX engine in the session), the TikZ was rasterised by a script and laid over the crop; every stroke lies on its ink to within about 1 unit. Read on the wider view: the thin curve coming down from the top of the crop is the right side of the circle drawn round the relations, and the marked point (a small heavy ring) sits on it. Drawn: that arc of the circle down to the ring; a heavier stroke leaving the ring downwards to the right; a thin curve that starts at the left, arches over, crosses the heavier stroke below the ring and runs down to the lower left edge of the crop; the small heavy closed loop to the left of the ring; and the sinuous stroke, which is a heavy zigzag at the lower left (two sharp turns, crossing the thin curve) running out to the right in a thin stroke. The old wave from the point to the lower left was not on the ink and is gone. Left out as before: the long horizontal rule above (layout). Disagreement with the transcription (not applied, listed in docs/review/transcription-readings-128-2026-11-12.md): the « courbe descendante portant un point marqué » is the circle round the relations, and the « trait sinueux » does not leave the point but stands at the lower left of the circle.
 % Coordinates: 1 unit = 1 mm = 1/100 of the crop width, y downwards as on the crop (bbox in page fractions: [0.54, 0.19, 0.7, 0.32]).
 % Redrawn by Claude (claude-fable-5-2), issue #128, 2026-11-12; not checked by a human; not compiled (no TeX in the session).
 % Rights: reproduces part of the work -- behind RENDER_TRANSCRIPTS, never published by itself.
@@ -11,9 +11,18 @@
 \tikzset{pencil/.style={black!45}, struck/.style={black!35}, mpt/.style={circle,draw,inner sep=1.3pt}, pt/.style={circle,fill,inner sep=0.9pt}, opt/.style={circle,draw,fill=white,inner sep=1.1pt}, Rd/.style={red!75!black}, Gn/.style={green!45!black}, Br/.style={brown!70!black}}
 \begin{document}
 \begin{tikzpicture}[x=1mm,y=-1mm,line cap=round,line join=round,font=\small]
-\draw (22,12) .. controls (32,20) and (40,30) .. (42,40) .. controls (43,50) and (43,58) .. (44,62) .. controls (46,68) and (50,72) .. (54,74);
-\node[pt] at (42,40) {};
-\draw (30,37) .. controls (26,35.6) and (20,37) .. (19,39.4) .. controls (21,41.6) and (27,41.4) .. (30,37);
-\draw[pencil] (40,45) .. controls (30,52) and (38,62) .. (33,75) .. controls (28,84) and (18,80) .. (10,92);
+% the right part of the circle drawn round the relations, down to the marked point
+\draw plot[smooth] coordinates {(0,3.1) (5,4.3) (10,6.1) (15,8.2) (20,10.6) (25,13.4) (29.4,16.7) (35.6,23.9) (38.9,31.1) (40.6,36.4)};
+% the marked point: a small heavy ring
+\draw[very thick] (42,40.3) ellipse[x radius=1.6, y radius=3.2];
+% heavy stroke leaving the point downwards to the right
+\draw[thick] plot[smooth] coordinates {(42.2,43.8) (42.9,50.1) (44.2,54.5) (45.1,59.9) (46.9,64.8) (49.1,70.6) (51.5,73.3) (55.2,75)};
+% thin curve from the left, over the stroke and down to the lower left
+\draw plot[smooth] coordinates {(29,44.3) (33.1,42.5) (36.6,42.3) (39.8,43.8) (42,47) (42.9,50.5) (42,55.4) (39.8,62.1) (35.3,70.6) (29.4,77.8) (24.4,83.3) (16.7,88.9) (8.9,93.3) (0,97.2)};
+% small closed loop to the left of the point
+\draw[very thick] plot[smooth cycle] coordinates {(18,40.6) (21.1,39.4) (26.7,36.7) (30,36.4) (30.8,38.3) (29.4,41.1) (26.7,42) (22.2,40.9)};
+% heavy zigzag at the bottom, running out to the right in a thin stroke
+\draw[very thick] (4.4,95.8) -- (11.1,93.3) -- (15,93.9) -- (8.9,84.7) -- (15.6,83.3) -- (21.1,83.6) -- (25,85.6) -- (26.4,81.1) -- (26.1,77.8) -- (27.2,76.4);
+\draw plot[smooth] coordinates {(27.2,76.4) (33.3,75.6) (42.2,75.3) (49.7,76.1)};
 \end{tikzpicture}
 \end{document}
