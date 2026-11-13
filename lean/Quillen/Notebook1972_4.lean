@@ -39,11 +39,9 @@ theorem tendsto_pred_div_mul_one_sub_pow (x : ℝ) :
   have hsq : Tendsto (fun N : ℕ => a N ^ 2) atTop (𝓝 1) := by
     simpa using ha1.pow 2
   have hfrac : Tendsto (fun N : ℕ => ((N : ℝ) - 1) / N) atTop (𝓝 1) := by
-    have h : Tendsto (fun N : ℕ => 1 - 1 / (N : ℝ)) atTop (𝓝 (1 - 0)) :=
-      tendsto_const_nhds.sub (tendsto_const_nhds.div_atTop tendsto_natCast_atTop_atTop)
+    have h := tendsto_one_div_atTop_nhds_zero_nat.const_sub (1 : ℝ)
     rw [sub_zero] at h
-    refine h.congr' ?_
-    filter_upwards [eventually_ge_atTop 1] with N hN
+    refine h.congr' ((eventually_ge_atTop 1).mono fun N hN => ?_)
     have : (N : ℝ) ≠ 0 := by positivity
     field_simp
   have hlim : Tendsto (fun N : ℕ => ((N : ℝ) - 1) / N * (a N ^ N / a N ^ 2)) atTop
@@ -55,10 +53,7 @@ theorem tendsto_pred_div_mul_one_sub_pow (x : ℝ) :
   have hne : ∀ᶠ N : ℕ in atTop, a N ≠ 0 :=
     ha1.eventually (isOpen_ne.mem_nhds one_ne_zero)
   filter_upwards [hne, eventually_ge_atTop 2] with N hN h2
-  have e1 : (1 - x / N) = a N := by simp only [ha]; ring
-  rw [e1]
-  congr 1
-  rw [div_eq_iff (pow_ne_zero 2 hN), ← pow_add, Nat.sub_add_cancel h2]
+  rw [show (1 - x / N) = a N by simp only [ha]; ring, pow_sub₀ _ hN h2]; rfl
 
 /-- **Quillen, notebook 1972-4, p. 24.** For `N` harmonic oscillators with total energy `λN`, the
 conditional density of the first one at radius `r` in its phase plane,
@@ -72,16 +67,11 @@ theorem tendsto_oscillator_marginal {lam : ℝ} (hlam : 0 < lam) (r : ℝ) :
   have h := (tendsto_pred_div_mul_one_sub_pow (r ^ 2 / (2 * lam))).div_const (2 * π * lam)
   refine h.congr' ?_
   -- eventually `r² ≤ 2λN`, so the Heaviside factor is `1`
-  have hbig : ∀ᶠ N : ℕ in atTop, r ^ 2 ≤ 2 * lam * N := by
-    have : Tendsto (fun N : ℕ => 2 * lam * (N : ℝ)) atTop atTop :=
-      tendsto_natCast_atTop_atTop.const_mul_atTop (by positivity)
-    exact this.eventually_ge_atTop _
+  have hbig : ∀ᶠ N : ℕ in atTop, r ^ 2 ≤ 2 * lam * N :=
+    (tendsto_natCast_atTop_atTop.const_mul_atTop (by positivity)).eventually_ge_atTop _
   filter_upwards [hbig, eventually_ge_atTop 1] with N hN h1
-  simp only [hN, ↓reduceIte, mul_one]
   have hN0 : (N : ℝ) ≠ 0 := by positivity
-  have e : r ^ 2 / (2 * lam) / N = r ^ 2 / (2 * lam * N) := by
-    field_simp
-  rw [e]
+  simp only [hN, ↓reduceIte, mul_one]
   field_simp
 
 /-- **Quillen, notebook 1972-4, p. 25.** For `N` harmonic oscillators with total energy `λN`, the
@@ -95,8 +85,6 @@ theorem tendsto_energy_marginal {lam : ℝ} (hlam : 0 < lam) (E₁ : ℝ) :
   filter_upwards [eventually_ge_atTop 1] with N h1
   have hN0 : (N : ℝ) ≠ 0 := by positivity
   have hl : lam ≠ 0 := hlam.ne'
-  have e : E₁ / lam / N = E₁ / (lam * N) := by field_simp
-  rw [e]
   field_simp
 
 /-- **Quillen, notebook 1972-4, pp. 24–25**, the finite-`N` density is normalised: for `E > 0`
@@ -109,14 +97,12 @@ theorem integral_energy_marginal {E : ℝ} (hE : 0 < E) (m : ℕ) :
     intro u _
     have h1 : HasDerivAt (fun u : ℝ => 1 - u / E) (-(1 / E)) u := by
       simpa using (hasDerivAt_id u).div_const E |>.const_sub 1
-    have h2 := (h1.pow (m + 1)).neg
-    convert h2 using 1
+    convert (h1.pow (m + 1)).neg using 1
     simp only [Nat.add_sub_cancel]
     push_cast
     ring
   rw [intervalIntegral.integral_eq_sub_of_hasDerivAt hderiv]
   · simp [hE0]
-  · apply Continuous.intervalIntegrable
-    fun_prop
+  · exact Continuous.intervalIntegrable (by fun_prop) _ _
 
 end Quillen.Notebook1972_4

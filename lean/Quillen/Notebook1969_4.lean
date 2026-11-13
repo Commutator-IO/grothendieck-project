@@ -66,9 +66,7 @@ theorem primeToPart_zmod (p : ℕ) [Fact p.Prime] (m : ℕ) :
 /-- Modulo a prime `p`, `(-1) ^ (p ^ j) = -1` (for `p = 2` both sides are `1`). -/
 theorem neg_one_pow_pow (p : ℕ) [hp : Fact p.Prime] (j : ℕ) :
     ((-1 : ZMod p)) ^ (p ^ j) = -1 := by
-  rcases hp.out.eq_two_or_odd' with rfl | h
-  · simp
-  · exact (h.pow).neg_one_pow
+  rcases hp.out.eq_two_or_odd' with rfl | h <;> [simp; exact h.pow.neg_one_pow]
 
 /-- `(p ^ j)!` is `p ^ (1 + p + ⋯ + p ^ (j - 1))` times an integer congruent to `(-1) ^ j`
 modulo `p`. -/
@@ -96,10 +94,7 @@ theorem factorial_pow_div_zmod (p : ℕ) [hp : Fact p.Prime] (j : ℕ) :
 theorem padicValNat_factorial_pow (p : ℕ) [hp : Fact p.Prime] (j : ℕ) :
     padicValNat p (p ^ j)! = (p ^ j - 1) / (p - 1) := by
   obtain ⟨a, ha, ha'⟩ := exists_factorial_pow_eq p j
-  have hpa : ¬ p ∣ a := by
-    intro h
-    rw [← ZMod.natCast_eq_zero_iff, ha'] at h
-    exact pow_ne_zero _ (neg_ne_zero.mpr one_ne_zero) h
+  have hpa : ¬ p ∣ a := by rw [← ZMod.natCast_eq_zero_iff, ha']; simp
   have ha0 : a ≠ 0 := fun h => hpa (h ▸ dvd_zero p)
   rw [← Nat.geomSum_eq hp.out.two_le j, ha,
     padicValNat.mul (pow_ne_zero _ hp.out.ne_zero) ha0, padicValNat.prime_pow,

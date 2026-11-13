@@ -49,13 +49,11 @@ variable {J}
 
 theorem one_add_mul_one_sub (hJ : ∀ x ∈ J, ∀ y ∈ J, x * y = 0) {x : R} (hx : x ∈ J) :
     (1 + x) * (1 - x) = 1 := by
-  have : (1 + x) * (1 - x) = 1 - x * x := by noncomm_ring
-  rw [this, hJ x hx x hx, sub_zero]
+  rw [show (1 + x) * (1 - x) = 1 - x * x by noncomm_ring, hJ x hx x hx, sub_zero]
 
 theorem one_sub_mul_one_add (hJ : ∀ x ∈ J, ∀ y ∈ J, x * y = 0) {x : R} (hx : x ∈ J) :
     (1 - x) * (1 + x) = 1 := by
-  have : (1 - x) * (1 + x) = 1 - x * x := by noncomm_ring
-  rw [this, hJ x hx x hx, sub_zero]
+  rw [show (1 - x) * (1 + x) = 1 - x * x by noncomm_ring, hJ x hx x hx, sub_zero]
 
 /-- For `x ∈ J`, `1 + x` is a unit with inverse `1 - x`. -/
 def oneAddUnit (hJ : ∀ x ∈ J, ∀ y ∈ J, x * y = 0) {x : R} (hx : x ∈ J) : Rˣ where
@@ -66,8 +64,8 @@ def oneAddUnit (hJ : ∀ x ∈ J, ∀ y ∈ J, x * y = 0) {x : R} (hx : x ∈ J)
 
 theorem mul_sub_one (hJ : ∀ x ∈ J, ∀ y ∈ J, x * y = 0) {a b : R} (ha : a - 1 ∈ J)
     (hb : b - 1 ∈ J) : a * b - 1 = (a - 1) + (b - 1) := by
-  have : a * b - 1 = (a - 1) + (b - 1) + (a - 1) * (b - 1) := by noncomm_ring
-  rw [this, hJ _ ha _ hb, add_zero]
+  rw [show a * b - 1 = (a - 1) + (b - 1) + (a - 1) * (b - 1) by noncomm_ring, hJ _ ha _ hb,
+    add_zero]
 
 /-- **Quillen, notebook 1973-12, p. 48.** For a two-sided ideal `J` of square zero, the group
 of units congruent to `1` modulo `J` is isomorphic to the additive group of `J`. -/
@@ -109,8 +107,7 @@ theorem isUnit_of_lift (hJ : ∀ x ∈ J, ∀ y ∈ J, x * y = 0) {u v : R}
   have hl : ((1 - (v * u - 1)) * v) * u = 1 :=
     (by noncomm_ring : ((1 - (v * u - 1)) * v) * u = (1 - (v * u - 1)) * (1 + (v * u - 1))).trans
       (one_sub_mul_one_add hJ h2)
-  have he := left_inv_eq_right_inv hl hr
-  exact ⟨⟨u, v * (1 - (u * v - 1)), hr, by rw [← he]; exact hl⟩, rfl⟩
+  exact ⟨⟨u, v * (1 - (u * v - 1)), hr, left_inv_eq_right_inv hl hr ▸ hl⟩, rfl⟩
 
 /-- For a two-sided ideal `I` of square zero in `A`, the matrices with entries in `I` form a
 two-sided ideal of square zero in `M_n(A)`. -/
@@ -120,8 +117,7 @@ theorem matrix_sq_zero {A : Type*} [Ring A] {n : Type*} [Fintype n] (I : TwoSide
   intro X hX Y hY
   ext i j
   rw [Matrix.mul_apply, Matrix.zero_apply]
-  refine Finset.sum_eq_zero fun k _ => hI _ ?_ _ ?_
-  · exact (TwoSidedIdeal.mem_matrix n I X).mp hX i k
-  · exact (TwoSidedIdeal.mem_matrix n I Y).mp hY k j
+  exact Finset.sum_eq_zero fun k _ => hI _ ((TwoSidedIdeal.mem_matrix n I X).mp hX i k) _
+    ((TwoSidedIdeal.mem_matrix n I Y).mp hY k j)
 
 end Quillen.Notebook1973_12

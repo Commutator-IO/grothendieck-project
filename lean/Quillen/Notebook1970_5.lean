@@ -111,10 +111,8 @@ theorem padicValNat_even_index (hq : q % 4 = 1) (hq1 : 1 < q) {m : ℕ} (hm : m 
 theorem not_padicValNat_odd_index_three :
     padicValNat 2 (∏ j ∈ range 1, (3 ^ (2 * (j + 1)) - 1)) ≠
       padicValNat 2 (2 ^ 1 * (1 : ℕ).factorial * (3 - 1) ^ 1) := by
-  have h8 : padicValNat 2 8 = 3 := by
-    rw [show (8 : ℕ) = 2 ^ 3 by norm_num, padicValNat.prime_pow]
-  have h4 : padicValNat 2 4 = 2 := by
-    rw [show (4 : ℕ) = 2 ^ 2 by norm_num, padicValNat.prime_pow]
+  have h8 : padicValNat 2 8 = 3 := padicValNat.prime_pow 3
+  have h4 : padicValNat 2 4 = 2 := padicValNat.prime_pow 2
   simp [h8, h4]
 
 end Quillen.Notebook1970_5

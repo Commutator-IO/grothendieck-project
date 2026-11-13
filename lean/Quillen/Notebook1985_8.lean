@@ -50,12 +50,11 @@ theorem succ_mul_s (n : ℕ) : (n + 1) * s (n + 1) = 4 * ((n + 1) * s n) := by
       2 * (2 * p.1 + 1) * (centralBinom p.1 * centralBinom p.2) := fun p _ => by
     rw [← mul_assoc, succ_mul_centralBinom_succ]; ring
   rw [sum_congr rfl this]
-  have h := two_mul_weighted n
   have e : ∑ p ∈ antidiagonal n, 2 * (2 * p.1 + 1) * (centralBinom p.1 * centralBinom p.2) =
       2 * (2 * ∑ p ∈ antidiagonal n, p.1 * (centralBinom p.1 * centralBinom p.2)) + 2 * s n := by
     rw [s, mul_sum, mul_sum, mul_sum, ← sum_add_distrib]
     exact sum_congr rfl fun p _ => by ring
-  rw [e, h]; ring
+  rw [e, two_mul_weighted]; ring
 
 /-- **The convolution identity** `∑_{i+j=n} C(2i, i) C(2j, j) = 4^n`. -/
 theorem sum_centralBinom_mul (n : ℕ) :
@@ -64,10 +63,8 @@ theorem sum_centralBinom_mul (n : ℕ) :
   induction n with
   | zero => simp [s]
   | succ n ih =>
-    have := succ_mul_s n
-    rw [ih] at this
-    have h : (n + 1) * s (n + 1) = (n + 1) * 4 ^ (n + 1) := by rw [this, pow_succ]; ring
-    exact Nat.eq_of_mul_eq_mul_left (Nat.succ_pos n) h
+    refine Nat.eq_of_mul_eq_mul_left (by omega : 0 < n + 1) ?_
+    rw [succ_mul_s, ih, pow_succ]; ring
 
 /-- The series `∑ C(2k, k) x^k / 4^k` over `ℚ`. -/
 noncomputable def centralSeries : PowerSeries ℚ :=
@@ -97,13 +94,9 @@ theorem centralBinom_div_four_pow (k : ℕ) :
   | zero => simp
   | succ k ih =>
     rw [prod_range_succ, ← ih]
-    have h := succ_mul_centralBinom_succ k
-    have h' : ((k : ℚ) + 1) * centralBinom (k + 1) = 2 * (2 * k + 1) * centralBinom k := by
-      exact_mod_cast h
-    have hk : (k : ℚ) + 1 ≠ 0 := by positivity
-    have hc : (centralBinom (k + 1) : ℚ) = 2 * (2 * k + 1) * centralBinom k / (k + 1) := by
-      field_simp; linarith
-    rw [hc, pow_succ]
+    have h : ((k : ℚ) + 1) * centralBinom (k + 1) = 2 * (2 * k + 1) * centralBinom k := by
+      exact_mod_cast succ_mul_centralBinom_succ k
+    rw [eq_div_of_mul_eq (by positivity) ((mul_comm _ _).trans h), pow_succ]
     field_simp
     ring
 
