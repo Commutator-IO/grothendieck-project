@@ -68,20 +68,13 @@ theorem one_sub_mul_W' (n : ℕ) (x : R) : (1 - x) * W' n x = 1 - ((n + 1 : ℚ)
 
 /-- `W = W' − (n/(2(n+1))) N` (p. 108). -/
 theorem W_eq (n : ℕ) (x : R) : W n x = W' n x - ((n : ℚ) / (2 * (n + 1))) • N n x := by
-  rw [W, W', S, N]
-  simp only [sub_smul, sum_sub_distrib, smul_sub, smul_sum, smul_smul]
-  have hS : ∀ j ∈ range (n + 1), ((n + 1 : ℚ)⁻¹) • (((n : R) - j) * x ^ j) =
-      ((n + 1 : ℚ)⁻¹ * (n - j)) • x ^ j := fun j _ => by
-    rw [mul_smul, sub_mul, sub_smul, smul_sub]
-    simp only [← nsmul_eq_mul, ← Nat.cast_smul_eq_nsmul ℚ]
-    rw [smul_sub]
-  rw [sum_congr rfl hS]
-  simp only [mul_sub, sub_smul, sum_sub_distrib]
-  have : ∀ j ∈ range (n + 1), ((n + 1 : ℚ)⁻¹ * (n / 2)) • x ^ j =
-      ((n + 1 : ℚ)⁻¹ * n) • x ^ j - (n / (2 * (n + 1)) : ℚ) • x ^ j := fun j _ => by
-    rw [← sub_smul]; congr 1; field_simp; ring
-  rw [sum_congr rfl this, sum_sub_distrib]
-  abel
+  rw [W, W', S, N, smul_sum, smul_sum, smul_sum, ← sum_sub_distrib]
+  refine sum_congr rfl fun j _ => ?_
+  rw [show ((n : R) - j) = algebraMap ℚ R (n - j) by simp, ← Algebra.smul_def, smul_smul,
+    smul_smul, ← sub_smul]
+  congr 1
+  field_simp
+  ring
 
 /-- **Cuntz's polynomial** (p. 107, boxed):
 `(1 − x) W_{n+1}(x) = 1 − N_{n+1}(x)/(n+1) + (n/(2(n+1))) (x^{n+1} − 1)`. -/
@@ -99,10 +92,9 @@ theorem one_sub_mul_aeval_W {A : Type*} [Ring A] [Algebra ℚ A] (n : ℕ) (l : 
     (hl : l ^ (n + 1) = 1) :
     (1 - l) * Polynomial.aeval l (W n (Polynomial.X : Polynomial ℚ)) =
       1 - ((n + 1 : ℚ)⁻¹) • ∑ j ∈ range (n + 1), l ^ j := by
-  have h := congrArg (Polynomial.aeval l) (one_sub_mul_W n (Polynomial.X : Polynomial ℚ))
-  simp only [map_mul, map_sub, map_add, map_one, map_smul, Polynomial.aeval_X, map_pow, N,
-    map_sum, hl, sub_self, smul_zero, add_zero] at h
-  exact h
+  simpa only [map_mul, map_sub, map_add, map_one, map_smul, Polynomial.aeval_X, map_pow, N,
+    map_sum, hl, sub_self, smul_zero, add_zero] using
+    congrArg (Polynomial.aeval l) (one_sub_mul_W n (Polynomial.X : Polynomial ℚ))
 
 /-- If `2` is invertible, `λ^n = 1` and `n` is odd, then `(1 + λ) · ½ Σ_{i<n} (−λ)^i = 1`
 (p. 95), in any ring. -/

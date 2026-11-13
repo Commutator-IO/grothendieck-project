@@ -41,12 +41,8 @@ theorem complementary_minor (A : Matrix m m R) (B : Matrix m n R) (C : Matrix n 
   rw [← fromBlocks_toBlocks N, hM, fromBlocks_multiply, ← fromBlocks_one] at hMN
   obtain ⟨-, h12, -, h22⟩ := fromBlocks_inj.mp hMN
   have key : M * fromBlocks 1 N.toBlocks₁₂ 0 N.toBlocks₂₂ = fromBlocks A 0 C 1 := by
-    rw [hM, fromBlocks_multiply, h12, h22]
-    simp
-  have := congrArg det key
-  rw [det_mul, det_fromBlocks_zero₂₁, det_fromBlocks_zero₁₂, det_one, det_one, one_mul,
-    mul_one] at this
-  exact this
+    rw [hM, fromBlocks_multiply, h12, h22]; simp
+  simpa [det_fromBlocks_zero₂₁, det_fromBlocks_zero₁₂] using congrArg det key
 
 end Minor
 
@@ -75,21 +71,14 @@ theorem pairing_mul (hτ : IsSkewCocycle τ) (g h : Aˣ) :
 /-- The pairing `g ↦ τ(g⁻¹, g)` as a homomorphism `Aˣ → k` (written multiplicatively). -/
 def pairing (hτ : IsSkewCocycle τ) : Aˣ →* Multiplicative k where
   toFun g := Multiplicative.ofAdd (τ ↑g⁻¹ ↑g)
-  map_one' := by
-    have := pairing_mul hτ 1 1
-    simp only [mul_one, inv_one] at this
-    simpa using this
-  map_mul' g h := by
-    rw [pairing_mul hτ]
-    rfl
+  map_one' := by simpa using pairing_mul hτ 1 1
+  map_mul' g h := by rw [pairing_mul hτ]; rfl
 
 /-- Coboundaries `τ(x, y) = φ(xy) − φ(yx)` are skew cocycles. -/
 theorem coboundary_isCocycle (φ : A → k) :
     IsSkewCocycle (fun x y => φ (x * y) - φ (y * x)) where
   skew x y := by abel
-  cocycle a x y := by
-    simp only [mul_assoc]
-    abel
+  cocycle a x y := by simp only [mul_assoc]; abel
 
 /-- The pairing vanishes on coboundaries. -/
 theorem pairing_coboundary (φ : A → k) (g : Aˣ) :

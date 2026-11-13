@@ -51,7 +51,6 @@ theorem integral_pow_mul_one_sub_pow (a b : ℕ) :
     rw [show a + 1 + b + 1 = (a + b + 1) + 1 by ring, show a + (b + 1) + 1 = (a + b + 1) + 1 by ring]
     rw [factorial_succ (a + b + 1), factorial_succ a, factorial_succ b]
     push_cast
-    have : ((a + b + 1)! : ℝ) ≠ 0 := by positivity
     field_simp
     ring
 
@@ -75,7 +74,6 @@ theorem notebook1988_5_first (k : ℕ) :
   have := integral_sq_sub_pow_mul_pow k 0
   simp only [pow_zero, mul_one, add_zero] at this
   rw [this]
-  have : (k ! : ℝ) ≠ 0 := by positivity
   field_simp
 
 /-- **Notebook 1988-5, p. 85**: `(1/(q+k)!) ∫₀¹ t^q (t² − t)^k dt = (−1)^k k! / (q + 2k + 1)!`. -/
@@ -84,7 +82,6 @@ theorem notebook1988_5_second (q k : ℕ) :
       (-1) ^ k * (k ! : ℝ) / (q + 2 * k + 1) ! := by
   simp_rw [mul_comm (_ ^ q), integral_sq_sub_pow_mul_pow k q]
   rw [show 2 * k + q + 1 = q + 2 * k + 1 by ring, add_comm k q]
-  have : ((q + k) ! : ℝ) ≠ 0 := by positivity
   field_simp
 
 /-- **Notebook 1984-13, p. 3** (with `k = m + 1`):
@@ -95,7 +92,6 @@ theorem notebook1984_13_first (m : ℕ) :
   simp only [pow_one] at h
   rw [integral_div, h]
   rw [show 2 * m + 1 + 1 = 2 * m + 2 by ring, factorial_succ m]
-  have : (m ! : ℝ) ≠ 0 := by positivity
   push_cast
   field_simp
 
@@ -122,8 +118,7 @@ theorem notebook1988_7_beta (m : ℕ) :
 theorem notebook1988_7_gauss (m : ℕ) :
     ∫ t in Set.Ioi (0 : ℝ), Real.exp (-t ^ 2) * t ^ (2 * m + 1) = (m ! : ℝ) / 2 := by
   have h := integral_rpow_mul_exp_neg_rpow (p := 2) (q := (2 * m + 1 : ℕ)) two_pos
-    (by have : (0 : ℝ) ≤ ((2 * m + 1 : ℕ) : ℝ) := by positivity
-        linarith)
+    (by linarith [Nat.cast_nonneg (α := ℝ) (2 * m + 1)])
   have hq : (((2 * m + 1 : ℕ) : ℝ) + 1) / 2 = (m : ℝ) + 1 := by push_cast; ring
   rw [hq, Real.Gamma_nat_eq_factorial] at h
   rw [← MeasureTheory.setIntegral_congr_fun measurableSet_Ioi (f := fun x : ℝ =>
@@ -159,7 +154,6 @@ theorem integral_simplex (i j k : ℕ) :
     ring
   simp_rw [h1, integral_const_mul, integral_pow_mul_one_sub_pow]
   rw [show j + (i + k + 1) + 1 = i + j + k + 2 by ring]
-  have : ((i + k + 1) ! : ℝ) ≠ 0 := by positivity
   field_simp
 
 end Quillen.Notebook1988_9

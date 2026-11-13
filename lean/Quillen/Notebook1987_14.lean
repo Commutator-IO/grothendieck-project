@@ -85,11 +85,9 @@ theorem ker_contr {d : Module.Dual K M} (hd : d ≠ 0) (q : ℕ) :
   have hm : d m = 1 := by simp [m, hm₀]
   apply le_antisymm
   · intro x hx
-    rw [LinearMap.mem_ker] at hx
     refine ⟨⟨ExteriorAlgebra.ι K m * x, ι_mul_mem m x.2⟩, ?_⟩
     apply Subtype.ext
-    have hx' : contr' d x = 0 := by
-      have := congrArg Subtype.val hx; simpa [contr_apply] using this
+    have hx' : contr' d x = 0 := by simpa [contr_apply] using congrArg Subtype.val hx
     rw [contr_apply, contr', contractLeft_ι_mul]
     erw [hx']
     rw [hm, one_smul, mul_zero, sub_zero]
@@ -123,10 +121,8 @@ theorem finrank_range_contr {d : Module.Dual K M} (hd : d ≠ 0) : ∀ q : ℕ,
       Nat.choose_zero_right]
   | q + 1 => by
     have hk : 0 < finrank K M := by
-      rw [Module.finrank_pos_iff_exists_ne_zero]
       obtain ⟨m₀, hm₀⟩ := DFunLike.ne_iff.mp hd
-      replace hm₀ : d m₀ ≠ 0 := hm₀
-      exact ⟨m₀, fun h => hm₀ (by rw [h, map_zero])⟩
+      exact Module.finrank_pos_iff_exists_ne_zero.2 ⟨m₀, fun h => hm₀ (by simp [h])⟩
     have hrn := LinearMap.finrank_range_add_finrank_ker (contr d q)
     rw [ker_contr hd, finrank_range_contr hd q, exteriorPower.finrank_eq] at hrn
     obtain ⟨k, hk'⟩ : ∃ k, finrank K M = k + 1 := ⟨_, (Nat.succ_pred_eq_of_pos hk).symm⟩
@@ -146,10 +142,8 @@ theorem finrank_ker_contr {d : Module.Dual K M} (hd : d ≠ 0) (q : ℕ) :
 theorem finrank_ker_sum {k : ℕ} (hk : 0 < k) (q : ℕ) :
     finrank K (LinearMap.ker (contr (M := Fin k → K)
       (∑ i, LinearMap.proj i : Module.Dual K (Fin k → K)) q)) = (k - 1).choose (q + 1) := by
-  have hd : (∑ i, LinearMap.proj i : Module.Dual K (Fin k → K)) ≠ 0 := by
-    intro h
-    have := LinearMap.congr_fun h (Pi.single ⟨0, hk⟩ 1)
-    simp at this
+  have hd : (∑ i, LinearMap.proj i : Module.Dual K (Fin k → K)) ≠ 0 := fun h => by
+    simpa using LinearMap.congr_fun h (Pi.single ⟨0, hk⟩ 1)
   rw [finrank_ker_contr hd, Module.finrank_fin_fun]
 
 end Quillen.Notebook1987_14
