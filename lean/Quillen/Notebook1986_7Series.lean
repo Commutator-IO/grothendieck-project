@@ -72,9 +72,7 @@ theorem toeplitz_mul_toeplitz {C B : R⟦X⟧} (h : B * C = 1) (n : ℕ) :
     rw [← this]
     exact Finset.sum_congr rfl fun q _ => mul_comm _ _
   split_ifs with h1 h2 h2
-  · subst h2
-    rw [hc]
-    simp
+  · subst h2; rw [hc]; simp
   · rw [hc, ite_eq_right (fun h0 => h2 (Fin.ext (by omega)))]
   · exact absurd (h2 ▸ le_refl _) h1
   · rfl
@@ -83,9 +81,8 @@ lemma det_toeplitz {C : R⟦X⟧} (h0 : coeff 0 C = 1) (n : ℕ) :
     (toeplitz (fun k => coeff k C) n).det = 1 := by
   rw [det_of_isLowerTriangular]
   · simp [toeplitz, h0]
-  · intro i j hij
-    simp only [toeplitz, of_apply]
-    rw [ite_eq_right (by have : (i : ℕ) < j := hij; omega)]
+  · intro i j (hij : i < j)
+    simp [toeplitz, not_le.mpr hij]
 
 /-- **Notebook 1986-7, pp. 28-29**: if `C · B = 1` with `C = 1 + c₁T + ⋯`, then `(−1)ⁿ bₙ` is
 the determinant of the Toeplitz–Hessenberg matrix whose entry `(i, j)` is `c_{j−i+1}` for
@@ -125,8 +122,7 @@ lemma one_add_mul_g (x : R) : (1 + C x * X) * g x = C x * X := by
   · rw [coeff_succ_X_mul]
     rcases n with _ | n
     · simp [g]
-    · simp only [g, coeff_mk]
-      simp only [Nat.add_one_ne_zero, ite_false, add_tsub_cancel_right, add_eq_right]
+    · simp only [g, coeff_mk, Nat.add_one_ne_zero, ite_false, add_tsub_cancel_right, add_eq_right]
       rw [pow_succ (-1 : R) n, pow_succ x (n + 1)]
       ring
 
@@ -143,8 +139,7 @@ theorem X_mul_derivative_prod {ι : Type*} (s : Finset ι) (x : ι → R) :
     simp only [coeff_mk, map_sum, g]
     split_ifs <;> simp [Finset.mul_sum]
   rw [hsum]
-  have hd : ∀ a, d⁄dX (1 + C (x a) * X : R⟦X⟧) = C (x a) := by
-    intro a
+  have hd : ∀ a, d⁄dX (1 + C (x a) * X : R⟦X⟧) = C (x a) := fun a => by
     rw [map_add, derivative_one, zero_add, Derivation.leibniz, derivative_C, derivative_X]
     simp
   clear hsum

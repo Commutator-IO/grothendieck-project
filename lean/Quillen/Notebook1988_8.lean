@@ -81,8 +81,8 @@ theorem trace_word_count (k l : ℕ) :
     (k + 1 : R) * trace (P A B (k + 1) l) = (k + l + 1 : R) * trace (A * P A B k l) := by
   have h := congrArg (fun p => p.coeff k) (Quillen.Notebook1988_5.derivative_trace_pow A B (k + l))
   simp only [Polynomial.coeff_derivative] at h
-  have htr : ∀ (N : Matrix ι ι R[X]) (j : ℕ), (trace N).coeff j = trace (N.map fun p => p.coeff j) := by
-    intro N j; simp [trace]
+  have htr : ∀ (N : Matrix ι ι R[X]) (j : ℕ),
+      (trace N).coeff j = trace (N.map fun p => p.coeff j) := fun N j => by simp [trace]
   have hl : (trace (((X : R[X]) • A.map C + B.map C) ^ (k + l + 1))).coeff (k + 1) =
       trace (P A B (k + 1) l) := by
     rw [htr]; simp only [P, M, show k + 1 + l = k + l + 1 by omega]
@@ -95,7 +95,7 @@ theorem trace_word_count (k l : ℕ) :
   push_cast at h
   rw [show ((k : R[X]) + l + 1) = Polynomial.C ((k : R) + l + 1) by simp,
     Polynomial.coeff_C_mul, hr2, hl] at h
-  rw [mul_comm]; exact h
+  exact (mul_comm _ _).trans h
 
 end WordCount
 
@@ -115,29 +115,20 @@ include hτ in
 /-- **Notebook 1988-8, p. 10**: `2τ(tⁿε) = 0` for `n ≥ 1` when `εt = −tε`. -/
 theorem two_nsmul_trace_pow_mul (hεt : ε * t = -(t * ε)) (n : ℕ) :
     2 • τ (t ^ (n + 1) * ε) = 0 := by
-  rcases Nat.even_or_odd (n + 1) with he | ho
-  · -- even: move one `t` around the trace
-    obtain ⟨m, hm⟩ : ∃ m, n = m + 1 := ⟨n - 1, by obtain ⟨r, hr⟩ := he; omega⟩
-    have h1 : τ (t ^ (n + 1) * ε) = τ (t ^ n * ε * t) := by
-      rw [pow_succ', mul_assoc, hτ, mul_assoc]
-    have h2 : t ^ n * ε * t = -(t ^ (n + 1) * ε) := by
-      rw [mul_assoc, hεt, mul_neg, ← mul_assoc, ← pow_succ]
-    have h3 : τ (t ^ (n + 1) * ε) = -τ (t ^ (n + 1) * ε) := h1.trans (by rw [h2, map_neg])
-    rw [two_nsmul]
-    nth_rewrite 2 [h3]
-    exact add_neg_cancel _
-  · have h1 : τ (t ^ (n + 1) * ε) = τ (ε * t ^ (n + 1)) := hτ _ _
-    rw [mul_pow_comm hεt, ho.neg_one_pow, neg_one_mul, map_neg] at h1
-    rw [two_nsmul]
-    nth_rewrite 2 [h1]
-    exact add_neg_cancel _
+  -- move one `t` around the trace
+  have h1 : τ (t ^ (n + 1) * ε) = τ (t ^ n * ε * t) := by
+    rw [pow_succ', mul_assoc, hτ, mul_assoc]
+  have h2 : t ^ n * ε * t = -(t ^ (n + 1) * ε) := by
+    rw [mul_assoc, hεt, mul_neg, ← mul_assoc, ← pow_succ]
+  rw [two_nsmul]
+  exact add_eq_zero_iff_eq_neg.mpr (h1.trans (by rw [h2, map_neg]))
 
 include hτ in
 /-- With values in a `ℚ`-vector space, `τ(tⁿε) = 0` for `n ≥ 1`. -/
 theorem trace_pow_mul [Module ℚ Mod] (hεt : ε * t = -(t * ε)) (n : ℕ) :
     τ (t ^ (n + 1) * ε) = 0 := by
-  have h := two_nsmul_trace_pow_mul τ hτ hεt n
-  have : (2 : ℚ) • τ (t ^ (n + 1) * ε) = 0 := by rw [ofNat_smul_eq_nsmul ℚ 2, h]
+  have : (2 : ℚ) • τ (t ^ (n + 1) * ε) = 0 := by
+    rw [ofNat_smul_eq_nsmul ℚ 2, two_nsmul_trace_pow_mul τ hτ hεt n]
   exact (smul_eq_zero.mp this).resolve_left two_ne_zero
 
 end Trace

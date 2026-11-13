@@ -48,8 +48,7 @@ theorem quadratic_identity {K : Type*} [Field K] (A : Matrix n n K) (hA : A.IsSy
         (∑ i, ∑ j, A i j * v i * v j * (x i / v i - x j / v j) ^ 2) / 2 := by
   -- Write `x i = v i * y i`.
   set y : n → K := fun i => x i / v i with hy
-  have hx : ∀ i, x i = v i * y i := fun i => by
-    simp only [hy]; field_simp [hv i]
+  have hx : ∀ i, x i = v i * y i := fun i => (mul_div_cancel₀ (x i) (hv i)).symm
   -- The two "square" halves of the double sum agree, by symmetry of `A`.
   have hswap : ∑ i, ∑ j, A i j * v i * v j * y j ^ 2 =
       ∑ i, ∑ j, A i j * v i * v j * y i ^ 2 := by
@@ -130,16 +129,13 @@ theorem ratio_eq_of_quadratic_eq_zero (A : Matrix n n ℝ) (hA : A.IsSymm)
         (mul_nonpos_of_nonpos_of_nonneg
           (mul_nonpos_of_nonpos_of_nonneg (hoff k l hkl) (hv k).le) (hv l).le)
         (sq_nonneg _)
-  have hrow : ∀ k, ∑ l, A k l * v k * v l * (x k / v k - x l / v l) ^ 2 ≤ 0 :=
-    fun k => Finset.sum_nonpos fun l _ => hterm k l
   have hrow0 : ∑ l, A i l * v i * v l * (x i / v i - x l / v l) ^ 2 = 0 :=
-    (Finset.sum_eq_zero_iff_of_nonpos fun k _ => hrow k).1 hx i (Finset.mem_univ _)
+    (Finset.sum_eq_zero_iff_of_nonpos fun k _ => Finset.sum_nonpos fun l _ => hterm k l).1 hx i
+      (Finset.mem_univ _)
   have h0 : A i j * v i * v j * (x i / v i - x j / v j) ^ 2 = 0 :=
     (Finset.sum_eq_zero_iff_of_nonpos fun l _ => hterm i l).1 hrow0 j (Finset.mem_univ _)
-  have hc : A i j * v i * v j ≠ 0 :=
-    mul_ne_zero (mul_ne_zero hij.ne (hv i).ne') (hv j).ne'
-  have := (mul_eq_zero.1 h0).resolve_left hc
-  exact sub_eq_zero.1 (pow_eq_zero_iff two_ne_zero |>.1 this)
+  exact sub_eq_zero.1 (pow_eq_zero_iff two_ne_zero |>.1 ((mul_eq_zero.1 h0).resolve_left
+    (mul_ne_zero (mul_ne_zero hij.ne (hv i).ne') (hv j).ne')))
 
 /-- The hypothesis as written on p. 34, `vᵗ A v ≥ 0` for a positive `v`, does not suffice:
 `A = !![4, -1; -1, -1]` has off-diagonal entries `≤ 0` and `(1, 1)ᵗ A (1, 1) = 1`, but
@@ -155,7 +151,6 @@ theorem not_posSemidef_example :
   · simp [A, dotProduct, mulVec, Fin.sum_univ_two]; norm_num
   · intro h
     have := h.dotProduct_mulVec_nonneg ![0, 1]
-    simp [A, dotProduct, mulVec, Fin.sum_univ_two] at this
-    norm_num at this
+    norm_num [A, dotProduct, mulVec, Fin.sum_univ_two] at this
 
 end Quillen.Notebook1982_7
