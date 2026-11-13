@@ -27,9 +27,7 @@ theorem logDeriv_mul (δ : S →+ S) (hδ : ∀ x y, δ (x * y) = δ x * y + x *
     (↑(u * v)⁻¹ : S) * δ ↑(u * v) =
       ↑v⁻¹ * (↑u⁻¹ * δ ↑u) * ↑v + ↑v⁻¹ * δ ↑v := by
   rw [Units.val_mul, hδ, mul_inv_rev, Units.val_mul, mul_add]
-  congr 1
-  · simp only [mul_assoc]
-  · rw [mul_assoc, ← mul_assoc (↑u⁻¹ : S), Units.inv_mul, one_mul]
+  simp [mul_assoc]
 
 end Ring
 

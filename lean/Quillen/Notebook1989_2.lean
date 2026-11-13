@@ -48,15 +48,14 @@ theorem mul_X_left (hw₂ : (1 - δ * h) * w = 1) : (1 - δ * h) * (w * δ) = δ
   rw [← mul_assoc, hw₂, one_mul]
 
 theorem mul_X_right (hw₁ : w * (1 - δ * h) = 1) : w * δ * (1 - h * δ) = δ := by
-  have : w * δ * (1 - h * δ) = w * (1 - δ * h) * δ := by noncomm_ring
-  rw [this, hw₁, one_mul]
+  rw [show w * δ * (1 - h * δ) = w * (1 - δ * h) * δ by noncomm_ring, hw₁, one_mul]
 
 /-- **Notebook 1989-2, pp. 76-80**, the key identity: with `X = (1 − δh)⁻¹δ`,
 `dX + Xd + X² + X(dh + hd)X = 0` whenever `d² = 0` and `(d + δ)² = 0`. -/
 theorem key (hd : d * d = 0) (hD : (d + δ) * (d + δ) = 0) (hw₁ : w * (1 - δ * h) = 1)
     (hw₂ : (1 - δ * h) * w = 1) :
     d * (w * δ) + w * δ * d + w * δ * (w * δ) + w * δ * (d * h + h * d) * (w * δ) = 0 := by
-  set X := w * δ with hX
+  set X := w * δ
   set E := d * X + X * d + X * X + X * (d * h + h * d) * X
   have hl : (1 - δ * h) * X = δ := mul_X_left hw₂
   have hr : X * (1 - h * δ) = δ := mul_X_right hw₁

@@ -58,22 +58,11 @@ theorem trace_F_comm_comm {F : Matrix n n R} (hF : F * F = 1) (a b : Matrix n n 
     trace (F * (F * a - a * F) * (F * b - b * F)) = 2 * trace (a * (F * b - b * F)) := by
   have hFF : ∀ X : Matrix n n R, F * (F * X) = X := fun X => by
     rw [← Matrix.mul_assoc, hF, Matrix.one_mul]
-  have e1 : F * (F * a - a * F) = a - F * a * F := by
-    rw [mul_sub, ← Matrix.mul_assoc, hF, Matrix.one_mul, Matrix.mul_assoc]
-  rw [e1]
-  have e2 : (a - F * a * F) * (F * b - b * F) =
-      a * F * b - a * b * F - F * a * b + F * a * F * b * F := by
-    simp only [sub_mul, mul_sub, Matrix.mul_assoc, hFF]
-    abel
-  rw [e2]
-  simp only [trace_sub, trace_add, mul_sub, two_mul]
-  have t1 : trace (F * a * F * b * F) = trace (a * F * b) := by
-    rw [trace_mul_comm]
-    simp only [Matrix.mul_assoc, hFF]
-  have t2 : trace (F * a * b) = trace (a * b * F) := by
-    rw [Matrix.mul_assoc, trace_mul_comm, Matrix.mul_assoc]
-  rw [t1, t2]
-  simp only [Matrix.mul_assoc]
+  have t1 : trace (F * (a * (F * (b * F)))) = trace (a * (F * b)) := by
+    rw [trace_mul_comm]; simp only [Matrix.mul_assoc, hF, Matrix.mul_one]
+  have t2 : trace (F * (a * b)) = trace (a * (b * F)) := by
+    rw [trace_mul_comm, Matrix.mul_assoc]
+  simp only [mul_sub, sub_mul, Matrix.mul_assoc, hFF, trace_sub, t1, t2]
   ring
 
 end Quillen.Notebook1986_2

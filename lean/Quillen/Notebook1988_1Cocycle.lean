@@ -39,14 +39,10 @@ def phi (ρ x y : Matrix n n k) : k := trace (x * (y * ρ - ρ * y))
 commute. -/
 theorem phi_mul_right (ρ : Matrix n n k) {x y z : Matrix n n k} (hxz : x * z = z * x) :
     phi ρ x (y * z) = phi ρ (x * y) z + phi ρ (x * z) y := by
-  have h1 : trace (x * (y * (ρ * z))) = trace (x * (z * (y * ρ))) := by
-    rw [show x * (y * (ρ * z)) = (x * y * ρ) * z by simp [Matrix.mul_assoc], trace_mul_comm,
-      show z * (x * y * ρ) = (z * x) * (y * ρ) by simp [Matrix.mul_assoc], ← hxz,
-      Matrix.mul_assoc]
-  have h2 : trace (x * (ρ * (y * z))) = trace (x * (z * (ρ * y))) := by
-    rw [show x * (ρ * (y * z)) = (x * ρ * y) * z by simp [Matrix.mul_assoc], trace_mul_comm,
-      show z * (x * ρ * y) = (z * x) * (ρ * y) by simp [Matrix.mul_assoc], ← hxz,
-      Matrix.mul_assoc]
+  have key : ∀ w, trace (x * (w * z)) = trace (x * (z * w)) := fun w => by
+    rw [← Matrix.mul_assoc x z, hxz, Matrix.mul_assoc, trace_mul_comm z, Matrix.mul_assoc]
+  have h1 := key (y * ρ); have h2 := key (ρ * y)
+  simp only [Matrix.mul_assoc] at h1 h2
   simp only [phi, mul_sub, trace_sub, Matrix.mul_assoc]
   rw [h1, h2]
   ring

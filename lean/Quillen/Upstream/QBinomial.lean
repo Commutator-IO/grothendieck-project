@@ -79,5 +79,4 @@ theorem sum_neg_one_pow_mul_qBinomial_eq_zero (q : R) {n : ℕ} (hn : 1 ≤ n) :
     ∑ k ∈ range (n + 1), (-1) ^ k * q ^ k.choose 2 * qBinomial q n k = 0 := by
   have h := prod_one_add_pow_mul_eq_sum_qBinomial q n (-1)
   rw [prod_eq_zero (i := 0) (mem_range.2 hn) (by simp)] at h
-  rw [h]
-  exact sum_congr rfl fun k _ => by ring
+  exact (sum_congr rfl fun k _ => by ring).trans h.symm

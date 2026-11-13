@@ -44,9 +44,7 @@ theorem mul_prod_of_le (he : IsClifford e) {i m : ℕ} (hm : m ≤ i) :
   induction m with
   | zero => simp [P]
   | succ m ih =>
-    have := ih (by omega)
-    simp only [P]
-    rw [← mul_assoc, this, mul_assoc _ (e i), he.anti i m (by omega), pow_succ]
+    rw [P, ← mul_assoc, ih (by omega), mul_assoc _ (e i), he.anti i m (by omega), pow_succ]
     simp only [mul_neg, neg_mul, mul_one, mul_assoc]
 
 theorem mul_prod_of_lt (he : IsClifford e) {i m : ℕ} (hi : i < m) :
@@ -55,13 +53,11 @@ theorem mul_prod_of_lt (he : IsClifford e) {i m : ℕ} (hi : i < m) :
   | zero => omega
   | succ m ih =>
     simp only [P, Nat.add_sub_cancel]
-    rcases Nat.lt_succ_iff_lt_or_eq.mp hi with h | h
+    rcases Nat.lt_succ_iff_lt_or_eq.mp hi with h | rfl
     · rw [← mul_assoc, ih h, mul_assoc _ (e i), he.anti i m (by omega)]
       obtain ⟨k, rfl⟩ : ∃ k, m = k + 1 := ⟨m - 1, by omega⟩
       simp only [Nat.add_sub_cancel, pow_succ, mul_neg, neg_mul, mul_one, mul_assoc]
-    · subst h
-      rw [← mul_assoc, mul_prod_of_le he le_rfl]
-      simp only [mul_assoc]
+    · rw [← mul_assoc, mul_prod_of_le he le_rfl]; simp only [mul_assoc]
 
 /-- **Quillen, notebook 1982-12, p. 88**: `(e 0 ⋯ e (m − 1))² = (−1)^{m(m−1)/2}`. -/
 theorem prod_mul_prod (he : IsClifford e) (m : ℕ) :
@@ -74,27 +70,15 @@ theorem prod_mul_prod (he : IsClifford e) (m : ℕ) :
       rw [mul_assoc, ← mul_assoc (e m), mul_prod_of_le he le_rfl, mul_assoc, mul_assoc,
         he.sq, mul_one, ← mul_assoc, ← neg_one_pow_comm]
       simp only [mul_assoc]
-    rw [h, ih, ← pow_add]
-    congr 1
-    rcases m with _ | m
-    · rfl
-    · simp only [Nat.add_sub_cancel]
-      have : (m + 1 + 1) * (m + 1) = (m + 1) * m + 2 * (m + 1) := by ring
-      rw [this, Nat.add_mul_div_left _ _ (by norm_num)]
-      ring
+    rw [h, ih, ← pow_add, Nat.triangle_succ, add_comm]
 
 /-- For `m = 2n`: `Γ² = (−1)^n`. -/
 theorem prod_mul_prod_even (he : IsClifford e) (n : ℕ) :
     P e (2 * n) * P e (2 * n) = (-1) ^ n := by
-  rw [prod_mul_prod he]
+  rw [prod_mul_prod he, mul_assoc, Nat.mul_div_cancel_left _ two_pos, pow_mul']
   rcases n with _ | n
   · simp
-  · have : 2 * (n + 1) * (2 * (n + 1) - 1) / 2 = (n + 1) * (2 * n + 1) := by
-      rw [show 2 * (n + 1) - 1 = 2 * n + 1 by omega, mul_assoc, Nat.mul_div_cancel_left _
-        (by norm_num)]
-    have hx : ((-1 : R) ^ (n + 1)) ^ 2 = 1 := by
-      rw [← pow_mul, mul_comm, pow_mul]; simp
-    rw [this, pow_mul, pow_succ, pow_mul, hx, one_pow, one_mul]
+  · rw [Odd.neg_one_pow ⟨n, by omega⟩]
 
 /-- `Γ = e 0 ⋯ e (2n − 1)` anticommutes with each `e i`, `i < 2n`. -/
 theorem mul_prod_even (he : IsClifford e) {n i : ℕ} (hi : i < 2 * n) :
