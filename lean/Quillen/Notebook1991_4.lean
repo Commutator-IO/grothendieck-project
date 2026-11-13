@@ -25,14 +25,11 @@ variable {R : Type*} [Semiring R]
 `J + K = R`, the intersection `J ∩ K` is `J K + K J`. -/
 theorem inf_eq_mul_sup_mul (J K : Ideal R) [J.IsTwoSided] [K.IsTwoSided] (h : J ⊔ K = ⊤) :
     J ⊓ K = J * K ⊔ K * J := by
-  apply le_antisymm
-  · intro x hx
-    obtain ⟨j, hj, k, hk, hjk⟩ := Submodule.mem_sup.mp ((Ideal.eq_top_iff_one _).mp h)
-    have hx' : x = x * k + x * j := by rw [← mul_add, add_comm, hjk, mul_one]
-    rw [hx']
-    exact Submodule.add_mem_sup (Ideal.mul_mem_mul hx.1 hk) (Ideal.mul_mem_mul hx.2 hj)
-  · exact sup_le (le_inf Ideal.mul_le_left Ideal.mul_le_right)
-      (le_inf Ideal.mul_le_right Ideal.mul_le_left)
+  refine le_antisymm (fun x hx => ?_) (sup_le (le_inf Ideal.mul_le_left Ideal.mul_le_right)
+    (le_inf Ideal.mul_le_right Ideal.mul_le_left))
+  obtain ⟨j, hj, k, hk, hjk⟩ := Submodule.mem_sup.mp ((Ideal.eq_top_iff_one _).mp h)
+  exact Submodule.mem_sup.2 ⟨_, Ideal.mul_mem_mul hx.1 hk, _, Ideal.mul_mem_mul hx.2 hj,
+    by rw [← mul_add, add_comm, hjk, mul_one]⟩
 
 /-- In a commutative ring the two products agree, and the statement is the usual
 `J ∩ K = J K` for comaximal ideals. -/

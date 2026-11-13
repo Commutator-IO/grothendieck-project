@@ -45,33 +45,24 @@ variable {R : Type*} [CommRing R] {V : Type*} [AddCommGroup V] [Module R V]
 /-- **Notebook 1987-13, pp. 41-42**: `Ker N = Im(1 − σ)` when `σⁿ = 1` and `n` is invertible. -/
 theorem ker_norm (h : σ ^ n = 1) (hn : IsUnit (n : R)) :
     LinearMap.ker (N σ n) = LinearMap.range (1 - σ) := by
-  apply le_antisymm
-  · intro v hv
-    rw [LinearMap.mem_ker] at hv
-    obtain ⟨c, hc⟩ := hn.exists_left_inv
-    refine ⟨c • Q σ n v, ?_⟩
-    rw [map_smul, ← Module.End.mul_apply, one_sub_mul_Q, LinearMap.sub_apply, hv, sub_zero]
-    rw [show ((n : Module.End R V)) v = (n : R) • v by rw [Nat.cast_smul_eq_nsmul]; simp,
-      smul_smul, hc, one_smul]
-  · rintro _ ⟨w, rfl⟩
-    rw [LinearMap.mem_ker, ← Module.End.mul_apply, N_mul_one_sub σ n h, LinearMap.zero_apply]
+  refine le_antisymm (fun v hv => ?_) (LinearMap.range_le_ker_iff.2 (N_mul_one_sub σ n h))
+  obtain ⟨c, hc⟩ := hn.exists_left_inv
+  refine ⟨c • Q σ n v, ?_⟩
+  rw [map_smul, ← Module.End.mul_apply, one_sub_mul_Q, LinearMap.sub_apply, LinearMap.mem_ker.1 hv,
+    sub_zero, Module.End.natCast_apply, ← Nat.cast_smul_eq_nsmul R, smul_smul, hc, one_smul]
 
 /-- **Notebook 1987-13, pp. 41-42**: `Im N = Ker(1 − σ)` when `σⁿ = 1` and `n` is invertible. -/
 theorem range_norm (h : σ ^ n = 1) (hn : IsUnit (n : R)) :
     LinearMap.range (N σ n) = LinearMap.ker (1 - σ) := by
-  apply le_antisymm
-  · rintro _ ⟨w, rfl⟩
-    rw [LinearMap.mem_ker, ← Module.End.mul_apply, one_sub_mul_N σ n h, LinearMap.zero_apply]
-  · intro v hv
-    rw [LinearMap.mem_ker, LinearMap.sub_apply, Module.End.one_apply, sub_eq_zero] at hv
-    have hpow : ∀ i, (σ ^ i) v = v := fun i => by
-      induction i with
-      | zero => simp
-      | succ i ih => rw [pow_succ, Module.End.mul_apply, ← hv, ih, hv]
-    obtain ⟨c, hc⟩ := hn.exists_left_inv
-    refine ⟨c • v, ?_⟩
-    rw [map_smul, N, LinearMap.sum_apply]
-    simp only [hpow, sum_const, card_range]
-    rw [← Nat.cast_smul_eq_nsmul R, smul_smul, hc, one_smul]
+  refine le_antisymm (LinearMap.range_le_ker_iff.2 (one_sub_mul_N σ n h)) fun v hv => ?_
+  rw [LinearMap.mem_ker, LinearMap.sub_apply, Module.End.one_apply, sub_eq_zero] at hv
+  have hpow : ∀ i, (σ ^ i) v = v := fun i => by
+    induction i with
+    | zero => simp
+    | succ i ih => rw [pow_succ, Module.End.mul_apply, ← hv, ih]
+  obtain ⟨c, hc⟩ := hn.exists_left_inv
+  refine ⟨c • v, ?_⟩
+  simp only [map_smul, N, LinearMap.sum_apply, hpow, sum_const, card_range]
+  rw [← Nat.cast_smul_eq_nsmul R, smul_smul, hc, one_smul]
 
 end Quillen.Notebook1987_13

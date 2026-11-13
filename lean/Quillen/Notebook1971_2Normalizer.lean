@@ -37,31 +37,16 @@ of a point `a` in the symmetric group of `α` is its own normalizer. -/
 theorem normalizer_stabilizer [Fintype α] (h3 : 3 ≤ Fintype.card α) (a : α) :
     Subgroup.normalizer (stabilizer (Perm α) a : Set (Perm α)) = stabilizer (Perm α) a := by
   refine le_antisymm (fun g hg => ?_) Subgroup.le_normalizer
-  rw [Subgroup.mem_normalizer_iff] at hg
   rw [mem_stabilizer_iff']
   by_contra hga
-  set a' := g⁻¹ a with ha'
-  have haa' : a ≠ a' := by
-    intro h
-    apply hga
-    calc g a = g a' := by rw [← h]
-      _ = a := by simp [ha']
-  obtain ⟨c, hc⟩ : ∃ c, c ∉ ({a, a'} : Finset α) := by
-    by_contra! h
-    have : Finset.univ ⊆ ({a, a'} : Finset α) := fun x _ => h x
-    have := Finset.card_le_card this
-    rw [Finset.card_univ] at this
-    have := Finset.card_le_two (a := a) (b := a')
-    omega
+  have haa' : a ≠ g⁻¹ a := fun h => hga (Perm.eq_inv_iff_eq.1 h)
+  obtain ⟨c, -, hc⟩ := Finset.exists_mem_notMem_of_card_lt_card (s := {a, g⁻¹ a}) (t := .univ)
+    (by have := Finset.card_le_two (a := a) (b := g⁻¹ a); rw [Finset.card_univ]; omega)
   simp only [Finset.mem_insert, Finset.mem_singleton, not_or] at hc
-  have hh : swap a' c ∈ stabilizer (Perm α) a := by
-    rw [mem_stabilizer_iff', swap_apply_of_ne_of_ne haa' (Ne.symm hc.1)]
-  have := (hg _).mp hh
-  rw [mem_stabilizer_iff'] at this
-  simp only [Perm.coe_mul, Function.comp_apply] at this
-  rw [← ha', swap_apply_left] at this
-  apply hc.2
-  rw [ha', ← this]; simp
+  have := (Subgroup.mem_normalizer_iff.1 hg _).1
+    (mem_stabilizer_iff'.2 (swap_apply_of_ne_of_ne haa' (Ne.symm hc.1)))
+  simp only [mem_stabilizer_iff', Perm.coe_mul, Function.comp_apply, swap_apply_left] at this
+  exact hc.2 (Perm.eq_inv_iff_eq.2 this)
 
 /-- For two letters the bound fails: the stabilizer of a point of `Fin 2` is trivial, so its
 normalizer is everything, and contains the transposition, which moves the point. -/
@@ -69,11 +54,8 @@ theorem normalizer_stabilizer_two :
     swap (0 : Fin 2) 1 ∈
         Subgroup.normalizer (stabilizer (Perm (Fin 2)) (0 : Fin 2) : Set (Perm (Fin 2))) ∧
       swap (0 : Fin 2) 1 ∉ stabilizer (Perm (Fin 2)) (0 : Fin 2) := by
-  constructor
-  · rw [Subgroup.mem_normalizer_iff]
-    intro h
-    simp only [mem_stabilizer_iff']
-    fin_cases h <;> decide
-  · rw [mem_stabilizer_iff']; decide
+  refine ⟨Subgroup.mem_normalizer_iff.2 fun h => ?_, by rw [mem_stabilizer_iff']; decide⟩
+  simp only [mem_stabilizer_iff']
+  fin_cases h <;> decide
 
 end Quillen.Notebook1971_2Normalizer

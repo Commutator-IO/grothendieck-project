@@ -49,9 +49,8 @@ theorem sum_range_mul (hκ : κ ^ m = 1) (k : ℕ) :
 theorem proj_mul (hκ : κ ^ m = 1) {k : ℕ} (hk : 0 < k) : proj (k * m) κ = proj m κ := by
   rw [proj, proj, sum_range_mul hκ, smul_smul]
   congr 1
-  have : (k : ℚ) ≠ 0 := by exact_mod_cast hk.ne'
   push_cast
-  field_simp
+  field_simp [hk.ne']
 
 /-- **Notebook 1990-2, p. 14**: `Q_{km} = Q_m` when `κ^m = 1`. -/
 theorem green_mul (hκ : κ ^ m = 1) {k : ℕ} (hk : 0 < k) : green (k * m) κ = green m κ := by
@@ -59,12 +58,10 @@ theorem green_mul (hκ : κ ^ m = 1) {k : ℕ} (hk : 0 < k) : green (k * m) κ =
   refine sum_congr rfl fun r _ => ?_
   rw [smul_smul, smul_smul]
   congr 1
-  have : (k : ℚ) ≠ 0 := by exact_mod_cast hk.ne'
   rcases Nat.eq_zero_or_pos m with rfl | hm
   · simp
-  have : (m : ℚ) ≠ 0 := by exact_mod_cast hm.ne'
   push_cast
-  field_simp
+  field_simp [hk.ne', hm.ne']
   ring
 
 end Quillen.Notebook1990_2Green

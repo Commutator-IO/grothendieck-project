@@ -32,10 +32,7 @@ theorem one_add_sum_le_prod {ι : Type*} (s : Finset ι) {a : ι → ℝ} (ha : 
   | empty => simp
   | insert j s hj ih =>
     rw [sum_insert hj, prod_insert hj]
-    have h1 : 1 ≤ ∏ i ∈ s, (1 + a i) := by
-      have := sum_nonneg fun i (_ : i ∈ s) => ha i
-      linarith
-    nlinarith [ha j]
+    nlinarith [ha j, sum_nonneg fun i (_ : i ∈ s) => ha i]
 
 /-- **The criterion of notebook 1982-3, p. 18**, for unconditional products. -/
 theorem multipliable_one_add_iff {ι : Type*} {a : ι → ℝ} (ha : ∀ i, 0 ≤ a i) :
@@ -54,16 +51,12 @@ theorem tendsto_prod_range_iff {a : ℕ → ℝ} (ha : ∀ i, 0 ≤ a i) :
     (∃ P, Tendsto (fun N => ∏ i ∈ range N, (1 + a i)) atTop (𝓝 P)) ↔ Summable a := by
   refine ⟨fun ⟨P, hP⟩ => ?_, fun h =>
     ⟨_, (Real.multipliable_one_add_of_summable h).hasProd.tendsto_prod_nat⟩⟩
-  have hmono : Monotone (fun N => ∏ i ∈ range N, (1 + a i)) := by
-    refine monotone_nat_of_le_succ fun N => ?_
-    rw [prod_range_succ]
-    have h1 : 1 ≤ ∏ i ∈ range N, (1 + a i) := by
-      have := one_add_sum_le_prod (range N) ha
-      have := sum_nonneg fun i (_ : i ∈ range N) => ha i
-      linarith
-    nlinarith [ha N]
-  refine summable_of_sum_range_le (c := P) ha fun N => ?_
-  have := hmono.ge_of_tendsto hP N
-  linarith [one_add_sum_le_prod (range N) ha]
+  have hmono : Monotone (fun N => ∏ i ∈ range N, (1 + a i)) :=
+    monotone_nat_of_le_succ fun N => by
+      rw [prod_range_succ]
+      nlinarith [ha N, one_add_sum_le_prod (range N) ha,
+        sum_nonneg fun i (_ : i ∈ range N) => ha i]
+  exact summable_of_sum_range_le (c := P) ha fun N => by
+    linarith [hmono.ge_of_tendsto hP N, one_add_sum_le_prod (range N) ha]
 
 end Quillen.Notebook1982_3
