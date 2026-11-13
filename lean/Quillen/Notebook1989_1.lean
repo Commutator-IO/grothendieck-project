@@ -47,9 +47,8 @@ lemma derivative_F (n : ℕ) : derivative (F n) = ((X : ℝ[X]) - X ^ 2) ^ n := 
   field_simp
 
 /-- `F = X^{n+1} · H`. -/
-lemma X_pow_dvd_F (n : ℕ) : (X : ℝ[X]) ^ (n + 1) ∣ F n := by
-  refine dvd_sum fun k _ => Dvd.dvd.mul_left ?_ _
-  exact pow_dvd_pow X (by omega)
+lemma X_pow_dvd_F (n : ℕ) : (X : ℝ[X]) ^ (n + 1) ∣ F n :=
+  dvd_sum fun _ _ => (pow_dvd_pow X (by omega)).mul_left _
 
 lemma eval_zero_F (n : ℕ) : (F n).eval 0 = 0 := by
   simp [F, eval_finsetSum, zero_pow (Nat.succ_ne_zero _)]
@@ -76,9 +75,8 @@ lemma eval_one_F_pos (n : ℕ) : 0 < (F n).eval 1 := by
   rw [eval_zero_F, sub_zero] at hint
   rw [← hint]
   refine intervalIntegral.intervalIntegral_pos_of_pos_on
-    (by apply Continuous.intervalIntegrable; fun_prop) (fun t ht => ?_) one_pos
-  have : 0 < t - t ^ 2 := by nlinarith [ht.1, ht.2]
-  positivity
+    (by apply Continuous.intervalIntegrable; fun_prop)
+    (fun t ht => pow_pos (by nlinarith [ht.1, ht.2]) n) one_pos
 
 /-- The idempotent-lifting polynomial `f = F / F(1)`. -/
 noncomputable def liftPoly (n : ℕ) : ℝ[X] := C ((F n).eval 1)⁻¹ * F n
@@ -95,8 +93,7 @@ theorem liftPoly_symm (n : ℕ) (x : ℝ) : (liftPoly n).eval x + (liftPoly n).e
 
 /-- `f(1 − X) = 1 − f` as polynomials. -/
 lemma liftPoly_comp (n : ℕ) : (liftPoly n).comp (1 - X) = 1 - liftPoly n := by
-  apply Polynomial.funext
-  intro x
+  refine Polynomial.funext fun x => ?_
   simp only [eval_comp, eval_sub, eval_one, eval_X]
   linarith [liftPoly_symm n x]
 
@@ -145,13 +142,8 @@ theorem isUnit_sum_odd_pow {n : ℕ} (hn : 1 ≤ n) {x : A} (hx : x ^ (2 * n - 1
   have h2n : 2 * n = m + 1 := by omega
   set N := ∑ k ∈ range m, x ^ k
   have hxN : x * N = N := by
-    have h1 := sum_range_succ' (fun k => x ^ k) m
-    have h2 := sum_range_succ (fun k => x ^ k) m
-    simp only [pow_zero, hx] at h1 h2
-    rw [mul_sum]
-    simp only [← pow_succ']
-    rw [h2] at h1
-    exact (add_right_cancel h1).symm
+    simp only [N]
+    linear_combination (by rw [geom_sum_mul, hx, sub_self] : (∑ k ∈ range m, x ^ k) * (x - 1) = 0)
   have hxkN : ∀ k, x ^ k * N = N := by
     intro k; induction k with
     | zero => simp
@@ -163,21 +155,13 @@ theorem isUnit_sum_odd_pow {n : ℕ} (hn : 1 ≤ n) {x : A} (hx : x ^ (2 * n - 1
     rw [one_add_mul_sum_even, h2n, sum_range_succ, hx, add_comm]
   have hinv : (1 + N) * (1 - (1 / ((m : ℚ) + 1)) • N) = 1 := by
     have hm1 : ((m : ℚ) + 1) ≠ 0 := by positivity
-    rw [mul_sub, mul_one, mul_smul_comm, add_mul, one_mul, hNN, smul_add, smul_smul]
-    have : (1 / ((m : ℚ) + 1)) • N + (1 / ((m : ℚ) + 1) * m) • N = N := by
-      rw [← add_smul, show 1 / ((m : ℚ) + 1) + 1 / ((m : ℚ) + 1) * m = 1 by field_simp; ring, one_smul]
-    rw [this]; abel
-  have hEu : IsUnit (∑ j ∈ range n, x ^ (2 * j)) := by
-    refine IsUnit.of_mul_eq_one ((1 + x) * (1 - (1 / ((m : ℚ) + 1)) • N)) ?_
-    calc _ = ((1 + x) * ∑ j ∈ range n, x ^ (2 * j)) * (1 - (1 / ((m : ℚ) + 1)) • N) := by ring
-      _ = 1 := by rw [hE, hinv]
-  have hxu : IsUnit x := by
-    refine IsUnit.of_mul_eq_one (x ^ (m - 1)) ?_
-    rw [← pow_succ', show m - 1 + 1 = m by omega, hx]
-  have : ∑ j ∈ range n, x ^ (2 * j + 1) = x * ∑ j ∈ range n, x ^ (2 * j) := by
-    rw [mul_sum]; simp only [pow_succ']
-  rw [this]
-  exact hxu.mul hEu
+    rw [mul_sub, mul_one, mul_smul_comm, add_mul, one_mul, hNN, smul_add, smul_smul, ← add_smul,
+      show 1 / ((m : ℚ) + 1) + 1 / ((m : ℚ) + 1) * m = 1 by field_simp; ring, one_smul]
+    abel
+  have hEu : IsUnit (∑ j ∈ range n, x ^ (2 * j)) :=
+    IsUnit.of_mul_eq_one ((1 + x) * (1 - (1 / ((m : ℚ) + 1)) • N)) <| by
+      linear_combination (1 - (1 / ((m : ℚ) + 1)) • N) * hE + hinv
+  simpa only [mul_sum, pow_succ'] using (IsUnit.of_pow_eq_one hx (by omega)).mul hEu
 
 end Unit
 

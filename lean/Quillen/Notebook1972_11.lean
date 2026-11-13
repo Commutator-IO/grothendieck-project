@@ -64,32 +64,21 @@ theorem fg_ker_coprod {F : Type*} [AddCommGroup F] [Module R F] [Module.Finite R
     (LinearMap.ker (f.coprod σ)).FG := by
   apply Submodule.fg_of_fg_map_of_fg_inf_ker (LinearMap.snd R M' F)
   · -- the image under the second projection is the kernel of `g ∘ σ`
-    have : (LinearMap.ker (f.coprod σ)).map (LinearMap.snd R M' F) =
-        LinearMap.ker (g ∘ₗ σ) := by
-      ext v
-      simp only [Submodule.mem_map, LinearMap.mem_ker, LinearMap.coprod_apply,
-        LinearMap.snd_apply, LinearMap.comp_apply, Prod.exists, exists_eq_right]
-      constructor
-      · rintro ⟨m', hm'⟩
-        have : g (f m' + σ v) = 0 := by rw [hm', map_zero]
-        rwa [map_add, H.apply_apply_eq_zero, zero_add] at this
-      · intro hv
-        obtain ⟨m', hm'⟩ := (H (σ v)).mp hv
-        exact ⟨-m', by rw [map_neg, hm', neg_add_cancel]⟩
-    rw [this]
-    exact Module.FinitePresentation.fg_ker (g ∘ₗ σ) hgσ
+    convert Module.FinitePresentation.fg_ker (g ∘ₗ σ) hgσ using 1
+    ext v
+    simp only [Submodule.mem_map, LinearMap.mem_ker, LinearMap.coprod_apply,
+      LinearMap.snd_apply, LinearMap.comp_apply, Prod.exists, exists_eq_right]
+    refine ⟨fun ⟨m', hm'⟩ => by simpa [H.apply_apply_eq_zero] using congrArg g hm', fun hv => ?_⟩
+    obtain ⟨m', hm'⟩ := (H (σ v)).mp hv
+    exact ⟨-m', by rw [map_neg, hm', neg_add_cancel]⟩
   · -- on the kernel the second projection is injective
-    have : LinearMap.ker (f.coprod σ) ⊓ LinearMap.ker (LinearMap.snd R M' F) = ⊥ := by
-      rw [eq_bot_iff]
-      rintro ⟨m', v⟩ ⟨h1, h2⟩
-      simp only [SetLike.mem_coe, LinearMap.mem_ker, LinearMap.coprod_apply,
-        LinearMap.snd_apply] at h1 h2
-      subst h2
-      rw [map_zero, add_zero] at h1
-      have : m' = 0 := hf (by rw [h1, map_zero])
-      simp [this]
-    rw [this]
-    exact Submodule.fg_bot
+    convert Submodule.fg_bot using 1
+    rw [eq_bot_iff]
+    rintro ⟨m', v⟩ ⟨h1, h2⟩
+    simp only [SetLike.mem_coe, LinearMap.mem_ker, LinearMap.coprod_apply,
+      LinearMap.snd_apply] at h1 h2
+    subst h2
+    simp [hf (by simpa using h1 : f m' = f 0)]
 
 /-- **Quillen, notebook 1972-11, p. 36, (c).** In a short exact sequence `0 → M' → M → M'' → 0`
 of modules over a ring, if `M'` and `M''` are finitely presented, then `M` is finitely
@@ -101,14 +90,11 @@ theorem finitePresentation_of_exact [Module.FinitePresentation R M']
   -- a finite free cover `π : R^n → M''`, lifted to `σ : R^n → M`
   obtain ⟨n, π, hπ⟩ := Module.Finite.exists_fin' R M''
   obtain ⟨σ, hσ⟩ := Module.projective_lifting_property g π hg
-  have hgσ : Surjective (g ∘ₗ σ) := by rw [hσ]; exact hπ
+  have hgσ : Surjective (g ∘ₗ σ) := hσ ▸ hπ
   -- `M' × R^n → M` is onto, with finitely generated kernel
-  have hsurj : Surjective (f.coprod σ) := by
-    intro m
+  have hsurj : Surjective (f.coprod σ) := fun m => by
     obtain ⟨v, hv⟩ := hgσ (g m)
-    have : g (m - σ v) = 0 := by
-      rw [map_sub]; rw [LinearMap.comp_apply] at hv; rw [hv, sub_self]
-    obtain ⟨m', hm'⟩ := (H (m - σ v)).mp this
+    obtain ⟨m', hm'⟩ := (H (m - σ v)).mp (by rw [map_sub, ← LinearMap.comp_apply, hv, sub_self])
     exact ⟨(m', v), by rw [LinearMap.coprod_apply, hm', sub_add_cancel]⟩
   exact Module.finitePresentation_of_surjective (f.coprod σ) hsurj
     (fg_ker_coprod f g σ hf H hgσ)
@@ -120,22 +106,12 @@ variable {X : Type*} [AddCommGroup X] [Module R X] (A B : Submodule R X)
 /-- `A + B = X` if and only if `B → X/A` is onto. -/
 theorem sup_eq_top_iff_surjective_right :
     A ⊔ B = ⊤ ↔ Surjective (A.mkQ ∘ₗ B.subtype) := by
-  constructor
-  · intro h y
-    obtain ⟨x, rfl⟩ := A.mkQ_surjective y
+  refine ⟨fun h y => ?_, fun h => eq_top_iff.2 fun x _ => ?_⟩
+  · obtain ⟨x, rfl⟩ := A.mkQ_surjective y
     obtain ⟨a, ha, b, hb, rfl⟩ := Submodule.mem_sup.mp (h ▸ Submodule.mem_top : x ∈ A ⊔ B)
-    refine ⟨⟨b, hb⟩, ?_⟩
-    simp [ha]
-  · intro h
-    rw [eq_top_iff]
-    intro x _
-    obtain ⟨b, hb⟩ := h (A.mkQ x)
-    have hx : x - b ∈ A := by
-      rw [← Submodule.Quotient.eq]
-      exact hb.symm
-    have : x = (x - b) + b := by abel
-    rw [this]
-    exact Submodule.add_mem_sup hx b.2
+    exact ⟨⟨b, hb⟩, by simp [ha]⟩
+  · obtain ⟨b, hb⟩ := h (A.mkQ x)
+    simpa using Submodule.add_mem_sup ((Submodule.Quotient.eq _).1 hb.symm) b.2
 
 /-- `A + B = X` if and only if `A → X/B` is onto. -/
 theorem sup_eq_top_iff_surjective_left :
@@ -147,9 +123,8 @@ theorem sup_eq_top_iff_surjective_left :
 onto. -/
 theorem sup_eq_top_iff_surjective_prod :
     A ⊔ B = ⊤ ↔ Surjective (A.mkQ.prod B.mkQ) := by
-  constructor
-  · intro h y
-    obtain ⟨x, hx⟩ := A.mkQ_surjective y.1
+  refine ⟨fun h y => ?_, fun h => eq_top_iff.2 fun x _ => ?_⟩
+  · obtain ⟨x, hx⟩ := A.mkQ_surjective y.1
     obtain ⟨x', hx'⟩ := B.mkQ_surjective y.2
     obtain ⟨a, ha, b, hb, hab⟩ :=
       Submodule.mem_sup.mp (h ▸ Submodule.mem_top : x - x' ∈ A ⊔ B)
@@ -163,19 +138,11 @@ theorem sup_eq_top_iff_surjective_prod :
       show B.mkQ (x - a) = y.2
       rw [this, map_add, hx', Submodule.mkQ_apply, (Submodule.Quotient.mk_eq_zero B).mpr hb,
         add_zero]
-  · intro h
-    rw [eq_top_iff]
-    intro x _
-    obtain ⟨z, hz⟩ := h (A.mkQ x, 0)
+  · obtain ⟨z, hz⟩ := h (A.mkQ x, 0)
     have h1 : A.mkQ z = A.mkQ x := congrArg Prod.fst hz
     have h2 : B.mkQ z = 0 := congrArg Prod.snd hz
-    have hxz : x - z ∈ A := by
-      rw [← Submodule.Quotient.eq]
-      exact h1.symm
-    have hzB : z ∈ B := by simpa using h2
-    have : x = (x - z) + z := by abel
-    rw [this]
-    exact Submodule.add_mem_sup hxz hzB
+    simpa using Submodule.add_mem_sup ((Submodule.Quotient.eq _).1 h1.symm)
+      (by simpa using h2 : z ∈ B)
 
 /-- The map `X → X/A × X/B` is injective if and only if `A ∩ B = 0`. -/
 theorem injective_prod_iff : Injective (A.mkQ.prod B.mkQ) ↔ A ⊓ B = ⊥ := by
