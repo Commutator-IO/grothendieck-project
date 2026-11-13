@@ -37,8 +37,7 @@ lemma sum_gt_mul_eq_zero (hsum : ∑ k, e k = 1) (hid : ∀ i, IsIdempotentElem 
     · rw [ite_eq_left hjk, ite_eq_right hjk.ne', add_zero]
   have hs : ∑ k, e k * e j = e j := by rw [← Finset.sum_mul, hsum, one_mul]
   rw [Finset.sum_congr rfl fun k _ => h k, Finset.sum_add_distrib] at hs
-  simp only [Finset.sum_ite_eq', Finset.mem_univ, ite_true] at hs
-  exact (add_eq_right).mp hs
+  simpa only [Finset.sum_ite_eq', Finset.mem_univ, ite_true, add_eq_right] using hs
 
 /-- **p. 50**: `e_i e_j = 0` for `j < i` as well. -/
 theorem mul_eq_zero_of_gt (hsum : ∑ k, e k = 1) (hid : ∀ i, IsIdempotentElem (e i))
@@ -60,17 +59,13 @@ theorem mul_eq_zero_of_gt (hsum : ∑ k, e k = 1) (hid : ∀ i, IsIdempotentElem
     · rw [ite_eq_right hjk, mul_zero, ite_eq_right]
       rintro rfl
       exact hjk hji
-  simp_rw [hterm, Finset.sum_ite_eq', Finset.mem_univ, ite_true] at h0
-  exact h0
+  simpa only [hterm, Finset.sum_ite_eq', Finset.mem_univ, ite_true] using h0
 
 /-- The family is a complete family of orthogonal idempotents. -/
 theorem completeOrthogonalIdempotents (hsum : ∑ k, e k = 1) (hid : ∀ i, IsIdempotentElem (e i))
     (hlt : ∀ t s, t < s → e t * e s = 0) : CompleteOrthogonalIdempotents e where
   idem := hid
-  ortho i j hij := by
-    rcases lt_or_gt_of_ne hij with h | h
-    · exact hlt i j h
-    · exact mul_eq_zero_of_gt hsum hid hlt i j h
+  ortho i j hij := (lt_or_gt_of_ne hij).elim (hlt i j) (mul_eq_zero_of_gt hsum hid hlt i j)
   complete := hsum
 
 end Idempotents

@@ -48,12 +48,10 @@ theorem bott_mul_invert (a : R) :
 
 /-- The direction `⇐`: if `a (1 - a)` is nilpotent, then `a z + (1 - a)` is a unit. -/
 theorem isUnit_bott_of_isNilpotent {a : R} (h : IsNilpotent (a * (1 - a))) :
-    IsUnit (bott a) := by
-  have hn : IsNilpotent ((T 1 - 2 + T (-1)) * LaurentPolynomial.C (a * (1 - a))) :=
-    (Commute.all _ _).isNilpotent_mul_left (h.map LaurentPolynomial.C)
-  have hu : IsUnit (bott a * invert (bott a)) := by
-    rw [bott_mul_invert]; exact hn.isUnit_one_add
-  exact isUnit_of_mul_isUnit_left hu
+    IsUnit (bott a) :=
+  isUnit_of_mul_isUnit_left (by
+    rw [bott_mul_invert]
+    exact ((Commute.all _ _).isNilpotent_mul_left (h.map LaurentPolynomial.C)).isUnit_one_add)
 
 /-- Over a domain, if `a X + b` divides a power of `X`, then `a = 0` or `b = 0`: a unit
 `a z + b` of the Laurent polynomial ring is a monomial. -/
@@ -64,29 +62,17 @@ theorem eq_zero_or_eq_zero_of_mul_eq_X_pow {D : Type*} [CommRing D] [IsDomain D]
   induction N with
   | zero =>
     intro G hG
-    left
-    have hu : IsUnit (Polynomial.C a * X + Polynomial.C b) :=
-      IsUnit.of_mul_eq_one _ (by simpa using hG)
-    have hdeg := Polynomial.natDegree_eq_zero_of_isUnit hu
+    have hdeg := Polynomial.natDegree_eq_zero_of_isUnit (IsUnit.of_mul_eq_one _ (by simpa using hG))
     have hc := Polynomial.coeff_eq_zero_of_natDegree_lt
       (p := Polynomial.C a * X + Polynomial.C b) (n := 1) (by omega)
-    simpa using hc
+    exact .inl (by simpa using hc)
   | succ n ih =>
     intro G hG
     by_cases hb : b = 0
     · exact Or.inr hb
-    have h0 : G.coeff 0 = 0 := by
-      have h := congrArg (fun p : D[X] => p.coeff 0) hG
-      simp only [Polynomial.mul_coeff_zero, Polynomial.coeff_add,
-        Polynomial.coeff_X_zero, mul_zero, zero_add, Polynomial.coeff_C_zero,
-        Polynomial.coeff_X_pow, Nat.zero_ne_add_one, ite_false] at h
-      exact (mul_eq_zero.mp h).resolve_left hb
-    obtain ⟨G1, rfl⟩ := Polynomial.X_dvd_iff.mpr h0
-    refine ih G1 (mul_left_cancel₀ (Polynomial.X_ne_zero (R := D)) ?_)
-    calc X * ((Polynomial.C a * X + Polynomial.C b) * G1)
-        = (Polynomial.C a * X + Polynomial.C b) * (X * G1) := by ring
-      _ = X ^ (n + 1) := hG
-      _ = X * X ^ n := by ring
+    obtain ⟨G1, rfl⟩ := Polynomial.X_dvd_iff.mpr
+      (by simpa [hb] using congrArg (fun p : D[X] => p.coeff 0) hG)
+    exact ih G1 (mul_left_cancel₀ (Polynomial.X_ne_zero (R := D)) (by linear_combination hG))
 
 /-- The direction `⇒`: if `a z + (1 - a)` is a unit, then `a (1 - a)` is nilpotent. -/
 theorem isNilpotent_of_isUnit_bott {a : R} (h : IsUnit (bott a)) :

@@ -59,17 +59,8 @@ theorem tmul_one_mul_s (a : Matrix n n K) :
     rw [smul_single, smul_eq_mul, mul_one]
   rw [this, ← smul_tmul', tmul_smul, smul_mul_assoc, mul_smul_comm, single_tmul_one_mul_s]
 
-theorem sum_single_one : ∑ i : n, (single i i (1 : K) : Matrix n n K) = 1 := by
-  ext a b
-  simp only [Matrix.sum_apply, single_apply, one_apply]
-  by_cases h : a = b
-  · subst h; simp
-  · simp only [h, ite_false]
-    rw [Finset.sum_eq_zero]
-    intro x _
-    split_ifs with hx
-    · exact absurd (hx.1.symm.trans hx.2) h
-    · rfl
+theorem sum_single_one : ∑ i : n, (single i i (1 : K) : Matrix n n K) = 1 :=
+  Matrix.sum_single_one
 
 /-- The multiplication map `x ⊗ y ↦ x y`. -/
 noncomputable abbrev mul' : Matrix n n K ⊗[K] Matrix n n K →ₗ[K] Matrix n n K :=

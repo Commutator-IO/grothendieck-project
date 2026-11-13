@@ -57,12 +57,8 @@ theorem main (n : ℕ) : ∀ (s : Finset J) (hs : IsLowerSet (s : Set J)), s.car
     have hcard : s'.card = n := by rw [Finset.card_erase_of_mem hjs]; omega
     obtain ⟨ihW, ihI⟩ := ih s' hs' hcard
     have hIic : LowerSet.Iic j ≤ ofFinset s hs := fun a ha => hs ha hjs
-    have hIio : LowerSet.Iio j ≤ ofFinset s' hs' := by
-      intro a ha
-      have ha' : a < j := ha
-      show a ∈ (s' : Set J)
-      rw [hs'def, Finset.coe_erase]
-      exact ⟨hs ha'.le hjs, ha'.ne⟩
+    have hIio : LowerSet.Iio j ≤ ofFinset s' hs' := fun a (ha : a < j) =>
+      show a ∈ (s' : Set J) by rw [hs'def, Finset.coe_erase]; exact ⟨hs ha.le hjs, ha.ne⟩
     have hsplit : ofFinset s hs = ofFinset s' hs' ⊔ LowerSet.Iic j := by
       refine le_antisymm (fun a ha => ?_) (sup_le (fun a ha => ?_) hIic)
       · by_cases haj : a = j
@@ -71,9 +67,7 @@ theorem main (n : ℕ) : ∀ (s : Finset J) (hs : IsLowerSet (s : Set J)), s.car
       · exact Finset.mem_of_mem_erase ha
     have hmeet : LowerSet.Iic j ⊓ ofFinset s' hs' ≤ LowerSet.Iio j := by
       rintro a ⟨ha1, ha2⟩
-      have ha1' : a ≤ j := ha1
-      have ha2' : a ∈ s' := ha2
-      exact lt_of_le_of_ne ha1' (Finset.ne_of_mem_erase ha2')
+      exact lt_of_le_of_ne ha1 (Finset.ne_of_mem_erase ha2)
     have hsupeq : s.sup V = V j ⊔ s'.sup V := by
       rw [← Finset.insert_erase hjs, Finset.sup_insert]
     have hWs : W (ofFinset s hs) = V j ⊔ W (ofFinset s' hs') := by
@@ -97,10 +91,8 @@ theorem iSup_eq (Z : LowerSet J) : W Z = ⨆ j ∈ Z, V j := by
     simp only [s, Finset.coe_filter, Finset.mem_univ, true_and] at ha ⊢
     exact Z.lower hba ha
   have hZ : ofFinset s hs = Z := by ext; simp [ofFinset, s]
-  have := (main W hW V hsup hdis s.card s hs rfl).1
-  rw [hZ] at this
-  rw [this, Finset.sup_eq_iSup]
-  simp [s]
+  rw [← hZ, (main W hW V hsup hdis s.card s hs rfl).1, Finset.sup_eq_iSup]
+  simp [s, ofFinset]
 
 include hW hsup hdis in
 /-- **Notebook 1975-21, pp. 37-38**: the `V_j` are independent. -/

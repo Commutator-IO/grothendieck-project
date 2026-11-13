@@ -108,11 +108,7 @@ theorem isCompl_range_ker (hFV : ∀ x, F (V x) = p ^ d • x) (hVF : ∀ x, V (
   constructor
   · rw [disjoint_iff, eq_bot_iff]
     rintro x ⟨⟨y, rfl⟩, hx⟩
-    have hx' : p ^ (d + d) • y = 0 := by
-      rw [pow_add, mul_smul]
-      exact hx
-    have := nsmul_eq_zero_of_pow_nsmul hVF hF hr (d + d) y hx'
-    simpa using this
+    simpa using nsmul_eq_zero_of_pow_nsmul hVF hF hr (d + d) y (by rw [pow_add, mul_smul]; exact hx)
   · rw [codisjoint_iff, eq_top_iff]
     intro x _
     obtain ⟨t, ht, hx⟩ := exists_decomp hFV hF d x
