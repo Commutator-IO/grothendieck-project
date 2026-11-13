@@ -28,13 +28,11 @@ noncomputable def s (N : ℕ) (α : A) : A := ∑ k ∈ range N, ((centralBinom 
 
 lemma s_eq_aeval (N : ℕ) (α : A) : s N α = aeval α (PowerSeries.trunc N centralSeries) := by
   rw [aeval_def, PowerSeries.eval₂_trunc_eq_sum_range, s]
-  refine sum_congr rfl fun k _ => ?_
-  simp [centralSeries, Algebra.smul_def]
+  exact sum_congr rfl fun k _ => by simp [centralSeries, Algebra.smul_def]
 
 lemma X_pow_dvd (N : ℕ) :
     (X : ℚ[X]) ^ N ∣ (PowerSeries.trunc N centralSeries) ^ 2 * (1 - X) - 1 := by
-  rw [X_pow_dvd_iff]
-  intro d hd
+  refine X_pow_dvd_iff.2 fun d hd => ?_
   have h : ((PowerSeries.trunc N centralSeries ^ 2 * (1 - X) - 1 : ℚ[X]) : PowerSeries ℚ) =
       (PowerSeries.trunc N centralSeries : PowerSeries ℚ) ^ 2 * (1 - PowerSeries.X) - 1 := by
     push_cast; rfl
@@ -46,21 +44,16 @@ lemma X_pow_dvd (N : ℕ) :
 /-- **Notebook 1987-11, p. 77**: `s² (1 − α) = 1` when `α^N = 0`. -/
 theorem sq_mul_one_sub {N : ℕ} {α : A} (hα : α ^ N = 0) : s N α ^ 2 * (1 - α) = 1 := by
   obtain ⟨R, hR⟩ := X_pow_dvd N
-  have := congrArg (aeval α) hR
-  rw [map_sub, map_mul, map_pow, map_sub, map_one, aeval_X, map_mul, map_pow, aeval_X, hα,
-    zero_mul, ← s_eq_aeval, sub_eq_zero] at this
-  exact this
+  simpa [hα, ← s_eq_aeval, sub_eq_zero] using congrArg (aeval α) hR
 
 /-- **Notebook 1987-11, p. 77**: if `u² = 1 − α`, `u α = α u` and `α^N = 0`, then `F = u s` is an
 involution. -/
 theorem involution {N : ℕ} {α u : A} (hα : α ^ N = 0) (hu : u ^ 2 = 1 - α)
     (hcomm : Commute u α) : (u * s N α) ^ 2 = 1 := by
-  have hc : Commute u (s N α) := by
-    rw [s]
-    exact Commute.sum_right _ _ _ fun k _ => (hcomm.pow_right k).smul_right _
-  have hsα : Commute (s N α) α := by
-    rw [s]
-    exact Commute.sum_left _ _ _ fun k _ => ((Commute.refl α).pow_left k).smul_left _
+  have hc : Commute u (s N α) :=
+    Commute.sum_right _ _ _ fun k _ => (hcomm.pow_right k).smul_right _
+  have hsα : Commute (s N α) α :=
+    Commute.sum_left _ _ _ fun k _ => ((Commute.refl α).pow_left k).smul_left _
   have hk : Commute (s N α ^ 2) (1 - α) := (Commute.one_right _).sub_right (hsα.pow_left 2)
   rw [hc.mul_pow, hu, ← hk.eq, sq_mul_one_sub hα]
 

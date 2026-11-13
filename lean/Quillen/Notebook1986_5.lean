@@ -28,8 +28,7 @@ noncomputable def j (A B : K) : Fin 4 → K := ![(A + 1) * ⅟2, B * ⅟2, (A - 
 def eps : Fin 4 → K := ![1, 1, -1, -1]
 
 lemma half_sq : (⅟2 : K) * ⅟2 * 4 = 1 := by
-  have : (4 : K) = 2 * 2 := by norm_num
-  rw [this, mul_assoc, ← mul_assoc (⅟2 : K) 2, invOf_mul_self, one_mul, invOf_mul_self]
+  rw [show (4 : K) = 2 * 2 by norm_num, mul_mul_mul_comm, invOf_mul_self, one_mul]
 
 theorem dot_self (h : A ^ 2 + B ^ 2 = 1) : ∑ i, j A B i * j A B i = 1 := by
   simp only [j, Fin.sum_univ_four, Matrix.cons_val_zero, Matrix.cons_val_one,
@@ -52,15 +51,10 @@ theorem four_pow_mul_prod (n : ℕ) :
   induction n with
   | zero => simp
   | succ n ih =>
-    have h := Nat.succ_mul_centralBinom_succ n
-    have h' : ((n : ℝ) + 1) * ((n + 1).centralBinom : ℝ) = 2 * (2 * n + 1) * n.centralBinom := by
-      exact_mod_cast h
-    rw [Finset.prod_range_succ, pow_succ]
-    have hn : (n : ℝ) + 1 ≠ 0 := by positivity
-    have hn2 : 2 * (n : ℝ) + 2 ≠ 0 := by positivity
-    have : ((n + 1).centralBinom : ℝ) = 2 * (2 * n + 1) * n.centralBinom / (n + 1) := by
-      rw [← h']; field_simp
-    rw [this, ← ih]
+    have h : ((n : ℝ) + 1) * ((n + 1).centralBinom : ℝ) = 2 * (2 * n + 1) * n.centralBinom := by
+      exact_mod_cast Nat.succ_mul_centralBinom_succ n
+    refine mul_left_cancel₀ (by positivity : (n : ℝ) + 1 ≠ 0) ?_
+    rw [Finset.prod_range_succ, pow_succ, h, ← ih]
     field_simp
     ring
 

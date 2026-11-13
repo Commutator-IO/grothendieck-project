@@ -18,11 +18,8 @@ lies in the commutator subgroup of the normal closure, which is normal. -/
 theorem isPerfect_normalClosure (H : Subgroup G) [Group.IsPerfect H] :
     Group.IsPerfect (normalClosure (H : Set G)) := by
   rw [isPerfect_iff]
-  set N := normalClosure (H : Set G)
-  refine le_antisymm (commutator_le_left N N) (normalClosure_le_normal ?_)
-  have hHN : H ≤ N := le_normalClosure
-  intro h hh
+  refine le_antisymm (commutator_le_left _ _) (normalClosure_le_normal fun h hh => ?_)
   rw [← (commutator_eq_self : ⁅H, H⁆ = H)] at hh
-  exact commutator_mono hHN hHN hh
+  exact commutator_mono le_normalClosure le_normalClosure hh
 
 end Subgroup

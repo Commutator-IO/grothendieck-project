@@ -31,17 +31,12 @@ theorem smul_mem_fixedPoints (g : G) {x : X} (hx : x ∈ fixedPoints N X) :
     g • x ∈ fixedPoints N X := by
   intro n
   have h : ((⟨g⁻¹ * n * g, Subgroup.Normal.conj_mem' ‹_› n.1 n.2 g⟩ : N) • x) = x := hx _
-  change (n : G) • g • x = g • x
-  calc (n : G) • g • x = g • ((g⁻¹ * n * g) • x) := by
-        rw [smul_smul, smul_smul]; group
-    _ = g • x := by rw [show (g⁻¹ * n * g) • x = x from h]
+  simpa [smul_smul, mul_assoc, Subgroup.smul_def] using congrArg (g • ·) h
 
 omit [N.Normal] in
 theorem smul_eq_of_mem {g g' : G} (h : g⁻¹ * g' ∈ N) {x : X} (hx : x ∈ fixedPoints N X) :
     g' • x = g • x := by
-  have : ((⟨g⁻¹ * g', h⟩ : N) • x) = x := hx _
-  calc g' • x = g • ((g⁻¹ * g') • x) := by rw [smul_smul]; group
-    _ = g • x := by rw [show (g⁻¹ * g') • x = x from this]
+  simpa [smul_smul] using congrArg (g • ·) (hx ⟨g⁻¹ * g', h⟩ : (⟨g⁻¹ * g', h⟩ : N) • x = x)
 
 /-- The action of `G ⧸ N` on the fixed points of `N`. -/
 instance quotientAction : MulAction (G ⧸ N) (fixedPoints N X) where
@@ -60,12 +55,9 @@ theorem coe_mk_smul (g : G) (x : fixedPoints N X) :
 /-- `(X^N)^{G ⧸ N} ≃ X^G`. -/
 def fixedPointsQuotientEquiv :
     fixedPoints (G ⧸ N) (fixedPoints N X) ≃ fixedPoints G X where
-  toFun y := ⟨y.1.1, fun g => by
-    have := y.2 (g : G ⧸ N)
-    exact congrArg Subtype.val this⟩
-  invFun x := ⟨⟨x.1, fun n => x.2 n⟩, fun q => by
-    induction q using QuotientGroup.induction_on with
-    | H g => exact Subtype.ext (x.2 g)⟩
+  toFun y := ⟨y.1.1, fun g => congrArg Subtype.val (y.2 (g : G ⧸ N))⟩
+  invFun x := ⟨⟨x.1, fun n => x.2 n⟩, fun q =>
+    QuotientGroup.induction_on q fun g => Subtype.ext (x.2 g)⟩
   left_inv _ := rfl
   right_inv _ := rfl
 

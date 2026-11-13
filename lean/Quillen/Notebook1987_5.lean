@@ -34,7 +34,7 @@ theorem exists_eq_add (x : ℚ_[p]) :
   refine ⟨(PadicInt.appr y k : ℤ), k, w, ?_⟩
   have hw' : (w : ℚ_[p]) * (p : ℚ_[p]) ^ k
       = (p : ℚ_[p]) ^ k * x - (PadicInt.appr y k : ℚ_[p]) := by
-    have := congrArg (fun t : ℤ_[p] => (t : ℚ_[p])) hw
+    have := congrArg ((↑) : ℤ_[p] → ℚ_[p]) hw
     push_cast at this
     exact this
   have hpk : (p : ℚ_[p]) ^ k ≠ 0 := pow_ne_zero _ hp0
@@ -47,12 +47,8 @@ theorem dvd_of_norm_div_le_one (m : ℤ) (k : ℕ)
     (h : ‖(m : ℚ_[p]) / (p : ℚ_[p]) ^ k‖ ≤ 1) : (p ^ k : ℤ) ∣ m := by
   rw [← Padic.norm_int_le_pow_iff_dvd]
   have hp0 : (p : ℚ_[p]) ^ k ≠ 0 := pow_ne_zero _ (by exact_mod_cast hp.out.ne_zero)
-  have : (m : ℚ_[p]) = (m : ℚ_[p]) / (p : ℚ_[p]) ^ k * (p : ℚ_[p]) ^ k := by field_simp
-  rw [this, norm_mul, Padic.norm_p_pow]
-  have hpos : (0 : ℝ) ≤ (p : ℝ) ^ (-(k : ℤ)) := zpow_nonneg (by positivity) _
-  calc ‖(m : ℚ_[p]) / (p : ℚ_[p]) ^ k‖ * (p : ℝ) ^ (-(k : ℤ)) ≤ 1 * (p : ℝ) ^ (-(k : ℤ)) :=
-        mul_le_mul_of_nonneg_right h hpos
-    _ = (p : ℝ) ^ (-(k : ℤ)) := one_mul _
+  rw [← div_mul_cancel₀ (m : ℚ_[p]) hp0, norm_mul, Padic.norm_p_pow]
+  exact mul_le_of_le_one_left (zpow_nonneg (by positivity) _) h
 
 /-- `ℤ[1/p] ∩ ℤ_p = ℤ`: a rational number with denominator a power of `p` that is a `p`-adic
 integer is an integer. -/
@@ -60,10 +56,7 @@ theorem inter_eq_int (m : ℤ) (k : ℕ) (h : ‖(((m : ℚ) / (p : ℚ) ^ k : �
     ∃ n : ℤ, (m : ℚ) / (p : ℚ) ^ k = n := by
   push_cast at h
   obtain ⟨n, hn⟩ := dvd_of_norm_div_le_one m k h
-  refine ⟨n, ?_⟩
   have hp0 : (p : ℚ) ^ k ≠ 0 := pow_ne_zero _ (by exact_mod_cast hp.out.ne_zero)
-  rw [hn]
-  push_cast
-  field_simp
+  exact ⟨n, by rw [hn]; push_cast; field_simp⟩
 
 end Quillen.Notebook1987_5

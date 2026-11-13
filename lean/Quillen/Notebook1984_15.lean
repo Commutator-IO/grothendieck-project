@@ -45,23 +45,12 @@ theorem two_smul_pair_symm (hR : IsCurvature R) (i j k l : ι) :
   rw [hR.skew₁ l i k j, hR.skew₂ i l k j, hR.skew₁ i k l j, hR.skew₂ k i l j,
     hR.skew₁ k i j l] at h3
   rw [hR.skew₁ l i j k, hR.skew₂ i j l k] at h4
-  rw [← sub_eq_zero]
-  have e : (2 : ℤ) • R i j k l - (2 : ℤ) • R k l i j
-      = (R i j k l + R j k i l + -R i k j l)
-        + (-R j k i l + -R k l i j + - -R j l i k)
-        - (R k l i j + - -R i l j k + - - -R i k j l)
-        - (-R i l j k + -R i j k l + R j l i k) := by
-    abel
-  rw [e, h1, h2, h3, h4]
-  abel
+  linear_combination (norm := abel) h1 + h2 - h3 - h4
 
 /-- **p. 55**: pair symmetry, when the target has no `2`-torsion. -/
 theorem pair_symm (hR : IsCurvature R) (h2 : ∀ x : G, (2 : ℤ) • x = 0 → x = 0)
     (i j k l : ι) : R i j k l = R k l i j := by
-  have := two_smul_pair_symm hR i j k l
-  rw [← sub_eq_zero]
-  apply h2
-  rw [smul_sub, this, sub_self]
+  exact sub_eq_zero.1 (h2 _ (by rw [smul_sub, two_smul_pair_symm hR, sub_self]))
 
 /-- The counterexample in characteristic `2`. -/
 def R₂ (i j k l : Fin 4) : ZMod 2 :=

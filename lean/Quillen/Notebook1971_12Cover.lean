@@ -35,16 +35,12 @@ theorem not_cover_of_infinite {A ι : Type*} [Ring A] (s : Finset ι) (a : ι �
     (I : ι → Ideal A) (hI : ∀ i ∈ s, Infinite (A ⧸ I i)) :
     ∃ x : A, ∀ i ∈ s, x - a i ∉ I i := by
   by_contra! h
-  have hcov : ⋃ i ∈ s, a i +ᵥ ((I i).toAddSubgroup : Set A) = Set.univ := by
-    refine Set.eq_univ_of_forall fun x => ?_
-    obtain ⟨i, hi, hx⟩ := h x
-    refine Set.mem_iUnion₂.mpr ⟨i, hi, ?_⟩
-    rw [mem_leftAddCoset_iff]
-    simpa [neg_add_eq_sub] using hx
+  have hcov : ⋃ i ∈ s, a i +ᵥ ((I i).toAddSubgroup : Set A) = Set.univ :=
+    Set.eq_univ_of_forall fun x => by
+      obtain ⟨i, hi, hx⟩ := h x
+      exact Set.mem_iUnion₂.mpr ⟨i, hi, by simpa [mem_leftAddCoset_iff, neg_add_eq_sub] using hx⟩
   obtain ⟨i, hi, hfin⟩ := AddSubgroup.exists_finiteIndex_of_leftCoset_cover hcov
-  have : Finite (A ⧸ (I i).toAddSubgroup) := AddSubgroup.finite_quotient_of_finiteIndex
-  have : Infinite (A ⧸ (I i).toAddSubgroup) := hI i hi
-  exact not_finite (A ⧸ (I i).toAddSubgroup)
+  exact @not_finite _ (hI i hi) AddSubgroup.finite_quotient_of_finiteIndex
 
 /-- **Quillen, notebook 1971-12, p. 19.** Let `A` be a commutative ring whose residue fields
 `A ⧸ m` at maximal ideals are all infinite. Then `A` is not a finite union of cosets
@@ -55,7 +51,6 @@ theorem not_cover {A ι : Type*} [CommRing A]
     ∃ x : A, ∀ i ∈ s, x - a i ∉ q i := by
   refine not_cover_of_infinite s a q fun i hi => ?_
   obtain ⟨m, hm, hqm⟩ := Ideal.exists_le_maximal (q i) (hq i hi)
-  have := hA m hm
-  exact Infinite.of_surjective _ (Ideal.Quotient.factor_surjective hqm)
+  exact @Infinite.of_surjective _ _ (hA m hm) _ (Ideal.Quotient.factor_surjective hqm)
 
 end Quillen.Notebook1971_12Cover

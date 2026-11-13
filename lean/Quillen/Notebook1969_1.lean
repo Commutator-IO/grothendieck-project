@@ -51,8 +51,7 @@ theorem sum_pow_mul_prod_eq_pow {s : Finset ι} {v : ι → K} (hvs : Set.InjOn 
   by_cases ha : a = 0
   · subst ha
     rw [← sum_pow_mul_prod_eq_zero_pow hvs hq]
-    refine sum_congr rfl fun i _ => ?_
-    simp [div_eq_mul_inv, Finset.prod_inv_distrib]
+    exact sum_congr rfl fun i _ => by simp [div_eq_mul_inv, Finset.prod_inv_distrib]
   · have hP : ((X : K[X]) ^ q).degree < #s := by rw [degree_X_pow]; exact_mod_cast hq
     have h := congrArg (eval a⁻¹) (Lagrange.eq_interpolate hvs hP)
     simp only [Lagrange.interpolate_apply, eval_finsetSum, eval_mul, eval_C, eval_pow, eval_X,
@@ -60,11 +59,8 @@ theorem sum_pow_mul_prod_eq_pow {s : Finset ι} {v : ι → K} (hvs : Set.InjOn 
     have key : ∀ i ∈ s, v i ^ q * ∏ j ∈ s.erase i, ((1 - a * v j) / (v i - v j)) =
         a ^ (#s - 1) * (v i ^ q * ∏ j ∈ s.erase i, ((v i - v j)⁻¹ * (a⁻¹ - v j))) := by
       intro i hi
-      have : ∀ j ∈ s.erase i, (1 - a * v j) / (v i - v j) =
-          a * ((v i - v j)⁻¹ * (a⁻¹ - v j)) := by
-        intro j _
-        field_simp
-      rw [prod_congr rfl this, prod_mul_distrib, prod_const, card_erase_of_mem hi]
+      rw [prod_congr rfl (g := fun j => a * ((v i - v j)⁻¹ * (a⁻¹ - v j))) fun j _ => by
+        field_simp, prod_mul_distrib, prod_const, card_erase_of_mem hi]
       ring
     rw [sum_congr rfl key, ← mul_sum, ← h, inv_pow]
     exact (pow_sub₀ a ha (by omega)).symm
