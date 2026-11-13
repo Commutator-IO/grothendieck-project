@@ -33,17 +33,8 @@ theorem mul_le_mul_of_ratios (hv : ∀ j ≤ n, 0 < v j)
   | zero => intro _; rw [mul_comm]
   | succ k ih =>
     intro hk
-    have h1 := ih (by omega)
-    have h2 := h k (by omega)
-    have hk0 := hv k (by omega)
-    have hk1 := hv (k + 1) (by omega)
-    have h0 := hv 0 (by omega)
-    refine le_of_mul_le_mul_right ?_ hk0
-    calc v 0 * v (k + 1 + 1) * v k = v 0 * (v k * v (k + 2)) := by ring
-      _ ≤ v 0 * v (k + 1) ^ 2 := by gcongr
-      _ = v 0 * v (k + 1) * v (k + 1) := by ring
-      _ ≤ v 1 * v k * v (k + 1) := by gcongr
-      _ = v 1 * v (k + 1) * v k := by ring
+    have h2 : v k * v (k + 1 + 1) ≤ v (k + 1) ^ 2 := h k (by omega)
+    nlinarith [ih (by omega), hv k (by omega), hv (k + 1) (by omega), hv 0 (by omega)]
 
 /-- `v₀ ^ k vₖ ≤ v₁ ^ k v₀` for `k ≤ n`. -/
 theorem pow_mul_le_pow_mul (hv : ∀ j ≤ n, 0 < v j)
@@ -54,15 +45,10 @@ theorem pow_mul_le_pow_mul (hv : ∀ j ≤ n, 0 < v j)
   | zero => intro _; simp
   | succ k ih =>
     intro hk
-    have h1 := ih (by omega)
-    have h2 := mul_le_mul_of_ratios hv h k hk
-    have h0 := hv 0 (by omega)
-    have h1' := hv 1 (by omega)
-    calc v 0 ^ (k + 1) * v (k + 1) = v 0 ^ k * (v 0 * v (k + 1)) := by ring
-      _ ≤ v 0 ^ k * (v 1 * v k) := by gcongr
-      _ = v 1 * (v 0 ^ k * v k) := by ring
-      _ ≤ v 1 * (v 1 ^ k * v 0) := by gcongr
-      _ = v 1 ^ (k + 1) * v 0 := by ring
+    rw [pow_succ, pow_succ]
+    nlinarith [mul_le_mul_of_nonneg_left (mul_le_mul_of_ratios hv h k hk)
+      (pow_pos (hv 0 (by omega)) k).le, mul_le_mul_of_nonneg_left (ih (by omega))
+      (hv 1 (by omega)).le]
 
 /-- **Quillen, 1983 lecture notes 3 (Kirwan), p. 2.** Let `v₀, …, vₙ` be positive reals, `n ≥ 1`,
 with `v₀ / v₁ ≤ v₁ / v₂ ≤ ⋯ ≤ vₙ₋₁ / vₙ` (written `vⱼ vⱼ₊₂ ≤ vⱼ₊₁ ^ 2`). Then
@@ -74,9 +60,8 @@ theorem pow_pred_mul_le_pow (hn : 1 ≤ n) (hv : ∀ j ≤ n, 0 < v j)
   have key := pow_mul_le_pow_mul hv h n le_rfl
   obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩
   refine le_of_mul_le_mul_right ?_ h0
-  calc v 0 ^ (m + 1 - 1) * v (m + 1) * v 0 = v 0 ^ (m + 1) * v (m + 1) := by
-        rw [Nat.add_sub_cancel]; ring
-    _ ≤ v 1 ^ (m + 1) * v 0 := key
+  rw [Nat.add_sub_cancel, mul_assoc, mul_comm (v _), ← mul_assoc, ← pow_succ]
+  exact key
 
 /-- The same implication in the form of the page: `(v₀ / v₁) ^ n ≤ v₀ / vₙ`. -/
 theorem div_pow_le_div (hv : ∀ j ≤ n, 0 < v j)

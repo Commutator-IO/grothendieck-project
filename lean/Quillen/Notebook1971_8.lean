@@ -43,30 +43,16 @@ theorem commutator_le_comap :
   rw [commutator_eq_closure, Subgroup.closure_le]
   rintro _ ⟨a, b, rfl⟩
   have hb : (b, b) ∈ diagClosure G := Subgroup.subset_normalClosure ⟨b, rfl⟩
-  have hn : (diagClosure G).Normal := Subgroup.normalClosure_normal
-  have h1 := hn.conj_mem _ hb (a, 1)
-  have h2 := (diagClosure G).mul_mem h1 ((diagClosure G).inv_mem hb)
-  have h3 : (a, (1 : G)) * (b, b) * (a, (1 : G))⁻¹ * (b, b)⁻¹ = (a * b * a⁻¹ * b⁻¹, 1) := by
-    ext <;> simp
-  rw [h3] at h2
-  change (a * b * a⁻¹ * b⁻¹, (1 : G)) ∈ diagClosure G
-  exact h2
+  simpa [commutatorElement_def] using (diagClosure G).mul_mem
+    (Subgroup.normalClosure_normal.conj_mem _ hb (a, 1)) ((diagClosure G).inv_mem hb)
 
 /-- The kernel of `(x, y) ↦ [x] [y]⁻¹` is the normal closure of the diagonal. -/
 theorem ker_toAb : (toAb G).ker = diagClosure G := by
-  apply le_antisymm
-  · rintro ⟨x, y⟩ h
-    rw [MonoidHom.mem_ker, toAb_apply] at h
-    have hc : x * y⁻¹ ∈ commutator G := by
-      rw [← Abelianization.ker_of, MonoidHom.mem_ker, map_mul, map_inv]
-      exact h
-    have h1 : (x * y⁻¹, (1 : G)) ∈ diagClosure G := commutator_le_comap G hc
-    have h2 : (y, y) ∈ diagClosure G := Subgroup.subset_normalClosure ⟨y, rfl⟩
-    have h3 := (diagClosure G).mul_mem h1 h2
-    simpa using h3
-  · apply Subgroup.normalClosure_le_normal
-    rintro _ ⟨g, rfl⟩
-    simp
+  refine le_antisymm ?_ (Subgroup.normalClosure_le_normal (by rintro _ ⟨g, rfl⟩; simp))
+  rintro ⟨x, y⟩ h
+  have h1 : (x * y⁻¹, (1 : G)) ∈ diagClosure G := commutator_le_comap G
+    (by rwa [← Abelianization.ker_of, MonoidHom.mem_ker, map_mul, map_inv])
+  simpa using (diagClosure G).mul_mem h1 (Subgroup.subset_normalClosure ⟨y, rfl⟩)
 
 /-- The homomorphism `(x, y) ↦ [x] [y]⁻¹` is onto. -/
 theorem toAb_surjective : Function.Surjective (toAb G) := by

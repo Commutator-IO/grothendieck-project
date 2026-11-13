@@ -49,22 +49,14 @@ theorem pow_sub_smul (hc : Commute κ N) (hNN : N * N = 0) (hκN : κ * N = N) (
 theorem pow_eq_one_iff (hc : Commute κ N) (hNN : N * N = 0) (hκN : κ * N = N) (hN : N ≠ 0)
     {m : ℕ} (hm : κ ^ m = 1 + N) (c : ℚ) : (κ - c • N) ^ m = 1 ↔ (m : ℚ) * c = 1 := by
   rw [pow_sub_smul hc hNN hκN, hm, add_sub_assoc, add_eq_left, sub_eq_zero]
-  constructor
-  · intro h
-    by_contra hne
-    have h1 : (1 - (m : ℚ) * c) • N = 0 := by rw [sub_smul, one_smul, ← h, sub_self]
-    exact hN ((smul_eq_zero.mp h1).resolve_left (sub_ne_zero.mpr (Ne.symm hne)))
-  · intro h; rw [h, one_smul]
+  exact ⟨fun h => smul_left_injective ℚ hN (by simpa using h.symm), fun h => by rw [h, one_smul]⟩
 
 /-- The page's normalisation: `κ̃ = κ − N/(n(n+1))` has `κ̃^{n(n+1)} = 1`. -/
 theorem pow_eq_one (hc : Commute κ N) (hNN : N * N = 0) (hκN : κ * N = N) {n : ℕ} (hn : 0 < n)
     (hm : κ ^ (n * (n + 1)) = 1 + N) :
     (κ - (1 / ((n : ℚ) * (n + 1))) • N) ^ (n * (n + 1)) = 1 := by
-  rw [pow_sub_smul hc hNN hκN, hm]
-  have : ((n * (n + 1) : ℕ) : ℚ) * (1 / ((n : ℚ) * (n + 1))) = 1 := by
-    have : (n : ℚ) ≠ 0 := by exact_mod_cast hn.ne'
-    push_cast; field_simp
-  rw [this, one_smul]; abel
+  rw [pow_sub_smul hc hNN hκN, hm, show ((n * (n + 1) : ℕ) : ℚ) * (1 / ((n : ℚ) * (n + 1))) = 1 by
+    push_cast; field_simp [hn.ne'], one_smul, add_sub_cancel_right]
 
 end Kappa
 
