@@ -9,6 +9,7 @@
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-09-24 — first pass, unchecked against the pages by a human.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — re-read on the 700 dpi tiles; 68 \ill and 15 \uncertain resolved, 85 \ill and 67 \uncertain remain (many former \ill now offered as \uncertain readings).
+% Revised: Fable 5.2 (claude-fable-5-2), 2026-11-14 — pp. 10–13 and 18 read again on the facsimile (pp. 10, 11 blind), not checked by a reader.
 %
 % The folder sits in the inventory group "69-89" « Géométrie et topologie
 % combinatoire », whose subject does not match this folder's (as for folder
@@ -321,7 +322,7 @@ Je dis que
 $F/X/Z$.}
 
 \page{10}
-\subsection{Théorie axiomatique des morphismes \ill{}}
+\subsection{Théorie axiomatique des morphismes \uncertain{normés}}
 
 Soit $\mathcal{C}$ une catégorie, où les sommes finies existent, et
 soit $\mathcal{N}$ un ensemble de \struck{\ill{}} morphismes de
@@ -333,27 +334,31 @@ suivantes » sont ajoutés au-dessus de la ligne.}
   \item[(ii)] Si $u, v \in \mathcal{N}$ sont composables, alors $vu \in \mathcal{N}$
   \item[(iii)] Si $u : X \to Y$ est dans $\mathcal{N}$, et si $Y' \to Y$ est
   quelconque, alors $X' = X \times_Y Y'$ existe et
-  $u' : \struck{X \times_Y} X' \to Y'$ est $\in \mathcal{N}$
+  $u^{Y'} : \struck{X \times_Y} X' \to Y'$ est $\in \mathcal{N}$
   \item[(iv)] Si $u_i : X_i \to Y$ ($i = 1, 2$) sont $\in \mathcal{N}$, alors
   $(u_1, u_2) : X_1 \amalg X_2 \to Y$ est dans $\in \mathcal{N}$ ; de plus,
   l'extension de \ill{}
   \note{fin de (iv) très corrigée : mots biffés, ajouts interlinéaires,
   \ill{}.}
-  \item[(v)] Si $u : X \to Y$ est $\in \mathcal{N}$, alors \uncertain{pour} tout
-  sous-groupe $G$ de $\mathfrak{S}_r$, le quotient
-  $\bigl(\overbrace{X \times_Y \cdots \times_Y X}^{r}\bigr)/G$ existe,
+  \item[(v)] Si $u : X \to Y$ est $\in \mathcal{N}$, alors pour tout
+  sous-groupe $G$ de $\mathfrak{S}_n$, le quotient
+  $\bigl(\overbrace{X \times_Y \cdots \times_Y X}^{n}\bigr)/G$ existe,
+  % Révision du 14 novembre 2026 : l'indice de $\mathfrak{S}$ et le nombre de
+  % facteurs sont « n », non « r » ; (v bis) reprend ce même quotient avec
+  % $E^n/G$ et l'accolade « n ».
+
   \uncertain{et il est} \ill{}
   \note{ces derniers mots sont entourés au crayon rouge, avec un « ? ».}
 \end{enumerate}
 
-Soit $\deg$ une fonction sur $\mathcal{N}$, \ill{} : $\deg(X/Y)$
+Soit $\deg$ une fonction sur $\mathcal{N}$, \uncertain{notation aussi} : $\deg(X/Y)$
 ayant les propriétés suivantes
 \begin{enumerate}
   \item[(i bis)] $\deg(\mathrm{id}_X) = 1$
   \item[(ii bis)] $\deg(vu) = \deg v \deg u$
   \item[(iii bis)] $\deg(u) = \deg(u^{Y'})$
   \item[(iv bis)] $\deg(u, v) = \deg u + \deg v$
-  \item[(v bis)] Le quotient envisagé par (v) a \ill{} degré qui se
+  \item[(v bis)] Le quotient envisagé dans (v) a \ill{} degré qui se
   calcule ainsi : Soit \struck{$\deg(X/Y)$, \ill{}}
   $r = \deg(X/Y)$, \ill{} $E = [1, r]$,
   \struck{$E = \Lambda^r$, $F = (\overset{r}{\otimes} E)/G$}
@@ -364,16 +369,21 @@ ayant les propriétés suivantes
 \note{à la place de « Soit », un premier essai encadré et biffé, \ill{}.}
 
 Enfin, pour \struck{\ill{}} morphisme $u \in \mathcal{N} : X \to Y$
-de degré $r$, on se donne un morphisme
+de degré $r$, soit donné un morphisme
 \[
-  \mathrm{Can}_u = \mathrm{Can}_{X/Y} : Y \to \Sigma^r X
+  \mathrm{Con}_u = \mathrm{Con}_{X/Y} : Y \to \Sigma^r X
 \]
-(\struck{\ill{}} \uncertain{canonique} de $u$, ou de $X/Y$), avec les
+(\struck{\ill{}} \add{\uncertain{appelé}} \uncertain{connexion} de $u$, ou de $X/Y$), avec les
 propriétés suivantes
+% Révision du 14 novembre 2026 : le symbole est « Con », non « Can », ici et
+% dans les diagrammes de la page 11 (un « o », alors que les flèches « can »
+% des mêmes diagrammes ont un « a » net) ; le mot souligné qui le nomme est
+% lu « connexion » sous réserve.
+
 \note{« de degré $r$ » est ajouté au-dessus de la ligne, relié par une
 accolade ; un trait de crayon rouge part de là vers la marge.}
 \begin{enumerate}
-  \item[(i ter)] $\mathrm{Can}_{X/X} = \mathrm{id}_X$
+  \item[(i ter)] $\mathrm{Con}_{X/X} = \mathrm{id}_X$
   \item[(ii ter)] \uncertain{On a} commutativité dans le diagramme suivant :
 \end{enumerate}
 
@@ -387,23 +397,23 @@ $\in \mathcal{N}$, de degrés $r, s$) :
 \note{à droite de cette ligne, isolé : $Y \longrightarrow \Sigma^r(X/Y)$.}
 
 \begin{tikzcd}[column sep=small, nodes={font=\scriptsize}]
-Z \arrow[r, "\mathrm{Can}_{Y/Z}"] \arrow[drr] \arrow[ddrr, "\mathrm{Can}_{X/Z}"'] & \Sigma^s(Y/Z) \arrow[r, "\Sigma^s(\mathrm{Can}_{X/Y}/Z)"] & \Sigma^s(\Sigma^r(X/Y)/Z) \arrow[d, "\mathrm{can}"] \\
+Z \arrow[r, "\mathrm{Con}_{Y/Z}"] \arrow[drr] \arrow[ddrr, "\mathrm{Con}_{X/Z}"'] & \Sigma^s(Y/Z) \arrow[r, "\Sigma^s(\mathrm{Con}_{X/Y}/Z)"] & \Sigma^s(\Sigma^r(X/Y)/Z) \arrow[d, "\mathrm{can}"] \\
 & & \Sigma^s(\Sigma^r(X/Z)/Z) \arrow[d, "\mathrm{can}"] \\
 & & \Sigma^{sr}(X/Z)
 \end{tikzcd}
 
-\note{sous l'étiquette $\mathrm{Can}_{Y/Z}$, un premier $\mathrm{Can}_{X/Z}$
+\note{sous l'étiquette $\mathrm{Con}_{Y/Z}$, un premier $\mathrm{Con}_{X/Z}$
 biffé ; le terme du milieu de la colonne de droite est écrit par-dessus un
 premier terme, peut-être $\Sigma^{s+r}$. Les deux flèches obliques issues de $Z$ sont
 chacune doublées d'un trait ondulé.}
 
 (iii ter) Soit $u : X \to Y$ dans $\mathcal{N}$, et $Y' \to Y$
-  quelconque, alors $Y' \xrightarrow{\mathrm{Can}_{X'/Y'}}$ est « l'image
-  inverse » de $\mathrm{Can}_{X/Y}$ par $Y' \to Y$, i.e. le diagramme
+  quelconque, alors $Y' \xrightarrow{\mathrm{Con}_{X'/Y'}}$ est « l'image
+  inverse » de $\mathrm{Con}_{X/Y}$ par $Y' \to Y$, i.e. le diagramme
 
 \begin{tikzcd}
-\Sigma^r(X/Y) & Y \arrow[l, "\mathrm{Can}_{X/Y}"'] \\
-\Sigma^r(X'/Y') \arrow[u, "\mathrm{can}"] & Y' \arrow[l, "\mathrm{Can}_{X'/Y'}"] \arrow[u]
+\Sigma^r(X/Y) & Y \arrow[l, "\mathrm{Con}_{X/Y}"'] \\
+\Sigma^r(X'/Y') \arrow[u, "\mathrm{can}"] & Y' \arrow[l, "\mathrm{Con}_{X'/Y'}"] \arrow[u]
 \end{tikzcd}
 
 est commutatif
@@ -416,16 +426,16 @@ est commutatif
     \Sigma^i(X_1/Y) \times \Sigma^j(X_2/Y)
   \]
   en particulier, si $r_i = \deg u_i$ et $r = r_1 + r_2 = \deg u$, on a un
-  morphisme d'\ill{} canonique
+  morphisme d'\uncertain{inclusion} canonique
   $\Sigma^{r_1}(X_1/Y) \times \Sigma^{r_2}(X_2/Y) \to \Sigma^r(X/Y)$.
   Ceci dit, on a commutativité dans
 
 \begin{tikzcd}
-Y \arrow[r, "{(\mathrm{Can}_{X_1/Y}, \mathrm{Can}_{X_2/Y})}"] \arrow[dr, "\mathrm{Can}_{X/Y}"'] & \Sigma^{r_1}(X_1/Y) \times \Sigma^{r_2}(X_2/Y) \arrow[d] \\
+Y \arrow[r, "{(\mathrm{Con}_{X_1/Y}, \mathrm{Con}_{X_2/Y})}"] \arrow[dr, "\mathrm{Con}_{X/Y}"'] & \Sigma^{r_1}(X_1/Y) \times \Sigma^{r_2}(X_2/Y) \arrow[d] \\
 & \Sigma^r(X/Y)
 \end{tikzcd}
 
-\note{« d'\ill{} » est ajouté au-dessus de la ligne.}
+\note{« d'\uncertain{inclusion} » est ajouté au-dessus de la ligne.}
 
 \textbf{Exemple I}. Soit $G$ un groupe, et $\mathcal{C}$ la catégorie des
 ensembles où $G$ opère. Un morphisme $u : X \to Y$ en $\mathcal{C}$ sera
@@ -433,40 +443,42 @@ ensembles où $G$ opère. Un morphisme $u : X \to Y$ en $\mathcal{C}$ sera
 pour tout $y \in Y$, \struck{\ill{}} on a $\mathrm{card}(u^{-1}(y)) = r$.
 Un morphisme est dans $\mathcal{N}$ s'il existe $r$ tel qu'il soit de degré
 $r$. Les conditions (i) à (v) et (i bis) à (v bis) sont trivialement
-vérifiées. [N.B. \struck{\ill{}} de produits fibrés et \uncertain{sommes} : \ill{} \uncertain{limites}
-quelconques existent dans $\mathcal{C}$, \ill{} de même le quotient d'un
+vérifiées. [N.B. \struck{\ill{}} de produits fibrés et \uncertain{sommes} \uncertain{à ens.\ d'indices}
+quelconque existent dans $\mathcal{C}$, \ill{} de même le quotient d'un
 objet de $\mathcal{C}$ par un groupe d'automorphismes $G$]. Soit
-$u : X \to Y$ de degré $r$. Montrons que $\Sigma^r(X/Y)$ est
-\ill{} l'ensemble \struck{\ill{}} réunion des $\Sigma^r(u^{-1}(y))$
+$u : X \to Y$ de degré $r$. Montrons que $\Sigma^r(X/Y)$ \struck{est}
+\add{\uncertain{a comme ens.\ sous-jacent}} l'ensemble \struck{\ill{}} réunion des $\Sigma^r(u^{-1}(y))$
 ($y \in Y$) ; comme $u^{-1}(y)$ a exactement $r$ éléments,
 \struck{\ill{}} il y a dans $\Sigma^r(u^{-1}(y))$ un élément privilégié,
 classe de la \uncertain{suite} de ses éléments rangés dans un ordre quelconque). D'où
-une application canonique
+une application \uncertain{canonique}
+% Révision du 14 novembre 2026 : le second mot n'a pas le jambage d'un « q » ;
+% « section » se lirait aussi bien.
 \[
   Y \to \Sigma^r(X/Y),
 \]
-qui évidemment \ill{} aux morphismes de 2 situations, donc \ill{}
-\ill{} sur un \struck{\ill{}} \ill{} de $\mathcal{C}$. Si \ill{}
+qui évidemment \uncertain{permute} aux morphismes de 2 situations, donc \uncertain{à fortiori}
+\ill{} un \struck{\ill{}} \ill{} de $\mathcal{C}$. Si \uncertain{on}
 \note{les deux dernières lignes du feuillet droit, au bord de la feuille,
 sont en partie hors de l'image.}
 
 \page{12}
-le diagramme pour $\mathrm{Can}_{X/Y}$, on vérifie aussitôt les conditions
+le diagramme pour $\mathrm{Con}_{X/Y}$, on vérifie aussitôt les conditions
 (i ter) à (iv ter).
 
-\marginal{Expliquer la relation \ill{} $\mathcal{C}$ \ill{}
-en général, \ill{} \ill{} \uncertain{géométriques} \uncertain{spéciaux}
+\marginal{Expliquer la relation \uncertain{de cet exemple avec le}
+\uncertain{cas} général, \uncertain{quand on a un objet} \uncertain{galoisien} \uncertain{spécial}
 \ill{} \ill{}}
 \textbf{Exemple II}. Soit $\mathcal{C}$ la catégorie des schémas,
-(dans un univers \uncertain{donné}.) Un morphisme $u : X \to Y$ fini et plat est dit
+(dans un univers donné.) Un morphisme $u : X \to Y$ fini et plat est dit
 de degré $r$ s'il correspond à un \struck{\ill{}} faisceau
-\struck{\uncertain{cohérent}} \add{\uncertain{q.~coh.}} d'algèbres sur $Y$, loc. libre de
+\struck{\uncertain{cohérent}} \add{q.~coh.} d'algèbres sur $Y$, loc. libre de
 \struck{degré} rang $r$ en tout point. Soit $\mathcal{N}$ l'ensemble des
 morphismes qui sont finis et plats et \ill{} \ill{} de degré $r$. Les
 conditions (i) à (v) et (i bis) à (v bis) se vérifient,
 comme on voit \struck{\uncertain{aussitôt}} très facilement. De plus, on
 peut définir de façon naturelle \struck{des applications} un morphisme
-$\mathrm{Can}_{X/Y}$, vérifiant les conditions (i) à (iv).
+$\mathrm{Con}_{X/Y}$, vérifiant les conditions (i) à (iv).
 \note{la parenthèse après « schémas » est ajoutée au-dessus de la ligne ;
 « $u : X \to Y$ » l'est aussi. La note marginale, à gauche, est reliée à
 l'intitulé de l'exemple.}
@@ -482,10 +494,13 @@ fixé, \struck{\uncertain{prenant les}} \uncertain{et}…
 Soit $X \in \mathcal{C}$, avec un groupe $\Gamma$ d'automorphismes
 \uncertain{discret} ; on suppose que pour tout sous-groupe $H$
 de $G$, \struck{et $H$ \ill{}} $X/H$ existe, et que pour
-$H' \subset H$ \uncertain{invariant} d'indice fini dans $H$,
+$H' \subset H$ invariant d'indice fini dans $H$,
+% Révision du 14 novembre 2026 : « invariant » est forcé par la suite, où
+% $H/H'$ est un groupe d'opérateurs.
+
 \struck{$X/H' \to X/H$ soit \uncertain{dans} $(\mathcal{N})$, \uncertain{et de} degré $r$} (\ill{} \ill{}
-\ill{} du \uncertain{complexe}, et les \uncertain{relations} \ill{} \ill{}, \ill{} \ill{}) \uncertain{l'espace}
-$X/H'$ \uncertain{sous} \ill{} \uncertain{d'opérateurs} fini $H/H'$ soit \emph{non ramifié}, et
+\ill{} du \uncertain{complexe}, et les \uncertain{relations} \ill{} \ill{}, \ill{} \ill{}) \uncertain{l'objet}
+$X/H'$ \uncertain{avec groupe} d'opérateurs fini $H/H'$ soit \emph{non ramifié}, et
 $X/H' \to X/H = (X/H')/(H/H')$ est $\in \mathcal{N}$. Soit
 $\mathcal{C}'$ la catégorie des ensembles $E$ où $\Gamma$ opère, tels que
 $E/\Gamma$ soit fini. Alors pour \struck{\ill{}} $E \in \mathcal{C}'$,
@@ -495,10 +510,13 @@ transcrit comme écrit. Le passage biffé entre parenthèses est entouré d'un
 cadre relié par un trait à la ligne précédente.}
 
 $\Phi$ est donc un foncteur $\mathcal{C}' \to \mathcal{C}$,
-\uncertain{commutant} aux sommes finies, et on suppose que $\Phi$ transforme
+commutant aux sommes finies, et on suppose que $\Phi$ transforme
 morphismes de degré $r$ en morphismes de degré $r$ (i.e. fonctions
 \uncertain{sur} $\mathcal{N}$). De plus, il transforme
-\struck{morphismes} \add{\uncertain{canoniques} en} \uncertain{canoniques}…
+\struck{morphismes} \add{\uncertain{connexions} en} \uncertain{connexions}…
+% Révision du 14 novembre 2026 : les deux mots n'ont pas le jambage d'un « q » ;
+% lus « connexions » d'après le symbole « Con » de la page 10.
+
 \marginal{; \uncertain{dualement} \ill{}}
 \note{ce dernier alinéa est marqué d'un trait vertical dans la marge
 gauche, auquel la note marginale est reliée. La page s'arrête au bas de la
