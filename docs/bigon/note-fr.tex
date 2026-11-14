@@ -1,0 +1,216 @@
+% Note de travail, en français, accompagnant docs/bigon/article.tex :
+% les définitions de l'article reprises depuis le début, sur un ton pédagogique,
+% pour un lecteur venu des mathématiques appliquées. Compilée par tectonic.
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern,microtype,amssymb,mathtools,booktabs}
+\usepackage[margin=2.7cm]{geometry}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+\tikzset{lab/.style={inner sep=0.5pt,font=\scriptsize},
+  dot/.style={circle,fill,inner sep=0pt,minimum size=3.2pt}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}
+\theoremstyle{plain}
+\newtheorem{theoreme}{Théorème}
+\theoremstyle{remark}
+\newtheorem{remarque}{Remarque}
+
+\newcommand{\II}[1]{\mathrm{II}_{#1}}
+\newcommand{\IIp}{\mathrm{II}'_{3,2}}
+\newcommand{\III}{\mathrm{III}_{6}}
+\newcommand{\A}{\mathcal A}
+
+\title[Note de lecture : la dichotomie sans bigone]{Une dichotomie sans bigone pour les systèmes\\ de pseudo-droites, note de lecture}
+\author{Michel Hua}
+\address{Commutator, Paris}
+\email{michel@commutator.io}
+\date{14 novembre 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Cette note accompagne l'article \emph{A bigon-free dichotomy for pseudoline arrangements, after a note of Grothendieck}. Elle en reprend les définitions depuis le début et les explique, sans rien supposer au-delà d'un peu de géométrie et de combinatoire, puis suit la démonstration pas à pas. Rien n'y est démontré de neuf ; en cas de désaccord, l'article fait foi.
+\end{abstract}
+
+\section{De quoi parle l'article}
+
+Le sujet est d'une simplicité trompeuse : des droites dans le plan, et les points où elles se croisent.
+
+Commençons par le cas rigide. Prenons $n$ droites du plan projectif réel, deux à deux distinctes et non toutes concourantes, et regardons l'ensemble de leurs points d'intersection. Beaucoup de questions de ce genre ne dépendent pas du fait que les courbes soient vraiment droites : seule compte la combinatoire des croisements, c'est-à-dire qui coupe qui, et dans quel ordre. D'où l'idée de remplacer les droites par des courbes plus souples, mais qui se comportent comme elles : les \emph{pseudo-droites}.
+
+\begin{definition}
+Un \emph{système de pseudo-droites} est une famille finie d'au moins trois courbes fermées simples du plan projectif réel, dont aucune ne le sépare, deux quelconques se coupant en un point et un seul où elles se traversent, et qui ne passent pas toutes par un même point.
+\end{definition}
+
+Chaque condition mérite un mot. « Ne sépare pas le plan » : une pseudo-droite fait le tour du plan projectif comme une droite, elle n'y découpe pas un disque. « Se coupent en un point et un seul, où elles se traversent » : c'est le comportement des droites, et c'est ce qui interdit les tangences et les courbes qui se recoupent. « Pas toutes concourantes » : sinon on obtient un simple éventail, cas dégénéré qu'on écarte d'emblée. Les systèmes de droites sont les premiers exemples, et on verra que ce ne sont pas les seuls.
+
+Les \emph{sommets} sont les points où au moins deux pseudo-droites se rencontrent. La propriété autour de laquelle tout l'article tourne est la suivante.
+
+\begin{definition}
+Une pseudo-droite est \emph{bigonale} lorsqu'elle porte exactement deux sommets. Un système est \emph{sans bigone} lorsque aucune de ses pseudo-droites ne l'est.
+\end{definition}
+
+Traduisons. Toute pseudo-droite rencontre les autres, donc elle porte au moins un sommet ; elle n'en porte qu'un seul dans un éventail, cas exclu. Dire qu'un système est sans bigone revient donc à dire que chaque pseudo-droite porte au moins trois sommets. Et si une pseudo-droite $D$ est bigonale, avec ses deux sommets $P$ et $Q$, alors toutes les autres passent par $P$ ou par $Q$ : la condition est très contraignante.
+
+\subsection*{Les quatre configurations}
+
+Quatre petits systèmes reviennent sans cesse, et il faut les avoir en tête.
+
+\begin{itemize}
+\item $\II4$ : quatre pseudo-droites en position générale, c'est-à-dire sans trois concourantes.
+\item $\II5$ : cinq pseudo-droites en position générale.
+\item $\IIp$ : cinq pseudo-droites $a, b, c, d, e$ dont $a, b, c$ passent par un point $p$, tandis que $d$ et $e$ l'évitent et se coupent en un point $q$ situé sur aucune des trois premières. Autrement dit, un éventail de trois et un éventail de deux, sans la pseudo-droite qui joindrait leurs centres. C'est le seul triplet concourant du système.
+\item $\III$ : le quadrangle complet, formé des six pseudo-droites qui joignent deux à deux quatre points $P_1, \dots, P_4$ ; chacune passe par exactement deux d'entre eux.
+\end{itemize}
+
+Un \emph{sous-système} est une sous-famille d'au moins trois pseudo-droites, avec les sommets qu'elle détermine ; on dit qu'un système \emph{contient} une configuration quand l'un de ses sous-systèmes est de ce type.
+
+\begin{theoreme}[article, théorème 5]
+Un système de pseudo-droites sans bigone est soit un $\II4$, soit contient un $\II5$, un $\IIp$ ou un $\III$.
+\end{theoreme}
+
+Le théorème est donc une dichotomie : ou bien le système est le plus petit possible, quatre pseudo-droites en position générale, ou bien il contient l'un de trois motifs précis, qu'on peut exhiber. L'énoncé est de Grothendieck, encadré à la page 24 de la cote 80 ; les démonstrations, le corollaire, la vérification par ordinateur et la formalisation sont celles de l'article.
+
+\section{Les outils de la démonstration}
+
+\subsection{Un croisement simple existe toujours}
+
+Un \emph{croisement simple} est un sommet qui ne porte que deux pseudo-droites, par opposition aux points où trois ou plus se rencontrent.
+
+Le seul résultat extérieur qu'utilise l'article est le théorème de Sylvester--Gallai, dans sa version pour les pseudo-droites : un système de $n$ pseudo-droites possède au moins $3n/7$ croisements simples, donc au moins un. L'énoncé pour les droites est un classique ; que la combinatoire suffise, sans la rigidité des droites, est le théorème de Kelly et Rottenberg de 1972.
+
+Ce résultat est l'amorce de toute la démonstration : il garantit un endroit du système où la situation est simple, à partir duquel on va construire.
+
+\subsection{Deux pseudo-droites ne se coupent qu'une fois}
+
+C'est l'axiome, mais il sert si souvent sous une forme détournée qu'il vaut la peine de l'énoncer autrement : si une pseudo-droite passe par deux points distincts d'une autre, les deux sont égales.
+
+Autrement dit, pour montrer que deux pseudo-droites coïncident, il suffit de leur trouver deux points communs ; et pour montrer qu'une configuration est impossible, il suffit souvent d'y faire passer une pseudo-droite deux fois par une autre. Presque chaque étape de l'article emploie ce raisonnement.
+
+\section{La démonstration, en deux lemmes}
+
+La structure est la suivante : on montre d'abord qu'un système sans bigone contient toujours quatre pseudo-droites en position générale, puis on examine ce que peut faire une cinquième.
+
+\subsection{Premier lemme : quatre pseudo-droites en position générale}
+
+\begin{theoreme}[lemme 6 de l'article]
+Un système sans bigone contient quatre pseudo-droites en position générale.
+\end{theoreme}
+
+Voici le fil de la démonstration, qui est courte mais mérite d'être suivie lentement.
+
+On part d'un croisement simple $p = a \cap b$, qui existe par Sylvester--Gallai. Comme $a$ n'est pas bigonale, elle porte d'autres sommets $q_1, \dots, q_k$, avec $k \ge 2$. Une pseudo-droite $c \ne a$ passant par l'un des $q_i$ ne peut pas être $b$, car $q_i$ serait alors $a \cap b = p$ ; et elle évite $p$, puisque $p$ n'est porté que par $a$ et $b$.
+
+Prenons alors $c$ par $q_i$ et $d$ par $q_j$, avec $i \ne j$. Deux cas.
+
+\emph{Premier cas}, $c$ et $d$ coupent $b$ en des points différents. Alors $a, b, c, d$ sont en position générale, et il n'y a plus rien à démontrer. Il suffit de vérifier les quatre triplets, ce que l'article fait en une ligne.
+
+\emph{Second cas}, et c'est là qu'est l'idée : supposons qu'au contraire $c$ et $d$ coupent toujours $b$ au même point, quel que soit le choix. Alors toutes les pseudo-droites autres que $a$ passant par les $q_i$ rencontrent $b$ en un unique point $r$. Un $q_i$ ne peut alors porter qu'une seule d'entre elles, car deux passeraient toutes deux par $q_i$ et par $r$, donc seraient égales. Toute pseudo-droite autre que $a$ et $b$ coupe $a$ en un point autre que $p$, c'est-à-dire en l'un des $q_i$ : le système est donc entièrement décrit, et $b$ ne porte que $p$ et $r$. Elle est bigonale, contre l'hypothèse.
+
+La leçon à retenir : le second cas n'est pas éliminé par un calcul mais par une \emph{saturation}. On suppose que la configuration cherchée n'existe pas, on en déduit que tout le système se rabat sur une forme très particulière, et cette forme contredit l'absence de bigone.
+
+\subsection{Second lemme : ce que peut faire une cinquième pseudo-droite}
+
+Fixons maintenant $Q = \{x, y, z, w\}$ en position générale. Ses six sommets sont les $x \cap y$ ; deux d'entre eux sont dits \emph{opposés} quand les deux paires sont disjointes, comme $x \cap y$ et $z \cap w$. Il y a trois paires opposées, et deux sommets non opposés sont toujours portés par une même pseudo-droite de $Q$.
+
+\begin{theoreme}[lemme 7 de l'article]
+Soit $\ell$ une pseudo-droite hors de $Q$. Elle passe par au plus deux sommets de $Q$, et par deux seulement s'ils sont opposés. Si elle n'en rencontre aucun, $Q \cup \{\ell\}$ est un $\II5$ ; si elle en rencontre exactement un, c'est un $\IIp$.
+\end{theoreme}
+
+La démonstration tient dans l'axiome rappelé plus haut : si $\ell$ passait par deux sommets portés par une même pseudo-droite $s$ de $Q$, elle couperait $s$ deux fois, donc lui serait égale. Comme parmi trois sommets quelconques il y en a toujours deux non opposés, $\ell$ en rencontre au plus deux.
+
+On appelle \emph{diagonale} de $Q$ une pseudo-droite passant par deux sommets opposés. Deux diagonales associées à la même paire opposée se couperaient deux fois : il y a donc au plus trois diagonales.
+
+Le lemme est l'outil décisif, car il ne laisse que trois possibilités pour une cinquième pseudo-droite : aucun sommet, et c'est $\II5$ ; un sommet, et c'est $\IIp$ ; deux sommets opposés, et c'est une diagonale. Il n'y a pas d'autre cas.
+
+\subsection{La dichotomie}
+
+Tout est en place. Soit $\A$ sans bigone, contenant $Q$ en position générale, et supposons que $\A$ ne contienne ni $\II5$ ni $\IIp$. Par le second lemme, toute pseudo-droite hors de $Q$ est alors une diagonale de $Q$, et on compte les diagonales.
+
+\emph{Aucune} : $\A = Q$ est un $\II4$.
+
+\emph{Une seule}, $\delta$, passant par $P_1 = x \cap y$ et $P_2 = z \cap w$. Toute autre pseudo-droite du système appartient à $Q$ et coupe donc $\delta$ en $P_1$ ou en $P_2$ : la diagonale $\delta$ est bigonale, ce qui est exclu.
+
+\emph{Au moins deux}, $\delta_1$ par $P_1, P_2$ et $\delta_2$ par $P_3, P_4$. Les six pseudo-droites $x, y, z, w, \delta_1, \delta_2$ joignent alors deux à deux les quatre points $P_1, \dots, P_4$, et chacune ne passe que par deux d'entre eux : c'est exactement un quadrangle complet $\III$.
+
+Les trois cas étant exhaustifs, le théorème est démontré.
+
+\begin{remarque}
+Aucune des quatre branches ne peut être retirée : $\II4$, $\II5$, $\IIp$ et $\III$ sont tous sans bigone, et $\III$ ne contient ni $\II5$ ni $\IIp$. Pour le voir, retirez un côté du quadrangle : il reste deux triplets concourants, alors que $\II5$ n'en a aucun et $\IIp$ un seul.
+\end{remarque}
+
+\section{Deux conséquences}
+
+\subsection{L'ordre de construction}
+
+La page 28 de la cote 80 demandait une numérotation $D_1, \dots, D_n$ des pseudo-droites, partant d'un $\II4$ ou d'un $\III$, telle qu'aucune $D_i$ ne soit bigonale dans le système partiel $\{D_1, \dots, D_i\}$ ; seule une esquisse en est écrite. L'article en démontre une forme plus forte : tous les systèmes partiels, à partir du départ, sont sans bigone.
+
+L'observation qui rend la chose facile est qu'ajouter une pseudo-droite n'enlève jamais un sommet à celles qui sont déjà là. Il suffit donc que chaque nouvelle venue rencontre les précédentes en au moins trois points distincts, et le reste est un décompte sur les configurations de départ. Quand il existe une diagonale, on prend soin de l'ajouter en dernier, de façon que tous ses sommets soient déjà présents.
+
+\subsection{Les systèmes qui évitent les trois configurations}
+
+\begin{theoreme}[corollaire 10 de l'article]
+Pour $n \ge 6$, un système de $n$ pseudo-droites ne contient aucun des trois motifs $\II5$, $\IIp$, $\III$ si et seulement si c'est un \emph{quasi-éventail}, c'est-à-dire un système où toutes les pseudo-droites sauf une passent par un même point.
+\end{theoreme}
+
+Le sens direct est un décompte. Dans l'autre sens, le raisonnement est joli et se suit sans crayon. Si $\A$ évite les trois motifs, il n'est pas un $\II4$ puisque $n \ge 6$, donc par le théorème principal il possède une pseudo-droite bigonale $D$, de sommets $P$ et $Q$. Toutes les autres passent par $P$ ou par $Q$, et par une seule des deux, car $D$ est la seule à passer par les deux. Notons $s$ et $t$ les effectifs des deux camps, avec $s + t = n - 1 \ge 5$.
+
+Si les deux camps sont un peu garnis, disons trois d'un côté et deux de l'autre, on fabrique immédiatement un $\IIp$ : les trois concourantes en $P$, les deux qui se coupent en $Q$, et la configuration est là. Comme $s + t \ge 5$, le seul moyen d'échapper à cette fabrication est que l'un des camps se réduise à une pseudo-droite. Et c'est exactement la définition d'un quasi-éventail.
+
+\section{La page 24, et pourquoi elle est fausse}
+
+L'article ne se contente pas de démontrer l'énoncé encadré : il examine le théorème dont Grothendieck le déduit, et montre que ce théorème est faux tel qu'il est écrit.
+
+Ce théorème suppose qu'il n'existe pas deux sommets tels que toute pseudo-droite passe par l'un d'eux, et que le système ne contient pas de $\II5$ ; il en conclut qu'on a affaire à un quadrangle complet ou à un quadrilatère complet muni de ses trois diagonales. Six droites ordinaires suffisent à le réfuter : prenez un triangle $ABC$ et une droite supplémentaire par chacun de ses sommets. Les vingt triplets de droites ne sont concourants que trois fois, en $A$, $B$ et $C$ ; il y a donc trois points triples et non quatre, six droites et non sept, et aucune paire de sommets ne porte les six droites.
+
+Le contre-exemple ne contredit pas le théorème principal, puisqu'il contient un $\IIp$. C'est précisément le point : l'énoncé de la page 24 redevient vrai dès qu'on exclut $\IIp$ en même temps que $\II5$, et il faut alors retirer le quadrilatère de sa conclusion. L'erreur des notes est donc une omission, pas une méprise.
+
+\section{La vérification}
+
+Deux contrôles indépendants accompagnent la démonstration, et ils méritent d'être distingués.
+
+\subsection{L'énumération}
+
+Tous les systèmes d'au plus neuf pseudo-droites ont été énumérés, comme classes de matroïdes orientés de rang 3, ce qui est la traduction combinatoire exacte des systèmes de pseudo-droites ; les systèmes simples le sont jusqu'à dix. Les nombres de classes obtenus, $1, 2, 4, 17, 143, 4890, 461053$ pour $n$ de 3 à 9, coïncident avec les valeurs publiées, ce qui valide le programme avant qu'on lui demande quoi que ce soit de neuf.
+
+Le théorème et l'ordre de construction sont vérifiés sur les $466\,094$ systèmes sans bigone concernés. Un détail instructif : à $n = 9$, quatre systèmes seulement ont un bigone, et tous les systèmes sans bigone sauf les simples contiennent un $\IIp$. L'hypothèse du théorème est donc très peu contraignante, et sa conclusion presque toujours réalisée par le même motif.
+
+\subsection{La formalisation}
+
+Le théorème principal est démontré en Lean 4 sur un modèle combinatoire des systèmes, les \emph{cartes généralisées} : un ensemble fini de drapeaux muni de trois involutions sans point fixe, dont les orbites donnent les sommets, les arêtes et les faces, avec une caractéristique d'Euler égale à $1$, qui est celle du plan projectif. Ce modèle est précisément celui que la page 60 de la cote décrit.
+
+La démonstration formelle suit l'article, à une substitution près : au lieu de Sylvester--Gallai, elle emploie le décompte de Melchior, qui donne l'existence d'un croisement simple par un argument de caractéristique d'Euler. Le reste est de la géométrie d'incidence. Les axiomes du modèle n'exigent pas que les pseudo-droites aillent tout droit en un sommet, si bien que le théorème formel est un peu plus général que l'énoncé pour les cartes.
+
+Ce qui n'est pas formalisé mérite d'être dit : l'ordre de construction, le corollaire sur les quasi-éventails, et le passage d'un système topologique à sa carte.
+
+\section{Petit lexique}
+
+\begin{tabular}{@{}p{3.6cm}p{10.2cm}@{}}
+\toprule
+Terme & Ce qu'il faut en retenir ici \\
+\midrule
+pseudo-droite & une courbe qui se comporte comme une droite : elle ne sépare pas le plan projectif et coupe chaque autre une fois \\[2pt]
+sommet & un point où au moins deux pseudo-droites se rencontrent \\
+croisement simple & un sommet qui ne porte que deux pseudo-droites \\
+bigonale & une pseudo-droite qui ne porte que deux sommets \\
+sans bigone & chaque pseudo-droite porte au moins trois sommets \\
+position générale & aucune pseudo-droite n'en traverse trois en un même point \\[2pt]
+éventail & toutes les pseudo-droites passent par un même point ; exclu par définition \\[2pt]
+quasi-éventail & toutes sauf une passent par un même point \\
+diagonale de $Q$ & une pseudo-droite joignant deux sommets opposés des quatre de $Q$ \\[2pt]
+quadrangle complet & les six pseudo-droites joignant deux à deux quatre points \\
+matroïde orienté & la combinatoire d'un système, sans sa géométrie ; support de l'énumération \\[2pt]
+carte généralisée & le modèle combinatoire d'une surface, support de la preuve Lean \\
+\bottomrule
+\end{tabular}
+
+\section*{Sur la rédaction de cette note}
+
+Note de travail écrite par Claude (Opus~5, Anthropic) sous la direction de l'auteur, à partir de \texttt{docs/bigon/article.tex}. Elle ne contient aucun résultat nouveau ; en cas de désaccord, l'article fait foi.
+
+\end{document}

@@ -74,6 +74,7 @@ const PREPRINTS: typeof ARTICLES = [
     more: [
       { label: 'Hexagon', href: 'https://hexagonmath.org/2611.00188v1' },
       { label: 'Palomar', href: 'https://palomar-registry.org/entry.html?id=PALOMAR-2026-11-07-000003' },
+      { label: 'Note de lecture (fr)', href: '/article/grothendieck-bigon-note-fr.pdf' },
     ],
     src: 'docs/bigon/article.tex',
   },
