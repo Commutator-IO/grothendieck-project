@@ -1,0 +1,263 @@
+% Note de travail, en français, accompagnant docs/tangent/article.tex :
+% les définitions de l'article reprises depuis le début, pour un lecteur
+% venu des mathématiques appliquées. Compilée par tectonic.
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern,microtype,amssymb,mathtools,booktabs}
+\usepackage[margin=2.7cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}
+\theoremstyle{plain}
+\newtheorem{theoreme}{Théorème}
+\theoremstyle{remark}
+\newtheorem{remarque}{Remarque}
+
+\newcommand{\M}{M_{0,n}}
+\newcommand{\Sn}{\mathfrak S}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\Aff}{\mathrm{Aff}}
+\newcommand{\Gm}{\mathbb G_m}
+\newcommand{\PP}{\mathbb P^1}
+\newcommand{\disc}{\operatorname{disc}}
+
+\title[Note de lecture : la droite tangente en un point marqué]{La droite tangente en un point marqué,\\ note de lecture}
+\author{Michel Hua}
+\address{Commutator, Paris}
+\email{michel@commutator.io}
+\date{14 novembre 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Cette note accompagne l'article \emph{The tangent line at a marked point on $M_{0,n}/\Sn_{n-1}$, after a table of Grothendieck}. Elle en reprend les définitions depuis le début, pour un lecteur qui a fait de l'algèbre et de la topologie sans rencontrer les schémas ni les champs. Elle se termine sur ce qu'ont apporté Dan Edidin et Michel Planat. C'est un document de travail : rien n'y est démontré qui ne le soit dans l'article, et les démonstrations y sont remplacées par le fil de l'argument.
+\end{abstract}
+
+\section{Le résultat, en une page}
+
+On se donne $n \ge 3$ points distincts sur une sphère, numérotés de $1$ à $n$. Deux configurations qui se déduisent l'une de l'autre par une transformation de la sphère sont tenues pour la même. L'ensemble de ces configurations s'appelle $\M$.
+
+En chaque point marqué, la sphère a une droite tangente. Quand la configuration bouge, cette droite bouge avec elle : on obtient une famille de droites au-dessus de $\M$, notée $L_i$ pour le $i$-ème point. On note $L = L_1 \otimes \cdots \otimes L_n$ la famille obtenue en les multipliant toutes.
+
+Une telle famille est dite \emph{triviale} lorsqu'on peut choisir, dans chaque droite, un vecteur non nul qui dépende continûment de la configuration. Les $L_i$ ne le sont pas ; en revanche une puissance $L_i^{\otimes e}$ finit par l'être. La question est : à partir de quel exposant $e$ ?
+
+Il faut encore dire une chose, sans quoi la question n'a pas la réponse annoncée. On veut que le choix soit compatible avec la renumérotation des points : si l'on permute les points, le vecteur choisi doit suivre la permutation. C'est ce que signifie l'indice $\Sn_{n-1}$ ou $\Sn_n$ dans le titre, et c'est là que les nombres intéressants apparaissent.
+
+\begin{theoreme}[article, théorème 1]
+Pour tout $n \ge 3$ :
+\begin{enumerate}
+\item le plus petit exposant qui trivialise $L_n$, de façon compatible avec les renumérotations des $n-1$ autres points, est $(n-1)(n-2)$ ;
+\item le plus petit exposant qui trivialise $L$, de façon compatible avec toutes les renumérotations, est $n-1$.
+\end{enumerate}
+\end{theoreme}
+
+Pour $n = 4, 5, 6$ cela donne $6, 12, 20$ d'une part, $3, 4, 5$ de l'autre. Une page des notes de Grothendieck (cote 146, page 70) donne ces nombres pour $n = 4$, et pour $n = 5$ et $6$ des valeurs suivies d'un point d'interrogation, dont deux sont fausses. Le théorème achève le tableau.
+
+\section{Les objets, un par un}
+
+\subsection{La droite projective}
+
+$\PP$ est l'ensemble des droites vectorielles de $k^2$, où $k$ est un corps de caractéristique nulle : par exemple $\mathbb C$, et alors $\PP$ est la sphère de Riemann. Un point s'écrit $\langle v \rangle$ pour $v \in k^2$ non nul, et deux vecteurs proportionnels donnent le même point. En posant $x = v_1/v_2$ on retrouve la droite affine, plus un point à l'infini.
+
+Le groupe $\mathrm{PGL}_2$ est celui des matrices $2\times 2$ inversibles modulo les scalaires. Il agit sur $\PP$ par homographies, $x \mapsto (ax+b)/(cx+d)$. Un fait qui sert partout : cette action est simplement $3$-transitive, c'est-à-dire qu'on peut envoyer trois points distincts donnés sur trois points distincts donnés, et d'une seule manière.
+
+\subsection{L'espace des configurations}
+
+\begin{definition}
+$\M$ est l'ensemble des $n$-uplets $(x_1, \dots, x_n)$ de points deux à deux distincts de $\PP$, modulo l'action diagonale de $\mathrm{PGL}_2$.
+\end{definition}
+
+La $3$-transitivité permet d'envoyer $x_{n-2}, x_{n-1}, x_n$ sur $0, 1, \infty$ : il reste $n-3$ points libres, donc $\M$ est de dimension $n-3$. Pour $n = 4$, c'est la droite moins trois points, et la coordonnée est le birapport. Pour $n = 3$, c'est un point.
+
+\subsection{Fibré en droites, section, trivialité}
+
+\begin{definition}
+Un \emph{fibré en droites} sur un espace $X$ est la donnée, pour chaque point $p$ de $X$, d'une droite vectorielle $E_p$, variant algébriquement avec $p$ : localement, $E$ ressemble à $U \times k$.
+\end{definition}
+
+Une \emph{section} associe à chaque $p$ un vecteur $s(p) \in E_p$. Le fibré est \emph{trivial} s'il admet une section qui ne s'annule nulle part : un tel $s$ identifie $E_p$ à $k$ en chaque point, donc $E$ au produit $X \times k$.
+
+Deux fibrés se multiplient, $E \otimes F$, en prenant le produit tensoriel droite par droite ; l'inverse est le fibré dual. Le fibré trivial est l'élément neutre.
+
+\subsection{Les droites tangentes}
+
+En un point $x$ de $\PP$, la droite tangente $T_x\PP$ est une droite vectorielle. En faisant varier la configuration, on obtient le fibré $L_i$ dont la fibre au-dessus de $(x_1, \dots, x_n)$ est $T_{x_i}\PP$, et le produit $L = L_1 \otimes \cdots \otimes L_n$.
+
+Un calcul qui revient deux fois dans l'article : si $v$ engendre la droite $\langle v\rangle$, alors
+\[
+T_{\langle v\rangle}\PP \;\cong\; \operatorname{Hom}(\langle v\rangle,\; k^2/\langle v\rangle).
+\]
+Une direction voisine de $\langle v \rangle$ est en effet le graphe d'une application linéaire de $\langle v\rangle$ dans un supplémentaire. On en tire que remplacer $v$ par $tv$ multiplie l'identification par $t^{-2}$, d'où les degrés $2e$ qui apparaissent plus loin.
+
+\subsection{L'action du groupe symétrique}
+
+Le groupe $\Sn_n$ agit sur $\M$ en renumérotant les points, et agit en même temps sur $L$, en permutant les facteurs. Le sous-groupe $\Sn_{n-1}$ qui fixe le dernier point agit sur $L_n$.
+
+\begin{definition}
+Une trivialisation \emph{équivariante} de $E^{\otimes e}$ est une section partout non nulle $s$ telle que $s(\sigma \cdot p) = \sigma \cdot s(p)$ pour tout $\sigma$ dans le groupe.
+\end{definition}
+
+C'est la condition qui change tout. Sans elle, les deux fibrés seraient triviaux dès que $n$ est assez grand, et la question n'aurait pas d'intérêt.
+
+\subsection{Le groupe de Picard}
+
+\begin{definition}
+$\Pic X$ est l'ensemble des classes d'isomorphisme de fibrés en droites sur $X$, muni du produit tensoriel. C'est un groupe abélien, d'élément neutre le fibré trivial.
+\end{definition}
+
+L'ordre d'une classe $[E]$ est le plus petit $e \ge 1$ tel que $E^{\otimes e}$ soit trivial, et l'infini si aucun ne l'est. Le théorème calcule donc deux ordres, dans deux groupes de Picard.
+
+\subsection{Le quotient $[X/G]$, et ce qu'il faut en retenir}
+
+L'action de $\Sn_n$ sur $\M$ n'est pas libre : certaines configurations sont préservées par une permutation non triviale. Le quotient ensembliste perd cette information, et son groupe de Picard donne une réponse fausse à notre question. La parade s'appelle le \emph{champ quotient}, noté $[X/G]$ ; sa théorie générale est lourde, mais une seule phrase en sert ici.
+
+\begin{definition}
+Un fibré en droites sur $[X/G]$ est un fibré en droites sur $X$ muni d'une action de $G$ au-dessus de l'action sur $X$. Il est trivial exactement quand il admet une trivialisation équivariante.
+\end{definition}
+
+Autrement dit, $\Pic[X/G]$ est le groupe des fibrés $G$-équivariants. On peut lire tout l'article avec cette définition et oublier les champs.
+
+\section{La démonstration, en cinq temps}
+
+\subsection{La tranche}
+
+Envoyons le dernier point à l'infini : c'est permis, puisque $\mathrm{PGL}_2$ est transitif. Ce qui reste du groupe est le stabilisateur de l'infini, c'est-à-dire le groupe affine $\Aff$ des $x \mapsto ax+b$. Les $m = n-1$ autres points, non numérotés, sont les racines d'un polynôme unitaire de degré $m$ sans racine double. D'où
+\[
+[\M/\Sn_{n-1}] \;\cong\; [U_m/\Aff],
+\]
+où $U_m$ est l'ouvert des polynômes unitaires de degré $m$ sans facteur carré, et $\Aff$ agit par substitution.
+
+L'intérêt du passage est là : on a remplacé un espace de configurations par un ouvert d'un espace affine, dont la géométrie est connue.
+
+\subsection{Centrer les racines}
+
+Les translations $x \mapsto x+b$ agissent librement et déplacent le coefficient $c_1$ sans contrainte. Comme $m$ est inversible, chaque orbite rencontre une fois exactement l'hyperplan $c_1 = 0$ : il suffit de remplacer $f(x)$ par $f(x - c_1/m)$, ce qui revient à mettre le centre de gravité des racines à l'origine. Il reste les homothéties :
+\[
+[U_m/\Aff] \;\cong\; [V_m/\Gm],
+\]
+où $V_m$ est l'ouvert des polynômes unitaires centrés sans facteur carré, et $t \in \Gm$ agit par $x \mapsto tx$, donc sur le coefficient $c_j$ avec le poids $j$.
+
+\subsection{Caractères et poids}
+
+$V_m$ est un ouvert d'un espace affine, donc son groupe de Picard est nul : tout fibré y est trivial. Un fibré $\Gm$-équivariant est alors le fibré trivial muni d'une action, et une telle action est donnée par un caractère $t \mapsto t^a$. On appelle $a$ le \emph{poids}.
+
+Deux poids $a$ et $b$ donnent le même fibré équivariant exactement quand il existe une fonction inversible $u$ sur $V_m$ avec $u(t\cdot x) = t^{b-a}u(x)$. Le groupe de Picard est donc
+\[
+\Pic[V_m/\Gm] \;\cong\; \mathbb Z \,/\, \{\text{poids des fonctions inversibles}\}.
+\]
+
+\subsection{Le discriminant}
+
+Reste à connaître les fonctions inversibles de $V_m$. Le complémentaire de $V_m$ dans l'espace affine est l'hypersurface d'équation $\disc = 0$, où
+\[
+\disc \;=\; \prod_{i<j}(r_i - r_j)^2
+\]
+est le discriminant, exprimé en les racines. Comme cette hypersurface est irréductible, les fonctions inversibles sur $V_m$ sont les $c\,\disc^j$, $c \in k^\times$.
+
+Le poids du discriminant se lit sur la formule : remplacer chaque racine $r_i$ par $t r_i$ multiplie chacun des $\binom{m}{2}$ facteurs $(r_i - r_j)^2$ par $t^2$, donc multiplie $\disc$ par $t^{m(m-1)}$. D'où
+\[
+\Pic[V_m/\Gm] \;\cong\; \mathbb Z/m(m-1),
+\]
+engendré par le poids $1$. Avec $m = n-1$, l'ordre du groupe est $(n-1)(n-2)$.
+
+\subsection{Les poids de $L_n$ et de $L$}
+
+Il ne reste qu'à calculer deux poids.
+
+En l'infini, prenons la coordonnée $u = 1/x$. L'homothétie $x \mapsto tx$ s'y écrit $u \mapsto u/t$, de dérivée $t^{-1}$ en $u=0$ : la droite tangente à l'infini a le poids $-1$. Comme $-1$ engendre $\mathbb Z/(n-1)(n-2)$, la classe de $L_n$ engendre le groupe de Picard, et son ordre est $(n-1)(n-2)$. C'est le point (1).
+
+En une racine finie, la dérivée de $x \mapsto tx$ vaut $t$ : chaque droite tangente en un point fini a le poids $+1$. Le produit $L$ a donc le poids $m \cdot (+1) + (-1) = m-1 = n-2$. L'ordre de $n-2$ dans $\mathbb Z/(n-1)(n-2)$ est $n-1$ : l'ordre de $L$ est donc un multiple de $n-1$. Pour conclure qu'il vaut exactement $n-1$, l'article exhibe une trivialisation explicite de $L^{\otimes(n-1)}$, écrite au paragraphe suivant.
+
+\section{La version élémentaire, sans champs}
+
+Le même calcul se dit sans aucun langage géométrique, et c'est cette version qui est formalisée en Lean.
+
+Écrivons chaque point comme un vecteur $v_i \in k^2 \smallsetminus\{0\}$, et posons $[v_iv_j] = \det(v_i, v_j)$, qui s'annule exactement quand les deux points coïncident. Une trivialisation équivariante de $L^{\otimes e}$ revient alors à une fonction $F(v_1, \dots, v_n)$ :
+\begin{itemize}
+\item qui ne s'annule jamais tant que les points sont distincts ;
+\item homogène de degré $2e$ en chaque $v_i$ (le $2$ vient du calcul de $T_{\langle v\rangle}\PP$) ;
+\item qui se transforme par $\det(g)^{\,n e}$ sous $g \in \mathrm{GL}_2$ ;
+\item symétrique en les $v_i$.
+\end{itemize}
+
+\emph{La majoration.} La fonction $\prod_{i\ne j}[v_iv_j]$ convient pour $e = n-1$ : chaque $v_i$ y figure dans $2(n-1)$ crochets, elle ne s'annule pas sur $\M$, et elle est symétrique puisqu'elle vaut $(-1)^{n(n-1)/2}\prod_{i<j}[v_iv_j]^2$.
+
+\emph{La minoration}, pour $L_n$, est l'argument le plus parlant de l'article. Prenons $\omega$ une racine primitive $(n-1)$-ème de l'unité, et la configuration formée du dernier point en $0$ et des $n-1$ autres aux racines $(n-1)$-èmes de l'unité. La matrice $\mathrm{diag}(\omega, 1)$ fixe $0$ et permute circulairement les autres points. Une trivialisation symétrique doit donc prendre la même valeur avant et après la rotation ; mais la règle de transformation la multiplie par $\omega^e$. D'où $\omega^e = 1$, c'est-à-dire $(n-1) \mid e$. La même manœuvre avec les racines $(n-2)$-èmes, en ajoutant le point à l'infini à la configuration, donne $(n-2) \mid e$. Comme $n-1$ et $n-2$ sont premiers entre eux, $(n-1)(n-2)$ divise $e$.
+
+C'est une symétrie de configuration qui force la divisibilité : on fait tourner une configuration sur elle-même, et on compare ce que la trivialisation doit faire avec ce qu'elle fait.
+
+\section{Ce qu'apporte Dan Edidin}
+
+Le travail de Dan Edidin et Zhengning Hu sur l'anneau de Chow entier de la pile des points de Weierstrass hyperelliptiques donne le même groupe, mais seulement pour $n$ pair et $n \ge 6$ : ils présentent la pile comme des formes binaires avec une racine marquée, ce qui est exactement notre $[\M/\Sn_{n-1}]$, et trouvent $\mathbb Z[l]/(2g(2g+1)l)$ avec $n = 2g+2$, soit un groupe cyclique d'ordre $(n-1)(n-2)$.
+
+Deux différences avec l'article :
+
+\begin{itemize}
+\item leur générateur est écrit en termes de caractères d'un tore, et son identification avec la droite tangente $L_n$ n'est pas énoncée ;
+\item le cas impair n'est pas traité.
+\end{itemize}
+
+Interrogé par courriel le 28 octobre 2026, Edidin a confirmé que leur article ne traite que le cas pair et qu'il ne connaît pas de référence pour le cas impair. Cette réponse est ce qui autorise l'article à dire que le cas impair ne semble pas être imprimé : sans elle, l'affirmation serait une recherche bibliographique infructueuse, ce qui n'est pas la même chose.
+
+\section{Ce que propose Michel Planat}
+
+Michel Planat a remanié l'article en vue d'un numéro spécial de l'\emph{International Journal of Topology}, dont il est le rédacteur en chef. Rien n'est décidé, et il décline la cosignature. Son apport est d'un autre côté des mathématiques, et il vaut la peine d'être compris, car il explique \emph{pourquoi} les nombres $(n-1)(n-2)$ et $n-1$ sont ceux-là.
+
+\subsection{Le point de vue topologique}
+
+Sur $\mathbb C$, l'espace $\M$ est le complémentaire des diagonales, et le champ $[\M/\Sn_{n-1}]$ a un groupe fondamental, au sens des orbifolds : le \emph{groupe modulaire} de la sphère à $n$ trous dont un est distingué, c'est-à-dire le groupe des homéomorphismes de la sphère privée de $n$ points, à isotopie près. Comme l'espace de Teichmüller est contractile, le champ a le type d'homotopie de l'espace classifiant de ce groupe, et ses fibrés en droites topologiques sont classés par $H^2$ du groupe.
+
+\subsection{Le tore et la tresse}
+
+Voici l'argument, qui tient en trois phrases. Ôtons la section nulle du fibré $L_n$ ; l'espace qui reste s'identifie à l'espace des configurations de $n-1$ points du plan à translation près, dont le groupe fondamental est le groupe de tresses $B_{n-1}$. La suite exacte d'homotopie de la fibration donne alors
+\[
+1 \longrightarrow \mathbb Z \longrightarrow B_{n-1} \longrightarrow \Gamma \longrightarrow 1,
+\]
+où $\mathbb Z$ est engendré par le \emph{twist complet} $\Delta^2$, la tresse qui fait tourner toutes les cordes d'un tour. Or la classe de Chern de $L_n$ est précisément la classe de cette extension centrale, et son ordre se lit sur la somme des exposants de $\Delta^2$ dans l'abélianisé de $B_{n-1}$, qui vaut $(n-1)(n-2)$.
+
+Le nombre $(n-1)(n-2)$ cesse d'être le poids d'un discriminant pour devenir le nombre de croisements d'un tour complet de $n-1$ brins. Les deux calculs donnent le même entier, et son corollaire dit que la classe de Chern identifie le groupe de Picard algébrique à la torsion de $H^2$.
+
+\subsection{Un troisième énoncé}
+
+Il ajoute aussi au théorème le calcul du groupe de Picard entier du quotient complètement non numéroté : $\Pic[\M/\Sn_n]$ est cyclique d'ordre $(n-1)\operatorname{pgcd}(2,n)$. L'article d'origine ne donnait que l'ordre de la classe de $L$ dans ce groupe. Pour $n$ pair, le résultat est déjà dans Gorchinskiy et Viviani ; pour $n$ impair, il se démontre par la méthode du paragraphe 3, étendue des polynômes unitaires aux formes binaires.
+
+\subsection{Ce qu'il faut savoir avant d'accepter}
+
+Trois réserves, que la note consigne pour mémoire.
+
+D'abord, la section topologique n'est pas de l'auteur de l'article, et sa déclaration d'usage d'outils indique qu'elle a été développée avec ChatGPT lors de discussions avec lui. J'en ai vérifié la démonstration pas à pas et je la crois juste ; cela ne dispense pas de la comprendre avant de la signer.
+
+Ensuite, deux citations topologiques, celle de Bigelow et Budney pour l'extension centrale et celle de Farb et Margalit pour la formule de parité, n'ont pas été ouvertes à la page citée.
+
+Enfin, la revue n'est indexée ni dans zbMATH ni dans MathSciNet, et son rédacteur en chef est celui qui apporte la section nouvelle ; un autre éditeur devrait suivre le manuscrit.
+
+\section{Petit lexique}
+
+\begin{tabular}{@{}p{3.2cm}p{10.6cm}@{}}
+\toprule
+Terme & Ce qu'il faut en retenir ici \\
+\midrule
+$\PP$ & la sphère de Riemann, ou les droites de $k^2$ \\
+$\mathrm{PGL}_2$ & les homographies ; transitif sur les triplets de points distincts \\
+$\M$ & les configurations de $n$ points distincts, à homographie près \\
+fibré en droites & une droite vectorielle au-dessus de chaque point, variant algébriquement \\[2pt]
+trivial & admet une section qui ne s'annule nulle part \\
+$\Pic$ & les fibrés en droites modulo isomorphisme, sous le produit tensoriel \\
+$[X/G]$ & lire : fibrés sur $X$ munis d'une action de $G$ \\
+poids & l'entier $a$ du caractère $t \mapsto t^a$ qui décrit l'action \\
+discriminant & $\prod_{i<j}(r_i-r_j)^2$, de poids $m(m-1)$ \\
+groupe modulaire & les homéomorphismes de la sphère à $n$ trous, à isotopie près \\
+groupe de tresses & le groupe fondamental des configurations de points du plan \\
+classe de Chern & l'invariant topologique d'un fibré, ici dans $H^2$ du groupe modulaire \\
+\bottomrule
+\end{tabular}
+
+\section*{Sur la rédaction de cette note}
+
+Note de travail écrite par Claude (Opus~5, Anthropic) sous la direction de l'auteur, à partir de \texttt{docs/tangent/article.tex} et du fichier remanié reçu de Michel Planat le 13 novembre 2026. Elle ne contient aucun résultat nouveau ; en cas de désaccord, l'article fait foi.
+
+\end{document}
