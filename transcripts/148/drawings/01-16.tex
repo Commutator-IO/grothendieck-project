@@ -1,9 +1,9 @@
 % Drawing 148/01-16 -- folder 148, batch 01, archive page 18 (PDF page 19).
 % Transcription: en bas à gauche, un tétraèdre vu par deux faces, dont la subdivision barycentrique est tracée en vert (les trois médianes de chaque face) ; un court chemin repassé en noir ; en pointillés rouges, avec des points rouges, une des cartes « carrés » associées.
-% Kind: tetrahedron with barycentric subdivision of two faces, red dotted square map. Method 2 (schematic redraw from the facsimile). Status: partial.
-% Notes: Colour render. Four vertices as dots; the outer edges thin, in brown; the edge common to the two visible faces heavy green. In heavy green, the three medians of each visible face, drawn through the computed centroid of the face and ending at the computed midpoints of the sides. A short heavy black stroke on the median of the right face above its centroid (the « chemin repassé en gras »). In red: a dotted line from the midpoint of the upper left edge across the left face to the midpoint of the common edge and on to the centroid of the right face and the midpoint of the right lower edge; a second dotted line across the lower part of the two faces; four red dots. Still differs: the red dotted lines and red dots are placed by eye and their path is partly a reading (they are faint and broken); the medians are drawn as exact medians, the page is freehand. Redrawn 2026-11-12 (issue 128): to check again.
+% Kind: tetrahedron with barycentric subdivision of two faces, red dotted square map. Method 2 (schematic redraw from the facsimile). Status: ok.
+% Notes: Colour scan. Four vertices as dots; the outer edges and the edge common to the two visible faces thin, in brown; the hidden edge (lower left to right) as six short brown dashes where it is not covered. In heavy green, the three medians of each visible face, each from a vertex to the middle of the opposite side, meeting at the face's centroid. A short heavy ink stroke on the median of the right face above its centroid (the « chemin repassé en gras »). In red: points at the middles of the edges top-left, top-bottom and bottom-right and at the two centroids; a dashed path from the middle of the top-left edge to the left centroid, on to the middle of the common edge, to the right centroid and to the middle of the bottom-right edge; a dotted stroke from the middle of the top-left edge towards a large red blot of the left face; and a second, dotted path from below the left centroid down to a red point, through a large red blot and up to the bottom-right edge. A small red-brown cross on the left edge near the lower left vertex. Redrawn 2026-11-12 (issue 128). 2026-11-13, Claude Opus 5.5, issue 147, overlay check: not compiled (no TeX in the session); the TikZ was rasterised by a local interpreter and laid over the 236 ppi scan rendered at 400 dpi. Redrawn on the ink: vertices, points and blots on their centres (red ones found as red components of the scan), edges and medians fitted by least squares on their ink, dashes placed one by one; every stroke lies on its ink to within about one unit (the green medians are wider on the page). Changed: the medians are drawn as they stand on the page, not as exact medians; the red paths follow the page (two paths, dashed and dotted, with their points and blots) instead of two dotted lines placed by eye; the hidden edge's dashes and the small cross are added. Only the number of red dots in the dotted strokes is TikZ's.
 % Coordinates: 1 unit = 1 mm = 1/100 of the crop width, y downwards as on the crop (bbox in page fractions: [0.2, 0.415, 0.5, 0.59]).
-% Redrawn by Claude (claude-fable-5-2), issue #128, 2026-11-12; not checked by a human; not compiled (no TeX in the session).
+% Redrawn by Claude (claude-fable-5-2), issue #128, 2026-11-12; not checked by a human; not compiled (no TeX in the session); overlay-checked on the scan by Claude Opus 5.5, issue #147, 2026-11-13, not compiled (no TeX in the session).
 % Rights: reproduces part of the work -- behind RENDER_TRANSCRIPTS, never published by itself.
 \documentclass[tikz,border=3pt]{standalone}
 \usepackage{amsmath,amssymb}
@@ -11,35 +11,52 @@
 \tikzset{pencil/.style={black!45}, struck/.style={black!35}, mpt/.style={circle,draw,inner sep=1.3pt}, pt/.style={circle,fill,inner sep=0.9pt}, opt/.style={circle,draw,fill=white,inner sep=1.1pt}, Rd/.style={red!75!black}, Gn/.style={green!45!black}, Br/.style={brown!70!black}}
 \begin{document}
 \begin{tikzpicture}[x=1mm,y=-1mm,line cap=round,line join=round,font=\small]
-\coordinate (T) at (38,11);
-\coordinate (R) at (83,35);
-\coordinate (L) at (12,73);
-\coordinate (B) at (66,68);
-\coordinate (C) at (38.67,50.67);
-\coordinate (D) at (62.33,38);
-\coordinate (mLB) at (39,70.5);
-\coordinate (mTL) at (25,42);
-\coordinate (mTB) at (52,39.5);
-\coordinate (mTR) at (60.5,23);
-\coordinate (mBR) at (74.5,51.5);
+\coordinate (T) at (38,11.04);
+\coordinate (L) at (12.08,73.6);
+\coordinate (B) at (66.06,68.07);
+\coordinate (R) at (82.99,35.33);
+% thin brown edges, the common edge T-B among them; the hidden edge L-R as a few brown dashes
 \draw[Br] (T) -- (L) -- (B) -- (R) -- cycle;
-\draw[Gn,very thick] (T) -- (B);
-\draw[Gn,very thick] (T) -- (C) -- (mLB);
-\draw[Gn,very thick] (L) -- (C) -- (mTB);
-\draw[Gn,very thick] (B) -- (C) -- (mTL);
-\draw[Gn,very thick] (T) -- (D) -- (mBR);
-\draw[Gn,very thick] (R) -- (D) -- (mTB);
-\draw[Gn,very thick] (B) -- (D) -- (mTR);
-\draw[line width=1.8pt] (D) -- (61.6,32);
-\draw[Rd,dotted,thick] (mTL) -- (45,38.5) -- (mTB) -- (D) -- (mBR);
-\draw[Rd,dotted,thick] (46,47) -- (51,53) -- (57,56);
-\fill[Rd] (41,45.5) circle [radius=1.3];
-\fill[Rd] (45,38.5) circle [radius=1];
-\fill[Rd] (51,53) circle [radius=1];
-\fill[Rd] (57,56) circle [radius=1.3];
-\node[pt] at (T) {};
-\node[pt] at (R) {};
-\node[pt] at (L) {};
-\node[pt] at (B) {};
+\draw[Br] (T) -- (B);
+\draw[Br,thick] (19.39,71.25) -- (20.79,70.49);
+\draw[Br,thick] (25.82,67.58) -- (27.22,66.82);
+\draw[Br,thick] (31.85,64.16) -- (33.25,63.40);
+\draw[Br,thick] (41.49,59.34) -- (42.89,58.58);
+\draw[Br,thick] (58.71,49.19) -- (60.11,48.43);
+\draw[Br,thick] (75.40,38.80) -- (76.80,38.04);
+% the three medians of each visible face, heavy green (on the left face they meet at its centroid, on the right face at its centroid)
+\draw[Gn,line width=1.8pt] (38.76,11.6) -- (40.77,71.73);
+\draw[Gn,line width=1.8pt] (12.85,73.02) -- (52.83,38.42);
+\draw[Gn,line width=1.8pt] (25.48,39.13) -- (66.6,68.3);
+\draw[Gn,line width=1.8pt] (38.8,12.41) -- (76.85,48.78);
+\draw[Gn,line width=1.8pt] (82.6,35.8) -- (51.5,39.4);
+\draw[Gn,line width=1.8pt] (66.06,68.07) -- (65.89,26.49);
+% the short heavy ink stroke on the median of the right face above its centroid
+\draw[line width=2pt] (65.36,25.97) -- (65.6,34.5);
+% red: points at the midpoints of the edges T-L, T-B, B-R and at the two centroids; dashed and dotted paths between them
+\fill[Rd] (26.08,39.45) circle [radius=1.1];
+\fill[Rd] (52.13,38.58) circle [radius=1];
+\fill[Rd] (76.35,47.09) circle [radius=1];
+\fill[Rd] (39.8,45.6) circle [radius=1.4];
+\fill[Rd] (65.6,37.3) circle [radius=1.1];
+\fill[Rd] (44.81,39.3) circle [radius=1.6];
+\fill[Rd] (57.71,56.07) circle [radius=1.8];
+\fill[Rd] (51.04,53.94) circle [radius=0.9];
+\fill[Rd] (59.59,58.01) circle [radius=0.4];
+\draw[Rd,thick,dash pattern=on 0pt off 4pt,line width=1.2pt] (28.6,39.45) -- (37,39.83);
+\draw[Rd,thick,dash pattern=on 4pt off 3pt] (27.5,40.3) -- (38.3,45.1);
+\draw[Rd,thick,dash pattern=on 4pt off 3pt] (41.6,44.6) -- (50.8,39.3);
+\draw[Rd,thick,dash pattern=on 4pt off 3pt] (54,38.85) -- (64,37.5);
+\draw[Rd,thick,dash pattern=on 4pt off 3pt] (67.3,38.6) -- (75,46);
+\draw[Rd,line width=1.2pt,dash pattern=on 0pt off 4pt] (46.9,45) -- (48.92,49.25) -- (50.6,52.8);
+\draw[Rd,line width=1.2pt,dash pattern=on 0pt off 4pt] (52.5,54.6) -- (55.8,55.4);
+\draw[Rd,line width=1.2pt,dash pattern=on 0pt off 4.5pt] (59.6,55.6) -- (63.33,53.96) -- (68.16,51.44) -- (70.74,50.42);
+% a small red-brown cross on the left edge near the lower left vertex
+\draw[Br,thick] (14.1,65.2) -- (15.7,66.8);
+\draw[Br,thick] (14.2,66.8) -- (15.6,65.2);
+\fill (T) circle [radius=1.3];
+\fill (L) circle [radius=1.3];
+\fill (B) circle [radius=1.3];
+\fill (R) circle [radius=1.3];
 \end{tikzpicture}
 \end{document}

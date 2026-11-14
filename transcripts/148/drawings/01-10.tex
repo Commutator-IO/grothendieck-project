@@ -1,9 +1,9 @@
 % Drawing 148/01-10 -- folder 148, batch 01, archive page 17 (PDF page 18).
 % Transcription: à gauche, première sphère, au crayon et à l'encre : l'équateur et trois méridiens issus du pôle nord ; le fuseau de gauche hachuré en rouge, celui de droite hachuré au crayon ; les pôles en rouge, des points noirs sur l'équateur, et de petits hexagones de points autour de deux sommets de l'équateur et d'un point du méridien central.
 % Kind: sphere with equator and meridians, one lune hatched in red. Method 2 (schematic redraw from the facsimile). Status: partial.
-% Notes: Colour render of p. 17. Pencil outline; north and south poles as red points; three meridians from the north pole down to the equator: the left one in red, the middle one in red (pencil below the equator), the right one red-brown; all three continue in pencil to the south pole. The lune between the left and middle meridians is hatched in red (horizontal strokes), the one between the middle and right meridians lightly in pencil (oblique strokes). Equator: heavy red between the left vertex and the middle point, heavy black from there to the right vertex, thin beyond; its back part dashed on the left with a black dot, another black dot at the back right. Small rings of six dots (hexagons) around the left and right vertices on the equator and, dashed, around a point just right of the middle meridian inside the upper hemisphere. Still differs: the number and slope of the hatching strokes are schematic; the ring of dots in the hemisphere sits by eye; the outline is doubled on the page and drawn once. Redrawn 2026-11-12 (issue 128): to check again.
+% Notes: Colour scan. Pencil outline (doubled at the right and at the bottom, drawn once); north and south poles as red points; three meridians from the north pole down to the equator: the left one heavy red, the middle one red, the right one red-brown; all three go on in pencil to the south pole. The lune between the left and middle meridians is hatched in red with fourteen nearly horizontal strokes; the one between the middle and right meridians is hatched in pencil and thin ink with oblique strokes. Equator: heavy red from the left ring to the middle point, heavy ink from there to the right ring, thin beyond on both sides, its back dashed at the left; a black point behind on the left and one on the right. Three small rings, each a closed stroke with four blots on it: round the left and the right vertex of the equator (solid; the right one partly red-brown where the right meridian reaches it) and round a point of the upper hemisphere just right of the middle meridian (dashed). Redrawn 2026-11-12 (issue 128). 2026-11-13, Claude Opus 5.5, issue 147, overlay check: not compiled (no TeX in the session); the TikZ was rasterised by a local interpreter and laid over the 236 ppi scan rendered at 400 dpi. Redrawn on the ink: the outline, meridians and equator through points moved onto their ink, the fourteen red strokes fitted one by one on their ink, the points and rings placed on their blots; these lie on the ink to within about one unit. Changed: the outline is no longer a circle (it is narrower at the top and wider at the bottom); the red hatching is stroke for stroke; the rings are closed strokes with four blots each, not hexagons of six dots. Still differs: the oblique hatching of the right lune is faint and crossed by the ring and the paper's ruling; eleven of its strokes are drawn, fitted where they could be followed, and the page has a few more short ones; their places are within about one to two units.
 % Coordinates: 1 unit = 1 mm = 1/100 of the crop width, y downwards as on the crop (bbox in page fractions: [0.12, 0.275, 0.4, 0.44]).
-% Redrawn by Claude (claude-fable-5-2), issue #128, 2026-11-12; not checked by a human; not compiled (no TeX in the session).
+% Redrawn by Claude (claude-fable-5-2), issue #128, 2026-11-12; not checked by a human; not compiled (no TeX in the session); overlay-checked on the scan by Claude Opus 5.5, issue #147, 2026-11-13, not compiled (no TeX in the session).
 % Rights: reproduces part of the work -- behind RENDER_TRANSCRIPTS, never published by itself.
 \documentclass[tikz,border=3pt]{standalone}
 \usepackage{amsmath,amssymb}
@@ -11,47 +11,62 @@
 \tikzset{pencil/.style={black!45}, struck/.style={black!35}, mpt/.style={circle,draw,inner sep=1.3pt}, pt/.style={circle,fill,inner sep=0.9pt}, opt/.style={circle,draw,fill=white,inner sep=1.1pt}, Rd/.style={red!75!black}, Gn/.style={green!45!black}, Br/.style={brown!70!black}}
 \begin{document}
 \begin{tikzpicture}[x=1mm,y=-1mm,line cap=round,line join=round,font=\small]
-\coordinate (N) at (49,11);
-\coordinate (S) at (48,71);
-\coordinate (A) at (28,50);
-\coordinate (M) at (47,51);
-\coordinate (B) at (69,47);
-\draw[pencil] (48,41) ellipse [x radius=32, y radius=31];
-\begin{scope}
-\clip (N) .. controls (38,20) and (31,35) .. (A) -- (M) -- cycle;
-\foreach \y in {14,17,...,50} {
-\draw[Rd,thin] (20,\y) -- (55,\y-1.5);
-}
-\end{scope}
-\begin{scope}
-\clip (N) .. controls (62,22) and (68,36) .. (B) -- (M) -- cycle;
-\foreach \y in {22,26,...,66} {
-\draw[pencil,thin] (44,\y) -- (76,\y-12);
-}
-\end{scope}
-\draw[Rd,thick] (N) .. controls (38,20) and (31,35) .. (A);
-\draw[Rd] (N) -- (M);
-\draw[Br] (N) .. controls (62,22) and (68,36) .. (B);
-\draw[pencil] (A) .. controls (31,62) and (40,70) .. (S);
-\draw[pencil] (M) -- (S);
-\draw[pencil] (B) .. controls (66,60) and (57,69) .. (S);
-\draw[Rd,very thick] (A) -- (M);
-\draw[very thick] (M) .. controls (56,51) and (63,50) .. (B);
-\draw (A) .. controls (22,50) and (17,48) .. (17,45);
-\draw[dashed,pencil] (17,45) .. controls (19,42) and (22,41) .. (26,40);
-\draw (B) .. controls (75,46) and (79,43) .. (80,41);
-\node[pt] at (26,40) {};
-\node[pt] at (73,36) {};
-\node[pt] at (M) {};
-\node[pt,Rd] at (N) {};
-\node[pt,Rd] at (S) {};
-\draw (A) circle [radius=2.8];
-\draw (B) circle [radius=2.8];
-\draw[dashed] (51,34) circle [radius=4.6];
-\foreach \a in {0,60,...,300} {
-\fill[shift={(A)}] (\a:2.8) circle [radius=0.6];
-\fill[shift={(B)}] (\a:2.8) circle [radius=0.6];
-\fill[shift={(51,34)}] (\a:4.6) circle [radius=0.6];
-}
+% outline (pencil, doubled at the right on the page, drawn once)
+\draw[pencil] plot[smooth cycle, tension=0.55] coordinates {(48.03,10.82) (45.85,11.04) (39.74,12.81) (33.64,15.32) (27.88,18.69) (22.87,23.49) (19.06,29.45) (16.36,40.01) (16.75,50.01) (19.96,58.03) (25.72,65.31) (33.32,69.36) (41.08,71.99) (47.95,71.81) (56.15,72.03) (63.94,67.9) (71.68,62.65) (76.65,55.08) (80.09,47.16) (80.39,40) (78.83,32.17) (75.68,24.48) (70.88,17.64) (63.11,12.26) (54.98,10.6)};
+% red hatching of the left lune
+\draw[Rd,thin] (45.45,14.79) -- (49.0,11.9);
+\draw[Rd,thin] (43.55,15.51) -- (48.9,14.5);
+\draw[Rd,thin] (42.11,17.38) -- (48.2,17.39);
+\draw[Rd,thin] (38.41,20.63) -- (47.6,19.45);
+\draw[Rd,thin] (35.84,23.62) -- (47.2,21.9);
+\draw[Rd,thin] (33.51,27.66) -- (46.8,25.66);
+\draw[Rd,thin] (31.66,30.43) -- (44.45,28.5);
+\draw[Rd,thin] (30.13,34.28) -- (46.4,31.8);
+\draw[Rd,thin] (29.67,36.63) -- (46.3,35.45);
+\draw[Rd,thin] (28.71,39.89) -- (46.2,38.81);
+\draw[Rd,thin] (28.6,41.75) -- (46.2,41.14);
+\draw[Rd,thin] (28.9,44.29) -- (46.4,43.83);
+\draw[Rd,thin] (30.01,46.63) -- (46.5,46.22);
+\draw[Rd,thin] (32.62,49.27) -- (46.5,47.75);
+% pencil hatching of the right lune (oblique)
+\draw[pencil,thin] (47.85,16.14) -- (56.45,15.21);
+\draw[pencil,thin] (47.4,19.3) -- (58.67,17.77);
+\draw[pencil,thin] (46.9,23.1) -- (59.98,19.23);
+\draw[pencil,thin] (46.8,26.1) -- (50.91,23.63);
+\draw[pencil,thin] (46.72,30.69) -- (50.07,28.28);
+\draw[pencil,thin] (64.47,28.74) -- (67.13,29.16);
+\draw[pencil,thin] (46.6,40.3) -- (56.26,34.21);
+\draw[pencil,thin] (48.55,42.8) -- (64.25,32.88);
+\draw[pencil,thin] (48.4,47.71) -- (61.77,39.44);
+\draw[pencil,thin] (51.02,50.3) -- (56.93,46.21);
+\draw[pencil,thin] (58.32,48.46) -- (65.12,45.97);
+% the three meridians from the north pole down to the equator: left red (heavy), middle red, right red-brown
+\draw[Rd,thick] plot[smooth, tension=0.55] coordinates {(48.95,12.01) (44.37,15.87) (40.19,20.16) (35.99,24.99) (32.86,30.44) (30.15,36.9) (28.65,42.91) (28.6,46.3)};
+\draw[Rd] plot[smooth, tension=0.55] coordinates {(49.13,12.03) (47.38,19.95) (46.66,29.97) (46.38,39.97) (46.6,49.49)};
+\draw[Br] plot[smooth, tension=0.55] coordinates {(50.82,12.22) (56.37,15.65) (60.75,21.03) (64.4,27.57) (66.62,33.77) (68.31,39.9) (69.2,42.6)};
+% below the equator the three continue in pencil to the south pole
+\draw[pencil] plot[smooth, tension=0.55] coordinates {(28.2,53.7) (29.5,58) (32.5,63.5) (37.5,67.5) (43,70) (48.07,70.61)};
+\draw[pencil] (46.91,50.73) -- (47.6,60) -- (48.07,70.61);
+\draw[pencil] plot[smooth, tension=0.55] coordinates {(70.6,51.9) (68.5,57) (64.5,62.5) (59,67) (53,69.8) (48.07,70.61)};
+% the equator: heavy red from the left ring to the middle point, heavy ink from there to the right ring, thin beyond; its back dashed on the left
+\draw[Rd,line width=1.6pt] (31.6,50.4) -- (46.91,50.6);
+\draw[line width=1.6pt] plot[smooth, tension=0.55] coordinates {(46.91,50.73) (55.01,50.48) (60.05,50.16) (66.4,49.4)};
+\draw plot[smooth, tension=0.55] coordinates {(25.5,50.03) (21.5,49.5) (17.9,48.12) (16.6,45.6)};
+\draw[dashed] plot[smooth, tension=0.55] coordinates {(16.6,44.41) (18.91,43.05) (21.22,41.76)};
+\draw plot[smooth, tension=0.55] coordinates {(73.56,46.93) (76.3,45.2) (78.37,43.41) (79.68,41.59)};
+% points: the poles in red, two black points behind, the middle point of the equator
+\fill[Rd] (49.07,11.03) circle [radius=0.9];
+\fill[Rd] (48.07,70.61) circle [radius=0.8];
+\fill (46.91,50.73) circle [radius=0.9];
+\fill (25.8,39.61) circle [radius=0.95];
+\fill (72.83,36.22) circle [radius=0.95];
+% small rings round the left and right vertices of the equator (solid) and round a point of the upper hemisphere (dashed), each with four blots
+\draw[thick] plot[smooth cycle, tension=0.55] coordinates {(28.6,46.2) (26.6,47.3) (25.2,48.8) (25,50) (26,52.3) (28.2,53.7) (30.3,53) (31.5,51) (31,48.5) (29.6,47)};
+\foreach \p in {(28.6,46.2),(25,50),(28.2,53.7),(31.6,50.3)} {\fill \p circle [radius=0.85];}
+\draw[thick] plot[smooth cycle, tension=0.55] coordinates {(67.2,43.5) (70,42.4) (72.5,43) (74.2,45.2) (74,47.5) (73,50) (70.6,51.8) (68,50.8) (66.5,48.5) (66.3,46)};
+\foreach \p in {(70,42.6),(74.2,45.2),(70.6,51.9),(66.6,48.2)} {\fill \p circle [radius=0.85];}
+\fill[Br] (67.4,43.4) circle [radius=0.7];
+\draw[thick,dashed] plot[smooth cycle, tension=0.55] coordinates {(47.5,33.5) (49.5,32.3) (51.8,31.7) (54,32.7) (55.3,34.8) (54.3,37) (52.5,38.3) (50.6,38.6) (48.5,37.8) (47,36)};
+\foreach \p in {(51.8,31.7),(55.3,34.8),(50.6,38.6),(46.6,35)} {\fill \p circle [radius=0.85];}
 \end{tikzpicture}
 \end{document}
