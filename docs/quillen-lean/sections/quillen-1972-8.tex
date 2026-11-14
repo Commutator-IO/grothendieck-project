@@ -1,0 +1,20 @@
+\section[Notebook 1972-8: $1 - \sigma$ on $k'^\times$; weights on $\Lambda^q$]{Notebook 1972-8: $z \mapsto \sigma(z)/z$ on $k'^\times$ has kernel $k^\times$ and cokernel of order $q - 1$; weights on $\Lambda^q$\protect\verifie{Notebook1972_8}}\label{sec:quillen-1972-8}
+
+\emph{Context.} In \carnet{1972}{8} Quillen computes $K_*$ of a twisted polynomial ring over finite fields, where $1 - \sigma$ on $k'^\times$ appears (p.~20); and uses a weight argument on $\Lambda^q$ for the dual numbers (p.~30). The orders of the image of $J$ listed on p.~12 are those of section~\ref{sec:quillen-1972-6}.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1972-8, pp.~20, 30]\label{thm:quillen-1972-8}
+\begin{enumerate}
+\item Let $k$ be a subfield of a finite field $K$, $|k| = q$, and $\sigma(z) = z^q$. The homomorphism $z \mapsto \sigma(z)/z = z^{q-1}$ of $K^\times$ has kernel $k^\times$, of order $q - 1$, and its image has index $q - 1$.
+\item For a module $M$ over a commutative ring and $\lambda$ a scalar, multiplication by $\lambda$ induces multiplication by $\lambda^q$ on $\Lambda^qM$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) $K^\times$ is cyclic of order $q^d - 1$, divisible by $q - 1$; in a cyclic group of order $N$ the $e$-th power map with $e \mid N$ has kernel of order $e$ and image of index $e$. Elements of $k^\times$ satisfy $z^{q-1} = 1$, and both groups have $q - 1$ elements. (2) On generators, $\lambda v_1 \wedge \dots \wedge \lambda v_q = \lambda^q v_1 \wedge \dots \wedge v_q$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1972_8.lean}{\texttt{Notebook1972\_8.\allowbreak{}lean}} proves \texttt{oneSubFrob\_apply}, \texttt{card\_ker}, \texttt{index\_range}, \texttt{ker\_eq} and \texttt{exteriorPower\_map\_smul}; the cyclic-group counts are mathlib's. The $K$-theoretic statements these serve are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical: the cokernel of $1 - \sigma$ in Quillen's computation of $K_*(\mathbf F_q)$ (Ann.\ of Math.\ 96, 1972). The edition does not present them as new.}

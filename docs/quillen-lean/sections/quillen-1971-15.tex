@@ -1,0 +1,17 @@
+\section[Notebook 1971-15: the poset of infinite coinfinite subsets is coned off]{Notebook 1971-15: every finite family of infinite, coinfinite subsets of $\mathbf N$ is coned off\protect\verifie{Notebook1971_15}}\label{sec:quillen-1971-15}
+
+\emph{Context.} On pages~3--4 of \carnet{1971}{15}, a fair copy proving that the group of all permutations of a countable set is acyclic, Quillen shows that the poset $X$ of subsets $x \subset \mathbf N$ with $x$ and $\mathbf N - x$ infinite, ordered by $x \le y$ iff $x = y$ or $x \subset y$ with $y - x$ infinite, is contractible: every finite subset of $X$ is coned off by a map $x \mapsto x \cup z'$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1971-15, pp.~3--4]\label{thm:quillen-1971-15}
+Let $F$ be a finite subset of $X$. There is $c \in X$ such that, for all $x, y \in F$: $x \cup c \in X$, $x \le x \cup c$, $c \le x \cup c$, and $x \le y$ implies $x \cup c \le y \cup c$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+By induction on $F$ there is an infinite $z$ with, for each $x \in F$, $z \subset x$ or $z \cap x = \emptyset$ (keep whichever of $z \cap x$, $z - x$ is infinite). Split $z = c \sqcup c'$ into two infinite parts (even and odd terms of an enumeration). Then $c \in X$ ($c' \subset \mathbf N - c$). If $z \subset x$, $x \cup c = x$ and $x - c \supset c'$; if $z \cap x = \emptyset$, $(x \cup c) - x = c$, $(x \cup c) - c = x$, and $c' $ lies outside $x \cup c$. Monotonicity is checked in the same way, case by case.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1971_15.lean}{\texttt{Notebook1971\_15.\allowbreak{}lean}} proves \texttt{exists\_infinite\_subset\_or\_disjoint}, \texttt{exists\_split} and \texttt{cone}. Contractibility of the nerve of $X$ (finite subcomplexes coned off), the spectral sequence of pp.~4--7 and the acyclicity of the permutation group are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Posets of large subsets are used for acyclicity by de la Harpe and McDuff (Comment.\ Math.\ Helv.\ 58, 1983); this exact poset and coning argument were not located. The statement is elementary; the edition does not present it as new.}

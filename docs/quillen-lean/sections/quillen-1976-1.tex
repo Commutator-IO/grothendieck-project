@@ -1,0 +1,17 @@
+\section[Notebook 1976-1: $\det(1 + t\nu)$ a unit iff $\nu^2 = 0$]{Notebook 1976-1: for $2 \times 2$ matrices, $\det(1 + t\nu) \in K^\times$ iff $\nu^2 = 0$ iff $\nu$ is nilpotent\protect\verifie{Notebook1976_1}}\label{sec:quillen-1976-1}
+
+\emph{Context.} On page~49 of \carnet{1976}{1} Quillen identifies the unimodular subspaces of degree at most one in $\mathbf C[t]^2$ with the matrices $1 + t\nu$, $\nu$ nilpotent, and notes that the cone of nilpotent $2 \times 2$ matrices has dimension~$2$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1976-1, p.~49]\label{thm:quillen-1976-1}
+Let $\nu$ be a $2 \times 2$ matrix over a field $K$. Then $\det(1 + t\nu) = 1 + t\operatorname{tr}\nu + t^2\det\nu$ in $K[t]$, and the following are equivalent: $\det(1 + t\nu)$ is a unit of $K[t]$; $\operatorname{tr}\nu = \det\nu = 0$; $\nu^2 = 0$; $\nu$ is nilpotent.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+The units of $K[t]$ are the nonzero constants. Cayley--Hamilton reads $\nu^2 = (\operatorname{tr}\nu)\nu - (\det\nu)1$. If $\nu^k = 0$, then $(\det\nu)^k = 0$, so $\nu^2 = (\operatorname{tr}\nu)\nu$, $\nu^k = (\operatorname{tr}\nu)^{k-1}\nu$, hence $\operatorname{tr}\nu = 0$ or $\nu = 0$, and $\nu^2 = 0$. If $\nu^2 = 0$ and $\operatorname{tr}\nu \ne 0$, Cayley--Hamilton gives $\nu = 0$, a contradiction.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1976_1.lean}{\texttt{Notebook1976\_1.\allowbreak{}lean}} proves \texttt{det\_one\_add}, \texttt{sq\_eq}, \texttt{sq\_eq\_zero\_iff}, \texttt{isUnit\_det\_iff} and \texttt{isNilpotent\_iff}, in every characteristic. The page's Quot-scheme context and higher-degree families are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary; the edition does not present it as new.}

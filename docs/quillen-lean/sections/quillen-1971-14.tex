@@ -1,0 +1,21 @@
+\section[Notebook 1971-14: the functional equation of the zeta function of a curve]{Notebook 1971-14: $Z(z) = q^{g-1}z^{2g-2}Z(1/qz)$ from Riemann--Roch\protect\verifie{Notebook1971_14}}\label{sec:quillen-1971-14}
+
+\emph{Context.} On pages~23--25 of \carnet{1971}{14} Quillen rewrites the zeta function of a curve $X$ of genus $g$ over $\mathbf F_q$ as a sum over $\mathrm{Pic}(X)$, splits it into a polynomial part (degrees $0$ to $2g - 2$) and a geometric tail, continues the tail analytically, and derives the functional equation from Riemann--Roch by $L \mapsto K - L$.
+
+\begin{encadre}
+\begin{theoreme}[After Quillen, notebook 1971-14, pp.~24--25]\label{thm:quillen-1971-14}
+Let $K$ be a field, $q, z \in K$ with $q \ne 0$, $z \ne 0$, $z \ne 1$, $qz \ne 1$, and $g \ge 1$, $h \ge 0$ integers. Let $I$ be a finite set with maps $\deg, h^0 : I \to \mathbf N$ and an involution $\sigma$ such that $\deg i + \deg\sigma(i) = 2g - 2$, $h^0(i) = \deg i + 1 - g + h^0(\sigma(i))$, and exactly $h$ elements of each degree $0, \dots, 2g - 2$. Put
+\[Z(w) = \sum_{i \in I}w^{\deg i}(q^{h^0(i)} - 1) + h\Bigl(\frac{q^gw^{2g-1}}{1 - qw} - \frac{w^{2g-1}}{1 - w}\Bigr).\]
+Then $Z(z) = q^{g-1}z^{2g-2}Z(1/(qz))$.
+\end{theoreme}
+\end{encadre}
+
+For a curve, $I$ is the set of classes of degree $0$ to $2g - 2$, $\sigma(L) = K - L$, $h = |\mathrm{Pic}^0(X)|$, and $Z$ is $(q - 1)$ times the zeta function in $z = q^{-s}$: the page's polynomial part and tail.
+
+\begin{proof}
+Since $\sum_{d < 2g - 1}w^d + w^{2g-1}/(1 - w) = 1/(1 - w)$, $Z(w) = B(w) + hS(w)$ with $B(w) = \sum_iw^{\deg i}q^{h^0(i)}$ and $S(w) = q^gw^{2g-1}/(1 - qw) - 1/(1 - w)$. Riemann--Roch and $\deg\sigma(i) = 2g - 2 - \deg i$ give, term by term after $i \mapsto \sigma(i)$, $q^{g-1}z^{2g-2}B(1/qz) = B(z)$; a direct computation gives $q^{g-1}z^{2g-2}S(1/qz) = S(z)$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1971_14.lean}{\texttt{Notebook1971\_14.\allowbreak{}lean}} defines \texttt{Z} and proves \texttt{functional\_equation}. The page continues an infinite sum over all classes analytically; the proof above uses only finite sums, the split into $B$ and $S$ being the edition's. The identification of $Z$ with the zeta function (counting effective divisors in a class) and Riemann--Roch are hypotheses, not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical: F.\,K.~Schmidt (1931); the proof through $\mathrm{Pic}$ and Riemann--Roch is the standard one (e.g.\ Rosen, \emph{Number theory in function fields}, ch.~5). The edition does not present it as new.}

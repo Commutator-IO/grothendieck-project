@@ -1,0 +1,21 @@
+\section[1972 mixed papers: square-zero symmetric functions; the cone product]{1972 mixed papers: $(\sum\varepsilon_i)^k = k!\,e_k$ when $\varepsilon_i^2 = 0$; the cone product; the sum map\protect\verifie{Notebook1972_Mixed}}\label{sec:quillen-1972-mixed}
+
+\emph{Context.} In the \href{https://www.claymath.org/library/Quillen/Working_papers/quillen\%201972/1972-mixed\%20papers.pdf}{file 1972-mixed papers} Quillen tests the cohomology of symmetric products of $\mathbf{CP}^1$ with classes $\varepsilon_i$ of square zero (p.~40), composes homotopies into a cone product (p.~17; the same algebra in \carnet{1971}{14}, pp.~10--11), and counts the $\ell$-torsion of a Brauer group as the kernel of a sum map (p.~33).
+
+\begin{encadre}
+\begin{theoreme}[Quillen, 1972 mixed papers, pp.~17, 33, 40]\label{thm:quillen-1972-mixed}
+\begin{enumerate}
+\item In a commutative ring, if $\varepsilon_i^2 = 0$ for $i \in s$, then $(\sum_{i\in s}\varepsilon_i)^k = k!\,e_k(\varepsilon)$, the elementary symmetric function; in particular $(\sum\varepsilon_i)^2 = 2\sum_{i<j}\varepsilon_i\varepsilon_j$ and $(\sum_{i\le n}\varepsilon_i)^n = n!\prod\varepsilon_i$.
+\item In a ring, if $dh + hd = u - v$, $dh' + h'd = u' - v'$ and $d$ commutes with $v$ and $u'$, then $d(hu' + vh') + (hu' + vh')d = uu' - vv'$.
+\item The kernel of the sum map $K^s \to K$, $s \ge 1$, has dimension $s - 1$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) By induction on $s$: $(\varepsilon_a + S)^{k+1} = S^{k+1} + (k + 1)\varepsilon_aS^k$ since $\varepsilon_a^2 = 0$, and $e_{k+1}$ of $s \cup \{a\}$ is $e_{k+1}(s) + \varepsilon_ae_k(s)$. (2) Expand: $[d, h]u' = (u - v)u'$, $v[d, h'] = v(u' - v')$. (3) The map is onto; rank--nullity.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1972_Mixed.lean}{\texttt{Notebook1972\_Mixed.\allowbreak{}lean}} proves \texttt{sum\_pow\_of\_sq\_eq\_zero}, \texttt{sum\_pow\_card}, \texttt{cone\_product} (ungraded commutators: $[d, h] = dh + hd$ for $h$ odd is written out) and \texttt{finrank\_ker\_sum}. The cohomology of symmetric products and the Brauer group are not formalised. Of the page's other short statements, the group of power series with constant term $1$ is the kernel of a homomorphism and the lifting-the-exponent identity of p.~30 is mathlib's \texttt{padicValNat.pow\_sub\_pow}; they are not repeated. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary or classical (Macdonald, Proc.\ Cambridge Philos.\ Soc.\ 58, 1962, for the symmetric products); the edition does not present them as new.}

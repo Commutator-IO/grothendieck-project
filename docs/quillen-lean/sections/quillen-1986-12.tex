@@ -1,0 +1,23 @@
+\section[Notebook 1986-12: the geometric-sum bound; the Cayley resolvent bound]{Notebook 1986-12: $\|g^n - 1\| \le n\|g - 1\|$; $|t + 1| - |t - 1| \ge 2\operatorname{Re}t/(1 + |t|)$\protect\verifie{Notebook1986_12}}\label{sec:quillen-1986-12}
+
+\emph{Context.} In \carnet{1986}{12} Quillen estimates functions of unitaries in Schatten ideals through $\|(g^n - 1)/(g - 1)\| \le n$ (p.~23), and bounds the resolvent of the Cayley picture $t(g + 1) + (g - 1)$ of a skew-adjoint operator for $\operatorname{Re}t > 0$ (p.~53).
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1986-12, pp.~23, 53]\label{thm:quillen-1986-12}
+\begin{enumerate}
+\item In a normed ring, if $\|g^k\| \le 1$ for all $k$, then $\|g^n - 1\| \le n\|g - 1\|$.
+\item For $t \in \mathbf C$, $|t + 1|^2 - |t - 1|^2 = 4\operatorname{Re}t$; if $\operatorname{Re}t > 0$, $|t + 1| - |t - 1| \ge 2\operatorname{Re}t/(1 + |t|)$.
+\item For a linear isometry $g$ of a complex normed space, $\|((t + 1)g + (t - 1))v\| \ge (|t + 1| - |t - 1|)\|v\|$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) $g^n - 1 = (\sum_{k<n}g^k)(g - 1)$. (2) Expand; then $(|t + 1| - |t - 1|)(|t + 1| + |t - 1|) = 4\operatorname{Re}t$ and $|t \pm 1| \le 1 + |t|$. (3) The triangle inequality and $\|gv\| = \|v\|$.
+\end{proof}
+
+With (2) and (3), $\|(t(g + 1) + (g - 1))^{-1}\| \le (1 + |t|)/(2\operatorname{Re}t)$ wherever the inverse exists, the page's bound.
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1986_12.lean}{\texttt{Notebook1986\_12.\allowbreak{}lean}} proves \texttt{norm\_pow\_sub\_one\_le}, \texttt{norm\_add\_one\_sq\_sub}, \texttt{norm\_add\_one\_sub\_ge} and \texttt{norm\_cayley\_ge}. The Schatten-ideal smoothness and the unbounded-operator setting are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Elementary; the bound in terms of $g$ was not located as stated (Kato, \emph{Perturbation theory}, ch.~V, for the setting). The edition does not present it as new.}

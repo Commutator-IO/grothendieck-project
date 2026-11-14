@@ -1,0 +1,17 @@
+\section[Notebook 1973-8: cancelling a free summand along a unimodular vector]{Notebook 1973-8: $A \oplus M \cong A \oplus M'$ with $f(1, m)$ of unit first coordinate gives $M \cong M'$\protect\verifie{Notebook1973_8Splitting}}\label{sec:quillen-1973-8-splitting}
+
+\emph{Context.} On pages~26--28 of \carnet{1973}{8} Quillen reviews the Jacobson radical and Bass's cancellation for semi-local rings, which he reduces to the splitting argument: an isomorphism $A \oplus M \cong A \oplus M'$ sending a vector $(1, m)$ to a vector whose first coordinate is a unit induces $M \cong M'$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1973-8, p.~27]\label{thm:quillen-1973-8-splitting}
+Let $A$ be a commutative ring, $M, M'$ modules and $f : A \times M \to A \times M'$ an isomorphism. If the first coordinate of $f(1, m)$ is a unit for some $m \in M$, then $M \cong M'$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Write $f(1, m) = u(1, m')$. The map $\pi_m(a, n) = n - am$ is onto $M$ with kernel $A(1, m)$, and similarly $\pi_{m'}$. Then $\varphi = \pi_{m'} \circ f \circ \iota_2$ and $\psi = \pi_m \circ f^{-1} \circ \iota_2$ are inverse: $f(0, n) - (0, \varphi(n)) = b(1, m')$ with $b$ the first coordinate of $f(0, n)$, so $f^{-1}(0, \varphi(n)) = (0, n) - bu^{-1}(1, m)$, whose image under $\pi_m$ is $n$; symmetrically for $\varphi\psi$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1973_8Splitting.lean}{\texttt{Notebook1973\_8Splitting.\allowbreak{}lean}} proves \texttt{proj\_symm\_proj} and \texttt{nonempty\_equiv}, with the explicit inverse pair. Bass's lemma (a unit in $a + I$ when $Aa + I = A$, semi-local $A$) and the noncommutative case are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical: Bass (Publ.\ Math.\ IHÉS 22, 1964), stable range one for semi-local rings. The edition does not present it as new.}

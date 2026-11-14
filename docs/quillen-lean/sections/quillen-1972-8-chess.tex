@@ -1,0 +1,17 @@
+\section[Notebook 1972-8: the $2 \times m$ chessboard complex]{Notebook 1972-8: the $2 \times m$ chessboard complex is disconnected for $m = 2$ and connected for $m \ge 3$\protect\verifie{Notebook1972_8Chess}}\label{sec:quillen-1972-8-chess}
+
+\emph{Context.} On pages~46--47 of \carnet{1972}{8} Quillen asks for the homotopy type of the complex of partial injections $\sigma \hookrightarrow C$, $\sigma \subset \{1, \dots, n\}$, and treats $n = 2$: disconnected when $|C| = 2$, a bouquet of circles when $|C| > 2$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1972-8, p.~47]\label{thm:quillen-1972-8-chess}
+Let $G_m$ be the graph on $\{1, 2\} \times C$, $|C| = m$, in which $(i, c)$ and $(j, c')$ are joined iff $i \ne j$ and $c \ne c'$. It is $(m - 1)$-regular with $m(m - 1)$ edges; it is disconnected for $m = 2$ and connected for $m \ge 3$. Hence for $m \ge 3$ it has the homotopy type of a bouquet of $m^2 - 3m + 1$ circles; for $m = 3$, one circle.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Each vertex has $m - 1$ neighbours, so $2|E| = 2m(m - 1)$. For $m = 2$, $i + c \bmod 2$ is constant along edges, so $(1, 1)$ and $(1, 2)$ are not joined by a path. For $m \ge 3$, two vertices $(1, c)$, $(1, c')$ are joined through $(2, d)$ with $d \ne c, c'$, and $(2, c)$ is joined to some $(1, c'')$. A connected graph is homotopy equivalent to a bouquet of $|E| - |V| + 1$ circles.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1972_8Chess.lean}{\texttt{Notebook1972\_8Chess.\allowbreak{}lean}} defines \texttt{chess} and proves \texttt{degree\_chess}, \texttt{card\_edgeFinset\_chess}, \texttt{not\_connected\_chess\_two} and \texttt{connected\_chess}. The homotopy type of a graph is not formalised (only the counts and connectivity). The \q{$\vee^4 S^1$} written beside a $3 \times 3$ array on the page does not fit $n = 2$, $|C| = 3$, which gives one hexagon; the reading of the exponent is doubtful. The axioms used are the three usual axioms of mathlib.
+
+\litterature{The chessboard complex: Björner, Lovász, Vrećica and Živaljević (J.\ London Math.\ Soc.\ 49, 1994), who show that the $m \times n$ complex is $(\nu - 2)$-connected, $\nu = \min(m, n, \lfloor(m + n + 1)/3\rfloor$). The edition does not present the case $n = 2$ as new.}

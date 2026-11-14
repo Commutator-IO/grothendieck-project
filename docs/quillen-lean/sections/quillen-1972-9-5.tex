@@ -1,0 +1,17 @@
+\section[Notebook 1972-9.5: $\bigcap\pi^nE$ is the largest divisible part]{Notebook 1972-9.5: for $E$ torsion-free over a discrete valuation ring, $\bigcap_n\pi^nE$ is $\pi$-divisible\protect\verifie{Notebook1972_9_5}}\label{sec:quillen-1972-9-5}
+
+\emph{Context.} On page~3 of \carnet{1972}{9.5}, sorites for his $K'$-theory of modules, Quillen considers a module $E$ over a discrete valuation ring with uniformiser $\pi$ and the submodule $W = \bigcap_n\pi^nE$, which he shows is $\pi$-divisible, hence a vector space over the fraction field, before asking whether $E/W$ is a lattice.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, notebook 1972-9.5, p.~3]\label{thm:quillen-1972-9-5}
+Let $E$ be a module over a commutative ring and $\pi$ a scalar acting injectively on $E$ (for instance $E$ torsion-free over a discrete valuation ring with uniformiser $\pi$). Every $x \in W = \bigcap_n\pi^nE$ is $\pi y$ with $y \in W$; and every subset $D$ of $E$ with $D \subset \pi D$ is contained in $W$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Write $x = \pi^{n+1}e_{n+1}$ for each $n$; then $\pi(\pi^ne_{n+1}) = x = \pi e_1$, so $\pi^ne_{n+1} = e_1$ for all $n$, and $y = e_1 \in W$. For the second claim, $D \subset \pi^nD \subset \pi^nE$ by induction on $n$.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1972_9_5.lean}{\texttt{Notebook1972\_9\_5.\allowbreak{}lean}} proves \texttt{divisible\_iInf} and \texttt{mem\_iInf\_of\_divisible}, with $W$ written elementwise. Injectivity of $\pi$ is the only hypothesis used. The transversality sorites of page~5 is the statement of section~\ref{sec:quillen-1972-11-transverse}; the coherence sorites of pages~31--33 and the lattice question are not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Standard commutative algebra (Bourbaki, \emph{Alg.\ comm.}~VII); the edition does not present it as new.}

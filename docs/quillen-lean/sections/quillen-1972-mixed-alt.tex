@@ -1,0 +1,17 @@
+\section[1972 mixed papers: alternating perfect pairings force even dimension]{1972 mixed papers: a nondegenerate alternating form forces even dimension, in every characteristic\protect\verifie{Notebook1972_MixedAlt}}\label{sec:quillen-1972-mixed-alt}
+
+\emph{Context.} On page~41 of the \href{https://www.claymath.org/library/Quillen/Working_papers/quillen\%201972/1972-mixed\%20papers.pdf}{file 1972-mixed papers} Quillen notes that the cup-product pairing on $H^1(\pi, \mathbf Z/p)$ of the Galois group of a $p$-adic field is a perfect alternating pairing, so that the dimension is even, which he checks against $[\mathbf Q_p(\mu_p) : \mathbf Q_p] = p - 1$. The statement below holds in every characteristic.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, 1972 mixed papers, p.~41]\label{thm:quillen-1972-mixed-alt}
+A nondegenerate alternating bilinear form on a finite-dimensional vector space over a field has even dimension. More generally, an alternating matrix (zero diagonal, $M^T = -M$) of odd size has determinant zero over any commutative ring.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+For the generic alternating matrix $G$ of odd size $n$ over $\mathbf Z[X_{ij}]_{i<j}$, $\det G = \det G^T = \det(-G) = -\det G$, so $2\det G = 0$ and $\det G = 0$ since $\mathbf Z[X_{ij}]$ has no $2$-torsion. Any alternating matrix is the image of $G$ under a ring homomorphism, which commutes with $\det$. The Gram matrix of a nondegenerate alternating form has nonzero determinant.
+\end{proof}
+
+\emph{Verification in Lean.} The file \href{\leanblobmain/Notebook1972_MixedAlt.lean}{\texttt{Notebook1972\_MixedAlt.\allowbreak{}lean}} proves \texttt{det\_generic\_eq\_zero}, \texttt{det\_eq\_zero\_of\_alternating} and \texttt{even\_finrank}. The argument by universality avoids the symplectic-basis theorem and the Pfaffian, neither of which the pinned mathlib has; the Galois-cohomological pairing is not formalised. The axioms used are the three usual axioms of mathlib.
+
+\litterature{Classical (Bourbaki, \emph{Algèbre}~IX, symplectic bases); the edition does not present it as new.}
