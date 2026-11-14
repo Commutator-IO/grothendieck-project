@@ -552,7 +552,8 @@ const BRACED = [
   // himself in corner brackets — angle brackets would read as a pairing.
   ['supplied', (a) => `<span class="tr-supplied" title="supplied by the transcriber">[${a}]</span>`],
   ['add', (a) => `<span class="tr-add" title="inserted by the author">\u231c${a}\u231d</span>`],
-  ['struck', (a) => `<span class="tr-struck" title="struck out by the author">${a}</span>`],
+  // A struck display is braced, {$\begin{array}…$}, so that ulem takes it as one unit; the braces are not his.
+  ['struck', (a) => `<span class="tr-struck" title="struck out by the author">${a.replace(/^\{([\s\S]*)\}$/, '$1')}</span>`],
   ['note', (a) => `<span class="tr-note" title="transcriber's note">${a}</span>`],
   // A drawing of his, described rather than redrawn: a note of its own kind,
   // so that drawings can be counted and listed without guessing from words.
