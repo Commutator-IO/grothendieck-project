@@ -64,6 +64,10 @@ const answered = new Set(Object.keys(answeredItems));
 const leaves = JSON.parse(readFileSync(join(ROOT, 'src/content/dated-leaves.json'), 'utf8')).records;
 const letters = JSON.parse(readFileSync(join(ROOT, 'src/content/letters.json'), 'utf8')).records;
 const isCote = (c) => existsSync(join(T, c));
+// A folder of the inventory, transcribed or not: enough for a question that
+// only sends the reader to the facsimile (datings, readings of a leaf, #113).
+const INVENTORY = new Set([...readFileSync(join(ROOT, 'src/content/catalogue.ts'), 'utf8').matchAll(/"id": "([^"]+)"/g)].map((m) => m[1]));
+const isFolder = (c) => isCote(c) || INVENTORY.has(c);
 const batchOf = (p) => Math.max(1, Math.ceil(p / 20));
 const skipped = [];
 
@@ -497,7 +501,7 @@ for (const raw of body.split('\n')) {
   // (src/content/proposed-datings.json): a question for a reader of the hand.
   if (section.startsWith('Datings against the inventory')) {
     const dat = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);
-    if (dat && isCote(dat[1])) {
+    if (dat && isFolder(dat[1])) {
       const ps = (dat[2] ?? '').split(/,\s*/).flatMap((r) => {
         const [a, b] = r.split('–').map(Number);
         return b > a ? Array.from({ length: b - a + 1 }, (_, i) => a + i) : a ? [a] : [];
@@ -574,7 +578,7 @@ for (const raw of body.split('\n')) {
   // A finding too imprecise to state: what the leaves can still fix.
   if (section.startsWith('Statements too imprecise')) {
     const imp = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);
-    if (imp && isCote(imp[1])) {
+    if (imp && isFolder(imp[1])) {
       const ps = (imp[2] ?? '').split(/,\s*/).flatMap((r) => {
         const [a, b] = r.split('–').map(Number);
         return b > a ? Array.from({ length: b - a + 1 }, (_, i) => a + i) : a ? [a] : [];
