@@ -6,7 +6,8 @@ description: Transcribes a batch of twenty handwritten pages from the Alexandre 
 # Transcribing a batch from the Grothendieck fonds
 
 
-**Runs on Opus 5.5, and on nothing else.** The
+**Runs on Opus 5.5, and on nothing else — except a revision on the
+facsimile, which may also run on Fable 5.2.** The
 frontmatter used to pin Fable 5, which made the choice automatic; the pin is
 gone so that the models can be measured against one another. Since 2026-09-22
 the Fable models are no longer admitted for new passes; the batches they
@@ -16,7 +17,16 @@ a check you make yourself, before reading a single page:
 
 - **Opus 5.5 (`claude-opus-5-5`)** — the only model admitted since
   2026-10-19 (the default since 2026-09-22); the successor to Opus 5, which
-  produced most batches so far.
+  produced most batches so far. Every first transcription is made on it.
+- **Fable 5.2 (`claude-fable-5-2`)** — for a revision pass on the facsimile
+  only, since 2026-11-14 (the editor's decision, #145), never for a first
+  transcription. Such a pass re-reads the `\uncertain{}` and `\ill{}` places
+  on a crop, and may read blind, a second time, the pages that a statement
+  cites; each difference between that second reading and the existing text is
+  then settled on the facsimile, place by place. **It never replaces the old
+  text wholesale**: on the six sample pages of 14 November the blind text
+  found nineteen errors in unflagged words and introduced three of its own.
+  See « Revising a batch ».
 - **Anything else** — stop, say which model the session is on, and do not
   transcribe. A pass on a model nobody chose produces a file whose provenance
   is an accident, and the fonds is not the place to discover that later.
@@ -458,6 +468,19 @@ frame happily shows yesterday's rendering.
 Corrections go in the `.tex`, never in the HTML or the PDF, which are derived.
 A correction to a reading is also a correction to the translation: take both
 files up together, or they drift.
+
+A revision on the facsimile may run on Fable 5.2 as well as on Opus 5.5
+(#145, 14 November 2026). It settles the doubtful places one by one: an
+`\uncertain{}` is confirmed (the flag dropped), corrected or left; an
+`\ill{}` is read or left. A flag is dropped only when the page is clear on
+the crop, or when the mathematics around it leaves one reading, and then a
+`\note{}` or a `%` comment says which fact forces it. Nothing is guessed to
+empty the count, and a sure reading is not made doubtful without a reason on
+the page. Where the pass also reads a cited page blind, the old text stays the
+base: the second reading is diffed against it and each disagreement is decided
+on a crop — old right, new right, or undecidable, in which case the old text
+stands. Its header line reads `% Revised: Fable 5.2 (claude-fable-5-2),
+<date> — read again on the facsimile, not checked by a reader.`
 
 Record the revision in the header, under the `% Pass:` line, in the same form:
 `% Revised: Opus 5.5 (claude-opus-5-5), <date> — <what changed>.` — the model
