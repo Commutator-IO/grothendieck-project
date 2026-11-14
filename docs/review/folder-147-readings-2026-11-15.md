@@ -1,0 +1,1180 @@
+# Readings of folder 147 to check on the facsimile (2026-11-15)
+
+Issue #156. Each bullet is one place of folder 147 where our transcription and an independent transcription made elsewhere (a first pass by another model, then a second pass, published in the repository named in #156) disagree. They come from a word-by-word comparison of the two texts, page by page, with formatting, fonts, arrowheads, abbreviations and displayed formulas left out. Nothing here has been checked by a person and nothing has been changed in `transcripts/`. The other text is not copied here beyond the few words of each reading.
+
+`scripts/review-queue.mjs` reads this file, one item per open box, as kind `uncertain` (« Doubtful reading »). The format is the one of `folder-12-readings-2026-11-10.md`:
+
+`- [ ] <cote> p<page> batch-<NN>:<line> | reading | <where on the page> | <our reading> | <the other reading>`
+
+1159 questions: 271 places our transcription leaves illegible and the other reading reads, 747 words read differently, 119 formulas and symbols read differently, 22 accents and spelling.
+
+## 1. Places our transcription leaves illegible and the other reading reads
+
+- [ ] 147 p3 batch-01:50 | reading | after « courbe standard sur $k$ est » | [illegible] | un e courbe
+- [ ] 147 p7 batch-01:132 | reading | after « foncteur pl fidèle il faut » | remplacer [illegible] [illegible] | se placer
+- [ ] 147 p7 batch-01:132a | reading | after « le contexte propre i e » | [illegible] | remplacer $X$ par
+- [ ] 147 p7 batch-01:132b | reading | after « propre i e [illegible] $(\widehat{X}, I)$ » | [illegible] $X = \widehat{X} \setminus I$ [illegible] | de sorte que $X=\widehat X-I$ J'appelle
+- [ ] 147 p7 batch-01:134 | reading | after « s'appellera le compactifié normalisé relatif » | [illegible] | par abus
+- [ ] 147 p7 batch-01:134a | reading | after « normalisé relatif [illegible] de système » | divisant le [illegible] | définissant langage
+- [ ] 147 p9 batch-01:176 | reading | after « par un $\widehat{X}$ convenable et » | [illegible] [illegible] | $ = $ avec
+- [ ] 147 p11 batch-01:206 | reading | after « comp conn de $X$ Donc » | [illegible] | l'on
+- [ ] 147 p12 batch-01:240 | reading | after « où » | [illegible] | $ h_1 $ est le
+- [ ] 147 p15 batch-01:316 | reading | after « un sommet puisqu'il est stable » | d'après [illegible] | de type $(1,0)$
+- [ ] 147 p16 batch-01:324 | reading | after « a au moins deux bouts » | donc [illegible] | dont
+- [ ] 147 p16 batch-01:331 | reading | after « de type $G$ Alors les » | [illegible] | types des
+- [ ] 147 p17 batch-01:340 | reading | after « à la maquette $G$ donnée » | [illegible] | Le
+- [ ] 147 p20 batch-01:377 | reading | after « n'est qu'à un iso can » | près [illegible] | plutôt
+- [ ] 147 p21 batch-02:21 | reading | after « $(g, \nu = card J)$ » | [illegible] | anabélien
+- [ ] 147 p22 batch-02:29 | reading | after « la condition de rigidité infinitésimale » | [illegible] | en automorphismes
+- [ ] 147 p22 batch-02:31 | reading | after « base $\mathcal{S}$ connexe p ex » | [illegible] | $ \mathcal S= $
+- [ ] 147 p28 batch-02:107 | reading | after « avec un poids marqué » | [illegible] | $ \nu $
+- [ ] 147 p29 batch-02:160 | reading | after « mais pas une immersion il » | [illegible] | ne correspond pas à
+- [ ] 147 p30 batch-02:171 | reading | after « proviennent de $\hat{M}_G$ Nous allons » | [illegible] | y
+- [ ] 147 p31 batch-02:181 | reading | after « $(g,\nu)$ Nous allons construire ses » | [illegible] | $ G $
+- [ ] 147 p32 batch-02:213 | reading | after « recette pratique est la suivante » | [illegible] | y
+- [ ] 147 p33 batch-02:220 | reading | after « graphe connexe $(S(\alpha), \tilde{A}(\alpha), [illegible] \ … » | [illegible] se | fix
+- [ ] 147 p33 batch-02:225 | reading | after « i e on répartit les » | [illegible] | divers
+- [ ] 147 p33 batch-02:229 | reading | after « que celui-ci soit un MD-graphe » | [illegible] | ce
+- [ ] 147 p34 batch-02:243 | reading | after « Morphismes de générisation de graphes » | [illegible] ordinaires | quelconques et de maquettes
+- [ ] 147 p34 batch-02:245 | reading | after « est $S$ et l'ens des » | [illegible] | chemins de
+- [ ] 147 p37 batch-02:278 | reading | after « et l'extrémité de $a$ ont » | [illegible] | $ \overline m $ image
+- [ ] 147 p37 batch-02:285 | reading | after « donnée d'un sous-graphe $G'_{\tilde{B}'}$ de » | [illegible] | $G$
+- [ ] 147 p38 batch-02:288 | reading | after « Ainsi on trouve la catégorie » | [illegible] | étendue
+- [ ] 147 p39 batch-02:319 | reading | after « $G'(\alpha)$ de $G'$ formé des » | [illegible] | $S$
+- [ ] 147 p39 batch-02:319a | reading | after « est connexe et il satisfait » | [illegible] à la condition | tous les les conditions
+- [ ] 147 p39 batch-02:324 | reading | after « l'origine se trouve dans $S'_\alpha$ » | [illegible] | i e dans $G'(\alpha)$
+- [ ] 147 p41 batch-03:27 | reading | after « même par $G'$ et la » | [illegible] | ens
+- [ ] 147 p42 batch-03:51 | reading | after « de $G'$ et $f$ de » | [illegible] | $ \overline m $
+- [ ] 147 p44 batch-03:79 | reading | after « Supposons maintenant que $G'$ soit » | [illegible] fini | fixé
+- [ ] 147 p44 batch-03:79a | reading | after « soit [illegible] fini et provienne » | [illegible] | $ \overline m $
+- [ ] 147 p46 batch-03:118 | reading | after « on peut de façon unique » | [illegible] | trouver
+- [ ] 147 p47 batch-03:128 | reading | after « défini par $S'$ et $C'$ » | [illegible] | $ =A' $
+- [ ] 147 p48 batch-03:141 | reading | after « naturel $\delta = card C'$ Alors … » | [illegible] | compris
+- [ ] 147 p49 batch-03:167 | reading | after « avec l'ens des sous-multiplicités fermées » | [illegible] | lisses
+- [ ] 147 p51 batch-03:181 | reading | after « le nb $s_1$ d'arêtes de » | [illegible] | $ \underline G $
+- [ ] 147 p51 batch-03:185 | reading | after « genre $0$ et est d'ordre » | [illegible] | $ 3 $
+- [ ] 147 p51 batch-03:195 | reading | after « i e \[ 189(60)\qquad M_G = … » | [illegible] | espace
+- [ ] 147 p52 batch-03:213 | reading | after « n'est pas réduit à un » | [illegible] | arbre
+- [ ] 147 p53 batch-03:227 | reading | after « autres sommets étant donc d'ordre » | 3 [illegible] | $3$ Et
+- [ ] 147 p53 batch-03:229 | reading | after « top est homéomorphe à et » | s'il [illegible] | si il n'y a pas $G$
+- [ ] 147 p53 batch-03:229a | reading | after « c'est qu'il est le graphe » | [illegible] | qui
+- [ ] 147 p54 batch-03:269 | reading | after « $(\mathcal{X}, I_{\mathcal{S}})$ est une MD courbe » | [illegible] | à
+- [ ] 147 p57 batch-03:335 | reading | at the top of the page | MD-graphes de dim modulaire 1 et de dim modulaire ambiante 1 2 [illegible] | 71
+- [ ] 147 p58 batch-03:379 | reading | after « des deux types $(0,5)$ $(1,2)$ » | [illegible] | $ (2,0) $
+- [ ] 147 p58 batch-03:379a | reading | after « $\alpha_0$ de genre $1$ d'ordre » | $\tilde{\mu}_\alpha \in \{1, 2\}$ [illegible] | $ \leq2 $ $\widetilde\mu_{\alpha_0}\in\{1,2\}$
+- [ ] 147 p58 batch-03:383 | reading | after « que les deux types sont » | [illegible] | tous deux
+- [ ] 147 p58 batch-03:383a | reading | after « types sont [illegible] $(0,4)$ $(1,1)$ » | [illegible] $(0,4)$ [illegible] | ou tous deux
+- [ ] 147 p59 batch-03:408 | reading | after « \[ 405\Gamma \longrightarrow \underbrace{\mathbb{Z}/2 \cdot (\mathfrak{S}_4 … » | pour l'essentiel les seules [illegible] multiplicités | par rapport aux schémas modulaires
+- [ ] 147 p59 batch-03:408a | reading | after « $\widehat{M}_G$ modulaires de dim $1$ » | [illegible] nouvelles | qui
+- [ ] 147 p61 batch-04:23 | reading | after « sections $s_0, s_1, s_\infty, s_\lambda$ ou … » | [illegible] | avec
+- [ ] 147 p62 batch-04:56 | reading | after « end align valable au-dessus de » | $\mathbb{Z}[\frac16]$ 79 [illegible] [illegible] | $\mathbf Z[\frac16]$ je me dispense de
+- [ ] 147 p62 batch-04:56a | reading | after « [illegible] [illegible] faire le calcul » | [illegible] au-dessus | plus fin au dessus
+- [ ] 147 p63 batch-04:96 | reading | after « groupe d'automorphismes $\mathbb{Z}/4\mathbb{Z}$ et $S_1$ » | [illegible] | $\simeq\mathbf Z$
+- [ ] 147 p63 batch-04:96a | reading | after « $2$ et $3$ qui correspondent » | [illegible] | sauf erreur
+- [ ] 147 p65 batch-04:160 | reading | after « dont chacun est un $\widehat{M}^{!}_{0,4}$ » | [illegible] | $\simeq\mathbf P$ $\mathbf P^1_{0,3}\mathfrak S_3$
+- [ ] 147 p65 batch-04:160a | reading | after « trois points à l'infini les » | [illegible] | pts à l'infini
+- [ ] 147 p65 batch-04:160b | reading | after « $(2,2,1)$ alors que les diviseurs » | [illegible] | à l'infini
+- [ ] 147 p65 batch-04:163 | reading | after « qui détermine un icosaèdre orienté » | [illegible] | ou encore
+- [ ] 147 p66 batch-04:166 | reading | after « de type $(2,2,1)$ de $I$ » | qui [illegible] intersections [illegible] | qu'on peut interpréter comme
+- [ ] 147 p66 batch-04:168 | reading | after « incidentes dans à une face » | des [illegible] | $f$ de
+- [ ] 147 p66 batch-04:168a | reading | after « ses og triangles fg $\subset I$ » | correspondent [illegible] commune | correspondant à $f$ a comme
+- [ ] 147 p66 batch-04:168b | reading | after « $\subset I$ correspondent [illegible] commune intersection » | [illegible] la corde [illegible] | avec le carré correspondant à $a$
+- [ ] 147 p66 batch-04:171 | reading | after « dodécaèdre On a donc trouvé » | NB on associe à l'icosaèdre [illegible] coloration des faces [illegible] 4 couleurs [illegible] faces [illegible] … | 66
+- [ ] 147 p67 batch-04:178 | reading | after « Bien entendu les groupes des » | [illegible] liés aux arêtes libres aux arêtes | composantes irréductibles sont nuls
+- [ ] 147 p67 batch-04:178a | reading | after « marqués fg les 10 composantes » | [illegible] | irréductibles
+- [ ] 147 p67 batch-04:178b | reading | after « [illegible] de $M_{0,5}$ $M^{\infty}_{0,5}$ qui » | soit [illegible] [illegible] courbe | est
+- [ ] 147 p67 batch-04:178c | reading | after « courbe de toutes façons une » | MD [illegible] | MD-courbe stable à
+- [ ] 147 p67 batch-04:180 | reading | after « géométrie de l'icosaèdre grand ou » | [illegible] | du
+- [ ] 147 p67 batch-04:183 | reading | after « passe à la multiplicité modulaire » | NB $\widehat{M}_{0,I}$ est un vrai schéma projectif et lisse sur $\mathbb{Z}$ [illegible] [illegible] Deligne [illegible] … | 67
+- [ ] 147 p69 batch-04:205 | reading | after « deux points critiques à l'infini » | [illegible] | dont
+- [ ] 147 p69 batch-04:208 | reading | after « donc celle des deux multiplicités » | [illegible] [illegible] | lisses $\widehat M$
+- [ ] 147 p69 batch-04:210 | reading | after « $U_{0,3}\mathbb{Z}$ soit $\{0, \infty\}$ et en » | [illegible] | transposant
+- [ ] 147 p69 batch-04:210a | reading | after « deux autres ceux correspondant plus » | [illegible] à $D_{-}$ [illegible] sur [illegible] | intrinsèque ceci correspond au
+- [ ] 147 p72 batch-04:270 | reading | after « que pour un tel $\alpha$ » | [illegible] | on a
+- [ ] 147 p72 batch-04:276 | reading | after « où $3(g-1) + \nu = 2$ … » | [illegible] dans | donc
+- [ ] 147 p73 batch-04:310 | reading | after « spécialisation des cas b si » | [illegible] [illegible] | on suppose
+- [ ] 147 p73 batch-04:315 | reading | after « les cas b $g' \neq$ les » | conditions [illegible] | notations $g',g''$
+- [ ] 147 p74 batch-04:332 | reading | after « ordres totaux sur $I$ définissent » | [illegible] | une
+- [ ] 147 p74 batch-04:345 | reading | after « de \[ 343\cdots\!-\!\overset{c_{i-1}}{\bullet}\!-\!\overset{c_{i+1}}{\bullet}\!-\!\overset{c_i}{\bullet}\!-\!\overset{c_{i+2}}{\bullet}\!-\!\cdots 344\] en contractant … » | [illegible] | seg
+- [ ] 147 p76 batch-04:370 | reading | after « $(\Pi M_{ G }, \Gamma_{ G … » | cartésien [illegible] | extérieur s'insère de par
+- [ ] 147 p76 batch-04:376 | reading | after « et une og variation de » | [illegible] généralisation | passage au quotient
+- [ ] 147 p77 batch-04:394 | reading | after « automorphismes qui induisent l'identité sur » | $ G '$ alors le morphisme [illegible] horizontal | $\underline G'$ la flèche verticale horizontale
+- [ ] 147 p77 batch-04:398 | reading | after « que des immersions locales il » | paraît [illegible] | me semble à vérifier ldots
+- [ ] 147 p78 batch-04:407 | reading | after « obtenus en prenant les traces » | des $\widehat{M}_{ G '}$ [illegible] | de $M$
+- [ ] 147 p79 batch-04:450 | reading | after « de l'homomorphisme sur les $\pi_1$ » | des bouts de $\Pi(M_{ G },$ $)$ [illegible] | dans
+- [ ] 147 p79 batch-04:450a | reading | after « $C$ ou plutôt on peut » | [illegible] $\Pi M^{*}_{ G , G '}$ | considérer $\Pi M^*_{\underline G,\underline G'}$
+- [ ] 147 p80 batch-04:462 | reading | after « de généralisation \[ 460(104)\qquad G \longrightarrow … » | [illegible] l association | naissance à
+- [ ] 147 p81 batch-05:44 | reading | after « un produit 2-cartésien c'est donc » | [illegible] | un
+- [ ] 147 p81 batch-05:44a | reading | after « 2-cartésien c'est donc [illegible] groupoïde » | de noyau x [illegible] cat | connexe ext
+- [ ] 147 p83 batch-05:96 | reading | after « c'est donc la généralisation spécial » | [illegible] | générisation
+- [ ] 147 p84 batch-05:104 | reading | after « \[ 102(113)\qquad S_{A}\Pi M_{G} \overset{ déf … » | des [illegible] | de ttes les
+- [ ] 147 p84 batch-05:105 | reading | after « des [illegible] arêtes de $G$ » | [illegible] $= \surd$ | $\ast$
+- [ ] 147 p84 batch-05:106 | reading | after « une extension de $\Pi M_{G,G'}$ par » | $\mathbb{Z}^{A(G)}$ [illegible] | $\mathbf Z^{A(G)}$ de
+- [ ] 147 p84 batch-05:108 | reading | after « $\Pi M_{G}$ mais aussi sur $S_{A}\Pi … » | [illegible] | $=\Gamma$
+- [ ] 147 p85 batch-05:152 | reading | after « compatible avec l'action de $\Gamma_{G,G'}$ » | d'où [illegible] | donc que
+- [ ] 147 p85 batch-05:152a | reading | after « [illegible] la deuxième flèche horizontale » | passant [illegible] | à son tour 85
+- [ ] 147 p87 batch-05:177 | reading | after « quotients $G'$ de $G$ est » | [illegible] | isomorphe à un simplexe
+- [ ] 147 p87 batch-05:180 | reading | after « $\neq G$ et qui ordinaires sont » | [illegible] dans | minimaux maximaux parmi ceux-ci alors
+- [ ] 147 p87 batch-05:180a | reading | after « des parties de $A_{G}$ Si » | $C \subset A_{G}$ [illegible] | On
+- [ ] 147 p87 batch-05:187 | reading | after « resp pour les morphismes quelc » | NB Il faudrait montrer comment cette axiomatisation s'applique à la situation des multiplicités topologiques relatives … | 87
+- [ ] 147 p88 batch-05:190 | reading | after « $S\Pi M_{G}$ est un foncteur en » | [illegible] | $M_G$
+- [ ] 147 p88 batch-05:190a | reading | after « telle que $G \to G'$ soit … » | à $G \to G/C$ [illegible] | en tant que
+- [ ] 147 p90 batch-05:221 | reading | after « bouchant les trous relatifs aux » | pts de $I \setminus I'$ [illegible] | $i\in I\setminus I'$ lin
+- [ ] 147 p90 batch-05:223 | reading | after « dans $\hat{X}$ On peut aussi » | [illegible] | aller
+- [ ] 147 p90 batch-05:223a | reading | after « cela revient en termes du » | [illegible] | le graphe
+- [ ] 147 p91 batch-05:234 | reading | after « la courbe normalisée propre $Y$ » | [illegible] | qui
+- [ ] 147 p91 batch-05:234a | reading | after « un ens de pts marqués » | [illegible] | lisses $ A $
+- [ ] 147 p92 batch-05:237 | reading | after « s'est ainsi donné pour un » | [illegible] MD-graphe $ G $ | MD m graphe $\underline G$
+- [ ] 147 p92 batch-05:237a | reading | after « $I' \subset I \amalg \tilde{J}$ qui … » | [illegible] | si
+- [ ] 147 p93 batch-05:244 | reading | after « peu cette construction en choisissant » | [illegible] | une partie
+- [ ] 147 p94 batch-05:265 | reading | after « deux MD-graphes Un morphisme de » | [illegible] | pré
+- [ ] 147 p94 batch-05:270 | reading | after « un sous-graphe de $G$ b » | $f_{I} : I' \to I \amalg \tilde{A}$ [illegible] | $f_I:I'\longrightarrow I\amalg\widetilde A (G) $
+- [ ] 147 p94 batch-05:282 | reading | after « MD-graphes et morphismes de normalisation » | [illegible] | On
+- [ ] 147 p96 batch-05:293 | reading | after « 1 complexe i e aux » | [illegible] pts-bouts | bouts pts-bord
+- [ ] 147 p96 batch-05:293a | reading | after « à la donnée $(S,\tilde{A},\sigma_{\tilde{A}},o_{\tilde{A}})$ d'un » | [illegible] | couple
+- [ ] 147 p96 batch-05:297 | reading | after « $\bullet$ et les boucles aplaties » | [illegible] | sont
+- [ ] 147 p97 batch-05:312 | reading | after « connexes de ce qui reste » | [illegible] [illegible] | en préservant outre
+- [ ] 147 p97 batch-05:313 | reading | after « qui reste [illegible] [illegible] c'est » | En somme le graphe déduit de $G$ en donnant une involution [illegible] pts fixes de … | 97
+- [ ] 147 p101 batch-06:19 | reading | after « stricts en isomorphismes équivalences de » | [illegible] | multi
+- [ ] 147 p101 batch-06:20 | reading | after « [illegible] groupoïdes et sommes de » | [illegible] | m graphes
+- [ ] 147 p102 batch-06:47 | reading | after « donne un diagramme commun à » | [illegible] | iso de foncteurs
+- [ ] 147 p102 batch-06:63 | reading | after « connaissance des morphismes de normalisation » | générale [illegible] se | généraux est
+- [ ] 147 p103 batch-06:72 | reading | after « graphes marqués Bien entendu pour » | [illegible] vraiment [illegible] | pouvoir reconstituer
+- [ ] 147 p103 batch-06:85 | reading | after « purement géométriques De plus pour » | [illegible] un | tt
+- [ ] 147 p103 batch-06:91 | reading | after « et pour un morphisme de » | généralisation [illegible] $G \to G'$ de MD-graphes | générisation
+- [ ] 147 p105 batch-06:136 | reading | after « $X$ à croisements normaux hyp » | [illegible] [illegible] sur | purement locale en
+- [ ] 147 p107 batch-06:181 | reading | after « on a un revêtement étale » | [illegible] [illegible] | à $q$ feuillets
+- [ ] 147 p107 batch-06:183 | reading | after « pt $(x, V)$ est formée des » | [illegible] | $ q $
+- [ ] 147 p108 batch-06:207 | reading | after « la multiplicité $D_J$ est lisse » | [illegible] | de
+- [ ] 147 p108 batch-06:217 | reading | after « $\widetilde{D}_d$ Si $J$ est de » | [illegible] | dim
+- [ ] 147 p108 batch-06:217a | reading | after « [illegible] totale $d = d(J)$ on … » | [illegible] reconstruire | retrouver reconstituer
+- [ ] 147 p108 batch-06:228 | reading | after « petit élément [illegible] les codim » | maximales [illegible] note écrite en oblique dans la marge gauche en grande partie illisible | 108
+- [ ] 147 p109 batch-06:246 | reading | after « de $D$ multiplicités \[ 242 (155) … » | [illegible] | $J$
+- [ ] 147 p109 batch-06:259 | reading | after « plus petit élément $e_{J'}$ de » | $e$ [illegible] | $c$
+- [ ] 147 p110 batch-06:282 | reading | after « à fonction codim car $\delta < … » | [illegible] $d = \delta$ car $\delta < d$ Utilisant [illegible] | resp si $\delta=d$
+- [ ] 147 p110 batch-06:283 | reading | after « avec $J = \Delta(d,\delta)$ au lieu … » | [illegible] | l
+- [ ] 147 p111 batch-06:321 | reading | after « par les inclusions $\{x\} \subset \{x, … » | a l'impression [illegible] | Cela signifie peut voir aussitôt
+- [ ] 147 p112 batch-06:334 | reading | after « et $D_{d,\delta}$ le rôle de » | [illegible] | f
+- [ ] 147 p113 batch-06:398 | reading | after « composition des flèches satisfaisant aux » | conditions [illegible] habituelles | axiomes habituels
+- [ ] 147 p114 batch-06:432 | reading | after « sera conséquence de c ci-dessous » | [illegible] [illegible] item c Pour $d \in \mathbb{N}$ fixé le morphisme source $D_{d*} \to D_{*}$ … | thm prouvé 114
+- [ ] 147 p115 batch-06:443 | reading | after « un esp analytique sur $D_d$ » | [illegible] | prédisposé
+- [ ] 147 p117 batch-06:524 | reading | after « un sens dans un site » | [illegible] | ce qui
+- [ ] 147 p117 batch-06:524a | reading | after « site [illegible] le fait de » | [illegible] un [illegible] | travailler
+- [ ] 147 p117 batch-06:525 | reading | after « site donné un sens à » | [illegible] des [illegible] | la notion
+- [ ] 147 p118 batch-06:540 | reading | after « situation relative de codim $d - … » | [illegible] [illegible] fait | On doit faire
+- [ ] 147 p118 batch-06:541 | reading | after « de Notons que pour que » | [illegible] $D_{d,d'} \to D_{d'}$ | $D_{d,d'} --- D_{d'}$
+- [ ] 147 p120 batch-06:603 | reading | after « intersection des germes $D^{i}_x$ et » | [illegible] | q bien sûr
+- [ ] 147 p120 batch-06:612 | reading | after « donnée d'un diviseur sur $X$ » | [illegible] [illegible] le | lorsqu'on en a choisi tel
+- [ ] 147 p121 batch-07:25 | reading | after « $\mathfrak{S}_d$ opère donc c'est un » | [illegible] | rev
+- [ ] 147 p121 batch-07:32 | reading | after « de codim 1 on a » | la sym [illegible] [illegible] | le sur
+- [ ] 147 p121 batch-07:32a | reading | after « la sym [illegible] [illegible] $D_1$ » | [illegible] | faisceau
+- [ ] 147 p124 batch-07:152 | reading | after « transitivité pour les morphismes précédents » | relatives [illegible] | $ \Pi P(d,d')_d $ relatifs
+- [ ] 147 p126 batch-07:211 | reading | after « sur $D_d$ dont le complémentaire » | [illegible] | du support
+- [ ] 147 p131 batch-07:381 | reading | after « trouve un diagramme 2-cartésien qui » | [illegible] [illegible] | suit
+- [ ] 147 p131 batch-07:382 | reading | after « 2-cartésien qui [illegible] [illegible] 209 » | [illegible] | aussi
+- [ ] 147 p131 batch-07:393 | reading | after « [illegible] correspondant $\widetilde{\Pi}_d \to \Pi_d$ conservent … » | [illegible] [illegible] [illegible] $D^{*!}_d$ | $ \Pi_d $ comme $D'^*_d$
+- [ ] 147 p131 batch-07:396 | reading | after « [illegible] sur les $\pi_1$ des » | injections [illegible] | applications injectives à
+- [ ] 147 p131 batch-07:401 | reading | after « et triviale et n'utilisent dans » | une certaine mesure que [illegible] | un site quelconque sans
+- [ ] 147 p133 batch-07:428 | reading | after « termes il faut introduire » | [illegible] | des cas
+- [ ] 147 p133 batch-07:440 | reading | after « d'un homom injectif de simplexes » | [illegible] il | on
+- [ ] 147 p133 batch-07:444 | reading | after « le cas déjà envisagé correspondant » | donc [illegible] | d'ailleurs
+- [ ] 147 p133 batch-07:445 | reading | after « donc [illegible] dans ce cas » | $D^{*}_{\Delta_{r'}} \to D^{*}_{\Delta_r}$ est [illegible] décomposé | se décompose
+- [ ] 147 p133 batch-07:454 | reading | after « voit que les considérants des » | $\widetilde{\Pi}_{d_0 \dots d_r}$ $\Pi_{d_0,\dots,d_r}$ [illegible] | $\widetilde\Pi_{d_0- d_r}$ $\Pi_{d_0,-d_r}$
+- [ ] 147 p133 batch-07:455 | reading | after « $d_0,\dots,d_r$ distincts par 220 et » | [illegible] le [illegible] | celle de $\alpha^*$ pour $\alpha$ non
+- [ ] 147 p133 batch-07:456 | reading | after « [illegible] le [illegible] stricts de » | [illegible] stricts [illegible] [illegible] suffisent [illegible] [illegible] | la poudre aux yeux simplement 133
+- [ ] 147 p134 batch-07:461 | reading | after « de dégénérescence alors 219 est » | une [illegible] bijection [illegible] | un e équiv isomorphisme
+- [ ] 147 p134 batch-07:478 | reading | after « est dans une situation de » | [illegible] spécialisation et on retrouve des [illegible] distincts de | notations en intervertissant
+- [ ] 147 p134 batch-07:481 | reading | after « fait [illegible] il suffit de » | [illegible] [illegible] | l'opération
+- [ ] 147 p134 batch-07:491 | reading | after « lisses de codim $d_0 - d'_0$ … » | est incluse [illegible] | ainsi s'insère
+- [ ] 147 p135 batch-07:509 | reading | after « diagramme 224 est cartésien plus » | généralement [illegible] | génér t
+- [ ] 147 p135 batch-07:510 | reading | after « cartésien plus généralement [illegible] il » | [illegible] [illegible] | reste tjs
+- [ ] 147 p135 batch-07:521 | reading | after « dim $p$ de $\Theta^{p}_{d'_*}$ et » | [illegible] | p
+- [ ] 147 p136 batch-07:531 | reading | after « isomorphisme local de $D_{d_*}$ sur » | [illegible] $\Theta^{d*}_{d'_*}$ | $ D_{d'_*} $ $\Theta_{d'_*}^{d*}$
+- [ ] 147 p137 batch-07:568 | reading | after « de dim $d_1$ de $\Theta$ » | [illegible] | et
+- [ ] 147 p137 batch-07:570 | reading | after « se factorise par $\Theta^{(d_0)*}$ squelette » | [illegible] | de dim
+- [ ] 147 p137 batch-07:572 | reading | after « [illegible] de $\Theta^{(d_0)*}$ et $\Theta^{(d_1)*}$ » | [illegible] [illegible] | On a
+- [ ] 147 p137 batch-07:573 | reading | after « [illegible] donc $\Theta$ [illegible] une » | obstruction [illegible] constituée | structure constante
+- [ ] 147 p137 batch-07:573a | reading | after « constituée le long de $D''^{*}$ » | [illegible] | savoir
+- [ ] 147 p137 batch-07:578 | reading | after « $d_1 > d_0 \geqslant 0$ cas … » | [illegible] [illegible] [illegible] | mais
+- [ ] 147 p137 batch-07:578a | reading | after « exclus [illegible] [illegible] [illegible] trivial » | [illegible] [illegible] cartésien petit | Cela signifie qu'on a un
+- [ ] 147 p138 batch-07:591 | reading | after « formelles dans la suite Notons » | dès à présent que [illegible] | tout de suite qu'on a
+- [ ] 147 p139 batch-07:631 | reading | after « factorisant par $D' \xrightarrow{ ét. } … » | [illegible] | le
+- [ ] 147 p139 batch-07:632 | reading | after « la voisinage tubulaire de $D'$ » | [illegible] | p
+- [ ] 147 p139 batch-07:633 | reading | after « comme un germe d'espace analytique » | [illegible] | aut
+- [ ] 147 p143 batch-08:62 | reading | after « a des propriétés de transitivité » | [illegible] | tt à fait
+- [ ] 147 p143 batch-08:67 | reading | after « simples comme canoniquement équivalents à » | $\Pi_1 P_{D'^*}$ $\Pi_1 P_{D''^*}$ D [illegible] | $\Pi_1P_{D'^{*}},\Pi_1P_{D''^{*}}$ Donc
+- [ ] 147 p143 batch-08:69 | reading | after « à croisements normaux de $Y$ » | $D'\to Y$ [illegible] | $D'\longrightarrow Y \Theta $
+- [ ] 147 p144 batch-08:73 | reading | after « Réduction de plus haut » | [illegible] | devient
+- [ ] 147 p144 batch-08:73a | reading | after « de plus haut [illegible] ici » | [illegible] | $d_0$
+- [ ] 147 p144 batch-08:74 | reading | after « il est essentiel pour ce » | qui va suivre [illegible] | qu'on veut faire qu'on n'exige pas
+- [ ] 147 p144 batch-08:74a | reading | after « va suivre [illegible] que $D'\subset\Theta^{(d)*}$ » | [illegible] | on en
+- [ ] 147 p144 batch-08:74b | reading | after « par trace de $Y^*=Y\setminus\Theta$ un » | [illegible] | un
+- [ ] 147 p144 batch-08:80 | reading | after « réduit à un pt le » | [illegible] pas | cas cas peut
+- [ ] 147 p144 batch-08:80a | reading | after « de l'équivalence m'a semblé nécessiter » | une [illegible] | un soin certain
+- [ ] 147 p146 batch-08:93 | reading | after « Pour trouver quelques doutes de » | canonicité [illegible] écrit en oblique dans la marge gauche en partie surchargé | canonique
+- [ ] 147 p146 batch-08:97 | reading | after « équivalence entre les $\Pi_1$ de » | [illegible] | comparer les $\Pi_1$ des $\mathcal V^{*}_{D'^{*}}$
+- [ ] 147 p146 batch-08:97a | reading | after « $\Pi_1$ de [illegible] et $P_{D'^*}$ » | il faut [illegible] rétablir [illegible] | en oubliant
+- [ ] 147 p146 batch-08:97b | reading | after « rétablir [illegible] les simplifications précédentes » | [illegible] [illegible] d'entrer dans des précisions | On a oublié de préciser
+- [ ] 147 p146 batch-08:99 | reading | after « relation avec le diviseur $\Theta$ » | quand nous prenons le [illegible] | qu'on veut que l'é isom
+- [ ] 147 p147 batch-08:118 | reading | after « termes de rev 1-connexes Il » | faudrait des généralisations adaptées [illegible] | faut donc généraliser en contexte présent
+- [ ] 147 p147 batch-08:118a | reading | after « pas tout aussi bien commode » | [illegible] | et utile pour la suite
+- [ ] 147 p149 batch-08:158 | reading | after « $d_0\geq d_1\geq\cdots\geq d_r>0$ les $V^*_{d_0,\dots,d_r}$ s'envoient … » | [illegible] | les uns
+- [ ] 147 p149 batch-08:160 | reading | after « topos dont les composantes sont » | [illegible] plats [illegible] un [illegible] | formé de multiplicités
+- [ ] 147 p149 batch-08:160a | reading | after « les $\pi_1$ relatifs à des » | rev [illegible] | comp connexes
+- [ ] 147 p150 batch-08:168 | reading | after « la structure à l $\infty$ » | $V^*_{\Theta_\delta,D_\delta}=D^*_\delta$ Lemme [illegible] que | $V^*_{\Theta_\delta,D_\delta}=D_\delta^*$ On applique
+- [ ] 147 p151 batch-08:191 | reading | after « que les voisins pour nous » | un changement [illegible] | ne change pas
+- [ ] 147 p151 batch-08:193 | reading | after « faut expliciter [illegible] [illegible] aussi » | [illegible] | comment envoyer les $\widetilde\Pi_i$ $(i\geq3)$ dans
+- [ ] 147 p151 batch-08:193a | reading | after « [illegible] aussi [illegible] le groupoïde » | $\widetilde\Pi_i$ $i\geq3$ dans $\varinjlim$ [illegible] de $V^*_{\Theta,X}$ | $\underset{\longrightarrow}{ Lim }$
+- [ ] 147 p152 batch-08:210 | reading | after « de $\Sigma$ dans $D_d$ par » | $D_d\to\Theta$ dans l'hyp [illegible] | $D_i\longrightarrow\Theta$
+- [ ] 147 p152 batch-08:210a | reading | after « $\Sigma$ dans l'hyp sur $\Sigma$ » | [illegible] [illegible] dire que | précise revient à
+- [ ] 147 p152 batch-08:229 | reading | after « inverse de $D_{d}^{\Sigma}$ dans $D_{d,d'}$ » | [illegible] | $ D_{d,d'}^\Sigma $
+- [ ] 147 p152 batch-08:229a | reading | after « les branches de codim $d$ » | [illegible] | contenue
+- [ ] 147 p152 batch-08:233 | reading | after « d'une partie $\Theta$ admissible de » | $\Theta$ [illegible] [illegible] | $\Sigma$ revient à la
+- [ ] 147 p152 batch-08:233a | reading | after « de $\Theta$ [illegible] [illegible] donnée » | [illegible] | de $0$ 152
+- [ ] 147 p154 batch-08:265 | reading | after « donnée équivaut à celle de » | [illegible] $\Sigma$ ldots | $ \Theta $ $\Sigma\ldots$
+- [ ] 147 p155 batch-08:277 | reading | after « une courbe entière alg lisse » | [illegible] compacte | propre complète
+- [ ] 147 p155 batch-08:277a | reading | after « le th de recollement est » | dans un pur tautologique [illegible] | alors une pure tautologie sur le
+- [ ] 147 p155 batch-08:277b | reading | after « un intérêt bien intéressant qui » | donne une interprétation [illegible] | exprime $ \Pi $
+- [ ] 147 p156 batch-08:294 | reading | after « le formalisme développé jusqu'à présent » | des [illegible] | du moins
+- [ ] 147 p156 batch-08:300 | reading | after « $\Pi_1(\Sigma'\setminus\Sigma)$ [illegible] $\Pi_1V^*_{\Sigma,X}$ et $\Pi_1$ » | [illegible] généralisation commune | avec généralisations convenables
+- [ ] 147 p156 batch-08:307 | reading | after « $\Sigma_1$ dessus qui peut s'écrire » | [illegible] | $ \Sigma'\cap $
+- [ ] 147 p156 batch-08:311 | reading | after « [illegible] \[ 309V_{\Sigma',\Sigma''}\cap\Sigma_1=V_{\Sigma'\cap\Sigma_1,\Sigma_1}) 310\] NB on … » | [illegible] | pas
+- [ ] 147 p157 batch-08:338 | reading | after « ex si $\Sigma'=\Theta$ c'est $V^*_{\Theta,X}$ » | [illegible] | $ \Theta $
+- [ ] 147 p157 batch-08:338a | reading | after « pour un diviseur lisse est » | [illegible] | isomorphe
+- [ ] 147 p158 batch-08:343 | reading | after « lisse des croisements normaux qui » | est un tic [illegible] | à dire vrai
+- [ ] 147 p158 batch-08:343a | reading | after « simplement par le système des » | $D^{\Sigma''}_{d_0\cdots d_r}$ [illegible] | $D_{d_0\ldots d_r}^{\Sigma''}$ Enfin
+- [ ] 147 p159 batch-08:353 | reading | after « formalisme en remplaçant $X$ par » | $X\setminus\Sigma_0^{ [illegible] }$ | $X\setminus\Sigma_0^{ ' }$
+- [ ] 147 p161 batch-09:22 | reading | after « la notation $D_{d_*}=D_{d_0,\dots,d_r}$ ce qui » | indique qu'il [illegible] [illegible] | implique qu'on se borne à
+- [ ] 147 p164 batch-09:65 | reading | after « le diagramme 265 Cela nous » | [illegible] | suggère
+- [ ] 147 p167 batch-09:102 | reading | after « on prendra le produit fibré » | $\mathcal{V}_{D_{d_*},D^{ [illegible] }_{d''_*}}^{(*)}$ qu'on notera | $ \mathcal V ^{D_{d'_*}(*)}_{D_{d_*},D_{d''_*}}$ dans noté
+- [ ] 147 p168 batch-09:117 | reading | after « non élémentaire i e $\mathbb{C}^2$ » | [illegible] | donc les
+- [ ] 147 p168 batch-09:117a | reading | after « il y a donc $4\times 4=16$ » | [illegible] | strates
+- [ ] 147 p168 batch-09:120 | reading | after « de la forme \[ (277)\quad \left\{ … » | [illegible] écrites [illegible] [illegible] | écritures sont
+- [ ] 147 p168 batch-09:120a | reading | after « écrites [illegible] [illegible] bien entendu » | [illegible] [illegible] [illegible] | purement heuristiques
+- [ ] 147 p168 batch-09:120b | reading | after « [illegible] et symétriques sous les » | rangées [illegible] | remplacer par des formules correctes $*$
+- [ ] 147 p168 batch-09:120c | reading | after « les rangées [illegible] il faudrait » | [illegible] [illegible] écrire [illegible] | pas mal de soins supplémentaires 168
+- [ ] 147 p169 batch-09:123 | reading | after « topos canoniques cf p 74 » | [illegible] | ff
+- [ ] 147 p169 batch-09:123a | reading | after « globaux de $X=\mathbb{C}^2$ savoir $\mathbb{C}^2\setminus\Delta_1$ » | [illegible] | les
+- [ ] 147 p171 batch-09:170 | reading | after « leurs groupoïdes fondamentaux Avant de » | [illegible] | voir
+- [ ] 147 p172 batch-09:180 | reading | after « défini comme le fibré conormal » | [illegible] [illegible] | s'introduit dans
+- [ ] 147 p176 batch-09:227 | reading | after « $D^*_{d_*}=D^*_{(d_0,d_1,\dots,d_r)}$ qui sont analytiques lisses » | [illegible] complémentaires | qui associés aux parties finies tout
+- [ ] 147 p176 batch-09:227a | reading | after « analytiques lisses [illegible] complémentaires de » | partie finie finie [illegible] de $\mathcal{N}$ | $\mathbb N$ et obtenus
+- [ ] 147 p176 batch-09:227b | reading | after « [illegible] $D_{d_*}\to D_{d_0}$ en fibré vectoriel » | [illegible] muni d'une | admet une
+- [ ] 147 p176 batch-09:227c | reading | after « général $\check{N}=\check{N}_{d_*;(d'_0,d''_0)}$ de cette filtration » | [illegible] contractile $D^*_{d_*}$ | et restreint à $D_{d_*}^{*}$
+- [ ] 147 p176 batch-09:228 | reading | after « fatigant un peu on doit » | [illegible] compris le cas [illegible] [illegible] [illegible] associés [illegible] [illegible] [illegible] sur $D^*_0$ [illegible] [illegible] … | 176
+- [ ] 147 p178 batch-09:238 | reading | after « [illegible] [illegible] [illegible] [illegible] $K(\pi,1)$ » | faisceaux [illegible] [illegible] [illegible] Remarque | de façon essentiellement triviale ldots Remords
+- [ ] 147 p179 batch-09:253 | reading | after « associé s i e au » | diagr de groupes [illegible] | diag des group es oïdes
+- [ ] 147 p179 batch-09:260 | reading | after « de groupes [illegible] qui se » | réalise [illegible] | réduit par
+- [ ] 147 p181 batch-10:22 | reading | after « $\overline{Z_j}$ et les $\pi_0(Z_j\,;\overline{Z_j},z_0)$ sont » | des [illegible] | de
+- [ ] 147 p181 batch-10:24 | reading | after « composantes connexes des $U \cap X_i$ … » | [illegible] | encore
+- [ ] 147 p181 batch-10:28 | reading | after « que ce préfaisceau n'est pas » | [illegible] | séparé
+- [ ] 147 p181 batch-10:30 | reading | after « les feuilletages j'ai l'impression cependant » | qu [illegible] | qu'une
+- [ ] 147 p182 batch-10:45 | reading | after « vais désigner par $D^{*}_{\Delta_0}$ la » | [illegible] l espace [illegible] | réunion l'espace somme
+- [ ] 147 p183 batch-10:58 | reading | after « de $X$ c Si la » | [illegible] | partition
+- [ ] 147 p183 batch-10:62 | reading | after « ici coïncide avec celle des » | [illegible] | la
+- [ ] 147 p184 batch-10:77 | reading | after « des drapeaux du type donné » | en [illegible] les | ou ces
+- [ ] 147 p186 batch-10:113 | reading | after « morphismes de dégénérescence fournissant des » | [illegible] | iso
+- [ ] 147 p188 batch-10:154 | reading | after « $D^{*}_{\Delta_0}$ NB Dans le cas » | [illegible] [illegible] | croise-ments normaux
+- [ ] 147 p188 batch-10:154a | reading | after « le cas [illegible] [illegible] c'est » | [illegible] vrai [illegible] cette fois | $=$ un rev étale fini
+- [ ] 147 p188 batch-10:154b | reading | after « dû au fait que les » | [illegible] | diff
+- [ ] 147 p188 batch-10:156 | reading | after « $D_{\Delta_\bullet}$ Également le fait que » | [illegible] | la
+- [ ] 147 p188 batch-10:156a | reading | after « une strate locale donnée soit » | [illegible] [illegible] | une isomorphe
+- [ ] 147 p189 batch-10:161 | reading | after « nb des strates contenant $\bullet$ » | [illegible] [illegible] | est en comptant $\bullet$ lui
+- [ ] 147 p189 batch-10:161a | reading | after « contenant $\bullet$ [illegible] [illegible] $=$ » | [illegible] | de
+
+## 2. Words read differently
+
+- [ ] 147 p3 batch-01:48 | reading | at the top of the page | subsection | Structure à l'infini des $M_{g,\nu}$
+- [ ] 147 p3 batch-01:48a | reading | after « subsection 1 Courbes » | standard | standart
+- [ ] 147 p3 batch-01:50a | reading | after « corps alg clos Une courbe » | standard | standart
+- [ ] 147 p3 batch-01:56 | reading | after « Il est connu qu'on peut » | trouver | donner
+- [ ] 147 p3 batch-01:56a | reading | after « qu'on peut trouver une unique » | complétée | complétion
+- [ ] 147 p3 batch-01:64 | reading | after « de $X$ équivaut à celle » | du | de
+- [ ] 147 p4 batch-01:67 | reading | after « est un schéma projectif dont » | les composantes irréductibles sont | tte composante irréductible est
+- [ ] 147 p4 batch-01:69 | reading | after « partie finie de $\widehat{X}^{ lisse }(k)$ … » | $\widehat{\widetilde{X}} = \widetilde{\widehat{X}}$ la normalisée | $\widetilde{\widehat X}=\widehat{\widetilde X}$ le normalisé
+- [ ] 147 p4 batch-01:77 | reading | after « et nous identifierons généralement $\widetilde{I}$ » | à | et
+- [ ] 147 p4 batch-01:77a | reading | after « dans $\widetilde{X}$ ou dans $\widehat{\widetilde{X}}$ » | d'où | alors
+- [ ] 147 p4 batch-01:81 | reading | after « $\widetilde{A}$ Ainsi à la courbe » | standard | standart
+- [ ] 147 p4 batch-01:81a | reading | after « standard $X$ nous avons associé » | le système | les systèmes
+- [ ] 147 p5 batch-01:94 | reading | after « c on construit une courbe » | standard | standart
+- [ ] 147 p5 batch-01:94a | reading | after « est universel dans Sch pour » | les données | la donnée
+- [ ] 147 p5 batch-01:103 | reading | after « Ainsi la catégorie des courbes » | standard | standart
+- [ ] 147 p6 batch-01:110 | reading | after « une base quelconque Une courbe » | standard | standart
+- [ ] 147 p6 batch-01:118 | reading | after « opérant librement On construit alors » | $\widehat{X} =$ $X$ $Y$ $/\sigma$ | $\widehat X=Y/\sigma$
+- [ ] 147 p6 batch-01:118a | reading | after « $\widehat{X} =$ $X$ $Y$ $/\sigma$ contenant » | $A = \widetilde{A}/\sigma$ | $A\simeq\widetilde A/\sigma$
+- [ ] 147 p7 batch-01:132c | reading | after « ex sur les nbs duaux » | sur un | d'un
+- [ ] 147 p7 batch-01:134b | reading | after « [illegible] $X = \widehat{X} \setminus I$ … » | standard | standart
+- [ ] 147 p7 batch-01:134c | reading | after « de l'image essentielle Le système » | $($ $X$ $Y, \widetilde{A}, I, \sigma)$ | $(Y,\widetilde A,I,\sigma)$
+- [ ] 147 p7 batch-01:134d | reading | after « lui donne naissance s'appellera le » | compactifié | complété
+- [ ] 147 p7 batch-01:134e | reading | after « $Y$ avec la structure supplémentaire » | $\widetilde{A}, I, \sigma_{\widetilde{A}}$ subsection | $\widetilde A,I,\sigma_{\widetilde A}\ldots$
+- [ ] 147 p7 batch-01:137 | reading | after « Graphe associé à une courbe » | standard | standart
+- [ ] 147 p7 batch-01:139 | reading | after « commencer Soit $X$ une courbe » | standard | standart
+- [ ] 147 p8 batch-01:166 | reading | after « l'ens des arcs ou arêtes » | munies d'une orientation | orientées
+- [ ] 147 p9 batch-01:174 | reading | after « les composantes irréductibles de $X$ » | figurées | figurés
+- [ ] 147 p9 batch-01:174a | reading | after « figurées par les sommets se » | recoupent | rencontrent
+- [ ] 147 p9 batch-01:174b | reading | after « pts singuliers quadratiques de $X$ » | correspondant | correspondent
+- [ ] 147 p9 batch-01:174c | reading | after « boucles fermées en $\alpha$ correspondent » | bijectivement | biunivoquement
+- [ ] 147 p9 batch-01:174d | reading | after « graphe $G_{X}$ n'a pas de » | boucle fermée | boucles fermées
+- [ ] 147 p10 batch-01:179 | reading | after « se donne des $I \to S$ … » | un | ens
+- [ ] 147 p10 batch-01:179a | reading | after « i e par une courbe » | standard | standart
+- [ ] 147 p10 batch-01:182 | reading | after « $S$ La maquette d'une courbe » | standard | standart
+- [ ] 147 p10 batch-01:197 | reading | after « $= (S, \widetilde{A}, \sigma_{\widetilde{A}})$ d'un ensemble … » | $A$ au-dessus | de au dessus
+- [ ] 147 p11 batch-01:204 | reading | after « Considérons la maquette d'une courbe » | standard | standart
+- [ ] 147 p12 batch-01:245 | reading | after « où [illegible] \[ 242(15)\qquad h_{1} = … » | Standard | Standart
+- [ ] 147 p12 batch-01:245a | reading | after « 13 résulte d'une suite exacte » | standard | standart
+- [ ] 147 p13 batch-01:275 | reading | after « marqués provenant de pts doubles » | ou | et
+- [ ] 147 p13 batch-01:275a | reading | after « sur la composante $Y_{\alpha}$ de » | $Y = \widehat{\widetilde{X}}$ subsection | $Y=\widetilde{\widehat X}$
+- [ ] 147 p13 batch-01:280 | reading | after « stables et MD-graphes Une courbe » | standard | standart
+- [ ] 147 p15 batch-01:316a | reading | after « $0$ sont d'ordre $\geq 3$ $G$ » | n'étant | n'est
+- [ ] 147 p15 batch-01:316b | reading | after « $0$ connexe avec $h_{1} = 1$ … » | bout | bord
+- [ ] 147 p16 batch-01:329 | reading | after « dit qu'une MD standard courbe » | standard | standart standart $C$
+- [ ] 147 p16 batch-01:329a | reading | after « est $G$ épinglée si on » | s'est donné | se donne
+- [ ] 147 p16 batch-01:331a | reading | after « épinglage Soit $(\widehat{X}, I )$ une … » | standard | standart
+- [ ] 147 p17 batch-01:346 | reading | after « pour les iso des courbes » | standard | standart
+- [ ] 147 p17 batch-01:346a | reading | after « courbes standard $G$ épinglées Pour » | tout $\alpha \in S$ | $\forall\ \alpha\in S$
+- [ ] 147 p17 batch-01:346b | reading | after « de la maquette soit $\widehat{I}_{\alpha} = … » | l'élément | l'ensemble
+- [ ] 147 p18 batch-01:349 | reading | after « $\alpha$ La donnée d'une courbe » | standard | standart
+- [ ] 147 p18 batch-01:349a | reading | after « équivaut à la donnée pour » | tout $\alpha \in S$ | $\forall\ \alpha\in S$
+- [ ] 147 p18 batch-01:351 | reading | after « munies d'un mono $I_{\mathcal{S}} \hookrightarrow Y$ … » | désignera de même | trouve donc si
+- [ ] 147 p18 batch-01:355 | reading | after « désigne le groupoïde des courbes » | standard | standart
+- [ ] 147 p19 batch-01:366 | reading | after « pour $G$ variable On voit » | donc | alors
+- [ ] 147 p19 batch-01:374 | reading | after « $G$ connexe cela signifie donc » | justement | précisément
+- [ ] 147 p20 batch-01:377a | reading | after « correspondante qui » | n'est qu'à | de sorte qu'on aura
+- [ ] 147 p20 batch-01:390 | reading | after « des multiplicités schématiques des courbes » | standard | standart
+- [ ] 147 p21 batch-02:22 | reading | after « Il en est donc de » | même des $M_{g,J}$ | $=$ de $\mathcal M_{g,J}$
+- [ ] 147 p21 batch-02:22a | reading | after « $M_G$ pour $G$ semi-stable et » | des $M_{[G]} = (M_G, \Gamma)$ section | de $\mathcal M_{[G]}=(\mathcal M_G,\Gamma)$
+- [ ] 147 p21 batch-02:26 | reading | after « $\mathcal{S}$ un e multiplicité schématique » | $\mathfrak{X}$ un | $ \mathcal X $ une
+- [ ] 147 p22 batch-02:29a | reading | after « $\mathfrak{X}_{\bar{s}}$ est connexe de dim » | 1 mais que ses | $1$ ainsi q les
+- [ ] 147 p22 batch-02:31a | reading | after « $(g,\nu)$ ne change pas invariance » | des $\chi(\hat{X}_s, O _{\hat{X}_s})$ | de $\chi(\widehat X_s,\underline O_{\widehat X_s})\ldots$
+- [ ] 147 p23 batch-02:41 | reading | after « On a alors le vraiment » | magnifique | mirifique
+- [ ] 147 p24 batch-02:49 | reading | after « type numérique $(g,\nu)$ les courbes » | standard | standart
+- [ ] 147 p24 batch-02:49a | reading | after « une base quelc $\mathcal{S}$ sont » | en particulier | manifestement
+- [ ] 147 p25 batch-02:60 | reading | after « partition de $\hat{M}_{g,\nu}$ en un » | ens | nb
+- [ ] 147 p25 batch-02:62 | reading | after « c'est une réunion finie de » | des $M_{[G']}$ | s $\mathcal M_{[G']}$
+- [ ] 147 p26 batch-02:67 | reading | after « Notons que chaque $M_{[G]}$ est » | isomorphe est quotient d'un revêtement | donné admet un revêt textsuperscript t
+- [ ] 147 p27 batch-02:97 | reading | after « de pts doubles des courbes » | standard du | standart de
+- [ ] 147 p27 batch-02:104 | reading | after « codimension modulaire Elle est nulle » | ssi | sss
+- [ ] 147 p28 batch-02:107a | reading | after « de vue structure de graphe » | muni d'un | associé au
+- [ ] 147 p28 batch-02:107b | reading | after « cas d'une dimension modulaire nulle » | ou et | ie
+- [ ] 147 p29 batch-02:151 | reading | after « qui sera manifestement une courbe » | standard | standart
+- [ ] 147 p29 batch-02:156 | reading | after « que $(\mathfrak{X}, I_{\mathcal{S}})$ devient une courbe » | standard | standart
+- [ ] 147 p30 batch-02:171a | reading | after « et lisses sur $\mathbb{Z}$ Ainsi » | on | se
+- [ ] 147 p30 batch-02:171b | reading | after « et lisse sur $ Spec \mathbb{Z}$ … » | pourrait espérer mieux | paraît a priori curieux
+- [ ] 147 p31 batch-02:185 | reading | after « est obtenue en choisissant pour » | tout $\alpha$ | $\forall\ \alpha$
+- [ ] 147 p32 batch-02:213a | reading | after « MD-graphe de type $(g_\alpha, \hat{I}_\alpha)$ où » | $\hat{I}_\alpha = I_\alpha \sqcup \tilde{A}_\alpha$ | $\widehat I_\alpha=I_\alpha\amalg\widetilde A_\alpha$
+- [ ] 147 p33 batch-02:229a | reading | after « les données 1 4 définissent » | un nouveau $G(\alpha)$ quadruplet | une maquette 0-connexe $G_{(\alpha)}$
+- [ ] 147 p33 batch-02:229b | reading | after « et on prend soin que » | celui-ci | celle-ci
+- [ ] 147 p33 batch-02:229c | reading | after « qui signifie ici que pour » | tt $\beta \in S(\alpha)$ | pour $\forall\beta\in S_{(\alpha)}$
+- [ ] 147 p34 batch-02:239 | reading | after « une » | catégorisation | extension
+- [ ] 147 p34 batch-02:245a | reading | after « Le groupoïde $\Pi_1(G)$ dépend fonctoriellement » | dans un | au
+- [ ] 147 p35 batch-02:255 | reading | after « les flèches grâce au diagramme » | commutatif | comm 43 quad
+- [ ] 147 p36 batch-02:267 | reading | after « flèche identique En d'autres termes » | notant flèches élémentaires | appelant flèche élémentaire
+- [ ] 147 p36 batch-02:267a | reading | after « notant flèches élémentaires de $\Pi_1(G')$ » | les flèches | $\forall$ flèche
+- [ ] 147 p36 batch-02:267b | reading | after « de $\Pi_1(G')$ les flèches qui » | sont | est
+- [ ] 147 p37 batch-02:278a | reading | after « supposer de plus que pour » | tt $a \in \tilde{A}' \setminus \tilde{B}'$ | $\forall\vec a\in\widetilde A'\setminus\widetilde B'$
+- [ ] 147 p37 batch-02:285a | reading | after « et $o_{\tilde{A}''}$ On peut dire » | aussi | enfin
+- [ ] 147 p37 batch-02:285b | reading | after « $G'_{\tilde{B}'}$ de [illegible] $G'$ ayant » | mêmes | $ =_{\mathrm s} $
+- [ ] 147 p37 batch-02:285c | reading | after « ayant mêmes sommets cela défini » | justement par la donnée d'une | juste rev à donner une
+- [ ] 147 p37 batch-02:285d | reading | after « composition des morphismes généralisés est » | donc | alors
+- [ ] 147 p38 batch-02:288a | reading | after « On notera que les iso » | de | dans
+- [ ] 147 p39 batch-02:319b | reading | after « [illegible] $\tilde{B}' \sqcup$ $I'_\alpha \hookrightarrow S'_\alpha$ … » | $\tilde{B}' \sqcup$ $I' \to S'$ | $ \widetilde B'\amalg I' \to S'$
+- [ ] 147 p39 batch-02:319c | reading | after « par $\tilde{B}' \sqcup$ $I' \to S'$ … » | $g_\alpha : S'_\alpha \to \mathbb{N}$ | $\gamma_\alpha:S'_\alpha\longrightarrow\mathbb N$
+- [ ] 147 p39 batch-02:324a | reading | after « NB $\tilde{B}'_\alpha$ est l'ens des » | $a' \in \tilde{B}'$ | $\vec a'\in\widetilde B'_\alpha$
+- [ ] 147 p41 batch-03:27a | reading | after « ou ce qui revient au » | même | $ = $
+- [ ] 147 p41 batch-03:27b | reading | after « $G'$ défini par $S'$ et » | $A' \smallsetminus B' \subset A'$ | $A'\setminus B'\subset A'$
+- [ ] 147 p41 batch-03:27c | reading | after « par $S'$ et $A' \smallsetminus B' … » | $\widetilde{A}' \smallsetminus \widetilde{B}' \subset \widetilde{A}'$ | $\widetilde A'\setminus\widetilde B'\subset\widetilde A'$
+- [ ] 147 p42 batch-03:42 | reading | after « enfin » | $\widetilde{A} \xrightarrow{\sigma_G} S$ | $\widetilde A\xrightarrow{ o_G }S$
+- [ ] 147 p42 batch-03:42a | reading | after « enfin $\widetilde{A} \xrightarrow{\sigma_G} S$ est » | déterminé | donné
+- [ ] 147 p42 batch-03:42b | reading | after « partir de $\sigma_G \,∣\, \widetilde{B}' : … » | de | dans 51 quad
+- [ ] 147 p42 batch-03:51a | reading | after « par commutativité de Ainsi $G$ » | se | est
+- [ ] 147 p42 batch-03:51b | reading | after « $f$ de [illegible] bien sûr » | Quant au fait | On voit
+- [ ] 147 p42 batch-03:51c | reading | after « de $G'$ en fait c'est » | plutôt | plus
+- [ ] 147 p42 batch-03:60 | reading | after « i e $G' \to G$ est … » | pour | parmi
+- [ ] 147 p42 batch-03:60a | reading | after « qui transforment les arcs de » | $\widetilde{A}' \smallsetminus \widetilde{B}'$ | $\widetilde A'\setminus\widetilde B'$
+- [ ] 147 p43 batch-03:70 | reading | after « $a' \in C'$ ou encore les … » | $\tilde{a}' \in \widetilde{C}'$ | $\vec a'\in\widetilde C'$
+- [ ] 147 p43 batch-03:70a | reading | after « bien à une intuition topologique » | courante | correcte
+- [ ] 147 p43 batch-03:70b | reading | after « sous-graphe $G'_{!}$ de $G'$ ayant » | mêmes | $ =^{\mathrm s} $
+- [ ] 147 p45 batch-03:94 | reading | after « encore la condition MD sur » | le graphe $ G $ obtenu | la maquette $\underline G$ obtenue
+- [ ] 147 p45 batch-03:98 | reading | after « i e que $(g_\alpha, \hat{\nu}_\alpha)$ est » | admissible | anabélien
+- [ ] 147 p45 batch-03:99 | reading | after « admissible Or ou que $ card … » | qui dit | je dis
+- [ ] 147 p45 batch-03:103 | reading | after « n 3 on aura $(g_\alpha, \hat{\nu}_\alpha)$ » | admissible | anabélien
+- [ ] 147 p45 batch-03:103a | reading | after « on aura $(g_\alpha, \hat{\nu}_\alpha)$ admissible pourvu » | seulement | qu'on sache
+- [ ] 147 p46 batch-03:114 | reading | after « autre que la condition de » | régularité | rigidité
+- [ ] 147 p46 batch-03:116 | reading | after « Résumons les résultats sur les » | MD-graphes | maquettes
+- [ ] 147 p47 batch-03:128a | reading | after « l'est Pour que Soit pour » | $\forall\, \alpha \in S$ | tt $ \alpha \in S$
+- [ ] 147 p47 batch-03:128b | reading | after « est une composante connexe du » | s-graphe $G'_{!}$ | ss-graphe $ G^! $
+- [ ] 147 p47 batch-03:128c | reading | after « $C'$ [illegible] et $ G '_\alpha$ … » | MD-graphe | m graphe
+- [ ] 147 p47 batch-03:128d | reading | after « $G'_\alpha$ en considérant l'application genre » | $S'_\alpha \to \mathbb{N}$ | $S'_\alpha\mathbin{ --- }\mathbf{N}$
+- [ ] 147 p47 batch-03:128e | reading | after « l'application genre $S'_\alpha \to \mathbb{N}$ induite … » | $g' : S' \to \mathbb{N}$ | $g':S'\mathbin{ --- }\mathbf{N}$
+- [ ] 147 p47 batch-03:132 | reading | after « condition est stable condition de » | régularité | rigidité
+- [ ] 147 p47 batch-03:132a | reading | after « les $ G '(\alpha)$ le sont … » | dans ce cas | alors
+- [ ] 147 p47 batch-03:132b | reading | after « si $ G '$ est un … » | donc | alors
+- [ ] 147 p48 batch-03:135 | reading | at the top of the page | Rem | Rmq
+- [ ] 147 p48 batch-03:135a | reading | after « a généralisé par la bande » | les définitions | la définition
+- [ ] 147 p48 batch-03:135b | reading | after « morphisme de généralisation entre MD-graphes » | ou m-graphes quelconques ni 0-connexes | aux maquettes pas néc $0$ connexes
+- [ ] 147 p48 batch-03:135c | reading | after « stables pour avoir une plus » | jolie terminologie | joli énoncé
+- [ ] 147 p48 batch-03:135d | reading | after « une plus jolie terminologie Les » | m-graphes déduits | maquettes déduites
+- [ ] 147 p48 batch-03:135e | reading | after « le procédé décrit s'appellent les » | m-graphes généralisations | maquettes générisations
+- [ ] 147 p48 batch-03:135f | reading | after « m-graphes généralisations de $ G '$ … » | m-graphes | maquettes
+- [ ] 147 p48 batch-03:139 | reading | after « Donc si $\mu' = card A'$ … » | de généralisations | des générisations
+- [ ] 147 p48 batch-03:141a | reading | after « morphisme de généralisation $ G ' … » | m-graphes | maquettes
+- [ ] 147 p49 batch-03:146 | reading | after « donné $ G $ de type … » | $(g, \nu)$ l | $(g, I \nu)$
+- [ ] 147 p50 batch-03:170 | reading | after « la situation typique d'une » | stratification | structure à
+- [ ] 147 p50 batch-03:170a | reading | after « à coups de schémas modulaires » | locaux | local
+- [ ] 147 p50 batch-03:170b | reading | after « bel et bien une telle » | situation | structure
+- [ ] 147 p51 batch-03:183 | reading | after « égal à son maximum $3(g-1)+\nu$ » | c | $c)$ Toute
+- [ ] 147 p51 batch-03:183a | reading | after « $3(g-1)+\nu$ c [illegible] $ G $ … » | maximal | minimal
+- [ ] 147 p51 batch-03:185a | reading | after « et est d'ordre [illegible] $\omega_\alpha \leqslant … » | i e | genre le poids
+- [ ] 147 p51 batch-03:187 | reading | after « égal à $3 - \omega_\alpha$ On … » | donc | alors
+- [ ] 147 p51 batch-03:187a | reading | after « unique près trouver une courbe » | standard $ G $ | standart $\underline G$
+- [ ] 147 p52 batch-03:201 | reading | after « La dimension modulaire ambiante d'un » | MD $ G $ | tel $\underline G$
+- [ ] 147 p52 batch-03:209 | reading | after « $h_1 \leqslant 1$ i e $h_1 … » | $ dimmod (G) = 0$ | $ \dim tot (G) =0$
+- [ ] 147 p52 batch-03:211 | reading | after « la dim modulaire est $\nu - … » | dans ce cas | donc on doit avoir
+- [ ] 147 p53 batch-03:227a | reading | after « b $h_1 = 1$ donc » | $ dimmod G = \nu$ | $\dim amb G=\nu$
+- [ ] 147 p53 batch-03:227b | reading | after « [illegible] Mais un graphe top » | connexe | compact
+- [ ] 147 p53 batch-03:229b | reading | after « d'ordre 2 c'est qu'il est » | le | isom au
+- [ ] 147 p53 batch-03:229c | reading | after « est dans $1 \ldots 2$ il … » | y en avoir | être
+- [ ] 147 p53 batch-03:229d | reading | after « a pour graphe et En » | somme | résumé
+- [ ] 147 p53 batch-03:229e | reading | after « et En somme on trouve » | exactement | encore
+- [ ] 147 p54 batch-03:269a | reading | after « can isom à $\Gamma$ et » | celui des | alors
+- [ ] 147 p56 batch-03:313 | reading | after « par la structure de graphe » | et des sommets prédéfinis | avec un sommet particulier
+- [ ] 147 p56 batch-03:326 | reading | after « sont ceux des MD graphes » | rétro-nuls | rationnels
+- [ ] 147 p56 batch-03:326a | reading | after « bien des MD graphes qui » | soient | ont
+- [ ] 147 p56 batch-03:326b | reading | after « tous leurs sommets sauf un » | rétro-nuls | rationnels
+- [ ] 147 p57 batch-03:340 | reading | after « évidemment celui donné par 70 » | i e | où
+- [ ] 147 p57 batch-03:359 | reading | after « $\leqslant$ \[ 347(72)\qquad 348\left\{ 349 354\right. … » | à poids marqué des | ou
+- [ ] 147 p57 batch-03:359a | reading | after « pas marqué ou poids marqué » | est | n'est pas
+- [ ] 147 p57 batch-03:359b | reading | after « poids marqués sont indiqués sur » | les graphes au-dessus | le graphe au dessus
+- [ ] 147 p58 batch-03:382 | reading | after « sont [illegible] chacun de type » | $(g_i, \hat{\nu}_i)$ | $(\alpha_i, \widehat\mu_i )$
+- [ ] 147 p58 batch-03:385 | reading | after « multiplicité schéma modulaire $\widehat{M}_G$ est » | donc | alors
+- [ ] 147 p59 batch-03:419 | reading | after « cas élémentaires les cas nouveaux » | dans | de
+- [ ] 147 p59 batch-03:419a | reading | after « et $\widehat{M}^{!}_{1,2}$ Cela fait en » | tout | tous
+- [ ] 147 p60 batch-03:436 | reading | after « strate maximale cela correspond bien » | au fait qu'on a | sûr aux
+- [ ] 147 p60 batch-03:443 | reading | after « faire il faudrait aussi expliciter » | end document | 60
+- [ ] 147 p61 batch-04:23a | reading | after « courbe modulaire $\widehat{\mathfrak{X}}^{!}_{0,4}$ sur $\widehat{M}^{!}_{0,4}$ » | munie de | avec
+- [ ] 147 p61 batch-04:23b | reading | after « pas le faire ici cela » | donnerait des compl | donnera du $=$ coup
+- [ ] 147 p61 batch-04:31 | reading | after « pt à l'infini correspondant aux » | deux | trois
+- [ ] 147 p63 batch-04:82 | reading | after « d'où » | au-dessus | au moins au dessus
+- [ ] 147 p63 batch-04:96b | reading | after « le morphisme modulaire \[ 94M_{1,1} \longrightarrow … » | on découpe $\mathbb{E}^1$ | en découpant $\mathbf E^1$
+- [ ] 147 p63 batch-04:96c | reading | after « courbe elliptique harmonique de groupe » | d'automorphismes $\mathbb{Z}/4\mathbb{Z}$ | d'automs $\mathbf Z/4\mathbf Z$
+- [ ] 147 p64 batch-04:120 | reading | after « zeta_3 end align où on » | a posé en général | pose
+- [ ] 147 p65 batch-04:160c | reading | after « og diviseurs fg à l'infini » | $\simeq (\{0,1,\infty\}, I'')$ | $( \{a',a''\} ,I'')$
+- [ ] 147 p65 batch-04:160d | reading | after « $\widehat{M}_{0,3}$ [illegible] [illegible] [illegible] et » | ayant | avait
+- [ ] 147 p65 batch-04:160e | reading | after « l'infini les [illegible] sont en » | tout | nb total
+- [ ] 147 p65 batch-04:160f | reading | after « parties $I', I'' \in \mathfrak{P}_2(I)$ se … » | ssi | on a
+- [ ] 147 p65 batch-04:160g | reading | after « elles ssi $I' \cap I'' = … » | ssi $I'$ $I''$ | sss $I',I''$
+- [ ] 147 p65 batch-04:160h | reading | after « e ssi $I'$ $I''$ et » | $I \setminus (I' \cup I'')$ | $I\smallsetminus(I'\cup I'')$
+- [ ] 147 p65 batch-04:160i | reading | after « $I'$ $I''$ et $I \setminus (I' … » | forment | justement
+- [ ] 147 p65 batch-04:163a | reading | after « icosaèdre orienté [illegible] un icos » | grand | graphe
+- [ ] 147 p65 batch-04:163b | reading | after « les éléments de $\mathfrak{P}_2(I)$ ou » | les sommets | par correspon 65
+- [ ] 147 p66 batch-04:166a | reading | at the top of the page | pris grand complémentaire | passage
+- [ ] 147 p66 batch-04:166b | reading | after « og triangles fg de $I$ » | correspondant | correspondent
+- [ ] 147 p66 batch-04:166c | reading | after « aux dix faces de l'icosaèdre » | grand | gauche
+- [ ] 147 p66 batch-04:166d | reading | after « [illegible] intersections [illegible] les structures » | cycliques | carrées
+- [ ] 147 p66 batch-04:168c | reading | after « les 5 pts de $I$ » | associées une telle couvrant | en associant à un tel carré
+- [ ] 147 p66 batch-04:168d | reading | after « les deux paires de sommets » | diagonaux | diagonalement
+- [ ] 147 p66 batch-04:168e | reading | after « une face des [illegible] l'icosaèdre » | ses og triangles fg | sss le triangle
+- [ ] 147 p66 batch-04:168f | reading | after « i e ssi le complémentaire » | des triangles On voit donc | du triangle est formé de l'une
+- [ ] 147 p66 batch-04:168g | reading | after « faces et arêtes de l'icosaèdre » | grand | gauche
+- [ ] 147 p67 batch-04:176 | reading | after « celui du 1-squelette du dodécaèdre » | grand | gauche
+- [ ] 147 p67 batch-04:178d | reading | after « orientation convenable Bien entendu les » | groupes | genres
+- [ ] 147 p67 batch-04:178e | reading | after « arêtes Il n'y a pas » | dans og | lieu de mettre des
+- [ ] 147 p67 batch-04:178f | reading | after « pas dans og pts marqués » | fg | sur $M_{0,I}$
+- [ ] 147 p67 batch-04:178g | reading | after « une MD [illegible] MD-graphe maximal » | tels toutes | tous
+- [ ] 147 p67 batch-04:178h | reading | after « MD-graphe maximal tels toutes les » | 2 | genres nuls tous les
+- [ ] 147 p67 batch-04:178i | reading | after « dans les gerbes [illegible] d'ordre » | 3 par des pointes marquées | $3$ pas de poids marqués
+- [ ] 147 p67 batch-04:180a | reading | after « de la géométrie de l'icosaèdre » | grand | gauche
+- [ ] 147 p67 batch-04:180b | reading | after « l'icosaèdre grand ou [illegible] dodécaèdre » | grand ou | gauche ldots
+- [ ] 147 p67 batch-04:180c | reading | after « lié bien sûr au bi-icosaèdre » | grand | gauche
+- [ ] 147 p69 batch-04:204 | reading | after « $I = \{a, b\}$ \[ 195(83)\qquad … » | fg og $D_{-}$ | quad $D_{\bullet-\bullet}$ D
+- [ ] 147 p69 batch-04:208a | reading | after « que dans $D_{-}$ Essayons de » | déterminer | bien saisir
+- [ ] 147 p69 batch-04:208b | reading | after « la multiplicité à l'infini $\widehat{M}^{\infty}_{1,I} \simeq … » | donc celle | qui est la réunion amalgamée
+- [ ] 147 p69 batch-04:210b | reading | after « est le graphe $\bigcirc\!\bullet^{I(2)}$ $\Gamma_0$ » | le | son
+- [ ] 147 p69 batch-04:210c | reading | after « $\Gamma^{!}_0 = Ker (\Gamma_0 \to \mathfrak{S}_{I(2)}) … » | dès lors $\Gamma^{!}_0 \simeq \mathbb{Z}/2$ | $\Gamma^!_0\simeq\mathbf Z/2$
+- [ ] 147 p69 batch-04:210d | reading | after « en [illegible] les deux autres » | ceux correspondant | soit $\{0,\infty\}$ De façon
+- [ ] 147 p69 batch-04:210e | reading | after « et $\infty$ donc on trouve » | en og | le
+- [ ] 147 p69 batch-04:210f | reading | after « og quotient fg par $z \mapsto … » | Désignons | De façon 69
+- [ ] 147 p70 batch-04:214 | reading | after « plus intrinsèque le graphe $G_0$ » | déployé revient | se déploie associe
+- [ ] 147 p70 batch-04:214a | reading | after « graphe $G_0$ déployé revient à » | un $I \amalg \widetilde{A}^{!}_0$ | l'ens $I\amalg\widetilde A'_0$
+- [ ] 147 p70 batch-04:214b | reading | after « partie $I$ de card $2$ » | l'une | l'ens $J$
+- [ ] 147 p70 batch-04:214c | reading | after « $2$ l'une des $J$ partitions » | du | de
+- [ ] 147 p70 batch-04:214d | reading | after « partitions du type $(1,3)$ a » | dans | donc
+- [ ] 147 p70 batch-04:214e | reading | after « $\varepsilon_1$ les deux autres pts » | correspondant | correspondent
+- [ ] 147 p70 batch-04:218 | reading | after « considéré comme le compactifié de » | $\mathfrak{S}^{1}_{\mathbb{Z}} \wedge_{\mathbb{Z}/2} J'$ | $\mathbb G_m^{1}\wedge_{\pm1}J'$
+- [ ] 147 p70 batch-04:218a | reading | after « et $\mathfrak{S}_{J'} \simeq \mathbb{Z}/2$ y opère … » | transport | transfert
+- [ ] 147 p70 batch-04:218b | reading | after « opère par transport de structure » | D'où | On a
+- [ ] 147 p70 batch-04:228 | reading | after « l'infini de $\widehat{M}_{D_{\circ}}$ correspondent la » | conjugaison | trajectoire
+- [ ] 147 p70 batch-04:228a | reading | after « correspondent la conjugaison $J'$ d'une » | paire | part
+- [ ] 147 p70 batch-04:228b | reading | after « d'une paire pt $P_0$ la » | conjugaison | trajectoire
+- [ ] 147 p71 batch-04:253 | reading | after « compte tenu qu'il me faudrait » | d'abord | mieux
+- [ ] 147 p71 batch-04:253a | reading | after « d'abord comprendre la structure de » | $M_{1,1}$ c'est | $\widehat M_{1,1}$ et
+- [ ] 147 p71 batch-04:253b | reading | after « $M_{1,1}$ c'est $=$ de $M_{1,1}$ » | ce que je ne connais | à commencer
+- [ ] 147 p71 batch-04:253c | reading | after « que je ne connais dans » | la catégorie transcendante | le cadre transcendant
+- [ ] 147 p72 batch-04:270a | reading | after « et » | utilisons | utilisant
+- [ ] 147 p72 batch-04:270b | reading | after « que les $\widehat{M}^{!}_{g_\alpha, \hat{\nu}_\alpha}$ sont connexes » | ainsi | on voit
+- [ ] 147 p72 batch-04:270c | reading | after « $\widehat{M}^{!}_{g_\alpha, \hat{\nu}_\alpha}$ sont connexes ainsi que » | $\widetilde{M}^{\infty}_{G} = \widehat{M}_G \setminus M_G$ | $\widehat M_G^\infty=\widehat M_G\setminus M_G$
+- [ ] 147 p72 batch-04:270d | reading | after « qui sont de dim $\geq 1$ » | on utilise | en utilisant
+- [ ] 147 p72 batch-04:271 | reading | after « un tel $\alpha$ [illegible] $M^{\infty}_{g_\alpha, \hat{\nu}_\alpha} … » | Dans | Donc il suffit de regarder
+- [ ] 147 p72 batch-04:276a | reading | after « tenu que ces diviseurs sont » | eux-mêmes | eux aussi
+- [ ] 147 p72 batch-04:276b | reading | after « diviseurs à l'infini correspondent aux » | 1-types | types
+- [ ] 147 p73 batch-04:296 | reading | after « On a comme spécialisation » | des | du
+- [ ] 147 p73 batch-04:310a | reading | after « On a comme autres spécialisation » | des | du
+- [ ] 147 p73 batch-04:315a | reading | after « $g'$ \[ 312(92)\quad b ')\quad 313 … » | donc dès | de sorte
+- [ ] 147 p73 batch-04:315b | reading | after « $g' \neq$ les conditions [illegible] de » | $g', g''$ ne sont | sorte
+- [ ] 147 p73 batch-04:315c | reading | after « $I \geq 6$ de DPS on … » | cas | que
+- [ ] 147 p73 batch-04:315d | reading | after « b a il y a » | dès qu il y | Or on
+- [ ] 147 p74 batch-04:332a | reading | after « diagrammes qui » | ont ceci de commun | est déterminé
+- [ ] 147 p74 batch-04:332b | reading | after « ont ceci de commun à » | savoir qu'ils sont donnés par | isom unique près en se donnant
+- [ ] 147 p74 batch-04:332c | reading | after « ordre total sur $I$ défini » | à | mod interversion
+- [ ] 147 p74 batch-04:332d | reading | after « deux éléments $c_i, c_{i+1}$ consécutifs dans » | les deux | la
+- [ ] 147 p74 batch-04:332e | reading | after « composante connexe Or les deux » | sont toujours la spécialisation | morphismes
+- [ ] 147 p75 batch-04:348 | reading | after « La structure groupoïdale des Teichmüller » | modulaires groupes modulaires des | modules
+- [ ] 147 p75 batch-04:352 | reading | after « og analytique fg nous les » | laisserons | faisons
+- [ ] 147 p75 batch-04:354 | reading | after « nos constructions il est en » | fait | effet
+- [ ] 147 p75 batch-04:354a | reading | after « par un groupoïde tel que » | l'équivalence des échantillons | $\Pi M_{\underline G}$ par un
+- [ ] 147 p75 batch-04:354b | reading | after « [illegible] l'équivalence commute à l'action » | du | de ce
+- [ ] 147 p76 batch-04:364 | reading | after « dont le $\pi_1$ est isomorphe » | au | en tant que
+- [ ] 147 p76 batch-04:370a | reading | after « dits des groupes de Teichmüller » | L'opération | Les opérations
+- [ ] 147 p76 batch-04:370b | reading | after « groupes de Teichmüller L'opération de » | $\Gamma^{\natural}_{ G }$ | $ \Gamma^{!}_{\underline G} $
+- [ ] 147 p76 batch-04:370c | reading | after « Teichmüller L'opération de $\Gamma^{\natural}_{ G }$ … » | $\Pi M_{ G }$ définit | $\Pi M_{\underline G}$ définissent
+- [ ] 147 p76 batch-04:376a | reading | after « allons définir une sorte de » | variation | variance
+- [ ] 147 p76 batch-04:376b | reading | after « de variation des $\Pi M_{ G … » | aux og | à deux sortes de
+- [ ] 147 p76 batch-04:376c | reading | after « morphismes fg pour les MD-graphes » | $ G $ Il s'agit | $\underline G$ Tout
+- [ ] 147 p76 batch-04:376d | reading | after « MD-graphes $ G $ Il s'agit … » | d'une og variation | une variance
+- [ ] 147 p76 batch-04:376e | reading | after « d'abord d'une og variation de » | généralisation fg | générisation
+- [ ] 147 p76 batch-04:376f | reading | after « de généralisation fg qui est » | comprise | composée
+- [ ] 147 p76 batch-04:376g | reading | after « qui est comprise de la » | variation | variance
+- [ ] 147 p76 batch-04:376h | reading | after « comprise de la variation pour » | morphismes des | isomorphismes de
+- [ ] 147 p76 batch-04:376i | reading | after « inutile de préciser et une » | og variation | variance
+- [ ] 147 p76 batch-04:376j | reading | after « de [illegible] généralisation de MD-graphes » | fg | 76
+- [ ] 147 p77 batch-04:394a | reading | after « gît en $\Gamma^{!}_{ G , G … » | l'on | on
+- [ ] 147 p77 batch-04:403 | reading | after « considérer le germe de multiplicité » | à définir | défini
+- [ ] 147 p78 batch-04:414 | reading | after « [illegible] $\widehat{M}_{ G , G '}$ … » | par une | comme
+- [ ] 147 p78 batch-04:414a | reading | after « sont définis par une des » | catégories $\varinjlim$ | Catégories $\underset{\longrightarrow}{\lim}$
+- [ ] 147 p78 batch-04:414b | reading | after « universels ou des catégories des » | revêtements connexes | revêtts du connexe
+- [ ] 147 p79 batch-04:449 | reading | after « groupoïdes \[ 441(103)\qquad 442 447\] og … » | généralisation fg | générisation
+- [ ] 147 p79 batch-04:450b | reading | after « de groupoïdes $\varphi_{ G , G … » | comme | les
+- [ ] 147 p79 batch-04:450c | reading | after « [illegible] a comme propriétés de » | l'homomorphisme | la l'hom
+- [ ] 147 p79 batch-04:450d | reading | after « un produit de disques épointés » | un par arête | ou
+- [ ] 147 p79 batch-04:450e | reading | after « épointés un par arête de » | $C$ ou plutôt | cercles si on préfère
+- [ ] 147 p79 batch-04:450f | reading | after « $\Pi(M_{ G }, \ldots)$ par $\mathbb{Z}^{C}$ … » | rappelons | on
+- [ ] 147 p79 batch-04:450g | reading | after « rappelons le est l'ens des » | flèches | frontières
+- [ ] 147 p79 batch-04:451 | reading | after « flèches arêtes de $ G $ … » | $(M_{ G }, \ldots)$ | $(M_G ,\Gamma_{\underline G,\underline G'} )$
+- [ ] 147 p80 batch-04:456 | reading | at the top of the page | qui | qu'on
+- [ ] 147 p80 batch-04:456a | reading | after « qui a » | été introduite | contracté
+- [ ] 147 p80 batch-04:456b | reading | after « qui a été introduite pour » | traiter | former
+- [ ] 147 p80 batch-04:456c | reading | after « été introduite pour traiter la » | généralisation $ G '$ | générisation $\underline G'$
+- [ ] 147 p80 batch-04:456d | reading | after « la généralisation $ G '$ Plus … » | revient | reviendra
+- [ ] 147 p80 batch-04:456e | reading | after « L'homomorphisme $\varphi_{ G , G '}$ … » | généralisation pour | générisation sur
+- [ ] 147 p80 batch-04:458 | reading | after « dégager une propriété de transitivité » | pour un homomorphisme | sur ces homs
+- [ ] 147 p80 batch-04:458a | reading | after « transitivité pour un homomorphisme de » | généralisation ou plutôt | générisation
+- [ ] 147 p81 batch-05:35 | reading | after « Dans ce diagramme on a » | un peu | enlevé
+- [ ] 147 p81 batch-05:35a | reading | after « un peu laissé tomber les » | indices | soulignés
+- [ ] 147 p81 batch-05:39 | reading | after « de même pour $\Pi M_{G',G''}$ On » | lira | tire de 105
+- [ ] 147 p81 batch-05:44b | reading | after « que c'est aussi en tant » | que gr cat | qu'ext
+- [ ] 147 p81 batch-05:44c | reading | after « tant que gr cat de » | $\Pi M_{G}$ | $\Pi M_{G , G' }$
+- [ ] 147 p81 batch-05:44d | reading | after « de $\Pi M_{G}$ de noyau une » | cat | ext
+- [ ] 147 p81 batch-05:44e | reading | after « $\mathbb{Z}^{C'}$ tordu une extension de » | $\Pi M_{G}$ | $\Pi M_{G , G' }$
+- [ ] 147 p81 batch-05:44f | reading | after « De façon plus précise on » | retire | tire
+- [ ] 147 p82 batch-05:55 | reading | after « voudrais comparer au diagramme de » | généralisation | spécialisation générisation
+- [ ] 147 p82 batch-05:68 | reading | after « provient du morphisme dirigé soit » | $ W $ | via l'inclusion le
+- [ ] 147 p82 batch-05:78 | reading | after « dis on a un diagramme » | qui | que je
+- [ ] 147 p83 batch-05:91 | reading | after « extensions successives de $\Pi M_{G,G'}$ s'interprète » | aussi directement | canoniquement
+- [ ] 147 p83 batch-05:96a | reading | after « plus grossière de toutes On » | pose désigne | désignera posera
+- [ ] 147 p83 batch-05:98 | reading | after « toutes On pose désigne par » | $S\Pi M_{G}$ | $S\Pi \mathfrak G M_G$ 83
+- [ ] 147 p85 batch-05:140 | reading | after « On va plutôt expliciter les » | choses | données
+- [ ] 147 p86 batch-05:155 | reading | at the top of the page | et factorisation | se factorise
+- [ ] 147 p86 batch-05:172 | reading | after « $\mathcal{G}$ pour abréger La catégorie » | visée | $\mathcal G$ joue le rôle
+- [ ] 147 p86 batch-05:172a | reading | after « abréger La catégorie visée d'un » | diagramme | ens
+- [ ] 147 p87 batch-05:177a | reading | after « begin quote 123 Simpl Pour » | tout $G \in \mathcal{G}$ | $\forall\ G\in \mathcal M $
+- [ ] 147 p87 batch-05:182 | reading | after « grand On suppose donnés pour » | tout $G \in Ob \,\mathcal{G}$ | $\forall\ G\in Ob \mathcal G$
+- [ ] 147 p87 batch-05:186 | reading | after « en $G$ pour les iso » | resp | pas
+- [ ] 147 p89 batch-05:205 | reading | after « section 10 Structure MDT discrète » | étude | action
+- [ ] 147 p89 batch-05:208 | reading | after « normalisation entre MD-graphes Nous voulons » | expliciter | exprimer
+- [ ] 147 p89 batch-05:218 | reading | after « celle d'iso de MD-graphes Géométriquement » | elle correspond | cela correspondra
+- [ ] 147 p89 batch-05:218a | reading | after « sur un corps alg clos » | $k$ où on distingue | $ h $ en distinguant
+- [ ] 147 p90 batch-05:221a | reading | after « trouve donc $X' = \hat{X}' \setminus … » | le normalisé | la normalisée
+- [ ] 147 p90 batch-05:223b | reading | after « termes de $X$ est donc » | complète | explicite
+- [ ] 147 p90 batch-05:223c | reading | after « est donc complète dès qu'on » | se donne | a donné
+- [ ] 147 p90 batch-05:229 | reading | after « Le graphe de $X'$ est » | alors | donc
+- [ ] 147 p91 batch-05:232 | reading | after « de $X'$ se déduit de » | celle | celui
+- [ ] 147 p91 batch-05:234b | reading | after « [illegible] indexés par $A'$ un » | deuxième | troisième
+- [ ] 147 p91 batch-05:234c | reading | after « $\tilde{J} \amalg I$ sur $\hat{X}'$ Ceci … » | au lieu d | on peut
+- [ ] 147 p92 batch-05:237b | reading | after « qui sera épinglée par le » | MD-graphe $ G '$ | m graphe $\underline G'$
+- [ ] 147 p92 batch-05:237c | reading | after « ayant $A'$ comme ens d'arêtes » | en prenant | avec
+- [ ] 147 p92 batch-05:241 | reading | after « par \[ 239(126)\qquad I' \longrightarrow S … » | $ G '$ étant | $\underline G'$ est
+- [ ] 147 p92 batch-05:241a | reading | after « pour $ G '$ étant celle … » | $ G $ | $\underline G$ 92
+- [ ] 147 p93 batch-05:244a | reading | after « peut généraliser encore un peu » | cette construction | ces constructions
+- [ ] 147 p93 batch-05:244b | reading | after « d'une partie $\tilde{A}'$ de $\tilde{A}(G)$ » | stable | st ble
+- [ ] 147 p93 batch-05:244c | reading | after « plus une partie $I'$ de » | $I \amalg \tilde{J}$ | $I\amalg \widetilde A \widetilde J$
+- [ ] 147 p93 batch-05:254 | reading | after « constructions en termes d'une notion » | adéquate | ad-hoc
+- [ ] 147 p94 batch-05:257 | reading | after « morphisme de normalisation de » | MD-graphes | m graphes
+- [ ] 147 p94 batch-05:265a | reading | after « la Définition Soient \[ 261 G … » | MD-graphes Un | m graphes On appelle
+- [ ] 147 p94 batch-05:265b | reading | after « [illegible] normalisation de $ G '$ … » | $ G $ est | $\underline G$
+- [ ] 147 p94 batch-05:284 | reading | after « un même sac pour un » | MD-graphe | m graphe 94
+- [ ] 147 p95 batch-05:287 | reading | after « et $I(G)$ munis l'un et » | l'autre | autre
+- [ ] 147 p95 batch-05:287a | reading | after « dans $S(G)$ Pour ceci on » | va | a à
+- [ ] 147 p95 batch-05:287b | reading | after « la notion de graphe avec » | boucles | branches
+- [ ] 147 p95 batch-05:287c | reading | after « tels que a $X$ soit » | étoilé | une étoile
+- [ ] 147 p95 batch-05:287d | reading | after « pt de $S$ et b » | toute | S tt
+- [ ] 147 p95 batch-05:287e | reading | after « on veut que toute adhérence » | d arête aboutisse en | d'arête ait
+- [ ] 147 p95 batch-05:287f | reading | after « connexe de $X \setminus S$ ne … » | composante connexe de $X$ | compacte
+- [ ] 147 p96 batch-05:293b | reading | after « fixes $I$ se correspond aux » | boucles | branches
+- [ ] 147 p96 batch-05:293c | reading | after « La donnée d'un graphe à » | boucles | branches
+- [ ] 147 p96 batch-05:293d | reading | after « boucles aplaties revient donc en » | désignant par | décomposant
+- [ ] 147 p96 batch-05:293e | reading | after « donc en désignant par $\hat{I}$ » | ou | en
+- [ ] 147 p96 batch-05:293f | reading | after « d'un [illegible] graphe ordinaire plus » | d'un | un
+- [ ] 147 p96 batch-05:293g | reading | after « plus d'un ensemble $I$ et » | d'une | une
+- [ ] 147 p96 batch-05:293h | reading | after « décrit un tel graphe à » | boucles | branches
+- [ ] 147 p96 batch-05:297a | reading | after « points gros $\bullet$ et les » | boucles | branches
+- [ ] 147 p96 batch-05:297b | reading | after « par le fait justement qu'elles » | n'ont | ne sont
+- [ ] 147 p96 batch-05:297c | reading | after « fait justement qu'elles n'ont pas » | de point | marquées en
+- [ ] 147 p96 batch-05:297d | reading | after « b a ci-dessus correspond donc » | en notation | avec la notion
+- [ ] 147 p96 batch-05:297e | reading | after « correspond donc en notation des » | pts | pieds
+- [ ] 147 p97 batch-05:303 | reading | after « dans le cas où $S' \simeq … » | $I' \simeq I \amalg \tilde{J}$ | $I'\xrightarrow{\sim}I\amalg\widetilde J$
+- [ ] 147 p97 batch-05:303a | reading | after « ordinaires de $G$ qu'on veut » | couper | enlever $\widetilde C$ est le
+- [ ] 147 p97 batch-05:303b | reading | after « veut couper complémentaire de $I'$ » | dans $\hat{I}' \to \hat{I}$ | ds $(\widehat I'\longrightarrow\widehat I)$
+- [ ] 147 p97 batch-05:303c | reading | after « de ciseaux i e prenant » | le diagramme | la découpe
+- [ ] 147 p97 batch-05:303d | reading | after « suivant la partie finie marquée » | en | sur
+- [ ] 147 p97 batch-05:312a | reading | after « trouve un nouveau graphe à » | boucles | branches
+- [ ] 147 p97 batch-05:312b | reading | after « à boucles aplaties qui a » | toutes les | des
+- [ ] 147 p97 batch-05:312c | reading | after « a toutes les chances d'être » | disconnecté | disconnexe
+- [ ] 147 p97 batch-05:312d | reading | after « si $G$ n'avait pas de » | boucles | branches
+- [ ] 147 p97 batch-05:312e | reading | after « de $G'$ en enlevant certaines » | boucles | branches
+- [ ] 147 p98 batch-05:316 | reading | after « en ajoutant ou retranchant des » | boucles | branches
+- [ ] 147 p98 batch-05:316a | reading | after « générale entre $G$ et un » | $G'$ des types explicités | $G'_0$ du type explicité
+- [ ] 147 p98 batch-05:318 | reading | after « normalisation strict est strict Les » | MD-graphes et | m graphes avec
+- [ ] 147 p98 batch-05:318a | reading | after « MD-graphes et morphismes de normalisation » | stricts forment | strict font
+- [ ] 147 p98 batch-05:318b | reading | after « sont les iso ordinaires de » | MD-graphes | m graphes
+- [ ] 147 p98 batch-05:318c | reading | after « on se borne aux morphismes » | dits | de norm
+- [ ] 147 p98 batch-05:318d | reading | after « que pour les morphismes de » | normalisation généraux | générisation
+- [ ] 147 p98 batch-05:318e | reading | after « de normalisation généraux l'ens des » | sous-MD-graphes $G'/\!\simeq$ | sous-m graphes
+- [ ] 147 p98 batch-05:318f | reading | after « des sous-MD-graphes $G'/\!\simeq$ stricts d'un » | MD-graphe | m graphe
+- [ ] 147 p98 batch-05:318g | reading | after « de $A(G)$ en associant à » | une | tte
+- [ ] 147 p98 batch-05:318h | reading | after « en associant à une partie » | $C \subset A(G)$ | $C\subset A(G$ 98
+- [ ] 147 p99 batch-05:321 | reading | at the top of the page | le diagramme | la découpe
+- [ ] 147 p99 batch-05:321a | reading | after « arêtes et à remplacer les » | sommets | côtés
+- [ ] 147 p99 batch-05:329 | reading | after « quelconque $S$ épinglée par $G$ » | donc | alors
+- [ ] 147 p99 batch-05:329a | reading | after « une courbe spéciale $C'$ épinglée » | donc | d'où
+- [ ] 147 p100 batch-05:340 | reading | after « \[ 338(132)\qquad M_{G} \longrightarrow M_{G'} , … » | transitivité | fonctorialité
+- [ ] 147 p100 batch-05:340a | reading | after « \[ 338(132)\qquad M_{G} \longrightarrow M_{G'} , … » | des | les
+- [ ] 147 p100 batch-05:340b | reading | after « les morphismes de normalisation stables » | morphismes de normalisation Ceci posé | Cette fois
+- [ ] 147 p100 batch-05:344 | reading | after « multiplicités b Soient $G_{\alpha}$ des » | MD-graphes | composantes connexes m graphes
+- [ ] 147 p100 batch-05:344a | reading | after « Soient $G_{\alpha}$ des MD-graphes stables » | graphes connexes et | de
+- [ ] 147 p100 batch-05:344b | reading | after « graphes connexes et $G$ le » | MD-graphe | m graphe
+- [ ] 147 p100 batch-05:349 | reading | after « de multiplicités NB On remplace » | 133 | la notation $\Pi M_G$
+- [ ] 147 p100 batch-05:351 | reading | after « un foncteur contravariant en le » | MD-graphe | m graphe
+- [ ] 147 p100 batch-05:354 | reading | after « MD-graphe stable $G$ pour les » | end document | 100
+- [ ] 147 p101 batch-06:28 | reading | after « $G$ \[ 25 (144) \qquad \Pi_1 … » | d ailleurs | de
+- [ ] 147 p101 batch-06:28a | reading | after « compte d ailleurs et redonne » | tautologiquement | automatiquement
+- [ ] 147 p101 batch-06:40 | reading | after « morphisme correspondant sur les normalisés » | totalement | totaux
+- [ ] 147 p103 batch-06:71 | reading | after « les morphismes de normalisation entre » | multiplicités associées | m graphes associés
+- [ ] 147 p103 batch-06:72a | reading | after « entre multiplicités associées aux graphes » | marqués | monoponctuels
+- [ ] 147 p103 batch-06:74 | reading | after « leurs propriétés de commutation aux » | bornes | iso
+- [ ] 147 p103 batch-06:74a | reading | after « aux bornes il faut utiliser » | la connaissance | les covariances
+- [ ] 147 p103 batch-06:83 | reading | after « et relations en termes purement » | géométriques | algébriques ldots
+- [ ] 147 p103 batch-06:92 | reading | after « ex un iso définir déterminer » | les morphismes | le morphisme
+- [ ] 147 p104 batch-06:110 | reading | after « marqués Soit $G$ un graphe » | du | de
+- [ ] 147 p104 batch-06:117 | reading | after « de généralisation \[ 114 (149) \qquad … » | diagramme | diag germe
+- [ ] 147 p105 batch-06:132 | reading | after « analytiques relatives ou en remplaçant » | les esp | l'hyp
+- [ ] 147 p105 batch-06:132a | reading | after « les esp analytiques par des » | esp | hyp
+- [ ] 147 p105 batch-06:140 | reading | after « définition les germes de sous-multiplicités » | attachées | attachés
+- [ ] 147 p105 batch-06:141 | reading | after « $x$ sont les intersections d'un » | ens | nb
+- [ ] 147 p106 batch-06:156 | reading | after « une fonction codimension sur $J$ » | un morphisme | en composant
+- [ ] 147 p106 batch-06:157 | reading | after « un morphisme soit $d$ et » | disons | dire
+- [ ] 147 p106 batch-06:158 | reading | after « en supposant donnée déjà $d$ » | dimension | d'avance
+- [ ] 147 p106 batch-06:164 | reading | after « que satisfaisant \[ 161 (151) \qquad … » | s'intéresse | se borne
+- [ ] 147 p106 batch-06:166 | reading | after « correspond donc à une codim » | minimale | maximale qui est
+- [ ] 147 p106 batch-06:169 | reading | after « n'y est déjà Considérons pour » | $p \in \mathbb{N}^{*}$ | tout $ q \in\mathbb N^*$
+- [ ] 147 p106 batch-06:171 | reading | after « de codim $p$ On voit » | écrit | voit
+- [ ] 147 p106 batch-06:172 | reading | after « les points d'une multiplicité analytique » | qui prolonge $D_p$ | que je note $D_{ q }$
+- [ ] 147 p107 batch-06:181a | reading | after « morphisme d'immersion locale de codim » | $d$ Pour $D_d$ | $q$ Sur $D_{ q }$
+- [ ] 147 p107 batch-06:184 | reading | after « pts de $\widetilde{D}_d$ correspondent aux » | triples | triplets
+- [ ] 147 p107 batch-06:195 | reading | after « et sont les couples d'un » | $x \in D$ et d'un plong | plongt
+- [ ] 147 p107 batch-06:196 | reading | after « d'un plong d'ens ordonnés compatible » | avec | aux
+- [ ] 147 p107 batch-06:200 | reading | after « suppose la fonction codim strictement » | croissante | décr
+- [ ] 147 p108 batch-06:204 | reading | after « On » | a déjà supposé | va désormais supposer
+- [ ] 147 p108 batch-06:204a | reading | after « un plus petit élément $e_J$ » | dont | et
+- [ ] 147 p108 batch-06:218 | reading | after « peut [illegible] reconstruire $D_J$ à » | partir | l'aide
+- [ ] 147 p108 batch-06:219 | reading | after « $\widetilde{D}_d$ via le revêtement principal » | tordu | torseur
+- [ ] 147 p108 batch-06:220 | reading | after « s'identifie aussi à $D_{I(d)}$ où » | $I(d)$ désigne | $\mathbf I(d)$
+- [ ] 147 p108 batch-06:228a | reading | after « Mais l'expression de $D_{I(d)}$ en » | termes | évidence les opérations
+- [ ] 147 p110 batch-06:263 | reading | after « est claire sur l'expression 155 » | soit | les
+- [ ] 147 p110 batch-06:265 | reading | after « $x$ $e_J$ de $J'$ $\neq e_J$ » | élément | qui est
+- [ ] 147 p110 batch-06:265a | reading | after « $\neq e_J$ élément de codim $\delta$ » | $< d$ | $ \ne d$
+- [ ] 147 p110 batch-06:269 | reading | after « le composé \[ 267 (158) \qquad … » | tautologie $\{x\} \subset J'$ | fonctorialité par l'inclusion $\{x\}\hookrightarrow J'$
+- [ ] 147 p110 batch-06:271 | reading | after « par tautologie $\{x\} \subset J'$ on … » | la | le
+- [ ] 147 p110 batch-06:276 | reading | after « $\Delta(d,\delta)$ étant le drapeau type » | du | de
+- [ ] 147 p110 batch-06:282a | reading | after « ordonné avec à fonction codim » | car | si
+- [ ] 147 p110 batch-06:283a | reading | after « car $\delta < d$ Utilisant [illegible] … » | peut prendre | a en appliquant
+- [ ] 147 p110 batch-06:283b | reading | after « [illegible] on peut prendre 155 » | avec | au cas de
+- [ ] 147 p110 batch-06:287 | reading | after « \[ 285 (160) \qquad D_{d,\delta} \simeq … » | dans | avec
+- [ ] 147 p110 batch-06:288 | reading | after « $H(J)$ pour l'élément $x \in J$ … » | $\delta$ $= cod (x)$ | de $J$ où $d'= cod (e')$
+- [ ] 147 p111 batch-06:304 | reading | after « un morphisme Ceci posé Cette » | relation | application
+- [ ] 147 p111 batch-06:320 | reading | after « par fonctorialité par les inclusions » | $\{x\} \subset \{x, e\} \subset J$ | $ \{e\} \{x\}\subset\{x,e\}\subset J$
+- [ ] 147 p111 batch-06:321a | reading | after « $D_J \to D_{d,\delta}$ est décrit par … » | relation | nôtre
+- [ ] 147 p112 batch-06:334a | reading | after « de [illegible] multiplicité des flèches » | ici morph | ou mor
+- [ ] 147 p112 batch-06:335 | reading | after « morph d'inclusion entre éléments de » | la sous-multiplicité | sous-multiplicités
+- [ ] 147 p112 batch-06:335a | reading | after « de la sous-multiplicité de $X$ » | associée | associés
+- [ ] 147 p112 batch-06:354 | reading | after « directement $D_{d'}$ \[ 352 (167) \qquad … » | sait | note
+- [ ] 147 p113 batch-06:395 | reading | after « \[ 390 D_{*} \longrightarrow D_{**} \qquad … » | flèches satisfaisant | espaces analytiques Toutes ces données satisfont
+- [ ] 147 p113 batch-06:398a | reading | after « aux conditions [illegible] habituelles associativité » | unités | unité ldots
+- [ ] 147 p114 batch-06:402 | reading | after « pour tout $S$ les » | pts | ens p textsuperscript ts
+- [ ] 147 p114 batch-06:402a | reading | after « $S$ les pts de $\mathcal{D}$ » | à valeurs dans $S$ formés | formé
+- [ ] 147 p114 batch-06:408 | reading | after « $D_{*}$ \[ 406 (170) \qquad D_{*} … » | résulte | sort
+- [ ] 147 p114 batch-06:408a | reading | after « des autres structures cf plus » | loin lecture incertaine | bas ldots
+- [ ] 147 p115 batch-06:446 | reading | after « des flèches de source donnée » | est | et
+- [ ] 147 p115 batch-06:446a | reading | after « relation d'ordre et la fonction » | codim à $\mathfrak{P}(I_d)_{D_d}$ | cardinal
+- [ ] 147 p115 batch-06:462 | reading | after « soit mono i e que » | les | tt
+- [ ] 147 p115 batch-06:462a | reading | after « les flèches sont déterminées par » | leur | sa
+- [ ] 147 p115 batch-06:462b | reading | after « par leur source et par » | leur | son
+- [ ] 147 p115 batch-06:463 | reading | after « et par leur but Mais » | pourtant | finalement
+- [ ] 147 p116 batch-06:497 | reading | after « tautologique de $D_{d,d'}$ ce qui » | se | donne pour $D_{d,d',d''}$
+- [ ] 147 p116 batch-06:509 | reading | after « cartésien NB $D_{d,d'}$ et $D_{d,d',d''}$ » | se déduisent | sont déduits
+- [ ] 147 p117 batch-06:513 | reading | after « plus qu'on ait commutativité dans » | les morph diagrammes | le simple diagramme 177 quad
+- [ ] 147 p117 batch-06:523 | reading | after « précédente a un sens dans » | un | chaque
+- [ ] 147 p117 batch-06:526 | reading | after « [illegible] définissent une décomposition en » | somme disjointe | sommes disjointes
+- [ ] 147 p117 batch-06:530 | reading | after « avec l'intuition des croisements normaux » | il faut | on va
+- [ ] 147 p117 batch-06:531 | reading | after « croisements normaux il faut faire » | des hypothèses ad-hoc | de plus une hypothèse ad hoc
+- [ ] 147 p118 batch-06:545 | reading | after « Dans le cas lisse ou » | relatif | relativement
+- [ ] 147 p118 batch-06:556 | reading | after « donc les $D_d$ s'envoient tous » | canoniquement | can textsuperscript t
+- [ ] 147 p119 batch-06:597 | reading | after « $D_d \overset{ id }{\longrightarrow} X$ d'autre … » | que définit | images $x_i$ de
+- [ ] 147 p120 batch-06:612a | reading | after « $X$ [illegible] [illegible] le diviseur » | donc | dans
+- [ ] 147 p120 batch-06:619 | reading | after « naissance à un groupe analytique » | ou | et $=$
+- [ ] 147 p120 batch-06:628 | reading | after « $\pi_1$ ou $H_1$ des fibres » | end document | 120
+- [ ] 147 p121 batch-07:24 | reading | after « de $T_d$ sur $D^{!}_d$ sur » | laquelle | lequel
+- [ ] 147 p121 batch-07:51 | reading | after « peut considérer \[ 48 (189) \qquad … » | opère | opérant
+- [ ] 147 p121 batch-07:51a | reading | after « \[ 48 (189) \qquad P^{!}_d = … » | $D^{!}_d$ permutant | $D'_d$ permute
+- [ ] 147 p122 batch-07:72 | reading | after « de $P_d$ et le groupoïde » | l'ouvert $D^{*}_d$ | quand $D_d^*$
+- [ ] 147 p122 batch-07:74 | reading | after « plus bas et plus essentiellement » | par | pour
+- [ ] 147 p122 batch-07:80 | reading | after « \[ 76 \Pi\bigl(\underbrace{P_d \mid D^{*}_d}_{\overset{ déf … » | variance | variation
+- [ ] 147 p123 batch-07:112 | reading | after « inverse sur $D^{!}_{d,d'} = D^{!}_d \times_{D_d} … » | cart | can 195 quad
+- [ ] 147 p124 batch-07:139 | reading | after « épi lisse \[ 131 (197) \quad … » | sait | voit
+- [ ] 147 p125 batch-07:168 | reading | after « et » | les | des
+- [ ] 147 p125 batch-07:180 | reading | after « $D_d$ $D_{d'}$ $D_{d''}$ par Prenant » | aussi | de $=$
+- [ ] 147 p125 batch-07:187 | reading | after « images inverses par des morphismes » | du type | des types
+- [ ] 147 p125 batch-07:198 | reading | after « l'est plus et qui fait » | sérieusement | sûrement
+- [ ] 147 p126 batch-07:202 | reading | after « On a » | aussi | envie
+- [ ] 147 p126 batch-07:206 | reading | after « normaux $D$ sur $X = D_0$ … » | dépliant | déployant
+- [ ] 147 p126 batch-07:207 | reading | after « Alors $\forall d \in \mathbb{N}$ la … » | dépliement | déploiement
+- [ ] 147 p126 batch-07:209 | reading | after « de développer au long les » | choses a aussi la même propriété | $=$ propriétés
+- [ ] 147 p126 batch-07:219 | reading | after « de $\Delta(d)$ On pose alors » | peut | veut
+- [ ] 147 p126 batch-07:224 | reading | after « de groupoïdes \[ 221 $(203) \quad … » | spécialisation | générisation 126
+- [ ] 147 p127 batch-07:228 | reading | after « Il faut introduire » | ensuite | encore
+- [ ] 147 p127 batch-07:230 | reading | after « drapeaux $D_{d_0,d_1,\dots,d_r}$ pour $d_0 \geqslant d_1 … » | réunion | somme
+- [ ] 147 p127 batch-07:235 | reading | after « pour $I$ ens fini ordonné » | rajoutant une | ayant un
+- [ ] 147 p127 batch-07:237 | reading | after « dépend fonctoriellement de façon contravariante » | de $\Delta_r$ par | en $ I_r $ pour
+- [ ] 147 p127 batch-07:237a | reading | after « contravariante de $\Delta_r$ par les » | relations | applications
+- [ ] 147 p127 batch-07:238 | reading | after « on a un espace analytique » | ½-simplicial | $1/2$ simplicial
+- [ ] 147 p127 batch-07:247 | reading | after « revêtement étale fini de $D_{d_0}$ » | s'identifie | s'identifiant
+- [ ] 147 p127 batch-07:255 | reading | after « qui est donc le complémentaire » | d'un diviseur $\Delta_{d_0 \dots d_r}$ | de l'image inverse $\Delta_{d_0- d_r}$
+- [ ] 147 p127 batch-07:257 | reading | after « On peut bien sûr plus » | simpl ement | simple 127
+- [ ] 147 p128 batch-07:270 | reading | after « par les morphismes premier sommet » | $\mathcal{D}_r \to D_{*}$ transposés | transposé
+- [ ] 147 p129 batch-07:307 | reading | after « son image inverse sur $D^{*}_{d_0,\dots,d_r}$ » | posons | on pose
+- [ ] 147 p129 batch-07:325 | reading | after « de $\Pi_{d_0,\dots,d_r}$ par $T^{*}_{d_0,\dots,d_r}$ On » | pourra | posera
+- [ ] 147 p130 batch-07:363 | reading | after « système local $T_{\Delta_r}$ sur $\Pi_{\Delta_r}$ » | provient se réduisant | pourra s'identifiant
+- [ ] 147 p130 batch-07:367 | reading | after « n'ont pas de dépendance simpliciale » | par rapport à | p r aux
+- [ ] 147 p130 batch-07:369 | reading | after « naturel entre $\Pi_{d,d'} = \Pi_1 D^{*}_{d,d'}$ … » | l'application | par 130
+- [ ] 147 p131 batch-07:392 | reading | after « et $\widetilde{\Pi} \to$ [illegible] correspondant $\widetilde{\Pi}_d … » | conservent | des projections locales et
+- [ ] 147 p131 batch-07:396a | reading | after « injections [illegible] image d'indice fini » | au fond | on peut
+- [ ] 147 p131 batch-07:401a | reading | after « essentiellement formelle et triviale et » | n'utilisent | marcheraient
+- [ ] 147 p131 batch-07:402 | reading | after « spécifique des croisements normaux et » | aussi | sans
+- [ ] 147 p131 batch-07:403 | reading | after « croisements normaux et aussi que » | la résolution | le remplacement
+- [ ] 147 p132 batch-07:407 | reading | after « définir les $\Pi_{\Delta_r}$ et $\widetilde{\Pi}_{\Delta_r}$ » | seules jouent | semble y jouer a
+- [ ] 147 p132 batch-07:408 | reading | after « seules jouent un rôle particulier » | ici | et
+- [ ] 147 p132 batch-07:414 | reading | after « les systèmes \[ 412 \widetilde{\Pi}_{d_0 d_1 … » | tour | hom
+- [ ] 147 p132 batch-07:415 | reading | after « nature essentiellement triviale il faudrait » | cependant | cepend t
+- [ ] 147 p132 batch-07:416 | reading | after « l'occasion de plus près cette » | mi-distante | soi-disant
+- [ ] 147 p132 batch-07:421 | reading | after « tout à fait non-formelle qui » | va provenir | ne peut s'obtenir qu'avec des hypothèses
+- [ ] 147 p132 batch-07:422 | reading | after « normaux dans son entier et » | s'exprimer | s'exprimant
+- [ ] 147 p132 batch-07:423 | reading | after « les $\Pi_{\Delta_r}$ forment un groupoïde » | ½-simplicial | $1/2$ simplicial
+- [ ] 147 p133 batch-07:437 | reading | after « qu'on appellera l homom de » | spécialisation | générisation
+- [ ] 147 p133 batch-07:440a | reading | after « de simplexes [illegible] il est » | nécessaire d'examiner | ramené à examiner
+- [ ] 147 p133 batch-07:451 | reading | after « certains de ses éléments et » | la flèche | les alors
+- [ ] 147 p133 batch-07:451a | reading | after « 220 en est un iso » | dans | donc
+- [ ] 147 p133 batch-07:452 | reading | after « iso dans si $\alpha$ est » | surjectif | un hom
+- [ ] 147 p133 batch-07:453 | reading | after « est surjectif On voit que » | les considérants | la considération
+- [ ] 147 p133 batch-07:455a | reading | after « $\widetilde{\Pi}_{d_0 \dots d_r}$ $\Pi_{d_0,\dots,d_r}$ [illegible] pour … » | distincts par 220 | non strictement décroissants
+- [ ] 147 p134 batch-07:462 | reading | after « [illegible] bijection [illegible] de nature » | essentiellement | ess t
+- [ ] 147 p134 batch-07:478a | reading | after « définir l'homom \[ 476 (222) \qquad … » | est dans une situation | a subrepticement changé
+- [ ] 147 p134 batch-07:481a | reading | after « 221 En fait [illegible] il » | suffit | s'agit
+- [ ] 147 p134 batch-07:489 | reading | after « que l'on a \[ 487 (223) … » | pas | non
+- [ ] 147 p134 batch-07:491a | reading | after « est incluse [illegible] dans le » | diviseur | diagramme 134
+- [ ] 147 p135 batch-07:502 | reading | after « verticales sont étales et la » | 2 textsuperscript e | $2^{ ième }$
+- [ ] 147 p135 batch-07:517 | reading | after « \[ 515 (225) \qquad D^{*}_{d_{*}} \longrightarrow … » | au départ et | en exposant à
+- [ ] 147 p135 batch-07:518 | reading | after « au départ et $D_{d_*}$ seulement » | mais | non à
+- [ ] 147 p136 batch-07:528 | reading | after « \[ 525 (226) \qquad \Theta^{d*}_{d'_*} \overset{ … » | privé | purifié
+- [ ] 147 p136 batch-07:528a | reading | after « squelette privé de codim $d$ » | du | de
+- [ ] 147 p136 batch-07:530 | reading | after « dans $D_{d'_*}$ Ceci posé on » | sait | voit
+- [ ] 147 p136 batch-07:533 | reading | after « Plus précisément $\Theta^{d*}_{d'_*}$ s'identifie à » | $D_{(d_0,d'_0,\dots,d'_r)} : D_{\tilde{d}'_*}$ | $ D_{d_0,d'_0,\ldots,d'_r} \quad D_{\widetilde d'_*}$
+- [ ] 147 p137 batch-07:553 | reading | after « évidemment l'image inverse de $D^{*}_{\tilde{d}'_*}$ » | i e | c'est
+- [ ] 147 p137 batch-07:557 | reading | after « on est ramené à la » | situation suivante $X$ | Situation clef quad
+- [ ] 147 p137 batch-07:578b | reading | after « $D'' \to Y$ $D' \to Y$ … » | $d_1 > d_0 \geqslant 0$ | $d_1\geq d_0\geq0$
+- [ ] 147 p138 batch-07:585 | reading | after « est l'image inverse de $\Theta^{(d_1)*}$ » | Ceci posé | fondamentaux $\Pi_1P_{D''^{*}},\Pi_1P_{D'^{*}}$ Cette fois
+- [ ] 147 p138 batch-07:605 | reading | after « qui lui est de nature » | essentiellement triviale | entièrement trivial
+- [ ] 147 p139 batch-07:622 | reading | after « avoir commutativité dans On fera » | la distinction | bien attention
+- [ ] 147 p139 batch-07:625 | reading | after « $D''$ dans $D'$ est contenue » | justement dans | juste en
+- [ ] 147 p139 batch-07:628 | reading | after « analytiques lisses telle que $D' \to … » | condition | relative à
+- [ ] 147 p139 batch-07:632a | reading | after « de la donnée de $\Theta$ » | la | le
+- [ ] 147 p140 batch-07:640 | reading | after « question sera figuré par et » | non dans | hors de
+- [ ] 147 p140 batch-07:645 | reading | after « le cadre p ex des » | prémulti locales | paires loc fer
+- [ ] 147 p140 batch-07:649 | reading | after « topologiques on peut encore définir » | un | ce
+- [ ] 147 p140 batch-07:650 | reading | after « germe de topos multiplicité diff » | abstraite partie | par descente à partir
+- [ ] 147 p140 batch-07:652 | reading | after « top paracompactes On peut aussi » | il semble t-il | me semble-t-il
+- [ ] 147 p140 batch-07:656 | reading | after « aussi il semble t-il donner » | end document | 140
+- [ ] 147 p141 batch-08:22 | reading | after « de fonctorialité telles que l'on » | trouve | tire
+- [ ] 147 p141 batch-08:22a | reading | after « d'une situation de deux d'un » | couple | composé
+- [ ] 147 p141 batch-08:35 | reading | after « $Y$ définissant l'ouvert $Y^*=Y\setminus\Theta$ Nous » | allons considérer | considérons
+- [ ] 147 p142 batch-08:56 | reading | after « non pas par lacets points » | et | de base
+- [ ] 147 p142 batch-08:58 | reading | after « isomorphismes entre tels ldots C'est » | essentiellement | en définitive
+- [ ] 147 p142 batch-08:58a | reading | after « tels ldots C'est essentiellement cela » | l heure de canonisation | l'horreur des normalisations
+- [ ] 147 p142 batch-08:58b | reading | after « le définir chaque fois qu'on » | a deux | se donne
+- [ ] 147 p142 batch-08:58c | reading | after « a deux des imm locales » | $D''\to D'\to Y$ | $D''\longrightarrow D'\mathbin{-}Y$ 142
+- [ ] 147 p143 batch-08:62a | reading | after « de topos » | simpliciaux disons ldots | simplement si on veut
+- [ ] 147 p143 batch-08:62b | reading | after « topos en question $Y$ pas » | besoin | la peine même
+- [ ] 147 p143 batch-08:62c | reading | after « d'un tel ss-objet i e » | définissant | dire
+- [ ] 147 p143 batch-08:62d | reading | after « ss-objet i e définissant $Y^*$ » | comme | est un
+- [ ] 147 p143 batch-08:62e | reading | after « ouvert du topos en question » | à | sans
+- [ ] 147 p143 batch-08:67a | reading | after « il faut encore ici expliciter » | la | les isom can
+- [ ] 147 p143 batch-08:69a | reading | after « encore ici expliciter la Théorème » | Soient | quad Soit
+- [ ] 147 p144 batch-08:73b | reading | at the top of the page | Réduction de | L'indice $d_1$
+- [ ] 147 p144 batch-08:80b | reading | after « la longue digression des notes » | Monodromie | Marche
+- [ ] 147 p144 batch-08:80c | reading | after « des notes Monodromie 53 n » | textsuperscript o 5 textsuperscript o | 50
+- [ ] 147 p144 batch-08:80d | reading | after « o p 768 ff Ici » | cas | en
+- [ ] 147 p144 batch-08:80e | reading | after « être assez évident de définir » | au moins conceptuellement | de façon non canonique
+- [ ] 147 p144 batch-08:80f | reading | after « moins conceptuellement un plongement topologique » | et via | cl
+- [ ] 147 p145 batch-08:89 | reading | after « l'application identique sur les fib » | fibrés | rés
+- [ ] 147 p145 batch-08:89a | reading | after « long de la section nulle » | Sa construction | Ça
+- [ ] 147 p145 batch-08:89b | reading | after « nulle Sa construction devrait en » | tout | tous
+- [ ] 147 p145 batch-08:89c | reading | after « cas des vrais espaces analytiques » | paracompactes | paracompacts
+- [ ] 147 p145 batch-08:89d | reading | after « l'opération du groupe discret $\mathbb Z$ » | plus | dont
+- [ ] 147 p145 batch-08:89e | reading | after « discret $\mathbb Z$ plus le générateur » | opérant | opère
+- [ ] 147 p145 batch-08:89f | reading | after « le générateur opérant par la » | transformation | transvection
+- [ ] 147 p145 batch-08:89g | reading | after « plongement $D'\subset V_{D',Y}\subset Y$ n'est pas … » | donc pas | alors que
+- [ ] 147 p146 batch-08:93a | reading | after « d'hypothèses restrictives gênantes Pour trouver » | quelques doutes | quelque chose
+- [ ] 147 p146 batch-08:97c | reading | after « définir $V^*_{D^*}\hookrightarrow V^*_{D'}$ [illegible] une équivalence » | entre | sur
+- [ ] 147 p146 batch-08:97d | reading | after « faut [illegible] rétablir [illegible] les » | simplifications | généralités
+- [ ] 147 p146 batch-08:99a | reading | after « un ouvert de $\check N_{D',Y}$ soit » | justement $V^*_{D',Y}$ | juste $\mathcal V^{*}_{D',Y}$
+- [ ] 147 p147 batch-08:114 | reading | after « je vais plutôt comme dans » | Mon | Mar
+- [ ] 147 p147 batch-08:118b | reading | after « défini en termes de rev » | 1-connexes | fonc can
+- [ ] 147 p147 batch-08:118c | reading | after « généralisations adaptées [illegible] les considérations » | de | du
+- [ ] 147 p147 batch-08:118d | reading | after « à présent dans quelle mesure » | la | le
+- [ ] 147 p147 batch-08:118e | reading | after « dans quelle mesure la th » | analogue | envisagé
+- [ ] 147 p147 batch-08:118f | reading | after « [illegible] de travailler avec les » | $\Pi_1 V^*_{D',Y}$ tirés | $\Pi_1\mathcal V^{*}_{D',Y}$ au lieu
+- [ ] 147 p148 batch-08:123 | reading | after « hyp spécifique crois normaux on » | veut | voit
+- [ ] 147 p148 batch-08:123a | reading | after « crois normaux on veut que » | $V^*_{D_1,D_0=X}$ puisse s'interpréter | $\mathcal V^{*}_{D_1,D_0=X}$ peut s'interprète
+- [ ] 147 p148 batch-08:125 | reading | after « de vue topologique sans nous » | focaliser | focuser
+- [ ] 147 p148 batch-08:125a | reading | after « normaux définit une filtration décroissante » | dans la multiplicité topologique | du
+- [ ] 147 p148 batch-08:133 | reading | after « dépend justement d'hyp crois normaux » | et | des
+- [ ] 147 p149 batch-08:158a | reading | after « $V^*_0=X^*$ ils et sauf via » | $V^*_d\Rightarrow D$ | $\mathcal V_d^{*}\lhook\joinrel\longrightarrow D$
+- [ ] 147 p149 batch-08:160b | reading | after « recollement Considérons le fibré en » | ½ | topos $\frac12$
+- [ ] 147 p149 batch-08:160c | reading | after « en ½ simplicial au-dessus de » | $V^*_{\Theta,X}$ topos | $\mathcal V^{*}_{\Theta,X}$
+- [ ] 147 p149 batch-08:160d | reading | after « là une équivalence de topos » | en fait | a fortiori
+- [ ] 147 p149 batch-08:160e | reading | after « équivalence d'homotopie et en particulier » | se traduit en bijection | ça induit un isom
+- [ ] 147 p150 batch-08:168a | reading | after « variables a comme [illegible] lim » | topologique | toposique
+- [ ] 147 p150 batch-08:170 | reading | after « [illegible] que le th à » | $D_\delta,\Theta_\delta$ ldots Cor Main | $D_\delta,\Theta_\delta\ldots$ Corollaire
+- [ ] 147 p150 batch-08:177 | reading | after « 2 Supposons que \[ 175 $V^*_{\Theta,X}\hookrightarrow … » | une $\Delta$ | un $1$
+- [ ] 147 p150 batch-08:177a | reading | after « $\Delta$ équivalence i e induise » | une bij | un iso
+- [ ] 147 p151 batch-08:191a | reading | after « de pureté montre qu'on peut » | dans un voisinage | innocemment
+- [ ] 147 p151 batch-08:191b | reading | after « négliger $\Theta^{(3)}$ i e que » | les voisins | ça
+- [ ] 147 p151 batch-08:191c | reading | after « nous un changement [illegible] si » | on | l'on
+- [ ] 147 p151 batch-08:202 | reading | after « Corollaire 4 Supposons que pour » | tout $d\in\mathbb N$ et | tt
+- [ ] 147 p151 batch-08:206 | reading | after « soit \[ 204 $D_i^{*\infty}\hookrightarrow$ [illegible] , … » | non multiplicité $D_i$ | sous-multiplicité $D'_i$
+- [ ] 147 p152 batch-08:210b | reading | after « la réunion des composantes irréductibles » | de $D_d$ | conn des $D_i$
+- [ ] 147 p152 batch-08:210c | reading | after « $D_d$ qui s'envoient dans $\Sigma$ » | dans | alors
+- [ ] 147 p152 batch-08:229b | reading | after « l'image l'image dans réunion des » | comp connexes | composantes réunion des composantes
+- [ ] 147 p152 batch-08:229c | reading | after « codim $d'$ est dans $\Sigma$ » | les branches | tte branche
+- [ ] 147 p152 batch-08:229d | reading | after « de codim $d$ [illegible] dedans » | l en | l'est
+- [ ] 147 p153 batch-08:254 | reading | after « de parties correspondantes \[ 252(2.52)\qquad \pi_0(D_d^\Sigma)\overset{ … » | la condition | les conditions
+- [ ] 147 p153 batch-08:261 | reading | after « \[ 259(2.53)\qquad D_{d_0\cdots d_r}^\Sigma= image inverse … » | $D_{\Delta_r}^\Sigma=\coprod D_{d_0\cdots d_r}^\Sigma$ forment | $D_{\Delta_r}^\Sigma=\coprod$ $D_{d_0\ldots d_r}^\Sigma$ forme
+- [ ] 147 p153 batch-08:261a | reading | after « ½ simplicial de multiplicités analytiques » | tel que | et
+- [ ] 147 p154 batch-08:265a | reading | after « début de ces réflexions p » | 76 | 56
+- [ ] 147 p154 batch-08:265b | reading | after « sont c'est donc un crible » | en | avec
+- [ ] 147 p154 batch-08:265c | reading | after « un crible en une terminologie » | vague | reçue
+- [ ] 147 p154 batch-08:269 | reading | after « généralise en Th de recollement » | 2 textsuperscript ème | $2^{ ième }$
+- [ ] 147 p155 batch-08:277c | reading | after « [illegible] Même dans le cas » | relativement ordinaire | en apparence anodin
+- [ ] 147 p155 batch-08:277d | reading | after « réduit un diviseur lisse le » | genre de | grand
+- [ ] 147 p155 batch-08:277e | reading | after « dans la section précédente est » | remarquable | incomplet
+- [ ] 147 p155 batch-08:277f | reading | after « pur tautologique [illegible] revenant voisinage » | essentiellement | consistant
+- [ ] 147 p155 batch-08:277g | reading | after « Il y a cependant un » | intérêt | énoncé
+- [ ] 147 p155 batch-08:277h | reading | after « une interprétation [illegible] $\Pi_1(X)$ et » | aussi $\Pi_1(X\setminus\Theta)$ | non $\Pi_1\underbrace{X^*}_{X\setminus\Theta} \Theta $
+- [ ] 147 p156 batch-08:300a | reading | after « $\widetilde\Pi_{\Delta_r}$ et des $\Pi_{\Delta_r}$ et » | ainsi | sinon
+- [ ] 147 p158 batch-08:341 | reading | after « $\Sigma''\setminus\Sigma'_0$ $\Sigma\setminus\Sigma\cap\Sigma'_0$ Pour faire cette » | réduction | déduction
+- [ ] 147 p158 batch-08:343b | reading | after « revenir plus bas D'autre part » | les $V^{\Sigma}_{\Sigma',\Sigma''}$ | le cas $V_{ \Sigma' ,\Sigma''}^{\Sigma}$
+- [ ] 147 p158 batch-08:343c | reading | after « $V^{\Sigma}_{\Sigma',\Sigma''}$ se ramènent au cas » | $V^\Sigma_{\Sigma',X}$ cas | $V_{\Sigma',X}^{\Sigma}$ où
+- [ ] 147 p158 batch-08:343d | reading | after « $\Sigma''$ bien entendu on perd » | l'hyp lisse | alors l'hypothèse
+- [ ] 147 p158 batch-08:343e | reading | after « un tic [illegible] elle ne » | paraît | joue
+- [ ] 147 p158 batch-08:343f | reading | after « puis belle lurette ldots c'est » | facile simplement | fait sûrement
+- [ ] 147 p159 batch-08:353a | reading | after « par $X\setminus\Sigma_0^{ [illegible] }$ etc on … » | dès lors $V^\Sigma_{\Sigma',\Sigma''}$ | alors les $V_{\Sigma',\Sigma''}^\Sigma$
+- [ ] 147 p159 batch-08:353b | reading | after « trouve dès lors $V^\Sigma_{\Sigma',\Sigma''}$ comme » | un sous | le
+- [ ] 147 p159 batch-08:355 | reading | after « fermé par $V_{\Sigma'\cap\Sigma,\Sigma'}\longrightarrow V_{\Sigma',\Sigma''}$ Mais cette » | évidence | réduction
+- [ ] 147 p159 batch-08:357 | reading | after « directeur dans ce petit programme » | serait | est
+- [ ] 147 p159 batch-08:357a | reading | after « petit programme serait celui-ci on » | sait | veut
+- [ ] 147 p159 batch-08:357b | reading | after « ceux qu'on vient d'expliciter et » | en particulier | tout particulièrement
+- [ ] 147 p160 batch-08:362 | reading | after « suffit [illegible] pour [illegible] Bien » | entendu la notation ne | faire attention au
+- [ ] 147 p160 batch-08:362a | reading | after « eux quitte à y ajouter » | par la même | pour le moment
+- [ ] 147 p160 batch-08:379 | reading | after « \[ 377(2.61)\qquad V_{d_*,d_*}=D^*_{d_*}=D^*_{d_0,\dots,d_r}, 378\] item [illegible] … » | $d^*_*=\{d^*_0,\dots,d^*_r=0\}$ redondant | $d'_* = \{d'_0,\ldots,d'_r\geq0\}$ redonne
+- [ ] 147 p161 batch-09:22a | reading | after « Dans » | un tel cas | ces termes
+- [ ] 147 p161 batch-09:22b | reading | after « comme pièces de construction sont » | les $\mathcal{V}_{d_*,d'_*}$ | des $V_{d_*,d'_*}$
+- [ ] 147 p161 batch-09:22c | reading | after « les $\mathcal{V}_{d_*,d'_*}$ et $\mathcal{V}^*_{d_*,d'_*}$ Du » | p oin t | pt
+- [ ] 147 p161 batch-09:22d | reading | after « t de vue notation j'ai » | omis | envie
+- [ ] 147 p161 batch-09:22e | reading | after « donc des composés d'op face » | donc | et le
+- [ ] 147 p162 batch-09:29 | reading | after « vais faire la liste complète » | des | de ces topos
+- [ ] 147 p162 batch-09:31 | reading | after « \[ (261)\qquad X=\mathbb{E}^{1\, an },\qquad \Theta=\{0\} … » | n'incluant | n'écrivant
+- [ ] 147 p162 batch-09:31a | reading | after « en n'incluant que les $D_{d_*}$ » | étant | str
+- [ ] 147 p163 batch-09:60 | reading | after « veut comprendre la situation de » | codimension $n$ | codim un
+- [ ] 147 p163 batch-09:60a | reading | after « de codimension $n$ dans les » | les espaces | représentants
+- [ ] 147 p164 batch-09:65a | reading | after « 265 Cela nous [illegible] conduit » | considérons | à considérer
+- [ ] 147 p164 batch-09:65b | reading | after « possibles de $I$ en quatre » | parties | paquets
+- [ ] 147 p165 batch-09:73 | reading | after « \[ d'_0= card I'_0, \] $d$ … » | rel | p r
+- [ ] 147 p165 batch-09:73a | reading | after « topos élémentaire envisagé qui ici » | dont donc | de $X$ alors
+- [ ] 147 p165 batch-09:81 | reading | after « $D_{I'_1}$ comme plongé dans On » | a | pose
+- [ ] 147 p165 batch-09:81a | reading | after « plongé dans On a pour » | une | tte
+- [ ] 147 p165 batch-09:83 | reading | after « de $I$ $D_J=\mathbb{C}^{*J}\times\mathbb{P}^{I\setminus J}\subset X=\mathbb{C}^J$ $D^*_J=\mathbb{C}^{*J}\times\mathbb{P}^{I\setminus … » | une | tte
+- [ ] 147 p165 batch-09:86 | reading | after « où $j\in J$ de codimension $d= … » | on aura donc | un ouvert dense
+- [ ] 147 p166 batch-09:92 | reading | after « induite sur $R$ où on » | y prend | préfère
+- [ ] 147 p166 batch-09:92a | reading | after « $\Theta_{d_0}$ Le cas général correspond » | bien entendu | donc
+- [ ] 147 p168 batch-09:117b | reading | after « Il me semble » | devenu | donc
+- [ ] 147 p168 batch-09:117c | reading | after « entre eux qu'il faudrait expliciter » | épuisent expriment | suffiraient à exprimer
+- [ ] 147 p168 batch-09:117d | reading | after « expriment tous les topos canoniques » | de | associés à la
+- [ ] 147 p168 batch-09:117e | reading | after « topos canoniques de stratification envisagés » | jusqu'à présent | pp 74 ff
+- [ ] 147 p168 batch-09:117f | reading | after « stratification envisagés jusqu'à présent Prenons » | Prenons un | Revenons au
+- [ ] 147 p168 batch-09:117g | reading | after « présent Prenons Prenons un cas-type » | non élémentaire | avec $n=2$
+- [ ] 147 p168 batch-09:117h | reading | after « $\mathbb{C}^2$ [illegible] il y a » | donc | alors
+- [ ] 147 p168 batch-09:120d | reading | after « entendu [illegible] [illegible] [illegible] et » | symétriques sous | symboliques pour
+- [ ] 147 p169 batch-09:123b | reading | after « p ex les ouverts globaux » | partir | par les
+- [ ] 147 p169 batch-09:125 | reading | after « $X=\mathbb{C}^2$ savoir $\mathbb{C}^2\setminus\Delta_1$ [illegible] \[ (278)\qquad … » | Pour ces derniers | Parmi ceux-ci
+- [ ] 147 p169 batch-09:129 | reading | after « On aura \[ \left. \right\}\quad \mathbb{C}=\mathbb{C}^*\amalg_{\mathbb{D}^*}\mathbb{D} … » | d'où | alors
+- [ ] 147 p171 batch-09:166 | reading | after « C'est dans » | ces deux diagrammes | ce dernier diagramme
+- [ ] 147 p171 batch-09:166a | reading | after « ces deux diagrammes qu'interviennent les » | non-locaux | nouveaux
+- [ ] 147 p171 batch-09:168 | reading | after « $\mathcal{V}^{\Delta_2}_{\mathbb{P},X}$ Je voudrais maintenant expliciter » | le voisinage | la variance
+- [ ] 147 p171 batch-09:168a | reading | after « à l'aide de ces topos » | sur | ou
+- [ ] 147 p171 batch-09:170a | reading | after « fondamentaux Avant de [illegible] d'examiner » | spécialement le voisinage | cependant la variance
+- [ ] 147 p171 batch-09:170b | reading | after « regarder un peu la structure » | des | de ces
+- [ ] 147 p171 batch-09:170c | reading | after « peu la structure des espaces » | homotopiques précédents | Heuristique prenons
+- [ ] 147 p171 batch-09:170d | reading | after « homotopiques précédents le fibré normal » | du | de
+- [ ] 147 p172 batch-09:180a | reading | after « suite exacte de fibrés conormaux » | associés | associée
+- [ ] 147 p172 batch-09:180b | reading | after « associés à la suite d'immersions » | $D_{d_*}\to D_{\{d_i\}}\to D_0$ | locales
+- [ ] 147 p172 batch-09:182 | reading | after « la suite d'immersions $D_{d_*}\to D_{\{d_i\}}\to D_0$ … » | $(\check{N}_{d_i\to D_0}∣D_{d_*})\to\check{N}$ quad dans | de sorte qu'on a
+- [ ] 147 p172 batch-09:184 | reading | after « gén si $d'_*\subset d_*$ et qu'on » | prenne | prend
+- [ ] 147 p172 batch-09:184a | reading | after « et qu'on prenne $d_i=d'_0$ on » | déduit de | trouve
+- [ ] 147 p173 batch-09:196 | reading | after « suite exacte peut s'interpréter ainsi » | on a donc | en termes de comme
+- [ ] 147 p173 batch-09:200 | reading | after « le plus général [illegible] est » | dans | donc
+- [ ] 147 p174 batch-09:203 | reading | after « en droites d'où en prenant » | les | le produit des
+- [ ] 147 p174 batch-09:205 | reading | after « d'ailleurs un fibré torseur sous » | tores convenables | un fibré tore tordu convenable
+- [ ] 147 p174 batch-09:214 | reading | after « image inverse de $\check{N}_{d_*,d_0}$ par » | $\check{N}^*\to D_{d_*}$ | $\check N^*\to D_{d^{ ? }_*}$ 174
+- [ ] 147 p175 batch-09:223 | reading | after « d'homotopie \[ (294)\qquad \boxed{\ \mathcal{V}^{d'_0}_{d_*,d''_0}\ \simeq\ … » | sens d'un voisinage | seul inconvénient
+- [ ] 147 p175 batch-09:223a | reading | after « le sens d'un voisinage de » | lisse par correspondance | ne pas correspondre
+- [ ] 147 p175 batch-09:223b | reading | after « lisse par correspondance à une » | fléchée des lacets canoniques | flèche canonique
+- [ ] 147 p175 batch-09:223c | reading | after « par la [illegible] d'avoir une » | relation précise homotopique | valeur purement heuristique
+- [ ] 147 p176 batch-09:227d | reading | after « Scholie important Les » | pièces | pieuvres
+- [ ] 147 p176 batch-09:227e | reading | after « Les pièces de construction dans » | la dissection | le dévissage
+- [ ] 147 p176 batch-09:227f | reading | after « vectoriel [illegible] muni d'une filtration » | du | de
+- [ ] 147 p176 batch-09:227g | reading | after « fibres $\mathbb{C}^{*\,d'_0-d''_0}$ c'est bien En » | fatigant | se fatiguant
+- [ ] 147 p177 batch-09:232 | reading | at the top of the page | écrire | arriver
+- [ ] 147 p177 batch-09:232a | reading | after « fondamentaux des $\check{N}^*_{d_*,(d'_0,d''_0)}∣D^*_{d_*}$ d'une part » | les $\mathcal{V}^{d'_0}_{d_*,d''_0}$ | des $ V _{d_*,d''_0}^{d'_0}$
+- [ ] 147 p177 batch-09:234 | reading | after « Actuellement on prend la connaissance » | du $\Pi_1\mathcal{V}^{d'_0}_{d_*,d''_0}$ modulo équivalence | de $\Pi_1 V _{d_*,d''_0}^{d'_0}$
+- [ ] 147 p177 batch-09:234a | reading | after « revient donc à celle des » | $\Pi_1$ extensions | $\pi_1$ ordinaires
+- [ ] 147 p177 batch-09:234b | reading | after « des $\Pi_1$ extensions de $\check{N}^{**}$ » | fibré au-dessus | qui au dessus
+- [ ] 147 p177 batch-09:234c | reading | after « de $\check{N}^{**}$ fibré au-dessus des » | affines | différentes
+- [ ] 147 p177 batch-09:234d | reading | after « au-dessus des affines composantes connexes » | de $D^*_{d_*}$ | des $D_{d_*}^{*}$
+- [ ] 147 p177 batch-09:234e | reading | after « composantes connexes de $D^*_{d_*}$ et » | on sait | ce sont
+- [ ] 147 p177 batch-09:234f | reading | after « des $\Pi_1$ des comp conn » | de $D^*_{d_*}$ | des $D_{d_*}^{*}$
+- [ ] 147 p177 batch-09:234g | reading | after « de $D^*_{d_*}$ par des quotients » | en | de
+- [ ] 147 p177 batch-09:234h | reading | after « quotients en $\mathbb{Z}^r$ par l'image » | du $\Pi_2$ | des $\pi_2$
+- [ ] 147 p178 batch-09:237 | reading | after « Teichmüller alors la connaissance des » | systèmes des $\Pi_1\mathcal{V}^{d'_0}_{d_*,d''_0}$ | $\Pi_1 V _{d_*,d''_0}^{d'_0}$
+- [ ] 147 p178 batch-09:237a | reading | after « groupoïdes doit permettre de reconstituer » | entièrement | non seulement
+- [ ] 147 p178 batch-09:237b | reading | after « aussi le topos quasi-galoisien formé » | par les | des
+- [ ] 147 p178 batch-09:237c | reading | after « e loc constants et par » | le biais le type | là aussi les types
+- [ ] 147 p179 batch-09:244 | reading | after « cas le plus simple de » | $X\simeq\mathbb{P}^1_{\mathbb{C}}\approx S^2$ | $X\simeq\mathbb P^1_{\mathbb C} \simeq S^2$
+- [ ] 147 p179 batch-09:244a | reading | after « $X=S^2$ à partir décrit via » | les systèmes inductifs des | le système 1-descriptif de
+- [ ] 147 p179 batch-09:244b | reading | after « inductifs des topos galoisiens associé » | s | à
+- [ ] 147 p179 batch-09:260a | reading | after « réalise [illegible] le topos global » | galoisien | quasi-galoisien
+- [ ] 147 p179 batch-09:260b | reading | after « catégorie $\to\cdot$ qui a un » | seul point | objt final
+- [ ] 147 p179 batch-09:260c | reading | after « de $S^2$ ne l'est pas » | Ceci souligne | Cela soulève
+- [ ] 147 p180 batch-09:264 | reading | after « 13 Digressions sur stratifications locales » | et globales | en génér
+- [ ] 147 p180 batch-09:270 | reading | after « loc connexes et connexes si » | tel | non elles ne sont connexes
+- [ ] 147 p180 batch-09:272 | reading | after « connexes si tel on suppose » | c Les strates sont des façons | de façon
+- [ ] 147 p180 batch-09:272a | reading | after « est une réunion de comp » | connexes de | conn des
+- [ ] 147 p180 batch-09:272b | reading | after « comp connexes de $X_j$ donc » | on | en
+- [ ] 147 p180 batch-09:274 | reading | after « et tout $x\in\overline{X_i}$ le germe » | d adhérence des | topologique de
+- [ ] 147 p180 batch-09:274a | reading | after « germe d adhérence des $X_i$ » | en un | au
+- [ ] 147 p180 batch-09:280 | reading | after « locale autour de $X_i$ de » | l'adh | l'ens
+- [ ] 147 p180 batch-09:283 | reading | after « tels que $\overline{X_j}\supset X_i$ est loc » | end document | 180
+- [ ] 147 p181 batch-10:24a | reading | after « avec les $Z_j$ est connexe » | Remarques | NB les $Z_j$ loc connexes Remarque
+- [ ] 147 p181 batch-10:24b | reading | after « stratification globale de $U$ Donc » | l'ens l'app à | l'application pour
+- [ ] 147 p181 batch-10:28a | reading | after « n'est pas [illegible] un faisceau » | autre | contre
+- [ ] 147 p181 batch-10:32 | reading | after « associé s'appellent les structures de » | stratifications locales | stratification locale
+- [ ] 147 p182 batch-10:37 | reading | at the top of the page | particulières Si j'avais | particuliers Sauf erreur
+- [ ] 147 p182 batch-10:41 | reading | after « une structure de stratification locale » | Si j'en avais | Sauf erreur
+- [ ] 147 p182 batch-10:41a | reading | after « locale Si j'en avais on » | pourrait | peut
+- [ ] 147 p182 batch-10:41b | reading | after « cas des feuilletages plus gén » | des toutes | de ttes
+- [ ] 147 p182 batch-10:41c | reading | after « $X$ en des feuilles strates » | disons que feuilles Str | chaque feuille $ F $ strate
+- [ ] 147 p182 batch-10:49 | reading | after « est bijective et une imm » | locale | loc 182
+- [ ] 147 p183 batch-10:54 | reading | after « Remarques » | 1 | a
+- [ ] 147 p183 batch-10:58a | reading | after « un diviseur à croisements normaux » | dans | sur
+- [ ] 147 p184 batch-10:77a | reading | after « topologie sur l'ens des drapeaux » | du | de
+- [ ] 147 p185 batch-10:82 | reading | after « les images des composantes connexes » | des $D^{*}_{\Delta_r}$ | de $D_{\Delta_r}^{*}$
+- [ ] 147 p185 batch-10:88 | reading | after « par la stratification globale on » | pourrait la | aurait pu le
+- [ ] 147 p185 batch-10:88a | reading | after « esp analytique on retrouve les » | notations | ouverts
+- [ ] 147 p185 batch-10:92 | reading | after « pouvoir définir l'analogue des morphismes » | ½simpliciaux | $ \tfrac12 $ simpliciaux 185
+- [ ] 147 p186 batch-10:101 | reading | after « et pour ceci on doit » | pourrait | penserait à
+- [ ] 147 p186 batch-10:103 | reading | after « généraux comme étant les systèmes » | $(x,\Sigma_*)$ mais | $(x,\overline{\Sigma}_*)$ avec
+- [ ] 147 p186 batch-10:113a | reading | after « les $D_{\Delta_r}$ forment un système » | ½simplicial | $ \tfrac12 $ simplicial
+- [ ] 147 p186 batch-10:115 | reading | after « fournissant des [illegible] Cet espace » | ½simplicial | $ \tfrac12 $ simplicial
+- [ ] 147 p188 batch-10:154c | reading | after « là un fait très spécial » | dû au | de $=$ que le
+- [ ] 147 p188 batch-10:154d | reading | after « [illegible] pour [illegible] [illegible] des » | $D_{\Delta_\bullet}$ Également | $D_{\Delta_{ * }}$ Egalement
+- [ ] 147 p188 batch-10:156b | reading | after « la structure locale ordinaire de » | l'une des $D^{*}_{\Delta_r}$ | $D^*_{\Delta_{ * }}$
+- [ ] 147 p188 batch-10:156c | reading | after « des $D^{*}_{\Delta_r}$ sur $D^{*}_{\Delta_0}$ flèches » | structures | structure de l'ens
+- [ ] 147 p188 batch-10:156d | reading | after « flèches structures des strates locales » | contenues dans | contenant
+- [ ] 147 p189 batch-10:159 | reading | after « à » | l'une | l'ens
+- [ ] 147 p189 batch-10:159a | reading | after « est spécial aux croisements normaux » | et | ce
+- [ ] 147 p189 batch-10:163 | reading | after « tubulaires [illegible] fournissant [illegible] des » | types | topos
+- [ ] 147 p189 batch-10:167 | reading | after « élémentaires de la section précédente » | end document | 189
+
+## 3. Formulas and symbols read differently
+
+- [ ] 147 p4 batch-01:67a | reading | after « ou ce qui revient au » | même | $=$
+- [ ] 147 p8 batch-01:157 | reading | after « définit l'involution $\sigma_{\widetilde{A}}$ Les applications » | $\sigma$ | $o$
+- [ ] 147 p10 batch-01:179b | reading | after « e des $\widetilde{X}_{\alpha}$ de genre » | $g_{\alpha}$ | $g_\alpha\ldots$
+- [ ] 147 p11 batch-01:206a | reading | after « alors $\alpha, \beta$ appartiennent à la » | même | $=$
+- [ ] 147 p11 batch-01:206b | reading | after « et $X_{\beta}$ appartiennent à la » | même | $=$
+- [ ] 147 p15 batch-01:316c | reading | after « les sommets sont de genre » | $0$ | nuls
+- [ ] 147 p16 batch-01:320 | reading | after « Éliminons de » | même | $=$
+- [ ] 147 p16 batch-01:329b | reading | after « donc une structure supplémentaire sur » | $X$ | $ C $
+- [ ] 147 p18 batch-01:351a | reading | after « pour deux un entier naturel » | $g$ | $g \alpha $
+- [ ] 147 p19 batch-01:370 | reading | after « s qu'il en soit de » | même | $=$
+- [ ] 147 p21 batch-02:22b | reading | after « est isomorphe au schéma modulaire » | $\overset{!}{M}_{g,\nu}$ | $\mathcal M^!_{g,\nu}$
+- [ ] 147 p21 batch-02:22c | reading | after « et $\mathfrak{S}_\nu$ On sait que » | $\overset{!}{M}_{g,\nu}$ | $\mathcal M^!_{g,\nu}$
+- [ ] 147 p21 batch-02:26a | reading | after « sur $\mathcal{S}$ et si pour » | tt | $\forall$
+- [ ] 147 p23 batch-02:36 | reading | after « nous un type numérique anabélien » | $2g+\nu \geqslant 3$ $(g,\nu)$ | $(2g+\nu\geq3)$
+- [ ] 147 p24 batch-02:49b | reading | after « car 0 D'autre part pour » | tout | $\forall$
+- [ ] 147 p29 batch-02:161 | reading | after « compatible d'ailleurs avec l'action de » | $\Gamma$ | $\Gamma= Aut G$
+- [ ] 147 p30 batch-02:171c | reading | after « qui pourrait espérer mieux En » | même | $=$
+- [ ] 147 p33 batch-02:227 | reading | after « application $\tilde{A}_\alpha \to S(\alpha)$ i e … » | tt | $\forall$
+- [ ] 147 p33 batch-02:229d | reading | after « 0 i e tel que » | $g_\alpha(\beta) = 0$ | $\gamma_\alpha(\beta)=0$
+- [ ] 147 p37 batch-02:278b | reading | after « $a \in \tilde{A}' \setminus \tilde{B}'$ l'origine … » | $a$ | $\vec a$
+- [ ] 147 p41 batch-03:27d | reading | after « de $G'$ En effet soit » | $G'_{!}$ | $G'_\bullet$
+- [ ] 147 p41 batch-03:27e | reading | after « surjectif et les $G'(\alpha)$ connexes » | Leftrightarrow | $\Longleftrightarrow$
+- [ ] 147 p43 batch-03:70c | reading | after « quel que soit le sous-graphe » | $G'_{!}$ | $G'_\bullet$
+- [ ] 147 p43 batch-03:70d | reading | after « d flèches arêtes $C' \subset A'$ … » | $G'_{!}$ | $G'_{ \psi \bullet}$
+- [ ] 147 p44 batch-03:76 | reading | after « par l'ens des arêtes de » | $C'$ | $G'$
+- [ ] 147 p45 batch-03:99a | reading | after « est la composante connexe de » | $G'_{!}$ | $G'_\bullet$
+- [ ] 147 p54 batch-03:269b | reading | after « $G$ épinglée sur une base » | $\mathcal{S}$ | $S$ connexe
+- [ ] 147 p54 batch-03:269c | reading | after « $\Gamma$ et celui des le » | $\mathcal{X}$ | $ X,I $
+- [ ] 147 p57 batch-03:345 | reading | after « $g_{\alpha_0} = 0$ tous les sommets … » | $\ldots$ | $1$
+- [ ] 147 p58 batch-03:379b | reading | after « 67 aux deux cas suivants » | 1 | $1^\circ)$
+- [ ] 147 p58 batch-03:382a | reading | after « donc deux cas en réalité » | 2 | $2^\circ)$
+- [ ] 147 p58 batch-03:382b | reading | after « en réalité 2 Tous les » | $\alpha \in S$ | $\alpha=S$
+- [ ] 147 p59 batch-03:403 | reading | after « \[ 390(74)\qquad 391\left\{ 392 399\right. 400\] … » | 3 | $3^\circ$
+- [ ] 147 p60 batch-03:426 | reading | after « strates en dim modulaire $\leqslant 2$ » | 1 | $1^\circ)$
+- [ ] 147 p62 batch-04:57 | reading | after « [illegible] ces trois quantités à » | des dénominateurs près $-1, -\frac{1}{24}, \frac{1}{12}$ 2 | $-1,-1/24,1/12$ $2^\circ)$
+- [ ] 147 p62 batch-04:75 | reading | after « $\mathbb{Z}[\frac12]$ \[ 72(78)\qquad \widehat{M}_{1,1} \longrightarrow \widehat{M}'_{1,4} … » | $\widehat{M}_{1,1}$ | $\overset{ \wedge }{M}_{1,1}$
+- [ ] 147 p62 batch-04:75a | reading | after « de groupe $\{\pm 1\}$ au-dessus de » | $\widehat{M}'_{1,4}$ | $\overset{ \wedge }{M}'_{1,4}$
+- [ ] 147 p65 batch-04:149 | reading | at the top of the page | 3 | $3^\circ)$
+- [ ] 147 p69 batch-04:192 | reading | at the top of the page | 4 | $4^\circ)$
+- [ ] 147 p69 batch-04:205a | reading | after « diviseurs à l'infini $D_{\circ}$ et » | $D_{-}$ cf $P_0$ | $D_{\bullet-\bullet}$
+- [ ] 147 p69 batch-04:205b | reading | after « contenu dans $D_{\circ}$ et dans » | $D_{-}$ | $D_{\bullet-\bullet}$
+- [ ] 147 p69 batch-04:205c | reading | after « l'autre contenu bien que dans » | $D_{-}$ | $D_{\bullet-\bullet}$
+- [ ] 147 p69 batch-04:208c | reading | after « multiplicités [illegible] [illegible] $D_{\circ}$ et » | $D_{-}$ | $D_{\bullet-\bullet}$
+- [ ] 147 p70 batch-04:214f | reading | after « de card $2$ l'une des » | $J$ | $3$
+- [ ] 147 p70 batch-04:214g | reading | after « des $J$ partitions du type » | $(1,3)$ | $(2,2)$
+- [ ] 147 p70 batch-04:228c | reading | after « donc $\mathfrak{S}_I$ opère trivialement sur » | $\widehat{M}_{D_{\circ}}$ | $\widehat M_{D_0}$
+- [ ] 147 p70 batch-04:228d | reading | after « deux pts à l'infini de » | $\widehat{M}_{D_{\circ}}$ | $\widehat M_{D_0}$
+- [ ] 147 p71 batch-04:257 | reading | after « déjà Proposition Si $\dim M_G \geq … » | $M^{\infty}_{G}$ | $M_G^\infty$
+- [ ] 147 p74 batch-04:332f | reading | after « $M^{\infty}_{0,\nu}$ qui appartiennent à une » | même | $=$
+- [ ] 147 p74 batch-04:332g | reading | after « l'autre par transposition des deux » | éléments | $\varepsilon$
+- [ ] 147 p81 batch-05:37 | reading | after « notation plus légère $\Pi M_{G,G'}$ de » | même | $=$
+- [ ] 147 p84 batch-05:113 | reading | after « \[ 110(114)\qquad S_{A}\Pi M_{G} \longrightarrow (\Pi … » | $A$ un | $\forall$
+- [ ] 147 p90 batch-05:221b | reading | after « $A \setminus A'$ On fera attention … » | $\hat{X}'$ | $\overset{ \wedge }{X}'$
+- [ ] 147 p90 batch-05:221c | reading | after « $\hat{X}'$ ne s'envoie pas dans » | $\hat{X}$ | $\overset{ \wedge }{X}$
+- [ ] 147 p90 batch-05:225 | reading | after « sous-graphe $G'$ de $G$ ayant » | même | $=$
+- [ ] 147 p91 batch-05:232a | reading | after « de $X$ en prenant la » | même | $=$
+- [ ] 147 p92 batch-05:237d | reading | after « $I \amalg \tilde{J}$ où $\tilde{J} = … » | toute | $\forall$
+- [ ] 147 p92 batch-05:237e | reading | after « sous-graphe $G'$ de $G$ ayant » | mêmes | $=$ $S$
+- [ ] 147 p95 batch-05:287g | reading | after « soit étoilé au voisinage de » | tout | $\forall$
+- [ ] 147 p95 batch-05:287h | reading | after « un sommet Il revient au » | même | $=$
+- [ ] 147 p95 batch-05:289 | reading | after « $\hat{\tilde{A}}$ sont des ens finis » | $\sigma_{\tilde{A}}$ | $\sigma_{\widehat A}$ est
+- [ ] 147 p96 batch-05:293i | reading | after « application On n'exige plus que » | $\sigma_{\hat{A}}$ | $\sigma_{ \widehat I }$
+- [ ] 147 p99 batch-05:329b | reading | after « associe canoniquement une courbe spéciale » | $C'$ | $G'$
+- [ ] 147 p100 batch-05:349a | reading | after « NB On remplace 133 par » | une variante $\Pi M_{G}$ | $\Pi_1M_G$
+- [ ] 147 p106 batch-06:171a | reading | after « attachée à $D$ de codim » | $p$ | $ q $
+- [ ] 147 p107 batch-06:182 | reading | after « revêtement étale [illegible] [illegible] noté » | $\widetilde{D}_d$ | $\overset{ q }{\widetilde D_{ q }}$
+- [ ] 147 p107 batch-06:184a | reading | after « $V$ Donc les pts de » | $\widetilde{D}_d$ | $\widetilde D_{ q }$
+- [ ] 147 p107 batch-06:186 | reading | after « à $D$ de codim respectives » | $d$ | $ q $
+- [ ] 147 p108 batch-06:212 | reading | after « sauf dans le cas où » | $d(J) = 0$ | $d(I)$ $=0$
+- [ ] 147 p108 batch-06:212a | reading | after « cas où $d(J) = 0$ i … » | $J$ | $I$
+- [ ] 147 p108 batch-06:220a | reading | after « $\mathfrak{S}_d$ associé à $\widetilde{D}_d$ soit » | $D^{!}_d$ | $\overset{ \sim }{D^!_d}$
+- [ ] 147 p108 batch-06:228b | reading | after « effet considérons Mais l'expression de » | $D_{I(d)}$ | $\overset{ \sim }{D^!_d}$ comme $D_{I_d}$ ne met pas
+- [ ] 147 p108 batch-06:228c | reading | after « de $D_{I(d)}$ en termes de » | $D_d$ | $\mathfrak S_d$ sur $\widetilde D_d$ pour ceci il faut prendre
+- [ ] 147 p115 batch-06:448 | reading | after « faisceau constant d'ensembles ordonnés simpliciaux » | $\mathfrak{P}(I_d)^{\circ}$ | $\mathcal P(I_d)^0$
+- [ ] 147 p119 batch-06:569 | reading | after « où » | $s$ | $\sigma$
+- [ ] 147 p119 batch-06:571 | reading | after « locaux il en est de » | même | $=$
+- [ ] 147 p119 batch-06:597a | reading | after « $x$ dans $D_1$ pr les » | $i$ | $s_i$ 119
+- [ ] 147 p120 batch-06:600 | reading | after « définissent des germes de sous-espaces » | $D^{i}_x$ | $D_x^i$
+- [ ] 147 p120 batch-06:603a | reading | after « soit l intersection des germes » | $D^{i}_x$ | $D_x^i$
+- [ ] 147 p123 batch-07:110 | reading | after « qui par image inverse sur » | $D^{!}_{d,d'} = D^{!}_d \times_{D_d} D_{d'}$ | $D'_{d,d'}=D'_d\mathbin\times_{D_d}D_{d'}$
+- [ ] 147 p125 batch-07:173 | reading | after « inverses des quantités correspondantes sur » | $D_d$ $D_{d'}$ $D_{d''}$ | $D (d) _{ d },D (d') _{ d' },D (d'') _{ d'' }$
+- [ ] 147 p126 batch-07:216 | reading | after « sur $D_{d,d'}$ image inverse de » | $\Delta(d)$ | $ \Theta(d) $
+- [ ] 147 p127 batch-07:235a | reading | after « est compatible avec la notation » | $D_I$ | $D_J$
+- [ ] 147 p127 batch-07:235b | reading | after « avec la notation $D_I$ pour » | $I$ | $J$
+- [ ] 147 p127 batch-07:236 | reading | after « une plus petite élément Alors » | $D_{\Delta_r}$ | $D_{ I_r }$
+- [ ] 147 p129 batch-07:323 | reading | after « une ext de $\Pi_{d_0,\dots,d_r}$ par » | $T^{*}_{d_0,\dots,d_r}$ | $T^*_{d_0- d_r}$ du moins si $\pi_2(D^*_{d_0,-d_r})=0\ldots$
+- [ ] 147 p133 batch-07:450 | reading | after « où $(d_0,\dots,d_r)$ est déduit de » | $(d'_0,\dots,d'_{r'})$ | $(d'_0,\ldots, d'_r )$ en réécrivant cette suite
+- [ ] 147 p135 batch-07:520 | reading | after « sur $D_{d_0}$ On désigne par » | $\Theta^{(p)}_{d'_*}$ | $\Theta_{d'_*}^{(p)}$
+- [ ] 147 p135 batch-07:521a | reading | after « squelette de dim $p$ de » | $\Theta^{p}_{d'_*}$ | $\Theta_{d'_*}^{p}$
+- [ ] 147 p139 batch-07:623 | reading | after « différence entre la flèche composée » | $i_{D'} r_{D'',D'}$ | $i_{D'}\gamma_{D'',D'}$
+- [ ] 147 p139 batch-07:623a | reading | after « nature triviale et la flèche » | $r_{D'',D'}$ | $\gamma_{D'',D'}$
+- [ ] 147 p139 batch-07:624 | reading | after « ne correspond à aucun morphisme » | $P_{D''^{*}} \to P_{D'^{*}}$ | $P_{D''^{*}}\mathbin{-}P_{D'^{*}}$
+- [ ] 147 p147 batch-08:118g | reading | after « besoin par la suite que » | $\widetilde\Pi_{d_0,\dots,d_r}\to\Pi_{d_0,\dots,d_r}$ | $\widetilde\Pi_{d_0,\ldots,d_r}\mathbin{-}\Pi_{d_0,\ldots,d_r}$
+- [ ] 147 p149 batch-08:146 | reading | after « Considérons le système » | ½ | $\frac12$
+- [ ] 147 p149 batch-08:158b | reading | after « on a [illegible] $d_0\geq d_1\geq\cdots\geq d_r>0$ … » | $V^*_{d_0,\dots,d_r}$ | $\mathcal V^{*}_{d_0,\ldots,d_r}$
+- [ ] 147 p149 batch-08:158c | reading | after « $V^*_{d_0,\dots,d_r}$ s'envoient tous [illegible] dans » | $X^*=D^*_0=$ $X\setminus\Theta$ dans $V^*_0=X^*$ ils | $X^{*}=D_0^{*}=X\setminus\Theta$
+- [ ] 147 p149 batch-08:160f | reading | after « un [illegible] analytiques formé des » | $V^*_{d_0,\dots,d_r}$ | $\mathcal V^{*}_{d_0,\ldots,d_r}$
+- [ ] 147 p150 batch-08:163 | reading | after « de $D_\delta^{*\infty}$ Alors le syst » | ½ | $\frac12$
+- [ ] 147 p152 batch-08:210d | reading | after « l'image inverse de $\Sigma$ dans » | $D_d$ | $D_i$
+- [ ] 147 p152 batch-08:229e | reading | after « donc que l'image inverse de » | $D_{d}^{\Sigma}$ | $D_d^{\Sigma \Sigma }$
+- [ ] 147 p153 batch-08:257 | reading | after « désignera alors pour tout drapeau » | $d_\bullet=\{d_0>d_1>\cdots>d_r\geq0\}$ | $d_*=\{d_0>d_1>\cdots>d_r\geq0\}$
+- [ ] 147 p153 batch-08:261b | reading | after « que $D_{\Delta_r}^\Sigma=\coprod D_{d_0\cdots d_r}^\Sigma$ forment un … » | ½ | $\frac12$
+- [ ] 147 p154 batch-08:269a | reading | after « Les $\coprod V^{\Sigma\,*}_{D_{d_0\cdots d_r}}=V^{\Sigma\,*}_{\Delta_r}$ forment un … » | ½ | $\frac12$
+- [ ] 147 p154 batch-08:269b | reading | after « de multiplicités analytiques dont la » | $\varinjlim$ | $\underset{\longrightarrow}{ Lim }$
+- [ ] 147 p156 batch-08:311a | reading | after « NB on suppose [illegible] que » | $\Sigma\subset\Sigma'$ | $ \Sigma' \subset\Sigma_1$ 156
+- [ ] 147 p157 batch-08:338b | reading | after « $\Sigma'_0=\Sigma'$ le premier terme est » | $V^{\Sigma'}_{\Sigma',X}$ | $V_{\Sigma',X}^{\Sigma'}$
+- [ ] 147 p158 batch-08:342 | reading | after « dans notre formalisme savoir expliciter » | trait vertical double en face des deux lignes suivantes | $\Vert$
+- [ ] 147 p160 batch-08:366 | reading | after « analogues relatifs à une inclusion » | $d'_*=\{d'_0,\dots,d'_r$ | $ d'_* = \{d'_0,\ldots,d'_r\} $
+- [ ] 147 p161 batch-09:22f | reading | after « d'éliminer des redondances telles que » | $D_{d_0,d_0}\simeq D_{d_0}$ | $D_{d_0,d_0}\xrightarrow{\sim}D_{d_0}$
+- [ ] 147 p161 batch-09:22g | reading | after « redondances telles que $D_{d_0,d_0}\simeq D_{d_0}$ et » | $D_{d_0,d_1,d_1}\simeq D_{d_0,d_1}$ | $D_{d_0,d_1,d_1}\xrightarrow{\sim}D_{d_0,d_1}$
+- [ ] 147 p161 batch-09:22h | reading | after « et les redondances du type » | $D_{d,0}\simeq D_d$ | $D_{d,0}\xrightarrow{\sim}D_d$
+- [ ] 147 p162 batch-09:28 | reading | after « cas particuliers des $\mathcal{V}_{d_*,d'_*}$ et » | $\mathcal{V}^*_{d_*,d'_*}$ | $V^*_{d_*,d'_*}$ de
+- [ ] 147 p166 batch-09:92b | reading | after « celui d'un voisinage tubulaire de » | $D^*_A$ | $ D^*_{I\setminus I'_1} $
+- [ ] 147 p167 batch-09:96 | reading | after « Je vais désigner par » | $\mathcal{V}^{B(*)}_{A,R}$ | $ \mathcal V _{A,R}^{B(*)}$
+- [ ] 147 p170 batch-09:163 | reading | after « lui-même $\mathbb{C}^*\times\mathbb{D}^*\leftarrow\mathbb{D}^*\times\mathbb{D}^*\to\mathbb{D}^*\times\mathbb{D}^*$ $\mathbb{D}^*\times\mathbb{D}^*$ Somme amalgamée » | $=\mathbb{C}^2$ | est $\mathbb C^2$ 170
+- [ ] 147 p176 batch-09:227h | reading | after « muni d'une filtration du type » | $d_*$ | $d_0$
+- [ ] 147 p176 batch-09:227i | reading | after « [illegible] contractile $D^*_{d_*}$ et l'ouvert » | $\check{N}^*$ | $ \breve N ^{*}$
+- [ ] 147 p183 batch-10:56 | reading | after « $X$ b La formation de » | $D^{*}_{\Delta_0}$ | $D_{\Delta_0}^{*}$ au dessus de $X$
+- [ ] 147 p184 batch-10:79 | reading | after « variable dans un ouvert de » | $\Sigma_*$ | $ \Sigma_0 $
+
+## 4. Accents and spelling
+
+- [ ] 147 p14 batch-01:287 | reading | after « 1 » | si | Si
+- [ ] 147 p14 batch-01:289 | reading | after « $g_{\alpha} = 1$ on a $\widehat{\nu}_{\alpha} … » | si | Si
+- [ ] 147 p26 batch-02:65 | reading | after « relation d'ordre dans l'ens des » | classes | Classes
+- [ ] 147 p33 batch-02:229e | reading | after « $\beta \in S(\alpha)$ du graphe $G(\alpha)$ … » | les | Les
+- [ ] 147 p35 batch-02:255a | reading | after « on connait \[ 253 (42) \qquad … » | connait | connaît
+- [ ] 147 p59 batch-03:419b | reading | after « complète de la structure des » | $\Pi_1$ | $\pi_1$
+- [ ] 147 p68 batch-04:189 | reading | after « \[ 187(82)\qquad \widehat{M}_{0,5} = (\widehat{M}^{!}_{0,5}, \mathfrak{S}_5) … » | il | Il
+- [ ] 147 p72 batch-04:276c | reading | after « DPS $N \geq 3$ Dans ce … » | il | Il
+- [ ] 147 p72 batch-04:276d | reading | after « peuvent être joints par une » | chaîne | chaine
+- [ ] 147 p102 batch-06:58 | reading | after « marge gauche La flèche oblique » | $\Psi$ | $\psi$
+- [ ] 147 p103 batch-06:81 | reading | after « leur dépendance fonctorielle pour $g$ » | fixé | fixe
+- [ ] 147 p108 batch-06:214 | reading | after « codim $d$ on retrouve $D_d$ » | s'il | S'il
+- [ ] 147 p117 batch-06:524b | reading | after « un [illegible] dans un site » | donné | donne
+- [ ] 147 p120 batch-06:602 | reading | after « le germe défini par $(D_d, x) … » | ceci | Ceci
+- [ ] 147 p123 batch-07:97 | reading | at the top of the page | considérons | Considérons
+- [ ] 147 p128 batch-07:284 | reading | after « c'est-à-dire des torseurs sous les » | groupes | Groupes
+- [ ] 147 p134 batch-07:480 | reading | after « distincts de $d_{*}$ et $d'_{*}$ » | On | on
+- [ ] 147 p147 batch-08:118h | reading | after « les considérations de loc cit » | je | Je
+- [ ] 147 p166 batch-09:90 | reading | at the top of the page | Avec | avec
+- [ ] 147 p171 batch-09:168b | reading | after « $d''_*\subset d'_*\subset d_*$ variable et celle … » | $\pi_1$ | $\Pi_1$
+- [ ] 147 p176 batch-09:227j | reading | after « finie [illegible] de $\mathcal{N}$ ainsi » | on | On
+- [ ] 147 p177 batch-09:234i | reading | after « exacte d'homotopie des extensions des » | $\Pi_1$ | $\pi_1$

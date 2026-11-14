@@ -980,7 +980,10 @@ const readingFiles = readdirSync(join(ROOT, 'docs/review'))
 const readingClaims = {};
 for (const READINGS of readingFiles) {
   let heading = '';
-  for (const raw of readFileSync(READINGS, 'utf8').split('\n')) {
+  // The issue the list belongs to: the first « #N » of the file (#66 for folder 12).
+  const text = readFileSync(READINGS, 'utf8');
+  const issue = /#(\d+)/.exec(text)?.[1] ?? '66';
+  for (const raw of text.split('\n')) {
     const h = /^##\s+(?:\d+\.\s*)?(.*)$/.exec(raw);
     if (h) heading = h[1];
     const box = /^\s*- \[([ xX])\]\s+(\S+)\s+p([\d,–-]+)\s+batch-(\d+):(\d+)([a-z]?)\s*\|(.*)$/.exec(raw);
@@ -1000,7 +1003,7 @@ for (const READINGS of readingFiles) {
     const id = `reading-${cote}-${batch}-${line}${letter}`;
     push({
       id,
-      section: `Readings of folder ${cote} to check on the facsimile (#66) · ${heading}`,
+      section: `Readings of folder ${cote} to check on the facsimile (#${issue}) · ${heading}`,
       kind: 'uncertain',
       cote,
       batch,

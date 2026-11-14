@@ -1,0 +1,1080 @@
+# Readings of folder 149 to check on the facsimile (2026-11-15)
+
+Issue #156. Each bullet is one place of folder 149 where our transcription and an independent transcription made elsewhere (a first pass by another model, then a second pass, published in the repository named in #156) disagree. They come from a word-by-word comparison of the two texts, page by page, with formatting, fonts, arrowheads, abbreviations and displayed formulas left out. Nothing here has been checked by a person and nothing has been changed in `transcripts/`. The other text is not copied here beyond the few words of each reading.
+
+`scripts/review-queue.mjs` reads this file, one item per open box, as kind `uncertain` (« Doubtful reading »). The format is the one of `folder-12-readings-2026-11-10.md`:
+
+`- [ ] <cote> p<page> batch-<NN>:<line> | reading | <where on the page> | <our reading> | <the other reading>`
+
+1059 questions: 249 places our transcription leaves illegible and the other reading reads, 648 words read differently, 141 formulas and symbols read differently, 21 accents and spelling.
+
+## 1. Places our transcription leaves illegible and the other reading reads
+
+- [ ] 149 p7 batch-01:86 | reading | after « des corps vers les » | [illegible] | proobjets
+- [ ] 149 p10 batch-01:125 | reading | after « est $\Leftrightarrow$ géom intègres sur » | [illegible] | $K_0$
+- [ ] 149 p11 batch-01:166 | reading | after « particulier [illegible] 13 [illegible] ext » | [illegible] $K/k_0$ | de corps $K/K_0$
+- [ ] 149 p12 batch-01:171 | reading | after « est $\leq n+2$ pour des coeff » | [illegible] | $\neq2$
+- [ ] 149 p12 batch-01:182 | reading | after « de $E'$ [illegible] $E'$ est » | [illegible] si $g \in \Gamma_{\overline{K}/K}$ centralise $E'$ son image $g$ | contenue
+- [ ] 149 p12 batch-01:182a | reading | after « $E'$ son image $g$ dans » | [illegible] [illegible] | le
+- [ ] 149 p12 batch-01:182b | reading | after « $\Gamma'$ dans $\Gamma_{\mathbb{Q}}$ $\Gamma$ centralise » | $\Gamma'$ [illegible] | $\Gamma'\subset\Gamma_{\mathbb Q}$
+- [ ] 149 p14 batch-01:207 | reading | after « que $E_{\overline{K}/K}$ soit sans à » | [illegible] | torsion
+- [ ] 149 p14 batch-01:207a | reading | after « est connu à équivalence près » | [illegible] | que l'on
+- [ ] 149 p15 batch-01:210 | reading | after « groupoïdes $\Pi_{K'} \to \Pi_K$ sont déterminés … » | isomorphisme [illegible] | équivalence
+- [ ] 149 p16 batch-01:213 | reading | after « en termes de » | [illegible] l'action | ain l action
+- [ ] 149 p18 batch-01:234 | reading | after « $\mathbb{Q}$ dans $K$ dans $\overline{\mathbb{Q}}$ » | [illegible] | comme
+- [ ] 149 p18 batch-01:237 | reading | after « $\overline{\mathbb{Q}}/\mathbb{Q}$ par le groupoïde $\Pi_{K \otimes_{\mathbb{Q}} … » | [illegible] | pas néc connexe
+- [ ] 149 p18 batch-01:237a | reading | after « sur lequel $\Gamma_{\overline{\mathbb{Q}}/\mathbb{Q}}$ opère ou » | [illegible] | bien parfois par
+- [ ] 149 p18 batch-01:237b | reading | after « [illegible] le topos galoisien $B_{K \otimes_{\mathbb{Q}} … » | [illegible] profinis [illegible] | avec
+- [ ] 149 p19 batch-01:245 | reading | after « d'extensions extérieures $E \to E'$ de … » | [illegible] $k \subset \overline{\mathbb{Q}}$ [illegible] | 19
+- [ ] 149 p20 batch-01:248 | reading | after « son image dans $\Gamma_{\overline{\mathbb{Q}}/\mathbb{Q}}$ est » | [illegible] | un él
+- [ ] 149 p21 batch-02:20 | reading | after « un corps de base quelconque » | $k$ et [illegible] fait la diff [illegible] | de car $0$ La démon montre
+- [ ] 149 p21 batch-02:20a | reading | after « la diff [illegible] bien que » | l'énoncé [illegible] | c'est en
+- [ ] 149 p21 batch-02:20b | reading | after « bien que l'énoncé [illegible] fait » | sur [illegible] l'énoncé est [illegible] arith [illegible] | un énoncé de nature
+- [ ] 149 p21 batch-02:23 | reading | after « foncteurs $\alpha : f^{*} \simeq g^{*}$ … » | le [illegible] | l isom
+- [ ] 149 p21 batch-02:41 | reading | after « des [illegible] Ceci s'exprime plus » | [illegible] | conclusion Ou bien
+- [ ] 149 p21 batch-02:43 | reading | after « faisant le changement de base » | [illegible] catégories finies sur $\overline{\mathbb{Q}}$ [illegible] | prenant extension finie
+- [ ] 149 p23 batch-02:69 | reading | after « schémas de t f réduits » | [illegible] | connexes
+- [ ] 149 p23 batch-02:75 | reading | after « $\ell$ premier à la car » | b Si $Y$ est une variété élémentaire d Artin [illegible] [illegible] fibrations successives des courbes … | exp
+- [ ] 149 p23 batch-02:80 | reading | after « être affaiblie en l'hyp que » | $f_1$ [illegible] | $f$ est $H_1(f,\mathbb Z_\ell)=H_1(g,\mathbb Z_\ell)$
+- [ ] 149 p24 batch-02:97 | reading | after « denses 3 $H_1(X, \mathbb{Z}_\ell) \simeq H_1(J, … » | [illegible] | le cas
+- [ ] 149 p25 batch-02:104 | reading | after « en prenant $Y = G \times … » | [illegible] $Y$ | est
+- [ ] 149 p25 batch-02:106 | reading | after « tel que $f(U) \subset V$ $g(U) … » | [illegible] | qui $ Q $
+- [ ] 149 p25 batch-02:106a | reading | after « remplacer $X$ par $U$ on » | [illegible] se ramène | est ramené
+- [ ] 149 p25 batch-02:106b | reading | after « que $V + u \subset Y$ … » | [illegible] | sait
+- [ ] 149 p26 batch-02:129 | reading | after « th géométrique on notera que » | [illegible] | quitte à
+- [ ] 149 p26 batch-02:129a | reading | after « que [illegible] remplacer $X$ par » | [illegible] | un
+- [ ] 149 p26 batch-02:129b | reading | after « par [illegible] ouvert non vide » | convenable [illegible] [illegible] par | connexe ce qui ne détruit pas
+- [ ] 149 p27 batch-02:134 | reading | after « d'Artin anabélienne donc sans $\pi_1$ » | [illegible] à | est a un
+- [ ] 149 p27 batch-02:147 | reading | after « de d des variétés $X$ » | [illegible] | aurait
+- [ ] 149 p27 batch-02:149 | reading | after « le cas des fibrations successives » | [illegible] | non complètes 27
+- [ ] 149 p28 batch-02:152 | reading | after « groupes fondamentaux premiers à $p$ » | [illegible] | et $ \overline m $
+- [ ] 149 p28 batch-02:155 | reading | after « $\overline{\mathbb{Q}}$ de $K$ dans $k$ » | [illegible] | des $k$ l
+- [ ] 149 p29 batch-02:162 | reading | after « $f = g$ En fait il … » | [illegible] | $ = $
+- [ ] 149 p30 batch-02:168 | reading | after « Au lieu d'avoir et d'utiliser » | [illegible] | seulement
+- [ ] 149 p30 batch-02:173 | reading | after « cela reste vrai pour $x \in … » | puis [illegible] extension des corps | faire
+- [ ] 149 p33 batch-02:227 | reading | after « faut utiliser tous les $\ell$ » | sinon [illegible] | si on omet
+- [ ] 149 p33 batch-02:227a | reading | after « d'ordre $p$ donne un contre-exemple » | [illegible] | Donc
+- [ ] 149 p34 batch-02:232 | reading | after « les ${}_pG$ par leurs quotients » | [illegible] pour | par
+- [ ] 149 p34 batch-02:232a | reading | after « quasi-variétés où on inverse les » | [illegible] | immersions
+- [ ] 149 p34 batch-02:232b | reading | after « [illegible] morphismes finis radiciels surjectifs » | identifie [illegible] il [illegible] | pour peu qu'il pour travailler
+- [ ] 149 p34 batch-02:232c | reading | after « il [illegible] avec la partie » | première [illegible] | proétale de
+- [ ] 149 p34 batch-02:232d | reading | after « $x$ est de $p$ torsion » | [illegible] $px = 0$ Mais | On est
+- [ ] 149 p34 batch-02:232e | reading | after « ramené au cas d'une VA » | [illegible] | avec $px=0$ Mais
+- [ ] 149 p34 batch-02:232f | reading | after « cas d'une courbe elliptique $Y$ » | contextes [illegible] | courbe rendue anabélienne au besoin
+- [ ] 149 p34 batch-02:232g | reading | after « elliptique $Y$ contextes [illegible] en » | se bornant aux [illegible] des pts [illegible] | enlevant un pt
+- [ ] 149 p34 batch-02:234 | reading | after « est fausse Il O K » | [illegible] | en se
+- [ ] 149 p34 batch-02:234a | reading | after « Il O K [illegible] remplaçant » | [illegible] | d'abord
+- [ ] 149 p35 batch-02:240 | reading | after « Si $G$ est un tore » | [illegible] | il suffit
+- [ ] 149 p35 batch-02:240a | reading | after « de $p$ torsion de $G_{Y'}$ » | [illegible] [illegible] divisible | Passant aux revêtements
+- [ ] 149 p35 batch-02:240b | reading | after « $G_{Y'}$ [illegible] [illegible] divisible par » | les comme [illegible] relèvements les | rev abéliens multiples
+- [ ] 149 p36 batch-02:252 | reading | after « le résultat est bien connu » | c'est [illegible] | Cela résulte
+- [ ] 149 p36 batch-02:252a | reading | after « fixes qui implique que si » | [illegible] | ce
+- [ ] 149 p37 batch-02:261 | reading | after « du faisceau trivial sur $\hat{Y}$ » | [illegible] | en
+- [ ] 149 p37 batch-02:264 | reading | after « mêmes identifications Pour que $x + … » | [illegible] | qu'il
+- [ ] 149 p37 batch-02:266 | reading | after « $x = y$ donc $u = … » | saurait [illegible] | ne sait pas
+- [ ] 149 p37 batch-02:268 | reading | after « est dans le Ker précédent » | [illegible] $\neq 1$ | du moins si $g\neq1$
+- [ ] 149 p38 batch-02:281 | reading | after « $H_1(U) \to H_1(Y)$ [illegible] [illegible] en … » | [illegible] [illegible] | a pour noyau la somme des
+- [ ] 149 p38 batch-02:281a | reading | after « $H_1(U) \to H_1(Y)$ induit par $j$ … » | le [illegible] | la somme
+- [ ] 149 p39 batch-02:292 | reading | after « un automorphisme de $Y$ Remplaçant » | [illegible] | $u$ que
+- [ ] 149 p39 batch-02:294 | reading | after « sa jacobienne généralisée ce qui » | [illegible] anabélienne sur $Y$ [illegible] | sauf
+- [ ] 149 p39 batch-02:294a | reading | after « $(0, \nu)$ exclu par l'hyp anabélienne » | [illegible] | sur $Y$ et
+- [ ] 149 p41 batch-03:29 | reading | after « clef d'une telle construction Bien » | [illegible] | en
+- [ ] 149 p42 batch-03:47 | reading | after « que l'homomorphisme en question est » | admissible [illegible] | anabélien disons
+- [ ] 149 p44 batch-03:105 | reading | after « d'un sous-groupe ouvert $\Gamma'$ de » | $\Gamma_{\mathbf{Q}}$ [illegible] de $E_K$ sur $\Gamma_{\mathbf{Q}}$ un sous-groupe ouvert | $\Gamma_{\mathbb Q}$
+- [ ] 149 p45 batch-03:118 | reading | after « dans l'énoncé de la conjecture » | exiger [illegible] pour | de départ prendre
+- [ ] 149 p45 batch-03:119 | reading | after « pour un hom ext $E_{K'} \to … » | donné [illegible] | dont on décrète d'avance
+- [ ] 149 p46 batch-03:135 | reading | after « topos galoisiens sur $B_{\mathbf{Q}}$ $B_U \to … » | [illegible] | de tels
+- [ ] 149 p46 batch-03:135a | reading | after « $B_{\mathbf{Q}}$ $B_U \to B_V$ [illegible] et … » | [illegible] | $V$
+- [ ] 149 p46 batch-03:136 | reading | after « si [illegible] est admissible élémentaire » | admissible [illegible] | anabélien cet homomorphisme
+- [ ] 149 p46 batch-03:142 | reading | after « topos En fait il suffit » | [illegible] [illegible] | sans hyp anabélienne
+- [ ] 149 p46 batch-03:144 | reading | after « sa restriction sur les topos » | [illegible] | étales ldots
+- [ ] 149 p47 batch-03:151 | reading | after « schémas de t f sur » | $\mathbf{Q}$ [illegible] [illegible] | $\mathbb{Q}$ $V$ séparés séparés
+- [ ] 149 p47 batch-03:159 | reading | after « lui-même soit un modèle élémentaire » | admissible [illegible] d'un corps de [illegible] | anabélien disons dim $1$
+- [ ] 149 p48 batch-03:197 | reading | after « $\varprojlim$ de schémas modèles élém » | [illegible] admissibles [illegible] | anabéliques avec morphismes de transition
+- [ ] 149 p49 batch-03:202 | reading | after « dans la catégorie des schémas » | [illegible] soit | pour
+- [ ] 149 p50 batch-03:232 | reading | after « fractions qui s'en déduit en » | [illegible] | égale
+- [ ] 149 p51 batch-03:249 | reading | after « rendant inv les homéom universels » | Exprimant [illegible] | ldots Expérimenter p
+- [ ] 149 p51 batch-03:252 | reading | after « $X$ qui respecte la structure » | [illegible] | à lacets
+- [ ] 149 p52 batch-03:272 | reading | after « un schéma en groupes commutatif » | [illegible] [illegible] rigides [illegible] | algébrique rigide
+- [ ] 149 p52 batch-03:286 | reading | after « algébrique qu'il ne soit pas » | [illegible] [illegible] | de
+- [ ] 149 p52 batch-03:287 | reading | after « on a vu que pour » | [illegible] $i \in \widehat{U} \setminus U$ pts | $\forall\ i\in\widehat U\setminus\bar U$ pt
+- [ ] 149 p52 batch-03:289 | reading | after « de lacets $L_i$ fournit un » | [illegible] [illegible] [illegible] | scindage au moins
+- [ ] 149 p53 batch-03:306 | reading | after « torseur sous $H^1(\Gamma,T)$ \[ 303 (3)\qquad … » | [illegible] | cet ensemble
+- [ ] 149 p53 batch-03:313 | reading | after « De plus de plus si » | [illegible] | on est
+- [ ] 149 p54 batch-03:324 | reading | after « pts de $U$ à fortiori » | aussi [illegible] | avant de passer au
+- [ ] 149 p54 batch-03:327 | reading | after « et un $L_{i_2}$ $i_1 \neq i_2$ … » | distincts [illegible] au moins | distinctes ça marche
+- [ ] 149 p55 batch-03:354 | reading | after « de $U$ et $E_L \to E_K$ … » | pro [illegible] | peut être
+- [ ] 149 p56 batch-03:363 | reading | after « $\Gamma^{o}$ par ces sections et » | on [illegible] mettre | en mettant
+- [ ] 149 p57 batch-03:378 | reading | after « les scindages de $E_U \to E_K$ … » | [illegible] remontent | remonte
+- [ ] 149 p58 batch-03:412 | reading | after « la conv simple-discrète sur les » | [illegible] $U_i$ | $ \widetilde U_i $ $\bar U_i$
+- [ ] 149 p59 batch-03:438 | reading | after « un cas particulier d'une conjecture » | conjecturale des conjectures [illegible] il | du $\S1$ sauf qu'il
+- [ ] 149 p63 batch-04:42 | reading | at the top of the page | Une circonstance [illegible] | Que deviendraient
+- [ ] 149 p63 batch-04:58 | reading | after « ces relèvements ceux qui sont » | [illegible] | nuls
+- [ ] 149 p65 batch-04:71 | reading | after « e les points des topos » | $B_{\widehat{\pi}_{0,3}, \Gamma_{\mathbb{Q}}}$ [illegible] | $B_{\widehat\pi_{0,3},\Gamma_Q}^{ \sharp }$
+- [ ] 149 p65 batch-04:71a | reading | after « sur lequel $\Gamma$ opère qui » | [illegible] [illegible] | n'est autre
+- [ ] 149 p66 batch-04:76 | reading | after « bouts entrant en trous $0, 1, … » | [illegible] | on trouve
+- [ ] 149 p66 batch-04:76a | reading | after « l'équivalent groupoïdal de la sphère » | [illegible] | ar
+- [ ] 149 p70 batch-04:101 | reading | after « remplie relativement aux $S'_i$ qui » | pourraient [illegible] | pour tant
+- [ ] 149 p71 batch-04:104 | reading | after « $T$ fini étale sur $S$ » | [illegible] ou | le OPS $ \overline m $
+- [ ] 149 p72 batch-04:125 | reading | after « aux relèvements de $\mathcal{E}_K \to \mathcal{E}_S$ … » | $\mathcal{E}_K \to \mathcal{E}_{\mathcal{U}_S}$ NB La quantité de $\mathcal{E}_K$ par le [illegible] engendré par $I_x$ n'est … | $E_K-E_{U_S}$ ldots
+- [ ] 149 p73 batch-04:137 | reading | after « sous forme plus générale Théorème » | [illegible] 1 | 2
+- [ ] 149 p74 batch-04:161 | reading | after « composé $\mathcal{E}_K \xrightarrow{\psi} \mathcal{E}_{\mathcal{U}_K} \to \mathcal{E}_{\mathcal{U}}$ … » | end itemize [illegible] | c
+- [ ] 149 p74 batch-04:166 | reading | after « aisément par descente au cas » | [illegible] | d'un
+- [ ] 149 p75 batch-04:175 | reading | after « si $\nu \geqslant 2$ n'est pas … » | [illegible] | donc
+- [ ] 149 p75 batch-04:179 | reading | after « \[ 177T_\ell(\widehat{K}^{*}) \simeq H_1(\mathcal{Y}, \mathbb{Z}_\ell) \longrightarrow … » | [illegible] $\ell$ nombre | tout $\ell=$ nb
+- [ ] 149 p76 batch-04:208 | reading | after « vais deviner le résultat Soit » | [illegible] | q
+- [ ] 149 p78 batch-04:235 | reading | after « relative sur un $S$ avec » | [illegible] $\mathcal{U} = X \smallsetminus T$ | du $U=X\setminus T$
+- [ ] 149 p78 batch-04:239 | reading | after « sans doute inutile si on » | a bien $^{*}$ En fait on n'a pas besoin que le centre de $\pi$ soit … | se borne 78
+- [ ] 149 p79 batch-04:267 | reading | after « sur un corps de car » | 0 [illegible] | abst 79
+- [ ] 149 p80 batch-04:280 | reading | after « je dis que la classe » | [illegible] | de
+- [ ] 149 p80 batch-04:284 | reading | after « $X$ le long de $g_i(S)$ » | [illegible] géométriquement un voisinage tubulaire de | et le qu'on ouvre on enlève
+- [ ] 149 p80 batch-04:284a | reading | after « schéma topos fibré au-dessus de » | [illegible] | Spec
+- [ ] 149 p82 batch-05:65 | reading | after « un idéal maximal $\tilde{x}_i$ de » | $\overline{\mathcal{O}}_x$ [illegible] | $\overline{\underline O}_x$ ce qui donne
+- [ ] 149 p84 batch-05:98 | reading | after « $\mathbb{G}_m(S)$ n'a pas d'él infiniment » | divisibles [illegible] | divisible s
+- [ ] 149 p85 batch-05:121 | reading | after « un point particulier $s$ de » | [illegible] | car
+- [ ] 149 p86 batch-05:145 | reading | after « en définit une de la » | sous-extension Si on considérer d'autres pts que scindages de [illegible] passage biffé de traits verticaux | sous extension Comme
+- [ ] 149 p87 batch-05:195 | reading | after « relatif au groupe de décomposition » | [illegible] et l'indice $i$ Ainsi $\mathcal{E}_{\tilde{K}}$ | $E_{\widetilde K} (s') $
+- [ ] 149 p88 batch-05:211 | reading | after « can isom à 27 par » | l hom [illegible] | l'inclusion l'hom
+- [ ] 149 p89 batch-05:241 | reading | after « de $\mathcal{E}_{U_{\tilde{K}}}$ sur $\mathcal{E}_{\tilde{K}}$ ne » | [illegible] | se déduit
+- [ ] 149 p90 batch-05:268 | reading | after « d'un $\mathcal{E}_k$ par un facteur » | [illegible] maximal | trivial kummérien
+- [ ] 149 p91 batch-05:288 | reading | after « sur les $\mathcal{E}_{k(s)}$ pour $s \in … » | Plus [illegible] précisément précisément [illegible] | On peut interpréter préciser ainsi
+- [ ] 149 p91 batch-05:289 | reading | after « précisément précisément [illegible] cette correspondance » | [illegible] [illegible] | entre
+- [ ] 149 p92 batch-05:318 | reading | after « que se passe-t-il pour $s \notin … » | [illegible] | Alors
+- [ ] 149 p93 batch-05:332 | reading | after « $S$ et $K$ d'une courbe » | relative [illegible] | relatif
+- [ ] 149 p93 batch-05:338 | reading | after « e qui est à l'infini » | [illegible] maintenant | $i_\alpha\in X_{s_\alpha}\setminus U_{s_\alpha}$
+- [ ] 149 p94 batch-05:358 | reading | after « cela me semble d'un intérêt » | mineur [illegible] | moins brûlant car cela n'est 94
+- [ ] 149 p95 batch-05:361 | reading | after « plus une question » | [illegible] | pour
+- [ ] 149 p96 batch-05:385 | reading | after « sous-corps $k'$ quelconques de $K$ » | [illegible] qui font apparaître | quand on regarde
+- [ ] 149 p96 batch-05:388 | reading | after « sous-groupes ouverts $\Gamma'$ de ceux-ci » | [illegible] | en la composant avec
+- [ ] 149 p96 batch-05:396 | reading | after « $\mathcal{O}_s/\mathfrak{m}_s$ des corps résiduels de » | [illegible] anneaux locaux | sous-anneaux
+- [ ] 149 p97 batch-05:400 | reading | after « $S$ une courbe régulière sur » | $k$ [illegible] | $k\ldots$
+- [ ] 149 p97 batch-05:403 | reading | after « une classe de conjugaison $\Delta_{s'}$ » | [illegible] des | dans
+- [ ] 149 p97 batch-05:404 | reading | after « sur $\mathcal{E}_k$ et les $N_{s'}$ » | [illegible] | qui qui sont justement
+- [ ] 149 p97 batch-05:410 | reading | after « restriction partielle obtenue de $\mathcal{E}_{U_K}$ » | [illegible] classe | au dessus
+- [ ] 149 p98 batch-05:421 | reading | after « e espèce normalisant un $L_i$ » | [illegible] | cyclique
+- [ ] 149 p98 batch-05:431 | reading | after « courbe modulaire pour courbes elliptiques » | [illegible] divisible [illegible] ponctuées | considérées comme pointées
+- [ ] 149 p99 batch-05:444 | reading | after « $\mathcal{E}_\eta$ s'insère encore dans \[ 442 … » | [illegible] | On est
+- [ ] 149 p99 batch-05:451 | reading | after « tout scindage de 30 mais » | [illegible] $\subset \pi$ [illegible] [illegible] [illegible] [illegible] note en oblique | je l'ai démontré
+- [ ] 149 p100 batch-05:461 | reading | after « de type $(g, \nu)$ inexistante mais » | si très [illegible] réduits | il y a tjrs une arithmétisation
+- [ ] 149 p100 batch-05:461a | reading | after « très [illegible] réduits de $\pi$ » | [illegible] | innocente
+- [ ] 149 p100 batch-05:462 | reading | after « a une section de 30 » | [illegible] | qu'on compose avec
+- [ ] 149 p100 batch-05:463 | reading | after « de 31 qui comprend une » | affection [illegible] | action effective
+- [ ] 149 p100 batch-05:466 | reading | after « action Sans [illegible] m'y attendre » | [illegible] | me voici
+- [ ] 149 p100 batch-05:466a | reading | after « m'y attendre [illegible] à tâter » | [illegible] pour | un peu
+- [ ] 149 p101 batch-06:21 | reading | after « Ce qui signifie aussi que » | $H$ seul [illegible] [illegible] dans [illegible] | tt ou un scindage
+- [ ] 149 p101 batch-06:22 | reading | after « défini par un pt de » | $U_{\bar{\xi}}$ [illegible] $/K$ | $U_\eta$ rat $ K $
+- [ ] 149 p101 batch-06:29 | reading | after « à la car résiduelle NB » | [illegible] | Pour car $p>0$
+- [ ] 149 p101 batch-06:38 | reading | after « à une ext de $\mathcal{E}_k$ » | [illegible] [illegible] sous-groupe [illegible] ouvert | au besoin
+- [ ] 149 p101 batch-06:42 | reading | after « extension finie de $k$ f » | Cette dernière dans [illegible] | En termes
+- [ ] 149 p102 batch-06:60 | reading | after « faire en réduisant au cas » | où $\pi \simeq$ [illegible] [illegible] $+\, y$ [illegible] [illegible] [illegible] [illegible] $+$ [illegible] [illegible] [illegible] … | du genre $0$
+- [ ] 149 p102 batch-06:60a | reading | after « [illegible] [illegible] [illegible] [illegible] devrait » | [illegible] [illegible] [illegible] | être particulièrement aisé à regarder ldots
+- [ ] 149 p104 batch-06:104 | reading | after « $\mathcal{E}_A$ et $\mathcal{E}^{\tilde{A}}_{A}$ si $A$ » | $= \mathcal{E}^{\tilde{X}}_{X}$ est hensélien où ces [illegible] | algèbre
+- [ ] 149 p105 batch-06:122 | reading | after « aussi quad $\mathcal{E}^{\Omega}_{X}$ Lieu de » | notation au [illegible] [illegible] qu | $\mathcal E_X^{ \xi }$
+- [ ] 149 p105 batch-06:123 | reading | after « qu $\Omega$ extension de $k(x)$ » | dans un cas abstraction [illegible] [illegible] | donc avec sa structure
+- [ ] 149 p106 batch-06:151 | reading | after « jouant le rôle de point » | [illegible] | on
+- [ ] 149 p106 batch-06:156 | reading | after « des rev étales de $Y$ » | [illegible] $\mathcal{E}^{\alpha}_{X}$ | ldots que $\mathcal E_X^{\widetilde X}$
+- [ ] 149 p107 batch-06:183 | reading | after « géométrique de $Y$ en $y = … » | [illegible] | par
+- [ ] 149 p108 batch-06:214 | reading | after « $\mathcal{E}^{\tilde{X}}_{X/A}$ si $Y = Spec A$ … » | $\mathcal{E}^{T}_{X/Y}$ 11 [illegible] | $\mathcal E_{X/Y}^T$ pour $T$ variable
+- [ ] 149 p108 batch-06:219 | reading | after « d'une suite exacte d'homotopie universelle » | [illegible] | de
+- [ ] 149 p108 batch-06:221 | reading | after « par exemple $X = Y$ donné … » | $T \to X$ Car $\mathcal{E}^{T}_{\ldots} = \mathcal{E}^{T}_{Y}$ [illegible] épi revient | $T \mathrel{ --- } X$ avec
+- [ ] 149 p110 batch-06:252 | reading | after « homo [illegible] [illegible] suite exacte » | [illegible] | d'homotopie mais avec
+- [ ] 149 p110 batch-06:268 | reading | after « calculer comme \[ 265 (16) \qquad … » | s'interpréter [illegible] $\mathcal{E}^{T}_{X_T}$ | noter $\mathcal E_{X_T}^T$
+- [ ] 149 p110 batch-06:269 | reading | after « s'interpréter [illegible] $\mathcal{E}^{T}_{X_T}$ mais en » | [illegible] interprétation [illegible] [illegible] | faisant attention que maintenant
+- [ ] 149 p110 batch-06:270 | reading | after « désigne non plus $X \times_Y T$ … » | [illegible] à | va être disconnexe si
+- [ ] 149 p110 batch-06:270a | reading | after « qui [illegible] à $Y' \to Y$ … » | [illegible] | iso
+- [ ] 149 p110 batch-06:272 | reading | after « Bien sûr à isom près » | [illegible] | on peut en remplacer
+- [ ] 149 p110 batch-06:274 | reading | after « $\mathcal{E}^{T}_{X_T}$ $T$ par $\tilde{Y}$ pour » | un point [illegible] de | ce qui est du
+- [ ] 149 p111 batch-06:296 | reading | after « dans le cas général Une » | [illegible] des [illegible] | autre interprétation
+- [ ] 149 p111 batch-06:296a | reading | after « [illegible] de $\mathcal{E}^{T}_{X/Y}$ s'obtient en » | supposant [illegible] | prenant
+- [ ] 149 p111 batch-06:298 | reading | after « $X_{\xi_Y}$ de $X$ sur $Y$ » | [illegible] | en
+- [ ] 149 p112 batch-06:307 | reading | at the top of the page | La [illegible] [illegible] | Le lien avec la
+- [ ] 149 p112 batch-06:325 | reading | after « de groupes profinis sans plus » | [illegible] | pas
+- [ ] 149 p113 batch-06:329 | reading | after « d'un » | [illegible] | él
+- [ ] 149 p113 batch-06:330 | reading | after « $\mathcal{E}^{T}_{X}$ $/Y$ opérant sur le » | [illegible] groupe $\mathcal{E}^{T}_{X/Y}$ | sous-groupe $\mathcal E_{X/Y}^T$
+- [ ] 149 p113 batch-06:333 | reading | after « temporairement Les relations $\mathcal{E}_X$ $\mathcal{E}_{X/Y}$ » | nouvelles relativement [illegible] pt | évoquent intuitivement un $p^t$
+- [ ] 149 p113 batch-06:336 | reading | after « sous-groupe convenable par $\mathcal{E}^{T}_{X/Y}$ qui » | [illegible] | sera souvent
+- [ ] 149 p113 batch-06:336a | reading | after « les besoins de la cause » | [illegible] | noté
+- [ ] 149 p114 batch-06:345 | reading | after « groupe de Galois $ Gal (\overline{K}/K)$ … » | [illegible] | $ \mathcal E_Y $
+- [ ] 149 p114 batch-06:347 | reading | after « $\Gamma$ au lieu de $\mathcal{E}_Y$ » | [illegible] | surtout
+- [ ] 149 p114 batch-06:349 | reading | after « le corps premier et qu'il » | [illegible] | n'a
+- [ ] 149 p114 batch-06:352 | reading | after « d'une partie arithmétique Soit $K$ » | [illegible] [illegible] | tel
+- [ ] 149 p115 batch-06:361 | reading | after « générique de $\mathcal{E}^{\overline{L}}_{L}$ relative à » | [illegible] | $K$
+- [ ] 149 p115 batch-06:362 | reading | after « [illegible] classifie les sel finis » | [illegible] | étales
+- [ ] 149 p115 batch-06:370 | reading | after « homomorphismes surjectifs \[ 368 (21) \qquad … » | [illegible] | alors
+- [ ] 149 p116 batch-06:399 | reading | after « considérations qui suivent $K$ et » | $X$ $U$ un [illegible] | $X,U$ ne jouent
+- [ ] 149 p116 batch-06:399a | reading | after « $X$ $U$ un [illegible] provisoirement » | [illegible] [illegible] [illegible] [illegible] | aucun rôle
+- [ ] 149 p116 batch-06:399b | reading | after « [illegible] [illegible] [illegible] [illegible] des » | solutions régulières [illegible] Les [illegible] [illegible] [illegible] les $\mathcal{E}^{\overline{L}}_{U}$ [illegible] $\mathcal{E}^{\overline{L}}_{L}$ Pour [illegible] [illegible] $V$ … | schémas épais quasi-proj réguliers 116
+- [ ] 149 p117 batch-06:422 | reading | after « [illegible] [illegible] par Kummer Notons » | ainsi [illegible] les | bien on a Ces
+- [ ] 149 p117 batch-06:423 | reading | after « Notons ainsi [illegible] les constructions » | [illegible] un système des | ne dépendent du
+- [ ] 149 p117 batch-06:423a | reading | after « [illegible] un système des choix » | [illegible] des modèles $(U, \ldots X \ldots)$ | d'aucun de modèle $U$ ou $X\ldots$
+- [ ] 149 p118 batch-06:446 | reading | after « algébrique de $\tilde{L}_x$ et d'une » | [illegible] domaine | isom chemin
+- [ ] 149 p118 batch-06:446a | reading | after « et d'une [illegible] domaine de » | [illegible] | domaines
+- [ ] 149 p118 batch-06:447 | reading | after « $\overline{L}$ i e compris des » | situations revient à [illegible] | revts
+- [ ] 149 p118 batch-06:448 | reading | after « situations revient à [illegible] d'un » | $\overline{L}$ [illegible] | $ K $ hom
+- [ ] 149 p118 batch-06:449 | reading | after « [illegible] d'un $\overline{L}$ [illegible] de » | [illegible] | $ K $ $ K $
+- [ ] 149 p118 batch-06:449a | reading | after « $\tilde{L}_x$ dans $\overline{L}$ et ceci » | [illegible] [illegible] Cf Hensel [illegible] [illegible] [illegible] [illegible] [illegible] [illegible] [illegible] fait ici [illegible] [illegible] … | à son tour
+- [ ] 149 p118 batch-06:452 | reading | after « donnée d'un $x'$ et d'un » | [illegible] | is
+- [ ] 149 p118 batch-06:473 | reading | after « un corps de base $K$ » | [illegible] premier [illegible] $\mathbb{C}$ On | on
+- [ ] 149 p119 batch-06:487 | reading | after « a un centre sur $U$ » | [illegible] [illegible] [illegible] | i e domine un anneau
+- [ ] 149 p119 batch-06:487a | reading | after « $U$ [illegible] [illegible] [illegible] local » | [illegible] | de
+- [ ] 149 p119 batch-06:488 | reading | after « [illegible] [illegible] local [illegible] $U$ » | que l'homom induit $I_{x'} \to \mathcal{E}^{\overline{L}}_{U}$ est nul puisque [illegible] la composée de $\mathcal{E}_{\tilde{U}_x} \to … | ldots A t-on
+- [ ] 149 p119 batch-06:493 | reading | after « [illegible] des [illegible] $(0,0)$ $(0,1)$ » | [illegible] [illegible] [illegible] | ldots lié à ceci enfin à
+- [ ] 149 p119 batch-06:493a | reading | after « $(0,1)$ [illegible] [illegible] [illegible] l'existence » | [illegible] [illegible] [illegible] [illegible] | d'un
+- [ ] 149 p119 batch-06:498 | reading | after « dont $U$ soit un ouvert » | [illegible] | on peut dire
+- [ ] 149 p119 batch-06:498a | reading | after « soit un ouvert [illegible] par » | exemple [illegible] [illegible] en [illegible] [illegible] | définition valuative de la propreté
+- [ ] 149 p119 batch-06:499 | reading | after « en [illegible] [illegible] que $V$ » | domine [illegible] [illegible] | a nécessairement un centre
+- [ ] 149 p119 batch-06:500 | reading | after « sur $X$ soit $a$ et » | la [illegible] | le centre
+- [ ] 149 p119 batch-06:500a | reading | after « et la [illegible] NB $a$ » | [illegible] [illegible] | pas néc
+- [ ] 149 p119 batch-06:502 | reading | after « codim 1 et la condition » | nécessaire [illegible] c'est-à-dire | envisagée tantôt assurant
+- [ ] 149 p120 batch-06:509 | reading | after « ayant un centre sur $U$ » | i e tels [illegible] | il suffit
+- [ ] 149 p120 batch-06:515 | reading | after « On peut regarder l'espace loc » | [illegible] singulier [illegible] | annelé $\varprojlim$
+- [ ] 149 p120 batch-06:526 | reading | after « de degré de transcendance $d \leq … » | [illegible] | on
+- [ ] 149 p121 batch-07:22 | reading | after « soit noethérien Cependant on a » | On pourrait [illegible] relation [illegible] et alors [illegible] relat [illegible] $\mathfrak{X}$ [illegible] dessus | $\big∣$
+- [ ] 149 p121 batch-07:25 | reading | after « bijection de $\mathfrak{X}$ sur l'ens » | des anneaux [illegible] | de ces
+- [ ] 149 p121 batch-07:27 | reading | after « utilisant la résolution OPS $\exists$ » | syst [illegible] [illegible] [illegible] [illegible] $f$ $g$ des [illegible] | système régulier
+- [ ] 149 p121 batch-07:27a | reading | after « $g$ des [illegible] de paramètres » | [illegible] | avec $f,g$ des monômes 121
+- [ ] 149 p122 batch-07:32 | reading | after « supposer que les diviseurs de » | $f$ $g$ [illegible] se | $f,g$ sont
+- [ ] 149 p122 batch-07:34 | reading | after « donc lui est égal puisque » | [illegible] dominant [illegible] | ce dernier
+- [ ] 149 p122 batch-07:34a | reading | after « [illegible] dominant [illegible] est un » | [illegible] | anneau
+- [ ] 149 p122 batch-07:36 | reading | after « ouvert s de $\mathfrak{X}$ correspondant » | [illegible] plonge | évidemment en le plongeant
+- [ ] 149 p122 batch-07:36a | reading | after « clair et et les modèles » | conven [illegible] | correspondent
+- [ ] 149 p123 batch-07:45 | reading | after « est de dim $0$ on » | a $\mathcal{E}_{k(x)}^{\overline{k(x)}}$ [illegible] | aur
+- [ ] 149 p123 batch-07:45a | reading | after « alg sur $K$ par $T^{\alpha}$ » | qui [illegible] avec un choix | qu'on aura une chance
+- [ ] 149 p123 batch-07:47 | reading | after « du modèle Ceci donne on » | a [illegible] $W$ nécessaires [illegible] | le supposera du moins
+- [ ] 149 p125 batch-07:63 | reading | after « restriction à $\mathcal{E}_K^{\circ}$ centralise $I_{V_1}$ » | [illegible] fait voir | il faut vérifier
+- [ ] 149 p125 batch-07:63a | reading | after « le corps résid de $V_1$ » | [illegible] extension | est bien
+- [ ] 149 p125 batch-07:63b | reading | after « de $V_1$ [illegible] extension $L_1$ » | [illegible] dim [illegible] | c'est un
+- [ ] 149 p125 batch-07:63c | reading | after « $L_1$ [illegible] dim [illegible] fait » | [illegible] | général ldots
+- [ ] 149 p127 batch-07:93 | reading | after « $\overline{I}_V$ qui en le devine » | donne une réalisation algébrique de [illegible] | jouera un rôle analogue
+- [ ] 149 p129 batch-07:132 | reading | after « autre $X'$ dominant $X$ en » | éclatant des [illegible] | y
+- [ ] 149 p129 batch-07:132a | reading | after « oin t de $D$ Mais » | est-il vrai qu'on [illegible] | y a-t-il un modèle minimal
+- [ ] 149 p129 batch-07:132b | reading | after « vrai qu'on [illegible] $X \supset U$ … » | que [illegible] localement injectif 2 | modèle a-t-on l'injectivité $2^\circ)$
+- [ ] 149 p129 batch-07:135 | reading | after « l'hom lorsque le corps résiduel » | [illegible] | de
+- [ ] 149 p129 batch-07:143 | reading | after « partie géométrique \[ 141 I_V \longrightarrow … » | image [illegible] ouverte ou plus [illegible] soit surjective [illegible] | un
+- [ ] 149 p132 batch-07:182 | reading | after « long de $D$ et $\widehat{X} \setminus … » | [illegible] une notion invariante | a un caractère invariant
+- [ ] 149 p132 batch-07:184 | reading | after « $U_{\infty}$ Considérons maintenant le localisé » | [illegible] | de au sens des ombres ou
+- [ ] 149 p134 batch-07:236 | reading | after « abstraction du fait que 37 » | [illegible] | n'a
+- [ ] 149 p135 batch-07:245 | reading | after « tous conjugués entre eux dans » | [illegible] $\mathcal{E}_{U/K}$ | $\mathcal E_{U/K}^{ \bar L }$
+- [ ] 149 p135 batch-07:253 | reading | after « a priori mod automorphismes intérieurs » | [illegible] dans un | près donc en
+- [ ] 149 p135 batch-07:253a | reading | after « extérieur bien déterminé qui est » | [illegible] | invariant stable par l'opération
+- [ ] 149 p135 batch-07:255 | reading | after « $D_{J'} \subset D_J$ choisissons une composante … » | $D_{J',\alpha'}$ [illegible] | $ \bar D_{J',\alpha'} $
+- [ ] 149 p135 batch-07:258 | reading | after « dans une seule comp conn » | de façon plus précise le choix d'un revêtement universel en impliqu ant $\widetilde{U}_x$ [illegible] dans … | 135
+
+## 2. Words read differently
+
+- [ ] 149 p2 batch-01:23 | reading | after « comme celle des foncteurs fibres » | i e l'opposée | à l'opposé
+- [ ] 149 p3 batch-01:39 | reading | after « $K'$ en définit un de » | $\Pi_{K^{*}}$ ainsi | $\Pi_{K^{ \prime }}$ associé
+- [ ] 149 p4 batch-01:54 | reading | after « une ext finie de $K$ » | et | donc
+- [ ] 149 p4 batch-01:54a | reading | after « que l'image de 3 est » | alors | bien
+- [ ] 149 p4 batch-01:54b | reading | after « d'indice fini égal à $E_{\overline{K}/K}$ » | sss | ssi
+- [ ] 149 p4 batch-01:54c | reading | after « fini l'hom 3 est injectif » | sss | ssi
+- [ ] 149 p4 batch-01:54d | reading | after « $K$ Donc il est bijectif » | sss | ssi
+- [ ] 149 p4 batch-01:54e | reading | after « et la condition précédente signifie » | alors | donc
+- [ ] 149 p4 batch-01:56 | reading | after « un isomorphisme Ainsi le foncteur » | $K \mapsto B_K$ | $K\longrightarrow B_K$
+- [ ] 149 p4 batch-01:56a | reading | after « Ainsi le foncteur $K \mapsto B_K$ … » | $K \mapsto \Pi_K$ | $K - \Pi_K$
+- [ ] 149 p4 batch-01:56b | reading | after « foncteur $K \mapsto B_K$ ou $K … » | $(K, \overline{K}) \mapsto E_{\overline{K}/K}$ | $(K,\bar K) - E_{\bar K/K}$
+- [ ] 149 p4 batch-01:56c | reading | after « conservatif quand on se limite » | aux | comme
+- [ ] 149 p4 batch-01:56d | reading | after « car 0 à ceux pour » | lesquels | qui font de
+- [ ] 149 p5 batch-01:59 | reading | after « la cat de ces corps » | vers | dans
+- [ ] 149 p5 batch-01:61 | reading | after « [illegible] est conservatif [illegible] catégorie » | quotient | quot $^t$
+- [ ] 149 p5 batch-01:61a | reading | after « considérée comme triviale le foncteur » | $K \mapsto B_K$ | $K - B_K$
+- [ ] 149 p5 batch-01:61b | reading | after « triviale le foncteur $K \mapsto B_K$ … » | $K \mapsto \Pi_K$ | $K - \Pi_K$
+- [ ] 149 p5 batch-01:64 | reading | after « des corps quelconques le 2-foncteur » | $K \mapsto B_K$ | $K - B_K$
+- [ ] 149 p5 batch-01:64a | reading | after « 2-foncteur $K \mapsto B_K$ ou $K … » | $(K,\overline{K}) \mapsto E_{\overline{K}/K}$ | $(K,\bar K) - E_{\bar K/K}$
+- [ ] 149 p6 batch-01:76 | reading | after « $B_K$ $\Pi_K$ $E_{\overline{K}/K}$ à partir » | des | du
+- [ ] 149 p6 batch-01:82 | reading | after « il s'ensuit que le foncteur » | $K \mapsto \mathbb{B}_K$ | $K\longrightarrow B_K$
+- [ ] 149 p6 batch-01:82a | reading | after « que le foncteur $K \mapsto \mathbb{B}_K$ … » | $K \mapsto \boldsymbol{\Pi}_K$ | $K - \Pi_K$
+- [ ] 149 p6 batch-01:82b | reading | after « foncteur $K \mapsto \mathbb{B}_K$ ou $K … » | $(K, \overline{K}) \mapsto \mathbb{E}_{\overline{K}/K}$ allant | $(K,\bar K)\longrightarrow E_{\bar K/K}$ étendu 6
+- [ ] 149 p7 batch-01:86a | reading | after « corps vers les [illegible] idoines » | vont | va
+- [ ] 149 p7 batch-01:86b | reading | after « par la suite nous borner » | le plus souvent | la plupart
+- [ ] 149 p7 batch-01:86c | reading | after « temps Mais il sera nécessaire » | en | au
+- [ ] 149 p7 batch-01:86d | reading | after « travail de donner une description » | précisément | purement
+- [ ] 149 p7 batch-01:86e | reading | after « description précisément algébrique p ex » | des pro-groupes profinis associés | du pro-pro-groupe fini associé
+- [ ] 149 p7 batch-01:88 | reading | after « premier de car 0 $\mathbb{Q}$ » | dont le | donc par
+- [ ] 149 p8 batch-01:96 | reading | after « suite on a donc des » | homom | homs
+- [ ] 149 p8 batch-01:100 | reading | after « $\Pi_K$ i e un $\overline{K}/K$ » | disons | d'où
+- [ ] 149 p8 batch-01:104 | reading | after « on regardera toujours $B_K$ $\Pi_K$ » | et $E$ | ou $E_{\bar K/K}$
+- [ ] 149 p8 batch-01:104a | reading | after « munis de cette structure supplémentaire » | en tant que | ce sont
+- [ ] 149 p8 batch-01:104b | reading | after « groupoïdes de groupes profinis arithmétiques » | dominant | domineront
+- [ ] 149 p8 batch-01:106 | reading | after « 7 que je note $\pi_{\overline{K}/K}$ » | je | on
+- [ ] 149 p9 batch-01:110 | reading | after « sous-groupe ouvert de $\Gamma_{\overline{\mathbb{Q}}/\mathbb{Q}}$ qui » | via la th de Galois | on l'a vu
+- [ ] 149 p9 batch-01:111 | reading | after « a une suite exacte NB » | $\pi = (1)$ | $\pi_{\bar K/K}=(1)$
+- [ ] 149 p9 batch-01:122 | reading | after « localisation $A_i \to A_j = (A_i)_{f_{ij}}$ … » | $U_j \hookrightarrow U_i$ | $U_j \lhook\joinrel\relbar U_i$
+- [ ] 149 p9 batch-01:122a | reading | after « $f_{ij} \in A_i \setminus \{0\}$ donc … » | immersions | inclusions
+- [ ] 149 p11 batch-01:161 | reading | after « comme les complétés profinis des » | $\pi_1(U_i(\mathbb{C}), \bar\eta)$ en interprétant | $\pi_1( U_i(\underset{k}{\mathbb C}) ,\bar\eta)$ où
+- [ ] 149 p11 batch-01:168 | reading | after « tout $\pi_i$ est un groupe » | pr | par
+- [ ] 149 p12 batch-01:178 | reading | after « en fait même des égalités » | s f | sauf
+- [ ] 149 p12 batch-01:178a | reading | after « égalités s f erreur et » | donnant | donnent
+- [ ] 149 p12 batch-01:180 | reading | after « est réduit au groupe unité » | Itou | Idem
+- [ ] 149 p13 batch-01:190 | reading | after « son centre est réduit à » | 1 | $1$ à vérifier
+- [ ] 149 p13 batch-01:194 | reading | after « vérifier Revenant à $E' \subset E_{\overline{K}/K}$ … » | sait | voit
+- [ ] 149 p14 batch-01:207b | reading | after « disant que le groupoïde $\Pi_{\overline{K}/K}$ » | associé type | ou le topos
+- [ ] 149 p15 batch-01:210a | reading | after « centralisateur réduit à 1 on » | sait | voit
+- [ ] 149 p15 batch-01:210b | reading | after « à 1 on sait de » | même | $ = $
+- [ ] 149 p15 batch-01:210c | reading | after « même que l'hom de topos » | $B_{K'} \to B_K$ et | $B_{K'} - B_K$ ou
+- [ ] 149 p15 batch-01:210d | reading | after « des groupes extérieurs Il en » | est | sera
+- [ ] 149 p15 batch-01:210e | reading | after « en est en particulier ainsi » | des morphismes structurels | du morphisme structural
+- [ ] 149 p15 batch-01:210f | reading | after « ainsi des morphismes structurels $B_K \to … » | et $\Pi_K \to \Pi_{\mathbb{Q}}$ | ou $\Pi_K-\Pi_{\mathbb Q}$
+- [ ] 149 p15 batch-01:210g | reading | after « et $\Pi_K \to \Pi_{\mathbb{Q}}$ qu'on peut … » | intrinsèquement | intrinsiquement
+- [ ] 149 p15 batch-01:210h | reading | after « point de vue un peu » | différent | affiné
+- [ ] 149 p16 batch-01:220 | reading | after « qu'on fixe un $\pi_{\overline{K}/K} = \pi_1(K … » | qu on | est qu'on
+- [ ] 149 p16 batch-01:220a | reading | after « un rev universel de $ Spec … » | compte tenu | compatible
+- [ ] 149 p16 batch-01:220b | reading | after « se donner le rev universel » | $ Spec K$ | $ S\bar K $
+- [ ] 149 p16 batch-01:220c | reading | after « $K$ Par la suite nous » | décrivons | décrirons
+- [ ] 149 p16 batch-01:220d | reading | after « décrivons avec une fidélité qui » | reste | met
+- [ ] 149 p16 batch-01:220e | reading | after « une fidélité qui reste à » | examiner | cœur
+- [ ] 149 p17 batch-01:225 | reading | after « $\overline{\mathbb{Q}}$ et étudier les $K$ » | tels | Ainsi
+- [ ] 149 p17 batch-01:225a | reading | after « clôture alg $\overline{K}$ de $K$ » | qui induise | par dessus
+- [ ] 149 p18 batch-01:231 | reading | after « que topos pro-galoisien sur $B_{\mathbb{Q}}$ » | item | 2
+- [ ] 149 p18 batch-01:232 | reading | after « que groupoïde au-dessus de $\Pi_{\mathbb{Q}}$ » | item | 2 3
+- [ ] 149 p18 batch-01:232a | reading | after « $E_K$ au-dessus du groupe extérieur » | $E_{\mathbb{Q}} \simeq \Gamma_{\mathbb{Q}}$ pro-groupe item | $E_{\mathbb Q}\longleftarrow\Gamma_{\mathbb Q}$ pro-gr 4
+- [ ] 149 p18 batch-01:233 | reading | after « $\overline{K}/K$ i e en décrivant » | des couples | le couple
+- [ ] 149 p18 batch-01:234a | reading | after « un sous-groupe ouvert $\Gamma$ de » | item | 5
+- [ ] 149 p18 batch-01:234b | reading | after « si $\Gamma = \Gamma_{\overline{\mathbb{Q}}/\mathbb{Q}}$ par le … » | en | et $\Gamma=\Gamma_{\overline{\mathbb Q}/\mathbb Q}$ par
+- [ ] 149 p18 batch-01:234c | reading | after « $i : k \to \overline{\mathbb{Q}}$ est … » | la | le
+- [ ] 149 p20 batch-01:248a | reading | after « se renforcer sauf erreur en » | écrivant | établissant
+- [ ] 149 p20 batch-01:248b | reading | after « erreur en écrivant que pour » | tout sous-groupe | tt ss-groupe
+- [ ] 149 p20 batch-01:248c | reading | after « [illegible] ce qui prouvera déjà » | dans | alors
+- [ ] 149 p20 batch-01:257 | reading | after « du $\pi_1$ d'une courbe algébrique » | end document | ldots 20
+- [ ] 149 p21 batch-02:18 | reading | after « Théorème 2 Le foncteur » | $K \mapsto \Pi_K/\Pi_{\mathbb{Q}}$ | $K-\Pi_K/\Pi_{\mathbb Q}$
+- [ ] 149 p21 batch-02:18a | reading | after « 2 Le foncteur $K \mapsto \Pi_K/\Pi_{\mathbb{Q}}$ … » | catégories des | extensions de
+- [ ] 149 p21 batch-02:20c | reading | after « pas spécial à $\mathbb{Q}$ il » | s'énoncerait | marcherait
+- [ ] 149 p21 batch-02:37 | reading | after « deux clôtures alg de $K$ » | $\overline{K}$ et $\widetilde{K}$ | de $K$ de $K'$
+- [ ] 149 p22 batch-02:49 | reading | after « Écrivons comme » | d'habitude | tantôt
+- [ ] 149 p22 batch-02:62 | reading | after « que les hom de transition » | dans le | du
+- [ ] 149 p22 batch-02:62a | reading | after « que l'égalité de $f^{*}$ et » | $g^{*} : \pi_{K'} \rightrightarrows \pi_1(\overline{U}_i)$ | $g^*:\pi_{K'}\rightrightarrows\pi_1 K (\bar U_i)$
+- [ ] 149 p23 batch-02:71 | reading | after « une extension d'une se plonge » | dans | par
+- [ ] 149 p24 batch-02:85 | reading | after « leurs composantes $\ell$ adiques Prenant » | alors la | une
+- [ ] 149 p24 batch-02:93 | reading | after « 2 $\varphi$ est Un tel » | homomorphisme | hom $\varphi$
+- [ ] 149 p24 batch-02:97a | reading | after « par 3 que $H_1(f) = H_1(g)$ … » | vu | si
+- [ ] 149 p24 batch-02:97b | reading | after « $H_1(\varphi) = H_1(\psi)$ donc par 2 … » | $\varphi = \psi$ | $\varphi= \varphi $
+- [ ] 149 p24 batch-02:99 | reading | after « ne peut conclure de l'hyp » | dans | de
+- [ ] 149 p25 batch-02:104a | reading | after « et celle de dominance Cette » | dernière | deuxième
+- [ ] 149 p25 batch-02:104b | reading | after « comme on voit en prenant » | $Y = G \times Z$ | pour $Y$ $=G\backslash Z$
+- [ ] 149 p25 batch-02:106c | reading | after « Quitte à remplacer $f, g$ étant » | dominants | dominante
+- [ ] 149 p25 batch-02:106d | reading | after « $V + u \subset Y$ Soit … » | dense | non vide
+- [ ] 149 p26 batch-02:120 | reading | after « L'hyp que » | $\pi_1(f)$ et $= \pi_1(g)$ | $\pi_1( f' ) = \pi_1(g)$
+- [ ] 149 p26 batch-02:124 | reading | after « un sous-groupe ouvert de $\pi_1(U)$ » | fait | tjrs
+- [ ] 149 p26 batch-02:124a | reading | after « $U$ ouvert $\neq \emptyset$ de $Y$ » | $u \in G$ | et $a\in G$
+- [ ] 149 p26 batch-02:124b | reading | after « de $Y$ $u \in G$ tels … » | $\tau_u U \subset Y$ | $\tau_aU\subset Y$
+- [ ] 149 p26 batch-02:124c | reading | after « par $j, j'$ les applications morphismes » | $y \mapsto y$ | $y\longrightarrow y$
+- [ ] 149 p26 batch-02:124d | reading | after « les applications morphismes $y \mapsto y$ … » | $y \mapsto y + u$ | $y\longmapsto y+a$
+- [ ] 149 p26 batch-02:129c | reading | after « rabats sur une méthode arithmétique » | ce qui fournit | Si cf plus bas Je ferai
+- [ ] 149 p26 batch-02:129d | reading | after « arithmétique ce qui fournit d'ailleurs » | affaibli généralisé | faible généraliser
+- [ ] 149 p26 batch-02:129e | reading | after « généralisé le th géométrique on » | notera | montre
+- [ ] 149 p26 batch-02:130 | reading | after « que $X$ est une variété » | Si cf plus bas | 26
+- [ ] 149 p27 batch-02:134a | reading | after « élémentaire d'Artin anabélienne donc » | sans | son
+- [ ] 149 p27 batch-02:137 | reading | after « car $0$ $X$ normal et » | satisfaite | enfin on est
+- [ ] 149 p27 batch-02:143 | reading | after « Le centre de $\pi_1(X)$ et » | les centralisateurs | le centralisateur
+- [ ] 149 p27 batch-02:143a | reading | after « $\pi_1(X)$ et les centralisateurs de » | l'image | son image
+- [ ] 149 p27 batch-02:147a | reading | after « réduits à $1$ [illegible] Comme » | les centralisateurs | le centralisateur
+- [ ] 149 p27 batch-02:147b | reading | after « un cas particulier de d » | des variétés | de même
+- [ ] 149 p27 batch-02:149a | reading | after « surj ${}^{*}$ il faut quand » | même traiter à part | $ \overline m $ travailler pour
+- [ ] 149 p27 batch-02:149b | reading | after « traiter à part le cas » | des | du
+- [ ] 149 p27 batch-02:149c | reading | after « borner [illegible] dans le cas » | des fibrations | de fibres
+- [ ] 149 p28 batch-02:152a | reading | after « centre trivial En car $p > … » | il suffira | notons qu'il suffit
+- [ ] 149 p28 batch-02:152b | reading | after « à $p$ [illegible] sur les » | localisés | localisations
+- [ ] 149 p28 batch-02:155a | reading | after « dans $k$ [illegible] et $\overline{X}, \overline{Y}, … » | sur déduits | se déduite
+- [ ] 149 p28 batch-02:155b | reading | after « $\pi_1(\overline{f}), \pi_1(\overline{g})$ satisfaisant la condition d » | et | avec
+- [ ] 149 p28 batch-02:157 | reading | after « $\pi_1(\overline{X})$ a centre trivial Mais » | nos | ces
+- [ ] 149 p29 batch-02:160 | reading | after « que $Y$ se plonge dans » | un VA | une V A
+- [ ] 149 p29 batch-02:160a | reading | after « i e $\pi_1(f)$ et $\pi_1(g)$ » | soient extérieurement | sont
+- [ ] 149 p29 batch-02:162a | reading | after « que les hom donc d'extensions » | tout court d extérieures extérieures | non comm
+- [ ] 149 p30 batch-02:168a | reading | at the top of the page | ramenées à | remontées en
+- [ ] 149 p30 batch-02:168b | reading | after « ramenées à des hypothèses » | diverses | dérivées
+- [ ] 149 p30 batch-02:168c | reading | after « dans le cor 1 a » | l'hypothèse | des hypothèses
+- [ ] 149 p30 batch-02:175 | reading | after « et a fortiori de l'extension » | abélianisée | à noyau abélien
+- [ ] 149 p30 batch-02:175a | reading | after « $f(x)$ et $g(x)$ définissent la » | même | $ = $
+- [ ] 149 p31 batch-02:180 | reading | after « $X$ est connexe lisse géom » | connexe | 0-connexe
+- [ ] 149 p31 batch-02:180a | reading | after « élémentaire d'Artin à fibres types » | génériques | fibres
+- [ ] 149 p31 batch-02:188 | reading | after « $K$ de type fini sur » | son | un
+- [ ] 149 p31 batch-02:188a | reading | after « $0$ mais sous cette forme » | est | ce n'est
+- [ ] 149 p32 batch-02:193 | reading | at the top of the page | Ces | Les
+- [ ] 149 p32 batch-02:195 | reading | after « au cas où $X$ est » | lui-même | lui $ \overline m $
+- [ ] 149 p32 batch-02:219 | reading | after « \[ 213H^1(K, H_1(\overline{G})) \to \varprojlim_n H^1(K, … » | montre | n'est autre
+- [ ] 149 p33 batch-02:227b | reading | after « 16 cqfd Remarque Il ne » | suffisait | suffirait
+- [ ] 149 p33 batch-02:227c | reading | after « pas dans cet argument de » | prendre | regarder
+- [ ] 149 p34 batch-02:232h | reading | after « [illegible] pour leurs parties radicielles » | on travaille | en travaillant donc
+- [ ] 149 p34 batch-02:232i | reading | after « la partie première [illegible] $H_1(\overline{G})$ » | qui dit | quitte
+- [ ] 149 p34 batch-02:232j | reading | after « th 3 en car $p > … » | me | nous
+- [ ] 149 p35 batch-02:240c | reading | after « 1 b en car $p > … » | et | en
+- [ ] 149 p35 batch-02:240d | reading | after « est un tore [illegible] pour » | celui | cela
+- [ ] 149 p35 batch-02:240e | reading | after « général la démonstration arithmétique prouve » | au moins | on verra
+- [ ] 149 p35 batch-02:240f | reading | after « si $x \in X$ d'où $f(x) … » | on voit que | dans $Y$ non seulement
+- [ ] 149 p35 batch-02:240g | reading | after « existe un $Q_n \in G$ tel … » | $n \cdot Q_n = Q$ | $ {}_n nQ_n =Q$
+- [ ] 149 p35 batch-02:242 | reading | after « qu'on puisse en déduire $P = … » | Certainement | ceci montre que
+- [ ] 149 p36 batch-02:249 | reading | after « anabélienne sur $k$ alg clos » | $Y \hookrightarrow J^1_Y$ | $Y\hookrightarrow J_Y^1$
+- [ ] 149 p36 batch-02:249a | reading | after « plongement dans sa jacobienne généralisée » | $u \in J^0_Y(k)$ | $u\in J_Y^0(k)$
+- [ ] 149 p36 batch-02:249b | reading | after « tels que $U + u \subset … » | en d'autres termes | ou encore
+- [ ] 149 p36 batch-02:252b | reading | after « fixes ce qui comme $g \geq … » | en vertu | à cause
+- [ ] 149 p36 batch-02:254 | reading | after « moins si $g \neq 1$ Si … » | parfait remplaçant | quitte à remplacer
+- [ ] 149 p36 batch-02:254a | reading | after « Si $g = 1$ ou $0$ … » | arguments cohomologiques | argument homologique
+- [ ] 149 p36 batch-02:256 | reading | after « par un tore $\mathbb{G}_m^I/\mathbb{G}_m$ où » | $I = \hat{Y} \setminus Y$ | $I=\widehat Y-Y$
+- [ ] 149 p36 batch-02:257 | reading | after « à construire un fibré inversible » | on peut voir ici | 36
+- [ ] 149 p37 batch-02:261a | reading | after « en identifiant les fibres réduites » | en | sur
+- [ ] 149 p37 batch-02:261b | reading | after « de $J^1_{\hat{Y}}$ muni de ces » | mêmes | $ \overline m $ s
+- [ ] 149 p37 batch-02:264a | reading | after « forme $y$ $y \in Y$ il … » | donc | déjà
+- [ ] 149 p37 batch-02:264b | reading | after « que $u + x$ et $y$ … » | même | $ \overline m $
+- [ ] 149 p37 batch-02:264c | reading | after « Si $g = 0$ [illegible] donc … » | en vertu | à cause
+- [ ] 149 p37 batch-02:266a | reading | after « encore à $x = y$ donc … » | Conclusion | Cependant
+- [ ] 149 p37 batch-02:268a | reading | after « présenter les choses sous forme » | cohomologique $g \geq 2$ | homologique
+- [ ] 149 p38 batch-02:277 | reading | after « ou ce qui revient au » | même | $ \overline m $
+- [ ] 149 p38 batch-02:281b | reading | after « et soit $f : \hat{Y} \simeq … » | $j : U \hookrightarrow Y$ | $j:U\subset Y$
+- [ ] 149 p38 batch-02:281c | reading | after « $J \supset f^{-1}(I)$ On voit que … » | noyau | passage
+- [ ] 149 p39 batch-02:294b | reading | after « $Y$ est une courbe elliptique » | dans ces arguments | Idem en remplaçant
+- [ ] 149 p39 batch-02:294c | reading | after « $Y' = Y \cup i = … » | même | $ \overline m $
+- [ ] 149 p39 batch-02:294d | reading | after « automorphisme de $Y'$ cet argument » | montre | marche dès
+- [ ] 149 p39 batch-02:294e | reading | after « cet argument montre que $Y'$ » | s'envoie | s'injecte
+- [ ] 149 p39 batch-02:294f | reading | after « $Y$ est de type $(0, \nu)$ » | exclu par | avec est le cas grâce à
+- [ ] 149 p40 batch-02:305 | reading | after « $K'$ isomorphes avec des iso » | plongements $k, k' \to \overline{\mathbb{Q}}$ | plongt $k, k' \longrightarrow\mathbb Q$
+- [ ] 149 p40 batch-02:305a | reading | after « des iso plongements $k, k' \to … » | même | $ \overline m $
+- [ ] 149 p40 batch-02:305b | reading | after « plongements $k, k' \to \overline{\mathbb{Q}}$ de … » | donc de sorte | d'où
+- [ ] 149 p40 batch-02:305c | reading | after « $\mathcal{E}_K$ et $\mathcal{E}_{K'}$ peuvent être » | considérées | considérés
+- [ ] 149 p40 batch-02:305d | reading | after « un hom $K \hookrightarrow K'$ Pour … » | un tel hom | ce dernier
+- [ ] 149 p40 batch-02:308 | reading | after « $\mathcal{E}_K, \mathcal{E}_{K'}$ ou encore à partir » | end document | 40
+- [ ] 149 p41 batch-03:30 | reading | after « sûr des homomorphismes extérieurs quelconques » | $\pi^{\wedge}_{K'} \to \pi^{\wedge}_{K}$ n'auront | $\pi_{\overline{K'}}\longrightarrow\pi_{\overline K}$ n'auraient
+- [ ] 149 p41 batch-03:37 | reading | after « ce qui revient manifestement au » | même | $ \overline m $
+- [ ] 149 p42 batch-03:48 | reading | after « de telle façon qu'à partir » | des | de cet
+- [ ] 149 p42 batch-03:48a | reading | after « commutant à $\Gamma$ on reconstitue » | les classes | l'hom
+- [ ] 149 p42 batch-03:50 | reading | after « justement $K' = k$ donc $E_{K'} … » | qui | que
+- [ ] 149 p43 batch-03:65 | reading | after « c L'hom extérieur $E_{K'} \to E_K$ … » | admissible | anabélien
+- [ ] 149 p43 batch-03:66 | reading | after « est admissible c n'est pas » | juste | assez fort
+- [ ] 149 p43 batch-03:68 | reading | after « bas NB On sait que » | a $\Rightarrow$ b $\Rightarrow$ c | $a\Longrightarrow b\Longrightarrow c$
+- [ ] 149 p43 batch-03:73 | reading | after « $E_{K'} \to E_K$ compatible avec les … » | sur $E_{\mathbf{Q}} = \Gamma_{\mathbf{Q}}$ | dans $E_{\mathbb Q}=\Gamma_{\mathbb Q}$
+- [ ] 149 p43 batch-03:79 | reading | after « impliquerait si $\pi_K \neq 1$ que … » | une | tte
+- [ ] 149 p43 batch-03:80 | reading | after « on aurait $\pi_K^{\Gamma'} \neq (1)$ Or … » | n'aperçois | m'aperçois
+- [ ] 149 p44 batch-03:84 | reading | after « bas n 3 il faudrait » | dans | en donc
+- [ ] 149 p44 batch-03:86 | reading | after « $E^{o}_{K'} \to E_K$ induit par $E_{K'} … » | admissible | anabélien
+- [ ] 149 p44 batch-03:96 | reading | after « $E_K$ non seulement de $E'$ » | lui-même | lui $ = $
+- [ ] 149 p44 batch-03:99 | reading | after « non seulement de $\Gamma'$ mais » | même | $ = $
+- [ ] 149 p44 batch-03:102 | reading | after « vérifier Donc la conjecture initiale » | devrait être | ainsi
+- [ ] 149 p44 batch-03:102a | reading | after « conjecture initiale devrait être corrigée » | dans | donne
+- [ ] 149 p44 batch-03:104 | reading | after « Conséquence conjecturale Pour toute [illegible] » | section d'un | un
+- [ ] 149 p44 batch-03:109 | reading | after « sur $\mathbf{Q}$ i e $\pi_K \neq … » | $\pi_K^{\Gamma'^{o}} \neq (1)$ | $\pi_K^{\Gamma'^\circ}\ne(1)$ 44
+- [ ] 149 p45 batch-03:114 | reading | after « lieu de regarder $\Gamma_K$ comme » | une limite | un $\varprojlim$
+- [ ] 149 p45 batch-03:119a | reading | after « [illegible] en plus de l'hyp » | d'admissibilité | anabélienne
+- [ ] 149 p45 batch-03:120 | reading | after « compatibilité avec les hom dans » | $\Gamma_{\mathbf{Q}}$ qu'il soit | $\Gamma_{\mathbb Q}$ qu'elle est
+- [ ] 149 p45 batch-03:124 | reading | after « grossières Nous allons alors en » | même | $ = $
+- [ ] 149 p45 batch-03:125 | reading | after « de $\mathbf{Q}$ les hom entre » | elles | tels
+- [ ] 149 p46 batch-03:129 | reading | after « analogue pour des modèles élémentaires » | admissibles | anabéliens
+- [ ] 149 p46 batch-03:135b | reading | after « [illegible] et si [illegible] est » | admissible | anabélien
+- [ ] 149 p46 batch-03:141 | reading | after « moins que la classe d'iso » | de | du
+- [ ] 149 p46 batch-03:143 | reading | after « est connu quand on connaît » | sa restriction | son action
+- [ ] 149 p47 batch-03:152 | reading | after « $U$ une modèle variété élémentaire » | admissible | anabélienne
+- [ ] 149 p47 batch-03:158 | reading | after « il suffit [illegible] que $V$ » | lui-même soit | lui $ = $ est
+- [ ] 149 p47 batch-03:163 | reading | after « provient à isom près d'un » | morphisme | homomorphisme
+- [ ] 149 p47 batch-03:166 | reading | after « est alors uniquement déterminé b » | $f \mid E_V^{o}$ | $f\mid E_V^\circ$
+- [ ] 149 p47 batch-03:166a | reading | after « uniquement déterminé b $f \mid E_V^{o}$ … » | admissible | anabélien
+- [ ] 149 p49 batch-03:201 | reading | at the top of the page | qui ne proviennent pas | pour pouvoir passer à
+- [ ] 149 p49 batch-03:209 | reading | after « ex on pourrait prendre $U$ » | $ Spec \mathcal{O}_{X,x}$ pour $V$ | $ Spec ( \mathcal{O} _{X,x})$ $V=$
+- [ ] 149 p49 batch-03:211 | reading | after « les spectres d'anneaux locaux réguliers » | $\mathcal{O}_{X,x}$ de schémas | ess
+- [ ] 149 p49 batch-03:216 | reading | after « qui proviennent de modèles élémentaires » | admissibles | anabéliens
+- [ ] 149 p49 batch-03:216a | reading | after « élémentaires admissibles ou encore les » | $\pi_U = \pi_1(\overline{U})$ | $\Pi_U=\pi_1(\bar U)$
+- [ ] 149 p50 batch-03:220 | reading | at the top of the page | les opér ations | actions
+- [ ] 149 p50 batch-03:226 | reading | after « notamment des variétés modulaires pour » | les | des
+- [ ] 149 p50 batch-03:229 | reading | after « ou plutôt la catégorie de » | ceux-ci et | ceux-là ldots ou
+- [ ] 149 p50 batch-03:231 | reading | after « type fini sur un $K$ » | ou du | tout au
+- [ ] 149 p51 batch-03:237 | reading | after « suggèrent aussi des énoncés comme » | le suivant | les suivants
+- [ ] 149 p51 batch-03:240 | reading | after « de car $0$ le foncteur » | $X \mapsto X_{ et }$ | $X\longrightarrow X_{ et }$
+- [ ] 149 p51 batch-03:242 | reading | after « 2-catégorie des topos au-dessus de » | $S_{ et }$ | $X_{ et }$
+- [ ] 149 p51 batch-03:243 | reading | after « de $S_{ et }$ est pleinement … » | donc | deux
+- [ ] 149 p51 batch-03:243a | reading | after « est pleinement 1-fidèle donc hom » | $f, g : X \rightrightarrows Y$ | $f,g:X = Y$
+- [ ] 149 p51 batch-03:244 | reading | after « hom $f, g : X \rightrightarrows … » | morphismes | homomorphismes $f_{ et },g_{ et }$
+- [ ] 149 p51 batch-03:246 | reading | after « soient isomorphes sont égaux et » | est | $ = $
+- [ ] 149 p51 batch-03:249a | reading | after « Exprimant [illegible] ceci p ex » | par | pour
+- [ ] 149 p51 batch-03:250 | reading | after « sur une ext finie de » | $\mathbf{Q}$ on retrouverait | $\mathbb{Q}$ en re trouvant
+- [ ] 149 p52 batch-03:259 | reading | after « sur $\Gamma$ Soit $U$ un » | variété | modèle
+- [ ] 149 p52 batch-03:261 | reading | after « $\pi_{U/K}$ conjugaison plus généralement en » | même | $ = $
+- [ ] 149 p52 batch-03:263 | reading | after « de $E_K$ ce qui signifie » | qu'on | que l'on
+- [ ] 149 p52 batch-03:272a | reading | after « se plonge dans un schéma » | en groupes | abélien ou un groupe
+- [ ] 149 p52 batch-03:285 | reading | after « $U$ est une courbe algébrique » | qu'il | qui a $\pi_1$ nul qui
+- [ ] 149 p52 batch-03:287a | reading | after « $(0,0)$ ou $(0,1)$ i e » | $\pi_1(\overline{U}) = \pi_{U/K} \neq \{0\}$ | $\pi_1(\bar U)=\Pi_{U/K}\ne\{0\}$ Alors
+- [ ] 149 p52 batch-03:289a | reading | after « [illegible] [illegible] [illegible] si $i$ » | rat $K$ | est $/K$
+- [ ] 149 p53 batch-03:300 | reading | after « conjugaison [illegible] des scindages de » | 2 | 1
+- [ ] 149 p53 batch-03:310 | reading | after « On suppose $(g,\nu) \neq (0,0), (0,1)$ … » | $\pi_{-} = \pi_{U/K} \neq (1)$ | $\Pi_{\bar U}=\Pi_{U/K}\ne(1)$
+- [ ] 149 p53 batch-03:316 | reading | after « de 2 pour deux indices » | $i = i_1$ | $i a =i_1$
+- [ ] 149 p54 batch-03:321 | reading | after « en bouchant le trou $i$ » | donc | alors
+- [ ] 149 p54 batch-03:323 | reading | after « elle est donc distincte de » | celles associées | celle associée
+- [ ] 149 p54 batch-03:324a | reading | after « aussi [illegible] quotient par le » | s-groupe | ss-groupe
+- [ ] 149 p54 batch-03:325 | reading | after « inv engendré par $L_i$ On » | raisonne | voudra
+- [ ] 149 p54 batch-03:325a | reading | after « par $L_i$ On raisonne de » | même pour voir | $ = $ façon se convaincre
+- [ ] 149 p54 batch-03:330 | reading | after « s'en tirer autrement à condition » | d'établir | d'admettre
+- [ ] 149 p54 batch-03:338 | reading | after « À énoncer parmi les conjectures-clefs » | Cela | ldots 54
+- [ ] 149 p55 batch-03:341 | reading | after « que la classe de conjugaison » | de section | des sections
+- [ ] 149 p55 batch-03:355 | reading | after « un groupe à lacets infini » | avec | car
+- [ ] 149 p55 batch-03:356 | reading | after « une infinité de classes de » | sous-groupes | ss-groupes lacets
+- [ ] 149 p55 batch-03:356a | reading | after « de classes de sous-groupes $L_i$ » | de lacets | ldots
+- [ ] 149 p56 batch-03:363a | reading | after « en regardant les centralisateurs des » | s-groupes | ss-groupes
+- [ ] 149 p56 batch-03:363b | reading | after « s-groupes images de $\Gamma^{o}$ par » | ces | ses
+- [ ] 149 p56 batch-03:364 | reading | after « et on [illegible] mettre ensemble » | les | des
+- [ ] 149 p56 batch-03:365 | reading | after « les scindages qui ont des » | $ Centr (\Gamma^{o})$ | $ Zentr (\Gamma^\circ)$
+- [ ] 149 p56 batch-03:366 | reading | after « pas eux-mêmes conjugués Donc on » | retrouverait | retrouve encore
+- [ ] 149 p56 batch-03:366a | reading | after « retrouverait une description de $X(K)$ » | comme | donc
+- [ ] 149 p56 batch-03:368 | reading | after « de $E_K$ par $\pi_{L/K}$ en » | même | $ = $
+- [ ] 149 p56 batch-03:368a | reading | after « qu'une façon de reconstituer les » | $U = X \setminus I$ | $U=X\setminus\bar I$ ldots
+- [ ] 149 p56 batch-03:371 | reading | after « le genre $0$ et $1$ » | vu que | où
+- [ ] 149 p57 batch-03:378a | reading | at the top of the page | les scindages | scindage
+- [ ] 149 p57 batch-03:379 | reading | after « scindage de $E_L \to E_K$ ou … » | pour | par en
+- [ ] 149 p57 batch-03:383 | reading | after « plus géométrique en introduisant en » | même | $ = $
+- [ ] 149 p57 batch-03:383a | reading | after « en introduisant en même temps » | que un | qu'un
+- [ ] 149 p57 batch-03:384 | reading | after « revêtement universel $\widetilde{U}$ de $U$ » | la normalisation | le normalisé de
+- [ ] 149 p57 batch-03:385 | reading | after « $X = \widehat{U}$ NB je m'abstiens … » | la | le
+- [ ] 149 p57 batch-03:386 | reading | after « m'abstiens de la noter $\widetilde{X}$ » | vu | car
+- [ ] 149 p57 batch-03:387 | reading | after « sur $X$ Notons que pour » | l'un | $i\in\bar I=\bar X-\bar U$ les l'ens
+- [ ] 149 p57 batch-03:387a | reading | after « l'un des $i \in I = … » | dans | de
+- [ ] 149 p57 batch-03:388 | reading | after « sont en corr 1-1 avec » | l'ens les fibres | l ens fibre
+- [ ] 149 p57 batch-03:400 | reading | after « réunion de $\widetilde{U}$ et de » | $X' \mid I$ | $X'∣\bar I=$
+- [ ] 149 p57 batch-03:401 | reading | after « sous-groupes lacets de $\overline{\pi}$ qui » | joueraient | apparaissent
+- [ ] 149 p57 batch-03:402 | reading | after « rev universel $\widetilde{U}$ D'ailleurs $E_U$ » | s'interprète | s'inter 57
+- [ ] 149 p58 batch-03:405 | reading | after « comme le groupe des » | $K$ automorphismes | $U$ autom
+- [ ] 149 p58 batch-03:407 | reading | after « l'hom de passage au quotient » | évident NB | induit sur
+- [ ] 149 p58 batch-03:407a | reading | after « au quotient évident NB $\overline{K}$ » | s'identifie | identifié
+- [ ] 149 p58 batch-03:413 | reading | after « finis sur $\overline{U}$ entre $\overline{U}$ » | et $\widetilde{U}$ | ldots
+- [ ] 149 p59 batch-03:432 | reading | after « d'autre pt fixe dans $\widetilde{U}$ » | au-dessus de | sur le $ = $
+- [ ] 149 p59 batch-03:434 | reading | after « il n'y a pas en » | même | $ = $
+- [ ] 149 p59 batch-03:434a | reading | after « a pas en même temps » | un | de
+- [ ] 149 p59 batch-03:436 | reading | after « premier type n'est pas en » | même | $ = $
+- [ ] 149 p59 batch-03:438a | reading | after « avons établi directement précédemment C'est » | un cas particulier | une particularisation
+- [ ] 149 p59 batch-03:443 | reading | after « l'image dans $X$ signifie qu'une » | même | $ = $
+- [ ] 149 p59 batch-03:444 | reading | after « un $L_i$ et un $L_j$ » | $(i \neq j)$ | $i\ne j$
+- [ ] 149 p59 batch-03:445 | reading | after « $(g,\nu) = (0,3)$ et l'unicité au-dessus … » | $i \in I$ fixé $i$ | $i\in\bar I$
+- [ ] 149 p60 batch-03:454 | reading | after « la conj B il est » | même | $ = $
+- [ ] 149 p60 batch-03:456 | reading | after « ce qui est plus fort » | car | que
+- [ ] 149 p60 batch-03:458 | reading | after « pts fixes à distance finie » | que $\pi^{\Gamma^{o}} = (1)$ | qu'on a alors $\pi^{\Gamma^\circ}=(1)$
+- [ ] 149 p60 batch-03:463 | reading | after « que \[ 461 \pi^{\Gamma^{o}} \subset Norm … » | $\pi^{\Gamma^{o}} = L_i$ | $\pi^{ \Gamma_0 }=L_i$
+- [ ] 149 p60 batch-03:466 | reading | after « pas être valables sans partir » | d'un relèvement | d'une action
+- [ ] 149 p60 batch-03:471 | reading | after « signifierait plus ou moins que » | end document | 60
+- [ ] 149 p61 batch-04:25 | reading | after « un corps de base $K$ » | doté | ext
+- [ ] 149 p61 batch-04:25a | reading | after « $K$ doté de type fini » | sur | de
+- [ ] 149 p61 batch-04:27 | reading | after « courbes anabéliennes $\overline{\mathcal{U}}, \overline{\mathcal{V}}$ sur $\overline{K}$ » | définissant | définissent
+- [ ] 149 p61 batch-04:28 | reading | after « telle on définit canoniquement sa » | complétion | complétée
+- [ ] 149 p61 batch-04:28a | reading | after « $\widehat{\mathcal{U}}$ de telle façon que » | les automorphismes | $\forall$ autom
+- [ ] 149 p61 batch-04:28b | reading | after « premiers induisant l'identité sur $\overline{K}$ » | induisent une action | induise un autom
+- [ ] 149 p62 batch-04:34 | reading | after « sur un corps cyclotomique cela » | simplifie | suffira
+- [ ] 149 p62 batch-04:34a | reading | after « de Poincaré sur $\overline{K}$ de » | complétion | complétée
+- [ ] 149 p62 batch-04:35 | reading | after « fixe et un seul de » | $\Gamma^{0}$ opérant | $\Gamma^\circ$ agissant
+- [ ] 149 p62 batch-04:39 | reading | after « différence avec la conjecture B » | pour | que
+- [ ] 149 p62 batch-04:39a | reading | after « la conjecture B pour celle-ci » | sous forme relative | renforce
+- [ ] 149 p62 batch-04:39b | reading | after « l'action d'un groupe profini $\pi$ » | opérant | agissant
+- [ ] 149 p62 batch-04:39c | reading | after « sur $\mathcal{U}$ de façon que » | $\mathcal{V} = \mathcal{U}/\pi$ | $\mathcal U/\pi$
+- [ ] 149 p63 batch-04:42a | reading | after « une situation où $K$ est » | engendré | remplacé
+- [ ] 149 p63 batch-04:46 | reading | after « \[ 44(4)\qquad \mathcal{E}_{\mathcal{U}_S} \longrightarrow \mathcal{E}_S 45\] … » | $\mathcal{E}_{\mathcal{U}_K} \to \mathcal{E}_K$ se | $E_{U_K}-E_K$ est
+- [ ] 149 p63 batch-04:58a | reading | after « $\mathcal{E}_{\mathcal{U}_K}$ sur $\mathcal{E}_K$ correspondent aux » | certaines | fausses
+- [ ] 149 p64 batch-04:63 | reading | after « e à une section de » | $\widehat{\mathcal{U}}_S \smallsetminus \mathcal{U}_S = S'$ | $\widehat U_S\setminus U_S=S'$
+- [ ] 149 p64 batch-04:63a | reading | after « Et il faudrait étudier encore » | quelle condition | à quelles conditions
+- [ ] 149 p65 batch-04:68 | reading | after « A ou B faite dans » | le | ce
+- [ ] 149 p65 batch-04:71b | reading | after « $\mathcal{E}_{0,3} = \mathcal{E}_{\mathcal{U}_{0,3}/\mathbb{Q}}$ où $\mathcal{U}_{0,3} = … » | donnée | classes
+- [ ] 149 p65 batch-04:71c | reading | after « $\mathcal{E}_{0,3}$ sur $\Gamma_{\mathbb{Q}} = \Gamma$ telles … » | la | le
+- [ ] 149 p65 batch-04:71d | reading | after « $\Gamma_{\mathbb{Q}} = \Gamma$ telles que la … » | du $\Gamma^{0}$ | de $\Gamma^\circ$
+- [ ] 149 p65 batch-04:71e | reading | after « [illegible] i e les points » | des | de ou les sections du
+- [ ] 149 p65 batch-04:71f | reading | after « [illegible] [illegible] que $\mathcal{U}_{0,3}(\overline{\mathbb{Q}}_0)$ à » | un ens | deux cas
+- [ ] 149 p66 batch-04:76b | reading | after « nous fournir un groupe extérieur » | $\pi_{0,3}(I)$ du | $\Pi_{0,3}(I)$ de
+- [ ] 149 p66 batch-04:76c | reading | after « utiliser le yoga introduit par » | Ihara | ailleurs
+- [ ] 149 p66 batch-04:76d | reading | after « des groupoïdes rigides donc on » | prend deux | peut
+- [ ] 149 p66 batch-04:76e | reading | after « donc on prend deux ou » | trois bouts entrant en | devra aussi boucher certains des
+- [ ] 149 p66 batch-04:76f | reading | after « un groupe ext à lacets » | non-fini | infini
+- [ ] 149 p66 batch-04:82 | reading | after « de 6 on construit de » | nouveau | $ \overline m $
+- [ ] 149 p66 batch-04:82a | reading | after « [illegible] $\mathcal{U}_{0,3}$ [illegible] et on » | retrouve | remonte
+- [ ] 149 p67 batch-04:85 | reading | after « précédemment pour » | savoir tant | avoir soit
+- [ ] 149 p67 batch-04:85a | reading | after « une extension finie de $K_1$ » | tant | soit
+- [ ] 149 p68 batch-04:91 | reading | after « des immersions ouvertes Mais je » | suis certain | sens nettement
+- [ ] 149 p68 batch-04:91a | reading | after « et où les points rigides » | ou cuspidaux | à coeff
+- [ ] 149 p69 batch-04:94 | reading | after « Reprenons le cas de » | $\mathcal{U} = \mathcal{U}_S$ schéma | $U=U_S$ schém
+- [ ] 149 p69 batch-04:94a | reading | after « $\pi_1$ non nul $S$ étant » | lui-même | lui $ \overline m $
+- [ ] 149 p69 batch-04:94b | reading | after « $\mathcal{E}_K \to \mathcal{E}_S$ en $\mathcal{E}_K \to … » | $\mathcal{E}_K \to \mathcal{E}_{\mathcal{U}_K}$ | la section $E_K-E_{U_{ \eta }}$
+- [ ] 149 p69 batch-04:94c | reading | after « $\mathcal{E}_K \to \mathcal{E}_{\mathcal{U}_S}$ composé de $\mathcal{E}_K … » | $\mathcal{E}_{\mathcal{U}_K} \to \mathcal{E}_{\mathcal{U}_S}$ | $E_{U_{ \eta }}-E_{U_S}$
+- [ ] 149 p69 batch-04:94d | reading | after « définie i e une section » | partout définie section | rationnelle
+- [ ] 149 p70 batch-04:101a | reading | after « codim $\geqslant 2$ alors alors posant » | $S' = S \smallsetminus Z$ | $S'=S\setminus Z$
+- [ ] 149 p70 batch-04:101b | reading | after « de $\pi_1$ $\mathcal{E}_K \to \mathcal{E}_S$ est … » | même | $ \overline m $
+- [ ] 149 p70 batch-04:101c | reading | after « le même que celui de » | $\mathcal{E}_K \to \mathcal{E}_{S'}$ or | $E_K-E_{S'}$ ou
+- [ ] 149 p70 batch-04:101d | reading | after « de $\mathcal{E}_K \to \mathcal{E}_{S'}$ or si … » | prend | préfère
+- [ ] 149 p70 batch-04:101e | reading | after « seulement $S'$ ce qui est » | aussi signifie | censé signifier
+- [ ] 149 p71 batch-04:104a | reading | after « à $S$ ce qui est » | aussi | censé
+- [ ] 149 p71 batch-04:104b | reading | after « $S$ dont la trace sur » | $S' = S \smallsetminus Z$ | $S'=S\setminus Z$
+- [ ] 149 p72 batch-04:125a | reading | after « des flèches horizontales surjectives L'hom » | $\mathcal{E}_K \leftarrow \mathcal{E}_{\mathcal{U}_S}$ | $E_K\longleftarrow E_{U_S}$
+- [ ] 149 p72 batch-04:125b | reading | after « l'hom dernier canonique $\mathcal{E}_{\mathcal{U}_{\mathcal{O}_x}} \to \mathcal{E}_{\mathcal{U}_S}$ … » | Les | derniers
+- [ ] 149 p72 batch-04:125c | reading | after « Les Les relèvements $\mathcal{E}_K \to \mathcal{E}_{\mathcal{U}_{\mathcal{O}_x}}$ … » | biunivoquement | biuniv $^{\mathrm t}$
+- [ ] 149 p72 batch-04:125d | reading | after « aux sections de $\mathcal{E}_{\mathcal{U}_K}$ sur » | $\mathcal{E}_K$ comme | $E_K$ ou
+- [ ] 149 p72 batch-04:125e | reading | after « $\mathcal{E}_{\mathcal{U}_K}$ sur $\mathcal{E}_K$ comme aux » | relèvements | relt $^{\mathrm s}$
+- [ ] 149 p72 batch-04:130 | reading | after « d'une section de $\mathcal{E}_{\mathcal{U}_{\mathcal{O}_x}}$ sur » | $\mathcal{O}_x$ ssi | $\underline O_x$ sss
+- [ ] 149 p72 batch-04:130a | reading | after « $\mathcal{O}_x$ ssi la section rationnelle » | correspondante | correspond $^{\mathrm t}$
+- [ ] 149 p73 batch-04:133 | reading | after « d'une section de $\mathcal{E}_{\mathcal{U}_S}$ sur » | $\mathcal{E}_S$ ssi | $E_S$ sss
+- [ ] 149 p73 batch-04:137a | reading | after « $T$ un trait spectre d'un » | anneau de valuation discrète $\mathcal{U}$ | anneau-jauge $U$
+- [ ] 149 p73 batch-04:137b | reading | after « section pt $K$ rationnel de » | $\mathcal{U}_K$ une suite extension | $U_K$ un carré cartésien
+- [ ] 149 p73 batch-04:139 | reading | after « de $\mathcal{U}$ ne soient pas » | du type | des types
+- [ ] 149 p73 batch-04:139a | reading | after « du type $(0,0)$ ou $(0,1)$ » | de dimension relative $1$ et | i e
+- [ ] 149 p74 batch-04:156 | reading | after « d'inertie » | $I_{x} \simeq T_{\infty}(\overline{K})$ | $I_x=T_\infty(\overline K)$
+- [ ] 149 p74 batch-04:159 | reading | after « section de $\mathcal{U}$ sur $S$ » | item | noindent
+- [ ] 149 p74 batch-04:159a | reading | after « d'une section de $\mathcal{E}_{\mathcal{U}}$ sur » | $\mathcal{E}_S$ item | $E_S$ noindent
+- [ ] 149 p74 batch-04:166a | reading | after « b et b $'$ et » | qu'elles | qu'ils
+- [ ] 149 p74 batch-04:166b | reading | after « b $'$ et qu'elles soient » | impliquées | impliqués
+- [ ] 149 p74 batch-04:166c | reading | after « une démonstration On est ramené » | aisément | aussitôt
+- [ ] 149 p74 batch-04:166d | reading | after « relative élémentaire de genre $g \geqslant … » | $\mathcal{U} = X \smallsetminus T$ | $U=X\setminus T$
+- [ ] 149 p74 batch-04:166e | reading | after « sur $S$ et la conclusion » | signifie | est
+- [ ] 149 p75 batch-04:171 | reading | after « $I$ ensemble fini et soit » | $\mathcal{U} = X \smallsetminus T$ | $U=X\setminus T$
+- [ ] 149 p75 batch-04:171a | reading | after « $\nu = card I$ on suppose … » | fixé | $ f_0 $
+- [ ] 149 p75 batch-04:171b | reading | after « des $g_i$ et telle que » | $f \mid k(s) = g_{i_0}$ | $ f_K(s) =g_{i_0}$
+- [ ] 149 p75 batch-04:171c | reading | after « on a donc un morphisme » | $\mathcal{Y} \to \mathcal{U}$ | $\eta\longrightarrow U$
+- [ ] 149 p75 batch-04:175a | reading | after « n'est pas trivial [illegible] et » | même | $ \overline m $ si $\nu\geq2$
+- [ ] 149 p75 batch-04:183 | reading | after « composé de l'hom envisagé avec » | $H_1(\mathcal{U}, \mathbb{Z}_\ell) \to H_1(\widehat{J}^{1}_{X/S}, \mathbb{Z}_\ell)$ | $H_1(\mathcal J^1_{X/S},\mathbb Z_\ell)$
+- [ ] 149 p75 batch-04:183a | reading | after « est nul i e le » | $H_1(\mathcal{Y}, \mathbb{Z}_\ell)$ | $H_1(\eta,\mathbb Z_\ell)$
+- [ ] 149 p75 batch-04:183b | reading | after « dans la partie torique de » | $H_1(\mathcal{U}, \mathbb{Z}_\ell)$ $\xleftarrow{\sim} H_1(\mathcal{U}_s, \mathbb{Z}_\ell)$ | $H_1(U,\mathbb Z_\ell)$ $\bigl(\xleftarrow{\sim}H_1(U_s,\mathbb Z_\ell)\bigr)$
+- [ ] 149 p76 batch-04:191 | reading | after « ce cas le critère homologique » | serait | s'avère
+- [ ] 149 p76 batch-04:206 | reading | after « considère donc l'image inverse par » | $\mathcal{Y} \to J^{1}_{\mathcal{U}/S}$ | $\eta\longrightarrow\mathcal J^1_{U/S}$
+- [ ] 149 p76 batch-04:206a | reading | after « inverse par $\mathcal{Y} \to J^{1}_{\mathcal{U}/S}$ composé … » | $\mathcal{Y} \to \mathcal{U} \to J^{1}_{\mathcal{U}/S}$ | $\eta\longrightarrow U\longrightarrow\mathcal J^1_{U/S}$
+- [ ] 149 p76 batch-04:208a | reading | after « inversible de $A$ soit de » | même $J_f$ | $ \overline m $ $\mathcal J_f$
+- [ ] 149 p77 batch-04:211 | reading | at the top of the page | et dépend | ne change
+- [ ] 149 p77 batch-04:211a | reading | after « et dépend pas » | que intrinsèquement des valeurs | quand on intervertit les rôles
+- [ ] 149 p77 batch-04:221 | reading | after « semble demander un traitement séparé » | Il Il suffit | Le fait
+- [ ] 149 p77 batch-04:221a | reading | after « premiers à $p$ c'est que » | l'hom | le hom
+- [ ] 149 p77 batch-04:223 | reading | after « $k_{i_0} \circ (n \cdot id _T)$ … » | dit sans | doit être
+- [ ] 149 p78 batch-04:235a | reading | after « sur $S$ $T$ fini étale » | une section | avec sections
+- [ ] 149 p78 batch-04:235b | reading | after « sur $S$ les sections de » | 2ème | 2ième
+- [ ] 149 p78 batch-04:239a | reading | after « \[ 2371 \longrightarrow \pi \longrightarrow \mathcal{E}_{\mathcal{U}} … » | dépend d'une | définit une
+- [ ] 149 p78 batch-04:239b | reading | after « classe de $\pi$ conj de » | un ss groupe de lacets Lie | ss-groupe fermés $L_{i_0}$
+- [ ] 149 p78 batch-04:239c | reading | after « de car zéro la restriction » | de | au
+- [ ] 149 p79 batch-04:245 | reading | after « on trouve donc des scindages » | par | pour
+- [ ] 149 p80 batch-04:284b | reading | after « d'homotopie de ce schéma topos » | fibré au-dessus | inventé au dessus
+- [ ] 149 p80 batch-04:284c | reading | after « au-dessus de [illegible] $S$ On » | est | a
+- [ ] 149 p80 batch-04:284d | reading | after « $S$ On est donc à » | préciser | prouver
+- [ ] 149 p80 batch-04:284e | reading | after « donc à préciser une histoire » | d orbites end document | d'ombres dots 80
+- [ ] 149 p81 batch-05:27 | reading | after « que l'ext 13 est scindée » | ssi $\xi_i = 0$ | sss $\gamma_i=0$
+- [ ] 149 p81 batch-05:28 | reading | after « scindée ssi $\xi_i = 0$ i … » | ssi on | si l'on
+- [ ] 149 p81 batch-05:31 | reading | after « suffisante cas arith ou pas » | Quand $\xi_i = 0$ | Bien plus
+- [ ] 149 p81 batch-05:32 | reading | after « section base de $J_i/J_i^2$ qui » | soit privilégiée | sont privilégiés
+- [ ] 149 p82 batch-05:55 | reading | after « l'infini OPS quitte à localiser » | $U_S = \mathbb{E}^1_S \smallsetminus T'$ | $U_S= \mathbb E'_S -T'$
+- [ ] 149 p82 batch-05:59 | reading | after « section de $\mathbb{E}^1_S$ Et on » | conclut | achève
+- [ ] 149 p82 batch-05:62 | reading | after « ou ce qui revient au » | même | $ \overline m $
+- [ ] 149 p83 batch-05:74 | reading | after « $I_{\tilde{x}}$ le sous-groupe noyau de » | l'h m | l'hom
+- [ ] 149 p83 batch-05:74a | reading | after « noyau de l'h m obtenu » | le | ou
+- [ ] 149 p83 batch-05:75 | reading | after « le stabilisateur géométrique de $\tilde{x}$ » | d'où | donc on a
+- [ ] 149 p83 batch-05:79 | reading | after « exacte \[ 77 (7)\qquad 1 \to … » | on trouve | un iso
+- [ ] 149 p83 batch-05:85 | reading | after « corps des fonctions de $D$ » | i e | C'est
+- [ ] 149 p84 batch-05:105 | reading | after « 13 admet des scindages géométriques » | et | car
+- [ ] 149 p84 batch-05:106 | reading | after « cela qu'il existe une section » | A const | tt court
+- [ ] 149 p84 batch-05:113 | reading | after « remarquable Je voudrais enfin comprendre » | aussi | encore
+- [ ] 149 p84 batch-05:114 | reading | after « 2 dans le cas de » | sections | corps
+- [ ] 149 p84 batch-05:114a | reading | after « le cas de sections de » | courbes relatives | valuation
+- [ ] 149 p85 batch-05:118 | reading | after « la sempiternelle situation de » | $U = X \smallsetminus T$ | $U=X\setminus T$
+- [ ] 149 p85 batch-05:126 | reading | after « $X$ \[ 124 g_i(s) = f(s) … » | l'h m | l'hom
+- [ ] 149 p85 batch-05:131 | reading | after « fait $I_{s'}$ dans $\pi$ et » | même | $ \overline m $
+- [ ] 149 p85 batch-05:131a | reading | after « et même dans les $L_i$ » | ou l'un d'eux | on l'a vu
+- [ ] 149 p85 batch-05:132 | reading | after « soit non nulle triviale Considérons » | donc | alors
+- [ ] 149 p85 batch-05:135 | reading | after « au hensélisé pas strict de » | l'anneau $\mathcal{O}_{S,s}$ | la jauge $\underline O_{S,s}$
+- [ ] 149 p86 batch-05:142 | reading | after « autour du germe de variété » | $D = \bigl(\overline{\{s\}}\bigr)_{ red }$ | $D=(\overline s)_{ red }$
+- [ ] 149 p86 batch-05:144 | reading | after « par $\pi_1$ La section donnée » | plutôt construite | globale construit
+- [ ] 149 p86 batch-05:158 | reading | after « de ce groupe par $\pi$ » | induite | n'est autre
+- [ ] 149 p86 batch-05:168 | reading | after « \[ 160 (24)\qquad 1 \to \pi … » | étant | est
+- [ ] 149 p87 batch-05:172 | reading | at the top of the page | Ceci se traduit dans | On trouve donc
+- [ ] 149 p87 batch-05:186 | reading | after « sur le sous-groupe d'inertie $I_{s'}$ » | lui-même | lui $ \overline m $
+- [ ] 149 p87 batch-05:188 | reading | after « de départ de $\mathcal{E}_{U_K}$ sur » | $\mathcal{E}_K$ elle-même | $E_K$ elle $ \overline m $
+- [ ] 149 p87 batch-05:194 | reading | after « où $k_i \colon T \to \pi$ … » | de lacets | local
+- [ ] 149 p87 batch-05:195a | reading | after « un hom de lacets relatif » | au | à l'indice $i$ Ainsi le
+- [ ] 149 p88 batch-05:210 | reading | after « en $s$ le diagramme 26 » | 25 dans | dont
+- [ ] 149 p88 batch-05:221 | reading | after « 26 ce qui revient au » | même | $ \overline m $
+- [ ] 149 p88 batch-05:225 | reading | after « même un relèvement \[ 223 (28)\qquad … » | $\mathcal{E}_{\tilde{K}} \to \mathcal{E}_{\tilde{\mathcal{O}}}$ $\simeq \mathcal{E}_{k(s)}$ | $E_{\widetilde K}\longrightarrow E_{\widetilde O}$ $\xleftarrow{\sim}E_{k(s)}$
+- [ ] 149 p88 batch-05:226 | reading | after « \[ 223 (28)\qquad \lambda \colon \mathcal{E}_{\tilde{K}} … » | $\mathcal{E}_{\tilde{K}}$ par ailleurs s'identifie | $E_{\widetilde K}$ peut d'ailleurs s'identifier
+- [ ] 149 p89 batch-05:236 | reading | after « où $k_i$ est un hom » | lacet | local
+- [ ] 149 p89 batch-05:238 | reading | after « $T \to \pi$ et $\mu \in … » | $\lambda \mid I$ | $\lambda\vert I$
+- [ ] 149 p89 batch-05:242 | reading | after « d'une section de $\mathcal{E}_{U_{\tilde{\mathcal{O}}}}$ sur » | $\mathcal{E}_{\tilde{\mathcal{O}}}$ item | $E_{\widetilde O}$
+- [ ] 149 p89 batch-05:246 | reading | after « f Si Désignons par $\tilde{f}$ » | désignons aussi | désigne
+- [ ] 149 p89 batch-05:253 | reading | after « Nous plaçant dans ce cas » | on pourra | ns pouvons
+- [ ] 149 p90 batch-05:265 | reading | after « $\mathcal{E}_U$ sur $\mathcal{E}_S$ » | ni même | ou $=$
+- [ ] 149 p90 batch-05:266 | reading | after « $\mathcal{E}_{U_{\tilde{\mathcal{O}}}}$ sur $\mathcal{E}_{\tilde{\mathcal{O}}}$ définit néanmoins » | sur | le
+- [ ] 149 p90 batch-05:267 | reading | after « définit néanmoins sur le sous-groupe » | $\mathcal{E}_{\tilde{K}} = N_{s'}$ | $\mathcal E_{\widetilde U}=N_{s'}$
+- [ ] 149 p90 batch-05:269 | reading | after « corps de degré de transcendance » | $n - 1$ | $\deg tr K-1$
+- [ ] 149 p90 batch-05:272 | reading | after « obstrue encore en tous cas » | $N_{s'} \simeq \mathcal{E}_{\tilde{K}}$ | $N_{s'}\simeq\mathcal E_{\widetilde U}$
+- [ ] 149 p90 batch-05:275 | reading | after « section de $\mathcal{E}_{X_s}$ sur $\mathcal{E}_{k(s)}$ » | dirais-je au pire | mais de deuxième espèce
+- [ ] 149 p90 batch-05:280 | reading | after « des pts $f(s) \in U_s$ où … » | parcourant l'un | parcourt l'ens
+- [ ] 149 p91 batch-05:283 | reading | after « ou » | si on préfère disons l'un | seulement sans doute l'ens
+- [ ] 149 p91 batch-05:283a | reading | after « disons l'un des pts fermés » | car | si
+- [ ] 149 p91 batch-05:286 | reading | after « de $\mathcal{E}_{U_K}$ sur $\mathcal{E}_K$ donne » | lieu | naissance
+- [ ] 149 p91 batch-05:291 | reading | after « des $\mathcal{E}_{X_s}$ sur les $\mathcal{E}_{k(s)}$ » | une généralisation de | en généralisant
+- [ ] 149 p91 batch-05:291a | reading | after « $\mathcal{E}_{k(s)}$ une généralisation de ce » | qui se passe | qu'on a vu
+- [ ] 149 p91 batch-05:291b | reading | after « se passe dans le cas » | d'un point | où $s$ est
+- [ ] 149 p91 batch-05:292 | reading | after « point de codim $1$ On » | interprète | introduit
+- [ ] 149 p91 batch-05:295 | reading | after « stabilisateur dans $\mathcal{E}_K$ d'un $s'$ » | dans | de
+- [ ] 149 p92 batch-05:307 | reading | after « $\mathcal{O}_{S,s}$ $N_{s'}$ est celui du » | complété | corps de
+- [ ] 149 p92 batch-05:311 | reading | after « il envoie $I_{s'}$ dans $\pi$ » | s'annule sur $I_{s'}$ | pour
+- [ ] 149 p92 batch-05:312 | reading | after « ce qui signifie justement que » | $s \in S'$ qu'on a | $s'\in S'\ldots$ que
+- [ ] 149 p92 batch-05:314 | reading | after « $\mathcal{E}_{k(s)} \to \mathcal{E}_U$ ou si on … » | $\mathcal{E}_{k(s)} \to \mathcal{E}_{U_{\tilde{\mathcal{O}}_s}} \simeq \mathcal{E}_{X_s}$ | $\mathcal E_{k(s)}\longrightarrow\mathcal E_{U_{\widetilde{\mathcal O}_s}}\xleftarrow{\sim}\mathcal E_{X_s}$
+- [ ] 149 p92 batch-05:315 | reading | after « on préfère $\mathcal{E}_{k(s)} \to \mathcal{E}_{U_{\tilde{\mathcal{O}}_s}} \simeq … » | s'interpréter | donc s'inter prète
+- [ ] 149 p92 batch-05:318a | reading | after « passe-t-il pour $s \notin S'$ [illegible] … » | sait | a vu
+- [ ] 149 p92 batch-05:319 | reading | after « $s \notin S'$ [illegible] On sait … » | $D = S \smallsetminus S'$ | $D=S\setminus S'$
+- [ ] 149 p92 batch-05:319a | reading | after « de codim $1$ c'est l'image » | inverse | réciproque
+- [ ] 149 p92 batch-05:320 | reading | after « $T$ sur $X$ par la » | section | fonction
+- [ ] 149 p92 batch-05:321 | reading | after « en fait le $\mu = \mu_\alpha$ … » | tout à l'heure | tantôt
+- [ ] 149 p93 batch-05:328 | reading | after « se passe pour les $s \in … » | ou | On
+- [ ] 149 p93 batch-05:329 | reading | after « $s \in \bigcup D_\alpha$ ou et … » | on regardera | regardons
+- [ ] 149 p93 batch-05:332a | reading | after « $\mathcal{E}_{U_{s_\alpha}}$ de $\mathcal{E}_{k(s_\alpha)}$ par $\pi$ » | disons | déduite
+- [ ] 149 p93 batch-05:332b | reading | after « $\mathcal{E}_{k(s_\alpha)}$ par $\pi$ disons comme » | tout | tantôt
+- [ ] 149 p93 batch-05:336 | reading | after « pt rat sur $k(s_\alpha)$ de » | $X_{s_\alpha}$ i e un | $ U_{s_\alpha} $ on n'a qu'un
+- [ ] 149 p94 batch-05:345 | reading | after « qui nous » | intéresse | incite
+- [ ] 149 p94 batch-05:345a | reading | after « qui nous intéresse justement regarder » | la classe | les classes
+- [ ] 149 p94 batch-05:347 | reading | after « notamment ceux relatifs au choix » | d'une uniformisante | d'un uniformisant
+- [ ] 149 p94 batch-05:349 | reading | after « de son pt gén $s_\alpha$ » | spécialisation | plus gén
+- [ ] 149 p94 batch-05:350 | reading | after « par le biais qu'elles définissent » | $U_{s_\alpha}/$ Quand on a | dans $\mathfrak m_{s_\alpha}/\mathfrak m_{s_\alpha}^{2}$ Quant à
+- [ ] 149 p94 batch-05:356 | reading | after « e la spécialisation des sections » | d'extensions du | de
+- [ ] 149 p95 batch-05:363 | reading | after « $X/S$ le long d'une section » | $g_i$ ou | $g$ avec
+- [ ] 149 p95 batch-05:366 | reading | after « la situation où on part » | d'une | de une
+- [ ] 149 p95 batch-05:369 | reading | after « de $K$ sur lequel $U_K$ » | pourrait | pouvait
+- [ ] 149 p96 batch-05:389 | reading | after « sections de $\mathcal{E}_K$ sur des » | $\mathcal{E}_k$ ou | $\mathcal E_{k'}$
+- [ ] 149 p96 batch-05:393 | reading | after « 29 ou définissant des actions » | extérieures | effectives
+- [ ] 149 p96 batch-05:394 | reading | after « $\mathcal{E}_{k(s)}$ sur $\pi$ Pour ces » | derniers | dernières
+- [ ] 149 p97 batch-05:401 | reading | after « $k$ [illegible] un corps $k$ » | tous | alors
+- [ ] 149 p97 batch-05:405 | reading | after « [illegible] les sous-groupes de décomposition » | relatifs | de tantôt
+- [ ] 149 p97 batch-05:407 | reading | after « de deuxième espèce et les » | comparer | composer
+- [ ] 149 p97 batch-05:409 | reading | after « ce qui précède que la » | restriction | section
+- [ ] 149 p97 batch-05:410a | reading | after « de $\mathcal{E}_{U_K}$ [illegible] classe de » | section $\mathcal{E}_{k(s)} \to \mathcal{E}_K$ | $\mathcal E_{k(s)}\hookrightarrow\mathcal E_{ K }$
+- [ ] 149 p97 batch-05:412 | reading | after « près action sur $\pi$ est » | induite par | n'est autre que
+- [ ] 149 p98 batch-05:420 | reading | after « en $s$ on trouve une » | section section | seule action
+- [ ] 149 p98 batch-05:420a | reading | after « trouve une section section de » | 2 textsuperscript e | $2^{ ième }$
+- [ ] 149 p98 batch-05:424 | reading | after « corps des fonctions relatif d'une » | variété | variable
+- [ ] 149 p98 batch-05:425 | reading | after « $U_K/K$ a bonne réduction c'était » | explicite | implicite car
+- [ ] 149 p98 batch-05:427 | reading | after « dans le cas où on » | sort de | abandonne
+- [ ] 149 p99 batch-05:435 | reading | after « dégénérée On peut passer » | encore | même
+- [ ] 149 p99 batch-05:436 | reading | after « l'hensélisé non strict de $\mathcal{O}_s$ » | i e partir de | on trouve
+- [ ] 149 p99 batch-05:440 | reading | after « par $\pi$ où ici $\mathcal{E}_\eta$ » | s'insère | s'inscrit
+- [ ] 149 p99 batch-05:448 | reading | after « de $T$ sur $\pi$ n'est » | évidemment | sûrement
+- [ ] 149 p99 batch-05:450 | reading | after « le groupe $\mathcal{E}_k$ n'opère pas » | par lui-même | lui $=$
+- [ ] 149 p100 batch-05:459 | reading | after « doute pas quelle courbe serait-ce » | i e | si
+- [ ] 149 p100 batch-05:459a | reading | after « courbe serait-ce i e ce » | serait | n'est
+- [ ] 149 p100 batch-05:462a | reading | after « 30 [illegible] une de 31 » | qui comprend | donc
+- [ ] 149 p100 batch-05:472 | reading | after « situation scabreuse ce pourrait-être celle-ci » | Conjecture de bonne réduction | Conjecture-à-tout-hasard
+- [ ] 149 p100 batch-05:476 | reading | after « a bonne réduction sur $S$ » | item | noindent
+- [ ] 149 p100 batch-05:477 | reading | after « $T$ sur $\pi$ est triviale » | end enumerate end document | 100
+- [ ] 149 p101 batch-06:25 | reading | after « c L'action de $T$ sur » | $\pi_{ ab } = H_1(U_{\bar{\xi}})$ | $\pi_{ ab }=H_1(U_{\bar\eta})$
+- [ ] 149 p101 batch-06:28 | reading | after « sur $\pi_{ ab } = H_1(U_{\bar{\xi}})$ … » | Item | Idem
+- [ ] 149 p101 batch-06:28a | reading | after « est triviale d Item pour » | $H_1(U_{\bar{\xi}}, T_\ell)$ | $H_1(U_{\bar\eta}, T_\ell )$
+- [ ] 149 p101 batch-06:31 | reading | after « l'exprimer par un critère sur » | le groupe | les groupes
+- [ ] 149 p101 batch-06:33 | reading | after « le groupe $p$ divisible e » | Etant donnée une | En termes d'une
+- [ ] 149 p101 batch-06:37 | reading | after « admissible quitte à passer à » | une ext | un sous-groupe ouvert
+- [ ] 149 p102 batch-06:52 | reading | after « être plus ou moins connu » | au | ou du
+- [ ] 149 p102 batch-06:52a | reading | after « ou moins connu au moins » | de | se
+- [ ] 149 p102 batch-06:57 | reading | after « réduction il faudrait une compréhension » | prof ou arithmétique | fut-elle heuristique
+- [ ] 149 p102 batch-06:65 | reading | after « avec la généralité qui lui » | revient | convient
+- [ ] 149 p102 batch-06:69 | reading | after « $\mathbb{Q}$ sur des $\pi$ à » | lacets | bouts
+- [ ] 149 p105 batch-06:118 | reading | after « $\xi$ correspond au choix d'un » | pt $x$ de $X$ | $x\in X$
+- [ ] 149 p105 batch-06:120 | reading | after « sép close $\overline{\Omega}$ de $k(x)$ » | par ex | pas néc
+- [ ] 149 p105 batch-06:121 | reading | after « $k(x)$ et on note aussi » | quad $\mathcal{E}^{\Omega}_{X}$ Lieu | $\mathcal E_X^\Omega$ au lieu
+- [ ] 149 p105 batch-06:123a | reading | after « au [illegible] [illegible] qu $\Omega$ » | extension | sous-entendu en tant qu'extension
+- [ ] 149 p105 batch-06:129 | reading | after « où $\overline{k(x)}$ est la clôture » | sép | alg
+- [ ] 149 p105 batch-06:131 | reading | after « si $X = Spec (A)$ on … » | quad $\mathcal{E}^{\Omega}_{A}$ | $\mathcal E_A^\Omega$
+- [ ] 149 p105 batch-06:131a | reading | after « notera aussi quad $\mathcal{E}^{\Omega}_{A}$ notation » | standard | surtout
+- [ ] 149 p105 batch-06:132 | reading | after « $\mathcal{E}^{\Omega}_{A}$ notation standard utilisée pour » | quad $\mathcal{E}^{\overline{K}}_{K}$ | $\mathcal E_K^{\bar K}$
+- [ ] 149 p106 batch-06:150 | reading | after « $\tilde{X} \to Y$ $\tilde{X}$ jouant le … » | de | du
+- [ ] 149 p106 batch-06:152 | reading | after « écrire en fait $\mathcal{E}^{\tilde{X}}_{Y}$ plus » | généralement $\mathcal{E}^{Z}_{Y}$ | gén $\mathcal E_Y^Z$
+- [ ] 149 p106 batch-06:154 | reading | after « 1-connexe jouant le rôle de » | fonction | foncteur
+- [ ] 149 p106 batch-06:164 | reading | after « seulement d'un $Z$ 1-connexe s'envoyant » | sur | dans
+- [ ] 149 p107 batch-06:177 | reading | after « $\ldots$ un homom de schémas » | géométriquement pointés | géom textsuperscript t ponctués
+- [ ] 149 p107 batch-06:179 | reading | after « pointés $(X, \xi) \to (Y, \eta)$ … » | la | tte
+- [ ] 149 p107 batch-06:182 | reading | after « close $\Omega$ de $k(x)$ définit » | canoniquement | can textsuperscript t
+- [ ] 149 p107 batch-06:182a | reading | after « $k(x)$ définit canoniquement une ponctuation » | géométrique | géom aussi
+- [ ] 149 p108 batch-06:200 | reading | after « C'est un foncteur » | par rapport | p r
+- [ ] 149 p108 batch-06:201 | reading | after « foncteur par rapport au triple » | $\tilde{X} \to X \to Y$ | $\widetilde X\mathrel{ --- }X\mathrel{ --- }Y$
+- [ ] 149 p108 batch-06:202 | reading | after « $\tilde{X}$ un rev universel plus » | généralement $Z$ $T$ | généralt
+- [ ] 149 p108 batch-06:203 | reading | after « plus généralement $Z$ $T$ si » | $T \to X$ | $T \mathrel{ --- } X$
+- [ ] 149 p108 batch-06:211 | reading | after « en lisible $(T \to X \to … » | $\mathcal{E}^{\xi}_{X/Y}$ si | $\mathcal E_{X/Y}^{ \xi }$
+- [ ] 149 p108 batch-06:221a | reading | after « pour $X \to Y$ alors la … » | par exemple | pour
+- [ ] 149 p109 batch-06:229 | reading | after « \[ T \longrightarrow Y \] et … » | de | en
+- [ ] 149 p109 batch-06:232 | reading | after « posé on a un isom » | comme il résulte de | can sous
+- [ ] 149 p109 batch-06:246 | reading | after « suite exacte \[ 244 (13) \qquad … » | se trouve | sera tjrs
+- [ ] 149 p110 batch-06:252a | reading | at the top of the page | dans | Sous
+- [ ] 149 p110 batch-06:252b | reading | after « [illegible] topie mais [illegible] pas » | univ | néc connexes
+- [ ] 149 p110 batch-06:258 | reading | after « pro-étale fini sur $Y$ et » | $\mathcal{E}_X \to \mathcal{E}_{Y'}$ étant | $\mathcal E_X^{ \prime }\longrightarrow\mathcal E_{Y'}$ est
+- [ ] 149 p110 batch-06:259 | reading | after « suite exacte univ d'homotopie bien » | vérifiée | sûr
+- [ ] 149 p110 batch-06:272a | reading | after « mais $X \times_Y T$ Bien sûr … » | isom | iso can
+- [ ] 149 p110 batch-06:273 | reading | after « [illegible] [illegible] remplace [illegible] le » | contenu | calcul
+- [ ] 149 p110 batch-06:275 | reading | after « pour ce qui est de » | l'analogue des | l'ancrage dans
+- [ ] 149 p111 batch-06:298a | reading | after « sur $Y$ [illegible] $\xi_Y$ $\xi_X$ » | s'interprète | s'interprétant
+- [ ] 149 p112 batch-06:307a | reading | after « La [illegible] [illegible] définition » | les conventions | description
+- [ ] 149 p112 batch-06:308 | reading | after « [illegible] définition les conventions 11 » | et décidons | est évidemment
+- [ ] 149 p112 batch-06:324 | reading | after « faire attention $Z$ non précisé » | que $\mathcal{E}_{X/Y}$ n'est | est
+- [ ] 149 p112 batch-06:325a | reading | after « [illegible] un groupe extérieur L'arbitraire » | de la donnée | dans le choix
+- [ ] 149 p112 batch-06:326 | reading | after « entre $\mathcal{E}^{T}_{X/Y}$ et $\mathcal{E}^{T'}_{X/Y}$ provient » | des | du
+- [ ] 149 p113 batch-06:333a | reading | after « [illegible] [illegible] [illegible] temporairement Les » | relations | notations
+- [ ] 149 p113 batch-06:335 | reading | after « extension de $\mathcal{E}^{T}_{Y}$ ou d'un » | sous-groupe | ss groupe
+- [ ] 149 p113 batch-06:342 | reading | after « $Y = Spec K$ $K$ un … » | formellement | souvent
+- [ ] 149 p113 batch-06:342a | reading | after « Aussi formellement Dans ce cas » | $\mathcal{E}_{Y} \simeq \mathcal{E}^{\overline{Y}}_{Y}$ | $\mathcal E_Y\simeq\mathcal E_Y^{\widetilde Y}$ 113
+- [ ] 149 p114 batch-06:346 | reading | after « sép de $K$ telle que » | $ Spec \overline{K} \simeq \overline{Y}$ | $ Spec \overline K=\widetilde Y$
+- [ ] 149 p115 batch-06:360 | reading | after « $\mathcal{E}^{\overline{L}}_{L}$ c'est la partie universellement » | générique | géom
+- [ ] 149 p115 batch-06:362a | reading | after « qui [illegible] [illegible] classifie les » | sel | schémas
+- [ ] 149 p115 batch-06:366 | reading | after « quelconque il se plonge dans » | les | un
+- [ ] 149 p115 batch-06:375 | reading | after « codim 1 $x_i$ les pts » | génériques des | gén de
+- [ ] 149 p117 batch-06:428 | reading | after « \[ 426 (28) \qquad I_{x'} \subset … » | passe aux hensélisés posons | peut dire posant
+- [ ] 149 p117 batch-06:440 | reading | after « le choix effectif dépend du » | homom $\mathcal{E}_{\tilde{U}_x} \xrightarrow{ ext } \mathcal{E}_L$ | seul habituel ldots 117
+- [ ] 149 p118 batch-06:443 | reading | after « rev universel précis ou [illegible] » | d'une | ou encore d'un
+- [ ] 149 p118 batch-06:444 | reading | after « précis ou [illegible] d'une pt » | géométrique | géom $ \xi $
+- [ ] 149 p118 batch-06:444a | reading | after « géométrique de $\tilde{U}_x$ i e » | de l'une | d'une
+- [ ] 149 p118 batch-06:472 | reading | after « que dans la situation actuelle » | il existe | ou même avec
+- [ ] 149 p118 batch-06:475 | reading | after « est lié [illegible] à l'idée » | qu on devrait | qu'on doit
+- [ ] 149 p119 batch-06:480 | reading | after « tirer au clair à l'occasion » | Revenons aux modèles | Revenant au modèle
+- [ ] 149 p119 batch-06:481 | reading | after « Revenons aux modèles $U$ fournissant » | des quotients $\mathcal{E}^{\overline{L}}_{U}$ | un quotient $\mathcal E_U^{\overline L}$
+- [ ] 149 p119 batch-06:482 | reading | after « quotients $\mathcal{E}^{\overline{L}}_{U}$ de $\mathcal{E}^{\overline{L}}_{L}$ d'où » | $N_{x'} \to \mathcal{E}^{\overline{L}}_{U}$ | $N_{x'}\longrightarrow\mathcal E_U^{\overline L}$
+- [ ] 149 p119 batch-06:482a | reading | after « de $\mathcal{E}^{\overline{L}}_{L}$ d'où $N_{x'} \to \mathcal{E}^{\overline{L}}_{U}$ … » | $I_{x'} \to \mathcal{E}^{\overline{L}}_{U}$ | $I_{x'}\longrightarrow\mathcal E_U^{\overline L}$
+- [ ] 149 p119 batch-06:497 | reading | after « on dispose d'un [illegible] modèle » | propre | projectif
+- [ ] 149 p119 batch-06:497a | reading | after « [illegible] modèle propre dont $U$ » | soit | est
+- [ ] 149 p120 batch-06:506 | reading | after « Ceci posé $\mathcal{E}^{\overline{L}}_{U}$ se » | reconstruit | récupère
+- [ ] 149 p120 batch-06:510 | reading | after « i e tels [illegible] $=$ » | des anneaux | de prendre
+- [ ] 149 p120 batch-06:517 | reading | after « singulier [illegible] des modèles propres » | plats | de
+- [ ] 149 p120 batch-06:528 | reading | after « pt et un seul de » | codimension $0$ | codim 0
+- [ ] 149 p120 batch-06:532 | reading | after « Les points de codim 1 » | end document | 120
+- [ ] 149 p121 batch-07:18 | reading | at the top of the page | correspondant | correspondent
+- [ ] 149 p121 batch-07:18a | reading | after « jauges dans $L$ qui sont » | ent | ess
+- [ ] 149 p121 batch-07:20 | reading | after « erreur ces deux types de » | p oin ts | pts
+- [ ] 149 p121 batch-07:20a | reading | after « cas avec $n = 0$ où … » | soit | est
+- [ ] 149 p121 batch-07:25a | reading | after « $\mathfrak{X}$ [illegible] dessus Proposition Pour » | tout $x \in \mathfrak{X}$ | $\forall x\in\mathfrak X$
+- [ ] 149 p121 batch-07:27b | reading | after « Soit $f \in L \setminus O … » | $1/f \in O _{\mathfrak{X},x}$ | $\frac1f\in O _{\mathfrak X,x}$
+- [ ] 149 p121 batch-07:27c | reading | after « $g, h \in O _{X,a}$ où … » | projectif | propre
+- [ ] 149 p121 batch-07:27d | reading | after « modèle régulier projectif $a$ un » | p oin t $f$ $g$ | pt $f,g$
+- [ ] 149 p122 batch-07:32a | reading | at the top of the page | un sys de | en ces
+- [ ] 149 p122 batch-07:32b | reading | after « un sys de paramètres et » | on | en
+- [ ] 149 p122 batch-07:32c | reading | after « de paramètres et on se » | ramène au cas où $f$ $g$ | ramenant à un $f,g$
+- [ ] 149 p122 batch-07:32d | reading | after « $g$ premiers entre eux on » | peut | est
+- [ ] 149 p122 batch-07:34b | reading | after « pour l'extension $L/K$ domine un » | p oin t | pt
+- [ ] 149 p122 batch-07:38 | reading | after « réunion finie Pour tt anneau » | local normal | loc textsuperscript l norm textsuperscript l
+- [ ] 149 p122 batch-07:38a | reading | after « on peut regarder $ Spec O … » | p oin t | pt
+- [ ] 149 p122 batch-07:38b | reading | after « oin t fermé $s$ le » | normalisé | normali 122
+- [ ] 149 p123 batch-07:41 | reading | after « de décomposition $N_{x'}$ d'inertie $I_{x'}$ » | mais | ayant
+- [ ] 149 p123 batch-07:41a | reading | after « pour prenant $ O $ de … » | par ex un | pas néc une
+- [ ] 149 p123 batch-07:45b | reading | after « $\mathcal{E}_{k(x)}^{\overline{k(x)}}$ [illegible] une extension de » | $\mathcal{E}_{k(x)}$ sous groupe | $\mathcal E_{k(x)}^{\overline{k( a )}}$ ss-groupe
+- [ ] 149 p123 batch-07:45c | reading | after « [illegible] avec un choix de » | paramètres scindées sous l'effet du modèle | pouvoir scinder sans trop de mal
+- [ ] 149 p124 batch-07:52 | reading | after « rait un principe général pour » | la construction | construire
+- [ ] 149 p124 batch-07:52a | reading | after « sur $\mathcal{E}_K$ à l'aide des » | p oin ts | pts
+- [ ] 149 p124 batch-07:54 | reading | after « $\mathfrak{X}$ de $L$ sur $K$ » | Comparant | Composant
+- [ ] 149 p124 batch-07:54a | reading | after « donc aussi un moyen de » | construction | construire
+- [ ] 149 p124 batch-07:54b | reading | after « $\mathcal{E}_{L_1}$ sur $\mathcal{E}_K$ et le » | test | fait
+- [ ] 149 p124 batch-07:56 | reading | after « de $L_1$ sur $K$ on » | pourrait | pense
+- [ ] 149 p124 batch-07:56a | reading | after « ici $K = \mathbb{Q}$ au cas … » | typique | sur $\mathbf Q$ bien sûr
+- [ ] 149 p125 batch-07:61 | reading | after « si celui de $V$ l'est » | et | donc
+- [ ] 149 p125 batch-07:61a | reading | after « l'est et $V_1 \neq L_1$ donc … » | correspond | $\longrightarrow$ corresp
+- [ ] 149 p125 batch-07:61b | reading | after « du corps de fonctions d'une » | variété | variable
+- [ ] 149 p125 batch-07:63d | reading | after « fait voir que le corps » | résid | des fractions
+- [ ] 149 p125 batch-07:68 | reading | after « $\mathcal{E}_K$ ou germe de tel » | sa variante $\ldots = \ldots$ | ça revient au $=$ ldots
+- [ ] 149 p126 batch-07:75 | reading | after « élémentaire de $L$ sur $K$ » | arbitraire | anabélien
+- [ ] 149 p126 batch-07:80 | reading | after « valuation $V$ de $L/K$ et » | par | qd
+- [ ] 149 p126 batch-07:80a | reading | after « $V$ un centre sur $U$ » | tel que | on n'a qu'à
+- [ ] 149 p126 batch-07:80b | reading | after « sur $U$ tel que se » | concentre pour le | concentrer au
+- [ ] 149 p126 batch-07:80c | reading | after « concentre pour le cas d'un » | p oin t | pt
+- [ ] 149 p127 batch-07:93a | reading | after « $1$ Pour mieux appréhender cette » | dernière | deuxième partie
+- [ ] 149 p127 batch-07:93b | reading | after « $\pi_{U/K}^{\overline{L}}$ image de $\overline{I}_V$ qui » | en | on
+- [ ] 149 p127 batch-07:93c | reading | after « algébrique de [illegible] à un » | groupe-lacet | groupe-bout
+- [ ] 149 p127 batch-07:93d | reading | after « Dans quelle mesure des $V$ » | distincts | distinctes
+- [ ] 149 p127 batch-07:95 | reading | after « Pour $x \in Supp D$ considérons … » | ou | pas
+- [ ] 149 p128 batch-07:108 | reading | after « choisi de $\widetilde{K}_x$ corps des » | fractions | fonctions
+- [ ] 149 p128 batch-07:110 | reading | after « sur $X$ est $\in Supp D$ … » | a hensélisé posant | aura pour
+- [ ] 149 p128 batch-07:110a | reading | after « hensélisé posant $S = Spec V$ … » | de p oin t | hensélisé du pt
+- [ ] 149 p128 batch-07:110b | reading | after « $\widetilde{\eta} \to \eta \in Spec (L)$ … » | $\widetilde{\eta} \to U$ | $\tilde\eta\mathrel{ --- }U$
+- [ ] 149 p129 batch-07:125 | reading | after « qui revient au même que » | son | sa
+- [ ] 149 p129 batch-07:132c | reading | after « sont pas les mêmes C'est » | sûrement | visiblement faux
+- [ ] 149 p129 batch-07:132d | reading | after « $ card I(x) \neq 1$ comme … » | remplaçant $X$ par | passant à
+- [ ] 149 p129 batch-07:132e | reading | after « $X$ par un autre $X'$ » | dominant | déduit de
+- [ ] 149 p129 batch-07:132f | reading | after « éclatant des [illegible] faisant un » | p oin t | pt
+- [ ] 149 p129 batch-07:139 | reading | after « zéro alors l'hom \[ 137 \mathcal{E}_{\widetilde{\eta}}^{\overline{L}} … » | égal | injectif
+- [ ] 149 p129 batch-07:139a | reading | after « surjectif ouverte ce qui revient » | à dire | ici
+- [ ] 149 p130 batch-07:151 | reading | after « sur $U$ et sans doute » | d'autre aucunement | d autre aucune
+- [ ] 149 p130 batch-07:153 | reading | after « aucunement façon triviale Avant de » | l'oser | co
+- [ ] 149 p130 batch-07:157 | reading | after « n'est pas associée à un » | p oin t | pt
+- [ ] 149 p130 batch-07:157a | reading | after « conjectures qui pouvaient d'abord sembler » | hérétiques | hâtives
+- [ ] 149 p131 batch-07:163 | reading | after « précédemment à propos » | de $N_V$ $I_V$ | des $N_V,I_V\ldots$
+- [ ] 149 p131 batch-07:163a | reading | after « $x \in X \setminus U$ pour … » | une connaissance de | me convaincre du
+- [ ] 149 p131 batch-07:163b | reading | after « évident si on admet ce » | qui | qu'on
+- [ ] 149 p131 batch-07:163c | reading | after « admet ce qui vient d » | être présumé | énoncer
+- [ ] 149 p131 batch-07:163d | reading | after « n'ayant pas de centre dans » | $X \setminus U$ $U$ | $ X\setminus U U\ldots$
+- [ ] 149 p131 batch-07:174 | reading | after « et soit \[ 169 D_J^{*} = … » | $\alpha = card J$ | $d= card J$
+- [ ] 149 p131 batch-07:174a | reading | after « \[ 169 D_J^{*} = \{\, x … » | sait | voit
+- [ ] 149 p131 batch-07:176 | reading | after « simplexe une partie $J \subset I$ … » | vient un nouveau décrire | vaut mieux définir
+- [ ] 149 p131 batch-07:176a | reading | after « un nouveau décrire $D_J$ comme » | l'ensemble $\bigcap_{i \in J} D_i$ | sous-schéma comme $\bigcap_{j\in J}D_j$
+- [ ] 149 p131 batch-07:176b | reading | after « comme l'ensemble $\bigcap_{i \in J} D_i$ … » | décrire | définir son support
+- [ ] 149 p132 batch-07:182a | reading | after « sur $I$ une structure de » | schéma ensemble simplicial | solide maquette simpliciale
+- [ ] 149 p132 batch-07:182b | reading | after « aux comp connexes de $D = … » | on connaît | ou encore
+- [ ] 149 p132 batch-07:182c | reading | after « $\widehat{X} \setminus D$ où $\widehat{X}$ est … » | formel | l'ombre
+- [ ] 149 p132 batch-07:182d | reading | after « invariante p r à la » | complétification | compactification
+- [ ] 149 p132 batch-07:182e | reading | after « sûr n'est pas le cas » | si $J$ | sauf
+- [ ] 149 p132 batch-07:184a | reading | after « localisé [illegible] en un sens » | à préciser | étale
+- [ ] 149 p132 batch-07:184b | reading | after « si on localise par p » | v algébrique | r à étalement
+- [ ] 149 p132 batch-07:184c | reading | after « par p v algébrique on » | trouve | aura
+- [ ] 149 p132 batch-07:188 | reading | after « \[ 186 (37) \qquad T^{J} \to … » | choisissons | choisissant
+- [ ] 149 p132 batch-07:188a | reading | after « d'ailleurs $\widetilde{X}_J$ de $X_J$ d'où » | aussi | d'ailleurs
+- [ ] 149 p132 batch-07:188b | reading | after « aussi $\widetilde{U}_J$ et $\widetilde{U}_J \to U$ … » | une | on
+- [ ] 149 p133 batch-07:195 | reading | after « que 37 est définie c'est » | la | le
+- [ ] 149 p133 batch-07:195a | reading | after « [illegible] sur $D_J$ savoir $U_J$ » | homotope | lui
+- [ ] 149 p133 batch-07:195b | reading | after « un peu peur d'y mettre » | les | un
+- [ ] 149 p133 batch-07:205 | reading | after « elle heuristiquement on devrait avoir » | devrait | a
+- [ ] 149 p133 batch-07:213 | reading | after « de suites exactes d'homotopie de » | cette relation | celle
+- [ ] 149 p133 batch-07:213a | reading | after « relative à la première ligne » | cohomologique | colonne
+- [ ] 149 p133 batch-07:213b | reading | after « la première ligne cohomologique dans » | cette relation $T^J$ scindée | celle relative à la seconde
+- [ ] 149 p134 batch-07:227 | reading | after « une structure d'extensions et on » | a aussi | aura
+- [ ] 149 p134 batch-07:236a | reading | after « a des choses plus intrinsèques » | ici | écrire
+- [ ] 149 p134 batch-07:236b | reading | after « plus intrinsèques ici avec les » | types et les groupoïdes multiplicatifs fondamentaux | topos étales galoisiens multigaloisiens
+- [ ] 149 p134 batch-07:242 | reading | after « définition précise que défini modulo » | opération d'automorphismes | opérations induites par autom
+- [ ] 149 p135 batch-07:245a | reading | after « celle qui exprime l'indétermination dans » | $\pi_{U/K}^{\overline{L}}$ ici seulement aux produits | 39 soient ceux provenant
+- [ ] 149 p135 batch-07:249 | reading | after « l'image de \[ 247 (39) \qquad … » | particulier lorsque | particulièrement simple chaque composante conn
+
+## 3. Formulas and symbols read differently
+
+- [ ] 149 p3 batch-01:39a | reading | after « de $\Pi_{K^{*}}$ ainsi on prend » | $\overline{K}^{*}$ | $\bar K^{ \prime }=$
+- [ ] 149 p5 batch-01:64b | reading | after « quelconques le 2-foncteur $K \mapsto B_K$ … » | $K \mapsto \Pi_K$ | $K\longrightarrow\Pi_K$
+- [ ] 149 p10 batch-01:125a | reading | after « $U_i$ des schémas élémentaires sur » | $k$ | $K_0$
+- [ ] 149 p11 batch-01:161a | reading | after « en utilisant un plongement de » | $\overline{K}$ | $\overline{\mathbb Q}$
+- [ ] 149 p13 batch-01:194a | reading | after « que son centralisateur $Z$ dans » | $E$ | $E_{\bar K/K}$
+- [ ] 149 p17 batch-01:223 | reading | after « de reconstituer l'extension $E_{\overline{K}/K}$ de » | $\Gamma_{\overline{K}/K}$ | $\Gamma^{ a }_{\bar K/K}$
+- [ ] 149 p18 batch-01:234d | reading | after « [illegible] par le groupe extérieur » | $\pi_K = \pi_1(K)$ | $\pi_K\neq\pi_1(K)$
+- [ ] 149 p19 batch-01:241 | reading | after « $\Gamma$ non précisé d'avance de » | $\Gamma_{\overline{\mathbb{Q}}/\mathbb{Q}}$ | $ \Pi _{\overline{\mathbb Q}/\mathbb Q}$
+- [ ] 149 p22 batch-02:49a | reading | after « Écrivons comme d'habitude $K = \varinjlim … » | $K\otimes$ | $ K_0 $
+- [ ] 149 p25 batch-02:114 | reading | after « où $j' : U \to Y$ … » | $\tau_u$ | $\tau_a$ 25
+- [ ] 149 p26 batch-02:124e | reading | after « $\pi_1(U)$ alors $j = j'$ i … » | $u = 0$ | $a=0$
+- [ ] 149 p28 batch-02:155c | reading | after « Soit $\overline{K}$ la clôture algébrique » | $\overline{\mathbb{Q}}$ | $ \overline K $
+- [ ] 149 p29 batch-02:160b | reading | after « morphisme $\pi_1(f)$ de $\mathcal{E}_{X/K}$ dans » | dans $\mathcal{E}_{Y/K}$ | $E_{Y/K}$
+- [ ] 149 p29 batch-02:160c | reading | after « $\mathcal{E}_{X/K}$ dans dans $\mathcal{E}_{Y/K}$ Soient » | $f, g : X \rightrightarrows Y$ | $f,g:X=Y$
+- [ ] 149 p34 batch-02:232k | reading | after « construit comme $\varprojlim$ des revêtements » | $G(n) \simeq G$ | $G(n)=G$
+- [ ] 149 p34 batch-02:232l | reading | after « suppose [illegible] qu'on remplace les » | ${}_pG$ | ${}_{p^\nu}G$
+- [ ] 149 p35 batch-02:240h | reading | after « $p$ on trouve que le » | $u$ | $a$
+- [ ] 149 p35 batch-02:240i | reading | after « on en conclut encore que » | $u = 0$ | $a=0$
+- [ ] 149 p36 batch-02:256a | reading | after « d'après la structure connue de » | $J^0_Y$ | $J_Y^0$
+- [ ] 149 p36 batch-02:256b | reading | after « de $J^0_Y$ comme extension de » | $J^0_{\hat{Y}}$ | $J_{\widehat Y}^0$
+- [ ] 149 p37 batch-02:264d | reading | after « $y$ aient même image dans » | $J^1_{\hat{Y}}$ | $J_{\widehat Y}^1$ ce qui pour un genre $g\neq1$
+- [ ] 149 p37 batch-02:264e | reading | after « comme l'image de $u$ dans » | $J^0_{\hat{Y}}$ | $J_{\widehat Y}^0$
+- [ ] 149 p37 batch-02:264f | reading | after « et on remplace $\hat{Y}$ par » | $\hat{Y}_J$ | $\widehat Y\setminus J$
+- [ ] 149 p37 batch-02:266b | reading | after « que l'image de $u$ dans » | $J^0_{\hat{Y}}$ | $J_{\widehat Y\setminus J}^0$
+- [ ] 149 p37 batch-02:272 | reading | after « Considérons les deux applications morphismes » | $U \rightrightarrows Y$ | $U\xrightarrow{i}Y$
+- [ ] 149 p38 batch-02:277a | reading | after « qui revient au même puisque » | $Y \xrightarrow{\alpha} J^1_Y$ | $Y\xrightarrow{\alpha}J_Y^1$
+- [ ] 149 p38 batch-02:277b | reading | after « puisque $Y \xrightarrow{\alpha} J^1_Y$ induit un … » | $H_1(\alpha) : H_1(Y) \to H_1(J^1_Y)$ | $H_1(\alpha):H_1(Y)-H_1(J_Y^1)$
+- [ ] 149 p38 batch-02:281d | reading | after « aux complétés donc on a » | $f(U) = \hat{Y} - f(J) \subset Y = \hat{Y} - I$ | $f(J)$
+- [ ] 149 p39 batch-02:294g | reading | after « que l'image de $u$ dans » | $J^0_{\hat{Y}}$ | $J_{\widehat Y}^0$
+- [ ] 149 p41 batch-03:26 | reading | after « du précédent appliqué notamment à » | $\mathbf{P}^1_K$ | $\mathbb P_K^1$
+- [ ] 149 p42 batch-03:56 | reading | after « morphisme $B_{K'} \to B_K$ de topos … » | $B_{\mathbf{Q}}$ | $B_{\mathbb Q}$ 42
+- [ ] 149 p44 batch-03:86a | reading | after « c ci-dessus en c L'hom » | $E^{o}_{K'} \to E_K$ | $E_{K'}^\circ-E_K$
+- [ ] 149 p44 batch-03:87 | reading | after « par $E_{K'} \to E_K$ est admissible … » | $E^{o}_{K'}$ | $E_{K'}^\circ$
+- [ ] 149 p44 batch-03:96a | reading | after « $E'$ lui-même mais même de » | $E'^{o}$ | $E'^\circ$
+- [ ] 149 p44 batch-03:99a | reading | after « de $\Gamma'$ mais même de » | $\Gamma'^{o}$ | $\Gamma'^\circ$
+- [ ] 149 p47 batch-03:166b | reading | after « e l'image par $f$ de » | tout | $\forall$
+- [ ] 149 p47 batch-03:167 | reading | after « de tout sous-groupe ouvert de » | $E_V^{o}$ | $E_V^\circ$
+- [ ] 149 p49 batch-03:207 | reading | after « compatibles avec les projections dans » | $E_{\mathbf{Q}} = \Gamma_{\mathbf{Q}}$ | $E_{\mathbb{Q}}\simeq\Gamma_{\mathbb{Q}}$
+- [ ] 149 p52 batch-03:263a | reading | after « fait une extension de base » | $K'$ | finie sur $K$ Si $K$
+- [ ] 149 p55 batch-03:350 | reading | after « y a plus des précisions » | $\pi^{\Gamma^{o}} = (1)$ | $\pi^{\Gamma^\circ}=(1)$
+- [ ] 149 p55 batch-03:351 | reading | after « des précisions $\pi^{\Gamma^{o}} = (1)$ premier … » | $\pi^{\Gamma^{o}} = L_i$ | $\pi^{\Gamma^\circ}=L_i$
+- [ ] 149 p56 batch-03:363c | reading | after « centralisateurs des s-groupes images de » | $\Gamma^{o}$ | $\Gamma^\circ$
+- [ ] 149 p56 batch-03:367 | reading | after « comme aussi des $X(K')$ pour » | $K'$ | tt
+- [ ] 149 p58 batch-03:411 | reading | after « compatible avec son action sur » | $\overline{K}$ | $\widetilde U$
+- [ ] 149 p58 batch-03:420 | reading | after « seul et l'action induite de » | $\Gamma^{o}$ | $\Gamma^\circ$
+- [ ] 149 p58 batch-03:427 | reading | after « essentiellement le th 3 du » | 1 | $\S1$
+- [ ] 149 p59 batch-03:440 | reading | after « conjectures [illegible] il faudrait écrire » | $\pi^{\Gamma^{o}} = (1)$ | $\pi^{\Gamma^\circ}=(1)$
+- [ ] 149 p60 batch-03:454a | reading | after « il est même vrai que » | $\Gamma^{o}$ | $\Gamma^\circ$
+- [ ] 149 p60 batch-03:467 | reading | after « tout entier mais seulement de » | $\Gamma^{o}$ | $\Gamma^\circ$
+- [ ] 149 p60 batch-03:468 | reading | after « contenant un sous-groupe ouvert de » | $\Gamma^{o}$ | $\Gamma^\circ$
+- [ ] 149 p62 batch-04:37 | reading | after « de $\Gamma^{0}$ opérant sur $\mathcal{X}$ » | $\Gamma^{0}$ | $\Gamma^\circ$
+- [ ] 149 p65 batch-04:71g | reading | after « des topos $B_{\widehat{\pi}_{0,3}, \Gamma_{\mathbb{Q}}}$ [illegible] sur » | $B_{\Gamma}$ | $B_{\Gamma_Q}^{ \sharp }$
+- [ ] 149 p67 batch-04:86 | reading | after « finalement tous les $\mathcal{E}_K$ sur » | $\mathcal{E}_{\mathbb{Q}}$ | $ E \,E_Q$
+- [ ] 149 p69 batch-04:94e | reading | after « $S$ définissant une section de » | $\mathcal{E}_{\mathcal{U}_K}$ | $E_{U_{ \eta }}$
+- [ ] 149 p69 batch-04:94f | reading | after « $S$ ssi la section de » | $\mathcal{E}_{\mathcal{U}_K}$ | $E_{U_{ \eta }}$
+- [ ] 149 p71 batch-04:104c | reading | after « $S'$ se prolonge automatiquement en » | $\mathcal{U}$ en | $U$
+- [ ] 149 p72 batch-04:125f | reading | after « correspondent biunivoquement aux sections de » | $\mathcal{E}_{\mathcal{U}_K}$ | $E_{U_\eta}$
+- [ ] 149 p73 batch-04:133a | reading | after « précédente que la la section » | $\varphi$ | $\psi$
+- [ ] 149 p73 batch-04:133b | reading | after « la la section $\varphi$ de » | $\mathcal{E}_{\mathcal{U}_K}$ | $E_{U_\eta}$
+- [ ] 149 p73 batch-04:137c | reading | after « générale Théorème [illegible] 1 Soit » | $T$ | $ S $
+- [ ] 149 p77 batch-04:219 | reading | after « \[ 217T_\ell \longrightarrow T_\ell^{I} / T_\ell … » | $n$ | $\mu$
+- [ ] 149 p77 batch-04:221b | reading | after « $p$ c'est que l'hom ext » | $\pi_1(\mathcal{Y}) \to \pi_1(\mathcal{U}) \simeq \pi_1(\mathcal{U}_s)$ | $\pi_1(\eta)\longrightarrow\pi_1(U)\simeq\pi_1(U_s)$
+- [ ] 149 p77 batch-04:221c | reading | after « égal à [illegible] $k_{i_0} \circ (n … » | $k_{i_0}$ | $\kappa_{i_0}$
+- [ ] 149 p81 batch-05:29 | reading | after « sur $X$ le long de » | $g_i(S)$ | $ g (S)$
+- [ ] 149 p82 batch-05:58 | reading | after « prolonge en une section de » | $\mathbb{E}^1_S$ | $ \mathbb E'_S $
+- [ ] 149 p82 batch-05:68 | reading | after « considérons son stabilisateur $N_x$ dans » | $\mathcal{E}_K$ | le $E_K$
+- [ ] 149 p84 batch-05:104 | reading | after « arithm est injectif Ainsi quand » | $\xi_i = 0$ | $\gamma_i=0$
+- [ ] 149 p84 batch-05:108 | reading | after « s'identifie à un sous-torseur du » | $\bigl(H^1(S, T) = \mathbb{G}_m(S)^{\wedge}\bigr)$ | $(H^1(S,T)=G_m(S)^\wedge)$
+- [ ] 149 p85 batch-05:121a | reading | after « codim $1$ va coïncider avec » | une $g_i$ | $g_{i_0}$
+- [ ] 149 p86 batch-05:142a | reading | after « germe de variété $D = \bigl(\overline{\{s\}}\bigr)_{ … » | $s$ | $s\dots$
+- [ ] 149 p87 batch-05:184 | reading | after « exactes numéroté 26 le noyau » | $I$ | $J$
+- [ ] 149 p87 batch-05:188a | reading | after « la section de départ de » | $\mathcal{E}_{U_K}$ | $E_{U_\eta}$
+- [ ] 149 p87 batch-05:189 | reading | after « sur $\mathcal{E}_K$ elle-même définie par » | $f_K$ | le
+- [ ] 149 p87 batch-05:189a | reading | after « $f_K$ pt $K$ rat de » | $U_K$ | $U_\eta$
+- [ ] 149 p87 batch-05:189b | reading | after « $K$ rat de $U_K$ sur » | $K$ | $\eta$
+- [ ] 149 p87 batch-05:194a | reading | after « de la forme $k_i \circ (\mu … » | $k_i \colon T \to \pi$ | $\kappa_i:T-\pi$
+- [ ] 149 p87 batch-05:197 | reading | after « s'envoie dans le normalisateur de » | $L_i = k_i(T)$ | $L_i=\kappa_i(T)$
+- [ ] 149 p88 batch-05:218 | reading | after « $\pi_1$ correspondant Une section rationnelle » | $f$ | $f_{ K }$
+- [ ] 149 p89 batch-05:236a | reading | after « de la forme $k_i \circ (\mu … » | $k_i$ | $\kappa_i$
+- [ ] 149 p89 batch-05:244 | reading | after « section rationnelle régulière $\tilde{f}$ de » | $U_{\tilde{K}}$ | $ \widehat U $
+- [ ] 149 p89 batch-05:255 | reading | after « $\pi$ à un sous-groupe de » | $\mathcal{E}_{X_s}$ | $ \pi_s E_{X_s}$ ext de $E_{k(s)}$ par $\pi$
+- [ ] 149 p89 batch-05:256 | reading | after « dans $N(L_i)$ Ainsi notre scindage » | de $\mathcal{E}_{U_K}$ | $E_{U_\eta}$
+- [ ] 149 p89 batch-05:258 | reading | after « $\mathcal{E}_{U_K}$ sur $\mathcal{E}_K$ ou de » | $\mathcal{E}_{U_{\tilde{K}}}$ | $E_{U_{\widetilde K}}$ $E_{X_s}$
+- [ ] 149 p90 batch-05:265a | reading | after « sur $\mathcal{E}_S$ ni même de » | $\mathcal{E}_{U_{\tilde{\mathcal{O}}}}$ | $\mathcal E_{\widetilde U}$
+- [ ] 149 p90 batch-05:270 | reading | after « type fini sur un corps » | $k_0$ | de $ N $
+- [ ] 149 p90 batch-05:278 | reading | after « Une section rationnelle $f$ de » | $U/S$ | $\frac{U}{S}$
+- [ ] 149 p90 batch-05:280a | reading | after « parcourant l'un des pts de » | $S'$ | $S$ 90
+- [ ] 149 p92 batch-05:308 | reading | after « celui du complété s'identifie de » | même | $=$
+- [ ] 149 p94 batch-05:346 | reading | after « la classe de scindages de » | $\mathcal{E}_{X_s}$ | $\mathcal E_{ X_B }$
+- [ ] 149 p94 batch-05:353 | reading | after « rationnelle envisagée du faisceau conormal » | $\mathcal{N}^{\vee}_{D_\alpha/S}$ | $\underline N_{D_\alpha,S}^{ r }$
+- [ ] 149 p95 batch-05:363a | reading | after « complété formel d'une courbe relative » | $X/S$ | $X/B$
+- [ ] 149 p97 batch-05:404a | reading | after « $\mathcal{E}_K$ [illegible] inertie relative sur » | $\mathcal{E}_k$ | $\mathcal E_k\ldots$
+- [ ] 149 p102 batch-06:72 | reading | after « considération de courbes de type » | gr | $g,\nu$
+- [ ] 149 p104 batch-06:103 | reading | after « corps je note $\mathcal{E}_A$ et » | $\mathcal{E}^{\tilde{A}}_{A}$ | $\mathcal E_A^{\tilde A}$ $=\mathcal E_X^{ \tilde X }$
+- [ ] 149 p105 batch-06:119 | reading | after « et d'une ext sép close » | $\overline{\Omega}$ | $\bar K$ $\Omega$
+- [ ] 149 p106 batch-06:152a | reading | after « devrait pouvoir écrire en fait » | $\mathcal{E}^{\tilde{X}}_{Y}$ | $\mathcal E_Y^{\widetilde X}$
+- [ ] 149 p107 batch-06:177a | reading | after « on a donc \[ 174 (8) … » | $\ldots$ | on a
+- [ ] 149 p108 batch-06:212 | reading | after « un pt géom de $X$ » | $\mathcal{E}^{\Omega}_{X/Y}$ $\mathcal{E}^{\tilde{X}}_{X/A}$ | $\mathcal E_{X/Y}^{\Omega}$ $\mathcal E_{X/A}^{\widetilde X}$
+- [ ] 149 p108 batch-06:213 | reading | after « $X$ $\mathcal{E}^{\Omega}_{X/Y}$ $\mathcal{E}^{\tilde{X}}_{X/A}$ si $Y = … » | $\mathcal{E}^{\tilde{B}}_{B/A}$ | $\mathcal E_{B/A}^{\widetilde B}$ $\ldots$
+- [ ] 149 p109 batch-06:229a | reading | after « $T \to X$ ce qui revient … » | même | $=$
+- [ ] 149 p110 batch-06:273a | reading | after « remplace [illegible] le contenu de » | $\mathcal{E}^{T}_{X_T}$ | $\mathcal E_{X_T}^T$
+- [ ] 149 p111 batch-06:296b | reading | after « Une [illegible] des [illegible] de » | $\mathcal{E}^{T}_{X/Y}$ | $\mathcal E_{X/Y}^T$
+- [ ] 149 p111 batch-06:297 | reading | after « un pt géométrique qui définit » | $\xi_X$ | donc
+- [ ] 149 p112 batch-06:319 | reading | after « aux divers pts géom de » | $\mathcal{E}^{T}_{X/Y}$ | $\mathcal E_{X/Y}^T$
+- [ ] 149 p112 batch-06:326a | reading | after « la donnée d'un isom entre » | $\mathcal{E}^{T}_{X/Y}$ | $\mathcal E_{X/Y}^T$
+- [ ] 149 p112 batch-06:326b | reading | after « d'un isom entre $\mathcal{E}^{T}_{X/Y}$ et » | $\mathcal{E}^{T'}_{X/Y}$ | $\mathcal E_{X/Y}^{T'}$
+- [ ] 149 p113 batch-06:329a | reading | after « d'un [illegible] de » | $\mathcal{E}^{T}_{X}$ $/Y$ | $\mathcal E_{X /Y }^T$
+- [ ] 149 p113 batch-06:334 | reading | after « pt de vue qui regarde » | $\mathcal{E}^{T}_{X}$ | $\mathcal E_{X /Y }^T$
+- [ ] 149 p113 batch-06:335a | reading | after « $\mathcal{E}^{T}_{X}$ comme une extension de » | $\mathcal{E}^{T}_{Y}$ | $\mathcal E_Y^T$
+- [ ] 149 p113 batch-06:335b | reading | after « ou d'un sous-groupe convenable par » | $\mathcal{E}^{T}_{X/Y}$ | $\mathcal E_{X/Y}^T$
+- [ ] 149 p113 batch-06:337 | reading | after « groupe fondamental géométrique tandis que » | $\mathcal{E}^{T}_{Y}$ | $\mathcal E_Y^T$
+- [ ] 149 p114 batch-06:347a | reading | after « $ Spec \overline{K} \simeq \overline{Y}$ Souvent … » | $\Gamma^{\overline{K}}_{K}$ $\Gamma$ | $\Gamma_K^{\overline K}$
+- [ ] 149 p114 batch-06:354 | reading | after « propre régulier de $L$ Alors » | $\mathcal{E}^{\overline{L}}_{X}$ | $\mathcal E_X^{\overline L}$
+- [ ] 149 p116 batch-06:390 | reading | after « est la limite projective des » | $\mathcal{E}^{\overline{L}}_{U}$ | $\mathcal E_U^{\overline L}$
+- [ ] 149 p116 batch-06:395 | reading | after « tient variables \[ 393 (24) \qquad … » | même | $=$
+- [ ] 149 p117 batch-06:411 | reading | after « $N_{x'}$ et un groupe d'inertie » | $I_{x'}$ | $ L_{x'} $
+- [ ] 149 p118 batch-06:444b | reading | after « [illegible] d'une pt géométrique de » | $\tilde{U}_x$ | $ \widetilde K_x $
+- [ ] 149 p118 batch-06:445 | reading | after « de l'une clôture algébrique de » | $\tilde{L}_x$ | $\widetilde K_x$
+- [ ] 149 p118 batch-06:447a | reading | after « $\tilde{U}_x \to U$ [illegible] Spec L … » | $\mathcal{E}_L$ | $ \xi _L$
+- [ ] 149 p120 batch-06:506a | reading | after « Ceci posé » | $\mathcal{E}^{\overline{L}}_{U}$ | $\mathcal E_U^{\overline L}$
+- [ ] 149 p122 batch-07:32e | reading | after « on peut faisant encore éclater » | supposer | $a$
+- [ ] 149 p122 batch-07:38c | reading | after « son p oin t fermé » | $s$ | $ x $
+- [ ] 149 p123 batch-07:45d | reading | after « $x \in \mathfrak{X}$ correspondant $T_{\infty} = … » | $x$ | $ a $
+- [ ] 149 p123 batch-07:45e | reading | after « groupe ouvert de $\mathcal{E}_K$ puisque » | $k(x)$ | $k( a )$
+- [ ] 149 p124 batch-07:54c | reading | after « $K$ Comparant pour une sous-extension » | $L_1$ | $L_1^{ k }$
+- [ ] 149 p125 batch-07:61c | reading | after « de normalise $I_{V_1}$ donc si » | $\ldots$ | on a
+- [ ] 149 p125 batch-07:61d | reading | after « $I_{V_1}$ et sa restriction à » | $\mathcal{E}_K^{\circ}$ | $\mathcal E_K^0$
+- [ ] 149 p126 batch-07:75a | reading | after « arbitraire Alors toute section de » | $\mathcal{E}_K^{\overline{L}}$ | $\mathcal E_U^{\bar L}$
+- [ ] 149 p126 batch-07:84 | reading | after « et on peut y remplacer » | $\Gamma^{\circ}$ | $\Gamma^0$
+- [ ] 149 p127 batch-07:95a | reading | after « irréd $D_i$ $i \in I$ de … » | $X \setminus U$ | $X-U$
+- [ ] 149 p127 batch-07:95b | reading | after « $X \setminus U$ des diviseurs réguliers … » | $X \setminus U$ | $X-U$
+- [ ] 149 p129 batch-07:125a | reading | after « réserve de vérifications je présume » | 1 | $1^\circ)$
+- [ ] 149 p129 batch-07:125b | reading | after « ou ce qui revient au » | même | $=$
+- [ ] 149 p129 batch-07:146 | reading | after « À noter que la question » | 2 | $2^\circ$
+- [ ] 149 p130 batch-07:151a | reading | after « vraie ou fausse par contre » | 1 | $1^\circ)$
+- [ ] 149 p130 batch-07:160 | reading | after « tourner vers l'étude des questions » | 1 | $1^\circ)$
+- [ ] 149 p130 batch-07:160a | reading | after « l'étude des questions 1 et » | 2 | $2^\circ)$
+- [ ] 149 p131 batch-07:174b | reading | after « $D_J \subset X$ est régulier de … » | $\alpha$ | $d$
+- [ ] 149 p132 batch-07:184d | reading | after « le long de $D_J$ soit » | $X$ $X_J$ | $ \hat X_J X_J$
+- [ ] 149 p132 batch-07:184e | reading | after « $U_J$ $= X_J \setminus D_J$ la … » | $U$ | $U_{ \xi }$
+- [ ] 149 p135 batch-07:245b | reading | after « les choix relatifs aux différents » | $x$ | $\alpha$
+
+## 4. Accents and spelling
+
+- [ ] 149 p2 batch-01:25 | reading | after « $E_{\overline{K}/K}$ comme le topos des » | ensembles | Ensembles
+- [ ] 149 p3 batch-01:30 | reading | after « on a un morphisme de » | topos | Topos
+- [ ] 149 p5 batch-01:59a | reading | after « équivalence de groupoïdes ou de » | topos | Topos
+- [ ] 149 p9 batch-01:110a | reading | after « de Galois correspond au sous-corps » | $k_0$ | $K_0$
+- [ ] 149 p17 batch-01:223a | reading | after « permet de » | reconstituer | réconstituer
+- [ ] 149 p19 batch-01:244 | reading | after « commute et ceci suffit pour » | reconstituer | réconstituer
+- [ ] 149 p20 batch-01:248d | reading | after « on a $Z \cap \pi = … » | Th | th
+- [ ] 149 p24 batch-02:87 | reading | after « $X$ on sait que 1 » | les | Les
+- [ ] 149 p24 batch-02:93a | reading | after « son action sur les $H_1(\ , … » | ce | Ce
+- [ ] 149 p36 batch-02:249c | reading | after « variété élémentaire d'Artin anabélienne sur » | $k$ | $K$
+- [ ] 149 p43 batch-03:74 | reading | after « projections sur $E_{\mathbf{Q}} = \Gamma_{\mathbf{Q}}$ en … » | toute | Toute
+- [ ] 149 p48 batch-03:182 | reading | after « sorte que $\Gamma'$ opère sur » | $\pi_U$ | $\Pi_U$
+- [ ] 149 p50 batch-03:223 | reading | after « groupes profinis correspondant à des » | $K(\pi,1)$ | $K(\Pi,1)$
+- [ ] 149 p52 batch-03:261a | reading | after « propose d'étudier les sections mod » | $\pi_{U/K}$ | $\Pi_{U/K}$
+- [ ] 149 p54 batch-03:324b | reading | after « e aux pts de $U$ » | à | a
+- [ ] 149 p56 batch-03:368b | reading | after « l'extension $E_L$ de $E_K$ par » | $\pi_{L/K}$ | $\Pi_{L/K}$
+- [ ] 149 p77 batch-04:215 | reading | after « une multiplicité d'intersection Ceci posé » | je | Je
+- [ ] 149 p89 batch-05:234 | reading | after « équivalentes begin enumerate item a » | cet | Cet
+- [ ] 149 p93 batch-05:333 | reading | after « [illegible] $U_{D_\alpha}$ sur $D_\alpha$ ou » | $U_{s_\alpha}$ | $U_{S_\alpha}$
+- [ ] 149 p107 batch-06:181 | reading | after « $x \in X$ i e une … » | sép | sep
+- [ ] 149 p120 batch-06:527 | reading | after « $x$ $n - d$ est la … » | il | Il
