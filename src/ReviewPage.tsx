@@ -38,6 +38,22 @@ const SHOW_READINGS = import.meta.env.VITE_RENDER_TRANSCRIPTS !== 'false';
 // Readers of the hand first, then the questions for mathematicians.
 const ITEMS = [...(QUEUE.items as ReviewItem[])].sort((a, b) => Number(isMaths(a.kind)) - Number(isMaths(b.kind)));
 const AUDIENCE = { readers: 'Reading the hand', maths: 'For mathematicians' } as const;
+const EMPTY_ITEM: ReviewItem = {
+  id: '',
+  section: '',
+  kind: 'uncertain',
+  cote: '',
+  batch: 1,
+  page: null,
+  prompt: '',
+  hint: '',
+  choices: [],
+  entry: null,
+  claim: null,
+  details: null,
+  context: null,
+  link: '',
+};
 type Filter = ReviewKind | 'all' | keyof typeof AUDIENCE;
 const audienceOf = (k: ReviewKind): keyof typeof AUDIENCE => (isMaths(k) ? 'maths' : 'readers');
 /** Answered here, with anything but « Skip »: such items leave the list unless « Show answered » is on. */
@@ -104,7 +120,7 @@ export function ReviewPage() {
     return kept;
   });
   const [kind, setKind] = useState<Filter>('all');
-  const [id, setId] = useState<string>(() => idFromHash() ?? ITEMS.find((i) => !loadAnswers()[i.id])?.id ?? ITEMS[0].id);
+  const [id, setId] = useState<string>(() => idFromHash() ?? ITEMS.find((i) => !loadAnswers()[i.id])?.id ?? ITEMS[0]?.id ?? '');
   const [pane, setPane] = useState(true);
   const [paneBatch, setPaneBatch] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
@@ -126,7 +142,9 @@ export function ReviewPage() {
   );
   const shown = useMemo(() => listed.filter(inKind), [listed, inKind]);
   const answeredHere = ITEMS.filter((i) => inKind(i) && isAnswered(answers[i.id])).length;
-  const item = ITEMS.find((i) => i.id === id) ?? ITEMS[0];
+  // The queue can be empty once every check is answered: a placeholder keeps the hooks below
+  // well-defined, and the question panel is not rendered.
+  const item = ITEMS.find((i) => i.id === id) ?? ITEMS[0] ?? EMPTY_ITEM;
   const index = shown.findIndex((i) => i.id === item.id);
   const answer = answers[item.id];
 
@@ -346,6 +364,7 @@ export function ReviewPage() {
               </ol>
             </nav>
 
+            {ITEMS.length > 0 && (
             <section className="order-1 min-w-0 2xl:order-2" aria-live="polite">
               <div className="rounded-xl border border-ink-200 bg-white p-4 sm:p-5">
                 <p className="flex flex-wrap items-center gap-x-2 text-[11.5px] font-semibold uppercase tracking-wider text-ink-400">
@@ -498,11 +517,12 @@ export function ReviewPage() {
                 )}
               </div>
             </section>
+            )}
           </div>
         </main>
         <Footer />
       </div>
-      {pane && source === 'montpellier' && <FacsimilePane open={facsimile} onClose={() => setPane(false)} onBatch={setPaneBatch} />}
+      {pane && source === 'montpellier' && ITEMS.length > 0 && <FacsimilePane open={facsimile} onClose={() => setPane(false)} onBatch={setPaneBatch} />}
     </>
   );
 }
