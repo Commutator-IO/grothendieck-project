@@ -104,6 +104,37 @@ const STOP = {
 
 const FIGURE = /^\s*(?:\[?\s*)?(figure|dessin|drawing|croquis|sketch|schéma|diagramme dessiné|a drawing|un dessin)/i;
 
+// After Grésillon, Éléments de critique génétique (glossary): a struck segment replaced on the
+// same line, at the pen's flow, is a substitution (« variante d'écriture »); one followed by
+// nothing new is a suppression. Read off the position of what follows \struck{} on its line:
+// a heuristic, since the transcription does not mark the operation itself.
+const REPLACES = /^[ \t]*(?:[\p{L}\p{N}$(]|\\(?:add|uncertain|supplied|ill|emph|underline|textbf|mathrm|mathcal|mathbb|operatorname)\b)/u;
+function substitutions(his) {
+  let n = 0;
+  for (const [, end] of groups(his, 'struck')) if (REPLACES.test(his.slice(end, end + 200))) n++;
+  return n;
+}
+// Metascriptural signs (Grésillon: any sign about the act of writing itself): cross-references
+// and memos to himself, read on his prose by their usual words.
+const META = /\b(?:voir|see)\s+(?:p\.|§|plus\s+(?:haut|loin))|\bcf\.|\b(?:supra|infra)\b|\bci-(?:dessus|dessous)\b|\bplus\s+(?:haut|loin)\b|\bà\s+(?:revoir|vérifier|compléter|reprendre|préciser)\b|\bN\.?\s?B\.?(?=\s|:)/giu;
+// Dates in his hand: 12.3.83, 5. 6. 1986, or 12 juin 1986, years 1950-1999.
+const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+function datesIn(prose) {
+  const out = [];
+  const keep = (d, m, y) => {
+    y = y < 100 ? 1900 + y : y;
+    if (y >= 1950 && y <= 1999 && m >= 1 && m <= 12 && d >= 1 && d <= 31)
+      out.push(`${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`);
+  };
+  for (const m of prose.matchAll(/(?<![\d.,])(\d{1,2})\s?\.\s?(\d{1,2})\s?\.\s?((?:19)?\d{2})(?![\d.,])/g))
+    keep(+m[1], +m[2], +m[3]);
+  for (const m of prose.matchAll(/(?<!\d)(\d{1,2})(?:er)?\s+(janvier|f[ée]vrier|mars|avril|mai|juin|juillet|ao[uû]t|septembre|octobre|novembre|d[ée]cembre)\s+((?:19)?\d{2})(?!\d)/giu))
+    keep(+m[1], MONTHS.findIndex((x) => x.normalize('NFD').replace(/\p{M}/gu, '') === m[2].toLowerCase().normalize('NFD').replace(/\p{M}/gu, '')) + 1, +m[3]);
+  return out;
+}
+// A new writing campaign starts after an interruption of more than this many days.
+const CAMPAIGN_GAP = 30;
+
 const batches = [];
 for (const d of readdirSync(T, { withFileTypes: true })) {
   if (!d.isDirectory() || !COTE.has(d.name)) continue;
@@ -130,6 +161,8 @@ for (const d of readdirSync(T, { withFileTypes: true })) {
     const lang = Object.fromEntries(Object.entries(STOP).map(([k, list]) => [k, lower.filter((w) => list.includes(w)).length]));
     const pages = new Set([...his.matchAll(/\\page\{([^}]*)\}/g)].map((p) => p[1]));
     const mathChars = his.length - mathless(his).length;
+    const struckN = count('struck');
+    const subst = substitutions(his);
     batches.push({
       folder: d.name,
       batch: Number(m[1]),
@@ -137,7 +170,13 @@ for (const d of readdirSync(T, { withFileTypes: true })) {
       words: words.length,
       ill: (his.match(/\\ill\{\}/g) ?? []).length,
       uncertain: count('uncertain'),
-      struck: count('struck'),
+      struck: struckN,
+      substitution: subst,
+      suppression: struckN - subst,
+      metascript: (prose.match(META) ?? []).length,
+      underline: count('underline'),
+      // The transcriber's section headings restate dates; only his own lines count.
+      dates: datesIn(prose.replace(/\\(?:sub)*section\*?\{[^{}]*\}/g, ' ')),
       add: count('add'),
       supplied: count('supplied'),
       marginal: count('marginal'),
@@ -154,7 +193,21 @@ for (const d of readdirSync(T, { withFileTypes: true })) {
 batches.sort((a, b) => byShelfmark(a.folder, b.folder) || a.batch - b.batch);
 
 // Per folder: the sums, and the inventory's dating for the chronology.
-const KEYS = ['pages', 'words', 'ill', 'uncertain', 'struck', 'add', 'supplied', 'marginal', 'diagrams', 'drawings'];
+const KEYS = ['pages', 'words', 'ill', 'uncertain', 'struck', 'substitution', 'suppression', 'add', 'supplied', 'marginal', 'metascript', 'underline', 'diagrams', 'drawings'];
+const DAY = 86400000;
+/** The writing campaigns of a folder, from the distinct days dated in his hand. */
+function campaigns(days) {
+  const ds = [...new Set(days)].sort();
+  if (!ds.length) return null;
+  let n = 1;
+  let longest = 0;
+  for (let i = 1; i < ds.length; i++) {
+    const gap = Math.round((Date.parse(ds[i]) - Date.parse(ds[i - 1])) / DAY);
+    if (gap > CAMPAIGN_GAP) n++;
+    longest = Math.max(longest, gap);
+  }
+  return { days: ds.length, campaigns: n, first: ds[0], last: ds.at(-1), longestGap: longest };
+}
 const folders = [...new Set(batches.map((b) => b.folder))].map((id) => {
   const bs = batches.filter((b) => b.folder === id);
   const sum = Object.fromEntries(KEYS.map((k) => [k, bs.reduce((a, b) => a + b[k], 0)]));
@@ -167,6 +220,7 @@ const folders = [...new Set(batches.map((b) => b.folder))].map((id) => {
     year: year(id),
     batches: bs.length,
     ...sum,
+    dated: campaigns(bs.flatMap((b) => b.dates)),
     // The share of formulas, weighted by the batches' lengths in words.
     math: Number((bs.reduce((a, b) => a + b.math * (b.words + 1), 0) / bs.reduce((a, b) => a + b.words + 1, 0)).toFixed(3)),
     // A language counts when its function words are at least a fifth of the
@@ -180,6 +234,19 @@ const lexicon = JSON.parse(
   readFileSync(resolve(ROOT, '.claude/skills/transcribe-grothendieck/references/lexicon.json'), 'utf8'),
 );
 
+// How the edition moves after a human check (the answers of /review/, review-answered.json):
+// a reading or a drawing that a reader changed, confirmed, or left open.
+const READINGS = ['ill', 'unc', 'reading', 'supplied', 'add', 'date', 'letter', 'quoted', 'imprecise'];
+const review = { readings: { changed: 0, stood: 0, open: 0 }, drawings: { changed: 0, stood: 0, open: 0 } };
+for (const [id, v] of Object.entries(JSON.parse(readFileSync(resolve(ROOT, 'src/content/review-answered.json'), 'utf8')).items)) {
+  const kind = id.split('-')[0];
+  const fam = kind === 'drawing' ? 'drawings' : READINGS.includes(kind) ? 'readings' : null;
+  if (!fam) continue;
+  if (v.result === 'applied' || v.result === 'corrected') review[fam].changed++;
+  else if (v.result.startsWith('confirmed')) review[fam].stood++;
+  else review[fam].open++;
+}
+
 // The drawings redrawn in TikZ (#73, #128), from each folder's drawings/drawings.json.
 const redrawn = { total: 0, ok: 0 };
 for (const d of readdirSync(resolve(ROOT, 'transcripts'))) {
@@ -190,6 +257,7 @@ for (const d of readdirSync(resolve(ROOT, 'transcripts'))) {
   redrawn.ok += list.filter((r) => r.status === 'ok').length;
 }
 
+for (const b of batches) delete b.dates;
 const out = {
   $why:
     'Generated by `npm run hand` from transcripts/*/batch-*.fr.tex — do not edit by hand. Counts of the transcription apparatus, not of ink.',
@@ -197,6 +265,7 @@ const out = {
   folders,
   batches,
   redrawn,
+  review,
   // His abbreviations, from the lexicon the transcription pass reads.
   abbreviations: Object.entries(lexicon.abbreviations)
     .slice(0, 40)

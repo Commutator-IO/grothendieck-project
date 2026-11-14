@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import handRaw from './content/hand.json';
 import quotesRaw from './content/quotes.json';
+import historyRaw from './content/hand-history.json';
 
 /**
  * The hand, measured: what the transcriptions could read, what they could
@@ -25,8 +26,13 @@ interface Folder {
   ill: number;
   uncertain: number;
   struck: number;
+  substitution: number;
+  suppression: number;
   add: number;
   marginal: number;
+  metascript: number;
+  underline: number;
+  dated: { days: number; campaigns: number; first: string; last: string; longestGap: number } | null;
   diagrams: number;
   drawings: number;
   math: number;
@@ -36,9 +42,14 @@ const HAND = handRaw as unknown as {
   built: string;
   folders: Folder[];
   redrawn: { total: number; ok: number };
+  review: Record<'readings' | 'drawings', { changed: number; stood: number; open: number }>;
   abbreviations: { form: string; n: number }[];
 };
 const FOLDERS = HAND.folders;
+const HISTORY = historyRaw as unknown as {
+  built: string;
+  snapshots: { date: string; tag?: string; commit: string; batches: number; words: number; per100: number; revised: number | null; revisedShare: number | null }[];
+};
 
 const BLUE = '#38539d';
 const AMBER = '#c9900c';
@@ -494,6 +505,88 @@ function Abbreviations() {
   );
 }
 
+/** Grésillon's writing operations, read off the apparatus. */
+function Operations() {
+  const s = (k: keyof Folder) => FOLDERS.reduce((a, f) => a + (f[k] as number), 0);
+  const dated = FOLDERS.filter((f) => f.dated);
+  const campaigns = dated.reduce((a, f) => a + (f.dated?.campaigns ?? 0), 0);
+  const days = dated.reduce((a, f) => a + (f.dated?.days ?? 0), 0);
+  const later = s('add') + s('marginal');
+  return (
+    <section className="mt-12">
+      <H2 id="operations">How he rewrote</H2>
+      <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
+        Almuth Grésillon&rsquo;s <em>Éléments de critique génétique</em> names four operations of writing
+        (addition, suppression, substitution, displacement) and separates a rewriting made at the pen&rsquo;s
+        flow, right after the struck word on the same line, from one made after a rereading, between the
+        lines or in the margin. The transcriptions do not mark these operations; the counts below read them
+        off the position of what follows each strike-out, and are estimates.
+      </p>
+      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <Kpi value={n(s('substitution'))} label="substitutions" help="a strike-out replaced on the same line, at the pen's flow" />
+        <Kpi value={n(s('suppression'))} label="suppressions" help="a strike-out followed by nothing new" />
+        <Kpi value={n(later)} label="later additions" help={`after a rereading: ${n(s('add'))} insertions and ${n(s('marginal'))} margin notes`} />
+        <Kpi value={pct(s('substitution') / Math.max(1, s('substitution') + later), 0)} label="of rewritings at the pen's flow" help="substitutions against later additions" />
+        <Kpi value={n(s('metascript'))} label="notes to himself" help="cross-references and memos: voir p., cf., supra, infra, à revoir, à vérifier" />
+        <Kpi value={n(s('underline'))} label="underlinings" />
+        <Kpi value={n(dated.length)} label="folders dated in his hand" help={`${n(days)} dated days; the others carry no date of his`} />
+        <Kpi value={n(campaigns)} label="writing campaigns" help="dated days more than thirty days apart start a new campaign" />
+      </div>
+    </section>
+  );
+}
+
+/** How the edition converges, release after release. */
+function Convergence() {
+  const r = HAND.review;
+  const rate = (x: { changed: number; stood: number }) => x.changed / Math.max(1, x.changed + x.stood);
+  return (
+    <section className="mt-12">
+      <H2 id="convergence">How the edition converges</H2>
+      <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
+        The counts above measure how hard the hand is, not how well it was read. These measure the edition
+        itself: what a human reader changed when shown a doubtful place, and how the transcriptions have
+        moved since the first batch. The places sent for review were chosen because they were doubtful, so
+        the rate of change overstates the error on the rest of the text.
+      </p>
+      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <Kpi value={pct(rate(r.readings), 0)} label="readings changed after review" help={`${n(r.readings.changed)} changed, ${n(r.readings.stood)} confirmed, ${n(r.readings.open)} still open`} />
+        <Kpi value={pct(rate(r.drawings), 0)} label="drawings changed after review" help={`${n(r.drawings.changed)} changed, ${n(r.drawings.stood)} confirmed`} />
+      </div>
+      <table className="mt-5 w-full max-w-[44em] text-left text-[12.5px] text-ink-600">
+        <thead className="text-[11px] uppercase tracking-[0.08em] text-ink-400">
+          <tr>
+            <th className="py-1 font-semibold">Snapshot</th>
+            <th className="py-1 text-right font-semibold">Batches</th>
+            <th className="py-1 text-right font-semibold">Words</th>
+            <th className="py-1 text-right font-semibold">Unread or doubtful, per 100 words</th>
+            <th className="py-1 text-right font-semibold">Lines revised since the previous</th>
+          </tr>
+        </thead>
+        <tbody>
+          {HISTORY.snapshots.map((h) => (
+            <tr key={h.date + h.commit} className="border-t border-ink-100">
+              <td className="tabular py-1">{h.tag ?? h.date}</td>
+              <td className="tabular py-1 text-right">{n(h.batches)}</td>
+              <td className="tabular py-1 text-right">{n(h.words)}</td>
+              <td className="tabular py-1 text-right">{h.per100.toFixed(1)}</td>
+              <td className="tabular py-1 text-right">
+                {h.revised === null ? '—' : `${n(h.revised)}${h.revisedShare !== null ? ` (${pct(h.revisedShare, 1)})` : ''}`}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="mt-3 max-w-[44em] text-[12px] leading-relaxed text-ink-400">
+        A snapshot every fourteen days from the git history, and one per tagged release once releases are
+        made; revised lines are counted only in batches present at both snapshots. An estimate of the
+        errors no reader has found yet needs two independent readings of the same pages, which do not
+        exist so far.
+      </p>
+    </section>
+  );
+}
+
 export function HandPage() {
   const t = useMemo(() => {
     const s = (k: keyof Folder) => FOLDERS.reduce((a, f) => a + (f[k] as number), 0);
@@ -548,6 +641,8 @@ export function HandPage() {
           <Kpi value={n(HAND.redrawn.total)} label="drawings redrawn" help={`in TikZ from the facsimile, ${n(HAND.redrawn.ok)} marked ok, the rest partial; none checked by a human`} />
         </div>
 
+        <Operations />
+        <Convergence />
         <InHisWords />
         <LegibilityOverTime />
         <Multiples />
@@ -556,7 +651,7 @@ export function HandPage() {
         <Abbreviations />
 
         <p className="mt-12 max-w-[44em] text-[12px] leading-relaxed text-ink-400">
-          Built on {HAND.built} by <code>npm run hand</code> from transcripts/*/batch-*.fr.tex. The
+          Built on {HAND.built} by <code>npm run hand</code> from transcripts/*/batch-*.fr.tex and its git history. The
           transcriber's notes are left out of every count but the drawings; his margins are
           counted both as words and as margins. Language is judged by common function words, so a
           quoted title does not make a folder bilingual.
