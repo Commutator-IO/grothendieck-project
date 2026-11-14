@@ -91,8 +91,13 @@ points.sort((a, b) => a.date.localeCompare(b.date));
 const snapshots = [];
 let prev = null;
 for (const p of points) {
-  const commit = p.tag ?? git(['rev-list', '-1', `--before=${p.date}T23:59:59`, 'HEAD']).trim();
-  if (!commit || (prev && prev.commit === commit && !p.tag)) continue;
+  const commit = git(['rev-list', '-1', ...(p.tag ? [p.tag] : [`--before=${p.date}T23:59:59`, 'HEAD'])]).trim();
+  if (!commit) continue;
+  if (prev && prev.commit === commit) {
+    // A tag on the commit of the fortnightly point just taken names that point.
+    if (p.tag) snapshots.at(-1).tag = p.tag;
+    continue;
+  }
   const files = snapshot(commit);
   let words = 0, ill = 0, uncertain = 0, lines = 0;
   for (const src of files.values()) {

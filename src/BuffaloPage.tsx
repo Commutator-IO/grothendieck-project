@@ -269,7 +269,7 @@ const STATS = statsRaw as unknown as {
   total: { sides: number; words: number; doubtful: number; inaudible: number; supplied: number; changedShare: number; bySource: Record<'captions' | 'whisper', { sides: number; changedShare: number }> };
   courses: { id: string; title: string; sides: number; words: number; doubtful: number; inaudible: number; supplied: number; changedShare: number }[];
   review: { checks: number; mathematical: number } | null;
-  history: { date: string; words: number; doubtful: number; inaudible: number; per100: number; changedShare: number }[];
+  history: { date: string; tag?: string; words: number; doubtful: number; inaudible: number; per100: number; changedShare: number }[];
 };
 const fmt = (x: number) => x.toLocaleString('en-GB');
 const share = (x: number) => `${(100 * x).toFixed(1)}%`;
@@ -325,7 +325,7 @@ function Convergence() {
         </tbody>
       </table>
       <p className="mt-3 text-[12px] leading-relaxed text-ink-400">
-        Release history: {STATS.history.map((h) => `${h.date} (${h.per100.toFixed(2)} doubtful per 100 words, ${share(h.changedShare)} changed)`).join('; ')}.
+        Release history: {STATS.history.map((h) => `${h.tag ? `${h.tag}, ` : ''}${h.date} (${h.per100.toFixed(2)} doubtful per 100 words, ${share(h.changedShare)} changed)`).join('; ')}.
         A snapshot is added each time the counts change, so the curve builds up release by release. The
         changed share counts every word of the transcript that a minimal word-level diff does not match in
         the first pass: corrections, supplied words and repunctuated passages alike. Built on {STATS.built} by{' '}

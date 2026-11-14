@@ -578,8 +578,8 @@ function Convergence() {
         </tbody>
       </table>
       <p className="mt-3 max-w-[44em] text-[12px] leading-relaxed text-ink-400">
-        A snapshot every fourteen days from the git history, and one per tagged release once releases are
-        made; revised lines are counted only in batches present at both snapshots. An estimate of the
+        A snapshot every fourteen days from the git history, and one per tagged release (transcripts-v1 on 14 November 2026 is the first);
+        revised lines are counted only in batches present at both snapshots. An estimate of the
         errors no reader has found yet needs two independent readings of the same pages, which do not
         exist so far.
       </p>

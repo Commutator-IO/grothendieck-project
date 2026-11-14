@@ -136,6 +136,13 @@ const last = old.history.at(-1);
 const history = last && last.words === snap.words && last.doubtful === snap.doubtful && last.inaudible === snap.inaudible
   ? old.history
   : [...old.history.filter((h) => h.date !== today), snap];
+// A release tag (transcripts-v*) names the last snapshot taken on or before its date.
+for (const t of execFileSync('git', ['tag', '--list', 'transcripts-v*', '--format=%(refname:short) %(creatordate:short)'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)) {
+  const [tag, date] = t.split(' ');
+  if (history.some((h) => h.tag === tag)) continue;
+  const h = history.filter((x) => x.date <= date && !x.tag).at(-1);
+  if (h) h.tag = tag;
+}
 
 writeFileSync(
   OUT,
