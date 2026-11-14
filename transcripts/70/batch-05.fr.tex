@@ -1,5 +1,6 @@
 % Folder 70, batch 5 (archivists' pages 81-100).
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-09-29 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-14 — pp. 82–94 read again on the facsimile (pp. 91, 93, 94 blind), not checked by a reader.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -35,12 +36,13 @@ $s_0$, $s_1 = \sigma_0 s_0$, $s_2 = \sigma_1 s_1$, $s_3 = \sigma_2 s_2$ ; \quad 
 \[ \begin{cases} e_1 = s_1 - s_0 \\ e_2 = s_2 - s_0 \\ e_3 = s_3 - s_0 \end{cases} \]
 
 \[ s'_3 = s_0 + \lambda e_1 + \mu e_2 + \nu e_3 \quad \bigl(= s_0 + \lambda e_1 - \nu\lambda e_2 + \nu e_3\bigr) \]
-\note{la parenthèse est lue avec doute : \uncertain{$-\nu\lambda e_2$}.}
+\note{la parenthèse se lit $-\nu\lambda e_2$.}
 
 \[ \sigma_0 : \begin{cases} e_1 \mapsto -e_1 \\ e_2 \mapsto -e_1 + e_2 \\ e_3 \mapsto -e_1 + e_3 \end{cases}
 \qquad \struck{\uncertain{\text{matrice}}} \quad
-\sigma_0 = \begin{pmatrix} -1 & -1 & -1 & \ill{} \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix} \]
-\note{le quatrième coefficient de la première ligne est couvert d'une tache d'encre ; la dernière ligne est écrite en surcharge.}
+\sigma_0 = \begin{pmatrix} -1 & -1 & -1 & 1 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix} \]
+% Re-reading for #145: the blotted entry is 1, forced by sigma_0(s_0) = s_1 = (1,0,0) (and by the matrix of p. 74).
+\note{le quatrième coefficient de la première ligne est couvert d'une tache d'encre (lu $1$ d'après $\sigma_0(s_0) = s_1$) ; la dernière ligne est écrite en surcharge.}
 
 \[ \sigma_1 : \begin{cases} e_1 \mapsto \struck{e_0}\ e_2 \\ e_2 \mapsto e_1 \\ e_3 \mapsto \lambda e_1 + \mu e_2 + \nu e_3 \quad (= \lambda e_1 - \lambda e_2 + e_3) \end{cases}
 \qquad \struck{\uncertain{\text{matrice}}} \quad
@@ -64,7 +66,7 @@ $s_0$, $s_1 = \sigma_0 s_0$, $s_2 = \sigma_1 s_1$, $s_3 = \sigma_2 s_2$ ; \quad 
 
 Les conditions sont
 \[ \begin{cases} \nu^2 = 1 \quad \struck{\mu + \nu\lambda} & (1^\circ) \\ \mu = -\nu\lambda & (2^\circ) \\ \lambda = -\nu\mu \end{cases} \]
-ou encore $\lambda = \nu^2\lambda$ (\uncertain{conséquence de $2^\circ$}), qui résulte de $1^\circ$.
+ou encore $\lambda = \nu^2\lambda$ (compte tenu de $2^\circ$), qui résulte de $1^\circ$.
 
 Sur un corps, ces conditions se décomposent en deux possibilités
 \[ \begin{cases} \nu = 1, & \mu = -\lambda \\ \nu = -1, & \mu = \lambda \end{cases} \]
@@ -72,8 +74,8 @@ Notons que
 \[ \det \sigma_1 = \struck{\det} -\nu \]
 donc si on veut $\det \sigma_1 = -1$ (i.e.\ si on veut $\sigma_1$ une réflexion) on doit avoir $\nu = 1$, $\mu = -\lambda$.
 
-\marginal{écrit en oblique dans la marge gauche, à hauteur des deux possibilités : « On \ill{} \ill{} \ill{} \ill{} $\nu = 1$, \ill{} $\sigma_0(s'_3) = \ill{}$, \ill{} $s''_3 = \ill{}$ \ldots\ i.e.\ $\sigma_1\sigma_0\sigma_1\sigma_0(s_3)$ \ldots »}
-\note{la note marginale oblique n'est lue qu'en fragments ; elle semble exprimer $s''_3$ au moyen de $\sigma_0$ et $\sigma_1$.}
+\marginal{écrit en oblique dans la marge gauche, à hauteur des deux possibilités : « On peut prouver \uncertain{en tous les cas} $\nu = 1$, en écrivant $u^3 = \mathrm{id}$ ; on aura $u s''_3 = s'_3$ (où $s''_3 = \sigma_0(s'_3) \uncertain{=} \sigma_0\sigma_1 s_3$), ou $\sigma_1 s''_3 = s'_3$, i.e.\ $\sigma_1\sigma_0\sigma_1(s_3) = \sigma_0\sigma_1(s_3)$ \ldots »}
+\note{la note marginale oblique, relue sur le fac-similé, exprime $s''_3$ au moyen de $\sigma_0$ et $\sigma_1$ pour tirer $\nu = 1$ de $u^3 = \mathrm{id}$.}
 
 On aura donc
 \[ s'_3 - s_3 = \struck{\lambda e_1 + \ldots} (s'_3 - s_0) - (s_3 - s_0) = \lambda(e_2 - e_1) = -\lambda(s_2 - s_1) \]
@@ -91,14 +93,14 @@ et la matrice de $\sigma_1$ sera
 \note{avec $\alpha' = -(1+\alpha)$ (page 83), la seconde matrice devrait porter $\alpha'$ puis $-\alpha'$ dans la troisième colonne ; le premier signe est lu avec doute.}
 
 Posons
-\[ (4) \qquad \begin{cases} u = \sigma_0\sigma_1 & \quad s_0 \mapsto s_1 \mapsto s_2 \mapsto s_1\uncertain{\text{ ?}},\quad s_3 \mapsto s''_3 \ \text{(à calculer)} \\ v = \sigma_1\sigma_2 & \quad s_0 \mapsto s_0,\quad s_3 \mapsto s_1 \mapsto s_2 \mapsto s'_3 \end{cases} \]
-\note{les lettres $u$ et $v$ sont écrites en surcharge d'autres, noircies. Dans la première ligne, le dernier terme du cycle se lit $s_1$ ; on attendrait $s_0$.}
+\[ (4) \qquad \begin{cases} u = \sigma_0\sigma_1 & \quad s_0 \mapsto s_1 \mapsto s_2 \mapsto s_1,\quad s_3 \mapsto s''_3 \ \text{(à calculer)} \\ v = \sigma_1\sigma_2 & \quad s_0 \mapsto s_0,\quad s_3 \mapsto s_1 \mapsto s_2 \mapsto s'_3 \end{cases} \]
+\note{les lettres $u$ et $v$ sont écrites en surcharge d'autres, noircies. Dans la première ligne, le dernier terme du cycle se lit $s_1$, sans point d'interrogation ; on attendrait $s_0$.}
 
 \struck{Notons que $s_0$, $s_1$, $s_2$, $s_3$}
 
 On aura
 \begin{align*}
-s''_3 = u s_0 + u e_3 &= s_{\uncertain{1}} + \sigma_0(\sigma_1(e_3)) = s_0 + e_1 + \sigma_0\bigl[(1+\alpha)(e_2 - e_1) + e_3\bigr] \\
+s''_3 = u s_0 + u e_3 &= s_1 + \sigma_0(\sigma_1(e_3)) = s_0 + e_1 + \sigma_0\bigl[(1+\alpha)(e_2 - e_1) + e_3\bigr] \\
 &= s_0 + e_1 + (1+\alpha)\, e_2 \struck{\ill{}} + e_3 - e_1
 \end{align*}
 donc
@@ -111,7 +113,8 @@ Calculons $u(s'_3)$ utilisant (2)
 \note{le $= s_1 + (1+\alpha)u(s_2 - s_1)$ final est lui aussi traversé par le trait.}
 \[ u(s'_3) = u(s_3) + (1+\alpha)\underbrace{u(s_2 - s_1)}_{s_0 - s_2 = -e_2} = s''_3 - (1+\alpha)\, e_2 \underset{(5)}{=} s_3 \]
 
-\ill{} \ill{}, on trouve de même par (6)
+% Re-reading for #145: « s_1 » after u s_0 + u e_3 is forced: u s_0 = sigma_0 sigma_1 s_0 = s_1 (and « = s_0 + e_1 » follows).
+\struck{\ill{}} \uncertain{Enfin}, on trouve de même par (6)
 \[ \struck{(7) \quad u(s_3) \longmapsto s'} \]
 \[ \struck{(7)}\ \ u(s''_3) = u(s_3) + (1+\alpha)\underbrace{u(s_2 - s_3)}_{s_0 - s_1 = -e_1} = s''_3 - (1+\alpha)\, e_1 \]
 \note{sous la dernière ligne, coupée par le bord de la feuille : « $= s_0 + (1+\alpha)(e_2 - e_1) + e_3$ ».}
@@ -130,7 +133,7 @@ Donc si $G$ est le groupe
 \[ (10) \qquad G = \Bigl\{ \sigma_0, \sigma_1, \sigma_2 \Bigm| \sigma_0^2 = \sigma_1^2 = \sigma_2^2 = 1,\ \sigma_0\sigma_2 = \sigma_2\sigma_{\uncertain{1}},\ (\sigma_0\sigma_1)^3 = 1,\ (\sigma_1\sigma_2)^5 = 1 \Bigr\} \]
 \[ = \mathrm{Aut}(\text{icosaèdre comb. épinglé} \ldots) \]
 \note{dans la relation de commutation, le dernier indice se lit 1 ; le contexte (page 83) demande $\sigma_0\sigma_2 = \sigma_2\sigma_0$.}
-alors sous réserve que $\alpha^2 + \alpha - 1 = 0$, ce groupe \add{\ill{}} $G$ opère \add{\uncertain{effectivement}} sur $\mathbb{E}^3$. Montrons que l'ensemble des transformés de $s_0$, $\mathrm{Dr}(s_0, s_1)$ et $\mathrm{Pl}(s_0, s_1, s_2)$ forme un icosaèdre géométrique ? Cela signifie que sur \uncertain{tout} corps, les seules relations d'incidence entre ces \struck{droites} sommets, droites et plans sont celles
+alors sous réserve que $\alpha^2 + \alpha - 1 = 0$, ce groupe \add{\uncertain{fini}} $G$ opère \add{effectivement} sur $\mathbb{E}^3$. Montrons que l'ensemble des transformés de $s_0$, $\mathrm{Dr}(s_0, s_1)$ et $\mathrm{Pl}(s_0, s_1, s_2)$ forme un icosaèdre géométrique ? Cela signifie que sur tout corps, les seules relations d'incidence entre ces \struck{droites} sommets, droites et plans sont celles
 
 \page{86}
 de l'icosaèdre.
@@ -149,9 +152,9 @@ s_3 = (0, 0, 1) \\
 s'_3 = \bigl(-(1+\alpha), 1+\alpha, 1\bigr) = (\alpha', -\alpha', 1) \\
 s''_3 = (0, 1+\alpha, 1) = (0, -\alpha', 1)
 \end{cases} \]
-\note{dans l'expression de droite de $s'_3$, le premier signe est noirci : \uncertain{$\alpha'$}. En marge droite des coordonnées : $\alpha' = -(\alpha+1) = -\alpha^{-1}$ (« l'antiracine » de $\alpha^2 + \alpha - 1 = 0$)  ; le mot entre guillemets est lu avec doute. Des accolades au crayon relient $s_0, s_1$ et $s_2, s_3$.}
+\note{dans l'expression de droite de $s'_3$, le premier signe est noirci ; la coordonnée est $\alpha'$, égale à $-(1+\alpha)$ à gauche. En marge droite des coordonnées : $\alpha' = -(\alpha+1) = -\alpha^{-1}$ (« l'antiracine » de $\alpha^2 + \alpha - 1 = 0$)  ; le mot entre guillemets est lu avec doute. Des accolades au crayon relient $s_0, s_1$ et $s_2, s_3$.}
 
-\struck{\ill{}} Il est clair que $s_0$ à $s_3$ sont deux à deux distincts, il faut \struck{voir} les comparer à $s'_3$, $s''_3$ et comparer ceux-ci entre eux. Comme la dernière coordonnée de $s'_3$, $s''_3$ \struck{\ill{}} est 1, ils sont $\neq s_0, s_1, s_2$ dont la dernière coordonnée est nulle. Ils \struck{\ill{}} \add{sont} \uncertain{égaux} \add{l'un à l'autre} \uncertain{à} $s_3$ \struck{\ill{}} \add{\uncertain{ssi}} $1 + \alpha = 0$ (i.e.\ $\alpha = -1$), qui est \add{donc} aussi la condition \uncertain{nécessaire} et suffisante pour que $s'_3 = s''_3$. Or \struck{$1+\alpha$} \ill{} si $\alpha = -1$
+\struck{\ill{}} Il est clair que $s_0$ à $s_3$ sont deux à deux distincts, il faut \struck{voir} les comparer à $s'_3$, $s''_3$ et comparer ceux-ci entre eux. Comme la dernière coordonnée de $s'_3$, $s''_3$ \struck{\ill{}} est 1, ils sont $\neq s_0, s_1, s_2$ dont la dernière coordonnée est nulle. Ils \struck{\ill{}} \add{sont} égaux \add{l'un à l'autre} à $s_3$ \struck{\ill{}} \add{\uncertain{ssi}} $1 + \alpha = 0$ (i.e.\ $\alpha = -1$), qui est \add{donc} aussi la condition néc.\ et suff. pour que $s'_3 = s''_3$. Or \struck{$1+\alpha$} \ill{} si $\alpha = -1$
 \note{les deux dernières phrases sont rapides et chargées de surcharges ; leur lecture est incertaine dans le détail. La phrase se poursuit au-delà du bas de la page.}
 
 \page{88}
@@ -187,10 +190,10 @@ On va d'abord déterminer le \emph{centre} de l'icosaèdre, défini (s'il existe
 
 \emph{NB} L'équation $\alpha^2 + \alpha - 1$ implique $\alpha$ inv.\ et \struck{en fait \ill{}} elle s'écrit
 \[ (16) \qquad \boxed{\alpha(\alpha + 1) = 1} \quad \text{ou} \]
-\struck{\ill{} $\alpha + 2$ \ill{}} [en fait, $\alpha(\alpha+1)(\alpha-1)(\alpha+2)$ \add{$(2\alpha - 1)$} sont inv.\ \ldots\ $\}$, et $(\alpha - 2)$ sera inv.\ \uncertain{ssi} 5 est inv.\ \ldots]
+\struck{\ill{} $\alpha + 2$ \ill{}} [en fait, $\alpha(\alpha+1)(\alpha-1)(\alpha+2)$ \add{$(2\alpha - 1)$} sont inv.\ \ldots\ $\}$, et $(\alpha - 2)$ sera inv.\ ssi 5 est inv.\ \ldots]
 
 Ainsi, en car.\ $\neq 2$ le centre est donné par les coordonnées (15), et en car.\ 2 \add{sans doute} c'est le pt à l'infini dans la direction $\bigl(-1, \frac{1}{\alpha}, \frac{1}{\alpha}\bigr)$ \ldots].
-\note{« sera inv.\ ssi 5 est inv. » : $(\alpha-2)(\alpha+3) = \alpha^2+\alpha-6 = -5$ ; lecture probable mais le mot « ssi » est très abrégé.}
+\note{« sera inv.\ ssi 5 est inv. » : $(\alpha-2)(\alpha+3) = \alpha^2+\alpha-6 = -5$ ; « ssi » est écrit comme ailleurs sur ces pages.}
 
 \page{91}
 Ceci dit, on doit pouvoir \add{sans mal} simplifier ceci.
@@ -199,8 +202,8 @@ Ceci dit, on doit pouvoir \add{sans mal} simplifier ceci.
 \[ (17) \qquad \underline{a}(x, y, z) = \bigl(\alpha' - x,\ (1 - \alpha') - y,\ (1 - \alpha') - z\bigr) \]
 \note{sous (17), une première version biffée et illisible : \struck{\ill{}}. Les premiers termes des trois coordonnées sont écrits en surcharge.}
 
-Si 2 est inv., \add{$\underline{a}$} \struck{\ill{}} a $o$ comme unique pt fixe --- or les $s_i$, \struck{$s_3$} $s'_3$, $s''_3$ sont $\neq o$ (n'étant pas fixes sous $G$). En car.\ \struck{\ill{}} 2, $\underline{a}$ est la translation par le vecteur $(\alpha', \uncertain{1}, \uncertain{1})$, donc n'a pas de pt fixe (à distance finie).
-\note{en caractéristique 2, (17) donne la translation par $(\alpha', 1 + \alpha', 1 + \alpha')$ ; les deux dernières composantes sont écrites en surcharge et lues « 1 ».}
+Si 2 est inv., \add{$\underline{a}$} \struck{\ill{}} a $o$ comme unique pt fixe --- or les $s_i$, \struck{$s_3$} $s'_3$, $s''_3$ sont $\neq o$ (n'étant pas fixes sous $G$). En car.\ \struck{\ill{}} 2, $\underline{a}$ est la translation par le vecteur $(\alpha', 1, 1)$, donc n'a pas de pt fixe (à distance finie).
+\note{en caractéristique 2, (17) donne la translation par $(\alpha', 1 + \alpha', 1 + \alpha')$ ; les deux dernières composantes sont écrites en surcharge ; le tracé final, net à 300 dpi, est « 1 ».}
 
 \emph{NB} En car.\ 2, \struck{les solutions de} l'équation $\alpha^2 + \alpha - 1 = 0$ sur une ext.\ \add{alg.\ close $K$} de $\mathbb{F}_2$ sont les deux éléments de \struck{\ill{}} $\mathbb{F}_4$ \uncertain{$\smallsetminus \mathbb{F}_2$}. $\widetilde{K} \smallsetminus K$, où $K$ est l'unique ext.\ quadratique de $\mathbb{F}_2$ dans $K$. Si on pose
 \[ \mathbb{F}_4 \overset{\text{déf}}{=} \mathbb{F}_2[T]/(T^2 + T + 1) = \text{corps des racines primitives } 3^{\text{ièmes}} \text{ de l'unité sur } \mathbb{F}_2 \]
@@ -213,10 +216,10 @@ la donnée d'une $\alpha$ sur $S/\mathbb{F}_2$ \struck{\ill{}} satisfaisant l'é
 \underline{a}\, s_1 = (\alpha' - 1, 1 - \alpha', 1 - \alpha') \\
 \underline{a}\, s_2 = (\alpha', -\alpha', 1 - \alpha') \\
 \underline{a}\, s_3 = (\alpha', 1 - \alpha', -\alpha') \\
-\underline{a}\, s'_3 = (0, 1 \ill{}, -\alpha') \\
-\underline{a}\, s''_3 = (\alpha', 1 \ill{}, -\alpha')
+\underline{a}\, s'_3 = (0, 1\,\struck{\ill{}}, -\alpha') \\
+\underline{a}\, s''_3 = (\alpha', 1\,\struck{\ill{}}, -\alpha')
 \end{cases} \]
-\note{dans les deux dernières lignes, la deuxième coordonnée est noircie après le « 1 » ; sous $\underline{a}\,s'_3$, une correction également noircie, où l'on devine \uncertain{$2\alpha + 3$}. D'après (11) et (17) on attendrait $\underline{a}\,s'_3 = (0, 1 - 2\alpha', -\alpha')$ et $\underline{a}\,s''_3 = (\alpha', 1, -\alpha')$. Le reste de la feuille (papier à musique) est blanc.}
+\note{dans les deux dernières lignes, ce qui suit le « 1 » est noirci, comme biffé ; sous $\underline{a}\,s'_3$, une correction également noircie, où l'on devine \uncertain{$2\alpha + 3$}. La deuxième coordonnée qui reste, $1$, est celle que donnent (11) et (17) : $\underline{a}\,s'_3 = (0, 1, -\alpha')$ et $\underline{a}\,s''_3 = (\alpha', 1, -\alpha')$. Le reste de la feuille (papier à musique) est blanc.}
 
 \page{93}
 \note{le haut de la page (titre et tableau (18)) est barré de deux longs traits obliques ; c'est une autre version de (18), avec d'autres valeurs, transcrite ici sous le trait.}
@@ -225,10 +228,11 @@ la donnée d'une $\alpha$ sur $S/\mathbb{F}_2$ \struck{\ill{}} satisfaisant l'é
 \underline{a}\, s_0 = \bigl(1, -\frac{1}{\alpha}, -\frac{1}{\alpha}\bigr) = (1, -1-\alpha, -1-\alpha) = (1, \alpha', \alpha') \\
 \underline{a}\, s_1 = \bigl(0, -\frac{1}{\alpha}, -\frac{1}{\alpha}\bigr) = (0, -1-\alpha, -1-\alpha) = (0, \alpha', \alpha') \\
 \underline{a}\, s_2 = \bigl(1, -\frac{1}{\alpha} - 1, -\frac{1}{\alpha}\bigr) = (1, -2-\alpha, -1-\alpha) = (1, \alpha' - 1, \alpha') \\
-\underline{a}\, s_3 = \bigl(1, -\frac{1}{\alpha}, -\frac{1}{\alpha} - 1\bigr) = (1, \uncertain{-1-\alpha}, -2-\alpha) = (1, \alpha', \alpha' - 1) \\
+\underline{a}\, s_3 = \bigl(1, -\frac{1}{\alpha}, -\frac{1}{\alpha} - 1\bigr) = (1, -1-\alpha, -2-\alpha) = (1, \alpha', \alpha' - 1) \\
 \underline{a}\, s'_3 = \bigl(2 + \alpha, -2(1+\alpha), -(2+\alpha)\bigr) = (1 - \alpha', -2\alpha', \alpha' - 1) \\
 \underline{a}\, s''_3 = \bigl(1, -2(1+\alpha), -(2+\alpha)\bigr) = (1, 2\alpha', \alpha' - 1)
 \end{cases} \]
+% Re-reading for #145: in a s_3, « -1-alpha » is forced by the line above (-1/alpha = -1-alpha, since alpha(1+alpha) = 1).
 
 On aimerait prouver que (\add{sur un corps de base quelconque}) \add{trois \uncertain{sommets}} \struck{\ill{}} distincts \add{(ce qui \ill{} \ill{} \ill{} \ill{} \ill{})} ne sont pas alignés, et quatre points distincts ne sont pas dans \struck{des} \add{un} même plan \emph{sauf} s'ils \struck{\ill{}} sont incidents \add{combinatoirement} (à une même face) (ce qui implique que un sommet n'est incident \add{géom.} à une face que s'il \struck{\ill{}} l'est combinatoirement ; et \add{par suite} qu'une arête n'est incidente \add{géom.} à une face que si elle est incidente combinatoirement).
 \marginal{« ? » en marge de ce paragraphe, qu'un trait vertical encadre ; plus bas, reliée par une flèche : « c'est en fait \emph{faux} en car.\ 2 ! »}
