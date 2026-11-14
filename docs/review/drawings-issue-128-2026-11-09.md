@@ -566,3 +566,12 @@ Raised while the sketches described only in notes were marked and redrawn; only 
 - [x] 76 02-1 | reading | The last letter of the row of marks under the two overlapping segments (left margin of p. 28), after the long dash: is it n, or H (the segments are called H and H' in the proof)? On the 400 dpi colour crop it has two uprights and a cross-bar, like an H. | n | H | answered in #152
 - [x] 161-2 03-1 | reading | is the mark under the two ovals an arrow head (of the short stroke leaving the common region) or the letter V? | v-shaped arrow head | the letter V (a label of the stroke) | answered in #148
 - [x] 74 04-14 | reading | which pencil line from t_1 / t_2 ends at which of alpha, beta, gamma (the six lines are faint and tangled; a wavy stroke between them is not drawn) | t_1 and t_2 each joined to alpha, beta, gamma | a different pairing, or a seventh line (the wavy stroke towards gamma) | answered in #146
+
+## Issue 147, questions left for the editor (14 November)
+
+The overlay passes of #147 could not settle these alone. The other drawings still `partial` are listed in #147 with what still differs; they wait for a reader and are not questions.
+
+- [ ] 115 01-1 | strike | The wheel of categories and the graph under it are wholly struck by two long oblique strokes, so the redraw is empty. Withdraw the drawing and keep only a note, or redraw what shows under the strokes in the struck style? | Withdraw: keep a note only | Redraw it in the struck style
+- [ ] 147 04-6 | strike | The small sketch is scribbled over by a dozen strokes and nothing of it can be made out, so the redraw is empty. Withdraw the drawing and keep only a note? | Withdraw: keep a note only | Keep the empty record
+- [ ] 34 02-1 | reading | Four pencil arches over three ink verticals and some dashes, with no structure the redraw could read. Is it a figure to keep as drawn, or scribbles to withdraw? | Keep as drawn, stroke by stroke | Withdraw: not a figure
+- [ ] 142 03-3 | reading | The three equatorial edges Q_i–Q_k, Q_i–Q_j, Q_j–Q_k are overdrawn with wavy coils and a scribble. Do these strokes cross the edges out (the graph is then K_{2,3}) or stress them (a triangular bipyramid)? | Emphasis: the edges stand (bipyramid) | Crossed out: no equatorial edges (K_{2,3})
