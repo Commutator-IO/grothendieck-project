@@ -32,12 +32,19 @@
 %     proof of Théorème 1 (page 31) is rewritten with that form;
 %   - page 90: Th. 3 needs f increasing (hypothesis a), not b) as its proof
 %     says; b) holds only in finite dimension;
-%   - page 147: the last step of the lemma integrates n(r)/r down to 0,
-%     which diverges; the argument is repaired by a split at δ;
+%   - page 147: the lemma's proof uses ∫_0^∞ n(r) r^{-1-p} dr and ∫_0^∞ n(r)/r dr,
+%     both divergent at 0 for this n(r); the argument is repaired with the
+%     finite ∫_0^∞ n(r) r^{p-1} dr and dominated convergence (revised
+%     2026-11-15: the earlier repair by a split at δ used a divergent integral);
 %   - page 148: P_n(u) carries the sign (−1)^k the page omits, and 2) is not
-%     proved by "decreasing terms" but by the lemma; 1) is restricted to
-%     normal u, the only case the lemma covers;
-%   - page 96: an inclusion between ℓ_{N'} and ℓ_{N''} is reversed.
+%     proved by "decreasing terms" but by the lemma; 1) is for normal u, as
+%     the second revision pass now reads the page (« normal », editor asked);
+%   - page 96: an inclusion between ℓ_{N'} and ℓ_{N''} is reversed;
+%   - page 84: (10) is written with its sides the other way round;
+%   - page 10: Prop. 2's « il faut et il suffit » is false; what is true is given;
+%   - page 120: the Cauchy bound with n+1 factors is that of α_{n+1}, not α_n;
+%   - page 99: the compactness step of the duality needs N not equivalent to N_1;
+%   - page 127: |A| and |A*| are unitarily equivalent only up to their kernels.
 %
 % Announced and never established: the plan's « N° 7, autres inégalités »
 % (page 2); the marginal « ② Dual de 𝓛^p ; réflexivité » of page 126 (done for
@@ -66,6 +73,30 @@
 %   and of the deduction of S_p subadditivity from the determinant inequality
 %   (finite dimension, 0 < p < 1, the value of K_p not needed; unconditional
 %   for n <= 2). Both findings unsearched: no literature added.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-15 — brought into line with
+%   the second revision pass of 14 November 2026 (#145; Fable 5.2 machine pass
+%   on the facsimile, not checked by a reader; docs/review/revision-145/1.md),
+%   every revised place footnoted with its page and flagged as a machine
+%   reading where a statement now rests on it. Pages revised: 10 (Prop. 2),
+%   11, 12 (Déf. 2 given once, W_1 « convexe », inf g > 0), 13, 15 (Prop. 3),
+%   16 (Remarque), 17 (Cor. 1), 20 (proof by C_i, the D_i lines struck), 21,
+%   22 (Cor. 2 « borélienne », support of μ_A, A ∈ a ⟺ z μ_A-summable — the
+%   former « finite mass » was false), 25, 26 (Cor. 4 equicontinuity), 27,
+%   29, 30, 31 (reduction to a non-atomic algebra), 33 (Cor. 3 hypothesis,
+%   Cor. 4 semi-norm), 34, 37, 38 (Ky Fan indices m+n+1, m+1, n+1), 39 (« Th. »,
+%   Cor. 1, partial sums a norm), 49, 50, 52, 54, 56, 58, 61, 63 (K_n = 1),
+%   64-69 (p. 68's eight restored lines), 71-73 (system presented as what is
+%   to be proved; 0 ≤ m ≤ n; (12)), 74, 75 (Remarque, no « Réponse »), 76,
+%   78, 79, 80, 84 ((10) reversed on the page), 85 (truncation for increasing
+%   φ only), 89, 90, 91, 95, 96, 97 (circular proof kept), 99 (compactness,
+%   completeness), 101, 103, 109 (Th. 3 whole line), 111, 114, 119 (finite-
+%   dimensional restrictions holomorphic, unbounded on the unit ball; « n'est
+%   pas induite par » left out, false if it denies holomorphy on ℓ¹), 120,
+%   124 (Cor. 4 with h, k, H = 1/(1+h)), 127, 129 ((5) or (4), hedged), 130,
+%   132, 135, 136, 143 (a question, not « invraisemblable »), 144, 145, 146,
+%   147, 148 (« normal », hedged), 149. Hedged pending the editor: pp. 10, 12,
+%   22, 26, 30, 31, 33, 38, 39, 75, 79, 84, 95, 97, 99, 111, 119, 120, 124,
+%   129, 136, 143, 144, 148.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -234,7 +265,10 @@ avec quels mots.
 
 Trois indices, pris dans les pages elles-mêmes, fixent une chronologie que
 la cote ne respecte pas. Page 129, pour l'inégalité $\sum |\lambda_i|^p \leq
-\sum s_i^p$, il écrit « je ne connais qu'une méthode analytique », et en donne
+\sum s_i^p$, il écrit « je ne connais qu'une méthode analytique »,\footnote{Le
+numéro de la formule visée se lit (5), la majoration des valeurs propres ;
+la lecture est soumise à l'éditeur, et l'indice tomberait si c'était (4) :
+voir la démonstration de 2), pages 126 à 131.} et en donne
 une par les zéros de $\det(1 - zA)$ ; page 88, la même inégalité est un
 corollaire en deux lignes du lemme de Weyl. Page 93, il annonce « un exposé de
 la théorie de Schatten, simplifié par les inégalités de convexité de Weyl ».
@@ -456,14 +490,26 @@ $]0, m(M)[$ équimesurable à $f$, encore appelée réarrangement décroissant.
 Le résultat suivant est classique :
 
 \emph{Proposition 2} (Hardy--Littlewood). Pour $f$, $g$ réelles mesurables
-sur $M$ de mesure finie, telles que $fg$ soit sommable,
+sur $M$ de mesure finie, telles que $fg$ et $\varphi_f\varphi_g$ soient
+sommables,
 \[
   \int_M fg\,dm \leq \int_0^{m(M)} \varphi_f\,\varphi_g\,ds .
 \]
-\footnote{La page ajoute, d'une lecture incertaine, que la sommabilité de
-$\varphi_f\varphi_g$ est requise, ce qui est bien la condition pour que le
-second membre soit fini ; l'inégalité vaut dans $]-\infty,+\infty]$ sans
-elle.}
+Pour $f$, $g$ positives, la sommabilité de $\varphi_f\varphi_g$ suffit, et
+entraîne celle de $fg$.\footnote{Page 10. La page dit, dans la lecture de
+la seconde passe (machine, non vérifiée par un lecteur) : « Pour que $fg$
+soit sommable, il faut et il suffit que $\varphi_f\varphi_g$ le soit, et on
+a alors (17) » ; la première passe lisait « il faut », sans « et il
+suffit ». L'équivalence est fausse. « Il faut » tombe : sur $]0,1[$,
+$f = s^{-1/2}$ sur $]0,\frac12[$ et $0$ ailleurs, $g = (s - \frac12)^{-1/2}$
+sur $]\frac12, 1[$ et $0$ ailleurs, donnent $fg = 0$, alors que
+$\varphi_f\varphi_g$ se comporte comme $1/(2s)$ en $0$. « Il suffit » ne
+vaut que pour $f$, $g$ positives (c'est alors l'inégalité (17) elle-même) :
+pour des fonctions de signes opposés, $f \geq 0$ et $g \leq 0$ portées par
+le même ensemble, $\varphi_f\varphi_g$ peut être nulle et $fg$ non
+sommable. La question de la lecture est posée à l'éditeur ; si la page ne
+porte que « il suffit », elle est juste pour des fonctions positives, et
+l'énoncé ci-dessus ne change pas.}
 
 \pagerange{11}{15}
 \section*{Fonctions de Pólya et fonctions de Weyl (pages 11 à 15)}
@@ -485,7 +531,10 @@ $P : K^\infty(I) \to \mathbf{R}$ telle que
 \end{itemize}
 En fait $P_3$ équivaut à la condition apparemment plus forte $P_3'$ : $P$ est
 semi-continue inférieurement pour la topologie faible $\sigma(L^\infty(K),
-L^1(K))$ sur les parties bornées de $L^\infty(K)$. Car pour tout $a$
+L^1(K))$ sur $L^\infty(K)$.\footnote{Page 11. La première passe lisait « sur
+les parties bornées de $L^\infty(K)$ » ; ces mots ne sont pas sur la page
+(seconde passe, machine). L'argument qui suit établit bien la semi-continuité
+sur tout $L^\infty(K)$.} Car pour tout $a$
 l'ensemble convexe $A = \{f \in L^\infty(K) : P(f) \leq a\}$ est, par $P_3$,
 fermé pour la convergence en mesure sur les boules de $L^\infty(K)$, donc
 fermé pour la norme de $L^1(K)$ sur ces boules ; or un convexe de
@@ -497,10 +546,34 @@ Krein--Šmulian.} Une fonction sur
 $K^\infty(]0,\infty[)$ est de Pólya si et seulement si sa restriction à chaque
 $L^\infty(]0,\omega[)$, $\omega < \infty$, l'est.
 
-\emph{Définition 2.} Une \emph{fonction de Weyl} sur les fonctions positives
-de $K^\infty(I)$ est une fonction $W$ telle que $f \mapsto W(e^{f})$ soit
-une fonction de Pólya. Les fonctions de Weyl et les fonctions de Pólya se
-correspondent donc par $W(g) = P(\log g)$, $P(f) = W(e^f)$.\footnote{Ces
+\emph{Définition 2.} Soit $0 < \omega < \infty$. Une \emph{fonction de Weyl}
+sur les fonctions positives de $L^\infty(]0,\omega[)$ est une fonction $W$
+satisfaisant à $P_1$ et $P_3$, continue pour la norme, et telle que
+\begin{itemize}
+  \item[$W_1$)] $f \mapsto W(e^{f})$ soit une fonction convexe sur
+    $L^\infty(]0,\omega[)$.
+\end{itemize}
+Sur $]0,\infty[$, une fonction de Weyl est une fonction dont les
+restrictions aux $]0,\omega[$ sont de Weyl. Alors $f \mapsto W(e^f)$ est une
+fonction de Pólya --- $P_1$ et $P_3$ passent de $W$ à $W\circ\exp$, et $W_1$
+est $P_2$ --- et la représentation qui suit donne $W(e^f) = \sup_i (a_i +
+\int_0^\omega \varphi_i\varphi_f)$, soit
+\[
+  W(g) = \sup_i \Bigl( a_i + \int_0^{\omega} \varphi_i \log\varphi_g \Bigr)
+  \qquad \text{si } \inf_{0 \leq s \leq \omega} g(s) > 0 ;
+\]
+la connaissance de $W$ sur ces $g$, c'est-à-dire des $\varphi_i$ et des
+$a_i$, détermine $W$ entièrement, par la semi-continuité pour la convergence
+en mesure. Les fonctions de Weyl et les fonctions de Pólya se correspondent
+donc par $W(g) = P(\log g)$ pour $\inf g > 0$, $P(f) = W(e^f)$ ; le cas
+important est celui où $W$ est croissante.\footnote{Page 12. La première
+passe donnait la définition deux fois, sous deux lectures ; la page la porte
+une fois, et la condition $\inf g > 0$ y était une lacune (seconde passe,
+machine, non vérifiée par un lecteur). Le mot de $W_1$ se lit « convexe » ;
+l'éditeur est interrogé, la ligne pouvant porter « de Pólya ». Sous l'une
+ou l'autre lecture $f \mapsto W(e^f)$ est une fonction de Pólya, et rien de
+ce qui suit ne change ; avec « de Pólya » la continuité en norme serait une
+condition de plus, que la suite n'emploie pas.}\footnote{Ces
 deux noms sont les siens et ne sont pas passés dans l'usage. Une fonction de
 Pólya est une fonctionnelle convexe, \emph{invariante par réarrangement} et
 semi-continue ; les fonctions de Weyl sont leurs transformées par le
@@ -521,7 +594,13 @@ sup étant atteint --- d'où, en posant $\varphi_i = \varphi_{L_i}$,
 \]
 les $\varphi_i$ étant des fonctions décroissantes sommables sur $]0, |K|]$.
 Réciproquement toute fonction de cette forme est de Pólya, et elle est
-croissante si les $\varphi_i$ sont positives. On peut prendre les $\varphi_i$
+croissante si et seulement si les $\varphi_i$ sont positives --- c'est la
+\emph{proposition 3}, en marge de la page 15.\footnote{Page 15 : « Alors on
+voit aussitôt que les $\varphi_i$ dans (1) sont positives (et
+réciproquement) » (seconde passe, machine). Le sens direct : si $P$ est
+croissante et $L_i + a_i \leq P$, un $L_i$ négatif sur une partie $B$ de
+mesure non nulle donnerait $P(-t1_B) \geq t\int_B |L_i| + a_i \to \infty$,
+alors que $P(-t1_B) \leq P(0)$.} On peut prendre les $\varphi_i$
 nulles sur $[|K|, \infty[$, et la formule s'écrit $P(f) = P^{*}(\varphi_f)$ où
 $P^{*}(\varphi) = \sup_i (a_i + \int_0^\infty \varphi_i\varphi)$ est une
 fonction de Pólya sur $\mathbf{R}^{*}_{+}$.\footnote{En langage
@@ -534,14 +613,24 @@ représentation d'une norme invariante par réarrangement par sa norme duale
 Lorentz, mais rien n'y renvoie à une publication.}
 
 \emph{Exemples de fonctions de Weyl.} Soit $\alpha$ une fonction sur
-$\mathbf{R}_{+}$, nulle en $0$, telle que $s \mapsto \alpha(e^s)$ soit
+$\mathbf{R}_{+}$, nulle en $0$ si $\omega = +\infty$,\footnote{Page 13 : la
+condition « si $\omega = +\infty$ » était une lacune (seconde passe,
+machine). Sur un intervalle de mesure finie $\int_0^\omega \alpha(\varphi_f)$
+a un sens sans elle.} telle que $s \mapsto \alpha(e^s)$ soit
 convexe. Alors $W_\alpha(f) = \int_0^\omega \alpha(\varphi_f)$ est une
 fonction de Weyl, croissante si et seulement si $\alpha$ l'est. Pour
 $\alpha_p(s) = s^p$, $0 < p < \infty$, on trouve $W_{\alpha_p}(f) = \int
 |f|^p = N_p(f)^p$. Une fonction de Weyl croissante sur les fonctions
-positives de $K^\infty$ s'étend à toute fonction mesurable positive $f$ sur
-un espace mesuré quelconque par $W(f) = \sup\{W(\varphi_g) : 0 \leq g \leq f,\ g \in K^\infty\}$, et l'on a $W(f) = W(\varphi_f)$, $W(f) = W(\varphi_{|f|})$
-pour $f$ complexe.
+positives de $L^\infty(]0,\omega[)$ est canoniquement la restriction d'une
+fonction de Weyl croissante sur les fonctions positives de
+$K^\infty(]0,\infty[)$, et celle-ci s'étend à toute fonction mesurable
+positive $f$ sur un espace mesuré quelconque par $W(f) = \sup\{W(\varphi_g) :
+0 \leq g \leq f,\ g \text{ mesurable à support compact}\}$ ; on a $W(f) =
+W(\varphi_f)$ lorsque $f$ admet un réarrangement décroissant, et pour $f$
+complexe $W(f) = W(\varphi_{|f|})$ si $|f|$ en admet un.\footnote{Page 13,
+dans la lecture de la seconde passe (machine) : « est canoniquement la
+restriction », « mesurables à support compact », et la condition « si $|f|$
+admet un réarrangement décroissant », qui était une lacune.}
 
 \pagerange{16}{17}
 \section*{Les inégalités de majoration (pages 16 et 17)}
@@ -556,7 +645,10 @@ sur $]0,\omega[$ telles que
 \]
 Alors $P(f) \leq P(g)$ pour toute fonction de Pólya \emph{croissante} $P$ sur
 $L^\infty(]0,\omega[)$. (La réciproque est triviale : pour tout $t$,
-$f \mapsto \int_0^t \varphi_f$ est une fonction de Pólya croissante.)
+$f \mapsto \int_0^t \varphi_f$ est une fonction de Pólya croissante.)\footnote{Page
+16 : la page dit « une fonction de Pólya », sans « croissante » (seconde
+passe, machine). Elle l'est, et c'est ce qu'il faut pour appliquer
+l'hypothèse de la proposition à cette fonction.}
 
 Par la représentation du numéro 2, il suffit de prouver $\int_0^\omega f\varphi
 \leq \int_0^\omega g\varphi$ pour $\varphi$ positive, décroissante et sommable,
@@ -569,20 +661,33 @@ et les deux termes croissent avec $F$ puisque $\varphi(\omega) \geq 0$ et
 $-d\varphi \geq 0$.
 
 \emph{Remarque.} Si de plus $\int_0^\omega f = \int_0^\omega g$, le premier
-terme est le même pour $f$ et $g$ et l'on n'a plus besoin de $\varphi \geq 0$ :
-la proposition vaut alors pour toute fonction de Pólya, croissante ou
-non.\footnote{C'est le théorème de Hardy, Littlewood et Pólya sur la
+terme est le même pour $f$ et $g$, et il n'est pas nécessaire de supposer
+$\varphi$ positive dans la conclusion. Par la représentation du numéro 2, où
+les $\varphi_i$ positives sont celles des fonctions croissantes, la
+proposition vaut alors pour toute fonction de Pólya, croissante ou non. La
+page ajoute qu'elle ne se servira pas de cette remarque, qui donne des
+inégalités bien connues dans les anneaux munis d'une trace finie.\footnote{Page
+16, dans la lecture de la seconde passe (machine, non vérifiée par un
+lecteur) : la page dit seulement que « il n'est pas nécessaire de supposer
+$\varphi$ positive dans la conclusion de la prop.~4 » ; la conclusion pour
+toute fonction de Pólya est tirée ici de la page 15. La première passe lui
+prêtait cette conclusion.}\footnote{C'est le théorème de Hardy, Littlewood et Pólya sur la
 majorisation, en dimension infinie : $f \prec_w g$ (sous-majorisation faible)
 entraîne $\Phi(f) \leq \Phi(g)$ pour $\Phi$ convexe, symétrique et
 croissante, et $f \prec g$ (majorisation) l'entraîne pour $\Phi$ convexe
 symétrique. La page 81 en redonnera la version finie, attribuée à Weyl.}
 
-\emph{Corollaire 1.} Soient $f$, $g$ positives sur $M$ telles que
-$\Delta_f(t) \leq \Delta_g(t) < \infty$ pour $0 \leq t \leq \omega$. Alors
-$W(f) \leq W(g)$ pour toute fonction de Weyl croissante $W$ sur les fonctions
-positives de $K^\infty(]0,\omega[)$. On se ramène à $M = ]0,\omega[$ et à
-$f = \varphi_f$, $g = \varphi_g$, puis on applique la proposition 4 à
-$\log f$, $\log g$ et à la fonction de Pólya croissante $h \mapsto W(e^h)$.
+\emph{Corollaire 1.} Soient $f$, $g$ positives sur deux espaces mesurés
+$M$, $N$ telles que $\Delta_f(t) \leq \Delta_g(t) < \infty$ pour $0 \leq t
+< \omega$. Alors $W(f) \leq W(g)$ pour toute fonction de Weyl croissante $W$
+sur les fonctions positives de $K^\infty(]0,\omega[)$. On se ramène à $f$,
+$g$ décroissantes sur $]0,\omega[$, puis au cas où elles sont de la forme
+$\exp h$, et on applique la proposition 4 à $\log f$, $\log g$ et à la
+fonction de Pólya croissante $h \mapsto W(e^h)$ ; la remarque qui suit la
+proposition 4 a ici son analogue.\footnote{Page 17, dans la lecture de la
+seconde passe (machine) : « sur un espace mesuré $M$, resp.\ $N$ », « $0
+\leq t < \omega$ », et la démonstration, qui était presque entièrement en
+lacunes ; le « CQFD » souligné est biffé.}
 
 \pagerange{18}{27}
 \section*{Réarrangement spectral d'un opérateur dans une algèbre de von Neumann (pages 18 à 27)}
@@ -610,17 +715,32 @@ $\mathfrak{b}$, alors $K(M) \subset \mathfrak{a}$, où $K(M)$ désigne les
 fonctions continues à support compact.
 
 Pour la première assertion, si $E = \lim A_i$ en norme avec $A_i \in
-\mathfrak{a}$, on a $E = \lim A_i^{*}A_i = \lim E A_i^{*} A_i E$, donc $E$ est
-limite de $D_i \in \mathfrak{a}$ avec $0 \leq D_i \leq E$ ; dès que
-$\|E - D_i\| \leq \frac12$ on a $E \leq 2D_i$, donc $E \in \mathfrak{a}$.
+\mathfrak{a}$, on a $E = \lim A_i^{*}A_i$, donc $E = \lim C_i$ avec $C_i =
+E A_i^{*} A_i E \in \mathfrak{a}$, positif et tel que $EC_iE = C_i$ ; dès
+que $\|E - C_i\| \leq \frac12$ on a $C_i \geq \frac12 E$ (décomposition
+spectrale de $C_i$ dans $E\mathcal{M}E$), donc $E \leq 2C_i$ et $E \in
+\mathfrak{a}$.\footnote{Page 20. La page biffe d'un trait ondulé les trois
+lignes qui passaient par des $D_i \in \mathfrak{a}$ avec $0 \leq D_i \leq E$,
+et écrit la conclusion avec $C_i$, les deux $C$ sur des $D$ (seconde passe,
+machine) ; la première lecture de cette édition suivait la version biffée,
+juste elle aussi. La marge note : « On se sert seulement du fait que
+$\mathfrak{a}$ [est] idéal dans $\mathfrak{b}$ ».}
 Pour la seconde, une $f \in K^{+}(M)$ est majorée par la fonction
 caractéristique d'un compact $K$, elle-même majorée par une $g \in K^{+}(M)$ ;
 l'opérateur $U_{1_K}$ de multiplication par $1_K$ est un projecteur, majoré
 par $U_g \in \mathfrak{b}$, donc dans $\mathfrak{b}$, donc dans
 $\mathfrak{a}$, et $U_f \leq \|f\|_\infty U_{1_K}$ est dans $\mathfrak{a}$.
 Page 21, la fin de la démonstration établit que si $\mathcal{C}$ est
-commutative \emph{maximale} dans $\mathfrak{b}$, le commutant de $\mathcal{C}$
-dans $E\mathcal{M}E$, pour $E = U_{1_K}$, se réduit à $\mathcal{C}(K)$.
+commutative \emph{maximale} dans $\mathfrak{b}$, tout compact $K$ est contenu
+dans une partie ouverte et fermée $K'$ avec $U_{1_K} = U_{1_{K'}}$, et que,
+pour $K$ ouvert et fermé et $E = U_{1_K}$, le commutant de $\mathcal{C}$
+dans $E\mathcal{M}E$ se réduit à $\mathcal{C}(K)$.\footnote{Page 21, dans la
+lecture de la seconde passe (machine, non vérifiée par un lecteur) : « une
+partie ouverte et fermée $K'$ », où la première lisait « un compact », et
+une fin de phrase, lue de très peu sur la silhouette des mots, qui
+conclurait que l'algèbre ainsi formée est faiblement fermée, « donc $M$ est
+stonien » ; l'éditeur est interrogé, et l'on ne reprend pas cette
+conclusion.}
 
 \emph{Corollaire 1.} Si $\mathcal{C} = C_0(M)$ est une sous-algèbre
 commutative maximale de $\mathfrak{b}$, la trace induit une mesure positive
@@ -628,8 +748,16 @@ $\mu$ sur $M$ : $f \in C_0(M)$ est dans $\mathfrak{a}$ si et seulement si $f$
 est $\mu$-intégrable, et alors $\tau(f) = \int f\,d\mu$.
 
 \emph{Corollaire 2.} Si $A$ est un opérateur normal de $\mathfrak{b}$ et $f$
-une fonction continue bornée sur $\mathbf{C}$, nulle au voisinage de $0$,
-alors $f(A) \in \mathfrak{a}$.
+une fonction borélienne sur $\mathbf{C}$, bornée sur les compacts, nulle au
+voisinage de $0$, alors $f(A) \in \mathfrak{a}$.\footnote{Page 22 : « borélienne »
+est la lecture de la seconde passe (machine, non vérifiée par un lecteur) ;
+la première lisait « continue », et l'éditeur est interrogé. L'énoncé est vrai
+sous la lecture « borélienne » : si $f = 0$ sur $|z| < \varepsilon$, le
+projecteur spectral $E$ de $A$ sur $\{|z| \geq \varepsilon\}$ s'écrit $A\,g(A)$
+avec $g$ borélienne bornée, donc est dans $\mathfrak{b}$, donc dans
+$\mathfrak{a}$ par la proposition 1, et $f(A) = f(A)E \in \mathfrak{a}$. Sous
+la lecture « continue », c'en est le cas particulier. La page 19, biffée,
+énonçait déjà la même chose pour $f$ borélienne bornée.}
 
 Soit maintenant $A$ normal dans $\mathfrak{b}$. Il est contenu dans une
 sous-algèbre commutative involutive maximale $C_0(M)$ de $\mathfrak{b}$,
@@ -639,9 +767,23 @@ mesure $\mu$ du corollaire 1 existe et ne dépend pas de $\mathcal{C}$, car
   \langle \varphi, \mu_f\rangle = \int_M \varphi\circ f\,d\mu = \tau(\varphi(A))
   \qquad (\varphi \in K(\mathbf{C}^{*})) .
 \]
-On l'appelle \emph{mesure spectrale de $A$} et on la note $\mu_A$ ; sa masse
-est finie si et seulement si $A \in \mathfrak{a}$, et alors
-$\int z^n\,d\mu_A(z) = \tau(A^n)$ pour $n \geq 1$. Si $A \geq 0$, la fonction
+On l'appelle \emph{mesure spectrale de $A$} et on la note $\mu_A$. Son
+support est $\sigma(A) \smallsetminus \{0\}$, la trace étant
+fidèle\footnote{Page 22 : la ligne cerclée « Supp $\mu_A = \sigma(A)$ »,
+que la première passe donnait pour biffée, ne l'est pas ; la phrase qui suit
+dit que « cette inclusion est une égalité quand $\varphi$ est fidèle », où
+l'on attend $T$ (seconde passe, machine ; l'éditeur est interrogé sur le
+signe, $=$ ou $\subset$). Le support est toujours contenu dans $\sigma(A)
+\smallsetminus \{0\}$, et l'égalité vient de la fidélité : un voisinage d'un
+point non nul du spectre porte un projecteur spectral non nul, de trace $> 0$.}
+; $z$ est $\mu_A$-sommable si et seulement si $A \in \mathfrak{a}$, et alors
+$\int z^n\,d\mu_A(z) = \tau(A^n)$ pour $n \geq 1$.\footnote{Page 22 : « $A
+\in \underline{a} \Longleftrightarrow z$ sommable pour $\mu_A$ » (seconde
+passe, machine). La lecture antérieure de cette édition disait « sa masse est
+finie si et seulement si $A \in \mathfrak{a}$ », ce qui est faux : dans
+$L(H)$, $A = \sum n^{-2}\,\bar e_n \otimes e_n$ est à trace et $\mu_A$ est de
+masse infinie. Pour $A$ normal, $A \in \mathfrak{a}$ équivaut à $\tau(|A|) =
+\int |z|\,d\mu_A < \infty$.} Si $A \geq 0$, la fonction
 décroissante $\varphi_A$ sur $\mathbf{R}^{*}_{+}$ de mesure spectrale $\mu_A$
 est le \emph{réarrangement spectral} de $A$ ; on a $\|\varphi_A\|_\infty =
 \|A\|$, et pour $A \in \mathfrak{b}$ quelconque on pose $\varphi_{|A|}$, puis
@@ -661,14 +803,20 @@ Les pages 23 à 25, en grande partie biffées et reprises, remarquent qu'un
 point $t \in M$ de masse $\mu(\{t\}) > 0$ définit un projecteur minimal
 $E = U_{1_{\{t\}}}$ de $\mathcal{M}$, que $\mathcal{M}$ se décompose alors en
 une somme directe dont le facteur porté par $E$ est de type I avec $\tau$
-proportionnelle à la trace usuelle, et que, inversement, une algèbre à trace
-finie fidèle se plonge dans une algèbre continue en posant $\tau(f) =
-\int_0^1 \tau(f(s))\,ds$ sur $L^\infty([0,1]) \mathbin{\bar\otimes}
-\mathcal{M}$ ; le réarrangement d'un $A \in \mathcal{M}$ est le même dans
-l'une et dans l'autre. C'est l'« astuce » que la page 34 nommera, et qui
-permet de supposer la trace continue.\footnote{La prose de ces trois pages
-est presque entièrement perdue ; on n'en retient que ce que les formules et
-la page 34 confirment.}
+proportionnelle à la trace usuelle, et que, inversement, une algèbre munie
+d'une trace normale finie fidèle se plonge dans une algèbre \emph{non
+atomique} munie d'une trace normale finie fidèle qui induit la trace donnée,
+par exemple en posant $\tau(f) = \int_0^1 \tau(f(s))\,ds$ sur
+$L^\infty([0,1]) \mathbin{\bar\otimes} \mathcal{M}$ ; la mesure spectrale
+d'un $A \in \mathcal{M}$ est la même dans l'une et dans l'autre, de sorte
+que « dans la plupart des questions sur les traces » on peut se borner au
+cas où l'algèbre est non atomique. C'est l'« astuce » que la page 34
+nommera.\footnote{La prose de ces trois pages est lue presque tout entière
+sur la silhouette des mots ; la seconde passe (machine, non vérifiée par un
+lecteur) y lit les mots « non atomique », « scalairement mesurables », et
+la conclusion citée, page 25, et trouve que la ligne « Mais chaque
+$\mathcal{A}_i$ peut se plonger dans une » est biffée. On n'en retient que
+ce que les formules et la page 34 confirment.}
 
 \emph{Proposition 6.} Pour $A \in \mathfrak{b}^{+}$ et $t > 0$,
 \[
@@ -697,16 +845,22 @@ $\varphi_{|BA|} \leq \|B\|\,\varphi_{|A|}$ et $\varphi_{|AB|} \leq
 \emph{Corollaire 3.} $\varphi_A$ est fonction croissante de
 $A \in \mathfrak{b}^{+}$.
 
-\emph{Corollaire 4.} Les fonctions $A \mapsto \varphi_{|A|}(t{-}0)$ sont
-semi-continues supérieurement sur $\mathfrak{b}$ pour la topologie de la
-norme.\footnote{La fin de l'énoncé est perdue au bord de la page ; la
-topologie est celle que l'infimum de normes rend évidente.}
+\emph{Corollaire 4.} Les fonctions $A \mapsto \varphi_{|A|}(t{-}0)$, $t >
+0$, forment une famille équicontinue sur $\mathfrak{b}$ muni de sa topologie
+normée : $|\varphi_{|A|}(t{-}0) - \varphi_{|B|}(t{-}0)| \leq \|A -
+B\|$.\footnote{Page 26, dans la lecture de la seconde passe (machine, non
+vérifiée par un lecteur) : « forment une famille équicontinue de fonctions
+(quand $\underline{b}$ est muni de sa topologie normée) ». La première passe
+lisait « sont semi-continues supérieurement » et donnait la fin pour perdue ;
+l'éditeur est interrogé. L'équicontinuité résulte du corollaire 1, puisque
+$\|A(1-E)\| \leq \|B(1-E)\| + \|A - B\|$, et contient la semi-continuité ;
+c'est aussi ce que redit le corollaire 5 de la page 34.}
 
 \emph{Proposition 7.} Pour $A \in \mathfrak{b}$, $\mu_{|A|} = \mu_{|A^{*}|}$,
 c'est-à-dire $\varphi_{|A|} = \varphi_{|A^{*}|}$, et par suite $\Phi_{|A|} =
 \Phi_{|A^{*}|}$, $\Psi_{|A|} = \Psi_{|A^{*}|}$, $\Delta_A = \Delta_{A^{*}}$.
-Il suffit de voir $\mu_{A^{*}A} = \mu_{AA^{*}}$, et par continuité de le voir
-pour $A \in \mathfrak{a}$ ; les deux mesures sont alors, hors de $0$, de
+Il suffit de voir $\mu_{A^{*}A} = \mu_{AA^{*}}$, et par le corollaire 4 de le
+voir pour $A \in \mathfrak{a}$ (page 27) ; les deux mesures sont alors, hors de $0$, de
 masse finie et à support dans $[0,\|A\|^2]$, donc déterminées par leurs
 moments $\int x^p\,d\mu$, $p \geq 1$ entier, et $\tau((A^{*}A)^p) =
 \tau((AA^{*})^p)$ résulte de $\tau(RS) = \tau(SR)$.
@@ -758,8 +912,11 @@ la multiplicativité en trace finie est le théorème principal ; la page 29
 commence une démonstration directe par $\Delta(A)^2 = \Delta(AA^{*})$, la
 biffe, et la page 30 la remplace par les déterminants relatifs qui suivent.
 Le passage de $1 + \mathfrak{a}$ au cas fini « par raison de continuité »
-demande la semi-continuité de $A \mapsto \Delta(A)$, qui n'est pas écrite ;
-elle résulte du corollaire 4 de la proposition 6.}
+demande une continuité de $A \mapsto \Delta(A)$ sur $1 + \mathfrak{a}$, qui
+n'est pas écrite ; le corollaire 4 de la proposition 6, lu à la page 26
+comme l'équicontinuité des $\varphi_{|A|}(t)$ en norme, n'en donne que la
+version ponctuelle, et le passage à la limite sous l'intégrale reste à
+faire.}
 
 \emph{Déterminants relatifs.} Supposons la trace finie. Soient $X$, $Y$ deux
 projecteurs équivalents de $\mathcal{M}$, $U \in \mathcal{M}$ une isométrie
@@ -783,8 +940,12 @@ projecteur $E_0$. Alors
 \]
 et le sup est atteint ; si $A$ est normal, on peut se borner aux
 $\Delta^{E}(EAE)$.\footnote{La page 30 écrit $\Delta_A(t) = \sup_{\tau(E)
-\leq t} \Delta^{E}(EAE)$ pour $A \in \mathfrak{b}$ quelconque, et la
-démontre « par diagonalisation ». Deux corrections. D'abord $\tau(E) = t$ et
+\leq t} \Delta^{E}(EAE)$ « ($A \in \tilde{\mathfrak{b}}$) », sans hypothèse
+de normalité, et la démontre en plaçant $A$ dans une algèbre commutative
+maximale, « (décomposition spectrale) » ; le tilde est la lecture de la
+seconde passe (machine), et l'éditeur est interrogé. La trace étant supposée
+finie depuis le haut de la page, $\tilde{\mathfrak{b}} = \mathfrak{b} =
+\mathcal{M}$, et l'énoncé est le même sous l'une ou l'autre lecture. Deux corrections. D'abord $\tau(E) = t$ et
 non $\leq t$ : pour $A = \frac12 1$ en trace finie, $\Delta_A(t) = 2^{-t}$
 décroît, tandis que le sup sur $\tau(E) \leq t$ vaut $1$ ; la page 31 elle-même
 prend $t = \tau(E)$. Ensuite, la formule avec un seul projecteur exige $A$
@@ -806,8 +967,20 @@ alors $\Delta^{E,F}(FAE) \leq \Delta_A(t)$.
 \[
   \Delta_{AB}(t) \leq \Delta_A(t)\,\Delta_B(t) .
 \]
-Les deux membres étant fonctions semi-continues de $A$ et $B$, on peut
-supposer la trace finie et $t = \tau(E)$. Par la proposition 9,
+On peut supposer, dit la page, $\mathcal{M}$ non atomique et la trace finie ;
+alors tout $t \in [0, \tau(1)]$ est la trace d'un projecteur, et l'on prend
+$t = \tau(E)$.\footnote{Page 31, phrase cerclée, dans la lecture de la
+seconde passe (machine, non vérifiée par un lecteur) : « On peut supposer que
+$\mathcal{A}$ est non atomique, et $T(1) < +\infty$ ». La lecture antérieure
+de cette édition donnait pour raison la semi-continuité des deux membres, ce
+que la page ne dit pas ; l'éditeur est interrogé. La réduction au cas non
+atomique est le plongement des pages 25 et 34, qui suppose la trace finie
+et ne change pas les réarrangements. La réduction à la trace finie n'est
+pas justifiée sur la page ; elle se fait en approchant $A$ et $B$ en norme
+par des éléments d'un $E\mathcal{M}E$, $E \in \mathfrak{a}$, les
+$\varphi_{|A|}$ dépendant continûment de $A$ par le corollaire 4 de la
+proposition 6, et l'on ne détaille pas ce passage à la limite.} Par la
+proposition 9,
 $\Delta_{AB}(t) = \sup \Delta^{E,G}(GABE)$ sur les couples $E \simeq G$ de
 trace $t$ ; soit $F$ un projecteur équivalent à $E$ majorant $\sigma(BE)$,
 $A' = GAF$, $B' = FBE$, de sorte que $GABE = A'B'$ et, par la
@@ -823,9 +996,11 @@ Fack (1982) et Fack--Kosaki (1986). Telle qu'elle est écrite page 31, la
 démonstration passe par la proposition 9 à un seul projecteur appliquée au
 produit $AB$, non normal ; on l'a réécrite avec les couples de projecteurs
 équivalents, ce qui est exactement ce que la fin de la page 31 et la page 32
-manipulent. Pour $t$ hors de $\tau(\mathcal{P})$ --- en type I, entre deux
-entiers --- l'énoncé reste vrai par la caractérisation de Fack--Kosaki, mais
-l'argument des pages ne le couvre pas.}
+manipulent. Les $t$ hors de $\tau(\mathcal{P})$ --- en type I, entre deux
+entiers --- sont couverts par la réduction au cas non atomique que la page
+fait en tête ; si la phrase cerclée disait autre chose, l'énoncé resterait
+vrai par la caractérisation de Fack--Kosaki, mais l'argument des pages ne le
+couvrirait pas.}
 
 \pagerange{32}{33}
 \section*{Les inégalités fondamentales (pages 32 et 33)}
@@ -863,10 +1038,22 @@ $r < 1$ et $p$, $q$ quelconques, ce qui est remarquable : c'est le théorème
 de la page 126, obtenu ici en trois lignes, et dans une algèbre de von Neumann
 semi-finie.}
 
-\emph{Corollaire 3.} Pour $A \in \mathfrak{b}$,
+\emph{Corollaire 3.} Supposons $\mathcal{M}$ non atomique. Pour $A \in
+\mathfrak{b}$,
 \[
-  \Phi_{|A|}(t) = \sup\bigl\{ |\tau(BA)| : B \in \mathcal{M},\ \|B\| \leq 1,\   \tau(\sigma(B)) \leq t \bigr\} .
+  \Phi_{|A|}(t) = \sup\bigl\{ |\tau(BA)| : B \in \mathcal{M},\ \|B\| \leq 1,\   \tau(\sigma(B)) \leq t \bigr\},
 \]
+et la borne est atteinte ; on peut prendre $B$ hermitien si $A$ l'est, et un
+projecteur si $A \geq 0$.\footnote{Page 33, dans la lecture de la seconde
+passe (machine, non vérifiée par un lecteur) : l'hypothèse « Supposons
+$\mathcal{A}$ non atomique », cerclée au-dessus de la ligne, et « et borne
+atteinte » ; l'éditeur est interrogé sur la première. La phrase suivante
+porte deux lacunes, « On peut exiger $B$ … si $A$ est hermitien et $B$ …
+hermitien si $A \geq 0$ » ; ce qu'on en donne est ce que fournit le $B =
+EU^{*}$ de la démonstration, $E$ commutant à $A$, et ce que la page 35 dit
+en marge (« se borner à $B \in \mathcal{P}$ si $A \geq 0$ »). Sans
+l'hypothèse non atomique la formule reste vraie par le plongement des pages
+25 et 34, mais la borne peut ne pas être atteinte.}
 L'inégalité $\geq$ : si $E = \sigma(B)$, $\varphi_{|B|} = \varphi_{|EB|} \leq
 \varphi_E$, et par le corollaire 1, $|\tau(BA)| \leq \int \varphi_E
 \varphi_{|A|} = \int_0^t \varphi_{|A|}$. L'inégalité $\leq$ : si $A = U|A|$,
@@ -875,11 +1062,14 @@ $\tau(E|A|) = \Phi_{|A|}(t)$, et $B = EU^{*}$ convient.\footnote{C'est le
 principe du maximum de Ky Fan (1951), $\sum_{i \leq n} s_i(A) = \sup
 |\operatorname{Tr} BA|$ sur les $B$ de norme $\leq 1$ et de rang $\leq n$,
 que la page 39 énonce dans $L(H)$. Le projecteur $E$ de trace exactement
-$t$ existe si $t \in \tau(\mathcal{P})$ ; sinon on prend le sup.}
+$t$ existe parce que $\mathcal{M}$ est non atomique.}
 
-\emph{Corollaire 4.} Les fonctions $A \mapsto \Phi_{|A|}(t)$ sont
-sous-additives sur $\mathfrak{b}$ : $\Phi_{|A+B|} \leq \Phi_{|A|} +
-\Phi_{|B|}$. Elles sont des sup de semi-normes par le corollaire 3.
+\emph{Corollaire 4.} Pour chaque $t$, $A \mapsto \Phi_{|A|}(t)$ est une
+semi-norme sur $\mathfrak{b}$, en particulier $\Phi_{|A+B|} \leq \Phi_{|A|} +
+\Phi_{|B|}$ : par le corollaire 3, c'est un sup de semi-normes, après
+plongement dans une algèbre non atomique s'il le faut.\footnote{Page 33 :
+« est une semi-norme » (écrit « ½ norme »), dans la lecture de la seconde
+passe (machine) ; la première lisait « sous-additives ».}
 
 \pagerange{34}{35}
 \section*{Seconde mouture (pages 34 et 35)}
@@ -894,7 +1084,11 @@ $\inf_{\tau(E) < t}$ et $\inf_{\tau(E) \leq t}$ diffèrent encore --- l'exemple
 $A = \frac12 1 + \frac12 E$ le montre --- de sorte que le « $t + 0$ » de la
 page 34, en face du signe strict, est la même inversion qu'à la page 7. On
 garde la limite à gauche.} l'argument par les projecteurs équivalents
-rapporté plus haut, les corollaires 1 à 3 et 5, et en marge un
+rapporté plus haut, les corollaires 1 à 3 et 5 --- ce dernier,
+l'équicontinuité des $A \mapsto \varphi_{|A|}(t)$, comme le corollaire 4 de
+la page 26 ---,\footnote{Page 34 : « équi-continuité », dans la lecture de
+la seconde passe (machine) ; la première lisait « semi-continuité ».} et en
+marge un
 \emph{corollaire 4} : $\varphi_{\alpha(A)} = \alpha(\varphi_A)$ pour $\alpha$
 croissante, $\varphi_{|1+A|} \leq 1 + \varphi_{|A|}$, $\varphi_{1+|A|} = 1 +
 \varphi_{|A|}$. Puis, avec la notation $\Delta_t(A)$ pour $\Delta_A(t)$ :
@@ -918,10 +1112,17 @@ $\Delta_t(1+|A|)$ croissant avec $t$.} Elle est ce que la page 32 appelle « cor
 \section*{Préliminaires sur les opérateurs compacts (pages 37 à 41)}
 
 Quatre feuillets jaunis, encadrés au crayon rouge, qui rappellent ce que
-tout le reste suppose ; le second porte « II ». Les pages 43 à 104 en sont
+tout le reste suppose.\footnote{Le signe souligné qui ouvre la page 39 se
+lit « Th. » dans la seconde passe (machine, non vérifiée par un lecteur) ;
+la première lisait « II » et en tirait un numéro de feuillet, indice d'une
+suite plus longue. L'éditeur est interrogé ; sous la lecture « Th. », rien
+dans ces feuillets ne suppose une suite perdue.} Les pages 43 à 104 en sont
 la rédaction. Si $E$ est un espace de Hilbert, son conjugué $\bar{E}$ l'est
 et $E' = \bar{E}$. Les opérateurs compacts sont les limites en norme
-d'opérateurs de rang fini. L'adjoint $u^{*} : F \to E$ de $u : E \to F$
+d'opérateurs de rang fini (« propriété d'approximation », dit la page 37),
+et l'application canonique $E' \mathbin{\hat\otimes} F \to L(E,F)$ est
+injective.\footnote{Page 37 : « Biunivocité de $E' \hat\otimes F \to
+L(E,F)$ » (seconde passe, machine) ; la première lisait « Bicontinuité ».} L'adjoint $u^{*} : F \to E$ de $u : E \to F$
 vérifie $\|u^{*}u\| = \|u\|^2$. Un hermitien compact se diagonalise, $u =
 \sum \lambda_i\, \bar{e}_i \otimes e_i$ avec $\lambda_i$ réels tendant vers
 $0$ et $(e_i)$ orthonormal, et $u \geq 0$ si et seulement si tous les
@@ -939,8 +1140,11 @@ s_i\,\bar{e}_i \otimes e_i$ avec $s_i > 0$, et $u = \sum s_i\,\bar{e}_i
 \otimes f_i$ où $f_i = Ue_i$ est orthonormal ; réciproquement une telle
 écriture donne $|u|$, $u^{*} = \sum s_i\,\bar{f}_i \otimes e_i$ et
 $|u^{*}| = \sum s_i\,\bar{f}_i \otimes f_i$, de sorte que $|u|$ et $|u^{*}|$
-ont les mêmes valeurs propres.\footnote{C'est la décomposition de Schmidt ;
-la fin de la page 37 est perdue dans une déchirure.}
+ont les mêmes valeurs propres.\footnote{C'est la décomposition de Schmidt.
+La fin de la page 37, que la seconde passe lit (machine), conclut
+directement de $u^{*} = \sum s_i\,\bar{f}_i \otimes e_i$ que $|u^{*}|$ a les
+mêmes valeurs propres que $|u|$ ; la formule pour $|u^{*}|$ est de cette
+édition.}
 
 \emph{Valeurs singulières.} Pour $u$ compact, $s_n(u) = \lambda_n(|u|)$, suite
 décroissante positive ; $|\lambda_1(u)| \leq s_1(u) = \|u\|$ et $s_n(u) =
@@ -952,27 +1156,44 @@ s_n(u^{*})$. Pour $h \geq 0$ compact, le principe du minimax donne
 \]
 d'où $s_n(uv) \leq \|u\|\,s_n(v)$, $s_n(uv) \leq \|v\|\,s_n(u)$, et $s_n(h)$
 croît avec l'hermitien positif $h$. Puis les \emph{inégalités de Ky Fan},
-que la page 143 démontre :
+que la page 143 démontre : pour $m$, $n \geq 0$,
 \[
-  s_{m+n-1}(AB) \leq s_m(A)\,s_n(B), \qquad
-  s_{m+n-1}(A+B) \leq s_m(A) + s_n(B) .
+  s_{m+n+1}(AB) \leq s_{m+1}(A)\,s_{n+1}(B), \qquad
+  s_{m+n+1}(A+B) \leq s_{m+1}(A) + s_{n+1}(B) .
 \]
 \footnote{Ky Fan, 1951 ; la page 38 porte le nom dans une lecture incertaine,
-et un point d'interrogation rouge en marge. Voir la page 143 pour la
-démonstration et la correction d'un signe.}
+et un point d'interrogation rouge en marge. Les indices $m+n+1$, $m+1$,
+$n+1$ sont la lecture de la seconde passe (machine, non vérifiée par un
+lecteur) ; la première lisait $m+n-1$, $m$, $n$, et l'éditeur est interrogé.
+Les deux formes sont la même inégalité --- on passe de l'une à l'autre en
+remplaçant $m$, $n$ par $m+1$, $n+1$ --- et toutes deux sont vraies avec la
+numérotation $s_1 = \|u\|$ de la page ; celle de la page est la forme
+habituelle pour des suites numérotées à partir de $0$. La page 143 écrit la
+forme en $m+n-1$. Voir la page 143 pour la démonstration et la correction
+d'un signe.}
 
 \emph{Opérateurs à trace.} $u \in \mathcal{S}_1(E,F)$ si et seulement si
-$\sum s_i(u) < \infty$, et alors $\|u\|_1 = \sum s_i(u)$ ; si $u$ est à trace,
-$|u|$ l'est et $\|u\|_1 = \|\,|u|\,\|_1 = \operatorname{Tr}|u|$ ;
+$\sum s_i(u) < \infty$, et alors $\|u\|_1 = \sum s_i(u)$ ; $u$ est à trace si
+et seulement si $|u|$ l'est, et $\|u\|_1 = \|\,|u|\,\|_1 =
+\operatorname{Tr}|u|$ (page 39, corollaire 1) ;
 $|\operatorname{Tr} u| \leq \sum s_i(u)$. Pour $u$ compact,
 \[
   \sum_{i=1}^n s_i(u) = \sup\bigl\{ |\operatorname{Tr} v_n u| : v_n \in L(F,E),\   \|v_n\| \leq 1,\ \operatorname{rang} v_n \leq n \bigr\},
 \]
 le sup étant atteint pour $v_n = \sum_{j \leq n} \bar{f}_j \otimes e_j$, et
-pour un projecteur hermitien de rang $n$ si $u$ est hermitien positif. D'où,
-pour $u$, $v$ compacts, $\sum_{i \leq n} s_i(u+v) \leq \sum_{i \leq n}
-(s_i(u) + s_i(v))$, $\|u+v\|_1 \leq \|u\|_1 + \|v\|_1$, et $\sum s_i$ est une
-norme sur $\mathcal{S}_1$. Enfin la définition des classes $\mathcal{S}_p(E,F)$
+pour un projecteur hermitien de rang $n$ si $u$ est hermitien positif.\footnote{Page
+39 : « $v_n$ est un projecteur hermitien si $u$ était supposé hermitien
+($f_i = e_i$) » (seconde passe, machine). La parenthèse est l'hypothèse $u
+\geq 0$, et c'est elle qu'il faut : pour $u$ hermitien non positif, $f_i =
+\pm e_i$ et $v_n$ n'est pas un projecteur.} D'où, pour $u$, $v$ compacts,
+$\sum_{i \leq n} s_i(u+v) \leq \sum_{i \leq n} (s_i(u) + s_i(v))$ : pour
+chaque $n$, $u \mapsto \sum_{i \leq n} s_i(u)$ est une norme sur
+$L_0(E,F)$ ; et $\|u+v\|_1 \leq \|u\|_1 + \|v\|_1$, $\sum s_i$ étant une
+norme sur $\mathcal{S}_1$.\footnote{Page 39 : la page écrit la somme
+partielle $\sum_{i=1}^{n} \rho_i$, « norme sur $L_0(E,F)$ » (seconde passe,
+machine ; la première lisait la somme totale, qui n'est pas finie sur
+$L_0$). L'éditeur est interrogé sur « norme » ou « ½ norme » ; c'est une
+norme, donc aussi une semi-norme.} Enfin la définition des classes $\mathcal{S}_p(E,F)$
 par $\|u\|_p = (\sum s_i(u)^p)^{1/p}$ et $S_p(u) = \sum s_i(u)^p$, avec les
 cas $p = 1$ et $p = \infty$.
 
@@ -1033,9 +1254,15 @@ compact et $E$ un espace de Hilbert, $L^2(\mu) \mathbin{\hat\otimes}_2 E =
 L^2_E(\mu)$, l'espace des fonctions de carré intégrable à valeurs dans $E$,
 avec $(f, g) = \int (f(t), g(t))\,d\mu(t)$ : l'application $\varphi \otimes a
 \mapsto \varphi\,a$ conserve les produits scalaires et a une image dense.
+(La page 49 définit $L^2_E(\mu)$ pour $E$ de Banach, et son produit scalaire
+quand $E$ est de Hilbert.)\footnote{Page 49, dans la lecture de la seconde
+passe (machine) ; la première faisait de $E$ un espace de Hilbert dès la
+définition. L'éditeur est interrogé sur le mot « Banach ».}
 \emph{Corollaire 1} : $\ell^2(I) \mathbin{\hat\otimes}_2 E = \ell^2_E(I)$.
 \emph{Corollaire 2} : $L^2(\mu) \mathbin{\hat\otimes}_2 L^2(\nu) = L^2(\mu
-\otimes \nu)$, puisque $L^2(\mu \otimes \nu) = L^2_{L^2(\nu)}(\mu)$.
+\otimes \nu)$, par l'isomorphisme canonique $L^2(\mu \otimes \nu) =
+L^2_{L^2(\nu)}(\mu)$ ; pour $\ell^2(I)$ et $\ell^2(J)$ on retrouve la
+proposition 1 (page 50).
 
 \emph{Opérateurs de Hilbert--Schmidt.} L'application $(\bar{a} \otimes b)\,x =
 (x, a)\,b$ identifie $\bar{E} \otimes F$ aux opérateurs de rang fini de $E$
@@ -1058,21 +1285,35 @@ pour $uA$ ; $u \in \mathcal{S}_2(E,F)$ si et seulement si $u^{*} \in
 \mathcal{S}_2(F,E)$, et $\|u\|_2 = \|u^{*}\|_2$.
 
 \emph{Théorème 3.} $u$ est de Hilbert--Schmidt si et seulement si $\sum
-s_i(u)^2 < \infty$, et alors $\|u\|_2 = \|u^{*}\|_2 = (\sum s_i(u)^2)^{1/2}$ ;
+s_i(u)^2 < \infty$, et alors $\|u\|_2 = \|\,|u|\,\|_2 = (\sum
+s_i(u)^2)^{1/2}$ ;\footnote{Page 52, formule (19) : $\|u\|_2 = \|h\|_2$,
+avec $h = \sqrt{u^{*}u}$, dans la lecture de la seconde passe (machine) ; la
+première lisait $\|u^{*}\|_2$, et l'éditeur est interrogé. Les deux égalités
+sont vraies, la seconde étant au point 2) du théorème 2. La marge de la page
+52 renumérote « Th.~3 » ce qui était le point 3) du théorème 2, et la page
+54 dit encore « le th.~2 est complètement démontré ».}
 en particulier $u \in \mathcal{S}_2$ si et seulement si $u^{*}u \in
 \mathcal{S}_1$, et $\|u\|_2 = \sqrt{\operatorname{Tr} u^{*}u} =
 \sqrt{\|u^{*}u\|_1}$. La démonstration passe par $u = Uh$, $h = Vu$ avec
 $h = |u|$ et $U$, $V$ des isométries partielles, puis diagonalise $h$.
 
-\emph{Théorème 3 bis.} Pour $u \in L(E,F)$ : $u$ est à trace si et seulement
+\emph{Théorème 3 bis.} L'application canonique de $\bar{E}
+\mathbin{\hat\otimes} F$, produit tensoriel projectif, dans $L(E,F)$ est
+injective.\footnote{Page 54, première phrase du théorème, dans la lecture
+de la seconde passe (machine) : le signe porte un chapeau, non « (2) » ; ce
+n'est donc pas le plongement de Hilbert--Schmidt de la page 51 mais
+l'injectivité du produit projectif, vraie pour les espaces de Hilbert
+(propriété d'approximation). L'éditeur est interrogé sur le signe. C'est ce
+qui permet de parler, page 55, de la trace d'un opérateur à trace.} Pour $u
+\in L(E,F)$ : $u$ est à trace si et seulement
 si $|u| = \sqrt{u^{*}u}$ l'est, si et seulement si $\sum s_i(u) < \infty$, et
 alors
 \[
   \|u\|_1 = \|\,|u|\,\|_1 = \sum s_i(u) = \operatorname{Tr}\sqrt{u^{*}u}
   = \operatorname{Tr}\sqrt{uu^{*}} .
 \]
-\footnote{La page 54 numérote ce théorème « 3 » comme le précédent ; on le
-distingue. Sa démonstration suppose connue une norme $\|u\|_1$ sur les
+\footnote{La page 54 numérote ce théorème « 3 » comme le précédent, qui
+n'était « Th.~3 » que par la marge de la page 52 ; on le distingue. Sa démonstration suppose connue une norme $\|u\|_1$ sur les
 opérateurs à trace pour laquelle $\|uA\|_1 \leq \|u\|_1\|A\|$ et
 $|\operatorname{Tr} u| \leq \|u\|_1$ : c'est la norme nucléaire du numéro 1
 absent, et $\sum_{i \leq n} s_i = \operatorname{Tr} p_n h \leq \|p_n h\|_1
@@ -1090,11 +1331,14 @@ $u$, $v \in \mathcal{S}_2(E,F)$,
 \[
   (u, v) = \operatorname{Tr} uv^{*} = \operatorname{Tr} v^{*}u .
 \]
-Par continuité on se ramène aux rangs finis ; alors $|\operatorname{Tr} Avu|
-\leq \|Av\|_2\|u\|_2 \leq \|A\|\,\|v\|_2\|u\|_2$ pour $\|A\| \leq 1$ donne la
-première formule par le corollaire 2, et la seconde se vérifie sur
+Par le corollaire 2 on est ramené à $|\operatorname{Tr} Avu| \leq
+\|v\|_2\|u\|_2$ pour $\|A\| \leq 1$, puis, avec $w = Av$, $\|w\|_2 \leq
+\|v\|_2$, à $|\operatorname{Tr} wu| \leq \|w\|_2\|u\|_2$ ;\footnote{Page 56,
+dans la lecture de la seconde passe (machine).} la seconde formule est
+triviale pour des opérateurs de rang fini --- il suffit de la vérifier sur
 $u = \bar{a} \otimes b$, $v = \bar{a}' \otimes b'$, où $v^{*}u = (b, b')\,\bar{a}
-\otimes a'$ et $\operatorname{Tr} v^{*}u = (a', a)(b, b') = (u, v)$.
+\otimes a'$ et $\operatorname{Tr} v^{*}u = (a', a)(b, b') = (u, v)$ ---,
+et elle s'étend à $\mathcal{S}_2(E,F)$ par prolongement par continuité.
 \emph{Corollaire 1} : $u \in L(E,F)$ est de Hilbert--Schmidt si et seulement
 si $vu$ est à trace pour tout $v \in \mathcal{S}_2(F,E)$, et alors $\|u\|_2 =
 \sup_{\|v\|_2 \leq 1} |\operatorname{Tr} vu|$ ; la réciproque passe par le
@@ -1110,10 +1354,13 @@ avec $v$, $w \in \mathcal{S}_2(E)$, et l'on peut prendre $\|v\|_2 = \|w\|_2 =
 \section*{Produits extérieurs hilbertiens (pages 58 à 69)}
 
 Le numéro 3, « Applications : des inégalités diverses ». Le produit tensoriel
-hilbertien de $n$ espaces $E_1, \ldots, E_n$ est défini par récurrence, avec
-$(a_1 \otimes \cdots \otimes a_n, b_1 \otimes \cdots \otimes b_n) = \prod (a_i,
-b_i)$ et pour base hilbertienne les $e^1_{\alpha_1} \otimes \cdots \otimes
-e^n_{\alpha_n}$ ; il est associatif, et pour $u_i \in L(E_i, F_i)$ on a
+hilbertien de $n$ espaces $E_1, \ldots, E_n$ est défini directement : sur le
+produit tensoriel algébrique, $(a_1 \otimes \cdots \otimes a_n, b_1 \otimes
+\cdots \otimes b_n) = \prod (a_i, b_i)$ donne, comme au numéro 2, une forme
+sesquilinéaire strictement positive, et l'on complète\footnote{Page 58, dans
+la lecture de la seconde passe (machine) ; la première faisait passer la
+définition par récurrence.} ; il a pour base hilbertienne les $e^1_{\alpha_1} \otimes \cdots \otimes
+e^n_{\alpha_n}$ ; il est associatif et commutatif, et pour $u_i \in L(E_i, F_i)$ on a
 $\|u_1 \otimes \cdots \otimes u_n\| \leq \prod \|u_i\|$, qu'on ramène par
 associativité au cas de deux facteurs et d'un seul $u_i \neq 1$, où c'est le
 théorème 2 du numéro 2 sous l'identification $E_1 \mathbin{\hat\otimes}_2 E_2
@@ -1139,9 +1386,12 @@ plonge comme sous-espace dense, et sur les multivecteurs décomposables
 orthonormale ; sans lui, $\|e_{i_1} \wedge \cdots \wedge e_{i_n}\| =
 (n!)^{-1/2}$. C'est la convention de l'espace de Fock antisymétrique.}
 
-\emph{Proposition.} Il existe sur $\Lambda E \times \Lambda E$ une unique
+\emph{Théorème.} Il existe sur $\Lambda E \times \Lambda E$ une unique
 forme hermitienne définie positive satisfaisant à cette formule, et son
-complété est $\Lambda_2 E$. Si $(e_i)_{i \in I}$ est une base hilbertienne de
+complété est la puissance extérieure hilbertienne $\Lambda_2 E$.\footnote{Page
+61 : le titre souligné est « Théorème », écrit après un « Prop » biffé, et
+« puissance extérieure » est écrit au-dessus de mots biffés (seconde passe,
+machine ; l'éditeur est interrogé sur le titre).} Si $(e_i)_{i \in I}$ est une base hilbertienne de
 $E$, $I$ totalement ordonné, les $e_J = e_{i_1} \wedge \cdots \wedge e_{i_n}$,
 $J = \{i_1 < \cdots < i_n\}$, forment une base hilbertienne de $\Lambda_2 E$.
 En particulier
@@ -1152,10 +1402,14 @@ En particulier
 l'inégalité venant, si $a_i = \sum_j a_{ij} e_j$ et $A = (a_{ij})$, de
 $\det((a_i, a_j)) = \det AA^{*} = |\det A|^2$ et du choix d'une base où $A$
 est triangulaire ; ce qui donne l'\emph{inégalité de Hadamard}
-$|\det A| \leq \prod_i \|a_i\|$, et le \emph{corollaire 1} :
-$|\det((a_i, b_j))| \leq \prod_i \|a_i\|\,\|b_i\|$, par Cauchy--Schwarz.
-Ce corollaire montre que la constante $K_n$ de la théorie générale vaut au
-plus $1$ dans l'espace de Hilbert.\footnote{Renvoi à « Chap.\ 1, § 2, n° 2,
+$|\det A| \leq \prod_i \|a_i\|$ --- le volume du parallélépipède construit
+sur les $a_i$ est au plus le produit des longueurs des côtés, dit la page 61
+---, et le \emph{corollaire 1} : $|\det((a_i, b_j))| \leq \prod_i
+\|a_i\|\,\|b_i\|$, par Cauchy--Schwarz. Ce corollaire montre que la constante
+$K_n$ de la théorie générale est égale à $1$ dans l'espace de Hilbert, la
+borne étant atteinte sur des vecteurs orthonormaux.\footnote{Page 63 (et de
+même page 77) : « égal à 1 », dans la lecture de la seconde passe (machine) ;
+la première lisait « $\leq 1$ ».}\footnote{Renvoi à « Chap.\ 1, § 2, n° 2,
 prop.\ 1 » : dans \emph{La théorie de Fredholm}, la constante qui borne
 $|\det((\langle x_i, x'_j\rangle))|$ par $\prod \|x_i\|\|x'_j\|$ dans un
 espace de Banach quelconque. Ces pages ne la définissent pas.}
@@ -1180,9 +1434,14 @@ Alors
   (\Lambda h)^\alpha = \Lambda(h^\alpha)\quad (h \geq 0,\ \alpha > 0),
 \end{gather*}
 la seconde par $((\Lambda u)\,a_1 \wedge \cdots \wedge a_n, b_1 \wedge \cdots
-\wedge b_n) = \det((ua_i, b_j)) = \det((a_i, u^{*}b_j))$, la troisième pour
-$\alpha = 1/n$ par unicité de la racine positive, puis pour $\alpha$
-rationnel, puis par continuité de $\alpha \mapsto h^\alpha$.
+\wedge b_n) = \det((ua_i, b_j)) = \det((a_i, u^{*}b_j))$ et la polarisation,
+la troisième, claire pour $\alpha$ entier, pour $\alpha = 1/n$ par unicité
+de la racine positive, puis pour $\alpha$ rationnel, puis par continuité de
+$\alpha \mapsto h^\alpha$ et densité.\footnote{Pages 64 et 65, dans la
+lecture de la seconde passe (machine) : la formule intérieure de la page 64
+est la polarisation $\Lambda(u_{i_1} + \cdots + u_{i_p})$, et la page 65
+procède par les exposants entiers, puis $1/n$, puis fractionnaires, puis par
+densité.}
 
 \emph{Proposition 1.} Résumé : $u_1 \wedge \cdots \wedge u_n$ est continue de
 $\Lambda^n_2 E$ dans $\Lambda^n_2 F$, de norme $\leq \prod \|u_i\|$ ; $u
@@ -1199,11 +1458,18 @@ aux $u$ de rang fini ; alors $E = E_0 \oplus E_1$ avec $E_0$ de dimension
 finie stable par $u$ et $u(E_1) = 0$, $\Lambda^n_2 E = \bigoplus_{p+q=n}
 \Lambda^p_2 E_0 \otimes \Lambda^q_2 E_1$, $\Lambda^n u$ s'annule sur les
 termes $q > 0$ et agit sur $\Lambda^n E_0$, où c'est l'algèbre linéaire
-d'une matrice triangulaire.\footnote{Le passage à la limite demande que les
-valeurs propres non nulles dépendent continûment de $u$ avec leurs
-multiplicités, ce qui est vrai pour les opérateurs compacts (continuité des
-projecteurs de Riesz) ; la page 66 le dit par « base hilbertienne
-convenable » dans un bloc biffé.}
+d'une matrice triangulaire.\footnote{Avec, page 66, $E_1 = \ker u \cap
+u(E)^{\perp}$ et $E_0 = E_1^{\perp}$ : $u$ s'annule sur $E_1$ et $u(E)
+\subset E_0$ (seconde passe, machine ; la première lisait « $E_1$
+l'orthogonal de $u(E)$ », sur lequel $u$ ne s'annule pas en général). Le
+passage à la limite demande que les valeurs propres non nulles dépendent
+continûment de $u$ avec leurs multiplicités, ce qui est vrai pour les
+opérateurs compacts (continuité des projecteurs de Riesz) ; c'est ce que
+disent les huit lignes du haut de la page 68, que la première passe donnait
+pour biffées et que la seconde restitue (machine, non vérifiée par un
+lecteur) : « la distribution des valeurs propres d'un opérateur compact
+dépend continûment de $u$ ». La page appelle cette proposition « prop.~3 »,
+trois fois, sous un titre « Proposition 2 » surchargé.}
 
 \emph{Corollaire 1.} Pour $u$ compact :
 \begin{gather*}
@@ -1220,11 +1486,17 @@ troisième par $|\lambda_1(w)| \leq s_1(w)$ appliqué à $w = \Lambda^n u$.
   s_1(vu) \cdots s_n(vu) \leq \bigl(s_1(u)\,s_1(v)\bigr) \cdots \bigl(s_n(u)\,s_n(v)\bigr),
 \]
 car le premier membre est $\|\Lambda^n(vu)\| = \|(\Lambda^n v)(\Lambda^n u)\|
-\leq \|\Lambda^n v\|\,\|\Lambda^n u\|$. L'idée est due à H.\ Weyl, dit la
-page 69.\footnote{Les inégalités du corollaire 1 sont celles de Weyl (1949) ;
-celle du corollaire 3 est de Horn (1950), qui l'obtient par la même méthode
-des puissances extérieures. Il n'y a pas de corollaire 2 visible, et la
-page 69 écrit $\rho_i(uv)$ là où $w = vu$ ; on a suivi $w$.}
+\leq \|\Lambda^n v\|\,\|\Lambda^n u\|$. L'idée de la démonstration de ces
+inégalités « semble due à H.\ Weyl, ainsi que leur utilisation pour les
+inégalités de convexité » du numéro suivant, dit la page 69.\footnote{Lecture
+de la seconde passe (machine, non vérifiée par un lecteur) ; la première
+lisait « est due à H.~Weyl ». Les inégalités du corollaire 1 sont celles de
+Weyl (1949) ; celle du corollaire 3 est de Horn (1950), qui l'obtient par la
+même méthode des puissances extérieures. Il n'y a pas de corollaire 2
+visible. La page 69 biffe la clause « posons $w = vu$ » et écrit
+$\rho_i(uv)$, avec la démonstration par $\|\Lambda(uv)\| = \|(\Lambda
+u)(\Lambda v)\|$ ; on a gardé l'ordre $vu$, qui est celui de la composition
+pour $u \in L_0(E,F)$, $v \in L_0(F,G)$, l'inégalité étant la même.}
 
 \pagerange{70}{73}
 \section*{Puissances extérieures d'opérateurs à trace, mise au net (pages 70 à 73)}
@@ -1298,8 +1570,13 @@ l'antisymétrie donnent
   (a_{i_1} \wedge \cdots \wedge c_{j_q}),
 \]
 et chaque terme est de norme trace $\leq 1$ par Hadamard.\footnote{La page
-71 écrit le facteur $\frac{1}{(p+q)!}$ devant la somme et fait apparaître
-$p!\,q!$ à la ligne suivante ; le compte est le même.}
+71 écrit le facteur $\frac{1}{(p+q)!}$ devant une première somme qui porte
+sur tous les indices $i_1, \ldots, i_p$, $j_1, \ldots, j_q$, et c'est en
+passant, sous la seconde somme, aux indices croissants que le facteur
+$p!\,q!$ apparaît (seconde passe, machine ; la première mettait les « $<$ »
+sous la première somme). Le compte est le même. La page biffe la ligne qui
+introduisait le facteur polaire $U$ de $|u+v| = U(u+v)$ : la démonstration
+du corollaire 2 ne passe que par $\alpha_n(|u+v|) = \|\Lambda^n(u+v)\|_1$.}
 
 \emph{Corollaire 2.} Pour tout $n$,
 \[
@@ -1324,13 +1601,24 @@ publié.}
 \emph{Théorème 2.} Pour $u$, $v$ compacts, $r \geq 0$ et tout $n$,
 \[
   \prod_{i=1}^{n} \bigl(1 + r s_i(u+v)\bigr) \leq
-  \prod_{i=1}^{n} \bigl(1 + r s_i(u)\bigr)\prod_{i=1}^{n} \bigl(1 + r s_i(v)\bigr),
+  \prod_{i=1}^{n} \bigl(1 + r s_i(u)\bigr)\prod_{i=1}^{n} \bigl(1 + r s_i(v)\bigr) .
 \]
-et plus précisément, avec $\sigma_n^m(w) = \sum_{1 \leq i_1 < \cdots < i_m
-\leq n} s_{i_1}(w) \cdots s_{i_m}(w)$, pour $0 \leq m \leq n$ :
+Il faut donc prouver, dit la page, qu'on a « majoration coefficient par
+coefficient » en $r$ : avec, pour $w \in L_0(E,F)$ et $0 \leq m \leq n$,
+$\sigma_n^m(w) = \sum_{1 \leq i_1 < \cdots < i_m \leq n} s_{i_1}(w) \cdots
+s_{i_m}(w)$,
 \[
-  \sigma_n^m(u+v) \leq \sum_{p=0}^{m} \sigma_n^p(u)\,\sigma_n^{m-p}(v) .
+  \sigma_n^m(u+v) \leq \sum_{p=0}^{m} \sigma_n^p(u)\,\sigma_n^{m-p}(v)
+  \qquad (0 \leq m \leq n) .
 \]
+\footnote{Page 71, dans la lecture de la seconde passe (machine ; les pages
+71 à 73 ont été relues à l'aveugle avant comparaison) : « il faut donc
+prouver, on a majoration coefficients par coefficients », et « où de façon
+générale on pose, pour $w \in L_0(E,F)$ et $0 \leq m \leq n$ ». Le système
+est présenté comme ce qu'il faut établir pour obtenir la forme produit, non
+comme une précision ajoutée à l'énoncé ; la première lecture de cette édition
+écrivait « et plus précisément » dans l'énoncé. Le système implique la forme
+produit, coefficient par coefficient en $r$.}
 Le second membre est la fonction symétrique élémentaire de degré $m$ des
 $2n$ nombres $s_1(u), \ldots, s_n(u), s_1(v), \ldots, s_n(v)$ ; le système
 majore donc, coefficient par coefficient, les fonctions symétriques des $n$
@@ -1357,24 +1645,39 @@ $3 \leq m \leq n$, la proposition 3 en général, et le passage aux opérateurs
 compacts. La formule de Cauchy--Binet et l'inégalité de Lagrange dont la
 preuve se sert sont proposées à mathlib (demandes d'intégration mathlib4 n° 44757 et 44759, ouvertes).}
 
-\emph{Proposition 3.} Pour $u$ compact et $m \leq n$,
+\emph{Proposition 3.} Pour $u$ compact et $0 \leq m \leq n$,
 \[
   \sigma_n^m(u) = \sup\bigl\{ |\alpha_m(v_n u)| : v_n \in L(F,E),\ \|v_n\| \leq 1,\   \operatorname{rang} v_n \leq n \bigr\} = \sup_{v_n} \alpha_m(|v_n u|) .
 \]
 Pour $\leq$ : si $u = \sum s_i\,\bar{e}_i \otimes f_i$, $v_n = \sum_{i \leq n}
 \bar{f}_i \otimes e_i$ donne $v_n u = \sum_{i \leq n} s_i\,\bar{e}_i \otimes
-e_i$ et $\alpha_m(v_n u) = \sigma_n^m(u)$. Pour $\geq$ : $s_i(v_n u) \leq
-s_i(u)$ et $v_n u$ est de rang $\leq n$, donc $|\alpha_m(v_n u)| \leq
-\alpha_m(|v_n u|) = \sigma_n^m(v_n u) \leq \sigma_n^m(u)$.
+e_i$ et $\alpha_m(v_n u) = \sigma_n^m(u)$, de sorte que le sup est atteint.
+Pour $\geq$ : comme $s_i(v_n u) \leq s_i(u)$, il suffit d'établir
+$|\alpha_m(v_n u)| \leq \sigma_n^m(v_n u)$, donc le lemme : si $w$ est de
+rang $\leq n$, $|\alpha_m(w)| \leq \alpha_m(|w|) = \sigma_n^m(w)$ --- la page
+le ramène à la restriction de $w$ à son image.\footnote{Page 72, dans la
+lecture de la seconde passe (machine) : l'inégalité à prouver est écrite
+d'abord, puis « donc le Lemme : si $u \in L(E,E)$ est de rang $\leq n$ » ; la
+restriction est prise par « $\alpha$ appl.\ identique $u(E) \to E$ ».}
 \emph{Proposition 4} : $\prod_{i \leq n}(1 + s_i(u)) = \sup_{v_n}
-\det(1 + v_n u)$ sur les mêmes $v_n$.
+\det(1 + v_n u)$ sur les mêmes $v_n$ ; « cette formule se démontre comme »
+la proposition 3, et la page laisse le raisonnement au lecteur.
 
 La démonstration du théorème 2 : pour $w \in L(F,E)$ de norme $\leq 1$ et de
 rang $\leq n$, le corollaire 2 donne $|\alpha_m(w(u+v))| \leq
 \sum_p \alpha_p(|wu|)\,\alpha_{m-p}(|wv|) \leq \sum_p \sigma_n^p(u)\,
 \sigma_n^{m-p}(v)$, et l'on prend le sup en $w$ par la proposition 3. La page
-73 juge ce système d'inégalités « les plus fortes possibles » majorant les
-$s_i(u+v)$ en fonction des $s_i(u)$ et $s_i(v)$.\footnote{La forme produit
+73 juge ce système d'inégalités et sa conséquence, la forme produit,
+« les inégalités les plus fortes possibles » majorant les $s_i(u+v)$ en
+fonction des $s_i(u)$ et $s_i(v)$, et note qu'on pourrait démontrer
+directement la forme produit à partir de l'inégalité du corollaire 1
+qu'elle généralise, $\det(1 + r|u+v|) \leq \det(1 + r|u|)\det(1 +
+r|v|)$.\footnote{Page 73, dans la lecture de la seconde passe (machine, page
+relue à l'aveugle) : « Notons qu'on pourrait démontrer directement
+l'inégalité (15) à partir de l'inégalité (12) qu'elle généralise » ; le
+numéro se lit (12), l'inégalité du déterminant entier. La première passe lui
+faisait dire que le système (17) en était un cas particulier. L'édition n'a
+pas vérifié que cette voie directe aboutisse.}\footnote{La forme produit
 est, pour $f(s) = \log(1 + rs)$, l'inégalité $\sum_{i \leq n} f(s_i(u+v)) \leq
 \sum_{i \leq n} f(s_i(u)) + f(s_i(v))$ que Rotfel'd (1967) et Thompson (1976)
 établissent pour toute $f$ concave croissante nulle en $0$ ; les pages 74
@@ -1398,7 +1701,8 @@ Si $\varphi$ est une fonction positive décroissante sur $\mathbf{R}^{*}_{+}$,
 et si $A \leq B$ sont deux fonctions croissantes nulles en $0$, alors
 $\int \varphi(r)\,dA(r) \leq \int \varphi(r)\,dB(r)$, par intégration par
 parties : $\int \varphi\,dA = [\varphi A] + \int A\,(-d\varphi)$ et les deux
-termes croissent avec $A$. Appliquée à $A(r) = \sum_{i \leq n} \log(1 +
+termes croissent avec $A$ (la page 74 note que le terme tout intégré est nul
+dans le cas qu'elle traite). Appliquée à $A(r) = \sum_{i \leq n} \log(1 +
 r s_i(u+v))$ et $B$ le second membre, cela donne, en posant
 \[
   f_\varphi(\rho) = \int_0^{\infty} \frac{\varphi(r)}{\frac{1}{\rho} + r}\,dr
@@ -1418,23 +1722,40 @@ $S^{(n)}_p(u) = \sum_{i \leq n} s_i(u)^p$,
   S_p(u+v) \leq S_p(u) + S_p(v) \qquad (0 < p < 1) .
 \]
 \emph{Remarque} : pour $p \geq 1$ ce n'est pas la bonne inégalité, qui est
-celle de Weyl (la norme). \emph{Question} : trouver toutes les fonctions $f$
-d'une variable positive telles que $f^{(n)}(u) = \sum_{i \leq n} f(s_i(u))$
-soit sous-additive pour tout $n$ ; il suffit que $f^{(\infty)}$ le
-soit.\footnote{Toute fonction concave croissante nulle en $0$ convient :
+celle de Weyl (la norme).\footnote{Page 75. Dans la lecture de la seconde
+passe (machine, non vérifiée par un lecteur), la remarque s'ouvre sur la
+formule « On a $\sum_1^n \rho_i(u+v)^p \leq \sum_1^n (\rho_i(u)^p +
+\rho_i(v)^p)$ », suivie de « $p$ réel $\geq 1$ », « pas dans », « de Weyl »,
+les mots entre eux non lus ; la première passe faisait de la formule la
+conclusion du cas $0 < p < 1$. Que la page affirme l'inégalité pour $p \geq
+1$ ou dise qu'elle y tombe, l'éditeur est interrogé. On donne la seconde
+lecture, la seule juste : pour $p > 1$ l'inégalité est fausse ($u = v$ de rang
+un donne $2^p > 2$), et pour $p \geq 1$ c'est l'inégalité triangulaire de
+$\|\cdot\|_p$ qui vaut. Si la page l'affirmait pour $p \geq 1$, elle se
+tromperait, sauf pour $p = 1$.} \emph{Question} : trouver la forme générale
+des fonctions $f$ d'une variable positive telles que $f^{(n)}(u) = \sum_{i
+\leq n} f(s_i(u))$ soit sous-additive pour tout $n$ ; il suffit que
+$f^{(\infty)}$ le soit, pour $u$ dans un espace de Hilbert de dimension
+arbitraire ; et la page ajoute : « Généralisation à des fonctions de $n$
+arguments ».\footnote{Toute fonction concave croissante nulle en $0$ convient :
 c'est le théorème de Rotfel'd (1967) et Thompson (1976), dont les
 $f_\varphi$ de la page 74 --- mélanges des noyaux concaves $\rho \mapsto
 \rho/(1 + r\rho)$ --- sont un cas particulier. La sous-additivité de $f$
 elle-même est nécessaire ($n = 1$, $u$ et $v$ multiples d'un même projecteur
-de rang un). La réponse de la page 75, « arbitraire », est illisible au-delà
-de ce mot.} La sous-additivité de $S_p$ pour $p \leq
+de rang un). La page 75 ne donne pas de réponse : le mot « arbitraire », que
+la première passe prenait pour le début d'une « Réponse », qualifie la
+dimension de l'espace de Hilbert (seconde passe, machine) ; suivent « Réf. »
+et une ligne sur la généralisation.} La sous-additivité de $S_p$ pour $p \leq
 1$ reparaîtra, avec une autre preuve, à la page 129.
 
 \pagerange{76}{79}
 \section*{Le premier état de la mise au net (pages 76 à 79)}
 
-Feuilles brunes portant, au crayon rouge, « Mettre 1 : n° 2 et cor.\ n° --- »,
-et la numérotation (13) à (23) d'un texte plus long. La proposition 3 y est
+Feuilles brunes portant, au crayon rouge, « Mettre ici N° 2 et
+corollaires », et la numérotation (13) à (23) d'un texte plus long ; la
+première ligne de la page 76 est la fin de la proposition 1 des pages 65 et
+66, que la page 76 suit donc directement.\footnote{Page 76, dans la lecture
+de la seconde passe (machine).} La proposition 3 y est
 la proposition 1 des pages 70 ; les corollaires 1 et 2 y sont ceux de la
 mise au net, avec la précision que, pour $u$ à trace ou de Hilbert--Schmidt,
 \[
@@ -1448,27 +1769,40 @@ trace si $u^{*}u$ l'est. Le corollaire 4 est $|\alpha_n(u)| \leq
 par ceux de $\det(1+z|u|)$ --- et le corollaire 5 est $|\det(1+zu)| \leq
 \det(1 + |z|\,|u|)$.
 
-\emph{Théorème 2.} Pour $u$ à trace dans $H$, $\det(1+u) = \prod_i (1 +
-\lambda_i)$, et $\det(1+zu) = \prod(1 + z\lambda_i)$ est de genre zéro ;
+\emph{Théorème 2.} Pour $u$ à trace dans $H$, la suite $(\lambda_i)$ des
+valeurs propres est sommable, $\det(1+u) = \prod_i (1 + \lambda_i)$, et
+$\det(1+zu) = \prod(1 + z\lambda_i)$ est de genre zéro (page 78) ;
 en marge, $\alpha_n(u) = \sum_{i_1 < \cdots < i_n} \lambda_{i_1} \cdots
 \lambda_{i_n}$ et $\operatorname{Tr} u = \sum \lambda_i(u)$. La démonstration
-des pages 78 et 79 est barrée de deux traits obliques et se lit par bribes :
-$\sum |\lambda_i| \leq \|u\|_1$ par les inégalités de Weyl ; les zéros de
-$\det(1 - zu)$ ; ses coefficients majorés par ceux d'une fonction de genre
-zéro ; et, pour la formule des coefficients dans le cas diagonalisable,
+des pages 78 et 79 est barrée de deux traits obliques et se lit dans ses
+grandes lignes : il suffirait de prouver $\sum |\lambda_i| \leq \|u\|_1$ pour
+les valeurs propres de vecteurs propres indépendants $x_1, \ldots, x_n$, par
+la projection orthogonale $p$ sur l'espace qu'ils engendrent --- ce qui ne
+donne que $|\lambda_1 + \cdots + \lambda_n| = |\operatorname{Tr} pu| \leq
+\|u\|_1$, la somme des modules étant l'inégalité de Weyl de la page 88 ;
+les inverses des zéros de $\det(1 - zu)$ forment donc une suite sommable ;
+ses coefficients sont majorés terme à terme par ceux de $\det(1 + zh)$, $h =
+\sqrt{u^{*}u}$, fonction de genre zéro ; et, pour la formule des coefficients dans le cas diagonalisable,
 $u = \sum \lambda_i\,\bar{e}_i \otimes e_i$ et $\alpha_n(u) = \sum
 \lambda_{i_1} \cdots \lambda_{i_n}\,\alpha_n(\bar{e}_{i_1} \otimes e_{i_1},
-\ldots)$ où seuls comptent les indices distincts.\footnote{La page 79
-écrit « $|z_1 \cdots z_n| = |\operatorname{Tr} pu| \leq \|u\|_1$ » pour une
-somme ; la transcription le note. Ce que la démonstration barrée cherche,
-c'est la proposition de la page 110, qui la complète : voir plus bas.}
+\ldots)$ où seuls comptent les indices distincts.\footnote{Page 79, lue dans
+ses grandes lignes par la seconde passe (machine, non vérifiée par un
+lecteur). La page écrit « $|z_1 \cdots z_n| = |\operatorname{Tr} pu| \leq
+\|u\|_1$ » où l'on attend une somme ; l'éditeur est interrogé. Sous l'une ou
+l'autre lecture la projection ne donne pas $\sum |z_i| \leq \|u\|_1$ : avec
+la somme elle borne $|\sum z_i|$, et la borne du produit est fausse ($u =
+3\cdot 1$ en dimension $2$ : $9 > 6$). Ce que la démonstration barrée cherche
+ensuite, c'est la proposition de la page 110, qui la complète : voir plus
+bas.}
 
 \pagerange{80}{80}
 \section*{Une feuille sur les fonctions convexes (page 80)}
 
 Soit $f$ convexe sur un ouvert convexe $U$ et $G_f = \{(x,y) : x \in U,\ y
-\geq f(x)\}$ son épigraphe. Par un point $(a, f(a))$ passe un hyperplan
-$H$ ne rencontrant pas l'intérieur de $G_f$ ; il n'est pas vertical, donc
+> f(x)\}$, l'ouvert au-dessus de son graphe.\footnote{Page 80 : $y > f(x)$,
+et « l'ouvert $G_f$ », dans la lecture de la seconde passe (machine) ; la
+première lisait $y \geq f(x)$.} Par un point $(a, f(a))$ passe un hyperplan
+$H$ ne rencontrant pas $G_f$ ; il n'est pas vertical, donc
 d'équation $y = L_a(x)$ avec $L_a$ affine, et $f(x) \geq L_a(x)$ sur $U$
 avec égalité en $a$. Ainsi
 \[
@@ -1553,11 +1887,31 @@ $f(1/\rho_1, \ldots, 1/\rho_n) \leq f(1/\sigma_1, \ldots, 1/\sigma_n)$ : de
 $\rho_1 \cdots \rho_n = \sigma_1 \cdots \sigma_n$ on tire $\rho_M \cdots
 \rho_n \geq \sigma_M \cdots \sigma_n$ pour tout $M$, donc les suites
 $(1/\rho_n, \ldots, 1/\rho_1)$ et $(1/\sigma_n, \ldots, 1/\sigma_1)$
-satisfont encore aux hypothèses.
+satisfont encore aux hypothèses --- la première étant décroissante, le
+produit des $1/\rho_i$ égal à celui des $1/\sigma_i$.\footnote{Page 84. La
+page écrit nettement (10) dans l'autre sens, $f(1/\sigma_1, \ldots,
+1/\sigma_n) \leq f(1/\rho_1, \ldots, 1/\rho_n)$, et les deux inégalités de la
+démonstration avec son « $\leq$ » : « d'où $\rho_M \cdots \rho_n \leq \sigma_M
+\cdots \sigma_n$ en vertu de $\sigma_1 \cdots \sigma_{M-1} \leq \rho_1 \cdots
+\rho_{M-1}$ » (seconde passe, machine, non vérifiée par un lecteur ; la
+première lisait « $\geq$ » dans la démonstration et transcrivait (10) dans
+le sens donné ici). Chacune est le contraire de ce que donne l'hypothèse
+(5), $\rho_1 \cdots \rho_m \leq \sigma_1 \cdots \sigma_m$, et la fin de la
+démonstration, qui range les $1/\rho_i$ en suite décroissante, mène au sens
+écrit ci-dessus, qui est le juste. L'éditeur est interrogé : si son
+« $\geq$ » est tracé ici comme son « $\leq$ », la démonstration de la page
+est juste et seul (10) est inversé ; sinon la page se trompe trois fois, et
+l'énoncé ci-dessus ne change pas.}
 
-\emph{Remarque.} Si deux suites satisfont aux hypothèses du 1° (resp.\ du
-2°), leurs $k$ premiers termes y satisfont aussi pour $1 \leq k \leq n$, et
-l'inégalité vaut pour les fonctions de $k$ variables.
+\emph{Remarque.} Si deux suites satisfont aux hypothèses générales du 1°
+(resp.\ du 2°), leurs $k$ premiers termes y satisfont aussi pour $1 \leq k
+\leq n$, et l'inégalité vaut pour les fonctions convexes \emph{croissantes}
+de $k$ variables --- le cas a) seulement, l'égalité des sommes totales ne
+passant pas aux suites tronquées.\footnote{Page 85 : « si $\varphi$ est une
+fonction convexe croissante de $k$ arguments », le mot « croissante » étant
+net (seconde passe, machine) ; la lecture antérieure de cette édition
+l'omettait, et l'énoncé était faux dans le cas b) : $\alpha = (0,0)$, $\beta
+= (1,-1)$, $k = 1$, $\varphi(t) = -t$.}
 
 \emph{Exemples.} Si $f$ est convexe croissante des $\rho_i$, alors $f\circ
 \exp$ est convexe, comme sup de fonctions $\sum a_i e^{t_i} + b$ avec
@@ -1603,7 +1957,13 @@ sur l'orthant fermé : c'est le cas b), grâce à
 \[
   |\lambda_1 \cdots \lambda_n| = |\det u| = s_1 \cdots s_n,
 \]
-puisque $(s_1 \cdots s_n)^2 = \det(u^{*}u) = |\det u|^2$.
+puisque $(s_1 \cdots s_n)^2 = \det(u^{*}u) = |\det u|^2$. Il en résulte
+par exemple que, pour $u$ inversible en dimension finie, $\sum |\lambda_i|^p
+\leq \sum s_i^p$ vaut pour $p$ réel quelconque.\footnote{Page 89 : ces lignes,
+que la première passe donnait pour biffées, ne le sont pas (seconde passe,
+machine) ; le titre « Corollaire 5 » commencé là est biffé. Pour $p < 0$,
+$\rho \mapsto \rho^p$ n'est pas croissante, mais $e^{pt}$ est convexe, et le
+cas b) s'applique.}
 \emph{Corollaire 5.} Pour $N$ une norme de Schatten sur $\mathbf{R}^k$,
 $k \leq \dim E$ : $N(|\lambda_1|, \ldots, |\lambda_k|) \leq N(s_1, \ldots,
 s_k)$ ; et si $N$ est une norme de Schatten sur $\mathbf{R}^{(\mathbf{N})}$
@@ -1617,8 +1977,9 @@ $v \in L_0(F,G)$ et $f$ comme au théorème 2. Alors
   f\bigl(s_1(v)s_1(u), \ldots, s_n(v)s_n(u)\bigr),
 \]
 par le théorème 1, 2°, a), et l'inégalité de Horn du numéro 3.\footnote{La
-page 90 énonce $f$ sans monotonie, ajoute en interligne « symétrique et
-croissante », et sa démonstration renvoie à l'hypothèse b) du théorème 1,
+page 90 énonce $f$ « continue », ajoute en interligne « symétrique et
+croissante », et sa démonstration renvoie à l'hypothèse b) du théorème 1
+(et au « N° 2, prop.~3, corollaire 3 », selon la seconde passe),
 qui exigerait $\prod_{i \leq n} s_i(vu) = \prod_{i \leq n} s_i(v)s_i(u)$ ---
 vrai en dimension finie $n$ (corollaire 4 ci-dessous), faux en général. Pour
 $u$, $v$ compacts quelconques c'est l'hypothèse a) qu'il faut, et la
@@ -1640,10 +2001,14 @@ $\frac1p + \frac1q = \frac1s$, $p, q, s > 0$, et tout $n$,
 en prenant $f(\rho) = \rho^s$ dans le corollaire 1 puis l'inégalité de
 Hölder ordinaire. Le cas le plus important est $s = 1$ : $\|vu\|_1 \leq
 \|u\|_p\|v\|_{p'}$ pour $\frac1p + \frac1{p'} = 1$.
-\emph{Corollaire 3} (en marge). $|\operatorname{Tr} vu| \leq \sum_i
-s_i(u)\,s_i(v)$, par $f(s) = s$ et $|\operatorname{Tr} w| \leq \sum
-s_i(w)$.\footnote{L'inégalité de trace de von Neumann (1937), obtenue ici
-comme cas $f(s) = s$ du corollaire 1.}
+\emph{Corollaire 3} (en marge). $\sum_i s_i(vu) \leq \sum_i s_i(u)\,s_i(v)$,
+par $f(s) = s$ ; si le second membre est fini, $vu$ est à trace, et
+$|\operatorname{Tr} vu| \leq \sum_i s_i(u)\,s_i(v)$ par $|\operatorname{Tr} w|
+\leq \sum s_i(w)$.\footnote{Page 91, note de côté, dans la lecture de la
+seconde passe (machine) : la formule (32) est sans $f$, et l'hypothèse
+« supposons $\sum \rho_i(u)\rho_i(v) < +\infty$ » précède (33) ; l'éditeur
+est interrogé sur cette condition. C'est l'inégalité de trace de von Neumann
+(1937), obtenue ici comme cas $f(s) = s$ du corollaire 1.}
 \emph{Corollaire 4} (feuillet collé). En dimension finie $n$, si $f\circ\exp$
 est convexe et symétrique, et si $u$ et $v$ sont inversibles ou $f$ continue
 sur l'orthant fermé, $f(s(vu)) \leq f(s(u)s(v))$, grâce à $\prod s_i(vu) =
@@ -1713,7 +2078,9 @@ On a $N(\lambda x) = |\lambda| N(x)$ et $N(x+y) \leq N(x) + N(y)$, car
 $|x+y|_n \leq |x|_n + |y|_n$ et $N$ croît sur l'orthant. Soit $\ell^N$
 l'espace des $x$ avec $N(x) < \infty$ : $N$ est une norme sur $\ell^N$. Si
 $N' \leq N''$, alors $\ell^{N''} \subset \ell^{N'}$ avec injection de norme
-$\leq 1$ ; comme toute norme de Schatten est comprise entre $N_\infty$ et
+$\leq 1$ ;\footnote{Page 95 : les deux exposants sont surchargés et ne se
+distinguent pas sur la page ; l'éditeur est interrogé. Le sens donné est
+celui que $N' \leq N''$ impose.} comme toute norme de Schatten est comprise entre $N_\infty$ et
 $N_1$,
 \[
   \ell^1 \subset \ell^N \subset \ell^\infty,
@@ -1725,8 +2092,10 @@ $\ell^\infty$ ; et il en résulte que $\ell^N$ est \emph{complet}, une série
 normalement convergente convergeant vers sa somme dans $\ell^\infty$ puis,
 par cette inégalité appliquée aux restes, dans $\ell^N$.
 
-Soit $\ell_N$ l'adhérence de $\mathbf{R}^{(\mathbf{N})}$ dans $\ell^N$,
-c'est-à-dire le complété de $\mathbf{C}^{(\mathbf{N})}$ pour $N$. Si $N' \leq
+Soit $\ell_N$ l'adhérence de $\mathbf{C}^{(\mathbf{N})}$ dans $\ell^N$,
+c'est-à-dire le complété de $\mathbf{C}^{(\mathbf{N})}$ pour $N$.\footnote{Page
+96 : « l'adhérence de $\mathbf{C}^{(\mathbf{N})}$ », un C épais (seconde
+passe, machine) ; la première lisait $\mathbf{R}^{(\mathbf{N})}$.} Si $N' \leq
 N''$, $\ell_{N''} \subset \ell_{N'}$,\footnote{La page 96 écrit
 l'inclusion dans l'autre sens, ce que la transcription note ; le sens est
 celui des $\ell^N$, l'adhérence d'un sous-espace dans le plus petit espace
@@ -1734,14 +2103,21 @@ celui des $\ell^N$, l'adhérence d'un sous-espace dans le plus petit espace
 \[
   \ell^1 \subset \ell_N \subset c_0,
 \]
-les espaces $\ell_N$ pour $N_1$ et $N_\infty$ étant $\ell^1$ et $c_0$. Une
+les espaces $\ell_N$ pour $N_1$ et $N_\infty$ étant $\ell^1$ et $c_0$. De
+plus, $\ell^N \subset c_0$ sauf si $N$ est équivalente à $N_\infty$ : si $N
+\not\sim N_\infty$, $N(1, \ldots, 1, 0, \ldots)$ à $n$ termes tend vers
+l'infini, et une suite qui ne tend pas vers $0$ n'est pas dans $\ell^N$. Une
 formule $\ell_N = \ell^N \cap c_0$ est écrite, numérotée (9), puis barrée ;
 elle est fausse en général.\footnote{Pour $N = N_\infty$ elle est vraie ;
 pour une norme de Lorentz ou d'Orlicz elle ne l'est pas : $\ell_N$ est le
 sous-espace des $x \in \ell^N$ dont les queues tendent vers zéro pour $N$,
-ce que la page 98 dira exactement. La proposition 1 annoncée page 96 n'a
-pas d'énoncé lisible ; d'après le plan de la page 101, c'est : $\ell_N
-\subset c_0$ strictement, sauf si $N$ est équivalente à $N_\infty$.}
+ce que la page 98 dira exactement. La proposition de la page 96 s'arrête,
+dans la lecture de la seconde passe (machine, non vérifiée par un lecteur),
+sur « $\ell^N \subset c_0$ sauf si $N$ est équivalente à : » ; la ligne
+n'est pas biffée, et $N_\infty$, nommée dans la ligne biffée qui suit, est ce
+qui manque. La première passe y lisait « si et seulement si », dans un bloc
+biffé. Le plan de la page 101 dit de son côté : $\ell_N \subsetneq c_0$, sauf
+si $N \sim N_\infty$.}
 
 \emph{La norme polaire.} $\mathbf{R}^{(\mathbf{N})}$ est en dualité avec
 lui-même par $\langle x, y\rangle = \sum x_i y_i$, et toute norme $N$ y a
@@ -1766,17 +2142,25 @@ de suites symétriques de Garling. Le passage de $\ell^\infty$ à
 $N^{\circ}(x') \leq \|X'\|$ utilise que $N^{\circ}(|x'|_n)$ se calcule sur
 $\mathbf{R}^n \subset \ell_N$.}
 
-\emph{Proposition.} $\ell_N$ est réflexif si et seulement si $\ell_N = \ell^N$
-et $\ell_{N^{\circ}} = \ell^{N^{\circ}}$. Si $\ell_N$ est réflexif, son bidual
-$(\ell^{N^{\circ}})'$, qui contient $\ell^N$ isométriquement par
-l'accouplement, est $\ell_N$, d'où $\ell_N = \ell^N$ ; et $\ell^{N^{\circ}}$,
-dual d'un réflexif, est réflexif, d'où de même $\ell_{N^{\circ}} =
-\ell^{N^{\circ}}$. Réciproquement, sous ces deux égalités, le dual de $\ell_N$
-est $\ell_{N^{\circ}}$ et le dual de celui-ci est $\ell_N$, par l'accouplement
-canonique.\footnote{La page 97 se reproche une « démonstration circulaire
-de l'équivalence des 4 conditions », biffe quatre lignes, et en donne une
-autre ; celle-ci est la sienne, mise au propre. Elle utilise $(N^{\circ})^{\circ}
-= N$, écrit en marge de la page 96.}
+\emph{Proposition.} Pour que $\ell_N$ soit réflexif, il faut et il suffit que
+$\ell^N$, resp.\ $\ell_{N^{\circ}}$, resp.\ $\ell^{N^{\circ}}$ le soit, ou
+que l'on ait $\ell_N = \ell^N$ et $\ell_{N^{\circ}} = \ell^{N^{\circ}}$. La
+démonstration est un cercle d'implications : $\ell^N$ réflexif entraîne
+$\ell_N$ réflexif (sous-espace fermé), qui entraîne $\ell^{N^{\circ}}$
+réflexif (dual de $\ell_N$), qui entraîne de même $\ell_{N^{\circ}}$ réflexif,
+qui entraîne $\ell^N = \ell^{N^{\circ\circ}}$ réflexif (son dual). Alors
+$\ell_{N^{\circ}}$, sous-espace fermé et total du dual $\ell^{N^{\circ}}$ du
+réflexif $\ell_N$, lui est égal, et de même $\ell_N = \ell^N$.
+Réciproquement, sous ces deux égalités, le dual de $\ell_N$ est
+$\ell_{N^{\circ}}$ et le dual de celui-ci est $\ell_N$, par l'accouplement
+canonique.\footnote{Page 97, dans la lecture de la seconde passe (machine,
+non vérifiée par un lecteur) : l'énoncé et la « démonstration circulaire de
+l'équivalence des 4 conditions », comme il l'appelle, sont soulignés et non
+biffés ; la première passe les donnait pour biffés, et cette édition
+donnait une autre démonstration. L'éditeur est interrogé. Un sous-espace
+fermé total du dual d'un réflexif est faiblement* dense, donc faiblement
+dense, donc égal au dual. Elle utilise $(N^{\circ})^{\circ} = N$, écrit en
+marge de la page 96.}
 
 \emph{Les classes $\mathcal{S}^N(E,F)$.} Soit $N$ une norme de Schatten sur
 $\mathbf{R}^{(\mathbf{N})}$, non équivalente à $N_\infty$, et $E$, $F$ deux
@@ -1813,17 +2197,31 @@ s'identifie à un sous-espace du dual de $\mathcal{S}_{N_1}(E,F) =
 $\mathcal{S}^{N^{\circ}}(F,E)$, isométriquement par l'inégalité précédente.
 Réciproquement, soit $v \in L(F,E)$ tel que $|\operatorname{Tr} vu| \leq
 M\,N(u)$ pour $u$ de rang fini. Par $v = U|v|$, $|v| = Vv$, on se ramène à
-$F = E$ et $v \geq 0$ ; pour tout projecteur $P$ de rang fini de la
-décomposition spectrale de $v$, $v = \sum \rho_i\,\bar{e}_i \otimes e_i$, les
-$u$ diagonaux dans la base $(e_i)$ montrent que $(\rho_i)$ définit une forme
-continue sur $\ell_N$, donc $(\rho_i) \in (\ell_N)' = \ell^{N^{\circ}}$, ce
-qui est la conclusion.\footnote{Le bloc de la page 98 qui énonce cette
+$F = E$ et $v \geq 0$. Alors $v$ est compact, si $N$ n'est pas équivalente à
+$N_1$ : sinon un projecteur spectral $P$ de $v$, de rang infini, sur lequel
+$v \geq \varepsilon > 0$, s'écrirait $P = wv$ avec $w = v^{-1}P$ borné, la
+forme $u \mapsto \operatorname{Tr}(Pu) = \operatorname{Tr}(v\,uw)$ serait
+continue sur $\mathcal{S}_N(E)$, et, restreinte aux $u$ diagonaux dans une
+base de $PH$, elle mettrait $(1, 1, \ldots)$ dans $(\ell_N)' =
+\ell^{N^{\circ}}$, ce qui n'est pas. Donc $v = \sum \rho_i\,\bar{e}_i \otimes
+e_i$, et les $u$ diagonaux dans la base $(e_i)$ montrent que $(\rho_i)$
+définit une forme continue sur $\ell_N$, donc $(\rho_i) \in (\ell_N)' =
+\ell^{N^{\circ}}$, ce qui est la conclusion. Il en résulte, dit la page 99,
+que $\mathcal{S}^{N^{\circ}}(F,E)$, qui est un dual, est complet, et de même
+$\mathcal{S}^N(E,F)$ et $\mathcal{S}_N(E,F)$.\footnote{Page 99, dans la
+lecture de la seconde passe (machine, non vérifiée par un lecteur) : « $v$
+est cpct : autrement il existerait un opérateur continu $w$ tel que $wv =
+P$, projecteur hermitien de rang infini … on aurait $1 \in (\ell_N)' =
+\ell^{N^{\circ}}$, ce qui n'est pas », et les lignes sur la complétude, que
+la première passe réduisait à trois symboles ; l'éditeur est interrogé sur
+« infini ». La condition $N \not\sim N_1$ n'est pas écrite : pour $N =
+N_1$, $(1,1,\ldots)$ est dans $\ell^{N_\infty} = \ell^\infty$, et le dual de
+$\mathcal{S}_1(E,F)$ est $L(F,E)$ tout entier, non compact.}\footnote{Le bloc de la page 98 qui énonce cette
 dualité est encadré et barré, puis repris page 99 avec un point
 d'interrogation rouge sur la dernière ligne ; la page 102 la réécrit sans
 le « $\circ$ » ni l'ordre $(F,E)$ ; le théorème 1 de la page 104 la donne
-sous la forme ci-dessus, qui est la bonne. L'argument de la page 99 est
-elliptique après « $v \geq 0$ » ; on l'a complété. C'est le théorème de
-dualité de Schatten (1950).}
+sous la forme ci-dessus, qui est la bonne. C'est le théorème de dualité de
+Schatten (1950).}
 
 \emph{Corollaire 1.} $u \in \mathcal{S}^N(E,F)$ si et seulement si $|u| \in
 \mathcal{S}^N(E)$, et $N(u) = N(|u|)$ ; de même pour $\mathcal{S}_N$.
@@ -1848,7 +2246,7 @@ faut : $p(\bar{x} \otimes y) = 1$ pour $x$, $y$ unitaires suffit.}
 
 Deux pages de plan, puis un « Théorème 1 » en cinq points dont les formules
 (18) à (27) continuent la numérotation du numéro 5. Le plan ajoute au
-numéro 5 : $N(x)$ est fonction croissante de $|x|$ ; $\ell_N \subsetneq c_0$
+numéro 5 : $N(x)$ est croissante pour $x$ positif ; $\ell_N \subsetneq c_0$
 sauf si $N \sim N_\infty$ ; $(N_p)^{\circ} = N_{p'}$ et l'on retrouve la
 réflexivité des $\ell^p$, $1 < p < \infty$ ; $\mathcal{S}^N(E,F) \subset
 L_0(E,F)$ si $N \not\sim N_\infty$, car si $|u|$ n'était pas compact il aurait
@@ -1884,7 +2282,13 @@ $u^{*} \in \mathcal{S}^N(F,E)$, et de même pour $\mathcal{S}_N$ ; et pour
 $u \in L(E,F)$, $v \in L(F,G)$, $N(vu) \leq \|v\|\,N(u)$ et $N(vu) \leq
 \|u\|\,N(v)$.\footnote{La page 103 écrit les deux inégalités avec les rôles
 de $u$ et $v$ échangés d'une à l'autre, et un point d'interrogation rouge en
-marge ; ce sont les deux inégalités du plan de la page 101.} Sur les
+marge ; ce sont celles du plan de la page 101, dont le premier jet, biffé,
+en écrit trois, avec $N(uv) \leq \|v\|\,N(u)$ (seconde passe, machine).}
+Ainsi, en composant à gauche ou à droite un opérateur de
+$\mathcal{S}^N$ (resp.\ $\mathcal{S}_N$) avec un opérateur linéaire continu,
+on obtient un opérateur de $\mathcal{S}^N$ (resp.\ $\mathcal{S}_N$).\footnote{Page
+103, dans la lecture de la seconde passe (machine) : la phrase parle
+d'opérateurs, non d'espaces comme le lisait la première.} Sur les
 hermitiens positifs compacts, $N(u)$ est fonction croissante de $u$.
 
 3. Si $N(xy) \leq N'(x)\,N''(y)$ sur $\mathbf{R}^{(\mathbf{N})}$, alors pour
@@ -1965,9 +2369,15 @@ est au plus le maximum des ordres, de sorte que les fonctions d'ordre $<
 \rho$ (resp.\ $\leq \rho$) forment une algèbre.
 
 \emph{Théorème 3} (Hadamard). Pour $f(z) = \sum c_n z^n$, l'ordre se lit sur
-les coefficients ; la page 109 s'interrompt au bord du feuillet après
-« si $n^\alpha\sqrt[n]{|c_n|} \to 0$ ».\footnote{L'énoncé complet : $\omega =
-\limsup \frac{n\log n}{-\log|c_n|}$. Ce que la suite utilise est le cas
+les coefficients : si $n^\alpha\sqrt[n]{|c_n|} \to 0$ quand $n \to \infty$,
+alors $f$ est d'ordre $\leq 1/\alpha$, donc au plus de genre
+$1/\alpha$.\footnote{Page 109 : « Si $n^\alpha \sqrt[n]{|c_n|} \to 0$ pour
+$n$ infini, alors $f$ est au plus de genre $1/\alpha$ ». La ligne est entière
+sur le fac-similé (seconde passe, machine, non vérifiée par un lecteur) ; la
+première passe la croyait coupée au bord du feuillet, et cette édition aussi.
+La page dit « genre » ; ce que l'hypothèse donne est l'ordre $\leq 1/\alpha$,
+et le genre, au plus égal à l'ordre (théorème 2), suit. L'énoncé complet :
+$\omega = \limsup \frac{n\log n}{-\log|c_n|}$. Ce que la suite utilise est le cas
 limite : une fonction de genre zéro vérifie $|f(z)| \leq C_\varepsilon
 e^{\varepsilon|z|}$ pour tout $\varepsilon > 0$ (elle est d'ordre $\leq 1$ et
 de type minimal), ce que la page 110 invoque comme connu.}
@@ -1999,11 +2409,16 @@ puisque $\theta > \pi/3$, et
 $G$ est donc bornée, donc constante ; mais $G(z) = z^{3m}\prod_i (1 -
 z^3/z_i^3)$, ce qui force $m = 0$ et l'absence de zéros : $g$ est constante,
 $f(z) = Ce^{\beta z}$, incompatible avec $|f(z)| \leq C_\varepsilon
-e^{\varepsilon|z|}$ pour $\varepsilon < \beta$.\footnote{Le second angle de la
-page 111 est serré en bout de ligne et lu $\pi/2$ ; c'est ce que l'argument
-demande, et le croquis en marge --- un disque coupé en trois secteurs par
-trois rayons --- est celui de $G$. La fin de la démonstration est écrite de
-bas en haut dans la marge.}
+e^{\varepsilon|z|}$ pour $\varepsilon < \beta$.\footnote{La page 111 dit
+« un angle arbitraire que nous supposerons une fois pour toutes entre
+$\pi/3$ et $\pi$… », le second angle serré en bout de ligne (seconde passe,
+machine ; la première lisait « strictement », qui n'est pas sur la page) ;
+l'éditeur est interrogé : $\pi/2$ ou $\pi$. L'argument demande $\pi/2$, qui
+donne $\operatorname{Re} z \geq c|z|$ sur le secteur ; avec $\pi$ cette
+minoration tomberait. Le croquis en marge --- un disque coupé en trois
+secteurs par trois rayons --- est celui de $G$. La fin de la démonstration
+est écrite de bas en haut dans la marge, et conclut que $f = C^{te}e^{\beta
+z}$ est incompatible avec $|f(z)| \leq |h(z)| \leq C^{te}e^{\varepsilon|z|}$.}
 
 \pagerange{112}{118}
 \section*{Exposant de convergence, fonction de comptage (pages 112 à 118)}
@@ -2042,13 +2457,17 @@ On peut donc parler de l'\emph{ordre} d'un ensemble dénombrable de nombres
 complexes, borne inférieure des $s > 0$ avec $\sum |z_i|^s < \infty$ ; une
 suite à décroissance rapide est une suite d'ordre zéro. Suivent trois
 lignes sur l'ordre d'une suite dans un espace de Banach et d'une partie
-bornée, puis dix lignes de crayon effacé.\footnote{Ces trois lignes ---
+bornée, et la page s'arrête là.\footnote{Ces trois lignes ---
 « deux définitions suivant qu'on prend la sommabilité ou la sommabilité
-absolue », et l'ordre d'une partie bornée comme borne inférieure des $s$
-tels qu'elle soit contenue dans l'enveloppe convexe fermée d'une suite
-d'ordre $s$ --- sont la première apparition, dans ce carton, des idées de
-\emph{Produits tensoriels topologiques} sur les suites d'ordre $s$ ; on
-ne les développe pas.}
+absolue », et l'ordre d'une partie bornée d'un espace de Banach ou de
+Fréchet comme borne inférieure des $s$ tels qu'elle soit contenue dans
+l'« enveloppe cerclée fermée » (l'enveloppe disquée ; « convexe » est biffé)
+d'une suite d'ordre $s$ --- sont la première apparition, dans ce carton, des
+idées de \emph{Produits tensoriels topologiques} sur les suites d'ordre $s$ ;
+on ne les développe pas. Page 114, dans la lecture de la seconde passe
+(machine) : les « dix lignes de crayon très pâle » que la première passe
+voyait dans la moitié inférieure sont le bas de la page 115 vu par
+transparence.}
 
 \emph{La fonction de comptage.} Soit $(r_\nu)$ une suite croissante de
 nombres $> 0$ tendant vers l'infini et $n(r)$ le nombre des $\nu$ avec
@@ -2111,13 +2530,33 @@ Pour $\lambda = (\lambda_i) \in \ell^1$ et $n \geq 0$, soit
   \qquad |\alpha_n(\lambda)| \leq \frac{\|\lambda\|_1^n}{n!} ;
 \]
 ce sont les coefficients de la fonction entière de genre zéro $f(z) =
-\prod(1 + \lambda_i z)$, et l'on obtient ainsi les coefficients de toutes
-les fonctions entières de genre zéro valant $1$ en $0$.
+\prod(1 + \lambda_i z)$, et l'on obtient ainsi, à un facteur constant près,
+les coefficients les plus généraux d'une fonction entière de genre zéro.
 
 \emph{Proposition.} Pour tout $\lambda \in \ell^1$ la série $S(\lambda) =
 \sum_{n \geq 0} n!\,\alpha_n(\lambda)$ converge absolument. La fonction $S$
 est holomorphe au voisinage de $0$, de rayon de convergence égal à $1$, et
-sa restriction à toute droite est entière.
+ses restrictions aux sous-espaces vectoriels de dimension finie sont
+holomorphes. Cependant $S$ n'est pas bornée sur la boule unité de
+$\ell^1$.\footnote{Page 119. La fin de la proposition, que la première passe
+donnait pour perdue, se lit dans la seconde (machine, non vérifiée par un
+lecteur) : « et ses restrictions aux sous-espaces vectoriels … de dim.\
+finie sont holomorphes. Cependant, cette fonction n'est pas bornée dans la
+boule unité de $\ell^1$, et n'est pas induite par une fonction entière de
+$\lambda$ ». La lecture antérieure de cette édition disait « sa restriction
+à toute droite est entière », d'après deux lignes de la page 121 qui sont
+biffées. La dernière clause, « n'est pas induite par », est lue avec doute,
+et l'éditeur est interrogé ; on ne la reprend pas dans l'énoncé, parce que,
+si elle signifie que $S$ n'est pas holomorphe sur $\ell^1$ tout entier, elle
+est fausse : $|1 + (\lambda_i + \delta_i)t| \leq (1 + |\lambda_i|t)(1 +
+|\delta_i|t)$ donne $|S(\lambda + \delta)| \leq \int_0^\infty e^{-t}\prod_i(1
++ |\lambda_i|t)\,e^{\|\delta\|_1 t}\,dt$, fini et borné pour $\|\delta\|_1 <
+1 - \varepsilon$, puisque $\prod_i (1 + |\lambda_i|t) \leq
+C_\varepsilon e^{\varepsilon t}$ ; $S$, localement bornée et holomorphe sur
+les sous-espaces de dimension finie, est holomorphe sur $\ell^1$. Ce que
+la proposition établit, c'est que sa série de Taylor en $0$ ne converge pas
+uniformément sur la boule unité : $S$ est entière sans être de type borné.
+Si la clause veut dire cela, elle est juste.}
 
 \emph{Corollaire.} Pour tout $\lambda \in \ell^1$, $\sqrt[n]{|\alpha_n(\lambda)|}
 = o(1/n)$ ; autrement dit les coefficients d'une fonction entière de genre
@@ -2130,23 +2569,36 @@ d'une fonction d'ordre $1$ est $\limsup (n/e)\,|c_n|^{1/n}$.}
 
 Démonstration. On peut supposer les $\lambda_i > 0$ et décroissants. Soit
 $f(z) = \prod(1 + \lambda_i z) = \sum \alpha_n z^n$. Par l'inégalité de Cauchy,
-$\alpha_n \leq M(R)/R^n$ avec $M(R) = f(R) = \prod(1 + \lambda_i R)$, et
-$\prod_{i \geq n+2}(1 + \lambda_i R) \leq e^{\rho_{n+1}R}$ où $\rho_{n+1} =
+$\alpha_{n+1} \leq M(R)/R^{n+1}$ avec $M(R) = f(R) = \prod(1 + \lambda_i R)$,
+soit
+\[
+  \alpha_{n+1} \leq \Bigl(\frac1R + \lambda_1\Bigr)\cdots\Bigl(\frac1R + \lambda_{n+1}\Bigr)
+  \prod_{i \geq n+2}(1 + \lambda_i R),
+\]
+et $\prod_{i \geq n+2}(1 + \lambda_i R) \leq e^{\rho_{n+1}R}$ où $\rho_{n+1} =
 \sum_{k \geq n+2}\lambda_k$. Avec $R = (n+1)/\rho_{n+1}$ :
 \[
-  \alpha_n \leq \prod_{k=1}^{n+1}\Bigl(\frac{\rho_{n+1}}{n+1} + \lambda_k\Bigr) e^{n+1}
+  \alpha_{n+1} \leq \prod_{k=1}^{n+1}\Bigl(\frac{\rho_{n+1}}{n+1} + \lambda_k\Bigr) e^{n+1}
   \leq \prod_{k=1}^{n+1}\Bigl(\frac{\rho_k}{k} + \lambda_k\Bigr) e^{n+1} .
 \]
 Or $\lambda_k = o(1/k)$ (lemme de la page 112) et $\rho_k/k = o(1/k)$, donc
 $\rho_k/k + \lambda_k \leq \varepsilon_k/k$ avec $\varepsilon_k \to 0$, et
 \[
-  n!\,\alpha_n \leq \frac{\varepsilon_1 \cdots \varepsilon_{n+1}}{n+1}\,e^{n+1},
+  (n+1)!\,\alpha_{n+1} \leq \varepsilon_1 \cdots \varepsilon_{n+1}\,e^{n+1},
   \qquad
   \sqrt[n]{n!\,\alpha_n} \to 0 ;
 \]
-la série converge absolument.\footnote{Les indices et exposants des pages
-120 et 121 oscillent entre $n$ et $n+1$ ; on a suivi $R = (n+1)/\rho_{n+1}$,
-qui donne $n+1$ facteurs.} Ensuite $S$ est holomorphe près de $0$ puisque
+la série converge absolument.\footnote{Page 120. La seconde passe (machine,
+non vérifiée par un lecteur) restitue une ligne qui manquait : « On a donc
+$\alpha_n \leq (1/R + \lambda_1) \cdots (1/R + \lambda_{n+1})
+\prod_{i=n+2}^\infty (1 + \lambda_i R)$ », c'est-à-dire $\alpha_n \leq
+M(R)/R^{n+1}$ ; l'exposant $n+1$ est donc le sien. Mais la majoration de
+Cauchy de $\alpha_n$ est $M(R)/R^n$, et celle-ci, à $n+1$ facteurs, est celle
+de $\alpha_{n+1}$ ; on l'a écrite ainsi, ce qui ne change pas la conclusion.
+La lecture antérieure de cette édition écrivait $\alpha_n$ à gauche, avec la
+même erreur d'un facteur $R$. Les exposants de $e$ se lisent $n$ (l'éditeur
+est interrogé : $n$ ou $n+1$), les indices des $\varepsilon$ oscillent ; on a
+suivi $R = (n+1)/\rho_{n+1}$, qui donne $n+1$ facteurs.} Ensuite $S$ est holomorphe près de $0$ puisque
 $|\alpha_n(\lambda)| \leq \|\lambda\|_1^n$ ; mieux, la forme $n$-linéaire
 symétrique associée à $\alpha_n$ est
 \[
@@ -2165,9 +2617,10 @@ et
 donc $S(a^{(m)}) \to \infty$ : $S$ n'est pas bornée sur la boule unité, le
 rayon est $\leq 1$, et $R_0 = R_1 = 1$.\footnote{$R_1$ est, dans les termes
 d'aujourd'hui, le \emph{rayon de bornitude} de $S$ en $0$ (Dineen) ; la
-proposition dit que $S$ est G-holomorphe sur $\ell^1$ tout entier, holomorphe
-au sens de Fréchet sur la boule unité ouverte, et non bornée sur cette
-boule --- l'exemple type de la distinction entre les deux rayons. On peut
+proposition dit que $S$ est G-holomorphe sur $\ell^1$ tout entier --- elle y
+est même holomorphe, comme on l'a vu en note de l'énoncé --- et non bornée
+sur la boule unité : l'exemple type de la distinction entre les deux rayons,
+et d'une fonction entière qui n'est pas de type borné. On peut
 ajouter que $S(\lambda) = \int_0^\infty e^{-t}\prod_i(1 + \lambda_i t)\,dt$,
 transformée de Laplace du produit canonique, ce qui rend la convergence
 évidente à partir du type minimal ; la page ne le dit pas.}
@@ -2227,18 +2680,27 @@ $S$ ; Cauchy--Schwarz sur les parties $S$ donne le corollaire 2. Les opérateurs
 cherché si l'inégalité est imprimée.}
 \emph{Corollaire 4.} $|\det(1 + A + B)| \leq \det(1 + |A|)\,\det(1 + |B|)$.
 Il suffit, par le corollaire 3 et $\det(1 + |A|) = \det(1 + |A|')$, de le
-prouver pour $A = H$ et $B = K$ hermitiens positifs ; alors $1 + H + K =
-(1 + H)\bigl(1 + (1+H)^{-1}K\bigr)$, donc $\det(1 + H + K) = \det(1 + H)\,
-\det(1 + H'K)$ avec $H' = (1+H)^{-1}$ hermitien positif de norme $\leq 1$, et
-il reste $\det(1 + H'K) \leq \det(1 + K)$, soit $\alpha_n(H'K) \leq
-\alpha_n(K)$ pour tout $n$, ce qui résulte de $\Lambda^n(H'K) =
-(\Lambda^n H')(\Lambda^n K)$ et $\|\Lambda^n(H'K)\|_1 \leq \|\Lambda^n H'\|\,
-\|\Lambda^n K\|_1 \leq \|K\|_1$-type, avec $\|\Lambda^n H'\| \leq \|H'\|^n
-\leq 1$.\footnote{La page 124 écrit $\det(1 + H + K) = \det(1 + L)(1 +
-K/(1+L))$ avec une lettre $R$ ou $H$ que la suite note $L$ et $H = 1/(1+L)$ ;
-on a renommé pour ne pas donner deux sens à $H$. Le corollaire 4 vaut sans
-$A$, $B$ hermitiens parce que $|\det(1+A+B)| \leq \det(1 + |A+B|)$ n'est
-pas utilisé : c'est le corollaire 3 qui fait le passage.}
+prouver pour $A = h$ et $B = k$ hermitiens positifs ; alors $1 + h + k =
+(1 + h)\bigl(1 + (1+h)^{-1}k\bigr)$, donc
+\[
+  \det(1 + h + k) = \det(1 + h)\,\det(1 + Hk), \qquad H = \frac{1}{1+h},
+\]
+$H$ hermitien positif de norme $\leq 1$, et il reste à prouver $\det(1 + Hk)
+\leq \det(1 + k)$ ; il suffit pour cela que $\alpha_n(Hk) \leq \alpha_n(k)$
+pour tout $n$, ce qui résulte de $\Lambda^n(Hk) = (\Lambda^n H)(\Lambda^n
+k)$, $\alpha_n(Hk) = \operatorname{Tr}\Lambda^n(Hk) \leq \|\Lambda^n
+H\|_\infty\,\|\Lambda^n k\|_1 = \|\Lambda^n H\|_\infty\,\alpha_n(k)$, et
+$\|\Lambda^n H\|_\infty \leq \|H\|_\infty^n \leq 1$.\footnote{Page 124 (page
+citée, relue à l'aveugle par la seconde passe, machine, non vérifiée par un
+lecteur) : les deux hermitiens positifs sont les minuscules $h$ et $k$, et
+la relation $H = 1/(1+h)$ est écrite ; la première passe lisait $H$, $K$ et
+une lettre $L$, et cette édition avait renommé $H$ en $H'$. On garde ici
+les lettres de la page, qui ne servent que dans cette démonstration ;
+l'éditeur est interrogé sur les mots qui précèdent « $\det(1 + Hk) \leq
+\det(1 + k)$ ». Les $\alpha_n(Hk)$ sont $\geq 0$, $Hk$ étant semblable à
+$k^{1/2}Hk^{1/2} \geq 0$. Le corollaire 4 vaut sans $A$, $B$ hermitiens
+parce que $|\det(1+A+B)| \leq \det(1 + |A+B|)$ n'est pas utilisé : c'est le
+corollaire 3 qui fait le passage.}
 \emph{Corollaire 5.} $\det(1 + |A + B|) \leq \det(1 + |A|)\,\det(1 + |B|)$.
 Il contient le précédent, puisque $|\det(1 + A + B)| \leq \det(1 + |A + B|)$,
 et il en résulte : $|A + B| = U(A + B)$ pour une isométrie partielle $U$,
@@ -2296,9 +2758,20 @@ $\mathcal{L}^p$ ; réflexivité » annoncent un second théorème qui n'est pas
 ici.}
 
 \emph{Démonstration de 1).} La première formule est évidente, $|A|$ et
-$|A^{*}|$ ayant les mêmes valeurs propres. La seconde est un cas particulier
-de 3), mais se prouve directement : si $(k_i)$ et $(h_i)$ sont les valeurs
-propres décroissantes de $|BA|$ et $|A|$, $k_i \leq \|B\|\,h_i$ pour tout $i$.
+$|A^{*}|$ ayant les mêmes valeurs propres non nulles, avec leurs
+multiplicités.\footnote{Page 127 : la page dit que $|A|$ et $|A^{*}|$ « sont
+unitairement équivalents », en renvoyant à une remarque 2 suivie d'un « (?) »
+(seconde passe, machine). Ce n'est exact qu'au noyau près --- pour le
+décalage pondéré compact $e_n \mapsto e_{n+1}/n$, $|A|$ est injectif et
+$|A^{*}|$ ne l'est pas --- ; ce que la formule demande, l'égalité des valeurs
+propres non nulles, vaut toujours, $|A^{*}|$ étant unitairement équivalent à
+$|A|$ sur l'orthogonal des noyaux. La page note les valeurs propres de $A$
+$(\alpha_i)$ aux pages 126 et 129 ; on garde $\lambda_i$.} La seconde est un
+cas particulier de 3), mais se prouve directement : si $(k_i)$ est la suite
+décroissante des valeurs propres de $|BA|$ (resp.\ $|AB|$) et $(h_i)$ celle
+de $|A|$, $k_i \leq \|B\|\,h_i$ pour tout $i$.\footnote{Page 127, dans la
+lecture de la seconde passe (machine) : sans l'exposant $2$ que lisait la
+première, et avec les deux produits.}
 L'inégalité triangulaire pour $p \geq 1$ se déduit de 3), démontré
 indépendamment : si $\frac1p + \frac1{p'} = 1$ et $\|B\|_{p'} \leq 1$, alors
 $\|AB\|_1 \leq \|A\|_p$, donc $|\operatorname{Tr} AB| \leq \|A\|_p$ ; et
@@ -2360,7 +2833,18 @@ déduit la seconde de la première. Pour $A$, $B \notin \mathcal{S}_1$ le
 corollaire s'applique par troncature.} Les assertions topologiques sont des
 conséquences faciles des formules.
 
-\emph{Démonstration de 2).} « Je ne connais qu'une méthode analytique. »
+\emph{Démonstration de 2).} « Je ne connais qu'une méthode analytique. »\footnote{Page
+129 : « Pour prouver la formule (5), je ne connais qu'une méthode
+analytique ». Le chiffre se lit 5 sur la bande et à la relecture aveugle de
+la seconde passe (machine, non vérifiée par un lecteur), mais l'éditeur est
+interrogé : la section consacrée au carton dans l'article Lean le prend pour
+(4). Sous la lecture (5), la phrase porte sur la majoration des valeurs
+propres $\sum |\lambda_i|^p \leq S_p(A)$, que la page 88 tire en deux lignes
+du lemme de Weyl, et c'est l'un des trois indices de la chronologie donnée
+plus haut. Sous la lecture (4), elle porterait sur la sous-additivité de
+$S_p$, qui a déjà sa démonstration analytique à la page 128 (« nous
+démontrons la formule (4) par voie analytique ») ; la chronologie
+perdrait cet indice et garderait les deux autres.}
 Pour $A$ compact et $0 < p < \infty$, posons $s_p(A) = \sum |\lambda_i|^p$ ;
 on a $s_p(A) = s_{p/n}(A^n)$ pour tout entier $n > 0$. Si $p < 1$, la
 majoration classique des inverses des modules des zéros de la fonction
@@ -2382,7 +2866,9 @@ tend vers $1$ quand $p \to 0$. Pour $p$ quelconque, soit $n$ avec $p/n < 1$ :
   S_{p/n}(A^n) \leq \frac{\frac{p}{n}\pi}{\sin\frac{p}{n}\pi}\,S_p(A),
 \]
 car $\|A^n\|_{p/n} \leq \|A\|_p^n$ par 3) généralisé à $n$ facteurs, soit
-$S_{p/n}(A^n) \leq S_p(A)$ ; et $n \to \infty$ donne l'inégalité. La
+$S_{p/n}(A^n) \leq S_p(A)$ --- la page 130 dit que la formule 3) « se
+généralise au produit d'un nombre fini quelconque d'opérateurs » ---, et $n
+\to \infty$ donne l'inégalité. La
 monotonie sur les positifs vient de ce que $0 \leq H \leq K$ entraîne
 $\lambda_i(H) \leq \lambda_i(K)$ pour tout $i$, par la caractérisation
 extrémale de Fischer.
@@ -2395,7 +2881,11 @@ preuve directe et très simple du cas $p, q \geq 1$, $r = 1$ --- qui
 s'applique sans changement à une trace au sens de von Neumann sur une
 algèbre auto-adjointe, les opérateurs « de puissance $p$-ième sommable »
 étant les $A$ avec $\tau(|A|^p) < \infty$.\footnote{Ce que la page 33
-réalise en trois lignes, dans le second état.} On prouve d'abord, pour
+réalise en trois lignes, dans le second état. Page 132, dans la lecture de
+la seconde passe (machine) : un second nom suit « von Neumann », lu avec
+doute « Dixmier », et la page ajoute : « Au n° suivant, nous obtiendrons
+d'ailleurs le résultat comme conséquence d'une proposition plus
+générale ».} On prouve d'abord, pour
 $2^n$ opérateurs compacts $A_1, \ldots, A_{2^n}$, $n \geq 1$,
 \[
   \|A_1 A_2 \cdots A_{2^n}\|_1 \leq \|A_1\|_{2^n}\,\|A_2\|_{2^n} \cdots \|A_{2^n}\|_{2^n},
@@ -2455,13 +2945,28 @@ par $\operatorname{Tr}$ --- on est ramené à $n = 1$ :
 Or le premier membre est la trace du produit de $2m$ facteurs $(A^{*}A)(BB^{*})
 \cdots(BB^{*})$, majorée par sa norme trace, donc par $\bigl(\|A^{*}A\|_{2m}
 \|BB^{*}\|_{2m}\bigr)^m$ par Hölder à $2m$ facteurs, et $\|A^{*}A\|_{2m} \leq
-\|A^{*}A\|_m$, $\|BB^{*}\|_{2m} = \|B^{*}B\|_{2m} \leq \|B^{*}B\|_m$.
+\|A^{*}A\|_m$, $\|BB^{*}\|_{2m} = \|B^{*}B\|_{2m} \leq \|B^{*}B\|_m$.\footnote{Page
+135, dans la lecture de la seconde passe (machine, non vérifiée par un
+lecteur) : les deux lignes de la réduction, que la première passe donnait
+pour biffées, ne le sont pas ; leurs lettres rondes sont écrites sur des
+droites : « en posant $\mathcal{A} = \Lambda^n A$, $\mathcal{B} = \Lambda^n
+B$ : $\mathcal{H} = \mathcal{A}^{*}\mathcal{A}$, $\mathcal{K} =
+\mathcal{B}^{*}\mathcal{B}$, $\mathcal{L} = (\mathcal{A}\mathcal{B})^{*}
+(\mathcal{A}\mathcal{B})$, $\operatorname{Tr}\mathcal{L}^m \leq
+\operatorname{Tr}\mathcal{H}^m \operatorname{Tr}\mathcal{K}^m$, ce qui nous
+ramène au cas où $n = 1$ ». C'est la réduction donnée ici.}
 
 \pagerange{136}{139}
 \section*{Hölder en toute généralité (pages 136 à 139)}
 
 Soient $A \in \mathcal{S}_p$, $B \in \mathcal{S}_q$ avec $\frac1p + \frac1q
-\geq \frac1r$, $p$ et $q$ finis --- sinon c'est 1) --- et même $\frac1p +
+\geq \frac1r$, $p$ et $q$ finis --- si l'un était infini, les formules (2)
+du point 1) donneraient le résultat\footnote{Page 136, dans la lecture de la
+seconde passe (machine) : la ligne interlinéaire « Nous pouvons supposer que
+$p$ et $q$ sont finis puisque si l'un était infini, les formules (2)
+donneraient le résultat » n'est pas biffée ; l'éditeur est interrogé sur
+« sont finis ». En marge, au crayon, « Th.\ connu sur les fonctions
+entières », en regard de la majoration de $M_{L^m}$ qui suit.} --- et même $\frac1p +
 \frac1q = \frac1r$, puisque $\|A\|_r$ décroît avec $r$. Soit $m$ un entier
 avec $p, q \leq 2m$, et $L = (AB)^{*}(AB)$, $H = A^{*}A$, $K = B^{*}B$ ; alors
 $r \leq m$ et $S_r(AB) = S_{r/2}(L) = S_{r/2m}(L^m)$, de sorte que, avec
@@ -2597,9 +3102,17 @@ pour $u^{*}$ ; la transcription note les deux. Ce sont les inégalités de
 Ky Fan (1951), que la page 38 cite.}
 
 Sous un trait, une question au crayon : peut-on avoir $\limsup
-|\lambda_i(u)|/s_i(u) = +\infty$ ? Une majoration $|\lambda_i(u)| \leq
-s_{i/2}(u)$ « ou analogue » lui paraît invraisemblable.\footnote{Elle l'est.
-Sur $\mathbf{C}^n$, le décalage cyclique pondéré $e_i \mapsto w_i e_{i+1}$,
+|\lambda_i(u)|/s_i(u) = +\infty$ ? Et une autre : « Majorations
+individuelles, p.\ ex.\ $|\lambda_i(u)| \leq s_{i/2}(u)$ ou analogue
+? »\footnote{Page 143, dans la lecture de la seconde passe (machine, non
+vérifiée par un lecteur) ; les deux mots « Majorations individuelles » sont
+aussi écrits et soulignés dans la marge. La première passe lisait
+« Hypothèse : invraisemblable pour … », et cette édition lui faisait juger
+une telle majoration invraisemblable ; la page ne juge pas, elle demande.
+L'éditeur est interrogé sur le mot entre « individuelles » et la formule,
+« p.\ ex. » ou « pour » ; c'est une question dans les deux cas. La réponse
+aux deux questions est celle de cette note : la première est oui, la seconde
+non, aucune majoration individuelle de cette forme ne valant. Sur $\mathbf{C}^n$, le décalage cyclique pondéré $e_i \mapsto w_i e_{i+1}$,
 $e_n \mapsto w_n e_1$, a pour valeurs singulières les $w_i$ et pour valeurs
 propres les $n$ racines $n$-ièmes de $w_1 \cdots w_n$, toutes de module
 $(w_1 \cdots w_n)^{1/n}$ ; avec $w = (1, \varepsilon, \varepsilon)$, $|\lambda_3|
@@ -2611,24 +3124,37 @@ les majorations des sommes et des produits partiels.}
 
 Les pages 144 et 145, au crayon pâle, reprennent la proposition pour un
 espace de Banach $E$ --- si $u_i \to u$ dans $L_0(E)$, les spectres et les
-projecteurs spectraux convergent --- et le corollaire 2 sous la forme
+projecteurs spectraux convergent ---, puis, pour les hermitiens, le critère
+du corollaire 1 de la page 141 : $u_i \to u$ dans $\mathcal{S}_p(E)$ si et
+seulement si 1° $\|u_i\|_p \to \|u\|_p$ et 2° $u_i \to u$ spectralement,
+c'est-à-dire dans $L(E)$,\footnote{Page 144, dans la lecture de la seconde
+passe (machine, non vérifiée par un lecteur) ; la première lisait
+« Conséquence de l'hermiticité … ». Les étiquettes sont un 1° et un 2°
+cerclés.} et le corollaire 2 sous la forme
 $u \mapsto |u|^r$ continue de $\mathcal{S}_p(E,F)$ dans $\mathcal{S}_{p/r}(E)$,
-avec une question : $\sigma \mapsto \sigma^{r/2}$ est-elle continue de
-$L(E)^{+}$ dans $L(E)$, et avec quelles inégalités précises ?\footnote{Oui :
+avec une question : $\sigma \mapsto \sigma^{r/2}$, dont la continuité de
+$L_0(E)^{+}$ dans $L_0(E)$ « se vérifie spectralement », est-elle « sans
+doute » continue aussi de $L(E)^{+}$ dans $L(E)$, et avec quelles inégalités
+précises ?\footnote{Oui :
 c'est la continuité de $\sigma \mapsto \sigma^{s}$ pour $0 < s < 1$ sur le cône
 positif, en norme d'opérateur, conséquence de l'inégalité de Powers--Størmer
 citée à la remarque 2 ; en 1953 le calcul fonctionnel continu la donne
 sur les bornés.} Un \emph{corollaire 2} affirme que pour $0 < p \leq 1$
 une suite d'hermitiens $u_i \to u$ converge dans $\mathcal{S}_p(E)$ dès
 qu'elle converge faiblement et que les normes convergent ; la page 145
-demande dans quels cas $\mathcal{S}_p(E,F)$ est uniformément convexe pour
-$0 < p < \infty$ --- « pas d'importance » ---, ramène la continuité de
-$H \mapsto H^r$ au cas $0 < r < 1$, et reformule la remarque 2 : prouver que
+demande si $\mathcal{S}_p(E,F)$ est uniformément convexe pour $0 < p <
+\infty$ --- « pas d'importance » ---, ramène la continuité de $H \mapsto H^r$
+au cas $0 < r < 1$, le cas entier étant trivial, et reformule la remarque 2 : prouver que
 $S_{p/r}(H^r - K^r) = S_p(|H^r - K^r|^{1/r})$ croît avec $r$, pour $p$
-quelconque ou déjà pour $p = 1$.\footnote{Ce corollaire 2 pour $p \leq 1$ est
-douteux tel quel : la convergence faible et celle des quasi-normes ne
-donnent pas la convergence en norme d'opérateur, et l'énoncé de la page 141
-demande cette dernière. Pour $p < 1$, $\mathcal{S}_p$ n'est pas localement
+quelconque ou déjà pour $p = 1$.\footnote{Ce corollaire 2 pour $p < 1$ est
+douteux tel quel : l'édition ne sait pas si la convergence faible et celle
+des quasi-normes donnent la convergence en norme d'opérateur, que l'énoncé
+de la page 141 demande ; pour $p = 1$ il est vrai, $\mathcal{S}_1$ ayant la
+propriété de Kadec--Klee (voir la remarque 1). Le chiffre après « $0 < p
+\leq$ » se lit 1 dans la seconde passe (machine), et l'éditeur est
+interrogé : avec 2, l'énoncé serait celui de la remarque 1 de la page 142
+pour $1 \leq p \leq 2$, où il est vrai, et resterait douteux pour $p <
+1$. Pour $p < 1$, $\mathcal{S}_p$ n'est pas localement
 convexe et la question de la convexité uniforme n'a pas de sens ; la page
 le dit à sa façon.}
 
@@ -2657,7 +3183,10 @@ $\sum_\nu \omega(\log s_\nu)$ se lit
 première expression de $\omega$ confirme. La réduction à $A_i \geq 0$ est
 la ligne la moins lisible de la page ; l'inégalité entre les sommes pour
 $A_i$ et $|A_i|$ est en fait une égalité, $s_\nu(A_i) = s_\nu(|A_i|)$, et le
-lemme se démontre tel quel pour $A_i$ quelconques.} Il suffit alors de
+lemme se démontre tel quel pour $A_i$ quelconques ; la marge de la page 146
+le dit à sa façon : « On n'a pas besoin de la continuité de $A \to |A|$ »
+(seconde passe, machine). La ligne pâle qui suit la formule de réduction
+s'arrête sur « par extraction d'une ».} Il suffit alors de
 montrer :
 a) $\rho^p\sum_{s_\nu > \rho} \log(e\,s_\nu^p/\rho^p) \to 0$ quand $\rho \to 0$,
 pour la suite fixe $(s_\nu) = \hat{A}$ ; b) $\sum_{s_\nu(A_i) \leq \rho}
@@ -2672,17 +3201,30 @@ l'intégration de Stieltjes des pages 115 et 116, avec $g(r) = \log(e\,r^p/
   = \rho^p\Bigl[-n(r)\,g(r)\Bigr]_{\rho+0}^{\infty} + p\rho^p\int_\rho^\infty \frac{n(r)}{r}\,dr
   = \rho^p\,n(\rho) + p\rho^p\int_\rho^{s_1} \frac{n(r)}{r}\,dr .
 \]
-Comme $\sum s_\nu^p < \infty$, on sait que $\rho^p n(\rho) \to 0$ et que
-$\int_0^\infty n(r)\,r^{-1-p}\,dr < \infty$. Pour le second terme, on coupe
-en $\delta$ : sur $[\rho, \delta]$, $\rho^p/r \leq (\rho\delta)^p\,r^{-1-p}$,
-donc $\rho^p\int_\rho^\delta n(r)\,dr/r \leq (\rho\delta)^p\int_0^\infty n(r)\,
-r^{-1-p}\,dr \to 0$ ; sur $[\delta, s_1]$, $\rho^p\int_\delta^{s_1} n(r)\,dr/r
-\leq \rho^p\,n(\delta)\log(s_1/\delta) \to 0$.\footnote{La page 147 écrit
-« $p\rho^p\int_\rho^\infty n(r)/r\,dr < p\rho^p\int_0^\infty n(r)/r\,dr \to 0$ »,
-ce qui supposerait $\int_0 n(r)\,dr/r$ fini ; or $n(r) \to \infty$ quand $r \to
-0$ dès que $A$ est de rang infini, et l'intégrale diverge. La coupure en
-$\delta$ répare l'argument sans en changer l'idée. Un bloc de quatre lignes,
-barré, tentait une autre voie par $\sum \|A_{i+1} - A_i\|_p < \infty$.}
+Comme $\sum s_\nu^p < \infty$, on sait que $\rho^p n(\rho) \to 0$, et
+\[
+  \int_0^\infty n(r)\,r^{p-1}\,dr = \sum_\nu \int_0^{s_\nu} r^{p-1}\,dr =
+  \frac1p\sum_\nu s_\nu^p < \infty .
+\]
+Pour le second terme, $\rho^p\int_\rho^\infty n(r)\,dr/r = \int_\rho^\infty
+(\rho/r)^p\,n(r)\,r^{p-1}\,dr$, où $(\rho/r)^p \leq 1$ tend vers $0$ pour
+chaque $r$ : il tend vers $0$ par convergence dominée.\footnote{La page 147
+écrit, dans la lecture de la seconde passe (machine, non vérifiée par un
+lecteur) : « et que $\int_0^{+\infty} n(r)\,r^{-1-p}\,dr < +\infty$ ; à
+fortiori $\int_0^{+\infty} n(r)/r\,dr < +\infty$, d'où $p\rho^p\int_\rho^\infty
+n(r)/r\,dr < p\rho^p\int_0^\infty n(r)/r\,dr \to 0$ », la borne $0$ de la
+deuxième intégrale étant lue avec doute (la première passe lisait « partant
+$\int_\rho^{+\infty}$ »). Avec $n(r)$ le nombre des $s_\nu > r$, ces deux
+intégrales divergent en $0$ dès que $A \neq 0$, puisque $n \geq 1$ près de
+$0$ : ce sont les formules des pages 115 et 116, écrites pour une suite
+$r_\nu \to \infty$, transportées sans passer aux inverses. Sous l'ancienne
+lecture « $\int_\rho$ », l'intégrale est finie mais rien ne dit que $\rho^p$
+fois elle tende vers $0$. L'intégrale finie est celle qu'on écrit
+ci-dessus ; la conclusion de la page est juste. La lecture antérieure de
+cette édition réparait l'argument par une coupure en $\delta$ qui employait
+la même intégrale divergente ; elle est remplacée. Un bloc de quatre
+lignes, barré, tentait une autre voie par $\sum \|A_{i+1} - A_i\|_p <
+\infty$.}
 
 \emph{Preuve de b).} On a
 \[
@@ -2717,14 +3259,16 @@ que sans le signe on aurait $R = 1 + 2\lambda + 2\lambda^2 + \cdots$. En
 dimension finie $R(u)$ est la matrice adjointe de $1 + u$.}
 
 \emph{Lemme.} Si $u = \sum_i \lambda_i\,e_i \otimes e_i'$ est diagonalisable,
-avec $(e_i)$ une base et $(e_i')$ la base duale, alors $P_n(u) = \sum_i
+avec $(e_i)$ une base et $(e_i')$ la base duale --- ce qui est le cas pour
+$u$ normal, que la page suppose ---, alors $P_n(u) = \sum_i
 p_i(u)\,e_i \otimes e_i'$ où
 \[
   p_i(u) = \sum_{I \not\ni i,\ |I| = n} \prod_{j \in I} \lambda_j
 \]
 est la $n$-ième fonction symétrique élémentaire des $\lambda_j$, $j \neq i$.
 On le voit en calculant successivement $u^n - \alpha_1 u^{n-1}$, $u^n -
-\alpha_1 u^{n-1} + \alpha_2 u^{n-2}$, et par récurrence.
+\alpha_1 u^{n-1} + \alpha_2 u^{n-2}$, et par récurrence ; le point 2)
+ci-dessous « se vérifie sur les valeurs propres de façon immédiate ».
 
 \emph{Théorème.} 1) $|P_n(u)| \leq P_n(|u|)$ et $|R(u)| \leq R(|u|)$ pour $u$
 normal, au sens des valeurs propres sur une base commune ; en particulier
@@ -2732,22 +3276,32 @@ $P_n(u) \geq 0$ et $R(u) \geq 0$ si $u \geq 0$. 2) Si $u \geq 0$, $0 \leq
 P_n(u) \leq \alpha_n(u)\cdot 1$ et $0 \leq R(u) \leq \det(1+u)$, puisque
 $p_i(u)$ est une somme partielle de $\alpha_n(u) = \sum_{|I| = n}\prod_I
 \lambda_j$.\footnote{La page 148 justifie 2) en disant que les termes
-$\alpha_{n-k}(u)\,u^k$ forment « une suite décroissante d'hermitiens », ce
-qui est faux --- pour $\lambda = (10, 1)$ et $n = 2$, $\alpha_2 = 10 <
-\lambda_1\alpha_1 = 110$ --- ; c'est la somme alternée qui est comprise
-entre $0$ et son premier terme, par le lemme. Le point 1) est énoncé pour
-$u$ à trace quelconque, et « devient évident » par le lemme, qui ne
-couvre que le cas diagonalisable ; on l'a restreint aux $u$ normaux, où
-$|u|$ se diagonalise dans la même base.}
+$\alpha_{n-k}(u)\,u^k$ forment « une suite décroissante d'hermitiens
+positifs », ce qui est faux --- pour $\lambda = (10, 1)$ et $n = 2$,
+$\alpha_2 = 10 < \lambda_1\alpha_1 = 110$ --- ; c'est la somme alternée qui
+est comprise entre $0$ et son premier terme, par le lemme, et la page le
+vérifie ensuite « sur les valeurs propres ». Le point 1) est énoncé, dans la
+lecture de la seconde passe (machine, non vérifiée par un lecteur), pour
+« $u$ un opérateur à trace normal », et le même mot revient au corollaire et
+au-dessus du lemme ; la première passe y voyait des lacunes, et cette
+édition l'avait restreint d'elle-même aux $u$ normaux. Le mot est soumis à
+l'éditeur. S'il n'était pas « normal », le point 1) serait énoncé pour tout
+$u$ à trace alors que le lemme, dont il « devient évident », ne couvre que
+le cas diagonalisable, et l'énoncé ci-dessus resterait celui qu'on peut
+démontrer.}
 
-\emph{Corollaire.} Pour $u$ à trace,
+\emph{Corollaire.} Pour $u$ à trace normal,
 \[
-  \|R(u)\| \leq \det(1 + |u|) \leq e^{\|u\|_1}, \qquad
-  \|P_n(u)\| \leq \alpha_n(|u|) \leq \frac{\|u\|_1^n}{n!} .
+  \|R(u)\| \leq \|R(|u|)\| \leq \det(1 + |u|) \leq e^{\|u\|_1}, \qquad
+  \|P_n(u)\| \leq \|P_n(|u|)\| \leq \alpha_n(|u|) \leq \frac{\|u\|_1^n}{n!} ;
 \]
-\footnote{La page les écrit avec un membre intermédiaire $\|R(|u|)\|$,
-$\|P_n(|u|)\|$, qui suppose le point 1) pour $u$ quelconque, non démontré
-ici. Les deux inégalités sont vraies sans lui : ce sont les estimations
+les inégalités entre les termes extrêmes valent pour tout $u$ à trace.
+\footnote{Page 148 : « Si $u$ est opérateur à trace normal », dans la lecture
+de la seconde passe (machine ; même mot qu'au point 1), soumis à
+l'éditeur). Pour $u$ normal, les membres intermédiaires $\|R(|u|)\|$,
+$\|P_n(|u|)\|$ viennent du point 1). Si le mot n'était pas « normal », ils
+supposeraient le point 1) pour $u$ quelconque, non démontré ici. Les
+inégalités extrêmes sont vraies sans lui : ce sont les estimations
 classiques du premier mineur de Fredholm, $\|\det(1+zu)\,(1+zu)^{-1}\| \leq
 \det(1 + |z|\,|u|)$ coefficient par coefficient, qu'on trouve, par les
 puissances extérieures, dans Simon, \emph{Trace ideals}, chapitre 5 ; et
@@ -2762,7 +3316,10 @@ voisins de $\det(1+u)$, et
   \|R(u)\| \geq |\det(1+u)| ,
 \]
 avec égalité pour $u \geq 0$ : l'estimation du corollaire est donc exacte
-sur les positifs.\footnote{En dimension infinie, $0$ est valeur spectrale de
+sur les positifs, et l'on ne peut pas l'améliorer, conclut la page
+149.\footnote{Page 149, dans la lecture de la seconde passe (machine) :
+« donc (pour l'inégalité (***) a) … pour l'améliorer, car elle devient
+égalité pour $u \geq 0$ ! », la négation étant dans les mots non lus.}\footnote{En dimension infinie, $0$ est valeur spectrale de
 $u$ et $\det(1+u)$ est valeur spectrale de $R(u)$, ce qui donne
 l'inégalité même si $u$ est de rang fini. C'est le dernier feuillet écrit du
 carton.}
