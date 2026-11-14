@@ -6,6 +6,7 @@ import catalogueRaw from './content/buffalo.json';
 import type { Board } from './components/Blackboard.tsx';
 import { buffaloIssueUrl } from './lib/report.ts';
 import { commentData, useComments } from './components/Comments.tsx';
+import statsRaw from './content/buffalo-stats.json';
 
 // The reconstructed boards are published (2026-11-01): written in the git-ignored
 // transcripts-buffalo/, copied to public/buffalo-boards/ by `npm run buffalo-boards`.
@@ -260,6 +261,77 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
         </>
       )}
     </div>
+  );
+}
+
+const STATS = statsRaw as unknown as {
+  built: string;
+  total: { sides: number; words: number; doubtful: number; inaudible: number; supplied: number; changedShare: number; bySource: Record<'captions' | 'whisper', { sides: number; changedShare: number }> };
+  courses: { id: string; title: string; sides: number; words: number; doubtful: number; inaudible: number; supplied: number; changedShare: number }[];
+  review: { checks: number; mathematical: number } | null;
+  history: { date: string; words: number; doubtful: number; inaudible: number; per100: number; changedShare: number }[];
+};
+const fmt = (x: number) => x.toLocaleString('en-GB');
+const share = (x: number) => `${(100 * x).toFixed(1)}%`;
+
+/** How the transcriptions of the tapes converge: counts only, the transcripts stay local. */
+function Convergence() {
+  const t = STATS.total;
+  const card = (value: string, label: string, help?: string) => (
+    <div className="rounded-[var(--radius-card)] border border-ink-200 bg-white px-3 py-2.5">
+      <div className="tabular text-[20px] font-semibold text-ink-900">{value}</div>
+      <div className="text-[12.5px] text-ink-700">{label}</div>
+      {help && <div className="mt-0.5 text-[11.5px] leading-snug text-ink-400">{help}</div>}
+    </div>
+  );
+  return (
+    <section id="convergence" className="mt-16 max-w-[52em]">
+      <h2 className="titre text-[22px] text-ink-900">How the transcriptions converge</h2>
+      <p className="mt-2 text-[13.5px] leading-relaxed text-ink-600">
+        The {t.sides} tape sides are transcribed in full, from YouTube&rsquo;s automatic captions (from a Whisper
+        transcription for the second topos video, which has none), then corrected from the mathematics. The
+        transcripts stay unpublished; these are their counts. The first-pass column measures how much of each
+        transcript differs, word for word, from the machine pass it started from.
+      </p>
+      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {card(fmt(t.words), 'words transcribed', `${t.sides} tape sides`)}
+        {card(share(t.changedShare), 'of words changed from the first pass', `captions ${share(t.bySource.captions.changedShare)} on ${t.bySource.captions.sides} sides, Whisper ${share(t.bySource.whisper.changedShare)} on ${t.bySource.whisper.sides}`)}
+        {card(fmt(t.doubtful), 'doubtful hearings', `[?], ${(100 * t.doubtful / Math.max(1, t.words)).toFixed(2)} per hundred words`)}
+        {card(fmt(t.inaudible), 'inaudible stretches', `and ${fmt(t.supplied)} words supplied in brackets`)}
+        {STATS.review && card(fmt(STATS.review.mathematical), 'doubts to check by ear', `of ${fmt(STATS.review.checks)} on the review tab: those that touch a statement`)}
+      </div>
+      <table className="mt-5 w-full text-left text-[12.5px] text-ink-600">
+        <thead className="text-[11px] uppercase tracking-[0.08em] text-ink-400">
+          <tr>
+            <th className="py-1 font-semibold">Course</th>
+            <th className="py-1 text-right font-semibold">Sides</th>
+            <th className="py-1 text-right font-semibold">Words</th>
+            <th className="py-1 text-right font-semibold">Doubtful per 100 words</th>
+            <th className="py-1 text-right font-semibold">Inaudible</th>
+            <th className="py-1 text-right font-semibold">Changed from the first pass</th>
+          </tr>
+        </thead>
+        <tbody>
+          {STATS.courses.map((c) => (
+            <tr key={c.id} className="border-t border-ink-100">
+              <td className="py-1">{c.title}</td>
+              <td className="tabular py-1 text-right">{c.sides}</td>
+              <td className="tabular py-1 text-right">{fmt(c.words)}</td>
+              <td className="tabular py-1 text-right">{(100 * c.doubtful / Math.max(1, c.words)).toFixed(2)}</td>
+              <td className="tabular py-1 text-right">{fmt(c.inaudible)}</td>
+              <td className="tabular py-1 text-right">{share(c.changedShare)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="mt-3 text-[12px] leading-relaxed text-ink-400">
+        Release history: {STATS.history.map((h) => `${h.date} (${h.per100.toFixed(2)} doubtful per 100 words, ${share(h.changedShare)} changed)`).join('; ')}.
+        A snapshot is added each time the counts change, so the curve builds up release by release. The
+        changed share counts every word of the transcript that a minimal word-level diff does not match in
+        the first pass: corrections, supplied words and repunctuated passages alike. Built on {STATS.built} by{' '}
+        <code>node scripts/buffalo-stats.mjs</code>.
+      </p>
+    </section>
   );
 }
 
@@ -527,6 +599,7 @@ export function BuffaloPage() {
           published by the « Erwin Schulhoff » YouTube channel on 27 October 2025. Tape list read from the videos'
           descriptions on {CAT.built}.
         </p>
+        <Convergence />
       </main>
       <Footer collection="buffalo" />
     </>
