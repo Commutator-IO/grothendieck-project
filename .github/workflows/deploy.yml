@@ -320,6 +320,16 @@ jobs:
           else
             echo "docs/lean did not compile; the committed PDF is served"
           fi
+      # The Quillen Lean article (docs/quillen-lean/), likewise: the site serves it
+      # as /article/quillen-lean.pdf, copied by `npm run article-tei` below.
+      - name: Compile the Quillen Lean article
+        run: |
+          mkdir -p "$RUNNER_TEMP/quillen-lean-article"
+          if (cd docs/quillen-lean && tectonic -X compile article.tex --outdir "$RUNNER_TEMP/quillen-lean-article"); then
+            cp "$RUNNER_TEMP/quillen-lean-article/article.pdf" docs/quillen-lean/article.pdf
+          else
+            echo "docs/quillen-lean did not compile; the committed PDF is served"
+          fi
       - name: The article, in TEI against tei_jtei
         run: npm run article-tei
 
