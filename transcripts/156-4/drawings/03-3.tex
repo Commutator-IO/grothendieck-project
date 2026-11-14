@@ -1,40 +1,17 @@
 % Drawing 156-4/03-3 -- folder 156-4, batch 03, archive page 51 (PDF page 52).
 % Transcription: moitié gauche, deuxième schéma : $\Phi \subset \overline{F}' \xrightarrow{\sim} F' \subset \overline{F}' \xrightarrow{\sim} F$ au-dessus de $\overline{G}' \xrightarrow{\sim} G' \subset \overline{G} \xrightarrow{\sim} G$, avec des flèches verticales descendantes.
-% Kind: relation diagram (subdivisions ~-> and inclusions). Method 2 (schematic redraw from the facsimile). Status: partial.
-% Notes: Top row: Phi (included in) F-bar'' ~-> F' (included in) F-bar' ~-> F; bottom row, a little lower on the left: G-bar'' ~-> G' (included in) G-bar ~-> G; a descending vertical arrow under each of the four nodes F-bar'', F', F-bar', F. Labels after the transcription. Doubtful: on the crop the first top node shows one prime only (F-bar', the transcription has F-bar''), the third top node shows a bar with a small arrow over it and no clear prime (the transcription has F-bar'), and the first bottom node shows one prime (transcription G-bar''). Left out as struck: the scribbled insertion above F' (an F-bar with a ~ and an arrow, struck through). Method: a relation diagram of formulas, which the transcription skill would set as text (tikz-cd); since it stands only as a \drawing mark, it is set here as a TikZ layout of the formula: every symbol is a LaTeX text node at its place on the page, the arrows are drawn between them. Redrawn 2026-11-09 (issue 128): to check again. Question settled by a machine pass on the facsimile, 2026-11-12 (maths): the third top node has no prime on the page: an F under a bar with a small arrow added over it. The cube at the foot of the same page has the same chain F' included in F-vec ~-> F, with F-vec standing over G-bar, so the node is F-vec, and it is now set so (the bar is the first writing, the arrow the correction). Not checked by a reader.
+% Kind: relation diagram (subdivisions ~-> and inclusions), set as a tikz-cd diagram. Method 2 (set as a tikz-cd diagram). Status: ok.
+% Notes: Set as a tikz-cd diagram, as the editor asks for arrow diagrams (#146): top row Phi (included in) F-bar' ≃ F' (hooked inclusion) F-vec ~-> F; bottom row, from under F-bar': G-bar' ~-> G' (hooked inclusion) G-bar ~-> G; between the rows, under F-bar', F', F-vec and F, the small vertical cup he writes for an inclusion, set as a cup between the nodes. The layout is canonical and keeps the shape of the scheme, not its geometry (not overlaid). Read on the page: the first top and bottom nodes carry one prime each (F-bar', G-bar'; Michel's check, #142); the third top node is an F under a bar corrected by a small arrow, set as F-vec (machine pass of 2026-11-12; the cube at the foot of the page has the same chain); the sign between F-bar' and F' is « ≃ » with no arrowhead; the inclusions F' to F-vec and G' to G-bar are hooked strokes with no head. Left out as struck: the scribbled insertion above F' (an F-bar with a ~ and an arrow, struck through). Redrawn 2026-11-09 (issue 128) as a TikZ layout of the formula; revised 2026-11-11 (#142) and 2026-11-12. 2026-11-13, Claude Opus 5.5, issue 147: the earlier layout was overlaid on the 250 ppi scan at 400 dpi (labels within about one unit, but the vertical relations drawn as long arrows where the page has small cups) and is replaced by the tikz-cd setting. Not compiled (no TeX in the session). Disagreement with the transcription: between F-bar' and F' the page has « ≃ » without arrowhead, and the vertical relations are cups, not « flèches descendantes ».
 % Coordinates: 1 unit = 1 mm = 1/100 of the crop width (bbox in page fractions: [0.18, 0.405, 0.5, 0.495]).
-% Redrawn by Claude (claude-opus-5-5), issue #73, 2026-11-09; not checked by a human; not compiled (no TeX in the session).
+% Redrawn by Claude (claude-opus-5-5), issue #73, 2026-11-09; not checked by a human; not compiled (no TeX in the session); overlay-checked on the scan by Claude Opus 5.5, issue #147, 2026-11-13, not compiled (no TeX in the session).
 % Rights: reproduces part of the work -- behind RENDER_TRANSCRIPTS, never published by itself.
 % Revised by Claude (claude-sonnet-5-5) 2026-11-11 after Michel's check (#142): the primes of the first top and bottom nodes are one each, F-bar prime and G-bar prime, as on the crop; the third top node is still to check. Compiled locally. Status: partial.
-\documentclass[tikz,border=3pt]{standalone}
+\documentclass[border=3pt]{standalone}
 \usepackage{amsmath,amssymb}
-\usetikzlibrary{patterns,arrows.meta}
-\tikzset{pencil/.style={black!45}, struck/.style={black!35}, mark/.style={circle,draw,inner sep=1.3pt}, pt/.style={circle,fill,inner sep=0.9pt}, opt/.style={circle,draw,fill=white,inner sep=1.1pt}}
+\usepackage{tikz-cd}
 \begin{document}
-\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\scriptsize]
-\node[inner sep=1pt] at (4,-12) {\small $\Phi$};
-\node[inner sep=1pt] at (11,-12) {\small $\subset$};
-\node[inner sep=1pt] at (23,-12) {\small $\overline{F}'$};
-\draw[-{Stealth[length=2mm]}] (29,-12) -- (38,-12);
-\node[inner sep=1pt] at (33.5,-9.4) {\small $\sim$};
-\node[inner sep=1pt] at (45,-12) {\small $F'$};
-\node[inner sep=1pt] at (52.5,-12) {\small $\subset$};
-\node[inner sep=1pt] at (63,-12) {\small $\vec{F}$};
-\draw[-{Stealth[length=2mm]}] (68.5,-12) -- (77,-12);
-\node[inner sep=1pt] at (72.8,-9.4) {\small $\sim$};
-\node[inner sep=1pt] at (81,-12) {\small $F$};
-\draw[-{Stealth[length=2mm]}] (23.5,-16) -- (23.5,-28.5);
-\draw[-{Stealth[length=2mm]}] (44,-16) -- (44,-29.5);
-\draw[-{Stealth[length=2mm]}] (63,-16) -- (63,-23.5);
-\draw[-{Stealth[length=2mm]}] (81,-16) -- (81,-23.5);
-\node[inner sep=1pt] at (24,-32.5) {\small $\overline{G}'$};
-\draw[-{Stealth[length=2mm]}] (30.5,-33) -- (39,-33);
-\node[inner sep=1pt] at (34.8,-30.4) {\small $\sim$};
-\node[inner sep=1pt] at (44.5,-33) {\small $G'$};
-\node[inner sep=1pt] at (52.5,-32.5) {\small $\subset$};
-\node[inner sep=1pt] at (63,-27.5) {\small $\overline{G}$};
-\draw[-{Stealth[length=2mm]}] (68.5,-27.5) -- (76.5,-27.5);
-\node[inner sep=1pt] at (72.5,-24.9) {\small $\sim$};
-\node[inner sep=1pt] at (81,-27.5) {\small $G$};
-\end{tikzpicture}
+\begin{tikzcd}[column sep=small, row sep=small]
+\Phi \arrow[r, phantom, "\subset"] & \overline{F}' \arrow[r, phantom, "\simeq"] \arrow[d, phantom, "\cup"] & F' \arrow[r, hook, no head] \arrow[d, phantom, "\cup"] & \vec{F} \arrow[r, "\sim"] \arrow[d, phantom, "\cup"] & F \arrow[d, phantom, "\cup"] \\
+ & \overline{G}' \arrow[r, "\sim"] & G' \arrow[r, hook, no head] & \overline{G} \arrow[r, "\sim"] & G
+\end{tikzcd}
 \end{document}
