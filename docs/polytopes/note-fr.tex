@@ -1,0 +1,489 @@
+% Note de travail, en français, accompagnant docs/polytopes/article.tex :
+% les définitions de l'article reprises depuis le début, sur un ton pédagogique,
+% pour un lecteur venu des mathématiques appliquées. Compilée par tectonic.
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern,microtype,amssymb,mathtools,booktabs}
+\usepackage[margin=2.7cm]{geometry}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+\emergencystretch=2em
+
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}
+\theoremstyle{plain}
+\newtheorem{theoreme}{Théorème}
+\theoremstyle{remark}
+\newtheorem{remarque}{Remarque}
+\newtheorem{exemple}{Exemple}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\F}{\mathbb F}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+\title[Note de lecture : polytopes réguliers sur un anneau]{Polytopes réguliers réalisés sur un anneau quelconque,\\ note de lecture}
+\author{Michel Hua}
+\address{Commutator, Paris}
+\email{michel@commutator.io}
+\date{15 novembre 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Cette note accompagne l'article \emph{Regular polytopes realised over arbitrary rings, after Grothendieck's working notes}. Elle en reprend les définitions depuis le début, pour un lecteur qui connaît l'algèbre linéaire mais pas forcément les anneaux ni les polytopes, explique sur des exemples le sens de « réaliser un polytope régulier sur un anneau », puis suit les démonstrations pas à pas. Rien n'y est démontré de neuf ; en cas de désaccord, l'article fait foi.
+\end{abstract}
+
+\section{De quoi parle l'article}
+
+Dans l'\emph{Esquisse d'un programme}, écrite en 1984, Grothendieck décrit un projet de la fin des années 1970 : réaliser les polyèdres réguliers, et plus généralement les cartes et polytopes réguliers, sur un corps quelconque et même sur un anneau de base quelconque, sans longueurs ni angles, par des formules universelles en quelques paramètres, les « doubles des cosinus des angles fondamentaux ». Il ajoute que l'icosaèdre spécialisé à un corps fini reste un icosaèdre, et que les caractéristiques $2$ et $5$ sont les plus singulières.
+
+L'université de Montpellier conserve les papiers mathématiques que Grothendieck a laissés à Jean Malgoire et en publie les fac-similés. Quatre cotes contiennent les calculs qui sont derrière ce passage : la cote 70 (les formules universelles et l'icosaèdre sur $\Z[\alpha]$), la cote 72, datée de 1978 par l'inventaire (les réalisations par pseudo-réflexions sur une base), la cote 78, datée de 1977 (les polygones réguliers sur un anneau), et la cote 86 (l'icosaèdre comme objet combinatoire).
+
+L'article énonce et démontre les principaux résultats de ces cotes, avec une règle d'attribution qu'il faut avoir en tête : un énoncé est attribué à Grothendieck, avec la page, quand la page l'énonce ; sinon il est dit \emph{d'après} la page (« after »), sous une forme que l'édition a complétée ou corrigée, et chaque changement est décrit. Quatre énoncés sont ainsi attribués à Grothendieck : le critère de fermeture des polygones (cote 78), la liste des sous-espaces invariants (cote 72), la quadrique circonscrite (cote 70) et les trièdres distingués (cote 86). Les démonstrations sont celles de l'article, sauf quand il dit suivre la page, et tous les résultats sont formalisés en Lean~4 avec Mathlib. L'article se compare à la littérature sans revendiquer de priorité.
+
+\section{Polytopes réguliers : drapeaux et réflexions}
+
+\subsection{Le polygone et ses drapeaux}
+
+Un polygone régulier à $p$ côtés a $p$ sommets et $p$ arêtes. Un \emph{drapeau} est un couple formé d'un sommet et d'une arête qui le contient ; il y en a $2p$. Le groupe des symétries du polygone, le groupe diédral, a lui aussi $2p$ éléments, et il agit sur les drapeaux de façon simplement transitive : une symétrie est déterminée par l'image d'un drapeau de base, et tout drapeau est une image.
+
+Deux symétries jouent un rôle à part (figure~\ref{fig:drapeau}, à gauche). La réflexion $\sigma_0$ garde l'arête du drapeau et échange ses deux extrémités ; la réflexion $\sigma_1$ garde le sommet et échange les deux arêtes qui en partent. Elles engendrent tout le groupe, et leur produit $\sigma_0\sigma_1$ est la rotation d'angle $2\pi/p$, d'ordre $p$.
+
+\subsection{En dimension supérieure}
+
+Dans l'espace, un drapeau d'un polyèdre est un triplet emboîté (sommet, arête, face). Le symbole de Schläfli $\{p, q\}$ dit que les faces sont des $p$-gones et que $q$ d'entre elles se rencontrent en chaque sommet : tétraèdre $\{3,3\}$, cube $\{4,3\}$, octaèdre $\{3,4\}$, dodécaèdre $\{5,3\}$, icosaèdre $\{3,5\}$. Il y a trois réflexions : $\sigma_i$ change la seule pièce de rang $i$ du drapeau et garde les autres. Les réflexions non consécutives commutent, et $\sigma_0\sigma_1$, $\sigma_1\sigma_2$ sont des rotations d'ordres $p$ et $q$. En dimension quelconque, $\{p_1, \dots, p_n\}$ a $n+1$ réflexions $\sigma_0, \dots, \sigma_n$, et $\sigma_k\sigma_{k+1}$ est d'ordre $p_{k+1}$.
+
+L'article travaille dans le \emph{repère des sommets}. Partant d'un sommet $s_0$, on pose $s_{i+1} = \sigma_i s_i$. Pour le polygone, $s_1$ est le voisin de $s_0$ sur l'arête du drapeau et $s_2$ son autre voisin. Pour l'icosaèdre, $s_1$ et $s_2$ sont deux voisins de $s_0$ formant avec lui la face du drapeau, et $s_3 = \sigma_2 s_2$ est le sommet de la face voisine de l'autre côté de l'arête $\{s_0, s_1\}$ (figure~\ref{fig:drapeau}, à droite). En dimension $n+1$, les $n+2$ points $s_0, \dots, s_{n+1}$ forment un repère affine : tout point s'écrit de façon unique $t_0s_0 + \dots + t_{n+1}s_{n+1}$ avec $t_0 + \dots + t_{n+1} = 1$. Ce sont les \emph{coordonnées barycentriques}.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.15, every node/.style={font=\small}]
+\foreach \k in {0,...,4} \coordinate (P\k) at ({90+72*\k}:1);
+\fill[black!8] (P0)--(P1)--(P2)--(P3)--(P4)--cycle;
+\draw[black!55] (P0)--(P1)--(P2)--(P3)--(P4)--cycle;
+\draw[line width=1.8pt] (P0)--(P1);
+\fill (P0) circle (2.2pt);
+\draw[densely dashed, black!60] (126:1.35) -- (-54:0.55) node[below right=-1pt] {$\sigma_0$};
+\draw[densely dashed, black!60] (90:1.35) -- (-90:0.55) node[below=-1pt] {$\sigma_1$};
+\foreach \k in {1,...,4} \fill (P\k) circle (1.2pt);
+\node[above right] at (P0) {$s_0$};
+\node[left] at (P1) {$s_1$};
+\node[right] at (P4) {$s_2$};
+\node at (-0.45,-0.35) {face};
+\end{tikzpicture}\hspace{1.5cm}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+\coordinate (s0) at (0,0);
+\coordinate (s1) at (90:1.3); \coordinate (s2) at (162:1.3); \coordinate (s3) at (18:1.3);
+\coordinate (a) at (234:1.3); \coordinate (b) at (306:1.3);
+\fill[black!12] (s0)--(s1)--(s2)--cycle;
+\draw[black!55] (s1)--(s2)--(a)--(b)--(s3)--cycle;
+\foreach \p in {s1,s2,s3,a,b} \draw[black!55] (s0)--(\p);
+\draw[line width=1.8pt] (s0)--(s1);
+\fill (s0) circle (2.2pt);
+\foreach \p in {s1,s2,s3,a,b} \fill (\p) circle (1.3pt);
+\node[below=3pt] at (s0) {$s_0$}; \node[above] at (s1) {$s_1$};
+\node[left] at (s2) {$s_2$}; \node[right] at (s3) {$s_3$};
+\end{tikzpicture}
+\caption{À gauche, un drapeau du pentagone régulier : le sommet $s_0$ (gros point) et l'arête $\{s_0, s_1\}$ (trait épais). La réflexion $\sigma_0$, d'axe la médiatrice de l'arête, envoie $s_0$ sur $s_1$ ; la réflexion $\sigma_1$, d'axe la droite qui joint $s_0$ au centre, fixe $s_0$ et envoie $s_1$ sur $s_2$, l'autre voisin de $s_0$. À droite, l'étoile d'un sommet $s_0$ de l'icosaèdre, dont les cinq voisins forment un pentagone ; le drapeau est formé de $s_0$, de l'arête $\{s_0, s_1\}$ (trait épais) et de la face $\{s_0, s_1, s_2\}$ (en gris). La réflexion $\sigma_2$ fixe $s_0$ et $s_1$ et envoie $s_2$ sur $s_3$, troisième sommet de l'autre face qui borde $\{s_0, s_1\}$.}\label{fig:drapeau}
+\end{figure}
+
+L'icosaèdre a $12$ sommets, $30$ arêtes, $20$ faces et $20 \times 3 \times 2 = 120$ drapeaux ; son groupe de symétries, réflexions comprises, a $120$ éléments.
+
+\section{Anneaux, et réalisations sur un anneau}
+
+Un anneau commutatif est un ensemble muni d'une addition et d'une multiplication qui obéissent aux règles habituelles, sans qu'on puisse forcément diviser. Les exemples à garder en tête sont les entiers $\Z$, où l'on ne divise pas par $2$ ; les entiers modulo $m$, $\Z/m$, qui forment le corps fini $\F_p$ quand $m = p$ est premier et, pour $m = 6$, contiennent des \emph{diviseurs de zéro} ($2 \cdot 3 = 0$ sans que $2$ ni $3$ soit nul) ; l'anneau $\Z[\alpha] = \Z[x]/(x^2 + x - 1)$ des $a + b\alpha$, $a, b$ entiers, avec la règle $\alpha^2 = 1 - \alpha$ (dans $\R$, on peut prendre $\alpha = (\sqrt5 - 1)/2 = 2\cos(2\pi/5)$) ; les nombres duaux $k[\varepsilon]$, avec $\varepsilon^2 = 0$, qui codent un calcul au premier ordre. Un élément est une \emph{unité} s'il est inversible : dans $\Z[\alpha]$, $1 + \alpha$, $2 + \alpha$ ou $13\alpha + 21$ sont des unités, et l'on s'en servira.
+
+La \emph{caractéristique}, au sens de l'article, d'un anneau non nul $k$ est l'entier $p \ge 0$ tel qu'un entier $m$ devient nul dans $k$ exactement quand $p$ divise $m$ : $0$ pour $\Z$ ou $\R$, $5$ pour $\F_5$, $6$ pour $\Z/6$. Aucune primalité n'est demandée.
+
+Sur un anneau quelconque, il n'y a ni longueurs ni angles : il ne reste que la géométrie affine, les combinaisons barycentriques et les \emph{affinités} $x \mapsto Ax + b$ qui les respectent. La cote 78 appelle donc polygone régulier un polygone dont chaque automorphisme combinatoire s'étend, et d'une seule façon, en une affinité du plan. Sur $\R$, ce sont les images affines des polygones réguliers usuels, dits \emph{affinement réguliers}. Réaliser un polytope sur un anneau $R$, c'est écrire des points de $R^{n+1}$ et des affinités $\sigma_i$ qui jouent le rôle des réflexions. Les formules étant polynomiales à coefficients entiers, elles ont un sens sur tout anneau ; reste à savoir quelles propriétés survivent à la spécialisation.
+
+\section{Les polygones réguliers sur un anneau}
+
+\subsection{Le paramètre \texorpdfstring{$\alpha$}{alpha}}
+
+Dans le repère de trois sommets consécutifs, $s_0 = (0,0)$, $s_1 = (1,0)$, $s_{-1} = (0,1)$, les pages 81 à 85 de la cote 78 ramènent un polygone régulier, quand il est \emph{propre}, à un seul paramètre $\alpha$, son invariant numérique, et la rotation s'écrit
+\[
+u_\alpha(x, y) = (1 - y + \alpha x,\ x).
+\]
+C'est une bijection de $k^2$, d'inverse $(x, y) \mapsto (y, 1 - x + \alpha y)$. Les sommets sont $s_n = u_\alpha^n(0,0)$ pour $n \in \Z$. La partie linéaire de $u_\alpha$ a pour matrice $\begin{psmallmatrix} \alpha & -1 \\ 1 & 0 \end{psmallmatrix}$ : trace $\alpha$, déterminant $1$. Sur $\R$, une telle matrice est conjuguée à la rotation d'angle $\theta$ quand $\alpha = 2\cos\theta$. Le paramètre est donc le double du cosinus de l'angle de rotation, ce que l'article relie, en dimension quelconque, aux « doubles des cosinus » de l'\emph{Esquisse}.
+
+\begin{exemple}
+Pour $\alpha = -1, 0, (\sqrt5-1)/2, 1$, on trouve sur $\R$ le triangle, le carré, le pentagone et l'hexagone de la figure~\ref{fig:polygones}. Sur un corps fini, les formules ne changent pas : sur $\F_{11}$, $\alpha = 7$ vérifie $\alpha^2 + \alpha - 1 = 55 = 0$, et l'on trouve le pentagone $(0,0), (1,0), (8,1), (1,8), (0,1)$, qui se referme au cinquième pas.
+\end{exemple}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.05, every node/.style={font=\small}]
+\begin{scope}
+\draw[black!55, fill=black!6] (0,0)--(1,0)--(0,1)--cycle;
+\foreach \p in {(0,0),(1,0),(0,1)} \fill \p circle (1.4pt);
+\node at (0.5,-0.45) {$\alpha = -1$};
+\end{scope}
+\begin{scope}[xshift=2.2cm]
+\draw[black!55, fill=black!6] (0,0)--(1,0)--(1,1)--(0,1)--cycle;
+\foreach \p in {(0,0),(1,0),(1,1),(0,1)} \fill \p circle (1.4pt);
+\node at (0.5,-0.45) {$\alpha = 0$};
+\end{scope}
+\begin{scope}[xshift=4.4cm]
+\draw[black!55, fill=black!6] (0,0)--(1,0)--(1.618,1)--(1,1.618)--(0,1)--cycle;
+\foreach \p in {(0,0),(1,0),(1.618,1),(1,1.618),(0,1)} \fill \p circle (1.4pt);
+\node at (0.8,-0.45) {$\alpha = \frac{\sqrt5-1}{2}$};
+\end{scope}
+\begin{scope}[xshift=7.3cm]
+\draw[black!55, fill=black!6] (0,0)--(1,0)--(2,1)--(2,2)--(1,2)--(0,1)--cycle;
+\foreach \p in {(0,0),(1,0),(2,1),(2,2),(1,2),(0,1)} \fill \p circle (1.4pt);
+\node at (1,-0.45) {$\alpha = 1$};
+\end{scope}
+\begin{scope}[xshift=7.3cm]
+\node[below left=-1pt] at (0,0) {$s_0$}; \node[below right=-1pt] at (1,0) {$s_1$}; \node[left] at (0,1) {$s_{-1}$};
+\end{scope}
+\end{tikzpicture}
+\caption{Les polygones de la rotation $u_\alpha$ sur $\R$, tous dans le même repère $s_0 = (0,0)$, $s_1 = (1,0)$, $s_{-1} = (0,1)$. Ils sont affinement réguliers : images affines des polygones réguliers usuels.}\label{fig:polygones}
+\end{figure}
+
+\subsection{Les polynômes \texorpdfstring{$F_n$}{Fn}}
+
+La question est : pour quels $\alpha$ le polygone se referme-t-il après $n$ pas ? Sur $\R$, la réponse est $\alpha = 2\cos(2\pi j/n)$, mais sur un anneau il faut une formulation polynomiale. On part des polynômes de Tchebychev de seconde espèce renormalisés : $S_0 = 1$, $S_1 = U$, $S_{m+1} = US_m - S_{m-1}$ pour tout $m \in \Z$, de sorte que $S_{-1} = 0$. Sur $\R$, $S_m(2\cos\theta) = \sin((m+1)\theta)/\sin\theta$, d'où l'intuition. Suivant la page 109, on pose
+\[
+F_{2m} = S_{m-1}, \qquad F_{2m+1} = S_m + S_{m-1} \qquad (m \in \Z).
+\]
+Les premiers sont $F_0 = 0$, $F_1 = F_2 = 1$, $F_3 = U + 1$, $F_4 = U$, $F_5 = U^2 + U - 1$, $F_6 = U^2 - 1$, et $F_{-n} = -F_n$. On reconnaît les valeurs de l'exemple : $F_3$ s'annule en $-1$ (triangle), $F_4$ en $0$ (carré), $F_5$ en $(\sqrt5 - 1)/2$ (pentagone), $F_6$ en $1$ (hexagone, et aussi en $-1$, puisque le triangle parcouru deux fois revient au départ en six pas).
+
+Le lien avec les racines de l'unité est le suivant : pour $t$ inversible d'inverse $t'$ et $m \ge 0$,
+\[
+F_{2m+2}(t + t')(t^2 - 1)t^m = t^{2m+2} - 1, \qquad F_{2m+1}(t + t')(t - 1)t^m = t^{2m+1} - 1,
+\]
+par récurrence à partir de $F_{n+4} = UF_{n+2} - F_n$. Ainsi $F_n(t + t^{-1})$ est, à une puissance de $t$ près, le quotient de $t^n - 1$ par $t^2 - 1$ si $n$ est pair, par $t - 1$ si $n$ est impair.
+
+\subsection{Le critère de fermeture}
+
+\begin{theoreme}[article, théorème 2.1 ; Grothendieck, cote 78, p.~109--113]\label{thm:fermeture}
+Soit $k$ un anneau commutatif et $\alpha \in k$.
+\begin{enumerate}
+\item Pour tout $n \in \Z$, dans $\Z[U]$, on a $F_nF_{n+1} - UF_{n-1}F_n + F_{n-2}F_{n-1} = 1$ ; de façon équivalente $A_nF_{n-1} + F_nF_{n+1} = 1$ avec $A_n = F_{n-2} - UF_n$. En particulier $F_{n-1}$ et $F_{n+1}$ sont premiers entre eux.
+\item Pour tout $n$ et tout $(x, y)$, en notant $X_n = (F_nF_{n+1})(\alpha)$,
+\[
+u_\alpha^n(x, y) = (1 - x - y)\,s_n + x\,s_{n+1} + y\,s_{n-1}, \qquad s_n = (X_n, X_{n-1}).
+\]
+\item Pour tout $n$, sont équivalents : (a) $u_\alpha^n = \id$ ; (b) $s_n = s_0$ ; (c) $u_\alpha^n$ fixe un sommet $s_i$ ; (d) $F_n(\alpha) = 0$.
+\end{enumerate}
+\end{theoreme}
+
+\emph{Le point (1)} est une identité de Bézout. Pour $n = 2m$, les quatre polynômes sont alors $S_{m-1}$, $S_m + S_{m-1}$, $S_{m-1} + S_{m-2}$ et $S_{m-2}$ ; en remplaçant $S_m$ par $US_{m-1} - S_{m-2}$, le membre de gauche devient $Q_{m-1}$, où
+\[
+Q_m = S_m^2 - US_mS_{m-1} + S_{m-1}^2.
+\]
+Le cas impair donne de même $Q_m$. Enfin $Q_{m+1} = S_{m+1}(S_{m+1} - US_m) + S_m^2 = S_m^2 - S_{m+1}S_{m-1} = Q_m$ et $Q_0 = 1$ : c'est l'identité de Cassini des $S_m$, analogue à celle des nombres de Fibonacci.
+
+\emph{Le point (2)} donne une formule close pour les puissances de la rotation. L'identité (1) au rang $n+1$, évaluée en $\alpha$, s'écrit $X_{n+1} = \alpha X_n - X_{n-1} + 1$, autrement dit $u_\alpha(X_n, X_{n-1}) = (X_{n+1}, X_n)$. Si $V_n(x, y)$ désigne le membre de droite de (2), on a $V_0 = \id$, puisque $X_0 = X_{-1} = 0$ et $X_1 = X_{-2} = 1$, et $u_\alpha \circ V_n = V_{n+1}$, parce que les poids $1 - x - y$, $x$, $y$ ont pour somme $1$ et que chaque $1 - X_{j-1} + \alpha X_j$ vaut $X_{j+1}$. On conclut par récurrence dans les deux sens, $u_\alpha$ étant bijective.
+
+\emph{Le point (3)} est le critère. Le sens (a)$\Rightarrow$(b) est clair. Pour (d)$\Rightarrow$(a) : si $F_n(\alpha) = 0$, alors $X_n = X_{n-1} = 0$, donc $X_{n+1} = X_{n-2} = 1$ par (1), et (2) donne $u_\alpha^n = \id$. Pour (b)$\Rightarrow$(d), qui est le sens délicat : $s_n = s_0$ dit que les produits $(F_nF_{n+1})(\alpha)$ et $(F_{n-1}F_n)(\alpha)$ sont nuls, et non que $F_n(\alpha)$ l'est. Sur un anneau avec diviseurs de zéro, on ne peut pas simplifier. On multiplie alors l'identité de (1), évaluée en $\alpha$, par $F_n(\alpha)$ :
+\[
+F_n(\alpha) = F_n(\alpha)\,(F_nF_{n+1})(\alpha) + \bigl(F_{n-2}(\alpha) - \alpha F_n(\alpha)\bigr)(F_{n-1}F_n)(\alpha) = 0.
+\]
+Enfin (b)$\Leftrightarrow$(c) vient de $u_\alpha^n(s_i) = u_\alpha^i(s_n)$ et de l'injectivité de $u_\alpha^i$.
+
+Le critère vaut donc sur tout anneau commutatif, diviseurs de zéro compris : la réciproque n'utilise que la relation de Bézout, aucune factorisation. L'article signale deux erreurs de la page : le premier coefficient de Bézout y est écrit $F_{n-2} - UF_{n-1}$, formule fausse dès $n = 4$ (on obtient $1 - U - U^2$ au lieu de $1$), le bon étant $A_n$ ; et la page 112 conclut « $F_n(\alpha) = 1$ » là où il faut lire $F_n(\alpha) = 0$.
+
+Une affinité de $k^2$ est déterminée par ses valeurs en $s_0$, $s_1$, $s_{-1}$ : un automorphisme combinatoire s'étend donc d'au plus une façon, et avec $\sigma_1 u_\alpha \sigma_1 = u_\alpha^{-1}$, où $\sigma_1(x,y) = (y,x)$, le groupe diédral agit sur les sommets. La fonction quadratique $f_\alpha(x,y) = x^2 - x + y^2 - y - \alpha xy$ de la page 96 est invariante par $u_\alpha$ et s'annule en chaque sommet : c'est la conique circonscrite.
+
+Dans la littérature, l'article situe ainsi le critère. Sur un corps, Bachmann et Schmidt ont donné un critère du même genre pour le système circulaire linéaire $v_{i-1} + cv_i + v_{i+1} = 0$ ($i$ modulo $n$), tel que le rappellent Korchmáros et Sz\H{o}nyi : il a une solution non triviale si et seulement si $c = \pm2$ ou $x^2 - cx + 1$ divise $x^n - 1$. Fisher et Jamison relient les diagonales des polygones affinement réguliers sur un corps aux polynômes de Tchebychev de seconde espèce. En termes de la suite de Lucas $U_m = U_m(\alpha, 1)$, on a $F_{2m}(\alpha) = U_m$ et $F_{2m+1}(\alpha) = U_{m+1} + U_m$.
+
+\subsection{Les polygones sur deux droites parallèles}
+
+En caractéristique $p$, les pages 84--85 et 94--99 décrivent deux polygones dont les sommets sont alternativement sur deux droites parallèles. Le premier est celui d'invariant $\alpha = -2$ ; sur $\R$, la partie linéaire de $u_{-2}$, de polynôme caractéristique $(t+1)^2$, n'est plus une rotation, et le polygone ne se referme pas : il s'étale le long de deux droites. Le second est le polygone \emph{impropre}, de rotation $v(x,y) = (1 - y, -x)$, dont on pose $t_n = v^n(0,0)$.
+
+\begin{theoreme}[article, proposition 2.2 ; d'après la cote 78, p.~84, 85, 94--99]
+Soit $k$ un anneau non nul de caractéristique $p$.
+\begin{enumerate}
+\item Pour $\alpha = -2$, $s_{2m} = (-m, m)$ et $s_{2m+1} = (1+m, -m)$ : les sommets pairs sont sur $x + y = 0$, les impairs sur $x + y = 1$, et $f_{-2} = (x+y)(x+y-1)$.
+\item $u_{-2}^n = \id$ si et seulement si $2p \mid n$, si et seulement si $F_n(-2) = 0$ ; donc $u_{-2}$ est d'ordre $2p$, et $s_n = s_m$ si et seulement si $2p \mid n - m$.
+\item Trois sommets consécutifs ne sont jamais alignés : $\det(s_{n+1} - s_n, s_{n-1} - s_n) = 1$.
+\item Pour le polygone impropre, $v^{2m}$ est la translation de vecteur $m(1,-1)$, $t_{2m} = (m, -m)$, $t_{2m+1} = (m+1, -m)$ ; $v$ est d'ordre $2p$, trois sommets consécutifs ne sont pas alignés, $\sigma_1 v \sigma_1 = v^{-1}$, et la partie linéaire de $v$ est de déterminant $-1$, tandis que celle de $u_{-2}$ est de déterminant $1$.
+\end{enumerate}
+\end{theoreme}
+
+Tout se démontre par récurrence. Pour (1), dans les deux sens, $u_{-2}(-m, m) = (1+m, -m)$ et $u_{-2}(1+m, -m) = (-(m+1), m+1)$. Pour (2), $s_{2m} = (0,0)$ revient à $m = 0$ dans $k$, donc à $p \mid m$ ; et $s_{2m+1} = (0,0)$ forcerait $1 = 0$. Le théorème~\ref{thm:fermeture} donne le reste. Pour (3), si $n = 2m$, les deux vecteurs sont $(1+2m, -2m)$ et $(2m, 1-2m)$, de déterminant $(1 - 4m^2) + 4m^2 = 1$ ; le cas impair est semblable. Pour (4), $v^{2m}(x,y) = (x+m, y-m)$ et $v^{2m+1}(x,y) = (1-y+m, -x-m)$, puis on raisonne comme en (2).
+
+Aucune primalité ni parité de $p$ n'intervient. Pour $p = 2$, $\alpha = -2 = 0$ et l'on retrouve le carré ; pour $p = 0$, les deux rotations sont d'ordre infini et les sommets forment les deux $\infty$-gones « en escalier » de la page 85. Les deux polygones ont les mêmes sommets, $s_{2m+1} = t_{2m+1}$ et $s_{2m} = t_{-2m}$ : le premier zigzague le long des deux droites en sens opposés, le second les monte dans le même sens. Dans les coordonnées $(x - y, x + y)$, les sommets pairs $s_{2m}$ sont les points $(-2m, 0)$ et les impairs $s_{2m+1}$ les points $(2m+1, 1)$ : les deux polygones dessinent deux lignes brisées entre les mêmes points de deux droites horizontales. Pour $p \ge 3$, chaque droite porte $p$ sommets, si bien que trois sommets sont alignés (jamais trois consécutifs) : ces polygones sont dégénérés au sens de Korchmáros et Sz\H{o}nyi. Leur survol, cohérent avec cela, classe sur un corps les polygones non dégénérés, qui sont sur une conique irréductible (ellipses, hyperboles et, en caractéristique $p$, paraboles portant des $p$-gones) ; l'article dit ne pas y avoir trouvé les $2p$-gones sur deux droites. Ici, la conique invariante $f_{-2} = 0$ est la paire de droites.
+
+\section{Les formules universelles en dimension quelconque}
+
+\subsection{Les réflexions}
+
+Les pages 9 à 25 de la cote 70 écrivent toute réalisation affine régulière par réflexions du polytope $\{p_1, \dots, p_n\}$ dans le repère de ses sommets $(s_0, \dots, s_{n+1})$, avec $n$ paramètres $\alpha_0, \dots, \alpha_{n-1}$ dans un anneau commutatif $R$. En coordonnées barycentriques $(t_0, \dots, t_{n+1})$, on pose
+\[
+\ell_i = t_i - t_{i+1} + (1 + \alpha_i)(t_{i+2} + \dots + t_{n+1}), \qquad \sigma_i = \id + \ell_i \otimes (s_{i+1} - s_i) \quad (0 \le i \le n),
+\]
+et $w_i = s_{i+1} - s_i$ ; pour $i = n$, le coefficient $\alpha_n$ n'intervient pas. La notation $\id + \ell \otimes w$ désigne $x \mapsto x + \ell(x)\,w$, qui est une réflexion affine de direction $w$ dès que $\ell(w) = -2$. On lit $\ell_i(s_j) = 0$ pour $j < i$, $\ell_i(s_i) = 1$, $\ell_i(s_{i+1}) = -1$ et $\ell_i(s_j) = 1 + \alpha_i$ pour $j \ge i + 2$ : $\sigma_i$ fixe les sommets d'indice $< i$ et échange $s_i$ et $s_{i+1}$, comme dans un drapeau.
+
+\begin{theoreme}[article, théorème 3.1 ; d'après la cote 70, p.~19, 23--25 et 67]\label{thm:univ}
+Soit $n \ge 1$.
+\begin{enumerate}
+\item Pour tous $\alpha_i$ : $\sigma_i^2 = 1$ ; $\sigma_i\sigma_j = \sigma_j\sigma_i$ pour $i + 2 \le j \le n$ ; $\sigma_i$ préserve $t_0 + \dots + t_{n+1}$ ; $\sigma_is_i = s_{i+1}$, $\sigma_is_j = s_j$ pour $j < i$, et $\sigma_is_j = s_j + (1 + \alpha_i)w_i$ pour $i + 2 \le j \le n+1$.
+\item Pour $k \le n - 1$, l'image de $\sigma_k\sigma_{k+1} - 1$ est contenue dans le plan $W = \langle w_k, w_{k+1}\rangle$, et $(t - 1)(t^2 - \alpha_kt + 1)$ annule $\rho = \sigma_k\sigma_{k+1}$.
+\item Si $R \ne 0$, $\rho$ est d'ordre exactement $3$, $4$ ou $5$ si et seulement si, respectivement, $\alpha_k = -1$, $\alpha_k = 0$, ou $\alpha_k^2 + \alpha_k - 1 = 0$.
+\end{enumerate}
+\end{theoreme}
+
+\emph{Point (1).} Comme $\ell_i(w_i) = -1 - 1 = -2$, on a $\ell_i(\sigma_ix) = \ell_i(x) - 2\ell_i(x) = -\ell_i(x)$, d'où $\sigma_i^2 = 1$. Pour $i + 2 \le j \le n$, $\ell_i(w_j) = 0 = \ell_j(w_i)$, si bien que les deux produits valent $x \mapsto x + \ell_i(x)w_i + \ell_j(x)w_j$. Le reste se lit sur les valeurs $\ell_i(s_j)$ ci-dessus.
+
+\emph{Point (2).} On calcule $\rho$ sur $W$. Comme $\ell_{k+1}(w_k) = 1$ et $\ell_k(w_{k+1}) = 2 + \alpha_k$,
+\[
+\rho w_k = (1 + \alpha_k)w_k + w_{k+1}, \qquad \rho w_{k+1} = -(2 + \alpha_k)w_k - w_{k+1}.
+\]
+Sur $W$, $\rho$ a pour trace $\alpha_k$ et pour déterminant $-(1 + \alpha_k) + (2 + \alpha_k) = 1$ ; elle annule donc $t^2 - \alpha_k t + 1$ (Cayley--Hamilton). Comme $\rho - 1$ envoie tout dans $W$, le facteur $t - 1$ achève.
+
+\emph{Point (3).} Pour le sens direct, on écrit $\rho^m x = x + \sum_{j<m}\rho^j(\rho x - x)$ et l'on calcule, sur $W$, à l'aide de $\rho^2 = \alpha_k\rho - 1$ :
+\[
+\sum_{j<3}\rho^j = (1 + \alpha_k)\rho, \quad \sum_{j<4}\rho^j = \alpha_k\bigl((1 + \alpha_k)\rho - 1\bigr), \quad \sum_{j<5}\rho^j = (\alpha_k^2 + \alpha_k - 1)(\alpha_k\rho - 1).
+\]
+Chacune s'annule sous l'hypothèse correspondante, et donne $\rho^m = 1$.
+
+Pour la réciproque, l'article suit l'orbite de $s_k$ dans le sous-espace $\langle s_k, s_{k+1}, s_{k+2}\rangle$, où, avec $\alpha = \alpha_k$,
+\[
+\rho(a,b,c) = \bigl(c - (1+\alpha)b,\ a + (1+\alpha)b,\ b\bigr).
+\]
+Les itérés de $s_k = (1,0,0)$ sont $(0,1,0)$, $(-1-\alpha, 1+\alpha, 1)$, $(-2\alpha - \alpha^2, \alpha + \alpha^2, 1 + \alpha)$, puis des vecteurs dont les deux dernières coordonnées sont $(\alpha^3 + \alpha^2 - \alpha, \alpha + \alpha^2)$ et $\bigl((\alpha^2 - 1)P, \alpha P\bigr)$, avec $P = \alpha^2 + \alpha - 1$. On lit alors : $\rho^3s_k = s_k$ force $1 + \alpha = 0$ (troisième coordonnée) ; $\rho^4s_k = s_k$ force $\alpha + \alpha^2 = 0 = \alpha^3 + \alpha^2 - \alpha$, donc $\alpha = \alpha(\alpha + \alpha^2) - (\alpha^3 + \alpha^2 - \alpha) = 0$ ; et $\rho^5s_k = s_k$ force $P = \alpha\cdot\alpha P - (\alpha^2 - 1)P = 0$. Enfin, l'ordre est \emph{exactement} $3$, $4$ ou $5$ : sous chaque hypothèse, les itérés intermédiaires ont une coordonnée égale à $1$ là où $s_k$ a $0$, de sorte que $\rho^m \ne 1$ pour les $m$ plus petits, dès que $R \ne 0$.
+
+Sur $\R$, la partie linéaire de $\rho$ sur le plan $s_k + W$ est conjuguée à la rotation d'angle $2\pi/p$ quand $\alpha_k = 2\cos(2\pi/p)$ : les paramètres sont les doubles des cosinus des angles de rotation, et c'est vraisemblablement, selon l'article, le sens de la formule de l'\emph{Esquisse}. Les solides de Platon sont $(\alpha_0, \alpha_1) = (-1,-1)$ (tétraèdre), $(0,-1)$ (cube), $(-1,0)$ (octaèdre), $(\alpha,-1)$ (dodécaèdre) et $(-1,\alpha)$ (icosaèdre), avec $\alpha^2 + \alpha = 1$ ; l'autre racine de $\alpha^2 + \alpha - 1$ donne les polyèdres étoilés de la page 69.
+
+\subsection{Un ordre \texorpdfstring{$p$}{p} quelconque}
+
+La page 67 énonce pour $n = 2$, sans démonstration, que $\rho^p = \id$ si et seulement si $F_p(\alpha) = 0$. L'article en donne la forme suivante.
+
+\begin{theoreme}[article, théorème 3.2 ; d'après la cote 70, p.~67]
+Soit $n \ge 1$, $k \le n-1$ et $\rho = \sigma_k\sigma_{k+1}$.
+\begin{enumerate}
+\item Si $R \ne 0$, alors pour tout $m \ge 0$, $\rho^m = 1$ si et seulement si $\chi = (t-1)(t^2 - \alpha_kt + 1)$ divise $t^m - 1$ dans $R[t]$.
+\item Pour $p \ge 3$, soit $\Psi_p \in \Z[x]$ le polynôme minimal de $2\cos(2\pi/p)$, de degré $d$. Alors $x^d\Psi_p(x + x^{-1}) = \Phi_p(x)$, le $p$-ième polynôme cyclotomique, et $2d = \varphi(p)$.
+\item Si $R = K$ est un corps de caractéristique $0$ et $p \ge 3$, alors $\rho$ est d'ordre exactement $p$ si et seulement si $\Psi_p(\alpha_k) = 0$.
+\end{enumerate}
+\end{theoreme}
+
+Pour (1), $\chi(\rho) = 0$ par le théorème~\ref{thm:univ}(2). Réciproquement, si $\rho^m = 1$, on divise $t^m - 1$ par $\chi$, unitaire (la division euclidienne par un polynôme unitaire marche sur tout anneau) ; le reste $r = r_0 + r_1t + r_2t^2$ vérifie $r(\rho)s_k = r_0s_k + r_1s_{k+1} + r_2\bigl(s_{k+2} + (1+\alpha_k)w_k\bigr) = 0$, d'où $r_2 = r_1 = r_0 = 0$ : le vecteur $s_k$ est \emph{cyclique}. Pour (2), $T = x^d\Psi_p(x + x^{-1})$ est entier, de degré au plus $2d$ et de terme constant $1$, et s'annule en $\zeta = e^{2i\pi/p}$, donc $\Phi_p$ divise $T$ ; or $\deg\Phi_p = [\Q(\zeta):\Q(\cos(2\pi/p))]\,d \ge 2d$, car $\Q(\cos(2\pi/p))$ est réel et $\zeta$ ne l'est pas, d'où $T = \Phi_p$ en comparant les termes constants. Pour (3), on écrit $\alpha_k = \zeta + \zeta^{-1}$ avec $\zeta$ racine de $t^2 - \alpha_kt + 1$ dans une clôture algébrique. En caractéristique $0$, $t^m - 1$ est à racines simples, donc par (1) $\rho^m = 1$ si et seulement si $\zeta^m = 1$ et $\zeta^2 \ne 1$ (les racines $1$, $\zeta$, $\zeta^{-1}$ de $\chi$ doivent être distinctes) ; $\rho$ est donc d'ordre $p$ si et seulement si $\zeta$ est racine primitive $p$-ième de l'unité, si et seulement si $\Psi_p(\alpha_k) = 0$ par (2).
+
+Pour $p = 3, 4, 5$, on a $\Psi_p = x + 1$, $x$, $x^2 + x - 1$, et le théorème~\ref{thm:univ}(3) dit la même chose sur tout anneau non nul. En caractéristique positive, l'article ne démontre pas le critère pour $p$ quelconque.
+
+\section{Réalisations épinglées par pseudo-réflexions}
+
+\subsection{Pseudo-réflexions}
+
+La cote 72 généralise dans deux directions : on travaille sur un module $E$ sur un anneau commutatif $k$ (un « espace vectoriel » dont les scalaires sont dans un anneau), et on remplace les réflexions par des \emph{pseudo-réflexions}
+\[
+\tau_i = \id + a'_i \otimes a_i \qquad (0 \le i \le n),
+\]
+c'est-à-dire $x \mapsto x + \langle x, a'_i\rangle a_i$, avec $a_i \in E$ et $a'_i \in E^\vee$ une forme linéaire. Une telle application fixe l'hyperplan $\ker a'_i$ et multiplie $a_i$ par $\lambda_i = 1 + \langle a_i, a'_i\rangle$. Une réflexion est le cas $\lambda_i = -1$ ; ici $\lambda_i$ est quelconque. On demande que les $\tau_i$ non consécutives commutent, et l'on se donne un vecteur de départ $s_0$, avec $s_{i+1} = \tau_is_i$ et
+\[
+\nu_i = \langle s_0, a'_0\rangle\langle a_0, a'_1\rangle\cdots\langle a_{i-1}, a'_i\rangle.
+\]
+
+Sur un anneau, une famille est dite \emph{libre} au sens fort de la page 103 lorsqu'elle est indépendante et engendre un facteur direct. Sur $\Z$, la famille $(1,0), (1,2)$ est indépendante mais engendre un sous-réseau d'indice $2$, qui n'est pas facteur direct. Les pages 96 à 100 et 103 comparent deux jeux de conditions, l'un sur les sommets, l'autre sur les données linéaires :
+\begin{itemize}
+\item[(A)] les $\tau_i$ non consécutives commutent, $\tau_is_0 = s_0$ pour $1 \le i \le n$, et $(s_0, \dots, s_{n+1})$ est libre ;
+\item[(B)] $\langle a_i, a'_j\rangle = 0$ pour $|i - j| \ge 2$, $\langle s_0, a'_i\rangle = 0$ pour $1 \le i \le n$, $(s_0, a_0, \dots, a_n)$ est libre, et $\nu_n$ est inversible.
+\end{itemize}
+
+\begin{theoreme}[article, théorème 4.1 ; d'après la cote 72, p.~96--100 et 103]
+Sur tout anneau commutatif $k$ et pour tout $k$-module $E$, (A) et (B) sont équivalentes. Pour l'indépendance seule, (A) n'entraîne pas l'inversibilité de $\nu_n$ : sur $\Z$, avec $n = 0$, $s_0 = e_0$, $a_0 = e_1$, $a'_0 = 2e_0^*$, la famille $(s_0, s_1) = (e_0, e_0 + 2e_1)$ est indépendante et $\nu_0 = 2$. Si $(s_0, \dots, s_{n+1})$ est une base de $E$, alors $E$ est libre.
+\end{theoreme}
+
+Le contre-exemple est le réseau d'indice $2$ ci-dessus. Esquisse de l'article : on se ramène au sous-module $N$ engendré par la famille. Sous (A), $s_{i+1} - s_i = \langle s_i, a'_i\rangle a_i$, et la coordonnée sur $s_{i+1}$ de la projection sur $N$ montre que $\langle s_i, a'_i\rangle$ est inversible ; donc $a_i \in N$, et la commutation de $\tau_i$ et $\tau_j$ devient $\langle a_i, a'_j\rangle = 0$. Sous (B), $\langle s_i, a'_i\rangle = \nu_i$ par récurrence. Dans les deux sens, la matrice de passage entre $(s_0, \dots, s_{n+1})$ et $(s_0, a_0, \dots, a_n)$ est triangulaire à diagonale inversible.
+
+\subsection{Classification}
+
+Une réalisation qui satisfait (B), avec $E$ libre de rang $n+2$, est dite \emph{épinglée} ; elle est \emph{normalisée} quand $\langle s_0, a'_0\rangle = 1$ et $\langle a_{i-1}, a'_i\rangle = 1$. Ses invariants sont
+\[
+\mu_i = \langle a_i, a'_i\rangle = \lambda_i - 1, \qquad \beta_i = \langle a_{i+1}, a'_i\rangle,
+\]
+de sorte que $\tau_ia_i = \lambda_ia_i$ et $\tau_ia_{i+1} = a_{i+1} + \beta_ia_i$. Dans la base $(s_0, a_0, \dots, a_n)$, tout est donc écrit par une matrice presque triangulaire dont les seules entrées libres sont les $\mu_i$ et les $\beta_i$.
+
+\begin{theoreme}[article, théorème 4.2 ; d'après la cote 72, p.~13 et 91--100]
+Une réalisation épinglée normalisée est isomorphe, par un unique isomorphisme qui envoie $s_0$ sur $e_0$ et conjugue les $\tau_i$, à la réalisation en coordonnées sur $k^{n+2}$ de base $(s_0, a_0, \dots, a_n)$ et de paramètres $(\mu_i, \beta_i)$. La réalisation en coordonnées satisfait (B) pour tous les paramètres, et $\tau_i$ est inversible si et seulement si $\lambda_i$ l'est. Une application linéaire entre deux réalisations normalisées, compatible avec $s_0$ et les $\tau_i$, force l'égalité de leurs paramètres. Les réalisations épinglées non dégénérées sur un module libre de rang $n+2$ sont donc classées, rigidement, par les $2n+1$ paramètres $(\lambda_0, \beta_0, \lambda_1, \dots, \beta_{n-1}, \lambda_n)$, avec $\lambda_i \in k^\times$ et $\beta_i \in k$.
+\end{theoreme}
+
+L'article situe ce résultat ainsi. Sur $\R$, pour un groupe de Coxeter engendré par des réflexions, les réflexions ne déterminent leur matrice de Cartan qu'à conjugaison près par une matrice diagonale (Danciger, Guéritaud, Kassel, Lee et Marquis) ; Monson et Schulte réduisent la représentation sur le réseau des racines d'un groupe de Coxeter cristallographique modulo un premier impair. Ici, l'anneau est quelconque, la valeur propre $\lambda_i$ aussi, et le vecteur de départ $s_0$ supprime l'ambiguïté diagonale. Le compte $2n+1$ s'accorde avec les $n + (n+1)$ variables qu'une note de l'\emph{Esquisse} annonce pour le pseudo-polyèdre universel.
+
+\subsection{Automorphismes}
+
+On cherche maintenant les applications linéaires inversibles qui commutent avec toutes les $\tau_i$. Dans la base $(s_0, a_0, \dots, a_n)$, notons $\pi$ la première coordonnée et $\tilde c$ l'unique vecteur annulé par toutes les formes $a'_i$ et dont la coordonnée sur $a_n$ vaut $1$ ; on l'obtient par substitution remontante, car le système est triangulaire. On pose $\rho = \pi(\tilde c)$. Attention : ce $\rho$ est un scalaire, sans rapport avec la rotation de la section précédente.
+
+\begin{exemple}
+Pour $n = 1$, les formes sont $a'_0 = (1, \mu_0, \beta_0)$ et $a'_1 = (0, 1, \mu_1)$ dans la base $(s_0, a_0, a_1)$. Le vecteur $\tilde c = (x, y, 1)$ doit vérifier $y + \mu_1 = 0$ et $x + \mu_0y + \beta_0 = 0$, d'où $\tilde c = (\mu_0\mu_1 - \beta_0, -\mu_1, 1)$ et $\rho = \mu_0\mu_1 - \beta_0$. Pour des réflexions, $\mu_0 = \mu_1 = -2$ et $\rho = 4 - \beta_0$, comme à la page 41.
+\end{exemple}
+
+La page 37 introduit le groupe $\mathcal U_\rho = \operatorname{Spec}\mathcal O_S[T]_{(1+\rho T)}$, de loi $\lambda * \lambda' = \lambda + \lambda' + \rho\lambda\lambda'$, qui agit par $u_\lambda = \id + \lambda\,\pi\otimes\tilde c$ ; le théorème de la page 38 affirme sans démonstration que $\mathbb G_m \times \mathcal U_\rho \to \operatorname{Aut}(E, (\tau_i))$ est un isomorphisme. Sans schémas : $\mathbb G_m$ est le groupe des unités, $\mathbb G_a$ le groupe additif, et $\mathcal U_\rho(k)$ l'ensemble des $\lambda$ tels que $1 + \rho\lambda$ soit inversible, muni de $*$. Comme $(1 + \rho\lambda)(1 + \rho\lambda') = 1 + \rho(\lambda * \lambda')$, la loi $*$ est la multiplication vue à travers $\lambda \mapsto 1 + \rho\lambda$ : le groupe multiplicatif déguisé si $\rho$ est inversible, le groupe additif si $\rho = 0$.
+
+\begin{theoreme}[article, théorème 4.3 ; d'après la cote 72, p.~37--38, sur les points]
+Les $\lambda \in k$ tels que $1 + \rho\lambda$ soit inversible forment un groupe commutatif $\mathcal U_\rho(k)$ ; $\lambda \mapsto 1 + \rho\lambda$ est surjectif sur les unités de toute $k$-algèbre si et seulement si $\rho$ est inversible, et $\mathcal U_0 = \mathbb G_a$. On a $u_\lambda u_{\lambda'} = u_{\lambda*\lambda'}$ et $\det u_\lambda = 1 + \rho\lambda$. Un endomorphisme de $E$ commute avec toutes les $\tau_i$ si et seulement s'il est de la forme $c + t\,\pi\otimes\tilde c$ pour un unique couple $(c, t)$, et il est inversible si et seulement si $c$ et $c + t\rho$ le sont. D'où $k^\times \times \mathcal U_\rho(k) \cong \operatorname{Aut}(E, (\tau_i))$, $(c, \lambda) \mapsto c\,u_\lambda$. Les vecteurs de départ sur la droite $D_0 = \bigcap_{i \ge 1}\ker a'_i$ qui évitent le centre et l'hyperplan $\pi = 0$, normalisés par $\langle s, a'_0\rangle = 1$, sont exactement les $s_0 + \lambda\tilde c = u_\lambda s_0$, chacun pour un seul $\lambda$.
+\end{theoreme}
+
+La composition se vérifie directement : $u_\lambda u_{\lambda'} = \id + (\lambda + \lambda' + \lambda\lambda'\,\pi(\tilde c))\,\pi\otimes\tilde c = u_{\lambda*\lambda'}$. Pour la surjectivité, l'article teste sur les nombres duaux : $1 + \varepsilon = 1 + \rho(a + b\varepsilon)$ exige $\rho b = 1$.
+
+Géométriquement, $D_0$ est un module de rang $2$ qui contient $s_0$ et $\tilde c$, c'est-à-dire une droite projective : la droite des vecteurs de départ. Dans la carte $\langle s, a'_0\rangle = 1$, le centre $\tilde c$ est à l'infini et les vecteurs de départ s'écrivent $s_0 + \lambda\tilde c$. L'élément $u_\mu$ envoie $s_0 + \lambda\tilde c$ sur $s_0 + (\lambda * \mu)\tilde c$. Si $\rho$ est inversible, c'est l'homothétie de rapport $1 + \rho\mu$ centrée au point $\lambda = -1/\rho$, où $\pi$ s'annule. Si $\rho = 0$, c'est la translation de $\mu$.
+
+\subsection{Sous-espaces invariants}
+
+Sur un corps, on pose $h_i = ka_i$, $H_i = \ker a'_i$, $Z'_i = H_0 \cap \dots \cap H_i$, $Z^*_i = \langle h_{i+1}, \dots, h_n\rangle$, et l'on note $C$ l'hyperplan $\pi = 0$.
+
+\begin{theoreme}[article, théorème 4.4 ; Grothendieck, cote 72, p.~79]
+Sur un corps, pour des $\mu_i$ quelconques (caractéristique $2$ comprise), un sous-espace de $E$ est stable par toutes les $\tau_i$ si et seulement si c'est $0$, $E$, la droite $k\tilde c$, l'hyperplan $C$, ou bien $Z'_i$ ou $Z^*_i$ pour un $i < n$ tel que $\beta_i = 0$.
+\end{theoreme}
+
+\begin{theoreme}[article, corollaire 4.5 ; d'après la cote 72, p.~80--82]
+La représentation sur $C$ est irréductible si et seulement si tous les $\beta_i$ sont non nuls et, pour $n \ge 1$, $\rho \ne 0$.
+\end{theoreme}
+
+On intersecte la liste du théorème avec $C$. $E \not\subset C$ puisque $\pi(s_0) = 1$ ; $k\tilde c \subset C$ si et seulement si $\rho = 0$ ; $Z^*_i \subset C$ toujours. Si $\beta_i = 0$ pour un $i < n$, alors $Z^*_i$ est un sous-espace stable de $C$ qui n'est ni $0$ ni $C$ : il contient $h_{i+1}$ mais pas $h_0$, qui est dans $C$. Si $\rho = 0$ et $n \ge 1$, $k\tilde c$ est une droite de $C$ distincte de $C$, car $h_0 \subset C$ n'est pas multiple de $\tilde c$, dont la dernière coordonnée vaut $1$.
+
+L'article relève les variantes de la page : le (d) barré de la page 80 demande $\rho \ne 0$ et tous les $\beta_i \ne 0$ ; le (c) de la page 82 omet $\rho \ne 0$, qui est nécessaire. Pour $i < n$, $Z^*_i \subset Z'_i$ si et seulement si $\beta_i = 0$, c'est-à-dire le « $\in$ » de la marge de la page 79, et non le « $\notin$ » de la page 81.
+
+\section{L'icosaèdre sur \texorpdfstring{$\Z[\alpha]$}{Z[alpha]}}
+
+\subsection{Les formules}
+
+La section VII de la cote 70 écrit l'icosaèdre régulier sur $\Z[\alpha] = \Z[x]/(x^2 + x - 1)$ par trois réflexions, dans le repère $(s_0, s_1 - s_0, s_2 - s_0, s_3 - s_0)$ (p.~74--75). Soit $R$ un anneau commutatif où $\alpha^2 + \alpha - 1 = 0$, et $\alpha' = -1 - \alpha$ l'autre racine. On pose
+\[
+\sigma_0(x,y,z) = \bigl(1 - (x+y+z), y, z\bigr),\quad \sigma_1(x,y,z) = (y + \alpha'z, x - \alpha'z, z),\quad \sigma_2(x,y,z) = (x, z, y),
+\]
+et $\iota(x,y,z) = (\alpha' - x, 1 - \alpha' - y, 1 - \alpha' - z)$, la symétrie centrale. Les douze sommets sont $s_0 = 0$, $s_1 = e_1$, $s_2 = e_2$, $s_3 = e_3$, $s'_3 = (\alpha', -\alpha', 1)$, $s''_3 = (0, -\alpha', 1)$ et leurs images par $\iota$. On reconnaît le schéma de la section précédente : $\sigma_0$ échange $s_0$ et $s_1$, $\sigma_1$ fixe $s_0$ et échange $s_1$ et $s_2$, $\sigma_2$ échange $s_2$ et $s_3$ ; et $\sigma_1(e_3) = (\alpha', -\alpha', 1) = s'_3$.
+
+La métrique est remplacée par une forme quadratique à coefficients dans $\Z[\alpha]$,
+\[
+q_0 = x^2 + y^2 + z^2 - \alpha yz + zx + xy, \qquad q = q_0 - (x + y + z).
+\]
+Sur $\R$, $q_0$ est le carré de la longueur euclidienne lue dans ce repère, les arêtes sont de longueur $1$, et $q = 0$ est la sphère circonscrite. Ainsi $q_0(e_2 - e_1) = 1$ (une arête), mais $q_0(e_3 - e_2) = 2 + \alpha$, le carré du nombre d'or : $s_2$ et $s_3$ ne sont pas voisins (figure~\ref{fig:drapeau}). Les trente arêtes sont les paires de sommets à $q_0$-distance $1$ sur $\Q(\sqrt5)$, les vingt faces les triangles d'arêtes. Sur un anneau, un point $p$ est \emph{sur la droite} $(r, u)$ si $p - r = a(u - r)$ pour un $a \in R$, et \emph{dans le plan} $(r, u, w)$ si $p - r = s(u - r) + t(w - r)$ ; sur un corps, ce sont l'alignement et la coplanarité habituels.
+
+\begin{theoreme}[article, théorème 5.1 ; d'après la cote 70, p.~74--94]\label{thm:fidele}
+Soit $R$ un anneau commutatif non nul où $\alpha^2 + \alpha = 1$.
+\begin{enumerate}
+\item Les $\sigma_i$ permutent les douze sommets, par des permutations de $\{0, \dots, 11\}$ indépendantes de $R$ ; les sommets sont sur $q = 0$, et $q_0(s' - s) = 1$ pour chaque arête $\{s, s'\}$.
+\item Les douze sommets sont distincts ; trois sommets distincts ne sont jamais alignés ; aucun sommet n'est dans le plan d'une face qui ne le contient pas.
+\item Le groupe $G$ engendré par $\sigma_0, \sigma_1, \sigma_2$ est d'ordre $120$ et agit fidèlement sur les sommets.
+\item Si $2 = 0$ dans $R$, $\iota$ est la translation de vecteur $(\alpha', \alpha, \alpha)$.
+\end{enumerate}
+\end{theoreme}
+
+Les points (1) et (4) sont des identités polynomiales modulo $\alpha^2 + \alpha - 1$ ; par exemple $q_0(s'_3) = 1 = x + y + z$ en $s'_3$, grâce à $\alpha\alpha' = -1$ et $\alpha'^2 + \alpha' = 1$.
+
+Le point (2) demande une idée, l'\emph{homogénéité}. Les $\sigma_i$ sont affines, donc un mot en les $\sigma_i$ transporte l'égalité de sommets, l'appartenance d'un sommet à la droite de deux autres et au plan de trois autres, le long de la permutation correspondante. Les pages 93--94 invoquent cette homogénéité et ne traitent que des cas de base ; l'article la rend explicite par deux tables. Pour toute paire ordonnée d'indices distincts, un mot l'envoie sur $(s_0, s_1)$, $(s_0, s''_3)$ ou $(s_0, \iota s_0)$ : voisins, à distance deux, antipodaux. Pour toute face, un mot l'envoie sur $(s_0, s_1, s_2)$. Ces $132 + 20$ faits portent sur des permutations de douze points et se vérifient par calcul. Restent les cas de base. $s_k$ n'est sur la droite $(s_0, s_j)$ que si les trois mineurs $2 \times 2$ de $(s_k, s_j)$ s'annulent ; pour $j \in \{1, 5, 6\}$ et chacun des trente indices $k \ne 0, j$, l'un d'eux est une unité de $\Z[\alpha]$, à savoir $\pm1$, $\pm(1+\alpha)$, $\pm(2+\alpha)$ ou $\pm(3+2\alpha)$, et son annulation donnerait $1 = 0$. Un sommet dans le plan $z = 0$ de la face $(s_0, s_1, s_2)$ aurait une troisième coordonnée nulle, alors que les neuf autres sommets ont pour troisième coordonnée $1$, $2 + \alpha$ ou $1 + \alpha$, toutes inversibles.
+
+L'argument marche sur tout anneau non nul parce qu'au lieu de diviser, on exhibe un élément inversible qui devrait être nul ; une unité de $\Z[\alpha]$ reste une unité dans tout anneau où $\alpha^2 + \alpha = 1$, par exemple $(2 + \alpha)(1 - \alpha) = 1$.
+
+Pour (3), une énumération en largeur donne $120$ mots dans les trois permutations, stables par multiplication à gauche par les générateurs ; et un élément de $G$ est affine et déterminé par les images de $s_0, \dots, s_3$, donc $G$ est isomorphe à son groupe de permutations.
+
+Ji, qui écrit des formules sur $\Z[\cos\theta, \cos\gamma]$ non définies en $2$ et en $5$, montre que le groupe d'automorphismes reste $A_5$ aux autres premiers et note que Grothendieck semble l'affirmer dans tous les cas. Le théorème confirme l'affirmation, pour les incidences, en toute caractéristique, grâce au repère entier de la page. L'article en déduit que la marge « c'est en fait faux en car.~2~! » ne porte ni sur le non-alignement ni sur les plans des faces, et que le vecteur de $\iota$ en caractéristique $2$ est $(\alpha', \alpha, \alpha)$, non le $(\alpha', 1, 1)$ lu à la page 91.
+
+\subsection{La quadrique circonscrite}
+
+\begin{theoreme}[article, théorème 5.2 ; Grothendieck, cote 70, p.~101--106]
+Soit $R$ un anneau commutatif où $\alpha^2 + \alpha = 1$.
+\begin{enumerate}
+\item $q$ est invariante par les $\sigma_i$, et toute fonction quadratique qui s'annule aux neuf sommets $s_0, s_1, s_2, s_3, s'_3, s''_3$, $\iota s_0, \iota s_1, \iota s_2$ est un multiple de $q$.
+\item Le demi-discriminant de $q_0$ vaut $1$.
+\item La quadrique projective $Q = q_0(x,y,z) - (x+y+z)t$ a pour discriminant $-\alpha - 3$, de norme $5$. Ce discriminant est inversible si et seulement si $5$ l'est dans $R$, et alors $0$ est le seul zéro commun des quatre dérivées partielles de $Q$ : $Q$ est lisse.
+\item Si $5 = 0$ et $\alpha = 2$, $Q$ est un cône de sommet le centre $o = (1, 2, 2)$. Sur un corps, $Q$ est singulière si et seulement si la caractéristique est $5$.
+\end{enumerate}
+\end{theoreme}
+
+L'unicité (dix coefficients, neuf équations linéaires) vient d'un mineur $9 \times 9$ égal à $13\alpha + 21$, unité de $\Z[\alpha]$ d'inverse $13\alpha - 8$ ; l'argument vaut sur tout anneau, sans division. Le demi-discriminant $4abc + uvw - au^2 - bv^2 - cw^2$ de $q_0 = ax^2 + by^2 + cz^2 + uyz + vzx + wxy$ vaut $4 - \alpha - \alpha^2 - 1 - 1 = 2 - (\alpha^2 + \alpha) = 1$ : c'est la « merveille » de la page 101, vraie aussi en caractéristique $2$. La matrice polaire $4 \times 4$ de $Q$ a pour déterminant $\alpha^2 - 4 = -\alpha - 3$ ; comme $(-\alpha - 3)(\alpha - 2) = 5$ et $(-\alpha - 3)^2 = 5(\alpha + 2)$, il est inversible si et seulement si $5$ l'est. Les lignes de la matrice polaire sont les dérivées partielles de $Q$, et une matrice carrée de déterminant inversible a un noyau nul. En caractéristique $5$, $\alpha^2 + \alpha - 1 = (\alpha - 2)^2$, et le noyau est engendré par $(1, 2, 2, 1)$, qui est sur $Q$.
+
+\subsection{La réduction modulo 5}
+
+\begin{theoreme}[article, théorème 5.3 ; d'après la cote 70, p.~78]
+Sur $\F_5$, où $\alpha = 2$, on pose $\bar s = s - o$ pour un sommet $s$.
+\begin{enumerate}
+\item Les douze $\bar s$ sont isotropes pour $q_0$, et les vecteurs isotropes non nuls de $q_0$ sont exactement les douze $\bar s$ et leurs doubles $2\bar s$, vingt-quatre vecteurs distincts.
+\item Un point de $\mathbb P^2(\F_5)$ est sur la conique $q_0 = 0$ si et seulement si c'est l'une des six directions de sommets.
+\item Les six directions de sommets, les quinze directions d'arêtes $s' - s$ et les dix directions de faces $\bar a + \bar b + \bar c$ sont les $31 = 5^2 + 5 + 1$ points de $\mathbb P^2(\F_5)$, chacun une fois.
+\item Une direction de face est $q_0$-orthogonale au plan de sa face. Par une direction d'arête passent exactement deux tangentes à la conique, par une direction de face aucune ; $q_0$ prend les valeurs $1$ ou $4$ sur $60$ vecteurs et $2$ ou $3$ sur $40$, de sorte que $125 = 1 + 24 + 60 + 40$.
+\end{enumerate}
+\end{theoreme}
+
+Tout se vérifie par calcul sur les $125$ vecteurs de $\F_5^3$. Le plan $\mathbb P^2(\F_5)$ a $124/4 = 31$ points ; douze sommets antipodaux deux à deux donnent six directions, trente arêtes parallèles deux à deux quinze, vingt faces dix. Ces trois familles remplissent le plan sans répétition, et la conique $q_0 = 0$ les sépare : sommets sur elle, arêtes à l'extérieur (deux tangentes), faces à l'intérieur (aucune).
+
+La page 78 donne la table des directions, le compte $125 = 1 + 24 + 60 + 40$ et la mention « deux icos. » : les vingt-quatre vecteurs isotropes sont les sommets de l'icosaèdre et de son homothétique de rapport $2$. L'action de $\mathfrak A_5 \cong \mathrm{PSL}_2(\F_5)$ sur les six axes comme sur $\mathbb P^1(\F_5)$ est classique ; l'article dit ne pas connaître de source imprimée qui lise la réduction modulo $5$ de l'icosaèdre comme cette conique et ses points extérieurs et intérieurs.
+
+Une note de l'\emph{Esquisse} suggère que les caractéristiques exceptionnelles sont celles où l'hyperquadrique circonscrite est dégénérée ou tangente à l'hyperplan à l'infini. La caractéristique $5$ est le cas dégénéré : la quadrique devient un cône, et l'icosaèdre survit sur ses directions isotropes. En caractéristique $2$, la conique à l'infini reste lisse (demi-discriminant $1$), mais le centre part à l'infini, comme l'\emph{Esquisse} le dit.
+
+\section{L'icosaèdre combinatoire et l'hémi-icosaèdre}
+
+\subsection{Les trièdres distingués}
+
+La cote 86 prend l'icosaèdre comme objet purement combinatoire, sans coordonnées. On numérote ses sommets $0, \dots, 11$, avec $0$ et $11$ opposés, $1, \dots, 5$ et $6, \dots, 10$ les deux pentagones de leurs voisins ; tout se calcule à partir de la table d'adjacence. Pour une face $\{x, y, z\}$, $\mathrm o(x, y, z)$ est le troisième sommet de l'autre face qui borde $\{x, y\}$ : c'est l'opération « traverser l'arête $\{x,y\}$ en partant de $z$ ». L'antipode $\iota x$ est le seul sommet qui n'est ni $x$, ni un voisin de $x$, ni un voisin d'un voisin. Un drapeau est ici un triangle orienté $(s, t, u)$ ; il y en a $120$. Deux arêtes ont la même \emph{direction} si elles sont égales ou antipodales ; trente arêtes donnent ainsi quinze directions.
+
+La page 18 définit, pour une arête $\{s, t\}$ de faces $\{s, t, u\}$ et $\{s, t, v\}$,
+\[
+\rho_0(s, t) = \{\mathrm o(s, u, t), \mathrm o(s, v, t)\},
+\]
+le côté du pentagone autour de $s$ opposé à $t$. Dans la figure~\ref{fig:drapeau}, avec $s = s_0$ et $t = s_1$, les faces sont $\{s_0, s_1, s_2\}$ et $\{s_0, s_1, s_3\}$, et $\rho_0(s_0, s_1)$ est le côté du bas du pentagone, entre les deux sommets non nommés.
+
+\begin{theoreme}[article, théorème 6.1 ; Grothendieck, cote 86, p.~18--25]
+\leavevmode
+\begin{enumerate}
+\item $\rho_0$ induit une permutation bien définie et sans point fixe $\rho$ des quinze directions d'arêtes, avec $\rho^3 = \id$. Ses cinq orbites, les \emph{trièdres distingués}, partagent chacune les douze sommets en six arêtes, et en chaque sommet les cinq arêtes sont dans les cinq trièdres différents.
+\item Le groupe d'automorphismes $G$ de l'icosaèdre est d'ordre $120$, commute avec $\iota$ et $\rho$, et agit sur l'ensemble $T$ des cinq trièdres par un morphisme $G \to \mathfrak S_T$ d'image $\Alt_T$ et de noyau $\{1, \iota\}$.
+\end{enumerate}
+\end{theoreme}
+
+Par exemple, avec la numérotation de l'article, $\{0,1\}$, $\{9,11\}$, $\{3,4\}$, $\{6,7\}$, $\{2,8\}$, $\{5,10\}$ forment un trièdre. En termes euclidiens, les trièdres sont les cinq repères orthogonaux, ou les cinq octaèdres inscrits dans l'icosaèdre ; l'article signale cette identification sans s'en servir.
+
+Un automorphisme commute avec $\mathrm o$, puisque $\mathrm o(x, y, z)$ est le seul voisin commun de $x$ et $y$ autre que $z$, et les douze sommets s'obtiennent à partir de $0, 1, 2$ par neuf applications de $\mathrm o$ ; un automorphisme est donc déterminé par l'image du drapeau $(0, 1, 2)$, et tout drapeau est une telle image. $\iota$ et $\rho$ sont définis par l'adjacence, donc commutent avec $G$. Le reste est un calcul sur les $120$ drapeaux : les permutations induites de $T$ sont paires, il y en a $60$, et seuls $(0,1,2)$ et $(\iota0, \iota1, \iota2)$ donnent l'identité.
+
+La page 23 met dans le même triplet deux arêtes de trièdres différents, ce que la vérification corrige ; là où la page raisonne sur la parité des générateurs et les ordres $6$, $10$, $4$ des images des stabilisateurs, l'article compte les drapeaux.
+
+\subsection{L'hémi-icosaèdre}
+
+L'hémi-icosaèdre $\bar\Pi = \Pi/\iota$ s'obtient en identifiant chaque sommet, arête, face de l'icosaèdre $\Pi$ à son antipode. Il a six sommets, quinze arêtes et dix faces ; son squelette est le graphe complet $K_6$ (deux sommets quelconques sont voisins) et son groupe est $\Alt_5$.
+
+\begin{theoreme}[article, théorème 6.2 ; d'après la cote 86, p.~21, 26--32]
+À un drapeau $(s, t, u)$, avec $v = \mathrm o(s, t, u)$, on associe la numérotation $\nu(s, t, u)\colon \{1, \dots, 5\} \to T$ formée des trièdres des cinq arêtes en $s$, lues autour du pentagone à partir de $t$, en s'éloignant de $u$.
+\begin{enumerate}
+\item Toutes les $\nu(s, t, u)$ ont la même parité ; elles définissent une orientation $\varpi$ de $T$ indépendante de tous les choix. Toute numérotation compatible avec $\varpi$ est un $\nu(s, t, u)$, et $\nu(s, t, u) = \nu(s', t', u')$ si et seulement si les drapeaux sont égaux ou antipodaux. Les $60$ drapeaux de l'hémi-icosaèdre sont ainsi les $60$ numérotations de $T$ compatibles avec $\varpi$.
+\item Changer le sommet, l'arête ou la face d'un drapeau compose $\nu$ à droite par $\tau_0 = (2\,4)(3\,5)$, $\tau_1 = (1\,5)(2\,4)$, $\tau_2 = (2\,5)(3\,4)$.
+\item Deux drapeaux de $\bar\Pi$ ont le même sommet si et seulement si leurs numérotations tracent le même pentagone sur $T$, la même arête si et seulement si elles donnent la même partition $\{a_1\} \sqcup \{a_2, a_3\} \sqcup \{a_4, a_5\}$, et la même face si et seulement si elles donnent le même ensemble à trois éléments $\{a_1, a_3, a_5\}$. On obtient $6$ pentagones, les $15$ partitions de type $(2,2,1)$, et les $10$ parties à trois éléments de $T$.
+\end{enumerate}
+\end{theoreme}
+
+Une \emph{orientation} d'un ensemble à cinq éléments est le choix d'une des deux classes de numérotations modulo les permutations paires. Le théorème reconstruit l'hémi-icosaèdre à partir de cette seule donnée : les sommets sont les six pentagones compatibles avec l'orientation, les arêtes les quinze partitions de type $(2,2,1)$, les faces les dix parties à trois éléments.
+
+Par le théorème précédent, $\nu(g0, g1, g2)$ est la permutation de $T$ induite par $g$, composée avec $\nu(0, 1, 2)$, qui est paire, d'où (1) ; (2) se ramène à trois égalités de permutations, et (3) à une vérification sur les $120$ drapeaux. Les dix symétries du pentagone $1\,2\,3\,4\,5$ sont des permutations paires des places : c'est pourquoi une numérotation trace le pentagone d'un sommet si et seulement si elle est compatible avec $\varpi$. Les pages 31--32 prennent un $\sigma_1$ égal à $\tau_2\tau_1\tau_2$, conjugué de celui de l'article, et obtiennent un ensemble à opérateurs isomorphe.
+
+\section{Vérification et questions ouvertes}
+
+Tous les théorèmes de l'article sont formalisés en Lean~4 avec Mathlib (fichiers \texttt{Folder70}, \texttt{Folder72}, \texttt{Folder78} et \texttt{Folder86} de \texttt{lean/Grothendieck}), avec les seuls axiomes standard ; les énoncés finis (les mots du théorème 5.1, les calculs sur $\F_5$, les $120$ drapeaux) sont vérifiés par le noyau.
+
+Ne sont pas démontrés dans l'article : le passage de la définition d'une réalisation régulière à la forme normale des pages 7--18 de la cote 70 ; le critère d'ordre pour $p$ quelconque en caractéristique positive ; l'identification de $G$ au groupe de Coxeter $H_3 \cong \mathfrak A_5 \times \Z/2$ ; le schéma $\mathcal U_\rho$ et l'énoncé projectif de la cote 72 sur une base ; l'unicité, suggérée dans la lecture de la cote 78, du $2p$-gone impropre parmi les polygones réguliers non unimodulaires.
+
+\section{Petit lexique}
+
+{\small
+\begin{tabular}{@{}p{3.6cm}p{10.2cm}@{}}
+\toprule
+Terme & À retenir ici \\
+\midrule
+drapeau & sommet, arête, face\dots\ emboîtés ; le groupe agit simplement transitivement \\
+caractéristique & l'entier $p \ge 0$ tel que $m = 0$ dans l'anneau si et seulement si $p \mid m$ \\
+affinement régulier & chaque symétrie combinatoire s'étend en une unique affinité \\
+$\alpha$ & invariant du polygone ; sur $\R$, $2\cos$ de l'angle de rotation \\
+$F_n$ & $F_n(\alpha) = 0$ : le polygone se referme en $n$ pas \\
+pseudo-réflexion & $x \mapsto x + \langle x, a'\rangle a$ ; fixe un hyperplan, multiplie $a$ par $\lambda$ \\
+libre (au sens fort) & indépendante et engendrant un facteur direct \\
+épinglée & munie d'un vecteur de départ $s_0$, sur un module libre de rang $n+2$ \\
+$\mathcal U_\rho$ & loi $\lambda + \lambda' + \rho\lambda\lambda'$ ; $\mathbb G_m$ si $\rho$ inversible, $\mathbb G_a$ si $\rho = 0$ \\
+trièdre distingué & cinq classes de trois directions d'arêtes, permutées par $\Alt_5$ \\
+hémi-icosaèdre & l'icosaèdre modulo l'antipodie : $6$ sommets, $15$ arêtes, $10$ faces \\
+\bottomrule
+\end{tabular}}
+
+\section*{Sur la rédaction de cette note}
+
+Note de travail écrite par Claude (Opus~5.5, Anthropic) sous la direction de l'auteur, à partir de \texttt{docs/polytopes/article.tex}. Elle ne contient aucun résultat nouveau ; en cas de désaccord, l'article fait foi.
+
+\end{document}

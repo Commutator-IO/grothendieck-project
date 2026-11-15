@@ -193,6 +193,7 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     what: 'Folders 70, 72, 78 and 86, behind §4 of the Esquisse: regular polygons over a ring and the 2p-gons of characteristic p, the universal formulae in any dimension, pinned realisations by pseudo-reflections over a base, the icosahedron over ℤ[α] faithful in every characteristic and its conic modulo 5, the five trihedra and the hemi-icosahedron.',
     pdf: '/article/grothendieck-polytopes.pdf',
     src: 'docs/polytopes/article.tex',
+    more: [{ label: 'Note de lecture (fr)', href: '/article/grothendieck-polytopes-note-fr.pdf' }],
   },
   {
     id: 'article-moduli',

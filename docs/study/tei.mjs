@@ -842,6 +842,7 @@ copyFileSync(resolve(root, 'docs/qcoh-descent/note-fr.pdf'), resolve(served, 'gr
 copyFileSync(resolve(root, 'docs/problem-three/note-fr.pdf'), resolve(served, 'grothendieck-problem-three-note-fr.pdf'));
 copyFileSync(resolve(root, 'docs/loday-filtration/note-fr.pdf'), resolve(served, 'grothendieck-loday-filtration-note-fr.pdf'));
 copyFileSync(resolve(root, 'docs/moduli/note-fr.pdf'), resolve(served, 'grothendieck-moduli-note-fr.pdf'));
+copyFileSync(resolve(root, 'docs/polytopes/note-fr.pdf'), resolve(served, 'grothendieck-polytopes-note-fr.pdf'));
 copyFileSync(resolve(root, 'docs/effective/article.pdf'), resolve(served, 'grothendieck-effective.pdf'));
 copyFileSync(resolve(root, 'docs/qcoh-descent/article.pdf'), resolve(served, 'grothendieck-qcoh-descent.pdf'));
 copyFileSync(resolve(root, 'docs/problem-three/article.pdf'), resolve(served, 'grothendieck-problem-three.pdf'));
