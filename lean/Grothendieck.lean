@@ -142,3 +142,4 @@ import Grothendieck.IhesSGA6_2_3Euler
 import Grothendieck.Folder94GenericFlatness
 import Grothendieck.Folder128FlatBaseChange
 import Grothendieck.Folder101Ext
+import Grothendieck.Folder101LocalCohomology
