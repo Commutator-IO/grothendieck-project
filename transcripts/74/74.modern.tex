@@ -1322,13 +1322,54 @@ attachés à un hexagone (sommets, côtés, diagonales, triangles inscrits et
 coinscrits, orientations, repères), puis le grand diagramme reliant les
 ensembles de configurations du graphe cubique, avec leurs groupes
 ($\mathfrak{S}_3 \times \mathfrak{S}_2$ pour les repères d'un grand hexagone,
-etc.) ; la transcription les décrit et ne les restitue pas, et l'on fait de
-même. La page 77 note enfin les sous-groupes de $\mathfrak{S}_3 \times
+etc.) ; la transcription les décrit, et l'on ne restitue que le premier,
+redessiné ci-dessous tel qu'elle le lit. La page 77 note enfin les sous-groupes de $\mathfrak{S}_3 \times
 \mathfrak{S}_2$ : trois sous-groupes d'indice 2, trois d'indice 3
 (conjugués), et des sous-groupes d'indice 6 répartis en trois classes,
 dénombrement que la page 80 précise\footnote{Les sous-groupes d'ordre 2 sont
 sept, en trois classes de conjugaison (le centre, et deux classes de trois) ;
 c'est ce que dit la page 80.}.
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,line cap=round,line join=round,
+  >={Stealth[length=1.8mm]}, font=\footnotesize,
+  ob/.style={align=center,inner sep=2pt},
+  deg/.style={font=\scriptsize,inner sep=1.5pt},
+  gap/.style={preaction={draw,white,line width=3pt,-}}]
+% face du haut
+\node[ob] (tau) at (0,0) {$\tau$ = diagonales};
+\node[ob] (rep) at (5.5,0) {rep.\ sym.};
+\node[ob] (som) at (3.2,2.6) {sommets};
+\node[ob] (F) at (8.7,2.6) {sommets orientés $\simeq$\\ côtés $\simeq$ repères};
+\node[ob] (cot) at (4.35,1.3) {côtés};
+% face du bas
+\node[ob] (e) at (0,-5) {$e$};
+\node[ob] (om) at (5.5,-5) {$\omega = \omega(\tau)$\\ orientations};
+\node[ob] (TI) at (2.85,-2.4) {triangles inscrits};
+\node[ob] (eo) at (8.7,-2.4) {$\varepsilon \times \omega$\\ triangles inscrits orientés};
+\node[ob] (ep) at (4.1,-3.75) {$\varepsilon' = \varepsilon \wedge \omega$\\ triangles coinscrits};
+\node[ob] (eps) at (1.8,-1.4) {$\varepsilon$};
+% arêtes arrière et intérieures
+\draw[->] (eo) -- node[deg,above,pos=0.3] {$2$} (TI);
+\draw[->] (F) -- node[deg,above] {$2$} (som);
+\draw[->] (F) -- node[deg,above,pos=0.45] {$2$} (cot);
+\draw[->] (F) -- (rep);
+\draw[->] (F) -- (eo);
+\draw[->] (eo) -- node[deg,above,pos=0.4] {$2$} (ep);
+\draw[->] (eo) -- node[deg,below right] {$2$} (om);
+\draw[->] (som) -- node[deg,above left] {$2$} (tau);
+\draw[->] (TI) -- node[deg,above left] {$2$} (e);
+\draw[->] (cot) -- node[deg,below right,pos=0.25] {$2$} (eps);
+\draw[->] (eps) -- node[deg,left] {$2$} (e);
+\draw[->,gap] (cot) -- (ep);
+% arêtes avant
+\draw[gap] (rep) -- (om);
+\draw[->,gap] (rep) -- node[deg,below,pos=0.3] {$2$} (tau);
+\draw[->] (tau) -- node[deg,left] {$3$} (e);
+\draw[->] (om) -- node[deg,below] {$2$} (e);
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, redessinée d'après le dessin de la page 76 (dessin 74/04-9). Le « cube » des revêtements entre les ensembles attachés à un hexagone : en haut, les repères (« sommets orientés $\simeq$ côtés $\simeq$ repères ») et leurs images, sommets, côtés, « rep.\ sym. » et diagonales $\tau$ ; en bas, $\varepsilon \times \omega$, ses quotients $\varepsilon'$, triangles inscrits, orientations $\omega$, et le point $e$ ; les flèches portent le degré écrit sur la page, quand il l'est. Le coin supérieur gauche est surchargé : la répartition des degrés autour de $\tau$, l'origine des flèches qui partent de l'amas d'étiquettes en haut à droite, et celle de la flèche verticale qui descend vers $\varepsilon'$ sont des lectures ; la page note à part $\varepsilon$ et « triangles inscrits », et la figure les garde séparés.}
 
 \pagerange{78}{80}
 \section*{16. Les polygones de trois à six côtés (pages 78 à 80)}
@@ -1367,6 +1408,54 @@ c'est ce que dit la page 80.}.
   sous-groupes d'ordre 2 (le centre, stabilisateur des points de $H_{p'}$, et
   deux classes de trois, stabilisateurs des sommets et des côtés).
 \end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[x=1.15cm,y=1cm,line cap=round,line join=round,
+  >={Stealth[length=1.8mm]}, font=\small,
+  ob/.style={inner sep=2pt},
+  deg/.style={font=\scriptsize,inner sep=1.5pt},
+  gap/.style={preaction={draw,white,line width=3pt,-}}]
+% le petit hexagone et ses deux triangles inscrits
+\begin{scope}[shift={(-2.1,-2)},x=0.6cm,y=0.6cm]
+\foreach \i in {0,...,5} \coordinate (h\i) at (60*\i:1);
+\draw (h0) -- (h1) -- (h2) -- (h3) -- (h4) -- (h5) -- cycle;
+\draw[densely dotted] (h0) -- (h2) -- (h4) -- cycle;
+\draw[densely dotted] (h1) -- (h3) -- (h5) -- cycle;
+\end{scope}
+% étage du haut
+\node[ob,label={[font=\scriptsize]right:$D_{6}$}] (Hr) at (7.5,0) {$H_{r}$};
+\node[ob] (Hs) at (5.05,1.0) {$H_{s}$};
+\node[ob,label={[font=\scriptsize,inner sep=1pt]above:$\mathfrak{S}_{3}$}] (Hp) at (3.75,0) {$H_{p'}$};
+\node[ob] (Hss) at (2.45,-1.0) {$H_{s^{*}}$};
+\node[ob] (Hd) at (0,0) {$H_{d}$};
+% étage du bas
+\node[ob,label={[font=\scriptsize]right:$\mathbb{F}_{2}^{2}$}] (Htr) at (7.5,-4) {$H_{tr}$};
+\node[ob] (Htrr) at (5.05,-3) {$H_{trr}$};
+\node[ob] (Hw) at (3.75,-4) {$H_{\omega}$};
+\node[ob] (Htrs) at (2.45,-5) {$H_{tr^{*}}$};
+\node[ob] (e) at (0,-4) {$e$};
+% arrière
+\draw[->] (Hr) -- node[deg,above] {$2$} (Hs);
+\draw[->] (Htr) -- node[deg,above] {$2$} (Htrr);
+\draw[->] (Hs) -- node[deg,right,pos=0.3] {$3$} (Htrr);
+\draw[->] (Htrr) -- node[deg,above,pos=0.3] {$2$} (e);
+% milieu
+\draw[->,gap] (Hr) -- node[deg,above,pos=0.3] {$2$} (Hp);
+\draw[->] (Htr) -- (Hw);
+\draw[->,gap] (Hp) -- (Hw);
+\draw[->] (Hp) -- node[deg,above] {$2$} (Hd);
+\draw[->] (Hw) -- node[deg,above,pos=0.35] {$2$} (e);
+% avant
+\draw[->,gap] (Hr) -- node[deg,below,pos=0.2] {$2$} (Hss);
+\draw[->] (Htr) -- (Htrs);
+\draw[->,gap] (Hss) -- node[deg,right,pos=0.55] {$3$} (Htrs);
+\draw[->] (Hss) -- node[deg,above right,pos=0.5] {$2$} node[font=\scriptsize,below left,pos=0.55] {opp} (Hd);
+\draw[->] (Htrs) -- node[deg,below left] {$2$} (e);
+\draw[->] (Hr) -- node[deg,right] {$3$} (Htr);
+\draw[->] (Hd) -- node[deg,left] {$3$} (e);
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, redessinée d'après le dessin de la page 79 (dessin 74/04-12). Le cube des revêtements de l'hexagone : de $H_{r}$, marqué $D_{6}$, aux espaces homogènes $H_{s}$, $H_{p'}$, $H_{s^{*}}$, $H_{d}$ en haut et, en bas, $H_{tr}$ (marqué $\mathbb{F}_{2}^{2}$), $H_{trr}$, $H_{\omega}$, $H_{tr^{*}}$ et le point $e$ ; seuls les degrés écrits sur la page sont reportés. Les indices du milieu ($H_{p'}$, $H_{s^{*}}$, $H_{trr}$) sont surchargés et lus comme dans la transcription, et l'arrivée de deux des flèches de la rangée du haut en $H_{p'}$ ou en $H_{d}$ est en partie une lecture. À gauche, le petit hexagone de la page, ses deux triangles inscrits en pointillés.}
 
 La page 80 s'arrête sur l'observation que les automorphismes de ces espaces
 homogènes sont, eux aussi, lisibles sur le diagramme. C'est la
@@ -1463,7 +1552,62 @@ ensembles de carrés et d'hexagones d'un pavé, avec les groupes ($\mathfrak{S}_
 $\mathfrak{S}_2$, $D_3$, $D_6$, $\mathbb{F}_2 \times \mathbb{F}_2$) ; une marge
 y note « invariants cube et hypercube dans polyèdres et polytopes ; prismes
 triangulaires, pentagonaux, hexagonaux », programme que reprendront les pages
-134 et 135. On ne restitue pas ces diagrammes.
+134 et 135. On ne restitue pas celui de la page 89 ; celui de la page 90 est
+redessiné ci-dessous tel que la transcription le lit.
+
+\begin{center}
+\begin{tikzpicture}[x=1.05mm,y=1mm,line cap=round,line join=round,
+  >={Stealth[length=1.6mm]}, font=\footnotesize,
+  ob/.style={align=center,inner sep=1.5pt},
+  sm/.style={font=\scriptsize},
+  grp/.style={font=\scriptsize,inner sep=1pt},
+  deg/.style={font=\scriptsize,inner sep=1.2pt},
+  gap/.style={preaction={draw,white,line width=3pt,-}}]
+\node[ob] (N1) at (58,-6) {$\mathrm{Car}_{d*} \simeq$ pav à trig pt};
+\node[ob] (N2) at (28,-24) {Car\\ {\scriptsize $\simeq$ pav pt}};
+\node[ob,label={[grp]right:$\mathfrak{S}_{3}$}] (N3) at (90,-24) {$\mathrm{Car}_{s*} \simeq$ pav.\ car\\ {\scriptsize $\simeq$ pav $+$ trig ép}};
+\node[ob] (N5) at (10,-44) {$\mathrm{hex}_{\Omega}$\\ {\scriptsize $\simeq$ tria $\Omega$}};
+\node[ob,label={[grp]above right:$\mathfrak{S}_{3}$}] (N4) at (60,-44) {$\mathrm{hex}_{r'} \simeq \mathrm{car}_{r'}$\\ {\scriptsize $\simeq$ tria ép}};
+\node[ob] (N6) at (10,-64) {hex\\ {\scriptsize $\simeq$ tria}};
+\node[ob,label={[grp]right:$\mathfrak{S}_{3}$}] (N7) at (28,-72) {$\mathrm{hex}_{\mathrm{tr}*}$};
+\node[ob] (N8) at (48,-64) {$\mathrm{hex}_{\mathrm{tr}\Omega}$\\ {\scriptsize ($\simeq$ trig ép tria $\Omega$)}};
+\node[ob,label={[grp]right:$\mathfrak{S}_{2}$}] (N9) at (92,-64) {hex ép\\ {\scriptsize ($\simeq$ trig ép tria ép)}\\ {\scriptsize ($\simeq$ pav ép)}};
+\node[ob] (N10) at (66,-80) {$\mathrm{hex}_{d}$\\ {\scriptsize ($\simeq \mathrm{Car}_{d} \simeq$ tria pt)}};
+\node[ob] (N11) at (92,-80) {$\mathrm{hex}_{s*}$};
+\node[ob] (N12) at (10,-96) {Pav coor\\ {\scriptsize $\simeq$ trig tria}};
+\node[ob,label={[grp]below left:$\mathfrak{S}_{3}$}] (N14) at (40,-96) {$\mathrm{hex}_{\mathrm{tr}}$\\ {\scriptsize ($\simeq$ trig ép tria)}};
+\node[ob,label={[grp]right:$\mathfrak{S}_{3}$}] (N15) at (92,-96) {$\mathrm{hex}_{s}$\\ {\scriptsize ($\simeq$ tria ép)}};
+\node[ob] (N16) at (66,-110) {trig tria pt\\ {\scriptsize $\simeq$ tria}};
+\node[ob] (N13) at (10,-124) {Pav};
+\node[ob] (N17) at (40,-124) {trig $\Omega$ tria};
+\node[ob] (N18) at (92,-124) {tria $\Omega$};
+% flèches
+\draw[->] (N2) -- node[deg,above left] {$2$} (N1);
+\draw[->] (N3) -- node[deg,above right] {$2$} (N1);
+\draw[->] (N9) -- (N3);
+\draw[->] (N4) -- node[deg,above] {$3$} (N5);
+\draw[->] (N9) -- node[deg,below right] {$2$} (N4);
+\draw[->] (N5) -- node[deg,left] {$2$} (N6);
+\draw[->] (N5) -- node[deg,above right,pos=0.45] {$2$} (N8);
+\draw[->] (N9) -- node[deg,above] {$3$} (N8);
+\draw[->] (N8) -- (N7);
+\draw[->] (N7) -- (N6);
+\draw[->] (N6) -- node[deg,left] {$3$} (N12);
+\draw[->] (N6) -- node[deg,above right,pos=0.6] {$2$} (N14);
+\draw[->] (N8) -- node[deg,right,pos=0.6] {$2$} (N14);
+\draw[->] (N11) -- (N10);
+\draw[->] (N15) -- node[deg,below left] {$3$} (N10);
+\draw[->] (N15) -- node[deg,above,pos=0.3] {$3$} (N14);
+\draw[->,gap] (N10) -- node[deg,right,pos=0.25] {$3$} (N16);
+\draw[->] (N14) -- node[deg,above] {$3$} (N12);
+\draw[->] (N12) -- node[deg,left] {$2$} (N13);
+\draw[->] (N12) -- node[deg,above right] {$2$} (N17);
+\draw[->] (N15) -- (N18);
+\draw[->] (N16) -- node[deg,above right] {$2$} (N18);
+\draw[->] (N18) -- node[deg,above] {$3$} (N17);
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, redessinée d'après le dessin de la page 90 (dessin 74/05-16). Le diagramme des ensembles de carrés et d'hexagones d'un pavé, avec leurs groupes : chaque flèche porte le degré écrit sur la page, quand il l'est. Les ensembles sont replacés sur une grille, sans changer les flèches du dessin ; les étiquettes sont celles de la transcription, « trig pt » (en haut) et « car » (dans $\mathrm{Car}_{s*}$) étant des lectures douteuses. Le dessin est au crayon léger : le sens de plusieurs diagonales, et l'origine de la flèche de degré $2$ qui monte vers $\mathrm{Car}_{d*}$, sont des lectures.}
 
 \pagerange{92}{100}
 \section*{19. Complexes cubiques généralisés (pages 92 à 100)}

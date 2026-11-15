@@ -198,6 +198,19 @@
   \fi
   {\small\color{gray!60!black}\textit{[Dessin : #1]}}\par\smallskip}
 
+% In a modernised reading: one of his drawings, as redrawn under #73
+% (drawings/<id>.pdf), set as a figure; \legende gives the edition's reading
+% of it in current terms. The drawing stays his; only the legend is the
+% edition's.
+\newsavebox\grothFigureBox
+\newcommand{\figuredessin}[1]{\par\smallskip
+  \IfFileExists{drawings/#1.pdf}{%
+    \sbox\grothFigureBox{\includegraphics{drawings/#1.pdf}}%
+    \begin{center}\ifdim\wd\grothFigureBox>0.8\linewidth
+      \resizebox{0.8\linewidth}{!}{\usebox\grothFigureBox}\else\usebox\grothFigureBox\fi\end{center}}%
+  {\begin{center}\fbox{\small dessin #1}\end{center}}}
+\newcommand{\legende}[1]{{\centering\small\color{gray!60!black}#1\par}\smallskip}
+
 % A marginal note of Grothendieck's, distinct from the body of the text.
 \newcommand{\marginal}[1]{\par\smallskip\noindent\hspace{1em}%
   {\small\color{gray!60!black}#1}\par\smallskip}

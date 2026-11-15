@@ -944,6 +944,63 @@ points avec toutes ses inerties non triviales est unique, les deux
 coïncident.\footnote{La note encadrée de la page se lit mal ; on en restitue le
 sens, sans ses mots (« subdivision barycentrique du biédre », « autodual »,
 « unicité de la rev.-théorie » sont incertains).}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,line cap=round,line join=round,
+  pt/.style={circle,fill,inner sep=1.3pt},
+  opt/.style={circle,draw,fill=white,inner sep=1.3pt},
+  hid/.style={gray,densely dashed}]
+% (a) la sphère et ses trois grands cercles
+\begin{scope}[x=1.5cm,y=1.5cm]
+% équateur : 0, 1, 0, 1
+\draw[hid] plot[domain=0:180,samples=60,smooth] ({cos(\x)},{0.35*sin(\x)});
+\draw[thick] plot[domain=180:360,samples=60,smooth] ({cos(\x)},{0.35*sin(\x)});
+% grand cercle par les deux 0 et les deux infinis
+\draw[thick] plot[domain=0:180,samples=60,smooth] ({cos(\x)},{0.937*sin(\x)});
+\draw[hid] plot[domain=180:360,samples=60,smooth] ({cos(\x)},{0.937*sin(\x)});
+% grand cercle par les deux 1 et les deux infinis
+\draw[thick] plot[domain=65.5:245.5,samples=60,smooth]
+  ({0.574*cos(\x)},{0.35*0.819*cos(\x)+0.937*sin(\x)});
+\draw[hid] plot[domain=-114.5:65.5,samples=60,smooth]
+  ({0.574*cos(\x)},{0.35*0.819*cos(\x)+0.937*sin(\x)});
+% l'axe des infinis
+\draw[hid] (0,0.937) -- (0,-0.937);
+\draw (0,1.02) -- (0,1.3);
+\draw (0,-1.02) -- (0,-1.3);
+\node[pt,label={[inner sep=1pt,xshift=-2pt]left:$\infty$}] at (0,0.937) {};
+\node[pt,label={[inner sep=1pt]right:$\infty$}] at (0,-0.937) {};
+\node[opt,label={left:$0$}] at (-1,0) {};
+\node[opt,label={right:$0$}] at (1,0) {};
+\node[pt,label={[inner sep=1pt]above right:$1$}] at (0.574,0.287) {};
+\node[pt,label={[inner sep=1pt]below left:$1$}] at (-0.574,-0.287) {};
+\node[pt] at (0.174,-0.345) {};
+\node at (0,-1.7) {(a)};
+\end{scope}
+% (b) la seconde figure, partielle
+\begin{scope}[shift={(2.5,7.1)},x=0.5mm,y=0.5mm]
+\draw[thick] plot[smooth cycle, tension=0.6] coordinates {(8.5,-166) (6.5,-156.8)
+  (7.2,-143.8) (12.4,-130.7) (20.3,-121.5) (29.4,-116.3) (38.6,-114.4)
+  (43.8,-116.3) (49,-122.8) (55.6,-130.7) (59.5,-137.2) (60.8,-146.4)
+  (59.5,-154.2) (57.6,-159.4) (56.9,-165.3) (53,-168.6) (45.1,-169.9)
+  (38.6,-168.2) (28.1,-169.3) (19,-168.6) (13.7,-169.3)};
+\draw[thick] plot[smooth cycle, tension=0.6] coordinates {(44.1,-132.9)
+  (37.3,-132.2) (28.1,-133.9) (20.3,-138.5) (16.4,-143.8) (15.7,-149)
+  (17.7,-154.2) (22.9,-158.1) (29.7,-160.1) (37.3,-160.7) (47.7,-158.8)
+  (55.6,-154.8) (58.8,-149.6) (59.5,-143.8) (56.9,-137.9) (50.3,-133.9)};
+\draw[gray] plot[smooth, tension=0.6] coordinates {(49,-135) (53.5,-138)
+  (56.3,-141.5) (57.3,-144.5)};
+\draw (12.4,-146) -- (19.4,-146);
+\draw (56.4,-149.6) -- (62.4,-149.6);
+\node[left,inner sep=1pt] at (12.6,-146) {$1$};
+\node[right,inner sep=1pt] at (62.2,-149.6) {$1$};
+\node[pt,label={[inner sep=1pt]above:$\infty$}] at (38.6,-114.4) {};
+\node[pt,label={[inner sep=1pt]below:$\infty$}] at (38.6,-168.2) {};
+\node[pt,label={[inner sep=1pt]below left:$0$}] at (44.1,-132.9) {};
+\node[pt,label={[inner sep=1pt]above left:$0$}] at (29.7,-160.1) {};
+\node at (34,-193) {(b)};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, redessinée d'après le dessin de la page 43 (dessin 138/03-1), en deux panneaux. (a) La conique $C_{2}$ vue comme une sphère, triangulée en octaèdre par trois grands cercles : ses six sommets sont les deux points au-dessus de chacun des points $0$, $1$, $\infty$ de $C_{1}$, et l'axe qui joint les deux points au-dessus de $\infty$ est tracé ; le point sans étiquette sur l'équateur est sur la page. (b) La seconde figure, que la page ne commente pas et qui n'est lue qu'en partie : une courbe fermée portant $\infty$ en haut et en bas, un ovale intérieur portant deux points $0$, deux traits marqués $1$ et, en gris, un arc léger au crayon.}
 
 \pagerange{45}{46}
 \subsection*{La tour diédrale (pages 45 et 46)}
@@ -965,6 +1022,55 @@ $\mathbb{D}_{\infty} = (\mathbb{Z}/2) \ltimes \mu_{\infty}$.\footnote{Le nom de
 cette tour, et le groupe $D_{n}$, sont tirés des formules de la page 46 ; le
 lien avec $C_{2}$ annoncé à la page 45 n'est pas écrit, la page s'arrêtant
 après « il a comme groupe $(\pi_{\infty})_{2}$ ».}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,line cap=round,line join=round,
+  pt/.style={circle,fill,inner sep=1.3pt},
+  >={Stealth[length=1.8mm]}, font=\small]
+% (a) les trois rangées et les flèches entre leurs points
+\begin{scope}
+\foreach \y in {0,1.4,2.8}
+  \draw[thick] plot[smooth, tension=0.7] coordinates {(0,\y) (2,\y+0.08) (4.5,\y-0.06) (7,\y)};
+% en bas
+\node[pt,label={below:$\infty$}] (b-inf) at (1.6,0.03) {};
+\node[pt,label={below:$0$}] (b-0) at (4.0,-0.04) {};
+\node[pt,label={below:$1$}] (b-1) at (5.9,-0.03) {};
+% au milieu
+\node[pt,label={[inner sep=1pt]below left:$0\,(1)$}] (m-0) at (0.8,1.45) {};
+\node[pt,label={[inner sep=1pt]below right:$\infty\,(1)$}] (m-inf) at (2.2,1.48) {};
+\node[pt,label={[inner sep=1pt]below right:$1\,(2)$}] (m-1) at (4.0,1.36) {};
+\node[pt,label={[inner sep=1pt]below right:$-1\,(2)$}] (m-m1) at (5.9,1.37) {};
+% en haut
+\node[pt,label={above:$0\,(n)$}] (h-0) at (0.8,2.85) {};
+\node[pt,label={above:$\infty\,(n)$}] (h-inf) at (2.2,2.88) {};
+\node[pt,label={[inner sep=1pt]above right:$1\,(1)$}] (h-1) at (4.0,2.76) {};
+\node[pt,inner sep=0.9pt] at (4.0,3.15) {};
+% les flèches
+\draw[->,shorten <=2pt,shorten >=2pt] (h-0) -- (m-0);
+\draw[->,shorten <=2pt,shorten >=2pt] (h-inf) -- (m-inf);
+\draw[->,shorten <=2pt,shorten >=2pt] (m-0) .. controls (0.9,0.7) .. (b-inf);
+\draw[->,shorten <=2pt,shorten >=2pt] (m-inf) .. controls (2.1,0.8) .. (b-inf);
+\draw[->,shorten <=2pt,shorten >=2pt] (h-1) -- node[draw,rounded corners=5pt,fill=white,inner sep=1.5pt,font=\scriptsize] {$n$ fois} (m-1);
+\draw[->,shorten <=2pt,shorten >=2pt] (m-1) -- (b-0);
+\draw[->,shorten <=2pt,shorten >=2pt] (m-m1) -- (b-1);
+\node at (7.6,2.1) {$n$ pair};
+\node at (3.5,-0.85) {(b)};
+\end{scope}
+% (b) les deux lignes de points de la gauche de la page
+\begin{scope}[shift={(-4.6,0.6)}]
+\draw[thick] plot[smooth, tension=0.7] coordinates {(0,1.4) (1.6,1.46) (4.1,1.4)};
+\draw[thick] plot[smooth, tension=0.7] coordinates {(0,0) (1.6,0.06) (4.1,0)};
+\node[pt,label={above:$0\,(2)$}] at (0.4,1.42) {};
+\node[pt,label={above:$1\,(2)$}] at (1.5,1.46) {};
+\node[pt,label={[font=\scriptsize]above:$\infty_{1}\,(1)$}] at (2.45,1.44) {};
+\node[pt,label={[font=\scriptsize]above:$\infty_{2}\,(1)$}] at (3.6,1.41) {};
+\node[pt,label={below:$0$}] at (0.4,0.02) {};
+\node[pt,label={below:$1$}] at (1.5,0.06) {};
+\node[pt,label={below:$\infty$}] at (2.9,0.03) {};
+\node at (1.8,-1.45) {(a)};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, redessinée d'après le dessin de la page 46 (dessin 138/03-3), en deux panneaux. (a) Les deux lignes de points de la gauche de la page : la fibre de $X_{1} \to X_{0}$ au-dessus de $0$, $1$, $\infty$. (b) Les fibres de la tour $X_{n} \to X_{1} \to X_{0}$, les trois rangées étant, de haut en bas, $X_{n}$, $X_{1}$ et $X_{0}$, l'indice de ramification entre parenthèses : au-dessus de $\infty$ les deux points $z = 0$ et $z = \infty$ de $X_{1}$, non ramifiés, eux-mêmes images de points ramifiés d'indice $n$ ; au-dessus de $0$ et de $1$ les points $z = 1$ et $z = -1$, ramifiés d'indice $2$, et au-dessus de $z = 1$ des points non ramifiés de $X_{n}$ (« $n$ fois »). Les pointes des deux flèches qui aboutissent à $\infty$ sont une lecture, et « $-1\,(2)$ » est en partie biffé sur la page.}
 
 \pagerange{48}{54}
 \subsection*{Les endomorphismes de la conique (pages 48 à 54)}
@@ -1002,6 +1108,27 @@ surchargé pour être restitué flèche par flèche.\footnote{Voir la transcript
 p.~52, qui en décrit les étiquettes sans choisir entre les flèches biffées.
 La page 48 contient encore un calcul de valeurs critiques
 ($p - \lambda q = p' - \lambda q' = 0$).}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,line cap=round,line join=round,
+  >={Stealth[length=1.8mm]}, font=\small]
+\node at (0,0.75) {$X$};
+\node at (3.6,0.75) {$X'$};
+\node (x0) at (0,0) {$0$};
+\node (x1) at (-0.35,-0.8) {$1$};
+\node (xm1) at (0.3,-0.8) {$-1$};
+\node at (0.95,-0.62) {$2$};
+\node (xinf) at (0,-1.6) {$\infty$};
+\node (y0) at (3.6,0) {$0$};
+\node (y1) at (3.6,-0.8) {$1$};
+\node (yinf) at (3.6,-1.6) {$\infty$};
+\draw[->] (x0.east) .. controls (1.4,0.3) and (2.3,0.3) .. (y0.west);
+\draw[->] (-0.05,-1.08) .. controls (1.2,-1.3) and (2.4,-1.05) .. (y1.west);
+\draw[->] (xinf.east) .. controls (1.4,-1.9) and (2.3,-1.9) .. (yinf.west);
+\draw[thick] (0,-2.1) -- (0,-3.3);
+\draw[thick,->] (3.6,-2.1) -- node[right] {$n$} (3.6,-3.3);
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, redessinée d'après le dessin de la page 48 (dessin 138/03-5). Deux copies $X$ et $X'$ de la droite, et une application de $X$ dans $X'$ qui envoie $0$ sur $0$, $1$ et $-1$ sur $1$, $\infty$ sur $\infty$, dessinée à côté du calcul de valeurs critiques de la page ; au-dessous, les deux droites en traits verticaux, la seconde marquée $n$. Le $2$ écrit à droite de $1$, $-1$ est laissé à sa place, sans flèche.}
 
 \section*{6. Automorphismes de groupoïdes (pages 56 à 62)}
 

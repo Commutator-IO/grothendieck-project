@@ -815,6 +815,49 @@ cas : un sommet portant $3$ points ($\nu = 3$, la droite à trois points) ; deux
 sommets portant chacun $2$ points ($\nu = 4$, deux droites sécantes) ; une chaîne
 $2 - 1 - 2$ ($\nu = 5$, trois droites en chaîne).
 
+\begin{center}
+\begin{tikzpicture}[scale=0.85, line cap=round,
+  comp/.style={line width=0.7pt},
+  pt/.style={circle, fill, inner sep=1.1pt},
+  every node/.style={font=\small}]
+% une droite portant a, b, c
+\coordinate (L1) at (0,0.2); \coordinate (L2) at (3,1.4);
+\draw[comp] (L1) -- (L2);
+\foreach \t/\l in {0.22/a, 0.5/b, 0.78/c}
+  \node[pt, label={[inner sep=1pt]above left:$\l$}] at ($(L1)!\t!(L2)$) {};
+% deux droites secantes portant a, b et c, d
+\begin{scope}[xshift=4.2cm]
+\coordinate (P1) at (0,0); \coordinate (P2) at (3,1.6);
+\coordinate (Q1) at (1.0,1.76); \coordinate (Q2) at (3.2,-0.44);
+\draw[comp] (P1) -- (P2);
+\draw[comp] (Q1) -- (Q2);
+\foreach \t/\l in {0.15/a, 0.38/b}
+  \node[pt, label={[inner sep=1pt]above left:$\l$}] at ($(P1)!\t!(P2)$) {};
+\foreach \t/\l in {0.62/c, 0.84/d}
+  \node[pt, label={[inner sep=1pt]below left:$\l$}] at ($(Q1)!\t!(Q2)$) {};
+\end{scope}
+% une chaine de trois droites : a, b ; c ; d, e
+\begin{scope}[xshift=8.4cm]
+\coordinate (M1) at (0,1); \coordinate (M2) at (4,1);
+\coordinate (G1) at (0.1,-0.2); \coordinate (G2) at (1.25,1.6);
+\coordinate (H1) at (2.75,1.6); \coordinate (H2) at (3.9,-0.2);
+\draw[comp] (M1) -- (M2);
+\draw[comp] (G1) -- (G2);
+\draw[comp] (H1) -- (H2);
+\node[pt, label={[inner sep=1pt]above:$c$}] at (2,1) {};
+\foreach \t/\l in {0.12/a, 0.36/b}
+  \node[pt, label={[inner sep=1pt]left:$\l$}] at ($(G1)!\t!(G2)$) {};
+\foreach \t/\l in {0.64/d, 0.88/e}
+  \node[pt, label={[inner sep=1pt]right:$\l$}] at ($(H1)!\t!(H2)$) {};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, redessinée d'après le dessin de la page 52
+(dessin 147/03-1). De gauche à droite, les courbes stables des trois arbres de
+(64), une droite projective par sommet et un point double par arête : la droite
+à trois points ($\nu = 3$), deux droites sécantes ($\nu = 4$), trois droites en
+chaîne ($\nu = 5$). La page les place l'une sous l'autre, en regard des arbres.}
+
 \emph{Graphes à un cycle} ($h_1 = 1$, dimension ambiante $\nu \leq 2$). Il y a au
 plus une feuille. Sans feuille, le graphe est un cycle dont tous les sommets sont
 d'ordre $2$, donc de poids $1$ : un ou deux sommets. Avec une feuille, de poids
@@ -823,6 +866,53 @@ boucle sur un sommet relié à la feuille. D'où trois cas : la boucle sur un so
 de poids $1$ ($\nu = 1$, la cubique nodale) ; deux sommets de poids $1$ reliés par
 deux arêtes ($\nu = 2$) ; la boucle munie d'une queue dont le bout porte deux
 points ($\nu = 2$).
+
+\begin{center}
+\begin{tikzpicture}[line cap=round,
+  comp/.style={line width=0.7pt},
+  pt/.style={circle, fill, inner sep=1.1pt},
+  every node/.style={font=\small}]
+% les trois graphes de (65)
+\node[pt] (u) at (0.4,0) {};
+\draw[comp] (u) .. controls (1.9,1.0) and (1.9,-1.0) .. (u);
+\node[left] at (u) {$1$};
+\node[pt] (v1) at (0,-2) {}; \node[pt] (v2) at (1.6,-2) {};
+\draw[comp] (v1) to[bend left=40] (v2);
+\draw[comp] (v1) to[bend right=40] (v2);
+\node[left] at (v1) {$1$}; \node[right] at (v2) {$1$};
+\node[pt] (w2) at (0,-4) {}; \node[pt] (w1) at (0.9,-4) {};
+\draw[comp] (w2) -- (w1);
+\draw[comp] (w1) .. controls (2.4,-3.0) and (2.4,-5.0) .. (w1);
+\node[above] at (w2) {$2$};
+% les courbes correspondantes
+\begin{scope}[xshift=5cm]
+% une courbe nodale portant a
+\draw[comp] (-0.6,0.45) .. controls (0.3,-0.2) and (1.3,-0.6) .. (1.3,0)
+  .. controls (1.3,0.6) and (0.3,0.2) .. (-0.6,-0.45);
+\node[pt, label={[inner sep=1pt]right:$a$}] at (1.3,0) {};
+% deux droites se coupant en deux points, portant a et b
+\draw[comp] (-0.8,-2.35) .. controls (0.3,-1.2) and (1.4,-1.2) .. (2.4,-2.35);
+\draw[comp] (-0.8,-1.65) .. controls (0.3,-2.8) and (1.4,-2.8) .. (2.4,-1.65);
+\node[pt, label={[inner sep=1pt]above:$a$}] at (0.8,-1.49) {};
+\node[pt, label={[inner sep=1pt]below:$b$}] at (0.8,-2.51) {};
+% une courbe nodale a laquelle est attachee une droite portant a et b
+\draw[comp] (-0.6,-3.55) .. controls (0.3,-4.2) and (1.3,-4.6) .. (1.3,-4)
+  .. controls (1.3,-3.4) and (0.3,-3.8) .. (-0.75,-4.56);
+\coordinate (L1) at (-0.85,-3.79); \coordinate (L2) at (0.35,-5.47);
+\draw[comp] (L1) -- (L2);
+\foreach \t/\l in {0.6/a, 0.88/b}
+  \node[pt, label={[inner sep=3pt]left:$\l$}] at ($(L1)!\t!(L2)$) {};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, redessinée d'après le dessin de la page 53
+(dessin 147/03-5). À gauche, les trois graphes à un cycle de (65), avec le
+poids de leurs sommets : la boucle sur un sommet de poids $1$, deux sommets de
+poids $1$ reliés par deux arêtes, la boucle munie d'une queue dont le bout porte
+deux points ; à droite, en regard, les courbes stables correspondantes : la
+cubique nodale portant $a$, deux droites qui se coupent en deux points, une
+courbe nodale à laquelle est attachée une droite portant $a$ et $b$. Sur la
+page, le $a$ de la première courbe est peu visible.}
 
 Leurs groupes, que la page 54 calcule, sont
 \[
@@ -885,6 +975,67 @@ image $\mathfrak{S}_3$ dans $\mathfrak{S}_4$), $\mathfrak{S}_2 \times
 \mathfrak{S}_2$ (avec $\Gamma^{!} = \mathfrak{S}_2$, le retournement de la boucle,
 et image $\mathfrak{S}_2 \times \mathfrak{S}_2$), et $\mathfrak{S}_2$ (avec
 $\Gamma^{!} = 1$).
+
+\begin{center}
+\begin{tikzpicture}[line cap=round,
+  comp/.style={line width=0.7pt},
+  pt/.style={circle, fill, inner sep=1.1pt},
+  every node/.style={font=\small}]
+% ligne 1 : une arete entre un sommet 3 (alpha_0) et un sommet 2 ; deux droites secantes
+\node[pt] (a1) at (0,0) {}; \node[pt] (a2) at (1.4,0) {};
+\draw[comp] (a1) -- (a2);
+\node[left] at (a1) {$3$}; \node[below=1pt] at (a1) {$\alpha_0$};
+\node[right] at (a2) {$2$};
+\begin{scope}[xshift=5.6cm]
+\coordinate (X) at (0,0);
+\draw[comp] ($(X)+(-1.6,0.27)$) -- ($(X)+(1.2,-0.2)$);
+\draw[comp] ($(X)+(-1.3,-0.55)$) -- ($(X)+(2.0,0.84)$);
+\foreach \s/\l in {-1.3/a, -0.8/b}
+  \node[pt, label={[inner sep=1pt]above:$\l$}] at ($(X)+(\s,-0.17*\s)$) {};
+\foreach \s/\l in {0.6/c, 1.1/d, 1.6/e}
+  \node[pt, label={[inner sep=1pt]above left:$\l$}] at ($(X)+(\s,0.42*\s)$) {};
+\end{scope}
+% ligne 2 : une boucle sur un sommet 2 (alpha_0) ; une courbe nodale portant a et b
+\begin{scope}[yshift=-1.9cm]
+\node[pt] (b1) at (0,0) {};
+\draw[comp] (b1) .. controls (1.6,0.9) and (1.6,-0.9) .. (b1);
+\node[above=1pt] at (b1) {$2$}; \node[below=1pt] at (b1) {$(\alpha_0)$};
+\begin{scope}[xshift=4.8cm]
+\draw[comp] (-0.6,0.45) .. controls (0.3,-0.2) and (1.3,-0.6) .. (1.3,0)
+  .. controls (1.3,0.6) and (0.3,0.2) .. (-0.6,-0.45);
+\node[pt, label={[inner sep=1pt]above right:$a$}] at (1.189,0.246) {};
+\node[pt, label={[inner sep=1pt]below right:$b$}] at (1.189,-0.246) {};
+\end{scope}
+\end{scope}
+% ligne 3 : une arete entre alpha_0 (g = 1) et un sommet 2 (g = 0) ; deux branches
+\begin{scope}[yshift=-3.8cm]
+\node[pt] (c1) at (0,0) {}; \node[pt] (c2) at (1.4,0) {};
+\draw[comp] (c1) -- (c2);
+\node[above=1pt] at (c2) {$2$};
+\node[below=1pt] (al) at (c1) {$(\alpha_0)$};
+\node[below=-1pt] at (al.south) {$g_{\alpha_0} = 1$};
+\node[below=1pt] at ($(c2)+(0.35,0)$) {$g_\alpha = 0$};
+\begin{scope}[xshift=5.4cm]
+\coordinate (Y) at (0,0);
+\draw[comp] (-1.5,-0.9) .. controls (-0.9,-0.6) and (-0.4,-0.35) .. (Y) -- (0.3,0.2);
+\coordinate (Z1) at (-0.3,0.22); \coordinate (Z2) at (1.9,-1.38);
+\draw[comp] (Z1) -- (Z2);
+\node[circle, fill, inner sep=1.6pt] at (Y) {};
+\foreach \t/\l in {0.42/a, 0.74/b}
+  \node[pt, label={[inner sep=1pt]above right:$\l$}] at ($(Z1)!\t!(Z2)$) {};
+\node[below=2pt] at (-1.1,-0.75) {$g_{\alpha_0} = 1$};
+\end{scope}
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, redessinée d'après le dessin de la page 57
+(dessin 147/03-9). Les trois MD-graphes de dimension ambiante $2$ à une seule
+arête, chacun en regard de la courbe stable qu'il représente : deux droites
+sécantes, $\alpha_0$ portant trois points (type $(0, 5)$) ; une courbe nodale
+portant deux points (type $(1, 2)$) ; une composante de genre $1$ coupant, au
+point épais, une droite qui porte deux points (type $(1, 2)$). L'indice
+surchargé du second sommet de la première ligne n'est pas lu et n'est pas
+reporté.}
 
 \pagerange{58}{60}
 \subsection*{Dimension modulaire $2$, et les quatre cas élémentaires (pages 58 à 60)}
@@ -1666,6 +1817,103 @@ et ses traces $V^{*}_{D',Y}$, $V^{*}_{D'',Y}$, on a un vrai morphisme
 à condition de définir les groupoïdes fondamentaux par les revêtements et non par
 les chemins ; cela vaut pour des immersions locales de topos.
 
+\begin{center}
+\begin{tikzpicture}[x=0.45mm, y=0.45mm, line cap=round,
+  every node/.style={font=\small}]
+\def\boucle{(14.7,-33) (33.3,-38.3) (53.3,-47.3) (70,-73.3) (71.7,-90)
+  (60,-110) (48.7,-114.3) (30,-106.7) (23.3,-96.7) (30,-76.7) (53.3,-47.3)
+  (81.7,-29.3)}
+% (a) la courbe qui se recoupe en un point double
+\draw[line width=0.7pt] plot[smooth, tension=0.55] coordinates {\boucle};
+\node[circle, fill, inner sep=1.4pt] at (53.3,-47.3) {};
+\node at (48,-130) {(a)};
+% (b) la meme boucle epaissie en une bande, qui se croise au point double
+\begin{scope}[xshift=110]
+\draw[line width=5.6mm, line cap=butt] plot[smooth, tension=0.55] coordinates {\boucle};
+\draw[line width=5.1mm, line cap=butt, black!12] plot[smooth, tension=0.55] coordinates {\boucle};
+\node[circle, fill, inner sep=1.4pt] at (53.3,-47.3) {};
+\node at (48,-130) {(b)};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, redessinée d'après les deux premiers dessins de
+la page 140 (dessins 147/07-1 et 147/07-2), en deux panneaux. (a) L'image dans
+$Y$ d'une courbe immergée $D'$ qui se recoupe en un point double. (b) La même
+boucle épaissie en une bande, dont les deux branches se croisent au point
+double. Le troisième dessin de la page, une bande qui ne se recoupe pas, n'est
+pas repris ici.}
+
+\begin{center}
+\begin{tikzpicture}[line cap=round,
+  pt/.style={circle, fill, inner sep=1.1pt},
+  every node/.style={font=\small}]
+% le voisinage tubulaire V_{D'}, bande autour de la courbe D'
+\filldraw[fill=black!10, line width=0.5pt]
+  (0,0) .. controls (2.8,-1) and (5.7,-1) .. (8.5,0) -- (8.5,-1)
+  .. controls (5.7,-2) and (2.8,-2) .. (0,-1) -- cycle;
+% les deux disques V_{D''} autour des points de D''
+\coordinate (p1) at (1.01,-0.82);
+\coordinate (p2) at (5.62,-1.17);
+\filldraw[fill=black!28, line width=0.5pt] (p1) circle (0.38) (p2) circle (0.38);
+\draw[line width=0.8pt] (0,-0.5) .. controls (2.8,-1.5) and (5.7,-1.5) .. (8.5,-0.5)
+  node[right] {$D'$};
+\node[pt] at (p1) {}; \node[pt] at (p2) {};
+\node at (-0.55,0.3) {$V_{D'}$};
+\node (dd) at (4.3,0.45) {$D''$};
+\draw[dashed, -{Stealth[length=1.8mm]}, shorten >=2.5pt] (dd) -- (p1);
+\draw[dashed, -{Stealth[length=1.8mm]}, shorten >=2.5pt] (dd) -- (p2);
+\node (vd) at (3.3,-2.75) {$V_{D''}$};
+\draw[dashed, -{Stealth[length=1.8mm]}] (vd) -- ($(p1)!0.4cm!(vd)$);
+\draw[dashed, -{Stealth[length=1.8mm]}] (vd) -- ($(p2)!0.4cm!(vd)$);
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, redessinée d'après le croquis de la page 141
+(dessin 147/08-1). Le voisinage tubulaire $V_{D'}$, bande autour de la courbe
+$D'$ ; deux points de $D''$ sur $D'$, chacun dans un petit disque, son
+voisinage $V_{D''}$ : la situation $D'' \to D' \to Y$ du diagramme de
+fonctorialité.}
+
+\begin{center}
+\begin{tikzpicture}[x=0.95mm, y=0.95mm, line cap=round,
+  every node/.style={font=\small}]
+\def\haut{(2.4,-9.8) (26.8,-18.3) (63.4,-14.6) (100,-19.5)}
+\def\ame{(8.5,-18.3) (23.2,-24.2) (45.1,-25.8) (78,-27.6) (100,-25.6)}
+% la bande, coupee a droite par le bord du dessin
+\fill[black!10] plot[smooth, tension=0.55] coordinates {\haut}
+  -- plot[smooth, tension=0.55] coordinates {(100,-34.2) (75.6,-37.8) (51.2,-39) (20.7,-34.2) (4.9,-22)}
+  -- cycle;
+\draw[line width=0.5pt] plot[smooth, tension=0.55] coordinates {\haut};
+\draw[line width=0.5pt] plot[smooth, tension=0.55] coordinates {(4.9,-22) (20.7,-34.2) (51.2,-39) (75.6,-37.8) (100,-34.2)};
+\draw[line width=0.5pt] (2.4,-9.8) -- (4.9,-22);
+% autour des deux points de croisement, les quatre quadrants hachures
+\foreach \p/\u/\l in {{(23.2,-24.2)}/{(25.5,-16.0)}/{(20.9,-32.4)}, {(78,-27.6)}/{(77.4,-19.6)}/{(78.6,-35.6)}} {
+  \fill[pattern=north east lines] \p circle (5.5);
+  \begin{scope}
+    \clip \p circle (5.5);
+    \draw[black!10, line width=3pt] plot[smooth, tension=0.55] coordinates {\ame};
+    \draw[black!10, line width=3pt] \u -- \l;
+  \end{scope}
+  \draw[line width=0.5pt] \p circle (5.5);
+}
+% la courbe centrale et les deux branches transverses
+\draw[line width=1.1pt] plot[smooth, tension=0.55] coordinates {\ame};
+\draw[line width=0.8pt] (25.5,-16.0) -- (20.9,-32.4);
+\draw[line width=0.8pt] (77.4,-19.6) -- (78.6,-35.6);
+\node[circle, fill, inner sep=1.2pt] at (23.2,-24.2) {};
+\node[circle, fill, inner sep=1.2pt] at (78,-27.6) {};
+% la marque Theta_{D',Y}
+\node (th) at (55,-7.5) {$\Theta_{D',Y}$};
+\draw[-{Stealth[length=1.8mm]}, shorten >=1pt] (th) -- (25.3,-16.8);
+\draw[-{Stealth[length=1.8mm]}, shorten >=1.5pt] (th) -- (47,-25.9);
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, redessinée d'après le dessin de la page 142
+(dessin 147/08-2). Le voisinage tubulaire $V_{D',Y}$ (la bande, coupée à
+droite par le bord du dessin), traversé par la courbe $D'$ ; en deux points,
+une branche transverse la coupe, et autour de chacun quatre quadrants hachurés.
+La marque $\Theta_{D',Y}$, image inverse de $\Theta$ dans $V_{D',Y}$,
+désigne de ses flèches une branche transverse et la courbe $D'$.}
+
 \textbf{Théorème (pages 143--144).} \emph{Soient $Y$ un espace analytique lisse,
 $\Theta$ un diviseur à croisements normaux, $D' \to Y$ une immersion locale de
 codimension $d$ se factorisant par la partie ouverte $\Theta^{(d)*}$ du squelette
@@ -1944,6 +2192,17 @@ $Z$ et les autres strates à des parties $Z_j$ localement connexes en
 $z_0$\footnote{La condition e) s'interrompt au bas de la page 180 et reprend en
 tête de la page 181 ; la lecture des conditions a) à d) est par endroits
 incertaine.}.
+
+\begin{center}
+\begin{tikzpicture}[line cap=round]
+\draw[line width=0.7pt] (-1.1,0.35) .. controls (-0.2,0.2) and (0.5,-0.2) .. (0.5,-0.7)
+  .. controls (0.5,-1.3) and (-0.5,-1.3) .. (-0.5,-0.7)
+  .. controls (-0.5,-0.2) and (0.2,0.2) .. (1.1,0.35);
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, redessinée d'après le dessin de la page 180
+(dessin 147/09-1). Une courbe qui se recoupe en un point double : la courbe
+nodale, dont la stratification par son nœud est exclue par la condition d).}
 
 Les stratifications globales d'un ouvert $U$ forment un préfaisceau qui n'est pas
 un faisceau (les exemples de d) le montrent, et plus simplement encore les

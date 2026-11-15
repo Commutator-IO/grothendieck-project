@@ -155,6 +155,9 @@ function liftMath(tex) {
     return marker(held.length - 1);
   };
   const out = tex
+    // A picture centred for the PDF (an edition figure in a modernised reading):
+    // the centring is TeX's business, and the reading view centres pictures.
+    .replace(/\\begin\{center\}\s*(\\begin\{tikzpicture\}[\s\S]*?\\end\{tikzpicture\})\s*\\end\{center\}/g, '\n\n$1\n\n')
     // Pictures and tikz-cd first: both hold $, &, \\ and braces that every
     // later pass would mangle.
     .replace(/\\begin\{tikzpicture\}[\s\S]*?\\end\{tikzpicture\}/g, (m) => keep(m, 'picture'))
@@ -559,6 +562,10 @@ const BRACED = [
   // so that drawings can be counted and listed without guessing from words.
   ['drawing', (a) => `<span class="tr-note tr-drawing" title="drawing, described by the transcriber">${a}</span>`],
   ['marginal', (a) => `<span class="tr-marginal" title="marginal note">${a}</span>`],
+  // In a modernised reading: one of his redrawn drawings (#73) as a figure, and
+  // the edition's legend under it.
+  ['figuredessin', (a) => `<span class="tr-drawing-fig"><img src="drawings/${a.trim()}.svg" alt="" loading="lazy"></span>`],
+  ['legende', (a) => `<span class="tr-drawing-cap tr-legende">${a}</span>`],
   // The modern vocabulary the folder should be found under. Kept in English
   // inside a French document on purpose: it is a search key, not prose, and
   // the manifest extracts it as the folder's tags.
