@@ -29,6 +29,8 @@ import Grothendieck.Folder151
 import Grothendieck.Folder152
 import Grothendieck.Folder153
 import Grothendieck.Folder154
+import Grothendieck.Folder154Sweep
+import Grothendieck.Folder154Zonogon
 import Grothendieck.Folder155
 import Grothendieck.Folder156_1
 import Grothendieck.Folder156_2
