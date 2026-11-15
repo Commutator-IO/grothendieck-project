@@ -53,6 +53,7 @@ import Grothendieck.Folder19
 import Grothendieck.Folder2
 import Grothendieck.Folder21
 import Grothendieck.Folder22
+import Grothendieck.Folder22Adic
 import Grothendieck.Folder29
 import Grothendieck.Folder37
 import Grothendieck.Folder39
@@ -99,12 +100,14 @@ import Grothendieck.Folder90
 import Grothendieck.Folder90Comodules
 import Grothendieck.Folder93
 import Grothendieck.Folder94
+import Grothendieck.Folder94Koszul
 import Grothendieck.Folder98
 import Grothendieck.Folder123Kostant
 import Grothendieck.Folder147
 import Grothendieck.IhesSGA6_1_4
 import Grothendieck.IhesSGA6_1_5
 import Grothendieck.IhesSGA6_2_3
+import Grothendieck.IhesSGA6_2_3Db
 import Grothendieck.IhesSGA6_2_3Verdier
 import Grothendieck.IhesSGA6_2_4
 import Grothendieck.Ihes2ILL5

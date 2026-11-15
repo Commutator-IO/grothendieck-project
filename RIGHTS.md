@@ -18,7 +18,10 @@ ours to give**:
 - `lean/` — the Lean proofs and their build files (since 17 October 2026). The
   statements they check are mathematics, which nobody owns; the code is ours.
   The few words of the manuscripts quoted in their comments, in « », stay
-  under the rights described below for `transcripts/`
+  under the rights described below for `transcripts/`. `lean/Stacks/` is not
+  ours and not under CC0: it is a verbatim copy of files of AxiomMath's
+  Stacks library, under the Apache License 2.0 (`lean/Stacks/LICENSE`,
+  `lean/Stacks/NOTICE.md`)
 - `src/content/catalogue.ts` and `src/content/books.json` as *arrangements* —
   the data is read from Montpellier's inventory and the facts in it are theirs
 
