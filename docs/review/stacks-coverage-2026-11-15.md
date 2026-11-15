@@ -184,3 +184,49 @@ best of this round, since three tagged Stacks results cover the three steps that
 `Folder53.lean` lists as not formalised. Rows 4 to 8 supply real pieces but each leaves glue to
 write (a second model of divided powers, the `Γ^p` homotopy, the graded gauged algebras, the
 affine translation, the descent statement). Rows 9 and 10 are out of reach by closure.
+
+## Buffalo entries
+
+The Buffalo lectures (1973) have their own Lean library, `lean/Buffalo/`, with one status record
+per entry of the three indexes in `docs/buffalo-{ag,topos,groupes}/lean/Part*.json`. Of the 2,357
+algebraic-geometry records, 532 were `partial` and 239 `not-formalised`; topos and group schemes
+add 353 and 192. They were screened by the reason their note gives (a notion or theorem missing
+from Mathlib) and matched against the same Stacks copy as above, by tag, by declaration name and
+by reading statements. « Closure » counts Stacks files as above, with the number not yet vendored
+in brackets. Rows 1–15 are proved in `lean/Buffalo/AG/Part04Stacks.lean`, `Part05Stacks.lean`,
+`Part06Stacks.lean`, `Part06dStacks.lean` and `Part07Stacks.lean`, and their records updated.
+
+| # | Buffalo entry (AG unless said) | Missing piece | Stacks declaration(s), file, tier | Closure | Feasibility |
+|---|---|---|---|---|---|
+| 1 | 23907, invertible ⇔ finite projective of rank one at every prime | the converse (a Mathlib TODO) | `Module.finite_projective_rankAtStalk_one_tfae_invertible_exists_tensor_inverse` (0B8I), `StacksFrontier/Algebra/Module/Projective/Invertible.lean`; Frontier | 3 [1] | **done** |
+| 2 | 7990, Koszul complex of a regular sequence acyclic | Koszul complexes | `Koszul.isKoszulRegularOn_and_isKoszulRegular_of_regular` (062F), `StacksFrontier/RingTheory/Koszul/Regular.lean`; Frontier | already vendored | **done** |
+| 3 | 8250, `A` regular ⇔ `Â` regular | regularity of the completion | `isRegularLocalRing_iff_adicCompletion_maximalIdeal` (07NY) in `StacksFrontier/RingTheory/AdicCompletion/PermanenceOfProperties.lean` (closure 230, too large), so 07NV and 07NY reproved over `AdicCompletion.isNoetherianRing` (0316); Frontier | 3 [2] | **done** |
+| 4 | 33941 and 33684, the relative spectrum of a quasi-coherent algebra, representable, `Spec Γ(U, 𝒜)` over affine `U` | quasi-coherent algebras, relative Spec | `relativeSpecFunctor_isRepresentable` (01LU), `relativeSpecRepresentableBy` (01LV), `GluedSpectrum.chart_isPullback` (01LP), `StacksFrontier/AlgebraicGeometry/RelativeSpec/Representability.lean`; Frontier | 22 [20] | **done** |
+| 5 | 34520 and 34263, `f_*𝒪_X` quasi-coherent for `f` affine, anti-equivalence with quasi-coherent algebras, essential image | the same | `isQuasicoherent_pushforwardAlgebra` (02KG), `affineQuasicoherentEquivalence` (01SA), `StacksFrontier/AlgebraicGeometry/RelativeSpecEssSurj/Basic.lean`; Frontier | 19 [0 after row 4] | **done** |
+| 6 | 17370, the equivalent definitions of a separable algebra (any perfect extension `K₁`) | the implications beyond Mathlib's definition | `Algebra.isGeometricallyReduced_tfae` (030V), `Algebra.IsGeometricallyReduced.isReduced_tensorProduct` (034N), `StacksFrontier/RingTheory/GeometricallyReduced/{TFAE,TensorProduct}.lean`; Frontier | 28 [25] (with rows 7–10) | **done** |
+| 7 | 19493, products of separable (and of geometrically irreducible) `k`-schemes | the separable half; universal openness over a field | `geometricallyReduced_pullback_over_field` (035Z), `.../Variety/Geometrically/ReducedProduct.lean`; universal openness is Mathlib's instance (0383, `.../Morphisms/Open/OverField.lean` only restates it) | same closure | **done** |
+| 8 | 16790 and 17116, perfect fields and reduced tensor products | arbitrary reduced algebras and extensions | `PerfectField.isReduced_tensorProduct` (00I4), `.../GeometricallyReduced/TensorProduct.lean` | same closure | **done** |
+| 9 | 17899, over a perfect field reduced ⇒ separable | the perfect-field converse | `Algebra.IsGeometricallyReduced.of_perfectField` (00I4), `geometricallyReduced_of_isReduced` (020I), `.../Variety/Geometrically/Reduced.lean` | same closure | **done** |
+| 10 | 17970, `X` separable over `k` ⇔ `X_{k'}` over `k'` | the descent direction | `geometricallyReduced_iff_baseChange_fieldExtension` (0384), `.../Variety/Geometrically/ReducedBaseChange.lean` | same closure | **done** |
+| 11 | 8055, `𝔾_m` and `GL_n` regular | regularity of localizations of regular rings | `isRegularRing_of_isLocalization` (after 00OD), `StacksFrontier/RingTheory/RegularRing/Defs.lean` | 1 [1] | **done** |
+| 12 | 2525, completions of noetherian rings noetherian | noetherianity of `AdicCompletion` | `AdicCompletion.isNoetherianRing` (0316), `.../AdicCompletion/NoetherianRing/PowerSeriesSurjection.lean` | 3 [2] | **done** for this half; `Â ⊗_A Â` non-noetherian not formalised |
+| 13 | 19954, 20993, 21315, products of geometrically connected `k`-schemes | the universal-openness hypothesis | none needed: Mathlib's `UniversallyOpen` instance over a field (0383); hypothesis dropped | 0 | **done** for these parts; the separably-closed and descent parts remain |
+| 14 | 8313, Cohen's structure theorem for complete regular local rings | Cohen structure theorem | `StacksFrontier/RingTheory/CompleteLocalRing/CohenStructureTheorem.lean` (032D, 032A) | 99 [83] | low |
+| 15 | 8121, Serre's criterion (regular ⇔ finite global dimension) | global dimension | `isRegularLocalRing_tfae` (00OC), `StacksFrontier/RingTheory/RegularLocalRing/GlobalDimension.lean` | 532 | low |
+| 16 | 7860, regular local ⇔ maximal ideal generated by a regular sequence | the comparison with `dim` | 00NQ in `StacksFrontier/Algebra/Module/RegularLocalNakayama.lean`; `isWeaklyRegular_of_span_range_eq_maximalIdeal` in `.../Blowup/ProjectiveLineExceptional.lean` | 42 [39]; 1,913 | low |
+| 17 | 22510, 22572, coherent sheaves of modules | coherent `𝒪_X`-modules | `StacksFrontier/Algebra/Category/ModuleCat/Sheaf/CoherentIffFinitePresentation.lean` (on ringed sites) | 27 [22] | medium: closure fine, but the statements are for sheaves on sites and need glue to Mathlib's `SheafOfModules` on a scheme |
+| 18 | 3491, descent of finite presentation for modules | fpqc descent of finite presentation | 03C4 only for `M^~` (`StacksFrontier/AlgebraicGeometry/FlatBaseChange/Descent.lean`) | 52 [48] | low |
+| 19 | Groupes 6070, determinant of a projective module | determinants of non-free modules | `K0.exists_determinant_hom` (0AFX), `StacksFrontier/KTheory/Grothendieck/Determinant.lean`; the determinant itself is private there | 15 [13] | low: no public determinant to state the entry with |
+| 20 | 24233, 28043–29412, 25093–27544, 31422–33600, 18281–19653 and the other ℙ(E), ample and very ample entries (about 60) | ℙ(E), ample invertible sheaves | `StacksFrontier/AlgebraicGeometry/ProjectiveBundle/…`, `.../Ample*/…`, `.../AmpleFamilyCartier/Basic.lean` | 5,642; 1,029; `AmpleWire/Basic.lean` 18 but only a wiring file | low |
+| 21 | 16640, 17552, 18219 and the effective descent of schemes | a category of descent data of schemes | `StacksFrontier/AlgebraicGeometry/Stacks/…` (descent for algebraic stacks) | hundreds | low |
+| 22 | Topos 02d, 03b, 05a, 07b: Grothendieck topoi, geometric morphisms, `Cat_D` | a notion of Grothendieck topos | only auxiliary structures (`ToposPoint`, `ToposAdjointPair` in `StacksFrontier/CategoryTheory/Sites/…`), no class of topoi | — | **none** |
+| 23 | Topos 01d, colimits in `GrpCat`; Groupes 03a, discrete `Gal(k_s/k)`-sets; group schemes (Cartier, quotients, `G⁰`, pseudo-compact duals) | outside the library's scope or not by name | nothing found by name | — | **none** |
+
+Rows 3 and 12 vendor only `PowerSeriesSurjection.lean` and `EvalFactorPow.lean`; the two lemmas
+of tags 07NV and 07NY are proved again in `Part06Stacks.lean` from Mathlib (going down for the flat
+completion, `AdicCompletion.maximalIdeal_eq_map`, `AdicCompletion.spanFinrank_maximalIdeal_eq`),
+since `PermanenceOfProperties.lean` pulls in 230 files. Row 13 needed no Stacks file: the
+Buffalo docstring that universal openness over a field was missing from Mathlib was wrong at our
+pin. All the proofs elaborate under `lake build` with `warningAsError`, and `#print axioms`
+reports only `propext`, `Classical.choice` and `Quot.sound`. Forty-nine Stacks files were vendored
+for them, unchanged, and are listed in `lean/Stacks/NOTICE.md`.
