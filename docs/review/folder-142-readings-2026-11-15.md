@@ -59,8 +59,8 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p34 batch-02:489 | reading | after « que $\zeta$ \[ 482(58)\quad 483\begin{cases} 484\beta' … » | [illegible] modifier $\zeta$ | ainsi considérer
 - [ ] 142 p34 batch-02:489a | reading | after « [illegible] modifier $\zeta$ en introduisant » | $\zeta' = $ [illegible] $\eta\,\zeta$ [illegible] | un mot
 - [ ] 142 p34 batch-02:489b | reading | after « à $\eta$ la relation 56 » | équivalant [illegible] | équivaut à
-- [ ] 142 p36 batch-02:564 | reading | after « 57 par le pur calcul » | [illegible] | en
-- [ ] 142 p36 batch-02:564a | reading | after « de façon géométrique en posant » | [illegible] | avant
+- [x] 142 p36 batch-02:564 | reading | after « 57 par le pur calcul » | [illegible] | en
+- [x] 142 p36 batch-02:564a | reading | after « de façon géométrique en posant » | [illegible] | avant
 - [ ] 142 p40 batch-02:712 | reading | after « troisième expression de $\beta'$ donne » | [illegible] 77 Ce | $( 77 )$ Ceci
 - [ ] 142 p40 batch-02:717 | reading | after « [illegible] $\sigma_\infty(\beta')$ en posant $\beta_1 = … » | [illegible] | pour
 - [ ] 142 p43 batch-03:40 | reading | after « notation [illegible] avec celles des » | [illegible] précédentes $\alpha, \beta, \beta', \zeta, \eta, \zeta'$ [illegible] 1 | calculs précédents en $\alpha,\beta,\alpha',\beta',\xi,\eta,\xi'\ldots$
@@ -69,7 +69,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p46 batch-03:145 | reading | after « dans les variétés $C^\infty$ et » | [illegible] | des variétés d'ailleurs
 - [ ] 142 p47 batch-03:211 | reading | after « sur $\Sigma^{*}$ on travaille sur » | [illegible] | $C$
 - [ ] 142 p49 batch-03:251 | reading | after « est défini par \[ 249 (17)\quad … » | $R_i^{\omega} \in U_{i\mathbf{R}}$ [illegible] et $R_i^{\omega}$ | $ R_{i\omega} $
-- [ ] 142 p49 batch-03:282 | reading | after « définit des chemins sur $\widetilde{\Sigma}$ » | [illegible] | choisit
+- [x] 142 p49 batch-03:282 | reading | after « définit des chemins sur $\widetilde{\Sigma}$ » | [illegible] | choisit
 - [ ] 142 p49 batch-03:282a | reading | after « [illegible] pour les $b_i^{\omega}$ [illegible] » | orientations [illegible] symétriques [illegible] | 49
 - [ ] 142 p50 batch-03:293 | reading | after « identifier l'une $\boldsymbol{\omega} = \Omega(J) = … » | [illegible] | $ \varepsilon $
 - [ ] 142 p50 batch-03:294 | reading | after « hémisphères Il s'agit d arcs » | [illegible] tout à fait déterminés d'origine extrémité direction [illegible] sur | de l'un
@@ -80,7 +80,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p51 batch-03:378 | reading | after « car le complémentaire connexe et » | [illegible] est connexe | à sont connexes
 - [ ] 142 p51 batch-03:397 | reading | after « identifications impliquées par ces formules » | [illegible] | De
 - [ ] 142 p52 batch-03:437 | reading | after « tous les automorphismes intérieurs Les » | $\pi_1(\Sigma^{*}, [illegible] )$ | $\Pi_1(\Sigma^*, en -)$
-- [ ] 142 p55 batch-03:576 | reading | after « conforme qui transforme le repère » | standard $\{\infty, \omega_{01\infty}, +1\}$ [illegible] | base standart $(\infty,\omega_{0,1,\infty},+1)$ analogue
+- [x] 142 p55 batch-03:576 | reading | after « conforme qui transforme le repère » | standard $\{\infty, \omega_{01\infty}, +1\}$ [illegible] | base standart $(\infty,\omega_{0,1,\infty},+1)$ analogue
 - [ ] 142 p55 batch-03:577 | reading | after « $\{\infty, \omega_{01\infty}, +1\}$ [illegible] dans le … » | [illegible] | $ (\omega i,\omega'i,i) $
 - [ ] 142 p57 batch-03:648 | reading | after « les isom d'épinglage [illegible] $P_\varepsilon$ » | [illegible] $\psi_\varepsilon(l_0)$ $\psi_\varepsilon(l_1)$ [illegible] les lacets standard [illegible] $Q_i$ [illegible] $R_{\omega i}$ NB [illegible] les … | On va expliciter
 - [ ] 142 p57 batch-03:664 | reading | after « [illegible] d'orientation dans le sens » | [illegible] $\omega$ sur l'équateur [illegible] dans $\Pi_{0,3}$ | d'orientation $ \bar\omega =\omega\wedge\varepsilon$
@@ -93,7 +93,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p67 batch-04:122 | reading | after « sens On identifiera [illegible] un » | élément de $ Hom _{\Pi_1}(x,y)$ à son image dans $ Hom _{\widehat{\Pi}_1}(x,y)$ [illegible] note écrite … | isom ext $G'\xrightarrow{\sim}H'$ rendant commutatif
 - [ ] 142 p69 batch-04:156 | reading | after « $l : x \to y$ dans … » | [illegible] | on suppose
 - [ ] 142 p69 batch-04:160 | reading | after « \[ 158 (*) \qquad {}^{u}l : … » | [illegible] | f
-- [ ] 142 p70 batch-04:186 | reading | after « p ex de choisir un » | [illegible] | $x$
+- [x] 142 p70 batch-04:186 | reading | after « p ex de choisir un » | [illegible] | $x$
 - [ ] 142 p70 batch-04:200 | reading | after « sont dans $I$ les syst » | choisis [illegible] finis | fini
 - [ ] 142 p71 batch-04:229 | reading | after « un sens On va développer » | [illegible] [illegible] | encore un
 - [ ] 142 p73 batch-04:273 | reading | after « formules de passage 9 elles » | [illegible] | tombent
@@ -260,7 +260,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p25 batch-02:180 | reading | after « deviennent \[ 178(16)\quad \tilde a^{\omega}_{\omega^2 i}\, … » | entiellemen | textsuperscript
 - [ ] 142 p26 batch-02:209a | reading | after « On prend un automorphisme $u$ » | des groupoïdes | du groupoïde
 - [ ] 142 p26 batch-02:209b | reading | after « de $ II _{J,i}$ engendré par … » | deux | 2
-- [ ] 142 p26 batch-02:230 | reading | after « Les relations à satisfaire sont » | celles | alors
+- [x] 142 p26 batch-02:230 | reading | after « Les relations à satisfaire sont » | celles | alors
 - [ ] 142 p26 batch-02:230a | reading | after « satisfaire sont celles déjà écrites » | sur | en
 - [ ] 142 p26 batch-02:230b | reading | after « $p$ ou $\gamma$ et $\beta$ » | savoir 12 | la dans $(12)$
 - [ ] 142 p27 batch-02:251a | reading | at the top of the page | équivalente | équivaut
