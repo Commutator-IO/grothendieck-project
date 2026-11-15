@@ -1,5 +1,6 @@
 import Buffalo.AG.Part05b
 import StacksFrontier.AlgebraicGeometry.RelativeSpec.Representability
+import StacksFrontier.AlgebraicGeometry.RelativeSpecEssSurj.Basic
 
 /-!
 # Buffalo, algebraic geometry, part 05: the relative spectrum of a quasi-coherent algebra
@@ -19,6 +20,12 @@ files of `StacksFrontier/AlgebraicGeometry/RelativeSpec/` and their imports (Apa
 * the scheme `(gluedSpectrum s).scheme`, glued from the `Spec Γ(U, 𝒜)` over the affine opens
   `U ⊆ S`, represents it (tags 01LU, 01LV), and its restriction over every affine open `U` is
   `Spec Γ(U, 𝒜)` (the cartesian squares of the gluing, tag 01LP).
+
+Entries `34263` and `34520` (schemes affine over `S` and the anti-equivalence with quasi-coherent
+algebras, which `Part05b.lean` proves over an affine base) follow from the same files:
+`isQuasicoherent_pushforwardAlgebra` (`f_*𝒪_X` is quasi-coherent for `f` affine, half of tag
+02KG) and `affineQuasicoherentEquivalence` (tag 01SA), whose essential surjectivity sends `𝒜`
+to its relative spectrum, affine over `S`.
 -/
 
 open AlgebraicGeometry CategoryTheory Limits Stacks.RelativeSpec
@@ -47,5 +54,26 @@ theorem prop_33941_relative (s : RelativeSpecSituation.{u}) :
           U.1.ι :=
   ⟨relativeSpecFunctor_isRepresentable s, ⟨relativeSpecRepresentableBy s⟩,
     (gluedSpectrum s).chart_isPullback⟩
+
+open Stacks.AffineAlgebraEquivalence in
+/-- thSz9ZHDK9o-34520 (9:35:20) [prop] If `f : X ⟶ S` is affine, `f_*𝒪_X` is a quasi-coherent
+`𝒪_S`-algebra, and `X ↦ f_*𝒪_X` is an anti-equivalence from the schemes affine over `S` to the
+quasi-coherent `𝒪_S`-algebras (Stacks tag 01SA). -/
+theorem prop_34520_relative (S : Scheme.{u}) :
+    (∀ {X : Scheme.{u}} (f : X ⟶ S) [IsAffineHom f],
+      AlgebraSheaf.IsQuasicoherent (pushforwardAlgebra f)) ∧
+    Nonempty ((AffineOver S)ᵒᵖ ≌ QuasicoherentAlgebra S) ∧
+    (affineQuasicoherentPushforwardFunctor S).IsEquivalence :=
+  ⟨fun f _ => isQuasicoherent_pushforwardAlgebra f, ⟨affineQuasicoherentEquivalence S⟩,
+    { }⟩
+
+open Stacks.AffineAlgebraEquivalence in
+/-- thSz9ZHDK9o-34263 (9:31:03) [prop] (essential image) Every quasi-coherent `𝒪_S`-algebra is,
+up to isomorphism, `f_*𝒪_X` for a scheme `f : X ⟶ S` affine over `S` (its relative spectrum):
+the functor `X ↦ f_*𝒪_X` on schemes affine over `S` is essentially surjective, so the essential
+image of `Spec` consists of the schemes affine over `S`. -/
+theorem prop_34263_relative (S : Scheme.{u}) :
+    (affineQuasicoherentPushforwardFunctor S).EssSurj :=
+  inferInstance
 
 end Buffalo.AG.Part05
