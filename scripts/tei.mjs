@@ -192,6 +192,8 @@ function liftMath(tex) {
     return marker(held.length - 1);
   };
   const out = tex
+    // An edition figure is set as a centred picture; the centring is presentation only.
+    .replace(/\\begin\{center\}\s*(\\begin\{tikzpicture\}[\s\S]*?\\end\{tikzpicture\})\s*\\end\{center\}/g, '\n\n$1\n\n')
     .replace(/\\begin\{tikzpicture\}[\s\S]*?\\end\{tikzpicture\}/g, (m) => keep(m, 'picture'))
     .replace(/\\begin\{tikzcd\}[\s\S]*?\\end\{tikzcd\}/g, (m) => keep(m, 'diagram'))
     .replace(
@@ -242,6 +244,8 @@ const BRACED = [
   ['note', (a) => `<note type="editorial" resp="${noteResp(a)}">${a}</note>`],
   ['drawing', (a) => `<note type="drawing" resp="${noteResp(a)}">${a}</note>`],
   ['marginal', (a) => `<note type="authorial" place="margin">${a}</note>`],
+  // The legend of an edition figure (\legende): the edition's words, not his.
+  ['legende', (a) => `<note type="editorial" resp="#pass">${a}</note>`],
   ['emph', (a) => `<hi rend="italic">${a}</hi>`],
   ['textit', (a) => `<hi rend="italic">${a}</hi>`],
   ['textbf', (a) => `<hi rend="bold">${a}</hi>`],
