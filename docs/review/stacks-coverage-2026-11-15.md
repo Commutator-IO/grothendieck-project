@@ -107,3 +107,80 @@ project of its own, and none can be closed by citing a declaration. The nearest 
 `23-finite-normalisation-quotient-of-regular` (finiteness of normalisation for quotients of
 regular rings), for which the library's Nagata and excellence material would be the place to
 look first.
+
+## Second round (from the roadmap overlap)
+
+### Method
+
+The first round started from the edition's gaps and searched Stacks by their names. This round
+starts from the Stacks directories that the Tau Ceti overlap page (`Overlap-with-AxiomMath-Stacks`
+on the TauCeti wiki) matches to Michel's roadmaps: `CategoryTheory/Sites/Topos` and `Sites/`,
+`AlgebraicGeometry/Groupoids/` (with `FiniteFlatQuotient` and `FiniteFlatAffine`),
+`AlgebraicGeometry/WeilCohomology/`, `AlgebraicGeometry/GroupScheme/`, `RingTheory/DeRham/Cartier`,
+`AlgebraicGeometry/DeRham/` and `Crystalline/`, `AlgebraicGeometry/FundamentalGroup/`,
+`SetTheory/`, and, where a folder called for them, `Cotangent/`, `Deformation/`, `Picard/` and
+`PicardScheme/`. For each directory the declarations were listed by their `@[stacks …]`
+attributes and module docstrings, then compared with the unproved or partly proved items of
+the folders on the same subjects: the `lean` fields of `src/content/findings.ts` that say
+« Partly », « not formalised » or « not proved » or name a Mathlib gap, the findings without a
+`lean` field in those folders, the « Not formalised » paragraphs of the `lean/Grothendieck/*.lean`
+docstrings, and the « n'est pas formalisé » sentences of `docs/lean/sections/*.tex`. One
+directory outside the list, `AlgebraicGeometry/Variety/`, is included because the matching
+`GroupScheme/OverField` file imports it. Every row was checked by reading the Stacks
+statement, not only its file name. Closures are counted as in the first round (Stacks files
+reached through `import StacksCore…`/`import StacksFrontier…`, the file itself included);
+nothing was vendored or elaborated against our Mathlib this round. Rows already in the first
+round's table are not repeated.
+
+### Ranked table
+
+| # | Item (cote, finding or file) | Missing piece | Stacks declaration(s), file, tier | Closure | Feasibility |
+|---|---|---|---|---|---|
+| 1 | 53, page 9, the criterion of geometric irreducibility (`Folder53.lean`, second part; section 53) | the scheme-level statement with Mathlib's `GeometricallyIrreducible`: the Galois action on `X_{k'}` and its transitivity on fibres, the reduction from all fields to finite Galois (or separable) extensions, the radicial step | `geometricallyIrreducible_tfae_of_isSepClosure` (038I, EGA IV 4.5.9), `StacksFrontier/AlgebraicGeometry/Variety/Geometrically/IrreducibleSeparableClosure.lean`; `fiber_irreducibleComponentsBaseChangeMap_eq_orbit` (04KY), `…/Variety/GeometricIrreducibleComponents/GaloisOrbit.lean`; `fixed_geometricComponent_iff_exists_geometricallyIrreducible_component` (038J), `StacksFrontier/AlgebraicGeometry/GroupScheme/OverField/GaloisFixedComponentDescent.lean`; Frontier | 15; 14; 18 | **high**: 038I is the reduction to `k^sep` (the radicial part is inside it), 04KY the transitivity of the Galois group on the components over a component of `X`, and 038J says that a Galois-fixed component of `X_{k^sep}` is the inverse image of a geometrically irreducible component of `X`, which is the page's last step when `X` is irreducible. All three use Mathlib's `GeometricallyIrreducible`. Remaining work: pass hypothesis b) (the image of `Z` meets no point lying on two components of `X_k̄`) from `k̄` to `k^sep`, and show the component containing `f'(Z')` is fixed |
+| 2 | 19, the remark after theorem 1.12 (section 19, `Folder19.lean`) | the application to topoi: for a morphism of topoi `u : E → F` with `u*` conservative, `F` is the category of coalgebras of the comonad `u* u_*`; « mathlib n'ayant pas les morphismes de topos » | `MorphismOfTopoi` (structure: pushforward, inverse image, adjunction, left exactness of the inverse image; SGA 4 IV 3.3.1 on `id` and `comp`), `StacksFrontier/CategoryTheory/Sites/Topos/MorphismOfTopoi.lean`; `IsMorphismOfSites.morphismOfTopoi` (00XC), same file; Frontier | 4 | **high**: the structure carries exactly the data the remark uses, and the proof is our `theoreme_b_suffisance` (Beck, already in `Folder19.lean`) applied to `u.adj`, equalizers being finite limits. The Stacks structure only bundles what Mathlib can state; what it adds is a shared name and the morphisms of topoi of sites (00XC) to apply the statement to |
+| 3 | 113, `Folder113.lean`, the `k`-linear form of Morita invariance | « the `k`-linear form (and the remark itself) is not formalised »: `Kar(P)` as a `k`-linear category, so that restriction along `P° → (Kar P)°` can be read on `k`-linear functors | `CategoryTheory.Idempotents.Karoubi.linear`, `Karoubi.instModule`, `Karoubi.comm_iff_exists` (in the file tagged 0FGA), `StacksFrontier/AlgebraicGeometry/WeilCohomology/Motives/Category.lean`; Frontier | 4 | **high**: the instance is the missing ingredient; it is declared `local` upstream, so it is used through `letI`, and it is short enough to restate. Remaining work: the `k`-linear analogue of `additive_of_toKaroubi_op` (a functor on `(Kar P)°` is `k`-linear when its restriction to `P°` is) and the restricted equivalence. The remark that additive functors are automatically `k`-linear stays to be proved separately |
+| 4 | 136, `136-pd-de-rham-shadows` (`Folder136.lean`) | « the differential `d(x^{(n)}) = x^{(n−1)}dx` on `Γ(Φ) ⊗ Λ^•Ψ` and its agreement with `pdD` in this basis » | divided power differentials `Crystalline.dividedPowerDifferentials` and the divided power de Rham complex `Crystalline.dividedPowerDeRhamComplex`, with its uniqueness (07HZ), `StacksFrontier/AlgebraicGeometry/Crystalline/Differentials/DeRham.lean`; `dividedPowerDifferentialsDividedPowerPolynomialEquiv` (07HS: `Ω¹` of `B⟨x_w⟩` is `P ⊗ Ω¹_B ⊕ ⨁ P dx_w`), `…/Differentials/DividedPowerPolynomialAlgebra.lean`; Frontier | 7; 30 | **medium**: 07HZ builds the complex with the rule `d(δ_{n+1}x) = δ_n x · dx` over any divided power ring, and 07HS identifies its first term for divided power polynomials over any base, which is the coordinate model of pages 5–7. Remaining work: Stacks uses its own divided power polynomial algebra, not Mathlib's `DividedPowerAlgebra` used in `Folder136.lean`, so the two must be identified (both have the monomial basis), and `pdD` compared with the Stacks differential on that basis. Stacks puts divided powers on the augmentation ideal of Mathlib's `Γ` only for torsion-free bases (`StacksFrontier/RingTheory/DividedPowers/AugmentationIdeal.lean`, closure 5), which is why the route goes through 07HS |
+| 5 | 136, same finding, Proposition 1 | « the acyclicity of `C^{p,q}_*` for `p ≥ 1` (Proposition 1, `Φ_* ≃ 0`) » | `Crystalline.simplexVertexModule` and its contracting homotopy (07L7), `StacksFrontier/AlgebraicGeometry/Crystalline/Cosimplicial/Preparation.lean`; `homotopic_exteriorPower_map`, tensor and completion parts of 07KQ, `StacksFrontier/AlgebraicGeometry/Crystalline/Cosimplicial.lean`; null homotopy ⇒ acyclic Moore complex, `…/Cosimplicial/Acyclicity.lean`; Frontier | 8; 7; 8 | **medium**: `[n] ↦ k^{n+1}` on the vertices of `[n]` is the page's `Φ_*`, and 07L7 is its contraction; 07KQ carries a homotopy through `⊗` and `Λ^q`. Missing: the divided power case `Γ^p` (07KQ as formalised has tensor, exterior powers and completion, not `Γ`), which has to be written on the model of `homotopic_exteriorPower_map`, and the passage from the cosimplicial module to sections over an arbitrary simplicial set |
+| 6 | 11, `11-simplicial-bivariant-poincare-equivalence` (`Folder11.lean`) | « the graded case with Koszul signs » and p. 41's « full faithfulness of `A ↦ (A(pt), Δ)`, whose axioms on `Δ` the page does not write » | `Stacks.WeilCohomology.DiagonalExpansion`: `exists_expansion`, `sum_trace_mul_smul`, `isPerfPair_tracePairing`, `bijective_diagonalContract`, `trace_unique` (the algebra of the proofs of 0FIJ and 0FIK; the file carries no attribute), `StacksFrontier/AlgebraicGeometry/WeilCohomology/Concrete/DiagonalExpansion.lean`; Frontier | 1 | **medium**: for `ℤ`-graded, graded-commutative algebras with a bijective Künneth map, a class `η` with `η·p₁a = η·p₂a` and `(id ⊗ λ)(κ⁻¹η) = 1` makes the trace pairing perfect and determines `λ`. These are candidate axioms for the page's `Δ`, with the signs included, and the uniqueness of `λ` is the step that full faithfulness needs. Remaining work: write the gauged algebras in the graded setting and derive full faithfulness from `trace_unique` |
+| 7 | `EffectiveVenken.lean` (section `effective-venken`) | « the scheme-theoretic language (`R` is handled through its ideal) », and the comparison with the flat case | pre-relations and equivalence relations of schemes, `equivalence_sourceTargetRel` (022Q), `StacksFrontier/AlgebraicGeometry/GroupScheme/Relations/PreRelations.lean`; the groupoid of an equivalence relation (0232, 0233), `…/GroupScheme/OverField/GroupoidOfEquivalenceRelation.lean`; for the flat contrast, `isFiniteLocallyFree_objectsToInvariantSpectrum`, `isPullback_objectsToInvariantSpectrum` (03BM, SGA 3 V 4.1), `StacksFrontier/AlgebraicGeometry/Groupoids/FiniteFlatAffine/AffineQuotient.lean`, and `isIntegral_invariantRing` (03BJ), `…/FiniteFlatAffine/IntegralInvariants.lean`; Frontier | 7; 6; 529; 101 | **medium** for the language: the definitions of 022Q and 0233 let Venken's `R ⊂ Spec B × Spec B` be stated as an equivalence relation of schemes, and the translation from our equivalence ideals is a short computation on affine schemes. **Low** for the contrast with 03BM (for finite locally free `R` on an affine scheme, `Spec B → Spec B^R` is finite locally free with `R` as kernel pair), whose closure is 529 |
+| 8 | 93, Cartier descent (section 93, `Folder93.lean`) | « La descente de Cartier n'est formalisée que sur le fibré trivial, quand l'anneau a une coordonnée »; the passage to a smooth curve | `KaehlerDifferential.Cartier.inverseCartier`, `inverseCartier_bijective_of_isFrobeniusCoordinates` (Cartier isomorphism for an algebra with Frobenius coordinates), `StacksFrontier/RingTheory/DeRham/Cartier/Coordinates.lean`; `inverseCartier_bijective_mvPolynomial`, `…/Cartier/Polynomial.lean`; no `@[stacks]` attribute on these files; Frontier | 42; 43 | **medium**: the Cartier isomorphism in degrees 0 and 1 in several coordinates is the input to Cartier descent for a connection `d + ω` of rank one, where `p`-curvature zero says that `ω` is fixed by the Cartier operator. Partial fill: the descent statement itself, nontrivial bundles and higher rank are not there, and the étale-over-polynomial case of Frobenius coordinates is announced in the docstring, not checked here. Closure at the threshold |
+| 9 | 16, `Folder16.lean` (Problem 5) | « Not formalised: weak and hard Lefschetz, Weil cohomologies » | `ClassicalWeilCohomologyTheory` (0FGV), with abstract `ChowCycleData`, `cycleClass_externalProduct`, `integration_pullback_mul_cycleClass`, `StacksFrontier/AlgebraicGeometry/WeilCohomology/ClassicalTheory.lean`; Frontier | 64 | **low**: the definition of a classical Weil cohomology theory is there with abstract Chow data, so `A⁰(X)`, `A'⁰`, `A''⁰` could be stated inside one; weak and hard Lefschetz are not among its axioms, and the closure exceeds 40 |
+| 10 | 11, `11-tautological-diagonal-product-rule` | « the geometric setting and excess intersection »: `δ² = χ y₁y₂` on `X²` in an actual cohomology theory | `eulerCharacteristic_eq_degree_diagonal_mul`, `eulerCharacteristic_eq_degree_diagonal_mul_eq_degree_chernCap` (0FH0), `StacksFrontier/AlgebraicGeometry/WeilCohomology/ClassicalEulerCharacteristic.lean`; `degree_diagonal_mul_eq_degree_chernCap_tangentSheaf` (0FH0), `…/ClassicalDiagonalSelfIntersection.lean`; Frontier | 15,264 | **low**: 0FH0 is the degree form of the page's first relation (`deg([Δ]·[Δ]) = Σ(−1)ⁱ dim Hⁱ = deg c_d(T_X)`), but the closure is out of reach; the algebraic model already in `Folder11.lean` stays the right place |
+
+### Directories with no match
+
+- **`SetTheory/` (8 files).** Reflection for `V_α` (000G), cofinality (05N2, 05N3) and a size
+  bound (046U). No Lean item or finding of the edition needs a Grothendieck universe or `V_κ`;
+  the occurrences of « universe » in `lean/Grothendieck/` are Lean `universe` declarations.
+- **`AlgebraicGeometry/FundamentalGroup/` (457).** Galois categories, étale `π₁`,
+  specialization and purity. The fundamental-group folders' open items are the free profinite
+  group of 145 (first round, row 15), the Teichmüller and Galois–Teichmüller statements of 142,
+  146, 148 and 149, and the stratified `Π₁` of 151, none of which is a statement about the étale
+  `π₁` of a scheme. The finite-set descent of 29 is first-round row 13.
+- **`CategoryTheory/Sites/Topos` beyond row 2.** 2-morphisms of topoi and their compositions
+  (04IA, 04I9, `TwoMorphismOfTopoi.lean`, closure 5) and localisation `Sh(C)/F ≃ Sh(C/F)` (0791,
+  `LocalizationOfTopoi.lean`, closure 2) are there, but no 2-product of topoi, localic topos,
+  Giraud theorem or `Ind_π`; first-round row 17 (161-3) stands, and 161-1 and 161-2 have no
+  match.
+- **`AlgebraicGeometry/GroupScheme/` beyond row 1.** Group schemes over a field (separated
+  047L, smooth in characteristic 0 047N, identity component 047M, 0B7R), torsors (0498–049A),
+  abelian varieties (03RO, 03RP, 0BFA). No monoid schemes (53, first part), no Krull–Schmidt or
+  tannakian categories (10), nothing on the ranks of 27, the affine quotients of 133 or the
+  Picard groups of 123, and no genus-0 curves over a base with an étale trisection (62).
+- **`Deformation/`, `Cotangent/`, `Picard/`, `PicardScheme/`.** The Rim–Schlessinger lifts
+  (06JE–06JH) and square-zero algebra extensions (0GPT–0GPY) are general; the liftings of smooth
+  groups and the obstruction in `FG_IL_2_GIRAUD69` would need group-scheme and gerbe versions
+  that are not there. No Picard group of a quotient stack was found (140-1, where the reading
+  says « Mathlib n'a pas les champs quotients ni leur groupe de Picard »).
+- **De Rham and crystalline beyond rows 4, 5 and 8.** The de Rham–Hochschild comparison of
+  162-5 and the de Rham application of `93-derived-morphism-homotopy-torsor` are statements about
+  formal categories and sheaf torsors; the crystalline files concern the crystalline site and
+  have no counterpart there.
+
+### Reading
+
+Rows 1 to 3 have small closures and statements that fill the named gap directly; row 1 is the
+best of this round, since three tagged Stacks results cover the three steps that
+`Folder53.lean` lists as not formalised. Rows 4 to 8 supply real pieces but each leaves glue to
+write (a second model of divided powers, the `Γ^p` homotopy, the graded gauged algebras, the
+affine translation, the descent statement). Rows 9 and 10 are out of reach by closure.
