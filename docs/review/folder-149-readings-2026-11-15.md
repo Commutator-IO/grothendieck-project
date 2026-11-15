@@ -913,38 +913,38 @@ Issue #156. Each bullet is one place of folder 149 where our transcription and a
 
 ## 3. Formulas and symbols read differently
 
-- [ ] 149 p3 batch-01:39a | reading | after « de $\Pi_{K^{*}}$ ainsi on prend » | $\overline{K}^{*}$ | $\bar K^{ \prime }=$
+- [x] 149 p3 batch-01:39a | reading | after « de $\Pi_{K^{*}}$ ainsi on prend » | $\overline{K}^{*}$ | $\bar K^{ \prime }=$ | dismissed: mathematically wrong — $\overline{K}'$ already names the closure of $K'$
 - [ ] 149 p5 batch-01:64b | reading | after « quelconques le 2-foncteur $K \mapsto B_K$ … » | $K \mapsto \Pi_K$ | $K\longrightarrow\Pi_K$
 - [ ] 149 p10 batch-01:125a | reading | after « $U_i$ des schémas élémentaires sur » | $k$ | $K_0$
 - [ ] 149 p11 batch-01:161a | reading | after « en utilisant un plongement de » | $\overline{K}$ | $\overline{\mathbb Q}$
 - [ ] 149 p13 batch-01:194a | reading | after « que son centralisateur $Z$ dans » | $E$ | $E_{\bar K/K}$
 - [ ] 149 p17 batch-01:223 | reading | after « de reconstituer l'extension $E_{\overline{K}/K}$ de » | $\Gamma_{\overline{K}/K}$ | $\Gamma^{ a }_{\bar K/K}$
-- [ ] 149 p18 batch-01:234d | reading | after « [illegible] par le groupe extérieur » | $\pi_K = \pi_1(K)$ | $\pi_K\neq\pi_1(K)$
+- [x] 149 p18 batch-01:234d | reading | after « [illegible] par le groupe extérieur » | $\pi_K = \pi_1(K)$ | $\pi_K\neq\pi_1(K)$ | dismissed: mathematically wrong — a group cannot be defined by an inequality
 - [ ] 149 p19 batch-01:241 | reading | after « $\Gamma$ non précisé d'avance de » | $\Gamma_{\overline{\mathbb{Q}}/\mathbb{Q}}$ | $ \Pi _{\overline{\mathbb Q}/\mathbb Q}$
 - [ ] 149 p22 batch-02:49a | reading | after « Écrivons comme d'habitude $K = \varinjlim … » | $K\otimes$ | $ K_0 $
-- [ ] 149 p25 batch-02:114 | reading | after « où $j' : U \to Y$ … » | $\tau_u$ | $\tau_a$ 25
-- [ ] 149 p26 batch-02:124e | reading | after « $\pi_1(U)$ alors $j = j'$ i … » | $u = 0$ | $a=0$
+- [x] 149 p25 batch-02:114 | reading | after « où $j' : U \to Y$ … » | $\tau_u$ | $\tau_a$ 25 | dismissed: mathematically wrong — $a$ undefined, translation is $\tau_u$; stray page number
+- [x] 149 p26 batch-02:124e | reading | after « $\pi_1(U)$ alors $j = j'$ i … » | $u = 0$ | $a=0$ | dismissed: mathematically wrong — $a$ undefined; the element is $u \in G$
 - [ ] 149 p28 batch-02:155c | reading | after « Soit $\overline{K}$ la clôture algébrique » | $\overline{\mathbb{Q}}$ | $ \overline K $
 - [ ] 149 p29 batch-02:160b | reading | after « morphisme $\pi_1(f)$ de $\mathcal{E}_{X/K}$ dans » | dans $\mathcal{E}_{Y/K}$ | $E_{Y/K}$
-- [ ] 149 p29 batch-02:160c | reading | after « $\mathcal{E}_{X/K}$ dans dans $\mathcal{E}_{Y/K}$ Soient » | $f, g : X \rightrightarrows Y$ | $f,g:X=Y$
+- [x] 149 p29 batch-02:160c | reading | after « $\mathcal{E}_{X/K}$ dans dans $\mathcal{E}_{Y/K}$ Soient » | $f, g : X \rightrightarrows Y$ | $f,g:X=Y$ | dismissed: mathematically wrong — $X=Y$ contradicts two distinct schemes; misread double arrow
 - [ ] 149 p34 batch-02:232k | reading | after « construit comme $\varprojlim$ des revêtements » | $G(n) \simeq G$ | $G(n)=G$
 - [ ] 149 p34 batch-02:232l | reading | after « suppose [illegible] qu'on remplace les » | ${}_pG$ | ${}_{p^\nu}G$
-- [ ] 149 p35 batch-02:240h | reading | after « $p$ on trouve que le » | $u$ | $a$
-- [ ] 149 p35 batch-02:240i | reading | after « on en conclut encore que » | $u = 0$ | $a=0$
+- [x] 149 p35 batch-02:240h | reading | after « $p$ on trouve que le » | $u$ | $a$ | dismissed: mathematically wrong — $a$ undefined; the point is $u$ of 1°)
+- [x] 149 p35 batch-02:240i | reading | after « on en conclut encore que » | $u = 0$ | $a=0$ | dismissed: mathematically wrong — $a$ undefined; the point is $u$
 - [ ] 149 p36 batch-02:256a | reading | after « d'après la structure connue de » | $J^0_Y$ | $J_Y^0$
 - [ ] 149 p36 batch-02:256b | reading | after « de $J^0_Y$ comme extension de » | $J^0_{\hat{Y}}$ | $J_{\widehat Y}^0$
-- [ ] 149 p37 batch-02:264d | reading | after « $y$ aient même image dans » | $J^1_{\hat{Y}}$ | $J_{\widehat Y}^1$ ce qui pour un genre $g\neq1$
+- [x] 149 p37 batch-02:264d | reading | after « $y$ aient même image dans » | $J^1_{\hat{Y}}$ | $J_{\widehat Y}^1$ ce qui pour un genre $g\neq1$ | dismissed: mathematically wrong — case split is $g \geq 1$ then $g = 0$
 - [ ] 149 p37 batch-02:264e | reading | after « comme l'image de $u$ dans » | $J^0_{\hat{Y}}$ | $J_{\widehat Y}^0$
 - [ ] 149 p37 batch-02:264f | reading | after « et on remplace $\hat{Y}$ par » | $\hat{Y}_J$ | $\widehat Y\setminus J$
 - [ ] 149 p37 batch-02:266b | reading | after « que l'image de $u$ dans » | $J^0_{\hat{Y}}$ | $J_{\widehat Y\setminus J}^0$
 - [ ] 149 p37 batch-02:272 | reading | after « Considérons les deux applications morphismes » | $U \rightrightarrows Y$ | $U\xrightarrow{i}Y$
 - [ ] 149 p38 batch-02:277a | reading | after « qui revient au même puisque » | $Y \xrightarrow{\alpha} J^1_Y$ | $Y\xrightarrow{\alpha}J_Y^1$
-- [ ] 149 p38 batch-02:277b | reading | after « puisque $Y \xrightarrow{\alpha} J^1_Y$ induit un … » | $H_1(\alpha) : H_1(Y) \to H_1(J^1_Y)$ | $H_1(\alpha):H_1(Y)-H_1(J_Y^1)$
+- [x] 149 p38 batch-02:277b | reading | after « puisque $Y \xrightarrow{\alpha} J^1_Y$ induit un … » | $H_1(\alpha) : H_1(Y) \to H_1(J^1_Y)$ | $H_1(\alpha):H_1(Y)-H_1(J_Y^1)$ | dismissed: mathematically wrong — minus sign where the map's arrow stands
 - [ ] 149 p38 batch-02:281d | reading | after « aux complétés donc on a » | $f(U) = \hat{Y} - f(J) \subset Y = \hat{Y} - I$ | $f(J)$
 - [ ] 149 p39 batch-02:294g | reading | after « que l'image de $u$ dans » | $J^0_{\hat{Y}}$ | $J_{\widehat Y}^0$
 - [ ] 149 p41 batch-03:26 | reading | after « du précédent appliqué notamment à » | $\mathbf{P}^1_K$ | $\mathbb P_K^1$
-- [ ] 149 p42 batch-03:56 | reading | after « morphisme $B_{K'} \to B_K$ de topos … » | $B_{\mathbf{Q}}$ | $B_{\mathbb Q}$ 42
-- [ ] 149 p44 batch-03:86a | reading | after « c ci-dessus en c L'hom » | $E^{o}_{K'} \to E_K$ | $E_{K'}^\circ-E_K$
+- [x] 149 p42 batch-03:56 | reading | after « morphisme $B_{K'} \to B_K$ de topos … » | $B_{\mathbf{Q}}$ | $B_{\mathbb Q}$ 42 | dismissed: artefact — stray page number 42
+- [x] 149 p44 batch-03:86a | reading | after « c ci-dessus en c L'hom » | $E^{o}_{K'} \to E_K$ | $E_{K'}^\circ-E_K$ | dismissed: mathematically wrong — minus sign where the homomorphism's arrow stands
 - [ ] 149 p44 batch-03:87 | reading | after « par $E_{K'} \to E_K$ est admissible … » | $E^{o}_{K'}$ | $E_{K'}^\circ$
 - [ ] 149 p44 batch-03:96a | reading | after « $E'$ lui-même mais même de » | $E'^{o}$ | $E'^\circ$
 - [ ] 149 p44 batch-03:99a | reading | after « de $\Gamma'$ mais même de » | $\Gamma'^{o}$ | $\Gamma'^\circ$
@@ -965,21 +965,21 @@ Issue #156. Each bullet is one place of folder 149 where our transcription and a
 - [ ] 149 p60 batch-03:468 | reading | after « contenant un sous-groupe ouvert de » | $\Gamma^{o}$ | $\Gamma^\circ$
 - [ ] 149 p62 batch-04:37 | reading | after « de $\Gamma^{0}$ opérant sur $\mathcal{X}$ » | $\Gamma^{0}$ | $\Gamma^\circ$
 - [ ] 149 p65 batch-04:71g | reading | after « des topos $B_{\widehat{\pi}_{0,3}, \Gamma_{\mathbb{Q}}}$ [illegible] sur » | $B_{\Gamma}$ | $B_{\Gamma_Q}^{ \sharp }$
-- [ ] 149 p67 batch-04:86 | reading | after « finalement tous les $\mathcal{E}_K$ sur » | $\mathcal{E}_{\mathbb{Q}}$ | $ E \,E_Q$
+- [x] 149 p67 batch-04:86 | reading | after « finalement tous les $\mathcal{E}_K$ sur » | $\mathcal{E}_{\mathbb{Q}}$ | $ E \,E_Q$ | dismissed: artefact — stray doubled letter E
 - [ ] 149 p69 batch-04:94e | reading | after « $S$ définissant une section de » | $\mathcal{E}_{\mathcal{U}_K}$ | $E_{U_{ \eta }}$
 - [ ] 149 p69 batch-04:94f | reading | after « $S$ ssi la section de » | $\mathcal{E}_{\mathcal{U}_K}$ | $E_{U_{ \eta }}$
 - [ ] 149 p71 batch-04:104c | reading | after « $S'$ se prolonge automatiquement en » | $\mathcal{U}$ en | $U$
 - [ ] 149 p72 batch-04:125f | reading | after « correspondent biunivoquement aux sections de » | $\mathcal{E}_{\mathcal{U}_K}$ | $E_{U_\eta}$
 - [ ] 149 p73 batch-04:133a | reading | after « précédente que la la section » | $\varphi$ | $\psi$
 - [ ] 149 p73 batch-04:133b | reading | after « la la section $\varphi$ de » | $\mathcal{E}_{\mathcal{U}_K}$ | $E_{U_\eta}$
-- [ ] 149 p73 batch-04:137c | reading | after « générale Théorème [illegible] 1 Soit » | $T$ | $ S $
+- [x] 149 p73 batch-04:137c | reading | after « générale Théorème [illegible] 1 Soit » | $T$ | $ S $ | dismissed: mathematically wrong — trait is $T$ throughout the theorem
 - [ ] 149 p77 batch-04:219 | reading | after « \[ 217T_\ell \longrightarrow T_\ell^{I} / T_\ell … » | $n$ | $\mu$
 - [ ] 149 p77 batch-04:221b | reading | after « $p$ c'est que l'hom ext » | $\pi_1(\mathcal{Y}) \to \pi_1(\mathcal{U}) \simeq \pi_1(\mathcal{U}_s)$ | $\pi_1(\eta)\longrightarrow\pi_1(U)\simeq\pi_1(U_s)$
 - [ ] 149 p77 batch-04:221c | reading | after « égal à [illegible] $k_{i_0} \circ (n … » | $k_{i_0}$ | $\kappa_{i_0}$
-- [ ] 149 p81 batch-05:29 | reading | after « sur $X$ le long de » | $g_i(S)$ | $ g (S)$
-- [ ] 149 p82 batch-05:58 | reading | after « prolonge en une section de » | $\mathbb{E}^1_S$ | $ \mathbb E'_S $
+- [x] 149 p81 batch-05:29 | reading | after « sur $X$ le long de » | $g_i(S)$ | $ g (S)$ | dismissed: mathematically wrong — index dropped; sections are $g_i$
+- [x] 149 p82 batch-05:58 | reading | after « prolonge en une section de » | $\mathbb{E}^1_S$ | $ \mathbb E'_S $ | dismissed: mathematically wrong — $\mathbb{E}^1_S$ two lines above; $\mathbb{E}'$ undefined
 - [ ] 149 p82 batch-05:68 | reading | after « considérons son stabilisateur $N_x$ dans » | $\mathcal{E}_K$ | le $E_K$
-- [ ] 149 p84 batch-05:104 | reading | after « arithm est injectif Ainsi quand » | $\xi_i = 0$ | $\gamma_i=0$
+- [x] 149 p84 batch-05:104 | reading | after « arithm est injectif Ainsi quand » | $\xi_i = 0$ | $\gamma_i=0$ | dismissed: mathematically wrong — the obstruction is $\xi_i$; $\gamma_i$ undefined
 - [ ] 149 p84 batch-05:108 | reading | after « s'identifie à un sous-torseur du » | $\bigl(H^1(S, T) = \mathbb{G}_m(S)^{\wedge}\bigr)$ | $(H^1(S,T)=G_m(S)^\wedge)$
 - [ ] 149 p85 batch-05:121a | reading | after « codim $1$ va coïncider avec » | une $g_i$ | $g_{i_0}$
 - [ ] 149 p86 batch-05:142a | reading | after « germe de variété $D = \bigl(\overline{\{s\}}\bigr)_{ … » | $s$ | $s\dots$
@@ -988,7 +988,7 @@ Issue #156. Each bullet is one place of folder 149 where our transcription and a
 - [ ] 149 p87 batch-05:189 | reading | after « sur $\mathcal{E}_K$ elle-même définie par » | $f_K$ | le
 - [ ] 149 p87 batch-05:189a | reading | after « $f_K$ pt $K$ rat de » | $U_K$ | $U_\eta$
 - [ ] 149 p87 batch-05:189b | reading | after « $K$ rat de $U_K$ sur » | $K$ | $\eta$
-- [ ] 149 p87 batch-05:194a | reading | after « de la forme $k_i \circ (\mu … » | $k_i \colon T \to \pi$ | $\kappa_i:T-\pi$
+- [x] 149 p87 batch-05:194a | reading | after « de la forme $k_i \circ (\mu … » | $k_i \colon T \to \pi$ | $\kappa_i:T-\pi$ | dismissed: mathematically wrong — minus sign where the map's arrow stands
 - [ ] 149 p87 batch-05:197 | reading | after « s'envoie dans le normalisateur de » | $L_i = k_i(T)$ | $L_i=\kappa_i(T)$
 - [ ] 149 p88 batch-05:218 | reading | after « $\pi_1$ correspondant Une section rationnelle » | $f$ | $f_{ K }$
 - [ ] 149 p89 batch-05:236a | reading | after « de la forme $k_i \circ (\mu … » | $k_i$ | $\kappa_i$
@@ -997,22 +997,22 @@ Issue #156. Each bullet is one place of folder 149 where our transcription and a
 - [ ] 149 p89 batch-05:256 | reading | after « dans $N(L_i)$ Ainsi notre scindage » | de $\mathcal{E}_{U_K}$ | $E_{U_\eta}$
 - [ ] 149 p89 batch-05:258 | reading | after « $\mathcal{E}_{U_K}$ sur $\mathcal{E}_K$ ou de » | $\mathcal{E}_{U_{\tilde{K}}}$ | $E_{U_{\widetilde K}}$ $E_{X_s}$
 - [ ] 149 p90 batch-05:265a | reading | after « sur $\mathcal{E}_S$ ni même de » | $\mathcal{E}_{U_{\tilde{\mathcal{O}}}}$ | $\mathcal E_{\widetilde U}$
-- [ ] 149 p90 batch-05:270 | reading | after « type fini sur un corps » | $k_0$ | de $ N $
+- [x] 149 p90 batch-05:270 | reading | after « type fini sur un corps » | $k_0$ | de $ N $ | dismissed: ungrammatical — « un corps de N, disons Q » makes no sense
 - [ ] 149 p90 batch-05:278 | reading | after « Une section rationnelle $f$ de » | $U/S$ | $\frac{U}{S}$
-- [ ] 149 p90 batch-05:280a | reading | after « parcourant l'un des pts de » | $S'$ | $S$ 90
-- [ ] 149 p92 batch-05:308 | reading | after « celui du complété s'identifie de » | même | $=$
+- [x] 149 p90 batch-05:280a | reading | after « parcourant l'un des pts de » | $S'$ | $S$ 90 | dismissed: artefact — stray page number 90
+- [x] 149 p92 batch-05:308 | reading | after « celui du complété s'identifie de » | même | $=$ | dismissed: ungrammatical — « s'identifie de = » breaks the syntax
 - [ ] 149 p94 batch-05:346 | reading | after « la classe de scindages de » | $\mathcal{E}_{X_s}$ | $\mathcal E_{ X_B }$
 - [ ] 149 p94 batch-05:353 | reading | after « rationnelle envisagée du faisceau conormal » | $\mathcal{N}^{\vee}_{D_\alpha/S}$ | $\underline N_{D_\alpha,S}^{ r }$
 - [x] 149 p95 batch-05:363a | reading | after « complété formel d'une courbe relative » | $X/S$ | $X/B$
 - [ ] 149 p97 batch-05:404a | reading | after « $\mathcal{E}_K$ [illegible] inertie relative sur » | $\mathcal{E}_k$ | $\mathcal E_k\ldots$
-- [ ] 149 p102 batch-06:72 | reading | after « considération de courbes de type » | gr | $g,\nu$
+- [ ] 149 p102 batch-06:72 | reading | after « considération de courbes de type » | gr | $g,\nu$ | note: our reading looks impossible: « gr » is not a word; « type $(g,\nu)$ » expected
 - [ ] 149 p104 batch-06:103 | reading | after « corps je note $\mathcal{E}_A$ et » | $\mathcal{E}^{\tilde{A}}_{A}$ | $\mathcal E_A^{\tilde A}$ $=\mathcal E_X^{ \tilde X }$
 - [ ] 149 p105 batch-06:119 | reading | after « et d'une ext sép close » | $\overline{\Omega}$ | $\bar K$ $\Omega$
 - [ ] 149 p106 batch-06:152a | reading | after « devrait pouvoir écrire en fait » | $\mathcal{E}^{\tilde{X}}_{Y}$ | $\mathcal E_Y^{\widetilde X}$
 - [ ] 149 p107 batch-06:177a | reading | after « on a donc \[ 174 (8) … » | $\ldots$ | on a
 - [ ] 149 p108 batch-06:212 | reading | after « un pt géom de $X$ » | $\mathcal{E}^{\Omega}_{X/Y}$ $\mathcal{E}^{\tilde{X}}_{X/A}$ | $\mathcal E_{X/Y}^{\Omega}$ $\mathcal E_{X/A}^{\widetilde X}$
 - [ ] 149 p108 batch-06:213 | reading | after « $X$ $\mathcal{E}^{\Omega}_{X/Y}$ $\mathcal{E}^{\tilde{X}}_{X/A}$ si $Y = … » | $\mathcal{E}^{\tilde{B}}_{B/A}$ | $\mathcal E_{B/A}^{\widetilde B}$ $\ldots$
-- [ ] 149 p109 batch-06:229a | reading | after « $T \to X$ ce qui revient … » | même | $=$
+- [x] 149 p109 batch-06:229a | reading | after « $T \to X$ ce qui revient … » | même | $=$ | dismissed: ungrammatical — « revient au = » breaks the syntax
 - [ ] 149 p110 batch-06:273a | reading | after « remplace [illegible] le contenu de » | $\mathcal{E}^{T}_{X_T}$ | $\mathcal E_{X_T}^T$
 - [ ] 149 p111 batch-06:296b | reading | after « Une [illegible] des [illegible] de » | $\mathcal{E}^{T}_{X/Y}$ | $\mathcal E_{X/Y}^T$
 - [ ] 149 p111 batch-06:297 | reading | after « un pt géométrique qui définit » | $\xi_X$ | donc
@@ -1020,23 +1020,23 @@ Issue #156. Each bullet is one place of folder 149 where our transcription and a
 - [ ] 149 p112 batch-06:326a | reading | after « la donnée d'un isom entre » | $\mathcal{E}^{T}_{X/Y}$ | $\mathcal E_{X/Y}^T$
 - [ ] 149 p112 batch-06:326b | reading | after « d'un isom entre $\mathcal{E}^{T}_{X/Y}$ et » | $\mathcal{E}^{T'}_{X/Y}$ | $\mathcal E_{X/Y}^{T'}$
 - [ ] 149 p113 batch-06:329a | reading | after « d'un [illegible] de » | $\mathcal{E}^{T}_{X}$ $/Y$ | $\mathcal E_{X /Y }^T$
-- [ ] 149 p113 batch-06:334 | reading | after « pt de vue qui regarde » | $\mathcal{E}^{T}_{X}$ | $\mathcal E_{X /Y }^T$
+- [x] 149 p113 batch-06:334 | reading | after « pt de vue qui regarde » | $\mathcal{E}^{T}_{X}$ | $\mathcal E_{X /Y }^T$ | dismissed: mathematically wrong — the extension is $\mathcal{E}_X$, by $\mathcal{E}_{X/Y}$
 - [ ] 149 p113 batch-06:335a | reading | after « $\mathcal{E}^{T}_{X}$ comme une extension de » | $\mathcal{E}^{T}_{Y}$ | $\mathcal E_Y^T$
 - [ ] 149 p113 batch-06:335b | reading | after « ou d'un sous-groupe convenable par » | $\mathcal{E}^{T}_{X/Y}$ | $\mathcal E_{X/Y}^T$
 - [ ] 149 p113 batch-06:337 | reading | after « groupe fondamental géométrique tandis que » | $\mathcal{E}^{T}_{Y}$ | $\mathcal E_Y^T$
 - [ ] 149 p114 batch-06:347a | reading | after « $ Spec \overline{K} \simeq \overline{Y}$ Souvent … » | $\Gamma^{\overline{K}}_{K}$ $\Gamma$ | $\Gamma_K^{\overline K}$
 - [ ] 149 p114 batch-06:354 | reading | after « propre régulier de $L$ Alors » | $\mathcal{E}^{\overline{L}}_{X}$ | $\mathcal E_X^{\overline L}$
 - [ ] 149 p116 batch-06:390 | reading | after « est la limite projective des » | $\mathcal{E}^{\overline{L}}_{U}$ | $\mathcal E_U^{\overline L}$
-- [ ] 149 p116 batch-06:395 | reading | after « tient variables \[ 393 (24) \qquad … » | même | $=$
+- [x] 149 p116 batch-06:395 | reading | after « tient variables \[ 393 (24) \qquad … » | même | $=$ | dismissed: ungrammatical — « et de = » breaks the syntax
 - [ ] 149 p117 batch-06:411 | reading | after « $N_{x'}$ et un groupe d'inertie » | $I_{x'}$ | $ L_{x'} $
 - [ ] 149 p118 batch-06:444b | reading | after « [illegible] d'une pt géométrique de » | $\tilde{U}_x$ | $ \widetilde K_x $
 - [ ] 149 p118 batch-06:445 | reading | after « de l'une clôture algébrique de » | $\tilde{L}_x$ | $\widetilde K_x$
 - [ ] 149 p118 batch-06:447a | reading | after « $\tilde{U}_x \to U$ [illegible] Spec L … » | $\mathcal{E}_L$ | $ \xi _L$
 - [ ] 149 p120 batch-06:506a | reading | after « Ceci posé » | $\mathcal{E}^{\overline{L}}_{U}$ | $\mathcal E_U^{\overline L}$
-- [ ] 149 p122 batch-07:32e | reading | after « on peut faisant encore éclater » | supposer | $a$
+- [x] 149 p122 batch-07:32e | reading | after « on peut faisant encore éclater » | supposer | $a$ | dismissed: ungrammatical — a lone symbol where the verb « supposer » is needed
 - [ ] 149 p122 batch-07:38c | reading | after « son p oin t fermé » | $s$ | $ x $
-- [ ] 149 p123 batch-07:45d | reading | after « $x \in \mathfrak{X}$ correspondant $T_{\infty} = … » | $x$ | $ a $
-- [ ] 149 p123 batch-07:45e | reading | after « groupe ouvert de $\mathcal{E}_K$ puisque » | $k(x)$ | $k( a )$
+- [x] 149 p123 batch-07:45d | reading | after « $x \in \mathfrak{X}$ correspondant $T_{\infty} = … » | $x$ | $ a $ | dismissed: mathematically wrong — $a$ undefined; the point is $x$
+- [x] 149 p123 batch-07:45e | reading | after « groupe ouvert de $\mathcal{E}_K$ puisque » | $k(x)$ | $k( a )$ | dismissed: mathematically wrong — $a$ undefined; residue field of $x$
 - [ ] 149 p124 batch-07:54c | reading | after « $K$ Comparant pour une sous-extension » | $L_1$ | $L_1^{ k }$
 - [ ] 149 p125 batch-07:61c | reading | after « de normalise $I_{V_1}$ donc si » | $\ldots$ | on a
 - [ ] 149 p125 batch-07:61d | reading | after « $I_{V_1}$ et sa restriction à » | $\mathcal{E}_K^{\circ}$ | $\mathcal E_K^0$
@@ -1045,12 +1045,12 @@ Issue #156. Each bullet is one place of folder 149 where our transcription and a
 - [ ] 149 p127 batch-07:95a | reading | after « irréd $D_i$ $i \in I$ de … » | $X \setminus U$ | $X-U$
 - [ ] 149 p127 batch-07:95b | reading | after « $X \setminus U$ des diviseurs réguliers … » | $X \setminus U$ | $X-U$
 - [ ] 149 p129 batch-07:125a | reading | after « réserve de vérifications je présume » | 1 | $1^\circ)$
-- [ ] 149 p129 batch-07:125b | reading | after « ou ce qui revient au » | même | $=$
+- [x] 149 p129 batch-07:125b | reading | after « ou ce qui revient au » | même | $=$ | dismissed: ungrammatical — « revient au = » breaks the syntax
 - [ ] 149 p129 batch-07:146 | reading | after « À noter que la question » | 2 | $2^\circ$
 - [ ] 149 p130 batch-07:151a | reading | after « vraie ou fausse par contre » | 1 | $1^\circ)$
 - [ ] 149 p130 batch-07:160 | reading | after « tourner vers l'étude des questions » | 1 | $1^\circ)$
 - [ ] 149 p130 batch-07:160a | reading | after « l'étude des questions 1 et » | 2 | $2^\circ)$
-- [ ] 149 p131 batch-07:174b | reading | after « $D_J \subset X$ est régulier de … » | $\alpha$ | $d$
+- [x] 149 p131 batch-07:174b | reading | after « $D_J \subset X$ est régulier de … » | $\alpha$ | $d$ | dismissed: mathematically wrong — codimension is $\alpha = \operatorname{card} J$
 - [ ] 149 p132 batch-07:184d | reading | after « le long de $D_J$ soit » | $X$ $X_J$ | $ \hat X_J X_J$
 - [ ] 149 p132 batch-07:184e | reading | after « $U_J$ $= X_J \setminus D_J$ la … » | $U$ | $U_{ \xi }$
 - [ ] 149 p135 batch-07:245b | reading | after « les choix relatifs aux différents » | $x$ | $\alpha$
@@ -1061,20 +1061,20 @@ Issue #156. Each bullet is one place of folder 149 where our transcription and a
 - [ ] 149 p3 batch-01:30 | reading | after « on a un morphisme de » | topos | Topos
 - [ ] 149 p5 batch-01:59a | reading | after « équivalence de groupoïdes ou de » | topos | Topos
 - [ ] 149 p9 batch-01:110a | reading | after « de Galois correspond au sous-corps » | $k_0$ | $K_0$
-- [ ] 149 p17 batch-01:223a | reading | after « permet de » | reconstituer | réconstituer
+- [x] 149 p17 batch-01:223a | reading | after « permet de » | reconstituer | réconstituer | dismissed: ungrammatical — misspelling « réconstituer »
 - [x] 149 p19 batch-01:244 | reading | after « commute et ceci suffit pour » | reconstituer | réconstituer
 - [ ] 149 p20 batch-01:248d | reading | after « on a $Z \cap \pi = … » | Th | th
 - [ ] 149 p24 batch-02:87 | reading | after « $X$ on sait que 1 » | les | Les
 - [ ] 149 p24 batch-02:93a | reading | after « son action sur les $H_1(\ , … » | ce | Ce
-- [ ] 149 p36 batch-02:249c | reading | after « variété élémentaire d'Artin anabélienne sur » | $k$ | $K$
+- [x] 149 p36 batch-02:249c | reading | after « variété élémentaire d'Artin anabélienne sur » | $k$ | $K$ | dismissed: mathematically wrong — the field is $k$, as in $J^0_Y(k)$
 - [ ] 149 p43 batch-03:74 | reading | after « projections sur $E_{\mathbf{Q}} = \Gamma_{\mathbf{Q}}$ en … » | toute | Toute
 - [ ] 149 p48 batch-03:182 | reading | after « sorte que $\Gamma'$ opère sur » | $\pi_U$ | $\Pi_U$
 - [ ] 149 p50 batch-03:223 | reading | after « groupes profinis correspondant à des » | $K(\pi,1)$ | $K(\Pi,1)$
 - [ ] 149 p52 batch-03:261a | reading | after « propose d'étudier les sections mod » | $\pi_{U/K}$ | $\Pi_{U/K}$
 - [ ] 149 p54 batch-03:324b | reading | after « e aux pts de $U$ » | à | a
 - [ ] 149 p56 batch-03:368b | reading | after « l'extension $E_L$ de $E_K$ par » | $\pi_{L/K}$ | $\Pi_{L/K}$
-- [ ] 149 p77 batch-04:215 | reading | after « une multiplicité d'intersection Ceci posé » | je | Je
+- [x] 149 p77 batch-04:215 | reading | after « une multiplicité d'intersection Ceci posé » | je | Je | dismissed: ungrammatical — capital « Je » after a comma
 - [ ] 149 p89 batch-05:234 | reading | after « équivalentes begin enumerate item a » | cet | Cet
-- [ ] 149 p93 batch-05:333 | reading | after « [illegible] $U_{D_\alpha}$ sur $D_\alpha$ ou » | $U_{s_\alpha}$ | $U_{S_\alpha}$
-- [ ] 149 p107 batch-06:181 | reading | after « $x \in X$ i e une … » | sép | sep
-- [ ] 149 p120 batch-06:527 | reading | after « $x$ $n - d$ est la … » | il | Il
+- [x] 149 p93 batch-05:333 | reading | after « [illegible] $U_{D_\alpha}$ sur $D_\alpha$ ou » | $U_{s_\alpha}$ | $U_{S_\alpha}$ | dismissed: mathematically wrong — the point is $s_\alpha$; $S_\alpha$ undefined
+- [x] 149 p107 batch-06:181 | reading | after « $x \in X$ i e une … » | sép | sep | dismissed: ungrammatical — « sep. » lacks its accent
+- [x] 149 p120 batch-06:527 | reading | after « $x$ $n - d$ est la … » | il | Il | dismissed: ungrammatical — capital « Il » after a semicolon
