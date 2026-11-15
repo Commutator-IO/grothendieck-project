@@ -32,6 +32,8 @@ files:
 | `StacksFrontier/Algebra/Homology/DerivedCategory/KGroup.lean` | `DerivedCategory.Bounded.exists_addEquiv_K0` (tag 0FCP) |
 | `StacksFrontier/RingTheory/Koszul/Defs.lean`, `Relations.lean`, `Cone.lean`, `HomotopyCofiber.lean`, `Regular.lean` | Koszul complexes, `IsKoszulRegularOn`, `IsKoszulRegular` (tag 062E), `isKoszulRegularOn_and_isKoszulRegular_of_regular` (tag 062F) |
 | `StacksFrontier/LinearAlgebra/ExteriorAlgebra/Prod.lean`, `StacksFrontier/LinearAlgebra/SymmetricPower/Presentation.lean` | imported by the Koszul files |
+| `StacksFrontier/RingTheory/Flat/GenericFlatness.lean` | `Algebra.exists_isOpen_dense_isFinitePresentationFreeAway` (tag 051Z), generic freeness over a reduced base, used by `lean/Grothendieck/Folder94GenericFlatness.lean` |
+| `StacksFrontier/Algebra/Category/Ring/Epi/GenericFlatness.lean`, `.../GenericFlatness/Noetherian.lean`, `.../GenericFlatness/FinitePresentation.lean`, `.../GenericFlatness/GenericFinitePresentation.lean`, `.../GenericFlatness/Locus.lean`, `StacksFrontier/RingTheory/FinitePresentation/FreeAway.lean`, `StacksCore/Algebra/Module/FinitePresentation.lean` | imported by the previous file (generic freeness 051R, 051S, 051T, the locus 051U–051Y) |
 
 The users are `lean/Grothendieck/Folder22Adic.lean`, `lean/Grothendieck/Folder94Koszul.lean` and
 `lean/Grothendieck/IhesSGA6_2_3Db.lean`.
