@@ -199,14 +199,6 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     src: 'docs/moduli/article.tex',
   },
   {
-    id: 'article-bourbaki-lean',
-    title: 'Rédactions Bourbaki : énoncés démontrés en Lean',
-    lang: 'French',
-    what: 'Statements from fifteen rédactions of the Bourbaki archive (1950–1974), proved in Lean and written out for a reader who does not use Lean. Several typed statements turn out false, with counterexamples.',
-    pdf: '/article/bourbaki-lean.pdf',
-    src: 'docs/bourbaki-lean/article.tex',
-  },
-  {
     id: 'article-quillen-lean',
     title: "Daniel Quillen's Notebooks: Statements Proved in Lean",
     lang: 'English',
@@ -265,7 +257,6 @@ const STARS: Record<string, 1 | 2 | 3> = {
   'article-polytopes': 2,
   'article-moduli': 2,
   'article-quillen-lean': 2,
-  'article-bourbaki-lean': 1,
   'article-recollement': 1,
 };
 
