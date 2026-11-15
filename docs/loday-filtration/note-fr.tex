@@ -1,0 +1,423 @@
+% Note de travail, en français, accompagnant docs/loday-filtration/article.tex :
+% les définitions de l'article reprises depuis le début, sur un ton pédagogique,
+% pour un lecteur venu des mathématiques appliquées. Compilée par tectonic.
+% Droits : les carnets de Quillen sont sous droits (Clay Mathematics Institute ; issue #36).
+% La note les décrit avec ses propres mots, carnet et page à l'appui, sans en reproduire le texte.
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern,microtype,amssymb,mathtools,booktabs}
+\usepackage[margin=2.7cm]{geometry}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+\raggedbottom
+
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}
+\theoremstyle{plain}
+\newtheorem{theoreme}{Théorème}
+\theoremstyle{remark}
+\newtheorem{remarque}{Remarque}
+
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Prim}{\operatorname{Prim}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\tr}{\operatorname{tr}}
+
+% Diagramme de Young : liste des longueurs de lignes, cases de 0,3 cm.
+\newcommand{\young}[1]{%
+  \foreach \len [count=\r] in {#1} {%
+    \foreach \c in {1,...,\len} {%
+      \draw (0.3*\c-0.3,-0.3*\r+0.3) rectangle ++(0.3,-0.3);}}}
+
+\title[Note de lecture : la filtration de rang sur les $n$-cycles]{La filtration de rang sur les $n$-cycles\\ de l'algèbre du groupe symétrique,\\ note de lecture}
+\author{Michel Hua}
+\address{Commutator, Paris}
+\email{michel@commutator.io}
+\date{15 novembre 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Cette note accompagne l'article \emph{The rank filtration on the $n$-cycles of the symmetric group algebra: Loday's filtration conjecture in a notebook of Quillen}. Elle en reprend les définitions depuis le début, à l'intention d'un lecteur qui connaît l'algèbre linéaire mais pas la théorie des représentations, les illustre sur les cas $n = 2, 3, 4$, puis suit les arguments et le calcul pas à pas. Rien n'y est démontré de neuf ; en cas de désaccord, l'article fait foi.
+\end{abstract}
+
+\section{De quoi parle l'article}
+
+L'homologie cyclique est un invariant attaché à une algèbre $A$ ; elle joue pour les algèbres non commutatives le rôle que les formes différentielles jouent pour les variétés. Un théorème de Loday et Quillen, obtenu indépendamment par Tsygan, la relie à l'homologie de l'algèbre de Lie $\gl(A)$ des matrices de taille quelconque à coefficients dans $A$. En ne gardant que les matrices de taille $i$ fixée, on obtient une filtration de l'homologie cyclique, indexée par $i$. Loday a conjecturé que les premiers termes de cette filtration sont nuls.
+
+Ramenée aux complexes qui calculent ces homologies, la question devient un problème d'algèbre linéaire finie dans l'algèbre du groupe symétrique $\Sigma_n$ : un certain sous-espace, défini par une condition de support (ne contenir que des cycles de longueur $n$) et une condition spectrale (ne voir que certaines représentations), est-il nul ? Quillen a écrit cette forme de la conjecture dans son carnet 1983-6, le 21 juillet 1983. L'article calcule ces sous-espaces exactement pour $n \le 8$, trouve qu'ils sont nuls sauf en deux cas, $n = 6$ et $n = 8$, et compare ce résultat à la forme publiée en 1984 par Loday et Quillen, accompagnée d'un argument de Procesi.
+
+La note suit cet ordre : l'algèbre du groupe symétrique (\S2), les matrices et la filtration de rang (\S\S3--4), les $n$-cycles et l'énoncé (\S5), l'argument de Procesi (\S6), le calcul (\S7), les deux lectures possibles de la filtration (\S8), puis les questions laissées ouvertes (\S9).
+
+\section{L'algèbre du groupe symétrique}
+
+\subsection{Des permutations aux vecteurs}
+
+Soit $k$ un corps de caractéristique nulle ; on peut penser à $\Q$ ou à $\mathbb R$. Le groupe $\Sigma_n$ des permutations de $n$ objets a $n!$ éléments. Son \emph{algèbre} $k[\Sigma_n]$ est l'espace vectoriel de dimension $n!$ dont les permutations forment une base : un élément est une combinaison formelle $x = \sum_\sigma x_\sigma\, \sigma$, c'est-à-dire, si l'on préfère, un vecteur de coefficients indexé par $\Sigma_n$. Le produit prolonge celui des permutations par bilinéarité,
+\[
+\Bigl(\sum_\sigma x_\sigma \sigma\Bigr)\Bigl(\sum_\tau y_\tau \tau\Bigr) = \sum_{\sigma, \tau} x_\sigma y_\tau\, \sigma\tau,
+\]
+et l'on reconnaît un produit de convolution sur le groupe. L'article identifie $k[\Sigma_n]$ à l'espace $k(\Sigma_n)$ des fonctions sur $\Sigma_n$ en envoyant la fonction indicatrice $\delta_\sigma$ sur $\sigma$ ; les deux points de vue reviennent au même, et l'on passera de l'un à l'autre sans prévenir.
+
+Pour $n = 2$, il y a deux permutations, l'identité $1$ et l'échange $s$, avec $s^2 = 1$. Un élément s'écrit $a + b s$. Pour $n = 3$, il y a six permutations : l'identité, trois transpositions et deux cycles de longueur $3$, $c = (1\,2\,3)$ et $c^2 = (1\,3\,2)$.
+
+\subsection{La décomposition en blocs}
+
+Pour un groupe commutatif comme $\mathbb Z/n$, la transformée de Fourier diagonalise la convolution : l'algèbre du groupe se décompose en $n$ morceaux de dimension $1$, un par fréquence. Pour $\Sigma_n$, qui n'est pas commutatif, il existe une décomposition analogue, mais les morceaux sont des algèbres de matrices.
+
+Les \og fréquences\fg{} sont ici les représentations irréductibles de $\Sigma_n$, et elles sont en bijection avec les partitions $\lambda$ de $n$, c'est-à-dire les suites décroissantes d'entiers positifs de somme $n$, notées $\lambda \vdash n$. On dessine une partition comme un \emph{diagramme de Young} : des lignes de cases alignées à gauche, de longueurs $\lambda_1 \ge \lambda_2 \ge \cdots$. Deux quantités serviront sans cesse : $\ell(\lambda)$, le nombre de lignes, et $\lambda_1$, la longueur de la première. La partition \emph{conjuguée} $\lambda'$ est celle dont le diagramme est le transposé de celui de $\lambda$ ; elle échange les deux quantités, $\ell(\lambda') = \lambda_1$.
+
+À chaque $\lambda$ correspondent une représentation irréductible $V_\lambda$, son caractère $\chi_\lambda$ (la fonction $g \mapsto \tr(g \text{ agissant sur } V_\lambda)$, à valeurs entières pour $\Sigma_n$) et sa dimension $d_\lambda = \chi_\lambda(1)$. L'article part de la décomposition
+\[
+k[\Sigma_n] = \bigoplus_{\lambda \vdash n} B_\lambda, \qquad B_\lambda \cong \End(V_\lambda), \qquad B_\lambda = k[\Sigma_n]\, e_\lambda, \quad e_\lambda = \frac{d_\lambda}{n!} \sum_{g \in \Sigma_n} \chi_\lambda(g)\, g .
+\]
+Le bloc $B_\lambda$ est une algèbre de matrices $d_\lambda \times d_\lambda$, de dimension $d_\lambda^2$, d'où l'égalité $\sum_\lambda d_\lambda^2 = n!$. Les $e_\lambda$ sont des projecteurs : $e_\lambda^2 = e_\lambda$, $e_\lambda e_\mu = 0$ si $\lambda \ne \mu$, $\sum_\lambda e_\lambda = 1$, et ils commutent à tout. Pour un élément $x$, le produit $x e_\lambda$ est sa composante dans le bloc $B_\lambda$, son \og coefficient de Fourier\fg{} en $\lambda$.
+
+\subsection{Les petits cas}
+
+Pour $n = 2$, les partitions sont $(2)$ et $(1,1)$, toutes deux de dimension $1$. La première est la représentation triviale, la seconde la signature. Les projecteurs sont
+\[
+e_{(2)} = \tfrac12 (1 + s), \qquad e_{(1,1)} = \tfrac12 (1 - s),
+\]
+et l'on vérifie à la main que $e_{(2)}^2 = e_{(2)}$ et $e_{(2)} e_{(1,1)} = 0$.
+
+Pour $n = 3$, les partitions sont $(3)$, $(2,1)$ et $(1,1,1)$, de dimensions $1$, $2$, $1$, et en effet $1 + 4 + 1 = 6$. Le caractère $\chi_{(2,1)}$ vaut $2$ en l'identité, $0$ sur les transpositions et $-1$ sur les deux $3$-cycles, de sorte que
+\[
+e_{(3)} = \tfrac16 \sum_\sigma \sigma, \qquad e_{(1,1,1)} = \tfrac16 \sum_\sigma \sgn(\sigma)\, \sigma, \qquad e_{(2,1)} = \tfrac13 \bigl(2 - c - c^2\bigr).
+\]
+De façon générale, $(n)$ est la représentation triviale et $(1^n) = (1, \dots, 1)$ la signature, et le bloc de chacune est une droite : celle de $\sum_\sigma \sigma$ pour la première, celle de $\sum_\sigma \sgn(\sigma)\sigma$ pour la seconde.
+
+Pour $n = 4$, les cinq partitions et leurs dimensions sont dessinées sur la figure~\ref{fig:young} ; on y reviendra.
+
+\section{Matrices et permutations}
+
+\subsection{Permuter les facteurs d'un produit tensoriel}
+
+Soit $V = k^i$, et $V^{\otimes n}$ le produit tensoriel de $n$ copies de $V$, de dimension $i^n$ ; une base est formée des $v_{a_1} \otimes \cdots \otimes v_{a_n}$, où les $a_j$ parcourent $\{1, \dots, i\}$. Une permutation agit sur $V^{\otimes n}$ en permutant les facteurs, ce qui donne une application d'algèbres
+\[
+\rho_i \colon k[\Sigma_n] \to \End(V^{\otimes n}).
+\]
+Pour $n = 2$, $\rho_i(s)$ est l'échange $u \otimes v \mapsto v \otimes u$. Si $i = 1$, l'espace $V \otimes V$ est une droite et l'échange y est l'identité : $\rho_1(s) = \rho_1(1)$, donc $\rho_1(1 - s) = 0$. Si $i \ge 2$, l'échange n'est plus l'identité et $\rho_i$ est injective.
+
+Cet exemple contient le mécanisme général. L'élément $\sum_\sigma \sgn(\sigma)\sigma$ agit sur $V^{\otimes n}$ comme un multiple du projecteur sur les tenseurs antisymétriques, et il n'y a pas de tenseur antisymétrique non nul à $n$ facteurs dans un espace de dimension $i < n$ : la signature est tuée dès que $n > i$. La dualité de Schur--Weyl, que l'article invoque, dit précisément quels blocs survivent :
+\[
+\ker \rho_i = \bigoplus_{\ell(\lambda) > i} B_\lambda .
+\]
+Les blocs dont le diagramme a plus de $i$ lignes sont tués, les autres sont envoyés injectivement. En particulier $\rho_i$ est injective quand $i \ge n$, puisque aucun diagramme à $n$ cases n'a plus de $n$ lignes. La signature, de diagramme une colonne de $n$ cases, est la première à disparaître.
+
+L'espace $\End(V^{\otimes n})$ s'identifie à $\gl_i^{\otimes n}$, où $\gl_i$ désigne l'algèbre de Lie des matrices $i \times i$ ; il porte l'action adjointe de $\gl_i$, par commutateurs. Le premier théorème fondamental de la théorie des invariants, également cité par l'article, dit que l'image de $\rho_i$ est exactement l'algèbre des invariants $(\gl_i^{\otimes n})^{\gl_i}$, c'est-à-dire des endomorphismes qui commutent à l'action de $\gl_i$.
+
+\subsection{Traces le long des cycles}
+
+Un calcul classique rend tout cela concret, et il servira au \S6. Pour des matrices $X_1, \dots, X_n$ de taille $i$, la trace de $(X_1 \otimes \cdots \otimes X_n) \circ \rho_i(\sigma)$ est le produit, sur les cycles de $\sigma$, des traces des produits des $X_j$ lus le long de chaque cycle. Pour $n = 2$, par exemple,
+\[
+\tr\bigl((X \otimes Y) \circ \rho_i(1)\bigr) = \tr X \cdot \tr Y, \qquad \tr\bigl((X \otimes Y) \circ \rho_i(s)\bigr) = \tr(XY).
+\]
+L'identité a deux cycles et donne deux traces ; l'échange n'a qu'un cycle et donne une seule trace. Un cycle de longueur $n$, qui n'a qu'un cycle, donne donc toujours une seule trace d'un produit de $n$ matrices. Les conventions exactes (lecture du cycle dans un sens ou dans l'autre) ne changent rien à ce qui suit.
+
+\section{La filtration de rang}
+
+\subsection{Définition}
+
+On veut maintenant transporter $\gl_i^{\otimes n}$ dans les fonctions sur $\Sigma_n$. Les \emph{coinvariants} $(\gl_i^{\otimes n})_{\gl_i}$ sont le quotient de $\gl_i^{\otimes n}$ par le sous-espace engendré par les $X \cdot u$, pour $X \in \gl_i$ agissant par l'action adjointe ; ils sont le dual naturel des invariants. L'article utilise l'application
+\[
+(\gl_i^{\otimes n})_{\gl_i} \to k(\Sigma_n), \qquad u \mapsto \bigl(\sigma \mapsto \tr(u\, \rho_i(\sigma))\bigr).
+\]
+Elle est bien définie sur le quotient parce que $\rho_i(\sigma)$ commute à l'action de $\gl_i$. Elle est injective, puisque les coinvariants sont duaux des invariants et que ceux-ci sont engendrés par les $\rho_i(\sigma)$. Son image est l'espace des fonctions qui s'annulent sur $\ker \rho_i$ : une fonction obtenue ainsi ne peut pas distinguer deux éléments de même image par $\rho_i$.
+
+\begin{definition}
+La \emph{filtration de rang} de $k[\Sigma_n]$ est
+\[
+F_i k(\Sigma_n) = \text{l'image de } (\gl_i^{\otimes n})_{\gl_i} = \bigoplus_{\ell(\lambda) \le i} B_\lambda, \qquad 0 = F_0 \subset F_1 \subset \cdots \subset F_n = k[\Sigma_n].
+\]
+\end{definition}
+
+La seconde égalité demande un mot. On munit $k[\Sigma_n]$ de la forme $\langle a, b \rangle = \tau(a b^*)$, où $\tau$ prend le coefficient de l'identité et $b^* = \sum_\sigma b_\sigma \sigma^{-1}$. Un calcul direct donne $\langle a, b \rangle = \sum_\sigma a_\sigma b_\sigma$ : c'est le produit scalaire usuel des vecteurs de coefficients, celui pour lequel les $\delta_\sigma$ sont orthonormés. L'involution $*$ préserve chaque bloc, les blocs sont deux à deux orthogonaux et la forme est non dégénérée sur chacun. L'orthogonal de $\ker \rho_i = \bigoplus_{\ell(\lambda) > i} B_\lambda$ est donc la somme des autres blocs, $\bigoplus_{\ell(\lambda) \le i} B_\lambda$. En langage de traitement du signal : $F_i$ est l'espace des signaux sur $\Sigma_n$ dont le spectre ne contient que des diagrammes d'au plus $i$ lignes.
+
+Les deux termes extrêmes non triviaux se décrivent simplement. Seul $(n)$ a une ligne, donc $F_1$ est la droite engendrée par $\sum_\sigma \sigma$. Tous les diagrammes sauf la colonne $(1^n)$ ont au plus $n-1$ lignes, donc $F_{n-1}$ est la somme de tous les blocs sauf celui de la signature, c'est-à-dire le noyau du caractère signature $x \mapsto \sum_\sigma x_\sigma \sgn(\sigma)$.
+
+\subsection{Deux conventions}
+
+L'article signale deux choix qui modifient les formules sans modifier les dimensions calculées. Remplacer $\sigma$ par $\sigma^{-1}$ dans l'accouplement fixe chaque bloc. La \emph{torsion par la signature}, $\sigma \mapsto \sgn(\sigma)\sigma$, qui apparaît en homologie des algèbres de Lie, envoie $B_\lambda$ sur $B_{\lambda'}$ ; elle échange donc la condition $\ell(\lambda) \le i$ et la condition $\lambda_1 \le i$. Comme tous les $n$-cycles ont la même signature, elle envoie l'espace engendré par les $n$-cycles sur lui-même.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{scope}[shift={(0,0)}]\young{4}\end{scope}
+\begin{scope}[shift={(2.2,0)}]\young{3,1}\end{scope}
+\begin{scope}[shift={(4.2,0)}]\young{2,2}\end{scope}
+\begin{scope}[shift={(5.9,0)}]\young{2,1,1}\end{scope}
+\begin{scope}[shift={(7.6,0)}]\young{1,1,1,1}\end{scope}
+\foreach \x/\lab/\d/\l/\f/\rk/\an in {0.6/{(4)}/1/1/4/oui/oui, 2.65/{(3,1)}/3/2/3/oui/oui, 4.5/{(2,2)}/2/2/2/oui/non, 6.2/{(2,1,1)}/3/3/2/non/non, 7.75/{(1^4)}/1/4/1/non/non} {
+  \node[font=\small] at (\x,-1.55) {$\lab$};
+  \node[font=\small] at (\x,-2.05) {$\d$};
+  \node[font=\small] at (\x,-2.5) {$\l$};
+  \node[font=\small] at (\x,-2.95) {$\f$};
+  \node[font=\small] at (\x,-3.4) {\rk};
+  \node[font=\small] at (\x,-3.85) {\an};
+}
+\node[font=\small,anchor=east] at (-0.4,-1.55) {$\lambda$};
+\node[font=\small,anchor=east] at (-0.4,-2.05) {$d_\lambda$};
+\node[font=\small,anchor=east] at (-0.4,-2.5) {$\ell(\lambda)$};
+\node[font=\small,anchor=east] at (-0.4,-2.95) {$\lambda_1$};
+\node[font=\small,anchor=east] at (-0.4,-3.4) {$\ell(\lambda) \le 2$};
+\node[font=\small,anchor=east] at (-0.4,-3.85) {$\lambda_1 > 2$};
+\end{tikzpicture}
+\caption{Les cinq partitions de $4$, avec la dimension de la représentation, le nombre de lignes et la longueur de la première ligne ; $1 + 9 + 4 + 9 + 1 = 24 = 4!$. L'avant-dernière ligne du tableau marque les blocs de $F_2 k(\Sigma_4)$, de dimension $1 + 9 + 4 = 14$ ; la dernière ceux de l'autre lecture de la filtration, étudiée au \S8. Les deux choix ne diffèrent que par $(2,2)$.}\label{fig:young}
+\end{figure}
+
+\section{Les $n$-cycles et l'énoncé de la conjecture}
+
+\subsection{Le sous-espace étudié}
+
+Un $n$-cycle est une permutation de $n$ objets formée d'un seul cycle, qui les parcourt tous. Il y en a $(n-1)!$ : on écrit le cycle en commençant par le premier objet, et l'ordre des $n-1$ autres est libre. On note $U_n$ leur ensemble et $k(U_n)$ l'espace qu'ils engendrent dans $k[\Sigma_n]$, c'est-à-dire les fonctions à support dans $U_n$. Conjuguer un $n$-cycle donne un $n$-cycle, donc $k(U_n)$ est stable par conjugation.
+
+\begin{definition}
+$F_i k(U_n) = k(U_n) \cap F_i k(\Sigma_n) = k(U_n) \cap \bigoplus_{\ell(\lambda) \le i} B_\lambda$.
+\end{definition}
+
+Comme $1 = \sum_\lambda e_\lambda$, un élément $x$ de $k(U_n)$ est dans $F_i k(U_n)$ si et seulement si $x e_\lambda = 0$ pour toute partition $\lambda$ à plus de $i$ lignes. On demande donc à un signal de vérifier deux contraintes à la fois : un support réduit aux $n$-cycles, et un spectre réduit aux diagrammes d'au plus $i$ lignes. Le lecteur qui a croisé le principe d'incertitude reconnaîtra le type de la question (le rapprochement est de cette note, pas de l'article) : un signal ne peut pas être trop concentré à la fois dans l'espace et en fréquence, et l'on se demande ici si la double concentration force la nullité.
+
+\subsection{Pourquoi ce sous-espace}
+
+Le lien avec l'homologie cyclique vient du théorème de Loday--Quillen et Tsygan. Les coinvariants de $\gl(A)$ dans le complexe de Chevalley--Eilenberg de $\gl(A)$ (le complexe qui calcule l'homologie de cette algèbre de Lie) forment une algèbre de Hopf, dont la partie primitive en degré $n$ est
+\[
+C_{n-1}(A) = \bigl(k(U_n) \otimes A^{\otimes n}\bigr) \otimes_{\Sigma_n} \sgn,
+\]
+le complexe de Connes de $A$, qui calcule l'homologie cyclique $HC_{n-1}(A)$ (Loday--Quillen, \S\S6.6--6.9). On n'a pas besoin du détail pour suivre l'article ; il suffit de retenir que les $n$-cycles apparaissent parce qu'ils correspondent aux éléments primitifs, ceux qui ne se décomposent pas en produits. La filtration de $\gl(A)$ par les $\gl_i(A)$ induit sur ce complexe une filtration $F_i C_{n-1}(A)$, construite de la même manière à partir de $F_i k(U_n)$, et une suite spectrale qui converge vers l'homologie cyclique (Loday--Quillen, proposition~6.13). Si $F_i k(U_n)$ est nul, le morceau correspondant du complexe l'est aussi.
+
+\subsection{Les petits cas}
+
+Pour $n = 2$, $U_2 = \{s\}$ et $F_1 k(\Sigma_2)$ est la droite de $1 + s$. Le vecteur $s$ n'est pas sur cette droite, donc $F_1 k(U_2) = 0$.
+
+Pour $n = 3$, $U_3 = \{c, c^2\}$ et $x = a c + b c^2$. Comme $\sigma \sum_\tau \tau = \sum_\tau \tau$ pour toute permutation $\sigma$, on a $x e_{(3)} = (a+b) e_{(3)}$, et de même $x e_{(1,1,1)} = (a+b) e_{(1,1,1)}$ puisque les $3$-cycles sont pairs. Un calcul de quelques lignes, en utilisant $c^3 = 1$, donne enfin
+\[
+(c - c^2)\, e_{(2,1)} = \tfrac13 (c - c^2)(2 - c - c^2) = c - c^2,
+\]
+de sorte que $c - c^2$ est tout entier dans le bloc $B_{(2,1)}$. On en tire :
+\begin{itemize}
+\item $F_1 k(U_3) = 0$, car il faudrait $a + b = 0$ et $a(c - c^2) e_{(2,1)} = 0$, donc $a = b = 0$ ;
+\item $F_2 k(U_3)$ est la droite engendrée par $c - c^2$, car seule la signature a plus de deux lignes, et la seule condition est $a + b = 0$.
+\end{itemize}
+Le second point illustre une remarque générale de l'article : $F_{n-1} k(U_n)$ est formé des combinaisons de $n$-cycles dont la somme des coefficients est nulle, et il est de dimension $(n-1)! - 1$. On retrouve les valeurs $5$ et $23$ du tableau~\ref{tab:dims} pour $n = 4$ et $n = 5$.
+
+Pour $n = 4$, l'espace $k(U_4)$ est de dimension $6$ et $F_2 k(\Sigma_4)$ de dimension $14$, dans un espace ambiant de dimension $24$. L'article trouve $F_2 k(U_4) = 0$. Un simple comptage, qui n'est pas dans l'article et ne démontre rien, aide à situer ce résultat : deux sous-espaces \og en position générale\fg{} de dimensions $6$ et $14$ dans un espace de dimension $24$ ne se rencontrent qu'en $0$, puisque $6 + 14 < 24$. Ce comptage conduit aussi à attendre la nullité pour $(n, i) = (6, 3)$, puisque $120 + 513 < 720$ ; c'est précisément le cas où elle tombe en défaut.
+
+\subsection{La conjecture dans le carnet de Quillen}
+
+Le carnet \href{https://www.claymath.org/library/Quillen/Working_papers/quillen\%201983/1983-6.pdf}{1983-6} de Quillen, de juillet 1983, publié en fac-similé par le Clay Mathematics Institute, revient plusieurs fois sur une conjecture de Loday portant sur cette filtration ; les pages sont celles du PDF du Clay. Les carnets sont sous droits, et la note, comme l'article, les décrit sans les citer au-delà de quelques mots.
+
+À la page~52 (19 juillet 1983), Quillen présente la conjecture comme l'analogue additif d'une conjecture de Soulé sur les poids des groupes de $K$-théorie algébrique. Il observe que la borne supérieure découle de la stabilité, que la borne inférieure fait tout le contenu, et note qu'il n'a pas encore la bonne forme de l'énoncé.
+
+Aux pages~60--61 (21 juillet 1983), $n$ désignant désormais le nombre de facteurs tensoriels, il définit $F_i k(\Sigma_n)$ comme l'image des coinvariants de $\gl_i$ dans les fonctions sur $\Sigma_n$, exactement comme au \S4, et $F_i k(U_n)$ comme son intersection avec $k(U_n)$. Il inscrit ensuite, dans un cadre intitulé \og Actual Loday conjecture\fg{}, l'énoncé
+\[
+F_i k(U_n) = 0 \quad \text{pour } i \le n/2 .
+\]
+Un premier cadre de la même page donne le domaine d'annulation correspondant pour le complexe de Connes filtré. Dans le carnet 1983-1, le résumé d'une lettre à Loday de la mi-janvier 1983 (pp.~62--64) décrit déjà la même filtration comme l'image des fonctions représentatives de $V^{\otimes n}$ pour $\dim V = i$, ce qui est la définition retenue ici.
+
+Aux pages~62 et~72 (21--22 juillet ; la page~72 appartient au brouillon d'une lettre à Loday datée du 22 juillet), Quillen démontre un énoncé plus faible, de nature homologique. Les classes de Chern $c_m$ s'annulent sur $\gl_i$ pour $m > i$. En supposant que le caractère de Chern s'accorde avec la description par Connes de $\Prim H_n(\gl(A))$ en termes de formes différentielles, il en déduit que l'image de l'homologie de $F_p C$ dans $\Prim H_n(\gl(A))$ est nulle pour $p \le n/2$ (pour $A$ lisse à la page~72). La lettre présente ce résultat comme une conséquence de la conjecture encadrée.
+
+\subsection{La forme publiée}
+
+L'article de Loday et Quillen paru en 1984 aux \emph{Commentarii} contient la conjecture aux \S\S6.12--6.14 (pp.~589--590). Au \S6.12, les auteurs considèrent la filtration de l'homologie cyclique induite par la filtration de rang de $\gl(A)$. Pour $i \le n$, ils regardent les invariants $(\gl_i^{\otimes n})^{\gl_i}$ comme un idéal bilatère $F^{n-i}$ de $k[\Sigma_n]$, avec $F^n = 0$, $F^{n-1}$ la droite de $\sum \sgn(\sigma)\sigma$, $F^1$ l'idéal d'augmentation et $F^0 = k[\Sigma_n]$ ; par dualité, ils en tirent une filtration croissante $F_j$ de $k[\Sigma_n]$, avec $F_1$ la droite de $\sum \sigma$ et $F_{n-1}$ le noyau de la signature. Ils indiquent que les $F_j$ se décrivent par des diagrammes de Young, et induisent la filtration sur $k[U_n]$ et sur le complexe de Connes. La proposition~6.13 est la suite spectrale.
+
+Ils proposent ensuite, par analogie avec la conjecture de Soulé, l'annulation de $H_n(\gl_i(A)) \cap \Prim H_n(\gl(A)) = F_i HC_{n-1}(A)$ pour $2i \le n$ (le texte imprimé écrit $GL_i$ et $GL$), et affirment que, traduite en termes de groupes symétriques, elle équivaut à
+\[
+\text{(6.14)} \qquad F_i k[U_{2i+1}] = 0 \quad\text{et}\quad F_i k[U_{2i}] = 0,
+\]
+avec en outre l'attente que $F_{i+1} k[U_{2i+1}]$ soit de dimension $1$, engendré par une somme signée des $(2i+1)$-cycles. Ils ajoutent que ces énoncés étaient des conjectures dans la première version, et que Procesi leur a indiqué que l'annulation découle d'un résultat de Levitzki sur les identités polynomiales, et l'énoncé de dimension $1$ du théorème d'Amitsur--Levitzki. Pour $n = 2i$, (6.14) est le cas pair du cadre de Quillen.
+
+\section{L'argument de Procesi}
+
+L'article reconstitue l'argument ainsi, en prévenant qu'il s'agit de sa compréhension. On le suit en quatre étapes.
+
+\emph{Première étape : des éléments du noyau aux identités de traces.} D'après la théorie des identités de traces de Procesi (1976), un élément $\sum_\sigma a_\sigma \sigma$ de $\ker \rho_r$ est la même chose qu'une identité de traces multilinéaire de degré $n$ pour les matrices $r \times r$ : on remplace chaque $\sigma$ par le produit des traces des monômes en $X_1, \dots, X_n$ lus le long de ses cycles, comme au \S3, et l'on obtient une expression qui s'annule pour toutes les matrices $X_j$ de taille $r$.
+
+\emph{Deuxième étape : une seule trace par terme.} Si l'élément est dans $k(U_n)$, chaque $\sigma$ est un $n$-cycle et contribue une seule trace. En faisant tourner chaque produit sous la trace pour placer $X_n$ à la fin, on peut écrire l'identité sous la forme $\tr\bigl(f(X_1, \dots, X_{n-1})\, X_n\bigr) = 0$, où $f$ est un polynôme non commutatif multilinéaire de degré $n-1$.
+
+\emph{Troisième étape : une identité polynomiale.} Si $\tr(M X_n) = 0$ pour toute matrice $X_n$, alors $M = 0$ ; il suffit de prendre pour $X_n$ les matrices élémentaires. L'identité de traces vaut donc pour tout $X_n$ seulement si $f(X_1, \dots, X_{n-1}) = 0$ pour toutes les matrices $r \times r$, c'est-à-dire si $f$ est une \emph{identité polynomiale} des matrices $r \times r$.
+
+\emph{Quatrième étape : le degré minimal.} Il n'existe pas d'identité polynomiale des matrices $r \times r$ de degré inférieur à $2r$. Si $n - 1 < 2r$, c'est-à-dire $n \le 2r$, il n'en reste aucune, et
+\[
+k(U_n) \cap \ker \rho_r = k(U_n) \cap \bigoplus_{\ell(\lambda) > r} B_\lambda = 0 \qquad \text{pour } n \le 2r.
+\]
+Pour $n = 2r + 1$, le polynôme standard $S_{2r}(X_1, \dots, X_{2r}) = \sum_{\pi \in \Sigma_{2r}} \sgn(\pi) X_{\pi(1)} \cdots X_{\pi(2r)}$, qui s'annule sur les matrices $r \times r$ par le théorème d'Amitsur--Levitzki, fournit l'élément non nul $\tr\bigl(S_{2r}(X_1, \dots, X_{2r})\, X_{2r+1}\bigr)$.
+
+Le cas $r = 1$ se vérifie à la main et rejoint le \S5. Les matrices $1 \times 1$ sont des scalaires, qui commutent : $S_2(X, Y) = XY - YX$ est nul, et $\tr\bigl((XY - YX)Z\bigr) = \tr(XYZ) - \tr(YXZ)$ correspond, au signe près, à l'élément $c - c^2$ de $k(U_3)$. On a vu qu'il engendre $k(U_3) \cap \ker \rho_1$, puisque $\ker \rho_1$ est la somme de tous les blocs sauf le trivial et que la seule condition est $a + b = 0$.
+
+L'article insiste sur un point, sur lequel repose tout le \S8 : cet argument porte sur le \emph{noyau} de $\rho_r$, c'est-à-dire sur les blocs à \emph{plus} de $r$ lignes, alors que la filtration de rang retient les blocs à \emph{au plus} $i$ lignes.
+
+\section{Le calcul}
+
+\subsection{Le résultat}
+
+\begin{theoreme}[article, théorème~3.1]
+Sur $\Q$, la dimension de $F_i k(U_n)$ pour $1 \le i \le n/2$ et $n \le 8$ est nulle, sauf dans les deux cas
+\[
+\dim F_3 k(U_6) = 15, \qquad \dim F_4 k(U_8) = 1708 .
+\]
+En particulier $F_i k(U_n) = 0$ dès que $2i < n \le 8$, ainsi que pour $(n, i) = (2, 1)$ et $(4, 2)$. Comme représentation de $\Sigma_6$ par conjugaison, $F_3 k(U_6) \cong V_{(3,3)} \oplus V_{(3,1,1,1)}$, de dimensions $5 + 10$.
+\end{theoreme}
+
+Le cas impair du cadre de Quillen tient donc dans tout le domaine calculé, et le cas pair tient pour $n = 2$ et $n = 4$ mais tombe pour $n = 6$ et $n = 8$. La dernière phrase du théorème porte sur une autre action que celle des blocs : la conjugaison $x \mapsto g x g^{-1}$ préserve $k(U_n)$ et chaque bloc, donc $F_3 k(U_6)$, et l'espace de dimension $15$ se décompose sous cette action en deux représentations irréductibles. Le tableau~\ref{tab:dims} reprend celui de l'article, avec entre parenthèses les valeurs $i > n/2$, données pour comparaison.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+$n$ & $i=1$ & $i=2$ & $i=3$ & $i=4$ \\
+\midrule
+$4$ & $0$ & $0$ & $(5)$ & \\
+$5$ & $0$ & $0$ & $(12)$ & $(23)$ \\
+$6$ & $0$ & $0$ & $\mathbf{15}$ & $(100)$ \\
+$7$ & $0$ & $0$ & $0$ & $(444)$ \\
+$8$ & $0$ & $0$ & $0$ & $\mathbf{1708}$ \\
+\bottomrule
+\end{tabular}
+\medskip
+\caption{$\dim F_i k(U_n)$, d'après l'article. En gras, les échecs de l'annulation pour $i \le n/2$ ; entre parenthèses, les valeurs pour $i > n/2$. Pour $n \le 3$, toutes les valeurs avec $i \le n/2$ sont nulles.}\label{tab:dims}
+\end{table}
+
+\subsection{Le témoin}
+
+L'élément non nul de $F_3 k(U_6)$ est donné explicitement, ce qui permet de le vérifier sans faire confiance aux programmes. On numérote les objets de $0$ à $5$ et l'on écrit une permutation $p$ sur une ligne, $p(0)p(1)\cdots p(5)$. Ainsi $124053$ envoie $0 \mapsto 1$, $1 \mapsto 2$, $2 \mapsto 4$, $3 \mapsto 0$, $4 \mapsto 5$, $5 \mapsto 3$ ; en suivant les flèches depuis $0$, on obtient $0 \to 1 \to 2 \to 4 \to 5 \to 3 \to 0$, un seul cycle qui passe par les six objets. L'article considère
+\[
+\begin{aligned}
+x = {}&{+}124053 - 124530 + 130452 - 135420 - 140253 - 143052 + 143520 + 145230 + 203451\\
+&{-}204153 - 234051 + 234510 + 241053 - 241530 - 253410 + 254130 - 301452 + 304251\\
+&{-}320451 + 325410 + 340152 - 345120 + 351420 - 354210 + 401532 - 403521 + 405123\\
+&{-}405231 + 420531 - 425013 - 430512 + 435021 - 450132 + 450213 - 451023 + 453012,
+\end{aligned}
+\]
+somme de $36$ six-cycles distincts affectés des coefficients $\pm 1$ ; il est donc non nul et dans $k(U_6)$. Les partitions de $6$ à plus de trois lignes sont au nombre de quatre, $(3,1,1,1)$, $(2,2,1,1)$, $(2,1,1,1,1)$ et $(1^6)$, et une multiplication directe dans $\Q[\Sigma_6]$ donne
+\[
+x \cdot \sum_{g \in \Sigma_6} \chi_\lambda(g)\, g = 0
+\]
+pour chacune. Comme $e_\lambda$ est un multiple de cette somme, $x e_\lambda = 0$ pour ces quatre $\lambda$, et $x \in F_3 k(U_6)$. Chacun des quatre produits compte $36 \times 720$ termes ; une machine les vérifie en quelques secondes, sans les scripts de l'article.
+
+\subsection{La méthode : un noyau de matrice de Gram}
+
+Pour calculer $F_i k(U_n)$ en général, l'article ramène la question au noyau d'une matrice entière. Soit $\Lambda$ un ensemble de partitions. Un élément $x = \sum_{c \in U_n} x_c\, c$ vérifie $x e_\lambda = 0$ pour tout $\lambda \in \Lambda$ si et seulement si $Gx = 0$, où $G$ est la matrice indexée par $U_n$
+\[
+G_{c, c'} = \sum_{\lambda \in \Lambda} d_\lambda\, \chi_\lambda(c^{-1}c') .
+\]
+Les caractères étant entiers, $G$ est à coefficients entiers. Pourquoi ce critère ? Notons $E$ la multiplication à droite par $\sum_{\lambda \in \Lambda} e_\lambda$ ; c'est un projecteur orthogonal pour le produit scalaire des coefficients du \S4, puisque les $e_\lambda$ sont des idempotents fixés par $*$. Soit $P$ la projection orthogonale sur $k(U_n)$. À un facteur $n!$ près, $G$ est la matrice de $P E P$ restreinte à $k(U_n)$, et pour $x \in k(U_n)$,
+\[
+x^{\mathsf T} G x \;\propto\; \langle x, E x \rangle = \| E x \|^2 = \sum_{\lambda \in \Lambda} \tau\bigl(x e_\lambda (x e_\lambda)^*\bigr),
+\]
+avec un facteur de proportionnalité positif : c'est la forme donnée par l'article, une somme de carrés de normes. La matrice $G$ est donc symétrique positive, et pour une telle matrice $Gx = 0$ équivaut à $x^{\mathsf T} G x = 0$, c'est-à-dire ici à $x e_\lambda = 0$ pour tout $\lambda \in \Lambda$. En prenant $\Lambda = \{\lambda : \ell(\lambda) > i\}$, $F_i k(U_n)$ est le noyau de $G$, une matrice de taille $(n-1)!$ : $120$ pour $n = 6$, $5040$ pour $n = 8$. Les caractères sont calculés par la règle de Murnaghan--Nakayama et contrôlés par $\sum_\lambda d_\lambda^2 = n!$ et par l'orthogonalité des colonnes de la table.
+
+\subsection{La certification des rangs}
+
+Calculer en virgule flottante le noyau d'une matrice de taille $5040$ ne donnerait qu'une indication. L'article certifie les dimensions de trois façons.
+
+\emph{Rang plein modulo un nombre premier.} Si $G$ est de rang plein modulo un nombre premier $p$, un mineur maximal est non nul modulo $p$, donc non nul comme entier, et $G$ est de rang plein sur $\Q$ : la dimension est exactement $0$. Les nombres premiers employés sont $1000003$ et $998244353$. Dans l'autre sens, le rang modulo $p$ ne peut que baisser, si bien que la dimension du noyau modulo $p$ majore celle sur $\Q$.
+
+\emph{Élimination exacte pour $(6, 3)$.} Le noyau est calculé par élimination exacte sur $\Q$, et chacun de ses $15$ vecteurs de base est vérifié par multiplication dans $\Q[\Sigma_6]$ comme le témoin ; $x$ est l'un d'eux.
+
+\emph{Sous-groupes de Young pour $(8, 4)$.} Ici $G$ est de taille $5040$, et le calcul modulo les deux nombres premiers borne la dimension par $1708$. La valeur exacte vient d'une seconde méthode, qui exploite l'action de $\Sigma_8$ par conjugaison sur le noyau. Pour chaque sous-groupe de Young $\Sigma_\nu$ (les permutations qui préservent une partition fixée des objets en paquets de tailles $\nu_1, \nu_2, \dots$) et pour $\varepsilon$ égal au caractère trivial ou à la signature, on calcule la dimension de la partie $(\Sigma_\nu, \varepsilon)$-isotypique du noyau, par élimination sans fractions sur $\mathbb Z$ appliquée aux sommes d'orbites ; ces problèmes sont bien plus petits que le problème initial. Chacune de ces dimensions est une combinaison linéaire des multiplicités inconnues des représentations irréductibles dans le noyau, à coefficients donnés par les nombres de Kostka. Le système obtenu est de rang plein, et sa solution est entière, positive, de dimension totale $1708$ ; elle fait intervenir seize représentations irréductibles, parmi lesquelles $V_{(5,3)}$, $V_{(4,4)}$ et $V_{(2,2,2,2)}$, une fois chacune.
+
+Les scripts sont dans le répertoire \texttt{computations/loday-filtration} du dépôt, avec un fichier README. Sur un ordinateur portable, \texttt{python3 witness.py 6 3} prend quelques secondes et \texttt{python3 youngsub.py 8 4 R 24} environ une minute et demie ; les rangs pour $n = 7, 8$ passent par un court programme en C.
+
+\subsection{Au niveau des chaînes}
+
+Puisque $F_3 k(U_6) \ne 0$, le groupe de chaînes $F_3 C_5(A) = (F_3 k(U_6) \otimes A^{\otimes 6}) \otimes_{\Sigma_6} \sgn$ est non nul dès $A = k[t_1, \dots, t_6]$. La raison : dans $A^{\otimes 6}$, les tenseurs $t_{\pi(1)} \otimes \cdots \otimes t_{\pi(6)}$, pour $\pi \in \Sigma_6$, engendrent une copie de la représentation régulière de $\Sigma_6$, celle qui contient toutes les représentations irréductibles. Le domaine d'annulation pour le complexe de Connes filtré, celui du premier cadre de Quillen, tombe donc lui aussi pour $n = 6$ dans le cas pair.
+
+\section{Deux lectures de la filtration}
+
+\subsection{Les deux familles de sous-espaces}
+
+Le calcul et l'argument de Procesi ne portent pas sur les mêmes sous-espaces de $k(U_n)$. Pour $0 \le j \le n$, l'article pose
+\[
+F^{\mathrm{rk}}_j = k(U_n) \cap \bigoplus_{\ell(\lambda) \le j} B_\lambda, \qquad
+F^{\mathrm{ann}}_j = k(U_n) \cap \bigoplus_{\lambda_1 > n-j} B_\lambda .
+\]
+La première est la filtration de rang du \S4, construite sur l'image de $\gl_j$. La seconde est construite sur l'annulateur de l'image de $\gl_{n-j}$, pris avec la torsion par la signature, comme au \S6.12 de Loday--Quillen. Ce sont deux filtrations croissantes de $k(U_n)$, de $0$ à $k(U_n)$. Elles ont les mêmes termes pour $j = 0, 1, n-1, n$ : pour $j = 1$, les deux sont nulles, et pour $j = n-1$, les deux sont formées des éléments de $k(U_n)$ dont la somme des coefficients est nulle, puisque tous les $n$-cycles ont la même signature. Entre les deux, les sommes de blocs diffèrent.
+
+La figure~\ref{fig:young} montre la différence pour $n = 4$ et $j = 2$ : la première somme retient $(4)$, $(3,1)$ et $(2,2)$, la seconde seulement $(4)$ et $(3,1)$. Sur $k(U_4)$, les deux intersections sont toutefois nulles, la première d'après le tableau~\ref{tab:dims}, la seconde d'après l'argument de Procesi ($n = 4 \le 2r$ avec $r = 2$, voir plus bas) ; cette remarque se déduit des énoncés de l'article mais n'y est pas faite. Les deux intersections se séparent ailleurs : pour $n = 5$ et $j = 3$, elles sont de dimensions $12$ et $1$ ; pour $n = 6$ et $j = 3$, de dimensions $15$ et $0$.
+
+\subsection{La portée de l'argument de Procesi}
+
+La torsion par la signature envoie $B_\lambda$ sur $B_{\lambda'}$, et $\lambda_1 > n - j$ équivaut à $\ell(\lambda') > n - j$. Elle envoie donc $F^{\mathrm{ann}}_j$ isomorphiquement sur
+\[
+k(U_n) \cap \bigoplus_{\ell(\lambda) > n-j} B_\lambda = k(U_n) \cap \ker \rho_{n-j}.
+\]
+L'argument du \S6 démontre ainsi (6.14) pour la seconde filtration. Pour $F^{\mathrm{ann}}_i k[U_{2i}]$, on a $r = n - j = i$ et $n = 2i \le 2r$ ; pour $F^{\mathrm{ann}}_i k[U_{2i+1}]$, on a $r = i + 1$ et $n = 2i + 1 \le 2r$. Dans les deux cas l'intersection est nulle. Et $F^{\mathrm{ann}}_{i+1} k[U_{2i+1}]$ correspond à $r = i$, $n = 2r + 1$, le cas du polynôme standard, d'où la dimension $1$.
+
+Le même calcul de matrice de Gram, avec cette fois $\Lambda = \{\lambda : \ell(\lambda) \le r\}$, s'accorde avec cette conclusion partout pour $n \le 8$ : $k(U_n) \cap \ker \rho_r = 0$ exactement quand $n \le 2r$, et sa dimension vaut $1$ pour $(n, r) = (3, 1), (5, 2), (7, 3)$. Le cas $(3, 1)$ est celui de l'élément $c - c^2$ vu plus haut.
+
+\subsection{La lecture du \S6.12}
+
+Selon l'article, la construction de Loday--Quillen s'accorde avec la seconde lecture. Au \S6.12, $F^{n-i}$ est l'image de $\gl_i$, vue comme idéal bilatère de $k[\Sigma_n]$. Comme $F^{n-1}$ y est la droite de la signature, image attendue de $\gl_1$, cet idéal doit être $\bigoplus_{\lambda_1 \le i} B_\lambda$ : la torsion par la signature est déjà incorporée. Si $F_j$ est l'annulateur de $F^j$ pour l'accouplement $\delta$, on trouve $F_j = \bigoplus_{\lambda_1 > n-j} B_\lambda$, dont l'intersection avec $k(U_n)$ est $F^{\mathrm{ann}}_j$. On obtient bien $F_1$ égal à la droite de $\sum \sigma$ et $F_{n-1}$ égal au noyau de la signature, comme l'indique le \S6.12 ; mais la filtration de rang de $k[\Sigma_n]$ a les mêmes deux termes, si bien que ces valeurs ne permettent pas de trancher entre les lectures.
+
+La conjecture que (6.14) est censé traduire porte, elle, sur $H_n(\gl_i(A))$, donc sur l'image de $\gl_i$ et sur la filtration de rang $F^{\mathrm{rk}}$, qui est aussi la définition du carnet de Quillen. Pour cette filtration, le cas impair de (6.14) tient dans le domaine calculé, et le cas pair tombe en $n = 6$ et $n = 8$.
+
+\subsection{Le statut de cette lecture}
+
+L'article présente tout cela comme sa propre lecture. Si elle est juste, (6.14) est correct pour la filtration par annulateurs, comme le montre l'argument de Procesi, et l'équivalence affirmée avec l'annulation pour la filtration de rang présente une lacune pour $n = 2i \ge 6$ pair. L'article dit n'avoir pas trouvé cette lacune discutée ailleurs, au terme d'une recherche limitée (zbMATH, EuDML). La lecture du \S6.12 suppose des identifications que le texte de 1984 laisse implicites, et l'article demande qu'un spécialiste de l'homologie cyclique ou des identités de traces la vérifie avant qu'on en tire quoi que ce soit de plus.
+
+\section{Questions ouvertes}
+
+\subsection{L'énoncé homologique}
+
+L'énoncé démontré par Quillen aux pages~62 et~72 du carnet 1983-6 (l'image de l'homologie de $F_p C$ dans $\Prim H_n(\gl(A))$ est nulle pour $p \le n/2$, si le caractère de Chern est compatible avec l'isomorphisme de Connes) concerne l'homologie, et un groupe de chaînes non nul ne le contredit pas : un complexe peut avoir des chaînes non nulles et une homologie nulle. L'article ne dit rien contre lui. Il ne tranche pas davantage la question de savoir si
+\[
+H_n(\gl_i(A)) \cap \Prim H_n(\gl(A)) = F_i HC_{n-1}(A)
+\]
+s'annule pour $2i = n \ge 6$, forme de la conjecture chez Loday--Quillen (\S6.13). Pour la filtration de rang, cette annulation ne peut pas se lire sur les chaînes quand $2i = n \ge 6$, alors que pour $2i < n$ et $n \le 8$ ce sont les chaînes elles-mêmes qui s'annulent.
+
+\subsection{Les autres carnets}
+
+L'article a cherché la filtration, les diagrammes de Young, le théorème d'Amitsur--Levitzki, Procesi et Soulé dans tous les carnets de 1982--1984 transcrits pour le projet ; ces transcriptions restent privées. En résumé :
+\begin{itemize}
+\item dans le carnet 1982-13, pp.~2--15 (22--26 novembre 1982), Quillen met en place la théorie des invariants pour $\gl_n$ : $k[\Sigma_p]$ s'envoie sur les invariants de $\gl_n^{\otimes p}$, injectivement si $n \ge p$, et les coinvariants se décomposent selon les classes de conjugaison. Les notes des 25 et 26 novembre et une lettre à Loday datée du 26 novembre esquissent l'identification de l'homologie cyclique à la partie primitive de l'homologie de $\gl(A)$, le théorème de Loday--Quillen--Tsygan ; les pages~45--46 (décembre) traitent le cas mixte de $\gl(V, W)$. Tout cela reste dans le domaine stable $n \ge p$, où $\rho_n$ est injective : ni le noyau, ni la filtration par diagrammes de Young, ni un énoncé d'annulation n'y figurent ;
+\item dans le carnet 1983-1 (janvier 1983), les pp.~36--40 (11 janvier) étudient le noyau de $k[\Sigma_p] \to \End(V^{\otimes p})$ et les diagrammes de Young d'au plus $\dim V$ lignes ; les pp.~54--55 donnent les invariants de $\gl^{\otimes p}$ comme fonctions sur les permutations ; les pp.~62--64, autour d'une lettre à Loday du 14 janvier, fixent la filtration comme image venue de $\End(V^{\otimes n})$ avec $\dim V = i$, et notent qu'elle est déjà non triviale pour les nombres duaux. Ce sont des définitions, sans énoncé d'annulation ;
+\item dans le carnet 1983-6, l'énoncé est celui du \S5. Des carnets ultérieurs de 1983 reviennent sur la lettre à Loday (1983-8, p.~19 ; 1983-10, pp.~6 et~15 ; 1983-13, p.~16), mais à propos de la compatibilité du caractère de Chern avec l'isomorphisme de Connes, non de la filtration.
+\end{itemize}
+Aucun des carnets transcrits ne démontre, n'affaiblit ni ne corrige l'énoncé encadré. Les carnets de 1984 postérieurs à mai, ceux de 1985 (le Clay indexe 1985-1 sur la cohomologie des algèbres de Lie $\gl_n(A)$ et les invariants de $\gl_n$) et les suivants n'ont pas été lus.
+
+\subsection{Une piste pour Lean}
+
+Rien n'est formalisé. L'article esquisse un certificat pour $(n, i) = (6, 3)$ qui éviterait la dualité de Schur--Weyl, absente de Mathlib. Pour deux applications $I, J \colon \{1, \dots, 6\} \to \{1, 2, 3\}$, la classe de $E_{I_1J_1} \otimes \cdots \otimes E_{I_6J_6}$ dans les coinvariants de $\gl_3$ (les $E_{ab}$ étant les matrices élémentaires) est, vue comme fonction sur $\Sigma_6$, l'indicatrice des permutations $\sigma$ telles que $J = I \circ \sigma$, aux conventions près ($\sigma$ ou $\sigma^{-1}$). Un certificat serait une liste d'entiers $a_m$ et de couples $(I_m, J_m)$ tels que $\sum_m a_m \mathbf 1_{\{J_m = I_m \circ \sigma\}} = x$. L'énoncé \og $x \ne 0$, $x$ est porté par les six-cycles et appartient à l'image de $\gl_3$\fg{} se réduirait alors à $720$ égalités entre entiers, sans théorie des représentations. Comme l'image de $\gl_3$ est de dimension $\sum_{\ell(\lambda) \le 3} d_\lambda^2 = 513$, un certificat d'au plus $513$ termes existe. L'article n'en a pas calculé de creux, et le risque principal est le temps que mettrait le noyau de Lean à vérifier une telle somme.
+
+\subsection{Limites}
+
+Le calcul s'arrête à $n = 8$ ; que le cas pair échoue pour tout $n \ge 6$ pair n'est pas démontré. La forme homologique de la conjecture pour $2i = n$ reste ouverte dans l'article. Sa lecture du \S6.12 n'a pas été vérifiée par un spécialiste. Le livre de Loday, \emph{Cyclic Homology}, traite le théorème de Loday--Quillen--Tsygan au chapitre~10 ; l'article n'a pas pu le consulter et ne sait pas s'il reprend (6.14) ou la filtration de rang. La recherche bibliographique n'a trouvé ni énoncé de l'annulation pour la filtration de rang, ni contre-exemple, mais elle n'était pas exhaustive.
+
+\subsection{Attributions}
+
+La conjecture est de Loday ; la forme étudiée ici est celle que Quillen a encadrée dans son carnet 1983-6, p.~61. L'énoncé (6.14), l'attente de dimension $1$ et la référence aux résultats de Levitzki et d'Amitsur--Levitzki, transmise par Procesi, sont publiés dans l'article de Loday et Quillen de 1984. Les théorèmes de Schur--Weyl, des invariants et d'Amitsur--Levitzki sont classiques. Les dimensions du tableau, le témoin, la méthode de certification et la comparaison des deux lectures sont le travail de l'article, qui précise que les dimensions reposent sur des scripts que chacun peut relancer, que le témoin se vérifie indépendamment d'eux, et que sa lecture de Loday--Quillen attend l'avis d'un spécialiste.
+
+\section{Petit lexique}
+
+\begin{tabular}{@{}p{4.2cm}p{9.6cm}@{}}
+\toprule
+Terme & À retenir ici \\
+\midrule
+$k[\Sigma_n]$ & les combinaisons de permutations, ou les fonctions sur $\Sigma_n$, avec la convolution \\[2pt]
+partition, $\lambda \vdash n$ & suite décroissante d'entiers de somme $n$, dessinée en diagramme de Young \\[2pt]
+$\ell(\lambda)$, $\lambda_1$ & nombre de lignes, longueur de la première ligne \\
+$\lambda'$ & partition conjuguée, diagramme transposé \\
+bloc $B_\lambda$ & composante de $k[\Sigma_n]$ attachée à $\lambda$, algèbre de matrices $d_\lambda \times d_\lambda$ \\[2pt]
+$e_\lambda$ & projecteur sur le bloc $B_\lambda$ \\
+$\rho_i$ & action des permutations sur $(k^i)^{\otimes n}$ ; son noyau est la somme des blocs à plus de $i$ lignes \\[2pt]
+filtration de rang & $F_i$ : somme des blocs à au plus $i$ lignes \\
+torsion par la signature & $\sigma \mapsto \sgn(\sigma)\sigma$ ; échange $\lambda$ et $\lambda'$ \\
+$n$-cycle, $U_n$ & permutation formée d'un seul cycle de longueur $n$ ; il y en a $(n-1)!$ \\[2pt]
+$F_i k(U_n)$ & combinaisons de $n$-cycles qui sont dans $F_i$ \\
+identité polynomiale & polynôme non commutatif qui s'annule sur toutes les matrices d'une taille donnée \\[2pt]
+polynôme standard $S_{2r}$ & somme alternée des produits de $2r$ matrices ; nul sur les matrices $r \times r$ (Amitsur--Levitzki) \\[2pt]
+$F^{\mathrm{ann}}_j$ & l'autre lecture : blocs avec $\lambda_1 > n - j$, liée au noyau de $\rho_{n-j}$ \\
+\bottomrule
+\end{tabular}
+
+\section*{Sur la rédaction de cette note}
+
+Note de travail écrite par Claude (Opus~5.5, Anthropic) sous la direction de l'auteur, à partir de \texttt{docs/loday-filtration/article.tex}. Elle ne contient aucun résultat nouveau ; en cas de désaccord, l'article fait foi.
+
+\end{document}

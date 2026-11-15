@@ -1,0 +1,496 @@
+% Note de travail, en français, accompagnant docs/effective/article.tex :
+% les définitions de l'article reprises depuis le début, sur un ton pédagogique,
+% pour un lecteur venu des mathématiques appliquées. Compilée par tectonic.
+\documentclass[11pt,a4paper]{amsart}
+\usepackage{iftex}
+\ifXeTeX\usepackage{fontspec}\else\usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}\fi
+\usepackage[french]{babel}
+\usepackage{lmodern,microtype,amssymb,mathtools,booktabs}
+\usepackage[margin=2.7cm]{geometry}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}
+\theoremstyle{plain}
+\newtheorem*{theoreme}{Théorème}
+\newtheorem*{lemme}{Lemme}
+\newtheorem*{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem{remarque}{Remarque}
+
+\newcommand{\A}{\mathbb A}
+\newcommand{\F}{\mathbb F}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Spec}{\operatorname{Spec}}
+
+\title[Note de lecture : relations d'équivalence finies non effectives]{Relations d'équivalence finies non effectives\\ sur les schémas finis sur un corps,\\ note de lecture}
+\author{Michel Hua}
+\address{Commutator, Paris}
+\email{michel@commutator.io}
+\date{15 novembre 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Cette note accompagne l'article \emph{Non-effective finite equivalence relations on finite schemes over a field: Venken's example checked, and a second one}. Elle en reprend les définitions depuis le début, sans supposer connus les schémas, et ramène chacune à de l'algèbre linéaire sur des espaces de dimension finie. Elle suit ensuite les deux exemples de l'article, celui de Venken (1971) et un second, tiré d'une relation de Raicu, puis la démonstration à la main du second, pas à pas. Rien n'y est démontré de neuf ; en cas de désaccord, l'article fait foi.
+\end{abstract}
+
+\section{De quoi parle l'article}
+
+Partons d'un ensemble fini $X$ et d'une relation d'équivalence $R$ sur $X$, vue comme une partie de $X \times X$. On forme le quotient $Y = X/R$, l'ensemble des classes, et l'application $\pi : X \to Y$ qui envoie un point sur sa classe. Deux points ont alors la même image dans $Y$ exactement quand ils sont équivalents :
+\[
+R = \{(x, x') : \pi(x) = \pi(x')\}.
+\]
+Cette égalité paraît tautologique, et pour les ensembles elle l'est. Elle dit que la relation est entièrement lue par le quotient : connaître $Y$ et $\pi$ suffit à retrouver $R$. On dit alors que $R$ est \emph{effective}. La figure~\ref{fig:ensembles} en donne l'image.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.42]
+\foreach \a/\b in {0/3, 3/5, 5/6} {
+  \fill[black!18] (\a,\a) rectangle (\b,\b);
+}
+\draw[step=1, black!35] (0,0) grid (6,6);
+\draw[thick] (0,0) rectangle (6,6);
+\foreach \i in {1,...,6} {
+  \node[font=\scriptsize] at (\i-0.5,-0.5) {$\i$};
+  \node[font=\scriptsize] at (-0.5,\i-0.5) {$\i$};
+}
+\node[font=\small] at (3,-1.5) {$X$};
+\node[font=\small] at (-1.6,3) {$X$};
+\end{tikzpicture}
+\caption{Une relation d'équivalence sur $X = \{1, \dots, 6\}$, de classes $\{1,2,3\}$, $\{4,5\}$ et $\{6\}$, dessinée dans $X \times X$ : la réunion des carrés grisés posés sur la diagonale. Pour les ensembles, ces carrés sont exactement les couples de points de même image dans le quotient ; l'article cherche une situation où cette égalité tombe en défaut.}\label{fig:ensembles}
+\end{figure}
+
+La géométrie algébrique remplace les ensembles par des objets plus riches, les \emph{schémas}, dont un point peut porter une structure infinitésimale : une direction, un jet d'ordre deux, une petite épaisseur. Sur ces objets, on sait encore définir une relation d'équivalence et un quotient, mais l'égalité ci-dessus n'est plus automatique. La question posée par Grothendieck en 1961 est de savoir si elle tient dans le cas le plus simple qu'on puisse imaginer : un schéma fini sur un corps, c'est-à-dire, on le verra, une algèbre de dimension finie. La réponse est non. Elle a été donnée par Venken en 1971 ; l'article revérifie son exemple et en construit un second, plus petit.
+
+Pour un lecteur venu des mathématiques appliquées, le point rassurant est que tout se ramène, à la fin, à comparer deux sous-espaces d'un espace vectoriel de dimension finie, de dimensions $269$ et $268$ dans le premier exemple, $52$ et $51$ dans le second. Le reste de la note explique d'où viennent ces deux sous-espaces.
+
+\section{Les objets, un par un}\label{sec:objets}
+
+On fixe un corps $k$ ; le lecteur peut penser à $\Q$, $\mathbb R$, $\mathbb C$ ou à un corps fini $\F_p$, et l'article tient à ce que tout marche pour chacun d'eux.
+
+\subsection{Algèbres finies et schémas finis}
+
+Une \emph{$k$-algèbre finie} est un anneau commutatif $A$ qui contient $k$ et qui est de dimension finie comme $k$-espace vectoriel. L'exemple type est un quotient d'anneau de polynômes,
+\[
+A = k[x_1, \dots, x_n]/I,
+\]
+où l'idéal $I$ est assez gros pour que le quotient soit de dimension finie. Le \emph{schéma fini} $X = \Spec A$ est l'objet géométrique dont $A$ est l'algèbre des fonctions. Il n'y a pas lieu ici d'en dire plus : tout le travail de l'article sur $X$ se lit sur $A$, et dans la note on peut lire « $\Spec A$ » comme un simple synonyme de « $A$ vue géométriquement ».
+
+Que sont les points de $X$ ? Pour toute $k$-algèbre $T$, un \emph{point de $X$ à valeurs dans $T$} est un morphisme de $k$-algèbres $A \to T$. Si $A = k[x_1, \dots, x_n]/I$, c'est une solution $(t_1, \dots, t_n) \in T^n$ de toutes les équations de $I$. Avec $T = k$ on retrouve les solutions ordinaires. Avec $T = k[\varepsilon]/(\varepsilon^2)$, une solution s'écrit $t_i = a_i + \varepsilon v_i$ : un point ordinaire $a$ et une direction $v$ en ce point, compatibles avec les équations au premier ordre.
+
+Un exemple fixe les idées. L'algèbre $k[x]/(x^2)$ a pour base $1, x$. Elle n'a qu'un point ordinaire, $x = 0$, mais ses points à valeurs dans $k[\varepsilon]/(\varepsilon^2)$ sont les $x = \varepsilon v$, une droite entière : c'est un point muni d'une direction tangente. Plus l'idéal est petit, plus le point est « épais ».
+
+\subsection{Algèbres locales artiniennes}
+
+Les deux exemples de l'article sont des algèbres \emph{locales artiniennes de corps résiduel $k$} : des algèbres finies qui n'ont qu'un seul point ordinaire, en lequel toutes les fonctions $x_i$ s'annulent, et dont les éléments de l'idéal maximal $\mathfrak m = (x_1, \dots, x_n)$ sont nilpotents. Par exemple $k[x_1, x_2]/(x_1^4, x_2^6, \dots)$ : puisque $x_1^4 = 0$ et $x_2^6 = 0$, toute solution ordinaire a $x_1 = x_2 = 0$.
+
+Pour ces algèbres, l'ensemble des points ordinaires est réduit à un point, et toute relation d'équivalence sur cet ensemble est triviale. La difficulté de l'article est donc invisible si l'on ne regarde que les points ordinaires : elle vit entièrement dans la structure infinitésimale, c'est-à-dire dans les points à valeurs dans des algèbres $T$ plus grosses que $k$. Cette remarque explique pourquoi on ne peut pas raisonner sur des ensembles, et pourquoi tout passe par l'algèbre.
+
+Les algèbres de l'article sont de plus \emph{graduées} : les relations sont homogènes, si bien que $A$ se décompose en $A = A_0 \oplus A_1 \oplus A_2 \oplus \cdots$ selon le degré des monômes. La suite des dimensions $\dim_k A_d$ s'appelle la \emph{fonction de Hilbert} de $A$, et sa somme est la \emph{longueur} $\dim_k A$.
+
+\subsection{Le produit et le produit tensoriel}
+
+Le produit $X \times_k X$ a pour algèbre de fonctions le produit tensoriel $A \otimes_k A$. Concrètement, si $A = k[x]/I$ avec $x = (x_1, \dots, x_n)$, on prend une seconde copie des variables, $y = (y_1, \dots, y_n)$, et
+\[
+A \otimes_k A = k[x, y]/\bigl(I(x) + I(y)\bigr) :
+\]
+des fonctions de deux points, $x$ et $y$, chacun soumis aux équations de $A$. L'élément $a \otimes b$ est la fonction $a(x)\,b(y)$, et $\dim (A \otimes_k A) = (\dim A)^2$. Un point de $X \times X$ à valeurs dans $T$ est un couple de points de $X$ à valeurs dans $T$.
+
+\subsection{Sous-schémas fermés}
+
+Un \emph{sous-schéma fermé} $R$ de $X \times X$ est donné par un idéal $I_R \subset A \otimes_k A$ : ce sont les équations supplémentaires qu'on impose au couple $(x, y)$. Ses points à valeurs dans $T$ sont les couples qui annulent tout $I_R$. Plus l'idéal est gros, plus $R$ est petit.
+
+\subsection{Relations d'équivalence}\label{sec:releq}
+
+\begin{definition}
+Un sous-schéma fermé $R \subset X \times_k X$ est une \emph{relation d'équivalence} lorsque, pour toute $k$-algèbre $T$, ses points à valeurs dans $T$ forment une relation d'équivalence sur l'ensemble des points de $X$ à valeurs dans $T$.
+\end{definition}
+
+La condition porte sur toutes les algèbres $T$ à la fois, et elle y gagne tout son contenu. On peut la traduire en trois conditions sur l'idéal, que l'article vérifie par machine pour l'exemple de Venken :
+\begin{itemize}
+\item \emph{réflexivité} : $I_R$ est contenu dans le noyau de la multiplication $A \otimes A \to A$, $a \otimes b \mapsto ab$, c'est-à-dire que ses équations sont satisfaites quand $y = x$ ;
+\item \emph{symétrie} : $I_R$ est stable par l'échange $a \otimes b \mapsto b \otimes a$, c'est-à-dire par $x \leftrightarrow y$ ;
+\item \emph{transitivité} : dans $A^{\otimes 3}$, fonctions de trois points $x, y, z$, l'image de $I_R$ par $p_{13}$ (les équations écrites en $(x, z)$) est contenue dans l'idéal qu'engendrent ses images par $p_{12}$ et $p_{23}$ (les mêmes équations écrites en $(x, y)$ et en $(y, z)$). Autrement dit, les équations « $x \sim z$ » sont conséquences algébriques des équations « $x \sim y$ » et « $y \sim z$ ».
+\end{itemize}
+Les deux \emph{projections} $R \rightrightarrows X$, $(x, y) \mapsto x$ et $(x, y) \mapsto y$, sont \emph{finies} : ici, cela revient à dire que les algèbres en jeu sont de dimension finie, et c'est automatique puisque $A$ l'est. Elles ne sont pas forcément \emph{plates}, et c'est toute la question. La platitude est une condition d'uniformité : grossièrement, les « classes d'équivalence » ont toutes la même taille. Sans elle, une classe peut être plus épaisse qu'une autre.
+
+\subsection{Les invariants et le quotient}
+
+Une fonction $a \in A$ est \emph{invariante} quand elle prend la même valeur en deux points équivalents, c'est-à-dire quand $a(x) - a(y)$ est conséquence des équations de $R$ :
+\[
+B = A^R = \{\, a \in A : a \otimes 1 - 1 \otimes a \in I_R \,\}.
+\]
+C'est une sous-algèbre de $A$, de dimension finie, et $Y = \Spec B$ est le quotient de $X$ par $R$ : l'objet dont les fonctions sont les fonctions invariantes. L'article rappelle qu'il s'agit du quotient dans la catégorie des schémas.
+
+\subsection{L'effectivité}
+
+Deux points ont la même image dans $Y$ quand toutes les fonctions invariantes y prennent la même valeur. Ce sous-schéma de $X \times X$ se note $X \times_Y X$ ; son idéal est
+\[
+J_B = \bigl(b \otimes 1 - 1 \otimes b : b \in B\bigr) \subset A \otimes_k A,
+\]
+et son algèbre est $A \otimes_B A = (A \otimes_k A)/J_B$. Par définition de $B$, chaque générateur de $J_B$ est dans $I_R$, donc $J_B \subseteq I_R$ : deux points équivalents ont toujours même image, $R \subseteq X \times_Y X$.
+
+\begin{definition}
+La relation $R$ est \emph{effective} lorsque $R = X \times_Y X$, c'est-à-dire lorsque $I_R = J_B$.
+\end{definition}
+
+L'article formule la définition comme « le morphisme $R \to X \times_Y X$ est un isomorphisme » ; c'est la même chose, ce morphisme étant l'immersion fermée définie par $I_R/J_B$.
+
+Pour les ensembles finis, l'effectivité est toujours vraie, parce que les fonctions constantes sur les classes suffisent à séparer deux classes distinctes. Ici, elle peut échouer : les fonctions invariantes peuvent être trop peu nombreuses pour imposer toutes les équations de $R$. On obtient alors une relation qu'aucun quotient ne « voit » en entier. L'enjeu dépasse l'exemple : la construction de quotients par des relations d'équivalence est un outil de base pour fabriquer des schémas, par exemple des espaces de modules, et c'est dans ce contexte, celui de ses exposés sur la construction des schémas, que Grothendieck a posé la question. Le cas où les projections sont plates est traité dans SGA~3, exposé~V.
+
+\section{La question, et la réponse de Venken}
+
+Dans le troisième de ses exposés au Séminaire Bourbaki sur la construction des schémas (exposé~212, 1960/61), après le cas plat, Grothendieck écrit qu'il ne sait pas si une relation d'équivalence finie est effective sans hypothèse de platitude. Il ramène la question au spectre d'un anneau local artinien de corps résiduel algébriquement clos, et dit qu'elle est ouverte même sur un corps (p.~212-05).
+
+La réponse est imprimée depuis 1971. La note de J.~Venken aux \emph{Comptes rendus} (tome~272, p.~A1553--A1554), présentée à l'Académie le 5 avril 1971, porte dans son titre sur la descente des modules plats, et la plus grande part en est consacrée aux modules : elle construit un morphisme fini injectif $f$ d'anneaux locaux artiniens qui est un morphisme de descente pour les modules plats, et une donnée de descente sur un module libre qui n'est pas effective. Chemin faisant, son corollaire~3.1 énonce qu'un certain idéal est un idéal d'équivalence, et que la relation qu'il définit n'est pas effective. L'anneau est une algèbre locale artinienne sur un corps $K$ quelconque, de corps résiduel $K$ : c'est une réponse négative à la question sur tout corps. Venken prend ses définitions dans le premier exposé de Grothendieck sur la descente.
+
+Deux ans plus tard, le 11 juillet 1973, à la fin d'une séance de son cours de géométrie algébrique à l'université d'État de New York à Buffalo, un auditeur demande des problèmes ouverts ; Grothendieck donne celui-ci, dit qu'on ne le sait pas, qu'il s'attend à une réponse négative et que la question est très élémentaire. Plus tard, dans l'appendice à l'article de Kollár sur les quotients par des relations d'équivalence finies, Raicu donne des relations d'équivalence finies sur le plan $\A^2$ qui ne sont pas effectives ; il montre aussi ailleurs que les relations d'équivalence toriques affines sont effectives. Philippe a étudié la descente le long des morphismes non ramifiés.
+
+L'article énonce deux théorèmes.
+
+\begin{theoreme}[Venken, 1971]
+Soit $K$ un corps quelconque. Il existe une $K$-algèbre locale artinienne de dimension $33$, de corps résiduel $K$, et une relation d'équivalence fermée sur son spectre, à projections finies, qui n'est pas effective.
+\end{theoreme}
+
+\begin{theoreme}[article, théorème~2]
+Soit $k$ un corps quelconque. Il existe une $k$-algèbre locale artinienne graduée de dimension $15$ ($16$ si $k$ est de caractéristique~$2$), à deux générateurs, de corps résiduel $k$, et une relation d'équivalence fermée sur son spectre, à projections finies, qui n'est pas effective.
+\end{theoreme}
+
+Le premier est celui de Venken ; l'article en apporte une vérification indépendante, par machine et en Lean. Le second est construit par l'article à partir de la relation publiée de Raicu. Les deux répondent aussi à la question plus générale, pour un schéma fini sur une base noethérienne.
+
+\section{L'effectivité comme algèbre linéaire}\label{sec:lin}
+
+La définition de la section~\ref{sec:objets} a une conséquence immédiate, sur laquelle repose tout l'article : $I_R$ et $J_B$ sont deux sous-espaces de l'espace de dimension finie $A \otimes_k A$, avec $J_B \subseteq I_R$, et la relation est effective si et seulement s'ils ont la même dimension. Prouver la non-effectivité, c'est exhiber un élément de $I_R$ qui n'est pas dans $J_B$ ; un tel élément s'appelle ici un \emph{témoin}.
+
+Quand $A$ et $I_R$ sont gradués, $B$ est une sous-algèbre graduée et les deux idéaux sont gradués : on peut comparer $(I_R)_d$ et $(J_B)_d$ degré par degré. Une remarque simple fait gagner beaucoup : un invariant homogène de degré $e$ ne contribue à $J_B$ qu'en degrés $\ge e$, puisque $b \otimes 1 - 1 \otimes b$ est de degré $e$ et qu'on ne fait que le multiplier. Pour comparer les deux idéaux en degré $d$, il suffit donc de connaître les invariants de degré au plus $d$.
+
+Le calcul de $B$ lui-même est linéaire : la condition $a \otimes 1 - 1 \otimes a \in I_R$ est une condition linéaire sur $a$, et $B$ est le noyau d'une application linéaire. Tout se fait par élimination de Gauss.
+
+\section{L'exemple de Venken}\label{sec:venken}
+
+\subsection{L'algèbre}
+
+On garde les notations de Venken. Sur un corps $K$, on considère l'algèbre
+\[
+\mathbf B = K[M, N, X, Y, Z, W]/\mathbf I,
+\]
+où l'idéal $\mathbf I$ est engendré par
+\[
+M^2,\ MN,\ N^2,\quad X^3,\ Y^3,\ Z^3,\ W^3,\quad YZ,\ NY,\ MZ,\ NXY,\ MYW
+\]
+et tous les monômes de degré $3$ en $X, Y, Z, W$ ; les minuscules désignent les classes. On peut se représenter $\mathbf B$ comme suit : deux variables $m, n$ qui ne peuvent figurer qu'une fois à elles deux dans un monôme non nul, quatre variables $x, y, z, w$ qui ne peuvent figurer qu'à l'ordre deux au plus, et quelques monômes mixtes supprimés. Un dénombrement de monômes donne la fonction de Hilbert $1, 6, 15, 11$ en degrés $0$ à $3$, et $\mathbf B$ est nulle au-delà ; on trouve bien $\dim \mathbf B = 33$.
+
+Soit $\mathbf A \subset \mathbf B$ la sous-algèbre engendrée par $m$, $n$, $mx$, $nw$ et $my - nz$. Le produit de deux de ces éléments contient deux facteurs pris parmi $m, n$, donc est nul : l'idéal maximal de $\mathbf A$ est de carré nul et $\dim_K \mathbf A = 6$. Venken montre que $\mathbf A \to \mathbf B$ est un morphisme de descente pour les modules plats, que le groupe de cohomologie $H^1(\mathbf B/\mathbf A, \mathbb G_a)$ n'est pas nul, la classe de $mxy \otimes w$ y étant non nulle, et en déduit :
+
+\begin{quote}
+\emph{Corollaire 3.1.} L'idéal $\mathbf J$ de $\mathbf B \otimes_{\mathbf A} \mathbf B$ engendré par $mxy \otimes w$ est un idéal d'équivalence, et la relation d'équivalence qu'il définit n'est pas effective.
+\end{quote}
+
+Vu dans $\mathbf B \otimes_K \mathbf B$, cette relation $R_V$ a pour idéal
+\[
+I_V = \bigl(a \otimes 1 - 1 \otimes a : a = m, n, mx, nw, my - nz\bigr) + (mxy \otimes w).
+\]
+Les premiers générateurs disent que $x$ et $y$ ont mêmes valeurs des cinq fonctions de $\mathbf A$ ; ils découpent $\mathbf B \otimes_{\mathbf A} \mathbf B$ dans $\mathbf B \otimes_K \mathbf B$. Le dernier est l'équation supplémentaire de Venken. Tous les générateurs sont des monômes ou des binômes homogènes, si bien que la comparaison degré par degré de la section~\ref{sec:lin} s'applique, chaque variable étant de degré~$1$.
+
+Il faut remarquer que la note de Venken donne la non-effectivité en une ligne, après un calcul de cohomologie ; d'où l'intérêt d'une vérification directe.
+
+\subsection{La vérification}
+
+\begin{proposition}[article, proposition~3]
+Sur tout corps $K$ :
+\begin{enumerate}
+\item $\dim \mathbf B = 33$, et $\mathbf B$ est nulle en degrés supérieurs à $3$ ;
+\item $I_V$ satisfait les trois axiomes d'une relation d'équivalence (réflexivité, symétrie, transitivité, sous la forme du §~\ref{sec:releq}) ;
+\item l'anneau des invariants $\mathbf B^{R_V}$ est de dimension $10$, donc strictement plus gros que $\mathbf A$ ;
+\item $I_V$ et $J_{\mathbf B^{R_V}}$ ne diffèrent qu'en degré $4$, où leurs dimensions sont $269$ et $268$, et $mxy \otimes w$ n'est pas dans $J_{\mathbf B^{R_V}}$.
+\end{enumerate}
+\end{proposition}
+
+Le point (iii) mérite un commentaire. Venken compare son idéal à $\mathbf B \otimes_{\mathbf A} \mathbf B$, c'est-à-dire aux équations venues de $\mathbf A$. Mais le quotient de la section~\ref{sec:objets} est défini par \emph{tous} les invariants, et ceux-ci forment un espace de dimension $10$, engendré par
+\[
+1,\ m,\ n,\ mx,\ nz - my,\ nw,\ mx^2,\ my^2,\ nz^2,\ nw^2.
+\]
+Les quatre derniers ne sont pas dans $\mathbf A$, et ils ajoutent des équations à $J$. Le point (iv) montre qu'ils n'en ajoutent pas assez : en degré $4$, il manque encore une dimension, et le témoin est précisément le générateur $mxy \otimes w$ de Venken. Ainsi $R_V$ n'est pas effective au sens de la section~\ref{sec:objets}, comme Venken l'énonce.
+
+Venken observe que l'idéal engendré par $M^2$, $MN$, $N^2$ et les monômes de degré $3$ en $X, Y, Z, W$ suffirait, les autres générateurs ne servant qu'à simplifier ses calculs. Le même contrôle sur cet idéal plus petit donne $\dim \mathbf B = 45$, des invariants de dimension $8$, et de nouveau un écart d'une dimension en degré $4$ ($410 > 409$).
+
+\subsection{Comment le calcul est certifié}
+
+Dans le dépôt, le script \texttt{venken.py} du répertoire \texttt{computations/\allowbreak effective/\allowbreak venken} travaille dans la base des monômes de $\mathbf B^{\otimes 2}$ et $\mathbf B^{\otimes 3}$ et fait les comparaisons par élimination de Gauss sur $\Q$, en arithmétique exacte. Tous les pivots rencontrés valent $\pm 1$. Un lecteur habitué au calcul numérique en verra la portée : diviser par $\pm 1$ ne fait jamais sortir des entiers, donc l'élimination se déroule en fait sur $\Z$, et ses résultats (rangs, noyaux) se réduisent tels quels modulo tout nombre premier $p$. Ils valent donc sur tout corps premier, et de là sur tout corps, car un corps contient $\Q$ ou un $\F_p$ et le rang d'une matrice ne change pas quand on agrandit le corps. Le script a aussi été lancé directement sur $\F_p$ pour $p = 2, 3, 5, 7, 11, 101$, avec le même résultat.
+
+La proposition, à l'exception des dimensions $269$ et $268$, est de plus formalisée en Lean~4 avec Mathlib, sur tout anneau commutatif non nul, à partir de certificats entiers vérifiés par le noyau de Lean. Le fichier \texttt{lean/\allowbreak Grothendieck/\allowbreak EffectiveVenken.lean} démontre (ii), l'égalité de $\mathbf B^{R_V}$ avec l'espace engendré par les dix éléments ci-dessus, et les deux faits $mxy \otimes w \in I_V$, $mxy \otimes w \notin J_{\mathbf B^{R_V}}$ (théorème \texttt{venken\_not\_effective}). Le résumé de l'article précise que la séparation des deux idéaux y est obtenue par une forme linéaire à coefficients entiers : une forme qui s'annule sur $J$ et pas sur le témoin. On retrouvera la même idée dans la démonstration à la main du second exemple.
+
+\section{La relation de Raicu et sa restriction}
+
+\subsection{Une relation sur le plan}
+
+Notons $x = (x_1, x_2)$ et $y = (y_1, y_2)$ les coordonnées de $\A^2 \times \A^2$, deux points du plan. La relation de Raicu est le sous-schéma fermé $R \subset \A^2 \times \A^2$ d'idéal
+\[
+I = \bigl(x_1^2 - y_1^2,\ x_1x_2 - x_2^2 - y_1y_2 + y_2^2,\ x_2^3 - y_2^3,\ (x_1y_2 - x_2y_1)\,y_2^3\bigr) \subset k[x_1, x_2, y_1, y_2].
+\]
+C'est une relation d'équivalence finie sur $\A^2$, définie sur $\Z$, et elle n'est pas effective après extension des scalaires à n'importe quel corps ; la classe de $(x_1y_2 - x_2y_1)\,y_2^3$ est l'obstruction. Ces faits sont dus à Raicu, et l'article les reprend tels quels.
+
+La lecture des générateurs est éclairante. Posons
+\[
+f_1 = x_1^2, \qquad f_2 = x_1x_2 - x_2^2, \qquad f_3 = x_2^3.
+\]
+Les trois premiers générateurs sont exactement $f_1(x) - f_1(y)$, $f_2(x) - f_2(y)$ et $f_3(x) - f_3(y)$ : ils disent que $x$ et $y$ ont les mêmes valeurs de $f_1, f_2, f_3$, et ces trois fonctions sont donc invariantes. Le quatrième générateur est une équation de plus, qui rend $R$ plus petit que « mêmes valeurs de $f_1, f_2, f_3$ ». La non-effectivité dit qu'aucune famille de fonctions invariantes ne parvient à imposer cette quatrième équation.
+
+\subsection{Le passage à un schéma fini}
+
+La relation de Raicu vit sur le plan, qui n'est pas un schéma fini. Pour obtenir un exemple de la forme demandée par Grothendieck, l'article la restreint à un petit voisinage infinitésimal de l'origine, découpé par les carrés des fonctions invariantes :
+\[
+Z = V(f_1^2, f_2^2, f_3^2) \subset \A^2, \qquad A = k[x_1, x_2]/(f_1^2, f_2^2, f_3^2).
+\]
+Comme $f_1^2 = x_1^4$ et $f_3^2 = x_2^6$, le seul point ordinaire de $Z$ est l'origine, et $A$ est locale artinienne de corps résiduel $k$. Le troisième relateur est
+\[
+f_2^2 = x_1^2x_2^2 - 2x_1x_2^3 + x_2^4.
+\]
+La fonction de Hilbert de $A$ est $1, 2, 3, 4, 3, 2$, donc $\dim_k A = 15$. En degrés au plus $3$, aucune relation n'intervient. En degré $4$, deux relations ($x_1^4$ et $f_2^2$) parmi cinq monômes laissent $3$. En degré $5$, les quatre relations $x_1^5$, $x_1^4x_2$, $x_1f_2^2$, $x_2f_2^2$ parmi six monômes laissent $2$. La figure~\ref{fig:monomes} montre ces monômes.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.62]
+\draw[->,black!50] (-0.3,0) -- (6.6,0) node[right,font=\scriptsize] {exposant de $x_1$};
+\draw[->,black!50] (0,-0.3) -- (0,6.6) node[above,font=\scriptsize] {exposant de $x_2$};
+\foreach \d in {1,...,6} {\draw[black!12] (\d,0) -- (0,\d);}
+\foreach \i in {0,...,5} {\foreach \j in {0,...,5} {
+  \pgfmathtruncatemacro{\s}{\i+\j}
+  \ifnum\s<4 \fill (\i,\j) circle (3.2pt); \fi
+}}
+\foreach \p in {(3,1),(2,2),(1,3),(3,2),(2,3)} {\fill \p circle (3.2pt);}
+\foreach \p in {(0,4),(1,4),(0,5)} {\draw[fill=black!35] \p circle (3.2pt);}
+\foreach \p in {(4,0),(5,0),(4,1)} {\draw \p circle (3.2pt);}
+\foreach \d/\h in {0/1,1/2,2/3,3/4,4/3,5/2} {
+  \node[font=\scriptsize,black!60] at (\d,-0.6) {$\d$};
+  \node[font=\scriptsize] at (\d,-1.15) {$\h$};
+}
+\node[font=\scriptsize,black!60,anchor=east] at (-0.4,-0.6) {degré $d$};
+\node[font=\scriptsize,anchor=east] at (-0.4,-1.15) {$\dim A_d$};
+\end{tikzpicture}
+\caption{Les monômes $x_1^ix_2^j$ de degré au plus $5$ dans $A$ (caractéristique différente de $2$). Points noirs : une base de $A$. Points gris : monômes exprimés en fonction des autres grâce à $f_2^2 = 0$, par exemple $x_2^4 = 2x_1x_2^3 - x_1^2x_2^2$. Cercles vides : monômes nuls, multiples de $x_1^4$. Sous l'axe, au pied de chaque diagonale $i + j = d$, le degré $d$ et la dimension $\dim A_d$, nombre de points noirs sur cette diagonale. En degré $6$, il ne reste rien.}\label{fig:monomes}
+\end{figure}
+
+Le cas de la caractéristique $2$ s'explique au même endroit. En degré $6$, après les multiples de $x_1^4$ et de $x_2^6$, il reste trois monômes $x_1^3x_2^3$, $x_1^2x_2^4$, $x_1x_2^5$, et trois relations, $x_1^2f_2^2$, $x_1x_2f_2^2$, $x_2^2f_2^2$, dont la matrice dans ces monômes est
+\[
+\begin{pmatrix} -2 & 1 & 0 \\ 1 & -2 & 1 \\ 0 & 1 & -2 \end{pmatrix},
+\]
+de déterminant $-4$. Ce calcul n'est pas dans l'article ; il montre seulement d'où vient la différence. Hors de la caractéristique $2$, les trois relations tuent les trois monômes ; en caractéristique $2$, $f_2^2 = x_1^2x_2^2 + x_2^4$ perd son terme du milieu, la matrice devient singulière et il survit un monôme. L'article donne dans ce cas la fonction de Hilbert $1, 2, 3, 4, 3, 2, 1$ et $\dim_k A = 16$. Comme la démonstration à la main n'utilise que les degrés au plus $5$, où rien ne change, elle vaut aussi en caractéristique $2$.
+
+On pose $R_Z = R \cap (Z \times Z)$ : le sous-schéma fermé de $Z \times Z$ dont l'idéal $I_{R_Z}$ est l'image de $I$ dans $A \otimes_k A$.
+
+\begin{lemme}[article, lemme~4]
+$R_Z$ est une relation d'équivalence fermée sur $Z$, à projections finies.
+\end{lemme}
+
+La démonstration est d'une ligne : pour toute $k$-algèbre $T$, les points de $R_Z$ à valeurs dans $T$ sont ceux de $R$ dont les deux composantes sont dans $Z$, c'est-à-dire la restriction d'une relation d'équivalence à une partie ; c'en est encore une. Et $R_Z$ est fermé dans $Z \times Z$, qui est fini sur $Z$ par chaque projection.
+
+La restriction permet de poser sur un schéma fini une question née sur le plan. Mais il n'est pas formel que la non-effectivité y survive. Les invariants de $R_Z$ se calculent sur $A$, et non sur $k[x_1, x_2]$ : une fonction qui n'était pas invariante sur le plan peut le devenir sur $Z$, parce que les équations de $Z$ l'aident, et $J_B$ peut alors grossir jusqu'à rattraper $I_{R_Z}$. La suite montre qu'il ne grossit pas assez.
+
+\section{Le calcul}
+
+Tous les idéaux en jeu sont homogènes pour le degré usuel. Dans $k[x, y] = k[x_1, x_2, y_1, y_2]$, on pose
+\[
+K = (f_1^2, f_2^2, f_3^2)(x) + (f_1^2, f_2^2, f_3^2)(y),
+\]
+de sorte que $A \otimes_k A = k[x, y]/K$. L'idéal de $R_Z$ se relève en $I + K$, et $J_B$ en $J + K$, où $J$ est engendré par les $b(x) - b(y)$, $b$ parcourant des relevés homogènes d'une base de $B$. On travaille donc dans les polynômes en quatre variables, et l'on compare deux idéaux qui contiennent $K$.
+
+\begin{proposition}[article, proposition~5]
+Sur $\Q$ et sur tout corps premier fini, les invariants de $R_Z$ de degré au plus $7$ donnent $27$ différences $b(x) - b(y)$ indépendantes modulo $I + K$, et dans les degrés $d \le 14$ les deux idéaux ne diffèrent qu'en degré $5$, où
+\[
+\dim_k (I + K)_5 = 52 > 51 = \dim_k (J + K)_5.
+\]
+\end{proposition}
+
+D'après la remarque de la section~\ref{sec:lin}, les invariants de degré au moins $8$ ne changent pas $J + K$ en degré $5$ ; l'inégalité stricte en degré $5$ prouve donc que $R_Z$ n'est pas effective. Un témoin est le générateur $(x_1y_2 - x_2y_1)\,y_2^3$ de $I$, l'obstruction de Raicu : il est dans $(I + K)_5$ et pas dans $(J + K)_5$, et l'article l'a vérifié sur $\Q$, $\F_2$ et $\F_3$.
+
+La proposition est un calcul fini : les parties de degré $d$ sont engendrées par les multiples monomiaux des générateurs, les invariants de degré $d$ forment le noyau d'une application linéaire sur les formes de degré $d$ en $x$, et les dimensions sont des rangs. Le script \texttt{scan.py} (répertoire \texttt{computations/\allowbreak effective/\allowbreak raicu}), lancé avec \texttt{EXP=2,2,2}, l'effectue par élimination de Gauss sur $\Q$ ou sur $\F_p$.
+
+\subsection{Pourquoi le calcul vaut sur tout corps}
+
+Ici les pivots ne valent plus tous $\pm 1$, et l'argument de la section~\ref{sec:venken} doit être affiné. Comme plus haut, il suffit de traiter les corps premiers, puisque toutes les données sont définies sur le corps premier et que rangs et noyaux ne changent pas par extension des scalaires.
+
+Sur $\Q$, l'élimination ne divise que par des pivots. Chaque coefficient qu'elle produit est une combinaison entière des coefficients de départ, tous entiers, divisée par un produit de pivots. Si un nombre premier $p$ ne divise ni le numérateur ni le dénominateur d'aucun pivot, la même suite d'opérations a un sens sur $\F_p$, avec les mêmes positions de pivots, et donne les mêmes rangs et les mêmes noyaux. Le script \texttt{certify\_scan.py} refait le calcul sur $\Q$ et relève les facteurs premiers de tous les pivots : ce sont $2, 3, 5, 7, 13, 41$ et $61$. Pour tout autre premier, la proposition sur $\F_p$ découle de celle sur $\Q$ ; pour ces sept-là, \texttt{scan.py} a été lancé directement sur $\F_p$, avec le même résultat.
+
+L'idée est familière en calcul formel : une élimination exacte sur $\Q$ reste valable modulo $p$ tant que $p$ ne touche à aucun pivot, et il n'y a qu'un nombre fini de premiers à examiner à part.
+
+\subsection{Deux remarques de l'article}
+
+Pourquoi ce $Z$ ? Parmi les sous-schémas $V(f_1^a, f_2^b, f_3^c)$ avec $a, b, c \le 3$, seize ont été essayés sur $\F_3$, et le plus petit sur lequel l'obstruction survit est $a = b = c = 2$ ; avec les exposants $(3, 3, 2)$ on obtient une longueur $27$, avec des écarts en degrés $5$ et $6$. On ne sait pas s'il existe un exemple plus court, issu d'autres idéaux. Une recherche aléatoire sur $48$ petites algèbres monomiales sur $\F_2$ et $\F_3$ n'a trouvé aucune relation non effective, et le théorème de Raicu sur les relations toriques affines suggère pourquoi. Comparé à celui de Venken, cet exemple a une longueur $15$ (ou $16$) au lieu de $33$, et deux générateurs au lieu de six.
+
+Grothendieck avait ramené la question au cas d'un corps résiduel algébriquement clos ; les deux exemples ont pour corps résiduel $k$, qu'on peut choisir algébriquement clos. Ils sont aussi gradués, propriété que la question n'exige pas.
+
+\section{La démonstration à la main}\label{sec:main}
+
+L'article donne enfin une démonstration sans ordinateur, valable en toute caractéristique d'un coup, que le témoin
+\[
+w = (x_1y_2 - x_2y_1)\,y_2^3
+\]
+est dans $(I + K)_5$ et pas dans $(J + K)_5$. Le principe tient en deux idées. D'abord, on remplace l'algèbre des invariants $B$, qu'on ne sait pas calculer à la main, par la sous-algèbre $C$ engendrée par $f_1, f_2, f_3$, qu'on connaît, et l'on montre qu'en degré $5$ cela ne change rien. Ensuite, pour prouver qu'un vecteur n'est pas dans un sous-espace, on exhibe une forme linéaire qui s'annule sur le sous-espace et pas sur le vecteur. C'est un certificat de non-appartenance, du même genre que ceux de la dualité en optimisation linéaire : le trouver peut être difficile, le vérifier est une suite de petits calculs.
+
+\subsection{Le plan}
+
+Soit $C \subset A$ la sous-algèbre engendrée par les classes de $f_1, f_2, f_3$ ; elle est contenue dans $B$. Posons $g_i = f_i(x) - f_i(y)$, les trois premiers générateurs de $I$, et
+\[
+L = (g_1, g_2, g_3) + K \subset k[x, y],
+\]
+de sorte que $k[x, y]/L = A \otimes_C A$ : l'algèbre des couples de points de $Z$ qui ont mêmes valeurs de $f_1, f_2, f_3$. On a la chaîne
+\[
+L \;\subseteq\; J + K \;\subseteq\; I + K,
+\]
+la première inclusion parce que $C \subseteq B$, la seconde par la section~\ref{sec:objets}. Le lemme suivant dit qu'en degré $5$ la première est une égalité et que la seconde ajoute au plus $w$.
+
+\subsection{Quelques degrés de $A$}
+
+En degrés au plus $3$, $A$ coïncide avec $k[x_1, x_2]$. En degré $4$, les relations sont $x_1^4 = 0$ et $f_2^2 = 0$, donc $A_4$ est de dimension $3$, de base $x_1^3x_2$, $x_1^2x_2^2$, $x_1x_2^3$, et
+\[
+x_2^4 = 2x_1x_2^3 - x_1^2x_2^2. \tag{1}
+\]
+En degré $5$, $x_1^5 = x_1^4x_2 = 0$, et $x_1 f_2^2 = x_2 f_2^2 = 0$ donnent
+\[
+x_1x_2^4 = 2x_1^2x_2^3 - x_1^3x_2^2, \qquad x_2^5 = 3x_1^2x_2^3 - 2x_1^3x_2^2.
+\]
+Ainsi $A_5$ est engendré par $x_1^3x_2^2$ et $x_1^2x_2^3$. Or $f_1f_3 = x_1^2x_2^3$ et $f_2f_3 = x_1x_2^4 - x_2^5 = x_1^3x_2^2 - x_1^2x_2^3$, d'où
+\[
+C_5 = A_5. \tag{2}
+\]
+En degré $5$, toute fonction est donc un polynôme en $f_1, f_2, f_3$. Ces formules sont à coefficients entiers et valent en toute caractéristique. Les composantes de $C$ en bas degré sont $C_1 = 0$, $C_2 = kf_1 + kf_2$, $C_3 = kf_3$, $C_4 = kf_1f_2$ (car $f_1^2 = f_2^2 = 0$ dans $A$) et $C_5 = A_5$.
+
+\begin{lemme}[article, lemme~8]
+$(J + K)_5 = L_5$, et $(I + K)_5 = L_5 + kw$.
+\end{lemme}
+
+\begin{proof}[Lecture de la démonstration]
+La seconde égalité vient de ce que $w$ est le seul générateur de $I$ de degré $5$, les autres étant $g_1, g_2, g_3$. Pour la première, on sait déjà $L \subseteq J + K$. Réciproquement, $J_5$ est engendré par les produits $(b(x) - b(y))\,m$, où $b$ est un invariant homogène de degré $e$, $1 \le e \le 5$, et $m$ un monôme de degré $5 - e$. On distingue deux cas.
+
+Si $e \le 4$ : $b(x) - b(y)$ est dans $(I + K)_e$ puisque $b$ est invariant, et en degré $e \le 4$ cet espace est égal à $L_e$, parce que $w$, de degré $5$, n'y contribue pas. Le produit est donc dans $L$. Autrement dit, en bas degré, la relation $R_Z$ et la relation « mêmes valeurs de $f_1, f_2, f_3$ » ont les mêmes équations, et un invariant ne peut rien fournir de plus.
+
+Si $e = 5$ : par (2), il existe un polynôme $c$ en $f_1, f_2, f_3$ avec $b - c \in (f_1^2, f_2^2, f_3^2)$ ; alors $b(x) - b(y)$ est congru modulo $K$ à $c(x) - c(y)$, qui est dans $(g_1, g_2, g_3)$, puisque $u(x)v(x) - u(y)v(y) = u(x)\bigl(v(x) - v(y)\bigr) + \bigl(u(x) - u(y)\bigr)v(y)$.
+\end{proof}
+
+Il reste donc à montrer que $w \notin L_5$, c'est-à-dire que la classe de $w$ dans $(A \otimes_C A)_5$ n'est pas nulle. Les invariants de $R_Z$ ne jouent plus aucun rôle. Le lemme rend compte aussi des dimensions de la proposition~5 : $52 = 51 + 1$.
+
+\subsection{Une présentation de $A \otimes_C A$}
+
+Pour calculer dans $A \otimes_C A$, on décrit $A$ comme module sur $C$ : par quels éléments est-il engendré, et avec quelles relations ?
+
+Dans $A/C^+A = k[x_1, x_2]/(f_1, f_2, f_3)$, où $C^+$ désigne les éléments de $C$ sans terme constant, on a $x_1^2 = 0$ et $x_1x_2 = x_2^2$, donc $x_1^2x_2 = 0$ et $x_1x_2^2 = x_2^3 = 0$ ; cet anneau a pour base $1, x_1, x_2, x_2^2$. Le lemme de Nakayama gradué, qui dit qu'un module gradué est engendré par des relevés d'une base de son quotient par $C^+$, donne alors que
+\[
+e_0 = 1, \quad e_1 = x_1, \quad e_2 = x_2, \quad e_3 = x_2^2
+\]
+engendrent $A$ comme $C$-module : toute fonction s'écrit $c_0 + c_1x_1 + c_2x_2 + c_3x_2^2$ avec des $c_j \in C$, pas de façon unique en général.
+
+Soit $E \subset C^4$ le module des relations, les $(c_0, c_1, c_2, c_3)$ tels que $\sum c_j e_j = 0$ dans $A$, gradué par $\deg c_j + \deg e_j$. En tensorisant la suite exacte $0 \to E \to C^4 \to A \to 0$ par $A$ sur $C$, on obtient
+\[
+A \otimes_C A = A^4 / A E,
+\]
+où $(a_0, a_1, a_2, a_3)$ représente $\sum a_j \otimes e_j$. L'intuition est simple : dans $A \otimes_C A$, les éléments de $C$ traversent le signe $\otimes$. On écrit le second facteur dans les générateurs $e_j$, on fait passer les coefficients $c_j$ à gauche, et l'on obtient un vecteur de $A^4$ ; l'ambiguïté de l'écriture est exactement donnée par les relations.
+
+En degré $5$, $(A^4)_5 = A_5 \oplus A_4 \oplus A_4 \oplus A_3$, de dimension $2 + 3 + 3 + 4 = 12$, et $(AE)_5$ est engendré par les produits $ar$ avec $r \in E_d$, $d \le 5$, et $a \in A_{5-d}$. Comme $x_2^4 = f_3e_2$ et $x_1x_2^3 = f_3e_1$, on a $w = x_1 \otimes f_3e_2 - x_2 \otimes f_3e_1$, et la classe de $w$ est
+\[
+W = (0,\ -x_2^4,\ x_1x_2^3,\ 0).
+\]
+
+\subsection{Les relations jusqu'au degré $5$}
+
+Une relation de degré $d$ a $c_0 \in C_d$, $c_1, c_2 \in C_{d-1}$ et $c_3 \in C_{d-2}$. On les détermine degré par degré, chaque fois en comparant la dimension de l'espace des $(c_j)$ à celle de son image dans $A_d$.
+
+\emph{Degrés au plus $2$.} Il n'y en a pas. En degré $2$, une relation s'écrit $c_0 + \gamma x_2^2 = 0$ avec $c_0 \in kf_1 + kf_2$ et $\gamma \in k$, et $x_1^2$, $x_1x_2 - x_2^2$, $x_2^2$ sont indépendants ; les degrés $0$ et $1$ sont clairs.
+
+\emph{Degré $3$.} $E_3 = k\rho$ avec $\rho = (f_3,\ f_2,\ f_2 - f_1,\ 0)$. L'identité $f_3 + x_1f_2 + x_2(f_2 - f_1) = 0$ se vérifie dans $k[x_1, x_2]$ en développant. L'espace des $(c_j)$ est de dimension $1 + 2 + 2 + 0 = 5$, et les cinq produits $f_3$, $x_1f_1$, $x_2f_1$, $x_1f_2$, $x_2f_2$ engendrent $A_3$, de dimension $4$ (ils donnent $x_2^3$, $x_1^3$, $x_1^2x_2$, puis $x_1x_2^2$) : les relations de degré $3$ forment une droite.
+
+\emph{Degré $4$.} $E_4 = k\sigma_1 + k\sigma_2$ avec
+\[
+\sigma_1 = (0,\ -f_3,\ f_3,\ f_2), \qquad \sigma_2 = (0,\ -2f_3,\ f_3,\ f_1).
+\]
+En effet $-x_1f_3 + x_2f_3 + x_2^2f_2 = 0$ dans $k[x_1, x_2]$, et $-2x_1f_3 + x_2f_3 + x_2^2f_1 = f_2^2$, nul dans $A$. L'espace $C_4 \oplus C_3 \oplus C_3 \oplus C_2$ est de dimension au plus $5$, et son image contient $x_1f_3 = x_1x_2^3$, $x_2^2f_1 = x_1^2x_2^2$ et $f_1f_2 + x_2^2f_1 = x_1^3x_2$, qui engendrent $A_4$. Donc $E_4$ est de dimension au plus $2$, et $\sigma_1, \sigma_2$ sont indépendants, comme on le voit sur leurs dernières composantes.
+
+\emph{Degré $5$.} Pour un élément de $E_5$, il suffit de savoir que $c_1 \in C_4 = kf_1f_2$ et $c_3 \in C_3 = kf_3$, car la forme linéaire ci-dessous ne lit que ces deux composantes.
+
+\subsection{La forme linéaire}
+
+Soit $\lambda$ la forme linéaire sur les formes de degré $4$ en $x_1, x_2$ définie par $\lambda(x_1^ix_2^{4-i}) = 1$ pour $0 \le i \le 3$ et $\lambda(x_1^4) = 0$. Elle s'annule sur $x_1^4$ et sur $f_2^2$, puisque $\lambda(f_2^2) = 1 - 2 + 1 = 0$ ; elle passe donc au quotient et définit une forme sur $A_4$. Soit $\nu$ la forme linéaire sur $A_3$ donnée par
+\[
+\nu(x_1^3) = \nu(x_1^2x_2) = 2, \qquad \nu(x_1x_2^2) = 1, \qquad \nu(x_2^3) = 0,
+\]
+et posons, sur $(A^4)_5$,
+\[
+\varphi(a_0, a_1, a_2, a_3) = \lambda(a_1) + \nu(a_3).
+\]
+
+\begin{lemme}[article, lemme~9]
+$\varphi$ s'annule sur $(AE)_5$, et $\varphi(W) = -1$.
+\end{lemme}
+
+Par la liste des relations, il suffit d'évaluer $\varphi$ sur $a\rho$ pour $a \in A_2$, sur $b\sigma_1$ et $b\sigma_2$ pour $b \in A_1$, et sur $E_5$. Le tableau~\ref{tab:phi} reprend les vérifications de l'article ; chaque ligne est un calcul de quelques termes, où l'on remplace $x_2^4$ par (1) quand il apparaît ($\lambda(x_2^4) = 1$, que l'on lise $x_2^4$ directement ou via (1)).
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+élément & $\varphi$ & calcul \\
+\midrule
+$x_1^2\rho$ & $\lambda(x_1^3x_2 - x_1^2x_2^2)$ & $1 - 1 = 0$ \\
+$x_1x_2\rho$ & $\lambda(x_1^2x_2^2 - x_1x_2^3)$ & $1 - 1 = 0$ \\
+$x_2^2\rho$ & $\lambda(x_1x_2^3 - x_2^4)$ & $1 - 1 = 0$ \\
+$x_1\sigma_1$ & $-\lambda(x_1x_2^3) + \nu(x_1^2x_2) - \nu(x_1x_2^2)$ & $-1 + 2 - 1 = 0$ \\
+$x_2\sigma_1$ & $-\lambda(x_2^4) + \nu(x_1x_2^2) - \nu(x_2^3)$ & $-1 + 1 - 0 = 0$ \\
+$x_1\sigma_2$ & $-2\lambda(x_1x_2^3) + \nu(x_1^3)$ & $-2 + 2 = 0$ \\
+$x_2\sigma_2$ & $-2\lambda(x_2^4) + \nu(x_1^2x_2)$ & $-2 + 2 = 0$ \\
+$r \in E_5$ & combinaison de $\lambda(f_1f_2)$ et $\nu(f_3)$ & $\lambda(x_1^3x_2) - \lambda(x_1^2x_2^2) = 0$, $\nu(x_2^3) = 0$ \\
+\midrule
+$W$ & $\lambda(-x_2^4)$ & $-1$ \\
+\bottomrule
+\end{tabular}
+\medskip
+\caption{Les valeurs de $\varphi$ sur les générateurs de $(AE)_5$ et sur la classe $W$ du témoin. Pour $a\rho$, seule la composante $a_1 = af_2$ compte, la dernière étant nulle.}\label{tab:phi}
+\end{table}
+
+\begin{proposition}[article, proposition~10]
+Sur tout corps, $w \in (I + K)_5$ et $w \notin (J + K)_5$. Donc $R_Z$ n'est pas effective.
+\end{proposition}
+
+La conclusion s'assemble. Par le lemme~9 de l'article, $\varphi$ induit une forme linéaire sur $(A \otimes_C A)_5 = (A^4)_5/(AE)_5$ qui ne s'annule pas sur la classe de $w$ ; donc $w \notin L_5$. Par le lemme~8, $(J + K)_5 = L_5$. Le témoin est dans l'idéal de $R_Z$ et pas dans celui de $Z \times_Y Z$.
+
+Tous les nombres de la démonstration sont des entiers, et le seul qui doive être non nul est $\varphi(W) = -1$. L'argument est donc le même en toute caractéristique, $2$ et $3$ comprises, bien que $A$ soit de longueur $16$ en caractéristique $2$. Il faut noter deux choses que la démonstration ne fait pas. Elle ne détermine pas $B$ : elle utilise seulement que les invariants de degré au plus $4$ donnent des différences dans $L$, et que $A_5 = C_5$. Elle ne transporte pas non plus l'argument de Raicu sur $\A^2$ ; elle compare directement $R_Z$ à $Z \times_{\Spec C} Z$. Le script \texttt{hand.py} du même répertoire vérifie sur $\Z$ chacune des identités employées.
+
+\section{Le partage des contributions}
+
+L'exemple de Venken, son algèbre, son idéal et l'énoncé de non-effectivité sont de Venken (1971). La relation sur $\A^2$, sa non-effectivité et son obstruction sont de Raicu, dans l'appendice à l'article de Kollár. L'article apporte la vérification de l'exemple de Venken par algèbre linéaire, avec le calcul de ses invariants et sa formalisation en Lean ; la restriction de la relation de Raicu au schéma fini $Z$, le calcul certifié sur tout corps et la démonstration à la main de la section~\ref{sec:main}.
+
+L'article dit aussi les limites du travail. Les deux exemples sont certifiés sur tout corps par ordinateur, et tous deux ont une démonstration à la main : celle de Venken dans sa note, celle du second dans la section~\ref{sec:main}. L'exemple de Venken est formalisé en Lean, sauf le décompte des dimensions en degré~$4$ ; le second ne l'est pas, et n'a pas été relu par un spécialiste de la descente. L'anneau des invariants $B$ du second exemple n'est pas déterminé à la main ; la démonstration n'en a pas besoin.
+
+Sur l'usage des modèles de langage, l'article indique que la question a été repérée dans l'enregistrement de Buffalo et dans l'exposé~212 avec des modèles de langage (Claude Opus~5.5, Anthropic), qui ont aussi trouvé l'exemple de Raicu, proposé la restriction à $Z$, écrit les scripts et une première rédaction, sous la direction de l'auteur. La note de Venken a été lue sur Gallica, et son corollaire~3.1 reconnu comme une réponse à la question, après qu'une première version du texte eut présenté comme nouveau le cas d'un schéma fini sur un corps. La démonstration à la main a été trouvée de la même manière, les scripts servant à chercher la forme $\varphi$. Les propositions~3 et~5 de l'article reposent sur les scripts, que chacun peut relancer, et l'auteur a vérifié les sections~2 et~3 de l'article (l'effectivité comme algèbre linéaire, et l'exemple de Venken).
+
+\section{Petit lexique}
+
+\begin{tabular}{@{}p{3.6cm}p{10.2cm}@{}}
+\toprule
+Terme & À retenir ici \\
+\midrule
+algèbre finie & une algèbre commutative de dimension finie sur $k$ \\
+schéma fini $\Spec A$ & l'objet géométrique dont $A$ est l'algèbre des fonctions \\
+point à valeurs dans $T$ & une solution des équations de $A$ dans l'algèbre $T$ \\
+locale artinienne & un seul point ordinaire, toutes les coordonnées y étant nilpotentes \\[2pt]
+fonction de Hilbert & la suite des $\dim A_d$ ; sa somme est la longueur \\
+$A \otimes_k A$ & les fonctions de deux points de $X$ \\
+relation d'équivalence & un idéal de $A \otimes_k A$ dont les solutions, dans toute $T$, sont une relation d'équivalence \\[2pt]
+projection plate & condition d'uniformité des classes ; non supposée ici \\
+invariants $B = A^R$ & les fonctions qui prennent même valeur en deux points équivalents \\[2pt]
+$J_B$ & l'idéal des couples de même image dans le quotient \\
+effective & $I_R = J_B$ : le quotient voit toute la relation \\
+témoin & un élément de $I_R$ hors de $J_B$ \\
+$C$ & la sous-algèbre engendrée par $f_1, f_2, f_3$, contenue dans $B$ \\
+forme linéaire certificat & nulle sur un sous-espace, non nulle sur le témoin \\
+\bottomrule
+\end{tabular}
+
+\section*{Sur la rédaction de cette note}
+
+Note de travail écrite par Claude (Opus~5.5, Anthropic) sous la direction de l'auteur, à partir de \texttt{docs/effective/article.tex}. Elle ne contient aucun résultat nouveau ; en cas de désaccord, l'article fait foi.
+
+\end{document}

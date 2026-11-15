@@ -837,6 +837,11 @@ copyFileSync(resolve(root, 'docs/bigon/note-fr.pdf'), resolve(served, 'grothendi
 copyFileSync(resolve(root, 'docs/tangent/article.pdf'), resolve(served, 'grothendieck-tangent.pdf'));
 // A reading note in French beside it: the article's definitions taken from the start.
 copyFileSync(resolve(root, 'docs/tangent/note-fr.pdf'), resolve(served, 'grothendieck-tangent-note-fr.pdf'));
+copyFileSync(resolve(root, 'docs/effective/note-fr.pdf'), resolve(served, 'grothendieck-effective-note-fr.pdf'));
+copyFileSync(resolve(root, 'docs/qcoh-descent/note-fr.pdf'), resolve(served, 'grothendieck-qcoh-descent-note-fr.pdf'));
+copyFileSync(resolve(root, 'docs/problem-three/note-fr.pdf'), resolve(served, 'grothendieck-problem-three-note-fr.pdf'));
+copyFileSync(resolve(root, 'docs/loday-filtration/note-fr.pdf'), resolve(served, 'grothendieck-loday-filtration-note-fr.pdf'));
+copyFileSync(resolve(root, 'docs/moduli/note-fr.pdf'), resolve(served, 'grothendieck-moduli-note-fr.pdf'));
 copyFileSync(resolve(root, 'docs/effective/article.pdf'), resolve(served, 'grothendieck-effective.pdf'));
 copyFileSync(resolve(root, 'docs/qcoh-descent/article.pdf'), resolve(served, 'grothendieck-qcoh-descent.pdf'));
 copyFileSync(resolve(root, 'docs/problem-three/article.pdf'), resolve(served, 'grothendieck-problem-three.pdf'));

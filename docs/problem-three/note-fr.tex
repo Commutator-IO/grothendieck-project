@@ -1,0 +1,376 @@
+% Note de travail, en français, accompagnant docs/problem-three/article.tex :
+% les définitions de l'article reprises depuis le début, sur un ton pédagogique,
+% pour un lecteur venu des mathématiques appliquées. Compilée par tectonic.
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern,microtype,amssymb,mathtools,booktabs}
+\usepackage[margin=2.7cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{cd,arrows.meta}
+\usepackage[hidelinks]{hyperref}
+\usepackage{newunicodechar}
+\newunicodechar{«}{\guillemotleft}
+\newunicodechar{»}{\guillemotright}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}
+\theoremstyle{plain}
+\newtheorem{theoreme}{Théorème}
+\theoremstyle{remark}
+\newtheorem{remarque}{Remarque}
+
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Grp}{\mathbf{Grp}}
+\newcommand{\Ann}{\mathbf{Ann}}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Eq}{\operatorname{Eq}}
+\newcommand{\It}{\widetilde I}
+
+\title[Note de lecture : le «~problème trois~» de Grothendieck]{Le «~problème trois~» de Grothendieck : engendrement\\ par limites et théories algébriques,\\ note de lecture}
+\author{Michel Hua}
+\address{Commutator, Paris}
+\email{michel@commutator.io}
+\date{15 novembre 2026}
+
+\begin{document}
+
+\begin{abstract}
+Cette note accompagne l'article \emph{Grothendieck's «~problem three~»: generation under limits and algebraic theories relative to a class of limits}. Elle en reprend les définitions depuis le début, sans supposer connue la théorie des catégories, explique sur des exemples simples (ensembles, groupes, anneaux) les limites, l'engendrement par limites et les théories algébriques, puis suit les démonstrations pas à pas. Rien n'y est démontré de neuf ; en cas de désaccord, l'article fait foi.
+\end{abstract}
+
+\maketitle
+
+\section{La question}
+
+D'avril à juillet 1973, Grothendieck fait à l'université d'État de New York à Buffalo un cours sur les topos. Les enregistrements sont en ligne, sur une chaîne YouTube tenue sous le pseudonyme «~Erwin Schulhoff~», et l'édition dont l'article fait partie les a indexés et en a reconstitué les tableaux. Plusieurs séances portent sur les théories algébriques relatives à une classe de limites.
+
+Le 2 juillet, il demande s'il existe une façon plus simple de dire qu'une théorie est «~basique~» sur un ensemble d'objets $I$, c'est-à-dire construite à partir de $I$ par des constructions libres. Une première idée, une condition de fidélité, est écartée aussitôt, sur la foi d'un contre-exemple qu'il attribue à Isbell (le nom est incertain dans l'enregistrement). Il propose alors une seconde caractérisation, qu'il numérote «~problème trois~» : être basique reviendrait à être \emph{engendré} par $I$ au moyen des limites et des colimites de la classe fixée. Il n'a démontré aucun des deux sens, attend le sens direct et espère la réciproque. Il remarque ensuite que, pour une classe petite, la question devrait se ramener aux petites catégories, et conjecture que, pour $R$ algébrique, on peut agrandir la base $I$ de sorte qu'il ne reste à imposer que des axiomes, sans flèches nouvelles. Le 10 juillet, il revient sur plusieurs affirmations du 2 juillet (que la cogénération stricte est transitive, que l'image de $I$ reste strictement cogénératrice à chaque étape, qu'une caractérisation par une petite sous-catégorie strictement cogénératrice est valable, et qu'aucune construction transfinie n'est nécessaire) et donne $\Set$ comme contre-exemple à cette dernière caractérisation.
+
+L'article répond au problème trois tel qu'il l'a finalement posé. Les mots «~limite~», «~engendré~», «~basique~» et «~algébrique~» seront définis plus bas ; voici d'abord les réponses, que la suite explique une à une. En admettant, comme Grothendieck, que les constructions libres existent, l'article montre que basique implique engendré, pour toute classe de limites ; qu'être basique sur $I$ équivaut à être engendré par $I$ et algébrique sur une autre base, si bien que le problème trois revient à demander si «~engendré~» entraîne «~algébrique~» ; que les deux notions coïncident pour une classe \emph{petite} de limites, la base restant la même, ainsi que pour les topos de Grothendieck, deux énoncés voisins du cours sur les topos étant faux tels qu'ils sont écrits. Pour la classe de toutes les petites limites, la réciproque est fausse : l'ensemble à deux éléments engendre tous les ensembles en deux étapes, mais la catégorie des ensembles n'est pas algébrique ; un exemple d'Adámek et Rosický donne un second contre-exemple et montre que le nombre d'étapes n'est pas borné en général. Reste ouverte la réciproque pour des classes mixtes et grandes, comme les limites finies jointes à toutes les colimites.
+
+\section{Un peu de vocabulaire}
+
+\subsection{Catégories et foncteurs}
+
+Une \emph{catégorie} est la donnée d'objets, de flèches $f\colon X\to Y$ entre objets, d'une composition associative des flèches et d'une flèche identité sur chaque objet. Les exemples à garder en tête sont $\Set$ (les ensembles et les applications), $\Grp$ (les groupes et les morphismes de groupes) et $\Ann$ (les anneaux commutatifs unitaires et leurs morphismes). Une flèche est un \emph{isomorphisme} si elle a un inverse ; deux objets isomorphes sont indiscernables pour tout ce qui suit.
+
+Un \emph{foncteur} $F\colon R\to C$ envoie objets sur objets et flèches sur flèches en respectant compositions et identités ; par exemple, le foncteur qui oublie la structure d'un groupe pour n'en garder que l'ensemble sous-jacent. Une \emph{transformation naturelle} $\sigma\colon F\to G$ entre deux foncteurs est une famille de flèches $\sigma_X\colon FX\to GX$ compatible avec toutes les flèches de $R$. Les foncteurs de $R$ dans $C$ et les transformations naturelles forment à leur tour une catégorie.
+
+Un foncteur est \emph{pleinement fidèle} s'il induit une bijection $\Hom(X,Y)\to\Hom(FX,FY)$ pour tous $X,Y$, et \emph{essentiellement surjectif} si tout objet de $C$ est isomorphe à un $FX$. Un foncteur qui a ces deux propriétés est une \emph{équivalence} : les deux catégories sont alors «~les mêmes à isomorphisme près~».
+
+Une \emph{sous-catégorie pleine} s'obtient en choisissant certains objets et en gardant toutes les flèches entre eux. Elle est \emph{réplète}, ou \emph{strictement pleine}, si elle contient, avec un objet, tous les objets qui lui sont isomorphes. Dans $\Grp$, les groupes abéliens forment une sous-catégorie strictement pleine.
+
+On travaille dans ZFC avec un univers de Grothendieck ; «~petit~» veut dire «~appartenant à l'univers~», et pour l'intuition un petit ensemble est un ensemble, par opposition à une classe propre comme celle de tous les ensembles. Les catégories sont localement petites : entre deux objets, les flèches forment un petit ensemble.
+
+\subsection{Limites et colimites}
+
+Une \emph{forme} de diagramme est une petite catégorie $J$, et un diagramme de forme $J$ dans $R$ est un foncteur $d\colon J\to R$ : une famille d'objets $d_k$ reliés par des flèches. Un \emph{cône} sur $d$ est un objet $L$ muni de flèches $L\to d_k$ compatibles avec celles du diagramme. Une \emph{limite} de $d$ est un cône universel : tout autre cône s'y factorise de façon unique. Dans $\Set$ :
+\begin{itemize}
+\item la limite de deux objets sans flèche est le produit $X\times Y$ ; pour une famille quelconque, c'est le produit $\prod X_s$, et une \emph{puissance} $2^S$ est le produit de $S$ copies de $2=\{0,1\}$ ;
+\item la limite de deux flèches parallèles $f,g\colon X\rightrightarrows Y$ est l'\emph{égaliseur} $\Eq(f,g)=\{x\in X: f(x)=g(x)\}$ ;
+\item la limite d'une chaîne $X_0\leftarrow X_1\leftarrow X_2\leftarrow\cdots$ est l'ensemble des suites compatibles ; les entiers $p$-adiques $\varprojlim\mathbf Z/p^n$ en sont l'exemple familier ;
+\item la limite du diagramme vide est l'ensemble à un élément, objet final.
+\end{itemize}
+Dans $\Grp$ et dans $\Ann$, les limites se calculent sur les ensembles sous-jacents : le produit de groupes est le produit cartésien muni de la loi composante par composante, l'égaliseur de deux morphismes est un sous-groupe.
+
+Les \emph{colimites} sont la notion duale, obtenue en renversant toutes les flèches : un cocône est une famille de flèches $d_k\to L$, et la colimite est le cocône universel. Dans $\Set$, la somme (colimite d'une famille sans flèche) est la réunion disjointe, et le \emph{coégaliseur} de $f,g\colon X\rightrightarrows Y$ est le quotient de $Y$ par la relation d'équivalence engendrée par $f(x)\sim g(x)$. Dans $\Grp$, la somme est le produit libre, et le coégaliseur est le quotient de $Y$ par le sous-groupe distingué engendré par les $f(x)g(x)^{-1}$. Dans $\Ann$, la somme est le produit tensoriel, et le coégaliseur est le quotient par l'idéal engendré par les $f(x)-g(x)$. Une présentation par générateurs et relations n'est donc rien d'autre qu'un coégaliseur : tout groupe est le coégaliseur de deux morphismes entre groupes libres, l'un envoyant chaque relation sur le mot qu'elle désigne, l'autre sur l'élément neutre.
+
+La \emph{catégorie opposée} $R^{\mathrm{op}}$ a les mêmes objets et les flèches renversées ; les limites de $R^{\mathrm{op}}$ sont les colimites de $R$. Cette dualité sert à la fin de l'article.
+
+\subsection{La classe $D$ et la 2-catégorie $\Delta$}
+
+L'article fixe une classe $D=(D',D'')$ : $D'$ est un ensemble de formes pour les limites, $D''$ un ensemble de formes pour les colimites. On note $\Delta=\Cat_D$ la collection des catégories localement petites qui ont toutes les limites de forme dans $D'$ et toutes les colimites de forme dans $D''$. Entre deux telles catégories, on ne considère que les \emph{$D$-foncteurs}, qui préservent ces limites et colimites, et l'on note $\Hom_D(R,C)$ la catégorie des $D$-foncteurs $R\to C$ et des transformations naturelles. Le «~2~» rappelle qu'on compare les foncteurs à isomorphisme près.
+
+La classe $D$ est \emph{petite} si $D'$ et $D''$ sont de petits ensembles de petites formes. Les exemples de l'article sont les limites finies, toutes les petites limites, toutes les petites colimites, et les topos (limites finies et toutes les petites colimites, avec des conditions d'exactitude).
+
+\section{Engendrer par limites}
+
+\begin{definition}[condition (G), saturation]
+Soit $i\colon I\to R$ un foncteur. Il vérifie \emph{(G)} si toute sous-catégorie strictement pleine $R'\subseteq R$ qui contient $i(I)$ et qui est fermée dans $R$ par $D'$-limites et $D''$-colimites est $R$ tout entière.
+
+La \emph{saturation} de $i$ est la suite croissante de sous-catégories pleines réplètes $I_\alpha$, indexée par les ordinaux : $I_0$ est formée des objets isomorphes à un objet de $i(I)$ ; $I_{\alpha+1}$ est $I_\alpha$ augmentée de tous les objets isomorphes à une limite d'un $D'$-diagramme de $I_\alpha$ ou à une colimite d'un $D''$-diagramme de $I_\alpha$ ; et $I_\lambda=\bigcup_{\beta<\lambda}I_\beta$ pour un ordinal limite $\lambda$.
+\end{definition}
+
+La condition (G) se lit comme on lit «~la partie $S$ engendre le groupe $G$~» : le plus petit sous-objet qui contient $S$ et qui est stable par les opérations est tout. La saturation est la construction «~par le bas~» de ce plus petit sous-objet. Un lecteur venu des probabilités connaît la même situation avec la tribu engendrée par les ouverts de $\mathbf R$ : en itérant réunions dénombrables et complémentaires, on ne l'atteint pas en un nombre fini ni même dénombrable d'étapes, mais il faut et il suffit d'itérer $\omega_1$ fois, parce que chaque opération ne fait intervenir qu'une famille dénombrable. L'énoncé suivant est l'analogue exact pour les limites ; il figure dans le livre de Kelly (§~3.5).
+
+\begin{theoreme}[proposition 2.4 de l'article]
+La condition (G) équivaut à $\bigcup_\alpha I_\alpha=R$, la réunion portant sur tous les ordinaux. Si toutes les formes de $D$ ont moins de $\rho$ flèches, pour un cardinal régulier $\rho$, alors (G) équivaut à $I_\rho=R$.
+\end{theoreme}
+
+La démonstration suit l'intuition. La réunion est réplète, contient $i(I)$, et elle est fermée : un diagramme n'a qu'un petit ensemble de sommets, chacun dans un $I_\alpha$, donc le diagramme tout entier tombe dans un même $I_\alpha$, et sa limite ou sa colimite est dans $I_{\alpha+1}$. Par récurrence, chaque $I_\alpha$ est contenu dans toute sous-catégorie $R'$ comme dans (G). La réunion est donc la plus petite de ces $R'$, et (G) dit qu'elle vaut $R$. Pour la borne : un diagramme à moins de $\rho$ flèches a moins de $\rho$ sommets, chacun dans un $I_\alpha$ avec $\alpha<\rho$ ; la régularité de $\rho$, c'est-à-dire le fait qu'une réunion de moins de $\rho$ ordinaux plus petits que $\rho$ reste plus petite que $\rho$, les place tous dans un même $I_\alpha$ avec $\alpha<\rho$. Pour des formes finies, $\omega$ étapes suffisent donc.
+
+\subsection*{Trois exemples}
+
+Les deux premiers, pour les colimites, ne sont pas dans l'article.
+\begin{itemize}
+\item Dans $\Grp$, partons de $I=\{\mathbf Z\}$. Les produits libres de copies de $\mathbf Z$ sont les groupes libres, qui sont donc dans $I_1$. Tout groupe est le coégaliseur de deux morphismes entre groupes libres, donc $I_2=\Grp$ : $\mathbf Z$ engendre les groupes par colimites en deux étapes au plus.
+\item Dans $\Ann$, partons de $\{\mathbf Z[x]\}$. Les sommes de copies de $\mathbf Z[x]$ sont les anneaux de polynômes $\mathbf Z[x_s]_{s\in S}$, et un quotient $\mathbf Z[x_s]/(p_r)$ est le coégaliseur des deux morphismes $\mathbf Z[y_r]\rightrightarrows\mathbf Z[x_s]$ qui envoient $y_r$ sur $p_r$ et sur $0$. Là encore, deux étapes suffisent.
+\item Dans $\Set$, pour les \emph{limites}, partons de $\{2\}$. Les puissances $2^S$ sont dans $I_1$. L'article montre que tout ensemble est un égaliseur de deux applications entre puissances de $2$, donc $I_2=\Set$, et que $I_1\ne\Set$ (section~\ref{sec:ens}). C'est l'exemple qui fera échouer le problème trois.
+\end{itemize}
+Une étape ne suffit pas toujours, même pour les colimites ; l'article cite un exemple de Kelly dans les catégories (fin du §~5.9 de son livre).
+
+\begin{remarque}[fidélité et densité]
+La condition (G) entraîne que la restriction $\Hom_D(R,C)\to C^I$ est fidèle pour tout $C$ dans $\Delta$ : deux transformations $\sigma,\tau\colon\psi\to\psi'$ qui coïncident sur $i(I)$ coïncident partout, car les objets $X$ où $\sigma_X=\tau_X$ forment une sous-catégorie réplète qui contient $i(I)$ et qui est fermée par $D$-limites (une flèche vers $\psi'(\lim d)=\lim\psi'd$ est déterminée par ses composantes) et, dualement, par $D$-colimites. La condition (G) se place donc entre «~basique~» et cette fidélité, que Grothendieck jugeait lui-même trop faible. Elle est aussi plus faible que la codensité au sens d'Isbell, qui demande que chaque objet soit la limite canonique des objets de $I$ au-dessous de lui, et qui donne (G) pour les limites en une étape. Dans $\Set$, $\{2\}$ vérifie (G) pour les limites sans être codense : aucun ensemble à trois éléments n'est même une limite de copies de $2$.
+\end{remarque}
+
+\section{Théories algébriques}
+
+\subsection{Les constructions libres, hypothèse (H)}
+
+Grothendieck admet l'existence de certaines constructions libres dans $\Delta$, ce qu'il appelle «~problèmes un et deux résolus~». Chacune est définie par une propriété universelle, testée contre toutes les catégories $C$ de $\Delta$ ; il faut lire $\Hom_D(T,C)$ comme «~la catégorie des modèles de la théorie $T$ dans $C$~».
+\begin{enumerate}
+\item L'\emph{enveloppe} $j\colon I\to\It$ d'une petite catégorie $I$ : restreindre le long de $j$ est une équivalence $\Hom_D(\It,C)\to\Hom(I,C)$. Un $D$-foncteur partant de $\It$ revient à se donner, sans contrainte, l'image de chaque objet de $I$. C'est l'analogue du groupe libre sur un ensemble.
+\item La \emph{localisation} $R\to R[\Sigma^{-1}]$ en un petit ensemble $\Sigma$ de flèches : ses modèles sont ceux de $R$ qui rendent inversibles les flèches de $\Sigma$. Plus précisément, la restriction de $\Hom_D(R[\Sigma^{-1}],C)$ à $\Hom_D(R,C)$ est pleinement fidèle, d'image essentielle les $D$-foncteurs qui inversent $\Sigma$.
+\item L'\emph{égalisation} d'un petit ensemble de paires de flèches parallèles, définie de la même façon : ses modèles sont ceux qui rendent égales les deux flèches de chaque paire.
+\item L'\emph{adjonction de flèches} : pour un petit ensemble $H$ de paires d'objets $(a_h,b_h)$ de $R$, un $D$-foncteur $R\to R\langle H\rangle$ dont les modèles sont les modèles $\psi$ de $R$ munis, pour chaque $h$, d'une flèche $\beta_h\colon\psi a_h\to\psi b_h$ arbitraire.
+\item Les 2-colimites de petites chaînes, c'est-à-dire le recollement à isomorphisme près d'une suite $R_0\to R_1\to\cdots$, et les 2-sommes amalgamées (qui ne servent qu'à la section~\ref{sec:red}).
+\end{enumerate}
+
+Pour $D'$ ou $D''$ vide et $D$ petite, le livre de Kelly fournit enveloppes et localisations sous forme de petites catégories ; pour les topos, ces constructions sont les topos classifiants, les 2-sommes amalgamées et les sous-topos. L'article n'a pas trouvé de référence pour une classe petite mixte, avec $D'$ et $D''$ tous deux non vides ; Grothendieck l'affirme sans démonstration. Les énoncés qui utilisent (H) le disent.
+
+\subsection{Basique et algébrique}
+
+\begin{definition}[basique, algébrique]
+Soit $I$ une petite catégorie discrète (un ensemble d'objets sans autre flèche que les identités), $R$ dans $\Delta$ et $i\colon I\to R$ un foncteur. On dit que $i$ est \emph{basique} s'il existe une suite $(R_\alpha)_{\alpha\le\gamma}$ de catégories de $\Delta$, indexée par un petit ordinal $\gamma$, avec des $D$-foncteurs $R_\alpha\to R_{\alpha'}$ pour $\alpha\le\alpha'$, telle que $R_0=\It$ ; que chaque passage $R_\alpha\to R_{\alpha+1}$ soit une localisation, une égalisation ou une adjonction de flèches, à données petites ; qu'en un ordinal limite $\lambda$, $R_\lambda$ soit la 2-colimite des $R_\beta$, $\beta<\lambda$ ; et qu'il y ait une équivalence $R_\gamma\simeq R$ dans $\Delta$ dont le composé avec $I\to\It\to R_\gamma$ soit isomorphe à $i$. La catégorie $R$ est \emph{algébrique} s'il existe un foncteur basique $I'\to R$ partant d'une petite catégorie discrète.
+\end{definition}
+
+Sur son tableau, Grothendieck appelle B les étapes de localisation et d'égalisation, qui imposent des axiomes, et C les adjonctions de flèches, qui ajoutent des données.
+
+L'exemple suivant, classique et absent de l'article, montre comment lire la définition. Prenons pour $D$ les limites finies et $I=\{x\}$. Un modèle de $\It$ dans $C$ est un objet de $C$. Adjoignons trois flèches $m\colon x\times x\to x$, $e\colon 1\to x$ et $s\colon x\to x$ (ce sont bien des flèches entre objets de $\It$, puisque $x\times x$ et l'objet final $1$ y sont des limites finies) : un modèle est désormais un objet muni d'une multiplication, d'un neutre et d'une inversion. Égalisons enfin les paires de flèches qui expriment l'associativité, la neutralité et l'inversion, par exemple $m\circ(m\times\mathrm{id})$ et $m\circ(\mathrm{id}\times m)$. Les modèles de la théorie obtenue $R$ dans $C$ sont les objets-groupes de $C$, et dans $C=\Set$ les groupes. Ainsi $x\to R$ est basique. Une localisation, elle, rend une flèche inversible : plus bas, inverser $x\to1$ forcera $x$ à être final.
+La définition de «~basique~» décrit une construction ; (G) est une propriété qu'on vérifie à l'intérieur de $R$.
+
+\section{Basique implique (G)}\label{sec:basicG}
+
+L'idée tient dans un argument que tout lecteur a vu pour les groupes libres. Soit $F(S)$ le groupe libre sur $S$, et $H\subseteq F(S)$ le sous-groupe engendré par $S$. La propriété universelle donne un morphisme $r\colon F(S)\to H$ qui fixe $S$ ; le composé $F(S)\to H\hookrightarrow F(S)$ fixe $S$, donc c'est l'identité, et $H=F(S)$. Une construction libre n'a pas de sous-objet propre qui contienne ses générateurs. L'article fait marcher cet argument pour chacune des constructions de (H), après l'avoir mis sous une forme commode.
+
+\begin{theoreme}[lemme 3.1 de l'article]
+Un foncteur $i\colon I\to R$ vérifie (G) si et seulement si, pour tout $D$-foncteur pleinement fidèle $u\colon B'\to R$, avec $B'$ dans $\Delta$, et tout foncteur $i'\colon I\to B'$ avec $ui'\cong i$, le foncteur $u$ est une équivalence.
+\end{theoreme}
+
+Dans un sens, une sous-catégorie $R'$ comme dans (G) est elle-même dans $\Delta$, puisque les limites et colimites voulues s'y calculent dans $R$, et son inclusion est un $D$-foncteur pleinement fidèle par lequel $i$ se factorise ; c'est donc une équivalence, et une sous-catégorie réplète équivalente à $R$ par son inclusion est $R$. Dans l'autre sens, l'image essentielle d'un tel $u$ est réplète, contient $i(I)$, et elle est fermée par $D'$-limites : un diagramme formé d'objets $u(b_k)$ se relève dans $B'$ parce que $u$ est pleinement fidèle, sa limite existe dans $B'$, et $u$ la préserve. Les colimites se traitent de même. Par (G), cette image essentielle est $R$, et $u$ est une équivalence.
+
+\begin{theoreme}[théorème 3.2 de l'article]
+Admettons (H). Si $i\colon I\to R$ est basique, il vérifie (G). Cela vaut pour toute classe $D$, petite ou non, et aussi pour une petite catégorie $I$ non discrète.
+\end{theoreme}
+
+On suit la suite basique $(R_\alpha)$ et on montre par récurrence transfinie que $I\to R_\alpha$ vérifie (G). À chaque étape on se donne $u\colon B'\to R_\alpha$ et $i'$ comme dans le lemme, et l'on peut supposer que $u$ est l'inclusion d'une sous-catégorie pleine réplète. Il suffit de montrer que $u$ est essentiellement surjectif.
+
+\emph{L'enveloppe.} La propriété universelle de $\It$, appliquée avec $C=B'$, prolonge $i'$ en un $D$-foncteur $r\colon\It\to B'$ avec $rj\cong i'$. On a alors $urj\cong ui'\cong j$, et comme la restriction le long de $j$ est pleinement fidèle (propriété universelle avec $C=\It$ cette fois), $ur\cong\mathrm{id}$. La figure~\ref{fig:env} résume le raisonnement. Pour $D'$ vide et $D''$ une classe de colimites, c'est la description par Kelly de la cocomplétion libre comme une clôture (théorème 5.35 de son livre).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[column sep=large, row sep=large]
+I \arrow[r, "j"] \arrow[dr, "i'"'] & \It \arrow[d, "r", shift left=1] \\
+ & B' \arrow[u, "u", shift left=1, hook]
+\end{tikzcd}
+\caption{L'étape de l'enveloppe : $r$ prolonge $i'$, et $ur$, égal à l'identité sur l'image de $I$, lui est isomorphe.}\label{fig:env}
+\end{figure}
+
+\emph{Une étape successeur} $F\colon R_\alpha\to R_{\alpha+1}$. Les objets de $R_\alpha$ que $F$ envoie dans $B'$ forment une sous-catégorie réplète qui contient l'image de $I$, et qui est fermée par $D$-limites et $D$-colimites, car $F$ les préserve et $B'$ y est fermée. Par récurrence elle est égale à $R_\alpha$, donc $F=uF'$ pour un $D$-foncteur $F'\colon R_\alpha\to B'$. On utilise alors la propriété universelle de l'étape, avec $C=B'$.
+\begin{itemize}
+\item Localisation en $\Sigma$ : $F'$ inverse $\Sigma$, car $uF'=F$ le fait et $u$, pleinement fidèle, reflète les isomorphismes. Donc $F'\cong rF$ pour un $D$-foncteur $r\colon R_{\alpha+1}\to B'$, puis $urF\cong F$, et $ur\cong\mathrm{id}$ puisque la restriction le long de $F$ est pleinement fidèle.
+\item Égalisation : même argument, $u$ étant fidèle, donc reflétant les égalités de flèches.
+\item Adjonction de flèches : les flèches universelles $\gamma_h\colon Fa_h\to Fb_h$ s'écrivent $u(\beta'_h)$ de façon unique ; le couple $(F',\beta')$ donne $r\colon R_{\alpha+1}\to B'$, et $(urF,ur\gamma)\cong(F,\gamma)$ dit exactement que $ur\cong\mathrm{id}$.
+\end{itemize}
+
+\emph{Un ordinal limite} $\lambda$. Chaque $F_\beta\colon R_\beta\to R_\lambda$ se factorise par $u$, les isomorphismes de cohérence se relèvent de façon unique par $u$ pleinement fidèle, et la propriété universelle de la 2-colimite donne $r$ avec $ur\cong\mathrm{id}$.
+
+À chaque étape la propriété universelle est employée avec $B'$ pour cible, qui est dans $\Delta$ ; aucune hypothèse de petitesse sur $D$ n'intervient, ni la discrétion de $I$.
+
+\section{Réduction de la réciproque à l'algébricité}\label{sec:red}
+
+La réciproque est plus délicate : de (G) il faut tirer une construction. L'article la ramène à une seule question.
+
+\begin{theoreme}[lemme 4.1 de l'article]
+Admettons (H). Soit $i\colon I\to R$ un foncteur partant d'une petite catégorie discrète, et $x$ un objet de la clôture de $i(I)$ par $D$-limites et $D$-colimites. Il existe un foncteur basique $I\to S$, un $D$-foncteur $\Phi\colon S\to R$ dont la restriction à $I$ est isomorphe à $i$, et un objet $s$ de $S$ avec $\Phi s\cong x$. De même pour une petite famille $(x_k)$, avec un seul $S$.
+\end{theoreme}
+
+Autrement dit, tout objet obtenu par saturation a un «~nom~» dans une théorie basique sur $I$. La preuve procède par récurrence sur l'étape de saturation de $x$. Si $x$ est dans $I_0$, on prend $S=\It$. Sinon, disons $x\cong\lim d$ pour un $D'$-diagramme $d\colon J\to I_\beta$ (le cas des colimites est dual). On choisit par récurrence un triplet $(S_k,\Phi_k,s_k)$ pour chaque sommet $d_k$ ; on forme la somme amalgamée des $S_k$ au-dessus de $\It$, qui est encore basique sur $I$ (construction qui figure dans le cours) ; on y adjoint une flèche $s_k\to s_{k'}$ pour chaque flèche $k\to k'$ de $J$, envoyée par $\Phi$ sur la flèche correspondante de $d$ ; on égalise les relations de composition et d'identité de $J$ ; on obtient un diagramme $\tilde d$ dans $S$ avec $\Phi\tilde d\cong d$, et $s=\lim\tilde d$ convient, puisque $\Phi$ préserve les $D'$-limites. Toutes ces données sont petites parce que $J$ l'est.
+
+\begin{theoreme}[théorème 4.2 de l'article]
+Admettons (H). Un foncteur $i\colon I\to R$ partant d'une petite catégorie discrète est basique si et seulement s'il vérifie (G) et que $R$ est algébrique.
+\end{theoreme}
+
+Le sens direct résulte de la section précédente. Pour la réciproque, on dispose d'une construction de $R$ sur une autre base $I'$, et du fait que $I$ engendre $R$. Le lecteur qui connaît les présentations de groupes reconnaîtra une situation proche des transformations de Tietze : un groupe présenté sur des générateurs $I'$ peut être présenté sur une autre partie génératrice $I$, en ajoutant les éléments de $I'$ comme nouveaux générateurs, chacun soumis à la relation qui l'exprime en fonction de $I$. La comparaison est de la note, non de l'article. La preuve se fait en trois temps.
+
+Le lemme précédent, appliqué à la famille $(x)_{x\in I'}$, donne $S$ basique sur $I$, des objets $s_x$ et des isomorphismes $c_x\colon x\cong\Phi s_x$.
+\begin{enumerate}
+\item On recolle $R$ et $S$ au-dessus de $\widetilde{I'}$ : 2-somme amalgamée $P=R\sqcup_{\widetilde{I'}}S$, où $\widetilde{I'}\to S$ prolonge $x\mapsto s_x$. Elle est basique sur $I$, parce que la somme amalgamée d'une localisation, d'une égalisation ou d'une adjonction de flèches est une étape de même nature.
+\item On rend isomorphes, par petites étapes, les deux foncteurs $\iota_S$ et $\iota_R\Phi$ de $S$ dans $P$. On remonte pour cela la suite basique de $S$ : sur l'enveloppe, on adjoint des flèches $e_k$ et $e'_k$ dans les deux sens pour $k\in I$ et l'on égalise leurs composés avec les identités ; une localisation ou une égalisation de $S$ ne demande rien ; une adjonction de flèches demande d'égaliser les deux côtés d'un carré de naturalité pour chaque flèche adjointe ; aux ordinaux limites on passe à la 2-colimite. On obtient $P'$ et un isomorphisme $e\colon\iota_S\cong\iota_R\Phi$.
+\item Pour chaque $x\in I'$, on égalise les deux isomorphismes $\iota_Rx\to\iota_R\Phi s_x$ fournis l'un par $e$ et le recollement, l'autre par $\iota_R(c_x)$. On note $P^*$ le résultat.
+\end{enumerate}
+Un $D$-foncteur $P^*\to C$ revient à des $D$-foncteurs $\psi\colon R\to C$ et $\varphi\colon S\to C$, accompagnés d'isomorphismes compatibles, et ces données sont déterminées par $\psi$ à isomorphisme unique près : $\varphi\cong\psi\Phi$ par $e$, et l'isomorphisme de recollement est imposé par la troisième étape. La restriction $\Hom_D(P^*,C)\to\Hom_D(R,C)$ est donc une équivalence pour tout $C$, et le lemme de Yoneda en dimension 2 fait de $R\to P^*$ une équivalence, compatible avec $I$. Toutes les données sont petites et la suite est de petite longueur : $i$ est basique.
+
+\begin{theoreme}[corollaire 4.3 de l'article]
+Si $\Delta$ vérifie (H), le problème trois a une réponse positive dans $\Delta$ si et seulement si toute catégorie $R$ de $\Delta$ qui vérifie (G) pour un foncteur partant d'une petite catégorie discrète est algébrique.
+\end{theoreme}
+
+\section{Les classes petites}
+
+\begin{theoreme}[théorème 5.1 de l'article]
+Soit $D$ une classe petite dont toutes les formes ont moins de $\rho$ flèches, pour un cardinal régulier $\rho$. Admettons (H), les constructions appliquées à des petites catégories avec des données petites donnant des petites catégories, comme le suppose Grothendieck. Alors, pour toute petite catégorie discrète $I$ et tout $i\colon I\to R$, $i$ est basique si et seulement s'il vérifie (G). La base $I$ n'est pas agrandie.
+\end{theoreme}
+
+L'article en donne deux démonstrations.
+
+\emph{Par la réduction.} Sous (G), $R=I_\rho$. Comme il n'y a qu'un petit ensemble de diagrammes de chacune des petites formes dans une catégorie qui n'a qu'un petit ensemble d'objets, chaque $I_\alpha$ n'a qu'un petit ensemble de classes d'isomorphisme d'objets, et $R$ est essentiellement petite. Un squelette $R_s$ de $R$ (un représentant par classe d'isomorphisme) est algébrique sur l'ensemble de ses objets, comme Grothendieck le montre dans le cours : on part de l'enveloppe, on adjoint les flèches de $R_s$, on égalise les relations de composition et d'identité, et l'on inverse les flèches de comparaison du petit ensemble des $D$-diagrammes de $R_s$. Le théorème de réduction conclut.
+
+\emph{Directement.} On construit une chaîne de petites catégories $S_\beta$, $\beta\le\rho$, avec des $D$-foncteurs $\Phi_\beta\colon S_\beta\to R$ qui prolongent $i$, à partir de $S_0=\It$. À chaque étape on adjoint une flèche formelle $a\to b$ pour chaque flèche $\Phi_\beta a\to\Phi_\beta b$ de $R$, et l'on égalise chaque paire de flèches parallèles que $\Phi_\beta$ identifie ; ces données sont petites, puisque $S_\beta$ l'est. Comme $\rho$ est régulier et les formes $\rho$-petites, la 2-colimite $S_\rho$ se calcule dans $\Cat$ : diagrammes et paires parallèles de $S_\rho$ proviennent d'étapes antérieures. Le foncteur $\Phi_\rho$ est alors pleinement fidèle, car toute flèche entre images a été adjointe à l'étape suivante et toute paire identifiée a été égalisée. Son image essentielle est fermée par $D$-limites et $D$-colimites, puisque les diagrammes se relèvent le long d'un foncteur pleinement fidèle ; par (G) elle est tout, et $\Phi_\rho$ est une équivalence. L'idée est celle par laquelle on présente un groupe sur une partie génératrice : prendre toutes les relations qu'il vérifie.
+
+Les limites finies avec $I$ infini mais petit, et les limites $\kappa$-petites, relèvent de ce théorème : il n'y a pas de contre-exemple au problème trois pour une classe $D$ petite.
+
+\section{Les topos de Grothendieck}
+
+\subsection{Le cadre}
+
+Un topos de Grothendieck est une catégorie de faisceaux d'ensembles sur un petit site. Pour l'intuition : la catégorie $\Set$, la catégorie des ensembles munis d'une action d'un groupe fixé, ou celle des faisceaux sur un espace topologique. Ce sont des catégories «~qui ressemblent à $\Set$~» : elles ont limites finies et petites colimites, vérifient les conditions d'exactitude de Giraud (sommes disjointes et universelles, relations d'équivalence effectives, quotients universels) et ont un petit ensemble générateur. Ici $\Delta$ est la 2-catégorie des topos, avec les foncteurs qui préservent limites finies et petites colimites, c'est-à-dire les images inverses des morphismes géométriques, lues dans le sens opposé. Les constructions de (H) sont les topos classifiants, les 2-sommes amalgamées et les sous-topos ; leur existence relève de la théorie standard des topos, que l'article utilise sans la redémontrer.
+
+\subsection{Deux énoncés du cours}
+
+Le cours sur les topos affirme d'une part que tout objet de $R_{\alpha+1}$ est recouvert par des images d'objets de $R_\alpha$, d'autre part, comme condition nécessaire, que si $I\to R$ est basique, les produits finis des objets de $I$ engendrent $R$.
+
+\begin{theoreme}[proposition 6.1 de l'article]
+Les deux énoncés sont faux tels qu'ils sont écrits.
+\end{theoreme}
+
+Le contre-exemple est très concret. Partons de $R_\alpha=\Set$ et adjoignons une flèche $1\to1\sqcup1$. Dans un topos, une telle flèche revient à découper l'objet final en deux morceaux ; le topos qui classifie ces découpages est $\Set\times\Set$, dont les objets sont les couples d'ensembles $(A,B)$, et l'image de $\Set$ est la diagonale des $(n,n)$. L'objet $(1,0)$ ne reçoit de flèche d'un $(n,n)$ que si $n=0$, puisqu'il faudrait une application $n\to0$ ; il n'est donc pas recouvert par les images des objets de $R_\alpha$.
+
+Pour le second énoncé, prenons $I=\{x\}$. On part du classifiant d'objets, enveloppe de $I$ ; on inverse $x\to1$, ce qui donne $\Set$ ; puis on adjoint $1\to1\sqcup1$. Le foncteur $\{(1,1)\}\to\Set\times\Set$ est ainsi basique. Mais les produits finis de $(1,1)$ se réduisent à $(1,1)$, qui n'engendre pas : les deux flèches $(1,0)\rightrightarrows(1,0)\sqcup(1,0)$ sont distinctes et coïncident après composition avec toute flèche venant de $(1,1)$, faute de telles flèches.
+
+La condition (G) est pourtant vérifiée dans cet exemple, comme le veut le théorème plus bas : le produit fibré de $(\mathrm{inl},\mathrm{inr})\colon(1,1)\to(2,2)$ le long de $\mathrm{inl}\colon(1,1)\to(2,2)$ est $(1,0)$, coordonnée par coordonnée. L'article donne un second exemple du même genre dans les ensembles munis d'une involution ; la condition suffisante énoncée dans le cours n'est pas mise en cause.
+
+\subsection{Clôtures dans un topos}
+
+Le sens «~basique implique (G)~» de la section~\ref{sec:basicG} demande que la sous-catégorie $B'$ soit dans $\Delta$, donc ici un topos. Une sous-catégorie fermée quelconque n'a aucune raison de l'être ; le lemme suivant fournit la bonne.
+
+\begin{theoreme}[lemme 6.2 de l'article]
+Soit $R$ un topos de Grothendieck et $K$ un petit ensemble d'objets de $R$. La plus petite sous-catégorie pleine réplète $B\subseteq R$ qui contient $K$ et qui est fermée par limites finies et petites colimites est un topos de Grothendieck, et son inclusion préserve limites finies et petites colimites.
+\end{theoreme}
+
+La difficulté est de trouver un petit ensemble générateur de $B$ ; les conditions d'exactitude de Giraud passent d'elles-mêmes de $R$ à $B$, puisque limites finies et colimites s'y calculent dans $R$. La preuve est un argument de cardinalité. On écrit $R=\mathrm{Sh}(C,J)$ avec $C$ petit, on borne par $\mu\ge\aleph_0$ le nombre de flèches de $C$, et l'on dit qu'un faisceau $X$ est \emph{petit} si $\sum_c|X(c)|<\kappa$, avec $\kappa=(2^\theta)^+$ et $\theta\ge\mu$ assez grand pour que les objets de $K$ soient petits. Ce choix assure $\nu^\mu<\kappa$ pour tout cardinal $\nu<\kappa$, car $\nu^\mu\le(2^\theta)^\theta=2^\theta$. Quatre faits servent alors : les limites finies de faisceaux petits sont petites (a) ; le faisceau associé à un préfaisceau ayant en tout moins de $\kappa$ éléments est petit, d'où il suit que les sommes de moins de $\kappa$ faisceaux petits et les images de faisceaux petits sont petites (b) ; tout élément d'un faisceau appartient à un sous-faisceau petit (c) ; enfin, si des flèches $s_l\to X$ sont conjointement épimorphiques, moins de $\kappa$ d'entre elles suffisent à recouvrir un sous-faisceau petit donné de $X$ (d). Le point (b) est un décompte : au plus $2^\mu$ cribles couvrants, au plus $\nu^\mu$ familles compatibles pour chacun.
+
+Soit $S$ la classe des objets petits de $B$, essentiellement un petit ensemble, et $B_S$ la classe des objets de $R$ sur lesquels les flèches venant de $S$ sont conjointement épimorphiques. L'article montre que $B\cap B_S$ contient $K$ et l'objet final, et qu'elle est fermée par colimites (les pattes d'une colimite sont conjointement épimorphiques) et par produits fibrés ; pour ces derniers, on recouvre les images d'un sous-faisceau petit de $X\times_ZY$ par des sommes d'objets de $S$, grâce à (d) et (b), puis on prend leur produit fibré, petit par (a), en utilisant que les épimorphismes sont stables par produit fibré dans un topos. Par minimalité de $B$, on a $B\subseteq B_S$ : $S$ est un petit ensemble générateur, et le théorème de Giraud conclut.
+
+\begin{theoreme}[théorème 6.3 de l'article]
+Dans la 2-catégorie des topos de Grothendieck, un foncteur $i\colon I\to R$ partant d'une petite catégorie discrète est basique si et seulement s'il vérifie (G).
+\end{theoreme}
+
+Tout topos est algébrique, comme Grothendieck le note dans le cours : pour $R=\mathrm{Sh}(C,J)$, on part de l'enveloppe de l'ensemble des objets de $C$, on adjoint les flèches de $C$ et l'on égalise ses relations, ce qui donne le topos classifiant des diagrammes de forme $C$ ; les diagrammes plats et $J$-continus forment un quotient de cette théorie géométrique, dont le classifiant $R$ est un sous-topos, et un sous-topos est la localisation en un petit ensemble de monomorphismes. La preuve du théorème de réduction n'emploie que des constructions disponibles pour les topos, donc (G) entraîne «~basique~». Dans l'autre sens, on reprend la récurrence de la section~\ref{sec:basicG} en prenant pour $B'$, à chaque étape, la clôture de l'image de $I$ fournie par le lemme : c'est un topos, son inclusion est une flèche de $\Delta$, et elle est contenue dans toute sous-catégorie $R'$ comme dans (G). L'énoncé du cours, réparé, devient donc «~basique si et seulement si (G)~», avec (G) à la place des conditions de recouvrement et d'engendrement.
+
+\section{Toutes les petites limites : la réciproque est fausse}\label{sec:ens}
+
+Ici $\Delta$ est soit la 2-catégorie des catégories complètes (toutes les petites limites) avec les foncteurs continus, soit, dualement, celle des catégories cocomplètes avec les foncteurs cocontinus. Le passage à la catégorie opposée échange les deux : $I\to R$ est basique, ou vérifie (G), dans l'une exactement quand $I\to R^{\mathrm{op}}$ l'est dans l'autre.
+
+\subsection{Les ensembles sont engendrés par $2$ en deux étapes}
+
+\begin{theoreme}[proposition 7.1 de l'article]
+Tout ensemble $X$ est l'égaliseur de deux applications entre puissances de $2=\{0,1\}$ :
+\[X\cong\Eq\bigl(f,g\colon2^{P(X)}\rightrightarrows2^{P(P(X))\sqcup P(X)}\bigr),\]
+\[f(u)=\bigl(S\mapsto u(\textstyle\bigcap S),\ A\mapsto u(A^c)\bigr),\qquad g(u)=\bigl(S\mapsto\textstyle\bigwedge_{A\in S}u(A),\ A\mapsto\neg u(A)\bigr),\]
+où $P$ désigne l'ensemble des parties, $A^c$ le complémentaire et $\bigcap\varnothing=X$.
+\end{theoreme}
+
+Une application $u\colon P(X)\to2$ est une façon de déclarer «~vraies~» certaines parties de $X$. Les deux applications $f$ et $g$ comparent, pour chaque famille $S$ de parties, la valeur de $u$ sur l'intersection avec la conjonction des valeurs, et pour chaque partie $A$, la valeur sur le complémentaire avec la négation de la valeur. L'égaliseur est donc formé des $u$ qui respectent intersections quelconques et complémentaires. Chaque point $x$ en donne un, l'évaluation $u_x(A)=[x\in A]$, et deux points distincts donnent des évaluations distinctes. Réciproquement, soit $u$ un tel morphisme et $F=\{A:u(A)=1\}$. Alors $X=\bigcap\varnothing$ est dans $F$, donc $\varnothing=X^c$ n'y est pas ; $F$ est stable par intersections quelconques, donc $\bigcap F$ est dans $F$ et n'est pas vide. Prenons $x$ dans $\bigcap F$. Toute partie de $F$ contient $x$ ; inversement, si $x\in A$, alors $x\notin A^c$, donc $A^c\notin F$, $u(A^c)=0$ et $u(A)=1$. Ainsi $u=u_x$, et $x$ est unique puisque $\{x\}\in F$. En résumé, la suite
+\[\begin{tikzcd}[column sep=large]
+X \arrow[r, "x\,\mapsto\, u_x"] & 2^{P(X)} \arrow[r, shift left=1, "f"] \arrow[r, shift right=1, "g"'] & 2^{P(P(X))\sqcup P(X)}
+\end{tikzcd}\]
+est un égaliseur ; les deux termes de droite sont dans $I_1$, donc $X$ est dans $I_2$.
+
+C'est une forme de la dualité classique entre les ensembles et les algèbres de Boole complètes atomiques, et cela découle aussi du théorème de Paré selon lequel le foncteur contravariant «~ensemble des parties~» $\Set^{\mathrm{op}}\to\Set$ est monadique : toute algèbre est un coégaliseur d'algèbres libres. L'article donne la paire explicite parce que la vérification en Lean s'en sert.
+
+\begin{theoreme}[corollaire 7.2 de l'article]
+Pour $D$ formée de toutes les petites limites, $\{2\}\to\Set$ vérifie (G), et sa saturation atteint $\Set$ en exactement deux étapes : $I_2=\Set$ et $I_1\ne\Set$.
+\end{theoreme}
+
+Les puissances de $2$ sont dans $I_1$ et la proposition met tout ensemble dans $I_2$. Il reste à voir qu'aucun ensemble à trois éléments n'est dans $I_1$. Une limite d'un diagramme de copies de $2$ est un ensemble de familles compatibles, donc une partie d'un produit de copies de $2$. Les quatre applications $2\to2$ (les deux constantes, l'identité, la négation) commutent toutes à l'opération ternaire $x+y+z$ de $\mathbf Z/2$, si bien que cette partie est stable par l'opération, prise coordonnée par coordonnée. Or une partie à trois éléments $\{a,b,c\}$ stable devrait contenir $a+b+c$ ; si $a+b+c=a$, alors $b+c=0$, donc $b=c$, et les deux autres cas sont identiques.
+
+\subsection{Pourquoi $\Set$ n'est pas algébrique}
+
+Il faut une notion de taille pour les objets. Un objet $X$ est \emph{$\lambda$-présentable}, pour un cardinal régulier $\lambda$, si le foncteur $\Hom(X,-)$ commute aux colimites $\lambda$-filtrantes, c'est-à-dire, pour fixer les idées, aux réunions croissantes indexées par un ordinal de cofinalité au moins $\lambda$. Pour $\lambda=\aleph_0$, dans $\Grp$, ce sont les groupes de présentation finie : une flèche d'un tel groupe vers une réunion croissante tombe déjà dans un des termes, parce que les générateurs, en nombre fini, y tombent, et les relations aussi. Dans $\Set$, tout ensemble est $\lambda$-présentable pour $\lambda$ assez grand. On va voir qu'une catégorie algébrique, parmi les catégories cocomplètes, a la même propriété ; $\Set^{\mathrm{op}}$ ne l'a pas.
+
+\begin{theoreme}[proposition 7.3 de l'article]
+Dans $\Set^{\mathrm{op}}$, l'objet $2$ n'est $\lambda$-présentable pour aucun cardinal régulier $\lambda$.
+\end{theoreme}
+
+Une colimite dans $\Set^{\mathrm{op}}$ est une limite dans $\Set$, et $\Hom_{\Set^{\mathrm{op}}}(2,X)=\Hom_\Set(X,2)=P(X)$. La question est donc de savoir si $P$ envoie les limites $\lambda$-cofiltrantes de $\Set$ sur des colimites. On prend la chaîne décroissante des queues $A_\alpha=[\alpha,\lambda)$, $\alpha<\lambda$, avec les inclusions ; sa limite est l'intersection, vide. Or $P(\varnothing)$ a un seul élément, tandis que $\varinjlim P(A_\alpha)$, ensemble des «~germes~» de parties, en a au moins deux : le germe de $\varnothing$ et celui des $A_\alpha$ tout entiers diffèrent, puisque aucun $A_\beta$ n'est vide.
+
+Pour conclure, l'article montre qu'une catégorie algébrique, dans la 2-catégorie des catégories cocomplètes, est de la forme suivante.
+
+\begin{theoreme}[proposition 7.4 de l'article]
+Soit $\Delta$ la 2-catégorie des catégories cocomplètes avec les foncteurs cocontinus, et $S$ algébrique. Alors $S$ est équivalente à une sous-catégorie pleine réflexive $\Phi\text{-}\mathrm{Alg}$ d'une catégorie de préfaisceaux $[A^{\mathrm{op}},\Set]$ sur une petite catégorie $A$, fermée par colimites $\lambda$-filtrantes pour un cardinal régulier $\lambda$.
+\end{theoreme}
+
+L'outil est la théorie des esquisses du chapitre 6 du livre de Kelly. Une esquisse $(A,\Phi)$ est une petite catégorie $A$ munie d'un ensemble $\Phi$ de «~cylindres~», c'est-à-dire de cocônes qu'on demande de voir devenir des colimites. Les comodèles de $(A,\Phi)$ dans une catégorie cocomplète $B$ sont les foncteurs $A\to B$ qui envoient ces cylindres sur des colimites, et la catégorie $\Phi\text{-}\mathrm{Alg}$ vérifie
+\[\mathrm{Cocts}[\Phi\text{-}\mathrm{Alg},B]\simeq\Phi\text{-}\mathrm{Com}[A,B]\]
+pour tout $B$ cocomplet (théorèmes 6.5, 6.11 et 5.56 de Kelly). Chaque étape de la suite basique se traduit sur les esquisses : l'enveloppe de $I$ est l'esquisse $(I,\varnothing)$, qui donne $\Set^I$ ; on agrandit l'esquisse quand il faut y faire figurer des objets donnés (proposition 6.21, corollaire 6.22 et théorème 6.23 de Kelly) ; inverser une flèche $\sigma\colon X\to Y$, c'est ajouter le cylindre qui dit que $Y$, de patte $\sigma$, est la colimite du diagramme à un seul objet $X$ ; égaliser deux flèches $X\rightrightarrows Y$, c'est inverser $Y\to Q$, où $Q$ est leur coégaliseur ; adjoindre des flèches, c'est les adjoindre librement à la petite catégorie ; aux ordinaux limites, on prend la pseudo-colimite des petites catégories. À la fin, les cylindres portent sur des diagrammes de taille bornée, d'où la fermeture par colimites $\lambda$-filtrantes.
+
+\begin{theoreme}[théorème 7.5 de l'article]
+Soit $\Delta$ la 2-catégorie des catégories cocomplètes. Tout objet d'une catégorie algébrique $S$ de $\Delta$ est $\mu$-présentable pour un cardinal régulier $\mu$. Par conséquent $\Set^{\mathrm{op}}$ n'est pas algébrique, et $\{2\}\to\Set^{\mathrm{op}}$ vérifie (G) sans être basique. Dualement, pour $D$ formée de toutes les petites limites, $\{2\}\to\Set$ vérifie (G) sans être basique, et $\Set$ n'est pas algébrique.
+\end{theoreme}
+
+C'est le contre-exemple que Grothendieck indiquait le 10 juillet. Dans la proposition 7.4, tout préfaisceau sur la petite catégorie $A$ est une petite colimite de représentables, qui sont de présentation finie ; il est donc $\mu$-présentable pour un $\mu\ge\lambda$. Comme $\Phi\text{-}\mathrm{Alg}$ est pleine et fermée par colimites $\mu$-filtrantes, un de ses objets $\mu$-présentable comme préfaisceau l'est encore dans $\Phi\text{-}\mathrm{Alg}$. La proposition 7.3 interdit alors à $\Set^{\mathrm{op}}$ d'être algébrique ; par le corollaire 7.2 et la dualité, $\{2\}\to\Set^{\mathrm{op}}$ vérifie (G), et il ne peut être basique, puisque sa cible n'est pas algébrique. Ce théorème n'utilise aucune partie de (H) : être basique demande seulement que les étapes employées existent.
+
+\begin{remarque}[Lean]\sloppy
+La proposition 7.1, le corollaire 7.2 et la proposition 7.3 sont vérifiés en Lean~4 avec Mathlib, avec les seuls axiomes standard, dans le fichier \texttt{lean/\allowbreak Buffalo/\allowbreak ProblemThree.lean} du dépôt de l'édition (commit \texttt{23657b5d}), $\Set$ y étant la catégorie des types d'un univers fixé : \texttt{equivEqualizer} pour l'égaliseur, \texttt{saturation\_two}, \texttt{not\_saturation\_one} (au moyen de \texttt{Buffalo.\allowbreak Topos.\allowbreak Part05.\allowbreak no\_limit\_of\_bools}, la stabilité par l'opération ternaire) et \texttt{conditionG} pour les deux étapes, \texttt{not\_isCardinalPresentable} et \texttt{not\_isPresentable} pour la présentabilité, avec la notion de Mathlib et la chaîne des queues de $\kappa$. Ni «~basique~» et «~algébrique~», ni (H), ni les esquisses de Kelly ne sont modélisés : la proposition 7.4, le théorème 7.5 et les conclusions «~$\Set^{\mathrm{op}}$ n'est pas algébrique~» et «~$\{2\}\to\Set$ n'est pas basique~» reposent sur l'argument écrit.
+\end{remarque}
+
+\subsection{Le nombre d'étapes}
+
+\begin{theoreme}[proposition 7.7 de l'article]
+Soit $\Delta$ la 2-catégorie des catégories cocomplètes, $R$ algébrique et $i\colon I\to R$ vérifiant (G), avec $I$ petit. Alors $I_{\alpha+1}=R$ pour un petit ordinal $\alpha$. De même, dualement, pour les catégories complètes.
+\end{theoreme}
+
+On écrit $R\simeq\Phi\text{-}\mathrm{Alg}$ comme plus haut, avec un réflecteur $L$. Tout préfaisceau est colimite de représentables $yA$, et $L$ préserve les colimites ; tout objet de $R$ est donc une colimite d'objets $L(yA)$, qui forment un petit ensemble $G$. Chacun d'eux est dans un $I_{\alpha_g}$ ; la borne supérieure $\alpha$ des $\alpha_g$ est un petit ordinal, et tout objet de $R$ est une colimite d'un petit diagramme de $I_\alpha$, donc est dans $I_{\alpha+1}$.
+
+Adámek et Rosický donnent une catégorie cocomplète et localement petite $\mathcal C$ de structures munies d'opérations unaires partielles indexées par tous les ordinaux, et un objet $A$ dont la clôture par colimites dans $\mathcal C$ n'est atteinte en aucun petit nombre d'étapes (exemple 6.38 de leur livre). Rosický a signalé cet exemple en réponse à une question de Campion sur MathOverflow, et la réponse de Campion lui-même le détaille. Sur la même page, Barr rappelle une affirmation d'Isbell, jamais publiée selon lui, d'après laquelle la clôture par limites du groupe $\mathbf Z/2$, vu comme catégorie à un objet, demande elle aussi une classe propre d'étapes.
+
+\begin{theoreme}[corollaire 7.8 de l'article]
+Soit $R$ la clôture de $\{A\}$ par petites colimites dans la catégorie $\mathcal C$ de cet exemple. Alors $R$ est cocomplète, $\{A\}\to R$ vérifie (G), sa saturation n'atteint $R$ en aucun petit nombre d'étapes, et $R$ n'est pas algébrique. Dans la 2-catégorie des catégories cocomplètes, $\{A\}\to R$ est donc un second contre-exemple au problème trois, et aucun petit ordinal ne borne le nombre d'étapes des foncteurs qui vérifient (G).
+\end{theoreme}
+
+Les colimites de $R$ se calculent dans $\mathcal C$, la saturation de $\{A\}$ dans $R$ est celle de $\mathcal C$, et la proposition 7.7 conclut. Un nombre d'étapes borné est ainsi nécessaire à l'algébricité, sans être suffisant : $\{2\}\to\Set$ demande deux étapes, et $\Set$ n'est pas algébrique. Rosický note aussi, sur la même page, que sous le principe de Vop\v{e}nka la clôture par colimites d'une petite sous-catégorie pleine d'une catégorie localement présentable est localement présentable.
+
+\section{Sources publiées et résultats de l'article}
+
+Sont dans la littérature, d'après l'article : la description transfinie de la clôture et la borne sur le nombre d'étapes (Kelly, §~3.5) ; la cocomplétion libre comme clôture des représentables (Kelly, théorème 5.35), qui est la première étape du théorème «~basique implique (G)~» ; la théorie des esquisses (Kelly, chapitre 6) ; la description de tout ensemble comme égaliseur entre puissances de $2$, forme de la dualité entre ensembles et algèbres de Boole complètes atomiques, qui découle aussi du théorème de Paré ; le fait que $\Set^{\mathrm{op}}$ n'est pas localement présentable, et l'identification des catégories algébriques aux catégories localement présentables, à dualité près (Gabriel et Ulmer, Adámek et Rosický ; l'argument de l'article n'utilise que les résultats cités de Kelly, et une moitié de cette dualité) ; l'exemple d'Adámek et Rosický, connu de l'article par la discussion de MathOverflow ; les notions de fidélité et de densité d'Isbell, voisines mais distinctes.
+
+L'article n'a trouvé dans la littérature ni les théorèmes 3.2, 4.2, 5.1 et 6.3, ni le lemme 6.2, ni l'emploi de ces exemples contre le problème trois. La plupart des arguments, dit-il, sont de routine pour les spécialistes.
+
+\section{Questions ouvertes et limites de l'article}
+
+La première question laissée ouverte concerne les classes mixtes et grandes : dans la 2-catégorie des catégories à limites finies et petites colimites, sans condition d'exactitude, (G) entraîne-t-elle l'algébricité ? En particulier, $\{2\}\to\Set^{\mathrm{op}}$ y vérifie (G), puisqu'il la vérifie déjà pour les seules colimites : $\Set^{\mathrm{op}}$ y est-elle algébrique ? On ne sait même pas si (H) y est vraie, les localisations et les 2-colimites de chaînes pouvant ne pas être localement petites, et la proposition 7.4 ne s'applique pas, sa preuve n'utilisant que des esquisses pour les colimites.
+
+La seconde demande si, pour de telles classes, le nombre d'étapes de saturation d'un foncteur basique est borné par un petit ordinal. Pour toutes les petites colimites, ou toutes les petites limites, la réponse est oui pour les foncteurs basiques et non pour ceux qui vérifient seulement (G). Grothendieck attendait une borne en général, sans démonstration.
+
+La deuxième question du 2 juillet, savoir si la base d'une catégorie algébrique peut être agrandie de sorte qu'il ne reste que des axiomes à imposer, a une réponse positive dans le cas localement présentable, par Gabriel--Ulmer : en prenant pour $I$ les objets de l'opposée de la catégorie des objets $\lambda$-présentables, la catégorie est celle des foncteurs $\lambda$-continus sur celle-ci. L'article ne l'a pas examinée pour les autres classes.
+
+L'article signale enfin ses limites. L'hypothèse (H) est admise et non démontrée, sauf là où le livre de Kelly la fournit, et il n'y a pas de référence pour les classes petites mixtes. Pour les topos, l'existence des constructions est tirée de la théorie standard. Seuls les énoncés sur les ensembles sont formalisés en Lean ; les résultats positifs, la proposition 7.4 et le théorème 7.5 reposent sur les démonstrations écrites. L'exemple 6.38 d'Adámek et Rosický est utilisé tel que Rosický et Campion le décrivent sur MathOverflow, le livre n'ayant pas été consulté. Aucun des arguments n'a été vérifié par un spécialiste.
+
+\section{Petit lexique}
+
+{\small\begin{tabular}{@{}p{2.9cm}p{11.9cm}@{}}
+\toprule
+Terme & À retenir ici \\
+\midrule
+limite & cône universel ; produits, égaliseurs, suites compatibles \\
+colimite & notion duale ; sommes, quotients, présentations \\
+$\Delta=\Cat_D$ & catégories à limites $D'$ et colimites $D''$, foncteurs qui les préservent \\
+(G) & toute sous-catégorie réplète fermée contenant $i(I)$ est $R$ \\
+saturation & les étapes $I_0\subseteq I_1\subseteq\cdots$ de la clôture, par le bas \\
+(H) & existence des constructions libres, admise comme chez Grothendieck \\
+enveloppe & théorie libre sur $I$, analogue du groupe libre \\
+basique & construit depuis l'enveloppe par axiomes, flèches et passages à la limite \\
+$\lambda$-présentable & $\Hom(X,-)$ commute aux colimites $\lambda$-filtrantes \\
+esquisse & petite catégorie et cocônes à rendre colimites \\
+topos & catégorie de faisceaux, proche de celle des ensembles \\
+\bottomrule
+\end{tabular}}
+
+\section*{Sur la rédaction de cette note}
+
+Note de travail écrite par Claude (Opus~5.5, Anthropic) sous la direction de l'auteur, à partir de \texttt{docs/problem-three/article.tex}. Elle ne contient aucun résultat nouveau ; en cas de désaccord, l'article fait foi.
+
+\end{document}

@@ -1,0 +1,451 @@
+% Note de travail, en français, accompagnant docs/qcoh-descent/article.tex :
+% les définitions de l'article reprises depuis le début, sur un ton pédagogique,
+% pour un lecteur venu des mathématiques appliquées. Compilée par tectonic.
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern,microtype,amssymb,mathtools,booktabs}
+\usepackage[margin=2.7cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathreplacing}
+\usepackage[hidelinks]{hyperref}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}
+\theoremstyle{plain}
+\newtheorem{theoreme}{Théorème}
+\theoremstyle{remark}
+\newtheorem{remarque}{Remarque}
+
+\newcommand{\Z}{\mathbf Z}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\N}{\mathbf N}
+\newcommand{\Pp}{\mathcal P}
+\newcommand{\QCoh}{\mathrm{QCoh}}
+\newcommand{\Des}{\mathrm{Des}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Mor}{\operatorname{Mor}}
+\newcommand{\pr}{\mathrm{pr}}
+
+\title[Note de lecture : descente le long des épimorphismes effectifs universels]{La descente des faisceaux quasi-cohérents\\ le long des épimorphismes effectifs universels,\\ note de lecture}
+\author{Michel Hua}
+\address{Commutator, Paris}
+\email{michel@commutator.io}
+\date{15 novembre 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Cette note accompagne l'article \emph{Descent of quasi-coherent sheaves along universal effective epimorphisms of schemes}. Elle en reprend les définitions depuis le début, sans supposer connus les schémas, les faisceaux ni les ultrafiltres, suit les démonstrations pas à pas, et distingue les résultats que l'article démontre lui-même de ceux qu'il emprunte à la littérature. Rien n'y est démontré de neuf ; en cas de désaccord, l'article fait foi.
+\end{abstract}
+
+\section{De quoi parle l'article}
+
+\subsection{Recoller}
+
+Imaginez une carte routière imprimée sur plusieurs feuilles qui se chevauchent. Chaque feuille porte un morceau du réseau, et là où deux feuilles se recouvrent, les routes doivent se raccorder. Deux questions se posent naturellement. Si deux cartes complètes coïncident feuille par feuille, sont-elles égales ? Et si l'on dispose seulement des feuilles, avec la consigne de raccord sur chaque recouvrement, peut-on reconstituer une carte d'un seul tenant ?
+
+La \emph{théorie de la descente} de Grothendieck pose ces deux questions dans un cadre beaucoup plus large. Les \guillemotleft\,feuilles\,\guillemotright{} n'y sont plus des morceaux d'un espace découpé à l'avance : on se donne un morphisme $f\colon X\to Y$, où $X$ est un autre espace qui se projette sur $Y$, et l'on cherche à fabriquer des objets sur $Y$ à partir d'objets sur $X$ munis d'une règle de raccord. La première question est celle de la \emph{pleine fidélité}, la seconde celle de l'\emph{effectivité}.
+
+\subsection{La question de Buffalo}
+
+Au cours de géométrie algébrique qu'il donnait à l'université d'État de New York à Buffalo, à la séance du 11 juillet 1973, Grothendieck venait de démontrer que les schémas sont des faisceaux pour la topologie fpqc. Un auditeur lui demanda pourquoi l'on ne prend pas pour recouvrements tous les épimorphismes effectifs universels. Il répondit que l'on obtiendrait ainsi la topologie la plus fine pour laquelle les foncteurs représentables sont des faisceaux, mais que ces morphismes sont difficiles à reconnaître, et qu'on ne sait pas si les faisceaux quasi-cohérents se descendent le long d'eux, ni même si le passage à l'image inverse est fidèle ; il ajouta qu'il doutait \guillemotleft\,very much\,\guillemotright{} qu'on puisse le démontrer. L'enregistrement n'est connu que par une transcription faite à partir des sous-titres et par machine, non vérifiée à l'oreille ; l'article n'en cite que ces deux mots.
+
+L'article répond aux deux questions. Sur la pleine fidélité, la réponse va contre le doute exprimé.
+
+\begin{theoreme}[article, théorème A]
+Tout épimorphisme effectif universel de schémas $f\colon X\to Y$ est un morphisme de descente pour les faisceaux quasi-cohérents : le foncteur $f^*$ de $\QCoh(Y)$ dans $\Des(f)$ est pleinement fidèle. Aucune hypothèse de quasi-compacité n'est nécessaire.
+\end{theoreme}
+
+\begin{theoreme}[Mesablishvili ; article, théorème B]
+Tout épimorphisme effectif universel quasi-compact de schémas est un morphisme de descente effective pour les faisceaux quasi-cohérents.
+\end{theoreme}
+
+\begin{theoreme}[article, théorème C]
+Supposons qu'un ultrafiltre non principal $U$ sur l'ensemble $\Pp$ des nombres premiers soit engendré par $\aleph_1$ ensembles, comme l'est tout ultrafiltre sous l'hypothèse du continu. Pour $A\in U$, notons $\Z_A$ l'anneau $\Z$ où l'on a inversé les premiers de $A$. Alors \[f\colon\coprod_{A\in U}\Spec\Z_A\to\Spec\Z\] est un épimorphisme effectif universel de schémas, donc un morphisme de descente, mais ce n'est pas un morphisme de descente effective pour les faisceaux quasi-cohérents. Par conséquent $\QCoh$ est un préchamp séparé, mais non un champ, pour la topologie canonique sur les schémas, et aussi pour la topologie canonique sur les schémas affines.
+\end{theoreme}
+
+Le vocabulaire sera expliqué au fur et à mesure. Retenons pour l'instant la forme du résultat : les morphismes se descendent toujours, les objets se descendent quand $f$ est quasi-compact, et sans quasi-compacité ils peuvent ne pas se descendre, du moins sous une hypothèse de théorie des ensembles.
+
+\section{Les objets, un par un}
+
+\subsection{Anneaux et spectres : l'exemple de $\Z$}
+
+La géométrie algébrique renverse la relation habituelle entre un espace et ses fonctions. On part d'un anneau commutatif $A$, que l'on décide de regarder comme l'anneau des fonctions d'un espace encore inconnu, et l'on construit cet espace, le \emph{spectre} $\Spec A$, dont les points sont les idéaux premiers de $A$.
+
+L'exemple qui servira tout du long est $A=\Z$. Ses idéaux premiers sont $(0)$ et les $(p)$ pour $p$ premier. L'espace $\Spec\Z$ a donc un point pour chaque nombre premier, plus un point $(0)$ dit générique, qui est \guillemotleft\,partout à la fois\,\guillemotright{}. Un entier $n$ est une fonction sur cet espace : sa valeur au point $p$ est $n$ modulo $p$, et elle s'annule exactement aux premiers qui divisent $n$.
+
+Inverser une fonction revient à retirer les points où elle s'annule. Si l'on inverse $2$, on n'a plus le droit d'évaluer en $2$, et $\Spec\Z[1/2]$ est $\Spec\Z$ privé du point $2$. Plus généralement, pour un ensemble $A$ de premiers, l'article note $\Z_A$ l'anneau des fractions dont le dénominateur est un produit de premiers de $A$, et
+\[
+\Spec\Z_A=\{(0)\}\cup A^c,\qquad A^c=\Pp\setminus A .
+\]
+Deux cas extrêmes : en inversant tous les premiers sauf $p$, on obtient l'anneau local $\Z_{(p)}$, dont le spectre ne garde que $p$ et le point générique ; en les inversant tous, on obtient $\Q$, qui ne garde que le point générique.
+
+Un détail compte pour la suite. Les parties ouvertes de $\Spec\Z$ pour sa topologie usuelle, dite de Zariski, sont celles qui contiennent le point générique et ne manquent qu'un nombre fini de premiers. Quand $A$ est infini, $\Spec\Z_A$ n'est donc pas un ouvert de $\Spec\Z$ : c'est un morceau plus fin, que la topologie de Zariski ne voit pas.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.95cm,y=0.8cm]
+\node[anchor=east] at (-0.4,1.4) {\small $\Spec\Z$};
+\foreach \x/\p in {0/2,1/3,2/5,3/7,4/11,5/13,6/17,7/19,8/23} {
+  \fill (\x,1.4) circle (2pt); \node[below=2pt] at (\x,1.4) {\scriptsize $\p$};
+}
+\node at (9,1.4) {$\cdots$};
+\draw[black!45,dashed,rounded corners=6pt] (-0.3,1.95) rectangle (9.4,2.45);
+\node at (4.5,2.2) {\scriptsize point générique $(0)$, présent dans tous les morceaux};
+\node[anchor=east] at (-0.4,0) {\small $\Spec\Z_A$};
+\foreach \x/\p/\m in {0/2/1,1/3/0,2/5/1,3/7/0,4/11/0,5/13/1,6/17/1,7/19/0,8/23/1} {
+  \ifnum\m=1
+    \draw (\x,0) circle (2pt);
+  \else
+    \fill (\x,0) circle (2pt);
+  \fi
+  \node[below=2pt] at (\x,0) {\scriptsize \p};
+}
+\node at (9,0) {$\cdots$};
+\end{tikzpicture}
+\caption{En haut, les points de $\Spec\Z$ : un point par nombre premier et le point générique. En bas, $\Spec\Z_A$ pour un ensemble infini $A$ de premiers (cercles vides, ici $2,5,13,17,23,\dots$) : inverser les premiers de $A$ les retire. Le morceau obtenu n'est pas un ouvert de Zariski, puisqu'il manque une infinité de points.}\label{fig:specZ}
+\end{figure}
+
+\subsection{Schémas et faisceaux quasi-cohérents}
+
+Un \emph{schéma} est un espace obtenu en recollant des spectres, comme une variété différentielle se recolle à partir d'ouverts de $\mathbf R^n$. Un schéma \emph{affine} est un spectre $\Spec A$, d'un seul tenant.
+
+Sur un schéma affine $\Spec A$, un \emph{faisceau quasi-cohérent} n'est rien d'autre qu'un $A$-module $M$. L'image à garder est celle d'une famille d'espaces vectoriels paramétrée par les points de l'espace, la fibre en un point $\mathfrak p$ étant, en gros, $M/\mathfrak pM$ ; à la différence d'un fibré vectoriel, la dimension de la fibre peut sauter d'un point à l'autre. Sur un schéma général, un faisceau quasi-cohérent est une famille de tels modules sur les morceaux affines, recollés entre eux. On note $\QCoh(Y)$ la catégorie qu'ils forment.
+
+Sur $\Spec\Z$, un faisceau quasi-cohérent est un groupe abélien. Le groupe $\Z$ lui-même est le faisceau structural $\mathcal O_Y$, la \guillemotleft\,fonction constante\,\guillemotright{}. Le groupe $\Z/p$, au contraire, ne vit qu'au point $p$ : il disparaît dès qu'on inverse $p$, puisque $\Z/p\otimes\Z[1/p]=0$. C'est une masse ponctuelle placée en $p$, et ces masses ponctuelles fabriqueront le contre-exemple.
+
+Pour un morphisme $f\colon X\to Y$, l'\emph{image inverse} $f^*$ transporte un faisceau de $Y$ sur $X$. Quand $f$ vient d'un morphisme d'anneaux $A\to B$, c'est l'extension des scalaires $M\mapsto B\otimes_AM$. Pour $\Z\to\Z_A$, c'est la localisation, que l'article note $M_A=M\otimes\Z_A$ : on garde $M$, en autorisant la division par les premiers de $A$.
+
+\subsection{Le produit fibré}
+
+Étant donné $f\colon X\to Y$, le \emph{produit fibré} $X\times_YX$ est, heuristiquement, l'espace des couples $(x,x')$ de points de $X$ ayant la même image dans $Y$. Il vient avec deux projections $\pr_1,\pr_2\colon X\times_YX\to X$. Pour des anneaux, il correspond au produit tensoriel $B\otimes_AB$, et ces deux projections aux deux applications $b\mapsto b\otimes1$ et $b\mapsto1\otimes b$.
+
+Dans l'exemple de $\Z$, le calcul est simple et parlant : $\Z_A\otimes\Z_B=\Z_{A\cup B}$. On inverse les premiers de $A$, puis ceux de $B$ ; les points qui restent sont ceux de $A^c\cap B^c$. Le produit fibré de deux morceaux est donc leur intersection, comme pour des ouverts.
+
+\subsection{Données de descente}
+
+\begin{definition}
+Soit $f\colon X\to Y$. Une \emph{donnée de descente} relativement à $f$ est un faisceau quasi-cohérent $N$ sur $X$ muni d'un isomorphisme $\theta\colon\pr_1^*N\cong\pr_2^*N$ sur $X\times_YX$, qui vérifie une condition de cocycle sur $X\times_YX\times_YX$. Ces données forment une catégorie $\Des(f)$. Tout faisceau $M$ sur $Y$ en fournit une, $f^*M$ avec l'identification évidente, d'où un foncteur $f^*\colon\QCoh(Y)\to\Des(f)$.
+\end{definition}
+
+Le lecteur qui connaît les fibrés vectoriels reconnaîtra les fonctions de transition. Un fibré se donne par des produits $U_i\times\mathbf R^r$ et des matrices $g_{ij}$ sur les intersections $U_i\cap U_j$, astreintes à $g_{ik}=g_{jk}g_{ij}$ sur les intersections triples. L'isomorphisme $\theta$ joue le rôle des $g_{ij}$, et la condition de cocycle celui de cette relation. Dans l'exemple de $\Z$, une donnée de descente se lit en clair : des $\Z_A$-modules $N_A$, des isomorphismes $\varphi_{AB}\colon(N_A)_{A\cup B}\cong(N_B)_{A\cup B}$ et la condition $\varphi_{AC}=\varphi_{BC}\varphi_{AB}$ au-dessus de $\Z_{A\cup B\cup C}$.
+
+\begin{definition}
+On dit que $f$ est un \emph{morphisme de descente} pour les faisceaux quasi-cohérents si $f^*$ est pleinement fidèle, et un \emph{morphisme de descente effective} si $f^*$ est une équivalence.
+\end{definition}
+
+Pleinement fidèle signifie : les morphismes $M\to F$ sur $Y$ correspondent exactement aux morphismes $f^*M\to f^*F$ sur $X$ compatibles avec les identifications. C'est la première question de la carte routière. Équivalence signifie en outre que toute donnée de descente provient d'un faisceau sur $Y$ : c'est la seconde.
+
+Le résultat classique est que les morphismes fidèlement plats et quasi-compacts sont de descente effective. L'article rappelle que, sans quasi-compacité, même la pleine fidélité peut échouer pour un morphisme fidèlement plat : un exemple donné sur MathOverflow prend la réunion disjointe des spectres des anneaux locaux de la droite affine complexe en ses points fermés.
+
+\subsection{Épimorphismes effectifs universels}
+
+\begin{definition}
+Dans une catégorie qui a des produits fibrés, un morphisme $f\colon X\to Y$ est un \emph{épimorphisme effectif} si, pour tout objet $T$, la suite
+\[
+\Mor(Y,T)\to\Mor(X,T)\rightrightarrows\Mor(X\times_YX,T)
+\]
+est un égalisateur. C'est un \emph{épimorphisme effectif universel} si tout changement de base de $f$ en est un.
+\end{definition}
+
+En mots : se donner une application de $Y$ vers $T$ revient à se donner une application de $X$ vers $T$ qui prend la même valeur en deux points de même image. L'exemple à garder en tête, hors des schémas, est l'enroulement de la droite réelle sur le cercle, $x\mapsto e^{2i\pi x}$. Deux réels ont même image quand ils diffèrent d'un entier, et une fonction sur le cercle est exactement une fonction périodique sur la droite. Le cercle est le quotient de la droite par la relation \guillemotleft\,avoir la même image\,\guillemotright{}. Un épimorphisme effectif est un morphisme qui fait de $Y$ un tel quotient de $X$ ; il est universel si cette propriété résiste à tout changement de base.
+
+La \emph{topologie canonique} est la topologie de Grothendieck la plus fine pour laquelle tout foncteur représentable est un faisceau. Ses familles couvrantes sont les familles universellement effectivement épimorphiques, et un crible engendré par une seule flèche est couvrant si et seulement si cette flèche est un épimorphisme effectif universel. Dans la catégorie des schémas, une famille $\{X_i\to Y\}$ est couvrante si et seulement si le morphisme unique $\coprod_iX_i\to Y$ est un épimorphisme effectif universel ; on peut donc toujours raisonner sur une seule flèche. Tout recouvrement fpqc en est un. L'article signale aussi que, dans une catégorie à produits fibrés, épimorphismes effectifs, réguliers et stricts coïncident, et que Mesablishvili appelle les épimorphismes effectifs universels \emph{épimorphismes réguliers stables}.
+
+Dire que $\QCoh$ est un \emph{préchamp séparé} pour cette topologie, c'est dire que $f^*$ est pleinement fidèle pour toute famille couvrante ; dire que c'est un \emph{champ}, c'est demander en plus l'effectivité.
+
+\subsection{Morphismes purs}
+
+\begin{definition}
+Un morphisme d'anneaux $A\to B$ est \emph{pur}, ou universellement injectif, si $M\to M\otimes_AB$ est injectif pour tout $A$-module $M$.
+\end{definition}
+
+La pureté demande que l'extension des scalaires ne tue rien. Le morphisme $\Z\to\Z[1/p]$ n'est pas pur : il tue $\Z/p$, la masse ponctuelle en $p$, parce qu'il a retiré ce point. En revanche $\Z\to\Z[1/2]\times\Z[1/3]$ est pur, car un élément tué par une puissance de $2$ et par une puissance de $3$ est nul. Être pur, c'est couvrir assez pour que rien ne se perde.
+
+\subsection{Quasi-compacité}
+
+Un espace est \emph{quasi-compact} si de tout recouvrement ouvert on peut extraire un recouvrement fini ; un morphisme $f$ l'est si l'image réciproque de tout ouvert affine est quasi-compacte. Une réunion disjointe d'une infinité de schémas non vides n'est pas quasi-compacte. Toute la difficulté de l'article est concentrée dans les morphismes qui ne le sont pas.
+
+\section{Le cas affine}
+
+Tout commence par le cas où $X$ et $Y$ sont affines, qui est classique.
+
+\begin{theoreme}[article, proposition 2.1]
+Pour un morphisme d'anneaux $A\to B$, les conditions suivantes sont équivalentes :
+\begin{enumerate}
+\item[(a)] $\Spec B\to\Spec A$ est un épimorphisme effectif universel de schémas ;
+\item[(b)] c'en est un de schémas affines ;
+\item[(c)] pour tout $A$-module $M$, la suite $M\to M\otimes_AB\rightrightarrows M\otimes_AB\otimes_AB$ est un égalisateur ;
+\item[(d)] $A\to B$ est pur ;
+\item[(e)] $A\to B$ est un morphisme de descente effective pour les modules ;
+\item[(f)] $A\to B$ est un morphisme de descente pour les modules.
+\end{enumerate}
+\end{theoreme}
+
+La démonstration de l'article est un assemblage de résultats publiés, dont il indique la source pour chaque flèche. De (a) à (b), on restreint les tests aux schémas affines, qui forment une sous-catégorie pleine stable par produits fibrés. L'équivalence de (b) et (c) est dans le Stacks Project (étiquette 0EUA), appliquée à une famille à un seul membre ; sa preuve de (b)$\Rightarrow$(c) utilise le changement de base le long de l'extension de carré nul $\Spec(A\oplus M)$ et l'objet test $\mathbf A^1$, et la démonstration du théorème~A reprend le même argument hors du cadre affine. De (c) à (d), il suffit de regarder la première flèche, injective pour tout $M$. Les équivalences entre (d), (e) et (f) forment un théorème de Joyal et Tierney, annoncé par Olivier en 1970, dont Mesablishvili a publié une démonstration et André et Fiorot une autre (Stacks, 08XA). Enfin, de (d) à (a), un morphisme pur de schémas affines est un épimorphisme régulier dans la catégorie des schémas, et cette propriété est stable par changement de base, d'après Mesablishvili (2004).
+
+Conclusion : dans le monde affine, les épimorphismes effectifs universels sont exactement les morphismes purs, et pour eux tout se passe bien. Mesablishvili va plus loin : un morphisme quasi-compact de schémas est pur, au sens où $\mathcal O_Y\to f_*\mathcal O_X$ reste injectif après tout changement de base, si et seulement si c'est un épimorphisme régulier stable, et si et seulement si c'est un morphisme de descente effective stable pour les faisceaux quasi-cohérents.
+
+\section{La pleine fidélité : le théorème A}
+
+La démonstration tient en cinq étapes. Son idée est une linéarisation, familière à tout lecteur venu de l'analyse numérique.
+
+\subsection{Étape 1 : se ramener à une base affine}
+
+Pour deux faisceaux $M$ et $F$ sur $Y$, les morphismes $M\to F$ forment un faisceau sur $Y$ : un morphisme se définit localement et se recolle. Les morphismes de données de descente $f^*M\to f^*F$, restreints au-dessus des ouverts de $Y$, forment aussi un faisceau. Le changement de base de $f$ à un ouvert de $Y$ reste un épimorphisme effectif universel. Si la comparaison est bijective au-dessus de chaque ouvert affine, les deux faisceaux coïncident sur une base de la topologie, donc partout. On suppose désormais $Y=\Spec A$ ; en revanche $X$ reste quelconque, et c'est là que l'absence de quasi-compacité pourrait gêner.
+
+\subsection{Étape 2 : l'extension de carré nul}
+
+Soit $F$ un faisceau quasi-cohérent sur $Y$. On fabrique un nouveau schéma $Y'$ dont l'anneau est $A\oplus\Gamma(Y,F)$, avec la multiplication
+\[
+(a,s)(a',s')=(aa',\,as'+a's).
+\]
+Le produit de deux éléments de $F$ est nul : c'est la règle $\varepsilon^2=0$ des nombres duaux, ou d'un développement limité à l'ordre un. Une fonction sur $Y'$ est une fonction $a$ sur $Y$ plus une perturbation infinitésimale $s$, qui prend ses valeurs dans $F$ au lieu de prendre des valeurs scalaires.
+
+On pose $X'=X\times_YY'$. C'est le même espace que $X$, avec le faisceau d'anneaux $\mathcal O_X\oplus f^*F$, et ses fonctions globales se décomposent de même :
+\[
+\Gamma(X',\mathcal O_{X'})=\Gamma(X,\mathcal O_X)\oplus\Gamma(X,f^*F).
+\]
+La même décomposition vaut pour $X'\times_{Y'}X'$, avec $\Gamma(X\times_YX,\mathcal O)\oplus\Gamma(X\times_YX,p^*F)$, où $p$ est la projection vers $Y$. Rien de tout cela ne demande que $X$ soit affine.
+
+\subsection{Étape 3 : tester contre la droite affine}
+
+Le morphisme $X'\to Y'$ est un changement de base de $f$, donc un épimorphisme effectif. On le teste contre $T=\mathbf A^1=\Spec\Z[t]$, la droite affine, qui a une propriété très commode : un morphisme d'un schéma vers $\mathbf A^1$ est la même chose qu'une fonction globale sur ce schéma. L'égalisateur de la définition devient donc : les fonctions sur $Y'$ sont exactement les fonctions sur $X'$ qui ont même image par les deux projections vers $X'\times_{Y'}X'$.
+
+Les deux projections respectent la décomposition \guillemotleft\,partie ordinaire plus partie infinitésimale\,\guillemotright{}, parce que ce sont des morphismes au-dessus de $Y'$. On peut donc ne garder que la partie infinitésimale, et l'on obtient un égalisateur
+\[
+\Gamma(Y,F)\to\Gamma(X,f^*F)\rightrightarrows\Gamma(X\times_YX,p^*F).
+\]
+En clair : une section de $F$ sur $Y$ est la même chose qu'une section de $f^*F$ sur $X$ dont les deux tirés en arrière sur $X\times_YX$ coïncident. On a obtenu un énoncé sur les sections de $F$ en appliquant la définition d'épimorphisme effectif à de simples fonctions, à condition de perturber $Y$ dans la direction de $F$.
+
+\subsection{Étape 4 : le cas $M=\mathcal O_Y$}
+
+Un morphisme $\mathcal O_X\to f^*F$ est donné par l'image de $1$, c'est-à-dire par une section $s\in\Gamma(X,f^*F)$, et il est compatible avec les données de descente canoniques exactement quand les deux tirés en arrière de $s$ sur $X\times_YX$ coïncident. L'égalisateur de l'étape~3 dit donc que $\Hom_Y(\mathcal O_Y,F)\to\Hom_{\Des(f)}(f^*\mathcal O_Y,f^*F)$ est bijectif.
+
+\subsection{Étape 5 : tous les $M$}
+
+La catégorie $\Des(f)$ a des colimites, calculées sur $X$, et $f^*$ les préserve. Les deux foncteurs $\Hom_Y(-,F)$ et $\Hom_{\Des(f)}(f^*-,f^*F)$ transforment donc sommes directes et conoyaux en produits et noyaux. Comme $Y$ est affine, tout $M$ a une présentation $\mathcal O_Y^{(I)}\to\mathcal O_Y^{(J)}\to M\to0$, et la bijection pour $\mathcal O_Y$ se propage aux sommes directes, puis à $M$.
+
+\medskip
+L'argument n'utilise ni quasi-compacité, ni hypothèse de finitude, ni recouvrement affine de $X$. Il en découle que $\QCoh$ est un préchamp séparé pour la topologie canonique sur les schémas : pour toute famille couvrante, remplacée par la réunion disjointe de ses membres, le foncteur de comparaison vers les données de descente est pleinement fidèle.
+
+\subsection{Le noyau affine en Lean}
+
+Le cas affine du théorème~A est vérifié en Lean~4 avec Mathlib, dans le fichier \texttt{lean/\allowbreak Buffalo/\allowbreak QcohDescent.lean} du dépôt, ajouté par le commit \texttt{379ce37e}, avec les seuls axiomes standard. Pour un morphisme d'anneaux $A\to B$ et deux $A$-modules $M$ et $N$, un morphisme de données de descente $B\otimes_AM\to B\otimes_AN$ est une application $B$-linéaire dont les deux changements de base à $B\otimes_AB$ coïncident. Le fichier démontre :
+\begin{itemize}
+\item \texttt{descend\_bijective} : si $N\to B\otimes_AN\rightrightarrows B\otimes_AB\otimes_AN$ est un égalisateur, le changement de base $\Hom_A(M,N)\to\Hom_{\Des}(B\otimes_AM,B\otimes_AN)$ est bijectif pour tout $M$ ;
+\item \texttt{isEqualizer\_iff\_bijective} : réciproquement, la bijectivité pour $M=A$ seul donne la condition d'égalisateur pour $N$ ;
+\item \texttt{equalizerCondition\_iff\_isPure} : la condition d'égalisateur pour tous les modules équivaut à la pureté de $A\to B$, et \texttt{descend\_bijective\_of\_isPure} énonce la pleine fidélité pour un morphisme pur.
+\end{itemize}
+La preuve formelle se passe de présentation : une application $B$-linéaire $g$ est déterminée par $m\mapsto g(1\otimes m)$, et elle est compatible avec les données de descente exactement quand cette application tombe dans l'égalisateur, qui est $N$. Ne sont pas formalisés : le passage des épimorphismes effectifs universels à la condition d'égalisateur, faute de modèle des schémas et de l'objet test $\mathbf A^1$ ; l'effectivité le long d'un morphisme pur ; le cas non affine du théorème~A ; les théorèmes~B et~C.
+
+\section{Le cas quasi-compact : le théorème B}
+
+Le théorème~B est dû à Mesablishvili et découle de ses deux caractérisations des morphismes purs quasi-compacts. L'article en donne une démonstration indépendante, qui se ramène au cas affine par un recouvrement affine fini. Le principe : on passe de $X$ à une réunion finie d'ouverts affines $U$, on descend de $U$ à $Y$ par le cas affine, puis on redescend de $U$ à $X$ l'isomorphisme obtenu et l'on vérifie qu'il respecte la donnée de départ.
+
+\emph{Étape 1.} Grâce au théorème~A, l'effectivité est locale sur $Y$ : si les restrictions d'une donnée de descente au-dessus des ouverts d'un recouvrement de $Y$ se descendent, les modules descendus sont uniques à isomorphisme unique près, donc se recollent. L'article note que c'est l'argument que Grothendieck donne dans le cours pour les morphismes fpqc. On suppose $Y=\Spec A$.
+
+\emph{Étape 2.} Comme $f$ est quasi-compact et $Y$ affine, $X$ est quasi-compact : on le recouvre par un nombre fini d'ouverts affines $U_i$, on pose $U=\coprod_iU_i=\Spec B$ (une réunion disjointe finie d'affines est affine) et $q\colon U\to X$ le morphisme évident.
+
+\emph{Étape 3.} Le composé $g=f\circ q\colon U\to Y$ est encore un épimorphisme effectif universel. L'argument est l'axiome de transitivité d'une topologie : le crible engendré par $f$ est couvrant, et au-dessus de chacune de ses flèches $f\circ k$, le crible engendré par $g$ contient l'image réciproque par $k$ du crible engendré par $q$, qui couvre puisque $q$ est un recouvrement de Zariski. Par la proposition affine, $A\to B$ est pur.
+
+\emph{Étape 4.} Une donnée $(N,\theta)$ sur $X$ se tire en arrière sur $U$ en une donnée relativement à $g$, qui se descend par le cas affine : on obtient un $A$-module $M$ et un isomorphisme $\psi\colon g^*M\cong q^*N$ compatible avec les données de descente sur $U\times_YU$.
+
+\emph{Étape 5.} Il faut redescendre $\psi$ de $U$ à $X$. Le morphisme naturel $U\times_XU\to U\times_YU$ est le changement de base de la diagonale $X\to X\times_YX$, et le long de la diagonale $\theta$ se réduit à l'identité, comme on le voit en tirant la condition de cocycle en arrière. Les deux tirés en arrière de $\psi$ sur $U\times_XU$ coïncident donc, et $\psi$ se descend, par simple recollement de Zariski, en un isomorphisme $\psi_0\colon f^*M\cong N$. Aucune propriété de la diagonale n'est utilisée.
+
+\emph{Étape 6.} Reste à voir que $\psi_0$ respecte $\theta$. Il suffit de le vérifier après tirage en arrière le long de $U\times_YU\to X\times_YX$, qui est un recouvrement de Zariski par les ouverts $U_i\times_YU_j$ et donc ne perd aucune information ; et là, c'est la compatibilité de $\psi$ obtenue à l'étape~4.
+
+L'article en tire une remarque : il suffit que, localement sur $Y$, un ouvert quasi-compact $X_0$ de $X$ soit déjà un épimorphisme effectif universel sur $Y$ pour que $f$ soit de descente effective. C'est l'énoncé du cours selon lequel un morphisme à travers lequel se factorise un morphisme de descente effective en est lui-même un. Cette remarque ne s'appliquera pas au contre-exemple : tout ouvert quasi-compact de la réunion disjointe ne rencontre qu'un nombre fini de composantes.
+
+Un dernier lemme, qui ne sert pas ensuite, explique où chercher un contre-exemple. Un module est dit de Mittag-Leffler s'il vérifie une condition de finitude affaiblie, satisfaite par exemple par les modules de présentation finie. Si une famille $(A\to B_j)$ ne tue aucun élément d'aucun module et si tous les $B_j$ sont de Mittag-Leffler, alors une sous-famille finie est déjà pure. La preuve procède par l'absurde, à l'aide d'un ultraproduit : un élément non nul qu'aucune sous-famille finie ne parvient à garder se recolle, à travers un ultrafiltre sur les parties finies de l'ensemble d'indices, en un élément non nul que toute la famille tue. Un contre-exemple doit donc employer des modules qui ne sont pas de Mittag-Leffler, comme des localisations, et c'est bien la forme de celui qui suit.
+
+\section{Un recouvrement non quasi-compact de $\Spec\Z$}
+
+\subsection{Les ultrafiltres}
+
+\begin{definition}
+Un \emph{ultrafiltre} sur un ensemble $E$ est une famille $U$ de parties de $E$, stable par intersection finie et par passage à un sur-ensemble, ne contenant pas l'ensemble vide, et telle que pour toute partie $C$, soit $C$, soit son complémentaire appartienne à $U$. Il est \emph{non principal} s'il ne contient aucune partie finie.
+\end{definition}
+
+On peut se le représenter comme une règle de vote qui déclare chaque partie de $E$ \guillemotleft\,grande\,\guillemotright{} ou \guillemotleft\,petite\,\guillemotright{}, de façon cohérente : l'intersection de deux grandes est grande, et de deux parties complémentaires, une exactement est grande. Un ultrafiltre principal est une dictature : il existe un point $x$ et les grandes parties sont celles qui contiennent $x$. Un ultrafiltre non principal n'a pas de dictateur, et aucune partie finie n'y est grande. L'existence de tels ultrafiltres repose sur l'axiome du choix, et l'on ne sait en écrire aucun explicitement. Le contre-exemple de l'article sera donc lui aussi non explicite.
+
+\subsection{Le recouvrement}
+
+Le recouvrement suivant est dans le Stacks Project (0EUE). Fixons un ultrafiltre non principal $U$ sur l'ensemble $\Pp$ des nombres premiers, et considérons
+\[
+\mathcal W_U=\{\Spec\Z_A\to\Spec\Z\}_{A\in U},\qquad\text{soit}\qquad f\colon X=\coprod_{A\in U}\Spec\Z_A\to Y=\Spec\Z .
+\]
+Chaque morceau retire une grande partie $A$ des premiers et garde la petite partie $A^c$. Les morceaux recouvrent tout : un premier $p$ est gardé par le morceau $A=\{p\}^c$, grand parce que $U$ est non principal.
+
+Ce recouvrement est un épimorphisme effectif universel de schémas (Stacks, 0EUG). Les ingrédients en sont la condition d'égalisateur, vraie pour tout groupe abélien $M$ (Stacks, 0EUF),
+\[
+M\to\prod_{A\in U}M_A\rightrightarrows\prod_{A,B\in U}M_{A\cup B},
+\]
+le recollement des fermés qui coïncident sur les intersections, et un critère (Stacks, 0EUD) selon lequel cette condition d'égalisateur, jointe à la submersivité universelle, donne un épimorphisme effectif universel.
+
+Aucune sous-famille finie ne suffit. L'intersection d'un nombre fini de grandes parties est grande, donc non vide : elle contient un premier $p$, et chaque morceau de la sous-famille inverse $p$, donc se factorise par $\Spec\Z[1/p]$, qui perd la masse ponctuelle $\Z/p$. Le morphisme $f$ est plat, surjectif, non quasi-compact, et c'est un recouvrement pour la topologie canonique.
+
+\subsection{Les données de descente}
+
+Comme les produits fibrés sont les $\Spec\Z_{A\cup B}$, une donnée de descente consiste en des $\Z_A$-modules $N_A$, des isomorphismes $\varphi_{AB}$ au-dessus de $\Z_{A\cup B}$ et la condition de cocycle. C'est aussi la catégorie des données de descente de la famille $\mathcal W_U$ dans la catégorie des schémas affines.
+
+Un lemme combinatoire sert deux fois.
+
+\begin{theoreme}[article, lemme 5.1]
+Soient $U$ un ultrafiltre sur un ensemble $\alpha$ et $T\subseteq\alpha$. Si $T\cap A^c$ est fini pour tout $A\in U$, alors $T$ est fini.
+\end{theoreme}
+
+Si $T$ était infini, on le couperait en deux moitiés infinies $T_1$ et $T_2$. Le vote tranche : ou bien $T_1^c$ est grand, et pour $A=T_1^c$ on trouve $T\cap A^c=T_1$ infini ; ou bien $T_1$ est grand, donc $T_2^c\supseteq T_1$ aussi, et $A=T_2^c$ donne $T\cap A^c=T_2$ infini.
+
+\subsection{Les données qui se descendent}
+
+\begin{theoreme}[article, proposition 5.2]
+Dans ZFC, les données de descente dont tous les $N_A$ sont de torsion, ou dont tous les $N_A$ sont sans torsion, sont effectives.
+\end{theoreme}
+
+\emph{Torsion.} Un groupe de torsion est une somme de masses ponctuelles : sa partie $p$-primaire, formée des éléments tués par une puissance de $p$, vit au point $p$. Si chaque $N_A$ est de torsion, il s'écrit $N_A=\bigoplus_{p\notin A}T_p$, où $T_p$ est la partie $p$-primaire de $N_{\{p\}^c}$, les identifications passant par les $\varphi$. Le groupe $M=\bigoplus_pT_p$ descend la donnée : chaque masse ponctuelle n'est vue que par les morceaux qui gardent son point, et elle est la même pour tous.
+
+\emph{Sans torsion.} Posons $V=N_\Pp$, un espace vectoriel sur $\Q$ (on a bien $\Pp\in U$), et voyons chaque $N_A$ comme un sous-groupe de $V$ grâce aux $\varphi$. Notons $N_{(p)}=N_{\{p\}^c}$ le morceau local en $p$. Sur l'anneau principal $\Z_A$, un module sans torsion est l'intersection de ses localisés : $N_A=\bigcap_{p\notin A}N_{(p)}$. On pose naturellement $M=\bigcap_pN_{(p)}$, les éléments qui sont \guillemotleft\,entiers\,\guillemotright{} en tout point.
+
+On a $M\subseteq N_A$, donc $M_A\subseteq N_A$. Pour l'inclusion inverse, fixons $x\in V$ et notons $T(x)$ l'ensemble des premiers $p$ tels que $x\notin N_{(p)}$, les points où $x$ a un \guillemotleft\,dénominateur\,\guillemotright{}. Pour $B\in U$, on écrit $x=y/s$ avec $y\in N_B$ et $s$ entier non nul ; aux premiers de $B^c$ qui ne divisent pas $s$, l'élément $x$ est entier, donc $T(x)\cap B^c$ est contenu dans l'ensemble fini des diviseurs premiers de $s$. Le lemme donne alors $T(x)$ fini. Si de plus $x\in N_A$, on a $T(x)\subseteq A$, et pour chaque $p\in T(x)$ une puissance $p^{k_p}x$ est dans $N_{(p)}$ ; le produit $s=\prod_{p\in T(x)}p^{k_p}$ n'a que des facteurs premiers dans $A$ et vérifie $sx\in M$. Donc $x\in M_A$, et $M_A=N_A$.
+
+\subsection{L'obstruction}
+
+Les données qui résistent sont donc des mélanges : une partie sans torsion recollée à une partie de torsion. L'article les décrit explicitement.
+
+\begin{theoreme}[article, proposition 5.3]
+Dans ZFC, soient $(T_p)_{p\in\Pp}$ des groupes abéliens, $T_p$ étant $p$-primaire, par exemple $T_p=\Z/p$, et $T=\bigoplus_pT_p$, de sorte que $T_A=\bigoplus_{p\notin A}T_p$. Une famille $g=(g_A)_{A\in U}$, avec $g_A\in\prod_{p\notin A}T_p$, est dite \emph{cohérente} si $g_A-g_B$ n'a qu'un nombre fini de composantes non nulles sur $A^c\cap B^c$ pour tous $A,B$, et \emph{triviale} s'il existe $k\in\prod_pT_p$ tel que, pour tout $A$, $g_A$ coïncide avec $k$ sur $A^c$ sauf en un nombre fini de premiers. Pour $g$ cohérente, on pose $t_{AB}=(g_A-g_B)|_{A^c\cap B^c}\in T_{A\cup B}$, qui est un $1$-cocycle, et
+\[
+N_A=\Z_A\oplus T_A,\qquad\varphi_{AB}(r,t)=(r,\,t+r\,t_{AB}).
+\]
+C'est une donnée de descente, une extension de $f^*\mathcal O_Y$ par $f^*T$, et elle est effective si et seulement si $g$ est triviale.
+\end{theoreme}
+
+L'image est la suivante. Sur chaque morceau, on choisit une valeur $g_A(p)\in T_p$ en chacun des points gardés, avec une liberté infinie. Deux choix voisins doivent s'accorder sur leur intersection, mais seulement à un nombre fini d'exceptions près : la cohérence. On demande s'il existe un choix global $k$, défini en tous les premiers à la fois, qui s'accorde avec chaque choix local à un nombre fini d'exceptions près : la trivialité. Les écarts finis $t_{AB}$ servent à tordre le recollement de $\Z_A\oplus T_A$ : le générateur $1$ de $\Z_A$ est envoyé sur $1$ décalé de $t_{AB}$. Puisque $T_A$ est une somme directe, seuls des décalages finis sont permis, et c'est précisément ce qu'assure la cohérence.
+
+La condition de cocycle est $t_{AC}=t_{AB}+t_{BC}$, vraie par construction. Supposons la donnée descendue par un groupe $M$ et des isomorphismes $\alpha_A\colon M_A\cong N_A$. Les projections $N_A\to\Z_A$ se recollent, par la condition d'égalisateur, en un morphisme $\pi\colon M\to\Z$ ; son conoyau a tous ses localisés nuls, donc il est nul, et il existe $m\in M$ avec $\pi(m)=1$. Alors $\alpha_A(m)=(1,h_A)$, où $h_A\in T_A$ n'a qu'un nombre fini de composantes non nulles. La compatibilité avec les $\varphi$ s'écrit $g_A+h_A=g_B+h_B$ sur $A^c\cap B^c$ ; ces valeurs se recollent en un $k\in\prod_pT_p$, puisque chaque $p$ est gardé par au moins un morceau, et $g_A=k-h_A$ coïncide avec $k$ hors d'un ensemble fini. Réciproquement, si $k$ trivialise $g$, on pose $h_A=(k-g_A)|_{A^c}$, $M=\Z\oplus T$ et $\alpha_A(r,t)=(r,\,t+r\,h_A)$ ; la vérification revient à $h_A+t_{AB}=h_B$.
+
+\begin{theoreme}[article, proposition 5.4]
+Dans ZFC, $f$ est un morphisme de descente effective pour les faisceaux quasi-cohérents si et seulement si, pour toute famille $(T_p)$ de groupes $p$-primaires, toute famille cohérente au sens précédent est triviale.
+\end{theoreme}
+
+Le sens direct est la proposition précédente. Pour la réciproque, on démonte une donnée quelconque en pièces élémentaires. La catégorie $\Des(f)$ est abélienne, $f^*$ est exact, préserve les colimites et est pleinement fidèle par le théorème~A ; les données effectives sont donc stables par conoyaux de morphismes entre elles, sommes directes finies et colimites filtrantes. Une donnée $(N_A,\varphi)$ a une partie de torsion et un quotient sans torsion, qui se descendent par la proposition 5.2 en $M'=\bigoplus_pT_p$ et en un groupe sans torsion $M''$. Ce dernier est la réunion filtrante de ses sous-groupes de type fini, qui sont libres ; on se ramène ainsi à $M''=\Z^n$, puis, en découpant selon les $n$ facteurs, à une extension $0\to f^*M'\to E\to f^*\Z\to0$. On relève alors $1$ en des $u_A\in E_A$ ; les écarts $\varphi_{AB}(u_A)-u_B=t_{AB}$ forment un cocycle, et en lisant ces écarts aux morceaux $\{p\}^c$ on définit $g_A(p)$ pour $p\notin A$. La famille $g$ est cohérente, $E$ est exactement la donnée construite à partir de $g$, et la trivialité de $g$ la rend effective.
+
+Toute la question est donc ramenée à un énoncé sur des familles de choix locaux à exceptions finies près, sans plus aucun schéma.
+
+\section{La traduction topologique}
+
+\subsection{Le reste de Stone--\v{C}ech}
+
+Considérons l'ensemble $\omega^*=\beta\Pp\setminus\Pp$ de tous les ultrafiltres non principaux sur $\Pp$. On le munit d'une topologie dont les ouverts-fermés élémentaires sont les
+\[
+C^*=\{V\in\omega^*: C\in V\},\qquad C\subseteq\Pp,
+\]
+avec $C^*=D^*$ exactement quand $C$ et $D$ ne diffèrent que d'un ensemble fini. Chaque point de $\omega^*$ est une façon d'aller à l'infini parmi les nombres premiers, et $C^*$ rassemble les façons d'y aller en restant dans $C$. L'ultrafiltre $U$ est un point de cet espace ; notons $O=\omega^*\setminus\{U\}$. Un ensemble $C^*$ est contenu dans $O$ si et seulement si $C\notin U$, et $O$ est la réunion des compacts ouverts $(A^c)^*$, $A\in U$ : les morceaux du recouvrement deviennent des ouverts de $O$.
+
+\begin{theoreme}[article, lemme 5.5]
+Les familles cohérentes $(g_A)_{A\in U}$ à valeurs dans $\{0,1\}$, prises à modification finie près de chaque $g_A$, correspondent aux ouverts-fermés $S$ de $O$, par $S\cap(A^c)^*=g_A^{-1}(1)^*$. La famille est triviale si et seulement si $S$ est la trace sur $O$ d'un ouvert-fermé de $\omega^*$. Un ouvert-fermé $S$ de $O$ n'est pas une telle trace si et seulement si $U$ est adhérent à la fois à $S$ et à $O\setminus S$.
+\end{theoreme}
+
+Une famille à valeurs dans $\{0,1\}$ choisit, sur chaque morceau, une partie $g_A^{-1}(1)$ de $A^c$ ; la cohérence dit que ces choix se recollent en une partie ouverte-fermée $S$ de l'espace privé du point $U$. La trivialité demande que $S$ se prolonge à travers $U$. Le prolongement est possible si $U$ n'est adhérent qu'à l'un des deux côtés : on ajoute $U$ au côté qui le touche. Il est impossible si $U$ touche les deux côtés, car tout voisinage de $U$ rencontrerait alors $S$ et son complémentaire.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.15]
+\fill[black!12] (0,0) -- (-3,1.3) -- (-3,-1.3) -- cycle;
+\fill[black!30] (0,0) -- (3,1.3) -- (3,-1.3) -- cycle;
+\foreach \k in {1,...,7} {
+  \pgfmathsetmacro{\x}{3*0.72^\k}
+  \pgfmathsetmacro{\r}{0.32*0.72^\k}
+  \draw[black!60] (-\x,0) circle (\r);
+  \draw[black!80] (\x,0) circle (\r);
+}
+\fill (0,0) circle (2pt);
+\draw[black!70] (0,0) -- (0,0.75);
+\node[above] at (0,0.75) {$U$};
+\node at (-2.3,-1.65) {\small aile $S$};
+\node at (2.3,-1.65) {\small aile $O\setminus S$};
+\draw[dashed] (0,0) circle (0.42);
+\draw[black!70] (0.2,-0.37) -- (0.5,-0.9);
+\node[anchor=north west] at (0.4,-0.9) {\scriptsize voisinage de $U$};
+\end{tikzpicture}
+\caption{Un point papillon fort : l'espace $O=\omega^*\setminus\{U\}$ est coupé en deux ailes ouvertes-fermées $S$ et $O\setminus S$, et chacune contient des ouverts-fermés (cercles) qui s'accumulent en $U$. Tout voisinage de $U$ rencontre les deux ailes, de sorte qu'aucun ouvert-fermé de $\omega^*$ n'a $S$ pour trace : la famille cohérente associée n'est pas triviale. Le dessin est une image ; $\omega^*$ n'a rien d'un plan.}\label{fig:papillon}
+\end{figure}
+
+\begin{definition}
+Le point $U$ est un \emph{point papillon fort} de $\omega^*$, au sens de Fine et Gillman, si $O$ possède un ouvert-fermé $S$ tel que $U$ soit adhérent à $S$ et à $O\setminus S$, les deux ailes du papillon.
+\end{definition}
+
+Alors $O$ n'est pas $C^*$-plongé dans $\omega^*$, c'est-à-dire $\beta O\neq\omega^*$ : la fonction qui vaut $0$ sur une aile et $1$ sur l'autre est continue et bornée sur $O$ mais ne se prolonge pas en $U$. Une famille à valeurs dans $\{0,1\}$ non triviale comme famille d'ensembles le reste dans $\prod_p\Z/p$ : un $k$ qui la trivialiserait donnerait l'ensemble trivialisant $W=\{p:k(p)=1\}$. Par la proposition 5.3, un point papillon fort fournit donc une donnée de descente non effective.
+
+\subsection{Les points de caractère $\aleph_1$}
+
+Le \emph{caractère} d'un point est le plus petit cardinal d'une base de voisinages. Un ultrafiltre engendré par $\aleph_1$ ensembles est un point de caractère $\aleph_1$ de $\omega^*$ ; sous l'hypothèse du continu, $2^{\aleph_0}=\aleph_1$ et tout point est dans ce cas.
+
+Le lemme du papillon de Fine et Gillman dit que, sous l'hypothèse du continu, tout point de $\omega^*$ est un point papillon fort ; Pitz et Suabedissen en donnent la démonstration (leur lemme 3.1). L'article observe que cette démonstration n'utilise l'hypothèse du continu que pour disposer d'une base de voisinages ouverts-fermés $\{U_\alpha:\alpha<\omega_1\}$ du point, avec deux propriétés de $\omega^*$ vraies dans ZFC : c'est un F-espace, et tout $G_\delta$ non vide y est d'intérieur non vide. On construit par récurrence transfinie sur $\alpha<\omega_1$ des ouverts-fermés $A_\alpha$ et $B_\alpha$ ne contenant pas le point, avec tous les $A_\alpha\cap B_\beta$ vides, recouvrant ensemble $\omega^*\setminus U_\alpha$ et rencontrant tous deux $U_\alpha$ ; les ailes sont $\bigcup A_\alpha$ et $\bigcup B_\alpha$. Il en résulte que, dans ZFC, tout point de caractère $\aleph_1$ est un point papillon fort. Le problème P20 de van Douwen, dans la liste des problèmes des \emph{Topology Proceedings}, l'énonce comme connu.
+
+Le théorème~C s'en déduit : sous son hypothèse, $U$ est de caractère $\aleph_1$, donc point papillon fort ; le lemme 5.5 donne une famille cohérente à valeurs dans $\{0,1\}$ non triviale, qui reste non triviale dans $\prod_p\Z/p$, et la proposition 5.3 avec $T_p=\Z/p$ produit une donnée non effective, une extension du faisceau structural par $\bigoplus_p\Z/p$. Pour les schémas affines, $\mathcal W_U$ est une famille couvrante de la topologie canonique des schémas affines (Stacks, 0EUA et 0EUF), avec les mêmes données de descente.
+
+\subsection{Une phrase d'André et Fiorot}
+
+André et Fiorot démontrent que la topologie canonique sur les schémas affines coïncide avec la topologie de descente effective, en traitant un recouvrement donné par un seul morphisme d'anneaux, et notent que l'argument s'adapte à une famille quelconque en prenant des produits. Pour une famille finie, c'est clair, la famille équivalant au morphisme unique vers le produit. Sous l'hypothèse du théorème~C, l'adaptation échoue pour les familles infinies : $\mathcal W_U$ couvre $\Spec\Z$ dans la topologie canonique des schémas affines sans être une famille de descente effective. Les deux topologies coïncident sur les recouvrements donnés par un seul morphisme et par des familles finies.
+
+\section{La question dans ZFC}
+
+Le théorème~C est conditionnel. L'article ne démontre ni un contre-exemple dans ZFC seul, ni l'indépendance de la question.
+
+Van Douwen, Kunen et van Mill ont construit un modèle de l'axiome de Martin avec $\mathfrak c=\aleph_2$ dans lequel $\beta(\omega^*\setminus\{p\})=\omega^*$ pour tout point $p$. Dans ce modèle, aucun point n'est papillon fort, et par le lemme 5.5 toute famille cohérente à valeurs dans $\{0,1\}$ est triviale : l'obstruction du théorème~C disparaît pour tout $U$. L'article ne sait pas si $\mathcal W_U$ y devient de descente effective, car la proposition 5.4 demande la trivialité pour tous les systèmes de coefficients $(T_p)$, que le $C^*$-plongement de $\omega^*\setminus\{U\}$ ne donne pas de façon évidente. D'après la solution du problème P20, la même égalité vaut aussi, par Malykhin, dans tout modèle où l'on ajoute au moins autant de réels de Cohen qu'il y a de réels dans le modèle de départ ; la même question s'y pose. Restent ouvertes aussi l'existence d'un $U$ donnant l'effectivité dans ZFC, et celle d'un contre-exemple dans ZFC, tiré de cette famille ou d'une autre. La théorie des ensembles semble intervenir dans la question de façon profonde.
+
+\section{La part de la littérature et celle de l'article}
+
+L'article a interrogé zbMATH Open, arXiv, Crossref, Semantic Scholar, MathOverflow et le Stacks Project, et lu les textes suivants.
+
+\begin{itemize}
+\item \emph{Le cas affine} est classique : pour $A\to B$, être un épimorphisme effectif universel, être pur, être de descente et être de descente effective pour les modules sont équivalents. Ce résultat est dû à Joyal et Tierney (non publié), à Olivier et à Mesablishvili, et figure dans le Stacks Project ; André et Fiorot en donnent un exposé complet, avec une reconstruction de la preuve d'Olivier.
+\item \emph{Le cas quasi-compact} est de Mesablishvili : pour un morphisme quasi-compact, être pur, être un épimorphisme régulier stable et être de descente effective stable pour les faisceaux quasi-cohérents sont équivalents. Cela contient le théorème~B, et le théorème~A dans le cas quasi-compact. La démonstration du théorème~B donnée dans l'article est indépendante de la sienne.
+\item \emph{Le recouvrement} $\mathcal W_U$, la condition d'égalisateur et le fait qu'il soit un épimorphisme effectif universel sont dans le Stacks Project, qui s'en sert pour montrer que $\Spec\Z$ n'est pas quasi-compact pour la topologie canonique.
+\item \emph{La topologie} : le lemme du papillon est de Fine et Gillman, sa démonstration est lue dans Pitz et Suabedissen, le cas du caractère $\aleph_1$ est énoncé comme connu dans le problème P20 de van Douwen, et le modèle sans point papillon fort est de van Douwen, Kunen et van Mill.
+\item \emph{Travaux voisins} : les études de Rydh sur les morphismes submersifs et subtrusifs, celle de Picavet, et la topologie \guillemotleft\,crisp\,\guillemotright{} récente de Kern, qui étend la pureté au-delà des morphismes quasi-compacts, ne traitent pas la descente des faisceaux quasi-cohérents le long d'épimorphismes effectifs universels non quasi-compacts. Orlov étudie les faisceaux quasi-cohérents sur les préfaisceaux sur les schémas affines et la topologie de descente effective. Aoki et Burklund observent que la topologie canonique sur les schémas affines n'est pas finitaire ; le recouvrement du théorème~C ne l'est pas non plus.
+\end{itemize}
+
+D'après cette recherche, le théorème~A sans quasi-compacité, le théorème~C et l'analyse de la section~5 de l'article ne figurent pas dans la littérature ; l'article ne prétend pas davantage.
+
+L'article dit aussi ce qui n'est pas fait. Seul le noyau affine du théorème~A est formalisé ; les théorèmes~B et~C et les propositions de la section~5 ne le sont pas. Aucun des arguments n'a été relu par un spécialiste de la descente ou de la topologie ensembliste. Le statut de l'effectivité le long de $\mathcal W_U$ dans ZFC, et dans le modèle de van Douwen, Kunen et van Mill, n'est pas tranché. La citation du cours repose sur une transcription non vérifiée à l'oreille. Enfin, la question a été repérée dans l'enregistrement et la littérature parcourue à l'aide de modèles de langage (Claude Opus~5.5, Anthropic), qui ont aussi trouvé les arguments des sections~3 à~5 de l'article, écrit le fichier Lean et un premier jet du texte, sous la direction de l'auteur.
+
+\section{Petit lexique}
+
+\begin{tabular}{@{}p{4.3cm}p{10.4cm}@{}}
+\toprule
+Terme & À retenir ici \\
+\midrule
+$\Spec A$ & l'espace dont $A$ est l'anneau des fonctions ; ses points sont les idéaux premiers \\
+$\Z_A$ & $\Z$ où l'on inverse les premiers de $A$ ; son spectre garde $A^c$ et le point générique \\
+faisceau quasi-cohérent & sur $\Spec A$, un $A$-module ; ailleurs, des modules recollés \\
+$f^*$ & l'image inverse ; pour $A\to B$, l'extension des scalaires $B\otimes_A-$ \\
+donnée de descente & un faisceau sur $X$ et un isomorphisme de raccord sur $X\times_YX$, avec cocycle \\
+morphisme de descente & $f^*$ pleinement fidèle : les morphismes se descendent \\
+descente effective & $f^*$ équivalence : les objets aussi \\
+épimorphisme effectif & $Y$ est le quotient de $X$ par la relation \guillemotleft\,même image\,\guillemotright{} \\
+universel & la propriété résiste à tout changement de base \\
+topologie canonique & la plus fine où les représentables sont des faisceaux \\
+pur & l'extension des scalaires ne tue aucun élément d'aucun module \\
+quasi-compact & tout recouvrement ouvert admet un sous-recouvrement fini \\
+extension de carré nul & $A\oplus F$ avec $F\cdot F=0$, un développement à l'ordre un \\
+ultrafiltre non principal & une règle de vote cohérente sur les parties, sans dictateur \\
+famille cohérente & des choix locaux qui s'accordent à exceptions finies près \\
+famille triviale & des choix locaux venant d'un choix global, à exceptions finies près \\
+$\omega^*$ & les ultrafiltres non principaux, ou les façons d'aller à l'infini \\
+point papillon fort & $\omega^*$ privé du point se coupe en deux ailes qui le touchent toutes deux \\
+caractère $\aleph_1$ & le point a une base de voisinages de cardinal $\aleph_1$ \\
+\bottomrule
+\end{tabular}
+
+\section*{Sur la rédaction de cette note}
+
+Note de travail écrite par Claude (Opus~5.5, Anthropic) sous la direction de l'auteur, à partir de \texttt{docs/qcoh-descent/article.tex}. Elle ne contient aucun résultat nouveau ; en cas de désaccord, l'article fait foi.
+
+\end{document}

@@ -1,0 +1,442 @@
+% Note de travail, en français, accompagnant docs/moduli/article.tex :
+% les définitions de l'article reprises depuis le début, sur un ton pédagogique,
+% pour un lecteur venu des mathématiques appliquées. Compilée par tectonic.
+\documentclass[11pt,a4paper]{amsart}
+\usepackage{iftex}
+\ifXeTeX\usepackage{fontspec}\else\usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}\fi
+\usepackage[french]{babel}
+\usepackage{lmodern,microtype,amssymb,mathtools,booktabs,array}
+\usepackage[margin=2.7cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usepackage[hidelinks]{hyperref}
+\emergencystretch=3em
+
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}
+\theoremstyle{plain}
+\newtheorem{theoreme}{Théorème}
+\theoremstyle{remark}
+\newtheorem{remarque}{Remarque}
+\newtheorem{exemple}{Exemple}
+\theoremstyle{plain}
+\newtheorem*{enonce}{Énoncé}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\F}{\mathbb F}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\PP}{\mathbb P^1}
+\newcommand{\PGL}{\mathrm{PGL}_2}
+\newcommand{\GL}{\mathrm{GL}_2}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Spec}{\operatorname{Spec}}
+
+\title[Note de lecture : petits problèmes de modules sur $\operatorname{Spec}\mathbb Z$]{Petits problèmes de modules sur $\operatorname{Spec}\mathbb Z$ :\\ algèbres quadratiques, rotations dans $\mathrm{PGL}_2$\\ et schwarzienne entière, note de lecture}
+\author{Michel Hua}
+\address{Commutator, Paris}
+\email{michel@commutator.io}
+\date{15 novembre 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Cette note accompagne l'article \emph{Small moduli problems over $\operatorname{Spec}\mathbb Z$: quadratic algebras, rotations in $\mathrm{PGL}_2$ and the integral Schwarzian, after Grothendieck's working notes}. Elle en reprend les définitions depuis le début, sans supposer connue la théorie des schémas, explique les objets par des images simples, puis suit les démonstrations pas à pas, en distinguant ce qui revient aux pages de Grothendieck, ce qui revient à l'article et ce qui est publié ailleurs. Rien n'y est démontré de neuf ; en cas de désaccord, l'article fait foi.
+\end{abstract}
+
+\section{De quoi parle l'article}
+
+L'article s'appuie sur cinq cotes du fonds Grothendieck conservé à l'université de Montpellier, toutes des années 1980 :
+\begin{itemize}
+\item la cote 84, sur les formes quadratiques binaires et les algèbres quadratiques, datée par l'inventaire de 1982 à 1986 environ ;
+\item la cote 83, sur les algèbres d'Azumaya de rang $4$, dont une partie est datée d'avril 1986 ;
+\item la cote 85, \emph{2-polyèdres et 1-polygônes}, sur les polygones et polyèdres réguliers réalisés dans des formes de $\PGL$ ;
+\item la cote 64, \emph{Modules courbes elliptiques en caractéristiques $\neq 2$}, datée de 1980--1982 ;
+\item la cote 93, sur la dérivée schwarzienne et les connexions projectives.
+\end{itemize}
+
+Les sujets paraissent disparates, mais la méthode est la même partout. Grothendieck prend un objet classique, une extension quadratique, un groupe de rotations, la schwarzienne, l'écrit en coordonnées avec des coefficients entiers, en extrait ses invariants, puis regarde ce qui se passe aux nombres premiers $2$, $3$ et $5$, que la théorie classique se permet d'inverser. L'article démontre, en termes élémentaires, celles de ses affirmations qui se prêtent à un calcul en coordonnées sur un anneau quelconque, et corrige les pages là où elles se trompent.
+
+La règle d'attribution de l'article mérite d'être dite d'emblée, car la note la suit à la lettre. Un énoncé est attribué à Grothendieck, avec la page, quand la page l'énonce ; sinon il est dit \emph{d'après} la page, et l'article précise ce qu'il a changé. Les démonstrations sont celles de l'article, sauf quand il dit suivre la page. Toutes sont formalisées en Lean~4 avec Mathlib, sauf mention contraire. Les énoncés de modules globaux de Grothendieck demandent plus que des coordonnées ; l'article les cite comme énoncés et dit ce qu'il en démontre.
+
+\section{Le décor : anneaux, points, problèmes de modules}
+
+\subsection{Pourquoi un anneau quelconque}
+
+L'article travaille sur un \emph{anneau commutatif} $R$ quelconque : un ensemble où l'on additionne et multiplie avec les règles habituelles, mais où l'on ne peut pas toujours diviser. Les exemples à garder en tête sont $\Z$, les corps finis $\F_p = \Z/p\Z$, les anneaux de polynômes comme $\Z[X]$, et leurs quotients.
+
+L'intérêt de cette généralité tient en une phrase : un calcul fait avec des coefficients entiers, sans division, vaut à la fois sur $\Q$, sur $\mathbb R$, et modulo chaque nombre premier. Si l'on divise par $2$ en cours de route, on perd tout ce qui se passe modulo $2$. Or c'est souvent là que le phénomène intéressant se cache.
+
+\subsection{Les points d'un anneau}
+
+L'idée qui remplace la géométrie est la suivante. À chaque \emph{idéal maximal} $\mathfrak m$ de $R$ est associé un corps, le quotient $R/\mathfrak m$, et réduire un objet défini sur $R$ modulo $\mathfrak m$, c'est le regarder « au point $\mathfrak m$ ». Pour $R = \Z$, les points sont les nombres premiers $p$, et le corps associé est $\F_p$. L'ensemble de ces points, muni de sa structure, est le \emph{spectre} $\Spec R$ ; $\Spec\Z$ est la « base » sur laquelle tout l'article est posé, d'où le titre.
+
+On peut voir un élément $r \in R$ comme une fonction sur ces points, dont la valeur en $\mathfrak m$ est sa classe dans $R/\mathfrak m$. Un fait sert à chaque page : $r$ est \emph{inversible} dans $R$ si et seulement s'il ne s'annule en aucun point. Ainsi « $2$ est inversible » veut dire « aucun point n'est de caractéristique $2$ », et « $2$, $b_1$, $b_2$ engendrent l'idéal unité » veut dire « en tout point, l'un des trois est non nul ». La plupart des hypothèses de l'article ont cette forme, et il est utile de les lire ainsi.
+
+On rencontre aussi les \emph{diviseurs de zéro} : $2$ est \emph{non diviseur de zéro} dans $R$ si $2x = 0$ entraîne $x = 0$. C'est le cas dans $\Z$ ou $\Z[X]$, pas dans $\F_2$. Cette hypothèse est plus faible que l'inversibilité : on ne peut pas diviser par $2$, mais on peut simplifier par $2$.
+
+Enfin, un \emph{changement de base} $R \to S$ consiste à lire les coefficients dans un autre anneau, par exemple à réduire modulo $p$, ou à passer de $\Z$ à $\Z[X]$. Un énoncé « vrai après tout changement de base » est un énoncé qui survit à toutes ces opérations.
+
+\subsection{Problèmes de modules}
+
+Un \emph{problème de modules} demande de classer des objets à isomorphisme près, et de le faire en famille. L'exemple de la cote 84 donne le ton : sur $\Z$, les algèbres $\Z[U]/(U^2 + bU + c)$ sont classées par un seul entier, leur discriminant. Sur une base plus générale, on veut savoir quelles données déterminent l'objet, quels automorphismes il garde, et s'il existe un espace de paramètres universel, dont chaque point correspond à un objet et un seul. Dans ce dernier cas on dit que le problème est \emph{représentable}.
+
+\section{Algèbres quadratiques et leur produit}
+
+\subsection{Définitions}
+
+La cote 84 travaille avec les algèbres
+\[
+A(b, c) = R[U]/(U^2 + bU + c),
+\]
+c'est-à-dire les expressions $x + yU$, avec $x, y \in R$, qu'on multiplie en remplaçant $U^2$ par $-bU - c$. Avec ce signe, la trace de $U$ vaut $-b$, et l'\emph{involution canonique} est $\sigma(U) = -b - U$ : elle échange les deux racines du polynôme, comme la conjugaison complexe échange $i$ et $-i$. Le \emph{discriminant} est $\delta(b, c) = b^2 - 4c$.
+
+Quelques exemples sur $\Z$ : $A(0, 1) = \Z[i]$, les entiers de Gauss, de discriminant $-4$ ; $A(-1, -1) = \Z[\varphi]$, où $\varphi$ est le nombre d'or, de discriminant $5$. Sur $\F_2$, $A(1, 0) = \F_2 \times \F_2$ et $A(1, 1) = \F_4$.
+
+Le rôle du discriminant se comprend en complétant le carré. Si l'on pose $z = 2U + b$, alors $z^2 = b^2 - 4c = \delta$ : l'algèbre contient une racine carrée de $\delta$. Quand $2$ est inversible, on retrouve $U = (z - b)/2$, et $\delta$ détermine tout. Sans division par $2$, ce n'est plus vrai, et il faut garder trace d'une information supplémentaire : la parité de $b$.
+
+\subsection{La classification par les triplets}
+
+Sur une base affine générale, la page 45 décrit un revêtement quadratique par un module inversible $L$, un élément $b \in L$ et un élément $c \in L \otimes L$. Le lecteur peut prendre $L = R$ sans rien perdre de l'idée : un module inversible est un module qui ressemble à $R$ au voisinage de chaque point, et pour $A(b, c)$ le module $L$ est libre, engendré par la classe de $U$ dans $A/R$. Le \emph{triplet} du revêtement est $(L, \delta, T_0)$, où $\delta = b \otimes b - 4c$ et $T_0$ est la classe de $b$ dans $L/2L$, c'est-à-dire « $b$ modulo $2$ ».
+
+Un morphisme de revêtements $(L, b, c) \to (L', b', c')$ est un couple $(\varphi, t)$ formé d'un isomorphisme $\varphi \colon L \to L'$ et d'un $t \in L'$, avec $\varphi(b) = b' + 2t$ et $(\varphi\otimes\varphi)(c) = c' + b'\otimes t + t \otimes t$. Dans le cas libre, ce n'est rien d'autre que le changement de variable $U \mapsto U + t$, suivi d'un changement d'échelle : on vérifie à la main que remplacer $U$ par $V - t$ dans $U^2 + bU + c$ change $b$ en $b - 2t$ et $c$ en $c - bt + t^2$. Un morphisme de triplets est un isomorphisme $\varphi$ qui envoie $\delta$ sur $\delta'$ et $T_0$ sur $T'_0$ modulo $2$.
+
+\begin{theoreme}[Grothendieck, cote 84, p.~45--53, base affine ; théorème 2.1 de l'article]
+Soient $L$, $L'$ des $R$-modules inversibles.
+\begin{enumerate}
+\item Sur tout $R$, le triplet d'un revêtement vérifie $T_0^2 \equiv \delta \bmod 4$, c'est-à-dire $\tau\otimes\tau - \delta \in 4(L\otimes L)$ pour un relèvement $\tau$ de $T_0$, et cela ne dépend pas du relèvement. Un morphisme de revêtements est un morphisme de triplets, et tout triplet vérifiant $T_0^2 \equiv \delta \bmod 4$ est le triplet d'un revêtement de même $L$.
+\item Si $2$ est non diviseur de zéro dans $R$, tout morphisme de triplets se relève en un unique morphisme de revêtements. Le foncteur des revêtements vers les triplets est alors une équivalence de groupoïdes. Il commute au changement de base $R \to S$, sur les objets et les morphismes, sur tout $R$.
+\item Sur $\Z$, un entier $\delta$ est un discriminant si et seulement si $\delta \equiv 0, 1 \bmod 4$, et $A(b, c) \cong A(b', c')$ si et seulement si $\delta(b, c) = \delta(b', c')$ (p.~53).
+\end{enumerate}
+\end{theoreme}
+
+Suivons la démonstration. La congruence vient de $b \otimes b - \delta = 4c$. Changer de relèvement, c'est remplacer $\tau$ par $\tau - 2a$, et
+\[
+(\tau - 2a)\otimes(\tau - 2a) - \tau\otimes\tau = 4(a\otimes a - \tau\otimes a),
+\]
+ce qui reste dans $4(L\otimes L)$ ; on utilise ici que $L\otimes L$ est symétrique quand $L$ est inversible. Inversement, si $\tau\otimes\tau - \delta = 4k$, le revêtement $(L, \tau, k)$ a pour triplet $(L, \delta, T_0)$. L'article le signale : c'est la formule $c = (\tau^2 - \delta)/4$ de la page, écrite sans division.
+
+Pour le point~(2), l'hypothèse sur $2$ sert à simplifier. Quand $2$ est non diviseur de zéro dans $R$, il l'est aussi sur les modules projectifs $L'$ et $L'\otimes L'$. L'équation $\varphi(b) = b' + 2t$ détermine alors $t$ (il existe parce que $\varphi(T_0) = T'_0$ modulo $2$, il est unique parce qu'on peut simplifier par $2$), et la seconde condition sur $(\varphi, t)$ découle de $(\varphi\otimes\varphi)(\delta) = \delta'$ après simplification par $4$. Sur $\Z$ enfin, si deux discriminants sont égaux, $(b' - b)(b' + b) = 4(c' - c)$ force $b' \equiv b \bmod 2$, et l'on est ramené au cas précédent.
+
+\begin{exemple}
+L'hypothèse sur $2$ dans~(2) ne peut pas être retirée. Sur $\F_2$, les algèbres $A(1, 0) = \F_2\times\F_2$ et $A(1, 1) = \F_4$ ont le même $b$ et le même $\delta = 1$, mais ne sont pas isomorphes. En effet, un changement de variable $V = U + t$ envoie $(1, c)$ sur $(1, c + t + t^2)$, et $t + t^2 = 0$ pour tout $t \in \F_2$. L'image est parlante : sur $\F_2$, le discriminant voit l'algèbre « étale », c'est-à-dire à deux racines distinctes, mais ne distingue pas le cas où ces racines sont dans $\F_2$ de celui où il faut aller les chercher dans $\F_4$.
+\end{exemple}
+
+Les pages 49--52 reconstruisent l'algèbre, sa trace et sa norme à partir du triplet, sans division. Dans le cas libre, un élément $y = a + eU$ a pour coordonnées $\beta = \Tr y$ et $\gamma = e$, avec $\beta \equiv \gamma b \bmod 2$, de sorte que $y = (\beta + \gamma z)/2$ avec $z = 2U + b$. L'unité est $(2, 0)$, et
+\[
+2\beta(yy') = \beta\beta' + \gamma\gamma'\delta, \qquad 2\gamma(yy') = \beta\gamma' + \gamma\beta', \qquad 4N(y) = \beta^2 - \gamma^2\delta.
+\]
+Ce sont les formules familières de $\Q(\sqrt\delta)$, où l'on écrit $y = (\beta + \gamma\sqrt\delta)/2$, multipliées par ce qu'il faut pour ne jamais diviser. Pour $L$ non trivial, l'article démontre seulement que chacune de ces divisions est légitime ; il ne démontre pas que les couples $(\beta, \gamma)$ forment un anneau isomorphe à l'algèbre du revêtement.
+
+\subsection{Le produit de deux algèbres quadratiques}
+
+Sur $\Q$, l'image est simple. Si $A_1 = \Q(\sqrt{\delta_1})$ et $A_2 = \Q(\sqrt{\delta_2})$, le produit tensoriel $A_1\otimes A_2$ contient $\sqrt{\delta_1}\sqrt{\delta_2}$, qui est une racine carrée de $\delta_1\delta_2$, et qui ne bouge pas quand on applique les deux conjugaisons à la fois, puisque chacune change un signe. On fabrique ainsi une troisième algèbre quadratique, $\Q(\sqrt{\delta_1\delta_2})$. Le problème est de faire la même chose sur $\Z$, sans diviser par $2$.
+
+La page 63 définit ce produit, « sauf erreur », par $b = b_1b_2$ et $4c = b^2 - \delta_1\delta_2$. La formule encadrée y porte $4c_1c_1$ là où le calcul donne $4c_1c_2$ ; la page 64 vérifie le générateur.
+
+\begin{theoreme}[Grothendieck, cote 84, p.~63, 64, 89, 102 ; proposition 2.3 de l'article]
+Soient $u_i$ tels que $u_i^2 + b_iu_i + c_i = 0$ dans des $R$-algèbres commutatives $A_i$, et posons $b = b_1b_2$ et $c = c_1b_2^2 + c_2b_1^2 - 4c_1c_2$. Dans tout anneau commutatif, avec $Q_i = u_i^2 + b_iu_i + c_i$ et $u = 2u_1u_2 + b_1u_2 + b_2u_1$,
+\[
+u^2 + bu + c = b_2^2Q_1 + b_1^2Q_2 + 4(Q_1Q_2 - c_1Q_2 - c_2Q_1).
+\]
+Par conséquent $\mathcal U = 2U_1U_2 + b_1U_2 + b_2U_1 \in A_1\otimes_R A_2$ vérifie $\mathcal U^2 + b\,\mathcal U + c = 0$ et définit un morphisme de $R$-algèbres $A(b, c) \to A_1\otimes A_2$. De plus $b^2 - 4c = \delta_1\delta_2$.
+\end{theoreme}
+
+La démonstration consiste à développer les deux membres : l'identité est polynomiale, à coefficients entiers, et la propriété universelle de $A(b, c)$ donne le morphisme. Pour voir d'où vient la formule, on peut revenir à l'image rationnelle : avec $z_i = 2u_i + b_i$, on trouve $z_1z_2 = 2u + b_1b_2$. Le générateur $u$ est donc exactement l'élément « $(z_1z_2 - b)/2$ » attaché à la racine carrée $z_1z_2$ de $\delta_1\delta_2$, mais écrit sans division.
+
+Ce produit est connu dans la littérature, et l'article le dit. Voight l'étudie sur un schéma de base quelconque comme le monoïde des anneaux quadratiques ; sa construction 3.12 est la même formule, dans la convention de signe opposée ; il attribue le cas affine libre à Hahn et démontre que la structure de monoïde est unique (théorème 3.24). La partie~(iii) de ce théorème identifie le produit aux invariants de $\sigma_1\otimes\sigma_2$ quand les deux algèbres sont séparables. Pour les algèbres quadratiques sur un anneau en général, l'article renvoie à Knus. Les pages 84--86 démontrent l'identification aux invariants sous une hypothèse plus faible.
+
+\begin{theoreme}[Grothendieck, cote 84, p.~84--86 ; théorème 2.4 de l'article]
+Soient $A_i = A(b_i, c_i)$, de bases $(1, U_i)$, et $E_i$ les modules duaux.
+\begin{enumerate}
+\item L'application $E_1\otimes E_2 \to E_1 * E_2$ de la page 63 induit une application bien définie $(E_1\otimes E_2)/\operatorname{Im}(\sigma_1\otimes\sigma_2 - \mathrm{id}) \to E_1 * E_2$, et celle-ci est bijective si et seulement si $2R + b_1R + b_2R = R$.
+\item Si $2R + b_1R + b_2R = R$, le morphisme $A(b, c) \to A_1\otimes A_2$ de la proposition précédente est injectif, d'image $(A_1\otimes A_2)^{\sigma_1\otimes\sigma_2}$. Il a cette propriété après tout changement de base $R \to S$ si et seulement si $2R + b_1R + b_2R = R$.
+\end{enumerate}
+\end{theoreme}
+
+Lisons la condition avec le dictionnaire du §2 : en tout point de caractéristique $2$, l'un des deux nombres $b_1$, $b_2$ est non nul. Or $A(b_i, c_i)$ est étale en un tel point exactement quand $b_i$ y est inversible. La condition dit donc qu'au-dessus de $2$, l'une des deux algèbres au moins est étale, ce qui est plus faible que de demander que les deux soient séparables, comme dans la partie~(iii) de Voight. Au point~(1), le noyau est engendré par les relations de Koszul de la ligne unimodulaire $(2, b_2, b_1)$.
+
+La page énonce le corollaire~(2) avec l'hypothèse « après tout changement de base ». Elle ne peut pas être retirée, et l'article donne un exemple, qui est le sien : sur $R = \Z[X]$, avec $b_1 = X$ et $b_2 = 0$, le morphisme est un isomorphisme sur les invariants au-dessus de $R$ lui-même, bien que $(2, X)$ soit un idéal propre. Le calcul est instructif. Les invariants $x_0 + x_1U_1 + x_2U_2 + x_3U_1U_2$ vérifient $2x_1 = 0$ et $2x_2 = Xx_3$ ; comme $2$ n'est pas diviseur de zéro dans $\Z[X]$, cela force $x_1 = 0$, $x_3$ pair et $x_2 = X x_3/2$, et les invariants sont exactement $R + R\,\mathcal U$. Dès qu'on réduit modulo $2$, ces simplifications ne sont plus permises et les invariants grossissent.
+
+\subsection{Les extensions munies d'un \texorpdfstring{$\chi$}{chi}-scindage}
+
+Les pages 65--79 vont plus loin : elles construisent le produit d'extensions $0 \to L \to E \to M \to 0$ munies d'un « $\chi$-scindage », pour un $\chi \in R$ fixé, par une somme amalgamée et sans division. L'article ne traite que le cas scindé, $E = M \oplus L$, où un $\chi$-scindage est donné par une application linéaire $b \colon M \to L$, via $\pi_b(\eta, \xi) = b(\eta) + \chi\xi$. Pour $\chi = 2$ et $M = R$, la condition $\varphi b = b'f + \chi w$ sur les morphismes, ci-dessous, rappelle la condition $\varphi(b) = b' + 2t$ des revêtements quadratiques.
+
+\begin{theoreme}[Grothendieck, cote 84, p.~65--79 et 123--131, cas scindé sur une base affine ; théorème 2.5 de l'article]
+Soit $\chi \in R$, zéro compris.
+\begin{enumerate}
+\item Les extensions scindées $M \oplus L$ munies du $\chi$-scindage de $b \colon M \to L$, avec les morphismes $(f, \varphi, w)$ vérifiant $\varphi b = b'f + \chi w$, forment une catégorie monoïdale symétrique pour le produit $b_1\otimes b_2$. Un morphisme est inversible dès que $f$ et $\varphi$ le sont.
+\item Pour $M = R$, l'objet $(R, L, b)$ est inversible pour le produit si et seulement si $L$ est un module inversible et $L = Rb + \chi L$ (marge de la p.~79).
+\item \emph{(D'après les p.~125, 127 et 169.)} Si $\gamma\chi = 2$, la transvection $T_{\gamma b}$ identifie le produit « poussé », de $\chi$-scindage $\pi_b$, au produit « tiré », de $\chi$-scindage $\pi_{-b}$. Pour les objets unités, une application induisant l'identité sur $L$ et sur $M$ et envoyant un scindage sur l'autre existe si et seulement si un $\gamma$ vérifie $\gamma\chi = 2$ ; sur $\Z$ avec $\chi = 4$, il n'y en a pas.
+\end{enumerate}
+\end{theoreme}
+
+Sur une base affine, toute extension de $R$ par $L$ est scindée, et le produit amalgamé de la page 68 coïncide avec le produit $b_1\otimes b_2$ ; le cas non scindé sur un schéma n'est pas démontré dans l'article.
+
+\section{La droite des tordues et son lieu dégénéré}
+
+\subsection{Les quaternions comme modèle}
+
+La cote 83 utilise le signe opposé : $H = R[u]/(u^2 - bu + c)$ et $H' = R[v]/(v^2 - b'v + c')$, de sorte que $\Tr u = b$ et $N(u) = c$. L'objet étudié est une algèbre de rang $4$ qui contient $H$ et $H'$, construite comme on construit les quaternions de Hamilton à partir de $\mathbb R[i]$ et $\mathbb R[j]$ : on prend la base $1, u, v, uv$, et l'on se donne une règle pour multiplier.
+
+Les pages 92--98 construisent ainsi, pour $(b, c, b', c', t) \in R^5$, l'algèbre $M = M(b, c; b', c'; t)$, libre de base $1, u, v, uv$, avec $u^2 = bu - c$, $v^2 = b'v - c'$, $\Tr(uv) = t$ et la table de multiplication de la page 92. Les pages 126--136 la retrouvent comme une structure d'algèbre sur $H\otimes H'$. Le paramètre $t$ dit, en substance, comment $u$ et $v$ commutent entre eux : une fois $H$ et $H'$ fixées, c'est le seul degré de liberté. Posons
+\[
+Q(t) = t^2 - bb't + b^2c' + b'^2c - 4cc'.
+\]
+
+Un mot sur le vocabulaire. Une \emph{algèbre d'Azumaya} de rang $4$ est une algèbre qui, en chaque point, devient après extension des scalaires l'algèbre des matrices $2\times 2$. Sur $\mathbb R$, les quaternions de Hamilton en sont une : ils ne sont pas les matrices $2\times 2$ réelles, mais le deviennent sur $\mathbb C$. Une algèbre d'Azumaya est donc une « algèbre de matrices tordue ». Comme les matrices $2\times 2$, ses éléments vérifient l'identité de Hamilton--Cayley $x^2 - \Tr(x)x + \det(x) = 0$.
+
+\begin{theoreme}[d'après la cote 83, p.~81--84, 92--98 et 130--143 ; théorème 3.1 de l'article]
+\leavevmode
+\begin{enumerate}
+\item Pour tout $t$, $M$ est une $R$-algèbre associative unitaire contenant $H$ et $H'$. Tout élément vérifie $x^2 - \Tr(x)x + \det(x) = 0$, $\det$ est multiplicatif, et $\Tr(uv) = t$. Réciproquement, soit $A$ une $R$-algèbre dont les éléments vérifient $x^2 - T(x)x + N(x) = 0$ pour une forme linéaire $T$ et une fonction $N$, et soient $u, v \in A$ avec $T(u) = b$, $N(u) = c$, $T(v) = b'$, $N(v) = c'$. Alors $x \mapsto x_0 + x_1u + x_2v + x_3uv$ est multiplicative de $M(b, c; b', c'; t)$ dans $A$ pour un certain $t$, unique si cette application est injective. Des valeurs distinctes de $t$ donnent des multiplications distinctes : les structures forment la droite affine de paramètre $t$.
+\item \emph{(Grothendieck, p.~98.)} $M$ est une algèbre d'Azumaya si et seulement si $Q(t)$ est inversible. Cela vaut sur tout anneau commutatif, caractéristique $2$ comprise, et sans hypothèse sur $\delta = b^2 - 4c$ et $\delta' = b'^2 - 4c'$. De façon équivalente, la forme $\det$ sur $B = R1 + Ru + Rv$ a un demi-discriminant inversible, égal à $-Q(t)$.
+\item Le discriminant de la forme trace de $M$ dans la base $(1, u, v, uv)$ est $-Q(t)^2$. Le polynôme $Q$ a pour discriminant $\delta\delta'$ et est invariant par $t \mapsto bb' - t$, et le lieu dégénéré $\widetilde S = \Spec R[t]/(Q)$ est libre de rang $2$ sur $R$.
+\item Dans $H\otimes H'$, l'élément $u * v = b'u + bv - 2u\otimes v$ vérifie $Q(u * v) = 0$, ce qui donne un morphisme $R[t]/(Q) \to H\otimes H'$. L'involution canonique de l'un ou l'autre facteur envoie $u * v$ sur $bb' - u * v$. Pour des caractères $\varphi$, $\varphi'$ de $H$, $H'$ à valeurs dans une $R$-algèbre commutative $K$, l'élément $b'\varphi(u) + b\varphi'(v) - 2\varphi(u)\varphi'(v)$ est une racine de $Q$ dans $K$.
+\end{enumerate}
+\end{theoreme}
+
+Deux exemples aident à se représenter le critère~(2). Pour $b = c = b' = c' = 0$, on a $u^2 = v^2 = 0$ et $Q(t) = t^2$ : $M(0, 0; 0, 0; t)$ est d'Azumaya si et seulement si $t$ est inversible, comme le dit la page 97. On reconnaît les matrices $2\times 2$ quand $t = 1$, avec $u = E_{12}$, $v = E_{21}$ et $uv = E_{11}$, de trace $1$. Pour les quaternions de Hamilton, $u = i$, $v = j$, $b = b' = 0$, $c = c' = 1$ et $t = \Tr k = 0$, on trouve $Q(0) = -4$ : inversible sur $\mathbb R$, mais pas sur $\Z$, où le critère dit que l'algèbre $\Z\langle i, j\rangle$ cesse d'être d'Azumaya au point $2$.
+
+\subsection{La démonstration}
+
+Pour~(1), chaque axiome est une identité polynomiale en les coordonnées. Pour la réciproque, on applique Hamilton--Cayley à $u + v$, ce qui donne
+\[
+vu = (t - bb') + b'u + bv - uv, \qquad t = bb' + c + c' - N(u + v),
+\]
+et le reste de la table s'en déduit par associativité. Le produit $vu$ est donc imposé par $u$, $v$ et un seul nombre, $t$.
+
+Pour~(2), l'idée est de remplacer la propriété d'Azumaya par un déterminant. L'algèbre $M$ est libre, donc elle est d'Azumaya si et seulement si l'application « sandwich » $M\otimes M^{\mathrm{op}} \to \operatorname{End}_R M$, qui envoie $x\otimes y$ sur $m \mapsto xmy$, est bijective, c'est-à-dire si son déterminant $D$, de taille $16\times 16$, est inversible. En composant avec l'accouplement trace de $\operatorname{End}_R M$, on obtient le carré de Kronecker de la forme trace de $M$, d'où $\pm D^2 = (-Q^2)^8 = Q^{16}$ ; l'exposant $8$ vient de ce que le déterminant d'un produit de Kronecker de deux matrices $4\times 4$ est la puissance $4$-ième de chacun des deux déterminants. L'argument n'utilise que le déterminant de la forme trace, et non sa non-dégénérescence, si bien qu'il vaut en caractéristique $2$.
+
+Pour~(4), on pose $U = u\otimes 1$ et $V = 1\otimes v$, et l'on vérifie l'identité
+\[
+Q(b'U + bV - 2UV) = (2V - b')^2(U^2 - bU + c) + (b^2 - 4c)(V^2 - b'V + c'),
+\]
+dont le membre de droite est nul.
+
+L'article corrige deux coquilles. La page 138 écrit le terme constant de $Q$ sous la forme $b^2b' + b'^2b - 4cc'$, et la page 143 écrit $\det(u * v) = b^2c + b'^2c' - 4cc'$ ; dans les deux cas il faut lire $b^2c' + b'^2c - 4cc'$.
+
+\subsection{Le lien avec le produit}
+
+Le point~(4) raccorde cette section à la précédente. Dans les notations de la cote 84, $H = A(-b, c)$ et $H' = A(-b', c')$. Le générateur du produit vaut alors $\mathcal U = 2UV - bV - b'U = -(u * v)$, et le produit est $A(bb', b^2c' + b'^2c - 4cc')$, d'équation $P(T) = T^2 + bb'T + b^2c' + b'^2c - 4cc'$. Comme $Q(t) = P(-t)$, l'application $t \mapsto -\mathcal U$ identifie $R[t]/(Q)$ au produit de $H$ et $H'$, et le morphisme de~(4) au morphisme canonique du produit. Dans la convention de Voight, $Q$ est exactement le polynôme de sa construction 3.12.
+
+L'énoncé qui en résulte est joli : le lieu de la droite des tordues où $M$ cesse d'être d'Azumaya est le spectre du produit $H * H'$, comme l'affirment les pages 137--143. Sur un corps, lorsque $Q$ a deux racines $t_1$ et $t_2$, on a $t_1 + t_2 = bb'$, les involutions canoniques échangent les deux points dégénérés, et les deux racines se confondent si et seulement si $\delta\delta' = 0$. Les pages 137--143 identifient aussi $\widetilde S$ au quotient de $X\times_S X'$ par $\sigma\times\sigma'$. L'article n'en démontre que le c\oe ur algébrique : par le théorème 2.4, les invariants de $\sigma\otimes\sigma'$ dans $H\otimes H'$ sont $R[u * v]$ quand $2$, $b$, $b'$ engendrent l'idéal unité.
+
+\section{Rotations dans les formes de \texorpdfstring{$\mathrm{PGL}_2$}{PGL2}}
+
+\subsection{Homographies et rotations}
+
+Le groupe $\PGL(R)$ est celui des matrices $2\times 2$ à déterminant inversible, modulo les matrices scalaires. Sur $\mathbb C$, une telle matrice agit sur la sphère de Riemann $\PP$ par l'homographie $z \mapsto (az + b)/(cz + d)$, et deux matrices proportionnelles donnent la même homographie. Les rotations de la sphère en sont des exemples, et les groupes de rotations d'un polyèdre régulier, octaèdre ou icosaèdre, se réalisent ainsi comme sous-groupes finis de $\PGL(\mathbb C)$.
+
+Une \emph{forme} de $\PGL$ est un groupe qui devient isomorphe à $\PGL$ après extension des scalaires, sans l'être forcément au départ, de même qu'une algèbre d'Azumaya est une algèbre de matrices tordue. L'exemple à avoir en tête est le groupe des rotations de l'espace réel, qui devient $\PGL(\mathbb C)$ sur les complexes. La cote 85 réalise polygones et polyèdres dans une forme de $\PGL$ sur une base, à l'aide d'un seul invariant. Pour $g \in M_2(R)$ de déterminant inversible, on pose
+\[
+A(g) = \frac{(\Tr g)^2}{\det g} - 2.
+\]
+Il ne dépend que de l'image de $g$ dans $\PGL(R)$, puisque multiplier $g$ par un scalaire $\lambda$ multiplie le numérateur et le dénominateur par $\lambda^2$. Si les valeurs propres de $g$ sont $\lambda$ et $\mu$, de rapport $\zeta = \lambda/\mu$, alors $A(g) = (\lambda + \mu)^2/(\lambda\mu) - 2 = \zeta + \zeta^{-1}$. Pour une rotation d'angle $\theta$, $\zeta = e^{i\theta}$ et $A = 2\cos\theta$ : l'invariant lit l'angle de rotation, à son signe près (figure~\ref{fig:ordres}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.2cm, y=1.2cm, every node/.style={font=\small}]
+\draw[-{Stealth}] (-2.45,0) -- (2.6,0) node[right] {$A$};
+\draw[densely dotted] (2,0) arc (0:180:2);
+\foreach \ang/\lab in {120/3, 90/4, 72/5, 144/5, 60/6} {
+  \draw[densely dashed, gray] ({2*cos(\ang)},0) -- ({2*cos(\ang)},{2*sin(\ang)});
+  \fill ({2*cos(\ang)},{2*sin(\ang)}) circle (1.8pt);
+  \node at ({2.22*cos(\ang)},{2.22*sin(\ang)+0.02}) {$\lab$};
+  \fill ({2*cos(\ang)},0) circle (1.4pt);
+}
+\fill (2,0) circle (1.8pt); \fill (-2,0) circle (1.8pt);
+\node[above right=1pt] at (2,0) {$1$}; \node[above left=1pt] at (-2,0) {$2$};
+\node[below=2pt] at (-2,0) {$-2$}; \node[below=2pt] at (-1,0) {$-1$};
+\node[below=2pt] at (0,0) {$0$}; \node[below=2pt] at (1,0) {$1$}; \node[below=2pt] at (2,0) {$2$};
+\node[below=13pt] at ({2*cos(144)},0) {$\tfrac{-1-\sqrt5}{2}$};
+\node[below=13pt] at ({2*cos(72)},0) {$\tfrac{-1+\sqrt5}{2}$};
+\end{tikzpicture}
+\caption{Lire l'ordre sur $A(g)$. Sur $\mathbb C$, une rotation d'angle $\theta$ a $A = 2\cos\theta$. Les points du demi-cercle portent l'ordre de la rotation, et leurs projections sont les valeurs de $A$ : $-2$ pour les involutions, $-1$, $0$ et $1$ pour les ordres $3$, $4$ et $6$, les deux racines de $A^2 + A - 1$ pour l'ordre $5$. Le théorème~\ref{th:ordres} fait la même lecture sur un anneau quelconque, avec des conditions sur $2$ et $6$ pour les ordres $4$ et $6$.}\label{fig:ordres}
+\end{figure}
+
+Sur un anneau, il faut dire ce que signifie « d'ordre $\nu$ ». On dit que $g$ est \emph{nulle part scalaire} si son image dans $M_2(R/\mathfrak m)$ n'est scalaire pour aucun idéal maximal $\mathfrak m$ ; de façon équivalente, les coefficients hors diagonale et la différence des coefficients diagonaux engendrent l'idéal unité. Autrement dit, en aucun point l'homographie n'est l'identité. Pour $\nu \ge 2$, $g$ est \emph{d'ordre $\nu$ en tout point} si $g^\nu$ est scalaire et si $g^m$ est nulle part scalaire pour tout diviseur $m$ de $\nu$ avec $1 \le m < \nu$. Pour $\nu$ premier et $g$ nulle part scalaire, cela revient à dire que $g^\nu$ est scalaire.
+
+\begin{theoreme}[d'après la cote 85, p.~6--7, 29--31 et 40 ; théorème 4.1 de l'article]\label{th:ordres}
+Soit $g \in M_2(R)$ nulle part scalaire, de trace $t$, de déterminant $d$ inversible, et $\alpha = A(g)$.
+\begin{enumerate}
+\item Avec $x_0 = 0$, $x_1 = 1$, $x_{n+2} = tx_{n+1} - dx_n$, on a $g^{n+1} = x_{n+1}g - dx_n$, et $g^{n+1}$ est scalaire si et seulement si $x_{n+1} = 0$. En particulier $g^2$ est scalaire si et seulement si $t = 0$, c'est-à-dire $\alpha = -2$.
+\item $g^3$ est scalaire si et seulement si $\alpha = -1$. L'élément $g$ est d'ordre $4$ en tout point si et seulement si $\alpha = 0$ et $2$ est inversible, et d'ordre $6$ en tout point si et seulement si $\alpha = 1$ et $6$ est inversible.
+\item $g^5$ est scalaire si et seulement si $\alpha^2 + \alpha - 1 = 0$. De plus $A(g^2) = A(g)^2 - 2$, de sorte que $A(g^2) = -1 - A(g)$ dans ce cas (le corollaire de la page 40).
+\end{enumerate}
+L'implication « $\alpha^2 + \alpha - 1 = 0 \Rightarrow g^5$ scalaire » vaut pour tout $g$ de déterminant inversible.
+\end{theoreme}
+
+La démonstration est un joli exercice de suites récurrentes. Le point de départ est Cayley--Hamilton, $g^2 = tg - d$ : toute puissance de $g$ s'écrit $x\,g + y$, et la récurrence de~(1) donne les coefficients. Comme $g$ est nulle part scalaire, $xg + y$ est scalaire si et seulement si $x = 0$, ce qui prouve~(1). Il reste à calculer les $x_n$ en fonction de $\alpha$. Puisque $t^2 = (\alpha + 2)d$, une récurrence donne $x_{2k+1} = d^kP_{2k+1}(\alpha)$ et $x_{2k+2} = t\,d^kP_{2k+2}(\alpha)$, où $P_0 = 0$, $P_1 = 1$, $P_{n+2} = P_{n+1} - P_n$ pour $n$ pair et $P_{n+2} = (\alpha + 2)P_{n+1} - P_n$ pour $n$ impair. On trouve
+\[
+P_3 = \alpha + 1, \qquad P_4 = \alpha, \qquad P_5 = \alpha^2 + \alpha - 1, \qquad P_6 = \alpha^2 - 1,
+\]
+ce qui donne~(2) et~(3). Ce sont, à normalisation près, des polynômes de Tchebychev, et l'on ne s'en étonnera pas : sur $\mathbb C$, $x_n$ est proportionnel à $\sin(n\theta)/\sin\theta$.
+
+Les conditions sur $2$ et $6$ ont une origine simple. Pour l'ordre $4$, $g^2$ est nulle part scalaire si et seulement si $x_2 = t$ est inversible ; or $\alpha = 0$ donne $t^2 = 2d$, donc $2$ est inversible. Pour l'ordre $6$, $t$ et $x_3 = d(\alpha + 1)$ doivent être inversibles, donc $\alpha = 1$, et alors $t^2 = 3d$ et $\alpha + 1 = 2$ rendent $6$ inversible. Enfin $A(g^2) = (t^2 - 2d)^2/d^2 - 2 = A(g)^2 - 2$, qui est la formule $2\cos 2\theta = (2\cos\theta)^2 - 2$.
+
+\subsection{Le groupe de l'icosaèdre}
+
+Le groupe des rotations de l'icosaèdre est le groupe alterné $\mathfrak A_5$. Il est engendré par un demi-tour $s$ et une rotation $p$ d'ordre $5$ dont le produit est d'ordre $3$.
+
+\begin{exemple}[cote 85, p.~40 ; exemple 4.2 de l'article]
+Sur $\Z[\zeta_5]$, les matrices $s = \bigl(\begin{smallmatrix} 0 & -1 \\ 1 & 0\end{smallmatrix}\bigr)$ et $p = \bigl(\begin{smallmatrix} \zeta & 1 \\ 0 & \zeta^4\end{smallmatrix}\bigr)$ vérifient $s^2 = -1$, $(sp)^3 = -1$ et $p^5$ scalaire, et $A(p) = \zeta^2 + \zeta^3$ est une racine de $T^2 + T - 1$. Les matrices $s$, $p$ et $sp$ sont nulle part scalaires. Comme $\langle s, p \mid s^2, (sp)^3, p^5\rangle$ est une présentation de $\mathfrak A_5$, elles définissent un morphisme $\mathfrak A_5 \to \PGL(\Z[\zeta_5])$, injectif sur chaque fibre parce que son image y est un quotient non trivial du groupe simple $\mathfrak A_5$. Cette dernière étape n'est pas formalisée. En caractéristique $5$, $\zeta = 1$ et $p$ est unipotente, avec $A(p) = 2$, racine double de $T^2 + T - 1 = (T - 2)^2$.
+\end{exemple}
+
+La dernière phrase mérite qu'on s'y arrête. Modulo $5$, la rotation d'ordre $5$ devient $z \mapsto z + 1$, une translation, qui est bien d'ordre $5$ puisque $5 = 0$. Les deux valeurs $\frac{-1\pm\sqrt5}{2}$ de la figure~\ref{fig:ordres} se rejoignent en une seule.
+
+La page 40 énonce ensuite le résultat suivant, que l'article cite sans le démontrer en entier.
+
+\begin{enonce}[Grothendieck, cote 85, p.~40 ; énoncé 4.3 de l'article]
+Pour une forme $G$ de $\PGL$ sur un schéma $S$ et un monomorphisme $\varphi \colon \mathfrak A_5 \to G$, l'élément $\alpha(\varphi) = A(\varphi(\pi))$, où $\pi$ est un $5$-cycle, vérifie $\alpha^2 + \alpha - 1 = 0$. La catégorie des couples $(G, \varphi)$ est rigide, et son foncteur des classes d'isomorphisme est représenté par $\Spec\Z[T]/(T^2 + T - 1)$.
+\end{enonce}
+
+Le théorème~\ref{th:ordres}(3) démontre la première assertion sur toute base, pour des matrices. L'article ne démontre ni la rigidité ni la représentabilité. Ensemble, elles diraient que, sur toute base, résidus de caractéristique $2$, $3$ et $5$ compris, un couple $(G, \varphi)$ est déterminé à unique isomorphisme près par la racine $\alpha$. L'espace des paramètres serait alors $\Spec\Z[T]/(T^2 + T - 1)$, dont les deux racines se confondent au-dessus de $5$, comme on vient de le voir sur l'exemple.
+
+Les formes de $\PGL$ sont ici inévitables. D'après la proposition~1.1 de Beauville, pour un corps $K$ de caractéristique première à $60$, $\PGL(K)$ contient $\mathfrak A_5$ si et seulement si $-1$ est somme de deux carrés dans $K$ et $5$ est un carré. Le groupe déployé sur $\mathbb R$, ou sur $\Q(\sqrt5)$, ne contient donc pas $\mathfrak A_5$, alors que le groupe des rotations de l'espace réel, qui en est une forme, contient le groupe de l'icosaèdre.
+
+\subsection{Le groupe \texorpdfstring{$G_2$}{G2}}
+
+Les pages 4--7 traitent des morphismes vers $\PGL(R)$ du groupe
+\[
+G_2 = \langle\tau_0, \tau_1, \tau_2 \mid \tau_i^2,\ (\tau_0\tau_2)^2\rangle.
+\]
+La notation est celle de la page ; $G_2$ est le groupe de Coxeter à diagramme linéaire dont les ordres de $\tau_0\tau_1$ et $\tau_1\tau_2$ ne sont pas fixés, et non le groupe exceptionnel. L'image à garder est celle du groupe de symétries d'un polyèdre régulier, engendré par trois réflexions : $\tau_0$ et $\tau_2$ commutent, et les produits $\rho_0 = \tau_0\tau_1$ et $\rho_1 = \tau_1\tau_2$ sont des rotations, autour d'une face et autour d'un sommet. Un tel morphisme est donné par des matrices $\tau_i$ à déterminants inversibles avec $\tau_i^2$ et $(\tau_0\tau_2)^2$ scalaires. On pose $\alpha_i = A(\rho_i)$ et
+\[
+\Delta = (\alpha_0 + 2)(\alpha_1 + 2)(\alpha_0 + \alpha_1).
+\]
+Sur un corps, la condition $(*)$ de la page 4 demande que $\rho_0^2$ et $\rho_1^2$ ne soient pas scalaires et que $\rho_0\rho_1$ ne soit pas multiple scalaire de $\rho_1\rho_0$. On dit que $(*)$ vaut en tout point si elle vaut pour les images des $\tau_i$ dans $M_2(R/\mathfrak m)$, pour tout idéal maximal $\mathfrak m$.
+
+\begin{theoreme}[d'après la cote 85, p.~4--7 ; théorème 4.4 de l'article]
+\leavevmode
+\begin{enumerate}
+\item $(*)$ vaut en tout point si et seulement si $\tau_0$, $\tau_1$, $\tau_2$ et $\tau_0\tau_2$ sont de trace nulle et $\Delta$ est inversible. Chaque facteur de $\Delta$ correspond à une condition de $(*)$.
+\item \emph{Rigidité.} Sous ces conditions, si $g \in \GL(R)$ et $\mu_i \in R$ vérifient $g\tau_i = \mu_i\tau_ig$ pour $i = 0, 1, 2$, alors $g$ est scalaire.
+\item \emph{Forme normale.} Pour tout $(\alpha_0, \alpha_1)$ avec $\Delta$ inversible, il existe des matrices explicites de trace nulle, ayant ces invariants et vérifiant $(*)$ en tout point, sur $R[T]/(T^2 - \alpha_0T + 1)$, qui est libre de rang $2$ sur $R$. Sur un corps contenant une racine de $T^2 - \alpha_0T + 1$, deux triplets de mêmes invariants sont conjugués dans $\PGL$.
+\end{enumerate}
+\end{theoreme}
+
+Suivons l'esquisse. Une involution nulle part scalaire $\tau$ vérifie $\tau^2 = (\Tr\tau)\tau - \det\tau$, et ce n'est un scalaire que si $\Tr\tau = 0$ : d'où les traces nulles. Pour des $\tau_i$ de trace nulle avec $\Tr(\tau_0\tau_2) = 0$, on note $t_{01} = \Tr\rho_0$, $t_{12} = \Tr\rho_1$, $T = \Tr(\tau_0\tau_1\tau_2)$ et $d_i = \det\tau_i$. Alors
+\[
+\alpha_0 + 2 = \frac{t_{01}^2}{d_0d_1}, \qquad \alpha_1 + 2 = \frac{t_{12}^2}{d_1d_2}, \qquad \rho_0\rho_1 - \rho_1\rho_0 = -T\tau_1, \qquad \alpha_0 + \alpha_1 = -\frac{T^2}{d_0d_1d_2},
+\]
+donc $\Delta$ est inversible si et seulement si $t_{01}$, $t_{12}$ et $T$ le sont. On voit ainsi les trois facteurs : le premier dit que $\rho_0^2$ n'est pas scalaire, le deuxième la même chose pour $\rho_1$, le troisième que $\rho_0$ et $\rho_1$ ne commutent pas, même à un scalaire près. Pour la rigidité, les traces donnent $\mu_0\mu_1 = \mu_1\mu_2 = 1$, donc $g$ commute à $\rho_0$ et $\rho_1$ ; alors $g = p + q\rho_0$, et la relation $qT\tau_1 = 0$ force $q = 0$.
+
+L'énoncé de modules qui suit est une reformulation des pages 4--7 par l'édition et n'est pas démontré dans l'article : les morphismes de $G_2$ vers des formes de $\PGL$ vérifiant $(*)$ en chaque fibre seraient classés par le complémentaire des trois droites $\Delta = 0$ dans le plan affine $\mathbb A^2_\Z$ de coordonnées $(\alpha_0, \alpha_1)$.
+
+\subsection{La configuration octaédrale et la caractéristique \texorpdfstring{$5$}{5}}
+
+La cote 64 considère une action fidèle du groupe de Klein sur $\PP$, localement $z \mapsto -z$ et $z \mapsto 1/z$, dont les axes forment la configuration octaédrale $\Delta = \{0, \infty, \pm1, \pm i\}$ (la lettre $\Delta$ ne désigne plus ici le discriminant de la section précédente). Sur la sphère de Riemann, ces six points sont les sommets d'un octaèdre régulier ; les sommets opposés sont $0$ et $\infty$, $1$ et $-1$, $i$ et $-i$. Pour identifier $\operatorname{Aut}(\PP, \Delta)$ au groupe des rotations de l'octaèdre, la page 48 calcule le fixateur des deux sommets non opposés $\infty$ et $-1$. Ses éléments sont les applications $z \mapsto az + (a - 1)$ : fixer $\infty$ impose une application affine, fixer $-1$ impose le terme constant.
+
+\begin{theoreme}[Grothendieck, cote 64, p.~48 ; théorème 4.5 de l'article]
+Soit $K$ un corps où $2 \ne 0$ et $i^2 = -1$. Si $z \mapsto az + (a - 1)$ envoie $\{0, 1, i, -i\}$ dans lui-même, alors $5(a - 1) = 0$. En particulier, si $5 \ne 0$ dans $K$, le fixateur de $\infty$ et $-1$ dans $\operatorname{Aut}(\PP_K, \Delta)$ est trivial.
+\end{theoreme}
+
+La démonstration tient en une idée : regarder la somme des points. Les quatre points sont distincts parce que $2 \ne 0$. Si $a = 0$, l'application envoie $0$ sur $-1$, qui n'en fait pas partie. Sinon elle est injective, donc elle permute les quatre points et conserve leur somme, qui vaut $1$. La somme des images vaut $a + 4(a - 1) = 5a - 4$, d'où $5a - 4 = 1$.
+
+La marge restreint le calcul à « car.~$\neq 3$ et $5$ ». La démonstration montre que la caractéristique $3$ ne demande aucun cas particulier. En caractéristique $5$, en revanche, l'identification tombe. On y a $i = \pm 2$, et $z \mapsto 2z + 1$ permute $\{0, 1, i, -i\}$. Sur $\F_5$, la configuration $\Delta$ est tout $\PP(\F_5)$, qui n'a que six points, de sorte que les $120$ éléments de $\PGL(\F_5)$ la préservent tous, et que le fixateur de $\infty$ et $-1$ est formé de l'identité et des $z \mapsto az + (a - 1)$ pour $a = 2, 3, 4$ (figure~\ref{fig:f5}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\small}]
+\coordinate (a0) at (-1.1,0); \coordinate (a1) at (0,1.1);
+\coordinate (a3) at (1.1,0); \coordinate (a2) at (0,-1.1);
+\coordinate (ainf) at (-2.6,0); \coordinate (a4) at (3.0,0);
+\foreach \v in {a0,a1,a2,a3,ainf,a4} \fill (\v) circle (1.5pt);
+\draw (ainf) circle (4pt); \draw (a4) circle (4pt);
+\draw[-{Stealth}, shorten <=4pt, shorten >=4pt] (a0) to[bend left=25] (a1);
+\draw[-{Stealth}, shorten <=4pt, shorten >=4pt] (a1) to[bend left=25] (a3);
+\draw[-{Stealth}, shorten <=4pt, shorten >=4pt] (a3) to[bend left=25] (a2);
+\draw[-{Stealth}, shorten <=4pt, shorten >=4pt] (a2) to[bend left=25] (a0);
+\node[left=3pt] at (a0) {$0$}; \node[above=3pt] at (a1) {$1$};
+\node[right=3pt] at (a3) {$3 = -i$}; \node[below=3pt] at (a2) {$2 = i$};
+\node[above=5pt] at (ainf) {$\infty$}; \node[above=5pt] at (a4) {$4 = -1$};
+\node at (0,0) {$z \mapsto 2z + 1$};
+\end{tikzpicture}
+\caption{Sur $\F_5$, avec $i = 2$, les six sommets de l'octaèdre sont les six points de $\PP(\F_5)$. L'application $z \mapsto 2z + 1$ fixe les sommets cerclés $\infty$ et $-1$ et fait tourner les quatre autres : $0 \mapsto 1 \mapsto 3 \mapsto 2 \mapsto 0$. Quand $5 \ne 0$, le théorème montre qu'une telle application n'existe pas.}\label{fig:f5}
+\end{figure}
+
+Les pages 44--52 affirment que, sur une base dont les caractéristiques résiduelles sont $\neq 2$, trois ensembles se correspondent bijectivement : les sous-schémas en groupes de $\operatorname{Aut}_S(X)$ localement isomorphes à $(\Z/2)^2$, ceux localement isomorphes à $\mathfrak S_4$, et les configurations octaédrales régulières. Là où les pages identifient $\operatorname{Aut}_S(X, \Delta)$ au groupe des rotations de l'octaèdre, l'exemple précédent montre qu'il faut que $5$ soit inversible. Sur un corps, la proposition~1.1 de Beauville dit que $\PGL(K)$ contient $\mathfrak S_4$ si et seulement si $-1$ est somme de deux carrés, pour $K$ de caractéristique première à $6$ ; en caractéristique $5$ ce sous-groupe existe, mais il n'est pas le stabilisateur complet de $\Delta$.
+
+Les pages 74--91 décrivent les modules des courbes elliptiques munies d'une structure de niveau $2$ et d'un « épinglage de Legendre » sur $\Z[1/2]$ par $U_{0,3}\times\mu_4^*$. Antieau et Meier démontrent un énoncé voisin, sans l'épinglage : l'espace des paramètres des courbes de Legendre, $\mathbb A^1_{\Z[1/2]} - \{0, 1\}$, est un torseur sous $C_2$ au-dessus du champ $\mathcal M(2)$ des courbes elliptiques à structure de niveau $2$ complète (définition~4.4 et proposition~4.5, dans la numérotation arXiv). Aucun des deux énoncés relatifs de la cote n'est démontré dans l'article.
+
+\section{La schwarzienne avec des dérivées divisées}
+
+\subsection{La dérivée schwarzienne}
+
+Classiquement, la schwarzienne d'une fonction $s$ de la variable $t$ est $s'''/s' - \frac32(s''/s')^2$. Elle mesure de combien $s$ s'écarte d'une homographie : elle est nulle exactement pour les $s = (at + b)/(ct + d)$, et elle se comporte bien par composition, ce qui en fait l'outil naturel pour comparer deux coordonnées sur une courbe. La cote 93 étudie la schwarzienne et les connexions projectives sur une courbe lisse au-dessus d'une base. Pour deux uniformisantes $t$ et $s$, c'est-à-dire deux coordonnées locales, la différence schwarzienne classique est
+\[
+G(t, s) = \Bigl(-2\frac{s'''}{s'} + 3\Bigl(\frac{s''}{s'}\Bigr)^2\Bigr)\,dt^2,
+\]
+soit $-2$ fois la schwarzienne usuelle.
+
+En caractéristique $p$, les dérivées usuelles se comportent mal : la dérivée $p$-ième de n'importe quel polynôme est nulle, puisque $p! = 0$. Le remède est connu depuis Hasse et Schmidt : les \emph{dérivées divisées} $D^{(i)} = \frac{1}{i!}\frac{d^i}{dt^i}$. Sur les monômes, $D^{(k)}(X^n) = \binom nk X^{n-k}$, un coefficient entier : ces opérateurs ont donc un sens sur tout anneau, et la formule de Taylor s'écrit sans factorielles, $f(x + h) = \sum_k D^{(k)}f(x)\,h^k$. La page 72 remplace les dérivées par ces opérateurs ; elle observe que les coefficients $2$ et $3$ de $G$ y font obstacle et prend $G_0 = G/12$ :
+\[
+G_0(t, s) = -\frac{D^{(3)}s}{D^{(1)}s} + \Bigl(\frac{D^{(2)}s}{D^{(1)}s}\Bigr)^2.
+\]
+En effet $s'' = 2D^{(2)}s$ et $s''' = 6D^{(3)}s$, de sorte que $G = -12\,D^{(3)}s/D^{(1)}s + 12\,(D^{(2)}s/D^{(1)}s)^2 = 12\,G_0$ : écrite en dérivées divisées, $G$ a tous ses coefficients divisibles par $12$, et l'on peut s'en débarrasser. On pose $N(s) = (D^{(2)}s)^2 - D^{(1)}s\cdot D^{(3)}s$, de sorte que $G_0(s) = N(s)/(D^{(1)}s)^2$. L'article travaille dans le modèle local $R[X]$, où $X$ joue le rôle de $t$, et dans ses quotients.
+
+\begin{theoreme}[Grothendieck, cote 93, p.~71--73 et 115--123 ; théorème 5.1 de l'article]
+\leavevmode
+\begin{enumerate}
+\item $G = 12\,G_0$, et $G_0$ est définie sur toute base, caractéristiques $2$ et $3$ comprises.
+\item \emph{Cocycle.} Pour des polynômes $s$, $u$, on a $N(s\circ u) = (N(s)\circ u)(D^{(1)}u)^4 + \bigl((D^{(1)}s)\circ u\bigr)^2N(u)$. Si $D^{(1)}s$ et $D^{(1)}u$ sont inversibles, $G_0(s\circ u) = (G_0(s)\circ u)(D^{(1)}u)^2 + G_0(u)$.
+\item \emph{Homographies.} Si $a, b, c, d \in R$, si $cX + d$ est inversible et si $s(cX + d) = aX + b$, alors $G_0(s) = 0$.
+\item \emph{Fonctions tuées} (marge de la p.~121). En caractéristique $p$, un polynôme est tué par $D^{(1)}$, $D^{(2)}$ et $D^{(3)}$ si et seulement si c'est un polynôme en $X^p$ pour $p > 3$, en $X^4$ pour $p = 2$, et en $X^9$ pour $p = 3$.
+\item \emph{Rigidité.} Soient $A$ un anneau local de caractéristique $p$, $e = 1$ si $p > 3$ et $e = 2$ si $p = 2, 3$, et $\alpha \in A$. Si $s \in A[T]/(T^{p^e} - \alpha)$ a $D^{(1)}s$ inversible et $G_0(t, s) = 0$, alors $s = (at + b)/(ct + d)$ avec $a, b, c, d \in A$ et $ct + d$ inversible. Il en va de même pour tout $A$ de caractéristique $p$ tel que $\operatorname{Pic}(A) = 0$.
+\end{enumerate}
+\end{theoreme}
+
+\subsection{Lecture des énoncés}
+
+Le point~(2) est la règle de dérivation des fonctions composées pour la schwarzienne : c'est cette loi de cocycle qui permet de recoller les $G_0$ d'une carte à l'autre sur une courbe. Le point~(3) dit que les homographies sont bien dans le noyau. Le point~(5) dit la réciproque, et le point~(4) explique pourquoi elle ne vaut qu'à un certain niveau : la caractéristique $p$ change ici la nature de la question.
+
+En caractéristique $p$, une fonction de $t^p$ se comporte comme une constante pour la dérivée ordinaire. Pour $G_0$, qui fait intervenir $D^{(1)}$, $D^{(2)}$ et $D^{(3)}$, les « constantes » sont les fonctions tuées par ces trois opérateurs, et le point~(4) les identifie. Le calcul se fait monôme par monôme : $X^n$ est tué si et seulement si $\binom n1$, $\binom n2$ et $\binom n3$ sont nuls modulo $p$. Pour $p > 3$, il suffit que $p$ divise $n$. Pour $p = 2$, $\binom n2$ impose en plus $n \equiv 0 \bmod 4$ ; pour $p = 3$, $\binom n3$ impose $n \equiv 0 \bmod 9$. La rigidité ne peut donc avoir lieu qu'« au niveau de Frobenius » $p$ ou $p^2$ : l'équation $G_0 = 0$ détermine $s$ modulo ces constantes, et non davantage. D'où l'anneau $A[T]/(T^{p^e} - \alpha)$ du point~(5) : ses éléments sont les polynômes en $T$ de degré $< p^e$, et c'est un petit voisinage infinitésimal, au-dessus de $A$, de la fibre où $t^{p^e}$ prend la valeur $\alpha$.
+
+L'article explique aussi pourquoi le niveau est $p^2$ pour $p = 2, 3$. Puisque $D^{(k)}(X^p) = \binom pk X^{p-k}$, la puissance $X^p$ est tuée par $D^{(1)}$, $D^{(2)}$, $D^{(3)}$ si et seulement si $p > 3$. Pour $p = 2$, $D^{(2)}(X^2) = 1$, et la translation $t \mapsto t + t^2$ a $G_0 = dt^2$ ; pour $p = 3$, $D^{(3)}(X^3) = 1$, et $t \mapsto t + t^3$ a $G_0 = -dt^2$. Ces deux applications sont des translations par une « constante » $t^p$ de la dérivée ordinaire. Pour $p = 2, 3$, le groupe des homographies à coefficients dans $\mathcal O^{(p)}$ ne laisse donc pas $G_0$ invariante. Les premiers en jeu sont exactement ceux qui divisent le facteur $12 = G/G_0$.
+
+\subsection{La démonstration de la rigidité}
+
+Les points~(1) à~(3) sont des identités du calcul des puissances divisées. Pour~(3), la formule de Leibniz appliquée à $sq = p$, avec $q = cX + d$ et $p = aX + b$, donne $q^2N(s) = 0$.
+
+Pour~(5) avec $\alpha = 0$, on cherche d'abord l'homographie osculatrice, celle qui coïncide avec $s$ jusqu'à l'ordre $2$, comme on cherche la droite tangente ou le cercle osculateur. On prend $d = 1$, $c = -s_2/s_1$, $b = s_0$, $a = s_1 + cs_0$, où les $s_k$ sont les coefficients de $s$, et l'on pose $r = s\,(cX + 1)$. Par construction, $r$ coïncide avec $aX + b$ jusqu'au degré $2$. Il faut montrer que l'accord continue. Si $X^{j+3}$ divise $r - (aX + b)$, le coefficient de $X^j$ dans $(cX + 1)N(s)$ vaut $-\binom{j+3}{3}s_1r_{j+3}$. Comme $N(s) = 0$, on obtient $\binom{j+3}3 s_1 r_{j+3} = 0$, et l'on conclut $r_{j+3} = 0$ dès que le coefficient binomial est inversible. Par récurrence sur $j$, $X^n$ divise $s(cX + 1) - (aX + b)$ tant que $\binom k3$ est inversible pour $3 \le k < n$. C'est le cas pour $n = p$ si $p > 3$, pour $n = 4$ si $p = 2$, où seul $\binom33 = 1$ intervient, et pour $n = 9$ si $p = 3$, où $\binom k3 = 1, 4, 10, 20, 35, 56$ pour $k = 3, \dots, 8$, aucun n'étant divisible par $3$.
+
+Pour $\alpha$ quelconque, on pose $q = p^e$ et $B = A[T]/(T^q - \alpha)$. En caractéristique $p$, $T^q - \alpha = (T - \beta)^q$, où $\beta$ est la classe de $T$ : l'anneau $B$ est, vu de $\beta$, un voisinage d'ordre $q$. L'application de Taylor $\theta(f) = f(\beta + Y)$ ramène la question au cas $\alpha = 0$ sur $B$, ce qui donne l'homographie osculatrice en $\beta$, à coefficients dans $B$. Il reste à redescendre de $B$ à $A$. Le vecteur $v$ des coefficients vérifie $(cY + 1)\,\theta(v) \equiv v \bmod Y^q$ ; pour $\ell$ dans $Ac + A(1 - cT)$, le vecteur $\ell^{q-1}v$ est alors tué par les $D^{(k)}$, $0 < k < q$, et se trouve dans $A^4$. Sur un anneau local, $c$ ou $1 - cT$ est inversible, puisque $(1 - cT)^q = 1 - c^q\alpha$. Quand $\operatorname{Pic}(A) = 0$, les dénominateurs des homographies égales à $s$ forment un sous-$A$-module inversible de $B$, qui est alors principal, engendré par une unité.
+
+\subsection{Deux corrections}
+
+L'article corrige les pages en deux endroits. D'abord, on ne peut pas normaliser le déterminant à $ad - bc = 1$ comme le fait la page 121. Dans $\F_5[T]/(T^5)$, $s = 2t$ a $N(s) = 0$ et $D^{(1)}s = 2$ inversible, mais $2$ n'est pas un carré dans $\F_5$, donc $s$ n'est pas une homographie à coefficients dans $\F_5$ avec $ad - bc = 1$. L'énoncé correct est dans $\PGL(A)$. Ensuite, la page passe de $\alpha \neq 0$ à $\alpha = 0$ sans argument (« OPS ») ; la descente ci-dessus fournit ce passage sur un anneau local, et plus généralement quand $\operatorname{Pic}(A) = 0$.
+
+\section{La vérification}
+
+Les démonstrations sont formalisées en Lean~4 avec Mathlib. Les fichiers se trouvent dans le répertoire \texttt{lean/Grothendieck} du dépôt : \texttt{Folder84.lean}, \texttt{Folder83.lean}, \texttt{Folder85.lean}, \texttt{Folder64.lean} et \texttt{Folder93.lean}, un par cote. Elles n'utilisent que les axiomes standard de Lean ; l'article donne le nom des théorèmes formels. L'injectivité sur les fibres du morphisme $\mathfrak A_5 \to \PGL(\Z[\zeta_5])$ n'est pas formalisée. En Lean, l'hypothèse $G_0(t, s) = 0$ dans $B$ est écrite $N(s) = 0$ dans $B$, ce qui est équivalent quand $D^{(1)}s$ est inversible.
+
+Les points que l'article ne démontre pas ont été signalés en chemin. En résumé, les énoncés attribués à Grothendieck sont ceux des pages citées, ceux qui sont dits « d'après » une page ont été modifiés par l'article, et les démonstrations sont de l'article sauf là où il dit suivre la page. Le produit des algèbres quadratiques est publié par Voight, qui en attribue le cas affine libre à Hahn ; les critères sur $\mathfrak A_5$ et $\mathfrak S_4$ sont de Beauville, le torseur de Legendre d'Antieau et Meier, les dérivées divisées de Hasse et Schmidt.
+
+\section{Petit lexique}
+
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{10.2cm}@{}}
+\toprule
+Terme & À retenir ici \\
+\midrule
+point de $R$ & un idéal maximal $\mathfrak m$ ; on y regarde les objets réduits modulo $\mathfrak m$ \\
+inversible & non nul en tout point \\
+algèbre quadratique & $R[U]/(U^2 + bU + c)$, ou sa version tordue par un module inversible $L$ \\
+discriminant & $b^2 - 4c$, le carré de $2U + b$ \\
+étale & à deux racines distinctes en chaque point ; au-dessus de $2$, $b$ inversible \\
+produit $A_1 * A_2$ & l'algèbre engendrée par « $\sqrt{\delta_1}\sqrt{\delta_2}$ », écrite sans division \\
+algèbre d'Azumaya & une algèbre de matrices $2\times 2$ tordue, comme les quaternions \\
+$\PGL$ & matrices $2\times 2$ inversibles modulo les scalaires ; les homographies \\
+forme de $\PGL$ & un groupe qui devient $\PGL$ après extension des scalaires \\
+$A(g)$ & $(\Tr g)^2/\det g - 2$, soit $2\cos\theta$ pour une rotation d'angle $\theta$ \\
+dérivées divisées & $D^{(k)} = \frac{1}{k!}\frac{d^k}{dt^k}$, à coefficients entiers sur les monômes \\
+$G_0$ & la schwarzienne divisée par $12$, définie en toute caractéristique \\
+niveau de Frobenius & $p^e$ : l'équation $G_0 = 0$ détermine $s$ au-dessus de $A[T]/(T^{p^e} - \alpha)$ \\
+\bottomrule
+\end{tabular}
+
+\section*{Sur la rédaction de cette note}
+
+Note de travail écrite par Claude (Opus~5.5, Anthropic) sous la direction de l'auteur, à partir de \texttt{docs/moduli/article.tex}. Elle ne contient aucun résultat nouveau ; en cas de désaccord, l'article fait foi.
+
+\end{document}
