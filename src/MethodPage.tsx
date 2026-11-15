@@ -246,6 +246,29 @@ const LIVRES: typeof ARTICLES = [
 ];
 
 /** The papers, first: they are what a visitor from outside the project came for. */
+/**
+ * Our estimate of a draft's interest, from one to three stars: what it adds that
+ * is new or solid, not how finished it is.
+ */
+const STARS: Record<string, 1 | 2 | 3> = {
+  'reading-2': 3,
+  'reading-159': 3,
+  'reading-1': 3,
+  'reading-126': 2,
+  'reading-58': 2,
+  'reading-33': 2,
+  'article-effective': 3,
+  'article-loday-filtration': 2,
+  'article-buffalo-open': 2,
+  'article-qcoh-descent': 2,
+  'article-problem-three': 2,
+  'article-polytopes': 2,
+  'article-moduli': 2,
+  'article-quillen-lean': 2,
+  'article-bourbaki-lean': 1,
+  'article-recollement': 1,
+};
+
 function Articles({ id = 'articles', title = 'The articles', items = ARTICLES }: { id?: string; title?: string; items?: typeof ARTICLES }) {
   const pill = 'rounded-full border border-ink-200 px-3 py-0.5 text-[12.5px] text-ink-700 transition hover:border-brand-400 hover:text-brand-700';
   return (
@@ -255,7 +278,19 @@ function Articles({ id = 'articles', title = 'The articles', items = ARTICLES }:
         {items.map((a) => (
           <article key={a.id} id={a.id} className="card flex scroll-mt-20 flex-col px-5 py-4">
             <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-ink-400">{a.lang}</p>
-            <h3 className="mt-1 text-[15px] font-semibold italic leading-snug text-ink-900">{a.title}</h3>
+            <h3 className="mt-1 text-[15px] font-semibold italic leading-snug text-ink-900">
+              {a.title}
+              {STARS[a.id] && (
+                <span
+                  className="ml-2 whitespace-nowrap not-italic tracking-[0.1em] text-amber-500"
+                  title={`Interest: ${STARS[a.id]} of 3`}
+                  aria-label={`Interest: ${STARS[a.id]} of 3`}
+                >
+                  {'★'.repeat(STARS[a.id])}
+                  <span className="text-ink-200">{'★'.repeat(3 - STARS[a.id])}</span>
+                </span>
+              )}
+            </h3>
             <p className="mt-2 flex-1 text-[13px] leading-relaxed text-ink-600">{a.what}</p>
             <p className="mt-3 flex flex-wrap items-center gap-2">
               <a href={a.pdf} className={pill}>
@@ -311,7 +346,10 @@ export function MethodPage() {
 
         <Articles />
         <Articles id="preprints" title="Preprints" items={PREPRINTS} />
-        <Articles id="drafts" title="Drafts" items={SOUS_ARTICLES} />
+        <Articles id="drafts" title="Drafts" items={[...SOUS_ARTICLES].sort((x, y) => (STARS[y.id] ?? 0) - (STARS[x.id] ?? 0))} />
+        <p className="mt-2 text-[12.5px] text-ink-500">
+          Stars give our estimate of each draft's interest, from ★ to ★★★: what it adds that is new or solid, not how finished it is.
+        </p>
         <Articles id="books" title="The books" items={LIVRES} />
 
         <section className="mt-16 max-w-[48em] text-[15px] leading-relaxed text-ink-700">
