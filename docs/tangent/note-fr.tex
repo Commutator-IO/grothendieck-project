@@ -7,6 +7,8 @@
 \usepackage[french]{babel}
 \usepackage{lmodern,microtype,amssymb,mathtools,booktabs}
 \usepackage[margin=2.7cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 \usepackage[hidelinks]{hyperref}
 
 \theoremstyle{definition}
@@ -59,6 +61,12 @@ Pour tout $n \ge 3$ :
 
 Pour $n = 4, 5, 6$ cela donne $6, 12, 20$ d'une part, $3, 4, 5$ de l'autre. La page 70 de la cote 146 porte ces nombres pour $n = 4$ et, pour $n = 5$ et $6$, des valeurs suivies d'un point d'interrogation : $12\,?$ et $12\,?$, puis $20\,?$ et $60\,?$. Deux d'entre elles sont fausses. L'ordre de $L$ vaut $4$ et non $12$ pour $n = 5$, et $5$ et non $20$ pour $n = 6$.
 
+\begin{figure}[htbp]
+\centering
+\resizebox{0.7\linewidth}{!}{\input{figures/146-04-10}}
+\caption{La page~67 de la cote~146, trois pages avant la table : des configurations de courbes stables esquissées à côté des compactifications $M_{0,5} \hookrightarrow \hat M_{0,5}$. Dessin de Grothendieck, redessiné par l'édition d'après le fac-similé (\href{https://grothendieck.umontpellier.fr/146.pdf}{Montpellier, cote~146}).}\label{fig:p67}
+\end{figure}
+
 \section{Les objets, un par un}
 
 \subsection{La droite projective}
@@ -100,6 +108,21 @@ T_{\langle v\rangle}\PP \;\cong\; \operatorname{Hom}(\langle v\rangle,\; k^2/\la
 Pourquoi ? Une direction voisine de $\langle v \rangle$ est le graphe d'une application linéaire de $\langle v\rangle$ vers un supplémentaire : bouger un peu la droite, c'est se donner une telle application, et la vitesse de ce mouvement vit dans cet espace de morphismes.
 
 La conséquence qui servira. Remplacer $v$ par $tv$ divise par $t$ la source du morphisme et laisse le but inchangé, donc multiplie l'identification par $t^{-2}$ : l'exposant est $-2$ et non $-1$, parce que $v$ apparaît des deux côtés. C'est de là que viendront les degrés $2e$, et c'est le seul endroit de la note où il faut un crayon.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.3, >=Stealth]
+\draw[black!40] (0,0) circle (1);
+\foreach \a/\l in {90/5, 200/1, 255/2, 320/3, 20/4} {
+  \fill (\a:1) circle (1.5pt);
+  \draw[->,thick] (\a:1) -- ++(\a+90:0.55);
+  \draw[black!30] (\a:1) -- ++(\a-90:0.35);
+  \node at (\a:1.28) {\small $x_{\l}$};
+}
+\node at (0,0) {\small $\PP$};
+\end{tikzpicture}
+\caption{Cinq points marqués sur la sphère $\PP$, vue ici comme un cercle, et un vecteur tangent en chacun. La droite qui porte la flèche en $x_i$ est la fibre de $L_i$ au-dessus de cette configuration. Trivialiser $L_i$, c'est choisir une telle flèche, non nulle, pour toutes les configurations à la fois et de façon continue.}\label{fig:tangentes}
+\end{figure}
 
 \subsection{L'action du groupe symétrique}
 
@@ -158,6 +181,36 @@ Les translations $x \mapsto x+b$ agissent librement et déplacent le coefficient
 [U_m/\Aff] \;\cong\; [V_m/\Gm],
 \]
 où $V_m$ est l'ouvert des polynômes unitaires centrés sans facteur carré, et $t \in \Gm$ agit par $x \mapsto tx$, donc sur le coefficient $c_j$ avec le poids $j$ : si toutes les racines sont multipliées par $t$, la somme de leurs produits $j$ à $j$ est multipliée par $t^j$.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05, >=Stealth]
+\begin{scope}
+\draw[black!35] (0,1) circle (1);
+\draw[black!70] (-3.2,0) -- (2.2,0) node[right] {\footnotesize $\mathbb A^1$};
+\fill (0,2) circle (1.8pt); \node[above=1pt] at (0,2) {\small $x_n = \infty$};
+\foreach \px/\py/\r/\l in {-0.94/1.342/-2.856/1, -0.819/0.426/-1.041/2, 0.342/0.06/0.353/3, 0.94/0.658/1.4/4} {
+  \draw[black!30] (0,2) -- (\r,0);
+  \fill (\px,\py) circle (1.4pt);
+  \fill (\r,0) circle (1.6pt);
+  \node[below=2pt] at (\r,0) {\footnotesize $r_{\l}$};
+}
+\node at (-0.45,-0.9) {\small (a) $\PP$, projetée depuis $x_n$};
+\end{scope}
+\begin{scope}[xshift=6.9cm]
+\draw[black!70] (-2.6,0) -- (2.6,0) node[right] {\footnotesize $\mathbb A^1$};
+\draw (0,0.12) -- (0,-0.12); \node[below=3pt] at (0,0) {\footnotesize $0$};
+\foreach \r in {-2.32, -0.505, 0.889, 1.936} {
+  \fill (\r,0) circle (1.6pt);
+  \draw[->,thick] (\r,0) -- (\r+0.42,0.42);
+}
+\node[align=left, anchor=west] at (-2.6,1.45) {\footnotesize $x \mapsto x + b$ : \ $c_1 = -\textstyle\sum r_i \mapsto c_1 - mb$};
+\node[align=left, anchor=west] at (-2.6,0.95) {\footnotesize $x \mapsto tx$ : \ $c_j \mapsto t^j c_j$, \ $T_{r_i}\PP \mapsto t$, \ $T_\infty\PP \mapsto t^{-1}$};
+\node at (0,-0.9) {\small (b) racines centrées, $\sum r_i = 0$};
+\end{scope}
+\end{tikzpicture}
+\caption{La tranche des deux premiers temps, pour $n = 5$. (a) Le dernier point envoyé à l'infini, les quatre autres deviennent des racines sur la droite affine. (b) Les translations déplacent $c_1$ librement, on centre donc les racines ; il reste les homothéties, qui agissent sur $c_j$ avec le poids $j$, sur chaque droite tangente en une racine (flèches) avec le poids $1$, et sur la droite tangente à l'infini avec le poids $-1$ (cinquième temps).}\label{fig:tranche}
+\end{figure}
 
 \subsection{Troisième temps : caractères et poids}
 
@@ -223,6 +276,34 @@ Soit $\omega$ une racine primitive $(n-1)$-ème de l'unité. Prenons la configur
 
 La même manœuvre avec les racines $(n-2)$-èmes, en ajoutant le point à l'infini à la configuration, donne $(n-2) \mid e$. Comme $n-1$ et $n-2$ sont premiers entre eux, leur produit divise $e$. Pour $n = 6$ : la première configuration donne $5 \mid e$, la seconde $4 \mid e$, donc $20 \mid e$, qui est bien la valeur annoncée.
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.4, >=Stealth]
+\begin{scope}
+\draw[black!35] (0,0) circle (1);
+\foreach \k in {0,...,4} { \fill (\k*72:1) circle (1.6pt); }
+\node[right=1pt] at (0:1) {\footnotesize $1$};
+\fill (0,0) circle (1.8pt); \node[below left=1pt] at (0,0) {\small $0$};
+\draw[->,thick] (0,0) -- (0:0.62) node[pos=0.75, below=1pt] {\footnotesize $v$};
+\draw[->,thick,dashed] (0,0) -- (72:0.62) node[pos=0.8, left=2pt] {\footnotesize $\omega v$};
+\draw[->,black!60] (12:0.36) arc (12:60:0.36);
+\node[align=center] at (0,-1.45) {\small $x_6 = 0$, $x_1, \dots, x_5 \in \mu_5$\\ \small tournés par $z \mapsto \omega z$};
+\end{scope}
+\begin{scope}[xshift=4.2cm]
+\draw[black!35] (0,0) circle (1);
+\foreach \k in {0,...,3} { \fill (\k*90:1) circle (1.6pt); }
+\node[right=1pt] at (0:1) {\footnotesize $1$};
+\fill (0,0) circle (1.8pt); \node[below left=1pt] at (0,0) {\small $0$};
+\draw[->,thick] (0,0) -- (45:0.62) node[pos=0.8, right=2pt] {\footnotesize $v$};
+\draw[->,thick,dashed] (0,0) -- (135:0.62) node[pos=0.8, left=2pt] {\footnotesize $\zeta v$};
+\draw[->,black!60] (57:0.36) arc (57:123:0.36);
+\fill (1.3,0.9) circle (1.6pt); \node[right=1pt] at (1.3,0.9) {\footnotesize $\infty$};
+\node[align=center] at (0,-1.45) {\small $x_6 = 0$, $x_1 = \infty$, $x_2, \dots, x_5 \in \mu_4$\\ \small tournés par $z \mapsto \zeta z$};
+\end{scope}
+\end{tikzpicture}
+\caption{Les deux configurations de la minoration pour $n = 6$, le dernier point en $0$. La rotation permute les autres points et change le vecteur tangent $v$ en $0$ en $\omega v$ ou $\zeta v$, avec $\omega = e^{2i\pi/5}$ et $\zeta = i$. Une trivialisation compatible avec la renumérotation doit prendre la même valeur dans les deux cas, d'où $5 \mid e$ et $4 \mid e$, donc $20 \mid e$ pour $L_6$.}\label{fig:rotation}
+\end{figure}
+
 \section{Ce qu'apporte Dan Edidin}
 
 Le travail de Dan Edidin et Zhengning Hu sur l'anneau de Chow entier de la pile des points de Weierstrass hyperelliptiques donne le même groupe, mais seulement pour $n$ pair et $n \ge 6$. Ils présentent la pile comme des formes binaires avec une racine marquée, ce qui est exactement notre $[\M/\Sn_{n-1}]$, et trouvent $\mathbb Z[l]/(2g(2g+1)l)$ avec $n = 2g+2$, soit un groupe cyclique d'ordre $(n-1)(n-2)$.
@@ -251,6 +332,44 @@ Sur $\mathbb C$, le champ $[\M/\Sn_{n-1}]$ possède un groupe fondamental, au se
 1 \longrightarrow \mathbb Z \longrightarrow B_{n-1} \longrightarrow \Gamma \longrightarrow 1,
 \]
 où le $\mathbb Z$ du milieu est engendré par le \emph{twist complet} $\Delta^2$, la tresse obtenue en faisant tourner toute la configuration d'un tour sur elle-même. Or la classe de Chern de $L_n$ est précisément la classe de cette extension centrale, et son ordre se lit sur la somme des exposants de $\Delta^2$ dans l'abélianisé de $B_{n-1}$, qui vaut $(n-1)(n-2)$ : un tour complet de $n-1$ brins produit ce nombre de croisements.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.9cm,y=0.9cm,thick,line cap=round]
+\draw (2,0.00) -- (2,-0.62);
+\draw (1,0.00) .. controls (1,-0.31) and (0,-0.31) .. (0,-0.62);
+\draw[white,line width=4pt,shorten <=6pt,shorten >=6pt] (0,0.00) .. controls (0,-0.31) and (1,-0.31) .. (1,-0.62);
+\draw (0,0.00) .. controls (0,-0.31) and (1,-0.31) .. (1,-0.62);
+\node[font=\scriptsize, black!55] at (2.75,-0.31) {$\sigma_1$};
+\draw (0,-0.62) -- (0,-1.24);
+\draw (2,-0.62) .. controls (2,-0.93) and (1,-0.93) .. (1,-1.24);
+\draw[white,line width=4pt,shorten <=6pt,shorten >=6pt] (1,-0.62) .. controls (1,-0.93) and (2,-0.93) .. (2,-1.24);
+\draw (1,-0.62) .. controls (1,-0.93) and (2,-0.93) .. (2,-1.24);
+\node[font=\scriptsize, black!55] at (2.75,-0.93) {$\sigma_2$};
+\draw (2,-1.24) -- (2,-1.86);
+\draw (1,-1.24) .. controls (1,-1.55) and (0,-1.55) .. (0,-1.86);
+\draw[white,line width=4pt,shorten <=6pt,shorten >=6pt] (0,-1.24) .. controls (0,-1.55) and (1,-1.55) .. (1,-1.86);
+\draw (0,-1.24) .. controls (0,-1.55) and (1,-1.55) .. (1,-1.86);
+\node[font=\scriptsize, black!55] at (2.75,-1.55) {$\sigma_1$};
+\draw (0,-1.86) -- (0,-2.48);
+\draw (2,-1.86) .. controls (2,-2.17) and (1,-2.17) .. (1,-2.48);
+\draw[white,line width=4pt,shorten <=6pt,shorten >=6pt] (1,-1.86) .. controls (1,-2.17) and (2,-2.17) .. (2,-2.48);
+\draw (1,-1.86) .. controls (1,-2.17) and (2,-2.17) .. (2,-2.48);
+\node[font=\scriptsize, black!55] at (2.75,-2.17) {$\sigma_2$};
+\draw (2,-2.48) -- (2,-3.10);
+\draw (1,-2.48) .. controls (1,-2.79) and (0,-2.79) .. (0,-3.10);
+\draw[white,line width=4pt,shorten <=6pt,shorten >=6pt] (0,-2.48) .. controls (0,-2.79) and (1,-2.79) .. (1,-3.10);
+\draw (0,-2.48) .. controls (0,-2.79) and (1,-2.79) .. (1,-3.10);
+\node[font=\scriptsize, black!55] at (2.75,-2.79) {$\sigma_1$};
+\draw (0,-3.10) -- (0,-3.72);
+\draw (2,-3.10) .. controls (2,-3.41) and (1,-3.41) .. (1,-3.72);
+\draw[white,line width=4pt,shorten <=6pt,shorten >=6pt] (1,-3.10) .. controls (1,-3.41) and (2,-3.41) .. (2,-3.72);
+\draw (1,-3.10) .. controls (1,-3.41) and (2,-3.41) .. (2,-3.72);
+\node[font=\scriptsize, black!55] at (2.75,-3.41) {$\sigma_2$};
+\foreach \x in {0,1,2} { \fill (\x,0) circle (1.6pt); \fill (\x,-3.72) circle (1.6pt); }
+\end{tikzpicture}
+\caption{Le twist complet $\Delta^2 = (\sigma_1\sigma_2)^3$ de $B_3$, c'est-à-dire $n = 4$ : trois points du plan font un tour complet sur eux-mêmes, et leurs trajectoires se croisent $6 = (n-1)(n-2)$ fois, toujours dans le même sens. C'est l'ordre de $L_4$, et la somme des exposants de $\Delta^2$ dans l'abélianisé de $B_3$.}\label{fig:tresse}
+\end{figure}
 
 Le même entier se lit donc de deux façons, comme le poids du discriminant et comme le nombre de croisements d'un tour complet. Ce n'est pas une coïncidence : le lacet du fibré et la rotation de la section précédente sont le même mouvement, vu une fois algébriquement et une fois topologiquement. Le corollaire du texte remanié en tire que la classe de Chern identifie le groupe de Picard algébrique à la torsion du $H^2$.
 
