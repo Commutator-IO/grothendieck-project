@@ -1039,10 +1039,10 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p10 batch-01:179b | reading | after « e des $\widetilde{X}_{\alpha}$ de genre » | $g_{\alpha}$ | $g_\alpha\ldots$
 - [ ] 147 p11 batch-01:206a | reading | after « alors $\alpha, \beta$ appartiennent à la » | même | $=$
 - [ ] 147 p11 batch-01:206b | reading | after « et $X_{\beta}$ appartiennent à la » | même | $=$
-- [ ] 147 p15 batch-01:316c | reading | after « les sommets sont de genre » | $0$ | nuls
+- [x] 147 p15 batch-01:316c | reading | after « les sommets sont de genre » | $0$ | nuls | dismissed: ungrammatical — « de genre nuls »: impossible agreement
 - [ ] 147 p16 batch-01:320 | reading | after « Éliminons de » | même | $=$
 - [ ] 147 p16 batch-01:329b | reading | after « donc une structure supplémentaire sur » | $X$ | $ C $
-- [ ] 147 p18 batch-01:351a | reading | after « pour deux un entier naturel » | $g$ | $g \alpha $
+- [x] 147 p18 batch-01:351a | reading | after « pour deux un entier naturel » | $g$ | $g \alpha $ | dismissed: mathematically wrong — the moduli M_{g,I} is indexed by g alone
 - [ ] 147 p19 batch-01:370 | reading | after « s qu'il en soit de » | même | $=$
 - [ ] 147 p21 batch-02:22b | reading | after « est isomorphe au schéma modulaire » | $\overset{!}{M}_{g,\nu}$ | $\mathcal M^!_{g,\nu}$
 - [ ] 147 p21 batch-02:22c | reading | after « et $\mathfrak{S}_\nu$ On sait que » | $\overset{!}{M}_{g,\nu}$ | $\mathcal M^!_{g,\nu}$
@@ -1052,7 +1052,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p29 batch-02:161 | reading | after « compatible d'ailleurs avec l'action de » | $\Gamma$ | $\Gamma= Aut G$
 - [ ] 147 p30 batch-02:171c | reading | after « qui pourrait espérer mieux En » | même | $=$
 - [ ] 147 p33 batch-02:227 | reading | after « application $\tilde{A}_\alpha \to S(\alpha)$ i e … » | tt | $\forall$
-- [ ] 147 p33 batch-02:229d | reading | after « 0 i e tel que » | $g_\alpha(\beta) = 0$ | $\gamma_\alpha(\beta)=0$
+- [x] 147 p33 batch-02:229d | reading | after « 0 i e tel que » | $g_\alpha(\beta) = 0$ | $\gamma_\alpha(\beta)=0$ | dismissed: mathematically wrong — the genus map is g_α (2°); γ_α undefined
 - [ ] 147 p37 batch-02:278b | reading | after « $a \in \tilde{A}' \setminus \tilde{B}'$ l'origine … » | $a$ | $\vec a$
 - [ ] 147 p41 batch-03:27d | reading | after « de $G'$ En effet soit » | $G'_{!}$ | $G'_\bullet$
 - [ ] 147 p41 batch-03:27e | reading | after « surjectif et les $G'(\alpha)$ connexes » | Leftrightarrow | $\Longleftrightarrow$
@@ -1065,7 +1065,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p57 batch-03:345 | reading | after « $g_{\alpha_0} = 0$ tous les sommets … » | $\ldots$ | $1$
 - [ ] 147 p58 batch-03:379b | reading | after « 67 aux deux cas suivants » | 1 | $1^\circ)$
 - [ ] 147 p58 batch-03:382a | reading | after « donc deux cas en réalité » | 2 | $2^\circ)$
-- [ ] 147 p58 batch-03:382b | reading | after « en réalité 2 Tous les » | $\alpha \in S$ | $\alpha=S$
+- [x] 147 p58 batch-03:382b | reading | after « en réalité 2 Tous les » | $\alpha \in S$ | $\alpha=S$ | dismissed: mathematically wrong — α is a vertex, cannot equal the set S
 - [ ] 147 p59 batch-03:403 | reading | after « \[ 390(74)\qquad 391\left\{ 392 399\right. 400\] … » | 3 | $3^\circ$
 - [ ] 147 p60 batch-03:426 | reading | after « strates en dim modulaire $\leqslant 2$ » | 1 | $1^\circ)$
 - [ ] 147 p62 batch-04:57 | reading | after « [illegible] ces trois quantités à » | des dénominateurs près $-1, -\frac{1}{24}, \frac{1}{12}$ 2 | $-1,-1/24,1/12$ $2^\circ)$
@@ -1083,7 +1083,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p70 batch-04:228d | reading | after « deux pts à l'infini de » | $\widehat{M}_{D_{\circ}}$ | $\widehat M_{D_0}$
 - [ ] 147 p71 batch-04:257 | reading | after « déjà Proposition Si $\dim M_G \geq … » | $M^{\infty}_{G}$ | $M_G^\infty$
 - [ ] 147 p74 batch-04:332f | reading | after « $M^{\infty}_{0,\nu}$ qui appartiennent à une » | même | $=$
-- [ ] 147 p74 batch-04:332g | reading | after « l'autre par transposition des deux » | éléments | $\varepsilon$
+- [x] 147 p74 batch-04:332g | reading | after « l'autre par transposition des deux » | éléments | $\varepsilon$ | dismissed: ungrammatical — « des deux ε c_i, c_{i+1} » breaks the syntax
 - [ ] 147 p81 batch-05:37 | reading | after « notation plus légère $\Pi M_{G,G'}$ de » | même | $=$
 - [ ] 147 p84 batch-05:113 | reading | after « \[ 110(114)\qquad S_{A}\Pi M_{G} \longrightarrow (\Pi … » | $A$ un | $\forall$
 - [ ] 147 p90 batch-05:221b | reading | after « $A \setminus A'$ On fera attention … » | $\hat{X}'$ | $\overset{ \wedge }{X}'$
@@ -1125,15 +1125,15 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p135 batch-07:521a | reading | after « squelette de dim $p$ de » | $\Theta^{p}_{d'_*}$ | $\Theta_{d'_*}^{p}$
 - [ ] 147 p139 batch-07:623 | reading | after « différence entre la flèche composée » | $i_{D'} r_{D'',D'}$ | $i_{D'}\gamma_{D'',D'}$
 - [ ] 147 p139 batch-07:623a | reading | after « nature triviale et la flèche » | $r_{D'',D'}$ | $\gamma_{D'',D'}$
-- [ ] 147 p139 batch-07:624 | reading | after « ne correspond à aucun morphisme » | $P_{D''^{*}} \to P_{D'^{*}}$ | $P_{D''^{*}}\mathbin{-}P_{D'^{*}}$
-- [ ] 147 p147 batch-08:118g | reading | after « besoin par la suite que » | $\widetilde\Pi_{d_0,\dots,d_r}\to\Pi_{d_0,\dots,d_r}$ | $\widetilde\Pi_{d_0,\ldots,d_r}\mathbin{-}\Pi_{d_0,\ldots,d_r}$
+- [x] 147 p139 batch-07:624 | reading | after « ne correspond à aucun morphisme » | $P_{D''^{*}} \to P_{D'^{*}}$ | $P_{D''^{*}}\mathbin{-}P_{D'^{*}}$ | dismissed: mathematically wrong — a morphism needs an arrow, not a difference
+- [x] 147 p147 batch-08:118g | reading | after « besoin par la suite que » | $\widetilde\Pi_{d_0,\dots,d_r}\to\Pi_{d_0,\dots,d_r}$ | $\widetilde\Pi_{d_0,\ldots,d_r}\mathbin{-}\Pi_{d_0,\ldots,d_r}$ | dismissed: mathematically wrong — an extension structure needs a map, not a difference
 - [ ] 147 p149 batch-08:146 | reading | after « Considérons le système » | ½ | $\frac12$
 - [ ] 147 p149 batch-08:158b | reading | after « on a [illegible] $d_0\geq d_1\geq\cdots\geq d_r>0$ … » | $V^*_{d_0,\dots,d_r}$ | $\mathcal V^{*}_{d_0,\ldots,d_r}$
 - [ ] 147 p149 batch-08:158c | reading | after « $V^*_{d_0,\dots,d_r}$ s'envoient tous [illegible] dans » | $X^*=D^*_0=$ $X\setminus\Theta$ dans $V^*_0=X^*$ ils | $X^{*}=D_0^{*}=X\setminus\Theta$
 - [ ] 147 p149 batch-08:160f | reading | after « un [illegible] analytiques formé des » | $V^*_{d_0,\dots,d_r}$ | $\mathcal V^{*}_{d_0,\ldots,d_r}$
 - [ ] 147 p150 batch-08:163 | reading | after « de $D_\delta^{*\infty}$ Alors le syst » | ½ | $\frac12$
-- [ ] 147 p152 batch-08:210d | reading | after « l'image inverse de $\Sigma$ dans » | $D_d$ | $D_i$
-- [ ] 147 p152 batch-08:229e | reading | after « donc que l'image inverse de » | $D_{d}^{\Sigma}$ | $D_d^{\Sigma \Sigma }$
+- [x] 147 p152 batch-08:210d | reading | after « l'image inverse de $\Sigma$ dans » | $D_d$ | $D_i$ | dismissed: mathematically wrong — index i undefined; the context is D_d → Θ
+- [x] 147 p152 batch-08:229e | reading | after « donc que l'image inverse de » | $D_{d}^{\Sigma}$ | $D_d^{\Sigma \Sigma }$ | dismissed: mathematically wrong — superscript ΣΣ defined nowhere; D_d^Σ throughout
 - [ ] 147 p153 batch-08:257 | reading | after « désignera alors pour tout drapeau » | $d_\bullet=\{d_0>d_1>\cdots>d_r\geq0\}$ | $d_*=\{d_0>d_1>\cdots>d_r\geq0\}$
 - [ ] 147 p153 batch-08:261b | reading | after « que $D_{\Delta_r}^\Sigma=\coprod D_{d_0\cdots d_r}^\Sigma$ forment un … » | ½ | $\frac12$
 - [ ] 147 p154 batch-08:269a | reading | after « Les $\coprod V^{\Sigma\,*}_{D_{d_0\cdots d_r}}=V^{\Sigma\,*}_{\Delta_r}$ forment un … » | ½ | $\frac12$
@@ -1158,7 +1158,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 
 - [ ] 147 p14 batch-01:287 | reading | after « 1 » | si | Si
 - [ ] 147 p14 batch-01:289 | reading | after « $g_{\alpha} = 1$ on a $\widehat{\nu}_{\alpha} … » | si | Si
-- [ ] 147 p26 batch-02:65 | reading | after « relation d'ordre dans l'ens des » | classes | Classes
+- [x] 147 p26 batch-02:65 | reading | after « relation d'ordre dans l'ens des » | classes | Classes | dismissed: ungrammatical — capital letter in mid-sentence
 - [ ] 147 p33 batch-02:229e | reading | after « $\beta \in S(\alpha)$ du graphe $G(\alpha)$ … » | les | Les
 - [ ] 147 p35 batch-02:255a | reading | after « on connait \[ 253 (42) \qquad … » | connait | connaît
 - [ ] 147 p59 batch-03:419b | reading | after « complète de la structure des » | $\Pi_1$ | $\pi_1$
@@ -1168,10 +1168,10 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p102 batch-06:58 | reading | after « marge gauche La flèche oblique » | $\Psi$ | $\psi$
 - [ ] 147 p103 batch-06:81 | reading | after « leur dépendance fonctorielle pour $g$ » | fixé | fixe
 - [ ] 147 p108 batch-06:214 | reading | after « codim $d$ on retrouve $D_d$ » | s'il | S'il
-- [ ] 147 p117 batch-06:524b | reading | after « un [illegible] dans un site » | donné | donne
+- [ ] 147 p117 batch-06:524b | reading | after « un [illegible] dans un site » | donné | donne | note: our reading looks impossible: « dans un site donné un sens à » lacks a verb; « donne » fits
 - [ ] 147 p120 batch-06:602 | reading | after « le germe défini par $(D_d, x) … » | ceci | Ceci
 - [ ] 147 p123 batch-07:97 | reading | at the top of the page | considérons | Considérons
-- [ ] 147 p128 batch-07:284 | reading | after « c'est-à-dire des torseurs sous les » | groupes | Groupes
+- [x] 147 p128 batch-07:284 | reading | after « c'est-à-dire des torseurs sous les » | groupes | Groupes | dismissed: ungrammatical — capital letter in mid-sentence
 - [ ] 147 p134 batch-07:480 | reading | after « distincts de $d_{*}$ et $d'_{*}$ » | On | on
 - [ ] 147 p147 batch-08:118h | reading | after « les considérations de loc cit » | je | Je
 - [ ] 147 p166 batch-09:90 | reading | at the top of the page | Avec | avec
