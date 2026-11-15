@@ -147,3 +147,4 @@ import Grothendieck.Folder53GeometricIrreducibility
 import Grothendieck.Folder19Topoi
 import Grothendieck.Folder113Linear
 import Grothendieck.Folder11GradedPoincare
+import Grothendieck.EffectiveVenkenRelation
