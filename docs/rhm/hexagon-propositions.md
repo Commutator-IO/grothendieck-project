@@ -290,6 +290,8 @@ le droit de la rapporter.
 
 ### 3.4 Carnets de Quillen
 
+Fait le 15 novembre 2026 : les citations des carnets de plus de trois mots sont paraphrasées dans « L'homotopie, de 1968 à 1991 » ; restent « construction chérie » (Grothendieck, non Quillen) et « catégorie des motifs », « very seldom occurs » (quelques mots, avec cahier et page).
+
 - [ ] Texte proposé :
 
   > Les carnets de recherche de Daniel Quillen, mort en 2011, sont mis en ligne
@@ -440,12 +442,12 @@ dans une partie réservée) :**
   > éditions établies par des mathématiciens et sans prétendre les remplacer :
   > la transcription de 164 cotes (9 414 pages) par un modèle de langage sert à
   > compter, à dater et à repérer.
-- [ ] **4.c — Ligne 160 (« Les possibilités de la méthode »).** « Sur
+- [x] **4.c — Ligne 160 (« Les possibilités de la méthode »).** « Sur
   l'ensemble des cotes, ils font voir des régularités qu'une lecture cote par
   cote ne montre pas. » Proposition :
   > Sur l'ensemble des cotes, ils font voir des régularités qu'une lecture cote
   > par cote montre moins aisément, et que cette lecture seule peut confirmer.
-- [ ] **4.d — Ligne 239 (« L'erreur sur la page »).** « Il ne voit pas toutes
+- [x] **4.d — Ligne 239 (« L'erreur sur la page »).** « Il ne voit pas toutes
   ses erreurs. Dans ses notes sur les pseudo-droites (n° 80), un « Théorème »
   affirme […] ; il est faux tel qu'il est écrit […]. » La phrase présente
   l'erreur comme une trouvaille du projet. Proposition :
@@ -465,7 +467,7 @@ dans une partie réservée) :**
   référence qui appuie la confirmation (`\moanswer`, entrée `cisinski2026mo`)
   est à relire au moment de trancher : un historien attend une source
   publiée ou une communication personnelle datée.
-- [ ] **4.f — Ligne 156 (« Le protocole »).** « Elle signale aussi deux cent
+- [x] **4.f — Ligne 156 (« Le protocole »).** « Elle signale aussi deux cent
   trente et une pistes : des énoncés qui pourraient manquer à la littérature
   […]. » Le conditionnel est déjà là. Proposition, pour le fermer :
   > Elle signale aussi deux cent trente et une pistes, des énoncés dont la
