@@ -144,3 +144,4 @@ import Grothendieck.Folder128FlatBaseChange
 import Grothendieck.Folder101Ext
 import Grothendieck.Folder101LocalCohomology
 import Grothendieck.Folder53GeometricIrreducibility
+import Grothendieck.Folder19Topoi
