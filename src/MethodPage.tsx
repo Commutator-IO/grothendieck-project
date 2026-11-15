@@ -269,6 +269,26 @@ const STARS: Record<string, 1 | 2 | 3> = {
   'article-recollement': 1,
 };
 
+const IHP_CAT = (q: string) =>
+  `https://sorbonne-universite.primo.exlibrisgroup.com/discovery/search?query=any,contains,${encodeURIComponent(q)}&tab=Everything&search_scope=MyInst_and_CI&vid=33BSU_INST:33BSU`;
+const NUMDAM = (id: string) => `https://www.numdam.org/item/${id}/`;
+const linkCls = 'text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700';
+function Where({ online, ihp }: { online?: [string, string][]; ihp?: string }) {
+  const items: [string, string][] = [...(online ?? []), ...(ihp ? [['IHP', IHP_CAT(ihp)] as [string, string]] : [])];
+  return (
+    <span className="text-[13px] text-ink-500">
+      {' '}(
+      {items.map(([label, href], i) => (
+        <span key={href}>
+          {i > 0 && ' · '}
+          <a href={href} className={linkCls}>{label}</a>
+        </span>
+      ))}
+      )
+    </span>
+  );
+}
+
 function Articles({ id = 'articles', title = 'The articles', items = ARTICLES }: { id?: string; title?: string; items?: typeof ARTICLES }) {
   const pill = 'rounded-full border border-ink-200 px-3 py-0.5 text-[12.5px] text-ink-700 transition hover:border-brand-400 hover:text-brand-700';
   return (
@@ -356,27 +376,58 @@ export function MethodPage() {
           <H2 id="reading-ega-sga">Reading EGA and SGA</H2>
           <P id="reading-ega-sga-why" className="mt-3">
             The notes assume EGA and SGA throughout. Nobody reads them cover to cover: they are references, read by chapters,
-            with a modern companion open alongside, Vakil&rsquo;s <em>The Rising Sea</em> or Hartshorne II&ndash;III, and the
-            Stacks Project, which cross-references EGA numbering. The section and exposé numbers below were checked against the
-            volumes (Numdam for EGA, the Springer editions for SGA) on 1 November 2026.
+            with a modern companion open alongside, Vakil&rsquo;s <em>The Rising Sea</em>
+            <Where online={[['online', 'https://math.stanford.edu/~vakil/216blog/']]} /> or Hartshorne II&ndash;III
+            <Where ihp="Algebraic geometry Robin Hartshorne" />, and the Stacks Project
+            <Where online={[['online', 'https://stacks.math.columbia.edu/']]} />, which cross-references EGA numbering. For the
+            homology that SGA&nbsp;4 and SGA&nbsp;5 take for granted, Hatcher&rsquo;s <em>Algebraic Topology</em>, chapters 2&ndash;3, is
+            an easy way in <Where online={[['online', 'https://pi.math.cornell.edu/~hatcher/AT/ATpage.html']]} ihp="Hatcher Algebraic topology" />.
+            The section and exposé numbers below were checked against the volumes (Numdam for EGA, the Springer editions for SGA)
+            on 1 November 2026.
           </P>
+          <p className="mt-2 text-[12.5px] text-ink-500">
+            « online » links go to a free legal copy (Numdam, arXiv, the authors&rsquo; pages); « IHP » opens a search of the
+            Sorbonne Université catalogue, which lists the holdings of the Institut Henri Poincaré library
+            (<a href="https://www.ihp.fr/fr/bibliotheque" className={linkCls}>ihp.fr/bibliotheque</a>); choose the IHP copy in the
+            availability list to consult it there.
+          </p>
           <ol className="mt-3 list-decimal space-y-1.5 pl-6">
             <li>
-              <b>EGA I</b> (2nd ed., 1971): chapter I, chapter 0 as needed. <b>EGA II</b>: §&nbsp;1 affine morphisms, §§&nbsp;2&ndash;4 Proj and
-              ample sheaves, §§&nbsp;5&ndash;7 proper, finite, valuative criteria.
+              <b>EGA I</b> (2nd ed., 1971): chapter I, chapter 0 as needed
+              <Where online={[['1st ed., Numdam', NUMDAM('PMIHES_1960__4__5_0')]]} ihp="Éléments de géométrie algébrique Grothendieck Dieudonné" />.{' '}
+              <b>EGA II</b>: §&nbsp;1 affine morphisms, §§&nbsp;2&ndash;4 Proj and
+              ample sheaves, §§&nbsp;5&ndash;7 proper, finite, valuative criteria
+              <Where online={[['Numdam', NUMDAM('PMIHES_1961__8__5_0')]]} ihp="Éléments de géométrie algébrique II étude globale élémentaire" />.
             </li>
             <li>
               <b>EGA III</b> §§&nbsp;1&ndash;4: cohomology of affine and projective morphisms, finiteness and formal functions; §&nbsp;5 for
-              formal geometry.
+              formal geometry
+              <Where online={[['Numdam, part 1', NUMDAM('PMIHES_1961__11__5_0')], ['part 2', NUMDAM('PMIHES_1963__17__5_0')]]} ihp="Éléments de géométrie algébrique III étude cohomologique des faisceaux cohérents" />.
             </li>
             <li>
               <b>EGA IV</b> by topic: §§&nbsp;2, 11, 12 flatness and descent; §§&nbsp;5&ndash;6 dimension, depth, regularity; §&nbsp;8 limits;
-              §§&nbsp;17&ndash;18 smooth, unramified and étale morphisms, the most used.
+              §§&nbsp;17&ndash;18 smooth, unramified and étale morphisms, the most used
+              <Where
+                online={[
+                  ['Numdam, part 1', NUMDAM('PMIHES_1964__20__5_0')],
+                  ['2', NUMDAM('PMIHES_1965__24__5_0')],
+                  ['3', NUMDAM('PMIHES_1966__28__5_0')],
+                  ['4', NUMDAM('PMIHES_1967__32__5_0')],
+                ]}
+                ihp="Éléments de géométrie algébrique IV étude locale des schémas"
+              />.
             </li>
             <li>
-              <b>SGA&nbsp;1</b> (étale morphisms, π₁, descent), then <b>SGA&nbsp;4½</b> before <b>SGA&nbsp;4</b> (topoi I&ndash;IV, étale
-              cohomology VII&ndash;IX, base change XII&ndash;XIII and XVI, duality XVIII), then <b>SGA&nbsp;5</b>; by topic <b>SGA&nbsp;3</b>
-              (group schemes), <b>SGA&nbsp;6</b> (Riemann&ndash;Roch), <b>SGA&nbsp;7</b> (monodromy), <b>SGA&nbsp;2</b> (local cohomology).
+              <b>SGA&nbsp;1</b> (étale morphisms, π₁, descent)
+              <Where online={[['arXiv', 'https://arxiv.org/abs/math/0206203']]} ihp="Revêtements étales et groupe fondamental SGA 1" />, then{' '}
+              <b>SGA&nbsp;4½</b> <Where ihp="Cohomologie étale SGA 4 1/2 Deligne" /> before <b>SGA&nbsp;4</b> (topoi I&ndash;IV, étale
+              cohomology VII&ndash;IX, base change XII&ndash;XIII and XVI, duality XVIII)
+              <Where ihp="Théorie des topos et cohomologie étale des schémas" />, then <b>SGA&nbsp;5</b>
+              <Where ihp="Cohomologie l-adique et fonctions L SGA 5" />; by topic <b>SGA&nbsp;3</b> (group schemes)
+              <Where online={[['new ed., online', 'https://webusers.imj-prg.fr/~patrick.polo/SGA3/']]} ihp="Schémas en groupes SGA 3" />,{' '}
+              <b>SGA&nbsp;6</b> (Riemann&ndash;Roch) <Where ihp="Théorie des intersections et théorème de Riemann-Roch SGA 6" />,{' '}
+              <b>SGA&nbsp;7</b> (monodromy) <Where ihp="Groupes de monodromie en géométrie algébrique SGA 7" />, <b>SGA&nbsp;2</b> (local
+              cohomology) <Where online={[['arXiv', 'https://arxiv.org/abs/math/0511279']]} ihp="Cohomologie locale des faisceaux cohérents et théorèmes de Lefschetz SGA 2" />.
             </li>
           </ol>
           <P id="reading-ega-sga-shortest" className="mt-3">
