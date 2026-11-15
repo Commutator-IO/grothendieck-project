@@ -1318,14 +1318,15 @@
   "key": "Oqhr-Gt66es-16790",
   "line": 893,
   "kind": "prop",
-  "status": "partial",
+  "status": "proved",
   "lean": [
    "Buffalo.AG.Part06.prop_16790",
+   "Buffalo.AG.Part06.prop_16790_tfae",
    "Buffalo.AG.Part06.exists_not_pow_of_not_perfect",
    "Buffalo.AG.Part06.isReduced_tensor_of_isSeparable"
   ],
   "mathlib": [],
-  "note": "Proved: k perfect iff k'⊗k' is reduced for every finite purely inseparable k' (⇒ for every finite k'). The conditions on arbitrary reduced algebras and extensions are not formalised."
+  "note": "The four conditions are equivalent in characteristic p (prop_16790_tfae): perfect ⇒ A ⊗ B reduced for reduced A, B by PerfectField.isReduced_tensorProduct (AxiomMath/Stacks 00I4, vendored); the converse by the counterexample k[t]/(tᵖ − x) of prop_16790."
  },
  {
   "key": "Oqhr-Gt66es-17048",
@@ -1345,28 +1346,32 @@
   "key": "Oqhr-Gt66es-17116",
   "line": 895,
   "kind": "prop",
-  "status": "partial",
+  "status": "proved",
   "lean": [
-   "Buffalo.AG.Part06.prop_17116"
+   "Buffalo.AG.Part06.prop_17116",
+   "Buffalo.AG.Part06.prop_17116_general"
   ],
   "mathlib": [
    "Algebra.FormallyUnramified.isReduced_of_field"
   ],
-  "note": "Proved for K finite over k (L arbitrary)."
+  "note": "For any two extensions K, L of a perfect field (PerfectField.isReduced_tensorProduct, AxiomMath/Stacks 00I4, vendored); prop_17116 is the case K finite."
  },
  {
   "key": "Oqhr-Gt66es-17370",
   "line": 896,
   "kind": "prop",
-  "status": "partial",
+  "status": "proved",
   "lean": [
-   "Buffalo.AG.Part06.prop_17370"
+   "Buffalo.AG.Part06.prop_17370",
+   "Buffalo.AG.Part06.prop_17370_tfae",
+   "Buffalo.AG.Part06.isReduced_tensor_of_perfect_extension"
   ],
   "mathlib": [
    "Algebra.IsGeometricallyReduced",
-   "Algebra.isReduced_of_isGeometricallyReduced"
+   "PerfectRing.lift",
+   "Module.Flat.rTensor_preserves_injective_linearMap"
   ],
-  "note": "mathlib's definition (k̄ ⊗ A reduced) gives A reduced and K ⊗ A reduced for K algebraic; the other implications are not formalised."
+  "note": "All five conditions equivalent, for any perfect extension K₁ (prop_17370_tfae): from Algebra.isGeometricallyReduced_tfae (AxiomMath/Stacks 030V) and Algebra.IsGeometricallyReduced.isReduced_tensorProduct (034N), vendored; finite purely inseparable extensions embed in K₁ by PerfectRing.lift."
  },
  {
   "key": "Oqhr-Gt66es-17834",
@@ -1384,23 +1389,25 @@
   "key": "Oqhr-Gt66es-17899",
   "line": 898,
   "kind": "prop",
-  "status": "partial",
+  "status": "proved",
   "lean": [
-   "Buffalo.AG.Part06.prop_17899"
+   "Buffalo.AG.Part06.prop_17899",
+   "Buffalo.AG.Part06.prop_17899_perfect"
   ],
   "mathlib": [],
-  "note": "Ring level: geometrically reduced ⇒ reduced; k not perfect ⇒ a reduced finite extension that is not geometrically reduced. \"k perfect ⇒ reduced implies separable\" is not formalised."
+  "note": "Separable ⇒ reduced; k not perfect ⇒ a reduced finite extension that is not separable (prop_17899); k perfect ⇒ every reduced algebra and every reduced k-scheme is separable (prop_17899_perfect: Algebra.IsGeometricallyReduced.of_perfectField and geometricallyReduced_of_isReduced, AxiomMath/Stacks 00I4, 020I, vendored)."
  },
  {
   "key": "Oqhr-Gt66es-17970",
   "line": 899,
   "kind": "prop",
-  "status": "partial",
+  "status": "proved",
   "lean": [
-   "Buffalo.AG.Part06.prop_17970"
+   "Buffalo.AG.Part06.prop_17970",
+   "Buffalo.AG.Part06.prop_17970_iff"
   ],
   "mathlib": [],
-  "note": "Direction ⇒ (base change); ⇐ not formalised."
+  "note": "Both directions: geometricallyReduced_iff_baseChange_fieldExtension (AxiomMath/Stacks 0384, vendored)."
  },
  {
   "key": "Oqhr-Gt66es-18099",
