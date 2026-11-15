@@ -259,6 +259,12 @@ const STARS: Record<string, 1 | 2 | 3> = {
   'article-quillen-lean': 2,
   'article-recollement': 1,
   'article-tangent': 3,
+  'article-lean': 3,
+  'article-problems': 3,
+  'article': 2,
+  'article-cicm': 2,
+  'article-rhm': 2,
+  'article-carbon': 1,
   'article-bigon': 2,
 };
 
@@ -357,7 +363,7 @@ export function MethodPage() {
           </p>
         </header>
 
-        <Articles />
+        <Articles items={[...ARTICLES].sort((x, y) => (STARS[y.id] ?? 0) - (STARS[x.id] ?? 0))} />
         <Articles id="preprints" title="Preprints" items={[...PREPRINTS].sort((x, y) => (STARS[y.id] ?? 0) - (STARS[x.id] ?? 0))} />
         <Articles id="drafts" title="Drafts" items={[...SOUS_ARTICLES].sort((x, y) => (STARS[y.id] ?? 0) - (STARS[x.id] ?? 0))} />
         <p className="mt-2 text-[12.5px] text-ink-500">
