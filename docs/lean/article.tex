@@ -40,16 +40,16 @@
 \newcommand{\cote}[1]{\mbox{n\textsuperscript{o}\,#1}}
 \newcommand{\lot}[3]{\href{https://grothendieck.commutator.io/\##1/#2/p#3}{#1, lot #2, p.~#3}}
 % Le fichier de la preuve vérifiée, une fois par section.
-% Un lemme général que la bibliothèque du projet démontre une fois pour toutes (lean/Grothendieck/Upstream/) :
+% Un lemme général que la bibliothèque du projet démontre une fois pour toutes (Grothendieck/Upstream/) :
 % on le cite sans en recopier la démonstration.
 % Les liens vers le code Lean pointent vers l'étiquette git de la version publiée,
 % pas vers main : le code continue d'évoluer après la publication.
 \newcommand{\leanref}{article-lean-2026-10b}
-\newcommand{\leanblob}{https://github.com/Commutator-IO/grothendieck-project/blob/\leanref/lean/Grothendieck}
+\newcommand{\leanblob}{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/Grothendieck}
 \newcommand{\general}[1]{\par\noindent\textit{Résultat général, démontré en Lean dans}\newline\href{\leanblob/Upstream/#1.lean}{\texttt{Upstream/\detokenize{#1}.lean}}\textit{ ; la démonstration n'est pas reprise ici.}\par}
 % Un fichier ajouté après l'étiquette n'y existe pas : son lien pointe vers main (\verifie[\leanblobmain]{...}).
-\newcommand{\leanblobmain}{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck}
-\newcommand{\verifie}[2][\leanblob]{\footnote{Preuve vérifiée : \href{#1/#2.lean}{\texttt{lean/Grothendieck/\detokenize{#2}.lean}}.}}
+\newcommand{\leanblobmain}{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/Grothendieck}
+\newcommand{\verifie}[2][\leanblob]{\footnote{Preuve vérifiée : \href{#1/#2.lean}{\texttt{Grothendieck/\detokenize{#2}.lean}}.}}
 % Un énoncé lié à l'un des théorèmes numérotés de la frise des œuvres (onglet
 % Timeline du site) : un losange et le numéro, qui renvoient à la frise.
 \definecolor{frise}{HTML}{2F4DA8}
@@ -117,9 +117,9 @@
 
 \section*{Introduction}\addcontentsline{toc}{section}{Introduction}
 
-Les énoncés qui suivent sont ceux des lectures modernisées, qui restituent en notation actuelle le contenu de la transcription. Chaque démonstration suit une preuve vérifiée mécaniquement en Lean~4, citée en note au titre de la section. Elle établit que l'énoncé tient sous les hypothèses écrites. Elle ne dit pas que la lecture est fidèle à la page.
+Les énoncés qui suivent sont ceux des lectures modernisées, qui restituent en notation actuelle le contenu de la transcription. Chaque démonstration suit une preuve vérifiée mécaniquement en Lean~4, citée en note au titre de la section ; les preuves s'appuient sur mathlib et sur la bibliothèque Stacks d'AxiomMath \cite{axiomstacks}. Elle établit que l'énoncé tient sous les hypothèses écrites. Elle ne dit pas que la lecture est fidèle à la page.
 
-Treize preuves s'appuient sur la bibliothèque Stacks d'AxiomMath \cite{axiomstacks}, une formalisation en Lean du Stacks Project \cite{stacks}. Elle a ce qui manque à mathlib pour ces énoncés : complexes de Koszul, platitude générique, cohomologie locale, morphismes de topos, lissité formelle pour une topologie adique. Les fichiers utilisés sont copiés sans modification sous \texttt{lean/Stacks/}, avec leur licence ; la plupart viennent de sa partie \texttt{StacksFrontier}, écrite par des agents et pas encore relue par ses mainteneurs. Une preuve qui en dépend cite l'étiquette du Stacks Project de l'énoncé qu'elle emprunte.
+Treize preuves s'appuient sur la bibliothèque Stacks d'AxiomMath \cite{axiomstacks}, une formalisation en Lean du Stacks Project \cite{stacks}. Elle a ce qui manque à mathlib pour ces énoncés : complexes de Koszul, platitude générique, cohomologie locale, morphismes de topos, lissité formelle pour une topologie adique. Le dépôt des preuves, \href{https://github.com/Commutator-IO/GrothendieckArchivesProofs}{Commutator-IO/GrothendieckArchivesProofs}, dépend à la fois de mathlib et de cette bibliothèque, épinglée au commit \texttt{c496df0}, avec la version de mathlib qu'elle utilise ; la plupart viennent de sa partie \texttt{StacksFrontier}, écrite par des agents et pas encore relue par ses mainteneurs. Une preuve qui en dépend cite l'étiquette du Stacks Project de l'énoncé qu'elle emprunte.
 
 Ces preuves sont modestes à côté d'autres travaux récents. Le 6 octobre 2026, OpenAI a publié 719 manuscrits produits par un modèle interne, non relus par des pairs, dont une partie s'accompagne de formalisations en Lean~4\footnote{\url{https://github.com/openai/math}, consulté le 10 octobre 2026. La portée des formalisations citées ici est celle que décrivent ses pages \texttt{lean/docs/008.md} et \texttt{lean/docs/312.md}.}. Quatre familles de ces manuscrits annoncent des énoncés issus du programme de Grothendieck : l'hypothèse d'homotopie ; la conjecture des sections, $p$-adique locale, et sur $\mathbb{Q}$ pour les courbes modulaires $X_0(N)$ et $X_1(N)$ de genre au moins deux ; la conjecture de Deligne--Drinfeld sur l'algèbre de Lie de Grothendieck--Teichmüller ; la conjecture de Hodge pour les variétés abéliennes à multiplication complexe et, par des théorèmes de Milne, la conjecture standard de type Hodge pour les variétés abéliennes. Deux seulement sont formalisées, en partie. Pour Deligne--Drinfeld, la formalisation établit la liberté de l'algèbre de Lie des solutions rationnelles de l'antisymétrie, de la relation à trois termes et du pentagone à quatre brins, munie du crochet d'Ihara, avec un générateur en chaque poids impair au moins égal à~3, et l'isomorphisme continu après complétion par le poids. Le transport régularisé et les conséquences pour le complexe des graphes n'y sont pas. Pour l'hypothèse d'homotopie, elle se borne à un théorème intermédiaire, rappelé dans la partie sur l'homotopie. Le projet n'a ni compilé ni vérifié ce code ; ce qui en est dit vient de ses pages de description. Les énoncés de l'annexe sont élémentaires, le plus souvent classiques, et aucun n'est une conjecture de Grothendieck.
 
@@ -337,7 +337,7 @@ Les énoncés démontrés ici sont tirés des lectures modernisées du fonds. Ce
 
 \section*{Remerciements}\addcontentsline{toc}{section}{Remerciements}
 
-L'auteur remercie Denis-Charles Cisinski, Dan Edidin et David Michael Roberts pour leurs remarques, et Michel Planat, qui a parcouru les parties sur la topologie modérée et les espaces stratifiés, sur la topologie combinatoire, les surfaces et les cartes, sur la théorie de l'homotopie et les catégories tests, et sur la géométrie anabélienne et les dessins.
+L'auteur remercie François Charles, Denis-Charles Cisinski, Dan Edidin, David Michael Roberts et Christophe Vuong pour leurs remarques, et Michel Planat, qui a parcouru les parties sur la topologie modérée et les espaces stratifiés, sur la topologie combinatoire, les surfaces et les cartes, sur la théorie de l'homotopie et les catégories tests, et sur la géométrie anabélienne et les dessins.
 
 \begin{thebibliography}{99}\small
 \bibitem{adamekrosicky1994} J.~Adámek et J.~Rosický, \emph{Locally Presentable and Accessible Categories}, London Mathematical Society Lecture Note Series 189, Cambridge University Press, 1994 ; doi:10.1017/CBO9780511600579.
