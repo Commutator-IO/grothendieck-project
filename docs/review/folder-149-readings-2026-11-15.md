@@ -983,7 +983,7 @@ Issue #156. Each bullet is one place of folder 149 where our transcription and a
 - [ ] 149 p84 batch-05:108 | reading | after « s'identifie à un sous-torseur du » | $\bigl(H^1(S, T) = \mathbb{G}_m(S)^{\wedge}\bigr)$ | $(H^1(S,T)=G_m(S)^\wedge)$
 - [ ] 149 p85 batch-05:121a | reading | after « codim $1$ va coïncider avec » | une $g_i$ | $g_{i_0}$
 - [ ] 149 p86 batch-05:142a | reading | after « germe de variété $D = \bigl(\overline{\{s\}}\bigr)_{ … » | $s$ | $s\dots$
-- [ ] 149 p87 batch-05:184 | reading | after « exactes numéroté 26 le noyau » | $I$ | $J$
+- [x] 149 p87 batch-05:184 | reading | after « exactes numéroté 26 le noyau » | $I$ | $J$
 - [ ] 149 p87 batch-05:188a | reading | after « la section de départ de » | $\mathcal{E}_{U_K}$ | $E_{U_\eta}$
 - [ ] 149 p87 batch-05:189 | reading | after « sur $\mathcal{E}_K$ elle-même définie par » | $f_K$ | le
 - [ ] 149 p87 batch-05:189a | reading | after « $f_K$ pt $K$ rat de » | $U_K$ | $U_\eta$
@@ -1003,7 +1003,7 @@ Issue #156. Each bullet is one place of folder 149 where our transcription and a
 - [ ] 149 p92 batch-05:308 | reading | after « celui du complété s'identifie de » | même | $=$
 - [ ] 149 p94 batch-05:346 | reading | after « la classe de scindages de » | $\mathcal{E}_{X_s}$ | $\mathcal E_{ X_B }$
 - [ ] 149 p94 batch-05:353 | reading | after « rationnelle envisagée du faisceau conormal » | $\mathcal{N}^{\vee}_{D_\alpha/S}$ | $\underline N_{D_\alpha,S}^{ r }$
-- [ ] 149 p95 batch-05:363a | reading | after « complété formel d'une courbe relative » | $X/S$ | $X/B$
+- [x] 149 p95 batch-05:363a | reading | after « complété formel d'une courbe relative » | $X/S$ | $X/B$
 - [ ] 149 p97 batch-05:404a | reading | after « $\mathcal{E}_K$ [illegible] inertie relative sur » | $\mathcal{E}_k$ | $\mathcal E_k\ldots$
 - [ ] 149 p102 batch-06:72 | reading | after « considération de courbes de type » | gr | $g,\nu$
 - [ ] 149 p104 batch-06:103 | reading | after « corps je note $\mathcal{E}_A$ et » | $\mathcal{E}^{\tilde{A}}_{A}$ | $\mathcal E_A^{\tilde A}$ $=\mathcal E_X^{ \tilde X }$
@@ -1062,7 +1062,7 @@ Issue #156. Each bullet is one place of folder 149 where our transcription and a
 - [ ] 149 p5 batch-01:59a | reading | after « équivalence de groupoïdes ou de » | topos | Topos
 - [ ] 149 p9 batch-01:110a | reading | after « de Galois correspond au sous-corps » | $k_0$ | $K_0$
 - [ ] 149 p17 batch-01:223a | reading | after « permet de » | reconstituer | réconstituer
-- [ ] 149 p19 batch-01:244 | reading | after « commute et ceci suffit pour » | reconstituer | réconstituer
+- [x] 149 p19 batch-01:244 | reading | after « commute et ceci suffit pour » | reconstituer | réconstituer
 - [ ] 149 p20 batch-01:248d | reading | after « on a $Z \cap \pi = … » | Th | th
 - [ ] 149 p24 batch-02:87 | reading | after « $X$ on sait que 1 » | les | Les
 - [ ] 149 p24 batch-02:93a | reading | after « son action sur les $H_1(\ , … » | ce | Ce

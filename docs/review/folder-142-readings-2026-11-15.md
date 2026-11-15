@@ -11,7 +11,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 ## 1. Places our transcription leaves illegible and the other reading reads
 
 - [ ] 142 p5 batch-01:132 | reading | after « sûr si on n'a pas » | [illegible] | une
-- [ ] 142 p6 batch-01:141 | reading | after « jacobienne n'est stable par aucune » | [illegible] | autom
+- [x] 142 p6 batch-01:141 | reading | after « jacobienne n'est stable par aucune » | [illegible] | autom
 - [ ] 142 p7 batch-01:154 | reading | after « stabilisateur de $f\in Hom _{ isot … » | [illegible] | un
 - [ ] 142 p7 batch-01:154a | reading | after « $f\in Hom _{ isot }(X,Y)$ s'identifie … » | [illegible] | gr
 - [ ] 142 p7 batch-01:155 | reading | after « de morphismes finis étales $X\to Y$ » | NB Tout sous-groupe fini de $T_{X}$ provient [illegible] stabilisateur [illegible] de cette [illegible] $f$ Th … | 7
