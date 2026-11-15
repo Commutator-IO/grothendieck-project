@@ -9,6 +9,7 @@
 % x / curly stroke is set as \chi throughout (it satisfies \gamma\chi = 2,
 % p. 127, and "2 - \chi = 1", p. 139); the product of extensions is written
 % * or \wedge as on the page, \vee where he uses it for the same object.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-15 — the edition's clean figures of the modernised reading added after the drawings 07-1, with their legend; the faithful redraws and the text are unchanged.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -153,6 +154,57 @@ d'où un \add{can.}\ iso d'ext.\ $\chi$-scindées
 Je dis qu'il est fonctoriel pour les \emph{iso}) : clair par construction. \add{Mais il y a aussi une notion} d'\emph{hom.}\ d'ext.\ $\chi$-scindées. Ça marche aussi
 
 \drawing{deux carrés emboîtés, en perspective, formés des suites $L_i \to E_i \to M_i$, $L_i' \to E_i' \to M_i'$, $L_i'' \to E_i'' \to M_i''$ et $L_i''' \to E_i''' \to M_i'''$, reliés par des flèches obliques et des signes d'égalité ($M_i' \Vert M_i$) ; le dessin est trop surchargé pour être mis en \texttt{tikz-cd} sans choisir des flèches}
+\begin{center}
+\begin{tikzpicture}[x=1.35mm,y=1.35mm,line cap=round,>={Stealth[length=1.8mm]},
+  every node/.style={inner sep=2pt},
+  eq/.style={double,double distance=1.3pt},
+  gap/.style={white,line width=4.5pt}]
+% back face (shifted by the depth vector (10,12))
+\node (L)   at (10,34) {$L_i$};
+\node (E)   at (38,34) {$E_i'$};
+\node (Mp)  at (66,34) {$M_i'$};
+\node (L3)  at (10,12) {$L_i'''$};
+\node (E3)  at (38,12) {$E_i'''$};
+\node (Mp3) at (66,12) {$M_i'$};
+% front face
+\node (L2)  at (0,22)  {$L_i''$};
+\node (E2)  at (28,22) {$E_i''$};
+\node (M)   at (56,22) {$M_i$};
+\node (L1)  at (0,0)   {$L_i'$};
+\node (E1)  at (28,0)  {$E_i'$};
+\node (M1)  at (56,0)  {$M_i$};
+% back face edges
+\draw (L) -- (E);
+\draw[->] (E) -- (Mp);
+\draw (L3) -- (E3);
+\draw[->] (Mp3) -- (E3);
+\draw (L) -- (L3);
+\draw[->] (E) -- (E3);
+\draw[eq] (Mp) -- (Mp3);
+% depth edges, back to front
+\draw[eq] (L) -- (L2);
+\draw[->] (E) -- (E2);
+\draw[->] (Mp) -- (M);
+\draw[->] (L3) -- (L1);
+\draw[->] (E3) -- (E1);
+\draw (Mp3) -- (M1);
+% front face edges, over the back ones
+\draw[gap] (L2) -- (E2);
+\draw (L2) -- (E2);
+\draw[gap] (E2) -- (M);
+\draw (E2) -- (M);
+\draw[->] (L1) -- (E1);
+\draw[->] (E1) -- (M1);
+\draw[eq,-{Implies}] (L2) -- (L1);
+\draw[gap] (E2) -- (E1);
+\draw[->] (E2) -- (E1);
+\draw[gap] (M) -- (M1);
+\draw[eq] (M) -- (M1);
+\end{tikzpicture}
+\end{center}
+
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après le dessin de la page 125 (dessin 84/07-1). Deux cubes partageant la face des $E$ : les suites $L_i \to E_i \to M_i$ et leurs copies primées, placées aux sommets, sur trois colonnes $L$, $E$, $M$ ; face avant $L_i''$, $E_i''$, $M_i$ au-dessus de $L_i'$, $E_i'$, $M_i$, face arrière $L_i$, $E_i'$, $M_i'$ au-dessus de $L_i'''$, $E_i'''$, $M_i'$. Les traits doubles, les traits sans pointe et les primes des étiquettes sont ceux du dessin ; les deux traits doubles verticaux de droite sont les signes d'égalité de la page, et plusieurs primes restent une lecture.}
+
 
 \begin{tikzcd}
   L_1 \otimes L_2 \arrow[r, hook] \arrow[d, Rightarrow] & E \arrow[r, two heads] & M_1 \otimes M_2 \arrow[ld, no head] \\

@@ -65,6 +65,7 @@
 % \ill{}: 226, nearly all on pp. 97 and 99. \uncertain{}: 19.
 % Hardest: pp. 97 and 99 (fast palimpsest, whole passages struck).
 
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-15 — the edition's clean figures of the modernised reading added after the drawings 05-1, 05-2, with their legend; the faithful redraws and the text are unchanged.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -183,6 +184,42 @@ $\Delta = 0$ ; plus bas une droite marquée « $j=0$ i.e.\ $c_4=0$ » et une
 courbe marquée « $j=12^3$ i.e.\ $c_6=0$ », qui la coupe en deux points,
 au-dessus de $p=2$ (à gauche) et de $p=3$ (à droite), reliés par des traits
 pointillés à une droite de base où ces deux points sont marqués. Légendes :}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,line cap=round,
+  pt/.style={circle,fill,inner sep=1.3pt},
+  leg/.style={font=\scriptsize,align=center,inner sep=1pt}]
+% la base et les deux points
+\draw[thick] (0,0) -- (8.4,0) node[right] {$\operatorname{Spec}\mathbf{Z}$};
+\node[pt,label={below:$p=2$}] (P2) at (2,0) {};
+\node[pt,label={below:$p=3$}] (P3) at (5.5,0) {};
+% le diviseur à l'infini
+\draw (0,5.4) -- (8.4,5.4) node[right] {$\Delta = 0$};
+% j = 0 et j = 12^3
+\draw (0,3) -- (8.4,3) node[right] {$j = 0$ ($c_4 = 0$)};
+\draw (0,4.1) .. controls (0.8,3.8) and (1.4,3.36) .. (2,3)
+  .. controls (2.6,2.64) and (3.2,2.25) .. (3.75,2.25)
+  .. controls (4.3,2.25) and (4.9,2.64) .. (5.5,3)
+  .. controls (6.4,3.54) and (7.4,4.1) .. (8.4,4.3)
+  node[right] {$j = 12^3$ ($c_6 = 0$)};
+\node[pt] (A2) at (2,3) {};
+\node[pt] (A3) at (5.5,3) {};
+\draw[dashed] (A2) -- (P2);
+\draw[dashed] (A3) -- (P3);
+% les groupes d'automorphismes aux deux points
+\node[leg] (G24) at (2.6,4.6) {groupe d'autom.\\ d'ordre $24$};
+\node[leg] (G12) at (4.9,4.6) {groupe d'autom.\\ d'ordre $12$};
+\draw[-{Stealth[length=1.8mm]}] (G24.south) .. controls +(0,-0.4) and +(0.25,0.4) .. (A2);
+\draw[-{Stealth[length=1.8mm]}] (G12.south) .. controls +(0,-0.4) and +(-0.25,0.4) .. (A3);
+% les multiplicités
+\draw (3.75,2.25) -- (3.75,1.95);
+\node[leg,anchor=north] at (3.75,1.9) {diviseur de\\ multiplicité $2$\\ (groupe d'autom.\\ d'ordre $4$ en\\ car.\ $\neq 2,3$)};
+\draw (7.2,3) -- (7.2,2.7);
+\node[leg,anchor=north] at (7.2,2.65) {diviseur de\\ multiplicité $3$\\ (groupe d'autom.\\ d'ordre $6$ en\\ car.\ $\neq 2,3$)};
+\end{tikzpicture}
+\end{center}
+
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après le dessin de la page 95 (dessin 63/05-1). Au-dessus de $\operatorname{Spec}\mathbf{Z}$, le diviseur à l'infini $M^{\infty} = \operatorname{div}\Delta$ et les diviseurs $M' = V(c_4)$ ($j = 0$) et $M'' = V(c_6)$ ($j = 12^3$), qui se rencontrent au-dessus de $p = 2$ et de $p = 3$ ; les légendes sont celles de la page.}
+
 
 \marginal{(groupe d'autom.\ d'ordre 24)}
 \note{flèche vers le point au-dessus de $p=2$ ;}
@@ -332,6 +369,50 @@ $\mu_3^{*}$ avec un point $b = \operatorname{Spec}\mathbf{F}_4$, et une droite
 marquée $\operatorname{Spec}\mathbf{Z}$ avec le point
 $\operatorname{Spec}\mathbf{F}_2$, reliés par un pointillé vertical. Une
 courbe sépare ce dessin du texte.}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,line cap=round,
+  pt/.style={circle,fill,inner sep=1.3pt}]
+% (a) page 97
+\begin{scope}
+\foreach \a in {-43,-14,15,42} \draw (\a:1.35) -- (\a+180:1.35);
+\node[pt] (a) at (0,0) {};
+\node[above=2pt] at (0,0.05) {$a$};
+\draw[decorate,decoration={brace,amplitude=5pt}] (-1.55,-1.0) -- (-1.55,1.0)
+  node[midway,left=6pt] {$M_3$};
+\node (Mp) at (2.75,0.15) {$M'_3$};
+\foreach \a in {42,15,-14}
+  \draw[-{Stealth[length=1.8mm]}] (Mp.west) .. controls +(-0.3,0) and ($(\a:1.15)+(0.3,0)$) .. ($(\a:1.15)+(0.08,0)$);
+\draw[densely dotted] (a) -- (0,-1.8);
+\draw[very thick] (-1.5,-1.8) -- (1.6,-1.8) node[pos=0,left] {$\mu_3^{*}$};
+\node[pt] (b) at (0,-1.8) {};
+\node[anchor=north west,inner sep=2pt] at (0.05,-1.85) {$b = \operatorname{Spec}\mathbf{F}_4$};
+\draw (-1.5,-3.0) -- (1.6,-3.0) node[pos=0,left] {$\operatorname{Spec}\mathbf{Z}$};
+\node[pt,label={below:$\operatorname{Spec}\mathbf{F}_2$}] at (0,-3.0) {};
+\node at (0,-4.1) {(a)};
+\end{scope}
+% (b) page 99
+\begin{scope}[xshift=7cm]
+\foreach \a in {-12,-4,5,14} \draw (\a:1.45) -- (\a+180:1.45);
+\draw (0,-0.6) -- (0,0.6);
+\node[pt] (a') at (0,0) {};
+\node[anchor=north west,inner sep=1pt] at (0.05,-0.12) {$a$};
+\draw[decorate,decoration={brace,amplitude=5pt}] (-1.6,-0.5) -- (-1.6,0.5)
+  node[midway,left=6pt] {$M'_3$};
+\draw[decorate,decoration={brace,amplitude=6pt,mirror}] (1.75,-0.9) -- (1.75,0.9)
+  node[midway,right=7pt] (M3) {$M_3$};
+\draw[very thick] (-1.5,-1.8) -- (1.6,-1.8) node[pos=0,left] {$\mu_3^{*}$};
+\node[pt,label={above right:$b$}] at (0,-1.8) {};
+\draw (-1.5,-3.0) -- (1.6,-3.0) node[pos=0,left] {$\mathbf{Z}$};
+\node[pt,label={below:$2$}] at (0,-3.0) {};
+\draw[-{Stealth[length=1.8mm]}] (2.3,-0.95) -- (2.3,-1.6);
+\draw[-{Stealth[length=1.8mm]}] (2.3,-2.05) -- (2.3,-2.8);
+\node at (0,-4.1) {(b)};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après les dessins des pages 97 (a) et 99 (b) (dessins 63/05-2 et 63/05-3 ; le croquis biffé de la page 99 est omis). Au-dessus du point $b = \operatorname{Spec}\mathbf{F}_4$ de $\mu_3^{*}$, lui-même au-dessus de $2$, les branches de $M'_3 = M_3 \cap V(c_4)$ dans $M_3$ passent toutes par le point $a$. Les branches y sont dessinées comme des droites distinctes passant par $a$ ; la page 99 conclut pourtant qu'elles ont même tangente (voir ci-dessous).}
+
 
 \page{98}
 \section*{\emph{Paramètres locaux du site modulaire} :}

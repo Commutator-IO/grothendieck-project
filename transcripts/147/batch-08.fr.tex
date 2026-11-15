@@ -5,6 +5,7 @@
 % connective prose. Notation fixed for the batch: V_{D',Y} tubular
 % neighbourhood, V^*_{D',Y} its trace on Y^* = Y \ \Theta, \Pi_1 fundamental
 % groupoid, P_{D'^*} as written.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-15 — the edition's clean figures of the modernised reading added after the drawings 08-1, 08-2, with their legend; the faithful redraws and the text are unchanged.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -31,6 +32,36 @@ V_{D'',Y} & \xrightarrow[\text{imm. loc.}]{} & V_{D',Y} & \xrightarrow[\text{imm
 \note{les flèches verticales $D''\to V_{D'',Y}$, $D'\to V_{D',Y}$ sont tracées comme des inclusions ; devant le diagramme, un renvoi biffé \struck{\ill{}}.}
 
 \drawing{À gauche du diagramme, un croquis : une bande courbe hachurée transversalement, marquée $V_{D'}$, autour d'une courbe $D'$ ; deux points de $D''$ sur $D'$, entourés chacun d'un petit disque hachuré, désignés par des flèches pointillées comme $V_{D''}$. Un numéro biffé (\struck{(2.35)}) au-dessus.}
+\begin{center}
+\begin{tikzpicture}[line cap=round,
+  pt/.style={circle, fill, inner sep=1.1pt},
+  every node/.style={font=\small}]
+% le voisinage tubulaire V_{D'}, bande autour de la courbe D'
+\filldraw[fill=black!10, line width=0.5pt]
+  (0,0) .. controls (2.8,-1) and (5.7,-1) .. (8.5,0) -- (8.5,-1)
+  .. controls (5.7,-2) and (2.8,-2) .. (0,-1) -- cycle;
+% les deux disques V_{D''} autour des points de D''
+\coordinate (p1) at (1.01,-0.82);
+\coordinate (p2) at (5.62,-1.17);
+\filldraw[fill=black!28, line width=0.5pt] (p1) circle (0.38) (p2) circle (0.38);
+\draw[line width=0.8pt] (0,-0.5) .. controls (2.8,-1.5) and (5.7,-1.5) .. (8.5,-0.5)
+  node[right] {$D'$};
+\node[pt] at (p1) {}; \node[pt] at (p2) {};
+\node at (-0.55,0.3) {$V_{D'}$};
+\node (dd) at (4.3,0.45) {$D''$};
+\draw[dashed, -{Stealth[length=1.8mm]}, shorten >=2.5pt] (dd) -- (p1);
+\draw[dashed, -{Stealth[length=1.8mm]}, shorten >=2.5pt] (dd) -- (p2);
+\node (vd) at (3.3,-2.75) {$V_{D''}$};
+\draw[dashed, -{Stealth[length=1.8mm]}] (vd) -- ($(p1)!0.4cm!(vd)$);
+\draw[dashed, -{Stealth[length=1.8mm]}] (vd) -- ($(p2)!0.4cm!(vd)$);
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après le croquis de la page 141
+(dessin 147/08-1). Le voisinage tubulaire $V_{D'}$, bande autour de la courbe
+$D'$ ; deux points de $D''$ sur $D'$, chacun dans un petit disque, son
+voisinage $V_{D''}$ : la situation $D'' \to D' \to Y$ du diagramme de
+fonctorialité.}
+
 
 \struck{Dans} Pour l'instant on n'a pas utilisé le diviseur $\Theta$ à croisements normaux dans $Y$ (définissant l'ouvert $Y^*=Y\setminus\Theta$). Nous allons considérer maintenant l'image inverse de $Y^*$ dans $V_{D',Y}$ et $V_{D'',Y}$, soient $V^*_{D',Y}$ et $V^*_{D'',Y}$, s'insérant dans un diagramme
 
@@ -48,6 +79,47 @@ V_{D'',Y}\setminus\Theta_{D'',Y} & & V_{D',Y}\setminus\Theta_{D',Y} & &
 \marginal{\emph{NB} $V^*_{D'',Y}$ a la structure du complémentaire d'un diviseur à croisements normaux $\Theta''$, dans un voisinage tubulaire de \uncertain{$\Theta''(d_0)^*$} — et analogue pour $V^*_{D',Y}$.}
 
 \drawing{Une bande courbe (le voisinage tubulaire), traversée par une courbe centrale ; en deux points, une branche transverse coupe la courbe, et autour de chaque point quatre quadrants hachurés ; une flèche désigne les branches comme $\Theta_{D',Y}$.}
+\begin{center}
+\begin{tikzpicture}[x=0.95mm, y=0.95mm, line cap=round,
+  every node/.style={font=\small}]
+\def\haut{(2.4,-9.8) (26.8,-18.3) (63.4,-14.6) (100,-19.5)}
+\def\ame{(8.5,-18.3) (23.2,-24.2) (45.1,-25.8) (78,-27.6) (100,-25.6)}
+% la bande, coupee a droite par le bord du dessin
+\fill[black!10] plot[smooth, tension=0.55] coordinates {\haut}
+  -- plot[smooth, tension=0.55] coordinates {(100,-34.2) (75.6,-37.8) (51.2,-39) (20.7,-34.2) (4.9,-22)}
+  -- cycle;
+\draw[line width=0.5pt] plot[smooth, tension=0.55] coordinates {\haut};
+\draw[line width=0.5pt] plot[smooth, tension=0.55] coordinates {(4.9,-22) (20.7,-34.2) (51.2,-39) (75.6,-37.8) (100,-34.2)};
+\draw[line width=0.5pt] (2.4,-9.8) -- (4.9,-22);
+% autour des deux points de croisement, les quatre quadrants hachures
+\foreach \p/\u/\l in {{(23.2,-24.2)}/{(25.5,-16.0)}/{(20.9,-32.4)}, {(78,-27.6)}/{(77.4,-19.6)}/{(78.6,-35.6)}} {
+  \fill[pattern=north east lines] \p circle (5.5);
+  \begin{scope}
+    \clip \p circle (5.5);
+    \draw[black!10, line width=3pt] plot[smooth, tension=0.55] coordinates {\ame};
+    \draw[black!10, line width=3pt] \u -- \l;
+  \end{scope}
+  \draw[line width=0.5pt] \p circle (5.5);
+}
+% la courbe centrale et les deux branches transverses
+\draw[line width=1.1pt] plot[smooth, tension=0.55] coordinates {\ame};
+\draw[line width=0.8pt] (25.5,-16.0) -- (20.9,-32.4);
+\draw[line width=0.8pt] (77.4,-19.6) -- (78.6,-35.6);
+\node[circle, fill, inner sep=1.2pt] at (23.2,-24.2) {};
+\node[circle, fill, inner sep=1.2pt] at (78,-27.6) {};
+% la marque Theta_{D',Y}
+\node (th) at (55,-7.5) {$\Theta_{D',Y}$};
+\draw[-{Stealth[length=1.8mm]}, shorten >=1pt] (th) -- (25.3,-16.8);
+\draw[-{Stealth[length=1.8mm]}, shorten >=1.5pt] (th) -- (47,-25.9);
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après le dessin de la page 142
+(dessin 147/08-2). Le voisinage tubulaire $V_{D',Y}$ (la bande, coupée à
+droite par le bord du dessin), traversé par la courbe $D'$ ; en deux points,
+une branche transverse la coupe, et autour de chacun quatre quadrants hachurés.
+La marque $\Theta_{D',Y}$, image inverse de $\Theta$ dans $V_{D',Y}$,
+désigne de ses flèches une branche transverse et la courbe $D'$.}
+
 
 Nous pouvons maintenant définir
 \[

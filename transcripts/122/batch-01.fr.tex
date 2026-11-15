@@ -72,6 +72,7 @@
 % arrowheads of the diagram); p. 16 (cube diagrams only described); the
 % connective prose throughout.
 
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-15 — the edition's clean figures of the modernised reading added after the drawings 01-5, with their legend; the faithful redraws and the text are unchanged.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -485,6 +486,119 @@ $\emptyset$, l'autre sur les lettres correspondantes $V'$, $X'_{\eta}$,
 $V'_{s}$, $V'_{s} \times \eta$, $X'_{\eta}$, $e$, $(s,t)$, $t$ ; plusieurs
 régions hachurées, des flèches repassées. Ils ne sont pas reproduits}
 \drawing{au milieu de la page, premier diagramme en perspective : les lettres $S$, $W$, $T$ en haut, $P$, $Q$, $M$, $R$, $N$, $t$ au milieu, $T$ et $S$ repassés, $(s,t)$, $\emptyset$ et $t$ en bas, reliées par des flèches montantes dont plusieurs épaisses ; des ovales au crayon entourent des groupes de lettres ; deux plages hachurées, à gauche et à droite en bas.}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,line cap=round,>={Stealth[length=1.8mm]},
+  every node/.style={inner sep=2pt},
+  hk/.style={{Hooks[right]}->},
+  dot/.style={circle,fill,inner sep=0.8pt},
+  ring/.style={circle,draw,fill=white,inner sep=1pt},
+  oval/.style={gray,thin}]
+% (a) the model
+\node (Stop) at (1.7,4.8) {$S$};
+\node (W)    at (4.3,4.8) {$W$};
+\node (Ttop) at (6.9,4.8) {$T$};
+\node (s)    at (0.4,3.7) {$s$};
+\node (P)    at (3.0,3.7) {$P$};
+\node (Q)    at (5.6,3.7) {$Q$};
+\node (t)    at (8.2,3.7) {$t$};
+\node (M)    at (1.7,2.6) {$M$};
+\node (R)    at (4.3,2.8) {$R$};
+\node[inner sep=0.5pt] at (4.3,2.43) {\rotatebox{90}{$=$}};
+\node (TS)   at (4.3,2.07) {$T \times S$};
+\node (N)    at (6.9,2.6) {$N$};
+\node (T)    at (3.0,1.15) {$\boldsymbol{T}$};
+\node (S)    at (5.6,1.15) {$\boldsymbol{S}$};
+\node (st)   at (4.3,0.25) {$(s,t)$};
+\node (e)    at (4.3,-0.75) {$\emptyset$};
+\node (tl)   at (6.8,0.0) {$t$};
+\node (Tl)   at (8.3,0.95) {$T$};
+\node at (0.15,1.45) {$s$};
+\node at (1.35,-0.05) {$s$};
+% pencil ovals
+\draw[oval,rotate around={-36:(3.65,3.25)}] (3.65,3.25) ellipse[x radius=1.2,y radius=0.42];
+\draw[oval,rotate around={36:(4.95,3.25)}] (4.95,3.25) ellipse[x radius=1.2,y radius=0.42];
+\draw[oval,rotate around={-47:(2.35,1.88)}] (2.35,1.88) ellipse[x radius=1.15,y radius=0.42];
+\draw[oval,rotate around={47:(6.25,1.88)}] (6.25,1.88) ellipse[x radius=1.15,y radius=0.42];
+% hatchings
+\fill[pattern=north east lines,pattern color=gray] (1.05,0.75) ellipse[x radius=0.75,y radius=0.45];
+\fill[pattern=north east lines,pattern color=gray,rotate around={35:(7.45,1.2)}] (7.45,1.2) ellipse[x radius=0.65,y radius=0.3];
+% arrows
+\draw[gray] (s) -- (Stop);
+\draw[->] (M) -- ($(M)!0.78!(s)$);
+\draw[->] (P) -- (Stop);
+\draw[hk] (P) -- node[dot,pos=0.45] {} (W);
+\draw[hk] (Q) -- node[dot,pos=0.45] {} ($(Q)!0.72!(W)$);
+\draw[->] (Q) -- (Ttop);
+\draw[->] (t) -- (Ttop);
+\draw[hk] (M) -- node[dot] {} (P);
+\draw[hk] (R) -- node[ring] {} (P);
+\draw[hk] (R) -- node[dot] {} (Q);
+\draw[hk] (N) -- (Q);
+\draw[->] (N) -- (t);
+\draw[hk] (T) -- node[font=\scriptsize,inner sep=0pt] {$\times$} (M);
+\draw[hk] (T) -- node[dot] {} (TS);
+\draw[hk] (S) -- node[dot] {} (TS);
+\draw[hk] (S) -- node[font=\scriptsize,fill=white,inner sep=0.3pt] {$\ast$} (N);
+\draw[hk] (st) -- (T);
+\draw[hk] (st) -- (S);
+\draw[hk] (e) -- (st);
+\draw[->] (S) -- (tl);
+\draw[dashed] (tl) -- (Tl);
+\node at (4.3,-1.5) {(a)};
+\end{tikzpicture}
+
+\bigskip
+
+\begin{tikzpicture}[x=1cm,y=1cm,line cap=round,>={Stealth[length=1.8mm]},
+  every node/.style={inner sep=2pt},
+  hk/.style={{Hooks[right]}->}]
+% (b) its geometric counterpart
+\coordinate (Stop) at (1.7,4.8);
+\node (W)    at (4.3,4.8) {$V'$};
+\node (Ttop) at (6.9,4.8) {$V'_s$};
+\node (s)    at (0.4,3.7) {$s$};
+\node (P)    at (3.0,3.7) {$X'_\eta$};
+\node (Q)    at (5.6,3.7) {$V'_s$};
+\node (t)    at (8.2,3.7) {$t$};
+\node (M)    at (1.7,2.6) {$X'_\eta$};
+\node (R)    at (4.3,2.6) {$V'_s \times \eta$};
+\node (N)    at (6.9,2.6) {$e$};
+\node (T)    at (3.0,1.15) {$V'_s$};
+\node (S)    at (5.6,1.15) {$\eta$};
+\node (st)   at (4.3,0.25) {$(s,t)$};
+% frame round X'_eta and V'_s x eta, pencil frame round the lower X'_eta and V'_s
+\draw[double,double distance=1.2pt,rounded corners=3pt,rotate around={-40:(3.65,3.15)}] (1.75,2.55) rectangle (5.55,3.75);
+\draw[gray,thin,rounded corners=3pt,rotate around={-47:(2.35,1.88)}] (0.9,1.43) rectangle (3.8,2.33);
+% hatched quadrilateral at the right, with the chevron at its corner and the loop beside it
+\draw[pattern=north east lines,pattern color=gray] (6.05,0.55) -- (6.75,-0.25) -- (7.95,0.55) -- (7.25,1.35) -- cycle;
+\node[fill=white,inner sep=1pt] (tl) at (6.95,0.35) {$t$};
+\draw (8.05,0.8) -- (8.25,0.55) -- (8.0,0.4);
+\draw (8.3,-0.05) circle[radius=0.1];
+% arrows
+\draw[->] (s) -- (Stop);
+\draw[->] (P) -- (Stop);
+\draw[->] (M) -- (s);
+\draw[hk] (P) -- (W);
+\draw[hk] (Q) -- (W);
+\draw[->] (Q) -- node[pos=0.25,above left,inner sep=0.5pt] {$\scriptstyle\sim$} (Ttop);
+\draw[->] (t) -- (Ttop);
+\draw[->] (N) -- node[pos=0.5,above left,inner sep=0.5pt] {$\scriptstyle\sim$} (t);
+\draw[hk] (N) -- (Q);
+\draw[->] (M) -- (P);
+\draw[->] (T) -- (M);
+\draw[->] (T) -- (R);
+\draw[->] (R) -- (P);
+\draw[->] (R) -- (Q);
+\draw[->] (S) -- (R);
+\draw[->] (S) -- (N);
+\draw[->] (st) -- (T);
+\draw[->] (st) -- (S);
+\node at (4.3,-0.75) {(b)};
+\end{tikzpicture}
+\end{center}
+
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après les deux dessins de la page 16 (dessins 122/01-5 et 01-6), réunis en deux panneaux sur une même disposition. (a) Le treillis des morceaux du modèle, de $\emptyset$ et du point-base $(s,t)$ jusqu'à $W$ en passant par $\boldsymbol{T}$, $\boldsymbol{S}$, $M$, $R = T \times S$, $N$, puis $P$, $Q$, et vers les bases $S$, $T$ ; les ovales gris sont au crayon sur la page, les points, l'anneau, la croix et l'astérisque sont portés par les flèches, et deux plages hachurées sont figurées en gris. Ce dessin est partiel : les flèches de $M$ vers $s$ et de $Q$ vers le haut s'arrêtent sans atteindre de lettre sûre. (b) Les objets correspondants selon le dictionnaire de la page : $V'$, $X'_\eta$ (deux fois), $V'_s$, $V'_s \times \eta$, $e$, $\eta$ ; le sommet en haut à gauche, raturé sur la page, est laissé sans nom, et une lettre biffée à droite n'est pas reprise.}
+
 \drawing{au-dessous, second diagramme en perspective, sur les lettres correspondantes : $V'$ et $V'_s$ en haut, $X'_{\eta}$, $V'_s$, $t$, $e$ au milieu, $X'_{\eta}$, $V'_s \times \eta$, $V'_s$, $\eta$, $(s,t)$, $t$ en bas, reliées par des flèches montantes épaisses ; un cadre en traits doubles et un cadre au crayon ; à droite, un quadrilatère hachuré.}
 
 \marginal{$D^{1} \times B \sim B$, $\ S^{1} \times B$ ; \struck{$H^{i}(B) \times H^{n-i}(B)$} $\ H^{i}(B)$}

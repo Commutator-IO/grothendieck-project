@@ -11,6 +11,7 @@
 % All twenty pages are in his hand and transcribed.
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-15 — the edition's clean figures of the modernised reading added after the drawings 08-1, with their legend; the faithful redraws and the text are unchanged.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -124,6 +125,48 @@ donc d'identifier $V_s$ et $V_{\bar s}$.
 au-dessus de $S$ : $V \leftarrow \bar V$, $V_\eta$, $V_{\bar\eta}$ en haut, $S$, $\bar S$,
 $\eta$, $\bar\eta$, $s$ en bas, reliés par des flèches ; plusieurs traits sont repassés et
 une partie du croquis est biffée.}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,line cap=round,>={Stealth[length=2mm]},
+  every node/.style={inner sep=2pt},
+  over/.style={preaction={draw=white,line width=3.2pt,arrows=-}}]
+% front face
+\node (V)  at (0,2.4) {$V$};
+\node (Vb) at (3,2.4) {$\bar V$};
+\node (S)  at (0,0)   {$S$};
+\node (Sb) at (3,0)   {$\bar S$};
+% back face
+\node (Ve)  at (1.5,1.4)  {$V_\eta$};
+\node (Veb) at (4.5,1.4)  {$V_{\bar\eta}$};
+\node (e)   at (1.5,-1.0) {$\eta$};
+\node (eb)  at (4.5,-1.0) {$\bar\eta$};
+% the closed points
+\node (s)  at (-0.9,0.75) {$s$};
+\node (sb) at (2.25,0.8)  {$\bar s$};
+% back edges first
+\draw (V) -- (Ve);
+\draw (Vb) -- (Veb);
+\draw (Ve) -- (Veb);
+\draw (Ve) -- (e);
+\draw (Veb) -- (eb);
+\draw[->] (eb) -- (e);
+\draw[->] (e) -- (S);
+\draw[->] (eb) -- (Sb);
+% front edges, over the back ones
+\draw[->] (Vb) -- (V);
+\draw (V) -- (S);
+\draw[->,over] (Vb) -- (Sb);
+\draw[->,over] (Sb) -- (S);
+\draw[->] (s) -- (S);
+\draw[->] (sb) -- (Sb);
+% the second V over S, at the right
+\node (V2) at (6.2,1.6)  {$V$};
+\node (S2) at (6.2,-0.2) {$S$};
+\draw (V2) -- (S2);
+\end{tikzpicture}
+\end{center}
+
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après le dessin de la page 143 (dessin 34/08-1). Un cube de schémas au-dessus de $S$ : sur la face avant, $\bar V \to V$ au-dessus de $\bar S \to S$ ; sur la face arrière, $V_\eta$ et $V_{\bar\eta}$ au-dessus de $\eta \leftarrow \bar\eta$ ; les points fermés $s$ et $\bar s$ s'envoient dans $S$ et $\bar S$. Les traits sans pointe sont sans pointe sur la page ; à droite, un second $V$ au-dessus de $S$.}
+
 
 \page{144}
 \note{Pagination de l'auteur « V.17 ».}

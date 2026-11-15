@@ -10,6 +10,7 @@
 % landscape sheet of diagrams: its list of sets is transcribed, the diagrams
 % are described. The connective prose is often a fast hand; the formulas
 % carry better than the words between them, and the apparatus says so.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-15 — the edition's clean figures of the modernised reading added after the drawings 04-9, 04-12, with their legend; the faithful redraws and the text are unchanged.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -293,6 +294,47 @@ i.e. c'est le sous-groupe de $\mathrm{Aut}\,\tau \times (\pm 1)^2$ formé \uncer
 \note{l'argument de $\mathrm{sg}$ est écrit comme un $\tau$ ; on lit $u$ d'après les triples $u, \alpha, \beta$. Les lettres $\alpha$ et $\beta$ du premier membre sont surchargées.}
 
 \drawing{un cube de revêtements, flèches marquées de leur degré (2 ou 3). Sommets lisibles : « $\tau$ = diagonales » relié par 2 à « sommets » ; « côtés » ; « rep.\ sym. » ; « sommets orientés $\simeq$ côtés $\simeq$ repères » ; $\varepsilon$ ; « triangles inscrits » ; « $\varepsilon' = \varepsilon \wedge \omega$, triangles coinscrits » ; « $\varepsilon \times \omega$, triangles inscrits orientés » ; « $\omega = \omega(\tau)$, orientations » ; le point $e$. Les flèches convergent vers $e$ ; plusieurs flèches et étiquettes du coin supérieur gauche sont surchargées et illisibles.}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,line cap=round,line join=round,
+  >={Stealth[length=1.8mm]}, font=\footnotesize,
+  ob/.style={align=center,inner sep=2pt},
+  deg/.style={font=\scriptsize,inner sep=1.5pt},
+  gap/.style={preaction={draw,white,line width=3pt,-}}]
+% face du haut
+\node[ob] (tau) at (0,0) {$\tau$ = diagonales};
+\node[ob] (rep) at (5.5,0) {rep.\ sym.};
+\node[ob] (som) at (3.2,2.6) {sommets};
+\node[ob] (F) at (8.7,2.6) {sommets orientés $\simeq$\\ côtés $\simeq$ repères};
+\node[ob] (cot) at (4.35,1.3) {côtés};
+% face du bas
+\node[ob] (e) at (0,-5) {$e$};
+\node[ob] (om) at (5.5,-5) {$\omega = \omega(\tau)$\\ orientations};
+\node[ob] (TI) at (2.85,-2.4) {triangles inscrits};
+\node[ob] (eo) at (8.7,-2.4) {$\varepsilon \times \omega$\\ triangles inscrits orientés};
+\node[ob] (ep) at (4.1,-3.75) {$\varepsilon' = \varepsilon \wedge \omega$\\ triangles coinscrits};
+\node[ob] (eps) at (1.8,-1.4) {$\varepsilon$};
+% arêtes arrière et intérieures
+\draw[->] (eo) -- node[deg,above,pos=0.3] {$2$} (TI);
+\draw[->] (F) -- node[deg,above] {$2$} (som);
+\draw[->] (F) -- node[deg,above,pos=0.45] {$2$} (cot);
+\draw[->] (F) -- (rep);
+\draw[->] (F) -- (eo);
+\draw[->] (eo) -- node[deg,above,pos=0.4] {$2$} (ep);
+\draw[->] (eo) -- node[deg,below right] {$2$} (om);
+\draw[->] (som) -- node[deg,above left] {$2$} (tau);
+\draw[->] (TI) -- node[deg,above left] {$2$} (e);
+\draw[->] (cot) -- node[deg,below right,pos=0.25] {$2$} (eps);
+\draw[->] (eps) -- node[deg,left] {$2$} (e);
+\draw[->,gap] (cot) -- (ep);
+% arêtes avant
+\draw[gap] (rep) -- (om);
+\draw[->,gap] (rep) -- node[deg,below,pos=0.3] {$2$} (tau);
+\draw[->] (tau) -- node[deg,left] {$3$} (e);
+\draw[->] (om) -- node[deg,below] {$2$} (e);
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après le dessin de la page 76 (dessin 74/04-9). Le « cube » des revêtements entre les ensembles attachés à un hexagone : en haut, les repères (« sommets orientés $\simeq$ côtés $\simeq$ repères ») et leurs images, sommets, côtés, « rep.\ sym. » et diagonales $\tau$ ; en bas, $\varepsilon \times \omega$, ses quotients $\varepsilon'$, triangles inscrits, orientations $\omega$, et le point $e$ ; les flèches portent le degré écrit sur la page, quand il l'est. Le coin supérieur gauche est surchargé : la répartition des degrés autour de $\tau$, l'origine des flèches qui partent de l'amas d'étiquettes en haut à droite, et celle de la flèche verticale qui descend vers $\varepsilon'$ sont des lectures ; la page note à part $\varepsilon$ et « triangles inscrits », et la figure les garde séparés.}
+
 
 NB Tous les carrés sont cartésiens, y compris les petits carrés horizontaux de forme triangulaire $\nwarrow \leftarrow \uparrow$.
 
@@ -380,6 +422,54 @@ Soit $H_{tr}$ l'ens. des 2 « triangles inscrits » — c'est $\varepsilon$ — 
 On a maintenant le diagramme
 
 \drawing{un cube de revêtements analogue à celui de la page 78 : $H_r$ (marqué $D_6$) $\xrightarrow{2} H_s$, $H_r \to H_{p'}$ (marqué $\mathfrak{S}_3$), $H_{s^*}$, $H_d$ (flèches « opp » et 2), $H_{trr}$, $H_{tr}$ (marqué $\mathbb{F}_2^2$), $H_\omega$, $H_{tr^*}$, $e$ ; flèches verticales de degré 3, les autres de degré 2. À gauche, un petit hexagone à triangles inscrits en pointillés.}
+\begin{center}
+\begin{tikzpicture}[x=1.15cm,y=1cm,line cap=round,line join=round,
+  >={Stealth[length=1.8mm]}, font=\small,
+  ob/.style={inner sep=2pt},
+  deg/.style={font=\scriptsize,inner sep=1.5pt},
+  gap/.style={preaction={draw,white,line width=3pt,-}}]
+% le petit hexagone et ses deux triangles inscrits
+\begin{scope}[shift={(-2.1,-2)},x=0.6cm,y=0.6cm]
+\foreach \i in {0,...,5} \coordinate (h\i) at (60*\i:1);
+\draw (h0) -- (h1) -- (h2) -- (h3) -- (h4) -- (h5) -- cycle;
+\draw[densely dotted] (h0) -- (h2) -- (h4) -- cycle;
+\draw[densely dotted] (h1) -- (h3) -- (h5) -- cycle;
+\end{scope}
+% étage du haut
+\node[ob,label={[font=\scriptsize]right:$D_{6}$}] (Hr) at (7.5,0) {$H_{r}$};
+\node[ob] (Hs) at (5.05,1.0) {$H_{s}$};
+\node[ob,label={[font=\scriptsize,inner sep=1pt]above:$\mathfrak{S}_{3}$}] (Hp) at (3.75,0) {$H_{p'}$};
+\node[ob] (Hss) at (2.45,-1.0) {$H_{s^{*}}$};
+\node[ob] (Hd) at (0,0) {$H_{d}$};
+% étage du bas
+\node[ob,label={[font=\scriptsize]right:$\mathbb{F}_{2}^{2}$}] (Htr) at (7.5,-4) {$H_{tr}$};
+\node[ob] (Htrr) at (5.05,-3) {$H_{trr}$};
+\node[ob] (Hw) at (3.75,-4) {$H_{\omega}$};
+\node[ob] (Htrs) at (2.45,-5) {$H_{tr^{*}}$};
+\node[ob] (e) at (0,-4) {$e$};
+% arrière
+\draw[->] (Hr) -- node[deg,above] {$2$} (Hs);
+\draw[->] (Htr) -- node[deg,above] {$2$} (Htrr);
+\draw[->] (Hs) -- node[deg,right,pos=0.3] {$3$} (Htrr);
+\draw[->] (Htrr) -- node[deg,above,pos=0.3] {$2$} (e);
+% milieu
+\draw[->,gap] (Hr) -- node[deg,above,pos=0.3] {$2$} (Hp);
+\draw[->] (Htr) -- (Hw);
+\draw[->,gap] (Hp) -- (Hw);
+\draw[->] (Hp) -- node[deg,above] {$2$} (Hd);
+\draw[->] (Hw) -- node[deg,above,pos=0.35] {$2$} (e);
+% avant
+\draw[->,gap] (Hr) -- node[deg,below,pos=0.2] {$2$} (Hss);
+\draw[->] (Htr) -- (Htrs);
+\draw[->,gap] (Hss) -- node[deg,right,pos=0.55] {$3$} (Htrs);
+\draw[->] (Hss) -- node[deg,above right,pos=0.5] {$2$} node[font=\scriptsize,below left,pos=0.55] {opp} (Hd);
+\draw[->] (Htrs) -- node[deg,below left] {$2$} (e);
+\draw[->] (Hr) -- node[deg,right] {$3$} (Htr);
+\draw[->] (Hd) -- node[deg,left] {$3$} (e);
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après le dessin de la page 79 (dessin 74/04-12). Le cube des revêtements de l'hexagone : de $H_{r}$, marqué $D_{6}$, aux espaces homogènes $H_{s}$, $H_{p'}$, $H_{s^{*}}$, $H_{d}$ en haut et, en bas, $H_{tr}$ (marqué $\mathbb{F}_{2}^{2}$), $H_{trr}$, $H_{\omega}$, $H_{tr^{*}}$ et le point $e$ ; seuls les degrés écrits sur la page sont reportés. Les indices du milieu ($H_{p'}$, $H_{s^{*}}$, $H_{trr}$) sont surchargés et lus comme dans la transcription, et l'arrivée de deux des flèches de la rangée du haut en $H_{p'}$ ou en $H_{d}$ est en partie une lecture. À gauche, le petit hexagone de la page, ses deux triangles inscrits en pointillés.}
+
 
 NB Dans les carrés, \uncertain{contenant} les flèches hor. de degré 2 \ill{} 3
 

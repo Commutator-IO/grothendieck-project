@@ -16,6 +16,7 @@
 % points to (U and y introduced), and the small X-bar / S diagram set in
 % tikz-cd, after Michel's check (#132: not a drawing, a frame round text to insert).
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-15 — the edition's clean figures of the modernised reading added after the drawings 09-4, 09-5, 09-6, with their legend; the faithful redraws and the text are unchanged.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -194,12 +195,65 @@ $\pi_1(X', \bar x) \to \pi_1(X, \bar x)$ \qquad $P \subset I$ \qquad $P$ opère 
 $X_0 =$ \uncertain{courbe} \uncertain{elliptique} \drawing{une droite portant deux points : « origine $0$ » et $x$.}
 
 $X = $ \drawing{une courbe à un point double (une boucle).}
+\begin{center}
+\begin{tikzpicture}[x=0.5mm,y=0.5mm,line cap=round]
+\node[anchor=east] at (8,-44) {$X = {}$};
+\draw[semithick] plot[smooth, tension=0.6] coordinates {(12,-44) (20,-36) (35,-32) (48,-37) (56,-46) (60,-57) (54,-67) (43,-69) (35,-62) (36,-52) (43,-44) (51,-38) (65,-34) (90,-33)};
+\end{tikzpicture}
+\end{center}
+
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après le dessin de la page 170 (dessin 34/09-4). La courbe nodale du brouillon : une courbe à un point double, qui fait une boucle.}
+
 
 \[
 H^0(K, A) \longrightarrow H^1(K, T_\ell(A))
 \]
 
 \drawing{Diagramme de schémas : en haut $X \leftarrow X_K \leftarrow X_{\tilde U}$, en bas $S \hookleftarrow U \leftarrow \bar U$, flèches verticales dans les deux sens (projections et sections) entre $X$ et $S$, $X_K$ et $U$ ; au milieu $X$ (en gras) $\Leftarrow \tilde X$, et $s \leftarrow \bar s$ sous $U$ et $\bar U$ ; à droite, $F_{\bar a}$.}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,line cap=round,>={Stealth[length=2mm]},
+  every node/.style={inner sep=2pt},
+  over/.style={preaction={draw=white,line width=3.2pt,arrows=-}}]
+% back: X <- X_K <- X_U~ over S <-' U <- U-bar
+\node (X)  at (0,3)   {$X$};
+\node (XK) at (2,3)   {$X_K$};
+\node (XU) at (5,3)   {$X_{\tilde U}$};
+\node (S)  at (0,0.2) {$S$};
+\node (U)  at (2,0.2) {$U$};
+\node (Ub) at (5,0.2) {$\bar U$};
+% front: bold X <= X~ over s <- s-bar
+\node (Xb) at (3.2,1.8)  {$\mathbf{X}$};
+\node (Xt) at (6.2,1.8)  {$\tilde X$};
+\node      at (7.35,1.8) {$F_{\bar a}$};
+\node (s)  at (3.2,-1.0) {$s$};
+\node (sb) at (6.2,-1.0) {$\bar s$};
+% back edges
+\draw[->] (XK) -- (X);
+\draw[->] (XU) -- (XK);
+\draw[->] ([xshift=2pt]X.south) -- ([xshift=2pt]S.north);
+\draw[->] ([xshift=-3pt]S.north) to[bend left=40] ([xshift=-3pt]X.south);
+\draw[->] ([xshift=2pt]XK.south) -- ([xshift=2pt]U.north);
+\draw[->] ([xshift=-3pt]U.north) to[bend left=40] ([xshift=-3pt]XK.south);
+\draw[{Hooks[right]}->] (U) -- (S);
+\draw[->] (Ub) -- (U);
+\draw (XU) -- (5,1.3);
+% obliques, front to back
+\draw[->] (Xb) -- (XK);
+\draw[->] (Xt) -- (XU);
+\draw[->] (s) -- (U);
+\draw[->] (sb) -- (Ub);
+% front edges, over the back ones
+\draw[white,line width=5pt,shorten <=6pt,shorten >=6pt] (Xt) -- (Xb);
+\draw[-{Implies},double equal sign distance,shorten <=1pt,shorten >=1pt] (Xt) -- (Xb);
+\draw[white,line width=4pt,shorten <=8pt,shorten >=8pt] (Xb) -- (s);
+\draw (Xb) -- (s);
+\draw (Xt) -- (sb);
+\draw[->] (sb) -- (s);
+\end{tikzpicture}
+\end{center}
+
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après le dessin de la page 170 (dessin 34/09-5), sur le brouillon que la rédaction n'intègre pas. Au fond, $X \leftarrow X_K \leftarrow X_{\tilde U}$ au-dessus de $S \hookleftarrow U \leftarrow \bar U$, avec une projection et une section entre $X$ et $S$ et entre $X_K$ et $U$ ; devant, $\mathbf{X} \Leftarrow \tilde X$ au-dessus de $s \leftarrow \bar s$, relié au fond par des flèches obliques ; $F_{\bar a}$ est écrit à droite. Le trait vertical sous $X_{\tilde U}$ s'arrête sur la page peu après avoir croisé $\mathbf{X} \Leftarrow \tilde X$ ; on le laisse inachevé.}
+
 
 \begin{tikzcd}
 B_\Gamma \arrow[d] & B_\pi \arrow[l] \arrow[d] & \\
@@ -249,7 +303,45 @@ Soit $U_K$ un ouvert affine \uncertain{dense} de $X_K$, \struck{Alors} contenant
 \marginal{corps résiduel parfait ? Mais on s'y ramène pour prouver 1.3, \struck{par réduct.\ au \uncertain{parfait}} \uncertain{à un $p$-groupe} \struck{\ill{}} \ill{} $I$, cf.\ $I$…}
 
 \page{175}\note{p.~11 de l'auteur.}
-terminée si \add{les $g_i(S)$} \struck{nous prouvons que} sont mutuellement disjoints et contenus dans l'ouvert de lissité de $\bar X$ sur $S$. \struck{Il faut \ill{} de} \struck{\ill{}, il faut examiner les \uncertain{cas} qui peuvent se présenter : a) \ill{} $g_i(S)$ \ill{} tel que $g_i(S)$ soit un pt double de $X_s$.}\drawing{En marge gauche : la fibre $X_s$, verticale, coupée en un point par la section $g_i(S)$, horizontale.} \struck{Faisant éclater} Mais si $D$ est le diviseur $X_s + \sum g_i(S)$ sur le schéma régulier $\bar X$, on sait (\quad) que, quitte à faire éclater un nb fini de fois des pts fermés de $\bar X$ (qui sont nécessairement dans $\bar X_s$, donc le processus ne touche pas à $\bar X_K$, ni a fortiori à $X_K$), on peut supposer que $D$ est à \emph{croisements normaux}.
+terminée si \add{les $g_i(S)$} \struck{nous prouvons que} sont mutuellement disjoints et contenus dans l'ouvert de lissité de $\bar X$ sur $S$. \struck{Il faut \ill{} de} \struck{\ill{}, il faut examiner les \uncertain{cas} qui peuvent se présenter : a) \ill{} $g_i(S)$ \ill{} tel que $g_i(S)$ soit un pt double de $X_s$.}\drawing{En marge gauche : la fibre $X_s$, verticale, coupée en un point par la section $g_i(S)$, horizontale.}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,line cap=round,
+  pt/.style={circle,fill,inner sep=1.1pt}]
+% (a) the fibre X_s cut by the section g_i(S)
+\begin{scope}
+\draw[semithick] (0.15,1.5) .. controls (0.05,0.6) and (-0.05,-0.6) .. (-0.2,-1.5);
+\node[above] at (0.15,1.5) {$X_s$};
+\draw[semithick] (-1.3,-0.15) .. controls (-0.5,0.05) and (0.6,0.05) .. (1.4,-0.05);
+\node[right] at (1.4,-0.05) {$g_i(S)$};
+\node[circle,draw,inner sep=1.6pt] at (0.02,0.0) {};
+\node at (0,-2.0) {(a)};
+\end{scope}
+% (b) two sections through one point of X_s
+\begin{scope}[xshift=4.3cm]
+\draw[semithick] (0,1.5) .. controls (0,0.6) and (0.05,-0.6) .. (0.2,-1.5);
+\node[above] at (0,1.5) {$X_s$};
+\draw[semithick] (-1.3,-0.55) -- (1.3,0.55) node[right] {$g_i(S)$};
+\draw[semithick] (-1.3,0.25) -- (1.3,-0.25) node[right] {$g_j(S)$};
+\node[pt] at (0,0) {};
+\node at (0,-2.0) {(b)};
+\end{scope}
+% (c) a section through the double point of X_s
+\begin{scope}[xshift=8.6cm]
+\draw[semithick] (-0.55,-1.5) .. controls (-0.3,-0.75) and (-0.15,-0.25) .. (0,0)
+  .. controls (0.35,0.6) and (0.75,1.35) .. (0,1.45)
+  .. controls (-0.75,1.35) and (-0.35,0.6) .. (0,0)
+  .. controls (0.15,-0.25) and (0.3,-0.75) .. (0.55,-1.5);
+\node[above] at (0,1.45) {$X_s$};
+\draw[thick] (-1.3,0.1) .. controls (-0.5,0.05) and (0.5,-0.05) .. (1.3,-0.15);
+\node[right] at (1.3,-0.15) {$g_i(s)$};
+\node[pt] at (0,0) {};
+\node at (0,-2.0) {(c)};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après les trois dessins de la page 175 (dessins 34/09-6, 09-7 et 09-8), réunis en trois panneaux. (a) La section $g_i(S)$ coupe la fibre spéciale $X_s$ en un point. (b) Deux sections $g_i(S)$, $g_j(S)$ passant par un même point de $X_s$ : cas exclu, trois branches ne pouvant se croiser normalement en dimension $2$. (c) Une section passant par un point double de $X_s$ : cas exclu, les $g_i(S)$ étant contenus dans l'ouvert de lissité. Le dernier dessin écrit $g_i(s)$.}
+ \struck{Faisant éclater} Mais si $D$ est le diviseur $X_s + \sum g_i(S)$ sur le schéma régulier $\bar X$, on sait (\quad) que, quitte à faire éclater un nb fini de fois des pts fermés de $\bar X$ (qui sont nécessairement dans $\bar X_s$, donc le processus ne touche pas à $\bar X_K$, ni a fortiori à $X_K$), on peut supposer que $D$ est à \emph{croisements normaux}.
 
 Mais ceci implique que les $g_i(S)$ sont mutuellement disjoints\drawing{trois droites concourantes : la fibre $X_s$ et deux sections $g_i(S)$, $g_j(S)$ passant par un même point.} \struck{contenus} puisqu'on ne pourrait avoir trois \struck{\ill{}} \add{\uncertain{branches}} à croisements normaux). \struck{et que $g_i(S) \cap X_s = \{g_i(s)\}$ est un \ill{} \ill{} un pt de lissité de $X_s$} \add{D'autre part} \struck{\ill{}} (\uncertain{sinon} on aurait\drawing{la fibre $X_s$ à point double, avec une section $g_i(s)$ passant par ce point.}) \struck{\ill{}} \add{comme} $X$ est régulier, cela \uncertain{implique} que les sections $g_i$ de $X$ sur $S$ est dans l'ouvert de lissité de $X$ (EGA~IV~17…). La réduction de 1.3 au cas 1.4 est achevée.
 

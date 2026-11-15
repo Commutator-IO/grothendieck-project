@@ -7,6 +7,7 @@
 % unnumbered sheets in between continue the text. The batch opens mid-argument
 % (n° 6, generalisation morphisms of graphs, formula (48) is before the batch)
 % and ends mid-sentence on p. 60.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-15 — the edition's clean figures of the modernised reading added after the drawings 03-1, 03-5, 03-9, with their legend; the faithful redraws and the text are unchanged.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -222,6 +223,49 @@ Un arbre qui n'est pas réduit à un \struck{\ill{}} sommet, ni à un segment, a
 \right.
 \]
 \drawing{En regard de chacun des trois cas de (64), la courbe correspondante : une droite portant trois points marqués $a, b, c$ ; deux droites sécantes portant $a, b$ et $c, d$ ; une chaîne de trois droites, les extrêmes portant $a, b$ et $d, e$, celle du milieu portant $c$.}
+\begin{center}
+\begin{tikzpicture}[scale=0.85, line cap=round,
+  comp/.style={line width=0.7pt},
+  pt/.style={circle, fill, inner sep=1.1pt},
+  every node/.style={font=\small}]
+% une droite portant a, b, c
+\coordinate (L1) at (0,0.2); \coordinate (L2) at (3,1.4);
+\draw[comp] (L1) -- (L2);
+\foreach \t/\l in {0.22/a, 0.5/b, 0.78/c}
+  \node[pt, label={[inner sep=1pt]above left:$\l$}] at ($(L1)!\t!(L2)$) {};
+% deux droites secantes portant a, b et c, d
+\begin{scope}[xshift=4.2cm]
+\coordinate (P1) at (0,0); \coordinate (P2) at (3,1.6);
+\coordinate (Q1) at (1.0,1.76); \coordinate (Q2) at (3.2,-0.44);
+\draw[comp] (P1) -- (P2);
+\draw[comp] (Q1) -- (Q2);
+\foreach \t/\l in {0.15/a, 0.38/b}
+  \node[pt, label={[inner sep=1pt]above left:$\l$}] at ($(P1)!\t!(P2)$) {};
+\foreach \t/\l in {0.62/c, 0.84/d}
+  \node[pt, label={[inner sep=1pt]below left:$\l$}] at ($(Q1)!\t!(Q2)$) {};
+\end{scope}
+% une chaine de trois droites : a, b ; c ; d, e
+\begin{scope}[xshift=8.4cm]
+\coordinate (M1) at (0,1); \coordinate (M2) at (4,1);
+\coordinate (G1) at (0.1,-0.2); \coordinate (G2) at (1.25,1.6);
+\coordinate (H1) at (2.75,1.6); \coordinate (H2) at (3.9,-0.2);
+\draw[comp] (M1) -- (M2);
+\draw[comp] (G1) -- (G2);
+\draw[comp] (H1) -- (H2);
+\node[pt, label={[inner sep=1pt]above:$c$}] at (2,1) {};
+\foreach \t/\l in {0.12/a, 0.36/b}
+  \node[pt, label={[inner sep=1pt]left:$\l$}] at ($(G1)!\t!(G2)$) {};
+\foreach \t/\l in {0.64/d, 0.88/e}
+  \node[pt, label={[inner sep=1pt]right:$\l$}] at ($(H1)!\t!(H2)$) {};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après le dessin de la page 52
+(dessin 147/03-1). De gauche à droite, les courbes stables des trois arbres de
+(64), une droite projective par sommet et un point double par arête : la droite
+à trois points ($\nu = 3$), deux droites sécantes ($\nu = 4$), trois droites en
+chaîne ($\nu = 5$). La page les place l'une sous l'autre, en regard des arbres.}
+
 
 \page{53}\note{p. 26 de l'auteur}
 b) $h_1 = 1$, donc $\operatorname{dimmod} G = \nu$, on veut $0 \leqslant \nu \leqslant 2$. On voit que le graphe $G$ a au maximum un bout, tous les autres sommets étant donc d'ordre~3. \struck{\ill{}} Mais un graphe (\add{top.\ connexe}) avec $h_1 = 1$ et n'ayant qu'un seul bout top.\ est homéomorphe à
@@ -238,6 +282,53 @@ et s'il \struck{\ill{}} \add{n'a pas de} sommet d'ordre~2, c'est qu'il est \add{
 \right.
 \]
 \drawing{Les trois graphes de (65) sont dessinés : un cercle portant un sommet marqué « 1 » ; deux sommets marqués « 1 » reliés par deux arcs ; un cercle avec une queue dont le bout est marqué « 2 ». En regard, les courbes correspondantes : une courbe nodale (en huit) portant un point $a$ ; deux droites se coupant en deux points, portant $a$ et $b$ ; une courbe nodale à laquelle est attachée une droite portant $a$ et $b$.}
+\begin{center}
+\begin{tikzpicture}[line cap=round,
+  comp/.style={line width=0.7pt},
+  pt/.style={circle, fill, inner sep=1.1pt},
+  every node/.style={font=\small}]
+% les trois graphes de (65)
+\node[pt] (u) at (0.4,0) {};
+\draw[comp] (u) .. controls (1.9,1.0) and (1.9,-1.0) .. (u);
+\node[left] at (u) {$1$};
+\node[pt] (v1) at (0,-2) {}; \node[pt] (v2) at (1.6,-2) {};
+\draw[comp] (v1) to[bend left=40] (v2);
+\draw[comp] (v1) to[bend right=40] (v2);
+\node[left] at (v1) {$1$}; \node[right] at (v2) {$1$};
+\node[pt] (w2) at (0,-4) {}; \node[pt] (w1) at (0.9,-4) {};
+\draw[comp] (w2) -- (w1);
+\draw[comp] (w1) .. controls (2.4,-3.0) and (2.4,-5.0) .. (w1);
+\node[above] at (w2) {$2$};
+% les courbes correspondantes
+\begin{scope}[xshift=5cm]
+% une courbe nodale portant a
+\draw[comp] (-0.6,0.45) .. controls (0.3,-0.2) and (1.3,-0.6) .. (1.3,0)
+  .. controls (1.3,0.6) and (0.3,0.2) .. (-0.6,-0.45);
+\node[pt, label={[inner sep=1pt]right:$a$}] at (1.3,0) {};
+% deux droites se coupant en deux points, portant a et b
+\draw[comp] (-0.8,-2.35) .. controls (0.3,-1.2) and (1.4,-1.2) .. (2.4,-2.35);
+\draw[comp] (-0.8,-1.65) .. controls (0.3,-2.8) and (1.4,-2.8) .. (2.4,-1.65);
+\node[pt, label={[inner sep=1pt]above:$a$}] at (0.8,-1.49) {};
+\node[pt, label={[inner sep=1pt]below:$b$}] at (0.8,-2.51) {};
+% une courbe nodale a laquelle est attachee une droite portant a et b
+\draw[comp] (-0.6,-3.55) .. controls (0.3,-4.2) and (1.3,-4.6) .. (1.3,-4)
+  .. controls (1.3,-3.4) and (0.3,-3.8) .. (-0.75,-4.56);
+\coordinate (L1) at (-0.85,-3.79); \coordinate (L2) at (0.35,-5.47);
+\draw[comp] (L1) -- (L2);
+\foreach \t/\l in {0.6/a, 0.88/b}
+  \node[pt, label={[inner sep=3pt]left:$\l$}] at ($(L1)!\t!(L2)$) {};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après le dessin de la page 53
+(dessin 147/03-5). À gauche, les trois graphes à un cycle de (65), avec le
+poids de leurs sommets : la boucle sur un sommet de poids $1$, deux sommets de
+poids $1$ reliés par deux arêtes, la boucle munie d'une queue dont le bout porte
+deux points ; à droite, en regard, les courbes stables correspondantes : la
+cubique nodale portant $a$, deux droites qui se coupent en deux points, une
+courbe nodale à laquelle est attachée une droite portant $a$ et $b$. Sur la
+page, le $a$ de la première courbe est peu visible.}
+
 
 \page{54}
 \marginal{MD-graphes maximaux (dim mod.\ nulle), de dim.\ modulaire ambiante $\leqslant 2$}
@@ -355,6 +446,67 @@ On trouve les trois cas de dim modulaire \struck{1} ambiante $2$, dim modulaire 
 \]
 \note{le numéro (72) est porté deux fois sur la page. Les graphes et les courbes sont dessinés ; les courbes sont décrites ici en mots. Dans le premier graphe, l'indice du second sommet est surchargé ($\alpha_0$ ?). Au-dessus du sommet $\alpha_0$ du troisième graphe, un chiffre biffé.}
 \drawing{les graphes et les courbes du tableau (72), sur trois lignes. Ligne 1 : deux sommets reliés par une arête, marqués « 3 » ($\alpha_0$) et « 2 » (indice surchargé) ; en regard, deux droites qui se coupent, l'une portant $a$, $b$, l'autre $c$, $d$, $e$. Ligne 2 : une boucle fermée sur un sommet marqué « 2 » ($\alpha_0$) ; en regard, une courbe nodale portant $a$ et $b$. Ligne 3 : deux sommets reliés par une arête, le premier ($\alpha_0$, $g_{\alpha_0} = 1$) surmonté d'un chiffre biffé, le second marqué « 2 » ($g_\alpha = 0$) ; en regard, deux branches qui se coupent en un point épais, l'une marquée $g_{\alpha_0} = 1$, l'autre portant $a$ et $b$.}
+\begin{center}
+\begin{tikzpicture}[line cap=round,
+  comp/.style={line width=0.7pt},
+  pt/.style={circle, fill, inner sep=1.1pt},
+  every node/.style={font=\small}]
+% ligne 1 : une arete entre un sommet 3 (alpha_0) et un sommet 2 ; deux droites secantes
+\node[pt] (a1) at (0,0) {}; \node[pt] (a2) at (1.4,0) {};
+\draw[comp] (a1) -- (a2);
+\node[left] at (a1) {$3$}; \node[below=1pt] at (a1) {$\alpha_0$};
+\node[right] at (a2) {$2$};
+\begin{scope}[xshift=5.6cm]
+\coordinate (X) at (0,0);
+\draw[comp] ($(X)+(-1.6,0.27)$) -- ($(X)+(1.2,-0.2)$);
+\draw[comp] ($(X)+(-1.3,-0.55)$) -- ($(X)+(2.0,0.84)$);
+\foreach \s/\l in {-1.3/a, -0.8/b}
+  \node[pt, label={[inner sep=1pt]above:$\l$}] at ($(X)+(\s,-0.17*\s)$) {};
+\foreach \s/\l in {0.6/c, 1.1/d, 1.6/e}
+  \node[pt, label={[inner sep=1pt]above left:$\l$}] at ($(X)+(\s,0.42*\s)$) {};
+\end{scope}
+% ligne 2 : une boucle sur un sommet 2 (alpha_0) ; une courbe nodale portant a et b
+\begin{scope}[yshift=-1.9cm]
+\node[pt] (b1) at (0,0) {};
+\draw[comp] (b1) .. controls (1.6,0.9) and (1.6,-0.9) .. (b1);
+\node[above=1pt] at (b1) {$2$}; \node[below=1pt] at (b1) {$(\alpha_0)$};
+\begin{scope}[xshift=4.8cm]
+\draw[comp] (-0.6,0.45) .. controls (0.3,-0.2) and (1.3,-0.6) .. (1.3,0)
+  .. controls (1.3,0.6) and (0.3,0.2) .. (-0.6,-0.45);
+\node[pt, label={[inner sep=1pt]above right:$a$}] at (1.189,0.246) {};
+\node[pt, label={[inner sep=1pt]below right:$b$}] at (1.189,-0.246) {};
+\end{scope}
+\end{scope}
+% ligne 3 : une arete entre alpha_0 (g = 1) et un sommet 2 (g = 0) ; deux branches
+\begin{scope}[yshift=-3.8cm]
+\node[pt] (c1) at (0,0) {}; \node[pt] (c2) at (1.4,0) {};
+\draw[comp] (c1) -- (c2);
+\node[above=1pt] at (c2) {$2$};
+\node[below=1pt] (al) at (c1) {$(\alpha_0)$};
+\node[below=-1pt] at (al.south) {$g_{\alpha_0} = 1$};
+\node[below=1pt] at ($(c2)+(0.35,0)$) {$g_\alpha = 0$};
+\begin{scope}[xshift=5.4cm]
+\coordinate (Y) at (0,0);
+\draw[comp] (-1.5,-0.9) .. controls (-0.9,-0.6) and (-0.4,-0.35) .. (Y) -- (0.3,0.2);
+\coordinate (Z1) at (-0.3,0.22); \coordinate (Z2) at (1.9,-1.38);
+\draw[comp] (Z1) -- (Z2);
+\node[circle, fill, inner sep=1.6pt] at (Y) {};
+\foreach \t/\l in {0.42/a, 0.74/b}
+  \node[pt, label={[inner sep=1pt]above right:$\l$}] at ($(Z1)!\t!(Z2)$) {};
+\node[below=2pt] at (-1.1,-0.75) {$g_{\alpha_0} = 1$};
+\end{scope}
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\legende{Figure de l'édition, reprise de la lecture modernisée et redessinée d'après le dessin de la page 57
+(dessin 147/03-9). Les trois MD-graphes de dimension ambiante $2$ à une seule
+arête, chacun en regard de la courbe stable qu'il représente : deux droites
+sécantes, $\alpha_0$ portant trois points (type $(0, 5)$) ; une courbe nodale
+portant deux points (type $(1, 2)$) ; une composante de genre $1$ coupant, au
+point épais, une droite qui porte deux points (type $(1, 2)$). L'indice
+surchargé du second sommet de la première ligne n'est pas lu et n'est pas
+reporté.}
+
 
 (NB les sommets \add{à poids marqué} des branches des courbes, dont le genre \add{n'est pas marqué ou poids marqué} est marqué en dessous, sont de genre \struck{zéro} \add{\ill{}} ; les poids marqués sont indiqués sur les \struck{graphes} \add{au-dessus des} sommets)
 
