@@ -41,7 +41,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p37 batch-02:285 | reading | after « donnée d'un sous-graphe $G'_{\tilde{B}'}$ de » | [illegible] | $G$
 - [ ] 147 p38 batch-02:288 | reading | after « Ainsi on trouve la catégorie » | [illegible] | étendue
 - [ ] 147 p39 batch-02:319 | reading | after « $G'(\alpha)$ de $G'$ formé des » | [illegible] | $S$
-- [ ] 147 p39 batch-02:319a | reading | after « est connexe et il satisfait » | [illegible] à la condition | tous les les conditions
+- [x] 147 p39 batch-02:319a | reading | after « est connexe et il satisfait » | [illegible] à la condition | tous les les conditions | dismissed: ungrammatical — « tous les les conditions »: doubled article, impossible agreement
 - [ ] 147 p39 batch-02:324 | reading | after « l'origine se trouve dans $S'_\alpha$ » | [illegible] | i e dans $G'(\alpha)$
 - [ ] 147 p41 batch-03:27 | reading | after « même par $G'$ et la » | [illegible] | ens
 - [ ] 147 p42 batch-03:51 | reading | after « de $G'$ et $f$ de » | [illegible] | $ \overline m $
@@ -59,7 +59,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p53 batch-03:229 | reading | after « top est homéomorphe à et » | s'il [illegible] | si il n'y a pas $G$
 - [ ] 147 p53 batch-03:229a | reading | after « c'est qu'il est le graphe » | [illegible] | qui
 - [ ] 147 p54 batch-03:269 | reading | after « $(\mathcal{X}, I_{\mathcal{S}})$ est une MD courbe » | [illegible] | à
-- [ ] 147 p57 batch-03:335 | reading | at the top of the page | MD-graphes de dim modulaire 1 et de dim modulaire ambiante 1 2 [illegible] | 71
+- [x] 147 p57 batch-03:335 | reading | at the top of the page | MD-graphes de dim modulaire 1 et de dim modulaire ambiante 1 2 [illegible] | 71 | dismissed: artefact — page number in place of the margin note
 - [ ] 147 p58 batch-03:379 | reading | after « des deux types $(0,5)$ $(1,2)$ » | [illegible] | $ (2,0) $
 - [ ] 147 p58 batch-03:379a | reading | after « $\alpha_0$ de genre $1$ d'ordre » | $\tilde{\mu}_\alpha \in \{1, 2\}$ [illegible] | $ \leq2 $ $\widetilde\mu_{\alpha_0}\in\{1,2\}$
 - [ ] 147 p58 batch-03:383 | reading | after « que les deux types sont » | [illegible] | tous deux
@@ -79,13 +79,13 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p66 batch-04:168 | reading | after « incidentes dans à une face » | des [illegible] | $f$ de
 - [ ] 147 p66 batch-04:168a | reading | after « ses og triangles fg $\subset I$ » | correspondent [illegible] commune | correspondant à $f$ a comme
 - [ ] 147 p66 batch-04:168b | reading | after « $\subset I$ correspondent [illegible] commune intersection » | [illegible] la corde [illegible] | avec le carré correspondant à $a$
-- [ ] 147 p66 batch-04:171 | reading | after « dodécaèdre On a donc trouvé » | NB on associe à l'icosaèdre [illegible] coloration des faces [illegible] 4 couleurs [illegible] faces [illegible] … | 66
+- [x] 147 p66 batch-04:171 | reading | after « dodécaèdre On a donc trouvé » | NB on associe à l'icosaèdre [illegible] coloration des faces [illegible] 4 couleurs [illegible] faces [illegible] … | 66 | dismissed: artefact — page number in place of the margin note
 - [ ] 147 p67 batch-04:178 | reading | after « Bien entendu les groupes des » | [illegible] liés aux arêtes libres aux arêtes | composantes irréductibles sont nuls
 - [ ] 147 p67 batch-04:178a | reading | after « marqués fg les 10 composantes » | [illegible] | irréductibles
 - [ ] 147 p67 batch-04:178b | reading | after « [illegible] de $M_{0,5}$ $M^{\infty}_{0,5}$ qui » | soit [illegible] [illegible] courbe | est
 - [ ] 147 p67 batch-04:178c | reading | after « courbe de toutes façons une » | MD [illegible] | MD-courbe stable à
 - [ ] 147 p67 batch-04:180 | reading | after « géométrie de l'icosaèdre grand ou » | [illegible] | du
-- [ ] 147 p67 batch-04:183 | reading | after « passe à la multiplicité modulaire » | NB $\widehat{M}_{0,I}$ est un vrai schéma projectif et lisse sur $\mathbb{Z}$ [illegible] [illegible] Deligne [illegible] … | 67
+- [x] 147 p67 batch-04:183 | reading | after « passe à la multiplicité modulaire » | NB $\widehat{M}_{0,I}$ est un vrai schéma projectif et lisse sur $\mathbb{Z}$ [illegible] [illegible] Deligne [illegible] … | 67 | dismissed: artefact — page number in place of the margin note
 - [ ] 147 p69 batch-04:205 | reading | after « deux points critiques à l'infini » | [illegible] | dont
 - [ ] 147 p69 batch-04:208 | reading | after « donc celle des deux multiplicités » | [illegible] [illegible] | lisses $\widehat M$
 - [ ] 147 p69 batch-04:210 | reading | after « $U_{0,3}\mathbb{Z}$ soit $\{0, \infty\}$ et en » | [illegible] | transposant
@@ -116,7 +116,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p87 batch-05:177 | reading | after « quotients $G'$ de $G$ est » | [illegible] | isomorphe à un simplexe
 - [ ] 147 p87 batch-05:180 | reading | after « $\neq G$ et qui ordinaires sont » | [illegible] dans | minimaux maximaux parmi ceux-ci alors
 - [ ] 147 p87 batch-05:180a | reading | after « des parties de $A_{G}$ Si » | $C \subset A_{G}$ [illegible] | On
-- [ ] 147 p87 batch-05:187 | reading | after « resp pour les morphismes quelc » | NB Il faudrait montrer comment cette axiomatisation s'applique à la situation des multiplicités topologiques relatives … | 87
+- [x] 147 p87 batch-05:187 | reading | after « resp pour les morphismes quelc » | NB Il faudrait montrer comment cette axiomatisation s'applique à la situation des multiplicités topologiques relatives … | 87 | dismissed: artefact — page number in place of the margin note
 - [ ] 147 p88 batch-05:190 | reading | after « $S\Pi M_{G}$ est un foncteur en » | [illegible] | $M_G$
 - [ ] 147 p88 batch-05:190a | reading | after « telle que $G \to G'$ soit … » | à $G \to G/C$ [illegible] | en tant que
 - [ ] 147 p90 batch-05:221 | reading | after « bouchant les trous relatifs aux » | pts de $I \setminus I'$ [illegible] | $i\in I\setminus I'$ lin
@@ -134,7 +134,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p96 batch-05:293a | reading | after « à la donnée $(S,\tilde{A},\sigma_{\tilde{A}},o_{\tilde{A}})$ d'un » | [illegible] | couple
 - [ ] 147 p96 batch-05:297 | reading | after « $\bullet$ et les boucles aplaties » | [illegible] | sont
 - [ ] 147 p97 batch-05:312 | reading | after « connexes de ce qui reste » | [illegible] [illegible] | en préservant outre
-- [ ] 147 p97 batch-05:313 | reading | after « qui reste [illegible] [illegible] c'est » | En somme le graphe déduit de $G$ en donnant une involution [illegible] pts fixes de … | 97
+- [x] 147 p97 batch-05:313 | reading | after « qui reste [illegible] [illegible] c'est » | En somme le graphe déduit de $G$ en donnant une involution [illegible] pts fixes de … | 97 | dismissed: artefact — page number in place of the margin note
 - [ ] 147 p101 batch-06:19 | reading | after « stricts en isomorphismes équivalences de » | [illegible] | multi
 - [ ] 147 p101 batch-06:20 | reading | after « [illegible] groupoïdes et sommes de » | [illegible] | m graphes
 - [ ] 147 p102 batch-06:47 | reading | after « donne un diagramme commun à » | [illegible] | iso de foncteurs
@@ -148,7 +148,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p108 batch-06:207 | reading | after « la multiplicité $D_J$ est lisse » | [illegible] | de
 - [ ] 147 p108 batch-06:217 | reading | after « $\widetilde{D}_d$ Si $J$ est de » | [illegible] | dim
 - [ ] 147 p108 batch-06:217a | reading | after « [illegible] totale $d = d(J)$ on … » | [illegible] reconstruire | retrouver reconstituer
-- [ ] 147 p108 batch-06:228 | reading | after « petit élément [illegible] les codim » | maximales [illegible] note écrite en oblique dans la marge gauche en grande partie illisible | 108
+- [x] 147 p108 batch-06:228 | reading | after « petit élément [illegible] les codim » | maximales [illegible] note écrite en oblique dans la marge gauche en grande partie illisible | 108 | dismissed: artefact — page number in place of the margin note
 - [ ] 147 p109 batch-06:246 | reading | after « de $D$ multiplicités \[ 242 (155) … » | [illegible] | $J$
 - [ ] 147 p109 batch-06:259 | reading | after « plus petit élément $e_{J'}$ de » | $e$ [illegible] | $c$
 - [ ] 147 p110 batch-06:282 | reading | after « à fonction codim car $\delta < … » | [illegible] $d = \delta$ car $\delta < d$ Utilisant [illegible] | resp si $\delta=d$
@@ -162,7 +162,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p117 batch-06:524a | reading | after « site [illegible] le fait de » | [illegible] un [illegible] | travailler
 - [ ] 147 p117 batch-06:525 | reading | after « site donné un sens à » | [illegible] des [illegible] | la notion
 - [ ] 147 p118 batch-06:540 | reading | after « situation relative de codim $d - … » | [illegible] [illegible] fait | On doit faire
-- [ ] 147 p118 batch-06:541 | reading | after « de Notons que pour que » | [illegible] $D_{d,d'} \to D_{d'}$ | $D_{d,d'} --- D_{d'}$
+- [x] 147 p118 batch-06:541 | reading | after « de Notons que pour que » | [illegible] $D_{d,d'} \to D_{d'}$ | $D_{d,d'} --- D_{d'}$ | dismissed: artefact — arrow rendered as a dash, a layout difference
 - [ ] 147 p120 batch-06:603 | reading | after « intersection des germes $D^{i}_x$ et » | [illegible] | q bien sûr
 - [ ] 147 p120 batch-06:612 | reading | after « donnée d'un diviseur sur $X$ » | [illegible] [illegible] le | lorsqu'on en a choisi tel
 - [ ] 147 p121 batch-07:25 | reading | after « $\mathfrak{S}_d$ opère donc c'est un » | [illegible] | rev
@@ -261,7 +261,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p176 batch-09:227a | reading | after « analytiques lisses [illegible] complémentaires de » | partie finie finie [illegible] de $\mathcal{N}$ | $\mathbb N$ et obtenus
 - [ ] 147 p176 batch-09:227b | reading | after « [illegible] $D_{d_*}\to D_{d_0}$ en fibré vectoriel » | [illegible] muni d'une | admet une
 - [ ] 147 p176 batch-09:227c | reading | after « général $\check{N}=\check{N}_{d_*;(d'_0,d''_0)}$ de cette filtration » | [illegible] contractile $D^*_{d_*}$ | et restreint à $D_{d_*}^{*}$
-- [ ] 147 p176 batch-09:228 | reading | after « fatigant un peu on doit » | [illegible] compris le cas [illegible] [illegible] [illegible] associés [illegible] [illegible] [illegible] sur $D^*_0$ [illegible] [illegible] … | 176
+- [x] 147 p176 batch-09:228 | reading | after « fatigant un peu on doit » | [illegible] compris le cas [illegible] [illegible] [illegible] associés [illegible] [illegible] [illegible] sur $D^*_0$ [illegible] [illegible] … | 176 | dismissed: artefact — page number in place of the margin note
 - [ ] 147 p178 batch-09:238 | reading | after « [illegible] [illegible] [illegible] [illegible] $K(\pi,1)$ » | faisceaux [illegible] [illegible] [illegible] Remarque | de façon essentiellement triviale ldots Remords
 - [ ] 147 p179 batch-09:253 | reading | after « associé s i e au » | diagr de groupes [illegible] | diag des group es oïdes
 - [ ] 147 p179 batch-09:260 | reading | after « de groupes [illegible] qui se » | réalise [illegible] | réduit par
@@ -310,7 +310,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p7 batch-01:137 | reading | after « Graphe associé à une courbe » | standard | standart
 - [ ] 147 p7 batch-01:139 | reading | after « commencer Soit $X$ une courbe » | standard | standart
 - [ ] 147 p8 batch-01:166 | reading | after « l'ens des arcs ou arêtes » | munies d'une orientation | orientées
-- [ ] 147 p9 batch-01:174 | reading | after « les composantes irréductibles de $X$ » | figurées | figurés
+- [x] 147 p9 batch-01:174 | reading | after « les composantes irréductibles de $X$ » | figurées | figurés | dismissed: ungrammatical — « figurés » cannot agree with « composantes »
 - [ ] 147 p9 batch-01:174a | reading | after « figurées par les sommets se » | recoupent | rencontrent
 - [ ] 147 p9 batch-01:174b | reading | after « pts singuliers quadratiques de $X$ » | correspondant | correspondent
 - [ ] 147 p9 batch-01:174c | reading | after « boucles fermées en $\alpha$ correspondent » | bijectivement | biunivoquement
@@ -327,12 +327,12 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p13 batch-01:280 | reading | after « stables et MD-graphes Une courbe » | standard | standart
 - [ ] 147 p15 batch-01:316a | reading | after « $0$ sont d'ordre $\geq 3$ $G$ » | n'étant | n'est
 - [ ] 147 p15 batch-01:316b | reading | after « $0$ connexe avec $h_{1} = 1$ … » | bout | bord
-- [ ] 147 p16 batch-01:329 | reading | after « dit qu'une MD standard courbe » | standard | standart standart $C$
+- [x] 147 p16 batch-01:329 | reading | after « dit qu'une MD standard courbe » | standard | standart standart $C$ | dismissed: ungrammatical — « standart » is a misspelling of « standard »
 - [ ] 147 p16 batch-01:329a | reading | after « est $G$ épinglée si on » | s'est donné | se donne
 - [ ] 147 p16 batch-01:331a | reading | after « épinglage Soit $(\widehat{X}, I )$ une … » | standard | standart
 - [ ] 147 p17 batch-01:346 | reading | after « pour les iso des courbes » | standard | standart
 - [ ] 147 p17 batch-01:346a | reading | after « courbes standard $G$ épinglées Pour » | tout $\alpha \in S$ | $\forall\ \alpha\in S$
-- [ ] 147 p17 batch-01:346b | reading | after « de la maquette soit $\widehat{I}_{\alpha} = … » | l'élément | l'ensemble
+- [ ] 147 p17 batch-01:346b | reading | after « de la maquette soit $\widehat{I}_{\alpha} = … » | l'élément | l'ensemble | note: our reading looks impossible: Î_α is a set with a cardinal, not an element
 - [ ] 147 p18 batch-01:349 | reading | after « $\alpha$ La donnée d'une courbe » | standard | standart
 - [ ] 147 p18 batch-01:349a | reading | after « équivaut à la donnée pour » | tout $\alpha \in S$ | $\forall\ \alpha\in S$
 - [ ] 147 p18 batch-01:351 | reading | after « munies d'un mono $I_{\mathcal{S}} \hookrightarrow Y$ … » | désignera de même | trouve donc si
@@ -352,8 +352,8 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p25 batch-02:60 | reading | after « partition de $\hat{M}_{g,\nu}$ en un » | ens | nb
 - [ ] 147 p25 batch-02:62 | reading | after « c'est une réunion finie de » | des $M_{[G']}$ | s $\mathcal M_{[G']}$
 - [ ] 147 p26 batch-02:67 | reading | after « Notons que chaque $M_{[G]}$ est » | isomorphe est quotient d'un revêtement | donné admet un revêt textsuperscript t
-- [ ] 147 p27 batch-02:97 | reading | after « de pts doubles des courbes » | standard du | standart de
-- [ ] 147 p27 batch-02:104 | reading | after « codimension modulaire Elle est nulle » | ssi | sss
+- [x] 147 p27 batch-02:97 | reading | after « de pts doubles des courbes » | standard du | standart de | dismissed: ungrammatical — « standart » is a misspelling of « standard »
+- [x] 147 p27 batch-02:104 | reading | after « codimension modulaire Elle est nulle » | ssi | sss | dismissed: ungrammatical — « sss » is no word or abbreviation
 - [ ] 147 p28 batch-02:107a | reading | after « de vue structure de graphe » | muni d'un | associé au
 - [ ] 147 p28 batch-02:107b | reading | after « cas d'une dimension modulaire nulle » | ou et | ie
 - [ ] 147 p29 batch-02:151 | reading | after « qui sera manifestement une courbe » | standard | standart
@@ -367,7 +367,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p33 batch-02:229c | reading | after « qui signifie ici que pour » | tt $\beta \in S(\alpha)$ | pour $\forall\beta\in S_{(\alpha)}$
 - [ ] 147 p34 batch-02:239 | reading | after « une » | catégorisation | extension
 - [ ] 147 p34 batch-02:245a | reading | after « Le groupoïde $\Pi_1(G)$ dépend fonctoriellement » | dans un | au
-- [ ] 147 p35 batch-02:255 | reading | after « les flèches grâce au diagramme » | commutatif | comm 43 quad
+- [x] 147 p35 batch-02:255 | reading | after « les flèches grâce au diagramme » | commutatif | comm 43 quad | dismissed: artefact — equation number and layout mark, not a reading
 - [ ] 147 p36 batch-02:267 | reading | after « flèche identique En d'autres termes » | notant flèches élémentaires | appelant flèche élémentaire
 - [ ] 147 p36 batch-02:267a | reading | after « notant flèches élémentaires de $\Pi_1(G')$ » | les flèches | $\forall$ flèche
 - [ ] 147 p36 batch-02:267b | reading | after « de $\Pi_1(G')$ les flèches qui » | sont | est
@@ -404,8 +404,8 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p47 batch-03:128a | reading | after « l'est Pour que Soit pour » | $\forall\, \alpha \in S$ | tt $ \alpha \in S$
 - [ ] 147 p47 batch-03:128b | reading | after « est une composante connexe du » | s-graphe $G'_{!}$ | ss-graphe $ G^! $
 - [ ] 147 p47 batch-03:128c | reading | after « $C'$ [illegible] et $ G '_\alpha$ … » | MD-graphe | m graphe
-- [ ] 147 p47 batch-03:128d | reading | after « $G'_\alpha$ en considérant l'application genre » | $S'_\alpha \to \mathbb{N}$ | $S'_\alpha\mathbin{ --- }\mathbf{N}$
-- [ ] 147 p47 batch-03:128e | reading | after « l'application genre $S'_\alpha \to \mathbb{N}$ induite … » | $g' : S' \to \mathbb{N}$ | $g':S'\mathbin{ --- }\mathbf{N}$
+- [x] 147 p47 batch-03:128d | reading | after « $G'_\alpha$ en considérant l'application genre » | $S'_\alpha \to \mathbb{N}$ | $S'_\alpha\mathbin{ --- }\mathbf{N}$ | dismissed: artefact — arrow rendered as a dash, a layout difference
+- [x] 147 p47 batch-03:128e | reading | after « l'application genre $S'_\alpha \to \mathbb{N}$ induite … » | $g' : S' \to \mathbb{N}$ | $g':S'\mathbin{ --- }\mathbf{N}$ | dismissed: artefact — arrow rendered as a dash, a layout difference
 - [ ] 147 p47 batch-03:132 | reading | after « condition est stable condition de » | régularité | rigidité
 - [ ] 147 p47 batch-03:132a | reading | after « les $ G '(\alpha)$ le sont … » | dans ce cas | alors
 - [ ] 147 p47 batch-03:132b | reading | after « si $ G '$ est un … » | donc | alors
@@ -420,13 +420,13 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p48 batch-03:141a | reading | after « morphisme de généralisation $ G ' … » | m-graphes | maquettes
 - [ ] 147 p49 batch-03:146 | reading | after « donné $ G $ de type … » | $(g, \nu)$ l | $(g, I \nu)$
 - [ ] 147 p50 batch-03:170 | reading | after « la situation typique d'une » | stratification | structure à
-- [ ] 147 p50 batch-03:170a | reading | after « à coups de schémas modulaires » | locaux | local
+- [x] 147 p50 batch-03:170a | reading | after « à coups de schémas modulaires » | locaux | local | dismissed: ungrammatical — « local » cannot agree with « schémas »
 - [ ] 147 p50 batch-03:170b | reading | after « bel et bien une telle » | situation | structure
 - [ ] 147 p51 batch-03:183 | reading | after « égal à son maximum $3(g-1)+\nu$ » | c | $c)$ Toute
 - [ ] 147 p51 batch-03:183a | reading | after « $3(g-1)+\nu$ c [illegible] $ G $ … » | maximal | minimal
 - [ ] 147 p51 batch-03:185a | reading | after « et est d'ordre [illegible] $\omega_\alpha \leqslant … » | i e | genre le poids
 - [ ] 147 p51 batch-03:187 | reading | after « égal à $3 - \omega_\alpha$ On … » | donc | alors
-- [ ] 147 p51 batch-03:187a | reading | after « unique près trouver une courbe » | standard $ G $ | standart $\underline G$
+- [x] 147 p51 batch-03:187a | reading | after « unique près trouver une courbe » | standard $ G $ | standart $\underline G$ | dismissed: ungrammatical — « standart » is a misspelling of « standard »
 - [ ] 147 p52 batch-03:201 | reading | after « La dimension modulaire ambiante d'un » | MD $ G $ | tel $\underline G$
 - [ ] 147 p52 batch-03:209 | reading | after « $h_1 \leqslant 1$ i e $h_1 … » | $ dimmod (G) = 0$ | $ \dim tot (G) =0$
 - [ ] 147 p52 batch-03:211 | reading | after « la dim modulaire est $\nu - … » | dans ce cas | donc on doit avoir
@@ -439,21 +439,21 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p54 batch-03:269a | reading | after « can isom à $\Gamma$ et » | celui des | alors
 - [ ] 147 p56 batch-03:313 | reading | after « par la structure de graphe » | et des sommets prédéfinis | avec un sommet particulier
 - [ ] 147 p56 batch-03:326 | reading | after « sont ceux des MD graphes » | rétro-nuls | rationnels
-- [ ] 147 p56 batch-03:326a | reading | after « bien des MD graphes qui » | soient | ont
+- [ ] 147 p56 batch-03:326a | reading | after « bien des MD graphes qui » | soient | ont | note: our reading looks impossible: « qui soient tous leurs sommets » breaks the syntax
 - [ ] 147 p56 batch-03:326b | reading | after « tous leurs sommets sauf un » | rétro-nuls | rationnels
 - [ ] 147 p57 batch-03:340 | reading | after « évidemment celui donné par 70 » | i e | où
 - [ ] 147 p57 batch-03:359 | reading | after « $\leqslant$ \[ 347(72)\qquad 348\left\{ 349 354\right. … » | à poids marqué des | ou
 - [ ] 147 p57 batch-03:359a | reading | after « pas marqué ou poids marqué » | est | n'est pas
 - [ ] 147 p57 batch-03:359b | reading | after « poids marqués sont indiqués sur » | les graphes au-dessus | le graphe au dessus
-- [ ] 147 p58 batch-03:382 | reading | after « sont [illegible] chacun de type » | $(g_i, \hat{\nu}_i)$ | $(\alpha_i, \widehat\mu_i )$
+- [x] 147 p58 batch-03:382 | reading | after « sont [illegible] chacun de type » | $(g_i, \hat{\nu}_i)$ | $(\alpha_i, \widehat\mu_i )$ | dismissed: mathematically wrong — a numerical type is (genus, weight), not a vertex α_i
 - [ ] 147 p58 batch-03:385 | reading | after « multiplicité schéma modulaire $\widehat{M}_G$ est » | donc | alors
 - [ ] 147 p59 batch-03:419 | reading | after « cas élémentaires les cas nouveaux » | dans | de
-- [ ] 147 p59 batch-03:419a | reading | after « et $\widehat{M}^{!}_{1,2}$ Cela fait en » | tout | tous
+- [x] 147 p59 batch-03:419a | reading | after « et $\widehat{M}^{!}_{1,2}$ Cela fait en » | tout | tous | dismissed: ungrammatical — « en tous » is no French idiom, « en tout »
 - [ ] 147 p60 batch-03:436 | reading | after « strate maximale cela correspond bien » | au fait qu'on a | sûr aux
-- [ ] 147 p60 batch-03:443 | reading | after « faire il faudrait aussi expliciter » | end document | 60
+- [x] 147 p60 batch-03:443 | reading | after « faire il faudrait aussi expliciter » | end document | 60 | dismissed: artefact — page number, not a reading
 - [ ] 147 p61 batch-04:23a | reading | after « courbe modulaire $\widehat{\mathfrak{X}}^{!}_{0,4}$ sur $\widehat{M}^{!}_{0,4}$ » | munie de | avec
 - [ ] 147 p61 batch-04:23b | reading | after « pas le faire ici cela » | donnerait des compl | donnera du $=$ coup
-- [ ] 147 p61 batch-04:31 | reading | after « pt à l'infini correspondant aux » | deux | trois
+- [ ] 147 p61 batch-04:31 | reading | after « pt à l'infini correspondant aux » | deux | trois | note: our reading looks impossible: M̂^!_{0,4} ≅ P^1 has three points at infinity, not two
 - [ ] 147 p63 batch-04:82 | reading | after « d'où » | au-dessus | au moins au dessus
 - [ ] 147 p63 batch-04:96b | reading | after « le morphisme modulaire \[ 94M_{1,1} \longrightarrow … » | on découpe $\mathbb{E}^1$ | en découpant $\mathbf E^1$
 - [ ] 147 p63 batch-04:96c | reading | after « courbe elliptique harmonique de groupe » | d'automorphismes $\mathbb{Z}/4\mathbb{Z}$ | d'automs $\mathbf Z/4\mathbf Z$
@@ -462,18 +462,18 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p65 batch-04:160d | reading | after « $\widehat{M}_{0,3}$ [illegible] [illegible] [illegible] et » | ayant | avait
 - [ ] 147 p65 batch-04:160e | reading | after « l'infini les [illegible] sont en » | tout | nb total
 - [ ] 147 p65 batch-04:160f | reading | after « parties $I', I'' \in \mathfrak{P}_2(I)$ se … » | ssi | on a
-- [ ] 147 p65 batch-04:160g | reading | after « elles ssi $I' \cap I'' = … » | ssi $I'$ $I''$ | sss $I',I''$
+- [x] 147 p65 batch-04:160g | reading | after « elles ssi $I' \cap I'' = … » | ssi $I'$ $I''$ | sss $I',I''$ | dismissed: ungrammatical — « sss » is no word or abbreviation
 - [ ] 147 p65 batch-04:160h | reading | after « e ssi $I'$ $I''$ et » | $I \setminus (I' \cup I'')$ | $I\smallsetminus(I'\cup I'')$
 - [ ] 147 p65 batch-04:160i | reading | after « $I'$ $I''$ et $I \setminus (I' … » | forment | justement
 - [ ] 147 p65 batch-04:163a | reading | after « icosaèdre orienté [illegible] un icos » | grand | graphe
-- [ ] 147 p65 batch-04:163b | reading | after « les éléments de $\mathfrak{P}_2(I)$ ou » | les sommets | par correspon 65
+- [x] 147 p65 batch-04:163b | reading | after « les éléments de $\mathfrak{P}_2(I)$ ou » | les sommets | par correspon 65 | dismissed: ungrammatical — fragment « correspon » followed by a page number
 - [ ] 147 p66 batch-04:166a | reading | at the top of the page | pris grand complémentaire | passage
 - [ ] 147 p66 batch-04:166b | reading | after « og triangles fg de $I$ » | correspondant | correspondent
 - [ ] 147 p66 batch-04:166c | reading | after « aux dix faces de l'icosaèdre » | grand | gauche
 - [ ] 147 p66 batch-04:166d | reading | after « [illegible] intersections [illegible] les structures » | cycliques | carrées
 - [ ] 147 p66 batch-04:168c | reading | after « les 5 pts de $I$ » | associées une telle couvrant | en associant à un tel carré
 - [ ] 147 p66 batch-04:168d | reading | after « les deux paires de sommets » | diagonaux | diagonalement
-- [ ] 147 p66 batch-04:168e | reading | after « une face des [illegible] l'icosaèdre » | ses og triangles fg | sss le triangle
+- [x] 147 p66 batch-04:168e | reading | after « une face des [illegible] l'icosaèdre » | ses og triangles fg | sss le triangle | dismissed: ungrammatical — « sss » is no word or abbreviation
 - [ ] 147 p66 batch-04:168f | reading | after « i e ssi le complémentaire » | des triangles On voit donc | du triangle est formé de l'une
 - [ ] 147 p66 batch-04:168g | reading | after « faces et arêtes de l'icosaèdre » | grand | gauche
 - [ ] 147 p67 batch-04:176 | reading | after « celui du 1-squelette du dodécaèdre » | grand | gauche
@@ -546,7 +546,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p76 batch-04:376g | reading | after « qui est comprise de la » | variation | variance
 - [ ] 147 p76 batch-04:376h | reading | after « comprise de la variation pour » | morphismes des | isomorphismes de
 - [ ] 147 p76 batch-04:376i | reading | after « inutile de préciser et une » | og variation | variance
-- [ ] 147 p76 batch-04:376j | reading | after « de [illegible] généralisation de MD-graphes » | fg | 76
+- [x] 147 p76 batch-04:376j | reading | after « de [illegible] généralisation de MD-graphes » | fg | 76 | dismissed: artefact — page number, not a reading
 - [ ] 147 p77 batch-04:394a | reading | after « gît en $\Gamma^{!}_{ G , G … » | l'on | on
 - [ ] 147 p77 batch-04:403 | reading | after « considérer le germe de multiplicité » | à définir | défini
 - [ ] 147 p78 batch-04:414 | reading | after « [illegible] $\widehat{M}_{ G , G '}$ … » | par une | comme
@@ -586,7 +586,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p86 batch-05:155 | reading | at the top of the page | et factorisation | se factorise
 - [ ] 147 p86 batch-05:172 | reading | after « $\mathcal{G}$ pour abréger La catégorie » | visée | $\mathcal G$ joue le rôle
 - [ ] 147 p86 batch-05:172a | reading | after « abréger La catégorie visée d'un » | diagramme | ens
-- [ ] 147 p87 batch-05:177a | reading | after « begin quote 123 Simpl Pour » | tout $G \in \mathcal{G}$ | $\forall\ G\in \mathcal M $
+- [x] 147 p87 batch-05:177a | reading | after « begin quote 123 Simpl Pour » | tout $G \in \mathcal{G}$ | $\forall\ G\in \mathcal M $ | dismissed: mathematically wrong — G ranges over 𝒢; 𝓜 is not defined here
 - [ ] 147 p87 batch-05:182 | reading | after « grand On suppose donnés pour » | tout $G \in Ob \,\mathcal{G}$ | $\forall\ G\in Ob \mathcal G$
 - [ ] 147 p87 batch-05:186 | reading | after « en $G$ pour les iso » | resp | pas
 - [ ] 147 p89 batch-05:205 | reading | after « section 10 Structure MDT discrète » | étude | action
@@ -603,16 +603,16 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p92 batch-05:237b | reading | after « qui sera épinglée par le » | MD-graphe $ G '$ | m graphe $\underline G'$
 - [ ] 147 p92 batch-05:237c | reading | after « ayant $A'$ comme ens d'arêtes » | en prenant | avec
 - [ ] 147 p92 batch-05:241 | reading | after « par \[ 239(126)\qquad I' \longrightarrow S … » | $ G '$ étant | $\underline G'$ est
-- [ ] 147 p92 batch-05:241a | reading | after « pour $ G '$ étant celle … » | $ G $ | $\underline G$ 92
+- [x] 147 p92 batch-05:241a | reading | after « pour $ G '$ étant celle … » | $ G $ | $\underline G$ 92 | dismissed: artefact — only a page number added
 - [ ] 147 p93 batch-05:244a | reading | after « peut généraliser encore un peu » | cette construction | ces constructions
-- [ ] 147 p93 batch-05:244b | reading | after « d'une partie $\tilde{A}'$ de $\tilde{A}(G)$ » | stable | st ble
+- [x] 147 p93 batch-05:244b | reading | after « d'une partie $\tilde{A}'$ de $\tilde{A}(G)$ » | stable | st ble | dismissed: ungrammatical — « st ble » is no word
 - [ ] 147 p93 batch-05:244c | reading | after « plus une partie $I'$ de » | $I \amalg \tilde{J}$ | $I\amalg \widetilde A \widetilde J$
 - [ ] 147 p93 batch-05:254 | reading | after « constructions en termes d'une notion » | adéquate | ad-hoc
 - [ ] 147 p94 batch-05:257 | reading | after « morphisme de normalisation de » | MD-graphes | m graphes
 - [ ] 147 p94 batch-05:265a | reading | after « la Définition Soient \[ 261 G … » | MD-graphes Un | m graphes On appelle
 - [ ] 147 p94 batch-05:265b | reading | after « [illegible] normalisation de $ G '$ … » | $ G $ est | $\underline G$
 - [ ] 147 p94 batch-05:284 | reading | after « un même sac pour un » | MD-graphe | m graphe 94
-- [ ] 147 p95 batch-05:287 | reading | after « et $I(G)$ munis l'un et » | l'autre | autre
+- [x] 147 p95 batch-05:287 | reading | after « et $I(G)$ munis l'un et » | l'autre | autre | dismissed: ungrammatical — « l'un et autre » breaks the idiom « l'un et l'autre »
 - [ ] 147 p95 batch-05:287a | reading | after « dans $S(G)$ Pour ceci on » | va | a à
 - [ ] 147 p95 batch-05:287b | reading | after « la notion de graphe avec » | boucles | branches
 - [ ] 147 p95 batch-05:287c | reading | after « tels que a $X$ soit » | étoilé | une étoile
@@ -644,14 +644,14 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p98 batch-05:316 | reading | after « en ajoutant ou retranchant des » | boucles | branches
 - [ ] 147 p98 batch-05:316a | reading | after « générale entre $G$ et un » | $G'$ des types explicités | $G'_0$ du type explicité
 - [ ] 147 p98 batch-05:318 | reading | after « normalisation strict est strict Les » | MD-graphes et | m graphes avec
-- [ ] 147 p98 batch-05:318a | reading | after « MD-graphes et morphismes de normalisation » | stricts forment | strict font
+- [x] 147 p98 batch-05:318a | reading | after « MD-graphes et morphismes de normalisation » | stricts forment | strict font | dismissed: ungrammatical — « strict » agrees with neither « morphismes » nor « normalisation »
 - [ ] 147 p98 batch-05:318b | reading | after « sont les iso ordinaires de » | MD-graphes | m graphes
 - [ ] 147 p98 batch-05:318c | reading | after « on se borne aux morphismes » | dits | de norm
 - [ ] 147 p98 batch-05:318d | reading | after « que pour les morphismes de » | normalisation généraux | générisation
 - [ ] 147 p98 batch-05:318e | reading | after « de normalisation généraux l'ens des » | sous-MD-graphes $G'/\!\simeq$ | sous-m graphes
 - [ ] 147 p98 batch-05:318f | reading | after « des sous-MD-graphes $G'/\!\simeq$ stricts d'un » | MD-graphe | m graphe
 - [ ] 147 p98 batch-05:318g | reading | after « de $A(G)$ en associant à » | une | tte
-- [ ] 147 p98 batch-05:318h | reading | after « en associant à une partie » | $C \subset A(G)$ | $C\subset A(G$ 98
+- [x] 147 p98 batch-05:318h | reading | after « en associant à une partie » | $C \subset A(G)$ | $C\subset A(G$ 98 | dismissed: artefact — page number inside the formula, broken parenthesis
 - [ ] 147 p99 batch-05:321 | reading | at the top of the page | le diagramme | la découpe
 - [ ] 147 p99 batch-05:321a | reading | after « arêtes et à remplacer les » | sommets | côtés
 - [ ] 147 p99 batch-05:329 | reading | after « quelconque $S$ épinglée par $G$ » | donc | alors
@@ -664,7 +664,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p100 batch-05:344b | reading | after « graphes connexes et $G$ le » | MD-graphe | m graphe
 - [ ] 147 p100 batch-05:349 | reading | after « de multiplicités NB On remplace » | 133 | la notation $\Pi M_G$
 - [ ] 147 p100 batch-05:351 | reading | after « un foncteur contravariant en le » | MD-graphe | m graphe
-- [ ] 147 p100 batch-05:354 | reading | after « MD-graphe stable $G$ pour les » | end document | 100
+- [x] 147 p100 batch-05:354 | reading | after « MD-graphe stable $G$ pour les » | end document | 100 | dismissed: artefact — page number, not a reading
 - [ ] 147 p101 batch-06:28 | reading | after « $G$ \[ 25 (144) \qquad \Pi_1 … » | d ailleurs | de
 - [ ] 147 p101 batch-06:28a | reading | after « compte d ailleurs et redonne » | tautologiquement | automatiquement
 - [ ] 147 p101 batch-06:40 | reading | after « morphisme correspondant sur les normalisés » | totalement | totaux
@@ -676,7 +676,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p103 batch-06:92 | reading | after « ex un iso définir déterminer » | les morphismes | le morphisme
 - [ ] 147 p104 batch-06:110 | reading | after « marqués Soit $G$ un graphe » | du | de
 - [ ] 147 p104 batch-06:117 | reading | after « de généralisation \[ 114 (149) \qquad … » | diagramme | diag germe
-- [ ] 147 p105 batch-06:132 | reading | after « analytiques relatives ou en remplaçant » | les esp | l'hyp
+- [x] 147 p105 batch-06:132 | reading | after « analytiques relatives ou en remplaçant » | les esp | l'hyp | dismissed: ungrammatical — « l'hyp analytiques »: singular article, plural adjective
 - [ ] 147 p105 batch-06:132a | reading | after « les esp analytiques par des » | esp | hyp
 - [ ] 147 p105 batch-06:140 | reading | after « définition les germes de sous-multiplicités » | attachées | attachés
 - [ ] 147 p105 batch-06:141 | reading | after « $x$ sont les intersections d'un » | ens | nb
@@ -741,7 +741,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p119 batch-06:597 | reading | after « $D_d \overset{ id }{\longrightarrow} X$ d'autre … » | que définit | images $x_i$ de
 - [ ] 147 p120 batch-06:612a | reading | after « $X$ [illegible] [illegible] le diviseur » | donc | dans
 - [ ] 147 p120 batch-06:619 | reading | after « naissance à un groupe analytique » | ou | et $=$
-- [ ] 147 p120 batch-06:628 | reading | after « $\pi_1$ ou $H_1$ des fibres » | end document | 120
+- [x] 147 p120 batch-06:628 | reading | after « $\pi_1$ ou $H_1$ des fibres » | end document | 120 | dismissed: artefact — page number, not a reading
 - [ ] 147 p121 batch-07:24 | reading | after « de $T_d$ sur $D^{!}_d$ sur » | laquelle | lequel
 - [ ] 147 p121 batch-07:51 | reading | after « peut considérer \[ 48 (189) \qquad … » | opère | opérant
 - [ ] 147 p121 batch-07:51a | reading | after « \[ 48 (189) \qquad P^{!}_d = … » | $D^{!}_d$ permutant | $D'_d$ permute
@@ -754,7 +754,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p125 batch-07:180 | reading | after « $D_d$ $D_{d'}$ $D_{d''}$ par Prenant » | aussi | de $=$
 - [ ] 147 p125 batch-07:187 | reading | after « images inverses par des morphismes » | du type | des types
 - [ ] 147 p125 batch-07:198 | reading | after « l'est plus et qui fait » | sérieusement | sûrement
-- [ ] 147 p126 batch-07:202 | reading | after « On a » | aussi | envie
+- [ ] 147 p126 batch-07:202 | reading | after « On a » | aussi | envie | note: our reading looks impossible: « On a aussi de définir » breaks the syntax
 - [ ] 147 p126 batch-07:206 | reading | after « normaux $D$ sur $X = D_0$ … » | dépliant | déployant
 - [ ] 147 p126 batch-07:207 | reading | after « Alors $\forall d \in \mathbb{N}$ la … » | dépliement | déploiement
 - [ ] 147 p126 batch-07:209 | reading | after « de développer au long les » | choses a aussi la même propriété | $=$ propriétés
@@ -768,7 +768,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p127 batch-07:238 | reading | after « on a un espace analytique » | ½-simplicial | $1/2$ simplicial
 - [ ] 147 p127 batch-07:247 | reading | after « revêtement étale fini de $D_{d_0}$ » | s'identifie | s'identifiant
 - [ ] 147 p127 batch-07:255 | reading | after « qui est donc le complémentaire » | d'un diviseur $\Delta_{d_0 \dots d_r}$ | de l'image inverse $\Delta_{d_0- d_r}$
-- [ ] 147 p127 batch-07:257 | reading | after « On peut bien sûr plus » | simpl ement | simple 127
+- [x] 147 p127 batch-07:257 | reading | after « On peut bien sûr plus » | simpl ement | simple 127 | dismissed: ungrammatical — « peut plus simple » breaks syntax; page number appended
 - [ ] 147 p128 batch-07:270 | reading | after « par les morphismes premier sommet » | $\mathcal{D}_r \to D_{*}$ transposés | transposé
 - [ ] 147 p129 batch-07:307 | reading | after « son image inverse sur $D^{*}_{d_0,\dots,d_r}$ » | posons | on pose
 - [ ] 147 p129 batch-07:325 | reading | after « de $\Pi_{d_0,\dots,d_r}$ par $T^{*}_{d_0,\dots,d_r}$ On » | pourra | posera
@@ -811,17 +811,17 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p137 batch-07:557 | reading | after « on est ramené à la » | situation suivante $X$ | Situation clef quad
 - [ ] 147 p137 batch-07:578b | reading | after « $D'' \to Y$ $D' \to Y$ … » | $d_1 > d_0 \geqslant 0$ | $d_1\geq d_0\geq0$
 - [ ] 147 p138 batch-07:585 | reading | after « est l'image inverse de $\Theta^{(d_1)*}$ » | Ceci posé | fondamentaux $\Pi_1P_{D''^{*}},\Pi_1P_{D'^{*}}$ Cette fois
-- [ ] 147 p138 batch-07:605 | reading | after « qui lui est de nature » | essentiellement triviale | entièrement trivial
-- [ ] 147 p139 batch-07:622 | reading | after « avoir commutativité dans On fera » | la distinction | bien attention
+- [x] 147 p138 batch-07:605 | reading | after « qui lui est de nature » | essentiellement triviale | entièrement trivial | dismissed: ungrammatical — « de nature … trivial » cannot agree with « nature »
+- [ ] 147 p139 batch-07:622 | reading | after « avoir commutativité dans On fera » | la distinction | bien attention | note: our reading looks impossible: « la distinction entre la différence entre » breaks the syntax
 - [ ] 147 p139 batch-07:625 | reading | after « $D''$ dans $D'$ est contenue » | justement dans | juste en
 - [ ] 147 p139 batch-07:628 | reading | after « analytiques lisses telle que $D' \to … » | condition | relative à
-- [ ] 147 p139 batch-07:632a | reading | after « de la donnée de $\Theta$ » | la | le
+- [ ] 147 p139 batch-07:632a | reading | after « de la donnée de $\Theta$ » | la | le | note: our reading looks impossible: « la voisinage »: voisinage is masculine
 - [ ] 147 p140 batch-07:640 | reading | after « question sera figuré par et » | non dans | hors de
 - [ ] 147 p140 batch-07:645 | reading | after « le cadre p ex des » | prémulti locales | paires loc fer
 - [ ] 147 p140 batch-07:649 | reading | after « topologiques on peut encore définir » | un | ce
 - [ ] 147 p140 batch-07:650 | reading | after « germe de topos multiplicité diff » | abstraite partie | par descente à partir
-- [ ] 147 p140 batch-07:652 | reading | after « top paracompactes On peut aussi » | il semble t-il | me semble-t-il
-- [ ] 147 p140 batch-07:656 | reading | after « aussi il semble t-il donner » | end document | 140
+- [ ] 147 p140 batch-07:652 | reading | after « top paracompactes On peut aussi » | il semble t-il | me semble-t-il | note: our reading looks impossible: « il semble t-il » is not French
+- [x] 147 p140 batch-07:656 | reading | after « aussi il semble t-il donner » | end document | 140 | dismissed: artefact — page number, not a reading
 - [ ] 147 p141 batch-08:22 | reading | after « de fonctorialité telles que l'on » | trouve | tire
 - [ ] 147 p141 batch-08:22a | reading | after « d'une situation de deux d'un » | couple | composé
 - [ ] 147 p141 batch-08:35 | reading | after « $Y$ définissant l'ouvert $Y^*=Y\setminus\Theta$ Nous » | allons considérer | considérons
@@ -829,7 +829,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p142 batch-08:58 | reading | after « isomorphismes entre tels ldots C'est » | essentiellement | en définitive
 - [ ] 147 p142 batch-08:58a | reading | after « tels ldots C'est essentiellement cela » | l heure de canonisation | l'horreur des normalisations
 - [ ] 147 p142 batch-08:58b | reading | after « le définir chaque fois qu'on » | a deux | se donne
-- [ ] 147 p142 batch-08:58c | reading | after « a deux des imm locales » | $D''\to D'\to Y$ | $D''\longrightarrow D'\mathbin{-}Y$ 142
+- [x] 147 p142 batch-08:58c | reading | after « a deux des imm locales » | $D''\to D'\to Y$ | $D''\longrightarrow D'\mathbin{-}Y$ 142 | dismissed: artefact — arrow rendered as a dash, page number appended
 - [ ] 147 p143 batch-08:62a | reading | after « de topos » | simpliciaux disons ldots | simplement si on veut
 - [ ] 147 p143 batch-08:62b | reading | after « topos en question $Y$ pas » | besoin | la peine même
 - [ ] 147 p143 batch-08:62c | reading | after « d'un tel ss-objet i e » | définissant | dire
@@ -843,10 +843,10 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p144 batch-08:80d | reading | after « o p 768 ff Ici » | cas | en
 - [ ] 147 p144 batch-08:80e | reading | after « être assez évident de définir » | au moins conceptuellement | de façon non canonique
 - [ ] 147 p144 batch-08:80f | reading | after « moins conceptuellement un plongement topologique » | et via | cl
-- [ ] 147 p145 batch-08:89 | reading | after « l'application identique sur les fib » | fibrés | rés
+- [x] 147 p145 batch-08:89 | reading | after « l'application identique sur les fib » | fibrés | rés | dismissed: artefact — « fib rés » split of « fibrés », « rés » no word
 - [ ] 147 p145 batch-08:89a | reading | after « long de la section nulle » | Sa construction | Ça
 - [ ] 147 p145 batch-08:89b | reading | after « nulle Sa construction devrait en » | tout | tous
-- [ ] 147 p145 batch-08:89c | reading | after « cas des vrais espaces analytiques » | paracompactes | paracompacts
+- [ ] 147 p145 batch-08:89c | reading | after « cas des vrais espaces analytiques » | paracompactes | paracompacts | note: our reading looks impossible: agreement with « espaces » requires « paracompacts »
 - [ ] 147 p145 batch-08:89d | reading | after « l'opération du groupe discret $\mathbb Z$ » | plus | dont
 - [ ] 147 p145 batch-08:89e | reading | after « discret $\mathbb Z$ plus le générateur » | opérant | opère
 - [ ] 147 p145 batch-08:89f | reading | after « le générateur opérant par la » | transformation | transvection
@@ -862,7 +862,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p147 batch-08:118e | reading | after « dans quelle mesure la th » | analogue | envisagé
 - [ ] 147 p147 batch-08:118f | reading | after « [illegible] de travailler avec les » | $\Pi_1 V^*_{D',Y}$ tirés | $\Pi_1\mathcal V^{*}_{D',Y}$ au lieu
 - [ ] 147 p148 batch-08:123 | reading | after « hyp spécifique crois normaux on » | veut | voit
-- [ ] 147 p148 batch-08:123a | reading | after « crois normaux on veut que » | $V^*_{D_1,D_0=X}$ puisse s'interpréter | $\mathcal V^{*}_{D_1,D_0=X}$ peut s'interprète
+- [x] 147 p148 batch-08:123a | reading | after « crois normaux on veut que » | $V^*_{D_1,D_0=X}$ puisse s'interpréter | $\mathcal V^{*}_{D_1,D_0=X}$ peut s'interprète | dismissed: ungrammatical — « peut s'interprète »: finite verb after « peut »
 - [ ] 147 p148 batch-08:125 | reading | after « de vue topologique sans nous » | focaliser | focuser
 - [ ] 147 p148 batch-08:125a | reading | after « normaux définit une filtration décroissante » | dans la multiplicité topologique | du
 - [ ] 147 p148 batch-08:133 | reading | after « dépend justement d'hyp crois normaux » | et | des
@@ -873,7 +873,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p149 batch-08:160e | reading | after « équivalence d'homotopie et en particulier » | se traduit en bijection | ça induit un isom
 - [ ] 147 p150 batch-08:168a | reading | after « variables a comme [illegible] lim » | topologique | toposique
 - [ ] 147 p150 batch-08:170 | reading | after « [illegible] que le th à » | $D_\delta,\Theta_\delta$ ldots Cor Main | $D_\delta,\Theta_\delta\ldots$ Corollaire
-- [ ] 147 p150 batch-08:177 | reading | after « 2 Supposons que \[ 175 $V^*_{\Theta,X}\hookrightarrow … » | une $\Delta$ | un $1$
+- [x] 147 p150 batch-08:177 | reading | after « 2 Supposons que \[ 175 $V^*_{\Theta,X}\hookrightarrow … » | une $\Delta$ | un $1$ | dismissed: ungrammatical — « un » cannot agree with « équivalence »
 - [ ] 147 p150 batch-08:177a | reading | after « $\Delta$ équivalence i e induise » | une bij | un iso
 - [ ] 147 p151 batch-08:191a | reading | after « de pureté montre qu'on peut » | dans un voisinage | innocemment
 - [ ] 147 p151 batch-08:191b | reading | after « négliger $\Theta^{(3)}$ i e que » | les voisins | ça
@@ -903,7 +903,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p158 batch-08:343b | reading | after « revenir plus bas D'autre part » | les $V^{\Sigma}_{\Sigma',\Sigma''}$ | le cas $V_{ \Sigma' ,\Sigma''}^{\Sigma}$
 - [ ] 147 p158 batch-08:343c | reading | after « $V^{\Sigma}_{\Sigma',\Sigma''}$ se ramènent au cas » | $V^\Sigma_{\Sigma',X}$ cas | $V_{\Sigma',X}^{\Sigma}$ où
 - [ ] 147 p158 batch-08:343d | reading | after « $\Sigma''$ bien entendu on perd » | l'hyp lisse | alors l'hypothèse
-- [ ] 147 p158 batch-08:343e | reading | after « un tic [illegible] elle ne » | paraît | joue
+- [ ] 147 p158 batch-08:343e | reading | after « un tic [illegible] elle ne » | paraît | joue | note: our reading looks impossible: « ne paraît plus de rôle » breaks the syntax
 - [ ] 147 p158 batch-08:343f | reading | after « puis belle lurette ldots c'est » | facile simplement | fait sûrement
 - [ ] 147 p159 batch-08:353a | reading | after « par $X\setminus\Sigma_0^{ [illegible] }$ etc on … » | dès lors $V^\Sigma_{\Sigma',\Sigma''}$ | alors les $V_{\Sigma',\Sigma''}^\Sigma$
 - [ ] 147 p159 batch-08:353b | reading | after « trouve dès lors $V^\Sigma_{\Sigma',\Sigma''}$ comme » | un sous | le
@@ -962,7 +962,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p173 batch-09:200 | reading | after « le plus général [illegible] est » | dans | donc
 - [ ] 147 p174 batch-09:203 | reading | after « en droites d'où en prenant » | les | le produit des
 - [ ] 147 p174 batch-09:205 | reading | after « d'ailleurs un fibré torseur sous » | tores convenables | un fibré tore tordu convenable
-- [ ] 147 p174 batch-09:214 | reading | after « image inverse de $\check{N}_{d_*,d_0}$ par » | $\check{N}^*\to D_{d_*}$ | $\check N^*\to D_{d^{ ? }_*}$ 174
+- [x] 147 p174 batch-09:214 | reading | after « image inverse de $\check{N}_{d_*,d_0}$ par » | $\check{N}^*\to D_{d_*}$ | $\check N^*\to D_{d^{ ? }_*}$ 174 | dismissed: artefact — query mark in the index and a page number
 - [ ] 147 p175 batch-09:223 | reading | after « d'homotopie \[ (294)\qquad \boxed{\ \mathcal{V}^{d'_0}_{d_*,d''_0}\ \simeq\ … » | sens d'un voisinage | seul inconvénient
 - [ ] 147 p175 batch-09:223a | reading | after « le sens d'un voisinage de » | lisse par correspondance | ne pas correspondre
 - [ ] 147 p175 batch-09:223b | reading | after « lisse par correspondance à une » | fléchée des lacets canoniques | flèche canonique
@@ -970,7 +970,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p176 batch-09:227d | reading | after « Scholie important Les » | pièces | pieuvres
 - [ ] 147 p176 batch-09:227e | reading | after « Les pièces de construction dans » | la dissection | le dévissage
 - [ ] 147 p176 batch-09:227f | reading | after « vectoriel [illegible] muni d'une filtration » | du | de
-- [ ] 147 p176 batch-09:227g | reading | after « fibres $\mathbb{C}^{*\,d'_0-d''_0}$ c'est bien En » | fatigant | se fatiguant
+- [ ] 147 p176 batch-09:227g | reading | after « fibres $\mathbb{C}^{*\,d'_0-d''_0}$ c'est bien En » | fatigant | se fatiguant | note: our reading looks impossible: the gerund needs « fatiguant »
 - [ ] 147 p177 batch-09:232 | reading | at the top of the page | écrire | arriver
 - [ ] 147 p177 batch-09:232a | reading | after « fondamentaux des $\check{N}^*_{d_*,(d'_0,d''_0)}∣D^*_{d_*}$ d'une part » | les $\mathcal{V}^{d'_0}_{d_*,d''_0}$ | des $ V _{d_*,d''_0}^{d'_0}$
 - [ ] 147 p177 batch-09:234 | reading | after « Actuellement on prend la connaissance » | du $\Pi_1\mathcal{V}^{d'_0}_{d_*,d''_0}$ modulo équivalence | de $\Pi_1 V _{d_*,d''_0}^{d'_0}$
@@ -996,11 +996,11 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p180 batch-09:270 | reading | after « loc connexes et connexes si » | tel | non elles ne sont connexes
 - [ ] 147 p180 batch-09:272 | reading | after « connexes si tel on suppose » | c Les strates sont des façons | de façon
 - [ ] 147 p180 batch-09:272a | reading | after « est une réunion de comp » | connexes de | conn des
-- [ ] 147 p180 batch-09:272b | reading | after « comp connexes de $X_j$ donc » | on | en
+- [ ] 147 p180 batch-09:272b | reading | after « comp connexes de $X_j$ donc » | on | en | note: our reading looks impossible: « donc on remplaçant » breaks the syntax, gerund needs « en »
 - [ ] 147 p180 batch-09:274 | reading | after « et tout $x\in\overline{X_i}$ le germe » | d adhérence des | topologique de
 - [ ] 147 p180 batch-09:274a | reading | after « germe d adhérence des $X_i$ » | en un | au
 - [ ] 147 p180 batch-09:280 | reading | after « locale autour de $X_i$ de » | l'adh | l'ens
-- [ ] 147 p180 batch-09:283 | reading | after « tels que $\overline{X_j}\supset X_i$ est loc » | end document | 180
+- [x] 147 p180 batch-09:283 | reading | after « tels que $\overline{X_j}\supset X_i$ est loc » | end document | 180 | dismissed: artefact — page number, not a reading
 - [ ] 147 p181 batch-10:24a | reading | after « avec les $Z_j$ est connexe » | Remarques | NB les $Z_j$ loc connexes Remarque
 - [ ] 147 p181 batch-10:24b | reading | after « stratification globale de $U$ Donc » | l'ens l'app à | l'application pour
 - [ ] 147 p181 batch-10:28a | reading | after « n'est pas [illegible] un faisceau » | autre | contre
@@ -1008,16 +1008,16 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p182 batch-10:37 | reading | at the top of the page | particulières Si j'avais | particuliers Sauf erreur
 - [ ] 147 p182 batch-10:41 | reading | after « une structure de stratification locale » | Si j'en avais | Sauf erreur
 - [ ] 147 p182 batch-10:41a | reading | after « locale Si j'en avais on » | pourrait | peut
-- [ ] 147 p182 batch-10:41b | reading | after « cas des feuilletages plus gén » | des toutes | de ttes
+- [ ] 147 p182 batch-10:41b | reading | after « cas des feuilletages plus gén » | des toutes | de ttes | note: our reading looks impossible: « des toutes les » is not French
 - [ ] 147 p182 batch-10:41c | reading | after « $X$ en des feuilles strates » | disons que feuilles Str | chaque feuille $ F $ strate
-- [ ] 147 p182 batch-10:49 | reading | after « est bijective et une imm » | locale | loc 182
+- [x] 147 p182 batch-10:49 | reading | after « est bijective et une imm » | locale | loc 182 | dismissed: artefact — same abbreviation, only a page number added
 - [ ] 147 p183 batch-10:54 | reading | after « Remarques » | 1 | a
 - [ ] 147 p183 batch-10:58a | reading | after « un diviseur à croisements normaux » | dans | sur
 - [ ] 147 p184 batch-10:77a | reading | after « topologie sur l'ens des drapeaux » | du | de
 - [ ] 147 p185 batch-10:82 | reading | after « les images des composantes connexes » | des $D^{*}_{\Delta_r}$ | de $D_{\Delta_r}^{*}$
 - [ ] 147 p185 batch-10:88 | reading | after « par la stratification globale on » | pourrait la | aurait pu le
 - [ ] 147 p185 batch-10:88a | reading | after « esp analytique on retrouve les » | notations | ouverts
-- [ ] 147 p185 batch-10:92 | reading | after « pouvoir définir l'analogue des morphismes » | ½simpliciaux | $ \tfrac12 $ simpliciaux 185
+- [x] 147 p185 batch-10:92 | reading | after « pouvoir définir l'analogue des morphismes » | ½simpliciaux | $ \tfrac12 $ simpliciaux 185 | dismissed: artefact — same notation, only a page number added
 - [ ] 147 p186 batch-10:101 | reading | after « et pour ceci on doit » | pourrait | penserait à
 - [ ] 147 p186 batch-10:103 | reading | after « généraux comme étant les systèmes » | $(x,\Sigma_*)$ mais | $(x,\overline{\Sigma}_*)$ avec
 - [ ] 147 p186 batch-10:113a | reading | after « les $D_{\Delta_r}$ forment un système » | ½simplicial | $ \tfrac12 $ simplicial
@@ -1030,7 +1030,7 @@ Issue #156. Each bullet is one place of folder 147 where our transcription and a
 - [ ] 147 p189 batch-10:159 | reading | after « à » | l'une | l'ens
 - [ ] 147 p189 batch-10:159a | reading | after « est spécial aux croisements normaux » | et | ce
 - [ ] 147 p189 batch-10:163 | reading | after « tubulaires [illegible] fournissant [illegible] des » | types | topos
-- [ ] 147 p189 batch-10:167 | reading | after « élémentaires de la section précédente » | end document | 189
+- [x] 147 p189 batch-10:167 | reading | after « élémentaires de la section précédente » | end document | 189 | dismissed: artefact — page number, not a reading
 
 ## 3. Formulas and symbols read differently
 
