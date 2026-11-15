@@ -18,8 +18,9 @@ Project built on Mathlib.
 
 Only the import closure of the declarations used by this project's proofs, at the upstream module
 paths, so that `import StacksCore.…` and `import StacksFrontier.…` resolve (libraries
-`StacksCore` and `StacksFrontier` in `lean/lakefile.toml`, with `srcDir = "Stacks"`). Sixteen
-files:
+`StacksCore` and `StacksFrontier` in `lean/lakefile.toml`, with `srcDir = "Stacks"`). 217 files
+on 15 November 2026; the table names the declarations each proof uses, with the main file of each
+closure (the other files of a closure are its imports):
 
 | File | Used for |
 |---|---|
