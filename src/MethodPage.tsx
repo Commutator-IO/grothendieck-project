@@ -258,6 +258,8 @@ const STARS: Record<string, 1 | 2 | 3> = {
   'article-moduli': 2,
   'article-quillen-lean': 2,
   'article-recollement': 1,
+  'article-tangent': 3,
+  'article-bigon': 2,
 };
 
 const IHP_CAT = (q: string) =>
@@ -356,7 +358,7 @@ export function MethodPage() {
         </header>
 
         <Articles />
-        <Articles id="preprints" title="Preprints" items={PREPRINTS} />
+        <Articles id="preprints" title="Preprints" items={[...PREPRINTS].sort((x, y) => (STARS[y.id] ?? 0) - (STARS[x.id] ?? 0))} />
         <Articles id="drafts" title="Drafts" items={[...SOUS_ARTICLES].sort((x, y) => (STARS[y.id] ?? 0) - (STARS[x.id] ?? 0))} />
         <p className="mt-2 text-[12.5px] text-ink-500">
           Stars give our estimate of each draft's interest, from ★ to ★★★: what it adds that is new or solid, not how finished it is.
