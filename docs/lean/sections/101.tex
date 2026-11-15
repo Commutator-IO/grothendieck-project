@@ -36,7 +36,17 @@ Soit $A$ un anneau de valuation discrète, de corps des fractions $K$. Alors $A$
 Le sens direct est b). Réciproquement, $A$ est séparé pour la topologie $\mathfrak m$-adique (Krull). Soit $(e_n)$ une suite de Cauchy, $e_m - e_n \in \varpi^n A$ pour $n \leqslant m$. Pour $x \in K$ et $n$ tel que $\varpi^n x \in A$, la classe de $e_n x$ modulo $A$ ne dépend pas de $n$, car $(e_m - e_n) x \in \varpi^n x A \subset A$ ; elle définit une application $A$-linéaire $f : K \to K/A$. Un relèvement $g$ de $f$ vérifie $g(1) \equiv e_0 \bmod A$, donc $g(1) \in A$, et $g(1) - e_n = \varpi^n \bigl(g(\varpi^{-n}) - e_n \varpi^{-n}\bigr) \in \varpi^n A$ : la suite converge vers $g(1)$.
 \end{proof}
 
-Ne sont pas démontrés ici : l'équivalence entre $\mathcal O_X$-modules et triplets, et le calcul des $\mathrm{Ext}$ (et, en particulier, l'identification de $\mathrm{Ext}^1_A(K, A)$ au conoyau de $\mathrm{Hom}_A(K, K) \to \mathrm{Hom}_A(K, K/A)$, qui n'est pas formalisée) et des $H^i_x$ dans ce modèle. En dimension~$2$ la dualité échoue, et la page~14 le découvre (piste \texttt{101-sheaf-duality-dim-two-fails}, ci-dessous) :
+\noindent\emph{Les $\mathrm{Ext}$ de mathlib.} L'équivalence avec $\mathrm{Ext}^1_A(K, A) = 0$ est démontrée pour le groupe $\mathrm{Ext}$ de mathlib dans la catégorie des $A$-modules. Le module $K$ est injectif par le critère de Baer, $A$ étant principal, donc $\mathrm{Ext}^1_A(K, K) = 0$. La suite exacte longue de $\mathrm{Ext}_A(K, -)$ pour $0 \to A \to K \to K/A \to 0$ contient alors le segment
+\[\mathrm{Hom}_A(K, K) \to \mathrm{Hom}_A(K, K/A) \to \mathrm{Ext}^1_A(K, A) \to 0,\]
+qui identifie $\mathrm{Ext}^1_A(K, A)$ au conoyau de la première flèche. Voir \texttt{baer\_K}, \texttt{ext\_one\_eq\_zero\_iff\_lift} et \texttt{isAdicComplete\_iff\_ext\_one} dans \href{\leanblobmain/Folder101Ext.lean}{\texttt{Folder101Ext.\allowbreak{}lean}}.
+
+\begin{enonce}[Page 10, la cohomologie locale en degrés $0$ et~$1$\piste{101-sheaf-duality-dim-one}]\verifie[\leanblobmain]{Folder101LocalCohomology}
+Soient $A$ un anneau de valuation discrète, d'idéal maximal $\mathfrak m = (\varpi)$, et $M$ un $A$-module. La cohomologie locale $H^i_x(M)$ au point fermé, cohomologie du foncteur dérivé $R\Gamma_{V(\mathfrak m)}$, est celle du complexe de Čech étendu $M \to M_\varpi$, placé en degrés $0$ et~$1$. Elle est nulle hors de ces deux degrés.
+\end{enonce}
+
+\noindent Le foncteur $R\Gamma_{V(\mathfrak m)}$ est l'adjoint à droite de l'inclusion des complexes à cohomologie de $\mathfrak m^\infty$-torsion (Stacks, étiquette 0A6Q), et son calcul par le complexe de Čech étendu d'une famille génératrice de $\mathfrak m$ est l'étiquette 0A6R ; tous deux viennent de la bibliothèque d'AxiomMath \cite{axiomstacks}. Ici la famille n'a qu'un élément, $\varpi$, et le complexe a deux termes. C'est le modèle à deux termes de la page, pour un faisceau quasi-cohérent. Voir \texttt{localCohomologyIsoCech} et \texttt{isZero\_localCohomology} dans \href{\leanblobmain/Folder101LocalCohomology.lean}{\texttt{Folder101LocalCohomology.\allowbreak{}lean}}.
+
+Ne sont pas démontrés ici : l'équivalence entre $\mathcal O_X$-modules et triplets ; l'identification de $H^0_x(M)$ et $H^1_x(M)$ au noyau et au conoyau de $M \to K \otimes_A M$, le complexe à deux termes n'étant pas déplié ; la cohomologie locale des $\mathcal O_X$-modules non quasi-cohérents, que la page traite aussi. En dimension~$2$ la dualité échoue, et la page~14 le découvre (piste \texttt{101-sheaf-duality-dim-two-fails}, ci-dessous) :
 
 \begin{encadre}
 \begin{contrexemple*}[pages 10, 14 et 15, dualité locale en dimension deux\piste{101-sheaf-duality-dim-two-fails}]\nonverifie

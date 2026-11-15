@@ -12,7 +12,7 @@ et, pour les images directes, $\int y = 1$, $\int 1 = 0$, $(\mathrm{id} \otimes 
 Soient $k$ un corps, $A$ une $k$-algèbre commutative de dimension finie, $(b_i)$ et $(b'_i)$ deux bases duales pour $(a, b) \mapsto \int ab$, $\varepsilon : A \to k$ une augmentation de noyau nilpotent, et $y$ tel que $ay = \varepsilon(a)\,y$, $\int y = 1$, $\int 1 = 0$, $\varepsilon(y) = 0$. Alors $\Delta = \sum_i b_i \otimes b'_i$ vérifie les identités ci-dessus, avec $\chi = \dim A$.
 \end{enonce}
 
-C'est le cas pair d'une algèbre à dualité de Poincaré, où $\chi = \dim H^*(X)$ ; le cas des classes de degré impair, avec signes, n'est pas formalisé (Lean : \texttt{model}).
+C'est le cas pair d'une algèbre à dualité de Poincaré, où $\chi = \dim H^*(X)$ ; le cas des classes de degré impair, avec signes, n'est pas formalisé (Lean : \texttt{model}) ; l'étape de la page~33 l'est dans le cas gradué (fin de la section).
 
 \begin{enonce}[Grothendieck, page 50]
 Pour $k = 2$ : $y_1\delta = y_2\delta = y_1y_2$ et $\delta^2 = \chi\, y_1y_2$. Pour $k = 3$, avec $\delta = \delta_{\{1,2,3\}}$ : $\delta_{12}\delta_{23} = \delta_{12}\delta_{13} = \delta_{23}\delta_{13} = \delta$, $\delta_{ij}^2 = \chi\, y_iy_j$, $\delta_{ij}\,y_i = y_iy_j$, $\delta\, y_i = y_1y_2y_3$, $\delta^2 = 0$ et $\delta_{ij}\,\delta = \chi\, y_1y_2y_3$.
@@ -131,3 +131,11 @@ Le foncteur $A(\cdot) \mapsto (A(\mathrm{pt}), \Delta)$, avec $\Delta = \delta_*
 \end{conjecture*}
 \end{encadre}
 {\small La page laisse \q{à préciser} les axiomes sur $\Delta$ ; la lecture les identifie aux identités en zigzag d'une algèbre de Frobenius. Faute d'axiomes écrits, l'énoncé n'est pas démontré ici. On se reportera aux notes de Grothendieck (\lot{11}{3}{41}).\par}
+
+\begin{enonce}[Page 33, dans le cas gradué, avec les signes de Koszul]\verifie[\leanblobmain]{Folder11GradedPoincare}
+Soit $A$ une algèbre $\mathbf Z$-graduée commutative au sens gradué sur un corps $F$, munie d'une classe diagonale $\Delta = \sum_t e_t \otimes f_t$ de degré $n$ pair, avec $e_t \in A^{a_t}$, $\Delta \cdot p_1(a) = \Delta \cdot p_2(a)$ pour tout $a$, et d'une jauge $\lambda$ nulle hors du degré $n$ avec $\sum_t \lambda(f_t)\, e_t = 1$. Soient $E$ une $F$-algèbre, $\kappa_E$ une forme linéaire sur $E$ et $h : A \to E$ un morphisme d'algèbres. Alors
+\[h_*(x) = \sum_t (-1)^{a_t}\, \kappa_E\bigl(h(e_t)\, x\bigr)\, f_t\]
+vérifie $\lambda(y \cdot h_* x) = \kappa_E(h(y)\, x)$, la formule de projection $h_*(h(y)\, x) = y\, h_*(x)$ et $\lambda \circ h_* = \kappa_E$, et c'est la seule application linéaire $E \to A$ qui ait les deux dernières propriétés. La jauge $\lambda$ est déterminée par $\Delta$.
+\end{enonce}
+
+\noindent C'est l'étape de la page~33 qui porte la pleine fidélité dans le cas commutatif : une image directe est l'adjointe de l'image inverse, donc un morphisme est déterminé par son image inverse. Le signe $(-1)^{a_t}$ est le signe de Koszul, que le cas commutatif ne voit pas. Les deux conditions sur $\Delta$ sont proposées comme axiomes pour le $\Delta$ de la page~41 ; elles ne sont pas lues sur la page. La forme $\lambda(yx)$ est alors parfaite en degrés complémentaires (Stacks, lemme 0FIJ et remarque 0FIK, dans la bibliothèque d'AxiomMath \cite{axiomstacks}). Voir \texttt{push}, \texttt{trace\_mul\_push}, \texttt{push\_proj}, \texttt{push\_unique} et \texttt{gauge\_unique} dans \href{\leanblobmain/Folder11GradedPoincare.lean}{\texttt{Folder11GradedPoincare.\allowbreak{}lean}}. Ne sont pas formalisées les algèbres bivariantes simpliciales graduées elles-mêmes, donc l'équivalence graduée des pages~37 et~41.

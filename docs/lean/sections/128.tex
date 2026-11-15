@@ -177,7 +177,25 @@ Ne sont pas démontrés ici, de la même cote :
 Soient $X$ un préschéma, $\mathcal I$ un idéal quasi-cohérent nilpotent de $\mathcal O_X$ et $X' = \operatorname{Spec} \mathcal A' \to X$ affine, $\mathcal I$ s'envoyant isomorphiquement sur un idéal de $\mathcal A'$ et $X'_0$ étant fidèlement plat sur $X_0 = V(\mathcal I)$. Alors $X' \to X$ est un morphisme de descente effective pour les modules quasi-cohérents plats, et le reste après tout changement de base plat $Y \to X$.
 \end{theoreme*}
 \end{encadre}
-{\small Le cas affine, avec l'hypothèse plus faible que $\operatorname{Spec} A'_0 \to \operatorname{Spec} A_0$ soit de descente effective pour les modules plats, est le théorème~\ref{thm:128-descente}, et le cas affine tel qu'énoncé, avec $A'_0$ fidèlement plat sur $A_0$, est le point~3 du théorème~\ref{thm:128-fid-plat}. Restent non vérifiés le recollement sur un préschéma et la stabilité par changement de base plat.\par}
+{\small Le cas affine, avec l'hypothèse plus faible que $\operatorname{Spec} A'_0 \to \operatorname{Spec} A_0$ soit de descente effective pour les modules plats, est le théorème~\ref{thm:128-descente}, et le cas affine tel qu'énoncé, avec $A'_0$ fidèlement plat sur $A_0$, est le point~3 du théorème~\ref{thm:128-fid-plat}. Reste non vérifié le recollement sur un préschéma.\par}
+
+\begin{theoreme}[Pages 8 et 9, corollaire~3 dans le cas affine\piste{128-nilpotent-conductor-flat-descent}]\verifie[\leanblobmain]{Folder128FlatBaseChange}
+Soient $A \to S$ un morphisme d'anneaux commutatifs et $I$ un idéal nilpotent de $A$ qui s'envoie isomorphiquement sur un idéal de $S$, avec $S/IS$ fidèlement plat sur $A/I$. Pour tout morphisme plat $A \to B$, $\operatorname{Spec}(B \otimes_A S) \to \operatorname{Spec} B$ est encore un morphisme de descente effective pour les modules plats.
+\end{theoreme}
+
+\begin{proof}
+Les trois hypothèses passent au changement de base. L'idéal $IB$ est nilpotent. Le morphisme $I \otimes_A B \to B \otimes_A S$ reste injectif parce que $B$ est plat, si bien que $IB$ s'envoie isomorphiquement sur un idéal de $B \otimes_A S$ : c'est le seul endroit où la platitude de $B$ sert. Enfin $(B \otimes_A S)/IB(B \otimes_A S) \simeq B/IB \otimes_{A/I} S/IS$ est fidèlement plat sur $B/IB$, pour tout $B$. On conclut par le point~3 du théorème~\ref{thm:128-fid-plat}.
+\end{proof}
+
+\begin{contrexemple}[Pages 8 et 9, la restriction aux modules plats est nécessaire]\verifie[\leanblobmain]{Folder128FlatBaseChange}
+Soient $k$ un corps, $S = k[\varepsilon] \times k[\varepsilon]$ avec $\varepsilon^2 = 0$, $A = \{(a + b\varepsilon, a + c\varepsilon)\} \subset S$ et $I = \{(b\varepsilon, c\varepsilon)\}$. Les hypothèses du corollaire~2 sont remplies, donc $\operatorname{Spec} S \to \operatorname{Spec} A$ est de descente effective pour les modules plats ; il ne l'est pas pour tous les modules.
+\end{contrexemple}
+
+\begin{proof}
+Un morphisme est de descente effective pour tous les modules si et seulement s'il est universellement injectif (Stacks, étiquette 08XA). Or $A \to S$ ne l'est pas. Posons $u = (\varepsilon, 0)$, $v = (0, \varepsilon)$ et $Q = A/(u - v)$. L'élément $u \otimes 1$ de $A \otimes_A Q = Q$ n'est pas nul, alors que dans $S \otimes_A Q$ on a $u \otimes 1 = (1, 0) \otimes \bar u = (1, 0) \otimes \bar v = (1, 0)v \otimes 1 = 0$.
+\end{proof}
+
+\noindent Les mêmes $A$, $S$ et $Q$ donnent le contre-exemple de la lecture au corollaire~3 pour un $Y = \operatorname{Spec} A/(u - v)$ non plat. Le critère 08XA et la définition de la descente pour tous les modules (étiquette 08WY) viennent de la bibliothèque d'AxiomMath \cite{axiomstacks}. Voir \texttt{cor3\_affine}, \texttt{example\_isEffectiveDescentFlat}, \texttt{example\_not\_isEffectiveDescentMorphismForModules} et \texttt{not\_injective\_rTensor} dans \href{\leanblobmain/Folder128FlatBaseChange.lean}{\texttt{Folder128FlatBaseChange.\allowbreak{}lean}}.
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 19 à 29, descente infinitésimale\piste{128-infinitesimal-descent-theorem}]\nonverifie
