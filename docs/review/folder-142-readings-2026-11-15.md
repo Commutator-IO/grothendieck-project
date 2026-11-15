@@ -10,11 +10,11 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 
 ## 1. Places our transcription leaves illegible and the other reading reads
 
-- [ ] 142 p5 batch-01:132 | reading | after « sûr si on n'a pas » | [illegible] | une
+- [x] 142 p5 batch-01:132 | reading | after « sûr si on n'a pas » | [illegible] | une | dismissed: ungrammatical — « n'a pas une d'exigence » is not French
 - [x] 142 p6 batch-01:141 | reading | after « jacobienne n'est stable par aucune » | [illegible] | autom
 - [ ] 142 p7 batch-01:154 | reading | after « stabilisateur de $f\in Hom _{ isot … » | [illegible] | un
-- [ ] 142 p7 batch-01:154a | reading | after « $f\in Hom _{ isot }(X,Y)$ s'identifie … » | [illegible] | gr
-- [ ] 142 p7 batch-01:155 | reading | after « de morphismes finis étales $X\to Y$ » | NB Tout sous-groupe fini de $T_{X}$ provient [illegible] stabilisateur [illegible] de cette [illegible] $f$ Th … | 7
+- [x] 142 p7 batch-01:154a | reading | after « $f\in Hom _{ isot }(X,Y)$ s'identifie … » | [illegible] | gr | dismissed: ungrammatical — fragment « gr » is not a word
+- [x] 142 p7 batch-01:155 | reading | after « de morphismes finis étales $X\to Y$ » | NB Tout sous-groupe fini de $T_{X}$ provient [illegible] stabilisateur [illegible] de cette [illegible] $f$ Th … | 7 | dismissed: artefact — stray page number « 7 »
 - [ ] 142 p8 batch-01:165 | reading | after « de t f et anabéliennes » | [illegible] | anabéliennes
 - [ ] 142 p9 batch-01:189 | reading | after « dite à $ Hom $ profinis … » | [illegible] | $ Hom $
 - [ ] 142 p9 batch-01:189a | reading | after « $C$ les stabilisateurs dans $ Aut … » | [illegible] des $u\in Hom _{C}(X,Y)$ | à
@@ -23,7 +23,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p9 batch-01:189d | reading | after « [illegible] soient des sous-groupes fermés » | [illegible] | On
 - [ ] 142 p9 batch-01:189e | reading | after « un espace loc compact Je » | [illegible] vois | dis veux
 - [ ] 142 p9 batch-01:197 | reading | after « des morphismes \[ 191 (14)\qquad 192 … » | [illegible] | continue
-- [ ] 142 p9 batch-01:197a | reading | after « \[ 191 (14)\qquad 192 \begin{cases} 193 … » | [illegible] | morphi
+- [x] 142 p9 batch-01:197a | reading | after « \[ 191 (14)\qquad 192 \begin{cases} 193 … » | [illegible] | morphi | dismissed: ungrammatical — fragment « morphi » is not a word
 - [ ] 142 p10 batch-01:231 | reading | after « $ Aut (X)\times Aut (Y)$ et … » | d'orbites [illegible] | de
 - [ ] 142 p11 batch-01:236 | reading | after « sont des espaces loc compacts » | [illegible] continus | séparés où on a la continuité
 - [ ] 142 p13 batch-01:266 | reading | after « à $Y$ isom unique près » | [illegible] | De
@@ -57,7 +57,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p32 batch-02:410 | reading | after « $a_i^{\omega}$ $c_i^{\omega}$ $d_i^{\omega}$ trois paquets » | [illegible] chacun | permutés ch un
 - [ ] 142 p33 batch-02:460 | reading | after « telle façon qu'ils se recollent » | [illegible] | en dans
 - [ ] 142 p34 batch-02:489 | reading | after « que $\zeta$ \[ 482(58)\quad 483\begin{cases} 484\beta' … » | [illegible] modifier $\zeta$ | ainsi considérer
-- [ ] 142 p34 batch-02:489a | reading | after « [illegible] modifier $\zeta$ en introduisant » | $\zeta' = $ [illegible] $\eta\,\zeta$ [illegible] | un mot
+- [x] 142 p34 batch-02:489a | reading | after « [illegible] modifier $\zeta$ en introduisant » | $\zeta' = $ [illegible] $\eta\,\zeta$ [illegible] | un mot | dismissed: artefact — « un mot » is a placeholder, not a reading
 - [ ] 142 p34 batch-02:489b | reading | after « à $\eta$ la relation 56 » | équivalant [illegible] | équivaut à
 - [x] 142 p36 batch-02:564 | reading | after « 57 par le pur calcul » | [illegible] | en
 - [x] 142 p36 batch-02:564a | reading | after « de façon géométrique en posant » | [illegible] | avant
@@ -70,7 +70,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p47 batch-03:211 | reading | after « sur $\Sigma^{*}$ on travaille sur » | [illegible] | $C$
 - [ ] 142 p49 batch-03:251 | reading | after « est défini par \[ 249 (17)\quad … » | $R_i^{\omega} \in U_{i\mathbf{R}}$ [illegible] et $R_i^{\omega}$ | $ R_{i\omega} $
 - [x] 142 p49 batch-03:282 | reading | after « définit des chemins sur $\widetilde{\Sigma}$ » | [illegible] | choisit
-- [ ] 142 p49 batch-03:282a | reading | after « [illegible] pour les $b_i^{\omega}$ [illegible] » | orientations [illegible] symétriques [illegible] | 49
+- [x] 142 p49 batch-03:282a | reading | after « [illegible] pour les $b_i^{\omega}$ [illegible] » | orientations [illegible] symétriques [illegible] | 49 | dismissed: artefact — stray page number « 49 »
 - [ ] 142 p50 batch-03:293 | reading | after « identifier l'une $\boldsymbol{\omega} = \Omega(J) = … » | [illegible] | $ \varepsilon $
 - [ ] 142 p50 batch-03:294 | reading | after « hémisphères Il s'agit d arcs » | [illegible] tout à fait déterminés d'origine extrémité direction [illegible] sur | de l'un
 - [ ] 142 p50 batch-03:305 | reading | after « On introduit sur $\widetilde{\Sigma}$ les » | [illegible] | arcs
@@ -94,7 +94,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p69 batch-04:156 | reading | after « $l : x \to y$ dans … » | [illegible] | on suppose
 - [ ] 142 p69 batch-04:160 | reading | after « \[ 158 (*) \qquad {}^{u}l : … » | [illegible] | f
 - [x] 142 p70 batch-04:186 | reading | after « p ex de choisir un » | [illegible] | $x$
-- [ ] 142 p70 batch-04:200 | reading | after « sont dans $I$ les syst » | choisis [illegible] finis | fini
+- [x] 142 p70 batch-04:200 | reading | after « sont dans $I$ les syst » | choisis [illegible] finis | fini | dismissed: ungrammatical — agreement « les syst. fini » cannot be
 - [ ] 142 p71 batch-04:229 | reading | after « un sens On va développer » | [illegible] [illegible] | encore un
 - [ ] 142 p73 batch-04:273 | reading | after « formules de passage 9 elles » | [illegible] | tombent
 - [ ] 142 p73 batch-04:275 | reading | after « $T = [0,1]$ $p$ une application … » | définissant ainsi un [illegible] | donnant naissance au
@@ -184,9 +184,9 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p2 batch-01:59a | reading | after « e définissent le même applicat » | morphisme | application
 - [ ] 142 p2 batch-01:59b | reading | after « même applicat morphisme de $X$ » | dans | en
 - [ ] 142 p2 batch-01:59c | reading | after « pouvons trouver une application continue » | famille | fin étal
-- [ ] 142 p2 batch-01:71 | reading | after « est pl fidèle on voit » | qu'il existe | que il exi
+- [x] 142 p2 batch-01:71 | reading | after « est pl fidèle on voit » | qu'il existe | que il exi | dismissed: ungrammatical — « que il exi »: missing elision, truncated word
 - [ ] 142 p3 batch-01:102 | reading | after « un homéom de $X$ sur » | lui-même | lui $=$
-- [ ] 142 p3 batch-01:108 | reading | after « Pour que deux applications morphismes » | finis | fini e s
+- [x] 142 p3 batch-01:108 | reading | after « Pour que deux applications morphismes » | finis | fini e s | dismissed: ungrammatical — « fini e s » broken, cannot agree with « morphismes »
 - [ ] 142 p3 batch-01:108a | reading | after « deux applications morphismes finis étales » | $f,g\colon X\to Y$ | $f,g:X\longrightarrow Y$
 - [ ] 142 p3 batch-01:108b | reading | after « faut et suffit qu'ils soient » | conjugués | congrus
 - [ ] 142 p3 batch-01:108c | reading | after « à l'identité i e $g=fu$ » | avec | où
@@ -238,7 +238,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p16 batch-01:309a | reading | after « $K$ automorphismes ou $\mathbb{Q}$ algébrique » | devrait | devant
 - [ ] 142 p17 batch-01:314 | reading | after « homo morphismes entre surfaces top » | complexes | comp clos
 - [ ] 142 p17 batch-01:327 | reading | after « \[ 320 (24)\qquad 321 326\] avec … » | $X\to Y$ lui-même | $X\mathbin{-}Y$ lui $=$
-- [ ] 142 p17 batch-01:327a | reading | after « $X\to Y$ lui-même étale Posant $S=\hat{X}\setminus … » | $T=\hat{Y}\setminus T$ | $T=\widehat Y- T $
+- [ ] 142 p17 batch-01:327a | reading | after « $X\to Y$ lui-même étale Posant $S=\hat{X}\setminus … » | $T=\hat{Y}\setminus T$ | $T=\widehat Y- T $ | note: our reading looks impossible: $T=\hat{Y}\setminus T$ cannot hold (both read it; sic noted, likely $\hat{Y}\setminus Y$)
 - [ ] 142 p17 batch-01:332 | reading | after « avoir des pts de ramification » | affectant | effective
 - [ ] 142 p17 batch-01:332a | reading | after « de ramification affectant non seulement » | un | en
 - [ ] 142 p17 batch-01:332b | reading | after « pts de $\hat{X}\,∣\,T$ mais aussi » | un | en
@@ -247,17 +247,17 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p18 batch-01:338c | reading | after « factorisation canonique d'une classe d'isotopie » | possibles de | des
 - [ ] 142 p18 batch-01:338d | reading | after « $Y'$ est un morphisme fini » | forcément | possédant
 - [ ] 142 p18 batch-01:338e | reading | after « ou son image dans un » | compactifié | complété
-- [ ] 142 p19 batch-01:345b | reading | after « si avec une propriété de » | transitivité évidente | transitivi té évidents
+- [x] 142 p19 batch-01:345b | reading | after « si avec une propriété de » | transitivité évidente | transitivi té évidents | dismissed: ungrammatical — « transitivité évidents »: agreement cannot be
 - [ ] 142 p19 batch-01:345c | reading | after « dans une notion correspondante de » | morphisme d'inclusion | morphismes d inclusion
 - [ ] 142 p20 batch-01:351 | reading | after « de Galois Teichmüller i e » | à ens de | avec des
-- [ ] 142 p20 batch-01:354 | reading | after « catégorie isotopique envisagée plus haut » | end document | 20
+- [x] 142 p20 batch-01:354 | reading | after « catégorie isotopique envisagée plus haut » | end document | 20 | dismissed: artefact — stray page number « 20 »
 - [ ] 142 p24 batch-02:112a | reading | after « $\widetilde{\mathfrak{S}}_J$ et fixe les pts » | il est | fini et
-- [ ] 142 p24 batch-02:112b | reading | after « $\omega \in \omega $ La restriction … » | définie est donnée | défini donné
+- [x] 142 p24 batch-02:112b | reading | after « $\omega \in \omega $ La restriction … » | définie est donnée | défini donné | dismissed: ungrammatical — « défini donné » cannot agree with « La restriction »
 - [ ] 142 p24 batch-02:138 | reading | after « \[ 135u(\tilde b_i^{\omega}) = \tilde b_i^{\omega} … » | exprimant 2 | équivalent à
 - [ ] 142 p24 batch-02:149a | reading | after « $\Pi_{0,3}$ que les équations 12 » | sur | en
 - [ ] 142 p25 batch-02:166 | reading | after « inutiles comme générateurs d'un groupoïde » | Donc les | Dans Les
 - [ ] 142 p25 batch-02:172 | reading | after « permutés de façon simpl transitive » | par $\widetilde{\mathfrak{S}}_J$ | sous $G_J$
-- [ ] 142 p25 batch-02:180 | reading | after « deviennent \[ 178(16)\quad \tilde a^{\omega}_{\omega^2 i}\, … » | entiellemen | textsuperscript
+- [x] 142 p25 batch-02:180 | reading | after « deviennent \[ 178(16)\quad \tilde a^{\omega}_{\omega^2 i}\, … » | entiellemen | textsuperscript | dismissed: artefact — LaTeX command residue « textsuperscript »
 - [ ] 142 p26 batch-02:209a | reading | after « On prend un automorphisme $u$ » | des groupoïdes | du groupoïde
 - [ ] 142 p26 batch-02:209b | reading | after « de $ II _{J,i}$ engendré par … » | deux | 2
 - [x] 142 p26 batch-02:230 | reading | after « Les relations à satisfaire sont » | celles | alors
@@ -273,8 +273,8 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p28 batch-02:297a | reading | after « contient $\widetilde{\mathfrak{S}}_3^{+}$ [illegible] $\{1, \rho^{-1}, \rho^{-2}\}$ … » | sous-groupe | ss-groupe $\widetilde G_3^+$
 - [ ] 142 p28 batch-02:297b | reading | after « s'ensuit que $\widetilde{\mathfrak{S}}_3$ opère sur » | l'ensemble | $V$ ens
 - [ ] 142 p29 batch-02:314 | reading | after « NB Les flèches $\tilde a_i^{\omega}$ sont » | ici | en fait
-- [ ] 142 p29 batch-02:316 | reading | after « On rajoute les deux sommets » | $P^{\omega}$ $\omega \in \omega $ | $ P_i^\omega $ $(\omega\in \omega )$
-- [ ] 142 p29 batch-02:326 | reading | after « les sommets $Q_i$ $i \in \omega$ … » | $P^{\omega}$ $\omega \in \omega $ | $P_\infty^\omega$ $(\omega\in \omega )$
+- [x] 142 p29 batch-02:316 | reading | after « On rajoute les deux sommets » | $P^{\omega}$ $\omega \in \omega $ | $ P_i^\omega $ $(\omega\in \omega )$ | dismissed: mathematically wrong — the two vertices are $P^{\omega}$; index $i$ undefined here
+- [x] 142 p29 batch-02:326 | reading | after « les sommets $Q_i$ $i \in \omega$ … » | $P^{\omega}$ $\omega \in \omega $ | $P_\infty^\omega$ $(\omega\in \omega )$ | dismissed: mathematically wrong — the vertices are $P^{\omega}$; $P_\infty^\omega$ is not defined
 - [ ] 142 p29 batch-02:330 | reading | after « qui impliquent d'ailleurs les relations » | correspondantes 16 | constitutives $(16)$
 - [ ] 142 p29 batch-02:330a | reading | after « pour $ III _J$ La donnée … » | automorphisme automorphisme | endomorphisme
 - [ ] 142 p29 batch-02:330b | reading | after « $P_\omega$ en fixant les $Q_i$ » | équivalente | équivaut à
@@ -290,15 +290,15 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p34 batch-02:467 | reading | after « réduit on a vu à » | $\tilde\alpha \rho^{-1}(\tilde\alpha) \rho^{-2}(\tilde\alpha) = 1$ | $ \rho \ \widetilde\alpha\rho^{-1}(\widetilde\alpha)\rho^{-2}(\widetilde\alpha)$
 - [ ] 142 p34 batch-02:489c | reading | after « $\zeta' = $ [illegible] $\eta\,\zeta$ [illegible] … » | grâce à | en
 - [ ] 142 p34 batch-02:491 | reading | after « 59 En résumé [illegible] $u$ » | décrits | est décrit
-- [ ] 142 p34 batch-02:491a | reading | after « $u$ décrits par les quantités » | $\boxed{\lambda, \eta, \zeta} \in \widehat{\Pi}_{0,3}$ équivalentes | $\in\widehat\Pi_{0,3}^{ 3 }$ équivalt
+- [x] 142 p34 batch-02:491a | reading | after « $u$ décrits par les quantités » | $\boxed{\lambda, \eta, \zeta} \in \widehat{\Pi}_{0,3}$ équivalentes | $\in\widehat\Pi_{0,3}^{ 3 }$ équivalt | dismissed: ungrammatical — « équivalt » is not a French word
 - [ ] 142 p34 batch-02:491b | reading | after « équivalentes à la donnée de » | $\lambda, \eta, \zeta$ auxquels | $\lambda,\eta,\xi$ auxquelles
 - [ ] 142 p35 batch-02:524 | reading | after « ce qui est de $\tilde\alpha$ » | donc | dont
-- [ ] 142 p35 batch-02:524a | reading | after « les autres se déduisent par » | 57 61 | $( x ),( xx )$
-- [ ] 142 p35 batch-02:524b | reading | after « par 57 61 D'ailleurs la » | 2e | 2 textsuperscript e
+- [x] 142 p35 batch-02:524a | reading | after « les autres se déduisent par » | 57 61 | $( x ),( xx )$ | dismissed: artefact — placeholders « (x), (xx) » for formula numbers
+- [x] 142 p35 batch-02:524b | reading | after « par 57 61 D'ailleurs la » | 2e | 2 textsuperscript e | dismissed: artefact — LaTeX residue of « 2e », same as ours
 - [ ] 142 p36 batch-02:564b | reading | after « lieu aux formules les plus » | sympathiques | symétriques
 - [ ] 142 p37 batch-02:605 | reading | after « déjà nommé $ IV $ ayant … » | mêmes objets | $=$ s dits
 - [ ] 142 p37 batch-02:605a | reading | after « six $d_i^{\omega}$ seulement et on » | ne | en
-- [ ] 142 p37 batch-02:605b | reading | after « seulement et on ne donne » | pas | par
+- [x] 142 p37 batch-02:605b | reading | after « seulement et on ne donne » | pas | par | dismissed: ungrammatical — « on ne donne par en plus » is not French
 - [ ] 142 p37 batch-02:605c | reading | after « ce qui est inutile en » | effet | fait
 - [ ] 142 p37 batch-02:605d | reading | after « 37 la donnée de $\tilde\alpha$ » | par | qui 37
 - [ ] 142 p38 batch-02:620 | reading | after « donnent lieu au diagramme d'inclusions » | Par le | quad 68 Sans
@@ -308,7 +308,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p40 batch-02:728 | reading | after « invariant par la substitution $\beta' \mapsto … » | dans | ou
 - [ ] 142 p40 batch-02:736 | reading | after « $\beta_1 = \beta'$ En résumé on … » | tout | donc
 - [ ] 142 p40 batch-02:740 | reading | after « et la relation à imposer » | $(\lambda, \zeta')$ | à $(\lambda,\xi')$
-- [ ] 142 p40 batch-02:742 | reading | after « imposer $(\lambda, \zeta')$ est au choix » | end document | 40
+- [x] 142 p40 batch-02:742 | reading | after « imposer $(\lambda, \zeta')$ est au choix » | end document | 40 | dismissed: artefact — stray page number « 40 »
 - [ ] 142 p41 batch-03:31 | reading | after « équivalentes avec celui défini par » | 76 | les formules équivalentes $( 76 )$
 - [ ] 142 p41 batch-03:31a | reading | after « ou le fait que $\beta'$ » | vu | ce
 - [ ] 142 p41 batch-03:32 | reading | after « $\beta'$ vu l'équation 78 écrite » | en choisissant | au choix
@@ -319,7 +319,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p43 batch-03:77 | reading | after « orientations voir plus loin 4 » | où | ici
 - [ ] 142 p44 batch-03:94 | reading | after « isomorphisme \[ 91 (5)\quad V \simeq … » | vu | par
 - [ ] 142 p44 batch-03:105 | reading | after « $q$ pour laquelle les $R_j$ » | soient unitaires | sont
-- [ ] 142 p44 batch-03:110 | reading | after « une base formée de $R_i, R_j$ » | donc $R_k$ | $R_{ n }$
+- [x] 142 p44 batch-03:110 | reading | after « une base formée de $R_i, R_j$ » | donc $R_k$ | $R_{ n }$ | dismissed: mathematically wrong — $R_n$ undefined; the three points are $R_i, R_j, R_k$
 - [ ] 142 p45 batch-03:141 | reading | after « compactification de $\Sigma^{*}$ pour disposer » | aussi | ainsi
 - [ ] 142 p45 batch-03:142 | reading | after « disposer aussi de pts-base proches » | de chaque | desdits
 - [ ] 142 p46 batch-03:145a | reading | after « La construction de » | l'éclatement réel a un sens | l'éclaté marche
@@ -336,7 +336,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p49 batch-03:259 | reading | after « l'une des orientations de celle-ci » | aux point | en les points
 - [ ] 142 p49 batch-03:268 | reading | after « à $\Sigma_i$ en $R_i$ se » | découpent | distinguent
 - [ ] 142 p49 batch-03:269 | reading | after « découpent suivant les deux hémisphères » | $\in \boldsymbol{\varepsilon} = \pi_0(\Sigma \setminus \Sigma_{\mathbf{R}})$ | $\varepsilon\in \varepsilon = \pi_0 (\Sigma\setminus\Sigma_{\mathbb R})$
-- [ ] 142 p49 batch-03:276 | reading | after « donné par la perm circulaire » | $1 \mapsto 2 \mapsto 3$ | $1\to2\to3$ quad
+- [x] 142 p49 batch-03:276 | reading | after « donné par la perm circulaire » | $1 \mapsto 2 \mapsto 3$ | $1\to2\to3$ quad | dismissed: artefact — LaTeX residue « quad »; same permutation as ours
 - [ ] 142 p49 batch-03:282b | reading | after « $E$ \[ 279 \boldsymbol{\varpi} \simeq \{+1, … » | chemins | arcs de cercle
 - [ ] 142 p49 batch-03:282c | reading | after « chemins sur $\widetilde{\Sigma}$ [illegible] des » | parties | chemins liant des points
 - [ ] 142 p50 batch-03:306 | reading | after « plongés ci-dessus $b, c, d$ chaque … » | forment | $b,c,d$ formant
@@ -345,14 +345,14 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p51 batch-03:397a | reading | after « \[ 385 (28)\quad 386 \left\{ 387 … » | impliquées | indiquées
 - [ ] 142 p51 batch-03:397b | reading | after « par ces formules [illegible] Pour » | tout $x \in \widetilde{\Sigma}_\omega$ | $\forall\ x\in\widetilde\Sigma_\omega$
 - [ ] 142 p52 batch-03:430 | reading | after « transitif d'isomorphismes au contraire les » | automorphismes de l'un | autom d'un
-- [ ] 142 p53 batch-03:459 | reading | after « $\varphi_\varepsilon$ pour préciser le groupe » | $\pi_1$ standard | $\Pi_1$ standart
+- [x] 142 p53 batch-03:459 | reading | after « $\varphi_\varepsilon$ pour préciser le groupe » | $\pi_1$ standard | $\Pi_1$ standart | dismissed: ungrammatical — misspelling « standart »
 - [ ] 142 p53 batch-03:459a | reading | after « standard $\Pi_i$ ou $\Pi_\varepsilon$ qui » | est en jeu | sont des sources
 - [ ] 142 p53 batch-03:469 | reading | after « faut enfin pour des calculs » | pénibles | formels
-- [ ] 142 p53 batch-03:470 | reading | after « $\Pi_\omega$ par un même groupe » | standard | standart
+- [x] 142 p53 batch-03:470 | reading | after « $\Pi_\omega$ par un même groupe » | standard | standart | dismissed: ungrammatical — misspelling « standart »
 - [ ] 142 p54 batch-03:537 | reading | after « épinglage de la situation est » | fourni | donné
 - [ ] 142 p54 batch-03:539 | reading | after « du produit $ Rep (J, \boldsymbol{\varpi}) … » | le choix | la donnée
 - [ ] 142 p54 batch-03:539a | reading | after « donc par le choix d'un » | $(i, \omega, \varpi)$ | $(i,\omega, \bar\omega )$
-- [ ] 142 p54 batch-03:552 | reading | after « juste à un triangle commutatif » | 35 | 54
+- [x] 142 p54 batch-03:552 | reading | after « juste à un triangle commutatif » | 35 | 54 | dismissed: artefact — page number « 54 » in place of formula number
 - [ ] 142 p55 batch-03:560 | reading | after « des deux isom 34 et » | vu | en vertu de
 - [ ] 142 p55 batch-03:585 | reading | after « $\omega, \varepsilon$ Cela fait trois resp » | douze | deux
 - [ ] 142 p55 batch-03:585a | reading | after « douze choix si on suppose » | qu'on | que l'on
@@ -369,7 +369,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p57 batch-03:682 | reading | after « est la symétrie p r » | aux grands cercles méridiens | au grand cercle méridien
 - [ ] 142 p58 batch-03:694 | reading | after « [illegible] est \[ 691 \psi_r = … » | même | $P_+$ à $Q_\infty$ Donc
 - [ ] 142 p59 batch-03:719 | reading | after « sont $ int (\sigma_\infty)$ $ int … » | le | ce
-- [ ] 142 p59 batch-03:743 | reading | after « $P_\varepsilon$ et les $Q_i$ comme » | pts | p textsuperscript ts
+- [x] 142 p59 batch-03:743 | reading | after « $P_\varepsilon$ et les $Q_i$ comme » | pts | p textsuperscript ts | dismissed: artefact — LaTeX residue of « pts », same as ours
 - [ ] 142 p59 batch-03:743a | reading | after « pour le travail que j'ai » | en vue | à faire
 - [ ] 142 p59 batch-03:744 | reading | after « qui sont les plus cruciaux » | car | où
 - [ ] 142 p59 batch-03:744a | reading | after « plus cruciaux car les calculs » | basés | faits
@@ -397,32 +397,32 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p67 batch-04:108 | reading | after « \[ 105 (2) \qquad 106\underbrace{ Aut … » | schématique | algébrique
 - [ ] 142 p67 batch-04:116 | reading | after « deuxième ens en tant que » | bitorseur sous | bi-torseur sur
 - [ ] 142 p68 batch-04:133 | reading | at the top of the page | dont $\Gamma$ | alors $ \mathbf{\Gamma} $
-- [ ] 142 p68 batch-04:133a | reading | after « de $\mathbb{C}$ Bien entendu si » | $\lambda : x \to y$ | $\lambda: x x\to y$
+- [x] 142 p68 batch-04:133a | reading | after « de $\mathbb{C}$ Bien entendu si » | $\lambda : x \to y$ | $\lambda: x x\to y$ | dismissed: artefact — duplicated « x » in $\lambda: x x\to y$
 - [ ] 142 p69 batch-04:156a | reading | after « Pour décrire » | les actions | l'action
-- [ ] 142 p69 batch-04:170 | reading | after « $g_l(u)$ ${}^{u}l$ se déterminent mutuellement » | $f_l$ et $g_l$ | fonctoriquement
+- [x] 142 p69 batch-04:170 | reading | after « $g_l(u)$ ${}^{u}l$ se déterminent mutuellement » | $f_l$ et $g_l$ | fonctoriquement | dismissed: ungrammatical — « fonctoriquement » is not a French word
 - [ ] 142 p69 batch-04:181 | reading | after « des éléments $f_l(u)$ ou $g_l(u)$ » | où $l$ parcourt | pour
 - [ ] 142 p69 batch-04:181a | reading | after « un syst de générateurs convenable » | du groupoïde plein correspondant | des groupoïdes pleins correspondants
 - [ ] 142 p70 batch-04:186a | reading | after « $X_K$ on pourra trouver un » | ens | nb
 - [ ] 142 p70 batch-04:186b | reading | after « de choisir un [illegible] $x_0 \in … » | de | et
-- [ ] 142 p70 batch-04:189 | reading | after « du paragraphe qui suit Je » | prévois | trouvait
+- [x] 142 p70 batch-04:189 | reading | after « du paragraphe qui suit Je » | prévois | trouvait | dismissed: ungrammatical — « Je trouvait » cannot agree
 - [ ] 142 p70 batch-04:189a | reading | after « ex si $X$ est une » | courbe | variété
 - [ ] 142 p71 batch-04:214 | reading | after « les $\widehat{\pi}_1(X,y)$ torseurs à gauche » | sous | avec op de
 - [ ] 142 p71 batch-04:214a | reading | after « gauche sous $\Gamma$ correspondant à » | ces 1-cocycles | ce $1$ cocycle
 - [ ] 142 p71 batch-04:216 | reading | after « Pour un composé d'un fini » | nombre fini | suite finie
-- [ ] 142 p71 batch-04:229a | reading | after « \[ 222 (12) \qquad g_{l_n l_{n-1}\cdots … » | évidentes simples possibles assurément | évidente simple possible en somme
-- [ ] 142 p71 batch-04:229b | reading | after « celles qu'on pourrait imaginer qui » | ont | ait
+- [x] 142 p71 batch-04:229a | reading | after « \[ 222 (12) \qquad g_{l_n l_{n-1}\cdots … » | évidentes simples possibles assurément | évidente simple possible en somme | dismissed: ungrammatical — « Formules les plus évidente simple » cannot agree
+- [x] 142 p71 batch-04:229b | reading | after « celles qu'on pourrait imaginer qui » | ont | ait | dismissed: ungrammatical — « celles … qui ait » cannot agree
 - [ ] 142 p71 batch-04:229c | reading | after « [illegible] [illegible] contexte qui permette » | même | mieux
 - [ ] 142 p72 batch-04:239 | reading | after « et \[ 237 (13) \qquad p … » | la conjugaison | le cas injectif
 - [ ] 142 p72 batch-04:239a | reading | after « application continue la conjugaison sera » | la | le
 - [ ] 142 p72 batch-04:252 | reading | after « au-dessus de $px$ $py$ mais » | seulement si | naturellement
-- [ ] 142 p72 batch-04:252a | reading | after « $py$ mais seulement si $p$ » | non | sera
+- [x] 142 p72 batch-04:252a | reading | after « $py$ mais seulement si $p$ » | non | sera | dismissed: mathematically wrong — no choice over $px, py$ when $p$ is injective
 - [ ] 142 p72 batch-04:256 | reading | after « considérer les $f_{l_{y,x}}(u)$ et $g_{l_{y,x}}(u)$ » | définis | du moins
 - [ ] 142 p73 batch-04:263 | reading | after « formules 10 11 se réduisent » | alors | donc
 - [ ] 142 p73 batch-04:275a | reading | after « $f_l(u)$ peuvent être considérés comme » | déduits | décrits
 - [ ] 142 p73 batch-04:275b | reading | after « [illegible] chemin $l$ plutôt à » | homotopie près | la classe
 - [ ] 142 p73 batch-04:284 | reading | after « 20 lecture incertaine La relation » | des 1-cocycles | de $1$ cocycle
 - [ ] 142 p73 batch-04:284a | reading | after « relation des 1-cocycles Bien entendu » | De fait | On peut
-- [ ] 142 p74 batch-04:330 | reading | after « elles il faut on considère » | note | les groupes sait
+- [x] 142 p74 batch-04:330 | reading | after « elles il faut on considère » | note | les groupes sait | dismissed: ungrammatical — « les groupes sait » cannot agree
 - [ ] 142 p74 batch-04:340 | reading | after « \[ 336 (27) \qquad g^{\beta}_{y,x}(u) = … » | $I$ muni de la | $ \mathbb{I} $ avec sa
 - [ ] 142 p74 batch-04:340a | reading | after « l'inclusion $T_\alpha \subset T_\beta$ soit tel … » | $\pi_0(I) \to \pi_0(X)$ | $\Pi_0(I) \leftrightarrow \Pi_0(X)$
 - [ ] 142 p75 batch-04:348 | reading | at the top of the page | comme | enfin
@@ -435,7 +435,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p76 batch-04:370a | reading | after « pour $T_\alpha \subset T_\beta$ on ait … » | éventuellement | normalement
 - [ ] 142 p76 batch-04:370b | reading | after « d'abord $I \subset X_K$ convenable et … » | pose | prend
 - [ ] 142 p77 batch-04:378 | reading | after « essentielle triviale qui fait » | pendant | penser
-- [ ] 142 p77 batch-04:407b | reading | after « 1-cocycles obtenus [illegible] $f$ un » | 1-cocycle droit | $1$ cocycles droits
+- [x] 142 p77 batch-04:407b | reading | after « 1-cocycles obtenus [illegible] $f$ un » | 1-cocycle droit | $1$ cocycles droits | dismissed: ungrammatical — « un 1 cocycles droits » cannot agree
 - [ ] 142 p78 batch-04:414 | reading | after « $l$ est justement un élément » | jouant | prenant
 - [ ] 142 p78 batch-04:414a | reading | after « origine pour en déduire des » | 1-cocycles | $1$ cocycles ldots
 - [ ] 142 p78 batch-04:419 | reading | after « Si on garde $x, y$ et » | qu'on | puis
@@ -447,7 +447,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p80 batch-04:489a | reading | after « bien sûr est loin d'être » | connu et | concret
 - [ ] 142 p80 batch-04:489b | reading | after « ceci il faut sûrement considérer » | que | qu'un
 - [ ] 142 p80 batch-04:489c | reading | after « $l_j : x_j \to y_j$ du … » | un indice | ens d'indices
-- [ ] 142 p80 batch-04:491 | reading | after « pour les flèches génératrices $x_j, y_j … » | end document | 80
+- [x] 142 p80 batch-04:491 | reading | after « pour les flèches génératrices $x_j, y_j … » | end document | 80 | dismissed: artefact — stray page number « 80 »
 - [ ] 142 p81 batch-05:27 | reading | after « ou de » | façons équivalentes | façon équivalente
 - [ ] 142 p81 batch-05:30 | reading | after « Ceci rappelé on peut espérer » | de trouver | donner
 - [ ] 142 p81 batch-05:30a | reading | after « sûr des propriétés arithmétiques précises » | des points particuliers | du point particulier
@@ -462,18 +462,18 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p84 batch-05:82b | reading | after « de $K$ isomorphismes de $X$ » | dont | alors
 - [ ] 142 p84 batch-05:82c | reading | after « $\Pi_1(X_{\bar K})$ $\Pi_1(X_K)$ comme des groupoïdes » | à opérateurs $\mathfrak{G}$ | où opère $ \mathcal G $
 - [ ] 142 p85 batch-05:94 | reading | after « $i \in I$ $\ell_i$ est un … » | de $\hat{\Pi}_1(X, I)$ | dans $\Pi_1(X,x_i)$
-- [ ] 142 p85 batch-05:101c | reading | after « à laquelle auquel on est » | ainsi | censé
+- [x] 142 p85 batch-05:101c | reading | after « à laquelle auquel on est » | ainsi | censé | dismissed: ungrammatical — « on est censé ramené » is not French
 - [ ] 142 p85 batch-05:101d | reading | after « la longue je crois impraticable » | et | est
 - [ ] 142 p85 batch-05:101e | reading | after « situations impliquant un groupe de » | symétries $\mathfrak{G}$ | symétrie $ \mathcal G $
 - [ ] 142 p86 batch-05:109c | reading | after « on [illegible] doit pouvoir trouver » | un | deux
-- [ ] 142 p87 batch-05:122 | reading | after « comme un groupoïde quotient de » | $\Pi_1(C, I)$ | $\Pi_1(C X ,I)$
+- [x] 142 p87 batch-05:122 | reading | after « comme un groupoïde quotient de » | $\Pi_1(C, I)$ | $\Pi_1(C X ,I)$ | dismissed: artefact — stray letter in $\Pi_1(C X ,I)$
 - [ ] 142 p87 batch-05:122a | reading | after « fini de $\Pi_1(U_{0,3}, I)$ plus précisément » | correctement | concrètement
 - [ ] 142 p87 batch-05:122b | reading | after « lui-même est un revêtement fini » | des groupoïdes de | du groupoïde
 - [ ] 142 p88 batch-05:129 | reading | after « $\hat{\Pi}_1(C, I')$ est déterminé via 39 » | et | ou
 - [ ] 142 p88 batch-05:135a | reading | after « de $I$ n'est pas tjrs » | forcément | fini
-- [ ] 142 p88 batch-05:135b | reading | after « que l'étude des relations entre » | $\hat{\Pi}_1(C; I)$ | $\widehat\Pi_1(C; x I)$
+- [x] 142 p88 batch-05:135b | reading | after « que l'étude des relations entre » | $\hat{\Pi}_1(C; I)$ | $\widehat\Pi_1(C; x I)$ | dismissed: artefact — stray letter in $\widehat\Pi_1(C; x I)$
 - [ ] 142 p88 batch-05:135c | reading | after « tant que groupoïdes à groupe » | d'opérateurs | d'opérations
-- [ ] 142 p88 batch-05:135d | reading | after « même si celui-ci n'est pas » | $\subset C_K$ | $\subset X C_K$
+- [x] 142 p88 batch-05:135d | reading | after « même si celui-ci n'est pas » | $\subset C_K$ | $\subset X C_K$ | dismissed: artefact — stray letter in $\subset X C_K$
 - [ ] 142 p89 batch-05:138 | reading | at the top of the page | qui remplacerait | 89 qu'à remplacer
 - [ ] 142 p89 batch-05:141b | reading | after « draconiennes pour qu'un automorphisme $\Theta$ » | des groupoïdes | du groupoïde
 - [ ] 142 p89 batch-05:141c | reading | after « automorphisme $\Theta$ des groupoïdes $\Pi_1(U_{0,3}; I_0)$ » | laissant fixes | laiss $^t$ fixe
@@ -501,7 +501,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p94 batch-05:231b | reading | after « unicité et la condition supplémentaire » | signifie pour | que
 - [ ] 142 p94 batch-05:233 | reading | after « bien opérer trivialement sur $I'$ » | Résumons | Revenons à
 - [ ] 142 p94 batch-05:233a | reading | after « de $\Gamma$ $= Gal \,\bar{K}/K$ sur … » | $\mathcal{C} = \hat{\Pi}_1(X, I)$ | $\mathcal{T}= \Pi_1 \widehat{\Pi}_1(X,I)$
-- [ ] 142 p95 batch-05:252a | reading | after « des $\Theta^{\nu}$ pour que $\Theta$ » | provienne | provient
+- [x] 142 p95 batch-05:252a | reading | after « des $\Theta^{\nu}$ pour que $\Theta$ » | provienne | provient | dismissed: ungrammatical — « pour que Θ provient » needs the subjunctive
 - [ ] 142 p95 batch-05:252b | reading | after « de $\mathbb{Q}$ on s'attend à » | une | l
 - [ ] 142 p95 batch-05:252c | reading | after « de degré de transcendance $> 0$ » | déjà | alors
 - [ ] 142 p95 batch-05:255 | reading | after « question de la relevabilité d'un » | automorphisme | $ \Theta $ endomorphisme
@@ -533,7 +533,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p101 batch-06:31 | reading | after « de 3 et 4 et » | même | $ = $
 - [ ] 142 p101 batch-06:34 | reading | after « conditions nécessaires sur les paramètres » | concrets | virtuels
 - [ ] 142 p101 batch-06:34a | reading | after « conditions néc et suff qui » | permettent | permettra
-- [ ] 142 p102 batch-06:37 | reading | after « partie de $X =$ $X(\mathbb{C})$ loc » | alemen | textsuperscript
+- [x] 142 p102 batch-06:37 | reading | after « partie de $X =$ $X(\mathbb{C})$ loc » | alemen | textsuperscript | dismissed: artefact — LaTeX command residue « textsuperscript »
 - [ ] 142 p102 batch-06:37a | reading | after « un $K$ morphisme qui sur » | les points | la partie
 - [ ] 142 p102 batch-06:37b | reading | after « $T$ soit fini étale Alors » | $X' \mid T = X'_T$ | $X'\vert T=X'_T$
 - [ ] 142 p102 batch-06:37c | reading | after « $X' \mid T = X'_T$ se … » | ens emble | nb
@@ -547,7 +547,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p103 batch-06:68c | reading | after « schéma pour laquelle $f : X' … » | net | rat
 - [ ] 142 p110 batch-06:170 | reading | after « l'orientation $(i, j, k)$ Désignons par … » | ldots dans $\mathbb{P}\Sigma_J = \check{\mathbb{V}}^*(\mathcal{O}_\Sigma(1))$ | de $P\Sigma_J=\check{V}^{*}(\mathcal{O}_\Sigma(1))$
 - [ ] 142 p110 batch-06:189 | reading | after « les deux points privilégiés de » | $\mathcal{O}(\underline\omega)^*_{Q_i}$ indexés | $\mathcal{O}(1)_{Q_i}^{*}$ induits
-- [ ] 142 p111 batch-06:209 | reading | after « Carte régulière orientée » | des polygones réguliers | du polygône régulier
+- [x] 142 p111 batch-06:209 | reading | after « Carte régulière orientée » | des polygones réguliers | du polygône régulier | dismissed: ungrammatical — misspelling « polygône »
 - [ ] 142 p111 batch-06:209a | reading | after « polygones réguliers $P_n$ $n \geq 2$ … » | la | le
 - [ ] 142 p111 batch-06:221 | reading | after « $D_n^+ \subset D_{2n}^+$ \[ 217 \Sigma_n^{\ast\ast} … » | cartes régulières $\Sigma_\alpha$ | carte régulière $\overline{\Sigma}_{ a }$
 - [ ] 142 p111 batch-06:255 | reading | after « $D_n$ tout entier on trouve » | de la ramification sous | des ramifications sur
@@ -557,9 +557,9 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p113 batch-06:303 | reading | after « d'un cran autour du sommet » | de | du
 - [ ] 142 p113 batch-06:303a | reading | after « du sommet de type $\infty$ » | vers | resp
 - [ ] 142 p113 batch-06:312 | reading | after « le sens indiqué par l'orientation » | définie par | choisie pour
-- [ ] 142 p114 batch-06:348a | reading | after « du sommet $R^i_r$ de $r$ » | $= R_s, R_a, R_f$ | $=R_s,R_{ o },R_f$
+- [x] 142 p114 batch-06:348a | reading | after « du sommet $R^i_r$ de $r$ » | $= R_s, R_a, R_f$ | $=R_s,R_{ o },R_f$ | dismissed: mathematically wrong — $r=(s,a,f)$: the vertices are $R_s, R_a, R_f$
 - [ ] 142 p114 batch-06:358b | reading | after « qui les $a^i_r$ entourent le » | drapeau repère | disque repéré
-- [ ] 142 p114 batch-06:358c | reading | after « désignent [illegible] les $\lambda^i_r$ sont » | sont des | une
+- [x] 142 p114 batch-06:358c | reading | after « désignent [illegible] les $\lambda^i_r$ sont » | sont des | une | dismissed: ungrammatical — « sont une portions » cannot agree
 - [ ] 142 p114 batch-06:358d | reading | after « des portions d'arc tournant autour » | du sommet | des sommets
 - [ ] 142 p114 batch-06:368 | reading | after « de dimension $= 1$ NB On » | désigne On supposera | suppose
 - [ ] 142 p114 batch-06:368a | reading | after « supposera que la carte combinatoire » | se trouve | a trans
@@ -580,7 +580,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p119 batch-06:480b | reading | after « $a^\infty_r$ ce qui conduit aussi » | éliminons | à éliminer
 - [ ] 142 p119 batch-06:480c | reading | after « ceux qui leur sont reliés » | proches | enfin
 - [ ] 142 p119 batch-06:480d | reading | after « [illegible] des contours des faces » | dans faces | etc
-- [ ] 142 p120 batch-06:518a | reading | after « on élimine non seulement les » | p oin ts | pts
+- [x] 142 p120 batch-06:518a | reading | after « on élimine non seulement les » | p oin ts | pts | dismissed: artefact — same word « pts », abbreviation only
 - [ ] 142 p120 batch-06:518b | reading | after « les p oin ts proches » | distincts | disons
 - [ ] 142 p120 batch-06:518c | reading | after « sommets qui leur sont liés » | directement | d'indice $\infty$
 - [ ] 142 p120 batch-06:518d | reading | after « aussi ceux proches des sommets » | distincts | disons
@@ -608,9 +608,9 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p13 batch-01:270c | reading | after « et de mettre sous la » | même | $=$
 - [ ] 142 p14 batch-01:294a | reading | after « groupoïde fondamental de celle-ci De » | même | $=$
 - [ ] 142 p14 batch-01:296a | reading | after « corps alg clos $k$ pas » | même | $=$
-- [ ] 142 p17 batch-01:332c | reading | after « qui ne sont pas dans » | $\hat{X}\,∣\,T$ | $\widehat X∣T$ 17
+- [x] 142 p17 batch-01:332c | reading | after « qui ne sont pas dans » | $\hat{X}\,∣\,T$ | $\widehat X∣T$ 17 | dismissed: artefact — same formula as ours plus stray page number « 17 »
 - [ ] 142 p24 batch-02:112c | reading | after « groupoïde $\widehat{ I }_J$ qui commute … » | $\widetilde{\mathfrak{S}}_J$ | $ \mathcal G_J $
-- [ ] 142 p24 batch-02:149b | reading | after « si $u$ est défini par » | $(p, \beta)$ | $(p,$ $\beta$ $\beta)$
+- [x] 142 p24 batch-02:149b | reading | after « si $u$ est défini par » | $(p, \beta)$ | $(p,$ $\beta$ $\beta)$ | dismissed: artefact — duplicated « $\beta$ » in $(p, \beta\ \beta)$
 - [ ] 142 p24 batch-02:149c | reading | after « 12 sur $\beta$ impliquent les » | mêmes | $\Rightarrow$
 - [ ] 142 p25 batch-02:162 | reading | after « façon simple ment transitive par » | $\widetilde{\mathfrak{S}}_J$ | $G_J$
 - [ ] 142 p26 batch-02:209c | reading | after « groupoïdes $\widehat{ II }_J$ qui commute … » | $\widetilde{\mathfrak{S}}_J$ | $G_J$
@@ -673,7 +673,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p66 batch-04:91b | reading | after « gêné par les racines de » | 1 | $1\ldots$
 - [ ] 142 p67 batch-04:112 | reading | after « topologique ou transcendant \[ 110 (3) … » | même grâce à 3 | $=$
 - [ ] 142 p68 batch-04:152 | reading | after « $\Pi_1(X_{\overline{K}})$ se fait à travers » | $\overline{\Gamma}$ | $\Gamma$ $\uparrow$ 68
-- [ ] 142 p69 batch-04:156b | reading | after « des points $x, y, \ldots$ rationnels … » | $K$ | $ X $
+- [x] 142 p69 batch-04:156b | reading | after « des points $x, y, \ldots$ rationnels … » | $K$ | $ X $ | dismissed: mathematically wrong — points are rational over the field $K$, not over $X$
 - [ ] 142 p70 batch-04:189b | reading | after « $g_l(u)$ pour d'autres $K$ schémas » | $Y$ | $Y\ldots$
 - [ ] 142 p70 batch-04:191 | reading | after « $Y$ Quand il s'agit du » | même | $=$
 - [ ] 142 p70 batch-04:191a | reading | after « $x, y \in I$ que les … » | là | $l_\alpha$
@@ -735,7 +735,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p114 batch-06:348c | reading | after « est proche de du sommet » | $R^i_r$ | $R_r^i$
 - [ ] 142 p114 batch-06:358e | reading | after « infty end equation qui les » | $a^i_r$ | $a_r^i$
 - [ ] 142 p114 batch-06:364 | reading | after « les trous bordés par les » | $R^i_r$ | ces lettres minuscules les flèches obtenues après bouchage de certains
-- [ ] 142 p114 batch-06:368d | reading | after « On désigne On supposera que » | la | $X$
+- [x] 142 p114 batch-06:368d | reading | after « On désigne On supposera que » | la | $X$ | dismissed: ungrammatical — « On supposera que $X$ carte combinatoire » is not French
 - [ ] 142 p115 batch-06:372d | reading | at the top of the page | $\tilde X^{\ast\ast}$ | $\widetilde{X}^{\substack{*\\*}*}$
 - [ ] 142 p115 batch-06:372e | reading | after « $\tilde X^{\ast\ast}$ les trois » | $\ast$ | $*$
 - [ ] 142 p115 batch-06:372f | reading | after « noté $X^{\ast\ast}$ on définit de » | même $X^{\ast\ast}$ | $X^{\substack{*\\\cdot}*}$
@@ -771,7 +771,7 @@ Issue #156. Each bullet is one place of folder 142 where our transcription and a
 - [ ] 142 p52 batch-03:416 | reading | at the top of the page | l'isom | L'isom
 - [ ] 142 p52 batch-03:438 | reading | after « il reste à repérer les » | $\pi_1$ | $\Pi_1$
 - [ ] 142 p57 batch-03:643 | reading | after « passant à l'action sur les » | $\pi_1$ | $\Pi_1$
-- [ ] 142 p57 batch-03:666 | reading | after « autom qui renverse l'orientation de » | $\Sigma$ | $\sigma$
+- [x] 142 p57 batch-03:666 | reading | after « autom qui renverse l'orientation de » | $\Sigma$ | $\sigma$ | dismissed: mathematically wrong — the orientation reversed is that of the sphere $\Sigma$
 - [ ] 142 p63 batch-04:71c | reading | after « $\Psi_i^{\omega,\omega}$ $\Psi_\omega^{i}$ au lieu de » | $\Psi_\omega^{i,\omega}$ | $\psi_\omega^{i,\omega}$
 - [ ] 142 p72 batch-04:248 | reading | after « \[ 246 (15) \qquad \varphi_x : … » | $\pi_1(X,p(x))$ | $\Pi_1(X,p(x))$
 - [ ] 142 p74 batch-04:312 | reading | after « aura \[ 307 (23) \qquad g^{T'}_{y',x'}(u) … » | supposons | Supposons
