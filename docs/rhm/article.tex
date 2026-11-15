@@ -41,12 +41,18 @@
 \special{papersize=155mm,240mm}
 \fi
 \fi
+\usepackage{iftex}
 \ifdefined\hexagon
 % pdfLaTeX : les caractères du texte (latin accentué, « », œ, °, º, ‘ ’, …) sont tous
 % couverts par inputenc utf8 et le codage T1 ; aucune police système.
+% Sous XeTeX (tectonic), inputenc est ignoré et T1 rend « » en ń ż : fontspec, Latin Modern par défaut.
+\ifXeTeX
+\usepackage{fontspec}
+\else
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
+\fi
 \else
 \usepackage{fontspec}
 \fi
@@ -98,7 +104,7 @@
 \author[Michel Hua]{Michel Hua}
 \address{Chercheur indépendant, Paris}
 \email{michel@commutator.io}
-\date{Octobre 2026}
+\date{Novembre 2026}
 \keywords{Alexandre Grothendieck, manuscrits de travail, archives mathématiques, chronologie, pratique d'écriture, théorie des topos, algèbre homotopique, transcription assistée par machine}
 \altkeywords{Alexandre Grothendieck, working manuscripts, mathematical archives, chronology, writing practice, topos theory, homotopical algebra, machine-assisted transcription}
 \ifdefined\hexagon
