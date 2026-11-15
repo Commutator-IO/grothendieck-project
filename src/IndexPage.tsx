@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import { BY_ID } from './content/catalogue.ts';
 import indexRaw from './content/fonds-index.json';
+import numdam from './content/numdam.json';
 
 /**
  * The index of the whole fonds: a name, a work of his, or a subject, and the
@@ -72,6 +73,32 @@ function FolderRef({ id, batches, extra }: { id: string; batches: number[]; extr
   );
 }
 
+/** The published text of a work of his, on Numdam where it is there: the open copy, linked first. */
+type Work = { label: string; url: string; more?: [string, string][] };
+const WORKS = numdam.works as unknown as Record<string, Work>;
+function NumdamLink({ term }: { term: string }) {
+  const w = WORKS[term];
+  if (!w) return null;
+  const ext = !w.url.startsWith('/');
+  return (
+    <span className="ml-2 text-[12px] font-normal text-ink-500">
+      ·{' '}
+      <a href={w.url} {...(ext ? { target: '_blank', rel: 'noreferrer' } : {})} className="text-brand-700 hover:underline">
+        {w.label}
+        {ext && ' ↗'}
+      </a>
+      {w.more?.map(([l, u]) => (
+        <span key={u}>
+          ,{' '}
+          <a href={u} target="_blank" rel="noreferrer" className="text-brand-700 hover:underline">
+            {l} ↗
+          </a>
+        </span>
+      ))}
+    </span>
+  );
+}
+
 function Entries({ list, letters }: { list: Entry[]; letters: boolean }) {
   const groups = useMemo(() => {
     if (!letters) return [['', list] as const];
@@ -105,6 +132,7 @@ function Entries({ list, letters }: { list: Entry[]; letters: boolean }) {
                   <span className="tabular text-[12px] font-normal text-ink-400">
                     {e.folders.length} {e.folders.length === 1 ? 'folder' : 'folders'}
                   </span>
+                  <NumdamLink term={e.term} />
                 </p>
                 <ul className="mt-0.5 pl-4">
                   {e.folders.map((f) => (
@@ -224,7 +252,7 @@ export function IndexPage() {
             <li>
               <strong>His works cited</strong> are EGA, SGA and FGA where a leaf names a volume, the
               same citations the citation map counts. A reference by year alone, or by a numeral that
-              could be an exposé, is not resolved and not listed.
+              could be an exposé, is not resolved and not listed. Where Numdam publishes the work (EGA I to IV, and the Bourbaki talks that make up FGA), its entry links there first.
             </li>
             <li>
               <strong>Subjects</strong> come from the keywords of the modernised readings, so only the{' '}

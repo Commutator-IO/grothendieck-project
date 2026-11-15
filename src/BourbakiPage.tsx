@@ -3,6 +3,7 @@ import { FacsimilePane, type OpenBatch } from './components/FacsimilePane.tsx';
 import { Footer, Header } from './components/Frame.tsx';
 import catalogueRaw from './content/bourbaki.json';
 import skimRaw from './content/bourbaki-skim.json';
+import numdam from './content/numdam.json';
 
 /**
  * The Bourbaki archive, listed beside the fonds.
@@ -29,6 +30,9 @@ import skimRaw from './content/bourbaki-skim.json';
  * any. Off, the condition below is a constant `false`, the lazy import goes
  * with it, and the page is the catalogue and the scan as before.
  */
+
+/** His Séminaire Bourbaki talks on Numdam (src/content/numdam.json), linked before any other copy. */
+const NUMDAM_TALKS = numdam.talks as { n: number | null; date: string; title: string; url: string; pdf: string; fga: boolean; erratum?: string }[];
 
 const RENDER_BOURBAKI = import.meta.env.DEV || import.meta.env.VITE_RENDER_BOURBAKI === 'true';
 const BourbakiReader = RENDER_BOURBAKI
@@ -202,6 +206,37 @@ export function BourbakiPage() {
             />
           </Suspense>
         )}
+
+        <section id="seminaire" className="mt-8 scroll-mt-16 max-w-[56em]">
+          <h2 className="text-[17px] font-semibold text-ink-900">His talks at the Séminaire Bourbaki</h2>
+          <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink-600">
+            The seminar's texts are not in this archive: Numdam publishes them, and each title below opens
+            Numdam's page, the PDF beside it. The eight talks of 1957–62 marked FGA, with his commentaries of
+            May 1962, are the « Fondements de la géométrie algébrique »; their errata, printed in 1962, are
+            linked beside each.
+          </p>
+          <ol className="mt-3 divide-y divide-ink-100 rounded-xl border border-ink-200 bg-white">
+            {NUMDAM_TALKS.map((t) => (
+              <li key={t.url} className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5 px-4 py-2 text-[13.5px]">
+                <span className="tabular w-14 shrink-0 text-[12px] text-ink-500">{t.n ? `n° ${t.n}` : 'complément'}</span>
+                <a href={t.url} target="_blank" rel="noreferrer" className="min-w-0 flex-1 text-ink-900 hover:text-brand-700">
+                  {t.title} <span className="text-ink-400">↗</span>
+                </a>
+                {t.fga && <span className="rounded bg-brand-50 px-1.5 text-[11px] font-semibold text-brand-700">FGA</span>}
+                <span className="tabular shrink-0 text-[12px] text-ink-500">{t.date}</span>
+                <a href={t.pdf} target="_blank" rel="noreferrer" className="shrink-0 text-[12px] text-brand-700 hover:underline">
+                  PDF
+                </a>
+                {t.erratum && (
+                  <a href={t.erratum} target="_blank" rel="noreferrer" className="shrink-0 text-[12px] text-ink-500 hover:text-brand-700">
+                    erratum
+                  </a>
+                )}
+              </li>
+            ))}
+          </ol>
+          <p className="mt-2 text-[12px] text-ink-500">Source: numdam.org, Séminaire Bourbaki, volumes 2 to 9.</p>
+        </section>
 
         <div className="mt-8 flex flex-wrap items-center gap-2">
           <button
