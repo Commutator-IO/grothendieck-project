@@ -125,6 +125,57 @@ La proposition de la page~85 tient en coordonnées sur tout anneau commutatif, d
 Seule la partie en coordonnées de la piste est démontrée, pour une extension scindée de modules quelconques, sans diviser par $\chi$ ni par~$2$. Le recollement de ces coordonnées en un produit $E_1 * E_2$ sur une base non affine et la compatibilité des contraintes entre elles (la quatrième compatibilité de la page~177 n'est pas écrite) ne le sont pas ; la construction par somme amalgamée et la propriété universelle des applications bi-affines (pages~68 à~76) sont démontrées sur une base affine à la fin de la section. La relation de cocycle de la page~131, que la page commence sans l'achever, est vraie avec les signes $b'_i = b_i + \chi u_i$. Le critère d'inversibilité de la note marginale de la page~79 est démontré dans le cas $L = M = R$ (pour $L$ quelconque, voir le théorème de la fin de la section) : l'inverse de la classe de $b$ est la classe de $g$ dès que $bg \equiv 1$ modulo~$\chi$, et l'on n'a besoin d'aucune unité $\varepsilon$ autre que $1$ pour le construire.
 \end{remarque}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.35mm,y=1.35mm,line cap=round,>={Stealth[length=1.8mm]},
+  every node/.style={inner sep=2pt},
+  eq/.style={double,double distance=1.3pt},
+  gap/.style={white,line width=4.5pt}]
+% back face (shifted by the depth vector (10,12))
+\node (L)   at (10,34) {$L_i$};
+\node (E)   at (38,34) {$E_i'$};
+\node (Mp)  at (66,34) {$M_i'$};
+\node (L3)  at (10,12) {$L_i'''$};
+\node (E3)  at (38,12) {$E_i'''$};
+\node (Mp3) at (66,12) {$M_i'$};
+% front face
+\node (L2)  at (0,22)  {$L_i''$};
+\node (E2)  at (28,22) {$E_i''$};
+\node (M)   at (56,22) {$M_i$};
+\node (L1)  at (0,0)   {$L_i'$};
+\node (E1)  at (28,0)  {$E_i'$};
+\node (M1)  at (56,0)  {$M_i$};
+% back face edges
+\draw (L) -- (E);
+\draw[->] (E) -- (Mp);
+\draw (L3) -- (E3);
+\draw[->] (Mp3) -- (E3);
+\draw (L) -- (L3);
+\draw[->] (E) -- (E3);
+\draw[eq] (Mp) -- (Mp3);
+% depth edges, back to front
+\draw[eq] (L) -- (L2);
+\draw[->] (E) -- (E2);
+\draw[->] (Mp) -- (M);
+\draw[->] (L3) -- (L1);
+\draw[->] (E3) -- (E1);
+\draw (Mp3) -- (M1);
+% front face edges, over the back ones
+\draw[gap] (L2) -- (E2);
+\draw (L2) -- (E2);
+\draw[gap] (E2) -- (M);
+\draw (E2) -- (M);
+\draw[->] (L1) -- (E1);
+\draw[->] (E1) -- (M1);
+\draw[eq,-{Implies}] (L2) -- (L1);
+\draw[gap] (E2) -- (E1);
+\draw[->] (E2) -- (E1);
+\draw[gap] (M) -- (M1);
+\draw[eq] (M) -- (M1);
+\end{tikzpicture}
+\caption{Figure de l'édition, redessinée d'après le dessin de la page 125. Deux cubes partageant la face des $E$ : les suites $L_i \to E_i \to M_i$ et leurs copies primées, placées aux sommets, sur trois colonnes $L$, $E$, $M$ ; face avant $L_i''$, $E_i''$, $M_i$ au-dessus de $L_i'$, $E_i'$, $M_i$, face arrière $L_i$, $E_i'$, $M_i'$ au-dessus de $L_i'''$, $E_i'''$, $M_i'$. Les traits doubles, les traits sans pointe et les primes des étiquettes sont ceux du dessin ; les deux traits doubles verticaux de droite sont les signes d'égalité de la page, et plusieurs primes restent une lecture.}\label{fig:84-cubes}
+\end{figure}
+
 \begin{enonce}[Pages 125, 127 et 169, \emph{produit poussé et produit tiré}\piste{84-chi-trivialised-extension-product}]
 En coordonnées, le produit poussé porte le $\chi$-scindage de $b = b_1 \otimes b_2$ et le produit tiré celui de $-b$ (page~125).
 \begin{enumerate}

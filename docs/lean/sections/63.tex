@@ -2,6 +2,50 @@
 
 La cote 63, \emph{Formulaire courbes elliptiques}, rassemble des textes d'autres auteurs (la lettre de Tate à Cassels, le formulaire de Deligne d'après Tate, des tapuscrits d'Atkin) et des notes de Grothendieck ; la carte la date de 1967. Aux pages~95 à~99, il étudie le schéma $M_3$ des courbes elliptiques munies d'une base de leurs points d'ordre~$3$, au-dessus de $\mathbf Z[\frac13]$, et le lieu $j = 0$, c'est-à-dire $M'_3 = M_3 \cap V(c_4)$. Ce lieu a quatre composantes irréductibles, qui se rencontrent toutes en un point $a$ au-dessus de $\mathbf F_4$, en caractéristique~$2$. La page~97 pose la question : \q{À examiner si les 4 composantes de $(M'_3)_2$ ont \q{tangentes distinctes}} (\lot{63}{5}{97}). La page~99 commence par \q{\dots{} aux composantes irréductibles sont égales} et affirme que l'espace tangent de Zariski en $a$ se scinde en $V_1 \times V_2$, stable sous le groupe $G' = \mathrm{SL}(2, \mathbf F_3)$ (\lot{63}{5}{99}). La lecture en conclut, par un argument d'orbites, que les quatre branches ont la même tangente. Elles en ont quatre.
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,line cap=round,
+  pt/.style={circle,fill,inner sep=1.3pt}]
+% (a) page 97
+\begin{scope}
+\foreach \a in {-43,-14,15,42} \draw (\a:1.35) -- (\a+180:1.35);
+\node[pt] (a) at (0,0) {};
+\node[above=2pt] at (0,0.05) {$a$};
+\draw[decorate,decoration={brace,amplitude=5pt}] (-1.55,-1.0) -- (-1.55,1.0)
+  node[midway,left=6pt] {$M_3$};
+\node (Mp) at (2.75,0.15) {$M'_3$};
+\foreach \a in {42,15,-14}
+  \draw[-{Stealth[length=1.8mm]}] (Mp.west) .. controls +(-0.3,0) and ($(\a:1.15)+(0.3,0)$) .. ($(\a:1.15)+(0.08,0)$);
+\draw[densely dotted] (a) -- (0,-1.8);
+\draw[very thick] (-1.5,-1.8) -- (1.6,-1.8) node[pos=0,left] {$\mu_3^{*}$};
+\node[pt] (b) at (0,-1.8) {};
+\node[anchor=north west,inner sep=2pt] at (0.05,-1.85) {$b = \operatorname{Spec}\mathbf{F}_4$};
+\draw (-1.5,-3.0) -- (1.6,-3.0) node[pos=0,left] {$\operatorname{Spec}\mathbf{Z}$};
+\node[pt,label={below:$\operatorname{Spec}\mathbf{F}_2$}] at (0,-3.0) {};
+\node at (0,-4.1) {(a)};
+\end{scope}
+% (b) page 99
+\begin{scope}[xshift=7cm]
+\foreach \a in {-12,-4,5,14} \draw (\a:1.45) -- (\a+180:1.45);
+\draw (0,-0.6) -- (0,0.6);
+\node[pt] (a') at (0,0) {};
+\node[anchor=north west,inner sep=1pt] at (0.05,-0.12) {$a$};
+\draw[decorate,decoration={brace,amplitude=5pt}] (-1.6,-0.5) -- (-1.6,0.5)
+  node[midway,left=6pt] {$M'_3$};
+\draw[decorate,decoration={brace,amplitude=6pt,mirror}] (1.75,-0.9) -- (1.75,0.9)
+  node[midway,right=7pt] (M3) {$M_3$};
+\draw[very thick] (-1.5,-1.8) -- (1.6,-1.8) node[pos=0,left] {$\mu_3^{*}$};
+\node[pt,label={above right:$b$}] at (0,-1.8) {};
+\draw (-1.5,-3.0) -- (1.6,-3.0) node[pos=0,left] {$\mathbf{Z}$};
+\node[pt,label={below:$2$}] at (0,-3.0) {};
+\draw[-{Stealth[length=1.8mm]}] (2.3,-0.95) -- (2.3,-1.6);
+\draw[-{Stealth[length=1.8mm]}] (2.3,-2.05) -- (2.3,-2.8);
+\node at (0,-4.1) {(b)};
+\end{scope}
+\end{tikzpicture}
+\caption{Figure de l'édition, redessinée d'après les dessins des pages 97 (a) et 99 (b). Au-dessus du point $b = \operatorname{Spec}\mathbf{F}_4$ de $\mu_3^{*}$, lui-même au-dessus de $2$, les branches de $M'_3 = M_3 \cap V(c_4)$ dans $M_3$ passent toutes par le point $a$. Les branches y sont dessinées comme des droites distinctes passant par $a$ ; la page 99 conclut pourtant qu'elles ont même tangente (voir ci-dessous).}\label{fig:63-branches}
+\end{figure}
+
 \noindent\emph{Le modèle.} On travaille sur la famille de Hesse $x^3 + y^3 + z^3 = 3t\,xyz$, de paramètre $t$, qui est le niveau~$3$ au-dessus de $\mathbf Z[\frac13, \zeta]$, $\zeta$ racine primitive cubique de l'unité. Pour cette famille, $c_4$ vaut $t(t^3 + 8)$ à une unité près (Artebani et Dolgachev) ; ce calcul et l'identification de la famille de Hesse à $M_3$ sont admis ici. Soient $R = \mathbf Z[\zeta]$, l'anneau $A = R[t]$, et l'idéal maximal $P = (2, t)$ du point $a$, de corps résiduel $A/P = R/2R = \mathbf F_4$. L'espace cotangent en $a$ est $P/P^2$, un $\mathbf F_4$-espace vectoriel de base les classes de $2$ et de~$t$. La tangente d'une branche lisse $f = 0$ passant par $a$ est la droite de $P/P^2$ engendrée par la classe de $f$.
 
 \begin{encadre}
