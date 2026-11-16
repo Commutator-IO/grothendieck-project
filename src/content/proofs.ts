@@ -1462,6 +1462,17 @@ export const PROOFS: Proof[] = [
     theorems: ["pdD_pdD", "pdH_pdD_add", "exact_of_pos", "cocycle_zero", "smul_tPow_eq_zero", "pdD_tMul", "tMul_tMul", "tMul_tPow", "pd_row_cohomology"],
   },
   {
+    folder: "136",
+    batch: 12,
+    page: "226",
+    name: "Proposition 1: Φ_* is homotopic to 0, and C^{p,q}_* is contractible for p ≥ 1",
+    statement: "The simplicial k-module Φ_* : [n] ↦ k^{n+1} of functions on the vertices is homotopic to 0 (Proposition 1); hence, by Corollary 1.1 (F(Φ_*) ≃ F(0)) applied to F = Γ^p(−) ⊗ Λ^qΨ_*, C^{p,q}_* = Γ^pΦ_* ⊗ Λ^qΨ_* is homotopic to 0 for p ≥ 1, hence acyclic.",
+    found: "Holds, over any commutative ring k, in the model of Folder136.lean (Φ_[n] = k^{n+1}, θ^* = precomposition). The proof is not the page’s Dold–Puppe argument but an explicit simplicial homotopy: indexed by the n-simplices αⁿᵢ of Δ[1], its component is the cut-off f ↦ f·1_{x<i}, the formula of Stacks 07L7 on functions instead of free generators, checked against the relations of Stacks 019L. On C^{p,q}_* the components are Γ^p(cut-off) ⊗ id, natural as in Stacks 07KQ, and Γ^p(0) = 0 for p ≥ 1. Both alternating face complexes are chain contractible, hence acyclic. Not formalised: Corollary 1.1 for an arbitrary functor, Corollaries 1.2 to 1.4, the identification of Γ^p with the weight-p span of dpBasis, the inclusion C^{p,q}_* ⊆ pdSimplicial q, and H^{p,q}_DRpd(X) ≅ H^q(X, k) for a simplicial set X.",
+    verdict: "holds",
+    lean: "lean/Grothendieck/Folder136Prop1.lean",
+    theorems: ["phiSimplicial", "phi_htpyRel", "phiHomotopy", "dpGrade", "map_zero_of_mem_dpGrade", "pdGradeSimplicial", "pdGrade_htpyRel", "pdGradeHomotopy", "phi_chainHomotopy", "pdGrade_chainHomotopy", "phi_exactAt", "pdGrade_exactAt"],
+  },
+  {
     folder: "161-1",
     batch: 1,
     page: "12",
