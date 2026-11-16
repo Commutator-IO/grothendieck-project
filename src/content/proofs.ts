@@ -1026,6 +1026,19 @@ export const PROOFS: Proof[] = [
     theorems: ['exists_poly_mul_unit', 'finite_bad', 'uncountable', 'exists_avoid'],
   },
   {
+    folder: '49',
+    batch: 1,
+    page: '3',
+    name: 'Flatness by fibrewise injection into flat stalks, local form',
+    statement:
+      'For φ : X → Y of finite type over a locally noetherian S, F quasi-coherent on X and flat over S, G coherent on Y and G → φ_*F injective on the fibre over s at the points above y, G is flat over S at y. Here at the stalks: R = O_{S,s} → A = O_{Y,y}, N = G_y, M_x = F_x.',
+    found:
+      'The local form holds with no finiteness of φ: for R → A a local homomorphism of noetherian local rings, N a finite A-module and R-linear maps u_x : N → M_x into flat R-modules, jointly injective modulo 𝔪_R, N is flat over R and N → ∏ₓ M_x is injective. The target need not be finite over A: Chase’s theorem (Stacks 05CZ) makes ∏ₓ M_x flat, the local criterion (00ME) asks only that the source be finite, and 00HM concludes. Not formalised: the passage from sheaves to stalks, and the struck form of clause c) (injectivity into (φ_{s*}F_s)_y), weaker than the pointwise form when φ is not proper.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder49Flatness.lean',
+    theorems: ['flat_of_fibre_injective_pi', 'flat_of_fibre_injective'],
+  },
+  {
     folder: '101',
     batch: 1,
     page: '10–11',
