@@ -21,6 +21,12 @@ interface Part {
 
 const math = () => FINDINGS.filter((n) => n.kind === 'mathematical');
 const isOpen = (n: Finding) => !n.lean && (n.status === 'candidate' || n.status === 'unsearched');
+// Areas that AxiomMath's Lean formalisation of the Stacks Project covers, read from its directories
+// (schemes, étale and crystalline cohomology, stacks, topoi of sites, group schemes, Chow and
+// K-theory, commutative algebra); a theory outside them is beyond both libraries.
+const inStacks = (n: Finding) =>
+  /scheme|étale|ℓ-adic|stack|gerbe|topoi|crystalline|de Rham|moduli of curves|K-theory|intersection|commutative algebra|Picard|motives/i.test(n.theory ?? '') &&
+  !/Greenberg|Tannakian|stratified|bordism|analytic/i.test(n.theory ?? '');
 
 function outcomeParts(): Part[] {
   const rows = math();
@@ -32,7 +38,8 @@ function outcomeParts(): Part[] {
     { key: 'matched', label: 'Found later in the literature', note: 'searched and found in print: kept as a killed candidate', fill: '#38539d', rows: rows.filter((n) => !n.lean && n.status === 'matched') },
     { key: 'refuted', label: 'Shown false as stated', note: 'a counterexample or a contradiction', fill: '#d55181', rows: rows.filter((n) => !n.lean && n.status === 'refuted') },
     { key: 'reachable', label: 'Open, within reach of Lean', note: 'mathlib has the theory the statement needs', fill: '#c9900c', rows: reach('reachable') },
-    { key: 'beyond', label: 'Open, beyond mathlib today', note: 'needs a theory mathlib does not have (schemes, étale cohomology, topoi, stacks…): provable in principle, not now', fill: '#4a3aa7', rows: reach('beyond') },
+    { key: 'stacks', label: 'Open, beyond mathlib, in an area of Stacks', note: 'needs a theory mathlib does not have, in an area AxiomMath’s Lean Stacks library covers (schemes, étale cohomology, stacks, topoi of sites…): the rows it may reach are sorted in issue 162', fill: '#8a7ad6', rows: reach('beyond').filter(inStacks) },
+    { key: 'beyond', label: 'Open, beyond mathlib and Stacks today', note: 'needs a theory neither mathlib nor the Stacks library has (Tannakian categories, derivators, stratified spaces…): provable in principle, not now', fill: '#4a3aa7', rows: reach('beyond').filter((n) => !inStacks(n)) },
     { key: 'other', label: 'Open: doubtful, imprecise or an open problem', note: 'judged: the statement is doubtful as read, too imprecise to formalise as written, or a known open problem', fill: '#eb6834', rows: reach('other') },
   ];
 }
@@ -99,7 +106,7 @@ function Bar({ title, parts }: { title: string; parts: Part[] }) {
 export function FindingsChart() {
   const outcome = outcomeParts();
   const onPage = pageParts();
-  const beyond = outcome.find((p) => p.key === 'beyond')!.rows;
+  const beyond = [...outcome.find((p) => p.key === 'stacks')!.rows, ...outcome.find((p) => p.key === 'beyond')!.rows];
   const theories = new Map<string, number>();
   for (const n of beyond) theories.set(n.theory ?? 'unspecified', (theories.get(n.theory ?? 'unspecified') ?? 0) + 1);
   return (
@@ -107,7 +114,8 @@ export function FindingsChart() {
       <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">Where the mathematical findings stand</h2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
         Each mathematical row counted once. « Beyond mathlib » is not « unprovable »: those statements
-        need a theory the library does not yet have, and could be proved once it does. Whether a row
+        need a theory the library does not yet have, and could be proved once it does. Part of them lie
+        in areas that AxiomMath’s Lean formalisation of the Stacks Project now covers. Whether a row
         is within reach, and what his leaves do with it, are the edition's judgements, made on the
         reading and the finding, not checked by a person.
       </p>
