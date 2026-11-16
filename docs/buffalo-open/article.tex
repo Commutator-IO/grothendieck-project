@@ -23,6 +23,7 @@
 \newcommand{\Set}{\mathbf{Set}}
 \newcommand{\Cat}{\mathbf{Cat}}
 \newcommand{\own}{\textsuperscript{(e)}}
+\newcommand{\lean}[1]{\texttt{#1}}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
 \title[The open problems of the Buffalo lectures]{The open problems of Grothendieck's 1973 Buffalo lectures,\\ and what became of them}
@@ -174,26 +175,28 @@ At the end of the algebraic geometry session of 11 July, recorded on the second 
 
 \section{Summary}
 
+The column Lean says which questions are stated as propositions, none of them proved, in \href{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/OpenProblems/Buffalo.lean}{\texttt{OpenProblems/\allowbreak Buffalo.lean}}; where the answer is negative, the proposition is his expectation, and is false. The others cannot yet be stated with Mathlib, for the reason given.
+
 \begin{table}[ht]
 \small
-\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}p{5.3cm}Y@{}}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{2.6cm}Y>{\raggedright\arraybackslash}p{3.3cm}@{}}
 \toprule
-Problem & His stance & Status \\
+Problem & His stance & Status & Lean \\
 \midrule
-\ref{p:presheaf} presheaf topoi & suspects yes & false: Scott sheaves on $[0,1]$\own; essential subtopoi of $\widehat C$ \cite{lw} \\
-\ref{p:fshriek} $f^!$ & feels no & false; local morphisms \cite{jm} \\
-\ref{p:classifying} classifying topoi & programme & done for geometric theories \\
-\ref{p:exactness} exactness properties & open in discussion & formalised \cite{jacqmin}; semigroup case trivial\own \\
-\ref{p:representable} algebraic $=$ representable & aim & yes for small $R$, no in general \\
-\ref{p:envelope} envelopes, localisations & known in two cases & small $D$: yes \cite{kelly,bkp} \\
-\ref{p:three} problem three & neither direction proved & $\Rightarrow$ yes; $\Leftrightarrow$ for small $D$; fails for all limits\own \\
-\ref{p:colim} colimits of accessible & expects yes & no\own; directed, full embeddings: yes \cite{pr} \\
-\ref{p:reflective} reflective subcategories & asks for a counterexample & yes if the inclusion is accessible, or under Vop\v{e}nka \cite{ar}; ZFC alone open to us \\
-\ref{p:dual} $E$, $E^{\mathrm{op}}$ accessible & guesses the point & no: the two-element chain \cite{gu} \\
-\ref{p:immersion} descent of immersions & believes yes & no (Stacks comment, 2026) \\
-\ref{p:perrin} structure of group schemes & main conjecture & Perrin 1976 \cite{perrin} \\
-\ref{p:qcoh} descent of quasi-coherent sheaves & doubts it & fully faithful; effective if quasi-compact; can fail under CH\own \\
-\S\ref{sec:eff} effectivity & suspects no & no, over every field (Venken 1971) \cite{venken,effective} \\
+\ref{p:presheaf} presheaf topoi & suspects yes & false: Scott sheaves on $[0,1]$\own; essential subtopoi of $\widehat C$ \cite{lw} & stated: \lean{Presheaf\allowbreak Topos\allowbreak Conjecture} \\
+\ref{p:fshriek} $f^!$ & feels no & false; local morphisms \cite{jm} & stated: \lean{Pushforward\allowbreak With\allowbreak Right\allowbreak Adjoint\allowbreak Is\allowbreak Equivalence} \\
+\ref{p:classifying} classifying topoi & programme & done for geometric theories & not statable: no classifying topoi \\
+\ref{p:exactness} exactness properties & open in discussion & formalised \cite{jacqmin}; semigroup case trivial\own & not statable: not a formal notion \\
+\ref{p:representable} algebraic $=$ representable & aim & yes for small $R$, no in general & not statable: no $\Cat_D$ \\
+\ref{p:envelope} envelopes, localisations & known in two cases & small $D$: yes \cite{kelly,bkp} & not statable: no $\Cat_D$ \\
+\ref{p:three} problem three & neither direction proved & $\Rightarrow$ yes; $\Leftrightarrow$ for small $D$; fails for all limits\own & not statable: no relative algebraic theories \\
+\ref{p:colim} colimits of accessible & expects yes & no\own; directed, full embeddings: yes \cite{pr} & stated, special case: \lean{Colimit\allowbreak Of\allowbreak Small\allowbreak Accessible\allowbreak Is\allowbreak Accessible} \\
+\ref{p:reflective} reflective subcategories & asks for a counterexample & yes if the inclusion is accessible, or under Vop\v{e}nka \cite{ar}; ZFC alone open to us & stated: \lean{Reflective\allowbreak Limit\allowbreak Closed\allowbreak Is\allowbreak Accessible} \\
+\ref{p:dual} $E$, $E^{\mathrm{op}}$ accessible & guesses the point & no: the two-element chain \cite{gu} & stated: \lean{Accessible\allowbreak Self\allowbreak Dual\allowbreak Is\allowbreak Point} \\
+\ref{p:immersion} descent of immersions & believes yes & no (Stacks comment, 2026) & stated (first question): \lean{Immersion\allowbreak Descends\allowbreak Fpqc} \\
+\ref{p:perrin} structure of group schemes & main conjecture & Perrin 1976 \cite{perrin} & not statable: no quotients of group schemes \\
+\ref{p:qcoh} descent of quasi-coherent sheaves & doubts it & fully faithful; effective if quasi-compact; can fail under CH\own & not statable: no descent data for $\mathcal O$-modules \\
+\S\ref{sec:eff} effectivity & suspects no & no, over every field (Venken 1971) \cite{venken,effective} & stated: \lean{Finite\allowbreak Equivalence\allowbreak Relations\allowbreak Effective} \\
 \bottomrule
 \end{tabularx}
 \end{table}

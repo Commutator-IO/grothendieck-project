@@ -45,11 +45,12 @@
 \newcommand{\known}{\entry{What is known.}}
 \newcommand{\ideas}{\entry{Ideas.}}
 \newcommand{\leanst}{\entry{Lean.}}
+\newcommand{\leanop}[1]{\href{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/OpenProblems/#1.lean}{\nolinkurl{OpenProblems/#1.lean}}}
 \newcommand{\settle}{\entry{What would settle it.}}
 
 \title{Open questions from Grothendieck's Montpellier notes:\\ thirteen statements a formalisation could not reach}
 \author{Michel Hua\\ \small Commutator, Paris\\ \small\texttt{michel@commutator.io} · ORCID 0009-0002-8304-0683}
-\date{Working paper, 29 October 2026, revised 15 November 2026}
+\date{Working paper, 29 October 2026, revised 16 November 2026}
 
 \begin{document}
 
@@ -93,7 +94,7 @@ For a field $k$ of characteristic $p$ put $p^{\nu(k)} = [k : k^{p}]$, and for a 
 
 \ideas The constant cannot be lowered to~$2$ (our observation): for $X = \Spec \mathbb Z$ and $p$ odd, $\nu(V(p)) = 0$ and $\sup_x \cd_p k(x) = \cd_p \mathbb Q = 2$, while $\cd_p(\Spec \mathbb Z) = 3$ \cite[X~6.1]{sga4}; by Artin--Verdier duality $H^3(\Spec \mathbb Z, j_!\mu_p) \cong \mathbb Z/p$ \cite[II.3.2, 3.3]{milneadt}. A natural route, which is the one of Mathew's proof, is the excision sequence for $V(p) \subset X$ and its complement $X[1/p]$: for $X$ noetherian, $V(p)$ is affine of characteristic~$p$, so of $p$-cohomological dimension at most~$1$ \cite[X~5.1]{sga4} (for $X$ not noetherian a limit argument is needed); local cohomology along $V(p)$ can be moved to the henselisation along $V(p)$ by Gabber's affine analogue of proper base change, where Gabber--Orgogozo and Mathew apply. The difficulty is to absorb the dimension terms of those local bounds into $\sup_x \cd_p k(x)$, which the page's bound allows, and to see where the shift~$3$ comes from: the page does not explain it.
 
-\leanst Not attempted. Mathlib has no étale cohomology; AxiomMath's Lean formalisation of the Stacks Project \cite{axiomstacks} has étale cohomology of schemes, so the question could now be stated in Lean.
+\leanst Stated in Lean as \texttt{CdShiftThree} (\leanop{EtaleCohomology}), with the étale cohomology of AxiomMath's Lean formalisation of the Stacks Project \cite{axiomstacks}; not proved. The statement is the page's; $\cd_p k(x)$ is written as the étale $\cd_p$ of $\Spec k(x)$, its identification with Galois cohomology not being formalised.
 
 \settle A printed bound of this shape for an arbitrary affine scheme of mixed characteristic, or a counterexample to the~$3$.
 
@@ -111,7 +112,7 @@ with exactly two possible exceptions: (a)~$r$ is the characteristic of $K$; (b)~
 
 \ideas Artin's proof of X~2.4 goes by induction on $\dim A$, down to a henselian local ring of dimension one through a height-one prime, where X~2.3 and 2.2 apply \cite{sga4}. The finer exception~(b) says that what matters is the virtual cohomological dimension of the real residue fields, which suggests running the same induction with $\cd_2$ replaced by $\cd_2$ of $k(x)(\sqrt{-1})$ at the real points. The page's exception list covers $r$ equal to the residue characteristic in mixed characteristic, which SGA~4 X~2.4 does not.
 
-\leanst Not attempted. Galois cohomology of fields is in Mathlib only in low degree; the Stacks formalisation \cite{axiomstacks} has more of it, not yet checked against this statement.
+\leanst The inequality with its two exceptions is stated in Lean as \texttt{LowerBoundExceptions}, and the two refinements as \texttt{LowerBoundRegular} and \texttt{LowerBoundCatenaryJapanese} (\leanop{EtaleCohomology}), on the étale side of the Stacks formalisation \cite{axiomstacks}; not proved. The catenary refinement reads \q{$k$ itself real} as replacing all of (b) by \q{$r = 2$ and $k$ orderable}, dropping the finiteness of $\cd_2 k(\sqrt{-1})$; the other reading would give a stronger statement.
 
 \settle A reference for (b) and the two refinements, or an example of a regular local domain where the inequality fails at $r = 2$.
 
@@ -131,7 +132,7 @@ so the weights lie in $[0, 2i]$ for $i \le n-1$ and in $[2(i-n+1), 2n]$ for $n \
 
 \ideas Our argument: take a resolution $\pi : \tilde Y \to Y$, an isomorphism over $X$, with $D = \pi^{-1}(Y \smallsetminus X)$ simple normal crossings; put $F = \pi^{-1}(y)$ and $F_q = F \cap D^{(q)}$. Then $\dim F_0 \le n-1$ and $\dim F_q \le n-q$. The weight spectral sequence $E_1 = H^{k-q}(F_q)(-q) \Rightarrow H^k(X \cap B_y)$ (Durfee's, in the case he treats; we have not checked its form in the general case) and Hodge~III 8.2.4~(i), (ii) for the compact $F_q$ put every $E_1$ term in the box. Locally the lower end moves up by one because $\pi^{-1}(y)$ has dimension at most $n-1$. The cone over a smooth projective $V$ of dimension $n-1$ with $h^{i,0}(V) \ne 0$ attains level $i$ for $i \le n-1$ and $n-1$ at $i = n$. For a proper $f$ with fibre dimension $d$ the gain fails, since a smooth family of curves already has $H^1$ of level $1 = d$; so the relative question of page~119 cannot keep $n-1$ if $d_y(f)$ is the fibre dimension.
 
-\leanst Not attempted: no Hodge structures on cohomology in Mathlib.
+\leanst Not stated: Mathlib has neither mixed Hodge structures, nor the one on $H^i(X \cap B_y)$, nor the singular cohomology of complex varieties, and the $\ell$-adic form would need $\ell$-adic sheaves with weights, which neither Mathlib nor the Stacks formalisation \cite{axiomstacks} has.
 
 \settle A reference for the box; a relative statement interpolating between the immersion case and the smooth proper case; its $\ell$-adic form with level read as divisibility of Frobenius eigenvalues.
 
@@ -145,7 +146,7 @@ On the fppf site of a base on which $2$ is invertible, is $\mathcal Ext^2_{\math
 
 \ideas Breen's theorem is stated for the étale sheafification of the Ext sheaves. The remaining cases are a quasi-coherent $M$ that is not locally free, and the passage from Breen's sheaves to the global groups on the fppf site, through the local-to-global spectral sequence.
 
-\leanst Not attempted. Mathlib has no fppf site; AxiomMath's Lean formalisation of the Stacks Project \cite{axiomstacks} has fppf topologies and group schemes, not yet checked for the $\mathcal Ext$ sheaves the statement needs.
+\leanst Not stated. It needs the big fppf site with its abelian sheaves, the sheaf $\mathcal Ext$ on it, and finite locally free group schemes and quasi-coherent modules as fppf sheaves; Mathlib has none of these, and the Stacks formalisation \cite{axiomstacks} has pieces of the fppf site, not that package in a form we could check.
 
 \settle Breen's vanishing for an arbitrary quasi-coherent $M$, or a counterexample; and whether it gives Illusie's obstruction directly.
 
@@ -183,7 +184,7 @@ C(Y) + A'^{0}(X \times X) + A''^{0}(X \times X) + A^0(Y_T) \;\Longrightarrow\; C
 \]
 and the question is whether the last term can be dropped, or replaced by a condition on varieties of dimension below~$n$. If it cannot, the splitting gains nothing on Kleiman's $C(X) \iff C(Y) + A^0(X \times X)$, where $A^0$ already bears on $X \times X$ directly.
 
-\leanst The two cases are proved as abstract linear algebra, the cohomology groups being modules and the algebraic classes submodules (\href{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/Grothendieck/Folder16.lean}{\nolinkurl{Grothendieck/Folder16.lean}}): \texttt{split\_even} for the display above, \texttt{split\_odd} and \texttt{split\_odd\_circular} for the odd case. Weak and hard Lefschetz, and the geometry of $Y_T$, are hypotheses, not theorems.
+\leanst The two cases are proved as abstract linear algebra, the cohomology groups being modules and the algebraic classes submodules (\href{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/Grothendieck/Folder16.lean}{\nolinkurl{Grothendieck/Folder16.lean}}): \texttt{split\_even} for the display above, \texttt{split\_odd} and \texttt{split\_odd\_circular} for the odd case. Weak and hard Lefschetz, and the geometry of $Y_T$, are hypotheses, not theorems. The problem itself is not stated: the Stacks formalisation \cite{axiomstacks} has Weil cohomology theories with cycle classes, Künneth and Poincaré duality, but neither library has smooth hyperplane sections with $\varphi^*$, $\varphi_*$ and $L$, the algebraic classes as images of the cycle map, or $C(X)$, and an abstract statement would not see the geometry of $Y_T$ the question is about.
 
 \settle A reference for the splitting; or a proof that $A^0(Y_T)$ can be dropped from the last display, or replaced by conditions on varieties of dimension below $n$; or an argument that it cannot, in which case the reduction is circular.
 
@@ -209,7 +210,7 @@ Let $A/S$ be an abelian scheme of relative dimension~$2$ with dual $B$, and $\de
 
 The points a specialist should check are the sign conventions in Steps 1 and~2, which decide whether the composite is $[\chi]$ or $[-\chi]$ but not the conclusion; the passage from $\varphi_L\varphi_N\varphi_L = -\chi\varphi_L$ to $\varphi_L\varphi_N = [-\chi]$ over a base; and the compatibility of the Fourier--Mukai transform with base change for a polarisation that exists only fppf-locally. Whether the trivialisation obtained is canonical, which is what the folder asks, is a separate question.
 
-\leanst Not attempted. Mathlib has no abelian schemes; AxiomMath's Lean formalisation of the Stacks Project \cite{axiomstacks} has abelian varieties, Picard schemes and a few files on abelian schemes.
+\leanst Not stated. Mathlib has no abelian schemes; the Stacks formalisation \cite{axiomstacks} has abelian varieties and abelian schemes, but not the dual $B = \Pic^0_{A/S}$, the sheaf $\mathrm{NS}_{A/S}$, the torsors $\Pic^\delta_{A/S}$ or $\chi(\delta)$, on which the class $c_\delta$ depends.
 
 \settle A specialist's check of the argument. One abelian surface over a number field with a polarisation of type $(1,2)$ and $c_\lambda \ne 0$ refutes the statement. A sharp consequence to test (our heuristic, unchecked): for a genus-$2$ curve $C/k$ whose Jacobian has real multiplication by $\mathcal O_D$, $D \equiv 1 \bmod 8$, defined over~$k$, the theta class is a sum of two classes of even $\chi$, so the statement would force $\Pic^1_C$ to have a $k$-point.
 
@@ -223,7 +224,7 @@ Let $G$ be a complex simple adjoint group with Coxeter number $h$ and Weyl group
 
 \ideas For $A_2$ all $36$ pairs $(B, B')$ are opposite: the eigenvectors of $E'$ are the Fourier vectors $(1, \omega^k, \omega^{2k})$, and the standard flag is transverse to every flag they span. In general the question is the Bruhat cell of $(B, B')$ for $B'$ running over the $|W|$ Borels through $T'$: whether it is always the open cell.
 
-\leanst Only the arithmetic: the announced number $\operatorname{card}(W)^2/(h\,z\,\varphi(h))$ is an integer for every simple type of rank at most $8$ and for $E_6$, $E_7$, $E_8$, $F_4$, $G_2$, and equals $1$, $2$, $4$, $12$ for $A_1$, $A_2$, $B_2$, $G_2$ (\href{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/Grothendieck/Folder123Kostant.lean}{\nolinkurl{Grothendieck/Folder123Kostant.lean}}). The geometry, and the relative position of $B$ and $B'$, are not attempted; the computer count above can be extended to that position in $B_2$ and $G_2$, which we have not done.
+\leanst Only the arithmetic: the announced number $\operatorname{card}(W)^2/(h\,z\,\varphi(h))$ is an integer for every simple type of rank at most $8$ and for $E_6$, $E_7$, $E_8$, $F_4$, $G_2$, and equals $1$, $2$, $4$, $12$ for $A_1$, $A_2$, $B_2$, $G_2$ (\href{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/Grothendieck/Folder123Kostant.lean}{\nolinkurl{Grothendieck/Folder123Kostant.lean}}). The question is stated in Lean for $G = \mathrm{PGL}_n(\mathbb C)$, type $A_{n-1}$, only, as \texttt{KostantOppositeTypeA} (\leanop{AbelianVarieties}): every complete flag stable under a cyclic element $E'$ with all $c_i \ne 0$ is opposite to the standard flag; not proved. The other types and the second question are not stated, Mathlib having no reductive groups, Borel subgroups or Bruhat decomposition in that generality; the computer count above can be extended to the relative position in $B_2$ and $G_2$, which we have not done.
 
 \settle The relative position of $B$ and $B'$ for all quadruples, by an argument or by computation in each type.
 
@@ -239,7 +240,7 @@ The theories of commutative rings with irreducible spectrum (nilradical prime) a
 
 \ideas Non-coherence needs more than the presentation: one must show that no coherent axiomatisation exists, for instance by exhibiting a cover in the classifying topos with no finite subcover. For points, Barr's theorem gives a Boolean cover, not points; a model-theoretic argument, or an explicit set of local rings detecting the theory, is needed.
 
-\leanst Not attempted: classifying topoi are neither in Mathlib nor in the Stacks formalisation \cite{axiomstacks}.
+\leanst Not stated: geometric theories and their classifying topoi, coherent topoi and points of a topos are neither in Mathlib nor in the Stacks formalisation \cite{axiomstacks}, which has morphisms of topoi only.
 
 \settle A proof or reference for non-coherence, and an answer to the question about points.
 
@@ -253,7 +254,7 @@ Is there an equivalence between the category of pairs $(X, R)$, with $X$ a topol
 
 \ideas The two functors are there; the problem is the right conditions on both sides so that they are mutually inverse, and which quotient topos the page means: the topos of $R$-invariant sheaves (sheaves on a monodromy groupoid) or the holonomy quotient, which Kock and Moerdijk distinguish.
 
-\leanst Not attempted. Mathlib has no geometric morphisms of topoi; AxiomMath's Lean formalisation of the Stacks Project \cite{axiomstacks} has them, and the Lean appendix uses them for folder~19, but not the $2$-category of \q{multiplicités topologiques} the statement needs.
+\leanst Not stated. Mathlib has no geometric morphisms of topoi; the Stacks formalisation \cite{axiomstacks} has them, but neither library has local equivalence relations and their quotient topoi, locally open and locally connected geometric morphisms, or étendues, and the page's third condition is partly illegible.
 
 \settle A correct statement with proof, or Moerdijk's Zaragoza lectures \cite{moerdijk1993}, which we could not read and where it might be.
 
@@ -267,7 +268,7 @@ Let $M$, $N$ be abelian sheaves on a topos, and ${}_2N$ the $2$-torsion of $N$. 
 
 \ideas Two sketches disagree. The reading realises the invariant by hand for $M$ free, on the split stack $M \times BN$ with an antisymmetric form $b$ such that $b(e_i, e_i) = q(e_i)$, and passes to general $M$ through a resolution. We doubt that step, which we have not checked: the construction depends on a basis. On the classifying topos of abelian groups, a Picard stack pinned by the generic group $U$ and $U/2U$, with the projection as invariant, would make Moore spectra truncated above $\pi_1$ functorial in finitely presented abelian groups; but the stable Moore-space category on finitely generated groups is a non-split linear extension, split on cyclic groups \cite[Rem.~1.5.5]{baues}. If that translation is right, the obstruction does not vanish universally. The letter of 1975 agrees with the second sketch on one point: the \q{universal} argument of 1974 rested on a miscalculation. It does not say whether the obstruction is non-zero. The statement does hold over a point and for $M$ constant and free.
 
-\leanst Not attempted. Mathlib has no stacks on a topos; AxiomMath's Lean formalisation of the Stacks Project \cite{axiomstacks} has stacks and gerbes over a site, not yet checked for Deligne's strictly commutative Picard stacks.
+\leanst Not stated. Mathlib has $\Ext$ in abelian categories but no stacks on a topos; neither it nor the Stacks formalisation \cite{axiomstacks} has Picard stacks and their symmetry invariant.
 
 \settle The obstruction $\operatorname{Hom}(M, {}_2N) \to \Ext^3(M, N)$ computed in a universal case: the identity of the universal sheaf of $\mathbb F_2$-vector spaces, to which the letter of 1975 reduces, or the differential $\operatorname{Hom}(M/2, N) \to \Ext^3(M, N)$ of the universal coefficient spectral sequence on the classifying topos of abelian groups. Since the 1974 argument is withdrawn, a non-zero value there would answer the problem in the negative.
 
@@ -281,7 +282,7 @@ Over a scheme $S$, a \q{domaine de ramification} is a stack of multigaloisian ca
 
 \ideas The corollary says that a ramification domain maps into another only as a subdomain. The proof should reduce to the case $(R, r)$ given by $(Z, G)$, where a morphism is determined by the image of the universal $G$-torsor.
 
-\leanst Not attempted. Mathlib has neither the étale site nor stacks of categories; AxiomMath's Lean formalisation of the Stacks Project \cite{axiomstacks} has both, but not the multigaloisian categories.
+\leanst Not stated: neither Mathlib nor the Stacks formalisation \cite{axiomstacks} has stacks of multigaloisian categories over the étale site, and the axioms R1--R2 themselves are not verified by the edition.
 
 \settle A proof of Proposition~6 from R1--R2, or a reference.
 
@@ -297,7 +298,7 @@ Let $X$ be an anabelian curve over a field $K$ of finite type over $\mathbb Q$, 
 
 \ideas Pop's variants need a base of dimension greater than one, so they do not cover the covers of one curve; that is what the page's loop condition at the cusps would have to supply. Here \q{anabelian curve} is the page's word for a hyperbolic curve.
 
-\leanst Not attempted. Mathlib has no étale fundamental group; AxiomMath's Lean formalisation of the Stacks Project \cite{axiomstacks} has it, with Galois categories, but not the fundamental groupoid on several base points.
+\leanst Not stated. Mathlib has Galois categories and fibre functors, and the Stacks formalisation \cite{axiomstacks} pieces of the étale fundamental group, but neither has the profinite fundamental groupoid on several base points with its functoriality in finite étale covers, hyperbolic curves with their cusps, or the outer Galois action.
 
 \settle A proof of sufficiency, a counterexample, or a published variant that implies it.
 
@@ -337,7 +338,7 @@ Let $X$ be a smooth complex analytic space (or orbifold) with a normal crossings
 
 \ideas The purity step reads: removing a subset of real codimension at least~$3$ does not change $\pi_1$. For $M_{g,\nu}$, the hypothesis of the last corollary (end and interior with the same $\Pi_1$) should follow from the simple connectivity of the curve complex (Harer).
 
-\leanst Not attempted: no homotopy colimits of spaces or stratified spaces in Mathlib.
+\leanst Not stated: neither Mathlib nor the Stacks formalisation \cite{axiomstacks} has complex analytic spaces and orbifolds, normal crossings divisors and their unfolding, tubular neighbourhoods, homotopy colimits of spaces, or fundamental groupoids of stratified spaces.
 
 \settle A reference for the gluing theorem, or a proof, and the check of the hypothesis for $M_{g,\nu}$.
 
@@ -416,7 +417,7 @@ A bigon-free arrangement $\mathcal A$ either is $\mathrm{II}_4$ or contains $\ma
 \emph{The numbering.} Adding pseudolines never removes a vertex from a pseudoline already there, so it suffices that each pseudoline, when added, meets the earlier ones in at least three points. A pseudoline meets the six sides of a $\mathrm{III}_6$ in at least three points: its vertices have multiplicity at most three, and two triple points share a side, so two vertices cover at most five sides. So if $\mathcal A \supseteq \mathrm{III}_6$, start there and add the rest in any order. Otherwise $\mathcal A$ contains at most one diagonal $\delta$ of $Q$: start from $Q$, add every pseudoline other than $\delta$ (each meets $Q$ in at least three points), and add $\delta$ last, when it has all its vertices in $\mathcal A$, at least three.
 \end{proof}
 
-This agrees with a computer enumeration of all arrangements of at most nine pseudolines (\nolinkurl{computations/bigon}). The dichotomy is also checked in Lean for combinatorial maps (generalised maps of Euler characteristic~$1$ whose flags are labelled by the pseudolines; \href{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/Grothendieck/Folder80Maps2.lean}{\nolinkurl{Grothendieck/Folder80Maps2.lean}}, \texttt{map\_dichotomy}); the numbering and the passage from a topological arrangement to its map are not formalised. We have not found the statement in print; it is elementary, and probably folklore among people who work on arrangements.
+This agrees with a computer enumeration of all arrangements of at most nine pseudolines (\nolinkurl{computations/bigon}). The dichotomy is also checked in Lean for combinatorial maps (generalised maps of Euler characteristic~$1$ whose flags are labelled by the pseudolines; \href{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/Grothendieck/Folder80Maps2.lean}{\nolinkurl{Grothendieck/Folder80Maps2.lean}}, \texttt{map\_dichotomy}); the numbering is stated, not proved, as \texttt{NumberingLemma} (\leanop{Pseudolines}), and the passage from a topological arrangement to its map is not formalised. We have not found the statement in print; it is elementary, and probably folklore among people who work on arrangements.
 
 \section{A statement the literature has largely settled}\label{sec:etrec}
 
@@ -434,7 +435,7 @@ Let $S$ be a locally noetherian scheme. Is the functor $X \mapsto X_{\mathrm{et}
 
 \ideas None on the page. For the proofs in print, \cite{chw} uses h-descent, de~Jong's alterations and Voevodsky's argument, and records that the step which fails over a finite field is its Proposition~6.22.
 
-\leanst Not attempted. Mathlib has the small étale site of a scheme but no geometric morphisms; AxiomMath's Lean formalisation of the Stacks Project \cite{axiomstacks} has morphisms of topoi, but not the $2$-category of topoi over $S_{\mathrm{et}}$.
+\leanst The faithfulness is stated in Lean as \texttt{EtaleToposFaithful}, and over a base of characteristic~$0$, as the margin asks, as \texttt{EtaleToposFaithfulCharZero} (\leanop{EtaleTopos}), with the inverse images of étale sheaves of sets of the Stacks formalisation \cite{axiomstacks}, a $2$-isomorphism over $S_{\mathrm{et}}$ being a natural isomorphism of inverse images compatible with the base; not proved. Without the condition on the characteristic it is probably false over $\mathbb F_p$, the absolute Frobenius acting as the identity on the étale topos (our remark, unchecked). The full faithfulness is not stated: neither library has the category of fractions inverting the universal homeomorphisms, nor closed points of a topos, nor pinned morphisms.
 
 \settle The general case: a base $S$ that is not a finitely generated field (finite fields, $\operatorname{Spec}\mathbb Z$, Dedekind schemes, noetherian bases); locally of finite presentation instead of finite type; faithfulness when the fibres are not reduced; seminormal sources without the condition $S_2$, where the method needs a torsion condition on $\operatorname{Pic}(X)$ that \cite{chw} leaves open (its footnote~1); and a form without the pinning, with another notion of morphism.
 
@@ -541,7 +542,7 @@ Three limits apply to every entry. The transcriptions are first passes by a lang
 Corrections, references and proofs are welcome at the address above. The register of findings, the Lean files and the notices of the folders are on the project's site, \url{https://grothendieck.commutator.io/}.
 
 \subsection*{Changes}
-15 November 2026: the Lean lines of Problems~\ref{p:cd}, \ref{p:lower}, \ref{p:ext2}, \ref{p:surf}, \ref{p:noncoh}, \ref{p:fol}, \ref{p:pic}, \ref{p:domram}, \ref{p:gal} and~\ref{p:etrec} say what AxiomMath's Stacks formalisation \cite{axiomstacks} now supplies; none of the thirteen problems is settled by it.
+15 November 2026: the Lean lines of Problems~\ref{p:cd}, \ref{p:lower}, \ref{p:ext2}, \ref{p:surf}, \ref{p:noncoh}, \ref{p:fol}, \ref{p:pic}, \ref{p:domram}, \ref{p:gal} and~\ref{p:etrec} say what AxiomMath's Stacks formalisation \cite{axiomstacks} now supplies; none of the thirteen problems is settled by it. 16 November 2026: the Lean lines say which problems are now stated as propositions in the repository's \texttt{OpenProblems} files (Problems~\ref{p:cd}, \ref{p:lower} and~\ref{p:etrec}, and type~$A$ of Problem~\ref{p:kostant}), none of them proved, and, for the others, what Mathlib and the Stacks formalisation lack to state them.
 
 26 October 2026: the pseudoline dichotomy of \fac{80} proved (\S\ref{sec:pseudo}); the count of Kostant quadruples derived, and Problem~\ref{p:kostant} replaced by the question Grothendieck asked Kostant; Problem~\ref{p:ext2} narrowed after Breen's 1975 theorem; references corrected after a citation check. 29 October 2026: \S\ref{sec:big} added, on the routes the notes take to seven published conjectures; the arguments for Problems~\ref{p:lef} and~\ref{p:surf} written out step by step, with what a specialist should check; Problem~\ref{p:lef} narrowed to the condition $A^0(Y_T)$, after a Lean proof of the two cases of the splitting; the OpenAI preprints on four of the seven conjectures noted. 31 October 2026: the problem on bigon-free arrangements answered for every bigon-free arrangement, three pencils included, by a sign argument on chirotopes and the Folkman--Lawrence theorem; the sign argument and its rank-$2$ step proved in Lean, Folkman--Lawrence left outside; the sources of \S\ref{sec:big} completed from the texts read (issue \#102). 1 November 2026: Problem~\ref{p:pic} updated after Grothendieck's letter to Breen of 5 February 1975 (IHÉS, 1ILL21), which withdraws the \q{universal} argument of 1974, and what would settle it restated; the letter to Giraud of 1969 added to the source of Problem~\ref{p:ext2}; the full-faithfulness conjecture of the IHÉS plan \q{Motifs} (2ILL5) added to the source of Conjecture~\ref{c:per}. The Buffalo problem added, from the recording of his Buffalo lecture of 11 July 1973, with its first statement in print (1961). 11 November 2026: the question whether the étale topos remembers the scheme added (\S\ref{sec:etrec}), from \fac{149}, with what Voevodsky and Carlson--Haine--Wolf prove and what is open. 5 November 2026: the problem on bigon-free arrangements and their skeleton removed (it was Problem~14 in the earlier versions); the Buffalo problem became the problem on finite equivalence relations. 14 November 2026: the problem on finite equivalence relations removed, Venken having settled it in 1971; it is written up on its own in the companion note on effectivity.
 
