@@ -655,8 +655,8 @@ export function MethodPage() {
                 Findings
               </a>
               , the Lean files in{' '}
-              <a href="https://github.com/Commutator-IO/grothendieck-project/tree/main/lean" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700">
-                lean/
+              <a href="https://github.com/Commutator-IO/GrothendieckArchivesProofs" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700">
+                GrothendieckArchivesProofs
               </a>
               .
             </P>

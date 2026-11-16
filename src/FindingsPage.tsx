@@ -254,7 +254,7 @@ function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
         {n.lean && (
           <Field label="Proved in Lean">
             {notation(n.lean.found)}{' '}
-            <a href={`https://github.com/Commutator-IO/grothendieck-project/blob/main/${n.lean.file}`} className="text-brand-700 hover:underline">
+            <a href={`https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/${n.lean.file.replace(/^lean\//, '')}`} className="text-brand-700 hover:underline">
               {n.lean.file.replace('lean/', '')}
             </a>
             . The statement holds as written; whether it is in the literature is still the question below.
@@ -562,8 +562,8 @@ function ProvedInLean() {
           a PDF (in French)
         </a>
         ; the Lean files in{' '}
-        <a href="https://github.com/Commutator-IO/grothendieck-project/tree/main/lean" className={link}>
-          lean/
+        <a href="https://github.com/Commutator-IO/GrothendieckArchivesProofs" className={link}>
+          GrothendieckArchivesProofs
         </a>
         , checked on every change.
       </p>
@@ -586,7 +586,7 @@ function ProvedInLean() {
               {notation(p.found)}
             </p>
             <p className="mt-2 text-[12px] text-ink-400 [overflow-wrap:anywhere]">
-              <a href={`https://github.com/Commutator-IO/grothendieck-project/blob/main/${p.lean}`} className="hover:text-brand-700">
+              <a href={`https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/${p.lean.replace(/^lean\//, '')}`} className="hover:text-brand-700">
                 {p.lean}
               </a>{' '}
               · {p.theorems.map((t) => <code key={t} className="mr-1.5 inline-block max-w-full text-[11.5px] [overflow-wrap:anywhere]">{t}</code>)}
