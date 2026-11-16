@@ -1407,6 +1407,17 @@ export const PROOFS: Proof[] = [
     theorems: ["stationary_of_germs", "stationary_of_locally_stationary", "germs_stabilize_of_noetherian", "not_stationary_without_uniformity", "isNoetherianRing_of_tilde"],
   },
   {
+    folder: "55",
+    batch: 1,
+    page: "13",
+    name: "Lemme B on an arbitrary ringed space: a half-formalised counterexample",
+    statement: "Read for an arbitrary ringed space X: if X is quasi-compact (i), O_X is coherent (ii), the local rings are noetherian (iv) and the identity principle (v) holds, every increasing sequence of coherent subsheaves of a coherent sheaf is stationary.",
+    found: "False for an arbitrary ringed space; the page’s own setting (analytic spaces or noetherian schemes, to be fixed on the facsimile) is not touched. Over k ⊂ D = k[[t]] ⊂ K = k((t)): a point ∞ and pieces {cₙ, eₙ, oₙ, dₙ}, with stalks k at ∞ and eₙ, the node D ×_k D at cₙ, K at oₙ and dₙ, the sets B_N = {∞} ∪ {all dₙ} ∪ {cₙ, eₙ, oₙ : n ≥ N} a fundamental system at ∞. (i), (ii), (iv), (v) hold, and the Ideals 𝒢_j of sections vanishing at ∞, at every dₙ and on the pieces n ≥ j, all with germ 0 at ∞, increase and are never stationary: (v) holds on every B_M, yet Γ(B_M, 𝒢_j) = 0 while 𝒢_j ≠ 0 on B_M for j > M. Lean proves the topological and sectional part (quasi-compactness, O and the 𝒢_j as subsheaves closed under the ring operations, (v) for O at ∞, non-stationarity, failure of the uniformity of Folder55.lean), with the rings abstract. Not formalised, argued on paper: coherence (Stacks 01BV) of O and of the 𝒢_j, the stalks and their noetherianity, and (v) for coherent Ideals other than 0.",
+    verdict: "partly proved",
+    lean: "lean/Grothendieck/Folder55LemmaB.lean",
+    theorems: ["instCompactSpacePt", "O_one_mem", "O_add_mem", "O_mul_mem", "G_le_O", "G_add_mem", "G_mul_mem", "G_mono", "rigid", "identity_principle", "G_sections_basic", "G_germs_inf", "G_germs_stabilize", "G_not_stationary", "G_not_uniform", "identity_principle_not_enough"],
+  },
+  {
     folder: "79",
     batch: 10,
     page: "187–188, 275",
