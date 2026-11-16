@@ -1,7 +1,8 @@
 /**
- * The 71 mathematical findings that were found in print (FindingsChart,
+ * The 80 mathematical findings that were found in print (FindingsChart,
  * « Found in the literature »): the folder's dating against the year of the
- * printed source that matches it. Built by hand on 2026-10-26 from the
+ * printed source that matches it. Built by hand on 2026-10-26 and brought up to date on
+ * 2026-11-16 from the
  * `settle` and `literature` fields of src/content/findings.ts and the
  * inventory's datings (src/content/catalogue.ts).
  *
@@ -29,6 +30,15 @@ export interface Rediscovery {
 }
 
 export const REDISCOVERIES: Rediscovery[] = [
+  { id: '161-3-two-product-by-intersection', cote: '161-3', from: 1963, to: 1973, pub: 1985, source: 'Pitts, product of sheaf topoi as an intersection of subtopoi', kind: 'later' },
+  { id: '29-formal-tame-pi1-self-intersection', cote: '29', from: 1959, to: 1969, pub: 1971, source: 'Grothendieck–Murre, The tame fundamental group of a formal neighbourhood (LNM 208)', kind: 'own' },
+  { id: '5-deligne-letter-ringed-duality', cote: '5', from: 1965, to: 1969, pub: 1973, source: 'Deligne, SGA 4 XVIII (global duality)', kind: 'circle' },
+  { id: '146-stable-graph-table-p126', cote: '146', from: 1978, to: 1988, open: true, pub: 2011, source: 'Maggiolo–Pagani, Generating stable modular graphs', kind: 'later' },
+  { id: '80-p9-simple-non-pappus', cote: '80', from: 1981, to: 1991, open: true, pub: 1926, source: 'Levi, the simple non-Pappus arrangement', kind: 'earlier' },
+  { id: '1-ell1-unbounded-entire', cote: '1', from: 1953, to: 1953, pub: 1972, source: 'Dineen, holomorphic functions unbounded on the ball of ℓ¹', kind: 'later' },
+  { id: '1-individual-eigenvalue-bounds-question', cote: '1', from: 1953, to: 1953, pub: 1954, source: 'Horn, eigenvalues with prescribed singular values', kind: 'later' },
+  { id: '1-hermitian-lp-convergence', cote: '1', from: 1953, to: 1953, pub: 1973, source: 'Grümm, Two theorems about C_p', kind: 'later' },
+  { id: 'FG_IL_5_SGA7_3-wild-inertia-nearby-cycles', cote: 'IHÉS SGA 7', from: 1967, to: 1969, pub: 1982, source: 'Rapoport–Zink, nearby cycles of semistable schemes', kind: 'later' },
   { id: '161-3-fields-partition', cote: '161-3', from: 1963, to: 1973, pub: 1972, source: 'Hakim, Topos annelés et schémas relatifs', kind: 'circle' },
   { id: '151-hypercovering-any-index-category', cote: '151', from: 1982, to: 1991, open: true, pub: 2012, source: 'Shulman, Exact completions and small sheaves', kind: 'later' },
   { id: '115-wheel-eleven-curryings', cote: '115', from: 1982, to: 1991, open: true, pub: 1973, source: 'Bénabou, Les distributeurs', kind: 'earlier' },

@@ -806,6 +806,7 @@ function RdMark({ shape, color, x, y, r = 3.4 }: { shape: string; color: string;
 
 function Rediscoveries() {
   const [sel, setSel] = useState<Rediscovery | null>(null);
+  const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
   const W = 900;
   const L = 74;
   const R = 16;
@@ -855,7 +856,14 @@ function Rediscoveries() {
           Folder’s dating (inventory)
         </span>
       </div>
-      <div className="mt-3 overflow-x-auto" onMouseLeave={() => setSel(null)}>
+      <div
+        className="mt-3 overflow-x-auto"
+        onMouseLeave={() => {
+          setSel(null);
+          setPos(null);
+        }}
+      >
+        <div className="relative min-w-[640px]">
         <svg
           viewBox={`0 0 ${W} ${H}`}
           className="w-full min-w-[640px] rounded-[var(--radius-card)] border border-ink-200 bg-white"
@@ -882,9 +890,23 @@ function Rediscoveries() {
                 const x1 = Math.max(x(r.to), x0 + 2);
                 const xp = x(r.pub);
                 return (
-                  <g key={r.id} opacity={on ? 1 : 0.3} onMouseEnter={() => setSel(r)} style={{ cursor: 'pointer' }}>
-                    <rect x={0} y={y - ROW / 2} width={W} height={ROW} fill="transparent" />
-                    <text x={L - 8} y={y + 3} textAnchor="end" className="tabular" style={{ fontSize: 8.5, fill: 'var(--color-ink-500)' }}>
+                  <g
+                    key={r.id}
+                    opacity={on ? 1 : 0.25}
+                    onMouseEnter={() => {
+                      setSel(r);
+                      setPos({ x: xp, y });
+                    }}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <rect x={0} y={y - ROW / 2} width={W} height={ROW} fill={sel === r ? '#eef2fb' : 'transparent'} />
+                    <text
+                      x={L - 8}
+                      y={y + 3}
+                      textAnchor="end"
+                      className="tabular"
+                      style={{ fontSize: sel === r ? 9.5 : 8.5, fontWeight: sel === r ? 700 : 400, fill: sel === r ? 'var(--color-ink-900)' : 'var(--color-ink-500)' }}
+                    >
                       {r.cote}
                     </text>
                     <line x1={Math.min(xp, x0)} x2={Math.max(xp, x1)} y1={y} y2={y} stroke={g.color} strokeWidth={0.8} opacity={0.5} />
@@ -894,13 +916,36 @@ function Rediscoveries() {
                         {r.pub}
                       </text>
                     )}
-                    <RdMark shape={g.shape} color={g.color} x={xp} y={y} />
+                    <RdMark shape={g.shape} color={g.color} x={xp} y={y} r={sel === r ? 4.6 : 3.4} />
                   </g>
                 );
               })}
             </g>
           ))}
         </svg>
+        {sel && pos && (
+          <div
+            className="pointer-events-none absolute z-10 w-[min(26em,60%)] rounded-md border border-ink-200 bg-white px-3 py-2 text-[12.5px] leading-snug text-ink-700 shadow-md"
+            style={{
+              left: `${Math.min(Math.max((pos.x / W) * 100 - 20, 1), 39)}%`,
+              top: `calc(${(pos.y / H) * 100}% + ${pos.y / H > 0.75 ? '-7.5em' : '12px'})`,
+            }}
+          >
+            <div className="font-semibold text-ink-900">
+              Folder {sel.cote} · dated {sel.from}
+              {sel.to !== sel.from ? `–${sel.to}` : ''}
+              {sel.open ? ' or later' : ''}
+            </div>
+            <div className="mt-0.5 text-ink-800">{sel.source}</div>
+            <div className="mt-0.5 text-ink-500">
+              printed {sel.pub}
+              {sel.pub > sel.to ? `, ${sel.pub - sel.to} years after the dating` : sel.pub < sel.from ? `, ${sel.from - sel.pub} years before the dating` : ', within the dating'}
+              {' · '}
+              {RD_GROUPS.find((g) => g.key === rdGroup(sel))!.label.toLowerCase()}
+            </div>
+          </div>
+        )}
+        </div>
       </div>
       <p className="mt-2 min-h-[2.5em] text-[12.5px] leading-relaxed text-ink-600">
         {sel ? (
