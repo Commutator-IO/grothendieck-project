@@ -326,7 +326,8 @@ export interface Finding {
   lean?: { file: string; found: string };
   /**
    * For an open mathematical row with no Lean proof: whether Lean can reach it
-   * today. `reachable` — mathlib has the theory; `beyond` — it needs a theory
+   * today. `reachable` — mathlib has the theory, or mathlib with AxiomMath's
+   * Stacks library (docs/review/stacks-findings-sweep-2026-11-16.md); `beyond` — it needs a theory
    * mathlib lacks (`theory` names it); `imprecise` — the page or the reading
    * does not yet fix a statement; `doubtful` — there is a concrete reason to
    * think it false as read; `open-problem` — an open question in the

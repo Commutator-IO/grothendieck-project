@@ -7123,7 +7123,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       "Compare with the local flatness criterion of EGA IV_3 §11.3 (around 11.3.7) and the Stacks Project, Lemma 10.99.1 (u : N → M, M flat over R, u ⊗ k injective ⇒ u injective with flat cokernel), to see whether either covers a target that is a pushforward along φ rather than a module over the same local ring; one web query pointed to the Stacks lemma but neither source has been read for this, so nothing is recorded under literature. First decide whether the statement holds at all without a finiteness hypothesis on φ at the points above y, and settle the reading of clause c) against the facsimile. 2026-10-26: EGA IV₃ 11.3.7 and 11.3.10 read (numdam text). 11.3.7 is the same-space form (both sheaves on X, finitely presented, u ⊗ k(y) injective ⇒ u injective with flat cokernel); the page's form, with G coherent on Y and the target φ_*F not coherent, is not there. This pass's own remark: when O_{S,s} is a DVR the statement holds as read (t-torsion of G_y maps to 0 in the torsion-free (φ_*F)_y, so it lies in ⋂ tⁿG_y = 0 by Krull); the general case needs the local criterion for a target that is not finite, which was not checked.",
-    reach: 'beyond',
+    reach: 'reachable',
     theory: "schemes beyond basics",
     onPage: 'partial',
   },
