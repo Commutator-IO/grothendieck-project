@@ -235,7 +235,7 @@ const LIVRES: typeof ARTICLES = [
   },
   {
     id: 'book-archives',
-    title: 'Archives outillées : reproduire la méthode sur des fonds publics',
+    title: 'Archives outillées : reproduire la méthode sur des fonds d’archives en libre accès',
     lang: 'French',
     what: "The companion book, on the sources rather than the tools: each archive the method ran on (Montpellier, the Bourbaki archive, Quillen's notebooks, the IHÉS, the BnF, the Buffalo tapes, Gallica for germain-project), how it is served, what got in the way and what was decided about rights; then a plan for Leibniz's mathematical manuscripts in Hanover.",
     pdf: '/article/archives-toolbox.pdf',
