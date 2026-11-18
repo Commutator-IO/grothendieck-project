@@ -42,6 +42,8 @@ function save(s: Store) {
 }
 
 type Box = (typeof BNF.boxes)[number];
+// The sessions list is empty once the visits are over; type it so that an empty file still compiles.
+const SESSIONS = BNF.sessions as { n: number; theme: string; ask: string[] }[];
 // Boxes whose review is finished carry `done` (the date) and leave the tab; « Copy all answers »
 // still exports what was entered for them.
 // Boxes for a later visit carry `later` and stay off the tab until then.
@@ -78,7 +80,20 @@ function allMarkdown(s: Store): string {
 const answeredIn = (b: Box, s: Store) =>
   b.items.some((it) => s[it.id]?.mark || one(s[it.id]?.note)) || BNF.grid.some((g) => one(s[`${b.id}:${g.id}`]?.note));
 
+// The visits are over once every box is `done`: nothing is asked any more.
 export function BnfReview() {
+  if (BOXES.length === 0) {
+    return (
+      <p className="mt-6 max-w-[48em] text-[14px] leading-relaxed text-ink-700">
+        The BnF visits are finished (the last session was on 18 November 2026): no question remains to be answered
+        here. What was read is summarised in the sub-article on the BnF papers.
+      </p>
+    );
+  }
+  return <BnfVisit />;
+}
+
+function BnfVisit() {
   const [s, setS] = useState<Store>(load);
   const [boxId, setBoxId] = useState<string>(() => {
     const h = decodeURIComponent(location.hash.slice(1));
@@ -130,7 +145,7 @@ export function BnfReview() {
       <details className="mt-4 rounded-md border border-ink-200 bg-white px-3 py-2 text-[13px] text-ink-700" open>
         <summary className="cursor-pointer font-semibold text-ink-900">Sessions to come, by pochette</summary>
         <ol className="mt-2 grid gap-1">
-          {BNF.sessions.map((se) => (
+          {SESSIONS.map((se) => (
             <li key={se.n}>
               <span className="font-semibold">Session {se.n}</span> · {se.theme}: {se.ask.join(' · ')}
             </li>
@@ -230,7 +245,9 @@ export function BnfReview() {
                     <span className="mr-1 text-ink-400">{n + 1}.</span>
                     {it.text}
                   </p>
-                  {'at' in it && it.at && <p className="mt-0.5 text-[12px] text-ink-500">Where: {it.at}</p>}
+                  {(it as { at?: string }).at && (
+                    <p className="mt-0.5 text-[12px] text-ink-500">Where: {(it as { at?: string }).at}</p>
+                  )}
                   <div className="mt-2 flex flex-wrap items-center gap-1.5">
                     {MARKS.map(([m, label]) => (
                       <button
