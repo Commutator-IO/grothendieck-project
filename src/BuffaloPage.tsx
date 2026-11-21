@@ -1,3 +1,4 @@
+import gaetaRaw from './content/buffalo-gaeta.json';
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
@@ -147,6 +148,15 @@ const KIND: Record<Kind, { label: string; color: string; italic?: boolean }> = {
 type CourseIndex = { pdf: string; entries: number; items: IndexItem[]; refs?: string[] };
 const loadIndex = () => import('./content/buffalo-index.json').then((m) => m.default as unknown as Record<string, CourseIndex>);
 
+// Gaeta's written notes of the algebraic geometry course: the page of the notes that an entry of the
+// index follows, from src/content/buffalo-gaeta.json (printed page n is page n + offset of the scan).
+const GAETA_PDF = 'https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/FuncAlg.pdf';
+const GAETA = gaetaRaw as unknown as { offset: number; rows: [string, number, number, number, number][] };
+const gaetaPage = (v: string, t: number) => {
+  const hit = GAETA.rows.filter((r) => r[0] === v && r[1] <= t && t <= r[2]).sort((a, b) => a[2] - a[1] - (b[2] - b[1]))[0];
+  return hit ? { first: hit[3], last: hit[4] } : null;
+};
+
 const tex = (s: string) => katex.renderToString(s, { throwOnError: false });
 const statement = (s: string) => s.split(/(\$[^$]*\$)/).map((p) => (p.startsWith('$') ? tex(p.slice(1, -1)) : p)).join('');
 
@@ -216,6 +226,7 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
             className="group mt-1.5 grid grid-cols-[4.6rem_minmax(0,1fr)_1.5rem] gap-2 [contain-intrinsic-size:auto_2.4rem] [content-visibility:auto]"
             {...commentData({ kind: 'lecture', label: `Buffalo, ${course}, ${i.ts}`, ref: i.ts, link: `https://www.youtube.com/watch?v=${i.v}&t=${i.w ?? i.t}s` })}
           >
+            <div className="self-start">
             <button
               type="button"
               onClick={() => onPlay(i.v, i.w ?? i.t)}
@@ -225,6 +236,21 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
             >
               {i.ts}
             </button>
+            {course === 'Algebraic geometry' && (() => {
+              const g = gaetaPage(i.v, i.t);
+              return g ? (
+                <a
+                  href={`${GAETA_PDF}#page=${g.first + GAETA.offset}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="The page of Gaeta's written notes of this course that this passage follows (a student's notes, not Grothendieck's)"
+                  className="tabular block px-1 text-[10.5px] text-ink-400 hover:text-brand-600"
+                >
+                  Gaeta p.{g.first}
+                </a>
+              ) : null;
+            })()}
+            </div>
             <p className={i.kind && KIND[i.kind]?.italic ? 'italic' : undefined}>
               {i.kind && KIND[i.kind] && (
                 <b className="mr-1.5 not-italic" style={{ color: KIND[i.kind].color }}>
