@@ -223,10 +223,9 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
         ) : (
           <div
             key={n}
-            className="group mt-1.5 grid grid-cols-[4.6rem_minmax(0,1fr)_1.5rem] gap-2 [contain-intrinsic-size:auto_2.4rem] [content-visibility:auto]"
+            className="group mt-1.5 grid grid-cols-[4.6rem_minmax(0,1fr)_3.6rem] gap-2 [contain-intrinsic-size:auto_2.4rem] [content-visibility:auto]"
             {...commentData({ kind: 'lecture', label: `Buffalo, ${course}, ${i.ts}`, ref: i.ts, link: `https://www.youtube.com/watch?v=${i.v}&t=${i.w ?? i.t}s` })}
           >
-            <div className="self-start">
             <button
               type="button"
               onClick={() => onPlay(i.v, i.w ?? i.t)}
@@ -236,21 +235,6 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
             >
               {i.ts}
             </button>
-            {course === 'Algebraic geometry' && (() => {
-              const g = gaetaPage(i.v, i.t);
-              return g ? (
-                <a
-                  href={`${GAETA_PDF}#page=${g.first + GAETA.offset}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="The page of Gaeta's written notes of this course that this passage follows (a student's notes, not Grothendieck's)"
-                  className="tabular block px-1 text-[10.5px] text-ink-400 hover:text-brand-600"
-                >
-                  Gaeta p.{g.first}
-                </a>
-              ) : null;
-            })()}
-            </div>
             <p className={i.kind && KIND[i.kind]?.italic ? 'italic' : undefined}>
               {i.kind && KIND[i.kind] && (
                 <b className="mr-1.5 not-italic" style={{ color: KIND[i.kind].color }}>
@@ -260,6 +244,21 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
               )}
               <Typeset text={i.text} />
             </p>
+            <div className="flex flex-col items-end self-start">
+            {course === 'Algebraic geometry' && (() => {
+              const g = gaetaPage(i.v, i.t);
+              return g ? (
+                <a
+                  href={`${GAETA_PDF}#page=${g.first + GAETA.offset}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="The page of Gaeta's written notes of this course that this passage follows (a student's notes, not Grothendieck's)"
+                  className="tabular whitespace-nowrap text-[10.5px] text-ink-400 hover:text-brand-600"
+                >
+                  Gaeta p.{g.first}
+                </a>
+              ) : null;
+            })()}
             <a
               href={buffaloIssueUrl(course, i)}
               target="_blank"
@@ -270,6 +269,7 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
             >
               ⚑
             </a>
+            </div>
           </div>
         ),
       )}
