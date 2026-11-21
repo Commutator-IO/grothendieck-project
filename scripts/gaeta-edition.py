@@ -53,6 +53,7 @@ SUNY at Buffalo\par
 Department of Mathematics\par
 \end{titlepage}
 
+\setcounter{page}{3}
 \pagerange{3}{4}
 \tableofcontents
 \clearpage
@@ -90,6 +91,7 @@ def bibliography(block):
             extra = '; '.join(x.strip() for x in labels[0].split(';')[1:]) + ('; ' + extra if extra else '')
         items.append(('item', lab, text, extra))
     out = [r'\begin{thebibliography}{ATIYAH-MACDONALD-LONGEST}']
+    links = {}
     n = 0
     for it in items:
         if it[0] == 'mark':
@@ -103,8 +105,30 @@ def bibliography(block):
         text = re.sub(r'\n(?=\\emph\{|\.\.\.\.\.\.)', r' \\\\\n', text)
         tail = f' \\hfill{{\\small(also quoted as: {extra})}}' if extra else ''
         out.append(f'\\bibitem[{lab}]{{gaeta{n}}}\n{text}{tail}\n')
+        for l in ([lab] + [x.strip() for x in extra.split(';') if x.strip()]):
+            l = re.sub(r'\s*\(.*$', '', l).split(',')[0].strip()
+            if re.fullmatch(r'[A-ZÀ-Ý0-9][A-ZÀ-Ý0-9 \-]*[A-ZÀ-Ý0-9]', l) and l not in links:
+                links[l] = f'gaeta{n}'
     out.append(r'\end{thebibliography}')
-    return '\n'.join(out)
+    return '\n'.join(out), links
+
+def link_citations(text, links):
+    """Link every occurrence of a « Quoted as » name of the bibliography, in the running text (not in math,
+    headings or the bibliography itself), to its entry."""
+    names = sorted(links, key=len, reverse=True)
+    if not names: return text
+    pat = re.compile(r'(?<![A-Za-zÀ-ÿ0-9\\\-])(' + '|'.join(re.escape(n) for n in names) + r')(?![A-Za-zÀ-ÿ0-9\-])')
+    i0 = text.index('\\begin{thebibliography}'); i1 = text.index('\\end{thebibliography}')
+    def seg(t):
+        out = []
+        for line in t.split('\n'):
+            if re.match(r'\\(?:sub)?section\*|\\gtoc|\\pagehead|\\pagefoot|% ', line):
+                out.append(line); continue
+            parts = re.split(r'(\$[^$]*\$)', line)
+            parts = [x if x.startswith('$') else pat.sub(lambda m: f'\\hyperlink{{cite.{links[m.group(1)]}}}{{{m.group(1)}}}', x) for x in parts]
+            out.append(''.join(parts))
+        return '\n'.join(out)
+    return seg(text[:i0]) + text[i0:i1] + seg(text[i1:])
 
 def build():
     fs = sorted(glob.glob(os.path.join(SRC, 'ag', 'batch-*.en.tex')))
@@ -123,7 +147,11 @@ def build():
     meta = [re.sub(r'\\pages\{\d+\}\{\d+\}', f'\\\\pages{{{first}}}{{{last}}}', l) for l in meta]
     while meta and not meta[-1].strip(): meta.pop()
     # no running title block: the title page stands in its place
+    meta = [re.sub(r'\\documentclass\[11pt', r'\\documentclass[10pt', l) for l in meta]
     meta.append('\\renewcommand{\\grothTitleBlock}{}')
+    # one LaTeX page per page of the typescript, numbered like the scan (printed page n = page n + 4)
+    meta.append('\\geometry{top=14mm,bottom=16mm,left=15mm,right=15mm,footskip=8mm}')
+    meta.append('\\hypersetup{colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black}')
     hdr = [f"% Transcription — Gaeta, Introduction to Functorial Algebraic Geometry (notes of Grothendieck's 1973 Buffalo course), PDF pages {first}-{last}:",
            f"% the {len(parts)} batches in one file, in the typescript's page order; the title pages, the table of contents and the bibliography are set with LaTeX structures.",
            "% Facsimile: scan U26.pdf (https://csg.igrothendieck.org/wp-content/uploads/2025/02/U26.pdf) (page n here = page n of that PDF; printed page n = PDF page n+4).",
@@ -143,7 +171,8 @@ def build():
     i6 = text.index('\\page{6}'); ic = text.index('\\section*{CHAPTER 0}')
     block = text[i6:ic]
     pre = re.match(r'(\\page\{6\}\s*\\pagehead\{[^}]*\}\s*)\\section\*\{BIBLIOGRAPHY\}\s*(.*)', block, flags=re.S)
-    text = text[:i6] + pre.group(1) + '\\section*{BIBLIOGRAPHY}\n\\gtoc{section}{BIBLIOGRAPHY}\n\n' + bibliography(pre.group(2)) + '\n\n' + text[ic:]
+    biblio, links = bibliography(pre.group(2))
+    text = text[:i6] + pre.group(1) + '\\section*{BIBLIOGRAPHY}\n\\gtoc{section}{BIBLIOGRAPHY}\n\n' + biblio + '\n\n' + text[ic:]
     # 3. every heading enters the table of contents with the printed page
     def head(m):
         kind = 'section' if m.group(1) == 'section' else 'subsection'
@@ -151,6 +180,9 @@ def build():
         if m.group(2).strip().upper().startswith(('BIBLIOGRAPHY', 'ALGEBRAIC GEOMETRY ONE CENTURY', 'PART II.')): return m.group(0)
         return m.group(0) + f'\n\\gtoc{{{kind}}}{{{title}}}'
     text = re.sub(r'\\(section|subsection)\*\{((?:[^{}]|\{[^{}]*\}|\{(?:[^{}]|\{[^{}]*\})*\})*)\}', head, text)
+    text = link_citations(text, links)
+    # each typescript page starts a new page, whose number is the scan's (the constant offset to Gaeta's own numbers is 4)
+    text = re.sub(r'\\page\{(\d+)\}', lambda m: f'\\clearpage\\setcounter{{page}}{{{m.group(1)}}}\\page{{{m.group(1)}}}' if int(m.group(1)) >= 5 else m.group(0), text)
     out = '\n'.join(hdr) + '\n' + '\n'.join(meta) + '\n\n\\begin{document}\n\n' + text + '\n\n\\end{document}\n'
     os.makedirs(os.path.join(OUT, 'gaeta', 'ag'), exist_ok=True)
     open(os.path.join(OUT, 'gaeta', 'ag', 'ag.en.tex'), 'w').write(out)
