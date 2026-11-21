@@ -48,7 +48,7 @@ export function folderDrawings(folderDir) {
  * of its source: the figure redrawn from it, or null.
  */
 export function drawingMap(folderDir, file, tex) {
-  const m = /^batch-(\d+)\.fr\.tex$/.exec(file);
+  const m = /^batch-(\d+)\.(?:fr|en)\.tex$/.exec(file);
   if (!m) return [];
   const pool = folderDrawings(folderDir).filter(
     (d) => d.id.split('-')[0] === m[1] && d.status !== 'failed',

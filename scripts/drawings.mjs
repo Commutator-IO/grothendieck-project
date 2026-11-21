@@ -31,8 +31,10 @@ import { drawingMap, folderDrawings } from './lib/drawing-map.mjs';
 
 const exec = promisify(execFile);
 const root = resolve(import.meta.dirname, '..');
-const SOURCE = resolve(root, 'transcripts');
-const OUT = resolve(root, 'public/transcripts');
+// Another collection's figures, like its reading views: `--gaeta` reads transcripts-gaeta/, `--survivre` transcripts-survivre/.
+const COLLECTION = ['gaeta', 'survivre'].filter((c) => process.argv.includes(`--${c}`)).map((c) => `transcripts-${c}`)[0] ?? 'transcripts';
+const SOURCE = resolve(root, COLLECTION);
+const OUT = resolve(root, 'public', COLLECTION);
 const CACHE = process.env.DRAWINGS_CACHE ?? resolve(root, 'node_modules/.cache/drawings');
 
 const only = process.argv.slice(2).filter((a) => !a.startsWith('--'));
@@ -84,7 +86,7 @@ for (const folder of folders) {
     const res = await Promise.all(batch.map((d) => compile(folder, d)));
     batch.forEach((d, j) => res[j] && ok.add(d.id));
   }
-  for (const file of (await readdir(dir)).filter((f) => /^batch-\d+\.fr\.tex$/.test(f))) {
+  for (const file of (await readdir(dir)).filter((f) => /^batch-\d+\.(?:fr|en)\.tex$/.test(f))) {
     const map = drawingMap(dir, file, await readFile(resolve(dir, file), 'utf8'));
     const lines = map
       .map((d, k) => (d && ok.has(d.id) ? `\\grothDrawingFile{${k + 1}}{${d.id}}` : null))
