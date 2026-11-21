@@ -9,11 +9,29 @@ Soit $f : X \to Y$ fini et universellement ouvert, $Y$ localement noethérien, d
 {\small Les feuillets en esquissent une démonstration incomplète : la section ouverte et fermée de la page~19 est marquée \q{[vérif]}, la prose des lemmes des pages 18, 20, 21 et~22 est illisible, et la page~23 s'arrête sur \q{À formuler}.\par}
 
 \begin{encadre}
+\begin{theoreme*}[D'après les pages 17 à 23, forme locale sur un anneau strictement hensélien\piste{126-radicial-etale-factorisation}]
+Soient $R$ un anneau local strictement hensélien et $A$ une $R$-algèbre finie telle que $\operatorname{Spec} A \to \operatorname{Spec} R$ soit ouverte et que le nombre de points géométriques de ses fibres soit une constante~$n$. Alors $A \simeq \prod_{i \in \iota} B_i$, avec $|\iota| = n$ et des $R$-algèbres finies $B_i$ locales et strictement henséliennes, chacune ayant exactement un point géométrique au-dessus de chaque point géométrique de $\operatorname{Spec} R$. L'application $R^\iota \to A$ est universelle : tout morphisme de $R$-algèbres $R^J \to A$, $J$ fini, se factorise de façon unique par elle.
+\end{theoreme*}
+\end{encadre}
+{\small \emph{Démonstration.} Une algèbre finie sur un anneau local strictement hensélien est produit d'anneaux locaux (étiquette 04GJ du Stacks Project). Chaque $\operatorname{Spec} B_i$ est ouvert et fermé dans $\operatorname{Spec} A$ ; son image est ouverte et contient le point fermé, c'est donc $\operatorname{Spec} R$ tout entier, et chaque facteur a au moins un point géométrique au-dessus de tout point. La fibre fermée en a exactement $|\iota|$, et la constance du nombre en impose exactement un au-dessus de chaque point. Voir \texttt{radicial\_etale\_factorisation\_of\_strictlyHenselian} et \texttt{existsUnique\_comp\_etalePartMap\_eq} dans \href{\leanblobmain/Folder126RadicialEtale.lean}{\texttt{Folder126RadicialEtale.\allowbreak{}lean}}, sur la bibliothèque Stacks d'AxiomMath \cite{axiomstacks}.
+
+L'énoncé est formalisé tel que la lecture le donne, avec l'ouverture universelle pour hypothèse ; la lecture de cette addition interlinéaire de la page~17 est incertaine. Ne sont pas formalisés : le cas global sur $Y$ localement noethérien, par changement de base aux hensélisés stricts et construction de $X^{\text{ét}}$ par descente des revêtements étales ; la propriété universelle contre les algèbres étales finies non déployées (étiquette 04GL) et l'invariance topologique du site étale qu'emploie la page~23.\par}
+
+\begin{encadre}
 \begin{theoreme*}[D'après les pages 4 à 7, forme complétée par l'édition, quotient d'une déformation nilpotente\piste{126-nilpotent-deformation-quotient}]\nonverifie
 Soit $R \rightrightarrows X$ une relation d'équivalence plate dont la réduction $R_0 \rightrightarrows X_0$ modulo un idéal nilpotent est effective, de quotient fpqc quasi-séparé $X_0 \to Y_0$. Alors $R$ est effective, son quotient $Y$ est un épaississement nilpotent de $Y_0$ et $X \to Y$ est plat.
 \end{theoreme*}
 \end{encadre}
 {\small La page porte la conclusion et la méthode, le relèvement par l'annulation de $\check H^0(X_0/Y_0, \mathcal H^1)$ ; les hypothèses, en grande partie illisibles, sont reconstituées par l'édition, de même que la réduction au cas $\mathcal J^2 = 0$ et la platitude.\par}
+
+\begin{encadre}
+\begin{theoreme*}[D'après la page 7, les deux derniers pas, forme affine\piste{126-nilpotent-deformation-quotient}]
+Soient $A'$ un anneau, $I \subset A'$ un idéal de carré nul, $B'$ une $A'$-algèbre et $J \subset B'$ un idéal de carré nul, avec $B = B'/J$ plat sur $A'/I$ et $I \otimes_{A'} B \to J$ bijectif. Soient $C'$ une $B'$-algèbre plate et $\varphi : B' \otimes_{A'} B' \to C'$ un morphisme de $A'$-algèbres qui devient bijectif après $(A'/I) \otimes_{A'} -$. Alors $B'$ est plat sur $A'$ et $\varphi$ est bijectif.
+\end{theoreme*}
+\end{encadre}
+{\small \emph{Démonstration.} La platitude de $B'$ est le critère de platitude le long d'un idéal nilpotent (étiquette 063Y du Stacks Project, par le critère de Tor de 051C), et $C'$ est alors plat sur $A'$. Une application linéaire $u : M \to N$ surjective modulo un idéal nilpotent $I$ est surjective, par Nakayama pour un idéal nilpotent, sans hypothèse de finitude ; si de plus $N$ est plat et $u$ bijective modulo $I$, on a $(A/I) \otimes \operatorname{Ker} u = 0$, d'où $\operatorname{Ker} u = 0$. Voir \texttt{flat\_and\_bijective\_of\_thickening} et \texttt{bijective\_of\_lTensor\_quotient\_nilpotent\_of\_flat} dans \href{\leanblobmain/Folder126NilpotentQuotient.lean}{\texttt{Folder126NilpotentQuotient.\allowbreak{}lean}}, sur la bibliothèque Stacks d'AxiomMath \cite{axiomstacks}.
+
+Seule la cible doit être plate. Ne sont pas formalisés : la réduction au cas $\mathcal J^2 = 0$, la descente de $\mathcal J_X$ en $\mathcal J_Y$ sur $Y_0$, la construction de $\mathcal O_Y = \operatorname{Ker}(\mathcal O_X \rightrightarrows \mathcal O_R)$ et l'exactitude de $0 \to \mathcal J_Y \to \mathcal O_Y \to \mathcal O_{Y_0} \to 0$ par l'annulation de la cohomologie de Čech, c'est-à-dire l'existence du quotient~$Y$, ni le cas non affine.\par}
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 26 à 29, descente générique\piste{126-generic-descent}]\nonverifie
