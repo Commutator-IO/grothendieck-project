@@ -641,6 +641,9 @@ const INLINE = [
   [/\\#/g, '#'],
   [/\\&amp;/g, '&amp;'],
   [/\\_/g, '_'],
+  // TeX's quote ligatures: `` opens and '' closes, as in the PDF.
+  [/``/g, '“'],
+  [/''/g, '”'],
   [/---/g, '—'],
   [/--/g, '–'],
   [/~/g, ' '],
