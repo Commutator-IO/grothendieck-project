@@ -22,6 +22,8 @@ interface Check {
   /** For a recording: the second of the video to listen from. */
   t?: number;
   q: string;
+  /** Where the check is, in a few words: the piece and the words around it. */
+  label?: string;
   /** A Buffalo doubt judged not to bear on the mathematics (speech, an aside): hidden unless asked for. */
   minor?: boolean;
 }
@@ -238,7 +240,7 @@ export function BourbakiReview() {
                       >
                         {s[c.id]?.mark ? '✓ ' : '· '}
                         {c.t !== undefined ? `${Math.floor(c.t / 60)}:${String(c.t % 60).padStart(2, '0')}` : `p. ${c.page}`} —{' '}
-                        {c.id.split('-').slice(1).join('-')}
+                        {c.label ?? c.id.split('-').slice(1).join('-')}
                       </button>
                     </li>
                   ))}

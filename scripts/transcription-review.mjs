@@ -40,20 +40,28 @@ function checks(file, batch, prefix) {
   const src = readFileSync(file, 'utf8');
   const body = src.slice(src.indexOf('\\begin{document}'));
   let page = 1;
+  let piece = '';
   const out = [];
   let n = 0;
-  for (const raw of body.split('\n')) {
+  const LINES = body.split('\n');
+  for (let li = 0; li < LINES.length; li++) {
+    const raw = LINES[li];
+    const sec = /\\(?:sub)?section\*?\{(.*)\}\s*$/.exec(raw);
+    if (sec) piece = plain(sec[1]).replace(/\s+/g, ' ').slice(0, 60);
     const pg = /\\page\{(\d+)\}/.exec(raw);
     if (pg) page = Number(pg[1]);
     const re = /\\(ill|uncertain)\{((?:[^{}]|\{[^{}]*\})*)\}/g;
     let m;
     while ((m = re.exec(raw))) {
       n++;
-      const before = plain(raw.slice(0, m.index)).split(' ').slice(-7).join(' ');
-      const after = plain(raw.slice(m.index + m[0].length)).split(' ').slice(0, 5).join(' ');
+      const prevText = plain(LINES.slice(Math.max(0, li - 2), li).filter((l) => !l.startsWith('%')).join(' '));
+      const nextText = plain(LINES.slice(li + 1, li + 3).filter((l) => !l.startsWith('%')).join(' '));
+      const before = `${prevText} ${plain(raw.slice(0, m.index))}`.trim().split(/\s+/).slice(-7).join(' ');
+      const after = `${plain(raw.slice(m.index + m[0].length))} ${nextText}`.trim().split(/\s+/).slice(0, 5).join(' ');
       const word = m[2] || '…';
       out.push({
         id: `${prefix}-b${batch}-${n}`,
+        label: `${piece ? `${piece} · ` : ''}« ${before.split(' ').slice(-3).join(' ')} [${word}] ${after.split(' ').slice(0, 3).join(' ')} »`.replace(/\s+/g, ' '),
         page,
         batch,
         q: `${m[1] === 'ill' ? 'Illegible in the transcription' : 'Doubtful reading'}: « … ${before} [${word}] ${after} … ». ${m[1] === 'ill' ? 'Can the page be read here? What does it say?' : `Does the page read « ${word} »?`}`,
