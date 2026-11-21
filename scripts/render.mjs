@@ -641,9 +641,9 @@ const INLINE = [
   [/\\#/g, '#'],
   [/\\&amp;/g, '&amp;'],
   [/\\_/g, '_'],
-  // TeX's quote ligatures: `` opens and '' closes, as in the PDF.
-  [/``/g, '“'],
-  [/''/g, '”'],
+  // TeX's quote ligatures: `` opens and '' closes, as in the PDF. Only in the collections that use them
+  // (Survivre, Gaeta…): in the Montpellier transcriptions '' is a double prime in running text.
+  ...(COLLECTION === 'transcripts' ? [] : [[/``/g, '“'], [/''/g, '”']]),
   [/---/g, '—'],
   [/--/g, '–'],
   [/~/g, ' '],
