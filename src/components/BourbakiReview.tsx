@@ -37,6 +37,8 @@ interface Doc {
   images?: string[];
   pdf: string;
   item: string;
+  /** The label of the link to `item`, when it is not the default one. */
+  notice?: string;
   checks: Check[];
 }
 interface Review {
@@ -113,7 +115,7 @@ function Question({ text }: { text: string }) {
 const one = (s?: string) => (s ?? '').trim().replace(/\s*\n\s*/g, ' ');
 // Bourbaki rédactions by default; a Quillen notebook names its own folder and language.
 const html = (d: Doc, c: Check) =>
-  `/${d.base ?? 'transcripts-bourbaki'}/${d.base ? d.id.replace(/^(quillen|illusie)-/, '') : d.id}/batch-${String(c.batch).padStart(2, '0')}.${d.lang ?? 'fr'}.html`;
+  `/${d.base ?? 'transcripts-bourbaki'}/${d.base ? d.id.replace(/^(quillen|illusie|survivre|gaeta)-/, '') : d.id}/batch-${String(c.batch).padStart(2, '0')}.${d.lang ?? 'fr'}.html`;
 
 function markdown(r: Review, s: Store): string {
   const out = ['Answers from the local review tab (Bourbaki, Buffalo, Quillen, Illusie); readings only, nothing quoted beyond a few words.', ''];
@@ -299,7 +301,7 @@ export function BourbakiReview() {
                 </a>{' '}
                 ·{' '}
                 <a className="text-brand-700 underline" href={doc.item} target="_blank" rel="noreferrer">
-                  {doc.images ? 'IHÉS item' : doc.base ? 'Clay notice' : 'AHP notice'}
+                  {doc.notice ?? (doc.images ? 'IHÉS item' : doc.base ? 'Clay notice' : 'AHP notice')}
                 </a>{' '}
                 ·{' '}
                 <a className="text-brand-700 underline" href={html(doc, check)} target="_blank" rel="noreferrer">

@@ -48,7 +48,7 @@ const ROOT = resolve(import.meta.dirname, '..');
 // their own directory into their own: `--illusie` reads transcripts-illusie/,
 // `--quillen` transcripts-quillen/, `--bourbaki` transcripts-bourbaki/.
 const COLLECTION =
-  ['illusie', 'quillen', 'bourbaki']
+  ['illusie', 'quillen', 'bourbaki', 'survivre', 'gaeta']
     .filter((c) => process.argv.includes(`--${c}`))
     .map((c) => `transcripts-${c}`)[0] ?? 'transcripts';
 const SOURCE = resolve(ROOT, COLLECTION);
@@ -562,6 +562,9 @@ const BRACED = [
   // so that drawings can be counted and listed without guessing from words.
   ['drawing', (a) => `<span class="tr-note tr-drawing" title="drawing, described by the transcriber">${a}</span>`],
   ['marginal', (a) => `<span class="tr-marginal" title="marginal note">${a}</span>`],
+  // A typescript's own running head and foot of a page (« -22- », « II-1-3 »), where the layout is kept (Gaeta's notes, #167).
+  ['pagehead', (a) => `<span class="tr-pagehead" title="running head of the page">${a}</span>`],
+  ['pagefoot', (a) => `<span class="tr-pagefoot" title="foot of the page">${a}</span>`],
   // In a modernised reading: one of his redrawn drawings (#73) as a figure, and
   // the edition's legend under it.
   ['figuredessin', (a) => `<span class="tr-drawing-fig"><img src="drawings/${a.trim()}.svg" alt="" loading="lazy"></span>`],
@@ -1023,6 +1026,8 @@ export function readingPage({ meta, lang, name, html, extraStyle = '' }) {
   .tr-drawing-fig { display: block; text-align: center; margin: .6em 0 .2em; }
   .tr-drawing-fig img { max-width: 100%; height: auto; background: #fff; padding: 4px; border-radius: 4px; }
   .tr-drawing-cap { display: block; font-size: .75em; color: var(--ink4, #9d9787); }
+  .tr-pagehead, .tr-pagefoot { display: block; text-align: center; font-size: .82em; color: var(--ink3); margin: .6rem 0; }
+  .tr-pagefoot { text-align: right; }
   .tr-note, .tr-marginal { display: block; margin: .4rem 0; padding-left: .7rem;
              border-left: 2px solid var(--rule); font-size: .88em; color: var(--ink3); }
   /* A list whose items carry his own labels prints those and nothing else.
