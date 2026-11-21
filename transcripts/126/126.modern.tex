@@ -425,7 +425,14 @@ sur $Y_0$ ; par le critère de platitude pour les épaississements nilpotents
 est plat, $R$ est plat sur $Y$, et $R \to P = X \times_Y X$ est un morphisme de
 $Y$-schémas plats qui se réduit modulo l'idéal nilpotent $\mathcal{J}_Y$ en
 l'isomorphisme $R_0 \simeq P_0 = X_0 \times_{Y_0} X_0$ ; c'est donc un
-isomorphisme.\footnote{L'énoncé utilisé — un morphisme de $Y$-schémas plats
+isomorphisme.\footnote{Les deux pas de cette page sont vérifiés en Lean dans le cas
+affine (GrothendieckArchivesProofs, Grothendieck/Folder126NilpotentQuotient.lean,
+\texttt{flat\_and\_bijective\_of\_thickening}) : $X$ est plat sur $Y$ (Stacks
+063Y), et une application linéaire de but plat, bijective modulo un idéal nilpotent,
+est bijective (\texttt{bijective\_of\_lTensor\_quotient\_nilpotent\_of\_flat}).
+L'effectivité au niveau des schémas, la descente de $\mathcal{J}_X$ en
+$\mathcal{J}_Y$ (prise pour hypothèse) et l'exactitude de $0 \to \mathcal{J}_Y \to
+\mathcal{O}_Y \to \mathcal{O}_{Y_0} \to 0$ ne sont pas formalisées.}\footnote{L'énoncé utilisé — un morphisme de $Y$-schémas plats
 qui est un isomorphisme modulo un idéal nilpotent de $Y$ en est un — est
 classique (il découle du même critère de platitude) ; la page conclut « donc
 $R \to P$ est un isomorphisme, o.k. ».}
@@ -632,7 +639,16 @@ $f$ se factorise en
 \]
 où $f_1$ est fini, surjectif et radiciel, et $f_2$ un revêtement étale (fini
 étale). De plus tout $Y$-morphisme $X \to Z$, avec $Z$ étale sur $Y$, se
-factorise de façon unique par $X^{\text{ét}}$.\footnote{« Univ. ouvert » est
+factorise de façon unique par $X^{\text{ét}}$.\footnote{Vérifié en Lean sous sa forme locale, avec
+« univ. ouvert » pour hypothèse (GrothendieckArchivesProofs,
+Grothendieck/Folder126RadicialEtale.lean,
+\texttt{radicial\_etale\_factorisation\_of\_strictlyHenselian}, avec la bibliothèque Stacks d'AxiomMath,
+Stacks 04GJ) : sur un anneau local strictement hensélien, une algèbre finie dont le
+spectre s'envoie ouvertement et dont les fibres géométriques ont toutes $n$ points
+est produit de $n$ facteurs radiciels, et $R^{n} \to A$ a la propriété universelle
+contre les algèbres finies étales déployées. L'énoncé global (descente étale), la
+propriété contre toute algèbre finie étale (Stacks 04GL) et l'invariance
+topologique du site étale ne sont pas formalisés.}\footnote{« Univ. ouvert » est
 ajouté en interligne, d'une lecture incertaine ; c'est lui qui fait marcher
 l'argument de la page 19. La page ajoute qu'« on peut supprimer » l'hypothèse
 « $d(y)$ constant » quand $Y$ est connexe, « quitte à remplacer $Y$ par une

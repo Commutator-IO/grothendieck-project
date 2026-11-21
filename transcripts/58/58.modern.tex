@@ -916,7 +916,15 @@ $U$.\footnote{Une note marginale annonce, à l'encre brune, « pour la
 généralisation » aux schémas et aux faisceaux cohérents « rel.? » plats et
 fidèles.}
 
-\emph{Corollaire 1} (page 42). Si $X$ est quasi-projectif et si $(X, Y)$
+\emph{Corollaire 1} (page 42).\footnote{Vérifié en Lean sur une base complète
+(GrothendieckArchivesProofs, Grothendieck/Folder58LefPermanence.lean, avec la bibliothèque Stacks d'AxiomMath) :
+si $A$ est noethérien et $J$-adiquement complet et $X \to \operatorname{Spec} A$
+propre, $(X, V(J\mathcal{O}_X))$ vérifie $(\mathrm{LG})_n$ pour tout $n$ par le
+théorème des fonctions formelles (Stacks 087U), et de même $(W, g^{-1}(Y))$ pour
+tout $g : W \to X$ propre, ni projectif ni plat
+(\texttt{lgN\_permanence\_of\_isProper\_of\_isAdicComplete}). Le cas où
+$(\mathrm{LG})_n$ pour $(X, Y)$ est une hypothèse, ainsi que LG et LG stricte, ne
+sont pas formalisés.} Si $X$ est quasi-projectif et si $(X, Y)$
 vérifie $(\mathrm{LG})_n$ (resp.\ LG, resp.\ LG stricte), alors pour tout
 $W$ projectif et plat sur $X$, le couple $(W, f^{-1}(Y))$ vérifie
 $(\mathrm{LG})_n$ (resp.\ LG, resp.\ LG stricte).\footnote{Le Corollaire 1 est
@@ -953,7 +961,13 @@ fidèle
   \rho : \mathcal{C}(X') / \mathcal{C}_\Phi(X') \longrightarrow \mathcal{C}(\widehat{X}') .
 \]
 Si $F$ et $G$ sont cohérents sur $X'$ et si $G$ est de profondeur $\geq 2$ aux
-points fermés de $X' \smallsetminus Y'$, alors
+points fermés de $X' \smallsetminus Y'$, alors\footnote{Ramené en Lean au cas $I = (t)$, $d = 1$ de
+Stacks 0EJ7 (GrothendieckArchivesProofs, Grothendieck/Folder58DepthComparison.lean,
+\texttt{hom\_bijective\_of\_depth\_two\_off\_V\_t}, avec la bibliothèque Stacks d'AxiomMath), sous un
+complexe dualisant sur $A$ et les inégalités strictes $(1, 2)$ de Stacks 0EJ3 pour
+$\widehat{G}$ le long de $Y'$ : cette dernière condition porte sur les points de
+$Y'$, où la page ne demande rien, et sa dérivation n'est pas faite. L'énoncé est
+ramené, non démontré.}
 \[
   \operatorname{Hom}(F, G) \xrightarrow{\ \sim\ } \operatorname{Hom}(\widehat{F}, \widehat{G}) .
 \]
