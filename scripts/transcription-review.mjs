@@ -51,12 +51,12 @@ function checks(file, batch, prefix) {
       n++;
       const before = plain(raw.slice(0, m.index)).split(' ').slice(-7).join(' ');
       const after = plain(raw.slice(m.index + m[0].length)).split(' ').slice(0, 5).join(' ');
-      const word = m[1] || '…';
+      const word = m[2] || '…';
       out.push({
         id: `${prefix}-b${batch}-${n}`,
         page,
         batch,
-        q: `${m[1] === '' || m[0].startsWith('\\ill') ? 'Illegible in the transcription' : 'Doubtful reading'}: « … ${before} [${word}] ${after} … ». ${m[0].startsWith('\\ill') ? 'Can the page be read here?' : `Does the page read « ${word} »?`}`,
+        q: `${m[1] === 'ill' ? 'Illegible in the transcription' : 'Doubtful reading'}: « … ${before} [${word}] ${after} … ». ${m[1] === 'ill' ? 'Can the page be read here? What does it say?' : `Does the page read « ${word} »?`}`,
       });
     }
   }
