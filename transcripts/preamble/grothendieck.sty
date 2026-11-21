@@ -63,6 +63,49 @@
 \robustify{\varinjlim}\robustify{\varprojlim}
 \pdfstringdefDisableCommands{\def\varinjlim{lim}\def\varprojlim{lim}}
 
+% --- Glyphs Latin Modern lacks (#168) ---------------------------------------
+% Latin Modern has no circled numbers or letters, no Greek, no Cyrillic and
+% few mathematical symbols, and XeTeX drops a character its font lacks with
+% nothing but a « Missing character » line in the log: ① … ⑳, which number his
+% statements and cross-references, went missing from 36 PDFs, and folder
+% titles such as « Mg,ν » or « SO(3) ≃ GP(1) » lost their mathematics. Each
+% such character is made active (newunicodechar) and set from a font that has
+% it, chosen in `fallback-glyphs.tex`: Libertinus Serif, FreeSerif, and
+% FreeMono inside \texttt. Both families are in Tectonic's bundle and in TeX
+% Live. In mathematics the character is set as text. The bookmarks get the
+% character itself.
+\usepackage{newunicodechar}
+\newfontfamily\grothFallbackL{LibertinusSerif}[Extension=.otf,
+  UprightFont=*-Regular,ItalicFont=*-Italic,BoldFont=*-Bold,BoldItalicFont=*-BoldItalic]
+\newfontfamily\grothFallbackF{FreeSerif}[Extension=.otf,
+  UprightFont=*,ItalicFont=*Italic,BoldFont=*Bold,BoldItalicFont=*BoldItalic]
+\newfontfamily\grothFallbackM{FreeMono}[Extension=.otf,
+  UprightFont=*,ItalicFont=*Oblique,BoldFont=*Bold,BoldItalicFont=*BoldOblique]
+\makeatletter
+\def\groth@fb@L{\grothFallbackL}
+\def\groth@fb@Lu{\grothFallbackL\upshape\mdseries}
+\def\groth@fb@F{\grothFallbackF\upshape\mdseries}
+% #1: the serif font key, #2: m when FreeMono has the glyph, #3: the code point.
+\DeclareRobustCommand\grothFallbackGlyph[3]{%
+  \ifmmode\text{\grothFallbackGlyph{#1}{#2}{#3}}\else
+    \begingroup
+    \edef\groth@fam{\f@family}\edef\groth@tt{\ttdefault}%
+    \ifx\groth@fam\groth@tt
+      \ifx m#2\grothFallbackM\else\csname groth@fb@#1\endcsname\fi
+    \else
+      \csname groth@fb@#1\endcsname
+    \fi
+    \Uchar"#3\relax
+    \endgroup
+  \fi}
+\newcommand\grothglyph[3]{%
+  \begingroup\edef\groth@c{\Uchar"#1}%
+  \expandafter\endgroup\expandafter\newunicodechar\expandafter{\groth@c}%
+    {\grothFallbackGlyph{#2}{#3}{#1}}}
+\makeatother
+\input{../preamble/fallback-glyphs}
+\pdfstringdefDisableCommands{\def\grothFallbackGlyph#1#2#3{\Uchar"#3}}
+
 % --- Batch metadata ---------------------------------------------------------
 % Taken as they stand by the rendering script, which shows them at the head of
 % the reading view. They fix what the file claims to cover: without them a

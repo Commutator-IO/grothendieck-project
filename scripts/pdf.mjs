@@ -120,6 +120,7 @@ async function main() {
   await mkdir(CACHE, { recursive: true });
   const shared = await sharedDigest();
   const used = new Set();
+  const missing = [];
   let built = 0;
   let reused = 0;
 
@@ -200,7 +201,14 @@ async function main() {
           await compile();
         }
         await copyFile(resolve(WORK, basename(file, '.tex') + '.pdf'), pdf);
-        await copyFile(pdf, cached);
+        const lost = await missingCharacters(resolve(WORK, basename(file, '.tex') + '.log'));
+        if (lost.length) {
+          // Kept for the download, but not stored: the next run compiles it
+          // again and reports it again, until the font or the source is fixed.
+          missing.push({ path: `transcripts/${folder}/${file}`, lost });
+        } else {
+          await copyFile(pdf, cached);
+        }
         built += 1;
         process.stdout.write(`  ${folder}/${basename(pdf)}\n`);
       } catch (e) {
@@ -226,6 +234,47 @@ async function main() {
   }
   process.stdout.write(`${built} PDFs compiled with ${engine}, ${reused} reused from the cache.\n`);
   await writeManifest();
+  if (missing.length) {
+    const n = missing.reduce((a, m) => a + m.lost.length, 0);
+    process.stderr.write(`\n${n} characters dropped from ${missing.length} PDFs (no glyph in the font):\n`);
+    for (const { path, lost } of missing) {
+      for (const { char, code, font } of lost) {
+        process.stderr.write(`  ${path}: ${char} U+${code} in ${font}\n`);
+        // An annotation, so the deploy run shows it although the workflow
+        // keeps going (`npm run pdf || true`).
+        if (process.env.GITHUB_ACTIONS) {
+          process.stdout.write(`::error file=${path}::PDF drops ${char} (U+${code}): no glyph in ${font}\n`);
+        }
+      }
+    }
+    process.stderr.write('Add the characters to transcripts/preamble/fallback-glyphs.tex (#168).\n');
+    process.exitCode = 1;
+  }
+}
+
+/**
+ * The characters a compile dropped, from its log (#168). XeTeX sets nothing for
+ * a character its font has no glyph for and says so only in the log, as
+ * « Missing character: There is no ① (U+2460) in font [lmroman10-regular]... »,
+ * so a PDF could lose every circled number of a page without a word. U+0000
+ * and U+0013 are not characters of the sources: the margin-note machinery
+ * around \page{} produces them, and nothing visible is lost.
+ */
+async function missingCharacters(log) {
+  let text = '';
+  try {
+    text = await readFile(log, 'utf8');
+  } catch {
+    return [];
+  }
+  const seen = new Map();
+  for (const m of text.matchAll(/Missing character: There is no (.+?) \(U\+([0-9A-F]{4,6})\) in font ([^!\n]*)/g)) {
+    const [, char, code, font] = m;
+    if (code === '0000' || code === '0013') continue;
+    const key = `${code} ${font}`;
+    if (!seen.has(key)) seen.set(key, { char, code, font: font.replace(/\].*$/, ']') });
+  }
+  return [...seen.values()];
 }
 
 main().catch((e) => {
