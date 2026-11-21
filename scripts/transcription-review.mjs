@@ -10,6 +10,7 @@
  * the file BourbakiReview reads), replacing the documents of the same kind it wrote before. The scans are copied
  * into public/csg-scans/ (git-ignored) so that the tab can show the page beside the rendered transcription.
  */
+import { createHash } from 'node:crypto';
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
@@ -60,7 +61,7 @@ function checks(file, batch, prefix) {
       const after = `${plain(raw.slice(m.index + m[0].length))} ${nextText}`.trim().split(/\s+/).slice(0, 5).join(' ');
       const word = m[2] || '…';
       out.push({
-        id: `${prefix}-b${batch}-${n}`,
+        id: `${prefix}-b${batch}-${createHash('sha1').update(`${m[1]}|${word}|${before.split(' ').slice(-3).join(' ')}|${after.split(' ').slice(0, 3).join(' ')}`).digest('hex').slice(0, 7)}`,
         label: `${piece ? `${piece} · ` : ''}« ${before.split(' ').slice(-3).join(' ')} [${word}] ${after.split(' ').slice(0, 3).join(' ')} »`.replace(/\s+/g, ' '),
         page,
         batch,
@@ -71,6 +72,14 @@ function checks(file, batch, prefix) {
   return out;
 }
 
+// Checks already reviewed (their answers applied or judged final) leave the tab: one id per line in
+// transcripts-survivre/reviewed.txt and transcripts-gaeta/reviewed.txt (git-ignored with the transcripts).
+const reviewed = new Set(
+  ['transcripts-survivre', 'transcripts-gaeta'].flatMap((d) => {
+    const f = resolve(ROOT, d, 'reviewed.txt');
+    return existsSync(f) ? readFileSync(f, 'utf8').split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#')) : [];
+  }),
+);
 const docs = [];
 // Survivre
 const SV = resolve(ROOT, 'transcripts-survivre');
@@ -95,6 +104,7 @@ if (existsSync(GA)) {
 
 const review = existsSync(FILE) ? JSON.parse(readFileSync(FILE, 'utf8')) : { built: '', docs: [] };
 // Survivre and Gaeta first in the list.
+for (const d of docs) d.checks = d.checks.filter((c) => !reviewed.has(c.id));
 review.docs = [...docs.filter((d) => d.checks.length).sort((a, b) => parseInt(a.id.replace(/\D*/, ''), 10) - parseInt(b.id.replace(/\D*/, ''), 10) || a.id.localeCompare(b.id)), ...review.docs.filter((d) => !/^(survivre|gaeta)-/.test(d.id))];
 review.built = new Date().toISOString().slice(0, 10);
 writeFileSync(FILE, `${JSON.stringify(review, null, 1)}\n`);
