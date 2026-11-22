@@ -69,6 +69,93 @@ locale oubliée soit rattrapée par l'intégration continue n'a rien de grave ; 
 rouge devient habituelle, plus personne ne la regarde.
 \end{tipblock}
 
+\section{Quand la machine de GitHub ne suffit plus}\label{sec:selfhosted}
+
+La machine que GitHub prête gratuitement est modeste : quatre cœurs, 16~Go de mémoire, et six
+heures au plus par tâche. Pour un article ou une petite formalisation, cela suffit. Pour une
+formalisation lourde, non. Compiler à froid un projet Lean qui dépend de mathlib et d'une
+bibliothèque de plusieurs milliers de modules (celle du projet Stacks, par exemple) a pris
+près de quatre heures, avec une machine qui a parfois été tuée faute de mémoire. Et le délai
+de six heures se rapproche à chaque module ajouté.
+
+Le cache aggrave le problème. Les modules compilés du projet n'ont pas de cache public ; on
+les garde donc d'une exécution à l'autre avec \texttt{actions/cache}, sous une clé qui dépend
+du fichier de versions (\fichier{lake-manifest.json}). Dès qu'on change une dépendance, la clé
+change et tout se recompile, y compris dans chaque demande de fusion ouverte avant le
+changement. Quatre demandes ouvertes en parallèle recompilent alors quatre fois la même
+chose.
+
+\subsection*{Le \emph{runner} auto-hébergé}
+
+GitHub permet de brancher sa propre machine : un \emph{runner} auto-hébergé. Ce programme
+tourne sur un serveur qu'on loue ou qu'on possède, se déclare auprès du dépôt ou de
+l'organisation avec une étiquette (par exemple \texttt{self-hosted, linux, lean}), et
+exécute les tâches dont le fichier de configuration dit \texttt{runs-on: [self-hosted,
+linux, lean]}. Cela marche avec tous les types de comptes GitHub, y compris gratuits. Les
+tâches peuvent y durer jusqu'à cinq jours, au lieu de six heures.
+
+Pour du Lean, trois choix comptent :
+\begin{itemize}
+  \item \textbf{Une machine à la mesure du projet.} 32 cœurs et 128~Go de mémoire dispensent de
+        l'espace d'échange, et font tenir une compilation à froid en moins d'une heure.
+        Le disque doit être rapide, d'au moins 256~Go : le cache de mathlib pèse quelques
+        gigaoctets, la compilation d'une grosse dépendance plusieurs dizaines.
+  \item \textbf{Un \fichier{.lake} qui reste sur la machine}, dans un dossier par empreinte du
+        fichier de versions et de la version de Lean. Une demande de fusion en copie le
+        contenu, ne recompile que ce qu'elle change, et il n'y a plus de cache à envoyer ni
+        à télécharger. Après une montée de version, la première exécution part du dossier le
+        plus récent plutôt que de zéro. On \emph{copie}, on ne partage pas : deux tâches
+        simultanées ne doivent jamais écrire dans le même dossier. Sur un système de fichiers
+        qui sait faire des copies légères (XFS, btrfs), la copie est presque instantanée.
+  \item \textbf{Une machine de secours.} L'ancienne tâche sur \texttt{ubuntu-latest} reste dans
+        le dépôt, lancée à la main seulement, pour que l'intégration continue existe encore le
+        jour où le serveur est éteint.
+\end{itemize}
+
+\begin{terminal}
+jobs:
+  build:
+    runs-on: [self-hosted, linux, x64, lean]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restaurer .lake
+        run: scripts/ci/store.sh restore "$HASH"
+      - run: lake build -j "$(nproc)"
+\end{terminal}
+
+\subsection*{Le risque : le code des autres sur votre machine}
+
+Un dépôt public reçoit des demandes de fusion de n'importe qui. Sur une machine de GitHub, leur
+code s'exécute dans une machine virtuelle jetable. Sur un runner auto-hébergé, il s'exécute
+\emph{chez vous}, avec ce que la machine voit. D'où quelques règles, à régler avant d'enregistrer
+le premier runner :
+
+\begin{itemize}
+  \item exiger l'approbation d'un mainteneur avant tout workflow venu d'un contributeur
+        extérieur (réglage « Require approval for all outside collaborators ») ;
+  \item des runners \emph{éphémères}, qui prennent une seule tâche puis disparaissent : un
+        ordinateur remis à zéro entre deux tâches, ou un contrôleur qui en crée un par tâche
+        sur Kubernetes. Le cache persistant n'est alors monté en écriture que pour la branche
+        principale et les branches du dépôt, jamais pour une demande venue d'une copie
+        (\emph{fork}) ;
+  \item aucun identifiant sur la machine hors le jeton d'enregistrement, et un réseau réduit au
+        strict nécessaire (GitHub, le serveur des versions de Lean, le cache de mathlib, les
+        dépôts des dépendances), séparé du reste de l'infrastructure ;
+  \item des droits minimaux par défaut (\texttt{permissions: contents: read}).
+\end{itemize}
+
+\begin{regle}
+Un runner auto-hébergé exécute le code de quiconque peut ouvrir une demande de fusion. Sur un
+dépôt public, on l'isole comme on isolerait un serveur ouvert à Internet.
+\end{regle}
+
+\begin{tipblock}
+Ce que cela change est d'abord le rythme du travail : une demande de fusion qui se vérifiait en
+une nuit se vérifie en quelques minutes, et des énoncés qu'on écartait à cause du coût de leurs
+dépendances redeviennent abordables. Mais le serveur est une machine de plus à maintenir et à
+payer ; pour un projet qui compile en vingt minutes, la machine de GitHub reste le bon choix.
+\end{tipblock}
+
 \section{Déployer depuis la branche \texttt{main}}
 
 Le même mécanisme publie. Quand les vérifications passent, une dernière étape construit le
@@ -79,5 +166,6 @@ principale est en ligne, et ce qui est en ligne a passé les vérifications.
 GitHub Actions et GitLab CI pour les vérifications ; GitHub Pages et GitLab Pages pour
 publier le site à chaque fusion sur \texttt{main} ; \texttt{tectonic} pour compiler le
 LaTeX sans installation, et l'action \texttt{leanprover/lean-action} pour compiler un
-projet Lean avec le cache de mathlib.
+projet Lean avec le cache de mathlib ; un \emph{runner} auto-hébergé (programme fourni par
+GitHub, installé sur un serveur loué) pour les compilations qui dépassent la machine gratuite.
 \end{outils}
