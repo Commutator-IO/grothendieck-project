@@ -1,0 +1,69 @@
+\section{A practical method for producing theorems}\label{sec:method}
+
+This section turns the pipeline of Figure~\ref{fig:pipeline} into a recipe that a student, or a program, can follow. Each step has an input, an output, and a check.
+
+\subsection{Step 1: choose an invariant you can read on both sides}
+
+Start from the arch registry. For presheaf topoi, each arch comes with a reading on the shape $C$ and an \emph{unfolding rule} that turns the property of the topos into a sentence about the structures:
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+\toprule
+invariant & reading on $C$ & on right $M$-sets & on representations of a quiver\\
+\midrule
+Boolean & groupoid & $M$ is a group & no arrows\\
+De Morgan & Ore condition & $aM\cap bM\neq\emptyset$ & $\le 1$ outgoing arrow per vertex\\
+Morita class & $\Kar(C)$ & corners $eMe$, $1\in MeM$ & the quiver itself\\
+essential points & objects of $\Kar(C)$ & idempotents mod $\mathcal D$ & vertices\\
+subtopoi & topologies on $C$ & idempotent ideals ($M$ finite) & e.g.\ $2^n+1$ for the $n$-cycle\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\emph{Check:} the invariant must be invariant under equivalence of categories. Properties stated with subobjects, limits and colimits are; properties that mention a chosen presentation (\q{the shape has three objects}) are not.
+
+\subsection{Step 2: recognise a deck}
+
+A structure is a presheaf topos when it has the following anatomy:
+\begin{enumerate}
+\item a set of data at each \q{place} (an object of $C$);
+\item a way to transport data along \q{relations} between places (restriction maps), contravariant and compatible with composition;
+\item no further equations or gluing conditions.
+\end{enumerate}
+If (3) fails because data must glue (functions on open sets, sections of a covering), the structure is a sheaf topos on a site; the arches of Bridge~\ref{br:sub} still apply, the other four need site versions. Typical decks: actions of a monoid ($C = \B M$), representations of a quiver ($C$ = free category), simplicial objects ($C = \Delta$), families indexed by a preorder ($C = P^{\op}$), models of a Horn theory ($C$ = finitely presented models, opposite). \emph{Check:} write down $C$ explicitly and verify, on one or two examples, that a presheaf on $C$ is the structure you had in mind; the side of the action and the direction of arrows are the usual sources of error.
+
+\subsection{Step 3: specialise the arch}
+
+Compute the reading on $C$. Two heuristics cover most cases:
+\begin{itemize}
+\item \emph{Test on representables.} A property of all presheaves is usually decided on the representable presheaves $\y U = \Hom(-,U)$ and their sieves; this is how Bridges~\ref{br:bool} and~\ref{br:dm} are proved, and how counterexamples are built (Figure~\ref{fig:branch}).
+\item \emph{Use a normal form for arrows.} In a free category arrows are paths, in $\B M$ elements, in a preorder there is at most one: the condition becomes a statement about words, elements or inequalities.
+\end{itemize}
+\emph{Check:} enumerate small cases by machine when possible (small monoids, small quivers), and compare with the specialised condition.
+
+\subsection{Step 4: unfold and rewrite}
+
+Translate the property of the topos with the unfolding rule (Lemma~\ref{lem:neg} for negation), then translate the condition on $C$ into the usual vocabulary of the field (minimal right ideals, out-degree, rank). Keep both forms: the raw form is what Lean proves, the rewritten form is what a reader understands.
+
+\subsection{Step 5: verify twice}
+
+\emph{In Lean.} A generated statement is a two-line corollary of the arch once the condition on $C$ is proved. The pattern, from the library:
+\begin{leancode}
+theorem isDeMorganTopos_singleObj_iff :
+    IsDeMorganTopos ((SingleObj M)ᵒᵖ ⥤ Type) ↔ ∀ a b : M, ∃ c d : M, a * c = b * d := by
+  rw [isDeMorganTopos_presheaf_iff_rightOreCondition, rightOreCondition_singleObj_iff]
+
+theorem not_isDeMorganTopos_freeMonoid_two :
+    ¬ IsDeMorganTopos ((SingleObj (FreeMonoid (Fin 2)))ᵒᵖ ⥤ Type) := by
+  rw [isDeMorganTopos_singleObj_iff]
+  -- remains: x and y have no common right multiple in the free monoid
+\end{leancode}
+All the work is in the lemma on $C$ (here \lean{rightOreCondition_singleObj_iff}), which is ordinary algebra or combinatorics. \emph{By hand.} Write a direct proof that does not use topoi; if it is much harder than the bridge, the bridge has bought something.
+
+\subsection{Step 6: filter for novelty}
+
+Search, in this order: Johnstone's \emph{Elephant}; the papers of the author of the arch (here Caramello); the recent literature on the deck (here Hemelaer, Rogers, Pirashvili for monoid actions); the classical literature of the field of the rewritten statement (semigroups, quivers, topology); preprint servers and the nLab. Search for the \emph{rewritten} statement in the vocabulary of its field, not only for the topos-theoretic one: three of our candidates were in print in semigroup-theoretic or scheme-theoretic language. Log found statements as calibration.
+
+\subsection{Step 7: decide whether it is interesting}
+
+A generated statement is worth keeping when (a) it connects two vocabularies that are not usually connected, (b) its rewritten form is short, (c) its direct proof is not a one-liner \emph{or} the question it answers had not been asked. Most outputs fail all three; this is the main limit of the method (\S\ref{sec:limits}).
