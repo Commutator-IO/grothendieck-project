@@ -178,6 +178,14 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     more: [{ label: 'Note de lecture (fr)', href: '/article/grothendieck-problem-three-note-fr.pdf' }],
   },
   {
+    id: 'article-kostant',
+    title: "Kostant's tori in apposition: the Borel subgroups are opposite in type A",
+    lang: 'English',
+    what: "Grothendieck's letter to Kostant of 22 October 1969 asks whether, for maximal tori in apposition, the Borel subgroups through them are in general position. For PGL_n and every n the answer is yes, for all n! Borels through the second torus: every flag stable under a cyclic element with nonzero coefficients is transverse to the standard one. A weighted-shift proof, formalised in Lean 4, and a second by Vandermonde determinants; the other types and the question of a distinguished class stay open.",
+    pdf: '/article/grothendieck-kostant.pdf',
+    src: 'docs/kostant/article.tex',
+  },
+  {
     id: 'article-loday-filtration',
     title: 'The rank filtration on the n-cycles of the symmetric group algebra: Loday’s filtration conjecture in a notebook of Quillen',
     lang: 'English',
@@ -260,6 +268,7 @@ const STARS: Record<string, 1 | 2 | 3> = {
   'article-buffalo-open': 2,
   'article-qcoh-descent': 2,
   'article-problem-three': 2,
+  'article-kostant': 1,
   'article-polytopes': 2,
   'article-moduli': 2,
   'article-quillen-lean': 2,
