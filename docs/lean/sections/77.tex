@@ -82,7 +82,7 @@ Soient $K$ un corps de caractéristique différente de~$2$, $a, b \in K^\times$,
 \end{enumerate}
 \end{theoreme}
 \end{encadre}
-L'énoncé tient tel que la page l'écrit, sur un corps (Lean : \href{\leanblob/Folder77.lean}{\texttt{qf\_commutator}, \texttt{sphere\_quotient}, \texttt{hors\_de\_U}}).
+L'énoncé tient tel que la page l'écrit, sur un corps (Lean : \href{\leanblob/RingTheory/Folder77.lean}{\texttt{qf\_commutator}, \texttt{sphere\_quotient}, \texttt{hors\_de\_U}}).
 
 
 Sur $\mathbf R$, avec $a = b = -1$, l'algèbre est celle des quaternions de Hamilton et l'énoncé se voit (figure~\ref{fig:77-sphere}). $E$ est l'espace euclidien des quaternions purs, $q(u) = u^2 = -\|u\|^2$, $\varphi(x, y) = -2\,x \cdot y$ et $[x, y] = 2\,x \times y$. Un couple de $\tilde U$ est un couple de vecteurs orthogonaux de même norme, son image $[x, y]/2q(x) = -x \times y/\|x\|^2$ est le vecteur unitaire normal à leur plan, et $\Sigma$ est la sphère unité. Comme $q$ est définie, le cas du point~3 ne se présente pas : la conique n'a pas de point réel.
@@ -149,7 +149,7 @@ La proposition de la page~85 porte sur $A$ noethérien où $2$ est régulier, $A
 Posons $A_\Delta = \mathbf Z[1/3]$ et $B_\Delta = A_\Delta[U]/(U^2 - 3)$. Le polynôme $U^2 - 3$ est unitaire de degré~$2$, donc $B_\Delta$ est libre de base $1, U$ sur $A_\Delta$ : c'est une extension finie, et même quadratique. Inverser $2$ dans $B_\Delta$ revient à inverser $2$ dans les coefficients : les deux morphismes évidents, $(B_\Delta)_2 \to A_{2\Delta}[U]/(U^2 - 3)$, qui envoie $U$ sur $U$ et existe parce que $2$ y est inversible, et $A_{2\Delta}[U]/(U^2 - 3) \to (B_\Delta)_2$, qui envoie $U$ sur l'image de $U$, sont inverses l'un de l'autre, comme on le vérifie sur les coefficients et sur $U$. Enfin, si $b^2 - 4c = 3$, on réduit modulo~$4$ : $b^2 \equiv 3$, alors que les carrés modulo~$4$ sont $0$ et~$1$.
 \end{proof}
 
-Le contre-exemple est formalisé tel que la page écrit c), avec $\mathbf Z[1/6]$ réalisé comme $\mathbf Z[1/3][1/2]$ ; le lemme \texttt{quadAlg\_away} établit, sur un anneau commutatif quelconque $R$, l'isomorphisme $(R[U]/(U^2 - d))_s \simeq R_s[U]/(U^2 - d)$ (Lean : \href{\leanblob/Folder77.lean}{\texttt{extension\_across\_two\_counterexample}, \texttt{quadAlg\_away}, \texttt{sq\_sub\_four\_mul\_ne\_three}}). Ici $B_\Delta$ n'est pas étale sur $\mathbf Z[1/3]$, puisque son discriminant $12$ n'y est pas inversible : le contre-exemple ne contredit donc pas la proposition lue avec \q{finie étale}, démontrée ci-dessous, dont ce fait est d'ailleurs une conséquence (corollaire~\ref{cor:77-B3}).
+Le contre-exemple est formalisé tel que la page écrit c), avec $\mathbf Z[1/6]$ réalisé comme $\mathbf Z[1/3][1/2]$ ; le lemme \texttt{quadAlg\_away} établit, sur un anneau commutatif quelconque $R$, l'isomorphisme $(R[U]/(U^2 - d))_s \simeq R_s[U]/(U^2 - d)$ (Lean : \href{\leanblob/RingTheory/Folder77.lean}{\texttt{extension\_across\_two\_counterexample}, \texttt{quadAlg\_away}, \texttt{sq\_sub\_four\_mul\_ne\_three}}). Ici $B_\Delta$ n'est pas étale sur $\mathbf Z[1/3]$, puisque son discriminant $12$ n'y est pas inversible : le contre-exemple ne contredit donc pas la proposition lue avec \q{finie étale}, démontrée ci-dessous, dont ce fait est d'ailleurs une conséquence (corollaire~\ref{cor:77-B3}).
 
 \begin{theoreme}[page 85, c) $\Rightarrow$ a) avec \q{finie étale}\piste{77-discriminant-extension-across-2}]\label{thm:77-p85}
 Soient $A$ un anneau commutatif où $2$ est régulier, tel que $A_0 = A/2A$ soit intègre et intégralement clos, et $\Delta \in A$ avec $\Delta \notin 2A$. S'il existe une $A_\Delta$-algèbre finie étale $B_\Delta$ et un isomorphisme de $A_\Delta$-algèbres $(B_\Delta)_2 \simeq A_{2\Delta}[U]/(U^2 - \Delta)$, alors il existe $b, c \in A$ avec $b^2 - 4c = \Delta$. De plus, deux morphismes de $A_\Delta$-algèbres $B_\Delta \to B'_\Delta$ compatibles avec de tels isomorphismes pour $B_\Delta$ et $B'_\Delta$ sont égaux.
@@ -160,7 +160,7 @@ Soit $P = 2A_\Delta$, premier puisque $\Delta \notin 2A$, et $R = (A_\Delta)_P$ 
 
 L'étape locale n'utilise pas de présentation monogène. Le quotient $C/2C$ est fini et non ramifié sur le corps $R/2R$, donc réduit ; de $v^2 \in 4C$ on tire $v \in 2C$, et, $2$ étant régulier, on descend jusqu'à $u \in C$ avec $u^2 = \Delta$. Pour un idéal maximal $Q$ de $C$ au-dessus de $2R$ (montée), $C/Q$ est une extension finie séparable de $R/2R$, de caractéristique~$2$ ; l'image de $u$ y est séparable et de carré dans $R/2R$, donc dans $R/2R$ : $\Delta \equiv c^2 \pmod{2R}$. Alors $(u - c)^2 \in 2C$, donc $u = c + 2s$ par réduction, et $\Delta - c^2 = 4(cs + s^2)$ ; écrivant $\Delta - c^2 = 2y$, on obtient $y \in 2C \cap R = 2R$, d'où $\Delta = c^2 - 4d$ dans $R$.
 
-Retour à $A$ : on écrit $c = \alpha/\tau$ avec $\tau \notin 2A$ et l'on chasse les dénominateurs, d'où $\alpha^2 - \tau^2\Delta \in 4A$. Dans le corps des fractions de $A_0$, $(\bar\alpha/\bar\tau)^2 = \bar\Delta$ ; cet élément est entier, donc égal à un $\bar b \in A_0$, et $\alpha = b\tau + 2x$. Alors $\tau^2(b^2 - \Delta) \in 4A$, et, $2A$ étant premier et $2$ régulier, $\tau y \in 4A$ avec $\tau \notin 2A$ entraîne $y \in 4A$ : $b^2 - \Delta = 4c'$. Pour l'unicité, $B'_\Delta$ est plat, donc sans $2$-torsion, et $B'_\Delta \to (B'_\Delta)_2$ est injectif. (Lean : \href{\leanblob/Folder77.lean}{\texttt{prop85\_c\_imp\_a}, \texttt{prop85\_local}, \texttt{exists\_of\_sq\_sub}, \texttt{dvd\_four\_of\_mul}, \texttt{prop85\_iso\_unique}}.)
+Retour à $A$ : on écrit $c = \alpha/\tau$ avec $\tau \notin 2A$ et l'on chasse les dénominateurs, d'où $\alpha^2 - \tau^2\Delta \in 4A$. Dans le corps des fractions de $A_0$, $(\bar\alpha/\bar\tau)^2 = \bar\Delta$ ; cet élément est entier, donc égal à un $\bar b \in A_0$, et $\alpha = b\tau + 2x$. Alors $\tau^2(b^2 - \Delta) \in 4A$, et, $2A$ étant premier et $2$ régulier, $\tau y \in 4A$ avec $\tau \notin 2A$ entraîne $y \in 4A$ : $b^2 - \Delta = 4c'$. Pour l'unicité, $B'_\Delta$ est plat, donc sans $2$-torsion, et $B'_\Delta \to (B'_\Delta)_2$ est injectif. (Lean : \href{\leanblob/RingTheory/Folder77.lean}{\texttt{prop85\_c\_imp\_a}, \texttt{prop85\_local}, \texttt{exists\_of\_sq\_sub}, \texttt{dvd\_four\_of\_mul}, \texttt{prop85\_iso\_unique}}.)
 \end{proof}
 
 \begin{corollaire}\label{cor:77-B3}
@@ -168,7 +168,7 @@ L'algèbre $B_\Delta = \mathbf Z[1/3][U]/(U^2 - 3)$ du contre-exemple n'est pas 
 \end{corollaire}
 
 \begin{proof}
-Sinon le théorème~\ref{thm:77-p85}, appliqué à $A = \mathbf Z$, $\Delta = 3$ et à l'isomorphisme du contre-exemple (qui est automatiquement $\mathbf Z[1/3]$-linéaire), donnerait $3 = b^2 - 4c$ dans $\mathbf Z$. (Lean : \href{\leanblob/Folder77.lean}{\texttt{B3\_not\_etale}}.)
+Sinon le théorème~\ref{thm:77-p85}, appliqué à $A = \mathbf Z$, $\Delta = 3$ et à l'isomorphisme du contre-exemple (qui est automatiquement $\mathbf Z[1/3]$-linéaire), donnerait $3 = b^2 - 4c$ dans $\mathbf Z$. (Lean : \href{\leanblob/RingTheory/Folder77.lean}{\texttt{B3\_not\_etale}}.)
 \end{proof}
 
 \begin{remarque}
