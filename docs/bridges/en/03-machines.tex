@@ -59,8 +59,7 @@ Two quivers $R$ and $R'$ have equivalent categories of representations in sets i
 \item[arch] Bridge~\ref{br:morita}: $\iff\Kar(C_R)\simeq\Kar(C_{R'})$.
 \item[specialise] a free category is idempotent complete (idempotent paths are identities), so $\Kar(C_R)\simeq C_R$; it is skeletal with no non-identity isomorphisms, so an equivalence $C_R\simeq C_{R'}$ is an isomorphism of categories.
 \item[rewrite] an isomorphism of free categories maps indecomposable arrows (paths of length $1$) to indecomposable arrows, hence is induced by an isomorphism $R^{\op}\cong R'^{\op}$.
-\item[verify] direct proof in the trace; Lean: %LEAN-QMORITA%
-in progress.
+\item[verify] direct proof in the trace; Lean: \lean{moritaEquivalentCat_paths_iff}, \lean{nonempty_representations_equiv_iff}, from \lean{paths_eq_id_of_idempotent}, \lean{paths_nonempty_iso_iff} and \lean{nonempty_paths_equiv_iff} (an equivalence of free categories induces an isomorphism of quivers, through \lean{pathLength_eq_one_iff_indecomposable}) (branch \texttt{mycaule/topos-bridges-quivers}, commit \texttt{2a32779}).
 \item[novelty] not found as a statement about quivers; each step is in print (Morita via the Karoubi envelope \cite[Lemma~1.1.3]{rogers-thesis}, after \cite[A1.1.9--10]{elephant}).
 \end{trace}
 
@@ -74,8 +73,7 @@ The essential points of $\mathrm{Rep}(R)$ (functors to sets preserving all limit
 
 \begin{trace}
 \item[arch] Bridge~\ref{br:pts}: essential points $\simeq\Kar(C_R)^{\op}\simeq C_R^{\op} = \mathrm{Paths}(R^{\op})^{\op}\cong\mathrm{Paths}(R)$.
-\item[verify] Lean: %LEAN-QPOINTS%
-in progress.
+\item[verify] Lean: \lean{essentialPointPathsEquiv}, \lean{nonempty_evaluationPoint_iso_iff}, \lean{exists_iso_evaluationPoint} (branch \texttt{mycaule/topos-bridges-quivers}, commit \texttt{2a32779}).
 \item[novelty] the general fact (a small category is recovered, up to idempotent completion, from the essential points of its presheaves) is in print \cite[\S4.2.1]{rogers-thesis}; the quiver version not found.
 \end{trace}
 
@@ -92,8 +90,7 @@ $\mathrm{Rep}(Z_n)$ has exactly $2^n + 1$ subtopoi: for each set $S$ of arrows, 
 \item[arch] Bridge~\ref{br:sub}: subtopoi $\leftrightarrow$ Grothendieck topologies on $C$.
 \item[specialise] classify the topologies on $C$ (below): degenerate, or one for each subset of vertices.
 \item[unfold] identify the sheaves: a representation is a sheaf iff the arrows leaving the vertices of the subset's complement are bijective.
-\item[verify] direct proof below; Lean: %LEAN-QCYCLE%
-in progress.
+\item[verify] direct proof below; Lean: \lean{card_grothendieckTopology} (exactly $2^n+1$ topologies), \lean{topologyEquiv} (a bijection with \texttt{Option (Set (ZMod n))}), \lean{eq_top_or_eq_topologyOf}, and \lean{CyclicSite.card_grothendieckTopology_one} for $n = 1$; the description of the sheaves of each topology is not formalised (branch \texttt{mycaule/topos-bridges-quivers}, commit \texttt{2a32779}).
 \item[novelty] for $n = 1$ it follows from Pirashvili's description of the subtopoi of $M$-sets for commutative $M$ \cite[Cor.~4.3.11]{pirashvili-jpaa}; for $n\ge 2$ not found. For quivers \emph{without} oriented cycles, the Grothendieck topologies on the path category are known: there are $2^m$ of them for $m$ vertices, one for each set of vertices \cite[Cor.~4.3]{schmid} (after an unpublished note of Murfet); the cyclic case differs in kind.
 \end{trace}
 
