@@ -1243,7 +1243,17 @@ devient le 13) de la page 42). « Spectre compact » signifie spectre de
 dimension zéro, i.e. anneau dont tout premier est maximal ; la condition
 donnée est la caractérisation par les idempotents, et la « quantification
 sur $n$ » (le $f^{n}$ nilpotent) est ce qui rend la théorie non cohérente,
-comme en 8).}
+comme en 8). Lean vérifie la partie du premier ordre de ce diagnostic
+(GrothendieckArchivesProofs, OpenProblems/TopoiStacksNoncoh.lean) : ni les anneaux
+à nilradical premier, ni ceux de dimension $\leq 0$, ni ceux de dimension $0$ ne
+sont les modèles, parmi les anneaux commutatifs, d'une théorie du premier ordre
+(\texttt{not\_isAxiomatizable\_nilradical\_isPrime},
+\texttt{not\_isAxiomatizable\_krullDimLE\_zero}), par le théorème de Łoś appliqué
+aux anneaux finis $D_{n} = \{(a, b) \in (\mathbb{Z}/2^{n+1})^{2} \mid a \equiv b
+\bmod 2\}$, qui ont les deux propriétés alors que leur ultraproduit n'en a aucune.
+Aucun quotient cohérent de la théorie des anneaux n'a donc ces modèles
+ensemblistes. La non-cohérence du topos classifiant pour toute présentation, et la
+question des points, ne sont pas formalisées.}
 
 \item[11)] \emph{Corps} : $A^{*} \amalg e \to A$ (l'inclusion des
 inversibles et la section nulle) est épimorphique — tout élément est
@@ -1286,7 +1296,17 @@ de von Neumann, par J.~C.~Berni et H.~L.~Mariano, « Classifying toposes for
 some theories of $C^{\infty}$-rings » (arXiv:1811.08838) ; l'argument se
 transporte mot pour mot aux anneaux ordinaires, et le fait général, qu'une
 théorie cartésienne est de type préfaisceaux, est dans P.~T.~Johnstone,
-\emph{Sketches of an Elephant}, D1.3 et D3.1.}
+\emph{Sketches of an Elephant}, D1.3 et D3.1. Vérifié en Lean dans le langage des
+anneaux muni d'un symbole unaire $q$ de plus (GrothendieckArchivesProofs,
+Grothendieck/Folder161\_2Classifying.lean, sur la bibliothèque de topos
+classifiants de lean-pool) : un anneau commutatif est régulier au sens de von
+Neumann si et seulement s'il a un quasi-inverse $q$ ($a^{2}q(a) = a$,
+$q(a)^{2}a = q(a)$), alors unique, et $e = a\,q(a)$ est l'idempotent de la page ;
+la théorie est donc équationnelle, de Horn, et de type préfaisceaux
+(\texttt{vnrTheory\_isOfPresheafType}). L'identification de la catégorie
+classifiante, la catégorie de Horn de la théorie, à
+l'opposée des anneaux absolument plats de présentation finie n'est pas
+formalisée.}
 
 \item[14)] \emph{Corps séparablement clos} $=$ corps strictement hensélien :
 $X \simeq \widetilde{R}_{\mathrm{top\,corps\,sépclos}} \simeq
@@ -2750,7 +2770,16 @@ P.~T.~Johnstone, « Rings, fields and spectra », \emph{J.\ Algebra} 49
 (arXiv:0808.1519), traitent du topos classifiant des corps ; le site qu'ils
 emploient n'a pas été vérifié pour l'édition, et l'édition n'a pas trouvé de
 source qui le présente sur les anneaux absolument plats de présentation
-finie, comme la page le fait.}
+finie, comme la page le fait. Lean vérifie une forme de cette description
+(Grothendieck/Folder161\_2Classifying.lean, \texttt{fieldTheory\_classifyingSite}) :
+la théorie des corps est celle des anneaux réguliers au sens de von Neumann munis
+de $q$, plus l'axiome $\top \vdash x = 0 \vee x\,q(x) = 1$ (le recouvrement
+$A_{x} \sqcup A/x$) et l'axiome $0 = 1 \vdash \bot$ (le recouvrement vide de
+l'anneau nul), et elle est classifiée par la même catégorie, pour une topologie
+plus fine que la topologie triviale. Ne sont pas formalisés l'identification de
+cette catégorie aux anneaux absolument plats de présentation finie, ni que la
+topologie soit engendrée par les recouvrements $A_{x} \sqcup A/x$ : elle est
+caractérisée par ses faisceaux.}
 
 La page 95 pose ensuite, pour les anneaux intègres, la question du
 sous-type $O' \subset O$ des éléments « qui opèrent régulièrement sur $O$ »
