@@ -1,0 +1,73 @@
+\section{Graphs, simplicial sets and trees}\label{sec:combi}
+
+Deck: the combinatorial structures of \S\ref{sec:shapes}, as presheaves on their shapes. Arches: Bridges~\ref{br:bool} and~\ref{br:dm}. Here the arch computations were done in Examples~\ref{ex:orehold} and~\ref{ex:orefail}; what remains is to unfold the statements in each language.
+
+\begin{theorem}\label{th:combi}
+\begin{enumerate}
+\item \textbf{Directed graphs.} There is a graph $X$ and a subgraph $A$ with $\neg A\cup\neg\neg A\neq X$: the graph with one edge $u\to v$ and $A = \{u\}$. So the topos of directed graphs is not De Morgan. The same holds for reflexive graphs.
+\item \textbf{Simplicial sets.} In $\Delta[1]$, with $A$ the vertex $0$, $\neg A\cup\neg\neg A = \partial\Delta[1]\neq\Delta[1]$. So simplicial sets do not form a De Morgan topos; nor do symmetric simplicial sets, cubical sets, or bisimplicial sets.
+\item \textbf{Augmented simplicial sets, $\mathsf{FI}$-sets, presheaves on finite sets.} These topoi are De Morgan: for every presheaf $X$, every sub-presheaf $A$ and every element $x$, either $x$ has no restriction in $A$, or every restriction of $x$ has a further restriction in $A$.
+\item \textbf{The topos of trees} $[\omega^{\op},\Set]$ is De Morgan and not Boolean.
+\end{enumerate}
+\end{theorem}
+
+\inwords{} In a graph or a simplicial set, the two ends of an edge are \q{independent}: an element can see $A$ through one face and $\neg A$ through another, and then belongs to neither $\neg A$ nor $\neg\neg A$. Adding an initial object to the shape (the empty simplex of augmented simplicial sets, the empty set of $\mathsf{FI}$) gives every element a common \q{bottom} restriction, through which all its faces communicate, and this restores the weak excluded middle.
+
+\gen{} Arch B on each shape: the graph shape, $\Delta$, $\mathsf{Fin}_{>0}$ and the cube category fail Ore because of two distinct \q{vertex} arrows into the same object that no arrow can equalise (Example~\ref{ex:orefail}); $\Delta\times\Delta$ fails because $\Delta$ does (Exercise~\ref{exo:oreproduct}); $\Delta_+$, $\mathsf{FI}$, $\mathsf{Fin}$ have an initial object; $\omega$ is a chain. Arch A: none of these shapes is a groupoid. For reflexive graphs, the shape $\mathsf G_r$ of Exercise~\ref{exo:reflgraph} fails Ore for the same reason as $\mathsf G$.
+
+\direct{} (1) and (2) are computed in Figure~\ref{fig:edge} and Example~\ref{ex:Delta1}. For symmetric simplicial sets and cubical sets, the same computation works in the representable \q{segment} with one of its endpoints. For bisimplicial sets, take $\Delta[1]\boxtimes\Delta[0]$ (the segment in the first direction) and one of its endpoints.
+
+(3) and (4): let $x$ be an element of $X(U)$ with a restriction $\res xf\in A$, and let $\res xg$ be any other restriction. In $\Delta_+$, $\mathsf{FI}$ or $\mathsf{Fin}$, let $i_W$ denote the unique arrow from the initial object $\emptyset$ to $W$. Then $\res{(\res xg)}{i_Z} = \res x{g\circ i_Z} = \res x{i_X} = \res x{f\circ i_Y} = \res{(\res xf)}{i_Y}\in A$, since $g\circ i_Z$ and $f\circ i_Y$ are both the unique arrow $\emptyset\to X$. In $\omega$, restrictions are along $m\le n$, and $\res xf$, $\res xg$ have the common restriction at $\min$ of the two levels (Example~\ref{ex:trees}).\qed
+
+\begin{example}[What $\neg$ and $\neg\neg$ look like in augmented simplicial sets]
+An augmented simplicial set is a simplicial set $X$ with a set $X_{-1}$ and a map $X_0\to X_{-1}$, i.e.\ a decomposition of $X$ into \q{components} labelled by $X_{-1}$ (not necessarily the connected components). Let $A\subseteq X$. By (3), a simplex $\sigma$ lies in $\neg A$ or in $\neg\neg A$; unfolding, $\sigma\in\neg\neg A$ iff its label in $X_{-1}$ lies in $A_{-1}$, and $\sigma\in\neg A$ iff it does not. So for augmented simplicial sets, the weak excluded middle is decided entirely by the augmentation.
+\end{example}
+
+\begin{example}[$\mathsf{FI}$-sets]
+$\mathsf{FI}$-modules (functors from $\mathsf{FI}$ to vector spaces) are used in representation stability, to study sequences of representations of the symmetric groups. Theorem~\ref{th:combi}(3) concerns $\mathsf{FI}^{\op}$-sets, that is presheaves on $\mathsf{FI}$; for covariant $\mathsf{FI}$-sets (presheaves on $\mathsf{FI}^{\op}$) the Ore condition asks that any two injections $Y\leftarrow X\rightarrow Z$ be completed by $Y\to W\leftarrow Z$, which holds (take the pushout, $W = Y\sqcup_X Z$). So both topoi are De Morgan.
+\end{example}
+
+\begin{center}\small
+\begin{tabular}{lccc}
+\toprule
+topos & shape & Boolean & De Morgan\\
+\midrule
+sets with an involution & $\B(\mathbb Z/2)$ & yes & yes\\
+discrete dynamical systems & $\B(\mathbb N,+)$ & no & yes\\
+automata, $|\Sigma|\ge 2$ & $\B(\Sigma^*)$ & no & no\\
+directed graphs, reflexive graphs & $\mathsf G$, $\mathsf G_r$ & no & no\\
+simplicial sets & $\Delta$ & no & no\\
+augmented simplicial sets & $\Delta_+$ & no & yes\\
+symmetric simplicial sets & $\mathsf{Fin}_{>0}$ & no & no\\
+presheaves on finite sets / on $\mathsf{FI}$ & $\mathsf{Fin}$, $\mathsf{FI}$ & no & yes\\
+bisimplicial sets & $\Delta\times\Delta$ & no & no\\
+the topos of trees & $\omega$ & no & yes\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\status{} The criterion is classical; of these examples we found only reflexive graphs in print \cite[Ex.~2.52]{hemelaer-rogers}. The paper that introduced the topos of trees \cite{birkedal} does not discuss De Morgan's law. Each example is a one-line check, and some are surely folklore.
+
+\subsection{Representations of quivers}
+
+A \emph{quiver} $R$ is a directed graph, with vertices and arrows $a : x\to y$. A \emph{representation of $R$ in sets} assigns a set $F(x)$ to each vertex and a map $F(a) : F(x)\to F(y)$ to each arrow, with no conditions. Many of our examples are of this kind: an automaton over $\Sigma$ is a representation of the quiver with one vertex and $|\Sigma|$ loops; a discrete dynamical system, of one loop; a directed graph, of the quiver $E\rightrightarrows V$ (two arrows, \q{source} and \q{target}); a presheaf on $\omega$, of the infinite path $\cdots\to 2\to 1\to 0$.
+
+\begin{theorem}\label{th:quivers}
+Representations of a quiver $R$ in sets form a De Morgan topos iff every vertex of $R$ has at most one outgoing arrow. They form a Boolean topos iff $R$ has no arrows.
+\end{theorem}
+
+\inwords{} The weak excluded middle holds iff the dynamics is \emph{deterministic}: from each vertex there is at most one way to move on.
+
+\gen{} Deck: representations of $R$ are the presheaves on the free category $C = \mathrm{Path}(R^{\op})$, whose arrows are the paths of the opposite quiver. Arch B: in a free category, $f\circ h = g\circ k$ means that the two paths are equal, so the path $f$ is a final segment of $g$ or conversely; hence $C$ satisfies Ore iff, of any two paths ending at the same vertex of $R^{\op}$, one is a final segment of the other, iff every vertex of $R^{\op}$ has at most one incoming arrow, iff every vertex of $R$ has at most one outgoing arrow. Arch A: a free category is a groupoid only if it has no arrows.
+
+\direct{} An element $x\in F(v)$ has \q{images} $F(p)(x)$ along the paths $p$ of $R$ starting at $v$, and a sub-representation $A$ is closed under taking images. If each vertex has at most one outgoing arrow, the paths from $v$ form a single sequence $p_0, p_1, p_2,\dots$ (possibly finite), each extending the previous one; if $F(p_k)(x)\in A$, then from any $F(p_j)(x)$ the further image $F(p_{\max(j,k)})(x)$ lies in $A$. Conversely, if $a : v\to w$ and $b : v\to w'$ are two different arrows, let $F(u)$ be the set of paths from $v$ to $u$ (images: extend the path), $A$ the paths that start with $a$, and $x$ the empty path at $v$: its image along $a$ lies in $A$, its image along $b$ has no image in $A$.\qed
+
+\begin{example}
+Theorem~\ref{th:quivers} recovers, in one statement, Corollary~\ref{co:automata} (one vertex, $|\Sigma|$ loops), the failure for graphs in Theorem~\ref{th:combi}(1) (the vertex $E$ has two outgoing arrows), and the topos of trees in Theorem~\ref{th:combi}(4) (each vertex of $\cdots\to 2\to 1\to 0$ has one outgoing arrow). It also says that representations of a \emph{forest of rooted trees with arrows pointing to the roots}, or of any \q{functional graph} (a set with a self-map, seen as a quiver), satisfy the weak excluded middle, while those of any quiver with a branching vertex do not.
+\end{example}
+
+\status{} Not found stated; it is a direct consequence of Bridge~\ref{br:dm}.
+
+\begin{exercise}\label{exo:semisimplicial}
+Semi-simplicial sets are the presheaves on $\Delta_{\mathrm{inj}}$, the finite non-empty ordinals with injective non-decreasing maps. Are they a De Morgan topos? And presheaves on the finite ordinals \emph{including} $\emptyset$, with injective non-decreasing maps?
+\end{exercise}

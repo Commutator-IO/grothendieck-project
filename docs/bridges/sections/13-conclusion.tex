@@ -1,0 +1,80 @@
+\section{What the generator produced}\label{sec:conclusion}
+
+\subsection{The grid}
+
+Table~\ref{tab:grid} sums up the run: rows are decks, columns are arches, and each entry is a generated statement.
+
+\begin{table}[ht]\small
+\centering
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.4cm}}
+\toprule
+deck & A: Boolean & B: De Morgan & C, D: Morita, points\\
+\midrule
+right $M$-sets & $M$ a group (\ref{th:monoid}) & $aM\cap bM\neq\emptyset$ (\ref{th:monoid}) & idempotents mod $\mathcal D$ (\ref{th:points}); $M\sim eMe$ (\ref{th:transfer})\\
+$\Sigma$-automata & never, $\Sigma\neq\emptyset$ & iff $|\Sigma|\le 1$ (\ref{co:automata}) & ---\\
+$T_n$, $M_n(k)$, bicyclic & no & no, yes, yes (\ref{ex:monoidlist}) & $n$, $n+1$, $1$ points (\ref{co:countpoints})\\
+Alexandrov space $X_P$ & $P$ symmetric & $P$ confluent; $X_P$ ext.\ disconnected (\ref{th:confluence}) & $T_0$ quotients (\ref{th:moritapre})\\
+rewriting system & --- & Church--Rosser (\ref{co:rewriting}) & ---\\
+graphs, simplicial sets & no & no (\ref{th:combi}) & ---\\
+quiver representations & no arrows & deterministic quiver (\ref{th:quivers}) & ---\\
+augmented simplicial, FI, trees & no & yes (\ref{th:combi}) & ---\\
+Horn theories & iff f.p.\ homs invertible & yes (\ref{th:horn}) & ---\\
+torsors & yes & yes & $G\cong H$ (\ref{th:torsors})\\
+\bottomrule
+\end{tabularx}
+\caption{The generator, run by hand. Numbers refer to theorems and examples.}\label{tab:grid}
+\end{table}
+
+\subsection{What is new}
+
+None of the outputs is deep, and the direct proofs show it: once the statement is known, each takes a few lines. What the bridges supply is the \emph{statement}, and sometimes a translation between subjects that are not usually taught together: monoid theory and automata, order theory and topology and rewriting, semigroup theory and Galois-type fibre functors.
+
+Most of the outputs are in print, as one should expect from a generator run on the simplest decks; \S\ref{sec:lit} gives the references. What we have not found stated as such:
+\begin{itemize}
+\item the weak excluded middle for automata, and its failure as soon as there are two letters (Corollary~\ref{co:automata});
+\item the reading of confluence of rewriting systems as extremal disconnectedness of the reachability topology, or as the De Morgan law of a topos (Corollary~\ref{co:rewriting});
+\item the characterisation of quivers whose representations in sets satisfy the weak excluded middle: at most one outgoing arrow at each vertex (Theorem~\ref{th:quivers});
+\item the De Morgan computations for directed graphs, simplicial sets, augmented simplicial sets, $\mathsf{FI}$-sets and the topos of trees (Theorem~\ref{th:combi});
+\item the counts of points: $n+1$ for $M_n(k)$-sets, $n$ for $T_n$-sets, one for the bicyclic monoid (Corollary~\ref{co:countpoints});
+\item the transfer of the Ore condition to corners $eMe$ (Theorem~\ref{th:transfer}).
+\end{itemize}
+All are elementary, some are surely folklore, and we would welcome references.
+
+\subsection{Lessons for an automatic generator}
+
+Running the generator by hand makes Caramello's list of difficulties concrete \cite[slides 11--17]{caramello-mines}.
+\begin{enumerate}
+\item \emph{Choosing decks.} The interesting outputs came from decks whose two sides belong to different subjects (automata and topoi; rewriting and topology). A generator needs a database of such identifications, not only of equivalences between sites.
+\item \emph{Unfolding.} The arch gives a condition on the site; the statement a human wants is in the language of the structures. Lemma~\ref{lem:neg} is the unfolding rule for negation in presheaf topoi; a generator needs such rules for each invariant.
+\item \emph{Rewriting.} The raw output for automata is \q{$\B(\Sigma^*)$ satisfies the right Ore condition}; the readable statement is about traps and reachability. That step, which the talk assigns to \q{rewriting systems} and language models, is where most of our work went.
+\item \emph{Checking.} Every output here has a direct proof. For deeper decks it will not, and the formal proof of the bridge in Lean is then the only check; this is why the arches are formalised.
+\end{enumerate}
+
+\subsection{Lean}
+
+The five bridges are proved in Lean~4, with Mathlib, in \lp{} (lean-pool), with no axioms beyond the three standard ones. The generated statements of \S\ref{sec:monoids}--\S\ref{sec:combi} are being formalised as corollaries in the same library (\S\ref{sec:leandecl}).
+
+\section{Literature search}\label{sec:lit}
+
+The search covered Johnstone's \emph{Elephant}, Caramello's papers and book, the work of Hemelaer and Rogers on toposes of monoid actions, the literature on Morita equivalence of monoids and on Green's relations, the nLab, and general web and preprint searches. Theorem numbers are those of the arXiv versions.
+
+\begin{itemize}
+\item \emph{Bridges~\ref{br:bool}, \ref{br:dm}.} \cite[D4.6.3(a)]{elephant}; also \cite[Prop.~14]{caramello-chamoun}. Bridges~\ref{br:morita}, \ref{br:pts}: \cite[A1.1.9--10]{elephant}, \cite[Cor.~4.2]{rogers-1905}. Bridge~\ref{br:sub}: \cite[ch.~3]{caramello-tst}.
+\item \emph{Theorem~\ref{th:monoid}.} In print: Boolean iff group \cite[Thm~2.4]{hemelaer-rogers}; De Morgan iff the right Ore condition holds \cite[Thm~2.31]{hemelaer-rogers}, with $(\mathbb N,+)$ and commutative monoids as examples \cite[Ex.~2.33, Table~2]{hemelaer-rogers}; the same in \cite{rogers-thesis}. Monoids with zero: immediate, not found stated. Automata (Corollary~\ref{co:automata}): not found; the identification of automata with $\Sigma^*$-sets is standard.
+\item \emph{Theorem~\ref{th:transfer}.} The Morita theorem for monoids \cite{knauer,banaschewski}, in the form \q{$N\cong eMe$ with $\beta\beta'=1$, $\beta e=\beta$} \cite[Cor.~6.6]{rogers-1905}. The transfer of the Ore condition follows from \cite[Thm~2.31]{hemelaer-rogers}; not found stated.
+\item \emph{Theorem~\ref{th:confluence}.} (1)$\Leftrightarrow$(2)$\Leftrightarrow$(3) for posets: \cite[Prop.~7.10(ii)]{caramello-stone}, Boolean case \cite[Prop.~7.8(ii)]{caramello-stone}; the Kripke-frame version for the logic KC: \cite{chagrov}. Rewriting and Church--Rosser: not found.
+\item \emph{Theorem~\ref{th:moritapre}.} Immediate from the Karoubi criterion \cite[A1.1.9--10]{elephant}; a poset is recovered from $[P,\Set]$ in \cite[\S4.1]{caramello-stone}. Not found in these words.
+\item \emph{Theorem~\ref{th:combi}.} The criterion is in print; the examples are not, except reflexive graphs \cite[Ex.~2.52]{hemelaer-rogers}. The paper introducing the topos of trees \cite{birkedal} does not discuss De Morgan's law.
+\item \emph{Theorem~\ref{th:quivers}.} Not found.
+\item \emph{Theorem~\ref{th:points}, Corollary~\ref{co:countpoints}.} Essential points of $\PSh(\B M)$ correspond to idempotents \cite[Cor.~4.2]{rogers-1905}; objects $e,f$ of the Karoubi envelope of a semigroup are isomorphic iff $e\mathrel{\mathcal D}f$ \cite[Prop.~3.1, \S3.2]{costa-steinberg}; for a group, $\End(U)\cong G^{\op}$ \cite{rogers-1905}. The counts for $M_n(k)$, $T_n$ and the bicyclic monoid: not found. Green's relations on $T_n$ and on matrix monoids are classical \cite{clifford-preston,ganyushkin}.
+\item \emph{Theorem~\ref{th:horn}.} \cite[Thm~3.5]{caramello-demorgan}, \cite[Prop.~14]{caramello-chamoun}.
+\item \emph{Theorem~\ref{th:torsors}.} Standard: $\PSh(\B G)$ classifies $G$-torsors, and $\B G$ is idempotent complete.
+\item \emph{Quotients.} The meet of local rings and integral domains: \cite[\S18]{caramello-lattices}.
+\end{itemize}
+
+\section{Lean declarations}\label{sec:leandecl}
+
+\emph{The bridges.} In \lp{}: \lean{isBooleanTopos_presheaf_iff_isGroupoid}, \lean{isDeMorganTopos_presheaf_iff_rightOreCondition}, \lean{isDeMorganTopos_presheaf_iff}, \lean{moritaEquivalentCat_iff_karoubi}, \lean{isGroupoid_iff_of_moritaEquivalentCat}, \lean{rightOreCondition_iff_of_moritaEquivalentCat}, \lean{essentialPointEquivKaroubiOp}, \lean{subtoposOrderIso}, \lean{exists_orderIso_ici_of_sheafEquiv}, and in \lean{ClassifyingTopoi}: \lean{exists_isClassifyingSite}, \lean{isOfPresheafType_of_isHorn}, \lean{isClassifyingSite_genericTorsor}, \lean{moritaEquivalent_torsorTheory_iff}, \lean{IsClassifyingSite.exists_quotient_theory}.
+
+\emph{The generated statements.} %LEANEXAMPLES%
+To be completed when the formalisation of the examples is pushed.

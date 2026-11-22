@@ -1,0 +1,105 @@
+\section{Preorders, Alexandrov spaces and confluence}\label{sec:preorders}
+
+Deck: for a preorder $P$, three presentations of one topos,
+\[
+\Sh(X_P)\ \simeq\ [P,\Set]\ =\ \PSh(P^{\op})
+\]
+(Proposition~\ref{prop:alexandrov}): sheaves on a space, functors on a preorder, presheaves on a small category. Arches: Bridges~\ref{br:bool} and~\ref{br:dm} on the right, and the topological arch of \S\ref{sec:sites} (De Morgan iff extremally disconnected) on the left.
+
+\subsection{The theorem}
+
+\begin{definition}[Confluence]
+A preorder $P$ is \emph{confluent} if any two elements above a common element have a common upper bound: $x\le y$ and $x\le z$ imply $y\le w$ and $z\le w$ for some $w$.
+\end{definition}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,every node/.style={font=\small}]
+\node (x) at (0,0) {$x$}; \node (y) at (-1,1) {$y$}; \node (z) at (1,1) {$z$}; \node (w) at (0,2) {$w$};
+\draw[->] (x) -- (y); \draw[->] (x) -- (z); \draw[->,dashed] (y) -- (w); \draw[->,dashed] (z) -- (w);
+\node at (0,-0.6) {confluence (the \q{diamond})};
+\begin{scope}[xshift=5cm]
+\node (a) at (0,0) {$a$}; \node (b) at (-1,1) {$b$}; \node (c) at (1,1) {$c$};
+\draw[->] (a) -- (b); \draw[->] (a) -- (c);
+\node at (0,-0.6) {the \q{V}: not confluent};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{theorem}\label{th:confluence}
+For a preorder $P$ the following are equivalent:
+\begin{enumerate}
+\item $P$ is confluent;
+\item the Alexandrov space $X_P$ is extremally disconnected: the closure of every open set is open;
+\item the topos $[P,\Set]\simeq\Sh(X_P)$ is De Morgan: for every functor $F : P\to\Set$, every subfunctor $A$ and every $x\in F(p)$, either the image of $x$ in $F(q)$ lies outside $A(q)$ for all $q\ge p$, or for every $q\ge p$ there is $r\ge q$ such that the image of $x$ in $F(r)$ lies in $A(r)$.
+\end{enumerate}
+Moreover $[P,\Set]$ is Boolean iff $P$ is symmetric (an equivalence relation), iff every open set of $X_P$ is closed.
+\end{theorem}
+
+\inwords{} In the Alexandrov space, \q{open} means \q{closed under going up} and \q{closure} means \q{everything below}. Extremal disconnectedness says that going down from an up-set and then up again never leaves the down-set: this is the diamond.
+
+\gen{} Deck $\Sh(X_P)\simeq\PSh(P^{\op})$. Arch B on the right: in $P^{\op}$ a cospan $y\to x\leftarrow z$ is a pair $x\le y$, $x\le z$ in $P$, and a completing square is a common upper bound, so Ore on $P^{\op}$ is confluence of $P$. Topological arch on the left. Arch A: $P^{\op}$ is a groupoid iff $\le$ is symmetric.
+
+\direct{} (1)$\Rightarrow$(2). Let $U$ be an up-set and $a\in\overline U = \downarrow U$, say $a\le u$ with $u\in U$. If $a\le b$, confluence gives $w\ge b,u$; $w\in U$ because $U$ is an up-set, so $b\le w\in U$ and $b\in\downarrow U$. Hence $\downarrow U$ is an up-set: it is open.
+
+(2)$\Rightarrow$(1). Let $x\le y$ and $x\le z$. The set $\uparrow y$ is open, so its closure $\downarrow\uparrow y$ is open. It contains $x$ (as $x\le y$), hence also $z\ge x$. So $z\le w$ for some $w\in\uparrow y$: $w$ is a common upper bound.
+
+(1)$\Leftrightarrow$(3). This is Bridge~\ref{br:dm}, whose proof in \S\ref{sec:arches} is itself direct: with restriction maps going up, the argument is the one given there.
+
+Boolean: if $\le$ is symmetric, every up-set is a down-set, hence closed. Conversely, if every open set is closed and $p\le q$, the open set $\uparrow q$ is a down-set containing $q$, so it contains $p$: $q\le p$. And Bridge~\ref{br:bool} (or the same argument with sub-functors) gives the topos.\qed
+
+\begin{example}\label{ex:confluentlist}
+\begin{enumerate}
+\item Every lattice, and every directed set, is confluent. The positive integers under divisibility are confluent ($\operatorname{lcm}$); so are the subsets of a set, the subgroups of a group, the open sets of a space (all under inclusion).
+\item A forest seen from the root upwards (each element has a unique parent below it) is confluent only if it is a disjoint union of chains.
+\item The \q{V} $\{a<b,\ a<c\}$: the open set $\{b\}$ has closure $\{a,b\}$, which is not open ($a\le c$ but $c\notin\{a,b\}$). Not extremally disconnected.
+\item The \q{$\Lambda$} $\{b<a,\ c<a\}$ is confluent ($a$ is above everything). So $X_\Lambda$ is extremally disconnected, while $X_V$ is not: the space depends on the direction of the order.
+\end{enumerate}
+\end{example}
+
+\status{} In print: (1)$\Leftrightarrow$(2)$\Leftrightarrow$(3) for posets is \cite[Prop.~7.10(ii)]{caramello-stone}, obtained by the same bridge, where confluence is called the \emph{amalgamation property}; the Boolean case is \cite[Prop.~7.8(ii)]{caramello-stone}. In intermediate logic, the same condition on Kripke frames characterises the logic KC of the weak excluded middle $\neg p\vee\neg\neg p$ \cite{chagrov}: this is the same theorem seen from logic, since the subfunctors of the terminal functor on $P$ are the up-sets.
+
+\subsection{Rewriting systems}
+
+An \emph{abstract rewriting system} is a set $S$ with a relation $\to$ (\q{rewrites in one step to}); $\to^*$ is its reflexive-transitive closure, a preorder. The system is \emph{confluent} (or has the \emph{Church--Rosser property}) if $\to^*$ is confluent: whenever $s$ rewrites to $t$ and to $u$, then $t$ and $u$ rewrite to a common term. Confluence is the property that makes normal forms unique, and it is a central property in the theory of programming languages.
+
+\begin{corollary}\label{co:rewriting}
+Let $(S,\to)$ be an abstract rewriting system. Put on $S$ the topology whose open sets are the sets of terms closed under rewriting. The following are equivalent:
+\begin{enumerate}
+\item the system is confluent;
+\item this space is extremally disconnected;
+\item for every family of sets $F(s)$ indexed by terms, with transport maps $F(s)\to F(t)$ along rewriting, every sub-family $A$ closed under transport, and every $x\in F(s)$: either no transport of $x$ ever lands in $A$, or from every transport of $x$ some further transport lands in $A$.
+\end{enumerate}
+In particular, the space of $\lambda$-terms, with the sets closed under $\beta$-reduction as open sets, is extremally disconnected.
+\end{corollary}
+
+\direct{} Theorem~\ref{th:confluence} for $P = (S,\to^*)$; confluence of $\beta$-reduction is the Church--Rosser theorem \cite{barendregt}.\qed
+
+\begin{example}
+\begin{enumerate}
+\item The string rewriting system on words in $a,b$ with the rule $ab\to ba$ (sorting) is confluent: every word rewrites to $b^ka^l$. Its space is extremally disconnected.
+\item The system $s\to t$, $s\to u$ (with no further rules) is not confluent: the open set $\{t\}$ has closure $\{s,t\}$, not open.
+\item Combinatory logic with the rules $\mathsf Kxy\to x$ and $\mathsf Sxyz\to xz(yz)$ is confluent, so its space is extremally disconnected.
+\end{enumerate}
+\end{example}
+
+\status{} We have not found the reading of confluence as extremal disconnectedness, or as the De Morgan law of a topos, in the rewriting literature. It is Theorem~\ref{th:confluence}, which is in print, applied to $\to^*$.
+
+\begin{remark}
+Newman's lemma says that a \emph{terminating} system is confluent as soon as it is \emph{locally} confluent (the diamond for one-step rewrites). Read through Corollary~\ref{co:rewriting}, it gives a sufficient condition for the extremal disconnectedness of an Alexandrov space in terms of its covering relation, when the preorder has no infinite ascending chains.
+\end{remark}
+
+\begin{exercise}\label{exo:finiteposets}
+Which posets with at most three elements have a De Morgan topos $[P,\Set]$? A Boolean one?
+\end{exercise}
+
+\subsection{When do two preorders give the same topos?}
+
+\begin{theorem}\label{th:moritapre}
+Two preorders $P$, $Q$ have equivalent topoi $[P,\Set]\simeq[Q,\Set]$ iff their posetal reflections $P/{\sim}$ and $Q/{\sim}$ are isomorphic, where $p\sim p'$ means $p\le p'\le p$. Equivalently, two Alexandrov spaces have equivalent topoi of sheaves iff their $T_0$ quotients are homeomorphic.
+\end{theorem}
+
+\gen{} Bridge~\ref{br:morita}: a preorder has no idempotents other than identities, so $\Kar(P^{\op})\simeq P^{\op}$, and $[P,\Set]\simeq[Q,\Set]$ iff $P\simeq Q$ as categories.
+
+\direct{} An equivalence of categories between preorders is a pair of monotone maps $\varphi : P\to Q$, $\psi : Q\to P$ with $\psi\varphi(p)\sim p$ and $\varphi\psi(q)\sim q$; it induces inverse isomorphisms of posetal reflections. For spaces, the $T_0$ quotient of $X_P$ is $X_{P/\sim}$, and a homeomorphism between $T_0$ Alexandrov spaces is the same as an isomorphism of their specialisation orders.\qed
+
+\status{} Immediate from the Karoubi criterion \cite[A1.1.9--10]{elephant}; a poset is recovered from $[P,\Set]$ in \cite[\S4.1]{caramello-stone}. We have not found this statement in these words.

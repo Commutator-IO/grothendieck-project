@@ -1,0 +1,75 @@
+\section{When do two shapes give the same structures?}\label{sec:same}
+
+Bridges~\ref{br:bool} and~\ref{br:dm} are \emph{arches}: they read a property of the topos on one presentation. To build a bridge we also need \emph{decks}: different presentations of the same topos. The simplest question is: when are $\PSh(C)$ and $\PSh(D)$ equivalent categories? We then say that $C$ and $D$ are \emph{Morita equivalent}, by analogy with rings, where two rings are Morita equivalent when their categories of modules are equivalent.
+
+\subsection{Idempotents and retracts}
+
+An arrow $e : U\to U$ is \emph{idempotent} if $e\circ e = e$. In a category of sets, an idempotent map is a projection onto its image: $e(U)$ is a subset of $U$ on which $e$ is the identity. In a general category the \q{image} of an idempotent need not exist as an object.
+
+\begin{example}
+In $\B M$, the idempotent arrows are the idempotent elements $e = e^2$ of $M$. In the multiplicative monoid $M_n(k)$ of $n\times n$ matrices over a field, these are the projections; in the monoid $T_n$ of all maps $\{1,\dots,n\}\to\{1,\dots,n\}$, the maps that fix every point of their image. A group has only one idempotent, $1$. In a preorder, the only idempotents are the identities.
+\end{example}
+
+\subsection{The Karoubi envelope}
+
+\begin{definition}[Karoubi envelope]
+The \emph{Karoubi envelope} (or idempotent completion) $\Kar(C)$ of $C$ has as objects the pairs $(U,e)$ with $e$ an idempotent on $U$, and as arrows $(U,e)\to(U',e')$ the arrows $a : U\to U'$ of $C$ with $e'\circ a\circ e = a$. The identity of $(U,e)$ is $e$ itself.
+\end{definition}
+
+Think of $(U,e)$ as \q{the image of $e$}, a piece of $U$ that $C$ may be missing. $C$ sits inside $\Kar(C)$ as the objects $(U,\id_U)$. In $\Kar(C)$, every idempotent has an image: $(U,e)$ is a \emph{retract} of $(U,\id_U)$, through $e : (U,\id)\to(U,e)$ and $e : (U,e)\to(U,\id)$, whose composite is $e = \id_{(U,e)}$.
+
+\begin{example}[Monoids]\label{ex:karM}
+For a monoid $M$, the objects of $\Kar(\B M)$ are the idempotents of $M$, and the arrows $e\to f$ are the elements $a$ with $fae = a$, i.e.\ $a\in fMe$. Two idempotents $e,f$ are \emph{isomorphic} in $\Kar(\B M)$ iff there are $a\in fMe$ and $b\in eMf$ with $ba = e$ and $ab = f$. Semigroup theorists know this relation: it is Green's relation $\mathcal D$ restricted to idempotents \cite[Prop.~3.1]{costa-steinberg}.
+\end{example}
+
+\begin{example}[Matrices]\label{ex:karMat}
+In $M_n(k)$, two projections $e,f$ are isomorphic in $\Kar$ iff they have the same rank. Indeed, if $a\in fMe$ and $b\in eMf$ with $ba = e$, $ab = f$, then $a$ restricts to a linear isomorphism from the image of $e$ onto the image of $f$ (with inverse $b$), so the ranks agree. Conversely, if $\operatorname{rk}e = \operatorname{rk}f = r$, choose a linear isomorphism $\theta$ from $\operatorname{im} e$ onto $\operatorname{im} f$ and put $a = \theta\circ e$ (seen as a matrix, zero on $\ker e$) and $b = \theta^{-1}\circ f$; then $a\in fMe$, $b\in eMf$, $ba = e$, $ab = f$. So $\Kar(\B M_n(k))$ has exactly $n+1$ isomorphism classes of objects, one for each rank $0,1,\dots,n$.
+\end{example}
+
+\begin{exercise}\label{exo:karTn}
+Show that two idempotents of $T_n$ are isomorphic in $\Kar(\B T_n)$ iff their images have the same size, so that $\Kar(\B T_n)$ has exactly $n$ isomorphism classes of objects. (Write maps on the left and compose as functions.)
+\end{exercise}
+
+\subsection{The Morita bridge}
+
+\begin{bridge}[Morita]\label{br:morita}
+$\PSh(C)\simeq\PSh(D)$ iff $\Kar(C)\simeq\Kar(D)$.
+\end{bridge}
+
+We explain why, without all the details. First, $\PSh(C)\simeq\PSh(\Kar(C))$: a presheaf $F$ on $C$ extends to $\Kar(C)$ by
+\[
+F(U,e) = \{x\in F(U) : \res xe = x\},
+\]
+the elements \q{fixed by $e$}, and every presheaf on $\Kar(C)$ is determined by its values on the objects $(U,\id_U)$. This gives one direction: an equivalence $\Kar(C)\simeq\Kar(D)$ gives $\PSh(C)\simeq\PSh(\Kar C)\simeq\PSh(\Kar D)\simeq\PSh(D)$. For the converse, one recovers $\Kar(C)$ from the category $\PSh(C)$ alone, as the full subcategory of the presheaves $P$ for which $\Hom(P,-)$ preserves all colimits: these are exactly the retracts of representable presheaves, and the retracts of $\y U$ correspond to the idempotents on $U$ \cite[A1.1.9--10]{elephant}. Since this description uses only the category $\PSh(C)$, an equivalence $\PSh(C)\simeq\PSh(D)$ matches these subcategories.
+
+\leanbox{\lean{moritaEquivalentCat_iff_karoubi}; the recovery of $\Kar(C)$ is \lean{isRetractOfRepresentable_iff} and \lean{karoubiEquivRetractsOfRepresentables}.}
+
+\begin{corollary}\label{cor:moritainv}
+Being a groupoid and satisfying the Ore condition are Morita invariant: if $\PSh(C)\simeq\PSh(D)$, then $C$ is a groupoid iff $D$ is, and $C$ satisfies Ore iff $D$ does.
+\end{corollary}
+
+\begin{proof}
+Being Boolean and being De Morgan are properties of a category that are preserved by equivalences of categories (they are stated in terms of subobjects). Apply Bridges~\ref{br:bool} and~\ref{br:dm} on both sides.
+\end{proof}
+
+This is our first bridge in full: the deck is $\PSh(C)\simeq\PSh(D)$, the arches are Bridges~\ref{br:bool} and~\ref{br:dm}. Notice that the corollary says something about $C$ and $D$ in which no topos appears; and notice that proving it directly, by transporting squares across a Karoubi equivalence, is possible but fiddly (we do it for monoids in \S\ref{sec:monoids}). In Lean: \lean{isGroupoid_iff_of_moritaEquivalentCat}, \lean{rightOreCondition_iff_of_moritaEquivalentCat}.
+
+\subsection{Points of a topos}
+
+For a topological space $X$, a point $x$ gives a way to evaluate a sheaf at $x$: the stalk $F_x$. Stalks preserve the finite limits and all colimits of sheaves. This suggests:
+
+\begin{definition}[Point, essential point]
+A \emph{point} of a topos $\mathcal E$ is a functor $p : \mathcal E\to\Set$ that preserves finite limits and has a right adjoint (equivalently, for presheaf topoi, preserves all colimits). It is \emph{essential} if it also has a left adjoint (equivalently, preserves all limits).
+\end{definition}
+
+For presheaves on $C$, every object $U$ gives an essential point, \emph{evaluation at $U$}: $F\mapsto F(U)$, which preserves all limits and all colimits since they are computed objectwise. More generally, an idempotent $e$ on $U$ gives the essential point $F\mapsto F(U,e) = \{x\in F(U):\res xe = x\}$.
+
+\begin{bridge}[Essential points]\label{br:pts}
+The essential points of $\PSh(C)$, with natural transformations between them, form a category equivalent to $\Kar(C)^{\op}$. In particular, the essential points up to isomorphism correspond to the objects of $\Kar(C)$ up to isomorphism.
+\end{bridge}
+
+The idea: an essential point $p$ has a left adjoint $L : \Set\to\PSh(C)$, and $p\cong\Hom(L(\{\ast\}),-)$; the presheaf $P = L(\{\ast\})$ is one for which $\Hom(P,-)$ preserves colimits, hence a retract of a representable, hence an object of $\Kar(C)$ (Bridge~\ref{br:morita}). \leanbox{\lean{essentialPointEquivKaroubiOp}, with \lean{isEssentialPoint_iff}.}
+
+\begin{example}
+Presheaves on a preorder $P$: $\Kar(P) = P$, so the essential points are the evaluations $F\mapsto F(p)$, and two of them are isomorphic iff $p\le q\le p$. For $G$-sets: $\Kar(\B G)\simeq\B G$ has one object, so up to isomorphism the forgetful functor $G\text{-sets}\to\Set$ is the only essential point.
+\end{example}

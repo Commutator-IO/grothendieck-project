@@ -228,6 +228,13 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     pdf: '/article/poeme-grothendieckien.pdf',
     more: [{ label: 'PDF (italiano)', href: '/article/poema-grothendieckiano.pdf' }],
     src: 'docs/recollement/article.tex',
+  },  {
+    id: 'article-bridges',
+    title: 'Theorems from topos-theoretic bridges: an undergraduate introduction, with a hand-run theorem generator',
+    lang: 'English',
+    what: "Draft. O. Caramello's « bridges » read one invariant of a topos on two of its presentations, and her Mines talk (2024) proposes to generate theorems by combining a database of topos equivalences with a database of such readings. This text explains the idea from scratch at bac+3 level and runs a small generator by hand, with five bridges proved in Lean in lean-pool (Boolean iff groupoid, De Morgan iff Ore, Morita iff Karoubi, essential points, subtopoi) as arches and familiar structures as decks: automata, monoid actions, Alexandrov spaces and rewriting systems, graphs and simplicial sets, the topos of trees, matrix monoids, algebraic theories and torsors. Every output has a proof without topoi; most are in print, a few readings are not (the weak excluded middle fails for automata over two letters, confluence as extremal disconnectedness, n+1 fibre functors for n×n matrices).",
+    pdf: '/article/grothendieck-bridges.pdf',
+    src: 'docs/bridges/article.tex',
   },
 ];
 
