@@ -1,6 +1,6 @@
 \section{Calibration: what the generator re-derives}\label{sec:calibration}
 
-A theorem generator should be tested on inputs whose outputs are known. Run on the simplest decks, ours produces the following results, all in print. We list them only to show that the machine is sound; they are not claimed as new.
+A theorem generator should be tested on inputs whose outputs are known. Run on the simplest decks, ours produces the following results, all in print; several of them we first believed new, before the literature search of stage~6 found them. We list them only to show that the machine is sound; they are not claimed as new.
 
 \begin{center}\small
 \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.3cm}}
@@ -11,7 +11,11 @@ $M$-sets $\times$ Boolean & excluded middle iff $M$ is a group (Lean: \lean{isBo
 $M$-sets $\times$ De Morgan & weak excluded middle iff $aM\cap bM\neq\emptyset$ (Lean: \lean{isDeMorganTopos_singleObj_iff}) & \cite[Thm~2.31]{hemelaer-rogers}\\
 Alexandrov space $\times$ De Morgan, topology & a preorder is confluent iff its Alexandrov space is extremally disconnected (Lean: \lean{extremallyDisconnected_iff_confluent}) & \cite[Prop.~7.10]{caramello-stone}\\
 preorders $\times$ Morita & equivalent topoi iff isomorphic posetal reflections (Lean: \lean{moritaEquivalentCat_preorder_iff}) & \cite[A1.1.9--10]{elephant}, \cite[\S4.1]{caramello-stone}\\
-$M$-sets $\times$ points & essential points $\leftrightarrow$ idempotents & \cite[Cor.~4.2]{rogers-1905}\\
+finite $M$-sets $\times$ De Morgan & weak excluded middle iff a single minimal right ideal & dual of \cite[Thm~5.21]{gould} with \cite[Thm~2.31]{hemelaer-rogers}\\
+$M$-sets $\times$ De Morgan & monoids with a left-absorbing element ($mz = z$), e.g.\ transition monoids of synchronizing automata & \cite[Thm~2.2.56]{rogers-thesis}\\
+$M$-sets $\times$ points & essential points $\leftrightarrow$ idempotents up to $\mathcal D$ ($\mathcal J$ for finite $M$) & \cite[Cor.~4.2]{rogers-1905}, \cite[Thm~5.6.1]{pirashvili-jncg}\\
+$M$-sets $\times$ subtopoi & finite $M$: two-sided idempotent ideals & \cite[Prop.~6.1.2]{pirashvili-jncg}\\
+$\mathbb N$-sets $\times$ subtopoi & exactly three: all, $\mathbb Z$-sets, degenerate & from \cite[Cor.~4.3.11]{pirashvili-jpaa}\\
 $M$-sets $\times$ Morita & $M\sim N$ iff $N\cong eMe$ with $1\in MeM$ & \cite{knauer,banaschewski}, \cite[Cor.~6.6]{rogers-1905}\\
 Horn theories $\times$ De Morgan & classifying topos De Morgan & \cite[Thm~3.5]{caramello-demorgan}\\
 torsors $\times$ Morita & $G$- and $H$-torsors Morita equivalent iff $G\cong H$ & standard\\

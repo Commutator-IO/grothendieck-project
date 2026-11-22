@@ -1,23 +1,29 @@
-\section{Quivers: the weak excluded middle is determinism}\label{sec:machines}
+\section{Quivers}\label{sec:machines}
 
-A \emph{quiver} $R$ is a directed graph (multiple arrows and loops allowed). A \emph{representation} of $R$ in sets gives a set $F(v)$ for each vertex and a map $F(a) : F(v)\to F(w)$ for each arrow $a : v\to w$, with no equations. A sub-representation $A$ is a family $A(v)\subseteq F(v)$ stable under the maps. Call an element $x\in F(v)$ \emph{avoiding} $A$ if no image of $x$ (along any path) lies in $A$, and \emph{attracted} by $A$ if every image of $x$ has a further image in $A$.
+A \emph{quiver} $R$ is a directed graph (multiple arrows and loops allowed). A \emph{representation} of $R$ in sets gives a set $F(v)$ for each vertex and a map $F(a) : F(v)\to F(w)$ for each arrow $a : v\to w$, with no equations; morphisms are families of maps commuting with the $F(a)$. We write $\mathrm{Rep}(R)$ for this category. It is the topos of presheaves on the free category $C_R = \mathrm{Paths}(R^{\op})$, whose arrows are the paths of the opposite quiver: a path is the only kind of composite there is, and the equation $f\circ h = g\circ k$ in $C_R$ is an equality of paths.
+
+This one deck, run through the five arches, gives four statements. Two facts about free categories are used throughout: the length of paths is additive, so an idempotent path ($p\circ p = p$) has length $0$ and is an identity, and an invertible path has length $0$ too.
+
+\subsection{De Morgan: determinism}
+
+Call an element $x\in F(v)$ \emph{avoiding} a sub-representation $A$ if no image of $x$ along a path lies in $A$, and \emph{attracted} by $A$ if every image of $x$ has a further image in $A$.
 
 \begin{theorem}\label{th:quivers}
-Representations of a quiver $R$ in sets form a De Morgan topos (for every representation, every sub-representation $A$ and every element $x$, $x$ is avoiding or attracted) iff every vertex of $R$ has at most one outgoing arrow. They form a Boolean topos iff $R$ has no arrows.
+$\mathrm{Rep}(R)$ is a De Morgan topos (every element is avoiding or attracted, for every sub-representation) iff every vertex of $R$ has at most one outgoing arrow. It is a Boolean topos iff $R$ has no arrows.
 \end{theorem}
 
 \begin{trace}
-\item[deck] representations of $R$ $=$ presheaves on the free category $C = \mathrm{Paths}(R^{\op})$.
+\item[deck] $\mathrm{Rep}(R) = \PSh(\mathrm{Paths}(R^{\op}))$.
 \item[arch] Bridge~\ref{br:dm} (De Morgan $\iff$ Ore) and Bridge~\ref{br:bool} (Boolean $\iff$ groupoid).
-\item[specialise] in a free category, $f\circ h = g\circ k$ is an equality of paths, so one of $f$, $g$ is a final segment of the other. Ore on $C$ $\iff$ of any two paths ending at a vertex of $R^{\op}$, one is a final segment of the other $\iff$ no vertex of $R^{\op}$ has two incoming arrows. A free category is a groupoid iff it has no arrows.
-\item[unfold] Lemma~\ref{lem:neg}: \q{$x\in\neg A$} is \q{avoiding}, \q{$x\in\neg\neg A$} is \q{attracted}.
-\item[rewrite] \q{no vertex of $R^{\op}$ has two incoming arrows} $=$ \q{no vertex of $R$ has two outgoing arrows}.
+\item[specialise] $f\circ h = g\circ k$ is an equality of paths, so one of $f$, $g$ is a final segment of the other; Ore on $\mathrm{Paths}(R^{\op})$ $\iff$ of any two paths ending at a vertex of $R^{\op}$, one is a final segment of the other $\iff$ no vertex of $R^{\op}$ has two incoming arrows. A free category is a groupoid iff it has no arrows.
+\item[unfold] Lemma~\ref{lem:neg}: $\neg A$ = avoiding, $\neg\neg A$ = attracted.
+\item[rewrite] two incoming arrows in $R^{\op}$ = two outgoing arrows in $R$.
 \item[verify] direct proof below; Lean: %LEAN-QUIVER%
-being formalised (\S\ref{sec:lean-lit}).
-\item[novelty] not found in print.
+in progress (\S\ref{sec:lean-lit}).
+\item[novelty] one special case is in print (the quiver $\bullet\leftarrow\bullet\to\bullet$, \cite[\S4.1.4]{caramello-chamoun}); the characterisation not found.
 \end{trace}
 
-\direct{} If every vertex has at most one outgoing arrow, the paths from $v$ form one sequence $p_0\subset p_1\subset\cdots$, each extending the previous one. If $F(p_k)(x)\in A$, then from any image $F(p_j)(x)$ the further image $F(p_{\max(j,k)})(x)$ lies in $A$, so $x$ is attracted; otherwise it is avoiding. Conversely, let $a : v\to w$ and $b : v\to w'$ be two distinct arrows, $F(u)$ the set of paths from $v$ to $u$ (maps extend paths), $A$ the paths beginning with $a$, and $x$ the empty path at $v$. Its image along $a$ is in $A$, so it is not avoiding; its image along $b$ has no image in $A$, so it is not attracted. For the Boolean case, if $a : v\to w$ is an arrow, take $F(v) = F(w) = \{\ast\}$, $A(w) = \{\ast\}$, $A(v) = \emptyset$: the element of $F(v)$ is neither in $A$ nor avoiding.\qed
+\direct{} If every vertex has at most one outgoing arrow, the paths from $v$ form one sequence $p_0\subset p_1\subset\cdots$, each extending the previous one; if $F(p_k)(x)\in A$, then from any image $F(p_j)(x)$ the further image $F(p_{\max(j,k)})(x)$ lies in $A$. Conversely, for two arrows $a : v\to w$ and $b : v\to w'$, let $F(u)$ be the set of paths from $v$ to $u$ (maps extend paths), $A$ the paths beginning with $a$, and $x$ the empty path at $v$ (Figure~\ref{fig:branch}): it is neither avoiding nor attracted. For the Boolean case, if $a : v\to w$ is an arrow, take $F(v) = F(w) = \{\ast\}$, $A(w) = \{\ast\}$, $A(v) = \emptyset$.\qed
 
 \begin{figure}[ht]
 \centering
@@ -29,10 +35,8 @@ being formalised (\S\ref{sec:lean-lit}).
 \caption{A branching vertex breaks the weak excluded middle.}\label{fig:branch}
 \end{figure}
 
-\inwords{} The weak excluded middle holds exactly for \emph{deterministic} quivers, those in which each vertex has a unique continuation if any: chains, cycles, and \q{in-forests} whose arrows point towards roots. One branching vertex anywhere breaks it.
-
 \begin{corollary}\label{co:automata}
-Right actions of the free monoid $\Sigma^*$ (deterministic automata over $\Sigma$, with no initial or final states) form a De Morgan topos iff $|\Sigma|\le 1$, and a Boolean topos iff $\Sigma = \emptyset$.
+Right actions of the free monoid $\Sigma^*$ (deterministic automata over $\Sigma$, without initial or final states) form a De Morgan topos iff $|\Sigma|\le 1$, and a Boolean topos iff $\Sigma = \emptyset$.
 \end{corollary}
 
 \begin{proof}
@@ -40,10 +44,66 @@ An action of $\Sigma^*$ is a representation of the quiver with one vertex and $|
 \end{proof}
 
 \begin{trace}
-\item[verify] Lean: \lean{isDeMorganTopos_singleObj_freeMonoid_unit} (one letter) and \lean{not_isDeMorganTopos_freeMonoid_two} (two letters), proved from \lean{isDeMorganTopos_singleObj_iff}.
-\item[novelty] the topos of $\Sigma$-automata is standard; this property not found in print.
+\item[verify] Lean: \lean{isDeMorganTopos_singleObj_freeMonoid_unit} (one letter), \lean{not_isDeMorganTopos_freeMonoid_two} (two letters), from \lean{isDeMorganTopos_singleObj_iff}.
+\item[novelty] the topos of automata is standard; this property not found in print.
 \end{trace}
 
-\begin{exercise}
-Which quivers among $\bullet\to\bullet\to\bullet$, $\bullet\rightleftarrows\bullet$, $\bullet\leftarrow\bullet\to\bullet$, $\bullet\to\bullet\leftarrow\bullet$ have De Morgan representation topoi? (Answer: all but the third.)
-\end{exercise}
+\subsection{Morita: the quiver is determined by its representations}
+
+\begin{theorem}\label{th:quivermorita}
+Two quivers $R$ and $R'$ have equivalent categories of representations in sets iff they are isomorphic.
+\end{theorem}
+
+\begin{trace}
+\item[deck] $\mathrm{Rep}(R)\simeq\mathrm{Rep}(R')$, i.e.\ $\PSh(C_R)\simeq\PSh(C_{R'})$.
+\item[arch] Bridge~\ref{br:morita}: $\iff\Kar(C_R)\simeq\Kar(C_{R'})$.
+\item[specialise] a free category is idempotent complete (idempotent paths are identities), so $\Kar(C_R)\simeq C_R$; it is skeletal with no non-identity isomorphisms, so an equivalence $C_R\simeq C_{R'}$ is an isomorphism of categories.
+\item[rewrite] an isomorphism of free categories maps indecomposable arrows (paths of length $1$) to indecomposable arrows, hence is induced by an isomorphism $R^{\op}\cong R'^{\op}$.
+\item[verify] direct proof in the trace; Lean: %LEAN-QMORITA%
+in progress.
+\item[novelty] %NOV-Q3%
+\end{trace}
+
+\inwords{} For representations of \emph{linear} algebras, very different quivers can have equivalent (derived) categories of representations; in sets, there is no such phenomenon: the category of set-valued representations remembers the quiver.
+
+\subsection{Essential points: the vertices}
+
+\begin{theorem}\label{th:quiverpoints}
+The essential points of $\mathrm{Rep}(R)$ (functors to sets preserving all limits and colimits) form a category isomorphic to the free category $\mathrm{Paths}(R)$. Up to isomorphism, they are the evaluations $F\mapsto F(v)$ at the vertices, two of them being isomorphic only if the vertices are equal.
+\end{theorem}
+
+\begin{trace}
+\item[arch] Bridge~\ref{br:pts}: essential points $\simeq\Kar(C_R)^{\op}\simeq C_R^{\op} = \mathrm{Paths}(R^{\op})^{\op}\cong\mathrm{Paths}(R)$.
+\item[verify] Lean: %LEAN-QPOINTS%
+in progress.
+\item[novelty] %NOV-Q4%
+\end{trace}
+
+\subsection{Subtopoi of the cyclic quiver}
+
+Let $Z_n$ be the cyclic quiver with vertices $\mathbb Z/n$ and one arrow $a_i : i\to i+1$ for each $i$. A representation is a cycle of maps $F(0)\to F(1)\to\cdots\to F(n-1)\to F(0)$. For $n = 1$ it is a set with an endomorphism.
+
+\begin{theorem}\label{th:cycle}
+$\mathrm{Rep}(Z_n)$ has exactly $2^n + 1$ subtopoi: for each set $S$ of arrows, the full subcategory of the representations in which the maps $F(a)$, $a\in S$, are bijective; and the degenerate subtopos.
+\end{theorem}
+
+\begin{trace}
+\item[deck] $\mathrm{Rep}(Z_n) = \PSh(C)$, $C = \mathrm{Paths}(Z_n^{\op})$.
+\item[arch] Bridge~\ref{br:sub}: subtopoi $\leftrightarrow$ Grothendieck topologies on $C$.
+\item[specialise] classify the topologies on $C$ (below): degenerate, or one for each subset of vertices.
+\item[unfold] identify the sheaves: a representation is a sheaf iff the arrows leaving the vertices of the subset's complement are bijective.
+\item[verify] direct proof below; Lean: %LEAN-QCYCLE%
+in progress.
+\item[novelty] for $n = 1$ it follows from Pirashvili's description of the subtopoi of $M$-sets for commutative $M$ \cite[Cor.~4.3.11]{pirashvili-jpaa}; for $n\ge 2$ %NOV-Q5%
+\end{trace}
+
+\direct{} In $C$, for each vertex $v$ and each $\ell\ge 0$ there is exactly one path of length $\ell$ ending at $v$ (it starts at $v+\ell$). A sieve on $v$ is closed under lengthening, so it is $\emptyset$ or $S_{v,k} = \{\text{paths of length}\ge k\}$ for some $k\ge 0$; $S_{v,0}$ is the maximal sieve. Pulling back $S_{v,k}$ along the path of length $m$ into $v$ gives $S_{v+m,\max(k-m,0)}$.
+
+Let $J$ be a topology. If $\emptyset$ covers some vertex, it covers every vertex (pull back along a path, which exists since the cycle is strongly connected), and $J$ is degenerate. Otherwise, covering sieves are closed upwards, so $J(v) = \{S_{v,k} : k\le K(v)\}$ for some $K(v)\in\{0,1,2,\dots,\infty\}$. The axioms become:
+\begin{itemize}
+\item \emph{stability}: $K(v+1)\ge K(v)-1$;
+\item \emph{transitivity}: if $1\le K(v) = k<\infty$, then $K(v+k) = 0$. (Take the covering sieve $S_{v,k}$ and $T = S_{v,k+1}$: the pullbacks of $T$ along the paths of $S_{v,k}$ are $S_{v+r,k+1-r}$, $r\ge k$, all maximal except $S_{v+k,1}$; if $K(v+k)\ge 1$ they all cover, so $T$ covers, contradicting $K(v) = k$. Conversely, when $K(v+k) = 0$ transitivity never forces a new covering sieve.)
+\end{itemize}
+These two conditions say exactly that $K(v)$ is the distance from $v$ to the next element of $Z = K^{-1}(0)$ going forward ($\infty$ if $Z = \emptyset$): a value $k\ge 1$ must be followed by $k-1$, and a run $k, k-1,\dots,1$ ends with a $0$. So non-degenerate topologies correspond to subsets $Z\subseteq\mathbb Z/n$, and there are $2^n$ of them. Finally, a matching family on $S_{v,1}$ is an element of $F(v+1)$, and its amalgamation is a preimage under $F(a_v)$; so $S_{v,1}$ covering (i.e.\ $v\notin Z$) means that $F(a_v)$ is bijective, and longer sieves add nothing. The subtopos of $Z$ is the representations in which the arrows leaving the vertices outside $Z$ are bijective; set $S = \{a_v : v\notin Z\}$.\qed
+
+\inwords{} Every way of \q{localising} a cycle of maps is to invert some of its maps, or to collapse everything. For $n = 1$: sets with an endomorphism, sets with an automorphism, and the degenerate topos. For an acyclic quiver the answer is different: the Sierpiński topos $\mathrm{Rep}(\bullet\to\bullet)$ has four subtopoi, one of which (\q{$F(\text{target})$ is a point}) inverts no arrow; strong connectivity is what excludes such subtopoi.
