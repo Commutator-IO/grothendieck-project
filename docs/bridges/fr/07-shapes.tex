@@ -1,6 +1,6 @@
 \section{Une douzaine de topos combinatoires}\label{sec:shapes}
 
-Le dernier lot montre le générateur sous son jour le plus mécanique : une forme venue de la combinatoire, la condition d'Ore vérifiée sur elle, le tiers exclu faible lu directement. Nous n'avons trouvé aucun de ces exemples dans la littérature, sauf les graphes réflexifs \cite[Ex.~2.52]{hemelaer-rogers}.
+Le dernier lot montre le générateur sous son jour le plus mécanique: une forme venue de la combinatoire, la condition d'Ore vérifiée sur elle, le tiers exclu faible lu directement. Nous n'avons trouvé aucun de ces exemples dans la littérature, sauf les graphes réflexifs \cite[Ex.~2.52]{hemelaer-rogers}.
 
 \begin{theorem}\label{th:shapes}
 \begin{center}\small
@@ -28,13 +28,13 @@ ensembles munis d'une involution & $\B(\mathbb Z/2)$ & oui & oui\\
 \begin{trace}
 \item[tablier] chaque forme.
 \item[arche] Ponts~\ref{br:bool} et~\ref{br:dm}.
-\item[spécialiser] \q{non} : deux flèches distinctes issues d'un sommet vers un même objet (source et but d'une arête, les extrémités $[0]\rightrightarrows[1]$) qu'aucune flèche n'égalise, toute flèche vers un sommet étant constante. \q{oui} : un objet initial (on complète toute paire de flèches de même but à partir de lui), ou une chaîne (on complète par le minimum).
-\item[vérifier] Lean : \lean{not_isDeMorganTopos_graphs} avec le contre-exemple explicite \lean{graphs_pseudocompl_counterexample}, \lean{not_isDeMorganTopos_simplicialSets}, \lean{isDeMorganTopos_augmentedSimplicialSets}, \lean{isDeMorganTopos_presheaf_fintypeCatSkeleton}, \lean{isDeMorganTopos_treeTopos}, \lean{not_isBooleanTopos_treeTopos}, tous par le résultat général \lean{isDeMorganTopos_presheaf_of_hasInitial} ; les autres lignes par la preuve directe.
-\item[nouveauté] le critère est classique ; les exemples, sauf les graphes réflexifs, n'ont pas été trouvés.
+\item[spécialiser] \q{non}: deux flèches distinctes issues d'un sommet vers un même objet (source et but d'une arête, les extrémités $[0]\rightrightarrows[1]$) qu'aucune flèche n'égalise, toute flèche vers un sommet étant constante. \q{oui}: un objet initial (on complète toute paire de flèches de même but à partir de lui), ou une chaîne (on complète par le minimum).
+\item[vérifier] Lean: \lean{not_isDeMorganTopos_graphs} avec le contre-exemple explicite \lean{graphs_pseudocompl_counterexample}, \lean{not_isDeMorganTopos_simplicialSets}, \lean{isDeMorganTopos_augmentedSimplicialSets}, \lean{isDeMorganTopos_presheaf_fintypeCatSkeleton}, \lean{isDeMorganTopos_treeTopos}, \lean{not_isBooleanTopos_treeTopos}, tous par le résultat général \lean{isDeMorganTopos_presheaf_of_hasInitial}; les autres lignes par la preuve directe.
+\item[nouveauté] le critère est classique; les exemples, sauf les graphes réflexifs, n'ont pas été trouvés.
 \end{trace}
 
-\direct{} Pour un \q{non}, dans le graphe à une arête (ou dans $\Delta[1]$), on prend pour $A$ une extrémité $u$ : alors $\neg A$ est l'autre extrémité $v$, $\neg\neg A = \{u\}$, et l'arête n'est dans aucun des deux. Pour un \q{oui} avec un objet initial $\emptyset$, tout élément $x$ a une restriction $\res x\emptyset$ qui est aussi une restriction de toute restriction de $x$ ; si une restriction de $x$ est dans $A$, alors $\res x\emptyset$ l'est aussi, et toute restriction de $x$ admet alors une restriction ultérieure dans $A$. Pour $\omega$, deux restrictions de $x$ ont une restriction ultérieure commune au niveau inférieur.\qed
+\direct{} Pour un \q{non}, dans le graphe à une arête (ou dans $\Delta[1]$), on prend pour $A$ une extrémité $u$: alors $\neg A$ est l'autre extrémité $v$, $\neg\neg A = \{u\}$, et l'arête n'est dans aucun des deux. Pour un \q{oui} avec un objet initial $\emptyset$, tout élément $x$ a une restriction $\res x\emptyset$ qui est aussi une restriction de toute restriction de $x$; si une restriction de $x$ est dans $A$, alors $\res x\emptyset$ l'est aussi, et toute restriction de $x$ admet alors une restriction ultérieure dans $A$. Pour $\omega$, deux restrictions de $x$ ont une restriction ultérieure commune au niveau inférieur.\qed
 
 \begin{example}
-Dans les ensembles simpliciaux augmentés, un simplexe appartient à $\neg\neg A$ si et seulement si son étiquette d'augmentation appartient à $A_{-1}$, et à $\neg A$ sinon : le tiers exclu faible est décidé par l'augmentation. Dans le topos des arbres, la logique interne démontre $\neg\varphi\vee\neg\neg\varphi$ pour tout $\varphi$, mais pas $\varphi\vee\neg\varphi$.
+Dans les ensembles simpliciaux augmentés, un simplexe appartient à $\neg\neg A$ si et seulement si son étiquette d'augmentation appartient à $A_{-1}$, et à $\neg A$ sinon: le tiers exclu faible est décidé par l'augmentation. Dans le topos des arbres, la logique interne démontre $\neg\varphi\vee\neg\neg\varphi$ pour tout $\varphi$, mais pas $\varphi\vee\neg\varphi$.
 \end{example}

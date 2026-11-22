@@ -1,20 +1,20 @@
-\section{Boîte à outils : quatre définitions et cinq arches}\label{sec:toolbox}
+\section{Boîte à outils: quatre définitions et cinq arches}\label{sec:toolbox}
 
-Cette section contient toute la théorie dont la suite a besoin : quatre définitions, et les cinq lemmes qui forment le registre des arches.
+Cette section contient toute la théorie dont la suite a besoin: quatre définitions, et les cinq lemmes qui forment le registre des arches.
 
 \subsection{Formes et préfaisceaux}
 
-Une petite catégorie $C$ est une \emph{forme}. Un \emph{préfaisceau} sur $C$ est un foncteur $C^{\op}\to\Set$, en Lean \texttt{Cᵒᵖ ⥤ Type u} : un ensemble $F(U)$ pour chaque objet et, pour chaque flèche $f : V\to U$, une application de \emph{restriction} $F(U)\to F(V)$, $x\mapsto\res xf$, avec $\res x{\id} = x$ et $\res{(\res xg)}f = \res x{g\circ f}$. Les préfaisceaux sur $C$ forment le topos $\PSh(C)$. Voici les exemples que nous utilisons :
+Une petite catégorie $C$ est une \emph{forme}. Un \emph{préfaisceau} sur $C$ est un foncteur $C^{\op}\to\Set$, en Lean \texttt{Cᵒᵖ ⥤ Type u}: un ensemble $F(U)$ pour chaque objet et, pour chaque flèche $f : V\to U$, une application de \emph{restriction} $F(U)\to F(V)$, $x\mapsto\res xf$, avec $\res x{\id} = x$ et $\res{(\res xg)}f = \res x{g\circ f}$. Les préfaisceaux sur $C$ forment le topos $\PSh(C)$. Voici les exemples que nous utilisons:
 
 \begin{center}\small
 \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}X}
 \toprule
 forme $C$ & préfaisceaux sur $C$\\
 \midrule
-$\B M$ : un objet, flèches $=$ éléments d'un monoïde $M$, $g\circ f = gf$ & $M$-ensembles à droite : un ensemble $X$ muni de $x\cdot m$, avec $x\cdot 1 = x$, $(x\cdot g)\cdot f = x\cdot gf$ ; dans Mathlib, \texttt{MulAction Mᵐᵒᵖ X}\\
-$\B(\Sigma^*)$, $\Sigma^*$ les mots sur un alphabet & automates déterministes : états $X$, transitions $x\cdot a$ (sans état initial ni états finaux)\\
-$\B(\mathbb N,+)$ & systèmes dynamiques discrets : un ensemble muni d'une application $\tau : X\to X$\\
-la catégorie libre d'un carquois & représentations du carquois opposé : un ensemble par sommet, une application par flèche\\
+$\B M$: un objet, flèches $=$ éléments d'un monoïde $M$, $g\circ f = gf$ & $M$-ensembles à droite: un ensemble $X$ muni de $x\cdot m$, avec $x\cdot 1 = x$, $(x\cdot g)\cdot f = x\cdot gf$; dans Mathlib, \texttt{MulAction Mᵐᵒᵖ X}\\
+$\B(\Sigma^*)$, $\Sigma^*$ les mots sur un alphabet & automates déterministes: états $X$, transitions $x\cdot a$ (sans état initial ni états finaux)\\
+$\B(\mathbb N,+)$ & systèmes dynamiques discrets: un ensemble muni d'une application $\tau : X\to X$\\
+la catégorie libre d'un carquois & représentations du carquois opposé: un ensemble par sommet, une application par flèche\\
 $V\rightrightarrows E$ & graphes orientés\\
 $\Delta$, $\Delta_+$ & ensembles simpliciaux, ensembles simpliciaux augmentés\\
 $\omega = (\mathbb N,\le)$ & suites $X_0\leftarrow X_1\leftarrow\cdots$ (le \q{topos des arbres} de la récursion gardée)\\
@@ -26,7 +26,7 @@ Pour un monoïde, la restriction de $x$ le long de $m$ est $x\cdot m$.
 
 \subsection{Pièges et négation}
 
-Un \emph{sous-préfaisceau} $A\subseteq F$, que nous appelons aussi un \emph{piège}, est une famille de sous-ensembles stable par restriction. Pour un $M$-ensemble, c'est une partie stable par l'action. Les sous-préfaisceaux sont les sous-objets du topos et jouent le rôle de propositions. Leur négation n'est pas le complémentaire ensembliste (qui n'est en général pas un piège), mais le plus grand sous-préfaisceau disjoint de $A$ :
+Un \emph{sous-préfaisceau} $A\subseteq F$, que nous appelons aussi un \emph{piège}, est une famille de sous-ensembles stable par restriction. Pour un $M$-ensemble, c'est une partie stable par l'action. Les sous-préfaisceaux sont les sous-objets du topos et jouent le rôle de propositions. Leur négation n'est pas le complémentaire ensembliste (qui n'est en général pas un piège), mais le plus grand sous-préfaisceau disjoint de $A$:
 
 \begin{lemma}\label{lem:neg}
 On a $x\in\neg A$ si et seulement si aucune restriction de $x$ n'appartient à $A$. Par conséquent, $x\in\neg\neg A$ si et seulement si toute restriction de $x$ admet une restriction ultérieure dans $A$.
@@ -37,18 +37,18 @@ L'ensemble de ces $x$ est stable par restriction, disjoint de $A$, et contient t
 \end{proof}
 
 \begin{definition}
-Le topos $\PSh(C)$ est \emph{booléen} si $A\cup\neg A = F$ pour tout $A\subseteq F$ (tiers exclu), et \emph{de De Morgan} si $\neg A\cup\neg\neg A = F$ pour tout $A\subseteq F$ (tiers exclu faible). D'après le lemme~\ref{lem:neg}, De Morgan signifie : \emph{pour tout préfaisceau $F$, tout $A\subseteq F$ et tout élément $x$, ou bien aucune restriction de $x$ n'appartient à $A$, ou bien toute restriction de $x$ admet une restriction ultérieure dans $A$.}
+Le topos $\PSh(C)$ est \emph{booléen} si $A\cup\neg A = F$ pour tout $A\subseteq F$ (tiers exclu), et \emph{de De Morgan} si $\neg A\cup\neg\neg A = F$ pour tout $A\subseteq F$ (tiers exclu faible). D'après le lemme~\ref{lem:neg}, De Morgan signifie: \emph{pour tout préfaisceau $F$, tout $A\subseteq F$ et tout élément $x$, ou bien aucune restriction de $x$ n'appartient à $A$, ou bien toute restriction de $x$ admet une restriction ultérieure dans $A$.}
 \end{definition}
 
-Informellement, De Morgan est une propriété de \emph{stabilité} : \q{$A$ est accessible} ne peut pas se perdre en restreignant davantage. Être booléen est plus fort : \q{$x\in A$} est décidé.
+Informellement, De Morgan est une propriété de \emph{stabilité}: \q{$A$ est accessible} ne peut pas se perdre en restreignant davantage. Être booléen est plus fort: \q{$x\in A$} est décidé.
 
 \subsection{La condition d'Ore}
 
-La catégorie $C$ vérifie la \emph{condition d'Ore} si toute paire de flèches de même but $f : Y\to X$, $g : Z\to X$ se complète en un carré commutatif $f\circ h = g\circ k$. Pour $\B M$ : pour tous $a,b\in M$, il existe $c,d$ avec $ac = bd$, c'est-à-dire $aM\cap bM\neq\emptyset$ (deux éléments quelconques ont un multiple à droite commun). Elle est vraie pour les groupes, les monoïdes commutatifs, les monoïdes à zéro, les catégories ayant un objet initial ou des produits fibrés, et les chaînes.
+La catégorie $C$ vérifie la \emph{condition d'Ore} si toute paire de flèches de même but $f : Y\to X$, $g : Z\to X$ se complète en un carré commutatif $f\circ h = g\circ k$. Pour $\B M$: pour tous $a,b\in M$, il existe $c,d$ avec $ac = bd$, c'est-à-dire $aM\cap bM\neq\emptyset$ (deux éléments quelconques ont un multiple à droite commun). Elle est vraie pour les groupes, les monoïdes commutatifs, les monoïdes à zéro, les catégories ayant un objet initial ou des produits fibrés, et les chaînes.
 
 \subsection{Les cinq arches}
 
-La bibliothèque \lp{} démontre en Lean~4 les cinq ponts suivants. Nous citons les déclarations principales ; les deux premières sont données avec leur énoncé exact.
+La bibliothèque \lp{} démontre en Lean~4 les cinq ponts suivants. Nous citons les déclarations principales; les deux premières sont données avec leur énoncé exact.
 
 \begin{bridge}[Booléen]\label{br:bool}
 $\PSh(C)$ est booléen si et seulement si $C$ est un groupoïde.
@@ -65,19 +65,19 @@ theorem isDeMorganTopos_presheaf_iff_rightOreCondition (C : Type u)
     [SmallCategory C] :
     IsDeMorganTopos (Cᵒᵖ ⥤ Type u) ↔ GrothendieckTopology.RightOreCondition C
 \end{leancode}
-Sa preuve est courte et mérite d'être connue. Si $\res xf\in A$ et si $g$ est une autre flèche de but $X$, on complète le carré $f\circ h = g\circ k$ ; alors $\res{(\res xg)}k = \res{(\res xf)}h\in A$. Réciproquement, on teste sur le préfaisceau $\y X = \Hom(-,X)$, le piège engendré par $f$, et l'élément $\id_X$.
+Sa preuve est courte et mérite d'être connue. Si $\res xf\in A$ et si $g$ est une autre flèche de but $X$, on complète le carré $f\circ h = g\circ k$; alors $\res{(\res xg)}k = \res{(\res xf)}h\in A$. Réciproquement, on teste sur le préfaisceau $\y X = \Hom(-,X)$, le piège engendré par $f$, et l'élément $\id_X$.
 \end{bridge}
 
 \begin{bridge}[Morita]\label{br:morita}
-On a $\PSh(C)\simeq\PSh(D)$ si et seulement si les \emph{enveloppes de Karoubi} $\Kar(C)$ et $\Kar(D)$ sont équivalentes. $\Kar(C)$ ajoute un objet pour chaque flèche idempotente $e = e\circ e$ ; pour $\B M$, ses objets sont les idempotents de $M$, et $e\cong f$ dans $\Kar(\B M)$ si et seulement s'il existe $a\in fMe$, $b\in eMf$ avec $ba = e$ et $ab = f$. Lean : \lean{moritaEquivalentCat_iff_karoubi} ; corollaires \lean{isGroupoid_iff_of_moritaEquivalentCat}, \lean{rightOreCondition_iff_of_moritaEquivalentCat}.
+On a $\PSh(C)\simeq\PSh(D)$ si et seulement si les \emph{enveloppes de Karoubi} $\Kar(C)$ et $\Kar(D)$ sont équivalentes. $\Kar(C)$ ajoute un objet pour chaque flèche idempotente $e = e\circ e$; pour $\B M$, ses objets sont les idempotents de $M$, et $e\cong f$ dans $\Kar(\B M)$ si et seulement s'il existe $a\in fMe$, $b\in eMf$ avec $ba = e$ et $ab = f$. Lean: \lean{moritaEquivalentCat_iff_karoubi}; corollaires \lean{isGroupoid_iff_of_moritaEquivalentCat}, \lean{rightOreCondition_iff_of_moritaEquivalentCat}.
 \end{bridge}
 
 \begin{bridge}[Points essentiels]\label{br:pts}
-Les foncteurs $\PSh(C)\to\Set$ qui préservent toutes les limites et toutes les colimites (les \emph{points essentiels}, ou \q{foncteurs fibres}) forment une catégorie équivalente à $\Kar(C)^{\op}$. Pour $\B M$, ce sont les foncteurs $X\mapsto Xe = \{x : x\cdot e = x\}$, pour $e$ idempotent, deux d'entre eux étant isomorphes si et seulement si $e\cong f$ dans $\Kar(\B M)$. Lean : \lean{essentialPointEquivKaroubiOp}, \lean{isEssentialPoint_iff}.
+Les foncteurs $\PSh(C)\to\Set$ qui préservent toutes les limites et toutes les colimites (les \emph{points essentiels}, ou \q{foncteurs fibres}) forment une catégorie équivalente à $\Kar(C)^{\op}$. Pour $\B M$, ce sont les foncteurs $X\mapsto Xe = \{x : x\cdot e = x\}$, pour $e$ idempotent, deux d'entre eux étant isomorphes si et seulement si $e\cong f$ dans $\Kar(\B M)$. Lean: \lean{essentialPointEquivKaroubiOp}, \lean{isEssentialPoint_iff}.
 \end{bridge}
 
 \begin{bridge}[Sous-topos]\label{br:sub}
-Les sous-topos de $\PSh(C)$ (sous-catégories pleines stables par limites dont l'inclusion admet un adjoint à gauche qui préserve les limites finies) correspondent, en renversant l'ordre, aux \emph{topologies de Grothendieck} sur $C$ : des choix de cribles \q{couvrants} sur chaque objet, stables par changement de base et transitifs. Lean : \lean{subtoposOrderIso}, \lean{exists_orderIso_ici_of_sheafEquiv}.
+Les sous-topos de $\PSh(C)$ (sous-catégories pleines stables par limites dont l'inclusion admet un adjoint à gauche qui préserve les limites finies) correspondent, en renversant l'ordre, aux \emph{topologies de Grothendieck} sur $C$: des choix de cribles \q{couvrants} sur chaque objet, stables par changement de base et transitifs. Lean: \lean{subtoposOrderIso}, \lean{exists_orderIso_ici_of_sheafEquiv}.
 \end{bridge}
 
 C'est tout. Chaque énoncé qui suit est l'un de ces cinq lemmes, spécialisé à une forme et déplié à l'aide du lemme~\ref{lem:neg}.

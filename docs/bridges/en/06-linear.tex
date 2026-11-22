@@ -21,7 +21,7 @@ Let $k$ be a field and $M_n(k)$ the monoid of $n\times n$ matrices under multipl
 \item[specialise] $\Kar(\B M_n(k))$: objects are projections $e$, arrows $e\to f$ are matrices $a$ with $a = fae$, i.e.\ linear maps $\operatorname{im}e\to\operatorname{im}f$; so $e\mapsto\operatorname{im}e$ is an equivalence $\Kar(\B M_n(k))\simeq\mathsf{Vect}_{\le n}$. Isomorphism classes: dimensions $0,\dots,n$.
 \item[rewrite] (2): equivalent Karoubi envelopes would have the same number $n+1$, $m+1$ of isomorphism classes of objects.
 \item[verify] Lean: \lean{karoubiRel_iff_rank_eq} (projections are isomorphic in $\Kar$ iff they have the same rank), \lean{essentialPointEndMulEquivOfGroup}, \lean{isBooleanTopos_singleObj_of_group}; the equivalence with $\mathsf{Vect}_{\le n}$ by the direct argument. %LEAN-LINEAR%
-\item[novelty] %NOV-LINEAR%
+\item[novelty] not found as stated; (2) follows from the Morita theorem for monoids, since in $M_n(k)$ one-sided inverses are inverses, so Morita equivalence is isomorphism \cite[Cor.~1.6.2]{rogers-thesis}. The linear analogue (the Karoubi envelope of $k[M_n(\mathbb F_q)]$-modules) is studied in \cite{kuhn}; the set-valued description (1) we did not find.
 \end{trace}
 
 \direct{} An arrow $e\to f$ in $\Kar(\B M_n(k))$ is a matrix $a$ with $fae = a$; restricting to $\operatorname{im}e$ gives a linear map $\operatorname{im}e\to\operatorname{im}f$, and every linear map arises from exactly one such $a$ (extend by $0$ on $\ker e$). Every space of dimension $\le n$ is the image of a projection. So $\Kar(\B M_n(k))\simeq\mathsf{Vect}_{\le n}$, and Bridge~\ref{br:morita} gives (1). For (2), an equivalence of categories preserves the number of isomorphism classes of objects, $n+1$ on one side and $m+1$ on the other. (3) is Bridge~\ref{br:bool} and Bridge~\ref{br:pts} for a group.\qed
@@ -35,7 +35,7 @@ Let $\mathrm{Sub}(V)$ be the lattice of subspaces of a finite-dimensional vector
 \begin{theorem}\label{th:subspaces}
 \begin{enumerate}
 \item $[\mathrm{Sub}(V),\Set]$ is De Morgan and, if $V\neq 0$, not Boolean.
-\item $[\mathrm{Sub}(V),\Set]\simeq[\mathrm{Sub}(W),\Set]$ iff $\mathrm{Sub}(V)\cong\mathrm{Sub}(W)$; if $\dim V\ge 3$ this holds iff $\dim V = \dim W$ and the fields are isomorphic. Over finite fields, the topos determines $q$ and $n = \dim V$ as soon as $n\ge 2$.
+\item $[\mathrm{Sub}(V),\Set]\simeq[\mathrm{Sub}(W),\Set]$ iff $\mathrm{Sub}(V)\cong\mathrm{Sub}(W)$. The topos determines $\dim V$ (the height of the lattice), and, if $\dim V\ge 3$, the field up to isomorphism; in dimension $2$ it determines only $|k|$, hence $k$ when $k$ is finite.
 \item Its essential points are the evaluations at the subspaces of $V$; over $\mathbb F_q$ there are $\sum_{k=0}^{n}\binom nk_q$ of them (Gaussian binomial coefficients).
 \end{enumerate}
 \end{theorem}
@@ -45,7 +45,7 @@ Let $\mathrm{Sub}(V)$ be the lattice of subspaces of a finite-dimensional vector
 \item[arch] Bridge~\ref{br:dm} (a lattice is confluent), Bridge~\ref{br:bool}, Bridge~\ref{br:morita} (a poset is its own Karoubi envelope), Bridge~\ref{br:pts}.
 \item[rewrite] (2) by the fundamental theorem of projective geometry: for $\dim V\ge 3$, a lattice isomorphism $\mathrm{Sub}(V)\cong\mathrm{Sub}(W)$ is induced by a semilinear bijection \cite{artin-geometric}; over $\mathbb F_q$ with $n = 2$, the number $q+1$ of lines determines $q$.
 \item[verify] Lean: \lean{isDeMorganTopos_functor_preorder_iff}, \lean{moritaEquivalentCat_preorder_iff}; the rest by the direct argument.
-\item[novelty] %NOV-SUB%
+\item[novelty] not found; the ingredients are classical (a poset is its own Karoubi envelope; the fundamental theorem of projective geometry \cite{artin-geometric}).
 \end{trace}
 
 \subsection{The multiplicative monoid of $\mathbb Z/n$}
@@ -62,10 +62,10 @@ Let $n\ge 2$ and let $\omega(n)$ be the number of distinct prime factors of $n$.
 \begin{trace}
 \item[deck] $\PSh(\B(\mathbb Z/n,\cdot))$.
 \item[arch] Bridges~\ref{br:dm}, \ref{br:bool}, \ref{br:pts}, and for finite monoids the classification of subtopoi by two-sided idempotent ideals \cite[Prop.~6.1.2]{pirashvili-jncg}.
-\item[specialise] $0$ is a zero, so Ore holds; $2$ (or any non-unit) is not invertible. The monoid is commutative, so essential points are the idempotents; by the Chinese remainder theorem the idempotents of $\mathbb Z/n$ correspond to the subsets of the prime factors of $n$. Idempotent ideals: below.
+\item[specialise] $0$ is a zero, so Ore holds; the class of a prime factor of $n$ is not invertible. The monoid is commutative, so essential points are the idempotents; by the Chinese remainder theorem the idempotents of $\mathbb Z/n$ correspond to the subsets of the prime factors of $n$. Idempotent ideals: below.
 \item[verify] direct proof below; Lean: %LEAN-ZN%
 not yet.
-\item[novelty] %NOV-ZN%
+\item[novelty] the general theory is in print (\cite[Prop.~6.1.2, Prop.~6.3.1, Thm~5.6.1]{pirashvili-jncg}: subtopoi $\leftrightarrow$ down-sets of the poset of $\mathcal J$-classes of idempotents); the monoid $(\mathbb Z/n,\cdot)$, the counts and the Dedekind numbers not found. Checked by machine for $n\le 60$ and $n = 210, 2310$, and, directly from the axioms of a Grothendieck topology, for $n\le 30$.
 \end{trace}
 
 \direct{} (1), (2) as in the trace. For (3), subtopoi correspond to the two-sided ideals $I$ of the finite monoid $M = (\mathbb Z/n,\cdot)$ with $I^2 = I$, the empty ideal included \cite[Prop.~6.1.2]{pirashvili-jncg}. In a finite monoid an idempotent ideal is generated by its idempotents: if $I = I^2$, every $x\in I$ is a product of arbitrarily many elements of $I$, and a long enough product in a finite semigroup factors as $uev$ with $e$ idempotent, $e$ a product of elements of $I$. So the idempotent ideals are the unions of principal ideals $eM$, $e$ idempotent, and $eM\subseteq fM$ iff $e = ef$. Writing $e\leftrightarrow S_e\subseteq\{\text{primes of }n\}$ (the primes $p$ with $e\equiv 1\bmod p^{v_p(n)}$), $e = ef$ iff $S_e\subseteq S_f$; so idempotent ideals correspond to the down-closed families of subsets of an $\omega(n)$-element set, whose number is the Dedekind number $D(\omega(n))$.\qed
