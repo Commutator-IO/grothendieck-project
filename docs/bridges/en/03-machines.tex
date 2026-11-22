@@ -61,7 +61,7 @@ Two quivers $R$ and $R'$ have equivalent categories of representations in sets i
 \item[rewrite] an isomorphism of free categories maps indecomposable arrows (paths of length $1$) to indecomposable arrows, hence is induced by an isomorphism $R^{\op}\cong R'^{\op}$.
 \item[verify] direct proof in the trace; Lean: %LEAN-QMORITA%
 in progress.
-\item[novelty] %NOV-Q3%
+\item[novelty] not found as a statement about quivers; each step is in print (Morita via the Karoubi envelope \cite[Lemma~1.1.3]{rogers-thesis}, after \cite[A1.1.9--10]{elephant}).
 \end{trace}
 
 \inwords{} For representations of \emph{linear} algebras, very different quivers can have equivalent (derived) categories of representations; in sets, there is no such phenomenon: the category of set-valued representations remembers the quiver.
@@ -76,7 +76,7 @@ The essential points of $\mathrm{Rep}(R)$ (functors to sets preserving all limit
 \item[arch] Bridge~\ref{br:pts}: essential points $\simeq\Kar(C_R)^{\op}\simeq C_R^{\op} = \mathrm{Paths}(R^{\op})^{\op}\cong\mathrm{Paths}(R)$.
 \item[verify] Lean: %LEAN-QPOINTS%
 in progress.
-\item[novelty] %NOV-Q4%
+\item[novelty] the general fact (a small category is recovered, up to idempotent completion, from the essential points of its presheaves) is in print \cite[\S4.2.1]{rogers-thesis}; the quiver version not found.
 \end{trace}
 
 \subsection{Subtopoi of the cyclic quiver}
@@ -94,7 +94,7 @@ $\mathrm{Rep}(Z_n)$ has exactly $2^n + 1$ subtopoi: for each set $S$ of arrows, 
 \item[unfold] identify the sheaves: a representation is a sheaf iff the arrows leaving the vertices of the subset's complement are bijective.
 \item[verify] direct proof below; Lean: %LEAN-QCYCLE%
 in progress.
-\item[novelty] for $n = 1$ it follows from Pirashvili's description of the subtopoi of $M$-sets for commutative $M$ \cite[Cor.~4.3.11]{pirashvili-jpaa}; for $n\ge 2$ %NOV-Q5%
+\item[novelty] for $n = 1$ it follows from Pirashvili's description of the subtopoi of $M$-sets for commutative $M$ \cite[Cor.~4.3.11]{pirashvili-jpaa}; for $n\ge 2$ not found. For quivers \emph{without} oriented cycles, the Grothendieck topologies on the path category are known: there are $2^m$ of them for $m$ vertices, one for each set of vertices \cite[Cor.~4.3]{schmid} (after an unpublished note of Murfet); the cyclic case differs in kind.
 \end{trace}
 
 \direct{} In $C$, for each vertex $v$ and each $\ell\ge 0$ there is exactly one path of length $\ell$ ending at $v$ (it starts at $v+\ell$). A sieve on $v$ is closed under lengthening, so it is $\emptyset$ or $S_{v,k} = \{\text{paths of length}\ge k\}$ for some $k\ge 0$; $S_{v,0}$ is the maximal sieve. Pulling back $S_{v,k}$ along the path of length $m$ into $v$ gives $S_{v+m,\max(k-m,0)}$.
@@ -106,4 +106,4 @@ Let $J$ be a topology. If $\emptyset$ covers some vertex, it covers every vertex
 \end{itemize}
 These two conditions say exactly that $K(v)$ is the distance from $v$ to the next element of $Z = K^{-1}(0)$ going forward ($\infty$ if $Z = \emptyset$): a value $k\ge 1$ must be followed by $k-1$, and a run $k, k-1,\dots,1$ ends with a $0$. So non-degenerate topologies correspond to subsets $Z\subseteq\mathbb Z/n$, and there are $2^n$ of them. Finally, a matching family on $S_{v,1}$ is an element of $F(v+1)$, and its amalgamation is a preimage under $F(a_v)$; so $S_{v,1}$ covering (i.e.\ $v\notin Z$) means that $F(a_v)$ is bijective, and longer sieves add nothing. The subtopos of $Z$ is the representations in which the arrows leaving the vertices outside $Z$ are bijective; set $S = \{a_v : v\notin Z\}$.\qed
 
-\inwords{} Every way of \q{localising} a cycle of maps is to invert some of its maps, or to collapse everything. For $n = 1$: sets with an endomorphism, sets with an automorphism, and the degenerate topos. For an acyclic quiver the answer is different: the Sierpiński topos $\mathrm{Rep}(\bullet\to\bullet)$ has four subtopoi, one of which (\q{$F(\text{target})$ is a point}) inverts no arrow; strong connectivity is what excludes such subtopoi.
+\inwords{} Every way of \q{localising} a cycle of maps is to invert some of its maps, or to collapse everything. For $n = 1$: sets with an endomorphism, sets with an automorphism, and the degenerate topos. For an acyclic quiver the answer is different \cite{schmid}: the Sierpiński topos $\mathrm{Rep}(\bullet\to\bullet)$ has $2^2 = 4$ subtopoi, one of which (\q{$F(\text{target})$ is a point}) inverts no arrow. On a cycle, strong connectivity excludes such subtopoi, and the subtopoi are counted by sets of arrows instead of sets of vertices.
