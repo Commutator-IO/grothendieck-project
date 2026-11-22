@@ -2,7 +2,7 @@
 """Three-pencil test for Problem 14 of docs/problems/article.tex (folder 80,
 pp. 39-54): is a bigon-free arrangement determined by its labelled skeleton?
 
-Lean (lean/Grothendieck/Folder80Maps3.lean, full_of_fourth') proves it when
+Lean (lean/Grothendieck/Combinatorics/Folder80Maps3.lean, full_of_fourth') proves it when
 every triangle has a fourth pseudoline through none of its vertices.  A
 triangle without one has three multiple vertices and every other pseudoline
 through one of them, so the arrangement lies in the three pencils at the

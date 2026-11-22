@@ -12,14 +12,14 @@
 % Pass: Opus 5 (claude-opus-5), 2026-09-19 — first pass, unchecked against the
 % pages by a human. The model was chosen explicitly for this pass.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
-% checks of 2.15/2.16 (lean/Grothendieck/Folder21.lean: Artin-Rees containment
+% checks of 2.15/2.16 (lean/Grothendieck/RingTheory/Folder21.lean: Artin-Rees containment
 % with the ambient module confirmed, finiteness used only through the A/I^m,
 % 2.16's extension argument needs no finiteness; mathlib declarations for Baer
 % and Artin-Rees; the open mathlib PR n° 44724), and with the literature of the
 % matched finding on pp. 15-20 and 27-28 (SGA 2 XIV §1, Raynaud), which
 % confirms the lowered ranges of Cor. 10. Body unchanged otherwise.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pp. 24-26, after the Lean
-%   check of Proposition 7 (lean/Grothendieck/Folder21.lean): it holds over a
+%   check of Proposition 7 (lean/Grothendieck/RingTheory/Folder21.lean): it holds over a
 %   noetherian quasi-sober space, for a prestack for (P1), (P2) and a stack
 %   for covers by two opens for (P3); (i) => (ii) and Cor. 8 formal; in
 %   (ii) => (i) pointwise essential surjectivity alone suffices, without the
@@ -806,7 +806,7 @@ Baer, qu'il cite sous le nom de \emph{Tohoku} — de vérifier que pour tout
 sous-module $N$ de $A$, l'application $\mathrm{Hom}(A,H) \to \mathrm{Hom}(N,H)$
 est surjective, ce qui ramène au cas où $M$ et $N$ sont de type fini.\footnote{Le
 critère de Baer est \texttt{Module.Baer.injective} dans mathlib ; c'est par lui
-que passe la vérification en Lean (lean/Grothendieck/Folder21.lean,
+que passe la vérification en Lean (lean/Grothendieck/RingTheory/Folder21.lean,
 \texttt{proposition2\_15}), qui confirme l'énoncé tel qu'il est lu ici, $H$ étant,
 comme le veulent « les notations précédentes », un module dont tout élément est
 annulé par une puissance de $I$.} Soit donc
@@ -820,7 +820,7 @@ d'Artin--Rees ; le théorème d'intersection de Krull en est le corollaire usuel
 et c'est lui qu'il nomme. Il ne donne pas à lui seul l'inclusion utile, et
 celle du feuillet, $N \cap I^{m}N \subset I^{n}N$, est triviale pour
 $m \geqslant n$ et ne sert à rien. La vérification en Lean
-(lean/Grothendieck/Folder21.lean, \texttt{proposition2\_15}) emploie exactement
+(lean/Grothendieck/RingTheory/Folder21.lean, \texttt{proposition2\_15}) emploie exactement
 l'inclusion $N \cap I^{m}M \subset I^{n}N$ pour $M = A$, tirée de la forme
 $I^{p}M \cap N = I^{p-k}(I^{k}M \cap N)$ ($p \geqslant k$) du lemme
 d'Artin--Rees, qui est \texttt{Ideal.exists\_pow\_inf\_eq\_pow\_smul} dans
@@ -845,7 +845,7 @@ isomorphisme fonctoriel
 \]
 — un homomorphisme d'un module de $I$-torsion de type fini
 atterrit dans la partie de $I$-torsion — et il suffit d'appliquer 2.15.\footnote{Vérifié
-en Lean (lean/Grothendieck/Folder21.lean, \texttt{corollaire2\_16}), sous la
+en Lean (lean/Grothendieck/RingTheory/Folder21.lean, \texttt{corollaire2\_16}), sous la
 forme : tout homomorphisme vers $H^{0}_{I}(K)$ défini sur un sous-module d'un
 $M \in \mathcal{C}$ se prolonge à $M$, en le prolongeant dans $K$. La
 vérification observe, et c'est de l'édition, que cet argument n'use d'aucune
@@ -1183,7 +1183,7 @@ majuscule, là où c'est le point $x$ qui est en cause ; la transcription le
 signale. Pour $(P_{1})$ et $(P_{2})$, l'énoncé n'est autre que la Proposition 3
 appliquée aux faisceaux $\mathcal{H}om(f,g)$, ce que la page dit en une ligne :
 « Reste le cas $P_{3}$, quand $P_{1}$, $P_{2}$ sont déjà vérifiés. »}\footnote{La
-proposition est vérifiée en Lean (lean/Grothendieck/Folder21.lean,
+proposition est vérifiée en Lean (lean/Grothendieck/RingTheory/Folder21.lean,
 \texttt{proposition7\_P1}, \texttt{proposition7\_P2} et
 \texttt{proposition7\_P3}) sous des hypothèses un peu plus faibles : $X$
 noethérien et quasi-sobre (un espace noethérien spectral l'est), $\mathcal{F}$
@@ -1219,7 +1219,7 @@ limite sur les $W$, ce qui est exactement la condition en $x$. Ce sens est
 formel : il vaut pour tout espace et toute catégorie fibrée, par le
 Corollaire 8 appliqué à $Y' = \overline{\{x\}}$, et le Corollaire 8 lui-même
 pour toute partie fermée $Y' \subset Y \cap X'$\footnote{Vérifié en Lean
-(lean/Grothendieck/Folder21.lean).}.\footnote{Le
+(lean/Grothendieck/RingTheory/Folder21.lean).}.\footnote{Le
 feuillet abrège les trois énoncés — fidélité, pleine fidélité, équivalence — par
 une lettre $\mathcal{H}$ qu'il n'introduit nulle part et qu'il glose seulement
 par « l'un des types ». Elle n'est pas reprise ici ; les trois cas sont énoncés
@@ -1244,7 +1244,7 @@ contrairement à ce que dit la page, il n'est pas besoin d'avoir déjà $(P_1)$ 
 $(P_2)$, et les trois propriétés se traitent séparément. La récurrence ne
 demande d'ailleurs à $X$ que ceci : tout fermé non vide de $Y$ a un point $x$
 muni d'un voisinage ouvert $W_0$ tel que $W_0 \cap Y \subset
-\overline{\{x\}}$\footnote{Vérifié en Lean (lean/Grothendieck/Folder21.lean,
+\overline{\{x\}}$\footnote{Vérifié en Lean (lean/Grothendieck/RingTheory/Folder21.lean,
 \texttt{proposition7\_P3}) : le recollement se fait au-dessus de
 $(V - Y') \cup W'$, par récurrence noethérienne sur un point maximal. La remarque
 que $(P_1)$ et $(P_2)$ ne servent pas est de l'édition.}.\footnote{C'est le seul pas du dossier qui demande à

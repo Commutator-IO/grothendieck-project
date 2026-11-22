@@ -41,7 +41,7 @@
 % pages by a human.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — p. 81: the footnote no longer says an infinite chain of adjoints is impossible; the Lean check (Folder19, chain_adj) gives one for presheaf topoi.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — refined with the Lean checks
-% of lean/Grothendieck/Folder19.lean, mathlib and the literature of the
+% of lean/Grothendieck/CategoryTheory/Folder19.lean, mathlib and the literature of the
 % folder's findings: the page-7 proviso « ou I fini » is false and is replaced
 % by « I fini et f_j exacts à gauche »; the degenerate cases of page 8 are put
 % under the page's own hypothesis that the g_i are fully faithful; Lean and
@@ -285,7 +285,7 @@ comonadique, et conservative. Les deux flèches $(\ast, \ast) \rightrightarrows
 $(\varnothing, \ast)$ dans $B$, et $(\varnothing, \varnothing)$ dans $A$ : $f$ ne
 commute pas à ce noyau. La condition nécessaire et suffisante est celle de Beck,
 qui ne porte que sur les doubles flèches dont l'image a un noyau \emph{scindé}.
-Vérifié en Lean (lean/Grothendieck/Folder19.lean, \texttt{theoreme\_b\_necessite\_fausse}) : le contre-exemple y est formalisé, l'inclusion y est comonadique et ne vérifie pas la condition C. Le même fichier vérifie a), sous la forme de la marge (\texttt{theoreme\_a}) et sous celle du texte, et la suffisance de b) (\texttt{theoreme\_b\_suffisance}) ; celle-ci n'est qu'une application du théorème de comonadicité de Beck tel qu'il est dans mathlib, \texttt{Comonad.comonadicOfHasPreservesFSplitEqualizersOfReflectsIsomorphisms}. La forme exacte, nécessaire et suffisante, avec les doubles flèches $f$-scindées (\texttt{beck\_iff}), s'obtient en joignant à ce théorème sa réciproque, \texttt{Comonad.createsFSplitEqualizersOfComonadic}, elle aussi dans mathlib.} C'est le
+Vérifié en Lean (lean/Grothendieck/CategoryTheory/Folder19.lean, \texttt{theoreme\_b\_necessite\_fausse}) : le contre-exemple y est formalisé, l'inclusion y est comonadique et ne vérifie pas la condition C. Le même fichier vérifie a), sous la forme de la marge (\texttt{theoreme\_a}) et sous celle du texte, et la suffisance de b) (\texttt{theoreme\_b\_suffisance}) ; celle-ci n'est qu'une application du théorème de comonadicité de Beck tel qu'il est dans mathlib, \texttt{Comonad.comonadicOfHasPreservesFSplitEqualizersOfReflectsIsomorphisms}. La forme exacte, nécessaire et suffisante, avec les doubles flèches $f$-scindées (\texttt{beck\_iff}), s'obtient en joignant à ce théorème sa réciproque, \texttt{Comonad.createsFSplitEqualizersOfComonadic}, elle aussi dans mathlib.} C'est le
 théorème de comonadicité de Beck, à la condition près.\footnote{La page porte
 un nom propre entre parenthèses après « Théorème 1.12 », que la transcription
 lit « Beck » sans certitude. La forme monadique du théorème est celle de la
@@ -400,7 +400,7 @@ $A = B_{0} = B_{1}$ la catégorie des ensembles, $f_{i} = \{0,1\} \times -$,
 adjoint à gauche de $X \mapsto X^{\{0,1\}}$, et $X_{0} = X_{1}$ un point, la
 composante $j$ de $\varphi((X_{i}))$ a deux éléments, et
 $\prod_{i} \varphi_{ji}(X_{i})$ en a quatre. Vérifié en Lean
-(lean/Grothendieck/Folder19.lean, \texttt{matrice\_fini\_fausse}) ; la formule
+(lean/Grothendieck/CategoryTheory/Folder19.lean, \texttt{matrice\_fini\_fausse}) ; la formule
 elle-même, sous l'hypothèse de commutation aux produits, y est vérifiée
 (\texttt{matrice}). L'erreur est sur la page, et la première version de cette
 lecture l'avait reprise.}
@@ -419,7 +419,7 @@ formules (3.9) de la page, qui expriment la coünité et la comultiplication de
 $\varphi$ par $\alpha_{k}(X_{k}) \circ \mathrm{pr}_{k}$ et
 $\lambda_{kji}(X_{i}) \circ \mathrm{pr}_{i}$, valent sans aucune hypothèse ; la
 commutation des $f_{j}$ aux produits sert seulement à ce qu'elles déterminent
-$\delta$. Vérifié en Lean (lean/Grothendieck/Folder19.lean,
+$\delta$. Vérifié en Lean (lean/Grothendieck/CategoryTheory/Folder19.lean,
 \texttt{counit\_matrice}, \texttt{comult\_matrice}, \texttt{comult\_unique}),
 ainsi que la note marginale de la page 8, $\lambda_{iii} = \lambda_{i}$
 (\texttt{lam\_diag}).} Les axiomes de
@@ -438,7 +438,7 @@ illisible. L'hypothèse de pleine fidélité est nécessaire : sans elle,
 $\lambda_{kki}$ et $\lambda_{kjj}$ ne sont pas inversibles en général. Avec
 elle, ce sont des isomorphismes, et des identités une fois $\varphi_{ii}$
 identifié à $\mathrm{id}_{B_{i}}$ ; vérifié en Lean
-(lean/Grothendieck/Folder19.lean, \texttt{lam\_isIso\_left},
+(lean/Grothendieck/CategoryTheory/Folder19.lean, \texttt{lam\_isIso\_left},
 \texttt{lam\_isIso\_right}), de même que l'identification de $\lambda_{iji}$ à
 l'unité $\mathrm{id}_{B_{i}} \to \varphi_{ij}\varphi_{ji}$ composée avec la
 coünité (\texttt{lam\_eq\_counit\_comp\_lamUnit}).} Ne restent que le cas
@@ -466,7 +466,7 @@ avec $\varphi(X', X'') = \bigl( X' \times \varphi'(X''),\ \varphi''(X') \times
 X'' \bigr)$.\footnote{Cette formule demande que $f'$ et $f''$ commutent aux
 produits binaires, ce que la page tient de son hypothèse générale sur les
 $f_{j}$ ; sous cette hypothèse elle est vérifiée en Lean
-(lean/Grothendieck/Folder19.lean, \texttt{deuxFacteurs\_left},
+(lean/Grothendieck/CategoryTheory/Folder19.lean, \texttt{deuxFacteurs\_left},
 \texttt{deuxFacteurs\_right}). La description de $A$ par les quadruplets qui
 suit ne l'est pas.}
 
@@ -609,7 +609,7 @@ un théorème de mathlib, dans l'espace de noms
 \texttt{GabrielPopescu.preservesFiniteLimits} ; le
 fichier source renvoie à B.~Mitchell, « A quick proof of the Gabriel--Popesco
 theorem », \emph{J. Pure Appl. Algebra} 20 (1981) ; la preuve en Lean
-(lean/Grothendieck/Folder19.lean, \texttt{gabriel\_popescu}) ne fait que
+(lean/Grothendieck/CategoryTheory/Folder19.lean, \texttt{gabriel\_popescu}) ne fait que
 l'invoquer. L'énoncé de Morita qui suit n'y est pas vérifié. Le manuscrit invoque
 $\mathrm{Hom}_{C}(U, M \otimes_{R} U) \simeq M$ comme « bien connu » ; cette
 formule vaut pour tout $M$ exactement quand $U$ est petit et projectif. La
@@ -2127,7 +2127,7 @@ applications croissantes $e_{m}(x) = 2x + m$ et $r_{m}(x) = \lfloor (x - m)/2
 forment une chaîne $B_{k} \dashv B_{k+1}$ pour tout $k \in \mathbb{Z}$, et la
 restriction des préfaisceaux donne une chaîne d'adjoints $F_{k} \dashv
 F_{k+1}$, infinie dans les deux sens, dont aucun n'est fidèle (vérifié en Lean,
-lean/Grothendieck/Folder19.lean, \texttt{chain\_adj} et
+lean/Grothendieck/CategoryTheory/Folder19.lean, \texttt{chain\_adj} et
 \texttt{chain\_not\_faithful}). Rien ne dit que c'est la construction que la
 page esquisse avec ses ensembles à involution.}
 

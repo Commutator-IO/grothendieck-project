@@ -27,7 +27,7 @@
 % and was not checked against the sources.
 %
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — refined with the Lean checks
-% of lean/Grothendieck/Folder78.lean, mathlib and the literature of the
+% of lean/Grothendieck/NumberTheory/Folder78.lean, mathlib and the literature of the
 % folder's findings. Now checked by machine: the identity of p. 109 (the
 % Cassini identity of the Chebyshev polynomials, in mathlib), the Bezout pair,
 % the vertices and the matrix of u^n, the theorem of p. 112 over any
@@ -1538,7 +1538,7 @@ $(m+1, -m)$, $m \in \mathbf{F}_p$, sont distincts ; c'est le calcul de la page
 85, « on vérifie aisément », fait ici. Ils sont sur les deux droites
 parallèles $x + y = 0$ et $x + y = 1$, celles-là mêmes qui portent le
 $2p$-gone propre d'invariant $\alpha = -2$ (pages 94 et 95). Vérifié en Lean
-(lean/Grothendieck/Folder78.lean, \texttt{imp\_orderOf},
+(lean/Grothendieck/NumberTheory/Folder78.lean, \texttt{imp\_orderOf},
 \texttt{imp\_vertex\_eq\_iff}, \texttt{imp\_noncollinear},
 \texttt{imp\_linPart\_det}) : $u$ est d'ordre $2p$, les $2p$ sommets sont
 distincts, trois sommets consécutifs ne sont jamais alignés,
@@ -1669,7 +1669,7 @@ caractéristique $0$ c'est un $\infty$-polygone ; en caractéristique $p > 2$,
 $u_V^2 = \mathrm{id} + 2v_0$ est une transvection d'ordre $p$, $u_V$ et $u$
 sont d'ordre $2p$ : un $2p$-gone régulier (unimodulaire), propre, distinct de
 l'impropre de la page 85.\footnote{Vérifié en Lean
-(lean/Grothendieck/Folder78.lean, \texttt{strip\_vertex}, \texttt{strip\_orderOf},
+(lean/Grothendieck/NumberTheory/Folder78.lean, \texttt{strip\_vertex}, \texttt{strip\_orderOf},
 \texttt{strip\_vertex\_eq\_iff}, \texttt{strip\_noncollinear},
 \texttt{linPart\_det}), en toute caractéristique $p$, y compris $p = 2$ où
 c'est le carré : $s_{2m} = (-m, m)$, $s_{2m+1} = (1 + m, -m)$, $u$ d'ordre
@@ -1714,7 +1714,7 @@ bxy + c(x + y)$, et l'invariance par $\sigma_0$ force $b = -\alpha a$, $c =
 Les fonctions $1$, $f_\alpha$ forment une base des fonctions invariantes de
 degré $\leq 2$\footnote{L'invariance de $f_\alpha$ par $u_\alpha$ et son
 annulation en tous les sommets, sur un anneau commutatif quelconque, sont
-vérifiées en Lean (lean/Grothendieck/Folder78.lean,
+vérifiées en Lean (lean/Grothendieck/NumberTheory/Folder78.lean,
 \texttt{conic\_invariant}) ; pour $\alpha = -2$, la factorisation
 $f_{-2} = (x+y)(x+y-1)$ du § 8 aussi (\texttt{strip\_conic}).}, et $f_\alpha$ est caractérisée par : a) $f_\alpha$ est nulle
 sur $S$ ; b) sa partie homogène
@@ -1911,7 +1911,7 @@ de « quatrième espèce ». Ces noms sont de nous. En termes des polynômes de
 Tchebychev de deuxième espèce renormalisés $S_m$ de mathlib
 (\texttt{Polynomial.Chebyshev.S}), $F_{2m} = S_{m-1}$ et
 $F_{2m+1} = S_m + S_{m-1}$ ; la vérification en Lean
-(lean/Grothendieck/Folder78.lean, \texttt{F\_even\_closed},
+(lean/Grothendieck/NumberTheory/Folder78.lean, \texttt{F\_even\_closed},
 \texttt{F\_odd\_closed}, \texttt{F\_zero}, \texttt{F\_neg}) établit que ce
 sont bien les $F_n$ définis ici, pour tout $n \in \mathbf{Z}$. Le signe de « $F_n = -F_{-n}$ »
 est peu net sur la page ; la formule
@@ -1938,7 +1938,7 @@ en termes des $S_m$, l'identité de Cassini
 $S_m^{2} - U S_m S_{m-1} + S_{m-1}^{2} = 1$ des polynômes de Tchebychev, qui
 est dans mathlib (\texttt{Polynomial.Chebyshev.S\_sq\_add\_S\_sq}) ; la
 proposition en découle pour tout $n \in \mathbf{Z}$, vérifié en Lean
-(lean/Grothendieck/Folder78.lean, \texttt{F\_identity}).}\footnote{La page
+(lean/Grothendieck/NumberTheory/Folder78.lean, \texttt{F\_identity}).}\footnote{La page
 introduit d'abord des $X'_n = F_n F_{n+1}$, $Y'_n = F_n F_{n-1}$, puis des
 $X_n$ définis par la récurrence $X_n = U X_{n-1} - X_{n-2} + 1$, et conclut
 par récurrence $X_n = X'_n$ ; les primes manquent par endroits. On a fusionné
@@ -1958,7 +1958,7 @@ unité :
 $F$ étant peu net ; le couple ne vérifie pas la relation ($n = 4$ : $(1 - U -
 U^2)(U + 1) + U(U^2 + U - 1) = 1 - U - U^2$). Celui qu'on donne se lit sur
 la proposition. La page 109 énonce $(F_n, F_{n+2}) = (1)$. Vérifié en Lean
-(lean/Grothendieck/Folder78.lean, \texttt{F\_bezout}, \texttt{isCoprime\_F} ;
+(lean/Grothendieck/NumberTheory/Folder78.lean, \texttt{F\_bezout}, \texttt{isCoprime\_F} ;
 \texttt{page\_A\_four\_fails} pour l'échec du couple de la page en $n = 4$).}.
 
 \textbf{Les sommets.} Dans les coordonnées universelles $(s_0, s_1, s_{-1})$
@@ -1984,7 +1984,7 @@ matrice
 colonne $(F_n F_{n+1}, F_{n-1} F_n)$, la seconde $(F_{n+1} F_{n+1}, F_{n-1}
 F_{n+1})$, indices surchargés et douteux. La troisième colonne est $s_n$, et
 c'est la première version qui est juste. Vérifié en Lean
-(lean/Grothendieck/Folder78.lean, \texttt{u\_zpow\_apply}, \texttt{vertex}) :
+(lean/Grothendieck/NumberTheory/Folder78.lean, \texttt{u\_zpow\_apply}, \texttt{vertex}) :
 $u_\alpha^n(x, y) = (1 - x - y)\,s_n + x\,s_{n+1} + y\,s_{n-1}$.}.
 
 \textbf{Théorème} (page 112). Soit $k$ un anneau, $\alpha \in k$, $u_\alpha$
@@ -2007,7 +2007,7 @@ F_{n+1})(\alpha) = 0$\footnote{La page conclut « la relation $F_n(\alpha) =
 1$, cqfd » : lire $= 0$. Elle lettre les conditions a), b), b$_i$), d), et
 conclut « a $\iff$ b $\iff$ c », où c) est b$_i$).}. Le théorème est juste
 tel quel, sur tout anneau commutatif et pour tout
-$n \in \mathbf{Z}$.\footnote{Vérifié en Lean (lean/Grothendieck/Folder78.lean,
+$n \in \mathbf{Z}$.\footnote{Vérifié en Lean (lean/Grothendieck/NumberTheory/Folder78.lean,
 \texttt{zpow\_eq\_one\_iff}, \texttt{vertex\_eq\_iff}, \texttt{zpow\_fix\_iff}),
 c) pour un seul $i$ quelconque ; et aussi $\sigma_1 u_\alpha \sigma_1 =
 u_\alpha^{-1}$, $\sigma_1 s_n = s_{-n}$ (\texttt{inv\_eq\_conj},

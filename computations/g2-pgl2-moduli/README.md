@@ -2,7 +2,7 @@
 
 Check for issue #91 (« Calculatoires »), appendix row « D'après les pages 4 à 7, modules des
 représentations de $G_2$, reformulation de l'édition » (`docs/lean/sections/85.tex`, the
-`\nonverifie` theorem `85-g2-pgl2-moduli-over-z`). Lean (`lean/Grothendieck/Folder85.lean`)
+`\nonverifie` theorem `85-g2-pgl2-moduli-over-z`). Lean (`lean/Grothendieck/Geometry/Folder85.lean`)
 proves the trace identities, the rigidity and a normal form over any ring, but not the
 representability by the complement of three lines in 𝔸²_ℤ. That part is not settled.
 
