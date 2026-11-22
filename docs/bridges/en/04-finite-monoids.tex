@@ -1,0 +1,62 @@
+\section{Finite monoids and synchronizing automata}\label{sec:finite}
+
+Every finite automaton has a finite \emph{transition monoid}: the functions $X\to X$ induced by words, composed as \q{first $m$, then $m'$}. Many systems are better described by the monoid of their commands than by a quiver: a counter, a cache, an editor buffer. This section answers, for a finite monoid $M$, the question of \S\ref{sec:machines}: when does every $M$-set satisfy the weak excluded middle?
+
+\subsection{The criterion}
+
+A \emph{right ideal} of $M$ is a non-empty subset $I$ with $IM\subseteq I$; for instance $aM = \{am : m\in M\}$, \q{everything that can happen after $a$}. A finite monoid has \emph{minimal} right ideals (right ideals containing no smaller one), and two distinct minimal right ideals are disjoint, since their intersection, if non-empty, would be a right ideal contained in both.
+
+\begin{theorem}\label{th:finite}
+Let $M$ be a finite monoid. Right $M$-sets satisfy the weak excluded middle (form a De Morgan topos) iff $M$ has exactly one minimal right ideal.
+\end{theorem}
+
+\inwords{} Think of $M$ as the commands of a system and of $aM$ as the set of command sequences that start with $a$. The theorem says: \emph{reachability of a trap is stable in every system driven by $M$ iff all the \q{final} behaviours of $M$ belong to a single minimal right ideal}, i.e.\ there is one terminal \q{basin} of command sequences that every sequence can be continued into.
+
+\gen{} Deck: right $M$-sets are $\PSh(\B M)$. Arch: Bridge~\ref{br:dm}, which for $\B M$ asks $aM\cap bM\neq\emptyset$ for all $a,b$. The generator's output is that condition; the finite-monoid reading is the unfolding.
+
+\direct{} If $R$ is the only minimal right ideal, every right ideal $aM$ contains a minimal right ideal (by finiteness), which is $R$; so $aM\cap bM\supseteq R\neq\emptyset$, and Lemma~\ref{lem:neg} gives the weak excluded middle exactly as in the proof of Bridge~\ref{br:dm}: if $x\cdot u\in A$ and $y = x\cdot m$, pick $c,d$ with $uc = md$; then $y\cdot d = (x\cdot u)\cdot c\in A$. If $R_1\neq R_2$ are minimal right ideals, they are disjoint; for $a\in R_1$, $b\in R_2$, the $M$-set $X = M$, the trap $A = aM$ and the state $1$ give a state that reaches $A$ (by $a$) but, after $b$, never can.\qed
+
+\begin{example}\label{ex:finite}
+\begin{enumerate}
+\item A finite group: one right ideal, $M$ itself. (Here even the excluded middle holds.)
+\item A monoid with a zero: $\{0\}$ is the only minimal right ideal. So the multiplicative monoid of $n\times n$ matrices over a finite field, or of $\mathbb Z/n$, satisfies it.
+\item The monoid $T_n$ of all maps $\{1,\dots,n\}\to\{1,\dots,n\}$, with the product $ab = a\circ b$ of composition of functions: the constant maps $c_i$ satisfy $c_i\circ m = c_i$, so the $\{c_i\}$ are $n$ distinct minimal right ideals: for $n\ge 2$ the weak excluded middle fails. With the opposite product $a\ast b = b\circ a$ there is a single minimal right ideal (all constants), and it holds. The side matters.
+\item A finite semilattice $(L,\vee)$, for instance the states of a state-based CRDT under merge: commutative, so $ab = ba\in aM\cap bM$; it holds.
+\end{enumerate}
+\end{example}
+
+\leanentry{} The criterion $aM\cap bM\neq\emptyset$ is Bridge~\ref{br:dm} applied to \lean{SingleObj M}; the finite-monoid reading is not in the library.
+
+\status{} For monoids in general, \q{De Morgan iff $aM\cap bM\neq\emptyset$} is in print \cite[Thm~2.31]{hemelaer-rogers}. We did not find the reformulation by minimal right ideals for finite monoids, nor its consequence below.
+
+\subsection{Synchronizing automata}
+
+A finite deterministic automaton with states $Q$ is \emph{synchronizing} if some word sends every state to the same state (a \q{reset word}), and \emph{strongly connected} if every state can reach every other. Synchronizing automata are studied in connection with the Černý conjecture; they model systems that can be reset without knowing their current state.
+
+\begin{corollary}\label{co:sync}
+Let $\mathcal A$ be a strongly connected synchronizing automaton and $M$ its transition monoid (acting on the right: $q\cdot(mm') = (q\cdot m)\cdot m'$). Then right $M$-sets satisfy the weak excluded middle.
+\end{corollary}
+
+\begin{proof}
+Let $K\subseteq M$ be the set of \emph{constant} transitions, $q\mapsto r$ for a fixed $r$; it is non-empty since $\mathcal A$ is synchronizing. For $c\in K$ constant at $r$ and any $m\in M$, $cm$ is constant at $r\cdot m$, and by strong connectivity every state is some $r\cdot m$: so $cM = K$, and $K$ is a right ideal. $K$ is minimal, since any right ideal $I\subseteq K$ contains some $c$ and hence $cM = K$. If $R$ is any minimal right ideal and $a\in R$, $c\in K$, then $ac\in R$ is constant, so $R\supseteq(ac)M = K$ and $R = K$. So $K$ is the only minimal right ideal, and Theorem~\ref{th:finite} applies.
+\end{proof}
+
+\inwords{} If a system's commands come from a resettable, strongly connected controller, then in \emph{any} system driven by those commands, \q{the target is reachable} is stable under further commands.
+
+\status{} Not found.
+
+\subsection{Transfer along corners}
+
+\begin{theorem}\label{th:transfer}
+Let $e$ be an idempotent of a monoid $M$ with $1\in MeM$, say $1 = res$. Then $M$ satisfies the Ore condition ($aM\cap bM\neq\emptyset$ for all $a,b$) iff the monoid $eMe$, with unit $e$, does.
+\end{theorem}
+
+\gen{} Deck: $1 = res$ makes every idempotent $f$ of $M$ isomorphic in $\Kar(\B M)$ to the idempotent $esfre$ of $eMe$ (via $a = esf$, $b = fre$: $ba = f$, $ab = esfre$), so $\Kar(\B M)\simeq\Kar(\B(eMe))$ and Bridge~\ref{br:morita} gives $\PSh(\B M)\simeq\PSh(\B(eMe))$. Arch: Morita invariance of the Ore condition (Bridges~\ref{br:dm} and~\ref{br:morita}).
+
+\direct{} If $M$ satisfies Ore and $a,b\in eMe$, take $ac = bd$; then $x = ecre$, $y = edre$ are in $eMe$ and $ax = acre = bdre = by$ (using $a = ae$, $b = be$). If $eMe$ satisfies Ore and $a,b\in M$, apply it to $esare$, $esbre$ to get $x,y\in eMe$ with $esare\,x = esbre\,y$; multiply on the left by $r$ and use $res = 1$: $a(rex) = b(rey)$.\qed
+
+\begin{remark}
+In a finite monoid, $1\in MeM$ forces $e = 1$, so Theorem~\ref{th:transfer} concerns infinite monoids, e.g.\ endomorphism monoids of infinite-dimensional spaces, where $e$ can project onto a subspace isomorphic to the whole space.
+\end{remark}
+
+\status{} Morita equivalence of monoids is classical \cite{knauer,banaschewski,rogers-1905}; the transfer of the Ore condition to corners we did not find stated.

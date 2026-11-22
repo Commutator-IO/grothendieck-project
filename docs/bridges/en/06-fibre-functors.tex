@@ -1,0 +1,50 @@
+\section{Counting the fibre functors of a monoid}\label{sec:fibre}
+
+A \emph{fibre functor} on $M$-sets is a way of observing every $M$-set at once, compatible with every construction: a functor to sets preserving all limits and all colimits. Bridge~\ref{br:pts} says what they are: for each idempotent command $e = e^2$ (a \q{normalise}, a \q{reset to canonical form}, a projection), the observer that looks only at the states that $e$ fixes,
+\[
+X\longmapsto Xe = \{x\in X : x\cdot e = x\},
+\]
+and two idempotents give the same observer (up to isomorphism) iff they are related by
+\[
+e\approx f\quad\iff\quad\text{there are } a\in fMe,\ b\in eMf \text{ with } ba = e \text{ and } ab = f.
+\]
+For idempotents, $\approx$ is Green's relation $\mathcal D$ \cite[Prop.~3.1]{costa-steinberg}; a $\mathcal D$-class containing an idempotent is called \emph{regular}.
+
+\begin{theorem}\label{th:fibre}
+Let $M$ be a finite monoid. The fibre functors on right $M$-sets, up to isomorphism, are in bijection with the regular $\mathcal D$-classes of $M$. In particular:
+\begin{center}\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.4cm}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}X}
+\toprule
+monoid $M$ & what it models & fibre functors\\
+\midrule
+a group $G$ & reversible commands & $1$ (the forgetful functor, with automorphism group $G$)\\
+$T_n$, all maps of $\{1..n\}$ & arbitrary state updates & $n$\\
+$PT_n$, partial maps & updates that may fail & $n+1$\\
+$I_n$, partial bijections & reversible updates that may fail & $n+1$\\
+$O_n$, order-preserving maps of a chain & monotone updates & $n$\\
+$M_n(\mathbb F_q)$, matrices under product & linear updates & $n+1$\\
+a commutative monoid & commuting commands & one per idempotent\\
+\bottomrule
+\end{tabularx}
+\end{center}
+For the (infinite) bicyclic monoid $\langle p,q\mid pq = 1\rangle$, which models a counter with an increment $p$ and a saturating decrement $q$ ($x\cdot p = x+1$, $x\cdot q = \max(x-1,0)$), there is exactly one.
+\end{theorem}
+
+\inwords{} The number of essentially different \q{observers} of a system driven by $M$ is the number of ranks of its idempotent commands: for arbitrary updates of an $n$-valued register, one observer per possible size of the set of values a normalising command can leave ($1$ to $n$); allowing failure adds the empty case.
+
+\gen{} Deck: $\PSh(\B M)$. Arch: Bridge~\ref{br:pts} with Bridge~\ref{br:morita}'s description of isomorphism in $\Kar(\B M)$. The counts unfold $\approx$ in each monoid.
+
+\direct{} The bijection is Bridge~\ref{br:pts} plus the identification of $\approx$ with $\mathcal D$. For the counts, in each of $T_n$, $PT_n$, $I_n$, $O_n$, $M_n(\mathbb F_q)$, with the product $ab = a\circ b$:
+\begin{itemize}
+\item if $e\approx f$, then $b\circ a = e$ is the identity on the image of $e$, so $a$ maps $\operatorname{im}e$ injectively into $\operatorname{im}f$, and symmetrically; so $|\operatorname{im}e| = |\operatorname{im}f|$ (for matrices, the ranks agree);
+\item conversely, if the images have the same size (rank), choose a bijection (an order isomorphism for $O_n$, a linear isomorphism for matrices) $\theta : \operatorname{im}e\to\operatorname{im}f$ and put $a = \theta\circ e$, $b = \theta^{-1}\circ f$; these lie in the monoid and satisfy $ba = e$, $ab = f$.
+\end{itemize}
+The possible image sizes of idempotents are $1,\dots,n$ for $T_n$ and $O_n$, and $0,\dots,n$ for $PT_n$, $I_n$ and $M_n(\mathbb F_q)$. In a commutative monoid, $ba = e$ and $ab = f$ force $e = f$. For a group, $1$ is the only idempotent, and the natural endomorphisms of the forgetful functor are $x\mapsto x\cdot g$, which compose as $G^{\op}\cong G$. For the bicyclic monoid, the idempotents are $q^ip^i$, and $a = q^i$, $b = p^i$ satisfy $ba = p^iq^i = 1$ and $ab = q^ip^i$, so all idempotents are $\approx 1$. (The count does not depend on the side of the action, since $\mathcal D$ is left-right symmetric.)\qed
+
+\leanentry{} The arch is \lean{essentialPointEquivKaroubiOp}; the counts are not in the library.
+
+\status{} That essential points of $\PSh(\B M)$ correspond to idempotents is in print \cite[Cor.~4.2]{rogers-1905}, and so is the description of isomorphism in the Karoubi envelope of a semigroup by $\mathcal D$ \cite{costa-steinberg}. We did not find the two combined, nor any of the counts.
+
+\begin{exercise}
+How many fibre functors does the monoid $\{1,e\}$ with $e^2 = e$ have (sets with an idempotent operation, e.g.\ a \q{normalise} command)? And $(\mathbb N,\max)$?
+\end{exercise}

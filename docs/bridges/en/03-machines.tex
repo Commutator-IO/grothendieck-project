@@ -1,0 +1,52 @@
+\section{State machines: determinism is the weak excluded middle}\label{sec:machines}
+
+\subsection{Pipelines and branching}
+
+A \emph{quiver} $R$ is a directed graph. A \emph{representation} of $R$ in sets gives a set $F(v)$ for each vertex and a function $F(a) : F(v)\to F(w)$ for each arrow $a : v\to w$, with no equations. Think of the vertices as the \emph{phases} of a system and of $F(v)$ as the states in phase $v$; an arrow is a step from one phase to the next. A compiler pipeline $\mathsf{Source}\to\mathsf{AST}\to\mathsf{Typed}\to\mathsf{Code}$, a protocol, a build: all are representations of quivers. A \emph{trap} is a family $A(v)\subseteq F(v)$ closed under the steps.
+
+\begin{theorem}\label{th:quivers}
+Representations of a quiver $R$ in sets satisfy the weak excluded middle (form a De Morgan topos) iff every vertex of $R$ has at most one outgoing arrow. They satisfy the excluded middle (form a Boolean topos) iff $R$ has no arrows.
+\end{theorem}
+
+\inwords{} Call a state $x$ \emph{doomed} for a trap $A$ if every run from $x$ can still reach $A$, and \emph{safe} if no run from $x$ ever reaches $A$. The theorem says: \emph{every state is either safe or doomed, for every system of shape $R$ and every trap, iff $R$ never branches}. A linear pipeline has the property; as soon as one phase has two possible next phases, some system of that shape has a state that is neither safe nor doomed.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[ph/.style={draw,rounded corners,minimum width=15mm,minimum height=6mm,font=\small},>=Stealth]
+\node[ph] (a) at (0,0) {$\mathsf{Typed}$};
+\node[ph,fill=red!12] (b) at (3,0.8) {$\mathsf{Code}$};
+\node[ph] (c) at (3,-0.8) {$\mathsf{Lint}$};
+\draw[->] (a) -- node[above,font=\small]{$a$} (b);
+\draw[->] (a) -- node[below,font=\small]{$b$} (c);
+\node[align=left,font=\small] at (8.2,0) {$F(v)$ = runs from $\mathsf{Typed}$ to $v$; trap $A$ = the runs through $a$.\\ The empty run $x$ at $\mathsf{Typed}$ reaches $A$ (step $a$),\\ but after step $b$ it never can: $x$ is neither safe nor doomed.};
+\end{tikzpicture}
+\caption{One branching vertex breaks the weak excluded middle.}\label{fig:branch}
+\end{figure}
+
+\gen{} Deck: representations of $R$ are the presheaves on the free category $C = \mathrm{Path}(R^{\op})$ (arrows are paths of the opposite quiver). Arch: Bridge~\ref{br:dm}. In a free category, $f\circ h = g\circ k$ is an equality of paths, so one of $f$, $g$ is a final segment of the other; thus $C$ satisfies Ore iff, of any two paths ending at the same vertex of $R^{\op}$, one is a final segment of the other, iff no vertex of $R^{\op}$ has two incoming arrows, iff no vertex of $R$ has two outgoing arrows. Bridge~\ref{br:bool}: a free category is a groupoid iff it has no arrows.
+
+\direct{} The \q{images} of $x\in F(v)$ are the values $F(p)(x)$ along the paths $p$ from $v$. If every vertex has at most one outgoing arrow, the paths from $v$ form one sequence $p_0\subset p_1\subset p_2\subset\cdots$, each extending the previous one. If $F(p_k)(x)\in A$, then from any image $F(p_j)(x)$ the further image $F(p_{\max(j,k)})(x)$ lies in $A$: $x$ is doomed, or else no image is in $A$ and $x$ is safe. Conversely, for two arrows $a : v\to w$, $b : v\to w'$, take $F(u)$ = the paths from $v$ to $u$ (steps extend the path), $A$ = the paths beginning with $a$, and $x$ = the empty path (Figure~\ref{fig:branch}). For the Boolean case, if $a : v\to w$ is an arrow, take $F(v) = F(w) = \{\ast\}$ and $A(w) = \{\ast\}$, $A(v) = \emptyset$: then $\neg A = \emptyset$, and $A\cup\neg A\neq F$.\qed
+
+\leanentry{} The arch is \lean{isDeMorganTopos_presheaf_iff_rightOreCondition}; the specialisation to free categories is not yet in the library (\S\ref{sec:lean-lit}).
+
+\status{} We did not find a characterisation of the Ore condition for free categories, or of De Morgan topoi of quiver representations.
+
+\subsection{Automata}
+
+\begin{corollary}\label{co:automata}
+For deterministic automata over an alphabet $\Sigma$ (sets of states with transitions $x\cdot a$, no initial or final states), every state is safe or doomed for every trap iff $|\Sigma|\le 1$. The excluded middle holds iff $\Sigma = \emptyset$.
+\end{corollary}
+
+\begin{proof}
+An automaton is a representation of the quiver with one vertex and $|\Sigma|$ loops. Apply Theorem~\ref{th:quivers}. Concretely, over $\{x,y\}$: three states $s,a,b$, with $s\cdot x = a$, $s\cdot y = b$, and $a$, $b$ fixed by both letters; the trap $\{a\}$; the state $s$ is neither safe nor doomed. Over one letter, an automaton is a map $\tau : X\to X$, and if $\tau^k(x)\in A$ then $\tau^{\max(j,k)}(x)\in A$ is reachable from every $\tau^j(x)$.
+\end{proof}
+
+\status{} The topos of automata is standard; we did not find this property stated.
+
+\begin{remark}
+Nondeterminism is not the issue here: these automata are deterministic. What breaks the weak excluded middle is \emph{choice of input}. A single-input system (a clock, a counter that only increments) is stable; a system driven by two independent inputs is not.
+\end{remark}
+
+\begin{exercise}
+Which representations of the quiver $\mathsf{Init}\to\mathsf{Run}\rightleftarrows\mathsf{Wait}$ (a run loop with a wait state) satisfy the weak excluded middle for every trap? (Hint: $\mathsf{Run}$ has one outgoing arrow and so does $\mathsf{Wait}$.)
+\end{exercise}

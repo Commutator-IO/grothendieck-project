@@ -1,0 +1,43 @@
+\section{The idea in programmer's terms}\label{sec:intro}
+
+\subsection{Two encodings, one invariant}
+
+Every Lean user knows the following situation. A type has two encodings, say a list and an array, related by an equivalence \texttt{e : List α ≃ Array α}. A property that is invariant under the equivalence (\q{has no duplicates}) has one definition on each side. Two lemmas, one per encoding, characterise it:
+\begin{leancode}
+lemma nodup_iff_list  : P x ↔ List.Nodup l
+lemma nodup_iff_array : P x ↔ Array.Nodup a   -- with a = e l
+\end{leancode}
+Chaining them gives \texttt{List.Nodup l ↔ Array.Nodup (e l)}, a statement in which $P$ no longer appears. O.~Caramello's \emph{bridges} \cite{caramello-unification,caramello-tst} are this pattern, with a much richer object in the middle: a \emph{topos}. A topos is a category that behaves like the category of sets (it has products, sums, function spaces, subsets), and the same topos can be encoded in many ways that look unrelated: as the actions of a monoid, as the representations of a graph, as the sheaves on a space, as the models of a logical theory. A property of the topos (for instance, \q{the law of excluded middle holds}) can be characterised on each encoding. Chaining two characterisations gives a theorem.
+
+\subsection{A theorem generator}
+
+In a talk at Mines Paris on 17 September 2024, Caramello proposed to automate this \cite{caramello-mines}: a proof assistant would take \q{a database of topos equivalences} (the \emph{decks}) and \q{a database of characterizations of topos-theoretic invariants in terms of different presentations for toposes} (the \emph{arches}), and combine them \q{to generate concrete correspondences between `unravelings' of a given invariant in terms of different presentations for a given topos} \cite[slide 11]{caramello-mines}. The results, she warns, \q{can be rather `weird' according to the usual mathematical standards}, but \q{with a careful choice of topos equivalences and invariants, one can easily get interesting and natural mathematical results} \cite[slide 8]{caramello-mines}.
+
+\subsection{What we did}
+
+\begin{itemize}
+\item \textbf{Arches.} We use five bridges proved in Lean~4 with Mathlib, in the library \lp{} of lean-pool (\S\ref{sec:toolbox}). We state them as Lean signatures and explain them in a few lines; we do not reprove them.
+\item \textbf{Decks.} We chose structures an engineer knows: state machines and automata, counters and stacks, dynamical systems, monoids of transformations and of matrices, graphs and simplicial sets.
+\item \textbf{Generation.} For each pair (deck, arch), we unfolded the arch on the deck into an ordinary statement, proved it again directly, and searched the literature.
+\item \textbf{Filter.} The generator re-derives many known results; we keep them out of the main text and list them in \S\ref{sec:calibration}, with references, to show that the machine is sound. Sections~\ref{sec:machines}--\ref{sec:shapes} contain only statements that our search did not find in print (\S\ref{sec:lean-lit} says how we searched).
+\end{itemize}
+
+\subsection{The new statements at a glance}
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}X l}
+\toprule
+structures & generated statement & \S\\
+\midrule
+representations of a quiver (state machines) & weak excluded middle $\iff$ every vertex has at most one outgoing arrow & \ref{sec:machines}\\
+automata over $\Sigma$ & weak excluded middle $\iff |\Sigma|\le 1$ & \ref{sec:machines}\\
+actions of a finite monoid & weak excluded middle $\iff$ a single minimal right ideal; true for every strongly connected synchronizing automaton & \ref{sec:finite}\\
+corners $eMe$, $1\in MeM$ & Ore condition transfers & \ref{sec:finite}\\
+discrete dynamical systems & exactly three subtopoi: all, invertible, none & \ref{sec:dynamics}\\
+actions of a finite monoid & fibre functors $\leftrightarrow$ regular $\mathcal D$-classes; $n$, $n+1$, $n+1$, $n$, $n+1$ for $T_n$, $PT_n$, $I_n$, $O_n$, $M_n(\mathbb F_q)$; one for a counter & \ref{sec:fibre}\\
+graphs, simplicial sets, trees, \dots & weak excluded middle, case by case & \ref{sec:shapes}\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+None of these is deep: each has a proof of a few lines, which we give. What the generator supplies is the \emph{statement}, and the choice of question: nobody asks whether automata satisfy $\neg p\vee\neg\neg p$ until a bridge says that the answer is a property of the alphabet.

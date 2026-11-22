@@ -1,97 +1,34 @@
 \documentclass[11pt]{article}
-% Built with XeLaTeX: cd docs/bridges && xelatex article.tex && xelatex article.tex
-% Same page design as the other working papers of docs/ (Charter, 27 mm margins, 1.1 spacing).
-\usepackage{fontspec}
-\IfFontExistsTF{Charter}{\setmainfont{Charter}}{\IfFontExistsTF{XCharter}{\setmainfont{XCharter}}{}}
+% English version; the French version is article-fr.tex. Built with XeLaTeX:
+% cd docs/bridges && xelatex article.tex && xelatex article.tex
 \usepackage{polyglossia}\setmainlanguage{english}\setotherlanguage{french}
-\usepackage{microtype}
-\usepackage[a4paper,margin=27mm]{geometry}
-\usepackage{setspace}\setstretch{1.1}
-\usepackage{amsmath,amssymb,amsthm}
-\usepackage{mathtools}
-\usepackage[most]{tcolorbox}
-\usepackage{xcolor}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning,calc,cd}
-\usepackage{booktabs,array,tabularx}
-\usepackage[hidelinks]{hyperref}
-\usepackage{xurl}
-\usepackage{enumitem}
-\setlist{nosep,leftmargin=*}
-\setlength{\emergencystretch}{2em}
-\setlength{\parskip}{0.35em}
-\numberwithin{equation}{section}
-
-\newcommand{\Set}{\mathbf{Set}}
-\newcommand{\PSh}{\mathrm{PSh}}
-\newcommand{\Sh}{\mathrm{Sh}}
-\newcommand{\Kar}{\operatorname{Kar}}
-\newcommand{\Hom}{\operatorname{Hom}}
-\newcommand{\End}{\operatorname{End}}
-\newcommand{\Aut}{\operatorname{Aut}}
-\newcommand{\id}{\mathrm{id}}
-\newcommand{\B}{\mathbf{B}}
-\newcommand{\y}{\mathbf{y}}
-\newcommand{\op}{\mathrm{op}}
-\newcommand{\fp}{\mathrm{f.p.}}
-\newcommand{\res}[2]{#1|_{#2}}
-\newcommand{\q}[1]{«\,#1\,»}
-\newcommand{\lean}[1]{{\small\nolinkurl{#1}}}
-\newcommand{\lp}{\href{https://github.com/LeanPool/lean-pool/tree/main/LeanPool/ToposTheoreticBridges}{\nolinkurl{ToposTheoreticBridges}}}
-
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{bridge}{Bridge}
-\renewcommand{\thebridge}{\Alph{bridge}}
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{exercise}{Exercise}[section]
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-\newtheorem*{intuition}{Intuition}
-\tcolorboxenvironment{theorem}{enhanced, breakable, colback=white, colframe=black!55, boxrule=0.6pt, arc=0pt, left=7pt, right=7pt, top=4pt, bottom=4pt, before skip=12pt, after skip=8pt}
-\tcolorboxenvironment{bridge}{enhanced, breakable, colback=blue!3, colframe=blue!35!black, boxrule=0.5pt, arc=0pt, left=7pt, right=7pt, top=4pt, bottom=4pt, before skip=12pt, after skip=8pt}
-\tcolorboxenvironment{definition}{enhanced, breakable, colback=black!3, colframe=black!25, boxrule=0.4pt, arc=0pt, left=7pt, right=7pt, top=4pt, bottom=4pt, before skip=10pt, after skip=6pt}
-\newcommand{\entry}[1]{\par\smallskip\noindent\textbf{#1}\enspace}
-\newcommand{\inwords}{\entry{In words.}}
+\newcommand{\thmname}{Theorem}\newcommand{\corname}{Corollary}\newcommand{\propname}{Proposition}
+\newcommand{\lemname}{Lemma}\newcommand{\bridgename}{Bridge}\newcommand{\defname}{Definition}
+\newcommand{\exname}{Example}\newcommand{\exoname}{Exercise}\newcommand{\remname}{Remark}
+\input{preamble}
+\newcommand{\inwords}{\entry{For an engineer.}}
 \newcommand{\gen}{\entry{How the generator finds it.}}
 \newcommand{\direct}{\entry{Proof, without topoi.}}
-\newcommand{\status}{\entry{Is it known?}}
-\newcommand{\leanbox}[1]{\par\smallskip\noindent{\small\textbf{Lean.}\enspace #1}}
+\newcommand{\status}{\entry{Is it new?}}
+\newcommand{\leanentry}{\entry{Lean.}}
 
-\title{Theorems from topos-theoretic bridges\\[0.3em] \large An undergraduate introduction, with a hand-run theorem generator,\\ from automata to algebraic theories}
+\title{New theorems from topos-theoretic bridges\\[0.3em] \large A theorem generator run by hand, explained for engineers who use Lean}
 \author{Michel Hua\\ \small Commutator, Paris\\ \small\texttt{michel@commutator.io} · ORCID 0009-0002-8304-0683}
 \date{Draft, 22 November 2026}
 
 \begin{document}
 \maketitle
-
-\begin{abstract}
-A Grothendieck topos can be described in many different ways, and O.~Caramello has shown how to exploit this: a property of the topos that can be read off each description turns into a theorem relating the descriptions. She calls such a pair of readings a \emph{bridge}, and has proposed to let a computer combine a stock of descriptions with a stock of readings, so as to generate theorems automatically. This text explains the idea from scratch, for a reader at the end of a first degree in mathematics (bac+3), and then runs a small version of the generator by hand. The readings we use are five bridges proved in Lean~4 in the library \lp{} of lean-pool: a category of presheaves satisfies the law of excluded middle exactly when its shape is a groupoid, it satisfies the weak law $\neg p\vee\neg\neg p$ exactly when its shape satisfies the Ore condition, two shapes give the same presheaves exactly when their idempotent completions agree, the \q{points} of presheaves are the idempotents, and the subtopoi are the finer Grothendieck topologies. The descriptions are structures that an undergraduate meets under other names: monoid actions and automata, preorders, Alexandrov spaces and rewriting systems, directed graphs, simplicial sets, the topos of trees, matrix and transformation monoids, the theories of algebraic structures and of torsors. Every generated statement comes with a direct proof that uses no topos theory, so that the bridge is a way of \emph{finding} a statement and the elementary proof is a way of \emph{checking} it. Most outputs turn out to be in print; a few readings we have not found stated, and we say which. Many examples and exercises are included.
-\end{abstract}
-
+\input{en/00-abstract}
 \tableofcontents
 \newpage
-
-\input{sections/01-introduction}
-\input{sections/02-shapes}
-\input{sections/03-negation}
-\input{sections/04-arches}
-\input{sections/05-same-topos}
-\input{sections/06-sites-theories}
-\input{sections/065-sierpinski}
-\input{sections/07-generator}
-\input{sections/08-monoids}
-\input{sections/09-preorders}
-\input{sections/10-combinatorics}
-\input{sections/11-points}
-\input{sections/12-theories}
-\input{sections/13-conclusion}
-\input{sections/14-solutions}
-
-\input{sections/99-bibliography}
+\input{en/01-intro}
+\input{en/02-toolbox}
+\input{en/03-machines}
+\input{en/04-finite-monoids}
+\input{en/05-dynamics}
+\input{en/06-fibre-functors}
+\input{en/07-shapes}
+\input{en/08-calibration}
+\input{en/09-lean-lit}
+\input{bibliography}
 \end{document}
