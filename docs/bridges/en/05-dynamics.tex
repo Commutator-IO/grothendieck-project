@@ -1,32 +1,31 @@
-\section{Discrete dynamical systems have exactly three subtopoi}\label{sec:dynamics}
+\section{The three subtopoi of $\mathbb N$-sets}\label{sec:dynamics}
 
-A \emph{discrete dynamical system} is a set $X$ with a map $\tau : X\to X$ (one tick of a clock, one step of a simulation, one iteration of a loop); maps of systems commute with $\tau$. These are the right $(\mathbb N,+)$-sets, $x\cdot n = \tau^n(x)$, i.e.\ $\PSh(\B\mathbb N)$.
-
-A \emph{subtopos} is a way of restricting attention to a class of systems that is closed under all limits and comes with a \q{best approximation} functor (left adjoint to the inclusion) preserving finite limits. Engineers do this all the time without the name: restricting to reversible systems, to systems that have converged, to systems observed only eventually.
+An action of the additive monoid $(\mathbb N,+)$ on a set $X$ is the same as a map $\tau : X\to X$ ($x\cdot n = \tau^n(x)$): a discrete dynamical system. A \emph{subtopos} of the topos of such systems is a full subcategory closed under limits, whose inclusion has a left adjoint preserving finite limits.
 
 \begin{theorem}\label{th:dynamics}
-The topos of discrete dynamical systems has exactly three subtopoi:
+The topos of sets with an endomorphism has exactly three subtopoi:
 \begin{enumerate}
-\item all systems;
-\item the \emph{invertible} systems ($\tau$ bijective, i.e.\ $\mathbb Z$-sets), with best approximation $X\mapsto\varinjlim(X\xrightarrow{\tau}X\xrightarrow{\tau}X\to\cdots)$;
-\item the degenerate subtopos, containing only the one-point system.
+\item all of it;
+\item the sets with an \emph{automorphism} ($\tau$ bijective, i.e.\ $\mathbb Z$-sets), the left adjoint being $X\mapsto\varinjlim(X\xrightarrow{\tau}X\xrightarrow{\tau}\cdots)$;
+\item the degenerate subtopos (only the one-point set).
 \end{enumerate}
+Equivalently, the one-object category $\B\mathbb N$ carries exactly three Grothendieck topologies.
 \end{theorem}
 
-\inwords{} There is no other coherent way to \q{simplify} dynamical systems: either keep them all, or make time reversible by passing to the long-run behaviour, or collapse everything. For instance \q{systems with a fixed point}, \q{eventually periodic systems}, \q{finite systems} are not subtopoi (they fail closure under limits or the left exactness of the approximation).
+\begin{trace}
+\item[deck] sets with an endomorphism $=$ presheaves on $\B\mathbb N$.
+\item[arch] Bridge~\ref{br:sub}: subtopoi $\leftrightarrow$ Grothendieck topologies on $\B\mathbb N$.
+\item[specialise] sieves on the object are $\emptyset$ and the right ideals $I_n = \{n,n+1,\dots\}$; pulling $I_n$ back along $m$ gives $I_{\max(n-m,0)}$. Count the topologies: three.
+\item[unfold] identify the sheaves of each topology.
+\item[verify] direct proof below; Lean: %LEAN-NAT%
+being formalised.
+\item[novelty] not found in print.
+\end{trace}
 
-\gen{} Deck: $\PSh(\B\mathbb N)$. Arch: Bridge~\ref{br:sub}; count the Grothendieck topologies on $\B\mathbb N$. A sieve on the single object is a right ideal of $(\mathbb N,+)$ or $\emptyset$: the right ideals are the sets $I_n = \{n, n+1,\dots\}$. Pulling back $I_n$ along $m$ gives $I_{\max(n-m,0)}$.
+\direct{} Let $J$ be a topology; it contains $I_0$. If it contains $\emptyset$, it contains every sieve (covering sieves are closed upwards). Otherwise, if it contains some $I_n$ with $n\ge 1$, it contains $I_1$ (the pullback of $I_n$ along $n-1$), and then every $I_k$ by induction: the pullback of $I_{k+1}$ along any $r\ge 1$ in the covering sieve $I_1$ is $I_{k+1-r}\supseteq I_k$, covering, so $I_{k+1}$ covers by transitivity. Hence three topologies: $\{I_0\}$, $\{I_n : n\ge 0\}$, all sieves. For the middle one, a matching family on $I_1$ is determined by its value $x_1$ at $1$ (then $x_{1+k} = \tau^k(x_1)$), and the sheaf condition asks for a unique $x$ with $\tau(x) = x_1$: $\tau$ is bijective. The left adjoint inverts $\tau$ by a filtered colimit, which preserves finite limits.\qed
 
-\direct{} Let $J$ be a topology. It contains $I_0 = \mathbb N$. If it contains $\emptyset$, it contains everything (covering sieves are closed upwards): the degenerate topology. Otherwise, if it contains some $I_n$ with $n\ge 1$, it contains $I_1$ (pull back along $n-1$), and then every $I_k$: by induction, the pullback of $I_{k+1}$ along every element $r\ge 1$ of the covering sieve $I_1$ is $I_{k+1-r}$, covering by induction, so $I_{k+1}$ is covering by transitivity. So there are exactly three topologies: only $I_0$; all $I_n$; all sieves. For the middle one, a matching family on $I_1$ is determined by its value $x_1$ at $1$ (with $x_{1+k} = \tau^k(x_1)$), and the sheaf condition asks for a unique $x$ with $\tau(x) = x_1$: $\tau$ must be bijective. The sheafification is the colimit, which is left exact since filtered colimits of sets commute with finite limits. Bridge~\ref{br:sub} turns the three topologies into the three subtopoi.\qed
+\inwords{} There is no intermediate way of \q{localising} dynamical systems: one either keeps all of them, or makes the dynamics invertible by passing to its colimit, or collapses everything. Sets with a fixed point, eventually periodic systems or finite systems do not form subtopoi.
 
-\begin{corollary}
-The same holds for one-letter automata, and for any system whose command monoid is $(\mathbb N,+)$: a counter that can only increase, a loop counter, a log that can only be appended to by one kind of entry.
-\end{corollary}
-
-\leanentry{} The arch is \lean{subtoposOrderIso}; the count of topologies on $\B\mathbb N$ is not in the library.
-
-\status{} Not found. (For a group $G$, the same computation gives exactly two subtopoi of $G$-sets, since $G$ is its only right ideal; this is immediate.)
-
-\begin{exercise}
-Show that dynamical systems with \emph{two commuting} maps ($(\mathbb N^2,+)$-sets) have more than three subtopoi. (Hint: the right ideal $(1,0)+\mathbb N^2$ generates a topology whose sheaves are the systems in which the first map is invertible.)
-\end{exercise}
+\begin{example}
+For a group $G$, the only sieves on $\B G$ are $\emptyset$ and $G$, so $G$-sets have exactly two subtopoi. For $(\mathbb N^2,+)$ there are more than three: inverting the first generator only gives a fourth.
+\end{example}

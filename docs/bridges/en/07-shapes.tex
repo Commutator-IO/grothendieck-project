@@ -1,38 +1,40 @@
 \section{A dozen combinatorial topoi}\label{sec:shapes}
 
-The last batch is the generator at its most mechanical: take a shape used in combinatorics or computer science, check the Ore condition, read off the weak excluded middle. The checks are one line each; we found none of these examples in print except reflexive graphs \cite[Ex.~2.52]{hemelaer-rogers}.
+The last batch is the generator at its most mechanical: a shape from combinatorics, the Ore condition checked on it, the weak excluded middle read off. We found none of these examples in print except reflexive graphs \cite[Ex.~2.52]{hemelaer-rogers}.
 
 \begin{theorem}\label{th:shapes}
 \begin{center}\small
 \begin{tabular}{llcc}
 \toprule
-structures & shape & excluded middle & weak excluded middle\\
+presheaves & shape & Boolean & De Morgan\\
 \midrule
 directed graphs & $V\rightrightarrows E$ & no & no\\
-reflexive graphs & $V\rightrightarrows E$, with loops & no & no\\
+reflexive graphs & $V\rightrightarrows E$ with loops & no & no\\
 simplicial sets & $\Delta$ & no & no\\
 semi-simplicial sets & $\Delta_{\mathrm{inj}}$ & no & no\\
 symmetric simplicial sets & non-empty finite sets & no & no\\
 cubical sets & cube category & no & no\\
 bisimplicial sets & $\Delta\times\Delta$ & no & no\\
-augmented simplicial sets & $\Delta_+$ & no & \textbf{yes}\\
-$\mathsf{FI}$-sets (finite sets, injections) & $\mathsf{FI}$ or $\mathsf{FI}^{\op}$ & no & \textbf{yes}\\
-presheaves on finite sets & $\mathsf{Fin}$ & no & \textbf{yes}\\
-the topos of trees & $\omega$ & no & \textbf{yes}\\
-sets with an involution & $\B(\mathbb Z/2)$ & \textbf{yes} & \textbf{yes}\\
+augmented simplicial sets & $\Delta_+$ & no & yes\\
+$\mathsf{FI}$-sets & finite sets and injections & no & yes\\
+presheaves on finite sets & $\mathsf{Fin}$ & no & yes\\
+the topos of trees & $\omega$ & no & yes\\
+sets with an involution & $\B(\mathbb Z/2)$ & yes & yes\\
 \bottomrule
 \end{tabular}
 \end{center}
 \end{theorem}
 
-\gen{} Bridges~\ref{br:bool} and~\ref{br:dm} on each shape. The \q{no} cases all fail Ore for the same reason: two distinct \q{vertex} arrows into the same object (the source and target of an edge, the two endpoints $[0]\rightrightarrows[1]$ of a segment) that no arrow can equalise, since every arrow into a vertex is constant. The \q{yes} cases have an initial object ($\Delta_+$, $\mathsf{FI}$, $\mathsf{Fin}$: complete any cospan by the empty object) or pushouts of injections ($\mathsf{FI}^{\op}$), or are a chain ($\omega$: complete by the minimum).
+\begin{trace}
+\item[deck] each shape.
+\item[arch] Bridges~\ref{br:bool} and~\ref{br:dm}.
+\item[specialise] \q{no}: two distinct vertex arrows into one object (source and target of an edge, the endpoints $[0]\rightrightarrows[1]$) that no arrow equalises, every arrow into a vertex being constant. \q{yes}: an initial object (complete any cospan from it), or a chain (complete by the minimum).
+\item[verify] Lean: \lean{not_isDeMorganTopos_graphs} with the explicit counterexample \lean{graphs_pseudocompl_counterexample}, \lean{not_isDeMorganTopos_simplicialSets}, \lean{isDeMorganTopos_augmentedSimplicialSets}, \lean{isDeMorganTopos_presheaf_fintypeCatSkeleton}, \lean{isDeMorganTopos_treeTopos}, \lean{not_isBooleanTopos_treeTopos}, all through the general \lean{isDeMorganTopos_presheaf_of_hasInitial}; the other rows by the direct proof.
+\item[novelty] the criterion is classical; the examples, except reflexive graphs, not found.
+\end{trace}
 
-\direct{} For a \q{no}, the witness is always the same picture: in the one-edge graph (or $\Delta[1]$), let $A$ be one endpoint $u$; then $\neg A$ is the other endpoint $v$, $\neg\neg A = \{u\}$, and the edge is in neither, since it sees $A$ through one end and $\neg A$ through the other. For a \q{yes} with an initial object $\emptyset$: every element $x$ has a restriction $\res x{\emptyset}$ to the empty object, reached from every restriction of $x$; if any restriction of $x$ is in $A$, so is $\res x\emptyset$, and then every restriction of $x$ has a further restriction in $A$.\qed
+\direct{} For a \q{no}, in the one-edge graph (or $\Delta[1]$) take $A$ = one endpoint $u$: then $\neg A$ is the other endpoint $v$, $\neg\neg A = \{u\}$, and the edge is in neither. For a \q{yes} with an initial object $\emptyset$, every element $x$ has a restriction $\res x\emptyset$ that is also a restriction of every restriction of $x$; if some restriction of $x$ is in $A$, so is $\res x\emptyset$, and every restriction of $x$ then has a further restriction in $A$. For $\omega$, two restrictions of $x$ have a common further restriction at the lower level.\qed
 
-\begin{example}[What the weak excluded middle says for augmented simplicial sets]
-An augmented simplicial set is a simplicial set $X$ with a map $X_0\to X_{-1}$, a labelling of its components. For a sub-object $A$, a simplex lies in $\neg\neg A$ iff its label lies in $A_{-1}$, and in $\neg A$ iff it does not. The weak excluded middle is decided entirely by the augmentation.
+\begin{example}
+In augmented simplicial sets, a simplex lies in $\neg\neg A$ iff its augmentation label lies in $A_{-1}$, and in $\neg A$ otherwise: the weak excluded middle is decided by the augmentation. In the topos of trees, the internal logic proves $\neg\varphi\vee\neg\neg\varphi$ for every $\varphi$, but not $\varphi\vee\neg\varphi$.
 \end{example}
-
-\begin{remark}
-For a programmer working with guarded recursion, the topos of trees is the standard model of the \q{later} modality \cite{birkedal}. That it is De Morgan means that its internal logic proves $\neg\varphi\vee\neg\neg\varphi$ for every proposition $\varphi$, although it does not prove $\varphi\vee\neg\varphi$; the proof above is two lines.
-\end{remark}

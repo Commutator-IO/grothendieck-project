@@ -1,6 +1,6 @@
 \section{Toolbox: four definitions and five arches}\label{sec:toolbox}
 
-This section is all the theory the rest needs. It can be read in twenty minutes.
+This section is all the theory the rest needs: four definitions, and the five lemmas that form the arch registry.
 
 \subsection{Shapes and presheaves}
 
@@ -22,14 +22,14 @@ $\omega = (\mathbb N,\le)$ & sequences $X_0\leftarrow X_1\leftarrow\cdots$ (\q{t
 \end{tabularx}
 \end{center}
 
-For a monoid, the restriction of $x$ along $m$ is $x\cdot m$: \q{the state reached from $x$ by the command $m$}. We keep this reading throughout.
+For a monoid, the restriction of $x$ along $m$ is $x\cdot m$.
 
 \subsection{Traps and negation}
 
-A \emph{sub-presheaf} $A\subseteq F$ is a family of subsets closed under restriction. For an $M$-set or an automaton it is a \emph{trap}: a set of states that no command leaves. Sub-presheaves are the subobjects in the topos, and play the role of propositions. Their negation is not the set complement (which is usually not a trap) but the largest trap disjoint from $A$:
+A \emph{sub-presheaf} $A\subseteq F$ is a family of subsets closed under restriction. For an $M$-set it is a subset closed under the action. Sub-presheaves are the subobjects in the topos, and play the role of propositions. Their negation is not the set complement (which is usually not a trap) but the largest sub-presheaf disjoint from $A$:
 
 \begin{lemma}\label{lem:neg}
-$x\in\neg A$ iff no restriction of $x$ lies in $A$ (\q{$x$ can never fall into the trap}). Hence $x\in\neg\neg A$ iff every restriction of $x$ has a further restriction in $A$ (\q{from $x$, the trap stays reachable whatever you do}).
+$x\in\neg A$ iff no restriction of $x$ lies in $A$ . Hence $x\in\neg\neg A$ iff every restriction of $x$ has a further restriction in $A$ .
 \end{lemma}
 
 \begin{proof}
@@ -37,14 +37,14 @@ The set of such $x$ is closed under restriction, disjoint from $A$, and contains
 \end{proof}
 
 \begin{definition}
-$\PSh(C)$ is \emph{Boolean} if $A\cup\neg A = F$ for every $A\subseteq F$ (excluded middle), and \emph{De Morgan} if $\neg A\cup\neg\neg A = F$ for every $A\subseteq F$ (weak excluded middle). By Lemma~\ref{lem:neg}, De Morgan means: \emph{for every presheaf, every trap $A$ and every element $x$, either $x$ can never reach $A$, or $A$ stays reachable from everything $x$ reaches.}
+$\PSh(C)$ is \emph{Boolean} if $A\cup\neg A = F$ for every $A\subseteq F$ (excluded middle), and \emph{De Morgan} if $\neg A\cup\neg\neg A = F$ for every $A\subseteq F$ (weak excluded middle). By Lemma~\ref{lem:neg}, De Morgan means: \emph{for every presheaf $F$, every $A\subseteq F$ and every element $x$, either no restriction of $x$ lies in $A$, or every restriction of $x$ has a further restriction in $A$.}
 \end{definition}
 
-For an engineer, De Morgan is a \emph{stability} property: \q{the trap is reachable} is a property that cannot be lost by moving on. Boolean is stronger: \q{the trap is reachable} is decided now.
+Informally, De Morgan is a \emph{stability} property: \q{$A$ can be reached} cannot be lost by restricting further. Boolean is stronger: \q{$x\in A$} is decided.
 
 \subsection{The Ore condition}
 
-$C$ satisfies the \emph{Ore condition} if every cospan $f : Y\to X$, $g : Z\to X$ completes to a commutative square $f\circ h = g\circ k$. For $\B M$: for all $a,b\in M$ there are $c,d$ with $ac = bd$, i.e.\ $aM\cap bM\neq\emptyset$ (\q{any two commands can be continued so as to agree}). It holds for groups, commutative monoids, monoids with a zero, categories with an initial object or with pullbacks, and chains.
+$C$ satisfies the \emph{Ore condition} if every cospan $f : Y\to X$, $g : Z\to X$ completes to a commutative square $f\circ h = g\circ k$. For $\B M$: for all $a,b\in M$ there are $c,d$ with $ac = bd$, i.e.\ $aM\cap bM\neq\emptyset$ (any two elements have a common right multiple). It holds for groups, commutative monoids, monoids with a zero, categories with an initial object or with pullbacks, and chains.
 
 \subsection{The five arches}
 

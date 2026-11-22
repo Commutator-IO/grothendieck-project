@@ -7,10 +7,10 @@ A theorem generator should be tested on inputs whose outputs are known. Run on t
 \toprule
 deck $\times$ arch & generated statement & in print\\
 \midrule
-$M$-sets $\times$ Boolean & excluded middle iff $M$ is a group & \cite[Thm~2.4]{hemelaer-rogers}\\
-$M$-sets $\times$ De Morgan & weak excluded middle iff $aM\cap bM\neq\emptyset$ & \cite[Thm~2.31]{hemelaer-rogers}\\
-Alexandrov space $\times$ De Morgan, topology & a preorder is confluent iff its Alexandrov space is extremally disconnected & \cite[Prop.~7.10]{caramello-stone}\\
-preorders $\times$ Morita & equivalent topoi iff isomorphic posetal reflections & \cite[A1.1.9--10]{elephant}, \cite[\S4.1]{caramello-stone}\\
+$M$-sets $\times$ Boolean & excluded middle iff $M$ is a group (Lean: \lean{isBooleanTopos_singleObj_iff}) & \cite[Thm~2.4]{hemelaer-rogers}\\
+$M$-sets $\times$ De Morgan & weak excluded middle iff $aM\cap bM\neq\emptyset$ (Lean: \lean{isDeMorganTopos_singleObj_iff}) & \cite[Thm~2.31]{hemelaer-rogers}\\
+Alexandrov space $\times$ De Morgan, topology & a preorder is confluent iff its Alexandrov space is extremally disconnected (Lean: \lean{extremallyDisconnected_iff_confluent}) & \cite[Prop.~7.10]{caramello-stone}\\
+preorders $\times$ Morita & equivalent topoi iff isomorphic posetal reflections (Lean: \lean{moritaEquivalentCat_preorder_iff}) & \cite[A1.1.9--10]{elephant}, \cite[\S4.1]{caramello-stone}\\
 $M$-sets $\times$ points & essential points $\leftrightarrow$ idempotents & \cite[Cor.~4.2]{rogers-1905}\\
 $M$-sets $\times$ Morita & $M\sim N$ iff $N\cong eMe$ with $1\in MeM$ & \cite{knauer,banaschewski}, \cite[Cor.~6.6]{rogers-1905}\\
 Horn theories $\times$ De Morgan & classifying topos De Morgan & \cite[Thm~3.5]{caramello-demorgan}\\
@@ -20,4 +20,4 @@ quotients $\times$ subtopoi & meet of local rings and integral domains & \cite[\
 \end{tabularx}
 \end{center}
 
-One output deserves a word, because it reads well for engineers even though the mathematics is known. For an abstract rewriting system $(S,\to)$, give $S$ the topology whose open sets are the sets of terms closed under rewriting. Then \emph{the system is confluent (Church--Rosser) iff this space is extremally disconnected}: this is the third line of the table applied to the preorder $\to^*$. Confluence of $\beta$-reduction thus says that the space of $\lambda$-terms, with the sets closed under $\beta$-reduction as open sets, is extremally disconnected. We did not find this reading in the rewriting literature, but since it is a direct restatement of a published theorem we do not count it as new.
+One output deserves a word, because its reading is new even though the mathematics is known. For an abstract rewriting system $(S,\to)$, give $S$ the topology whose open sets are the sets of terms closed under rewriting. Then \emph{the system is confluent (Church--Rosser) iff this space is extremally disconnected}: this is the third line of the table applied to the preorder $\to^*$. Confluence of $\beta$-reduction thus says that the space of $\lambda$-terms, with the sets closed under $\beta$-reduction as open sets, is extremally disconnected. We did not find this reading in the rewriting literature, but since it is a direct restatement of a published theorem we do not count it as new.

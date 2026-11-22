@@ -1,43 +1,63 @@
-\section{The idea in programmer's terms}\label{sec:intro}
+\section{The generator as a software pipeline}\label{sec:intro}
 
-\subsection{Two encodings, one invariant}
+\subsection{Bridges}
 
-Every Lean user knows the following situation. A type has two encodings, say a list and an array, related by an equivalence \texttt{e : List α ≃ Array α}. A property that is invariant under the equivalence (\q{has no duplicates}) has one definition on each side. Two lemmas, one per encoding, characterise it:
-\begin{leancode}
-lemma nodup_iff_list  : P x ↔ List.Nodup l
-lemma nodup_iff_array : P x ↔ Array.Nodup a   -- with a = e l
-\end{leancode}
-Chaining them gives \texttt{List.Nodup l ↔ Array.Nodup (e l)}, a statement in which $P$ no longer appears. O.~Caramello's \emph{bridges} \cite{caramello-unification,caramello-tst} are this pattern, with a much richer object in the middle: a \emph{topos}. A topos is a category that behaves like the category of sets (it has products, sums, function spaces, subsets), and the same topos can be encoded in many ways that look unrelated: as the actions of a monoid, as the representations of a graph, as the sheaves on a space, as the models of a logical theory. A property of the topos (for instance, \q{the law of excluded middle holds}) can be characterised on each encoding. Chaining two characterisations gives a theorem.
+O.~Caramello's \emph{bridges} \cite{caramello-unification,caramello-tst} rest on one observation. A \emph{topos} (a category that behaves like the category of sets) can be presented in many ways that look unrelated: as the actions of a monoid, as the representations of a quiver, as the sheaves on a space, as the models of a logical theory. A property of the topos, such as \q{the law of excluded middle holds}, can be characterised on each presentation. Two characterisations of one property, on two presentations of one topos, give a theorem relating the two presentations, in which the topos no longer appears. In Lean terms: two lemmas \texttt{P E ↔ Q₁ C} and \texttt{P E ↔ Q₂ D}, for an equivalence \texttt{E ≌ PSh C} and \texttt{E ≌ PSh D}, chain into \texttt{Q₁ C ↔ Q₂ D}.
 
-\subsection{A theorem generator}
+In a talk at Mines Paris on 17 September 2024 \cite{caramello-mines}, Caramello proposed to automate this: a proof assistant would take \q{a database of topos equivalences} (the \emph{decks} of the bridges) and \q{a database of characterizations of topos-theoretic invariants in terms of different presentations for toposes} (their \emph{arches}), and combine them \q{to generate concrete correspondences between `unravelings' of a given invariant in terms of different presentations for a given topos} \cite[slide 11]{caramello-mines}. The results, she warns, \q{can be rather `weird' according to the usual mathematical standards}, but \q{with a careful choice of topos equivalences and invariants, one can easily get interesting and natural mathematical results} \cite[slide 8]{caramello-mines}.
 
-In a talk at Mines Paris on 17 September 2024, Caramello proposed to automate this \cite{caramello-mines}: a proof assistant would take \q{a database of topos equivalences} (the \emph{decks}) and \q{a database of characterizations of topos-theoretic invariants in terms of different presentations for toposes} (the \emph{arches}), and combine them \q{to generate concrete correspondences between `unravelings' of a given invariant in terms of different presentations for a given topos} \cite[slide 11]{caramello-mines}. The results, she warns, \q{can be rather `weird' according to the usual mathematical standards}, but \q{with a careful choice of topos equivalences and invariants, one can easily get interesting and natural mathematical results} \cite[slide 8]{caramello-mines}.
+\subsection{The pipeline}
 
-\subsection{What we did}
+This text runs such a generator by hand, and describes it the way one describes a data pipeline: what goes in, what each stage does, what comes out, how outputs are tested.
 
-\begin{itemize}
-\item \textbf{Arches.} We use five bridges proved in Lean~4 with Mathlib, in the library \lp{} of lean-pool (\S\ref{sec:toolbox}). We state them as Lean signatures and explain them in a few lines; we do not reprove them.
-\item \textbf{Decks.} We chose structures an engineer knows: state machines and automata, counters and stacks, dynamical systems, monoids of transformations and of matrices, graphs and simplicial sets.
-\item \textbf{Generation.} For each pair (deck, arch), we unfolded the arch on the deck into an ordinary statement, proved it again directly, and searched the literature.
-\item \textbf{Filter.} The generator re-derives many known results; we keep them out of the main text and list them in \S\ref{sec:calibration}, with references, to show that the machine is sound. Sections~\ref{sec:machines}--\ref{sec:shapes} contain only statements that our search did not find in print (\S\ref{sec:lean-lit} says how we searched).
-\end{itemize}
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[st/.style={draw,rounded corners,align=center,font=\small,minimum height=9mm,text width=25mm},db/.style={draw,align=center,font=\small,minimum height=9mm,text width=25mm,fill=blue!6},ok/.style={draw,rounded corners,align=center,font=\small,minimum height=9mm,text width=25mm,fill=green!8},>=Stealth,node distance=5mm]
+\node[db] (decks) at (0,1) {deck registry\\ \footnotesize shapes $C$};
+\node[db] (arches) at (0,-1) {arch registry\\ \footnotesize Lean lemmas};
+\node[st] (join) at (3.4,0) {1.~join\\ \footnotesize deck $\times$ arch};
+\node[st] (spec) at (6.8,0) {2.~specialise\\ \footnotesize compute on $C$};
+\node[st] (unf) at (10.2,0) {3.~unfold\\ \footnotesize elementary terms};
+\node[st] (rw) at (10.2,-2.2) {4.~rewrite\\ \footnotesize readable statement};
+\node[ok] (ver) at (6.8,-2.2) {5.~verify\\ \footnotesize Lean + direct proof};
+\node[ok] (nov) at (3.4,-2.2) {6.~novelty filter\\ \footnotesize literature};
+\node[st] (out) at (0,-3.3) {output\\ \footnotesize new theorems};
+\node[st] (cal) at (3.4,-4.2) {calibration\\ \footnotesize known results};
+\draw[->] (decks) -- (join); \draw[->] (arches) -- (join);
+\draw[->] (join) -- (spec); \draw[->] (spec) -- (unf); \draw[->] (unf) -- (rw);
+\draw[->] (rw) -- (ver); \draw[->] (ver) -- (nov); \draw[->] (nov) -- (out); \draw[->] (nov) -- (cal);
+\end{tikzpicture}
+\caption{The generator, stage by stage. Blue: inputs. Green: the two test stages.}\label{fig:pipeline}
+\end{figure}
 
-\subsection{The new statements at a glance}
+\begin{description}
+\item[Arch registry.] Five lemmas of the form \texttt{(property of PSh C) ↔ (condition on C)}, proved in Lean~4 in the library \lp{} of lean-pool (\S\ref{sec:toolbox}). This is the trusted core: everything downstream is a specialisation of these lemmas.
+\item[Deck registry.] Small categories $C$ whose presheaves are a familiar structure: $\B M$ for a monoid $M$ (its actions), the free category of a quiver (its representations), $\Delta$ (simplicial sets), a preorder (functors on it, or sheaves on its Alexandrov space).
+\item[1. Join.] Pair every deck with every arch.
+\item[2. Specialise.] Instantiate the arch at the deck and compute the condition on $C$: for instance, the Ore condition on $\B M$ becomes $aM\cap bM\neq\emptyset$.
+\item[3. Unfold.] Translate the property of the topos into the language of the structures, with one rule per property (Lemma~\ref{lem:neg} for negation).
+\item[4. Rewrite.] Reformulate the condition on $C$ in the usual language of the field (minimal right ideals, outgoing arrows, \dots). This is where a human, or a language model, is needed.
+\item[5. Verify.] Two independent tests: a Lean proof of the specialised statement, as a corollary of the arch; and a direct proof without topoi, readable by a third-year student.
+\item[6. Novelty filter.] Search the literature. Outputs found in print go to a calibration log (\S\ref{sec:calibration}); the others are the output (\S\ref{sec:machines}--\ref{sec:shapes}).
+\end{description}
+
+Each theorem below is printed with its \emph{trace}: the values at stages 1--6.
+
+\subsection{Outputs}
 
 \begin{center}\small
-\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}X l}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.4cm}>{\raggedright\arraybackslash}X l}
 \toprule
-structures & generated statement & \S\\
+deck & generated statement & \S\\
 \midrule
-representations of a quiver (state machines) & weak excluded middle $\iff$ every vertex has at most one outgoing arrow & \ref{sec:machines}\\
-automata over $\Sigma$ & weak excluded middle $\iff |\Sigma|\le 1$ & \ref{sec:machines}\\
-actions of a finite monoid & weak excluded middle $\iff$ a single minimal right ideal; true for every strongly connected synchronizing automaton & \ref{sec:finite}\\
-corners $eMe$, $1\in MeM$ & Ore condition transfers & \ref{sec:finite}\\
-discrete dynamical systems & exactly three subtopoi: all, invertible, none & \ref{sec:dynamics}\\
-actions of a finite monoid & fibre functors $\leftrightarrow$ regular $\mathcal D$-classes; $n$, $n+1$, $n+1$, $n$, $n+1$ for $T_n$, $PT_n$, $I_n$, $O_n$, $M_n(\mathbb F_q)$; one for a counter & \ref{sec:fibre}\\
+representations of a quiver & weak excluded middle $\iff$ at most one outgoing arrow per vertex & \ref{sec:machines}\\
+actions of a finite monoid & weak excluded middle $\iff$ a single minimal right ideal; true for the transition monoid of every strongly connected synchronizing automaton & \ref{sec:finite}\\
+corners $eMe$ with $1\in MeM$ & the Ore condition transfers & \ref{sec:finite}\\
+actions of $(\mathbb N,+)$ & exactly three subtopoi: all, the invertible actions, none & \ref{sec:dynamics}\\
+actions of a finite monoid & essential points $\leftrightarrow$ regular $\mathcal D$-classes; $n$, $n+1$, $n+1$, $n$, $n+1$ of them for $T_n$, $PT_n$, $I_n$, $O_n$, $M_n(\mathbb F_q)$ & \ref{sec:fibre}\\
 graphs, simplicial sets, trees, \dots & weak excluded middle, case by case & \ref{sec:shapes}\\
 \bottomrule
 \end{tabularx}
 \end{center}
 
-None of these is deep: each has a proof of a few lines, which we give. What the generator supplies is the \emph{statement}, and the choice of question: nobody asks whether automata satisfy $\neg p\vee\neg\neg p$ until a bridge says that the answer is a property of the alphabet.
+None of these is deep, and \S\ref{sec:limits} discusses what that says about the method. The reader we have in mind is an engineer who writes Lean and thinks in pipelines: we keep the theory to one short section, quote the Lean statements, and spend the space on the outputs and on what each stage did.
