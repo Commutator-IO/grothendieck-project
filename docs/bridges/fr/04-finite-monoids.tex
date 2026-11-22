@@ -1,0 +1,59 @@
+\section{Monoïdes : dénombrements et coins}\label{sec:finite}
+
+Pour un monoïde $M$, le tablier est le topos des $M$-ensembles à droite, $\PSh(\B M)$. Trois arches y ont été appliquées dans la littérature, avec des réponses complètes : booléen si et seulement si $M$ est un groupe, De Morgan si et seulement si $aM\cap bM\neq\emptyset$ pour tous $a,b$ \cite{hemelaer-rogers} ; points essentiels $\leftrightarrow$ idempotents à $\mathcal D$ (ou $\mathcal J$) près \cite{rogers-1905,pirashvili-jncg} ; sous-topos $\leftrightarrow$ idéaux bilatères idempotents, pour $M$ fini \cite[Prop.~6.1.2]{pirashvili-jncg}. Ces résultats vont au journal d'étalonnage (\S\ref{sec:calibration}). Ce qu'ajoute le générateur, ce sont les \emph{spécialisations} aux monoïdes classiques, que nous n'avons pas trouvées calculées, et un énoncé de transfert.
+
+\subsection{Dénombrer les points essentiels et les sous-topos}
+
+Un idempotent $e$ donne le point essentiel $X\mapsto Xe = \{x : x\cdot e = x\}$, et $e$, $f$ donnent des points isomorphes si et seulement si
+\[
+e\approx f\quad:\iff\quad\exists\, a,b\in M,\ \ a = fae,\ \ b = ebf,\ \ ba = e,\ \ ab = f,
+\]
+ce qui, pour des idempotents, est la relation de Green $\mathcal D$ \cite[Prop.~3.1]{costa-steinberg}.
+
+\begin{theorem}\label{th:fibre}
+Les points essentiels des $M$-ensembles à droite, à isomorphisme près, et les sous-topos des $M$-ensembles à droite sont en nombre :
+\begin{center}\small
+\begin{tabular}{lll}
+\toprule
+monoïde $M$ & points essentiels & sous-topos\\
+\midrule
+$T_n$ (toutes les applications d'un ensemble à $n$ éléments) & $n$ & $n+1$\\
+$PT_n$ (applications partielles) & $n+1$ & $n+2$\\
+$I_n$ (bijections partielles) & $n+1$ & $n+2$\\
+$O_n$ (applications croissantes d'une chaîne à $n$ éléments) & $n$ & $n+1$\\
+$M_n(\mathbb F_q)$ pour la multiplication & $n+1$ & $n+2$\\
+le monoïde bicyclique $\langle p,q\mid pq=1\rangle$ & $1$ & ---\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{theorem}
+
+\begin{trace}
+\item[tablier] $M$-ensembles à droite.
+\item[arche] Pont~\ref{br:pts} (points essentiels $\simeq\Kar(\B M)^{\op}$), et pont~\ref{br:sub}.
+\item[spécialiser] objets de $\Kar(\B M)$ : les idempotents ; isomorphisme : $\approx$. Lean : \lean{nonempty_essentialPoint_iso_iff}, \lean{exists_iso_essentialPoint}.
+\item[réécrire] compter les classes d'idempotents pour $\approx$, monoïde par monoïde : ce sont les rangs.
+\item[vérifier] Lean, pour les matrices sur un corps quelconque : \lean{karoubiRel_iff_rank_eq} ($e\approx f\iff\operatorname{rk}e=\operatorname{rk}f$) ; les autres lignes par la preuve directe. %LEAN-KAROUBI%
+\item[nouveauté] les correspondances sont publiées \cite{rogers-1905,pirashvili-jncg}, avec l'exemple $T_3$ \cite[Ex.~6.1.5]{pirashvili-jncg} ; les dénombrements pour $n$ quelconque et pour ces monoïdes n'ont pas été trouvés.
+\end{trace}
+
+\direct{} Avec $ab = a\circ b$ : si $e\approx f$, alors $b\circ a = e$ est l'identité sur $\operatorname{im}e$, donc $a$ envoie $\operatorname{im}e$ injectivement dans $\operatorname{im}f$, et symétriquement ; les images ont le même cardinal (le rang). Réciproquement, pour une bijection $\theta : \operatorname{im}e\to\operatorname{im}f$ (un isomorphisme d'ordres pour $O_n$, un isomorphisme linéaire pour les matrices), $a = \theta\circ e$ et $b = \theta^{-1}\circ f$ appartiennent au monoïde et vérifient les quatre équations. Il existe des idempotents d'images de cardinal $1,\dots,n$ dans $T_n$, $O_n$, et $0,\dots,n$ dans $PT_n$, $I_n$, $M_n(\mathbb F_q)$. Dans le monoïde bicyclique, les idempotents sont les $q^ip^i$, et $a = q^i$, $b = p^i$ donnent $q^ip^i\approx 1$. Pour les sous-topos : pour $M$ fini, ils correspondent aux idéaux bilatères $I$ tels que $I^2 = I$, auxquels s'ajoute l'idéal vide (le sous-topos dégénéré) \cite[Prop.~6.1.2]{pirashvili-jncg}. Dans chacun de ces monoïdes, les idéaux bilatères non vides sont les idéaux de rang $\{m : \operatorname{rk}m\le k\}$, qui forment une chaîne, et chacun est engendré par un idempotent $e$ de rang $k$, donc idempotent ($I\supseteq I^2\ni e$, d'où $I^2\supseteq MeM = I$). En comptant les rangs possibles et en ajoutant $\emptyset$, on obtient la dernière colonne.
+\qed
+
+\subsection{Transfert le long des coins}
+
+\begin{theorem}\label{th:transfer}
+Soit $e$ un idempotent d'un monoïde $M$ tel que $1\in MeM$, disons $1 = res$. Alors $aM\cap bM\neq\emptyset$ pour tous $a,b\in M$ si et seulement si $a(eMe)\cap b(eMe)\neq\emptyset$ pour tous $a,b\in eMe$.
+\end{theorem}
+
+\begin{trace}
+\item[tablier] $\PSh(\B M)\simeq\PSh(\B(eMe))$ : avec $a = esf$, $b = fre$, tout idempotent $f$ de $M$ est isomorphe dans $\Kar(\B M)$ à l'idempotent $esfre$ de $eMe$ ; puis le pont~\ref{br:morita}.
+\item[arche] invariance de Morita de la condition d'Ore (\lean{rightOreCondition_iff_of_moritaEquivalentCat}).
+\item[vérifier] preuve directe ci-dessous ; Lean : %LEAN-CORNER%
+en cours.
+\item[nouveauté] conséquence immédiate de résultats publiés (théorème de Morita pour les monoïdes \cite{knauer,banaschewski,rogers-1905} et \cite[Th.~2.31]{hemelaer-rogers}) ; non trouvé sous forme d'énoncé.
+\end{trace}
+
+\direct{} Si $M$ vérifie la condition et si $a,b\in eMe$, on prend $ac = bd$ ; alors $x = ecre$, $y = edre\in eMe$ et $ax = acre = bdre = by$ (car $a = ae$, $b = be$). Si $eMe$ vérifie la condition et si $a,b\in M$, on l'applique à $esare$, $esbre$ : $esare\,x = esbre\,y$ avec $x,y\in eMe$ ; on multiplie à gauche par $r$ et on utilise $res = 1$ : $a(rex) = b(rey)$.\qed
+
+Dans un monoïde fini, $1\in MeM$ impose $e = 1$ ; ce résultat concerne donc les monoïdes infinis, par exemple les monoïdes d'endomorphismes d'espaces vectoriels de dimension infinie.

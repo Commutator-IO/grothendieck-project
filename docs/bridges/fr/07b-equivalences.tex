@@ -1,0 +1,42 @@
+\section{Des théorèmes classiques comme deux lectures d'un même pont}\label{sec:equivalences}
+
+La même machinerie explique pourquoi certaines paires de théorèmes de troisième année de licence, enseignés dans des cours différents, sont \q{le même théorème} : ce sont deux lectures d'un même invariant sur un même topos. Rien dans cette section n'est nouveau ; son but est pédagogique, et elle montre ce que fait un pont quand ses deux extrémités sont déjà connues.
+
+\subsection{Relations d'équivalence et quotients}
+
+Soit $E$ une relation d'équivalence sur un ensemble $S$, vue comme un groupoïde (une flèche $s\to t$ quand $s\mathrel E t$). Un préfaisceau sur $E$ est une famille d'ensembles $(F_s)_{s\in S}$ munie de bijections compatibles $F_s\cong F_t$ pour $s\mathrel E t$.
+
+\begin{itemize}
+\item \emph{Tablier :} le groupoïde $E$ est équivalent à la catégorie discrète $S/E$ (chaque composante connexe est contractile), donc, d'après le pont~\ref{br:morita}, $\PSh(E)\simeq\Set^{S/E}$.
+\item \emph{Lecture 1 (algèbre de L1--L2) :} les familles sur $S$ compatibles avec $E$ sont la même chose que les familles sur $S/E$ ; pour $F_s = \{\ast\}$ ou $\emptyset$, c'est la propriété universelle du quotient : \emph{une application $S\to\{0,1\}$ constante sur les classes se factorise par $S/E$}.
+\item \emph{Lecture 2 (pont~\ref{br:bool}) :} $E$ est un groupoïde, donc tout sous-préfaisceau a un complémentaire ; pour les parties, \emph{une réunion de classes a pour complémentaire une réunion de classes} : les classes forment une partition de $S$.
+\end{itemize}
+
+\subsection{Orbites et complémentaires}
+
+Pour un groupe $G$, le pont~\ref{br:bool} dit que le complémentaire d'un sous-$G$-ensemble est un sous-$G$-ensemble. Avec la décomposition de tout préfaisceau en composantes connexes (vraie dans tout topos de préfaisceaux), c'est la \emph{décomposition en orbites} : tout $G$-ensemble est la réunion disjointe de ses orbites, et tout sous-$G$-ensemble est une réunion d'orbites. Pour un monoïde qui n'est pas un groupe, la décomposition en composantes connexes reste vraie, mais une composante n'est pas forcément \q{indécomposable} au sens booléen : le pont montre que le théorème de décomposition en orbites est un énoncé sur l'inversibilité.
+
+\subsection{Le théorème de Birkhoff et les espaces $T_0$ finis}
+
+Soit $P$ un ensemble ordonné fini et $X_P$ son espace d'Alexandrov (ouverts $=$ parties stables vers le haut, ou sections finissantes). Le tablier est $\Sh(X_P)\simeq[P,\Set]$ : un faisceau sur $X_P$ est déterminé par ses valeurs sur les plus petits voisinages ouverts $\uparrow p$, et $\uparrow q\subseteq\uparrow p$ quand $p\le q$. Deux invariants de ce topos :
+\begin{itemize}
+\item ses \emph{objets sous-terminaux} (sous-préfaisceaux du préfaisceau à un point) : lus sur $X_P$, ce sont les ouverts ; lus sur $[P,\Set]$, ce sont les parties de $P$ stables vers le haut ;
+\item ses \emph{points} : lus sur $X_P$ (un espace sobre), ce sont les points de $X_P$ ; lus sur $[P,\Set]$, ce sont les évaluations aux éléments de $P$, et les parties principales $\uparrow p$ sont exactement les éléments sup-irréductibles de $\mathrm{Up}(P)$, avec $\uparrow p\subseteq\uparrow q$ si et seulement si $q\le p$.
+\end{itemize}
+Lire ces invariants à rebours donne d'un coup deux théorèmes classiques : le \emph{théorème de représentation de Birkhoff} (un treillis distributif fini $L$ est isomorphe au treillis des parties stables vers le haut de l'opposé de l'ensemble ordonné de ses éléments sup-irréductibles) et la \emph{correspondance entre espaces $T_0$ finis et ensembles ordonnés finis} (un espace $T_0$ fini est l'espace d'Alexandrov de son ordre de spécialisation). En appliquant de plus le pont~\ref{br:bool} : le topos est booléen si et seulement si $P$ est discret, si et seulement si $\mathrm{Up}(P)$ est l'ensemble des parties de $P$, ce qui est le cas fini du \emph{théorème de représentation de Stone} : une algèbre de Boole finie est l'ensemble des parties de ses atomes.
+
+\subsection{Le théorème de Cayley et la reconstruction d'un groupe}
+
+Pour un groupe $G$, le pont~\ref{br:pts} dit que le foncteur d'oubli $U$ des $G$-ensembles vers les ensembles est, à isomorphisme près, l'unique point essentiel, et que son groupe d'automorphismes est $G$ (Lean : \lean{essentialPointEndMulEquivOfGroup}). En évaluant les automorphismes de $U$ sur le $G$-ensemble régulier $G$, on obtient un morphisme injectif $G\to\mathrm{Sym}(G)$ : c'est le \emph{théorème de Cayley}. Réciproquement, le théorème de Cayley et le lemme de Yoneda (une transformation naturelle de $U = \Hom(G,-)$ est déterminée par sa valeur sur l'identité) donnent la reconstruction. Les deux sont un seul énoncé sur le topos $\PSh(\B G)$, lu sur ses points et sur son objet représentable.
+
+\subsection{Correspondance de Galois et revêtements}
+
+Deux théorèmes de troisième année de licence, le \emph{théorème fondamental de la théorie de Galois} (corps intermédiaires d'une extension galoisienne finie $L/K$ $\leftrightarrow$ sous-groupes de $\mathrm{Gal}(L/K)$) et la \emph{classification des revêtements} (revêtements connexes d'un espace connexe raisonnable $X$ $\leftrightarrow$ classes de conjugaison de sous-groupes de $\pi_1(X)$), sont deux lectures d'un même pont, explicité par Grothendieck \cite{sga1} : la catégorie des $K$-algèbres étales finies déployées par $L$ et la catégorie des revêtements de $X$ sont toutes deux équivalentes à une catégorie de $G$-ensembles ($G = \mathrm{Gal}(L/K)$, resp.\ $\pi_1(X)$) ; l'invariant est l'ensemble ordonné des \emph{objets connexes pointés}, qui, du côté des $G$-ensembles, est l'ensemble ordonné des sous-groupes. (Ces tabliers ne sont pas des topos de préfaisceaux sur une forme finie, et ce pont n'est pas dans la bibliothèque Lean ; voir \cite{szamuely} pour un exposé de niveau licence.)
+
+\subsection{Confluence et espaces extrêmement discontinus}
+
+La dernière paire figure au journal d'étalonnage : un préordre est confluent si et seulement si son espace d'Alexandrov est extrêmement discontinu \cite[Prop.~7.10]{caramello-stone} (Lean : \lean{extremallyDisconnected_iff_confluent}). Lu sur un système de réécriture, le théorème de Church--Rosser pour la $\beta$-réduction devient le fait qu'un espace de $\lambda$-termes est extrêmement discontinu. Ici, le pont ne se contente pas de redémontrer deux théorèmes connus : il montre qu'une propriété issue de la théorie des langages de programmation et une propriété de topologie générale sont la même propriété.
+
+\begin{remark}
+Dans chaque paire, une lecture est en général démontrée dans un cours et l'autre dans un autre, par des arguments sans rapport. Le pont ne donne pas de preuves plus courtes ; il explique \emph{pourquoi} les deux énoncés ont la même forme, et il donne une recette pour trouver d'autres paires de ce genre : prendre un topos ayant deux présentations familières, et lire un invariant sur les deux.
+\end{remark}

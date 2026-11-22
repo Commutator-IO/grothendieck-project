@@ -1,0 +1,27 @@
+\section{Lean, littérature et leçons pour l'automatisation}\label{sec:lean-lit}
+
+\subsection{État de la formalisation en Lean}
+
+Les cinq arches sont démontrées en Lean~4 avec Mathlib dans \lp{}, sans autre axiome que \texttt{propext}, \texttt{Classical.choice} et \texttt{Quot.sound}. Les énoncés engendrés sont formalisés comme corollaires des arches dans le module \texttt{ToposTheoreticBridges/Examples}, sur deux branches du fork \texttt{mycaule/lean-pool} :
+\begin{itemize}
+\item \texttt{mycaule/topos-bridges-examples} (commit \texttt{28ed796}) : \lean{Monoids.lean} (\lean{isBooleanTopos_singleObj_iff}, \lean{isDeMorganTopos_singleObj_iff}, \lean{isDeMorganTopos_singleObj_of_monoidWithZero}, \lean{isDeMorganTopos_singleObj_of_commMonoid}, \lean{isDeMorganTopos_singleObj_freeMonoid_unit}, \lean{not_isDeMorganTopos_freeMonoid_two}) ; \lean{Preorders.lean} (\lean{isDeMorganTopos_functor_preorder_iff}, \lean{extremallyDisconnected_iff_confluent}, \lean{moritaEquivalentCat_preorder_iff}) ; \lean{Combinatorics.lean} (\lean{isDeMorganTopos_presheaf_of_hasInitial}, \lean{not_isDeMorganTopos_graphs}, \lean{graphs_pseudocompl_counterexample}, \lean{not_isDeMorganTopos_simplicialSets}, \lean{isDeMorganTopos_augmentedSimplicialSets}, \lean{isDeMorganTopos_presheaf_fintypeCatSkeleton}, \lean{isDeMorganTopos_treeTopos}, \lean{not_isBooleanTopos_treeTopos}) ; \lean{EssentialPoints.lean} (\lean{nonempty_essentialPoint_iso_iff}, \lean{exists_iso_essentialPoint}, \lean{essentialPointEndMulEquivOfGroup}, \lean{karoubiRel_iff_rank_eq}).
+\item \texttt{mycaule/topos-bridges-new} et \texttt{mycaule/topos-bridges-quivers} : les énoncés des \S\ref{sec:machines}--\ref{sec:finite} non couverts ci-dessus (carquois : De Morgan, Morita, points essentiels, carquois cyclique ; coins ; monoïdes de transformations). %LEANNEW%
+En cours au moment de la rédaction.
+\end{itemize}
+Dans Mathlib, \texttt{SingleObj M} compose selon $f\gg g = g\cdot f$ ; avec cette convention, la condition d'Ore sur \texttt{SingleObj M} s'écrit $\forall a\,b,\ \exists c\,d,\ a\cdot c = b\cdot d$ (\lean{rightOreCondition_singleObj_iff}), comme dans le texte.
+
+\subsection{Comment nous avons cherché}
+
+Pour chaque énoncé des \S\ref{sec:machines}--\ref{sec:shapes}, nous avons consulté l'\emph{Elephant} de Johnstone, les articles et le livre de Caramello (dont \cite{caramello-chamoun}), les articles et la thèse de Hemelaer et Rogers sur les topos d'actions de monoïdes \cite{hemelaer-rogers,rogers-1905,rogers-thesis}, la littérature sur l'équivalence de Morita et les relations de Green des monoïdes, la littérature sur les automates synchronisants, le nLab, ainsi que des recherches générales sur le web et dans les serveurs de prépublications. \q{Non trouvé} signifie exactement cela ; plusieurs énoncés sont élémentaires et relèvent peut-être du folklore, et nous accueillerons volontiers des références.
+
+%LITDETAILS%
+
+\subsection{Leçons pour un générateur automatique}
+
+\begin{enumerate}
+\item \emph{Choisir les tabliers est l'étape créative.} Les résultats nouveaux viennent de tabliers que personne n'avait associés à ces arches : carquois, automates synchronisants, monoïdes de transformations. Une base de données utile de tabliers est une base de données d'énoncés \q{cette structure familière est un préfaisceau sur telle forme}.
+\item \emph{Le dépliage est mécanique.} Le lemme~\ref{lem:neg} est la seule règle nécessaire pour traduire \q{De Morgan} en un énoncé sur des états et des pièges. Un générateur a besoin d'une telle règle par invariant.
+\item \emph{C'est la réécriture qui demande le travail.} La sortie brute pour les automates est \q{$\B(\Sigma^*)$ vérifie \texttt{RightOreCondition}} ; l'énoncé lisible porte sur des états sûrs et des états condamnés. Cette étape est celle que l'exposé confie aux systèmes de réécriture et aux modèles de langage \cite[transparent 17]{caramello-mines}.
+\item \emph{Le filtrage par la littérature est nécessaire.} La plupart des résultats de la première exécution étaient connus (\S\ref{sec:calibration}). Un générateur sans filtre de nouveauté redécouvre surtout.
+\item \emph{La vérification.} Chaque résultat présenté ici a une preuve directe. Pour des tabliers plus profonds, ce ne sera pas le cas, et la preuve formelle de l'arche en Lean sera alors la seule garantie ; c'est pourquoi les arches sont formalisées en premier.
+\end{enumerate}

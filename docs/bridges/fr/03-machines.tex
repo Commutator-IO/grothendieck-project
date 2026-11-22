@@ -1,0 +1,109 @@
+\section{Carquois}\label{sec:machines}
+
+Un \emph{carquois} $R$ est un graphe orienté (flèches multiples et boucles permises). Une \emph{représentation} de $R$ dans les ensembles donne un ensemble $F(v)$ pour chaque sommet et une application $F(a) : F(v)\to F(w)$ pour chaque flèche $a : v\to w$, sans équations ; les morphismes sont les familles d'applications qui commutent aux $F(a)$. On note $\mathrm{Rep}(R)$ cette catégorie. C'est le topos des préfaisceaux sur la catégorie libre $C_R = \mathrm{Paths}(R^{\op})$, dont les flèches sont les chemins du carquois opposé : un chemin est la seule forme de composé possible, et l'équation $f\circ h = g\circ k$ dans $C_R$ est une égalité de chemins.
+
+Ce seul tablier, passé par les cinq arches, donne quatre énoncés. Deux faits sur les catégories libres servent partout : la longueur des chemins est additive, donc un chemin idempotent ($p\circ p = p$) est de longueur $0$ et c'est une identité ; un chemin inversible est lui aussi de longueur $0$.
+
+\subsection{De Morgan : le déterminisme}
+
+On dit qu'un élément $x\in F(v)$ est \emph{évitant} pour une sous-représentation $A$ si aucune image de $x$ le long d'un chemin n'appartient à $A$, et \emph{attiré} par $A$ si toute image de $x$ admet une image ultérieure dans $A$.
+
+\begin{theorem}\label{th:quivers}
+Le topos $\mathrm{Rep}(R)$ est de De Morgan (pour toute sous-représentation, tout élément est évitant ou attiré) si et seulement si chaque sommet de $R$ a au plus une flèche sortante. C'est un topos booléen si et seulement si $R$ n'a aucune flèche.
+\end{theorem}
+
+\begin{trace}
+\item[tablier] $\mathrm{Rep}(R) = \PSh(\mathrm{Paths}(R^{\op}))$.
+\item[arche] Pont~\ref{br:dm} (De Morgan $\iff$ Ore) et pont~\ref{br:bool} (booléen $\iff$ groupoïde).
+\item[spécialiser] $f\circ h = g\circ k$ est une égalité de chemins, donc l'un de $f$, $g$ est un segment final de l'autre ; Ore sur $\mathrm{Paths}(R^{\op})$ $\iff$ de deux chemins aboutissant à un même sommet de $R^{\op}$, l'un est un segment final de l'autre $\iff$ aucun sommet de $R^{\op}$ n'a deux flèches entrantes. Une catégorie libre est un groupoïde si et seulement si elle n'a aucune flèche.
+\item[déplier] Lemme~\ref{lem:neg} : $\neg A$ = évitants, $\neg\neg A$ = attirés.
+\item[réécrire] deux flèches entrantes dans $R^{\op}$ = deux flèches sortantes dans $R$.
+\item[vérifier] preuve directe ci-dessous ; Lean : %LEAN-QUIVER%
+en cours (\S\ref{sec:lean-lit}).
+\item[nouveauté] un cas particulier est publié (le carquois $\bullet\leftarrow\bullet\to\bullet$, \cite[\S4.1.4]{caramello-chamoun}) ; la caractérisation n'a pas été trouvée.
+\end{trace}
+
+\direct{} Si chaque sommet a au plus une flèche sortante, les chemins issus de $v$ forment une seule suite $p_0\subset p_1\subset\cdots$, chacun prolongeant le précédent ; si $F(p_k)(x)\in A$, alors, depuis toute image $F(p_j)(x)$, l'image ultérieure $F(p_{\max(j,k)})(x)$ appartient à $A$. Réciproquement, pour deux flèches $a : v\to w$ et $b : v\to w'$, soit $F(u)$ l'ensemble des chemins de $v$ à $u$ (les applications prolongent les chemins), $A$ les chemins qui commencent par $a$, et $x$ le chemin vide en $v$ (figure~\ref{fig:branch}) : il n'est ni évitant ni attiré. Pour le cas booléen, si $a : v\to w$ est une flèche, on prend $F(v) = F(w) = \{\ast\}$, $A(w) = \{\ast\}$, $A(v) = \emptyset$.\qed
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[vx/.style={circle,draw,inner sep=1.5pt,minimum size=6mm,font=\small},>=Stealth]
+\node[vx] (v) at (0,0) {$v$}; \node[vx,fill=red!12] (w) at (2.6,0.8) {$w$}; \node[vx] (w2) at (2.6,-0.8) {$w'$};
+\draw[->] (v) -- node[above,font=\small]{$a$} (w); \draw[->] (v) -- node[below,font=\small]{$b$} (w2);
+\node[align=left,font=\small] at (7.6,0) {$F(u)$ = chemins de $v$ à $u$ ; $A$ = chemins commençant par $a$ ;\\ le chemin vide en $v$ n'est ni évitant ni attiré.};
+\end{tikzpicture}
+\caption{Un sommet qui se ramifie met en défaut le tiers exclu faible.}\label{fig:branch}
+\end{figure}
+
+\begin{corollary}\label{co:automata}
+Les actions à droite du monoïde libre $\Sigma^*$ (automates déterministes sur $\Sigma$, sans état initial ni états finaux) forment un topos de De Morgan si et seulement si $|\Sigma|\le 1$, et un topos booléen si et seulement si $\Sigma = \emptyset$.
+\end{corollary}
+
+\begin{proof}
+Une action de $\Sigma^*$ est une représentation du carquois à un sommet et $|\Sigma|$ boucles.
+\end{proof}
+
+\begin{trace}
+\item[vérifier] Lean : \lean{isDeMorganTopos_singleObj_freeMonoid_unit} (une lettre), \lean{not_isDeMorganTopos_freeMonoid_two} (deux lettres), à partir de \lean{isDeMorganTopos_singleObj_iff}.
+\item[nouveauté] le topos des automates est classique ; cette propriété n'a pas été trouvée dans la littérature.
+\end{trace}
+
+\subsection{Morita : le carquois est déterminé par ses représentations}
+
+\begin{theorem}\label{th:quivermorita}
+Deux carquois $R$ et $R'$ ont des catégories de représentations ensemblistes équivalentes si et seulement s'ils sont isomorphes.
+\end{theorem}
+
+\begin{trace}
+\item[tablier] $\mathrm{Rep}(R)\simeq\mathrm{Rep}(R')$, c'est-à-dire $\PSh(C_R)\simeq\PSh(C_{R'})$.
+\item[arche] Pont~\ref{br:morita} : $\iff\Kar(C_R)\simeq\Kar(C_{R'})$.
+\item[spécialiser] une catégorie libre est karoubienne (les chemins idempotents sont des identités), donc $\Kar(C_R)\simeq C_R$ ; elle est squelettique et sans isomorphisme autre que les identités, donc une équivalence $C_R\simeq C_{R'}$ est un isomorphisme de catégories.
+\item[réécrire] un isomorphisme de catégories libres envoie les flèches indécomposables (chemins de longueur $1$) sur des flèches indécomposables ; il est donc induit par un isomorphisme $R^{\op}\cong R'^{\op}$.
+\item[vérifier] preuve directe dans la trace ; Lean : %LEAN-QMORITA%
+en cours.
+\item[nouveauté] non trouvé comme énoncé sur les carquois ; chaque étape est publiée (Morita par l'enveloppe de Karoubi \cite[Lemme~1.1.3]{rogers-thesis}, d'après \cite[A1.1.9--10]{elephant}).
+\end{trace}
+
+\inwords{} Pour les représentations d'algèbres \emph{linéaires}, des carquois très différents peuvent avoir des catégories (dérivées) de représentations équivalentes ; dans les ensembles, ce phénomène n'existe pas : la catégorie des représentations ensemblistes garde la mémoire du carquois.
+
+\subsection{Points essentiels : les sommets}
+
+\begin{theorem}\label{th:quiverpoints}
+Les points essentiels de $\mathrm{Rep}(R)$ (foncteurs vers les ensembles qui préservent toutes les limites et colimites) forment une catégorie isomorphe à la catégorie libre $\mathrm{Paths}(R)$. À isomorphisme près, ce sont les évaluations $F\mapsto F(v)$ aux sommets, deux d'entre elles n'étant isomorphes que si les sommets sont égaux.
+\end{theorem}
+
+\begin{trace}
+\item[arche] Pont~\ref{br:pts} : points essentiels $\simeq\Kar(C_R)^{\op}\simeq C_R^{\op} = \mathrm{Paths}(R^{\op})^{\op}\cong\mathrm{Paths}(R)$.
+\item[vérifier] Lean : %LEAN-QPOINTS%
+en cours.
+\item[nouveauté] le fait général (une petite catégorie se retrouve, à complétion idempotente près, à partir des points essentiels de ses préfaisceaux) est publié \cite[\S4.2.1]{rogers-thesis} ; la version pour les carquois n'a pas été trouvée.
+\end{trace}
+
+\subsection{Sous-topos du carquois cyclique}
+
+Soit $Z_n$ le carquois cyclique de sommets $\mathbb Z/n$, avec une flèche $a_i : i\to i+1$ pour chaque $i$. Une représentation est un cycle d'applications $F(0)\to F(1)\to\cdots\to F(n-1)\to F(0)$. Pour $n = 1$, c'est un ensemble muni d'un endomorphisme.
+
+\begin{theorem}\label{th:cycle}
+Le topos $\mathrm{Rep}(Z_n)$ a exactement $2^n + 1$ sous-topos : pour chaque ensemble $S$ de flèches, la sous-catégorie pleine des représentations dans lesquelles les applications $F(a)$, $a\in S$, sont bijectives ; et le sous-topos dégénéré.
+\end{theorem}
+
+\begin{trace}
+\item[tablier] $\mathrm{Rep}(Z_n) = \PSh(C)$, $C = \mathrm{Paths}(Z_n^{\op})$.
+\item[arche] Pont~\ref{br:sub} : sous-topos $\leftrightarrow$ topologies de Grothendieck sur $C$.
+\item[spécialiser] classer les topologies sur $C$ (ci-dessous) : la topologie dégénérée, ou une par partie de l'ensemble des sommets.
+\item[déplier] identifier les faisceaux : une représentation est un faisceau si et seulement si les flèches issues des sommets du complémentaire de la partie sont bijectives.
+\item[vérifier] preuve directe ci-dessous ; Lean : %LEAN-QCYCLE%
+en cours.
+\item[nouveauté] pour $n = 1$, le résultat découle de la description par Pirashvili des sous-topos des $M$-ensembles pour $M$ commutatif \cite[Cor.~4.3.11]{pirashvili-jpaa} ; pour $n\ge 2$, il n'a pas été trouvé. Pour les carquois \emph{sans} cycle orienté, les topologies de Grothendieck sur la catégorie des chemins sont connues : il y en a $2^m$ pour $m$ sommets, une par ensemble de sommets \cite[Cor.~4.3]{schmid} (d'après une note non publiée de Murfet) ; le cas cyclique est d'une autre nature.
+\end{trace}
+
+\direct{} Dans $C$, pour chaque sommet $v$ et chaque $\ell\ge 0$, il y a exactement un chemin de longueur $\ell$ qui aboutit à $v$ (il part de $v+\ell$). Un crible sur $v$ est stable par allongement, c'est donc $\emptyset$ ou $S_{v,k} = \{\text{chemins de longueur}\ge k\}$ pour un $k\ge 0$ ; $S_{v,0}$ est le crible maximal. Le changement de base de $S_{v,k}$ le long du chemin de longueur $m$ qui aboutit à $v$ donne $S_{v+m,\max(k-m,0)}$.
+
+Soit $J$ une topologie. Si $\emptyset$ couvre un sommet, il couvre tous les sommets (on tire en arrière le long d'un chemin, qui existe car le cycle est fortement connexe), et $J$ est dégénérée. Sinon, les cribles couvrants sont stables par passage à un crible plus grand, donc $J(v) = \{S_{v,k} : k\le K(v)\}$ pour un $K(v)\in\{0,1,2,\dots,\infty\}$. Les axiomes deviennent :
+\begin{itemize}
+\item \emph{stabilité} : $K(v+1)\ge K(v)-1$ ;
+\item \emph{transitivité} : si $1\le K(v) = k<\infty$, alors $K(v+k) = 0$. (On prend le crible couvrant $S_{v,k}$ et $T = S_{v,k+1}$ : les changements de base de $T$ le long des chemins de $S_{v,k}$ sont les $S_{v+r,k+1-r}$, $r\ge k$, tous maximaux sauf $S_{v+k,1}$ ; si $K(v+k)\ge 1$, ils couvrent tous, donc $T$ couvre, ce qui contredit $K(v) = k$. Réciproquement, quand $K(v+k) = 0$, la transitivité n'impose jamais de nouveau crible couvrant.)
+\end{itemize}
+Ces deux conditions disent exactement que $K(v)$ est la distance de $v$ au prochain élément de $Z = K^{-1}(0)$ en avançant ($\infty$ si $Z = \emptyset$) : une valeur $k\ge 1$ doit être suivie de $k-1$, et une suite $k, k-1,\dots,1$ se termine par un $0$. Les topologies non dégénérées correspondent donc aux parties $Z\subseteq\mathbb Z/n$, et il y en a $2^n$. Enfin, une famille compatible sur $S_{v,1}$ est un élément de $F(v+1)$, et son recollement est un antécédent par $F(a_v)$ ; donc dire que $S_{v,1}$ couvre (c'est-à-dire $v\notin Z$) revient à demander que $F(a_v)$ soit bijective, et les cribles plus longs n'ajoutent rien. Le sous-topos associé à $Z$ est formé des représentations dans lesquelles les flèches issues des sommets hors de $Z$ sont bijectives ; on pose $S = \{a_v : v\notin Z\}$.\qed
+
+\inwords{} Toute manière de \q{localiser} un cycle d'applications consiste à inverser certaines d'entre elles, ou à tout écraser. Pour $n = 1$ : les ensembles munis d'un endomorphisme, les ensembles munis d'un automorphisme, et le topos dégénéré. Pour un carquois acyclique, la réponse est différente \cite{schmid} : le topos de Sierpiński $\mathrm{Rep}(\bullet\to\bullet)$ a $2^2 = 4$ sous-topos, dont l'un (\q{$F(\text{but})$ est un point}) n'inverse aucune flèche. Sur un cycle, la connexité forte exclut de tels sous-topos, et les sous-topos sont comptés par des ensembles de flèches au lieu d'ensembles de sommets.
