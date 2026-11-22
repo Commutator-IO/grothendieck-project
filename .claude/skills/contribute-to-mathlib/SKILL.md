@@ -1,12 +1,16 @@
 ---
 name: contribute-to-mathlib
-description: Prepares a general lemma that a Lean proof of this repository needed for Mathlib (leanprover-community/mathlib4) — checks that the gap is real, points Michel to the Mathematics in Lean chapters to learn before he writes it by hand, reviews his code against Mathlib's conventions and style guide, compiles it against the project's pinned Mathlib without `lake build`, pushes a branch to the fork mycaule/mathlib4 and opens a draft PR, then handles CI and reviews. Use when someone asks to upstream a lemma from lean/Grothendieck/*.lean, open or fix a mathlib4 PR, improve the open PRs of issue #52, answer a review, or repair a PR's CI. Also covers bringing a merged PR back into the Lean appendix and the Findings tab.
+description: Prepares a general lemma that a Lean proof of this repository needed for Mathlib (leanprover-community/mathlib4) — checks that the gap is real, points Michel to the Mathematics in Lean chapters to learn before he writes it by hand, reviews his code against Mathlib's conventions and style guide, compiles it against the project's pinned Mathlib without `lake build`, pushes a branch to the fork mycaule/mathlib4 and opens a draft PR, then handles CI and reviews. Use when someone asks to upstream a lemma from a Lean proof of Commutator-IO/GrothendieckArchivesProofs or of lean/Bourbaki, lean/Quillen, open or fix a mathlib4 PR, improve the open PRs of issue #52, answer a review, or repair a PR's CI. Also covers bringing a merged PR back into the Lean appendix and the Findings tab.
 ---
 
 # Contributing to Mathlib from this repository
 
-The Lean proofs in `lean/Grothendieck/` (34 folders, about a thousand theorems) sometimes
-need a general lemma Mathlib lacks. These make good PRs if they are presented the way Mathlib
+The Lean proofs of the fonds live in
+[Commutator-IO/GrothendieckArchivesProofs](https://github.com/Commutator-IO/GrothendieckArchivesProofs)
+(`Grothendieck/`, `Buffalo/`, pinned to a Mathlib release); this repository keeps only
+`lean/Bourbaki/` and `lean/Quillen/`, and `lean/` here stays the build pinned to a recent Mathlib
+master that the PRs are checked against (§3). Those proofs sometimes need a general lemma
+Mathlib lacks. These make good PRs if they are presented the way Mathlib
 expects. Tracking: issue #52 (one checkbox per candidate, with the PR number and its state).
 PRs, titles, descriptions and commit messages are **in English**.
 
@@ -202,7 +206,8 @@ Mathlib's build (8 GB), no full build from source.
 - **Refreshing it to a newer master**: set `rev` in `lean/lakefile.toml` to the new SHA, then
   `cd lean && lake update mathlib` (its post-update hook runs `cache get`), then
   `lake build Mathlib --no-build` must answer "All targets up-to-date". Then rebuild the
-  Grothendieck folders (they use `warningAsError`, so a deprecation in Mathlib fails them).
+  Bourbaki and Quillen libraries (they use `warningAsError`, so a deprecation in Mathlib fails
+  them).
 - **`~/Commutator/mathlib4` is a git clone only** (remotes `origin` = the fork `mycaule/mathlib4`,
   `upstream` = leanprover-community), without a build: it holds the PR worktrees (§4). Keep its
   `master` a fast-forward of `upstream/master`.

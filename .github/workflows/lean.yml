@@ -1,8 +1,10 @@
 name: lean
 
-# The Lean proofs in lean/ (issue #26): statements of the modernised readings,
-# proved against mathlib. Runs when lean/ changes, and by hand. It does not
-# gate the deploy — a proof checks a reading, not the site.
+# The Lean proofs in lean/: statements of the Bourbaki rédactions and of
+# Quillen's notebooks, proved against mathlib (the proofs of the Grothendieck
+# fonds live in Commutator-IO/GrothendieckArchivesProofs). Runs when lean/
+# changes, and by hand. It does not gate the deploy — a proof checks a
+# reading, not the site.
 on:
   push:
     branches: [main]
@@ -27,8 +29,7 @@ jobs:
       # library depends on an axiom beyond propext, Classical.choice and
       # Quot.sound; sorry and native_decide count as such axioms.
       # leanchecker, the independent re-check, is left out: it got the
-      # runner stopped, even restricted to the Grothendieck modules (runs
-      # 39902170011, 39917152591).
+      # runner stopped (runs 39902170011, 39917152591).
       - uses: leanprover/lean-action@v1
         with:
           lake-package-directory: lean

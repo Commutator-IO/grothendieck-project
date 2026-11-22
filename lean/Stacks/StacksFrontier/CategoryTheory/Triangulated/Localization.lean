@@ -1,6 +1,0 @@
-module
-
-public import StacksFrontier.CategoryTheory.Triangulated.Localization.Pretriangulated
-public import StacksFrontier.CategoryTheory.Triangulated.Localization.IndexCategory
-public import StacksFrontier.CategoryTheory.Triangulated.Localization.Resolutions
-public import StacksFrontier.CategoryTheory.Triangulated.Localization.OreConditionsAndKernel
