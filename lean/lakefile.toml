@@ -1,5 +1,8 @@
 name = "grothendieck"
-defaultTargets = ["Grothendieck", "Bourbaki", "Quillen", "Buffalo"]
+
+# The Lean proofs of the Grothendieck fonds, the Buffalo lectures and the vendored Stacks files
+# live in Commutator-IO/GrothendieckArchivesProofs; only Bourbaki and Quillen stay here.
+defaultTargets = ["Bourbaki", "Quillen"]
 
 # A `sorry` is a warning, and a proof with a warning in it proves nothing: the
 # build fails on either.
@@ -12,29 +15,7 @@ scope = "leanprover-community"
 rev = "715a03a90adf491de40fbec8b456c179a623435f"
 
 [[lean_lib]]
-name = "Grothendieck"
-
-[[lean_lib]]
 name = "Bourbaki"
 
 [[lean_lib]]
 name = "Quillen"
-
-# The Buffalo lectures (1973): the entries of docs/buffalo-*/index.tex, one file per part.
-[[lean_lib]]
-name = "Buffalo"
-globs = ["Buffalo.+"]
-
-# Vendored files of AxiomMath/Stacks (Apache-2.0), kept at their upstream module paths under
-# Stacks/; see Stacks/NOTICE.md. Their options are Stacks' own, and their warnings are not errors.
-[[lean_lib]]
-name = "StacksCore"
-srcDir = "Stacks"
-globs = ["StacksCore.+"]
-leanOptions = { warningAsError = false, autoImplicit = false, relaxedAutoImplicit = false, maxSynthPendingDepth = 3 }
-
-[[lean_lib]]
-name = "StacksFrontier"
-srcDir = "Stacks"
-globs = ["StacksFrontier.+"]
-leanOptions = { warningAsError = false, autoImplicit = false, relaxedAutoImplicit = false, maxSynthPendingDepth = 3 }
