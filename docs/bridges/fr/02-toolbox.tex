@@ -89,7 +89,7 @@ C'est tout. Chaque énoncé qui suit est l'un de ces cinq lemmes, appliqué à u
 Le registre compte trois arches de plus. Nous ne les avons encore appliquées qu'aux tabliers tirés des notes de Grothendieck, ci-dessous, et à ses pseudo-corps (\S\ref{sec:pseudofields}); aucun des résultats des sections~\ref{sec:machines} à~\ref{sec:shapes} n'en vient.
 
 \begin{bridge}[Deux valeurs]\label{br:twoval}
-Les sous-objets de l'objet final de $\PSh(C)$ (ses \q{ouverts}) correspondent aux cribles de $C$ \cite[IV~8.4.4]{sga4}. Ainsi $\PSh(C)$ n'a pas d'autre sous-objet de l'objet final que $0$ et $1$ si et seulement si, pour deux objets quelconques $a$, $b$ de $C$, il existe une flèche $a\to b$. Lean: \lean{forall_subfunctor_terminal_eq_bot_or_eq_top_iff}.
+Les sous-objets de l'objet final de $\PSh(C)$ (ses \q{ouverts}) correspondent aux cribles de $C$ \cite[IV~8.4.4]{sga4}. Ainsi $\PSh(C)$ n'a pas d'autre sous-objet de l'objet final que $0$ et $1$ si et seulement si, pour deux objets quelconques $a$, $b$ de $C$, il existe une flèche $a\to b$. Pour $C$ vide, le topos est dégénéré et la condition est vérifiée par vacuité: l'énoncé porte donc sur les $C$ non vides. Lean: \lean{forall_subfunctor_terminal_eq_bot_or_eq_top_iff}.
 \end{bridge}
 
 \begin{bridge}[Connexe]\label{br:conn}
@@ -97,7 +97,7 @@ $\PSh(C)$ est connexe non vide au sens de \cite[IV~8.7~e)]{sga4} (toute partitio
 \end{bridge}
 
 \begin{bridge}[Spatial]\label{br:spatial}
-$\PSh(C)$ est équivalent au topos de préfaisceaux d'un préordre, donc au topos des faisceaux sur son espace d'Alexandrov, si et seulement si $C$ est mince. Grothendieck le donne en exercice \cite[p.~26]{grothendieck-161-3}; voir le \S\ref{sec:precedents}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}.
+$\PSh(C)$ est équivalent au topos de préfaisceaux d'un préordre, donc au topos des faisceaux sur son espace d'Alexandrov, si et seulement si $C$ est mince. Grothendieck le donne en exercice \cite[p.~26]{grothendieck-161-3}; voir le \S\ref{sec:precedents}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}, qui énonce la forme relative aux préordres; que le topos soit alors celui d'un espace relève de l'équivalence de Grothendieck, tirée du même exercice, et n'est pas formalisé ici.
 \end{bridge}
 
 \subsubsection{Les tabliers}
@@ -110,6 +110,6 @@ Trois tabliers reviennent dans les notes de travail de Grothendieck. Voici ce qu
 \begin{itemize}
 \item La catégorie simpliciale $\Delta$, la première catégorie test de \emph{Pursuing Stacks} (dossiers 108 et 118 du fonds): les ensembles simpliciaux forment un topos à deux valeurs et connexe, puisqu'il existe une application constante entre deux objets quelconques de $\Delta$, et ce n'est pas le topos de préfaisceaux d'un préordre, car les deux sommets de $[1]$ sont deux flèches $[0]\to[1]$ (\lean{simplexCategory_twoValued}, \lean{simplexCategory_isConnected}, \lean{simplexCategory_not_spatial}).
 \item Un groupe $G$ vu comme groupoïde à un objet, dont le topos de préfaisceaux est $\B G$ (dossier 161-6, p.~22, où Grothendieck ramène une question à ce cas): à deux valeurs, comme le note \cite[IV~8.4.3]{sga4} pour tout monoïde, connexe, et topos de préfaisceaux d'un préordre si et seulement si $G$ est trivial (\lean{singleObj_twoValued}, \lean{singleObj_isConnected}, \lean{singleObj_spatial_iff}).
-\item Un ensemble ordonné $I$, dont le topos de préfaisceaux $\widehat I$ est $\mathrm{Top}(I)$ (dossier 37, p.~48; dossier 161-3, p.~26): à deux valeurs si et seulement si deux éléments quelconques sont comparables dans les deux sens, c'est-à-dire si et seulement si son quotient ordonné a au plus un point (\lean{preorder_twoValued_iff}).
+\item Un ensemble préordonné $I$, dont le topos de préfaisceaux $\widehat I$ est $\mathrm{Top}(I)$ (dossier 37, p.~48; dossier 161-3, p.~26): à deux valeurs si et seulement si deux éléments quelconques sont comparables dans les deux sens, c'est-à-dire si et seulement si son quotient ordonné a au plus un point (\lean{preorder_twoValued_iff}).
 \end{itemize}
 Ce sont des corollaires immédiats; nous les consignons parce que ce sont les premières entrées du registre tirées du fonds.
