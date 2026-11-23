@@ -12,6 +12,8 @@ Call an element $x\in F(v)$ \emph{avoiding} a sub-representation $A$ if no image
 $\mathrm{Rep}(R)$ is a De Morgan topos (every element is avoiding or attracted, for every sub-representation) iff every vertex of $R$ has at most one outgoing arrow. It is a Boolean topos iff $R$ has no arrows.
 \end{theorem}
 
+\emph{Dictionary for Lean.} In Lean, presheaves on \texttt{Paths Q} are the representations of the opposite quiver $Q^{\op}$, so Lean's \texttt{Q} is our $R^{\op}$ and $C_R = \mathrm{Paths}(R^{\op})$; Lean's \q{at most one incoming arrow per vertex of \texttt{Q}} is our \q{at most one outgoing arrow per vertex of $R$}.
+
 \begin{trace}
 \item[deck] $\mathrm{Rep}(R) = \PSh(\mathrm{Paths}(R^{\op}))$.
 \item[arch] Bridge~\ref{br:dm} (De Morgan $\iff$ Ore) and Bridge~\ref{br:bool} (Boolean $\iff$ groupoid).
@@ -22,7 +24,7 @@ $\mathrm{Rep}(R)$ is a De Morgan topos (every element is avoiding or attracted, 
 \item[novelty] one special case is in print (the quiver $\bullet\leftarrow\bullet\to\bullet$, \cite[\S4.1.4]{caramello-chamoun}); the characterisation not found.
 \end{trace}
 
-\direct{} If every vertex has at most one outgoing arrow, the paths from $v$ form one sequence $p_0\subset p_1\subset\cdots$, each extending the previous one; if $F(p_k)(x)\in A$, then from any image $F(p_j)(x)$ the further image $F(p_{\max(j,k)})(x)$ lies in $A$. Conversely, for two arrows $a : v\to w$ and $b : v\to w'$, let $F(u)$ be the set of paths from $v$ to $u$ (maps extend paths), $A$ the paths beginning with $a$, and $x$ the empty path at $v$ (Figure~\ref{fig:branch}): it is neither avoiding nor attracted. For the Boolean case, if $a : v\to w$ is an arrow, take $F(v) = F(w) = \{\ast\}$, $A(w) = \{\ast\}$, $A(v) = \emptyset$.\qed
+\direct{} If every vertex has at most one outgoing arrow, the paths from $v$ form one sequence $p_0\subset p_1\subset\cdots$, each extending the previous one; if $F(p_k)(x)\in A$, then from any image $F(p_j)(x)$ the further image $F(p_{\max(j,k)})(x)$ lies in $A$. Conversely, for two arrows $a : v\to w$ and $b : v\to w'$, let $F(u)$ be the set of paths from $v$ to $u$ (maps extend paths), $A$ the paths beginning with $a$, and $x$ the empty path at $v$ (Figure~\ref{fig:branch}): it is neither avoiding nor attracted. For the Boolean case, let $a : v\to w$ be any arrow (a loop is allowed) and take the same $F$, the same $A$ (a sub-representation, since extending a path keeps its first arrow) and the same $x$: $x$ is not in $A$, as the empty path does not begin with $a$, and its image along $a$, the path $a$, is in $A$, so $x$ is not in $\neg A$ either. This works whether or not $w$ reaches $v$, and for any number of outgoing arrows.\qed
 
 \begin{figure}[ht]
 \centering
@@ -43,7 +45,7 @@ An action of $\Sigma^*$ is a representation of the quiver with one vertex and $|
 \end{proof}
 
 \begin{trace}
-\item[verify] Lean: \lean{isDeMorganTopos_singleObj_freeMonoid_unit} (one letter), \lean{not_isDeMorganTopos_freeMonoid_two} (two letters), from \lean{isDeMorganTopos_singleObj_iff}.
+\item[verify] Lean: \lean{isDeMorganTopos_singleObj_freeMonoid_unit} (one letter), \lean{not_isDeMorganTopos_freeMonoid_two} (two letters), from \lean{isDeMorganTopos_singleObj_iff} (branch \texttt{mycaule/topos-bridges-examples}, commit \texttt{28ed796}).
 \item[novelty] the topos of automata is standard; this property not found in print.
 \end{trace}
 
@@ -62,7 +64,7 @@ Two quivers $R$ and $R'$ have equivalent categories of representations in sets i
 \item[novelty] not found as a statement about quivers; each step is in print (Morita via the Karoubi envelope \cite[Lemma~1.1.3]{rogers-thesis}, after \cite[A1.1.9--10]{elephant}).
 \end{trace}
 
-\inwords{} For representations of \emph{linear} algebras, very different quivers can have equivalent (derived) categories of representations; in sets, there is no such phenomenon: the category of set-valued representations remembers the quiver.
+\inwords{} For representations of \emph{linear} algebras, very different quivers can have equivalent derived categories of representations (module categories of basic path algebras, by contrast, also remember the quiver); in sets, there is no such phenomenon: the category of set-valued representations remembers the quiver.
 
 \subsection{Essential points: the vertices}
 

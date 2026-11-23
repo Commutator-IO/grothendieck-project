@@ -11,22 +11,21 @@ Let $k$ be a field and $M_n(k)$ the monoid of $n\times n$ matrices under multipl
 \begin{enumerate}
 \item Right $M_n(k)$-sets are equivalent to presheaves on the category $\mathsf{Vect}_{\le n}$ of $k$-vector spaces of dimension at most $n$.
 \item Right $M_n(k)$-sets and right $M_m(k)$-sets are equivalent categories iff $n = m$.
-\item Right $\mathrm{GL}_n(k)$-sets form a Boolean topos whose only essential point (up to isomorphism) is the forgetful functor, with automorphism group $\mathrm{GL}_n(k)$.
 \end{enumerate}
 \end{theorem}
 
 \begin{trace}
 \item[deck] $\PSh(\B M_n(k))$.
-\item[arch] Bridge~\ref{br:morita} (Karoubi envelope), Bridge~\ref{br:pts}, Bridge~\ref{br:bool}.
+\item[arch] Bridge~\ref{br:morita} (Karoubi envelope).
 \item[specialise] $\Kar(\B M_n(k))$: objects are projections $e$, arrows $e\to f$ are matrices $a$ with $a = fae$, i.e.\ linear maps $\operatorname{im}e\to\operatorname{im}f$; so $e\mapsto\operatorname{im}e$ is an equivalence $\Kar(\B M_n(k))\simeq\mathsf{Vect}_{\le n}$. Isomorphism classes: dimensions $0,\dots,n$.
 \item[rewrite] (2): equivalent Karoubi envelopes would have the same number $n+1$, $m+1$ of isomorphism classes of objects.
-\item[verify] Lean: \lean{karoubiRel_iff_rank_eq} (projections are isomorphic in $\Kar$ iff they have the same rank), \lean{essentialPointEndMulEquivOfGroup}, \lean{isBooleanTopos_singleObj_of_group}; the equivalence with $\mathsf{Vect}_{\le n}$ by the direct argument.
+\item[verify] Lean: \lean{karoubiRel_iff_rank_eq} (projections are isomorphic in $\Kar$ iff they have the same rank) and \lean{essentialPointClassesEquivFin} (branch \texttt{mycaule/topos-bridges-examples}, commit \texttt{28ed796}); the equivalence with $\mathsf{Vect}_{\le n}$ and the deduction of (2) by the direct argument only.
 \item[novelty] not found as stated; (2) follows from the Morita theorem for monoids, since in $M_n(k)$ one-sided inverses are inverses, so Morita equivalence is isomorphism \cite[Cor.~1.6.2]{rogers-thesis}. The linear analogue (the Karoubi envelope of $k[M_n(\mathbb F_q)]$-modules) is studied in \cite{kuhn}; the set-valued description (1) we did not find.
 \end{trace}
 
-\direct{} An arrow $e\to f$ in $\Kar(\B M_n(k))$ is a matrix $a$ with $fae = a$; restricting to $\operatorname{im}e$ gives a linear map $\operatorname{im}e\to\operatorname{im}f$, and every linear map arises from exactly one such $a$ (extend by $0$ on $\ker e$). Every space of dimension $\le n$ is the image of a projection. So $\Kar(\B M_n(k))\simeq\mathsf{Vect}_{\le n}$, and Bridge~\ref{br:morita} gives (1). For (2), an equivalence of categories preserves the number of isomorphism classes of objects, $n+1$ on one side and $m+1$ on the other. (3) is Bridge~\ref{br:bool} and Bridge~\ref{br:pts} for a group.\qed
+\direct{} An arrow $e\to f$ in $\Kar(\B M_n(k))$ is a matrix $a$ with $fae = a$; restricting to $\operatorname{im}e$ gives a linear map $\operatorname{im}e\to\operatorname{im}f$, and every linear map arises from exactly one such $a$ (extend by $0$ on $\ker e$). Every space of dimension $\le n$ is the image of a projection. So $\Kar(\B M_n(k))\simeq\mathsf{Vect}_{\le n}$, and Bridge~\ref{br:morita} gives (1). For (2), an equivalence of categories preserves the number of isomorphism classes of objects, $n+1$ on one side and $m+1$ on the other.\qed
 
-\inwords{} The set-valued representation theory of the matrix monoid sees the size of the matrices; the linear one does not. The difference is that idempotents split in $\mathsf{Vect}$ but the category of sets does not \q{add} objects: $k^n\oplus k^n\cong k^{2n}$ is invisible to $M_n(k)$-sets.
+\inwords{} The set-valued representation theory of the matrix monoid sees the size of the matrices; the linear one does not. The reason is visible in the Karoubi envelope: for $M_n(k)$-sets it is $\mathsf{Vect}_{\le n}$, which contains no space of dimension above $n$, whereas for modules one also adds finite direct sums, which produce $k^m$ for every $m$ and make $M_n(k)$ and $k$ Morita equivalent.
 
 \subsection{Lattices of subspaces}
 
@@ -63,8 +62,8 @@ Let $n\ge 2$ and let $\omega(n)$ be the number of distinct prime factors of $n$.
 \item[deck] $\PSh(\B(\mathbb Z/n,\cdot))$.
 \item[arch] Bridges~\ref{br:dm}, \ref{br:bool}, \ref{br:pts}, and for finite monoids the classification of subtopoi by two-sided idempotent ideals \cite[Prop.~6.1.2]{pirashvili-jncg}.
 \item[specialise] $0$ is a zero, so Ore holds; the class of a prime factor of $n$ is not invertible. The monoid is commutative, so essential points are the idempotents; by the Chinese remainder theorem the idempotents of $\mathbb Z/n$ correspond to the subsets of the prime factors of $n$. Idempotent ideals: below.
-\item[verify] direct proof below; Lean: not formalised (the classification of subtopoi of finite monoids by idempotent ideals is not in the library); the counts are checked by machine instead.
-\item[novelty] the general theory is in print (\cite[Prop.~6.1.2, Prop.~6.3.1, Thm~5.6.1]{pirashvili-jncg}: subtopoi $\leftrightarrow$ down-sets of the poset of $\mathcal J$-classes of idempotents); the monoid $(\mathbb Z/n,\cdot)$, the counts and the Dedekind numbers not found. Checked by machine for $n\le 60$ and $n = 210, 2310$, and, directly from the axioms of a Grothendieck topology, for $n\le 30$.
+\item[verify] direct proof below; Lean: not formalised (the classification of subtopoi of finite monoids by idempotent ideals is not in the library); the counts were also enumerated by machine, see the novelty line.
+\item[novelty] the general theory is in print (\cite[Prop.~6.1.2, Prop.~6.3.1, Thm~5.6.1]{pirashvili-jncg}: subtopoi $\leftrightarrow$ down-sets of the poset of $\mathcal J$-classes of idempotents); the monoid $(\mathbb Z/n,\cdot)$, the counts and the Dedekind numbers not found. Machine enumerations were run for $n\le 60$ and $n = 210, 2310$, and, directly from the axioms of a Grothendieck topology, for $n\le 30$; they are not part of the Lean development, and no script or commit for them is recorded here. For $n>30$ they go through the classification of idempotent ideals \cite{pirashvili-jncg}, so there they do not check the topologies independently of that classification.
 \end{trace}
 
 \direct{} (1), (2) as in the trace. For (3), subtopoi correspond to the two-sided ideals $I$ of the finite monoid $M = (\mathbb Z/n,\cdot)$ with $I^2 = I$, the empty ideal included \cite[Prop.~6.1.2]{pirashvili-jncg}. In a finite monoid an idempotent ideal is generated by its idempotents: if $I = I^2$, every $x\in I$ is a product of arbitrarily many elements of $I$, and a long enough product in a finite semigroup factors as $uev$ with $e$ idempotent, $e$ a product of elements of $I$. So the idempotent ideals are the unions of principal ideals $eM$, $e$ idempotent, and $eM\subseteq fM$ iff $e = ef$. Writing $e\leftrightarrow S_e\subseteq\{\text{primes of }n\}$ (the primes $p$ with $e\equiv 1\bmod p^{v_p(n)}$), $e = ef$ iff $S_e\subseteq S_f$; so idempotent ideals correspond to the down-closed families of subsets of an $\omega(n)$-element set, whose number is the Dedekind number $D(\omega(n))$.\qed
