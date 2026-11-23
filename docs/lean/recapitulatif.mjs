@@ -54,7 +54,19 @@ for (const [folder, vs] of Object.entries(doubleQuoted)) verdicts[folder] ??= vs
 // with cards of other files (the Buffalo lectures).
 const byLean = {};
 for (const m of proofs.matchAll(/verdict: (\[[^\]]*\]|'[^']+'|"[^"]+"),\s*lean: ['"]lean\/Grothendieck\/([^'"]+)\.lean['"]/g)) {
-  (byLean[m[2]] ??= []).push(...[...m[1].matchAll(/['"]([^'"]+)['"]/g)].map((v) => v[1]));
+  const vs = [...m[1].matchAll(/['"]([^'"]+)['"]/g)].map((v) => v[1]);
+  (byLean[m[2]] ??= []).push(...vs);
+  // The cards give the path under Grothendieck/ (AlgebraicGeometry/EffectiveVenken), while
+  // \verifie gives the bare file name (EffectiveVenken): index by both.
+  const bare = m[2].split('/').pop();
+  if (bare !== m[2]) (byLean[bare] ??= []).push(...vs);
+}
+
+// The path of each Lean file under Grothendieck/, from the lean fields of the cards
+// (\\verifie gives only the bare name, the proofs repository files it under a topic directory).
+const leanPath = {};
+for (const m of proofs.matchAll(/lean: ['"]lean\/Grothendieck\/([^'"]+)\.lean['"]/g)) {
+  leanPath[m[1].split('/').pop()] ??= m[1];
 }
 
 /** The argument of \cmd[...] with balanced brackets, starting at the [. */
@@ -97,7 +109,7 @@ for (const m of article.matchAll(/\\part\{([^}]*(?:\{[^}]*\}[^}]*)*)\}|\\input\{
   const label = tex.match(/\\label\{(sec:[^}]+)\}/)?.[1] ?? `sec:${name}`;
   if (!vs.length || vs.some((v) => !VERDICT[v])) throw new Error(`verdict of ${name}: ${vs}`);
   rows.push(
-    `${cote} & ${statement} & ${vs.map((v) => VERDICT[v]).join(' ; ')} & \\href{${base}/${file}.lean}{\\texttt{\\detokenize{${file}}}} & \\ref{${label}}\\\\`,
+    `${cote} & ${statement} & ${vs.map((v) => VERDICT[v]).join(' ; ')} & \\href{${base}/${leanPath[file] ?? file}.lean}{\\texttt{\\detokenize{${file}}}} & \\ref{${label}}\\\\`,
   );
 }
 // Parts with no section of their own (the empty ones) leave a heading with no row.
