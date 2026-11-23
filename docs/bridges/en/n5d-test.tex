@@ -1,0 +1,86 @@
+\section{Test categories and the De Morgan arch}\label{sec:test}
+
+This section takes up issue~\#187 of the edition: the questions that folders 108, 118 and 134-2 leave open on test categories, read as bridges. We fix a fundamental localizer $W$ (Grothendieck's \emph{localisateur fondamental}) on the category $\mathrm{Cat}$ of small categories; the usual weak equivalences, those whose nerve is a weak equivalence of simplicial sets, are the smallest one. For a small category $A$, $i_A\colon\widehat A\to\mathrm{Cat}$ sends a presheaf $X$ to its category of elements $A/X$, and $i_A^*(C)(a) = \Hom(A/a, C)$. We use the definitions of \cite[\S4.1]{cisinski-308}, which follow \emph{Pursuing Stacks}: $A$ is a \emph{weak test category} if $i_A^*(C)$ is $W$-aspherical for every small $C$ with a final object (Déf.~4.1.8); a \emph{local test category} if every $A/a$ is a weak test category (Déf.~4.1.12); a \emph{test category} if it is both. The Lawvere object $L_A = i_A^*(\Delta_1)$ is the presheaf of sieves, and Grothendieck's criterion reads: $A$ is a local test category iff $L_A$ is locally aspherical, that is, iff $A/(a\times L_A)$ is aspherical for every object $a$ (\cite[Th.~4.1.19]{cisinski-308}, \cite[Th.~6.6]{maltsiniotis-2001}). This is a bridge in the sense of \S\ref{sec:recall}, with a homotopical arch: a property of the topos $\widehat A$, that its sheaf of truth values is contractible, read on the category $A$.
+
+\subsection{The questions and what is known}
+
+The table lists the questions on test categories, weak, local and strict test categories, asphericity and separating intervals that the three folders leave open, by folder and page of the transcription. Folder 134-2 holds only the plans and tables of contents of \emph{Pursuing Stacks} (its text is printed); for it we give the section the table announces and read the section in the arXiv edition \cite{ps-arxiv}. \q{Ours} marks a step that is the edition's; \q{open} means not found in the sources we read, which are \cite{cisinski-308,maltsiniotis-2001,ps-arxiv,hubert-thesis,hubert-dk}. We did not consult Jardine's papers, Cisinski's \emph{Higher categories and homotopical algebra}, nor the printed Astérisque~301.
+
+\begin{center}\scriptsize\emergencystretch=3em
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{1.25cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{5.2cm}}
+\toprule
+folder, page & question & status\\
+\midrule
+108, p.~2, q.~2 & are $W$ and $W_A$ saturated? & settled: every fundamental localizer is strongly saturated \cite[Prop.~4.2.4]{cisinski-308}; so is $W_A$ (118, pp.~39--40)\\
+108, p.~2, q.~3 & is $(\mathrm{Cat})$ a model category? & settled: Thomason's structure \cite[Th.~5.2.12, 5.2.15]{cisinski-308}, for every accessible $W$\\
+108, p.~2, q.~4 & exactness of $\mathrm{Hot}_W$ and of $\mathrm{Cat}\to\mathrm{Hot}_W$, $\widehat A\to\mathrm{Hot}_W$ & partly: finite sums and products \cite[\S9]{maltsiniotis-2001}, filtered colimits \cite[Cor.~4.2.22]{cisinski-308}, products and $\widehat A\to\mathrm{Hot}$ iff $A$ totally aspherical \cite[Prop.~4.3.2]{cisinski-308} (with the correction of row \nolinkurl{118-groupoid-products-not-totally-aspherical})\\
+108, p.~2, q.~5 & when is $\widehat A$ a closed model category? & settled: a model structure with cofibrations the monomorphisms and weak equivalences $W_A$ exists iff $A$ is a local test category \cite[introduction, Th.~1.4.3, Cor.~4.2.18]{cisinski-308}\\
+108, p.~2, q.~6 & is $\Delta^{\circ}$ a test category? (\q{no}) & settled, ours: $\Delta^\circ$ has an initial object, so it is neither a weak nor a local test category (Theorem~\ref{th:ore} below); the test case is stated without argument in \cite[\S88]{ps-arxiv}\\
+108, p.~2, q.~6a & the variants $\Delta_f$, cubes & $\Delta_f$ is a weak test category, not a test category \cite[\S8]{maltsiniotis-2001}; the cube category is a test category \cite[Cor.~8.4.13]{cisinski-308}; the other cubical signs are not identified on the page\\
+108, p.~2, q.~7, 17 & invariants of $\widehat A$, Dold--Puppe & partly: homotopical Dold--Kan correspondences for the test categories satisfying a Whitehead condition, $\Theta$ included \cite{hubert-thesis,hubert-dk}\\
+108, p.~3, q.~13 & aspherical with 0-connected topos $\Rightarrow$ totally aspherical? & partly: total asphericity is the asphericity of the $a\times b$ \cite[4.3.1--4.3.2]{cisinski-308}, \cite[Prop.~7.1]{maltsiniotis-2001}; a totally aspherical weak test category is a strict test category \cite[Prop.~1.17]{hubert-dk}; the 0-connected form of the page: open\\
+108, p.~4, q.~16 & for a contractor $A$, are $i_A$, $j_A$ inverse up to homotopisms; contractibility through $A/X$; $i_A(X\times Y)\to i_AX\times i_AY$? & up to weak equivalences: yes, since a nontrivial contractor is a strict test category (\cite[\S88]{ps-arxiv}, \cite[\S7]{maltsiniotis-2001}) and \cite[Th.~4.1.26, Prop.~4.3.2]{cisinski-308}; up to homotopisms: open\\
+118, p.~14, pp.~18--22 & pushouts along immersions in $(\mathrm{Cat})$ & the page answers \q{non} on p.~22; Cisinski's pushout criteria \cite[\S5.1]{cisinski-308} (row \nolinkurl{118-pushout-along-cofibrations-in-cat})\\
+118, pp.~23--25 & calculus of fractions for $\mathrm{Hot}_A$ with a separating interval; which class $\mathfrak M$ in $(\mathrm{Cat})$? & in $\widehat A$ the page needs $A$ local test, as \cite[Th.~4.1.19]{cisinski-308}; the version in $(\mathrm{Cat})$: open\\
+118, p.~14 (1) & $W = W^{\circ}$? & settled \cite[Sorites~3.3.8 (7)]{cisinski-308}\\
+118, pp.~26--30 & arbitrary sums in $\mathrm{Hot}(W)$ & settled for accessible $W$, ours from \cite[3.3.8 (1), Th.~5.2.15]{cisinski-308}\\
+118, p.~36 & is an infinite product of aspherical objects aspherical? & no, ours (Proposition~\ref{prop:products})\\
+134-2, p.~5, \S\S31--33 & a criterion for test categories, necessity of T1--T3 & settled \cite[Th.~4.1.19]{cisinski-308}, \cite[Th.~6.6]{maltsiniotis-2001}\\
+134-2, p.~6 \S43, p.~9 \S98 & $\Delta^f$ weak test; \q{perplexities about its being aspheric} & settled \cite[\S8]{maltsiniotis-2001}\\
+134-2, p.~9, \S84 & the inclusion $f_!(M_{\mathrm{as}})\subset M'_{\mathrm{as}}$ & left unanswered in \cite[\S88, 1)]{ps-arxiv}; open\\
+134-2, p.~9, \S86 & does a notion of map of asphericity structures exist? & open\\
+134-2, p.~9, \S90 & existence of (perfect) test functors into a modelizer & open in general; for $\Delta\to\mathrm{Cat}$, Thomason's $c\,\mathrm{Sd}^2$ gives a Quillen equivalence \cite[Th.~5.2.12]{cisinski-308}\\
+134-2, p.~9, \S91 & conditions on $A$ for the homotopy types of finite type; test categories with boundary operations & open; for homology, \cite{hubert-dk}\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The De Morgan obstruction}
+
+By the De Morgan arch (arch~B of \cite{bridges-generator}), $\widehat A$ is De Morgan iff $A$ satisfies the Ore condition. The Lawvere object sees the Ore condition directly.
+
+\begin{lemma}\label{lem:ore-sieves}
+$A$ satisfies the Ore condition iff, for every arrow $f\colon b\to a$ and every nonempty sieve $S$ on $a$, the sieve $f^*S$ is nonempty. Equivalently, the empty sieves form a direct summand of $L_A$: $L_A = L_A^{\emptyset}\sqcup L_A^{+}$, where $L_A^{+}(a)$ is the set of nonempty sieves on $a$.
+\end{lemma}
+
+\begin{proof}
+If $S$ contains $g\colon c\to a$ and the cospan $(f,g)$ completes to $f h = g k$, then $h\in f^*S$. Conversely, given a cospan $(f,g)$, apply the condition to the sieve generated by $g$: an arrow $h$ of $f^*S$ is an $h$ with $fh = gk$ for some $k$. The empty sieves always form a sub-presheaf; their complement is one iff no nonempty sieve pulls back to the empty one.
+\end{proof}
+
+\begin{theorem}\label{th:ore}
+Let $W$ be a fundamental localizer other than the two coarse ones, and $A$ a nonempty small category satisfying the Ore condition, that is, with $\widehat A$ De Morgan. Then $A$ is neither a weak $W$-test category nor a local $W$-test category. More generally, if some $A/X$ satisfies the Ore condition, $A$ is not a local $W$-test category.
+\end{theorem}
+
+\begin{proof}
+Every non-coarse fundamental localizer is contained in the localizer $W_0$ of the functors that induce a bijection on $\pi_0$ \cite[Prop.~9.3.2]{cisinski-308}, so a $W$-aspherical category is connected. By Lemma~\ref{lem:ore-sieves}, $A/L_A$ is the disjoint union of $A/L_A^{\emptyset}\simeq A$ and $A/L_A^{+}$, which contains the maximal sieves; both are nonempty, so $L_A$ is not aspherical, while a weak test category needs it to be (Déf.~4.1.8 with $C=\Delta_1$). Likewise $a\times L_A = (a\times L_A^{\emptyset})\sqcup(a\times L_A^{+})$, both pieces containing a section over $a$, so $L_A$ is not locally aspherical and $A$ is not a local test category \cite[Th.~4.1.19]{cisinski-308}. The last assertion follows, since $A/X$ is a local test category as soon as $A$ is \cite[Prop.~4.1.14 (v)]{cisinski-308}, and a slice of a nonempty category is nonempty.
+\end{proof}
+
+\begin{corollary}\label{cor:ore}
+For the usual weak equivalences, none of the following is a weak test category or a local test category: a nonempty groupoid; a commutative monoid, a group, a monoid with zero; a finite monoid with a single minimal right ideal; a category with an initial object, such as $\Delta^{\circ}$, the augmented simplex category, or finite sets with the empty set; the free category on a quiver in which every vertex has at most one incoming arrow (\lean{rightOreCondition_paths_iff}). None is a local test category among: posets with a minimal element, since the slice over it is the point; finite free categories on acyclic quivers, for the same reason at a source.
+\end{corollary}
+
+For finite monoids, the Ore condition is the existence of a single minimal right ideal: two minimal right ideals are disjoint, and every right ideal $mM$ contains one. For the second list we use the last assertion of Theorem~\ref{th:ore} with $X$ representable.
+
+\status{} Grothendieck states the test-category case for an initial object in \emph{Pursuing Stacks}: \q{it is easy to see that a test category cannot possibly have an initial object} \cite[\S88, typescript p.~294]{ps-arxiv}, without an argument; Maltsiniotis notes that a representable separating segment excludes an initial object \cite[Rem.~6.8]{maltsiniotis-2001}, and the families of test categories of \cite[Ex.~4.1.20]{cisinski-308} and \cite[Ex.~6.9]{maltsiniotis-2001} exclude the empty category. So the answer \q{non} of folder 108 to question~6 agrees with Grothendieck's own later remark. What we did not find in these sources, nor through TheoremSearch and alphaXiv, is the general form: the Ore condition, that is, the De Morgan property of the topos, rules out weak and local test categories. The bridge reads it in one line: a logical property of $\widehat A$ (the De Morgan law) forbids a homotopical one (a contractible object of truth values). The converse fails: $\Delta$ does not satisfy the Ore condition and is a test category, while the non-Ore finite monoids below are not.
+
+\subsection{Finite decks: computations and a conjecture}
+
+On the decks the generator enumerates, the script \nolinkurl{computations/187-test-categories/finite_test.py} computes the homology in degrees $0$ to $2$, over $\mathbb Q$ and $\mathbb F_2$, of the nerves of $A$, $A/L_A$ and every $A/(a\times L_A)$. For every monoid of order at most~6 (2510 up to isomorphism, from the atlas of the companion article), the homology of $A/L_A$ in degrees at most~2 differs from that of a point, and so does that of $A/(a\times L_A)$: no monoid of order $\le 6$ is a weak test category or a local test category, for the usual weak equivalences. The non-Ore ones, 495 of them, are not covered by Theorem~\ref{th:ore}; for them $H_1(A/(a\times L_A);\mathbb Q)$ has rank between $4$ and $743$. For posets, \nolinkurl{posets_euler.py} computes the Euler characteristic of the finite poset $A/L_A$ by the formula $\chi(A/L_A) = \sum_x |D(\downarrow x)|\,c(x)$, with $D(\downarrow x)$ the down-sets of $\downarrow x$ and $c(x) = 1-\chi(A_{<x})$: on every poset with at most six points and $\chi(A)=1$, $\chi(A/L_A)\ne1$, so no poset with at most six points is a weak test category (a poset with $\chi(A)\ne1$ is not even aspherical).
+
+\begin{remark}[Conjecture]
+No nonempty finite category is a weak test category, nor a local test category. The local case holds for finite posets and finite acyclic free categories (Corollary~\ref{cor:ore}); for monoids we only have the computations above.
+\end{remark}
+
+\subsection{Infinite products}
+
+\begin{proposition}\label{prop:products}
+For every non-coarse fundamental localizer $W$, an infinite product of $W$-aspherical categories need not be $W$-aspherical, and the class $W$ is not stable under infinite products.
+\end{proposition}
+
+\begin{proof}
+Let $Z_n$ be the zigzag $0\to1\leftarrow2\to\cdots$ with $n+1$ objects, a contractible poset. A zigzag of length $k$ in $\prod_n Z_n$ projects onto zigzags of length $k$ in every factor, and the ends of $Z_n$ are at distance $n$; so $(0)_n$ and $(n)_n$ lie in different components of $\prod_n Z_n$, which is not $W$-aspherical (Theorem~\ref{th:ore}, proof). Hence $\prod_n(Z_n\to e)$ is not in $W$.
+\end{proof}
+
+This answers the question of folder 118, p.~36, which Grothendieck there judges less important than infinite sums; the argument is that of p.~28, where the same zigzags show that $(\mathrm{Cat})\to\overline{\mathrm{Cat}}$, the passage to homotopy classes of functors, does not commute with infinite sums. Since the nerve commutes with limits, it also gives an infinite product of aspherical simplicial sets that is not aspherical.
+
+\leanentry{} The file \lean{TestCategories.lean} of \texttt{lean/bridges} proves the connectedness core of Theorem~\ref{th:ore}, with Mathlib's Lawvere object \lean{Functor.sieves}: Lemma~\ref{lem:ore-sieves} (\lean{rightOreCondition_iff_pullback_ne_bot}), the splitting of every category of elements over $L_A$ (\lean{not_isPreconnected_elements}), its consequences for $L_A$ and $a\times L_A$ (\lean{not_isConnected_elements_sieves}, \lean{not_isConnected_elements_yonedaProdSieves}), the reading through the De Morgan arch of \lp{} (\lean{not_isConnected_elements_sieves_of_isDeMorganTopos}), $\Delta^{\circ}$ (\lean{not_isConnected_elements_sieves_simplexCategory_op}) and monoids (\lean{not_isConnected_elements_sieves_singleObj}). Mathlib has the nerve, simplicial sets and categories of elements, but not fundamental localizers, the weak equivalences of $\mathrm{Cat}$, or Grothendieck's test notions; so the step from \q{not connected} to \q{not aspherical}, and the definitions of weak and local test categories, are not formalised. Proposition~\ref{prop:products} is not formalised.

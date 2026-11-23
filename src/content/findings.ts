@@ -397,19 +397,22 @@ export const FINDINGS: Finding[] = [
     pages: '2',
     kind: 'mathematical',
     claim:
-      'The folder records a negative answer to whether Δ° is a test category, written as a bare underlined « non » with no argument and no definition of the notion on the page.',
+      'The folder records a negative answer to whether Δ° is a test category, written as a bare underlined « non » with no argument and no definition of the notion on the page. The answer holds for every non-coarse fundamental localizer, and Δ° is not even a weak test category nor a local test category.',
     basis:
       'Question 6 of the list reads « Is the category Δ° a test category, or not? » and is answered « no », underlined, on the same line — the only one of the seventeen questions that carries its own answer. The list nowhere defines modelizer or test category, and gives neither proof nor counterexample. The question continues with a row of cubical and simplicial variants, one of whose symbols the transcription declines to name. No argument is written on the leaves: checked on the facsimile by Michel Hua (#125, 2026-11-07), the statement is only stated.',
     ours:
-      'Nothing is supplied. The reading states the answer and explicitly declines to reconstruct an argument for it, since a counterexample invented here would be the edition’s and not the page’s.',
+      'The proof is the edition’s (issue #187), with the definitions of Cisinski, Astérisque 308, Déf. 4.1.8 and 4.1.12. Δ° has an initial object, [0], so it satisfies the right Ore condition: every cospan completes to a commutative square. Under the Ore condition, pulling back along any arrow never empties a nonempty sieve, so the empty sieves form a direct summand of the Lawvere object L = i_A^*(Δ1), and the categories of elements of L and of every a × L split into two nonempty pieces. A disconnected category is not W-aspherical when W ⊂ W_0, which holds for every fundamental localizer except the two coarse ones (Cisinski, Prop. 9.3.2). Since a weak test category needs L aspherical (Déf. 4.1.8 with C = Δ1) and a local test category needs L locally aspherical (Th. 4.1.19), neither holds. The same argument applies to every nonempty category with the Ore condition, that is, every category whose presheaf topos is De Morgan: groupoids, commutative monoids, monoids with zero, categories with an initial object, free categories on quivers with at most one arrow into each vertex. The edition did not find this general form, nor the weak-test form, in the sources listed. What the pass did not establish is the reason the page had in mind.',
     literature: [
       "A. Grothendieck, Pursuing Stacks (1983), arXiv:2111.01000 (published as Documents Mathématiques 20, SMF), §39 (p. 101: definition of a test category through asphericity of A and of the Lawvere element) and §88, item 3) (p. 281) (read 2026-11-23): « it is easy to see that a test category cannot possibly have an initial object ». Δ° has an initial object ([0], final in Δ), so it is not a test category; this one-line deduction is the pass's, the text does not name Δ°.",
+      'Same edition, §88, margin [p. 294] of the typescript: the remark comes with no argument',
+      'G. Maltsiniotis, La théorie de l’homotopie de Grothendieck, version provisoire août 2001 (prst.pdf), Th. 6.6, Rem. 6.8 (a separating segment that is representable excludes an initial object), Ex. 6.9 d) (the empty category excluded)',
+      'D.-C. Cisinski, Les préfaisceaux comme modèles des types d’homotopie, Astérisque 308 (2006), Déf. 4.1.8, 4.1.12, Th. 4.1.19, Ex. 4.1.20, Prop. 9.3.2 (author’s copy)',
+      'TheoremSearch (api.theoremsearch.com), queries « category with an initial object is not a test category », « test category Ore condition », « subobject classifier locally aspherical local test category », 23 November 2026: nothing on the Ore form',
     ],
     status: 'matched',
     settle:
-      'Establish first which definition of test category is in play, since the page uses the term without defining it and the notion was still moving; then check the answer against the definitive treatments of test categories and modelizers. Until the definition is fixed the statement is not yet in a form that can be looked up, which is why this entry is unsearched rather than a candidate. Re-check 2026-11-23: matched through Pursuing Stacks §88 (recorded above), with one step of the pass (Δ° has an initial object). This settles the answer « non », not what the folder meant by test category; if the folder’s notion is the strict one, the answer is the same since a strict test category is a test category. Maltsiniotis, Astérisque 301, where Δ° may be named, was not opened.',
-    reach: 'beyond',
-    theory: "derivators and homotopy theory of categories",
+      'Matched (re-check of 2026-11-23, then issue #187) for the statement about test categories: Pursuing Stacks §88 says, without argument, that no test category has an initial object, and Δ° has one. Still open as a literature question: whether the Ore (De Morgan) form, and the extension to weak test categories, are stated somewhere, for instance in Maltsiniotis’s Astérisque 301 (2005), which was not consulted in its printed form, or in the SMF edition of Pursuing Stacks.',
+    lean: { file: 'lean/bridges/Bridges/TestCategories.lean', found: 'The connectedness core is proved, with Mathlib’s Lawvere object Functor.sieves: the right Ore condition holds iff the pullback of a nonempty sieve is never empty (rightOreCondition_iff_pullback_ne_bot); under it, any presheaf over the Lawvere object with a section over the empty sieve and one over a nonempty sieve has a category of elements that is not connected (not_isPreconnected_elements); hence neither the elements of L nor those of any a × L form a connected category (not_isConnected_elements_sieves, not_isConnected_elements_yonedaProdSieves), and the same follows from the De Morgan arch of lean-pool (not_isConnected_elements_sieves_of_isDeMorganTopos). For Δ°, through its initial object (not_isConnected_elements_sieves_simplexCategory_op). Not formalised: fundamental localizers, test categories and the step from disconnected to non-aspherical, since Mathlib has no theory of fundamental localizers (it has the nerve and simplicial sets, not the weak equivalences of Cat nor Grothendieck’s test notions).' },
     onPage: 'stated',
   },
   {
@@ -3145,6 +3148,25 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Look at the facsimile of pp. 56–57 for the struck or overwritten 1983 page numbers and any trace of a leaf 41. Then compare with Brown’s 1982 translation of the July letter (its pp. 2–11) or with the SMF vol. I edition’s note on this letter. If those pages hold mathematics answering Breen’s questions, the 1983 typescript omits them by design, and the transcription note and reading should say “omitted in 1983” rather than “missing from the folder”.',
+  },
+  {
+    id: '134-2-delta-f-weak-test',
+    cote: '134-2',
+    pages: '6, 9',
+    kind: 'mathematical',
+    claim:
+      'The table of contents announces that Δ^f, the simplices without degeneracies, is a weak test category (§ 43, p. 6), and later a « sketch of proof … and perplexities about its being aspheric » (§ 98, p. 9).',
+    basis:
+      'Pages 6 and 9 of the folder are the typed and hand-corrected table of contents of Pursuing Stacks; § 98 itself is not in the folder. In the printed text (§ 98) Grothendieck reduces the statement to the asphericity of Δ^f, which he cannot prove « by a very simple argument » and supports by a heuristic boundary-operator computation.',
+    ours: null,
+    literature: [
+      'G. Maltsiniotis, La théorie de l’homotopie de Grothendieck, version provisoire 2001, introduction (§ 8): the subcategory of Δ of strictly increasing maps is a weak test category and not a test category',
+      'L. Hubert, Correspondances de Dold-Kan homotopiques, thèse, Aix-Marseille, 2025, arXiv:2505.08321, 1.1.17 and the remark after it (the slices Δ′/Δ_n are not weak test categories, after Maltsiniotis 1.7.25–1.7.26)',
+      'A. Grothendieck, Pursuing Stacks, arXiv:2111.01000v2, § 98',
+    ],
+    status: 'matched',
+    settle: 'Nothing to settle: the statement and its proof are in Maltsiniotis’s exposition.',
+    onPage: 'stated',
   },
   // Folder 6 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), reading 6.modern.tex made on Opus 5.5 (same model). No literature was searched in this pass.
   {
@@ -7643,6 +7665,49 @@ export const FINDINGS: Finding[] = [
     status: 'matched',
     settle:
       'Nothing to settle for the statement. Whether the page’s telescope route can be completed without a test category is a separate question, open on the calculus of fractions in Cat.',
+  },
+  // Folder 118 — pass of issue #187 on Opus 5.5 (claude-opus-5-5), 2026-11-23, on the reading made by Opus 5.5 (2026-10-03). Sources read: Cisinski, Astérisque 308 (author’s copy), Maltsiniotis 2001 (prst.pdf).
+  {
+    id: '118-infinite-products-aspherical',
+    cote: '118',
+    pages: '36',
+    kind: 'mathematical',
+    claim:
+      'The page asks whether an infinite product of W-aspherical categories (or of 𝒲_A-aspherical presheaves) is W-aspherical. For every non-coarse fundamental localizer it is not: the product of the zigzags Z_n (n + 1 objects, 0 → 1 ← 2 → …) is not connected, although each Z_n is aspherical; so 𝒲 is not stable under infinite products, and (Cat) → Hot does not commute with them.',
+    basis:
+      'Page 36 asks « un produit infini ∏ X_j d’objets W-asphériques est-il W-asphérique ? Ça me semble moins important de toutes façons que la question des sommes infinies »; pages 31–35 reduce the infinite case of Corollary 2 to it; page 28 uses the same zigzag of growing length against infinite sums in the category of homotopy classes.',
+    ours:
+      'The answer is the edition’s. A zigzag of length k in the product projects to zigzags of length k in every factor, and the two ends of Z_n are at distance n, so the objects (0)_n and (n)_n of ∏ Z_n are not joined; a disconnected category is not W-aspherical for W ⊂ W_0, which is every W but the two coarse ones (Cisinski, Prop. 9.3.2). Since the nerve commutes with products, the same example in Δ^ shows that an infinite product of aspherical simplicial sets need not be aspherical. The page’s « objets » is \\uncertain{} in the transcription.',
+    literature: [
+      'Cisinski, Astérisque 308 (2006), Sorites 3.3.8 (stability under sums and finite products, nothing on infinite products), Prop. 9.3.2',
+      'Maltsiniotis, La théorie de l’homotopie de Grothendieck, version provisoire 2001, §9 (finite products and finite sums in Hot for strong localizers)',
+    ],
+    status: 'candidate',
+    settle:
+      'The counterexample is elementary and likely folklore (products of categories do not commute with π_0); a reference stating it for fundamental localizers would make the row matched.',
+    reach: 'reachable',
+    onPage: 'stated',
+  },
+  {
+    id: '118-arbitrary-sums-hot',
+    cote: '118',
+    pages: '26–30',
+    kind: 'mathematical',
+    claim:
+      'The page’s guess that Hot(𝒲) has arbitrary sums and that (Cat) → Hot(𝒲) commutes with them holds for every accessible fundamental localizer, in particular for the usual weak equivalences.',
+    basis:
+      'Page 28: « Je suppose pourtant que dans Hot(W), les sommes quelconques existent et que Cat → Hot(W) y commute ?? »; pages 29–30 try the surjectivity and stop at the injectivity, which needs a « condition de type Kan ».',
+    ours:
+      'The deduction is the edition’s, from two published results: for accessible W, (Cat) carries the Thomason model structure with weak equivalences W (Cisinski, Th. 5.2.12 and 5.2.15), so Hot(W) has small sums, computed on cofibrant replacements; and W is stable under sums (Sorites 3.3.8 (1)), so the sum of the replacements is W-equivalent to the sum of the categories. The page’s own route through the calculus of fractions is not completed.',
+    literature: [
+      'Cisinski, Astérisque 308 (2006), Sorites 3.3.8 (1), Th. 5.2.12 (Thomason), 5.2.15–5.2.16',
+    ],
+    status: 'candidate',
+    settle:
+      'Look for an explicit statement (Cisinski’s derivator Hot_W, or Maltsiniotis, Astérisque 301) for arbitrary W, accessible or not; for accessible W the row is a two-line consequence of the cited results.',
+    reach: 'beyond',
+    theory: 'model structures on Cat (Thomason) and fundamental localizers',
+    onPage: 'partial',
   },
   // Folder 131 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5 (2026-09-24).
   // Sources actually read: J. P. Murre, « Representation of unramified functors. Applications (according to unpublished
