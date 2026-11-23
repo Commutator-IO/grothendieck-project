@@ -49,7 +49,11 @@ const readScript = (s: string, at: number): { body: string; next: number } | nul
   return { body: ch, next: open + ch.length };
 };
 
-export function notation(text: string): ReactNode {
+/** French guillemets keep their inner spaces on the line: « mot » never breaks before ». */
+const guillemets = (s: string) => s.replace(/« /g, '«\u00a0').replace(/ »/g, '\u00a0»');
+
+export function notation(raw: string): ReactNode {
+  const text = guillemets(raw);
   if (!text.includes('_') && !text.includes('^')) return text;
 
   const out: ReactNode[] = [];
