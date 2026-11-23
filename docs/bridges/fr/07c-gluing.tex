@@ -1,0 +1,57 @@
+\section{Une sixième arche, tirée des notes de Grothendieck : recoller deux sous-topos}\label{sec:gluing}
+
+Les cinq arches du \S\ref{sec:toolbox} viennent de la littérature. Une sixième vient des notes de Grothendieck sur l'algèbre universelle (dossier 161-2, p.~48), où il se demande quand deux sous-topos $V$, $W$ d'un topos $B$ peuvent être \q{recollés} : quand les morphismes qui sont \emph{localement} dans $V$ ou dans $W$ forment-ils un sous-topos ? La note associée \cite{bridges-notes} (section \q{Anneaux de caractéristique définie}) rend son critère précis et le démontre ; dans le cas où il l'appliquait, les anneaux de caractéristique définie, il est en défaut, ce qui est un cas particulier du fait que la caractéristique~$0$ n'est pas géométriquement définissable \cite[\S8.2]{caramello-flat}. Nous faisons ici tourner ce critère comme une arche.
+
+\begin{bridge}[Recollement]\label{br:glue}
+Pour des sous-topos $V$, $W$ d'un topos $B$, les morphismes géométriques $f\colon\mathcal E\to B$ tels que $\mathcal E$ soit recouvert par deux ouverts sur lesquels $f$ se factorise respectivement par $V$ et par $W$ sont les morphismes qui se factorisent par un sous-topos si et seulement s'il existe des sous-objets $U'$, $U''$ de l'objet final de $B$ tels que
+\[
+W\wedge o(U')\le V,\qquad V\wedge o(U'')\le W,\qquad V\vee W\le o(U'\vee U'').
+\]
+Ce sous-topos est alors $V\vee W$. Lean : le cœur ordinal, dans un treillis distributif quelconque, est \lean{Grothendieck.Folder161_2.recollement_iff} (dépôt GrothendieckArchivesProofs) ; le passage aux sous-topos utilise la distributivité du treillis des sous-topos et la localité de la factorisation par un sous-topos \cite[\S A4.5]{elephant}, qui ne sont pas formalisées.
+\end{bridge}
+
+\subsection{Le tablier : sous-topos donnés par des sous-catégories pleines}
+
+Soient $C$ une petite catégorie où les idempotents se scindent, et $D\subseteq C$ une sous-catégorie pleine stable par isomorphismes et par rétracts. La restriction le long de $D\subseteq C$, avec l'extension de Kan à droite comme adjoint à droite, fait de $\PSh(D)$ un sous-topos de $\PSh(C)$ ; ce sont les sous-topos \emph{essentiels}, et $\PSh(E)\le\PSh(D)$ si et seulement si $E\subseteq D$ \cite{kelly-lawvere}. Un sous-objet de l'objet final de $\PSh(C)$ est un ensemble $S$ d'objets stable par les flèches entrantes, $o(S)\simeq\PSh(S)$, et le sous-topos ouvert de $\PSh(D)$ découpé par $S$ est $\PSh(D\cap S)$.
+
+\begin{theorem}\label{th:cospan}
+Soient $D_1$, $D_2$ des sous-catégories pleines de $C$ stables par isomorphismes et par rétracts. Les morphismes qui sont localement dans $\PSh(D_1)$ ou dans $\PSh(D_2)$ forment un sous-topos si et seulement s'il n'existe pas de \emph{cospan mixte}
+\[
+a\longrightarrow x\longleftarrow b,\qquad a\in D_1\smallsetminus D_2,\quad b\in D_2\smallsetminus D_1,\quad x\in D_1\cup D_2.
+\]
+\end{theorem}
+
+\begin{trace}
+\item[tablier] $\PSh(C)$ avec les sous-topos essentiels $\PSh(D_1)$, $\PSh(D_2)$.
+\item[arche] Pont~\ref{br:glue}.
+\item[spécialiser] $W\wedge o(S')\le V$ s'écrit $D_2\cap S'\subseteq D_1$, c'est-à-dire que $S'$ évite $D_2\smallsetminus D_1$ ; le plus grand tel $S'$ est l'ensemble des objets qui ne reçoivent aucune flèche de $D_2\smallsetminus D_1$. De même pour $S''$.
+\item[réécrire] $V\vee W\le o(S'\cup S'')$ s'écrit $D_1\cup D_2\subseteq S'\cup S''$ : aucun objet de $D_1\cup D_2$ ne reçoit à la fois une flèche de $D_1\smallsetminus D_2$ et une flèche de $D_2\smallsetminus D_1$.
+\item[vérifier] argument direct ci-dessous ; Lean : le cœur de l'arche seulement.
+\item[nouveauté] l'arche elle-même n'a pas été trouvée imprimée (note associée) ; les corollaires sont évalués un par un.
+\end{trace}
+
+\direct{} D'après le pont~\ref{br:glue}, la condition est l'existence de $S'$, $S''$ comme dans la trace, et les trois conditions sont monotones en $S'$, $S''$, de sorte qu'on peut prendre les plus grands choix. Un cospan mixte $a\to x\leftarrow b$ avec $x\in D_1\cup D_2$ place $x$ hors des deux plus grands choix ; réciproquement, un objet de $D_1\cup D_2$ hors des deux reçoit une flèche de chacune des deux différences.\qed
+
+\subsection{Trois lectures}
+
+\begin{corollary}[Préordres et espaces d'Alexandrov]\label{co:alex}
+Soient $P$ un préordre, $X_P$ son espace d'Alexandrov (les ouverts sont les sections commençantes), et $A$, $B\subseteq P$. Les faisceaux sur $X_P$ qui sont localement des faisceaux sur le sous-espace $A$ ou sur le sous-espace $B$ forment un sous-topos si et seulement si $A\smallsetminus B$ et $B\smallsetminus A$ sont \emph{séparés dans $A\cup B$} : aucun ne rencontre l'adhérence de l'autre dans $A\cup B$.
+\end{corollary}
+
+\noindent Un cospan mixte $a\le x\ge b$ dit que $x$ est dans les adhérences (les sections finissantes) de $a$ et de $b$. \status{} Non : c'est le fait classique que $A\cup B$ est réunion de deux ouverts relatifs contenus dans $A$ et dans $B$ si et seulement si $A\smallsetminus B$ et $B\smallsetminus A$ sont séparés dans $A\cup B$. Le pont lit une condition de recollement topossique comme un axiome de séparation.
+
+\begin{corollary}[Carquois]\label{co:quivgl}
+Soient $Q$ un carquois, $C$ la catégorie libre sur $Q$ (les préfaisceaux sur $C$ sont les représentations de $Q^{\op}$), et $D_1$, $D_2$ des ensembles de sommets. La disjonction locale de $\PSh(D_1)$ et $\PSh(D_2)$ est un sous-topos si et seulement si aucun sommet de $D_1\cup D_2$ n'est l'extrémité à la fois d'un chemin partant de $D_1\smallsetminus D_2$ et d'un chemin partant de $D_2\smallsetminus D_1$.
+\end{corollary}
+
+\noindent Une catégorie libre n'a pas d'idempotent non trivial, donc toute sous-catégorie pleine est stable par rétracts, et les flèches sont des chemins. La condition se vérifie en temps linéaire par deux parcours du graphe. \status{} Non trouvé, mais sa preuve tient en une ligne une fois le pont~\ref{br:glue} admis.
+
+\begin{corollary}[Topos à deux valeurs et monoïdes]\label{co:twovalued}
+Dans un topos dont les seuls sous-objets de l'objet final sont $0$ et $1$, la disjonction locale de deux sous-topos $V$, $W$ est un sous-topos si et seulement si $V\le W$ ou $W\le V$. En particulier, pour un monoïde $M$, la disjonction locale de deux sous-topos essentiels du topos des $M$-ensembles (donnés par des ensembles d'idempotents stables par rétracts dans $\Kar(\B M)$) n'est un sous-topos que si l'un contient l'autre.
+\end{corollary}
+
+\noindent Avec seulement deux ouverts, la troisième condition du pont~\ref{br:glue} force $U'$ ou $U''$ à valoir $1$, d'où $W\le V$ ou $V\le W$. Dans $\Kar(\B M)$ il y a une flèche $fe\colon e\to f$ entre deux idempotents quelconques, de sorte que le théorème~\ref{th:cospan} donne la même réponse. \status{} Non ; c'est presque une tautologie.
+
+\begin{remark}
+Cette arche a été ajoutée après le reste de l'article et c'est la plus faible : de ses trois sorties, l'une est de la topologie classique, une autre presque tautologique, et la dernière, le corollaire~\ref{co:quivgl}, est un court critère combinatoire dont la preuve est l'arche elle-même. Elle confirme une limite de la méthode discutée au \S\ref{sec:limits} : une arche dont la condition est déjà élémentaire produit des théorèmes élémentaires.
+\end{remark}
