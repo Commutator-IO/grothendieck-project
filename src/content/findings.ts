@@ -7720,6 +7720,28 @@ export const FINDINGS: Finding[] = [
     theory: 'model structures on Cat (Thomason) and fundamental localizers',
     onPage: 'partial',
   },
+  {
+    id: '118-local-test-no-de-morgan-slice',
+    cote: '118',
+    pages: '23–25',
+    kind: 'mathematical',
+    claim:
+      'For a local test category A, as page 25 requires for its calculus of fractions, no slice of the presheaf topos is De Morgan: for every nonempty presheaf X, Â/X ≃ (A/X)^ is not De Morgan, for every non-coarse fundamental localizer.',
+    basis:
+      'Page 25 says what the calculus of fractions of pages 23–24 cost: a separating interval I of Â defining a homotopy structure compatible with 𝒲_A, « donc, pratiquement, que A soit une catégorie-test locale ». The page draws no consequence for the topos itself.',
+    ours:
+      'The statement and its proof are the edition’s (issue #187). A/X is a local test category as soon as A is (Cisinski, Astérisque 308, Prop. 4.1.14 (v)); a nonempty category with the right Ore condition is neither a weak nor a local test category, because the empty sieves split off its Lawvere object (row 108-delta-op-not-test); and the presheaf topos of a small category is De Morgan iff the category satisfies the right Ore condition (lean-pool, isDeMorganTopos_presheaf_iff_rightOreCondition). For X empty the slice is the degenerate topos, which is De Morgan, hence « nonempty ». In Lean (lean/bridges/Bridges/TestCategories.lean) only the connectedness ingredients are proved, for any small category (not_isConnected_elements_sieves, not_isDeMorganTopos_of_isConnected_elements_sieves); Mathlib has no fundamental localizers. The words « pratiquement » and « catégorie-test locale » of page 25 sit next to two largely illegible marginal notes.',
+    literature: [
+      'Cisinski, Astérisque 308 (2006), Prop. 4.1.14 (v), Th. 4.1.19, Prop. 9.3.2',
+      'Maltsiniotis, La théorie de l’homotopie de Grothendieck, version provisoire 2001, Rem. 6.4 b), Th. 6.6',
+      'TheoremSearch, queries on test categories and the Ore condition, 23 November 2026: nothing on De Morgan slices',
+    ],
+    status: 'candidate',
+    settle:
+      'Look for a statement relating test categories or test topoi to the De Morgan law (or to the Ore condition on the categories A/X) in Maltsiniotis, Astérisque 301 (printed), in Cisinski’s work on test topoi, and in the SMF edition of Pursuing Stacks.',
+    reach: 'beyond',
+    theory: 'fundamental localizers and test categories',
+  },
   // Folder 131 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5 (2026-09-24).
   // Sources actually read: J. P. Murre, « Representation of unramified functors. Applications (according to unpublished
   // results of A. Grothendieck) », Séminaire Bourbaki exp. 294 (mai 1965), pp. 243–261, full text from Numdam.
