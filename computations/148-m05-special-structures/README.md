@@ -79,8 +79,18 @@ circle. So the page takes six structures over each equianharmonic point,
 cyclically permuted by τ⁰_r = tw₁/₆ (u_ω has order 6), and never forms the
 quarter-twist of II₁, while it writes out II′₂ = Tw₁/₄ II₂. The page's notion
 is narrower than the definition above at the tetrahedral node, and 542 is exact
-for it. Which of the two real orbits is the page's II₁ is not decided by the
-leaf: both are six rays a sixth of a turn apart and admit the same indexing by
-J × E. The
+for it.
+
+**The drawing of II₁ decides which real orbit** (re-read at 600 dpi). Below the
+red circle a small cap carries the three points of J: 0, a point whose label
+is blackened, and P̄. Three great circles, the mirrors through the node, each
+pass through one of them and cut the red circle in the six u_i. 1 and ∞, the
+two points of E, lie on the mirror through 0. The drawn structure is real for
+the reflection fixing 0, 1 and ∞ and exchanging P and P̄. That reflection fixes
+both points of E, so the page's II₁ is the orbit printed in `results.txt` with
+antiholomorphic relabelling `01243` (ray 0.833π). The orbit left out,
+Tw₁/₄ II₁, is the one with relabelling `10243`, whose real structure exchanges
+the two points of E. (The indexing by J × E alone cannot tell them apart: both
+are six rays a sixth of a turn apart.) The
 arrows (1620 in fourteen orbits) are not tested: their definition is not on
 the leaves.
