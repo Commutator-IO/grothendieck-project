@@ -1,0 +1,40 @@
+\section{A deck from Grothendieck's notes: pseudo-fields}\label{sec:pseudofields}
+
+The precedents of \S\ref{sec:precedents} show Grothendieck reading invariants of a topos on two presentations. His notes on universal algebra also contain a deck that the registry did not have: the topos of \q{pseudo-fields}, for which he gives three presentations.
+
+\subsection{The deck}
+
+In folder 161-2 \cite{grothendieck-161-2}, pp.~38--43, Grothendieck lists properties of rings and, for each, a subtopos of the topos $X_{\mathrm{ann}}\simeq\widehat R$ classifying rings, where $R$ is the category of affine schemes of finite type over $\mathbb Z$. His numbering changes between two pages: on p.~41 item~12 is the fields, while on p.~42 he renumbers, so that item~12 becomes the compact rings and item~13 the compact reduced rings. Below, \q{item~12} and \q{item~13} refer to the numbering of p.~42, and the fields are \q{the fields of p.~41}. Item~13 is the \emph{compact reduced ring}, which he names \emph{pseudo-field}: for every $f$ there is a unique idempotent $e$ with $ef$ invertible in $eA$ and $(1-e)f=0$, so that $A\simeq A_f\times A/fA$. These are the commutative von Neumann regular rings. He gives three presentations of the subtopos they define:
+\[
+X_{\mathrm{ps.\,corps}}\;\simeq\;\widetilde R_{\mathrm{ps.\,corps}}\;\simeq\;\widehat{R_{\mathrm{cons}}}.
+\]
+The second is the topos of sheaves on $R$ for the topology in which a family covers when one of its members has a section fibre by fibre; the third is the topos of presheaves on the category $R_{\mathrm{cons}}$ obtained from $R$ by inverting the arrows that are bijective with trivial residue field extensions (pp.~41--42).
+
+\subsection{Checking the presentation by presheaves}
+
+The theory of pseudo-fields can be axiomatised by the axioms of commutative rings and the sequent
+\[
+\forall a\ \exists!\,b\ \ (a^2b = a\ \wedge\ ab^2 = b):
+\]
+in a commutative ring the quasi-inverse $b$ of $a$ is unique, and the idempotent of Grothendieck's definition is $e = ab$. So the theory is cartesian, hence of presheaf type: its classifying topos is the topos of $\Set$-valued functors on its finitely presentable models. Let $T$ be the left adjoint of the inclusion of von Neumann regular rings into rings. This inclusion preserves filtered colimits, so $T$ preserves finite presentability. Conversely, every finitely presentable pseudo-field is some $T(A)$ with $A$ a finitely presented ring: in a finite presentation, replace each quasi-inverse by a new variable subject to its two equations. By Olivier \cite{olivier}, $\operatorname{Spec}T(A)$ is $\operatorname{Spec}A$ with its constructible topology, and the local rings of $T(A)$ are the residue fields of $A$. By Pierce \cite{pierce}, a von Neumann regular ring is the ring of global sections of the sheaf of its local rings over its spectrum, a Boolean space. Hence for $u:A\to B$ of finite presentation, $T(u)$ is an isomorphism iff $\operatorname{Spec}u$ is bijective and every residue field extension is trivial: a continuous bijection of Boolean spaces is a homeomorphism, and a map of sheaves that is an isomorphism on stalks is an isomorphism. The arrows that $T$ inverts are therefore exactly the arrows of the class $W$ that Grothendieck inverts.
+
+It remains to see that the finitely presentable pseudo-fields are obtained from the finitely presented rings by inverting $W$, and we argue as follows. Olivier's construction writes $T(B)$ as a filtered colimit of finitely presented $B$-algebras obtained by adjoining quasi-inverses, one element $a$ at a time:
+\[
+B' = B[y]/(a^2y - a,\ ay^2 - y).
+\]
+Each map $B\to B'$ of this tower is bijective on spectra with trivial residue field extensions: over a point where $a$ is nonzero in the residue field, the equations force $y = 1/a$, and where $a = 0$ they force $y = 0$. So these maps lie in $W$, and so do their composites. Since $A$ is finitely presented, a map $T(A)\to T(B)$, that is a map $A\to T(B)$, factors through a stage of the tower, and is therefore represented by a roof $A\to B'\leftarrow B$ with $B\to B'$ in $W$. Hence the category of finitely presentable pseudo-fields is the localisation of the category of finitely presented rings at $W$; its opposite is $R_{\mathrm{cons}}$, and the classifying topos is $\widehat{R_{\mathrm{cons}}}$, as Grothendieck states. We have not checked the presentation by the topology $\mathrm{ps.\,corps}$. Nothing in this section is formalised.
+
+\subsection{The arches on this deck}
+
+\begin{itemize}
+\item \emph{De Morgan:} yes; the finitely presentable models of a cartesian theory have pushouts, so they amalgamate (Bridge~\ref{br:dm}).
+\item \emph{Two-valued:} no; the sentence $1=0$ defines a subterminal object that is neither $0$ nor $1$.
+\item \emph{Connected:} yes; $T(\mathbb Z)$ is an initial finitely presentable model, so the category of these models is connected.
+\item \emph{Boolean:} no; the map $T(\mathbb Z)\to T(\mathbb F_2)$ is not invertible.
+\item \emph{Essential points:} the finitely presentable pseudo-fields $T(A)$, up to isomorphism.
+\item \emph{Subtopoi:} the quotient theories of the theory of pseudo-fields, by the duality between quotient theories and subtopoi \cite{caramello-tst}. Several items of Grothendieck's list are such quotients: the fields of p.~41, which he identifies with the integral pseudo-fields and with the local ones (he marks the last equality \q{à prouver}, and it is true, since a local von Neumann regular ring is a field); separably and algebraically closed fields (items~14--15); rings killed by $n$ and rings in which $n$ is invertible (item~16, p.~43), which he marks as open subtopoi.
+\end{itemize}
+
+\subsection{An answer to a question in the margin}
+
+For item~12, the \emph{compact} rings (every $f$ invertible on an idempotent $e$ and nilpotent on $1-e$, p.~42), Grothendieck notes in the margin that the topology is not coherent and asks whether the topos has enough points. On p.~41 he also warns that the subtopoi of his list are determined by their points, but that this is not clear for their intersections, so that checking an inclusion between intersections on set-theoretic structures may not suffice. We settle both doubts through axioms. Each item of his list is axiomatised over the countable signature of rings by finitely many geometric sequents. For the compact rings one of these sequents has a countable disjunction, since $(1-e)f$ is nilpotent of some order $n$ with no bound on $n$; this is why the topology is not coherent. The classifying topos of a countable geometric theory is the topos of sheaves on its syntactic site, a countable category with finite limits whose topology is generated by countably many sieves. A theorem of Makkai and Reyes \cite[Thm~6.2.4]{makkai-reyes} (see also \cite[Cor.~3.3.10]{diliberti-rogers}) says that a topos of sheaves on a countable category with pullbacks, for a topology generated by a countable family of sieves, has enough points. So the topos of compact rings has enough points; the topos of pseudo-fields has enough points trivially, being a presheaf topos. Once a subtopos $E'$ has enough points, an inclusion $E'\subseteq E''$ can be checked on points. An intersection of countably many subtopoi of his list classifies the theory obtained by putting their axioms together, which is still countable, so it has enough points and his checks on points are legitimate for it. The argument does not cover intersections of uncountably many subtopoi.

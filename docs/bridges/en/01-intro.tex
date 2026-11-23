@@ -8,7 +8,7 @@ In a talk at Mines Paris on 17 September 2024 \cite{caramello-mines}, Caramello 
 
 \subsection{The pipeline}
 
-We run such a generator by hand and describe it the way one describes a data pipeline: what goes in, what each stage does, what comes out, how outputs are tested.
+We run such a generator by hand and describe it the way one describes a data pipeline: what goes in, what each stage does, what comes out, and how the outputs are tested.
 
 \begin{figure}[ht]
 \centering
@@ -31,17 +31,17 @@ We run such a generator by hand and describe it the way one describes a data pip
 \end{figure}
 
 \begin{description}
-\item[Arch registry.] Five lemmas of the form \texttt{(property of PSh C) ↔ (condition on C)}, proved in Lean~4 in the library \lp{} of lean-pool (\S\ref{sec:registry}). They are the trusted core, and everything downstream specialises them. Three more (two-valued, connected, spatial; \S\ref{sec:morearches}) are proved in \texttt{lean/bridges} and so far joined only with the decks of Grothendieck's notes (\S\ref{sec:grdecks}).
+\item[Arch registry.] Five lemmas of the form \texttt{(property of PSh C) ↔ (condition on C)}, proved in Lean~4 in the library \lp{} of lean-pool (\S\ref{sec:registry}). They are the trusted core: every later stage specialises them. Three more (two-valued, connected, spatial; \S\ref{sec:morearches}) are proved in \texttt{lean/bridges}; so far we have applied them only to the decks taken from Grothendieck's notes (\S\ref{sec:grdecks}) and to his pseudo-fields (\S\ref{sec:pseudofields}).
 \item[Deck registry.] Small categories $C$ whose presheaves are a familiar structure: $\B M$ for a monoid $M$ (its actions), the free category of a quiver (its representations), $\Delta$ (simplicial sets), a preorder (functors on it, or sheaves on its Alexandrov space). The book of La Palme Reyes, Reyes and Zolfaghari \cite{reyes-generic} is a catalogue of such decks, each familiar structure presented by its \q{generic figures}.
 \item[1. Join.] Pair every deck with every arch.
 \item[2. Specialise.] Instantiate the arch at the deck and compute the condition on $C$: for instance, the Ore condition on $\B M$ becomes $aM\cap bM\neq\emptyset$.
 \item[3. Unfold.] Translate the property of the topos into the language of the structures, with one rule per property (Lemma~\ref{lem:neg} for negation).
 \item[4. Rewrite.] Reformulate the condition on $C$ in the usual language of the field (minimal right ideals, outgoing arrows, \dots). This stage needs a human, or a language model.
 \item[5. Verify.] Two independent tests: a Lean proof of the specialised statement, as a corollary of the arch; and a direct proof without topoi, readable by a third-year student.
-\item[6. Novelty filter.] Look the statement up in the matching dataset of TheoremGraph and in the semantic search of TheoremSearch, then in the literature. Statements found in print go to a calibration log (\S\ref{sec:calibration}); the rest form the output (\S\ref{sec:machines}--\ref{sec:shapes}).
+\item[6. Novelty filter.] Look the statement up in the matching dataset of TheoremGraph and with the semantic search of TheoremSearch, then in the literature. Statements found in print go to a calibration log (\S\ref{sec:calibration}); the rest form the output (\S\ref{sec:machines}--\ref{sec:shapes}).
 \end{description}
 
-Each theorem below is printed with its \emph{trace}: the values at stages 1--6.
+Each theorem below is printed with its \emph{trace}, which records what stages 1--6 produced for it.
 
 \subsection{Outputs}
 
@@ -64,8 +64,8 @@ graphs, simplicial sets, trees, \dots & weak excluded middle, case by case (at o
 \end{tabularx}
 \end{center}
 
-None of these is deep, and \S\ref{sec:limits} discusses what that implies for the method. We write for an engineer who writes Lean and thinks in pipelines, so the theory occupies one short section, the Lean statements are quoted, and most of the space goes to the outputs and to what each stage did.
+None of these is deep; \S\ref{sec:limits} discusses what that means for the method. We write for an engineer who writes Lean and thinks in pipelines: the theory takes one short section, we quote the Lean statements, and most of the space goes to the outputs and to what each stage did.
 
 \subsection{Plan}
 
-Section~\ref{sec:toolbox} gives the four definitions the text needs and the registry: the five arches that drive the outputs, three more arches, and the decks, among them those of Grothendieck's notes. Section~\ref{sec:method} turns the pipeline into a recipe, with a table of invariants, a checklist for recognising decks, a Lean template and a search protocol. Sections~\ref{sec:machines} to~\ref{sec:shapes} give the outputs, deck by deck: quivers, monoids, analysis, linear algebra and arithmetic, combinatorial topoi. Section~\ref{sec:equivalences} runs the same machinery backwards to show that pairs of classical third-year theorems (Birkhoff and finite $T_0$ spaces, Cayley and the reconstruction of a group, Galois theory and covering spaces) are two readings of one bridge, and Section~\ref{sec:precedents} collects the precedents in Grothendieck's notes. Section~\ref{sec:calibration} lists the outputs already in print, and Section~\ref{sec:limits} discusses the limits of the approach and the lessons for an automatic generator. Appendix~\ref{app:novelty} gives the novelty filter in detail, with the sources searched, and Appendix~\ref{sec:lean-lit} the Lean files and declarations.
+Section~\ref{sec:toolbox} gives the four definitions the text needs and the registry: the five arches that drive the outputs, three more arches, and the decks, among them those of Grothendieck's notes. Section~\ref{sec:method} turns the pipeline into a recipe, with a table of invariants, a checklist for recognising decks, a Lean template and a search protocol. Sections~\ref{sec:machines} to~\ref{sec:shapes} give the outputs, deck by deck: quivers, monoids, analysis, linear algebra and arithmetic, combinatorial topoi. Section~\ref{sec:equivalences} runs the same machinery backwards to show that pairs of classical third-year theorems (Birkhoff and finite $T_0$ spaces, Cayley and the reconstruction of a group, Galois theory and covering spaces) are two readings of one bridge. Section~\ref{sec:precedents} collects the precedents in Grothendieck's notes. Section~\ref{sec:pseudofields} adds a deck taken from the same notes, the topos of pseudo-fields, which Grothendieck presents in three ways; we check one of the presentations, read the arches on the deck, and answer a question he left in the margin. Section~\ref{sec:calibration} lists the outputs already in print, and Section~\ref{sec:limits} discusses the limits of the approach and the lessons for an automatic generator. Appendix~\ref{app:novelty} gives the novelty filter in detail, with the sources searched, and Appendix~\ref{sec:lean-lit} lists the Lean files and declarations.
