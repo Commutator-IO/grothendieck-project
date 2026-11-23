@@ -1,0 +1,57 @@
+\section{A sixth arch, from Grothendieck's notes: gluing two subtopoi}\label{sec:gluing}
+
+The five arches of \S\ref{sec:toolbox} come from the literature. A sixth comes from Grothendieck's notes on universal algebra (folder 161-2, p.~48), where he asks when two subtopoi $V$, $W$ of a topos $B$ can be \q{glued}: when do the morphisms that are \emph{locally} in $V$ or in $W$ form a subtopos? The companion note \cite{bridges-notes} (section \q{Rings of definite characteristic}) makes his criterion precise and proves it; in the case he applied it to, the rings of definite characteristic, it fails, which is an instance of the fact that characteristic~$0$ is not geometrically definable \cite[\S8.2]{caramello-flat}. Here we run the criterion as an arch.
+
+\begin{bridge}[Gluing]\label{br:glue}
+For subtopoi $V$, $W$ of a topos $B$, the geometric morphisms $f\colon\mathcal E\to B$ such that $\mathcal E$ is covered by two opens on which $f$ factors through $V$ and through $W$ respectively are the morphisms factoring through a subtopos iff there are subterminal objects $U'$, $U''$ of $B$ with
+\[
+W\wedge o(U')\le V,\qquad V\wedge o(U'')\le W,\qquad V\vee W\le o(U'\vee U'').
+\]
+The subtopos is then $V\vee W$. Lean: the order-theoretic core, in any distributive lattice, is \lean{Grothendieck.Folder161_2.recollement_iff} (repository GrothendieckArchivesProofs); the passage to subtopoi uses the distributivity of the lattice of subtopoi and the locality of factoring through a subtopos \cite[\S A4.5]{elephant}, which are not formalised.
+\end{bridge}
+
+\subsection{The deck: subtopoi given by full subcategories}
+
+Let $C$ be a small category in which idempotents split, and $D\subseteq C$ a full subcategory closed under isomorphisms and retracts. Restriction along $D\subseteq C$, with right Kan extension as right adjoint, makes $\PSh(D)$ a subtopos of $\PSh(C)$; these are the \emph{essential} subtopoi, and $\PSh(E)\le\PSh(D)$ iff $E\subseteq D$ \cite{kelly-lawvere}. A subterminal object of $\PSh(C)$ is a set $S$ of objects closed under incoming arrows, $o(S)\simeq\PSh(S)$, and the open subtopos of $\PSh(D)$ cut out by $S$ is $\PSh(D\cap S)$.
+
+\begin{theorem}\label{th:cospan}
+Let $D_1$, $D_2$ be full subcategories of $C$ closed under isomorphisms and retracts. The morphisms that are locally in $\PSh(D_1)$ or in $\PSh(D_2)$ form a subtopos iff there is no \emph{mixed cospan}
+\[
+a\longrightarrow x\longleftarrow b,\qquad a\in D_1\smallsetminus D_2,\quad b\in D_2\smallsetminus D_1,\quad x\in D_1\cup D_2.
+\]
+\end{theorem}
+
+\begin{trace}
+\item[deck] $\PSh(C)$ with the essential subtopoi $\PSh(D_1)$, $\PSh(D_2)$.
+\item[arch] Bridge~\ref{br:glue}.
+\item[specialise] $W\wedge o(S')\le V$ reads $D_2\cap S'\subseteq D_1$, that is, $S'$ avoids $D_2\smallsetminus D_1$; the largest such $S'$ is the set of objects receiving no arrow from $D_2\smallsetminus D_1$. Symmetrically for $S''$.
+\item[rewrite] $V\vee W\le o(S'\cup S'')$ reads $D_1\cup D_2\subseteq S'\cup S''$: no object of $D_1\cup D_2$ receives arrows from both $D_1\smallsetminus D_2$ and $D_2\smallsetminus D_1$.
+\item[verify] direct argument below; Lean: the core of the arch only.
+\item[novelty] the arch itself was not found in print (companion note); the corollaries below are assessed one by one.
+\end{trace}
+
+\direct{} By Bridge~\ref{br:glue} the condition is the existence of $S'$, $S''$ as in the trace, and the three conditions are monotone in $S'$, $S''$, so the largest choices may be taken. A mixed cospan $a\to x\leftarrow b$ with $x\in D_1\cup D_2$ puts $x$ outside both largest choices; conversely, an object of $D_1\cup D_2$ outside both receives an arrow from each difference.\qed
+
+\subsection{Three readings}
+
+\begin{corollary}[Preorders and Alexandrov spaces]\label{co:alex}
+Let $P$ be a preorder, $X_P$ its Alexandrov space (open sets the down-sets), and $A$, $B\subseteq P$. The sheaves on $X_P$ that are locally sheaves on the subspace $A$ or on the subspace $B$ form a subtopos iff $A\smallsetminus B$ and $B\smallsetminus A$ are \emph{separated in $A\cup B$}: neither meets the closure of the other inside $A\cup B$.
+\end{corollary}
+
+\noindent A mixed cospan $a\le x\ge b$ says that $x$ lies in the closures (the up-sets) of $a$ and of $b$. \status{} No: this is the classical fact that $A\cup B$ is the union of two relatively open sets contained in $A$ and in $B$ iff $A\smallsetminus B$ and $B\smallsetminus A$ are separated in $A\cup B$. The bridge reads a topos-theoretic gluing condition as a separation axiom.
+
+\begin{corollary}[Quivers]\label{co:quivgl}
+Let $Q$ be a quiver, $C$ the free category on $Q$ (presheaves on $C$ are representations of $Q^{\op}$), and $D_1$, $D_2$ sets of vertices. The local disjunction of $\PSh(D_1)$ and $\PSh(D_2)$ is a subtopos iff no vertex of $D_1\cup D_2$ is the end of a path from $D_1\smallsetminus D_2$ and of a path from $D_2\smallsetminus D_1$.
+\end{corollary}
+
+\noindent A free category has no nontrivial idempotents, so every full subcategory is closed under retracts, and arrows are paths. The condition is checked in linear time by two searches in the graph. \status{} Not found, but its proof is one line once Bridge~\ref{br:glue} is granted.
+
+\begin{corollary}[Two-valued topoi and monoids]\label{co:twovalued}
+In a topos whose only subterminal objects are $0$ and $1$, the local disjunction of two subtopoi $V$, $W$ is a subtopos iff $V\le W$ or $W\le V$. In particular, for a monoid $M$, the local disjunction of two essential subtopoi of the topos of $M$-sets (given by sets of idempotents closed under retracts in $\Kar(\B M)$) is a subtopos only when one contains the other.
+\end{corollary}
+
+\noindent With only two opens, the third condition of Bridge~\ref{br:glue} forces $U'$ or $U''$ to be $1$, hence $W\le V$ or $V\le W$. In $\Kar(\B M)$ there is an arrow $fe\colon e\to f$ between any two idempotents, so Theorem~\ref{th:cospan} gives the same answer. \status{} No; it is almost a tautology.
+
+\begin{remark}
+This arch was added after the rest of the article and is the weakest: of its three outputs, one is classical topology, one is nearly tautological, and one, Corollary~\ref{co:quivgl}, is a short combinatorial criterion whose proof is the arch itself. It confirms a limit of the method discussed in \S\ref{sec:limits}: an arch whose condition is already elementary yields elementary theorems.
+\end{remark}
