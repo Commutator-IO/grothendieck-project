@@ -4,6 +4,7 @@
 
 Les cinq arches sont démontrées en Lean~4 avec Mathlib dans \lp{}, sans autre axiome que \texttt{propext}, \texttt{Classical.choice} et \texttt{Quot.sound}. Cela décrit le développement; les fichiers ne contiennent aucune commande \texttt{\#print axioms}, et nous ne consignons pas de vérification séparée. Les énoncés engendrés sont formalisés comme corollaires des arches dans le paquet Lake \texttt{lean/bridges} du dépôt de cette édition (\url{https://github.com/Commutator-IO/grothendieck-project}), qui dépend de lean-pool à une révision fixée. Ses fichiers sont:
 \begin{itemize}
+\item \lean{PreorderPresheaves.lean} (\lean{exists_preorder_moritaEquivalentCat_iff_isThin}, d'après l'exercice de Grothendieck, dossier 161-3, p.~26);
 \item \lean{Monoids.lean} (\lean{isBooleanTopos_singleObj_iff}, \lean{isDeMorganTopos_singleObj_iff}, \lean{isDeMorganTopos_singleObj_of_monoidWithZero}, \lean{isDeMorganTopos_singleObj_of_commMonoid}, \lean{isDeMorganTopos_singleObj_freeMonoid_unit}, \lean{not_isDeMorganTopos_freeMonoid_two}, \lean{isBooleanTopos_singleObj_of_group}); \lean{Preorders.lean} (\lean{isDeMorganTopos_functor_preorder_iff}, \lean{extremallyDisconnected_iff_confluent}, \lean{moritaEquivalentCat_preorder_iff}); \lean{Combinatorics.lean} (\lean{isDeMorganTopos_presheaf_of_hasInitial}, \lean{not_isDeMorganTopos_graphs}, \lean{graphs_pseudocompl_counterexample}, \lean{not_isDeMorganTopos_simplicialSets}, \lean{isDeMorganTopos_augmentedSimplicialSets}, \lean{isDeMorganTopos_presheaf_fintypeCatSkeleton}, \lean{isDeMorganTopos_treeTopos}, \lean{not_isBooleanTopos_treeTopos}); \lean{EssentialPoints.lean} (\lean{nonempty_essentialPoint_iso_iff}, \lean{exists_iso_essentialPoint}, \lean{essentialPointEndMulEquivOfGroup}, \lean{karoubiRel_iff_rank_eq}, \lean{essentialPointClassesEquivFin}).
 \item \lean{QuiversMorita.lean} (Morita et points essentiels des représentations de carquois: \lean{moritaEquivalentCat_paths_iff}, \lean{nonempty_representations_equiv_iff}, \lean{essentialPointPathsEquiv}) et \lean{QuiversCyclic.lean} (les $2^n+1$ topologies du carquois cyclique: \lean{card_grothendieckTopology}).
 \item \lean{QuiversDeMorgan.lean} (De Morgan et booléen pour les représentations de carquois: \lean{rightOreCondition_paths_iff}, \lean{isDeMorganTopos_paths_iff}, \lean{isBooleanTopos_paths_iff}; il ne contient aucun énoncé de Morita ni de points essentiels), \lean{Corners.lean} (transfert aux coins), \lean{KaroubiMonoid.lean} (les $n$ classes pour $T_n$) et, pour le journal d'étalonnage, \lean{FiniteMonoids.lean} (unique idéal à droite minimal) et \lean{NatTopologies.lean} (les trois topologies sur $\B\mathbb N$, \lean{nat_card_grothendieckTopology_natCat}, avec les faisceaux de celle du milieu, \lean{isSheaf_finalTopology_iff}).
@@ -13,7 +14,7 @@ Dans Mathlib, \texttt{SingleObj M} compose selon $f\gg g = g\cdot f$; avec cette
 
 \begin{center}\scriptsize\emergencystretch=3em
 \begingroup\def\UrlBreaks{\do\_\do\.\do\/}
-\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{2.6cm}}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.9cm}>{\raggedright\arraybackslash}p{2.2cm}}
 \toprule
 énoncé & déclaration Lean & fichier & statut\\
 \midrule
@@ -28,6 +29,7 @@ points essentiels de $PT_n$, $I_n$, $O_n$; tous les dénombrements de sous-topos
 coins: Ore se transfère & \lean{forall_exists_mul_eq_mul_iff_cornerMonoid} & \lean{Corners} & démontré en Lean\\
 $M_n(k)$-ensembles, $\mathsf{Vect}_{\le n}$ & --- & --- & à la main seulement (les classes de rang sont en Lean, voir plus haut)\\
 treillis de sous-espaces: De Morgan, Morita & \lean{isDeMorganTopos_functor_preorder_iff}, \lean{moritaEquivalentCat_preorder_iff} & \lean{Preorders} & démontré en Lean; le reste à la main seulement\\
+petites catégories: topos de préfaisceaux d'un préordre si et seulement si mince (Grothendieck, 161-3, p.~26) & \lean{exists_preorder_moritaEquivalentCat_iff_isThin} & \lean{PreorderPresheaves} & démontré en Lean\\
 dénombrements pour $(\mathbb Z/n,\cdot)$ & --- & --- & énumérés par ordinateur (pas en Lean); preuve à la main seulement\\
 $X$ compact séparé & --- & --- & à la main seulement\\
 graphes, ensembles simpliciaux, augmentés, $\mathsf{Fin}$, arbres & \lean{not_isDeMorganTopos_graphs}, \lean{not_isDeMorganTopos_simplicialSets}, \lean{isDeMorganTopos_augmentedSimplicialSets}, \lean{isDeMorganTopos_presheaf_fintypeCatSkeleton}, \lean{isDeMorganTopos_treeTopos} & \lean{Combinatorics} & démontré en Lean; les autres lignes combinatoires à la main seulement\\

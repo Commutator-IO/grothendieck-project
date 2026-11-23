@@ -7,6 +7,7 @@ public import Bridges.FiniteMonoids
 public import Bridges.KaroubiMonoid
 public import Bridges.Monoids
 public import Bridges.NatTopologies
+public import Bridges.PreorderPresheaves
 public import Bridges.Preorders
 public import Bridges.QuiversCyclic
 public import Bridges.QuiversDeMorgan
