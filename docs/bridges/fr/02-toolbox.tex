@@ -1,4 +1,4 @@
-\section{Boîte à outils: quatre définitions et cinq arches}\label{sec:toolbox}
+\section{Boîte à outils: quatre définitions et les arches}\label{sec:toolbox}
 
 Cette section contient toute la théorie dont la suite a besoin: quatre définitions, et les cinq lemmes qui forment le registre des arches.
 
@@ -81,3 +81,19 @@ Les sous-topos de $\PSh(C)$ (sous-catégories pleines stables par limites dont l
 \end{bridge}
 
 C'est tout. Chaque énoncé qui suit est l'un de ces cinq lemmes, spécialisé à une forme et déplié à l'aide du lemme~\ref{lem:neg}.
+
+\subsection{Trois arches de plus}\label{sec:morearches}
+
+Trois autres arches ont leur place dans le registre. Elles n'ont pas encore été jointes aux tabliers de cet article, et aucun des résultats qui suivent n'en provient.
+
+\begin{bridge}[Deux valeurs]\label{br:twoval}
+Les sous-objets de l'objet final de $\PSh(C)$ (ses \q{ouverts}) correspondent aux cribles de $C$ \cite[IV~8.4.4]{sga4}. Ainsi $\PSh(C)$ n'a pas d'autre sous-objet de l'objet final que $0$ et $1$ si et seulement si, pour deux objets quelconques $a$, $b$ de $C$, il existe une flèche $a\to b$. Lean: \lean{forall_subfunctor_terminal_eq_bot_or_eq_top_iff}.
+\end{bridge}
+
+\begin{bridge}[Connexe]\label{br:conn}
+$\PSh(C)$ est connexe non vide au sens de \cite[IV~8.7]{sga4} (toute partition de l'objet final a exactement une partie non vide) si et seulement si $C$ est connexe. En termes de sous-objets de l'objet final: $C$ est non vide et les seuls sous-objets complémentés de l'objet final sont $0$ et $1$. Lean: \lean{isConnected_iff_forall_isCompl}.
+\end{bridge}
+
+\begin{bridge}[Spatial]\label{br:spatial}
+$\PSh(C)$ est équivalent au topos de préfaisceaux d'un préordre, donc au topos des faisceaux sur son espace d'Alexandrov, si et seulement si $C$ est mince. Grothendieck l'énonce comme exercice \cite[p.~26]{grothendieck-161-3}; voir le \S\ref{sec:equivalences}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}.
+\end{bridge}

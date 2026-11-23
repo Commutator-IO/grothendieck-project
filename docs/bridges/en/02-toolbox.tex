@@ -1,4 +1,4 @@
-\section{Toolbox: four definitions and five arches}\label{sec:toolbox}
+\section{Toolbox: four definitions and the arches}\label{sec:toolbox}
 
 The rest of the text needs only four definitions and the five lemmas that form the arch registry.
 
@@ -81,3 +81,19 @@ The subtopoi of $\PSh(C)$ (full subcategories closed under limits whose inclusio
 \end{bridge}
 
 Every statement below is one of these five lemmas, specialised to a shape and unfolded with Lemma~\ref{lem:neg}.
+
+\subsection{Three more arches}\label{sec:morearches}
+
+Three further arches belong in the registry. They have not yet been joined with the decks of this article, so no output below comes from them.
+
+\begin{bridge}[Two-valued]\label{br:twoval}
+The subterminal objects of $\PSh(C)$ (its \q{opens}) correspond to the sieves of $C$ \cite[IV~8.4.4]{sga4}. Hence $\PSh(C)$ has no subterminal objects besides $0$ and $1$ iff for any two objects $a$, $b$ of $C$ there is an arrow $a\to b$. Lean: \lean{forall_subfunctor_terminal_eq_bot_or_eq_top_iff}.
+\end{bridge}
+
+\begin{bridge}[Connected]\label{br:conn}
+$\PSh(C)$ is connected and nonempty in the sense of \cite[IV~8.7]{sga4} (every partition of its final object has exactly one nonempty part) iff $C$ is connected. In terms of subterminal objects: $C$ is nonempty and the only complemented subterminal objects are $0$ and $1$. Lean: \lean{isConnected_iff_forall_isCompl}.
+\end{bridge}
+
+\begin{bridge}[Spatial]\label{br:spatial}
+$\PSh(C)$ is equivalent to the presheaf topos of a preorder, and so to the topos of sheaves on its Alexandrov space, iff $C$ is thin. Grothendieck states it as an exercise \cite[p.~26]{grothendieck-161-3}; see \S\ref{sec:equivalences}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}.
+\end{bridge}
