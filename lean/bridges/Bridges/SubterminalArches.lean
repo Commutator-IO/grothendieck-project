@@ -54,12 +54,14 @@ theorem mem_of_mem_obj {S : Subfunctor (terminalPresheaf C)} {a b : C} (f : a �
 theorem eq_top_of_mem {S : Subfunctor (terminalPresheaf C)}
     (h : ∀ a : C, PUnit.unit ∈ S.obj (op a)) : S = ⊤ := by
   ext U x
-  simpa [Subsingleton.elim x PUnit.unit] using h U.unop
+  cases x
+  exact iff_of_true (h U.unop) (by simp)
 
 theorem eq_bot_of_not_mem {S : Subfunctor (terminalPresheaf C)}
     (h : ∀ a : C, PUnit.unit ∉ S.obj (op a)) : S = ⊥ := by
   ext U x
-  simpa [Subsingleton.elim x PUnit.unit] using h U.unop
+  cases x
+  exact iff_of_false (h U.unop) (by simp)
 
 variable (C)
 
