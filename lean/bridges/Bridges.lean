@@ -4,6 +4,7 @@ public import Bridges.Combinatorics
 public import Bridges.Corners
 public import Bridges.EssentialPoints
 public import Bridges.FiniteMonoids
+public import Bridges.GrothendieckDecks
 public import Bridges.KaroubiMonoid
 public import Bridges.Monoids
 public import Bridges.NatTopologies
