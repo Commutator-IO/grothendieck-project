@@ -81,10 +81,12 @@ Moving it to Core would pull in 00WV, 00WW and 00X1 and enlarge the claim.
 
 Points the review should settle before the move (the reason for this claim):
 
-1. **00XC is proved in greater generality than stated.** `Functor.IsMorphismOfSites` asks for
-   Mathlib's continuity, which is the conclusion of 00WW and weaker than continuity in the sense of
-   00WV. The file's own docstring says so. That is allowed, since the result is more general, but
-   then the tagged declaration is not about the 00X1 notion until the bridge lemma above exists.
+1. **00XC is proved in SGA 4's generality, which is wider than the Stacks Project's.**
+   `Functor.IsMorphismOfSites` asks for Mathlib's `Functor.IsContinuous`: restriction along `u`
+   sends sheaves to sheaves. That is the continuity of SGA 4 III 1.1, the one SGA 4 IV 4.9.1 uses,
+   and the conclusion of Stacks 00WW. It is weaker than continuity in the sense of Stacks 00WV.
+   The file's own docstring says so. That is allowed, since the result is more general. But the
+   tagged declaration is not about the 00X1 notion until the bridge lemma above exists.
 2. **Parallel definitions.** Frontier has four notions named `IsMorphismOfSites`:
    - `Functor.IsMorphismOfSites` (`Sites/MorphismOfSites.lean`, `@[sga "4 IV 4.9.1"]`);
    - `Stacks.Sites.Site.IsMorphismOfSites` (`Sites/FamilySite.lean`, `@[stacks 00X1]`);
@@ -95,15 +97,35 @@ Points the review should settle before the move (the reason for this claim):
      `morphismOfTopoi`.
 
    The convention « reuse existing definitions rather than introducing parallel ones » asks which
-   one Core keeps. The two definitions both tagged `sga "4 IV 4.9.1"` are different, so at most one
-   of them is SGA 4's.
+   one Core keeps. The two definitions tagged `sga "4 IV 4.9.1"` are both faithful to SGA 4, in two
+   equivalent forms (point 4): one asks that the given left adjoint `u.sheafPullback` be left exact,
+   the other that some left exact left adjoint exist. Left adjoints are unique up to isomorphism,
+   so the two agree (not checked in Lean). The class allows any categories and sheaves in
+   `Type w`; the structure asks for small categories in the universe of the sheaves.
 3. **`LeftAdjointsPreserveFiniteLimits`** (`ToposDefs.lean`) formalises no tag, and its own
    docstring calls it false in general. On the one-point site, `X × -` is left adjoint to `X ⟹ -`
    but does not preserve the terminal object unless `X` is a singleton. It should stay behind or be
    removed rather than move to Core.
-4. **SGA references to check against SGA 4.** `MorphismOfTopoi.id` and `MorphismOfTopoi.comp`
-   carry `@[sga "4 IV 3.3.1"]`, and `Functor.IsMorphismOfSites` carries `@[sga "4 IV 4.9.1"]` and
-   `@[sga "4 IV 4.9" "morphism of sites def"]`. These are not checked yet.
+4. **SGA references, checked (23 Nov).** Checked against the numbering of SGA 4 IV in the
+   English translation by KokunoYumeto (`KokunoYumeto/sga-en`,
+   `sources/native/SGA4/…/source/04/`), which keeps the original numbering. Not yet checked against
+   a scan of the 1972 edition.
+   - `@[sga "4 IV 3.3.1"]` on `MorphismOfTopoi.id` and `MorphismOfTopoi.comp`: **correct**. 3.3.1
+     defines the composite `vu` (direct images composed, inverse images composed in the opposite
+     order, a left exact composite) and the identity morphism `(id, id, φ)`. 3.3.2 adds the
+     2-category structure. The structure `MorphismOfTopoi` itself carries no `sga` attribute; its
+     source is IV 3.1 (Definition 3.1), which could be added.
+   - `@[sga "4 IV 4.9.1"]` on `Functor.IsMorphismOfSites`: **correct in substance**. In 4.9.1 a
+     continuous functor `f : C → C'` is a morphism of sites from `C'` to `C` when the left adjoint
+     `f^s` of the restriction `f_s` is left exact. That left exactness is the only condition. The
+     structure's third field, `preservesFiniteColimits`, is redundant: a left adjoint preserves
+     colimits, and the same file proves it (`preservesFiniteColimits_sheafPullback`). Core could
+     drop the field, or keep it and say it is automatic.
+   - `@[sga "4 IV 4.9.1"]` on the class `IsMorphismOfSites` (`MorphismDefs.lean`): also correct.
+     Its « there is a left exact left adjoint » is the « in other words » form 4.9.1 gives
+     (existence of a morphism of topoi whose inverse image extends `f`), without the extension
+     condition, which holds automatically.
+   - `@[sga "4 IV 4.9" "morphism of sites def"]`: correct, as a section reference.
 5. **Argument order.** `SheafToposMorphism.comp f g` is `f ∘ g` (`f : Sh(D) → Sh(C)`,
    `g : Sh(E) → Sh(D)`), whereas `MorphismOfTopoi.comp g f` takes the second morphism first.
    Mathlib naming would want a single convention.
@@ -114,7 +136,7 @@ Points the review should settle before the move (the reason for this claim):
    and stays in Frontier.
 
 **References.** Stacks Project, Tags 00XA, 00XC, 00X1, 00WV, 00WW. SGA 4, Exposé IV, 3.1–3.3 and
-4.9.
+4.9 (numbering checked in the English translation `KokunoYumeto/sga-en`).
 
 **Before submitting.** Michel ticks the two checkboxes after checking the open claims (#8 was the
 only one on 21 Nov).
