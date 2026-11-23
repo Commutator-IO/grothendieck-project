@@ -50,7 +50,7 @@ const startsWith = (text, word) => text.split('\n').filter((l) => l.startsWith(w
 // Theorems per file. A folder has one file `Folder<cote>.lean` or several
 // (`Folder101Ext.lean`…), and some files belong to no folder (`IhesSGA6_2_3.lean`,
 // `EffectiveVenken.lean`); the shared `Attr.lean` is not a proof.
-const files = pgit('ls-tree', '-r', '--name-only', PROOFS_SNAPSHOT, 'Grothendieck/').trim().split('\n').filter((f) => !/\/Attr\.lean$/.test(f));
+const files = pgit('ls-tree', '-r', '--name-only', PROOFS_SNAPSHOT, 'Grothendieck/').trim().split('\n').filter((f) => !f.endsWith('/Attr.lean'));
 const count = {};
 let lines = 0;
 let lemmas = 0;
