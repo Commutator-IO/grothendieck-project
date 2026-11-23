@@ -91,6 +91,8 @@ th{color:var(--ink2);font-weight:600}
     <option value="decl">Size: declarations</option>
     <option value="lines">Size: lines</option>
   </select>
+  <label style="display:inline-flex;gap:6px;align-items:center;color:var(--ink2);cursor:pointer"><input type="checkbox" id="onlyS">Files importing Stacks</label>
+  <label style="display:inline-flex;gap:6px;align-items:center;color:var(--ink2);cursor:pointer" title="City only"><input type="checkbox" id="links">Links to the Stacks library (city)</label>
   <input id="q" type="search" placeholder="Search a declaration" aria-label="Search a declaration">
   <button class="seg" id="theme" style="all:unset;cursor:pointer;padding:6px 10px;border:1px solid var(--line);border-radius:6px;color:var(--ink2)" aria-label="Toggle theme">◐</button>
 </div>
@@ -117,7 +119,7 @@ const on=Object.fromEntries(KINDS.map(k=>[k[0],true]));
 const $=id=>document.getElementById(id);
 const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const fmt=n=>n.toLocaleString('en-US');
-const state={layout:'treemap',proj:'ALL',metric:'decl',zoom:[],q:''};
+const state={layout:'treemap',proj:'ALL',metric:'decl',zoom:[],q:'',onlyS:false,links:false};
 
 // ---- data: tree of folders → files → declarations
 const files=DATA.files.map(f=>({...f,top:f.path.includes('/')?f.path.split('/')[0]:'(root)',
@@ -137,6 +139,7 @@ function buildTree(){
   const root={name:'GrothendieckArchivesProofs',children:[]};
   for(const f of files){
     if(state.proj!=='ALL'&&f.top!==state.proj) continue;
+    if(state.onlyS&&!f.st.length) continue;
     const ds=visibleDecls(f); if(!ds.length) continue;
     const parts=f.path.split('/'); const fn=parts.pop();
     let node=root;
@@ -208,6 +211,11 @@ function tip(e,d){
   tipEl.innerHTML=`<b>${d.n}</b><br>${kn} (${d.k}) · ${d.len} lines<br><code>${d.file}:${d.l}</code>`;
   tipEl.style.display='block';tipEl.style.left=Math.min(e.clientX+14,innerWidth-380)+'px';tipEl.style.top=(e.clientY+14)+'px';
 }
+function tipS(e,s){
+  const l=s.imp.slice(0,6).map(f=>f.replace(/\.lean$/,'')).join('<br>');
+  tipEl.innerHTML=`<b>${s.mod.replace('StacksFrontier.','').replace('StacksCore.','core: ')}</b><br>Stacks library · ${fmt(s.bytes)} bytes<br>imported by ${s.imp.length} file${s.imp.length>1?'s':''}:<br><code>${l}${s.imp.length>6?'<br>…':''}</code>`;
+  tipEl.style.display='block';tipEl.style.left=Math.min(e.clientX+14,innerWidth-380)+'px';tipEl.style.top=(e.clientY+14)+'px';
+}
 function hideTip(){tipEl.style.display='none'}
 
 // ---- city (three.js)
@@ -224,8 +232,9 @@ function initThree(){
   renderer.domElement.addEventListener('mousemove',e=>{
     if(!three.mesh)return;const r=renderer.domElement.getBoundingClientRect();
     const m=new THREE.Vector2(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1);
-    three.ray.setFromCamera(m,cam);const h=three.ray.intersectObject(three.mesh)[0];
-    if(h&&h.instanceId!=null)tip(e,three.items[h.instanceId]);else hideTip();
+    three.ray.setFromCamera(m,cam);const hs=three.sgroup?three.ray.intersectObject(three.smesh)[0]:null,h=three.ray.intersectObject(three.mesh)[0];
+    if(hs&&(!h||hs.distance<h.distance))tipS(e,three.sitems[hs.instanceId]);
+    else if(h&&h.instanceId!=null)tip(e,three.items[h.instanceId]);else hideTip();
   });
   renderer.domElement.addEventListener('mouseleave',hideTip);
 }
@@ -254,8 +263,43 @@ function drawCity(){
   const gm=new THREE.Mesh(new THREE.PlaneGeometry(S+20,S+20),new THREE.MeshBasicMaterial({color:new THREE.Color(css('--folder'))}));
   gm.rotation.x=-Math.PI/2;three.scene.add(gm);three.ground=gm;
   three.scene.background=new THREE.Color(css('--panel'));
-  three.cam.position.set(-S*.55,S*.75,S*.9);three.ctl.target.set(0,0,0);three.ctl.update();
-  $('note').textContent=`${fmt(leaves.length)} declarations; footprint = size share, height = √(lines of the declaration). Drag to orbit, scroll to zoom, hover for details.`;
+  if(three.sgroup){three.scene.remove(three.sgroup);three.sgroup.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)o.material.dispose()});three.sgroup=null;three.smesh=null}
+  let nEdges=0,nMods=0;
+  if(state.links){
+    const byFile=new Map();leaves.forEach((n,i)=>{const d=n.data.d;let c=byFile.get(d.file);if(!c){c={x:0,z:0,n:0,h:0};byFile.set(d.file,c)}
+      c.x+=(n.x0+n.x1)/2-S/2;c.z+=(n.y0+n.y1)/2-S/2;c.n++;c.h=Math.max(c.h,Math.max(.6,Math.sqrt(d.len)*2.4))});
+    const imp=new Map();
+    for(const f of files){if(!byFile.has(f.path))continue;for(const m of f.st){(imp.get(m)||imp.set(m,[]).get(m)).push(f.path)}}
+    const tree={name:'Stacks',children:[]};
+    for(const m of imp.keys()){let node=tree;const parts=m.split('.');const last=parts.pop();
+      for(const p of parts){let c=node.children.find(x=>x.name===p&&x.children);if(!c){c={name:p,children:[]};node.children.push(c)}node=c}
+      node.children.push({name:last,mod:m,value:Math.max(DATA.stacks[m]||1,1)})}
+    nMods=imp.size;
+    if(nMods){
+      const S2=Math.round(S*.55),ox=S/2+90+S2/2;
+      const sh=d3.hierarchy(tree).sum(d=>d.value||0).sort((a,b)=>b.value-a.value);
+      d3.treemap().size([S2,S2]).paddingInner(.8).paddingOuter(1.5).tile(d3.treemapSquarify)(sh);
+      const sl=sh.leaves();const sm=new THREE.InstancedMesh(geo,new THREE.MeshLambertMaterial({color:0xffffff}),sl.length);
+      const pos=new Map();const sit=[];
+      sl.forEach((n,i)=>{const w=Math.max(.5,n.x1-n.x0),dp=Math.max(.5,n.y1-n.y0),ht=Math.max(.8,Math.sqrt((n.data.value||1)/49)*2.4);
+        const x=ox+(n.x0+w/2-S2/2),z=n.y0+dp/2-S2/2;dum.position.set(x,ht/2,z);dum.scale.set(w,ht,dp);dum.updateMatrix();sm.setMatrixAt(i,dum.matrix);
+        sm.setColorAt(i,col.set(css('--k-other')));pos.set(n.data.mod,{x,z,h:ht});sit.push({mod:n.data.mod,bytes:n.data.value,imp:imp.get(n.data.mod)})});
+      sm.instanceMatrix.needsUpdate=true;if(sm.instanceColor)sm.instanceColor.needsUpdate=true;
+      const g=new THREE.Group();g.add(sm);
+      const gp=new THREE.Mesh(new THREE.PlaneGeometry(S2+16,S2+16),new THREE.MeshBasicMaterial({color:new THREE.Color(css('--folder-edge'))}));gp.rotation.x=-Math.PI/2;gp.position.set(ox,-.2,0);g.add(gp);
+      const P=[];const N=18;
+      for(const f of files){const c=byFile.get(f.path);if(!c)continue;const ax=c.x/c.n,az=c.z/c.n;
+        for(const m of f.st){const q=pos.get(m);if(!q)continue;nEdges++;
+          const mid={x:(ax+q.x)/2,y:Math.max(c.h,q.h)+90+Math.abs(q.x-ax)*.18,z:(az+q.z)/2};
+          let px=ax,py=c.h,pz=az;
+          for(let k=1;k<=N;k++){const u=k/N,v=1-u;const nx=v*v*ax+2*u*v*mid.x+u*u*q.x,ny=v*v*c.h+2*u*v*mid.y+u*u*q.h,nz=v*v*az+2*u*v*mid.z+u*u*q.z;P.push(px,py,pz,nx,ny,nz);px=nx;py=ny;pz=nz}}}
+      const lg=new THREE.BufferGeometry();lg.setAttribute('position',new THREE.Float32BufferAttribute(P,3));
+      g.add(new THREE.LineSegments(lg,new THREE.LineBasicMaterial({color:new THREE.Color(css('--ink')),transparent:true,opacity:.28})));
+      three.scene.add(g);three.sgroup=g;three.smesh=sm;three.sitems=sit;
+    }
+  }
+  three.cam.position.set(state.links?-S*.2:-S*.55,S*.75,S*(state.links?1.15:.9));three.ctl.target.set(state.links?S*.18:0,0,0);three.ctl.update();
+  $('note').textContent=(state.links?`${fmt(nMods)} Stacks modules (grey, on the right) are imported by the files drawn, through ${fmt(nEdges)} import links (a line leaves the middle of a file's block). `:'')+`${fmt(leaves.length)} declarations; footprint = size share, height = √(lines of the declaration). Drag to orbit, scroll to zoom, hover for details.`;
 }
 
 // ---- table
@@ -276,6 +320,8 @@ $('crumbs').addEventListener('click',e=>{const b=e.target.closest('button');if(b
 function setLayout(l){state.layout=l;$('bT').setAttribute('aria-pressed',l==='treemap');$('bC').setAttribute('aria-pressed',l==='city');
   $('cv').style.display=l==='treemap'?'block':'none';$('gl').style.display=l==='city'?'block':'none';hideTip();render()}
 $('bT').onclick=()=>setLayout('treemap');$('bC').onclick=()=>setLayout('city');
+$('onlyS').onchange=e=>{state.onlyS=e.target.checked;state.zoom=[];render()};
+$('links').onchange=e=>{state.links=e.target.checked;if(state.links&&state.layout!=='city')setLayout('city');else render()};
 $('proj').onchange=e=>{state.proj=e.target.value;state.zoom=[];render()};
 $('metric').onchange=e=>{state.metric=e.target.value;render()};
 $('q').oninput=e=>{state.q=e.target.value.trim();render()};
