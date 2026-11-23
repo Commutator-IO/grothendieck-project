@@ -8,8 +8,9 @@ import {
   useManifest,
 } from './lib/batches.ts';
 import { STATES, type State } from './lib/progress.ts';
+import { Articles, STARS, type ArticleItem } from './components/Articles.tsx';
 
-const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: string; src: string; tei?: string; more?: { label: string; href: string }[] }[] = [
+const ARTICLES: ArticleItem[] = [
   {
     id: 'article',
     title: "A Machine Reads Grothendieck's Working Notes: Transcribing and Encoding Mathematical Manuscripts",
@@ -26,23 +27,6 @@ const ARTICLES: { id: string; title: string; lang: string; what: string; pdf: st
     what: 'What the notes show: how the fonds came to be dated, how he wrote, and what recurs and what stops across thirty years. An annex lists the readings still to check against the facsimile.',
     pdf: '/article/grothendieck-rhm.pdf',
     src: 'docs/rhm/article.tex',
-  },
-  {
-    id: 'article-cicm',
-    title: "Formalising a Mathematician's Working Notes: Lean Proofs from the Grothendieck Archive",
-    lang: 'English',
-    what: 'Prepared for the Conference on Intelligent Computer Mathematics: how statements of the readings are chosen, formalised and attributed, what the proofs found, and how the lemmas offered to Mathlib were received.',
-    pdf: '/article/grothendieck-cicm.pdf',
-    src: 'docs/cicm/article.tex',
-  },
-  {
-    id: 'article-lean',
-    title: 'Annexe. Énoncés des lectures modernisées démontrés',
-    lang: 'French',
-    what: 'For each folder proved in Lean: the leaf in context, the statement as the reading has it, a proof written out for a mathematician, and what is not proved. In the chronological order of the fonds’ themes.',
-    pdf: '/article/grothendieck-lean.pdf',
-    more: [{ label: 'Hexagon', href: 'https://hexagonmath.org/2611.00125v1' }],
-    src: 'docs/lean/article.tex',
   },
   {
     id: 'article-problems',
@@ -213,14 +197,6 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     more: [{ label: 'Note de lecture (fr)', href: '/article/grothendieck-moduli-note-fr.pdf' }],
   },
   {
-    id: 'article-quillen-lean',
-    title: "Daniel Quillen's Notebooks: Statements Proved in Lean",
-    lang: 'English',
-    what: "One hundred and twenty statements from Quillen's research notebooks (Clay Mathematics Institute), from general topology and linear algebra to representation theory, commutative algebra and theta functions, proved in Lean and written out without it. All one hundred and ten hold in the form proved; several under weaker hypotheses than the page's, one fails for p = 2, one needs 2 to be cancellable, and four come from his notes of lectures. The notebooks are in copyright: everything is stated in the paper's own words, with notebook and page.",
-    pdf: '/article/quillen-lean.pdf',
-    src: 'docs/quillen-lean/article.tex',
-  },
-  {
     id: 'article-recollement',
     title: 'Recollements · Incollamenti',
     lang: 'French and Italian · typewritten',
@@ -256,32 +232,6 @@ const LIVRES: typeof ARTICLES = [
  * Our estimate of a draft's interest, from one to three stars: what it adds that
  * is new or solid, not how finished it is.
  */
-const STARS: Record<string, 1 | 2 | 3> = {
-  'reading-2': 3,
-  'reading-159': 3,
-  'reading-1': 3,
-  'reading-126': 2,
-  'reading-58': 2,
-  'reading-33': 2,
-  'article-effective': 3,
-  'article-loday-filtration': 2,
-  'article-buffalo-open': 2,
-  'article-qcoh-descent': 2,
-  'article-problem-three': 2,
-  'article-kostant': 1,
-  'article-polytopes': 2,
-  'article-moduli': 2,
-  'article-quillen-lean': 2,
-  'article-recollement': 1,
-  'article-tangent': 3,
-  'article-lean': 3,
-  'article-problems': 3,
-  'article': 2,
-  'article-cicm': 2,
-  'article-rhm': 2,
-  'article-carbon': 1,
-  'article-bigon': 2,
-};
 
 const IHP_CAT = (q: string) =>
   `https://sorbonne-universite.primo.exlibrisgroup.com/discovery/search?query=any,contains,${encodeURIComponent(q)}&tab=Everything&search_scope=MyInst_and_CI&vid=33BSU_INST:33BSU`;
@@ -300,52 +250,6 @@ function Where({ online, ihp }: { online?: [string, string][]; ihp?: string }) {
       ))}
       )
     </span>
-  );
-}
-
-function Articles({ id = 'articles', title = 'The articles', items = ARTICLES }: { id?: string; title?: string; items?: typeof ARTICLES }) {
-  const pill = 'rounded-full border border-ink-200 px-3 py-0.5 text-[12.5px] text-ink-700 transition hover:border-brand-400 hover:text-brand-700';
-  return (
-    <section className="mt-10">
-      <H2 id={id}>{title}</H2>
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
-        {items.map((a) => (
-          <article key={a.id} id={a.id} className="card flex scroll-mt-20 flex-col px-5 py-4">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-ink-400">{a.lang}</p>
-            <h3 className="mt-1 text-[15px] font-semibold italic leading-snug text-ink-900">
-              {a.title}
-              {STARS[a.id] && (
-                <span
-                  className="ml-2 whitespace-nowrap not-italic tracking-[0.1em] text-amber-500"
-                  title={`Interest: ${STARS[a.id]} of 3`}
-                  aria-label={`Interest: ${STARS[a.id]} of 3`}
-                >
-                  {'★'.repeat(STARS[a.id])}
-                  <span className="text-ink-200">{'★'.repeat(3 - STARS[a.id])}</span>
-                </span>
-              )}
-            </h3>
-            <p className="mt-2 flex-1 text-[13px] leading-relaxed text-ink-600">{a.what}</p>
-            <p className="mt-3 flex flex-wrap items-center gap-2">
-              <a href={a.pdf} className={pill}>
-                PDF
-              </a>
-              {a.more?.map((m) => (
-                <a key={m.href} href={m.href} className={pill}>
-                  {m.label}
-                </a>
-              ))}
-              {a.tei && (
-                <a href={a.tei} className={pill} title="The submission file, valid against the journal's tei_jtei schema">
-                  TEI
-                </a>
-              )}
-              <code className="ml-auto text-[11px] text-ink-400">{a.src}</code>
-            </p>
-          </article>
-        ))}
-      </div>
-    </section>
   );
 }
 

@@ -75,7 +75,7 @@ th{color:var(--ink2);font-weight:600}
 </style>
 </head>
 <body>
-<nav style="max-width:1280px;margin:0 auto;padding:14px 16px 0;font-size:13px"><a href="/" style="color:var(--ink2)">← Grothendieck archives</a></nav>
+<nav style="max-width:1280px;margin:0 auto;padding:14px 16px 0;font-size:13px"><a href="/built/" style="color:var(--ink2)">← Built with Lean</a></nav>
 <header style="padding-bottom:0"><h1>GrothendieckArchivesProofs, as a map</h1></header>
 <div class="bar">
   <div class="seg" role="group" aria-label="Layout">
@@ -326,6 +326,13 @@ $('q').oninput=e=>{state.q=e.target.value.trim();render()};
 $('legend').addEventListener('change',e=>{on[e.target.dataset.k]=e.target.checked;render()});
 $('theme').onclick=()=>{const d=document.documentElement;const dark=d.dataset.theme==='dark'||(!d.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);d.dataset.theme=dark?'light':'dark';render()};
 addEventListener('resize',()=>render());
+{ // ?layout=city&links=1 opens the city, with the Stacks links
+  const q=new URLSearchParams(location.search);
+  if(q.get('links')==='1'){state.links=true;$('links').checked=true}
+  if(q.get('layout')==='city'||state.links)state.layout='city';
+  $('bT').setAttribute('aria-pressed',state.layout==='treemap');$('bC').setAttribute('aria-pressed',state.layout==='city');
+  $('cv').style.display=state.layout==='treemap'?'block':'none';$('gl').style.display=state.layout==='city'?'block':'none';
+}
 
 // ---- scale: this repository beside the Stacks library and its sister projects (figures from stacks.axiommath.ai, 23 Nov 2026)
 const REF=[

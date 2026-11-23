@@ -176,6 +176,7 @@ export default defineConfig(({ mode }) => ({
         fonds: resolve(import.meta.dirname, 'fonds/index.html'),
         archive: resolve(import.meta.dirname, 'archive/index.html'),
         method: resolve(import.meta.dirname, 'method/index.html'),
+        built: resolve(import.meta.dirname, 'built/index.html'),
         contribute: resolve(import.meta.dirname, 'contribute/index.html'),
         findings: resolve(import.meta.dirname, 'findings/index.html'),
         maps: resolve(import.meta.dirname, 'maps/index.html'),
