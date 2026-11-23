@@ -1191,6 +1191,32 @@ export const FINDINGS: Finding[] = [
     lean: { file: "lean/Grothendieck/CategoryTheory/Folder161_2Classifying.lean", found: "Holds, in the language of rings with one more unary symbol q (GrothendieckArchivesProofs, Folder161_2Classifying.lean, on lean-pool’s classifying-topoi library ported in LeanPool/, #42). A commutative ring is von Neumann regular iff it has a quasi-inverse operation q (a² q(a) = a, q(a)² a = q(a)), which is then unique (existsUnique_quasiInverse_iff); so von Neumann regular rings are the models of an equational theory (vnrTheory, isSetModel_ofCommRing_iff), and e = a q(a) is the idempotent of page 42 (mul_quasiInverse_idempotent). An equational theory is Horn and Horn theories are of presheaf type, so the theory is classified by a presheaf topos (vnrTheory_isOfPresheafType). Not formalised: the identification of the classifying category, the Horn category of the theory, with the opposite of the finitely presented von Neumann regular rings (R̂_cons of page 42); that every set model of the theory is a commutative ring (the converse is stated for structures coming from a ring)." },
   },
   {
+    id: '161-2-pseudofield-opens-by-residue-fields',
+    cote: '161-2',
+    pages: '41–43',
+    kind: 'mathematical',
+    claim:
+      'In the presheaf topos classifying commutative von Neumann regular rings (« pseudo-corps »), a map T(A) → T(B) between absolutely flat hulls, A finitely presented and B any ring, exists iff every residue field of B receives a ring map from A; hence the frame of open subtopoi is the frame of all down-sets of the distributive lattice D of classes of fields F(A) = {K : Hom(A, K) ≠ ∅} (the Lindenbaum lattice of coherent sentences of the theory of fields), the opens determined by residue fields are the ideals of D, and the open subtopoi of the field topos form Idl(D).',
+    basis:
+      'Pages 41–42 give the presentation X_{ps.corps} ≃ R̂_cons, whose opens are the classes of finitely presentable pseudo-fields closed upward under maps; page 43, item 16, marks « anneau annulé par n » and « anneau où n inversible » as open subtopoi, with the N.B. X_{1-tors} = X_∅ = topos ponctuel. The pages do not describe the frame of opens.',
+    ours:
+      'Everything in the claim is the edition’s, issue #186, docs/bridges notes §« The open subtopoi, described by fields » (EN and FR), 2026-11-23, not checked by a specialist: the local-to-global lemma for a regular ring R (local witnesses on clopens D(e), quasi-compactness of Spec R, orthogonalised idempotents, R ≅ ∏ Rε_i), with a counterexample showing that A must be finitely presented; the criterion through Olivier’s description of Spec T(B); the frame Down(D) and the comparison with Idl(D); the small cases. On item 16 it finds that in the pseudo-field topos « n = 0 » depends only on the radical of n, that the two opens meet in the point of the zero ring (his N.B. for n = 1) and do not cover (𝔽₂ × ℚ for n = 2), though the ideal they generate is everything, every pseudo-field splitting as R/nR × R[1/n]; and that the characteristic-zero part has interior the point, so is not open, as on page 47 for R̂.',
+    literature: [
+      'O. Caramello, P. T. Johnstone, De Morgan’s law and the theory of fields (arXiv 0808.1972), p. 2 and Lemmas 1.1–1.3 — read: Char R of a finitely presented regular ring is finite without 0 or cofinite with 0, and the subterminals T_A of the field topos defined by characteristic; the characteristic-only shadow of D, no description of the frame',
+      'O. Caramello, Universal models and definability (arXiv 0906.3061), §7(ii) — read: restates the characteristic case',
+      'O. Caramello, Lattices of theories (arXiv 0905.0299), §7.1 — read: subterminals of a presheaf topos as sieve-closed full subcategories, of a classifying topos as geometric sentences; not applied to regular rings or fields',
+      'S. Burris, H. P. Sankappanavar, A Course in Universal Algebra (2012 update), Def. IV.8.1 (patchwork property) and the Dauns–Hofmann example after Cor. IV.8.14 (biregular rings as Boolean products of simple rings) — read: the ingredients of the lemma, but no statement that a primitive positive sentence holds in a Boolean product iff in every factor',
+      'J.-P. Olivier, Anneaux absolument plats universels (Séminaire Samuel 1967–68) and R. S. Pierce, Modules over commutative regular rings (1967) — already cited by the note for Spec T(B) and the Pierce sheaf; not re-read for this entry',
+      'TheoremSearch, 23 November 2026, nine queries on primitive positive sentences in Boolean products and regular rings and on subterminals of the classifying toposes of regular rings and of fields — no hit states the lemma or the frame',
+      'Not accessible: S. Burris, H. Werner, Sheaf constructions and their elementary properties (Trans. AMS 248, 1979); A. Macintyre, Model-completeness for sheaves of structures (Fund. Math. 81, 1973) — the likely places for the pp-patchwork lemma; Johnstone, Stone Spaces and Rings, fields and spectra, not consulted',
+    ],
+    status: 'candidate',
+    settle:
+      'Read Burris–Werner 1979 and Macintyre 1973 for the statement that a primitive positive sentence holds in a Boolean product (a commutative regular ring) iff it holds in every stalk; if it is there, the criterion is a corollary and only the description of the frame as Down(D), against Idl(D) for fields, remains to be searched (Johnstone, Stone Spaces V; Elephant D3).',
+    reach: 'beyond',
+    theory: "topoi",
+  },
+  {
     id: '161-2-definite-characteristic-join-of-subtopoi',
     cote: '161-2',
     pages: '47–49',
