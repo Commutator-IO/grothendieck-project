@@ -34,7 +34,7 @@
 \begin{document}
 \emergencystretch=2em
 \begin{abstract}
-On 22 October 1969 Grothendieck wrote to Kostant about pairs of maximal tori $T$, $T'$ of a complex simple adjoint group in apposition, $T'$ being the centraliser of a cyclic element. Choosing Borel subgroups $B \supset T$ and $B' \supset T'$, he asked whether $B$ and $B'$ are always in general position. The answer is yes, in every type and for all $|W|$ Borel subgroups through $T'$: every one of them is opposite to $B$, and also to the opposite Borel subgroup $B^-$. The proof takes a few lines from two published facts: $\operatorname{Lie}T'$ contains an element of $f + \mathfrak b$ with $f$ a principal nilpotent of $\mathfrak b^-$ (Kostant), and a Borel subalgebra containing such an element is opposite to $\mathfrak b$ (an argument of Bălibanu's). We give it in full, self-contained. In type $A$ the element of $f+\mathfrak b$ is the inverse of the cyclic element, and the statement becomes the transversality of the flags stable under a cyclic weighted shift, which we prove directly and formalise in Lean~4 with Mathlib, together with the flag forms in types $B$, $C$ and in part $D$. A computation modulo primes checks types $B_2$ to $B_7$ independently. Grothendieck's second question, on a distinguished conjugacy class of quadruples, stays open.
+On 22 October 1969 Grothendieck wrote to Kostant about pairs of maximal tori $T$, $T'$ of a complex simple adjoint group in apposition, $T'$ being the centraliser of a cyclic element. Choosing Borel subgroups $B \supset T$ and $B' \supset T'$, he asked whether $B$ and $B'$ are always in general position. The answer is yes, in every type and for all $|W|$ Borel subgroups through $T'$: every one of them is opposite to $B$, and also to the opposite Borel subgroup $B^-$. The proof takes a few lines from two published facts: $\operatorname{Lie}T'$ contains an element of $f + \mathfrak b$ with $f$ a principal nilpotent of $\mathfrak b^-$ (Kostant), and a Borel subalgebra containing such an element is opposite to $\mathfrak b$ (an argument of Bălibanu's). We give it in full, self-contained. In type $A$ the element of $f+\mathfrak b$ is the inverse of the cyclic element, and the statement becomes the transversality of the flags stable under a cyclic weighted shift, which we prove directly and formalise in Lean~4 with Mathlib, together with the flag forms in types $B$, $C$ and in part $D$. A computation modulo primes checks types $B_2$ to $B_7$ independently. For Grothendieck's second question, on a distinguished conjugacy class of quadruples invariant under the exterior automorphisms, the answer is no in type $A_{2l}$, where the exterior automorphism fixes no class; in the other types we computed, a construction with the Coxeter plane gives a canonical pair of invariant classes, exchanged by the sign of $e_{-\theta}$.
 \end{abstract}
 \maketitle
 
@@ -48,7 +48,7 @@ where $\theta$ is the highest root. Such an element is regular semisimple \cite[
 
 The letter asks, in the words of the page, whether for some or for all such quadruples $(T,B,T',B')$ the Borel subgroups $B$ and $B'$ are \q{in general position}, and whether there is a \emph{distinguished} conjugacy class of quadruples. It also states, without proof, that the quadruples form $|W|^2/(h\,z\,\varphi(h))$ conjugacy classes, $z$ being the order of the centre of the simply connected cover. The count follows from standard theory and is derived in our note on open problems \cite{problems}, problem \texttt{p:kostant}; we do not repeat it here.
 
-Two Borel subgroups are in general position, or opposite, when their relative position is the longest element $w_0$ of $W$, that is, when $B \cap B'$ is a maximal torus. This article answers the first question in every type (Section~\ref{sec:general}). The statement is a short consequence of published results, which we did not find put together (Section~\ref{sec:literature}). Sections~\ref{sec:statement}--\ref{sec:classical} give the explicit form of the statement for the classical groups, as the transversality of flags, with direct proofs formalised in Lean; Section~\ref{sec:checks} reports the computations.
+Two Borel subgroups are in general position, or opposite, when their relative position is the longest element $w_0$ of $W$, that is, when $B \cap B'$ is a maximal torus. This article answers the first question in every type (Section~\ref{sec:general}). The statement is a short consequence of published results, which we did not find put together (Section~\ref{sec:literature}). Sections~\ref{sec:statement}--\ref{sec:classical} give the explicit form of the statement for the classical groups, as the transversality of flags, with direct proofs formalised in Lean; Section~\ref{sec:checks} reports the computations, and Section~\ref{sec:second} the second question of the letter.
 
 \section{The answer in every type}\label{sec:general}
 
@@ -183,9 +183,61 @@ Two computations check Theorem~\ref{thm:general} independently of its proof.
 
 We found no source stating Theorem~\ref{thm:general}. Its two ingredients are in print: the element $\tilde z_0 \in \mathfrak t'$ of Lemma~\ref{lem:dual} is in Kostant's Theorem~6.7 \cite{kostant}, and Lemma~\ref{lem:opposite} is Bălibanu's Lemma~4.5 \cite{balibanu}, stated for the Kostant slice but proved for $f + \mathfrak b$. The same paper (Lemma~4.4) shows $G_x \cap B = 1$ for $x$ in the slice, and uses the lemma, in the proof of its Lemma~4.7, to put in the big cell the Borel subgroups through the centraliser of a regular semisimple element of the slice. So the theorem is a short consequence of published results, and we do not claim it is new; we state it because it answers Grothendieck's question. We searched arXiv, Crossref and the literature on cyclic elements and Coxeter tori (Kostant's papers of 1959 and 2010, Springer \cite{springer}, Elashvili, Kac and Vinberg on cyclic elements, Brillon and Schechtman, Guest and Ho, Crooks on the Kostant--Toda lattice, Bălibanu); of Kostant's 1959 paper we read pages 1013--1015, 1018 and 1027.
 
+\section{The second question: is there a distinguished class?}\label{sec:second}
+
+The letter goes on: \q{Is there in any sense a \emph{distinguished} conjugacy class of such quadruples (which should then be, of course, invariant by action of exterior automorphisms)? What are the groups of automorphisms of such quadruples (they are isomorphic to subgroups of the group of exterior automorphisms of $G$)?} We answer the first part negatively in type $A_{2l}$ and give, in the other types we could compute, a canonical pair of invariant classes.
+
+\paragraph{The set of classes.} Fix $T$ and a torus $T'$ in apposition with it; all such pairs are conjugate \cite[Thm~7.3]{kostant}. Let $Q$ and $Q'$ be the sets of Borel subgroups containing $T$ and $T'$, of $|W|$ elements each. The conjugacy classes of quadruples are the orbits of $\Phi = N(T)\cap N(T')$ on $Q \times Q'$; $\Phi$ acts freely, the stabiliser of a quadruple in $G$ being $T \cap T' = 1$, and $|\Phi| = h\,z\,\varphi(h)$, which gives the letter's count (the argument is in \cite{problems}, problem \texttt{p:kostant}). An automorphism of $G$ can be composed with an inner one so as to normalise $T$ and $T'$, so the group $\operatorname{Out}(G)$ of exterior automorphisms acts on the set of classes. The stabiliser of a quadruple in $\operatorname{Aut}(G)$ meets $G$ trivially, hence maps isomorphically onto the stabiliser of its class in $\operatorname{Out}(G)$: this is Grothendieck's parenthesis, and the groups of automorphisms asked for are these stabilisers.
+
+\begin{theorem}\label{thm:odd}
+Let $G = \PGL_n(\C)$ with $n = 2l+1 \ge 3$, of type $A_{2l}$. The outer automorphism of $G$ fixes no class of quadruples. So no class is invariant under $\operatorname{Out}(G)$, and every quadruple has a trivial group of automorphisms.
+\end{theorem}
+
+\begin{proof}
+Suppose an outer automorphism $\sigma$ fixes a quadruple $(T,B,T',B')$. Then $\sigma^2$ is inner and fixes it, so $\sigma^2 = 1$. Take $T$ diagonal and $B$ upper triangular. The automorphism $\sigma$ acts on $\mathfrak t$ by an automorphism of the root system fixing the chamber of $B$, and not trivially (an automorphism acting trivially on a Cartan subalgebra is inner), so by the flip: $\sigma(\operatorname{diag}(d_1,\dots,d_n)) = \operatorname{diag}(d_n^{-1},\dots,d_1^{-1})$ on $T$. The group $T \cap N(T')$ is cyclic of order $n$ \cite{problems}, generated by a principal element $P' = \operatorname{diag}(\omega^{a(1)},\dots,\omega^{a(n)})$, $\omega = e^{2\pi i/n}$, where $a$ is a bijection from $\{1,\dots,n\}$ to $\mathbb Z/n$, since $P'$ is regular of order $n$. As $\sigma$ normalises $T\cap N(T')$, $\sigma(P') = P'^{\,k}$ for a unit $k$ of $\mathbb Z/n$ with $k^2 = 1$, that is
+\[
+-a(n+1-i) \equiv k\,a(i) + c \pmod n \qquad (1 \le i \le n)
+\]
+for some constant $c$ (elements of $\PGL_n$ being defined up to scalars). The involution $i \mapsto n+1-i$ has exactly one fixed point, $n$ being odd; through $a$ it becomes the affine involution $x \mapsto -kx - c$ of $\mathbb Z/n$, which therefore has exactly one fixed point, so $\gcd(k+1, n) = 1$.
+
+On the other side, $T'$ has $n$ eigenlines in $\C^n$, which $P'$ permutes cyclically, as the Coxeter element $\operatorname{Ad}P'|_{\mathfrak t'}$ does; number them by $\mathbb Z/n$ so that $P'$ sends the line $m$ to the line $m-1$. The automorphism $\sigma$ is $x \mapsto J\,{}^t x^{-1} J^{-1}$ up to an inner one; it sends $T'$ to itself and so permutes its eigenlines, through a bijection $\pi$, the line $m$ going to $J$ applied to the line of $(\C^n)^*$ that vanishes on the other eigenlines. From $\sigma(P') = P'^{\,k}$ one gets $\pi(m-1) = \pi(m) - k$, so $\pi(m) = km + e$. A Borel subgroup $B' \supset T'$ is the stabiliser of the flag spanned by the eigenlines in an order $(m_1,\dots,m_n)$, and $\sigma(B')$ is that of the flag of the eigenlines in the order $(\pi(m_n), \dots, \pi(m_1))$, by duality. So $\sigma(B') = B'$ means $\pi(m_{n+1-i}) = m_i$ for all $i$: the involution $x \mapsto kx + e$ is conjugate to $i \mapsto n+1-i$, and has exactly one fixed point, so $\gcd(k-1, n) = 1$.
+
+Now $n$ divides $k^2 - 1 = (k-1)(k+1)$, a product of two numbers prime to $n$, which is impossible for $n > 1$.
+\end{proof}
+
+In type $A_{2l+1}$ the same argument gives no contradiction, and the outer automorphism does fix classes (the table below).
+
+\paragraph{A canonical pair of classes.} Let $P_B = \exp(2\pi i\rho_B^\vee/h)$ be the principal element of $T$ defined by $B$. Say that $B$ is \emph{adapted} to $T'$ if $P_B$ normalises $T'$, that is, if $T'$ is the centraliser of a cyclic element relative to $B$, as in Section~\ref{sec:general}. Then $c' = \operatorname{Ad}P_B|_{\mathfrak t'}$ is a Coxeter element of the Weyl group of $T'$, the cyclic element $E'$ spans its eigenline for $e^{2\pi i/h}$, and the real and imaginary parts of $E'$, in the real form of $\mathfrak t'$ on which the roots are real, span its Coxeter plane. Say that $B' \supset T'$ is a \emph{Coxeter Borel subgroup} if its positive roots are $\{\beta : \operatorname{Re}(\mu\,\beta(E')) > 0\}$ for some $\mu \in \C^\times$, that is, if its chamber meets the Coxeter plane.
+
+\begin{proposition}\label{prop:pair}
+The quadruples with $B$ adapted to $T'$ and $B'$ a Coxeter Borel subgroup form exactly two conjugacy classes $D_+$ and $D_-$. Changing the sign of $e_{-\theta}$ in the definition of $E'$ exchanges them. If an exterior automorphism, written as a pinned automorphism $\delta$, satisfies $\delta(e_{-\theta}) = \varepsilon\,e_{-\theta}$, it fixes $D_+$ and $D_-$ when $\varepsilon = 1$ and exchanges them when $\varepsilon = -1$.
+\end{proposition}
+
+\begin{proof}
+The adapted Borel subgroups are those with $P_B$ a generator of the cyclic group $T \cap N(T')$; there are $z\,\varphi(h)$ of them, $z$ for each generator, and the image of $\Phi$ in $W$, of the same order, permutes them freely, hence simply transitively. So every class of the statement has a representative with $B$ fixed, and two such representatives differ by an element of $\Phi \cap T = \langle P_B \rangle$, which acts on $\mathfrak t'$ by $c'$. The Coxeter plane meets exactly $2h$ chambers, and $c'$ acts on them as the rotation through $2\pi/h$ (Steinberg's description of the Coxeter plane, see \cite[\S3.17--3.19]{humphreys}; the computation below confirms the number $2h$ in every case); $\langle c'\rangle$ acts freely, so there are two orbits, which are the two classes. Replacing $\mu$ by $\mu e^{i\pi/h}$ moves a chamber to the next one in the other orbit. Replacing $e_{-\theta}$ by $-e_{-\theta}$ replaces $E'$, up to conjugation by $T$, by $\lambda E'$ with $\lambda^h = -1$, a rotation through an odd multiple of $\pi/h$, which exchanges the orbits. For $\delta$, the composite $\psi = \operatorname{Ad}(t)\circ\delta$ with $t = \exp(\log\lambda\cdot\rho^\vee)$, $\lambda^h = \varepsilon$, fixes $T$ and $B$, sends $E'$ to $\lambda E'$, hence $T'$ to itself, and maps the chamber of $\mu$ to that of $\mu\lambda$: a rotation through an even multiple of $\pi/h$ if $\varepsilon = 1$, and through an odd one if $\varepsilon = -1$.
+\end{proof}
+
+The sign $\varepsilon$ is $-1$ in type $A_{2l}$ and $+1$ in type $A_{2l+1}$: writing $e_\theta = [\dots[[e_{\alpha_1}, e_{\alpha_2}], e_{\alpha_3}], \dots, e_{\alpha_r}]$, the diagram automorphism reverses the order of the brackets, which costs $(-1)^{r-1}$ (checked numerically up to $r = 6$). We computed $\varepsilon = 1$ for all the exterior automorphisms of $D_4$ (the group $S_3$) and for that of $D_5$; we did not compute $E_6$. So in types $A_{2l+1}$, $D_4$, $D_5$, and trivially in types $B$, $C$, $F_4$, $G_2$, which have no exterior automorphism, $D_+$ and $D_-$ are two classes invariant under $\operatorname{Out}(G)$, whose groups of automorphisms are the whole of $\operatorname{Out}(G)$; in type $A_{2l}$ they are exchanged, as Theorem~\ref{thm:odd} requires. They are distinguished as a pair: which of the two is singled out depends on the sign of $e_{-\theta}$, which a pinning does not fix, in line with Grothendieck's own remark that the cyclic line is \q{définie au signe près} (folder~123, p.~34).
+
+\paragraph{Computations.} A computation in the adjoint representation (floating point, the outcome being combinatorial) lists the orbits of $\Phi$ on $Q\times Q'$, taking for $\Phi$ the fibre product over $(\mathbb Z/h)^*$ of the elements of $W$ multiplying $P_B$ to a power and of those of the Weyl group of $T'$ normalising $\langle c'\rangle$, and the action of $\operatorname{Out}(G)$ (script \texttt{computations/kostant/kostant\_quadruples.py}). The number of orbits is the letter's in every case, and the pair $D_\pm$ has two classes in every case. The classes fixed by the exterior automorphisms are:
+\begin{center}\small
+\begin{tabular}{lrrl}
+type & $h$ & classes & classes fixed by the exterior automorphisms\\
+\hline
+$A_2$ & 3 & 2 & 0\\
+$A_3$ & 4 & 18 & 8\\
+$A_4$ & 5 & 144 & 0\\
+$A_5$ & 6 & 7200 & 192\\
+$A_6$ & 7 & 86400 & 0\\
+$D_4$ & 6 & 768 & 96 by each transposition of $S_3$, 12 by each $3$-cycle\\
+$D_5$ & 8 & 28800 & 2304\\
+\end{tabular}
+\end{center}
+In the types where invariant classes exist, there are many of them, so invariance alone does not single one out; the pair $D_\pm$ is the canonical candidate. We did not search the literature for this question beyond the sources of Section~\ref{sec:literature}.
+
 \section{What is open}\label{sec:open}
 
-\paragraph{The second question.} Whether some conjugacy class of quadruples is \emph{distinguished}, stable under the outer automorphisms, is not addressed. In type $A_{n-1}$ the number of classes is $((n-1)!)^2/\varphi(n)$, which is $1$, $2$, $18$ for $n = 2, 3, 4$. The letter's footnote, that $N(T)\cap N(T')$ is an extension of $(\mathbb Z/h)^{*}$ by $\mathbb Z/h \times Z(\tilde G)$, would be the starting point.
+The sign $\varepsilon$ for $E_6$, and a uniform proof that $\varepsilon = 1$ outside $A_{2l}$; a choice between $D_+$ and $D_-$ that does not depend on the sign of $e_{-\theta}$, if there is one; and a proof of the fibre-product description of $\Phi$ used in the computations, which rests on the argument of \cite{problems}, not checked by a specialist.
 
 \subsection*{Declaration}
 This note and the Lean file it describes were drafted with a language model (Claude, Anthropic) from the edition's registers. The author received no funding for this work.
@@ -195,6 +247,7 @@ This note and the Lean file it describes were drafted with a language model (Cla
 \bibitem{balibanu} A.~Bălibanu, The partial compactification of the universal centralizer, \emph{Selecta Math.\ (N.S.)} 29 (2023), paper 85; arXiv:1710.06327.
 \bibitem{brillon} L.~Brillon and V.~Schechtman, Coxeter element and particle masses, \emph{Selecta Math.\ (N.S.)} 22 (2016), 2591--2627; arXiv:1612.04133.
 \bibitem{guestho} M.~Guest and N.-K.~Ho, Kostant, Steinberg, and the Stokes matrices of the tt*-Toda equations, arXiv:1802.01126.
+\bibitem{humphreys} J.~E.~Humphreys, \emph{Reflection groups and Coxeter groups}, Cambridge Univ.\ Press, 1990.
 \bibitem{kostant2010} B.~Kostant, Experimental evidence for the occurrence of $E_8$ in nature and the radii of the Gosset circles, arXiv:1003.0046.
 \bibitem{springer} T.~A.~Springer, Regular elements of finite reflection groups, \emph{Invent.\ Math.} 25 (1974), 159--198.
 \bibitem{problems} M.~Hua, Open questions from Grothendieck's Montpellier notes: thirteen statements a formalisation could not reach, problem \texttt{p:kostant}, 2026.
