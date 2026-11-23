@@ -96,7 +96,7 @@ for (const block of list.split(/\n  \{\n/).slice(1)) {
 }
 
 const line = (cote, r) =>
-  `${cote} & ${r.pages.join(' ; ').replace(/–/g, '--')} & ${r.statement} & ${r.status} & \\href{\\leanblobmain/${r.leanFile}.lean}{\\texttt{\\detokenize{${r.leanFile}}}} & ${r.ref}\\\\`;
+  `${cote} & ${r.pages.join(' ; ').replace(/–/g, '--')} & ${r.statement} & ${r.status} & \\href{\\leanblobmain/${r.leanFile}.lean}{\\texttt{\\detokenize{${r.leanFile.split('/').pop()}}}} & ${r.ref}\\\\`;
 const body = GROUPS.filter(([v]) => rows[v].size)
   .map(([v, head]) => `\\multicolumn{6}{@{}l}{\\textit{${head}} (${rows[v].size})}\\\\[1pt]\n${[...rows[v]].map(([c, r]) => line(c, r)).join('\n')}`)
   .join('\n');

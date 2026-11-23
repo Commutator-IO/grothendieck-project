@@ -1,4 +1,4 @@
-\section[IHÉS SGA\,6 2/3 : le groupe $K$ d'une catégorie triangulée, la formule d'Euler]{IHÉS SGA\,6 2/3 : le groupe $K$ d'une catégorie triangulée, et la formule d'Euler\protect\verifie[\leanblobmain]{IhesSGA6_2_3}}\label{sec:ihes-sga6-2-3}
+\section[IHÉS SGA\,6 2/3 : le groupe $K$ d'une catégorie triangulée, la formule d'Euler]{IHÉS SGA\,6 2/3 : le groupe $K$ d'une catégorie triangulée, et la formule d'Euler\protect\verifie[\leanblobmain]{CategoryTheory/IhesSGA6_2_3}}\label{sec:ihes-sga6-2-3}
 
 Comme la section~\ref{sec:ihes-sga6-1-5}, cette section porte sur une pièce du fonds Grothendieck--Illusie de l'IHÉS, \texttt{FG\_IL\_5\_SGA6\_2\_3} (\href{https://grothendieck.commutator.io/illusie/\#FG_IL_5_SGA6_2_3/1/p1}{vue~1}). Ce sont des notes manuscrites de quinze vues, intitulées \q{Groupes $K$}, qui portent en haut de la première \q{(Pour Illusie)} ; le catalogue de l'IHÉS les date \q{1965 ?}. Elles esquissent un exposé sur les groupes $K$ : le groupe d'une catégorie triangulée, sa comparaison avec celui d'une catégorie abélienne, puis une généralisation. Aucune lecture modernisée n'en a été faite : les énoncés ci-dessous sont lus sur la transcription des vues~1 à~3.
 
@@ -78,13 +78,13 @@ La surjectivité vient de ce que tout objet de $\mathcal C/\mathcal D$ est un $L
 
 Ne sont pas démontrés ici : le sens \q{seulement si} du critère des deux triangles, et la description de $K(\mathcal C)$ par le monoïde des classes d'isomorphie ; le fait qu'une équivalence induise un isomorphisme ; le contre-exemple de Thomason sans l'hypothèse d'épaisseur.
 
-\begin{enonce}[N\textsuperscript{o}\,2, le groupe $K$ d'une catégorie abélienne et de sa catégorie dérivée]\verifie[\leanblobmain]{IhesSGA6_2_3Db}
+\begin{enonce}[N\textsuperscript{o}\,2, le groupe $K$ d'une catégorie abélienne et de sa catégorie dérivée]\verifie[\leanblobmain]{CategoryTheory/IhesSGA6_2_3Db}
 Soit $\mathcal A$ une catégorie abélienne. Il existe un unique homomorphisme $K(\mathcal A) \to K(D^b(\mathcal A))$ qui envoie $[X]$ sur la classe du complexe $X$ placé en degré~$0$, et c'est un isomorphisme. En particulier tout élément de $K(\mathcal A)$ est l'image de la classe d'un seul objet de $D^b(\mathcal A)$.
 \end{enonce}
 
 \noindent Ici $K(\mathcal A)$ est le groupe abélien libre sur les objets modulo $[X_2] = [X_1] + [X_3]$ pour chaque suite exacte courte (Stacks, étiquette 02MU). Le groupe $K(D^b(\mathcal A))$ de l'édition est, par définition, celui de l'étiquette 0FCN, et le théorème est 0FCP de la bibliothèque d'AxiomMath \cite{axiomstacks} : l'inverse est la caractéristique d'Euler $\sum (-1)^i [H^i(X)]$. La dernière assertion est la forme triangulée de la propriété que la vue~4 met en doute pour une catégorie abélienne, où seules les différences $\mathrm{cl}\,X - \mathrm{cl}\,Y$ sont affirmées. Voir \texttt{exists\_addEquiv}, \texttt{addEquiv\_unique} et \texttt{exists\_cl\_eq} dans \href{\leanblobmain/CategoryTheory/IhesSGA6_2_3Db.lean}{\texttt{IhesSGA6\_2\_3Db.\allowbreak{}lean}}.
 
-\begin{enonce}[Vue~3, la formule d'Euler pour une fonction additive quelconque]\verifie[\leanblobmain]{IhesSGA6_2_3Euler}
+\begin{enonce}[Vue~3, la formule d'Euler pour une fonction additive quelconque]\verifie[\leanblobmain]{CategoryTheory/IhesSGA6_2_3Euler}
 Soient $\mathcal A$ une catégorie abélienne, $G$ un groupe abélien et $\chi$ une fonction des objets de $\mathcal A$ dans $G$, additive sur les suites exactes courtes. Pour un complexe $X^\bullet$ nul hors de $[a, b]$,
 \[\sum_{a \leq i \leq b} (-1)^i \chi(X^i) = \sum_{a \leq i \leq b} (-1)^i \chi\bigl(H^i(X^\bullet)\bigr),\]
 et la somme de gauche est nulle si $X^\bullet$ est exact.

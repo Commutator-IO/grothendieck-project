@@ -109,7 +109,7 @@ for (const m of article.matchAll(/\\part\{([^}]*(?:\{[^}]*\}[^}]*)*)\}|\\input\{
   const label = tex.match(/\\label\{(sec:[^}]+)\}/)?.[1] ?? `sec:${name}`;
   if (!vs.length || vs.some((v) => !VERDICT[v])) throw new Error(`verdict of ${name}: ${vs}`);
   rows.push(
-    `${cote} & ${statement} & ${vs.map((v) => VERDICT[v]).join(' ; ')} & \\href{${base}/${leanPath[file] ?? file}.lean}{\\texttt{\\detokenize{${file}}}} & \\ref{${label}}\\\\`,
+    `${cote} & ${statement} & ${vs.map((v) => VERDICT[v]).join(' ; ')} & \\href{${base}/${file.includes('/') ? file : leanPath[file] ?? file}.lean}{\\texttt{\\detokenize{${file.split('/').pop()}}}} & \\ref{${label}}\\\\`,
   );
 }
 // Parts with no section of their own (the empty ones) leave a heading with no row.
