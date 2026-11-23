@@ -1199,7 +1199,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'refuted',
     settle:
-      "Refuted for the statement as read (the classifying subtopos does not exist); what remains: a specialist's check of the argument in docs/bridges/notes.tex, and a literature search for the gluing lemma in the form proved (none found in Johnstone, Elephant A4.5, cited from memory). The order-theoretic core is being formalised in GrothendieckArchivesProofs (issue #185).",
+      "Refuted for the statement as read (the classifying subtopos does not exist); what remains: a specialist's check of the argument in docs/bridges/notes.tex, and a literature search for the gluing lemma in the form proved (none found in Johnstone, Elephant A4.5, cited from memory). The order-theoretic core of the lemma is proved in Lean, in any distributive lattice: Grothendieck.Folder161_2.recollement_iff and recollement (GrothendieckArchivesProofs, Grothendieck/Order/Folder161_2Join.lean, PR #75); the instance on subtopoi and the refutation are not formalised.",
     reach: 'doubtful',
     theory: "topoi",
     onPage: 'partial',
