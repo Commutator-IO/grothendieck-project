@@ -236,7 +236,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person reads the two numerals against the facsimile at high resolution and decides whether either is a slip. If both stand, the question becomes which EGA numbering each belongs to, and that is answered from the other plan folders (26 for EGA VI, 35 for SGA 7) rather than from this one.',
+      'A person reads the two numerals against the facsimile at high resolution and decides whether either is a slip. If both stand, the question becomes which EGA numbering each belongs to, and that is answered from the other plan folders (26 for EGA VI, 35 for SGA 7) rather than from this one. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the cover reads « Plan EGA VII » and p. 2 « EGA Chap. VI »; the third stroke of VII sits at or past the right end of its box, so it may have been added — for a reader.',
   },
   {
     id: '48-typescript-leaves-reversed',
@@ -252,7 +252,7 @@ export const FINDINGS: Finding[] = [
     literature: ['Transcription 48, batch 1 (batch-01.fr.tex), pages 3 and 5'],
     status: 'candidate',
     settle:
-      'A person checks the two numerals on the facsimile, and checks whether the leaves are rectos of one sheet — in which case the order is an accident of scanning rather than of filing. Identifying which SGA 4 exposé the typescript belongs to would also place the (29)/(30) pagination, which this entry does not attempt.',
+      'A person checks the two numerals on the facsimile, and checks whether the leaves are rectos of one sheet — in which case the order is an accident of scanning rather than of filing. Identifying which SGA 4 exposé the typescript belongs to would also place the (29)/(30) pagination, which this entry does not attempt. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the numerals (29) on p. 5 and (30) on p. 3 are confirmed; the typescript shows through legibly on pp. 2 and 4, so pp. 2/3 and 4/5 are two sheets: the plan was written on the backs of two discarded typescript leaves, and the filing follows the plan’s order, not the typescript’s. Those leaves precede (31)–(32) in folder 26.',
   },
   {
     id: '66-two-ink-layers',
@@ -271,7 +271,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person compares the inks under the facsimile and dates the two works the margins name — Artin’s approximation results and Mumford’s on rational equivalence of zero-cycles — which together give a terminus post quem for the annotation layer. Note what this dates: the annotations, not the list.',
+      'A person compares the inks under the facsimile and dates the two works the margins name — Artin’s approximation results and Mumford’s on rational equivalence of zero-cycles — which together give a terminus post quem for the annotation layer. Note what this dates: the annotations, not the list. Machine pass on the facsimile, 2026-11-23, not checked by a reader: « 1964 » boxed at the top of p. 1 is legible; the margin notes are in a thinner grey medium, distinct from the brown ink of the list (ink or pencil not decidable on the scan). Literature: Artin, Publ. Math. IHÉS 36 (1969), 23–58 (received 15 December 1968), which cites his Invent. Math. 5 (1968) paper; Mumford, J. Math. Kyoto Univ. 9 (1969), seen as a Crossref record only.',
   },
   {
     id: '66-subject-22-commissioned',
@@ -306,7 +306,7 @@ export const FINDINGS: Finding[] = [
     literature: ['Transcription 35, batch 1 (batch-01.fr.tex), pages 1 and 3'],
     status: 'candidate',
     settle:
-      'A person reads the margin names against the facsimile — one of them, the civility or forename of the Raynaud written above the struck one, is marked uncertain in the transcription and the two Raynauds of that period are distinct people — and compares the assignments with the authorship of the published volumes.',
+      'A person reads the margin names against the facsimile — one of them, the civility or forename of the Raynaud written above the struck one, is marked uncertain in the transcription and the two Raynauds of that period are distinct people — and compares the assignments with the authorship of the published volumes. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the forename above the struck « Mme Raynaud » reads « Marc »; the word at exposé VI reads « Rim », struck or underlined not decided. At bibliography entry [19] the leaf reads « Deligne–Grothendieck, A. », Deligne written in front with a hyphen and no horizontal strike through Grothendieck (only the diagonal across the whole list) — this differs from the transcription and needs a reader. The published SGA 7 volumes were not compared.',
   },
   {
     id: '35-dependency-graphs-redrawn',
@@ -508,7 +508,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'Only physical evidence would settle it — a dated verso, an institute letterhead, a numbered seminar reference among these particular leaves. Recorded because an external review of the folder (Kimi, shared conversation of 2026-08) read the inventory range as evidence that these pages precede Beck, which it cannot be: the range is a deduction about the shelfmark, not a reading of these leaves. This entry exists to stop the next reader making the same step. Whatever is found, priority is not a claim this project makes.',
+      'Only physical evidence would settle it — a dated verso, an institute letterhead, a numbered seminar reference among these particular leaves. Recorded because an external review of the folder (Kimi, shared conversation of 2026-08) read the inventory range as evidence that these pages precede Beck, which it cannot be: the range is a deduction about the shelfmark, not a reading of these leaves. This entry exists to stop the next reader making the same step. Whatever is found, priority is not a claim this project makes. Machine pass on the facsimile, 2026-11-23, not checked by a reader: pp. 3–6 carry no date, letterhead, stamp or seminar reference, only the archivists’ numbers; their versos are not in the scan as separate pages.',
   },
   {
     id: '19-adjoint-chains-length-n',
@@ -1032,7 +1032,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'Only physical evidence would settle it — a dated verso, a letterhead, or an identification of the Bourbaki typescript on page 7, whose internal number would place that sheet and therefore give a terminus for the leaf whose recto it is. This entry exists to stop the next reader treating « [à partir de 1971] » as a reading of these leaves: it is a deduction about the shelfmark. Whatever is found, priority is not a claim this project makes, about anyone.',
+      'Only physical evidence would settle it — a dated verso, a letterhead, or an identification of the Bourbaki typescript on page 7, whose internal number would place that sheet and therefore give a terminus for the leaf whose recto it is. This entry exists to stop the next reader treating « [à partir de 1971] » as a reading of these leaves: it is a deduction about the shelfmark. Whatever is found, priority is not a claim this project makes, about anyone. Machine pass on the facsimile, 2026-11-23, not checked by a reader: no leaf carries a date. But the basis’s « no year the transcription records » is not right: the transcription header identifies p. 7 as Bourbaki rédaction n° 391 (Dieudonné, February 1963), in another typing than the AHP copy; the facsimile shows « - 17 - » (second digit doubtful) and « n° 391 », and 6/7 are one sheet, so the sheet bearing his p. 6 is probably no earlier than early 1963. This bounds the leaf, not the mathematics.',
   },
   {
     id: '54-flatness-typescript-fragment',
@@ -1052,7 +1052,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'Identify the typescript. If it is a draft of a published section, its standing hypotheses settle the question at once and this entry becomes matched. Two internal clues are available without leaving the fonds: the leaves cite « Prop. A » in a typed correction over a struck reference to 4.1, and page 5’s heading « Corollaire 4.1. ter » is renamed « Proposition A » in ink, so the document had at least the statements 4.1, 4.1 bis, 4.1 ter and 4.1 quater and was being restructured while it was typed. A search of the neighbouring shelfmarks of the group « 45-54 » for the missing leaves would be the next step.',
+      'Identify the typescript. If it is a draft of a published section, its standing hypotheses settle the question at once and this entry becomes matched. Two internal clues are available without leaving the fonds: the leaves cite « Prop. A » in a typed correction over a struck reference to 4.1, and page 5’s heading « Corollaire 4.1. ter » is renamed « Proposition A » in ink, so the document had at least the statements 4.1, 4.1 bis, 4.1 ter and 4.1 quater and was being restructured while it was typed. A search of the neighbouring shelfmarks of the group « 45-54 » for the missing leaves would be the next step. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the struck « nilpotent », the ink « ∀n » and « A/I^{n+1} », « Prop. A » typed over a struck reference, and « Corollaire 4.1. ter » renamed « Proposition A » are all seen. The typescript is still unidentified.',
   },
   {
     id: '26-sga4-viii-79-draft',
@@ -1071,7 +1071,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'Collate the two leaves against the 1972 Lecture Notes in Mathematics 270 printing, which was not consulted here. That decides both halves at once: whether « préschéma » stood in the first printing, and whether the « = ∅ » is a misprint of the re-edition or is inherited from 1972. If it is inherited, the folder’s leaves carry the correct form of a line that has been wrong in print since.',
+      'Collate the two leaves against the 1972 Lecture Notes in Mathematics 270 printing, which was not consulted here. That decides both halves at once: whether « préschéma » stood in the first printing, and whether the « = ∅ » is a misprint of the re-edition or is inherited from 1972. If it is inherited, the folder’s leaves carry the correct form of a line that has been wrong in print since. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the leaves are numbered (32 on p. 3 and (31 on p. 5, in reverse order; p. 3 has « φ(U) ≠ ∅ ⇔ x ∈ U » and « le[s] préschéma[s] » with the s overtyped. Against print: the « original » of Exposé VIII linked by Orgogozo (SGA4-VIIIo.pdf, printed pp. 366–412, taken to be the LNM 270 printing by its page numbers) prints on p. 401 « ≠ » and « schéma », so « préschéma » was not in 1972 and the « = ∅ » is the re-edition’s own error, not carried over from 1972 — this reverses part of the claim, for a reader to confirm. Folder 48’s leaves (29) and (30) precede these in the same typescript, (30) joining (31).',
   },
   {
     id: '26-wrapper-numbered-v',
@@ -1091,7 +1091,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'Whether the fonds holds another folder whose wrapper numbers a chapter, and how those numbers line up with the 1960 plan. If a second wrapper shows the same shift by one, the folder is witness to an intermediate renumbering of the treatise rather than to a slip.',
+      'Whether the fonds holds another folder whose wrapper numbers a chapter, and how those numbers line up with the 1960 plan. If a second wrapper shows the same shift by one, the folder is witness to an intermediate renumbering of the treatise rather than to a slip. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the wrapper reads « V » (barred above and below), then « Plan », « Notations »; on p. 4 the V is preceded by a small ring not on the wrapper (« 0_V » uncertain). EGA I (1960), p. 6, confirms the chapter plan. Folder 48 shows the same shift by one: wrapper « Plan EGA VII », leaf « EGA Chap. VI » for group schemes.',
   },
   {
     id: '26-later-annotation-campaign',
@@ -1363,7 +1363,7 @@ export const FINDINGS: Finding[] = [
     literature: ['Transcription 31, batch 1 (batch-01.fr.tex), header and pages 10, 12, 14, 16'],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile that the foot of page 14 and the head of page 12 join, and whether 10–11, 12–13, 14–15, 16–17 are recto/verso pairs of single leaves — in which case the disorder belongs to the stack of typescript he wrote on, not to the binding.',
+      'A person checks on the facsimile that the foot of page 14 and the head of page 12 join, and whether 10–11, 12–13, 14–15, 16–17 are recto/verso pairs of single leaves — in which case the disorder belongs to the stack of typescript he wrote on, not to the binding. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the leaf numbers 30, 29, 28, 27 are handwritten; the typescript shows through mirrored on each manuscript page, so 10–11, 12–13, 14–15, 16–17 are the two sides of four leaves, and the disorder comes from the reversed typescript stack; the join p. 14 → p. 12 fits but is only partly legible at 150 dpi.',
   },
   {
     id: '31-typescript-runs-reversed',
@@ -1382,7 +1382,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks the typist’s leaf numbers on the facsimile of pages 11 to 17 and the two headers on pages 99 and 101. Whether the reversal belongs to the stack, the binding or the scan is not determined by the pages. Separately: the typescripts of pages 11–17, 71 and 83–87 are, by content and by their internal references (Exp VIII, Exp IX, SGA VIII 2.1), leaves of the seminar on group schemes and not of SGA 4; matching their numbering against the published volume would confirm that identification and situate the leaves within its redaction.',
+      'A person checks the typist’s leaf numbers on the facsimile of pages 11 to 17 and the two headers on pages 99 and 101. Whether the reversal belongs to the stack, the binding or the scan is not determined by the pages. Separately: the typescripts of pages 11–17, 71 and 83–87 are, by content and by their internal references (Exp VIII, Exp IX, SGA VIII 2.1), leaves of the seminar on group schemes and not of SGA 4; matching their numbering against the published volume would confirm that identification and situate the leaves within its redaction. Machine pass on the facsimile, 2026-11-23, not checked by a reader: pp. 11–17 run backwards; pp. 99 and 101 carry « VII – 9 – » and « VII – 7 – » above « n°339 »; pp. 83, 85, 87 run forwards (3.1/3.2, 4.6, 4.7–4.9). One part differs from the claim: p. 27 is numbered « 9 » and is in §2 (Th. 2.1, 2.2), p. 25 is numbered « 35 » (doubtful) and is in §5 (5.9–5.11), and 27 does not continue on 25 — for a reader to confirm before the claim is corrected.',
   },
   {
     id: '16-graded-ring-lefschetz-criterion',
@@ -1527,7 +1527,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile that page 39’s last line and page 41’s first join, that pages 30 and 31 carry nothing but their titles, and that the two dates read as transcribed. Whether « 6.1.1966 » is a slip for 1967 is not something the leaves settle; Coates’s own papers, or the notes of the talk both letters comment on, would.',
+      'A person checks on the facsimile that page 39’s last line and page 41’s first join, that pages 30 and 31 carry nothing but their titles, and that the two dates read as transcribed. Whether « 6.1.1966 » is a slip for 1967 is not something the leaves settle; Coates’s own papers, or the notes of the talk both letters comment on, would. Machine pass on the facsimile, 2026-11-23, not checked by a reader: pp. 30 and 31 carry only titles, p. 31 reading « Formulaire des L, Λ, etc »; dates « 4.1.67. » (p. 43) and « 6.1.1966 » (p. 47) as transcribed; p. 41 opens without heading. On p. 39 « Mais » is not the last thing written: an underlined line (« … p^i_X pour 0 ≤ i ≤ [struck] ») stands below it, which the transcription places before « Mais » — a reader should decide the order.',
   },
   {
     id: '12-immersion-level-bound',
@@ -1606,7 +1606,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile which typed face backs which handwritten one on pages 158 to 167. If 158|159, 160|161, … are leaves, the swap of the first two leaves is confirmed; if not, only the logical order 160 → 158 stands.',
+      'A person checks on the facsimile which typed face backs which handwritten one on pages 158 to 167. If 158|159, 160|161, … are leaves, the swap of the first two leaves is confirmed; if not, only the logical order 160 → 158 stands. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the typed numerals read VII.19, VII.20, VII.18, VII.17, VII.15 on pp. 159–167, as stated; no show-through ties faces together; pp. 166 and 167 share a strong yellowing pattern, suggesting one leaf, so the pairing 158|159, 160|161, … follows by parity if no sheet is single-sided — an inference, not an observation.',
   },
   {
     id: '14-albanese-equivalence-ring',
@@ -1670,7 +1670,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile that the reference on p. 28 is blank in its first term and not merely faint, and compares paper, ink and hand of pp. 23–38 with pp. 48–69. Whether « 1.2 » was meant for p. 51 or for a text not in the folder, the leaves do not settle.',
+      'A person checks on the facsimile that the reference on p. 28 is blank in its first term and not merely faint, and compares paper, ink and hand of pp. 23–38 with pp. 48–69. Whether « 1.2 » was meant for p. 51 or for a text not in the folder, the leaves do not settle. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the first term of « [ , 1.2.] » on p. 28 is blank at 300 dpi, with no erased trace; Th. 1.6 is on pp. 29 and 55, Prop. 2.7 on pp. 34 and 67, Cor. 1.2 on p. 51, a struck Cor. 2.2 at the foot of p. 60; the Cor. 2.2 labels on pp. 33 and 61 are doubtful (digits overwritten; 2 or 7). Paper, ink and hand of the two runs look alike on the scan, which cannot decide them.',
   },
   {
     id: '14-brauer-typescript-shared-with-12',
@@ -1690,7 +1690,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person sets the typed faces of folder 14, pp. 3–15, beside those of folder 12, pp. 159–167, and compares typeface, paper, margins and running heads; a title or colophon on any folder 14 leaf would decide it. Folder 16, batch 2, lists a Brauer-group typescript among its typed versos without describing it, and is the next place to look.',
+      'A person sets the typed faces of folder 14, pp. 3–15, beside those of folder 12, pp. 159–167, and compares typeface, paper, margins and running heads; a title or colophon on any folder 14 leaf would decide it. Folder 16, batch 2, lists a Brauer-group typescript among its typed versos without describing it, and is the next place to look. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the typed faces read IV.2 (p. 3), an unnumbered page headed « IV. The Brauer group of a ringed space. » (p. 5), III.7, III.6, III.5, III.4 (pp. 7–13), and II.9 on p. 15 — so p. 15 lies outside the range III.4–IV.2 that the row and transcription 14 give. The typeface matches folder 12’s VII.19. Folder 16 does not hold this typescript (its Brauer leaf, p. 22, is in French on another machine).',
   },
   {
     id: '15-real-fibre-functor-criterion',
@@ -1755,7 +1755,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile that page 140’s last line and page 142’s first line join, and whether page 141 is the verso of page 140 or a sheet of its own. If it is a verso, the « misplacement » is only the scan’s recto–verso order.',
+      'A person checks on the facsimile that page 140’s last line and page 142’s first line join, and whether page 141 is the verso of page 140 or a sheet of its own. If it is a verso, the « misplacement » is only the scan’s recto–verso order. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the join from p. 140 to p. 142 reads as stated; large printed capitals show through p. 141, mirrored, from its reverse, and not on 140 or 142, so p. 141 is a separate sheet, not the verso of p. 140 (the printed word, « EXTRA…SIONS »?, is doubtful).',
   },
   {
     id: '15-brauer-section-5-leaves',
@@ -1771,10 +1771,11 @@ export const FINDINGS: Finding[] = [
     literature: [
       'Transcription 15, batch 9 (batch-09.fr.tex), header and pages 175 and 178',
       'Modernised reading 15, section XI',
+      "A. Grothendieck, « Le groupe de Brauer II », Séminaire Bourbaki exp. 297, §1, pp. 291–293 (Numdam, read 2026-11-23): the leaves correspond by content under another numbering — (5.1) to sequence (2), H¹(X, Div_X) = 0 to the proof of Cor. 1.8, Prop. 5.4 to Prop. 1.7 / Cor. 1.8, Cor. 5.5 to Cor. 1.10; Theorem 5.6 a) was not matched.",
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile that nothing below page 178’s colon or above page 175’s first line has been missed, then compares the leaves with § 1 of « Le groupe de Brauer II » (Séminaire Bourbaki 1965–66, exp. 297; Dix exposés sur la cohomologie des schémas, 1968) to see whether they are a draft of it and where the numbering diverges. The other leaves of the § 5, if they survive, would be in another folder of the fonds.',
+      'A person checks on the facsimile that nothing below page 178’s colon or above page 175’s first line has been missed, then compares the leaves with § 1 of « Le groupe de Brauer II » (Séminaire Bourbaki 1965–66, exp. 297; Dix exposés sur la cohomologie des schémas, 1968) to see whether they are a draft of it and where the numbering diverges. The other leaves of the § 5, if they survive, would be in another folder of the fonds. Machine pass on the facsimile, 2026-11-23, not checked by a reader: nothing is lost below p. 178’s closing colon, at the foot of the leaf; on p. 175 « on tire aisément de (5.3.) » is on the third line, after « Lorsque … factoriels, », so « opens » is loose. Comparison with print recorded above.',
   },
   {
     id: '15-unites-leaf-other-hand',
@@ -1793,7 +1794,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person compares the hand of page 167 with his and with the other hands known in the fonds. Identifying the writer would say whether the leaf is a correspondent’s answer to a question of the folder or a stray. The pencil cover of page 179, which repeats the title of page 171, is the other leaf whose hand the transcription leaves undecided.',
+      'A person compares the hand of page 167 with his and with the other hands known in the fonds. Identifying the writer would say whether the leaf is a correspondent’s answer to a question of the folder or a stray. The pencil cover of page 179, which repeats the title of page 171, is the other leaf whose hand the transcription leaves undecided. Machine pass on the facsimile, 2026-11-23, not checked by a reader: squared, punched paper, blue ink, a round underlined hand visibly different from his; the statement is as stated. Whose hand it is was not determined.',
   },
   {
     id: '15-two-typescripts',
@@ -1813,7 +1814,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person compares typeface, paper and margins of page 58 with pages 80–81 on the facsimile. Further leaves of either typescript — a § 2 of « Catégories de Deuring », or the part of « Localisation » that reaches abelian varieties — would be looked for in the Montpellier inventory and the neighbouring folders of the group [10–18].',
+      'A person compares typeface, paper and margins of page 58 with pages 80–81 on the facsimile. Further leaves of either typescript — a § 2 of « Catégories de Deuring », or the part of « Localisation » that reaches abelian varieties — would be looked for in the Montpellier inventory and the neighbouring folders of the group [10–18]. Machine pass on the facsimile, 2026-11-23, not checked by a reader: titles and § 1 openings as stated; p. 81 breaks off « …catégorie de Deuring, » two-thirds down, p. 82 is blank; pp. 58 and 80–81 are in the same monospaced face, but the scan does not show one machine. The other foreign typed leaves were not rechecked one by one.',
   },
   {
     id: '51-albanese-good-reduction-codim-two',
@@ -1856,7 +1857,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person looks on the facsimile for faint numbers at the head of pages 2–20, since a pencil figure is easily passed over, and establishes which pages share a sheet. If none of this yields a run ending at 11 on page 21, the number belongs to a sequence partly outside the folder. The neighbouring folders of the group « Variétés abéliennes » (45–56) are then the place to look.',
+      'A person looks on the facsimile for faint numbers at the head of pages 2–20, since a pencil figure is easily passed over, and establishes which pages share a sheet. If none of this yields a run ending at 11 on page 21, the number belongs to a sequence partly outside the folder. The neighbouring folders of the group « Variétés abéliennes » (45–56) are then the place to look. Machine pass on the facsimile, 2026-11-23, not checked by a reader: pp. 2–21 are ten sheets written on both sides (each pair (2,3) … (20,21) matches by show-through), so p. 21 is the back of the tenth. The « 11 » is two brown strokes in another medium than the text; matching brown strokes stand at the same corner on p. 2 and bleed onto pp. 3, 19 and 20, which fits a mark across the corner of the bundle better than a page number — so it is doubtful that the « 11 » is a numeral at all.',
   },
   {
     id: '67-involution-modules-triples',
@@ -1893,7 +1894,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'The numbers were read on the facsimile on 2026-09-23 (16, 17, 18; 1′ probable; 2′), but not by a person. A person confirms them, in particular the prime of page 44, which « 17 » cannot be entirely ruled out as, and compares the paper of pages 44–45 with the tractor-feed sheets of pages 26–40.',
+      'The numbers were read on the facsimile on 2026-09-23 (16, 17, 18; 1′ probable; 2′), but not by a person. A person confirms them, in particular the prime of page 44, which « 17 » cannot be entirely ruled out as, and compares the paper of pages 44–45 with the tractor-feed sheets of pages 26–40. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the order 16, 17, 18, 2′ is as stated; p. 44’s number reads « 1′ » or « 17 », its second mark unlike the prime on p. 45. Paper: pp. 28–43 are bluish-grey tractor-feed with holes top and bottom, pp. 44–45 cream with one row of holes on the left, pp. 26–27 cream with no holes — so pp. 26–27 are not on the tractor-feed stock, contrary to what this settle assumes. In this folder the pencil numbers differ from the footer numbers (footer 26 is pencilled 29).',
   },
   {
     id: '68-orientation-stokes-axioms',
@@ -1930,7 +1931,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person compares on the facsimile the blue ink of the corrections on pages 1 and 3 with that of page 33 and of the other blue-ink leaves, and the paper of pages 1–13 with that of pages 23–33. A shared ink would make the corrections to the first redaction and the end of the second one campaign. Without it, only the textual argument remains: the second redaction completes the first’s cancelled proof, which does not by itself exclude a later pass over the first.',
+      'A person compares on the facsimile the blue ink of the corrections on pages 1 and 3 with that of page 33 and of the other blue-ink leaves, and the paper of pages 1–13 with that of pages 23–33. A shared ink would make the corrections to the first redaction and the end of the second one campaign. Without it, only the textual argument remains: the second redaction completes the first’s cancelled proof, which does not by itself exclude a later pass over the first. Machine pass on the facsimile, 2026-11-23, not checked by a reader: on p. 1 the blue « ∖C₀ » additions and the struck NB are confirmed; on p. 3 only « R(x) ⊂ G(j) » and one other addition are clearly blue, while « ∖C₀(j) » and « ∖C̄₀(j) », called blue by the transcription, look grey (doubtful on colour); p. 6 is cancelled by two parallel oblique strokes, not one. A crude colour measure groups the blue of pp. 1, 3 and 33, lighter than the blue-black of pp. 16, 21, 49–53.',
   },
   {
     id: '68-epousailles-typescript',
@@ -1950,7 +1951,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile whether pages 50, 52 and 54 are the backs of pages 49, 51 and 53. If they are, the orientation notes were written on the backs of three copies of the typed page and are not earlier than it. The same person reads the heading, the « 82 » and the corrections. The typed page is then compared with the typescripts of Récoltes et semailles, part III (« La Clef du yin et du yang »), and of La Clef des songes, looking for a chapter XVIII or a section « Les épousailles ». A match would bound the date of the orientation leaves more closely than the inventory’s « [à partir de 1978-à partir de 1983] ».',
+      'A person checks on the facsimile whether pages 50, 52 and 54 are the backs of pages 49, 51 and 53. If they are, the orientation notes were written on the backs of three copies of the typed page and are not earlier than it. The same person reads the heading, the « 82 » and the corrections. The typed page is then compared with the typescripts of Récoltes et semailles, part III (« La Clef du yin et du yang »), and of La Clef des songes, looking for a chapter XVIII or a section « Les épousailles ». A match would bound the date of the orientation leaves more closely than the inventory’s « [à partir de 1978-à partir de 1983] ». Machine pass on the facsimile, 2026-11-23, not checked by a reader: the heading « XVIII Les épousailles (2) », the hand corrections and the « 82 » on p. 52 alone are confirmed; « W⊂V » from p. 53 shows through on p. 54, so 54 is the back of 53; for 49/50 and 51/52 nothing shows through. The comparison with the Récoltes et semailles typescripts was not done.',
   },
   {
     id: '81-inventory-title-on-no-leaf',
@@ -1969,7 +1970,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person looks on the facsimile for the title on every leaf, the untranscribed pages 6–8 and 12 and the backs of the covers included. If it is on none, the question goes to the Montpellier archives: whether it was read from an outer wrapper that was not digitised, or supplied by the cataloguers, in which case it would carry the brackets their other supplied titles carry.',
+      'A person looks on the facsimile for the title on every leaf, the untranscribed pages 6–8 and 12 and the backs of the covers included. If it is on none, the question goes to the Montpellier archives: whether it was read from an outer wrapper that was not digitised, or supplied by the cataloguers, in which case it would carry the brackets their other supplied titles carry. Machine pass on the facsimile, 2026-11-23, not checked by a reader: no leaf carries the title; Montpellier’s cover sheet (PDF p. 1) footnotes it « Selon Jean Malgoire, il s’agit d’un sujet proposé à Christine Voisin », so the cataloguers credit the title to Malgoire, printed without brackets. No outer wrapper is in the scan.',
   },
   {
     id: '81-dessins-dating-cannot-support-precedence',
@@ -1988,7 +1989,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'Only physical evidence would settle it: whether pages 2–5 and page 12 share a paper or a sheet, what the dates of page 8 are, and a comparison with the dated texts where a person would look for the same observation — La Longue Marche (written in the first half of 1981), the Esquisse (January 1984), both dates cited from memory, and folder 88, whose page 15 the reading says stops at the same point for its maps of type (p, q). This entry exists to stop the next reader treating « [à partir de 1981] » as a date for page 2. Whatever is found, priority is not a claim this project makes, about anyone.',
+      'Only physical evidence would settle it: whether pages 2–5 and page 12 share a paper or a sheet, what the dates of page 8 are, and a comparison with the dated texts where a person would look for the same observation — La Longue Marche (written in the first half of 1981), the Esquisse (January 1984), both dates cited from memory, and folder 88, whose page 15 the reading says stops at the same point for its maps of type (p, q). This entry exists to stop the next reader treating « [à partir de 1981] » as a date for page 2. Whatever is found, priority is not a claim this project makes, about anyone. Machine pass on the facsimile, 2026-11-23, not checked by a reader: pp. 2–5 carry no date; p. 12 is a table of draft labels whose latest year is 1981, and Montpellier’s cover sheet says the date comes from « Versos : brouillon [réalisé à partir de 1981] d’étiquettes cotées… », which replaces this entry’s own guess at the source. P. 12 is ruled, pp. 2–5 are not. P. 8 has a faint pencil inscription written upside down on the page itself (not show-through, as the transcription says), read doubtfully « R?ain? C?, Dodek? / 192? … 1?7? ».',
   },
   {
     id: '81-fermat-leaves-other-hand',
@@ -2004,7 +2005,7 @@ export const FINDINGS: Finding[] = [
     literature: ['Transcription 81, batch 1 (batch-01.fr.tex), header'],
     status: 'candidate',
     settle:
-      'A person compares the hand of pages 6–7 with his and with the other hands known in the fonds, and establishes whether 6 and 7 are the two sides of one sheet and whether page 8, whose faint pencilled name and dates are read through the paper, belongs with them. That would say whether the sheet is a correspondent’s, a stray, or paper he reused.',
+      'A person compares the hand of pages 6–7 with his and with the other hands known in the fonds, and establishes whether 6 and 7 are the two sides of one sheet and whether page 8, whose faint pencilled name and dates are read through the paper, belongs with them. That would say whether the sheet is a correspondent’s, a stray, or paper he reused. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the rounded hand and the boxed q = 2 example (3, 4, 5) are confirmed; there are pencil additions in another, smaller hand, not identified; marks at mirror corners and a common fold suggest pp. 6 and 7 are one sheet. Comparison with other hands of the fonds left for a person.',
   },
   {
     id: '81-cover-13-names-both-redactions',
@@ -2024,7 +2025,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile whether the pink sheets of pages 13 and 30 are the two halves of one folded chemise and, if so, which leaves it enclosed: pages 14–29 would put Version I and the unlabelled redaction of pages 25–29 under a title taken from Version II, with Version II itself outside. The same person compares the pencil of the title with that of « et découpages » and of the « Version I » on page 14.',
+      'A person checks on the facsimile whether the pink sheets of pages 13 and 30 are the two halves of one folded chemise and, if so, which leaves it enclosed: pages 14–29 would put Version I and the unlabelled redaction of pages 25–29 under a title taken from Version II, with Version II itself outside. The same person compares the pencil of the title with that of « et découpages » and of the « Version I » on page 14. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the words on pp. 13, 14 (« Version I » over a struck « V »), 31 (« Version II ») and 37 (the « décomposition n-aire » note) are confirmed; where « et découpages » stands on p. 13 is doubtful; p. 30 is a blank pink sheet, but the scan cannot show whether 13 and 30 are one folded chemise.',
   },
   {
     id: '133-centre-and-derived-group-from-two-crossed-modules',
@@ -2472,7 +2473,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person reads on the facsimile the number of the Publ. Math. volume and checks whether « 6 » and the replacement are in the same ink as the other corrections of the typescript; then compares the leaves with SGA 3, Exposé VI_B (LNM 151, 1970), §§ 10–11, including what its 11.2 and 11.10 say and whether Remarque 11.10.1 there cites Serre’s article. The contents of SGA 6 decide whether an exposé of Serre was ever part of it. None of this dates the mathematics; priority is not a claim this project makes, about anyone.',
+      'A person reads on the facsimile the number of the Publ. Math. volume and checks whether « 6 » and the replacement are in the same ink as the other corrections of the typescript; then compares the leaves with SGA 3, Exposé VI_B (LNM 151, 1970), §§ 10–11, including what its 11.2 and 11.10 say and whether Remarque 11.10.1 there cites Serre’s article. The contents of SGA 6 decide whether an exposé of Serre was ever part of it. None of this dates the mathematics; priority is not a claim this project makes, about anyone. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the handwritten volume number reads « 3? », the second digit 4 or 9 (doubtful); some words of the replacement reference are in paler ink. Serre’s article is Publ. Math. IHÉS 34 (1968), 37–52, received 23 August 1967; P. Polo’s reproduction of the original Exposé VI_B (origExp6B.pdf) prints Remarque 11.10.1 with « Pub. Math. IHES n° 39 » and does not mention SGA 6, and its footnote says §§ 10–11 were rewritten after the multigraphed edition.',
   },
   {
     id: '10-polarisation-leaves-undated-against-p108',
@@ -2494,7 +2495,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'Only physical evidence would narrow it: the paper and ink of pages 3–16 against those of pages 18–30 and of the typescript of pages 101–108. A comparison of pages 3–16 — Weil forms, compatibility, prepolarisation, C-polarisation, « hodgien » — with N. Saavedra Rivano, Catégories tannakiennes (LNM 265, 1972), chapters V–VI, cited from memory, would show a shared subject, not an order. This entry exists to stop the next reader taking page 108 as the occasion of pages 3–16, or those pages as written before or after Saavedra’s account. Whatever is found, priority is not a claim this project makes, about anyone.',
+      'Only physical evidence would narrow it: the paper and ink of pages 3–16 against those of pages 18–30 and of the typescript of pages 101–108. A comparison of pages 3–16 — Weil forms, compatibility, prepolarisation, C-polarisation, « hodgien » — with N. Saavedra Rivano, Catégories tannakiennes (LNM 265, 1972), chapters V–VI, cited from memory, would show a shared subject, not an order. This entry exists to stop the next reader taking page 108 as the occasion of pages 3–16, or those pages as written before or after Saavedra’s account. Whatever is found, priority is not a claim this project makes, about anyone. Machine pass on the facsimile, 2026-11-23, not checked by a reader: no date on any page; pp. 3–16 are on white paper in blue ink, as is the typescript of pp. 101–108; pp. 18–19 are yellowed, but p. 20 does not look yellowed on the scan, against batch 1’s description.',
   },
   {
     id: '10-cover-140-and-dictionary-order',
@@ -2515,7 +2516,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile whether the cover of page 140 physically wraps pages 142–179, reads « top. » and the struck line, and compares the paper and ink of pages 156–179 with those of pages 142–154 and with the typescript of pages 117–136. A shared wrapper would make the reversed order one of filing, not of the titles; nothing of this would order the handwritten run and the typescript in time.',
+      'A person checks on the facsimile whether the cover of page 140 physically wraps pages 142–179, reads « top. » and the struck line, and compares the paper and ink of pages 156–179 with those of pages 142–154 and with the typescript of pages 117–136. A shared wrapper would make the reversed order one of filing, not of the titles; nothing of this would order the handwritten run and the typescript in time. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the cover titles are as read (« top. » plausible; the struck first line illegible); blank cream leaves stand at 141 and 155; pp. 142–154 and 156–183 differ in paper colour on the scan; there is no back cover after 179, and the scan does not show whether the cover wraps the runs.',
   },
   {
     id: '104-pinned-posets-nonsingular-presheaves',
@@ -2654,7 +2655,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person identifies the typescript of pages 3–19 — its headings -2.24- to -2.33-, -3.1-, -3.2- and its subject — and checks whether the versos of batches 2 and 3 belong to it; if it is a datable text typed before his notes were written on its backs, it bounds those leaves from below, and only those. Paper and ink of pages 2–30 against pages 41–47 would say whether the two formalisms were written in one campaign, not in which order. Whatever is found, priority is not a claim this project makes, about anyone.',
+      'A person identifies the typescript of pages 3–19 — its headings -2.24- to -2.33-, -3.1-, -3.2- and its subject — and checks whether the versos of batches 2 and 3 belong to it; if it is a datable text typed before his notes were written on its backs, it bounds those leaves from below, and only those. Paper and ink of pages 2–30 against pages 41–47 would say whether the two formalisms were written in one campaign, not in which order. Whatever is found, priority is not a claim this project makes, about anyone. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the headings read « -3.2- » (p. 3) and « -2.26- » (p. 19); the versos at p. 21 (« -2.24- », flag complex, Tits, Δ(G)) and p. 48 (« -3.3- », R-partitions, PGL(n)) look like one English typescript, not identified.',
   },
   {
     id: '11-page-47-breaks-off',
@@ -2673,7 +2674,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile whether the comma of page 47 falls at the foot of the leaf or above blank space, and whether any leaf of the fonds carries the sentence on. Blank space below would make the stop an abandonment rather than a loss.',
+      'A person checks on the facsimile whether the comma of page 47 falls at the foot of the leaf or above blank space, and whether any leaf of the fonds carries the sentence on. Blank space below would make the stop an abandonment rather than a loss. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the sentence stops at « conditions, » about three quarters down the leaf; the lower quarter is blank.',
   },
   {
     id: '113-listing-stamps-bound-below-only',
@@ -3044,7 +3045,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person compares the typed page 19 (typed p. 20, § 2) and pages 21, 23 (typed pp. 9, 10) with the corresponding pages of the n° 276 scan on the Archives Bourbaki site, and one n° 272 leaf (typed p. 39 or 43–47) with the n° 272 scan. If the text matches line for line, the identification stands. The marginalia on pp. 21, 23 and 42 could then be read against the printed text they annotate.',
+      'A person compares the typed page 19 (typed p. 20, § 2) and pages 21, 23 (typed pp. 9, 10) with the corresponding pages of the n° 276 scan on the Archives Bourbaki site, and one n° 272 leaf (typed p. 39 or 43–47) with the n° 272 scan. If the text matches line for line, the identification stands. The marginalia on pp. 21, 23 and 42 could then be read against the printed text they annotate. Machine pass on the facsimile, 2026-11-23, not checked by a reader: folder 62 pp. 19, 21 and 23 match Bourbaki n° 276, typed pp. 20, 9 and 10, line for line, including the typo « ramenenau » (copies of one stencil run), and p. 28 matches n° 272, typed p. 39; the typed headers of the even pages 28–54 read n° 272 pp. 39, 43–47 and n° 276 pp. 13, 15–18, 25–27. The Archives Bourbaki scans opened are the copies inscribed « M. Delsarte », not an ENS copy; the « Archives, Serre, Juin 1957 » note for n° 272 is not on them and stays unchecked.',
   },
   {
     id: '62-triples-rigidified-moduli',
@@ -3257,7 +3258,7 @@ export const FINDINGS: Finding[] = [
     literature: ['Transcription 6, batch 2 (batch-02.fr.tex), pages 33–36', 'Reading 6.modern.tex, section on pages 32–36'],
     status: 'candidate',
     settle:
-      'A person checks against the facsimile whether 35 and 36 are the two sides of one leaf (then the order is a matter of which side was scanned first) or two leaves bound out of order.',
+      'A person checks against the facsimile whether 35 and 36 are the two sides of one leaf (then the order is a matter of which side was scanned first) or two leaves bound out of order. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the order and the text join are as stated; the scan cannot show whether 35 and 36 are two sides of one leaf.',
   },
   {
     id: '6-eleven-leaves-not-in-sequence',
@@ -3273,7 +3274,7 @@ export const FINDINGS: Finding[] = [
     literature: ['Transcription 6, batches 2–4 (batch-02.fr.tex, batch-03.fr.tex, batch-04.fr.tex), headers and pages 39, 52, 61'],
     status: 'candidate',
     settle:
-      'A person checks the pencil numbers at the 38/39 junction on the facsimile, then looks for leaves pencilled 39–49 in the neighbouring folders of the « Cristaux » group (cotes 4–9) and checks whether one of them supplies the start of page 52 or the definition of the triangle of page 61.',
+      'A person checks the pencil numbers at the 38/39 junction on the facsimile, then looks for leaves pencilled 39–49 in the neighbouring folders of the « Cristaux » group (cotes 4–9) and checks whether one of them supplies the start of page 52 or the definition of the triangle of page 61. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the pencil numbers read 38 → « 38 », then 39 → « 50 », up to 66 → « 77 ». Folders 4–9 were not searched for the missing leaves.',
   },
   {
     id: '34-wild-inertia-outer-pi1',
@@ -3702,7 +3703,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks pages 38–39 against the facsimile and looks for § 10 in the Springer LNM 270 printing itself (not only the re-edition) and in the IHÉS mimeographed fascicles; if any printing carries it, mark matched.',
+      'A person checks pages 38–39 against the facsimile and looks for § 10 in the Springer LNM 270 printing itself (not only the re-edition) and in the IHÉS mimeographed fascicles; if any printing carries it, mark matched. Machine pass on the facsimile, 2026-11-23, not checked by a reader: pp. 38–39 hold § 10, 10.1–10.4 and an empty circled 10.5, with the handwritten footnote on Artin; p. 44 has the ink entries « VIII 10.2 » and « VIII 10.4 ». The scan of Exposé VIII linked by Orgogozo (SGA4-VIIIo.pdf), which by its page numbers looks like the LNM 270 printing rather than the IHÉS typescript, lists §§ 1–9 only and ends at 9.4.4 on p. 412, with no « étendue algébrique ». The IHÉS mimeographed fascicles were not checked.',
   },
   {
     id: '37-ega-i-10-10-5-counterexample',
@@ -3808,7 +3809,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person transcribes the typed half of page 56 in full from the facsimile and compares it word for word with SGA 2 XII 3.1 in the 1968 North-Holland edition, and if possible with the IHÉS mimeographed fascicles of 1962–63. A match settles which state of Exposé XII the leaf is. The handwritten pages 56 and 60 are then compared with the proof of 3.2 (i) and Lemme 3.3.',
+      'A person transcribes the typed half of page 56 in full from the facsimile and compares it word for word with SGA 2 XII 3.1 in the 1968 North-Holland edition, and if possible with the IHÉS mimeographed fascicles of 1962–63. A match settles which state of Exposé XII the leaf is. The handwritten pages 56 and 60 are then compared with the proof of 3.2 (i) and Lemme 3.3. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the typed text of p. 56 was compared with SGA 2 XII 3.1–3.2 in the edition arXiv:math/0511279, pp. 117–118: it differs in five places (where O_X enters a)–c); « X_s » for « X_{0s} »; no ample-sheaf sentence; « le long de X_0 »; « Sous les conditions de 3.1. ( »). P. 60 is a second copy of the same typing. The 1968 North-Holland edition and the IHÉS fascicles were not opened, so which state of Exposé XII the leaf is stays open.',
   },
 // Folder 63 — find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on the Opus 5.5 reading of 2026-10-03.
 // Pool: nearly every footnote of 63.modern.tex names a match (Tate's algorithm, Deligne's formulaire, G_2^* and the Hodge splitting
@@ -4197,7 +4198,7 @@ export const FINDINGS: Finding[] = [
     literature: ['Transcription 64, batch 8 (batch-08.fr.tex), header and pages 145–148'],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile whether pages 146 and 147 are the two faces of one leaf, in which case the « reversal » is just which face was scanned first, or two separate leaves filed in the wrong order.',
+      'A person checks on the facsimile whether pages 146 and 147 are the two faces of one leaf, in which case the « reversal » is just which face was scanned first, or two separate leaves filed in the wrong order. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the formula numbers run (10) on 145, (11)–(13) on 147, (14) on 146, (15) on 148, and the join 145 → 147 holds; whether 146 and 147 are one leaf is not decided (no show-through, scans cropped to the edge).',
   },
   {
     id: '64-page-156-june-1981-notice',
@@ -4213,7 +4214,7 @@ export const FINDINGS: Finding[] = [
     literature: ['Transcription 64, batch 8 (batch-08.fr.tex), header and pages 154, 156'],
     status: 'candidate',
     settle:
-      'A person reads the notice on the facsimile: its nature, its sender and whether the stamps are dates of dispatch or of a meeting. They also check whether page 156 is the verso of pages 154–155 or a separate sheet. Note what this dates: the jottings on that sheet, not the appendix they repeat, and not the folder.',
+      'A person reads the notice on the facsimile: its nature, its sender and whether the stamps are dates of dispatch or of a meeting. They also check whether page 156 is the verso of pages 154–155 or a separate sheet. Note what this dates: the jottings on that sheet, not the appendix they repeat, and not the folder. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the notice is from the Scolarité of the USTL (Montpellier II), ref. MD/gs; « 9 JUIN 1981 » dates the letter and « 16 JUIN 1981 » the invigilation it calls him to (14 h 45 – 18 h, Amphi 9 et 10). Its blue stamp « M Le Professeur » shows through mirrored on p. 155, so p. 155 — part of the appendix begun on p. 154, a separate sheet — is written on the back of the notice, and was written on or after 9 June 1981; the claim is narrower than this.',
   },
 // Folder 123 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over the Opus 5.5 reading of 2026-10-03.
 // Three entries, all unsearched: the only search was three general web queries, not a reading of the named books.
@@ -4921,7 +4922,7 @@ export const FINDINGS: Finding[] = [
     literature: ['Transcription 4, batch 1 (batch-01.fr.tex), pages 1, 4, 5, 6, 9, 10'],
     status: 'candidate',
     settle:
-      'Look at the facsimile of pages 1, 5 and 10: confirm the « 8.4.4 » heading and the margin reference on page 5, and the extent of the strike on page 10 (whether condition c) is included).',
+      'Look at the facsimile of pages 1, 5 and 10: confirm the « 8.4.4 » heading and the margin reference on page 5, and the extent of the strike on page 10 (whether condition c) is included). Machine pass on the facsimile, 2026-11-23, not checked by a reader: page 1 is on IHÉS letterhead, headed « 8.4.4. »; the page 5 margin reads « Cor. 8.4.4[ter] (utilisé [dans] 8.1.7) les résultats de la feuille jointe (marquée 8.4.4) » (« ter » and the last digit of « 8.1.7 » doubtful); on page 10 the diagonal strokes reach into the line of condition c), with a wavy line just below it, so c) seems to lie inside the struck area (doubtful).',
   },
   // Folder 5 — find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5 (pass header 2026-10-03); transcriptions by Fable 5.1 (2026-09-19), batch 3 revised by Opus 5.5. No literature was read in this pass: every mathematical entry is unsearched.
   // Dropped as matches (they are in the reading's footnotes, where they belong): Roby's Γ(M) (p. 22); the PD envelope and its presentation (pp. 23, 31; Berthelot–Ogus 3.19); e ≤ p − 1 for the maximal ideal of a DVR (pp. 12, 46); the PD criterion on a principal ideal (p. 44, which as written is wrong — the repaired condition is the edition's); Legendre (p. 10); the Čech–Alexander complex (pp. 28–30); the inserter/co-inserter topos Q(α, β) (pp. 15–17), a lax colimit of topoi; the Poincaré-lemma list (p. 36), quasi-homogeneous cases (Reiffen 1967, K. Saito 1971); κ′_n ≡ (∏ a_i!)⁻¹ mod p (p. 40), the edition's answer, from the classical congruence for n!/p^{v_p(n!)}. Not proposed: the questions the pages leave open (p. 40, extending γ_p; pp. 18–19, derived functors), since the folder establishes nothing there.
@@ -4983,7 +4984,7 @@ export const FINDINGS: Finding[] = [
     literature: ['Transcription 5, batch 3 (batch-03.fr.tex), header and pages 45, 47'],
     status: 'candidate',
     settle:
-      'A person checks the hand and the page numbers on the facsimile, then compares with printed EGA IV, Publ. Math. IHÉS 32 (1967), 18.13.4–18.13.5: whether the semi-local noetherian hypothesis and the words « déterminés de façon unique » survive in print. That would show whether these annotations reached the published text.',
+      'A person checks the hand and the page numbers on the facsimile, then compares with printed EGA IV, Publ. Math. IHÉS 32 (1967), 18.13.4–18.13.5: whether the semi-local noetherian hypothesis and the words « déterminés de façon unique » survive in print. That would show whether these annotations reached the published text. Machine pass on the facsimile, 2026-11-23, not checked by a reader: p. 47 is headed « IV-977-22 » and p. 45 « IV-977-23 » (977 by hand), so 47 reads before 45; the margin query reads « à quoi sert ici l’hypothèse ? Prendre un anneau topologique plus général ? »; in « déterminés de façon uniques » only « façon » and the final « s » are struck, with « style + ? » in the margin. The printed EGA IV (Publ. Math. IHÉS 32, 1967, table of contents pp. 341–342, Numdam) has no § 18.13 — § 18 ends at 18.12 — so print does not settle the comparison at these numbers.',
   },
   {
     id: '5-berthelot-correspondence-absent',
@@ -5001,7 +5002,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks the skipped leaves 3, 9, 11, 13 and 33 on the facsimile — in particular whether page 13’s list of corrections is addressed to a Berthelot typescript — and whether Montpellier’s PDF of folder 5 has any leaf beyond 52.',
+      'A person checks the skipped leaves 3, 9, 11, 13 and 33 on the facsimile — in particular whether page 13’s list of corrections is addressed to a Berthelot typescript — and whether Montpellier’s PDF of folder 5 has any leaf beyond 52. Machine pass on the facsimile, 2026-11-23, not checked by a reader: pp. 3, 9, 11 and 33 are typescripts on abelian varieties and conductors; p. 13 corrects pp. 64–76 of an unnamed typescript, with no addressee; no leaf names Berthelot, and the PDF ends at p. 52.',
   },
   // Folder 32 — find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5 (pass header 2026-10-09).
   // The rest of the candidate pool was dropped as matches already named in the reading's footnotes: Dold–Puppe bounds (p. 4), SGA 4 XVIII 1.2 drafts (pp. 15–27), the SL_2 lift and theta characteristics (p. 28), the Deligne pairing (p. 32), the tame symbol (p. 33), the induction formula and sheafified/local duality (pp. 38–47), or as repairs made by the edition (pp. 4, 9, 12–13, 41, 46, 47).
@@ -5478,7 +5479,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks the handwritten date and the pencil numbers 37–38 on the facsimile, and finds which leaves of the folder carry 36 and 39 — that locates the run of notes the letter was filed in.',
+      'A person checks the handwritten date and the pencil numbers 37–38 on the facsimile, and finds which leaves of the folder carry 36 and 39 — that locates the run of notes the letter was filed in. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the date reads « 29.9.1965 », pencil numbers « 37. » and « 38 »; p. 133 carries 36 and p. 136 (the handwritten plan) 39, the run 1–41 being continuous over pp. 98–138 (the « IV 21 » typescript, the letter, the two plans) — so the letter is filed inside a run of typescript and plans, not of « notes ».',
   },
   {
     id: '25-appendix-18-joint-paper',
@@ -6673,7 +6674,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'An IHÉS seminar listing or Demazure’s own record for January–February 1970 giving the dates 5 January and 12 February would settle it; the facsimile is not needed, the two headings being read without \\uncertain{}.',
+      'An IHÉS seminar listing or Demazure’s own record for January–February 1970 giving the dates 5 January and 12 February would settle it; the facsimile is not needed, the two headings being read without \\uncertain{}. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the headings read « Demazure 5.1.1970 » and « Demazure 12.2.70 » (month of the first and the 7 of the second doubtful; both fall in January–February 1970); the quotation from Demazure, Ann. ÉNS 1970, p. 509 (Numdam), is exact, and §1 n° 1–6, §2 n° 1–5, §3 n° 1 exist as named. No IHÉS listing of the two dates was found.',
   },
   {
     id: '41-irreducible-components-etale-criterion',
@@ -6775,7 +6776,7 @@ export const FINDINGS: Finding[] = [
     literature: ['Transcription 43, batch 3 (batch-03.fr.tex), pages 59 and 60, and the note at the head of page 59'],
     status: 'candidate',
     settle:
-      'A person checks the facsimile to see whether 59 and 60 are recto and verso of one leaf (the order would then be an accident of which side was numbered first) or two separate leaves bound in the wrong order.',
+      'A person checks the facsimile to see whether 59 and 60 are recto and verso of one leaf (the order would then be an accident of which side was numbered first) or two separate leaves bound in the wrong order. Machine pass on the facsimile, 2026-11-23, not checked by a reader: p. 60 sets up and p. 59 continues, as stated; no show-through, so whether 59 and 60 are one sheet is not established.',
   },
   {
     id: '45-h1-surjectivity-dim-one',
@@ -6838,7 +6839,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person compares the letter’s content (λ-structures, the treatment of characteristic 2, the « programme minimum ») with Delzant’s 1962 CRAS note to confirm which text is being refereed, and checks whether this commentary is recorded or cited anywhere (Serre’s or Delzant’s papers, the Grothendieck–Serre correspondence).',
+      'A person compares the letter’s content (λ-structures, the treatment of characteristic 2, the « programme minimum ») with Delzant’s 1962 CRAS note to confirm which text is being refereed, and checks whether this commentary is recorded or cited anywhere (Serre’s or Delzant’s papers, the Grothendieck–Serre correspondence). Machine pass on the facsimile, 2026-11-23, not checked by a reader: title, programme, « mon séminaire », the « tu » address and the ink corrections are as stated; the date reads « 22.7. » followed by three figures like « 961 », the second « 2 » apparently written over — not confirming the « 6 over another digit » of the reading of #127, nor contradicting it. Delzant’s 1962 note could not be opened.',
   },
 // Folder 47: no pass run. transcripts/47/47.modern.tex header reads "% Pass: Fable 5.1 (claude-fable-5-1)"; find-novelty forbids any model running on a Fable reading (folders 1 and 47) until someone decides what should. Nothing searched, no entries.
 // Folder 50 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over a reading made by Opus 5 (claude-opus-5, 2026-09-02), under the skill's one-way exception.
@@ -7208,7 +7209,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile that leaves 61–64 carry the author’s numbers 3–6 in the same ink and hand as « 2 » on leaf 60, and that paper and ink of 59–64 agree; the dates of the three letters read on the facsimile settle the order.',
+      'A person checks on the facsimile that leaves 61–64 carry the author’s numbers 3–6 in the same ink and hand as « 2 » on leaf 60, and that paper and ink of 59–64 agree; the dates of the three letters read on the facsimile settle the order. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the dates read 15 décembre 1966 (p. 55), 29 octobre 1966 (p. 57), 17 octobre 1966 (p. 59), in reverse date order; pp. 60–64 carry Deligne’s numbers « 2 » to « 6 », written alike, and p. 59 none; pp. 59–64 are one buff squared paper, different from the other two letters; the join A′ = A[[T_i]] / « Remplaçant A par A′ » and the « pg 2 » reference on p. 64 are on the pages.',
   },
   {
     id: '23-finite-normalisation-quotient-of-regular',
@@ -7484,7 +7485,7 @@ export const FINDINGS: Finding[] = [
     literature: ['Transcription 55, batch 1 (batch-01.fr.tex), pages 9 and 11, and their notes'],
     status: 'candidate',
     settle:
-      'A person checks the facsimile: whether pages 9 and 11 are recto and verso of one sheet or separate leaves, and whether ink and hand agree across the join.',
+      'A person checks the facsimile: whether pages 9 and 11 are recto and verso of one sheet or separate leaves, and whether ink and hand agree across the join. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the join « Ceci prouve » → p. 9 is in the same hand and ink (the first word of p. 9 still doubtful); pp. 9 and 11 are separate leaves, p. 9 the back of typescript p. 101 and p. 11 the back of p. 102, which explains why 9 is bound before 11.',
   },
   // Folder 88, pass by Opus 5.5 (claude-opus-5-5) on a reading made by Opus 5 (claude-opus-5), 2026-09-13; exception of 2026-09-23.
   // Run 1 (pages 2-8) dropped: the Phi-question is answered wrongly on the page and the reading's Proposition is the edition's repair;
@@ -7825,7 +7826,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile whether the reversed pairs are rectos and versos of the same sheets (an accident of turning the paper) or separate leaves misfiled, and whether the upper part of page 38 is in the same ink and on the same paper as pages 41–42.',
+      'A person checks on the facsimile whether the reversed pairs are rectos and versos of the same sheets (an accident of turning the paper) or separate leaves misfiled, and whether the upper part of page 38 is in the same ink and on the same paper as pages 41–42. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the seams 3→5→4, 15→17→16→18 and 41→38 agree; the archivists’ « 18 » is pencilled bottom right, not left; p. 17 shows p. 18’s text the right way round — the leaf beneath at scanning, not a verso. Recto/verso not settled for these pages.',
   },
   {
     id: '76-semisimplicial-vertex-order',
@@ -8210,7 +8211,7 @@ export const FINDINGS: Finding[] = [
     pages: '9',
     kind: 'codicological',
     claim:
-      'The region count of page 9 (7 triangles, 24 quadrilaterals, 6 pentagons) counts as quadrilaterals the three regions he marks 4′ and closes with a thickened arc of the rim; in the projective plane these are triangles, and the arrangement as redrawn has 10 triangles, 21 quadrilaterals and 6 pentagons, which removes the odd side-sum (147) the reading flags and agrees with Levi’s lower bound of n triangles.',
+      "The region count of page 9 (7 triangles, 24 quadrilaterals, 6 pentagons) is right for the disc as drawn, with the rim as a side, but in the projective plane it counts three triangles among the quadrilaterals: the arrangement as redrawn has 10 triangles, 21 quadrilaterals and 6 pentagons, which removes the odd side-sum (147) the reading flags and agrees with Levi's lower bound of n triangles. The three extra triangles are the rim faces Δ_A Δ_A′ D_C, Δ_B Δ_B′ D_B, Δ_C Δ_C′ D_A, not the regions he marks 4′.",
     basis:
       'Batch 1, page 9, transcribes the count « triangles : 1 + 3 + 3 = 7, carrés : 3 + … + 3 = 24, pentagones : 3 + 3 = 6 » and notes that the regions at infinity between Δ_A and Δ_A′ (and the same for B, C) are marked 4′, each closed by a thickened arc of the rim. The redraw 01-3 (method 2, overlay-checked, its central crossings confirmed by the editor, #151) has nine curves, 36 crossings, every pair crossing once, no triple point, and its rim endpoints in antipodal order; cutting the disc along the curves and gluing antipodal rim arcs gives 37 regions with side counts 3 ×10, 4 ×21, 5 ×6, summing to 144 = 2E (E = 9·8). The three extra triangles are exactly the regions Δ_A Δ_A′ D_C, Δ_B Δ_B′ D_B, Δ_C Δ_C′ D_A where his 4′ labels stand: each is a sliver between a pair Δ, Δ′ and the rim, glued across infinity to a region with three sides, so 2 + 3 − 2 = 3 sides once the rim arc is not counted. 147 − 144 = 3 is the three rim arcs.',
     ours:
@@ -8223,7 +8224,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile that the three regions labelled 4′ are bounded only by the pair Δ, Δ′, one D curve and the thickened rim arc, and that the three rows of the count group the 4′ regions with the « carrés ». If so the page’s count is right for the disc as drawn, with the rim as a side, and wrong by three for the projective plane.',
+      'A person checks on the facsimile that the three regions labelled 4′ are bounded only by the pair Δ, Δ′, one D curve and the thickened rim arc, and that the three rows of the count group the 4′ regions with the « carrés ». If so the page’s count is right for the disc as drawn, with the rim as a side, and wrong by three for the projective plane. Machine pass on the facsimile, 2026-11-23, checked by this pass on the page (PDF p. 10) but not by a reader: the thickened rim arcs (top between Δ_C′ and Δ_C, left between Δ_A and Δ_A′, right between Δ_B′ and Δ_B) close regions labelled « 4 », unprimed; the three « 4′ » stand at the other end of each pair, outside the circle, by short dashed strokes. The transcription note this entry first rested on (4′ regions closed by the thickened arcs) is therefore wrong, as the lean field had found; the claim was rewritten on 2026-11-23 to the lean field’s identification, the counts unchanged. The count on the page reads « 1+3+3 = 7 », eight 3s = 24, « 3+3 = 6 ».',
     lean: { file: 'lean/Grothendieck/Combinatorics/Folder80Count.lean', found: "Yes for the counts, with a correction to the identification. On the cell structure read off the redraw 01-3 (for each curve the order of its eight crossings, and the order of the eighteen ends on the circle; every pair crosses once, ends in antipodal order), the 46 regions of the disc are the cycles of the left-turn permutation of the 180 darts, checked against an explicit list (54 − 99 + 46 = 1); gluing antipodal rim arcs gives 37 projective faces, 10 triangles, 21 quadrilaterals, 6 pentagons, side-sum 144 = 2·72, and 36 − 72 + 37 = 1 (proj_count, euler_proj). Away from the rim: 7 triangles (the central D_A D_B D_C and six), 18 quadrilaterals, 3 pentagons; across the rim: 3 triangles, 3 quadrilaterals, 3 pentagons. The page's eighteen labels on the rim pieces are all right projectively (labels_rim). Its rows are 7 = the inner triangles, 24 = inner and rim quadrilaterals plus the three rim triangles, 6 = inner and rim pentagons, so 147 = 144 + 3 (page_count). Correction: the three triangles counted among the quadrilaterals are the rim faces Δ_A Δ_A′ D_C, Δ_B Δ_B′ D_B, Δ_C Δ_C′ D_A (a piece with three curve sides, four with its rim arc, glued to a piece with two), which the page labels 3 and 3′, not the regions marked 4′: those are the thin wedges between Δ_X and Δ_X′, projective quadrilaterals (2 + 4 − 2), correctly labelled, and the thickened arcs close their opposite pieces. No uniform convention gives the page's count: the rim arc as a side of every rim face gives 7, 21, 6 and 3 hexagons; the disc regions, rim arc counted, are 13, 24, 9 (rim_arc_side, disc_count). Not formalised: the passage from the drawing to the two lists (a script on a machine redraw not checked by a reader), and non-stretchability." },
   },
   {
@@ -8588,7 +8589,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'Look for a leaf numbered 7 in his hand, on polygons, among the neighbouring folders of the group « Géométrie et topologie combinatoire » (69–89), first 75 and 89, and in the leaves of this folder outside the run; check on the facsimile that page 20’s « 8 » is not a 7.',
+      'Look for a leaf numbered 7 in his hand, on polygons, among the neighbouring folders of the group « Géométrie et topologie combinatoire » (69–89), first 75 and 89, and in the leaves of this folder outside the run; check on the facsimile that page 20’s « 8 » is not a 7. Machine pass on the facsimile, 2026-11-23, not checked by a reader: his numbers run 1–6, 8, 9–16, with no 7 on pp. 1–13; p. 20’s « 8 » is clearly not a 7, but it is uncircled, thinner and set lower than its neighbours. In this folder the pencil numbers differ from the footer numbers (footer 14 is pencilled 21). Folders 75 and 89 were not searched.',
   },
   // Folder 69 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over transcripts/69/69.modern.tex (Pass: Opus 5.5) and batch-01..06.fr.tex. No literature search was carried out in this pass: every entry is unsearched. Dropped as matches already named in the reading's footnotes: the characterisation of pp. 2–10 (uniqueness of GQ(2,4) / srg(27,10,1,5), Seidel 1968), the stabilisers W(D5), W(F4), W(B3) and |W(E6)| = 51 840, the self-complementarity of the bitriangle (Paley graph of order 9, AG(2,3)), the minuscule weights of pp. 95–98, the autotopy group of a group's Latin square (pp. 108, 116; Albert 1943), the Reidemeister-type closure of p. 103 and the E7 quartic of p. 105.
   {
@@ -9525,7 +9526,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile whether pages 55 and 56 are recto and verso of one sheet (written verso first, or the sheet turned) or separate leaves misfiled, and whether page 46 is on a different paper or in a different ink from pages 45 and 47.',
+      'A person checks on the facsimile whether pages 55 and 56 are recto and verso of one sheet (written verso first, or the sheet turned) or separate leaves misfiled, and whether page 46 is on a different paper or in a different ink from pages 45 and 47. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the seams agree. A stain on p. 46 sits at the mirror position of one on p. 45, suggesting 46 is the verso of 45 rather than an inserted leaf; marks at mirror positions on pp. 55 and 56 suggest one sheet. A person should confirm both on the leaves.',
   },
 // Folder 93 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-11, over the Opus 5.5 reading of 2026-10-11 (same model; no disagreement with the reading to record).
 // Dropped as matches already footnoted in the reading: station IV (Grothendieck–Messing, Mazur–Messing, Tate, Fontaine), the oper / projective-connection dictionary (VII–X), Cartier isomorphism, Tate residues, Hasse–Witt/Cartier–Manin duality, Cartier descent, Katz–Oda, the p-curvature question (Grothendieck–Katz), χ − χ_! for locally conic spaces. Dropped as repaired by the reading: p. 203 (dimension of logarithmic forms), p. 184 (sign of the determinant). The Q × Q → Ω¹ Cartier pairing (pp. 181–185) is left out as most likely in Raynaud 1982; not checked.
@@ -9719,7 +9720,7 @@ export const FINDINGS: Finding[] = [
     literature: ['Transcription 79, batch 2 (batch-02.fr.tex), pages 33 and 35'],
     status: 'candidate',
     settle:
-      'A person checks the two passages against the facsimile and looks for the « formulaire 1981 » elsewhere in the fonds; the dessins d’enfants folders (81, 88), which the reading cross-refers, are one place to look. Note that this dates the leaves that make the reference, not the folder.',
+      'A person checks the two passages against the facsimile and looks for the « formulaire 1981 » elsewhere in the fonds; the dessins d’enfants folders (81, 88), which the reading cross-refers, are one place to look. Note that this dates the leaves that make the reference, not the folder. Machine pass on the facsimile, 2026-11-23, not checked by a reader: both passages read as quoted, under his numbers 16 and 17; the first digit of « 1981 » is written over another stroke, the final reading 1981 clear. The « formulaire 1981 » was not found; folder 63 (« Formulaire courbes elliptiques ») is a place for a person to look.',
   },
   // Folder 83 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-17, over transcripts/83/83.modern.tex (Pass: Opus 5.5) and batch-01..12.fr.tex. Literature searched in this pass: J. Voight, « Characterizing quaternion rings over an arbitrary base », J. reine angew. Math. 657 (2011), arXiv:0904.4310v5. Its full text was searched by keyword and § 3 and the end of § 4 were read. One web search on pairs of quadratic subalgebras turned up nothing relevant, and nothing it returned was read. Gross–Lucianovic, Knus and Kanzaki are cited here only as Voight cites them. Dropped as matches already footnoted in the reading: PSL₂(𝔽₄) ≃ 𝔄₅ and the icosahedron; B₃ → SL₂(ℤ) and the Steinberg relations; n-alités as nets and transversal designs; the cross-ratio relations; the Fricke trace identities, including Π for Tr xyz·Tr zyx; the invariants of three 2×2 matrices (Sibirskii, Procesi, Formanek); and the product of quadratic algebras, together with the product of affine spaces with involution and the λ-split extensions. The last three are folder 84's material and already in its rows 84-product-quadratic-algebras-formula, 84-product-coinvariants-one-etale and 84-chi-trivialised-extension-product.
   {
@@ -9780,7 +9781,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks on the facsimile the numbers « 114 » and « 135 » and the diagonals on pages 26 and 28 of folder 83. Then they compare relations (9)–(13) of page 26 with folder 79\'s § XI, to see whether they reappear under other numbers in the final redaction, which would make page 26 an earlier draft of it. Neither facsimile was opened for this pass.',
+      'A person checks on the facsimile the numbers « 114 » and « 135 » and the diagonals on pages 26 and 28 of folder 83. Then they compare relations (9)–(13) of page 26 with folder 79\'s § XI, to see whether they reappear under other numbers in the final redaction, which would make page 26 an earlier draft of it. Neither facsimile was opened for this pass. Machine pass on the facsimile, 2026-11-23, not checked by a reader: « 114 » (last digit doubtful) and « 135 » are read on the upside-down parts of pp. 26 and 28, each crossed by a diagonal. From the transcriptions only, the nearest match to p. 26’s notation is folder 79’s author’s pp. 84–86 (inventory pp. 165–169), not § XI; folder 79’s facsimile was not opened.',
   },
   {
     id: '83-leaves-out-of-order',
@@ -9800,7 +9801,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'candidate',
     settle:
-      'A person checks the sentence joins on the facsimile and whether the reversals belong to the stack, the binding or the scan. The pages carry no author\'s numbering of their own to confirm the order.',
+      'A person checks the sentence joins on the facsimile and whether the reversals belong to the stack, the binding or the scan. The pages carry no author\'s numbering of their own to confirm the order. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the joins 108→104, 132→134→133 and 145→144→146 read as stated; the scans do not show whether the reversals come from the stack, the binding or the scan.',
   },
   // Folder 91 — find-novelty pass, Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading, 2026-10-17. Nothing was searched: every entry is unsearched.
   {
