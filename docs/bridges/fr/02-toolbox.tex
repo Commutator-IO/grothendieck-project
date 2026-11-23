@@ -1,6 +1,6 @@
 \section{Boîte à outils: quatre définitions et le registre}\label{sec:toolbox}
 
-Cette section contient toute la théorie dont la suite a besoin: quatre définitions, puis le registre, qui comprend les cinq lemmes dont viennent les résultats, trois arches de plus et les tabliers.
+Toute la théorie dont la suite a besoin tient dans cette section: quatre définitions, puis le registre, c'est-à-dire les cinq lemmes dont viennent les résultats, trois arches de plus et les tabliers.
 
 \subsection{Formes et préfaisceaux}
 
@@ -44,13 +44,13 @@ Informellement, De Morgan est une propriété de \emph{stabilité}: \q{$A$ est a
 
 \subsection{La condition d'Ore}
 
-La catégorie $C$ vérifie la \emph{condition d'Ore} si toute paire de flèches de même but $f : Y\to X$, $g : Z\to X$ se complète en un carré commutatif $f\circ h = g\circ k$. Pour $\B M$: pour tous $a,b\in M$, il existe $c,d$ avec $ac = bd$, c'est-à-dire $aM\cap bM\neq\emptyset$ (deux éléments quelconques ont un multiple à droite commun). Elle est vraie pour les groupes, les monoïdes commutatifs, les monoïdes à zéro, les catégories ayant un objet initial ou des produits fibrés, et les chaînes.
+La catégorie $C$ vérifie la \emph{condition d'Ore} si toute paire de flèches de même but $f : Y\to X$, $g : Z\to X$ se complète en un carré commutatif $f\circ h = g\circ k$. Pour $\B M$: pour tous $a,b\in M$, il existe $c,d$ avec $ac = bd$, c'est-à-dire $aM\cap bM\neq\emptyset$ (deux éléments quelconques ont un multiple à droite commun). Elle est vérifiée par les groupes, les monoïdes commutatifs, les monoïdes à zéro, les catégories ayant un objet initial ou des produits fibrés, et les chaînes.
 
 \subsection{Le registre}\label{sec:registry}
 
 \subsubsection{Les cinq arches}
 
-La bibliothèque \lp{} démontre en Lean~4 les cinq ponts suivants. Nous citons les déclarations principales; les deux premières sont données avec leur énoncé exact.
+La bibliothèque \lp{} démontre en Lean~4 les cinq ponts suivants. Nous citons les déclarations principales, et l'énoncé exact des deux premières.
 
 \begin{bridge}[Booléen]\label{br:bool}
 $\PSh(C)$ est booléen si et seulement si $C$ est un groupoïde.
@@ -82,34 +82,34 @@ Les foncteurs $\PSh(C)\to\Set$ qui préservent toutes les limites et toutes les 
 Les sous-topos de $\PSh(C)$ (sous-catégories pleines stables par limites dont l'inclusion admet un adjoint à gauche qui préserve les limites finies) correspondent, en renversant l'ordre, aux \emph{topologies de Grothendieck} sur $C$: des choix de cribles \q{couvrants} sur chaque objet, stables par changement de base et transitifs. Lean: \lean{subtoposOrderIso}, \lean{exists_orderIso_ici_of_sheafEquiv}.
 \end{bridge}
 
-C'est tout. Chaque énoncé qui suit est l'un de ces cinq lemmes, spécialisé à une forme et déplié à l'aide du lemme~\ref{lem:neg}.
+C'est tout. Chaque énoncé qui suit est l'un de ces cinq lemmes, appliqué à une forme particulière puis traduit à l'aide du lemme~\ref{lem:neg}.
 
 \subsubsection{Trois arches de plus}\label{sec:morearches}
 
-Trois autres arches ont leur place dans le registre. Elles n'ont été jointes pour l'instant qu'aux tabliers des notes de Grothendieck, ci-dessous; aucun résultat des sections suivantes n'en provient.
+Le registre compte trois arches de plus. Nous ne les avons encore appliquées qu'aux tabliers tirés des notes de Grothendieck, ci-dessous, et à ses pseudo-corps (\S\ref{sec:pseudofields}); aucun des résultats des sections~\ref{sec:machines} à~\ref{sec:shapes} n'en vient.
 
 \begin{bridge}[Deux valeurs]\label{br:twoval}
 Les sous-objets de l'objet final de $\PSh(C)$ (ses \q{ouverts}) correspondent aux cribles de $C$ \cite[IV~8.4.4]{sga4}. Ainsi $\PSh(C)$ n'a pas d'autre sous-objet de l'objet final que $0$ et $1$ si et seulement si, pour deux objets quelconques $a$, $b$ de $C$, il existe une flèche $a\to b$. Lean: \lean{forall_subfunctor_terminal_eq_bot_or_eq_top_iff}.
 \end{bridge}
 
 \begin{bridge}[Connexe]\label{br:conn}
-$\PSh(C)$ est connexe non vide au sens de \cite[IV~8.7]{sga4} (toute partition de l'objet final a exactement une partie non vide) si et seulement si $C$ est connexe. En termes de sous-objets de l'objet final: $C$ est non vide et les seuls sous-objets complémentés de l'objet final sont $0$ et $1$. Lean: \lean{isConnected_iff_forall_isCompl}.
+$\PSh(C)$ est connexe non vide au sens de \cite[IV~8.7~e)]{sga4} (toute partition de l'objet final a exactement une partie non vide) si et seulement si $C$ est connexe, fait rappelé comme connu dans \cite[ex.~3.6]{hora-kamio}. En termes de sous-objets de l'objet final: $C$ est non vide et les seuls sous-objets complémentés de l'objet final sont $0$ et $1$. Lean: \lean{isConnected_iff_forall_isCompl}.
 \end{bridge}
 
 \begin{bridge}[Spatial]\label{br:spatial}
-$\PSh(C)$ est équivalent au topos de préfaisceaux d'un préordre, donc au topos des faisceaux sur son espace d'Alexandrov, si et seulement si $C$ est mince. Grothendieck l'énonce comme exercice \cite[p.~26]{grothendieck-161-3}; voir le \S\ref{sec:precedents}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}.
+$\PSh(C)$ est équivalent au topos de préfaisceaux d'un préordre, donc au topos des faisceaux sur son espace d'Alexandrov, si et seulement si $C$ est mince. Grothendieck le donne en exercice \cite[p.~26]{grothendieck-161-3}; voir le \S\ref{sec:precedents}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}.
 \end{bridge}
 
 \subsubsection{Les tabliers}
 
-Le registre des tabliers contient les formes du tableau ci-dessus, avec leurs préfaisceaux, et les formes introduites avec chaque résultat aux \S\ref{sec:machines}--\ref{sec:shapes}; l'étape~2 du \S\ref{sec:method} indique comment en reconnaître une nouvelle.
+Le registre des tabliers contient les formes du tableau ci-dessus, avec leurs préfaisceaux, et les formes introduites avec chaque résultat aux \S\ref{sec:machines}--\ref{sec:shapes}; l'étape~2 du \S\ref{sec:method} explique comment reconnaître une forme nouvelle.
 
 \subsubsection{Les tabliers des notes de Grothendieck}\label{sec:grdecks}
 
-Trois tabliers reviennent dans les notes de travail de Grothendieck, et les trois arches ci-dessus les lisent ainsi (Lean: \lean{GrothendieckDecks.lean}).
+Trois tabliers reviennent dans les notes de travail de Grothendieck. Voici ce qu'en disent les trois arches ci-dessus (Lean: \lean{GrothendieckDecks.lean}).
 \begin{itemize}
-\item La catégorie simpliciale $\Delta$, la première catégorie test de \emph{Pursuing Stacks} (dossiers 108 et 118 du fonds): les ensembles simpliciaux forment un topos à deux valeurs et connexe, puisqu'il existe une application constante entre deux objets quelconques de $\Delta$, et ce n'est pas le topos de préfaisceaux d'un préordre, puisque les deux sommets de $[1]$ sont deux flèches $[0]\to[1]$ (\lean{simplexCategory_twoValued}, \lean{simplexCategory_isConnected}, \lean{simplexCategory_not_spatial}).
+\item La catégorie simpliciale $\Delta$, la première catégorie test de \emph{Pursuing Stacks} (dossiers 108 et 118 du fonds): les ensembles simpliciaux forment un topos à deux valeurs et connexe, puisqu'il existe une application constante entre deux objets quelconques de $\Delta$, et ce n'est pas le topos de préfaisceaux d'un préordre, car les deux sommets de $[1]$ sont deux flèches $[0]\to[1]$ (\lean{simplexCategory_twoValued}, \lean{simplexCategory_isConnected}, \lean{simplexCategory_not_spatial}).
 \item Un groupe $G$ vu comme groupoïde à un objet, dont le topos de préfaisceaux est $\B G$ (dossier 161-6, p.~22, où Grothendieck ramène une question à ce cas): à deux valeurs, comme le note \cite[IV~8.4.3]{sga4} pour tout monoïde, connexe, et topos de préfaisceaux d'un préordre si et seulement si $G$ est trivial (\lean{singleObj_twoValued}, \lean{singleObj_isConnected}, \lean{singleObj_spatial_iff}).
 \item Un ensemble ordonné $I$, dont le topos de préfaisceaux $\widehat I$ est $\mathrm{Top}(I)$ (dossier 37, p.~48; dossier 161-3, p.~26): à deux valeurs si et seulement si deux éléments quelconques sont comparables dans les deux sens, c'est-à-dire si et seulement si son quotient ordonné a au plus un point (\lean{preorder_twoValued_iff}).
 \end{itemize}
-Ce sont des corollaires immédiats, consignés parce qu'ils sont les premières entrées du registre tirées du fonds.
+Ce sont des corollaires immédiats; nous les consignons parce que ce sont les premières entrées du registre tirées du fonds.

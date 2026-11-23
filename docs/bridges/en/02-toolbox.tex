@@ -1,10 +1,10 @@
 \section{Toolbox: four definitions and the registry}\label{sec:toolbox}
 
-The rest of the text needs only four definitions and the registry: the five lemmas that drive the outputs, three more arches, and the decks.
+This section holds all the theory the rest of the text needs: four definitions, then the registry, which contains the five lemmas that drive the outputs, three more arches, and the decks.
 
 \subsection{Shapes and presheaves}
 
-A small category $C$ is a \emph{shape}. A \emph{presheaf} on $C$ is a functor $C^{\op}\to\Set$, in Lean \texttt{Cᵒᵖ ⥤ Type u}: a set $F(U)$ for each object, and for each arrow $f : V\to U$ a \emph{restriction} map $F(U)\to F(V)$, $x\mapsto\res xf$, with $\res x{\id} = x$ and $\res{(\res xg)}f = \res x{g\circ f}$. Presheaves on $C$ form the topos $\PSh(C)$. The examples we use:
+We call a small category $C$ a \emph{shape}. A \emph{presheaf} on $C$ is a functor $C^{\op}\to\Set$, in Lean \texttt{Cᵒᵖ ⥤ Type u}: a set $F(U)$ for each object, and for each arrow $f : V\to U$ a \emph{restriction} map $F(U)\to F(V)$, $x\mapsto\res xf$, with $\res x{\id} = x$ and $\res{(\res xg)}f = \res x{g\circ f}$. Presheaves on $C$ form the topos $\PSh(C)$. We use the following examples.
 
 \begin{center}\small
 \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}X}
@@ -26,7 +26,7 @@ For a monoid, the restriction of $x$ along $m$ is $x\cdot m$.
 
 \subsection{Traps and negation}
 
-A \emph{sub-presheaf} $A\subseteq F$ is a family of subsets closed under restriction. For an $M$-set it is a subset closed under the action. Sub-presheaves are the subobjects in the topos and play the role of propositions. Their negation is not the set complement (which is usually not a trap) but the largest sub-presheaf disjoint from $A$:
+A \emph{sub-presheaf} $A\subseteq F$, which we also call a \emph{trap}, is a family of subsets closed under restriction. For an $M$-set it is a subset closed under the action. Sub-presheaves are the subobjects in the topos and play the role of propositions. Their negation is not the set complement (which is usually not a trap) but the largest sub-presheaf disjoint from $A$:
 
 \begin{lemma}\label{lem:neg}
 $x\in\neg A$ iff no restriction of $x$ lies in $A$. Hence $x\in\neg\neg A$ iff every restriction of $x$ has a further restriction in $A$.
@@ -50,7 +50,7 @@ $C$ satisfies the \emph{Ore condition} if every cospan $f : Y\to X$, $g : Z\to X
 
 \subsubsection{The five arches}
 
-The library \lp{} proves the following five bridges in Lean~4. We quote the main declarations; the first two are given with their exact statements.
+The library \lp{} proves the following five bridges in Lean~4. We quote the main declarations, and give the exact statements of the first two.
 
 \begin{bridge}[Boolean]\label{br:bool}
 $\PSh(C)$ is Boolean iff $C$ is a groupoid.
@@ -86,14 +86,14 @@ Every statement below is one of these five lemmas, specialised to a shape and un
 
 \subsubsection{Three more arches}\label{sec:morearches}
 
-Three further arches belong in the registry. They have been joined so far only with the decks of Grothendieck's notes, below; no output of the later sections comes from them.
+The registry has three more arches. So far we have applied them only to the decks taken from Grothendieck's notes, below, and to his pseudo-fields (\S\ref{sec:pseudofields}); none of the outputs of Sections~\ref{sec:machines} to~\ref{sec:shapes} comes from them.
 
 \begin{bridge}[Two-valued]\label{br:twoval}
 The subterminal objects of $\PSh(C)$ (its \q{opens}) correspond to the sieves of $C$ \cite[IV~8.4.4]{sga4}. Hence $\PSh(C)$ has no subterminal objects besides $0$ and $1$ iff for any two objects $a$, $b$ of $C$ there is an arrow $a\to b$. Lean: \lean{forall_subfunctor_terminal_eq_bot_or_eq_top_iff}.
 \end{bridge}
 
 \begin{bridge}[Connected]\label{br:conn}
-$\PSh(C)$ is connected and nonempty in the sense of \cite[IV~8.7]{sga4} (every partition of its final object has exactly one nonempty part) iff $C$ is connected. In terms of subterminal objects: $C$ is nonempty and the only complemented subterminal objects are $0$ and $1$. Lean: \lean{isConnected_iff_forall_isCompl}.
+$\PSh(C)$ is connected and nonempty in the sense of \cite[IV~8.7~e)]{sga4} (every partition of its final object has exactly one nonempty part) iff $C$ is connected, a fact recalled as known in \cite[Ex.~3.6]{hora-kamio}. In terms of subterminal objects: $C$ is nonempty and the only complemented subterminal objects are $0$ and $1$. Lean: \lean{isConnected_iff_forall_isCompl}.
 \end{bridge}
 
 \begin{bridge}[Spatial]\label{br:spatial}
@@ -102,14 +102,14 @@ $\PSh(C)$ is equivalent to the presheaf topos of a preorder, and so to the topos
 
 \subsubsection{The decks}
 
-The deck registry holds the shapes of the table above, with their presheaves, and the shapes introduced with each output in \S\ref{sec:machines}--\ref{sec:shapes}; Step~2 of \S\ref{sec:method} says how to recognise a new one.
+The deck registry holds the shapes of the table above, with their presheaves, and the shapes introduced with each output in \S\ref{sec:machines}--\ref{sec:shapes}. Step~2 of \S\ref{sec:method} explains how to recognise a new deck.
 
 \subsubsection{The decks of Grothendieck's notes}\label{sec:grdecks}
 
-Three decks recur in Grothendieck's working notes, and the three arches above read them as follows (Lean: \lean{GrothendieckDecks.lean}).
+Three decks recur in Grothendieck's working notes. Here is what the three arches above say about them (Lean: \lean{GrothendieckDecks.lean}).
 \begin{itemize}
-\item The simplex category $\Delta$, the first test category of \emph{Pursuing Stacks} (folders 108 and 118 of the fonds): simplicial sets form a two-valued and connected topos, since there is a constant map between any two objects of $\Delta$, and not the presheaf topos of a preorder, since the two vertices of $[1]$ are two maps $[0]\to[1]$ (\lean{simplexCategory_twoValued}, \lean{simplexCategory_isConnected}, \lean{simplexCategory_not_spatial}).
-\item A group $G$ as a one-object groupoid, whose presheaf topos is $\B G$ (folder 161-6, p.~22, where Grothendieck reduces a question to this case): two-valued, as \cite[IV~8.4.3]{sga4} notes for any monoid, connected, and the presheaf topos of a preorder iff $G$ is trivial (\lean{singleObj_twoValued}, \lean{singleObj_isConnected}, \lean{singleObj_spatial_iff}).
-\item An ordered set $I$, whose presheaf topos $\widehat I$ is $\mathrm{Top}(I)$ (folder 37, p.~48; folder 161-3, p.~26): two-valued iff any two elements are comparable both ways, that is iff its posetal quotient has at most one point (\lean{preorder_twoValued_iff}).
+\item The simplex category $\Delta$, the first test category of \emph{Pursuing Stacks} (folders 108 and 118 of the fonds): simplicial sets form a two-valued and connected topos, since there is a constant map between any two objects of $\Delta$; this topos is not the presheaf topos of a preorder, since the two vertices of $[1]$ are two maps $[0]\to[1]$ (\lean{simplexCategory_twoValued}, \lean{simplexCategory_isConnected}, \lean{simplexCategory_not_spatial}).
+\item A group $G$ as a one-object groupoid, whose presheaf topos is $\B G$ (folder 161-6, p.~22, where Grothendieck reduces a question to this case): the topos is two-valued (as \cite[IV~8.4.3]{sga4} notes for any monoid) and connected, and it is the presheaf topos of a preorder iff $G$ is trivial (\lean{singleObj_twoValued}, \lean{singleObj_isConnected}, \lean{singleObj_spatial_iff}).
+\item An ordered set $I$, whose presheaf topos $\widehat I$ is $\mathrm{Top}(I)$ (folder 37, p.~48; folder 161-3, p.~26): the topos is two-valued iff any two elements are comparable both ways, that is, iff its posetal quotient has at most one point (\lean{preorder_twoValued_iff}).
 \end{itemize}
-These are immediate corollaries, recorded because they are the first entries of the registry taken from the fonds.
+These are immediate corollaries. We record them because they are the first entries of the registry taken from the fonds.

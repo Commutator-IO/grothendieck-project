@@ -1,6 +1,6 @@
 \section{Classical theorems as two readings of one bridge}\label{sec:equivalences}
 
-The same machinery explains why some pairs of theorems from a third-year curriculum, taught in different courses, are \q{the same theorem}: they are two readings of one invariant on one topos. Nothing in this section is new; its point is pedagogical, and it shows what a bridge does when both ends are already known.
+The same machinery explains why some pairs of theorems from a third-year curriculum, taught in different courses, are \q{the same theorem}: they are two readings of one invariant on one topos. Nothing in this section is new. Its point is pedagogical: it shows what a bridge does when both ends are already known.
 
 \subsection{Equivalence relations and quotients}
 
@@ -14,7 +14,7 @@ Let $E$ be an equivalence relation on a set $S$, seen as a groupoid (one arrow $
 
 \subsection{Orbits and complements}
 
-For a group $G$, Bridge~\ref{br:bool} says that the complement of a sub-$G$-set is a sub-$G$-set. Together with the decomposition of every presheaf into connected components (true in every presheaf topos), this is the \emph{orbit decomposition}: every $G$-set is the disjoint union of its orbits, and every sub-$G$-set is a union of orbits. For a monoid that is not a group the decomposition into connected components still holds, but a component need not be \q{indecomposable} in the Boolean sense: the bridge shows that the orbit decomposition theorem is a statement about invertibility.
+For a group $G$, Bridge~\ref{br:bool} says that the complement of a sub-$G$-set is a sub-$G$-set. Together with the decomposition of every presheaf into connected components (true in every presheaf topos), this is the \emph{orbit decomposition}: every $G$-set is the disjoint union of its orbits, and every sub-$G$-set is a union of orbits. For a monoid that is not a group the decomposition into connected components still holds, but a component need not be \q{indecomposable} in the Boolean sense. The bridge thus shows that the orbit decomposition theorem is a statement about invertibility.
 
 \subsection{Birkhoff's theorem and finite $T_0$ spaces}
 
@@ -23,9 +23,9 @@ Let $P$ be a finite poset and $X_P$ its Alexandrov space (open sets $=$ up-sets)
 \item its \emph{subterminal objects} (sub-presheaves of the one-point presheaf): read on $X_P$ they are the open sets; read on $[P,\Set]$ they are the up-sets of $P$;
 \item its \emph{points}: read on $X_P$ (a sober space) they are the points of $X_P$; read on $[P,\Set]$ they are the evaluations at the elements of $P$, and the principal up-sets $\uparrow p$ are exactly the join-irreducible elements of $\mathrm{Up}(P)$, with $\uparrow p\subseteq\uparrow q$ iff $q\le p$.
 \end{itemize}
-Reading these invariants backwards gives two classical theorems at once: \emph{Birkhoff's representation theorem} (a finite distributive lattice $L$ is isomorphic to the lattice of up-sets of the opposite of its poset of join-irreducible elements) and the \emph{correspondence between finite $T_0$ spaces and finite posets} (a finite $T_0$ space is the Alexandrov space of its specialisation order). Applying Bridge~\ref{br:bool} on top: the topos is Boolean iff $P$ is discrete, iff $\mathrm{Up}(P)$ is the power set of $P$, which is the finite case of \emph{Stone's representation theorem}: a finite Boolean algebra is the power set of its atoms.
+Reading these invariants backwards gives two classical theorems at once: \emph{Birkhoff's representation theorem} (a finite distributive lattice $L$ is isomorphic to the lattice of up-sets of the opposite of its poset of join-irreducible elements) and the \emph{correspondence between finite $T_0$ spaces and finite posets} (a finite $T_0$ space is the Alexandrov space of its specialisation order). Adding Bridge~\ref{br:bool}: the topos is Boolean iff $P$ is discrete, iff $\mathrm{Up}(P)$ is the power set of $P$, which is the finite case of \emph{Stone's representation theorem}: a finite Boolean algebra is the power set of its atoms.
 
-For a precedent in Grothendieck's notes, see \S\ref{sec:precedents}.
+Grothendieck's notes contain a precedent (\S\ref{sec:precedents}).
 
 \subsection{Cayley's theorem and the reconstruction of a group}
 
@@ -33,11 +33,11 @@ For a group $G$, Bridge~\ref{br:pts} says that the forgetful functor $U$ from $G
 
 \subsection{Galois correspondence and covering spaces}
 
-Two theorems of a third-year course, the \emph{fundamental theorem of Galois theory} (intermediate fields of a finite Galois extension $L/K$ $\leftrightarrow$ subgroups of $\mathrm{Gal}(L/K)$) and the \emph{classification of covering spaces} (connected coverings of a nice connected space $X$ $\leftrightarrow$ conjugacy classes of subgroups of $\pi_1(X)$), are two readings of one bridge, made explicit by Grothendieck \cite{sga1}: the category of finite étale $K$-algebras split by $L$, and the category of coverings of $X$, are both equivalent to a category of $G$-sets ($G = \mathrm{Gal}(L/K)$, resp.\ $\pi_1(X)$); the invariant is the poset of \emph{connected objects with a point}, which on the $G$-set side is the poset of subgroups. (These decks are not presheaf topoi on a finite shape, and this bridge is not in the Lean library; see \cite{szamuely} for an undergraduate account.)
+Two theorems of a third-year course, the \emph{fundamental theorem of Galois theory} (intermediate fields of a finite Galois extension $L/K$ $\leftrightarrow$ subgroups of $\mathrm{Gal}(L/K)$) and the \emph{classification of covering spaces} (connected coverings of a nice connected space $X$ $\leftrightarrow$ conjugacy classes of subgroups of $\pi_1(X)$), are two readings of one bridge, which Grothendieck made explicit \cite{sga1}. The category of finite étale $K$-algebras split by $L$ and the category of coverings of $X$ are both equivalent to a category of $G$-sets ($G = \mathrm{Gal}(L/K)$, resp.\ $\pi_1(X)$), and the invariant is the poset of \emph{connected objects with a point}, which on the $G$-set side is the poset of subgroups. (These decks are not presheaf topoi on a finite shape, and this bridge is not in the Lean library; see \cite{szamuely} for an undergraduate account.)
 
 \subsection{Confluence and extremal disconnectedness}
 
-The last pair is in the calibration log: a preorder is confluent iff its Alexandrov space is extremally disconnected \cite[Prop.~7.10]{caramello-stone} (Lean: \lean{extremallyDisconnected_iff_confluent}). Read on a rewriting system, the Church--Rosser theorem for $\beta$-reduction becomes the extremal disconnectedness of a space of $\lambda$-terms. Here the bridge re-derives two known theorems and also shows that a property from programming-language theory and a property from general topology are the same property.
+The last pair is already in the calibration log: a preorder is confluent iff its Alexandrov space is extremally disconnected \cite[Prop.~7.10]{caramello-stone} (Lean: \lean{extremallyDisconnected_iff_confluent}). Read on a rewriting system, the Church--Rosser theorem for $\beta$-reduction becomes the extremal disconnectedness of a space of $\lambda$-terms. Here the bridge re-derives two known theorems and also shows that a property from programming-language theory and a property from general topology are the same property.
 
 \begin{remark}
 In each pair, one reading is usually proved in one course and the other in another, by unrelated arguments. The bridge gives no shorter proofs, but it explains why the two statements have the same shape, and it gives a recipe for finding more such pairs: pick a topos with two familiar presentations, and read an invariant on both.
