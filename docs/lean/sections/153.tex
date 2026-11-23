@@ -31,7 +31,7 @@ Les deux membres sont additifs en $t$, et il suffit de le vérifier sur un tense
 Un élément $t$ de $P \otimes_{k_0} M$ est dans l'image de $f \otimes \mathrm{id}_M$ si et seulement si chacune de ses coordonnées est dans l'image de $f$.
 \end{lemme}
 
-\general{TensorProductMemRangeRTensorBasis}
+\generalpool{CommutativeAlgebraToolkit}{TensorProductMemRangeRTensorBasis}
 
 \begin{lemme}\label{lem:153-un}
 L'image de $M \to K_0 \otimes_{k_0} M$, $m \mapsto 1 \otimes m$, est l'image de $\iota \otimes \mathrm{id}_M : k_0 \otimes_{k_0} M \to K_0 \otimes_{k_0} M$.
@@ -136,7 +136,7 @@ L'hypothèse de la lecture, $K_0[X] \otimes_{k_0} K_0[Y] = K_0[X, Y]$, revient �
 Les $F_n$ sont dans $\mathrm{Int}(\mathbf Z)$ et linéairement indépendants sur $\mathbf Z$. Tout $P \in \mathrm{Int}(\mathbf Z)$ de degré $d$ s'écrit $P = \sum_{k \le d} c_k F_k$ avec $c_k = (\Delta^k P)(0) \in \mathbf Z$. Ainsi $(F_n)_{n \in \mathbf N}$ est une base du $\mathbf Z$-module $\mathrm{Int}(\mathbf Z)$.
 \end{enonce}
 
-\general{PolynomialIntegerValued}
+\generalpool{CommutativeAlgebraToolkit}{PolynomialIntegerValued}
 
 \begin{enonce}[Page 2, Vandermonde, et les co-opérations de $\mathrm{Int}(\mathbf Z)$]
 Dans $\mathbf Q[X, Y]$, $F_m(X + Y) = \sum_{i + j = m} F_i(X) F_j(Y)$. Par suite l'unique élément de $\mathrm{Int}(\mathbf Z) \otimes_{\mathbf Z} \mathrm{Int}(\mathbf Z)$ qui représente $F_m(X + Y)$ est $\sum_{i+j=m} F_i \otimes F_j$ : les $\gamma^m_{ij}$ de la page valent $1$ si $i + j = m$ et $0$ sinon. De même $F_m(XY) = \sum_{i,j} \delta^m_{ij} F_i(X) F_j(Y)$ pour des entiers $\delta^m_{ij}$ uniquement déterminés.
@@ -191,7 +191,7 @@ Soit $k$ un anneau commutatif non nul et $F = \sum_{m \ge 1} T^m$. Les coefficie
 \begin{proof}
 La matrice de Pascal $P_N = \bigl(\binom{p+q}{p}\bigr)_{p, q < N}$ est de déterminant $1$, énoncé général rappelé à la suite de la démonstration. Si les coefficients étaient $\sum_{i < n} a_{i,p} b_{i,q}$, ceux de $P_{n+2}$ seraient $\sum_{i < n} a_{i,p} b_{i,q} + [p = 0][q = 0]$, et $P_{n+2}$ serait le produit d'une matrice à $n + 1$ colonnes par une matrice à $n + 1$ lignes, de rang au plus $n + 1$, alors qu'elle est inversible, de rang $n + 2$.
 \end{proof}
-\general{DetPascalMatrix}
+\generalpool{LinearAlgebraCombinatoricsAndAnalysis}{DetPascalMatrix}
 
 \begin{remarque}
 Le contre-exemple de~3a) pour $\mathrm{Appl}(A, A)$ est établi pour $A$ unitaire, commutatif, non nul et infini. La page ne parle pas de~3), et la lecture dit \q{pour $A$ infini}. Pour $k[[T]]^+$, la matrice des coefficients de $F(X + Y)$ diffère de la matrice de Pascal, que nomme la note de la lecture, par le coefficient $(0,0)$, nul puisque $F$ n'a pas de terme constant ; l'argument coûte donc un rang de plus. Le déterminant de la matrice de Pascal valant $1$ sur $\mathbf Z$, le contre-exemple vaut en toute caractéristique. L'énoncé Lean porte sur les coefficients. Le passage aux séries, où le coefficient de $X^p Y^q$ d'un produit $a(X) b(Y)$ est $a_p b_q$, est celui de la note.
