@@ -226,8 +226,9 @@ function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
         <span className="text-[10px] uppercase tracking-wide text-ink-400">{KIND[n.kind]}</span>
         {/* The identifier is what a commit message or an issue cites, so it
             has to be reachable from the page it names. Hidden until hover so
-            that forty-nine of them do not sit in the margin shouting. */}
-        <CommentButton scope="findings" ctx={findingCtx(n)} text={n.claim} className="ml-auto" />
+            that forty-nine of them do not sit in the margin shouting. It comes
+            before the comment button: invisible, it still takes its width, and
+            after the button it pushed the button towards the middle of the row. */}
         <a
           href={`#${n.id}`}
           className="select-none text-[11px] text-ink-300 opacity-0 transition-opacity hover:text-brand-600 focus:opacity-100 group-hover:opacity-100"
@@ -235,6 +236,7 @@ function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
         >
           #{n.id}
         </a>
+        <CommentButton scope="findings" ctx={findingCtx(n)} text={n.claim} className="ml-auto" />
       </div>
 
       <p className="mt-3 max-w-[42em] text-[15.5px] leading-relaxed text-ink-900">

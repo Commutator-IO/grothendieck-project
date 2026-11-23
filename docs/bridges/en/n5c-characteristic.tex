@@ -1,0 +1,82 @@
+\section{Rings of definite characteristic: a gluing that is not a subtopos}\label{sec:characteristic}
+
+On pp.~47--49 of folder 161-2 \cite{grothendieck-161-2}, item~20 of his list, Grothendieck considers the rings that are, locally, of characteristic $p$ for some prime $p$ or of characteristic $0$. In the topos $B = X_{\mathrm{ann}} \simeq \widehat R$ classifying rings ($R$ the affine schemes of finite type over $\mathbb Z$), these are the morphisms that factor locally through one of two subtopoi:
+\begin{itemize}
+\item $V = X_{\mathrm{car}>0}$, the union of the open subtopoi $\widehat R_{\mathbb Z/p}$, which is open: $V = o(U_V)$, where $U_V \subseteq 1$ is the sieve of the schemes that map to some $\operatorname{Spec}\mathbb F_p$;
+\item $W = X_{\mathrm{car}\,0} \simeq \widehat{R_{\mathbb Q}}$, the $\mathbb Q$-algebras, the meet of the opens $o(\operatorname{Spec}\mathbb Z[1/n])$, which is not open.
+\end{itemize}
+He notes that the condition involves an infinite limit and so does not give a classifying topos by the usual route. He then asks for a subtopos $Z \subseteq B$ that classifies the condition, states a criterion for its existence (p.~48), with one step marked \q{(à vérifier)}, checks the criterion in this case (\q{Donc OK}), and identifies the result with the topos of presheaves on the category $R_{\mathrm{car}}$ of schemes of finite type over a prime field, $\mathbb Q$ included, glued along the empty scheme (p.~49). We make the criterion precise and prove it, and find that in this case it fails: no subtopos of $\widehat R$ classifies the rings of definite characteristic. The glued topos exists, but it is not a subtopos.
+
+\subsection{The gluing lemma}
+
+We use four standard facts about a topos $B$ \cite[\S A4.5]{elephant}:
+\begin{enumerate}
+\item[(F1)] the subtopoi of $B$ form a co-Heyting algebra, in particular a distributive lattice, with join $\vee$ and meet $\wedge$;
+\item[(F2)] for a subterminal object $U$, a geometric morphism $f\colon \mathcal E\to B$ factors through the open subtopos $o(U)$ iff $f^*U = 1$; and $f$ factors through $Y_1\wedge Y_2$ iff it factors through $Y_1$ and through $Y_2$; also $o(U')\vee o(U'') = o(U'\vee U'')$;
+\item[(F3)] factoring through a subtopos is local on the domain: if $\mathcal E$ is covered by subterminals $e_i$ ($\bigvee e_i = 1$) and each restriction $f|_{\mathcal E/e_i}$ factors through $Y$, so does $f$ (the condition is that $f^*$ inverts the dense monomorphisms of $Y$, and invertibility is local);
+\item[(F4)] the open subtopoi of a subtopos $Z\subseteq B$ are the $Z\wedge o(U)$, $U$ subterminal in $B$ (a subterminal object of $Z$ is one of $B$).
+\end{enumerate}
+Let $V$, $W$ be subtopoi of $B$. Say that $f\colon\mathcal E\to B$ is \emph{locally in $V$ or $W$} if there are subterminals $e'$, $e''$ of $\mathcal E$ with $e'\vee e'' = 1$, $f|_{e'}$ factoring through $V$ and $f|_{e''}$ through $W$. The \emph{gluing problem} asks for a subtopos $Z$ such that $f$ factors through $Z$ iff $f$ is locally in $V$ or $W$.
+
+\begin{theorem}[Folder 161-2, p.~48, made precise]\label{th:gluing}
+The following are equivalent:
+\begin{enumerate}
+\item the gluing problem has a solution;
+\item $V\vee W$ is the union of two open subtopoi, one contained in $V$ and one in $W$;
+\item there are subterminals $U'$, $U''$ of $B$ with
+\[
+W\wedge o(U')\le V,\qquad V\wedge o(U'')\le W,\qquad V\vee W\le o(U'\vee U'').
+\]
+\end{enumerate}
+The solution is then $Z = V\vee W$, and $Z' = V\wedge o(U')$, $Z'' = W\wedge o(U'')$ satisfy Grothendieck's conditions $V = Z'\vee(Z''\wedge V)$ and $W = Z''\vee(Z'\wedge W)$, with $Z'\wedge W$ open in $W$ and $Z''\wedge V$ open in $V$.
+\end{theorem}
+
+\begin{proof}
+(1)$\Rightarrow$(2). Let $Z$ be a solution. The identity of $V$ is locally in $V$ or $W$, so $V\le Z$, and likewise $W\le Z$. The inclusion of $Z$ factors through $Z$, so it is locally in $V$ or $W$: $Z$ is covered by two open subtopoi $Z_1\le V$, $Z_2\le W$. Then $Z = Z_1\vee Z_2\le V\vee W\le Z$. (This is Grothendieck's necessity argument, p.~47.)
+
+(2)$\Rightarrow$(3). By (F4) the two opens are $Z\wedge o(U')$ and $Z\wedge o(U'')$, with $Z = V\vee W$. From $Z\wedge o(U')\le V$ we get $W\wedge o(U')\le V$, and likewise for $U''$; and $Z = (Z\wedge o(U'))\vee(Z\wedge o(U''))\le o(U'\vee U'')$.
+
+(3)$\Rightarrow$(1). Put $Z = V\vee W$. By distributivity (F1), $Z\wedge o(U') = (V\wedge o(U'))\vee(W\wedge o(U'))\le V$, and $Z\wedge o(U'')\le W$. If $f$ is locally in $V$ or $W$, it factors through $Z$ by (F3). Conversely, if $f$ factors through $Z$, put $e' = f^*U'$ and $e'' = f^*U''$: then $e'\vee e'' = f^*(U'\vee U'') = 1$ since $Z\le o(U'\vee U'')$, and $f|_{e'}$ factors through $Z\wedge o(U')\le V$ by (F2), and $f|_{e''}$ through $W$.
+
+For Grothendieck's form: $V = V\wedge o(U'\vee U'') = (V\wedge o(U'))\vee(V\wedge o(U''))$ by (F1), and $V\wedge o(U'') = Z''\wedge V$ because $V\wedge o(U'')\le W$; symmetrically for $W$. Finally $Z'\wedge W = W\wedge o(U')$ is open in $W$, and $Z''\wedge V$ is open in $V$.
+\end{proof}
+
+\begin{remark}
+On p.~48 Grothendieck proves sufficiency by gluing $Z'$ and $Z''$ along their intersection and marks the resulting embedding into $B$ \q{(à vérifier)}. Condition~(3) avoids the gluing: the solution is the join $V\vee W$, which exists in any case. What the criterion adds is the \emph{shape} of the opens: $Z'$ must be cut out of $V$ by an open $o(U')$ of $B$ whose trace on $W$ already lies in $V$, and symmetrically. The lemma is elementary once (F1)--(F4) are granted, but we did not find it stated in \cite{elephant} or elsewhere.
+\end{remark}
+
+\subsection{The case of the characteristic}
+
+\begin{proposition}\label{prop:nocar}
+For $B = \widehat R$, $V = X_{\mathrm{car}>0}$ and $W = X_{\mathrm{car}\,0}$, condition~(3) of Theorem~\ref{th:gluing} fails. So no subtopos of $\widehat R$ classifies the rings that are locally of characteristic $p>0$ or of characteristic $0$.
+\end{proposition}
+
+\begin{proof}
+A subterminal object of $\widehat R$ is a sieve $S$ on $\operatorname{Spec}\mathbb Z$, that is, a set of finitely presented rings closed under ring maps out of them, and the point of $\widehat R$ given by a ring $C$ lies in $o(S)$ iff some $A\in S$ has a ring map $A\to C$ (for $C$ finitely presented: iff $C\in S$). Two observations.
+
+(a) \emph{$W\le o(S)$ forces $S$ to contain some $\mathbb F_p$.} The inverse image of $S$ in $W\simeq\widehat{R_{\mathbb Q}}$ is $1$ iff its value at $\mathbb Q$ is nonempty, that is, iff $S$ contains a finitely presented ring $A$ with a ring map $A\to\mathbb Q$. The image of such a map is a finitely generated subring $\mathbb Z[1/n]$ of $\mathbb Q$, so $A$ maps to $\mathbb F_p$ for every prime $p\nmid n$, and $\mathbb F_p\in S$.
+
+(b) \emph{$\mathbb F_p$ lies in $V$, not in $W$, and $\mathbb Q$ lies in $W$, not in $V$}: a ring of characteristic $p$ inverts no multiple of $p$, and $\mathbb Q$ maps to no $\mathbb F_p$.
+
+Suppose (3) holds. Since $W\le o(U'\vee U'')$ and the join of two sieves is their union, the argument of (a) gives a ring $A$ with a map $A\to\mathbb Q$ in $U'$ or in $U''$. If $A\in U'$, then $W\wedge o(U') = W$ (the inverse image of $U'$ in $W$ is already $1$), so $W\le V$, contradicting (b) at $\mathbb Q$. If $A\in U''$, then $\mathbb F_p\in U''$ for some $p$ by (a), so the point $\mathbb F_p$ lies in $V\wedge o(U'')\le W$, contradicting (b).
+\end{proof}
+
+So Grothendieck's \q{Donc OK} does not hold. What his check establishes is that $V\wedge W$ is open in $V$ and in $W$: it is the open $o(\emptyset)$ of the zero ring. His N.B.\ on p.~48 says that this suffices; Proposition~\ref{prop:nocar} shows that it does not. In the notation of Theorem~\ref{th:gluing}, the largest open $Z'$ of $V$ of the required shape is $V$ itself, but the largest such open $Z''$ of $W$ is the point $o(\emptyset)\wedge W$, and $W\ne Z''\vee(Z'\wedge W)$.
+
+\paragraph{What is known.} Proposition~\ref{prop:nocar} is an immediate instance of a known fact: having characteristic~$0$ is not definable by a geometric formula in the theory of fields \cite[\S8.2]{caramello-flat}; Caramello and Johnstone make the same remark and attribute the first proof to Johnstone \cite{caramello-johnstone}. Indeed, subterminal objects of a classifying topos correspond to geometric sentences \cite[\S7.1]{caramello-lattices}. If a subtopos classified the condition, the open $e''$ of its generic model would be defined by a geometric sentence $\psi$ in the signature of rings. A field of characteristic~$0$ is a point of $W$ and not of $V$, so $\psi$ holds in it; a field of characteristic~$p$ is a point of $V$ and not of $W$, so $\psi$ fails in it. Thus $\psi$ would define characteristic~$0$ among fields. The step of our proof that a finitely presented ring mapping to $\mathbb Q$ maps to some $\mathbb F_p$ is the site form of Lemma~1.1 of \cite{caramello-johnstone}, on the characteristics of finitely presented von Neumann regular rings, and Hutzler observes that a join of subtopoi is not computed locally \cite[Rem.~3.5.2]{hutzler}. What we did not find in print is the gluing criterion of Theorem~\ref{th:gluing}, the statement in terms of the join $V\vee W$, and the fact that the glued topos below does not embed in $\widehat R$.
+
+\paragraph{What survives: the glued topos.} A presheaf on $R_{\mathrm{car}}$, the amalgamated sum of the $R_p$ ($p$ prime or $0$, $R_0 = R_{\mathbb Q}$) along their initial object $\emptyset$, is a family of presheaves $F_p$ on the $R_p$ with the values $F_p(\emptyset)$ identified. So $\widehat{R_{\mathrm{car}}}$ is the topos obtained by gluing the $\widehat{R_p}$ along their common open point $o(\emptyset)$, which is item~21's \q{2-somme amalgamée sous le topos ponctuel}; grouping the primes, it is $V$ and $W$ glued along $V\wedge W$, and Grothendieck's own N.B.\ identifies $V$ with $\widehat{R_{\mathrm{car}>0}}$. The inclusions of $V$ and $W$ glue to a geometric morphism $\widehat{R_{\mathrm{car}}}\to\widehat R$.
+
+\begin{corollary}
+The morphism $\widehat{R_{\mathrm{car}}}\to\widehat R$ is not an embedding. So $\widehat{R_{\mathrm{car}}}$ is not equivalent, over $\widehat R$, to a subtopos of $\widehat R$; in particular not to $V\vee W$, nor to the topos of sheaves $\widetilde R_{\mathrm{top.car}}$ for the topology \q{top car} of p.~47.
+\end{corollary}
+
+\begin{proof}
+If it were an embedding with image $Z$, the open subtopoi $V$ and $W$ of $\widehat{R_{\mathrm{car}}}$, which cover it, would be open subtopoi of $Z$ contained in $V$ and $W$ and covering it, so (2) of Theorem~\ref{th:gluing} would hold, contradicting Proposition~\ref{prop:nocar}.
+\end{proof}
+
+So the identification $X_{\mathrm{car}}\simeq\widehat{R_{\mathrm{car}}}$ of p.~49 is right if $X_{\mathrm{car}}$ means the glued topos, and wrong if it means a subtopos of $\widehat R$, which is how p.~47 introduces it ($X_{\mathrm{car}} = \widetilde R_{\mathrm{top.car}}$). Since its morphism to $\widehat R$ is not an embedding, the glued topos does not classify a property of the ring.
+
+\paragraph{Points.} Item~21 claims that the glued topos built from subtopoi $Z(p)$ of the $\widehat{R_p}$ has enough points iff each $Z(p)$ has. This holds: a topos covered by open subtopoi that have enough points has enough points, and an open subtopos of a topos with enough points has enough points. For $\widehat{R_{\mathrm{car}}}$ itself, a presheaf topos, it is immediate.
+
+\leanentry{} The order-theoretic core of Theorem~\ref{th:gluing} is proved in \href{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/Grothendieck/Order/Folder161_2Join.lean}{\nolinkurl{Grothendieck/Order/Folder161\_2Join.lean}} (GrothendieckArchivesProofs): \lean{Grothendieck.Folder161_2.recollement_iff} is the equivalence of~(2) and~(3), and \lean{Grothendieck.Folder161_2.recollement} gives Grothendieck's form, in any distributive lattice and for any two elements standing for the opens. The instance on subtopoi is not formalised: neither Mathlib nor the Stacks library has the distributive lattice of subtopoi, the open subtopos $o(U)$ of a subterminal object, or the locality of factoring through a subtopos. Proposition~\ref{prop:nocar} is not formalised.

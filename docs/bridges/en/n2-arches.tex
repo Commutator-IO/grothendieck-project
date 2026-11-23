@@ -1,0 +1,43 @@
+\section{Notation and the five arches}\label{sec:recall}
+
+We use the notation of the companion article \cite{bridges-generator}, recalled here briefly. A small category $C$ is a \emph{shape}. A \emph{presheaf} on $C$ is a functor $C^{\op}\to\Set$, in Lean \texttt{Cᵒᵖ ⥤ Type u}; presheaves on $C$ form the topos $\PSh(C)$, which Grothendieck writes $\widehat C$. A \emph{deck} is a shape whose presheaves are a familiar structure. The negation $\neg A$ of a sub-presheaf $A\subseteq F$ is the largest sub-presheaf of $F$ disjoint from $A$. $\PSh(C)$ is \emph{Boolean} if $A\cup\neg A = F$ for every $A\subseteq F$ (excluded middle), and \emph{De Morgan} if $\neg A\cup\neg\neg A = F$ for every $A\subseteq F$ (weak excluded middle). $C$ satisfies the \emph{Ore condition} if every cospan $f : Y\to X$, $g : Z\to X$ completes to a commutative square $f\circ h = g\circ k$. The \emph{Karoubi envelope} $\Kar(C)$ adds an object for each idempotent arrow $e = e\circ e$, and contains $C$ as a full subcategory. $C$ is \emph{thin} if there is at most one arrow between any two objects.
+
+The companion article runs its generator on five arches, proved in Lean~4 in the library \lp{} of lean-pool:
+\begin{itemize}
+\item \emph{Boolean:} $\PSh(C)$ is Boolean iff $C$ is a groupoid;
+\item \emph{De Morgan:} $\PSh(C)$ is De Morgan iff $C$ satisfies the Ore condition;
+\item \emph{Morita:} $\PSh(C)\simeq\PSh(D)$ iff $\Kar(C)$ and $\Kar(D)$ are equivalent;
+\item \emph{essential points:} the functors $\PSh(C)\to\Set$ that preserve all limits and all colimits form a category equivalent to $\Kar(C)^{\op}$;
+\item \emph{subtopoi:} the subtopoi of $\PSh(C)$ correspond, order-reversingly, to the Grothendieck topologies on $C$.
+\end{itemize}
+
+\section{Three more arches}\label{sec:morearches}
+
+We add three arches to the registry of the companion article \cite{bridges-generator}. So far we have applied them only to the decks taken from Grothendieck's notes (\S\ref{sec:grdecks}) and to his pseudo-fields (\S\ref{sec:pseudofields}); none of the outputs of the companion article comes from them. We number them F to H, after the five arches A to E of the companion article.
+\setcounter{bridge}{5}
+
+\begin{bridge}[Two-valued]\label{br:twoval}
+The subterminal objects of $\PSh(C)$ (its \q{opens}) correspond to the sieves of $C$ \cite[IV~8.4.4]{sga4}. Hence $\PSh(C)$ has no subterminal objects besides $0$ and $1$ iff for any two objects $a$, $b$ of $C$ there is an arrow $a\to b$. For $C$ empty the topos is degenerate and the condition holds vacuously, so the statement is about nonempty $C$. Lean: \lean{forall_subfunctor_terminal_eq_bot_or_eq_top_iff}.
+\end{bridge}
+
+\begin{bridge}[Connected]\label{br:conn}
+$\PSh(C)$ is connected and nonempty in the sense of \cite[IV~8.7~e)]{sga4} (every partition of its final object has exactly one nonempty part) iff $C$ is connected, a fact recalled as known in \cite[Ex.~3.6]{hora-kamio}. In terms of subterminal objects: $C$ is nonempty and the only complemented subterminal objects are $0$ and $1$. Lean: \lean{isConnected_iff_forall_isCompl}.
+\end{bridge}
+
+\begin{bridge}[Spatial]\label{br:spatial}
+$\PSh(C)$ is equivalent to the presheaf topos of a preorder, and so to the topos of sheaves on its Alexandrov space, iff $C$ is thin. Grothendieck states it as an exercise \cite[p.~26]{grothendieck-161-3}; see \S\ref{sec:precedents}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}, which states the preorder form; that the topos is then the topos of a space is Grothendieck's equivalence, from the same exercise, and is not formalised here.
+\end{bridge}
+
+On the two main decks of the companion article, right $M$-sets and representations of a quiver, they read as follows.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+\toprule
+invariant & reading on $C$ & on right $M$-sets & on representations of a quiver\\
+\midrule
+two-valued & an arrow between any two objects & always & strongly connected\\
+connected & $C$ connected & always & connected\\
+preorder (spatial) & $C$ thin & $M$ trivial & at most one path between two vertices\\
+\bottomrule
+\end{tabularx}
+\end{center}

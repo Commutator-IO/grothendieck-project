@@ -49,9 +49,9 @@ const LEAN_ARTICLES: ArticleItem[] = [
   },
   {
     id: 'article-kostant',
-    title: "Kostant's tori in apposition: the Borel subgroups are opposite in type A",
+    title: "Kostant's tori in apposition: the Borel subgroups are opposite, and there is no distinguished class in type A_2l",
     lang: 'English',
-    what: "Grothendieck's letter to Kostant of 22 October 1969 asks whether, for maximal tori in apposition, the Borel subgroups through them are in general position. For PGL_n and every n the answer is yes, for all n! Borels through the second torus: every flag stable under a cyclic element with nonzero coefficients is transverse to the standard one. A weighted-shift proof, formalised in Lean 4, and a second by Vandermonde determinants; the other types and the question of a distinguished class stay open.",
+    what: "Grothendieck's letter to Kostant of 22 October 1969 asks two questions on quadruples (T, B, T', B') with T, T' maximal tori in apposition. Are B and B' in general position? Yes, in every type: all |W| Borel subgroups through the centraliser of a cyclic element are opposite to B, a short consequence of Kostant (1959) and of a lemma of Bălibanu (2023), given in full and formalised in Lean 4 for the flag forms of the classical types. Is there a distinguished class, invariant under the exterior automorphisms? Not in type A_2l, where the exterior automorphism fixes no class; elsewhere a construction with the Coxeter plane gives a canonical pair of classes, exchanged by the sign of the lowest root vector, and computations list the invariant classes up to A_6 and D_5.",
     pdf: '/article/grothendieck-kostant.pdf',
     src: 'docs/kostant/article.tex',
   },
@@ -197,6 +197,24 @@ const DRAFTS: ArticleItem[] = [
     pdf: '/article/grothendieck-moduli.pdf',
     src: 'docs/moduli/article.tex',
     more: [{ label: 'Note de lecture (fr)', href: '/article/grothendieck-moduli-note-fr.pdf' }],
+  },
+  {
+    id: 'article-bridges',
+    title: 'Topos-theoretic bridges as a theorem generator',
+    lang: 'English and French',
+    what: "Draft. O. Caramello's « bridges » read one invariant of a topos on two of its presentations, and her Mines talk (2024) proposes to generate theorems by combining a database of topos equivalences with a database of such readings. This text runs a small generator by hand and describes it as a software pipeline (registries, join, specialise, unfold, rewrite, verify in Lean and by hand, novelty filter), with five bridges proved in Lean in lean-pool as arches.",
+    pdf: '/article/grothendieck-bridges.pdf',
+    src: 'docs/bridges/article.tex',
+    more: [{ label: 'Version française', href: '/article/grothendieck-bridges-fr.pdf' }],
+  },
+  {
+    id: 'article-bridges-notes',
+    title: "Bridges in Grothendieck's notes",
+    lang: 'English and French',
+    what: "Draft, companion to the previous one. Three more arches (two-valued, connected, presheaves on a preorder), proved in Lean and read on the decks of Grothendieck's notes; his own bridges in folders 161-3 (an exercise, proved in Lean), 37 and 161-2 (sub-theories and subtopoi); the topos of pseudo-fields with his three presentations, one of them checked, and the answer to his question on points (Makkai–Reyes); and the link with stacks, with the Picard group of [M₀,ₙ/𝔖ₙ₋₁] from folder 146 as a finer arch.",
+    pdf: '/article/grothendieck-bridges-notes.pdf',
+    src: 'docs/bridges/notes.tex',
+    more: [{ label: 'Version française', href: '/article/grothendieck-bridges-notes-fr.pdf' }],
   },
 ];
 

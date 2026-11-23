@@ -1,0 +1,34 @@
+\section{Lean}\label{sec:lean-lit}
+
+The five arches of \lp{}, in lean-pool, are proved in Lean~4 with Mathlib, with no axioms beyond \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. This statement describes the development; the files contain no \texttt{\#print axioms} command, and we do not record a separate check for them. For \texttt{lean/bridges}, the continuous integration of this edition's repository runs an axiom audit on every change: at the version described here it covered 437 declarations, all within \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. The generated statements are formalised, as corollaries of the arches, in the Lake package \texttt{lean/bridges} of this edition's repository (\url{https://github.com/Commutator-IO/grothendieck-project}), which depends on lean-pool at a fixed revision. The files used here are the following; the package has three more, described in the companion note \cite{bridges-notes}:
+\begin{itemize}
+\item \lean{Monoids.lean} (\lean{isBooleanTopos_singleObj_iff}, \lean{isDeMorganTopos_singleObj_iff}, \lean{isDeMorganTopos_singleObj_of_monoidWithZero}, \lean{isDeMorganTopos_singleObj_of_commMonoid}, \lean{isDeMorganTopos_singleObj_freeMonoid_unit}, \lean{not_isDeMorganTopos_freeMonoid_two}, \lean{isBooleanTopos_singleObj_of_group}); \lean{Preorders.lean} (\lean{isDeMorganTopos_functor_preorder_iff}, \lean{extremallyDisconnected_iff_confluent}, \lean{moritaEquivalentCat_preorder_iff}); \lean{Combinatorics.lean} (\lean{isDeMorganTopos_presheaf_of_hasInitial}, \lean{not_isDeMorganTopos_graphs}, \lean{graphs_pseudocompl_counterexample}, \lean{not_isDeMorganTopos_simplicialSets}, \lean{isDeMorganTopos_augmentedSimplicialSets}, \lean{isDeMorganTopos_presheaf_fintypeCatSkeleton}, \lean{isDeMorganTopos_treeTopos}, \lean{not_isBooleanTopos_treeTopos}); \lean{EssentialPoints.lean} (\lean{nonempty_essentialPoint_iso_iff}, \lean{exists_iso_essentialPoint}, \lean{essentialPointEndMulEquivOfGroup}, \lean{karoubiRel_iff_rank_eq}, \lean{essentialPointClassesEquivFin}).
+\item \lean{QuiversMorita.lean} (Morita and essential points of quiver representations: \lean{moritaEquivalentCat_paths_iff}, \lean{nonempty_representations_equiv_iff}, \lean{essentialPointPathsEquiv}) and \lean{QuiversCyclic.lean} (the $2^n+1$ topologies of the cyclic quiver: \lean{card_grothendieckTopology}).
+\item \lean{QuiversDeMorgan.lean} (De Morgan and Boolean for quiver representations: \lean{rightOreCondition_paths_iff}, \lean{isDeMorganTopos_paths_iff}, \lean{isBooleanTopos_paths_iff}; it contains no Morita or essential-point statement), \lean{Corners.lean} (transfer to corners), \lean{KaroubiMonoid.lean} (the $n$ classes for $T_n$), and, for the calibration log, \lean{FiniteMonoids.lean} (single minimal right ideal) and \lean{NatTopologies.lean} (the three topologies on $\B\mathbb N$, \lean{nat_card_grothendieckTopology_natCat}, with the sheaves of the middle one, \lean{isSheaf_finalTopology_iff}).
+\end{itemize}
+Not formalised: the analysis chapter (Mathlib has no topos of sheaves on a space with its negation), the subspace lattices beyond the De Morgan and Morita statements, the counts for $PT_n$, $I_n$, $O_n$ and $(\mathbb Z/n,\cdot)$, all the counts of subtopoi of monoids, and the description of the sheaves of the cyclic quiver. The machine enumerations for $(\mathbb Z/n,\cdot)$ (\S\ref{sec:linear}) are not part of the Lean development, and for $n>30$ they go through the classification of idempotent ideals, so they do not check the topologies independently.
+
+In Mathlib, \texttt{SingleObj M} composes as $f\gg g = g\cdot f$; with this convention the Ore condition on \texttt{SingleObj M} reads $\forall a\,b,\ \exists c\,d,\ a\cdot c = b\cdot d$ (\lean{rightOreCondition_singleObj_iff}), as in the text.
+
+\begin{center}\scriptsize\emergencystretch=3em
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.9cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.2cm}}
+\toprule
+statement & Lean declaration & file & status\\
+\midrule
+$M$-sets Boolean iff group; De Morgan iff Ore & \lean{isBooleanTopos_singleObj_iff}, \lean{isDeMorganTopos_singleObj_iff} & \lean{Monoids} & proved in Lean\\
+quivers: De Morgan, Boolean (Thm~\ref{th:quivers}) & \lean{isDeMorganTopos_paths_iff}, \lean{isBooleanTopos_paths_iff} & \lean{QuiversDeMorgan} & proved in Lean (Lean's convention)\\
+automata over $\Sigma$ & \lean{isDeMorganTopos_singleObj_freeMonoid_unit}, \lean{not_isDeMorganTopos_freeMonoid_two} & \lean{Monoids} & proved in Lean\\
+quivers: Morita, essential points & \lean{nonempty_representations_equiv_iff}, \lean{essentialPointPathsEquiv} & \lean{QuiversMorita} & proved in Lean\\
+cyclic quiver: $2^n+1$ topologies & \lean{card_grothendieckTopology} & \lean{QuiversCyclic} & proved in Lean for the count of topologies; the sheaves of each, by hand only\\
+$T_n$: $n$ essential points & \lean{karoubiClassesEquivFin} & \lean{KaroubiMonoid} & proved in Lean (classes of the Karoubi envelope)\\
+$M_n(\mathbb F_q)$: $n+1$ essential points & \lean{essentialPointClassesEquivFin} & \lean{EssentialPoints} & proved in Lean, any field\\
+$PT_n$, $I_n$, $O_n$ essential points; all subtopos counts of \S\ref{sec:finite} & --- & --- & by hand only\\
+corners: Ore transfers & \lean{forall_exists_mul_eq_mul_iff_cornerMonoid} & \lean{Corners} & proved in Lean\\
+$M_n(k)$-sets, $\mathsf{Vect}_{\le n}$ & --- & --- & by hand only (the rank classes are in Lean, see above)\\
+subspace lattices: De Morgan, Morita & \lean{isDeMorganTopos_functor_preorder_iff}, \lean{moritaEquivalentCat_preorder_iff} & \lean{Preorders} & proved in Lean; the rest by hand only\\
+$(\mathbb Z/n,\cdot)$ counts & --- & --- & enumerated by machine (not in Lean); proof by hand only\\
+compact Hausdorff $X$ & --- & --- & by hand only\\
+graphs, simplicial sets, augmented, $\mathsf{Fin}$, trees & \lean{not_isDeMorganTopos_graphs}, \lean{not_isDeMorganTopos_simplicialSets}, \lean{isDeMorganTopos_augmentedSimplicialSets}, \lean{isDeMorganTopos_presheaf_fintypeCatSkeleton}, \lean{isDeMorganTopos_treeTopos} & \lean{Combinatorics} & proved in Lean; the other combinatorial rows by hand only\\
+\bottomrule
+\end{tabularx}
+\end{center}

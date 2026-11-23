@@ -207,7 +207,7 @@ export function SeeAlso({ id }: { id: string }) {
             <span className="text-ink-500">{out ? KIND_OUT[link.kind] : KIND_IN[link.kind]}: </span>
             <FindingLinkText id={other} />{' '}
             <BasisLabel basis={link.basis} where={link.where} />
-            <span className="block pl-3 text-ink-500">{link.note}</span>
+            <span className="block pl-3 text-ink-500">{notation(link.note)}</span>
           </li>
         ))}
       </ul>
@@ -286,7 +286,7 @@ function ThreadBlock({ t }: { t: Thread }) {
                   {next && (
                     <div className="my-2.5 max-w-[44em] pb-2 text-[12.5px] leading-relaxed text-ink-600">
                       <BasisLabel basis={next.basis} where={next.where} />{' '}
-                      <span>{next.sentence}</span>
+                      <span>{notation(next.sentence)}</span>
                     </div>
                   )}
                   {last && <div className="pb-1" />}

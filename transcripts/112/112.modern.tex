@@ -8,13 +8,38 @@
 % pages by a human. The folder was read whole; it holds one batch, pages 1-4.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-11-07 — readings checked on the
 % facsimile by Michel Hua (#125): question (1) has D^{lc}(B̂_k) as its target.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-23 — p. 2 re-read on the facsimile
+% at 600 dpi (not checked by a reader): the note under question (1), « ≀ par
+% Quillen, peut se définir aussi comme M_• ↦ M_•^b », fixes its target as
+% D^{lc}_•(Â_k) and its functor as L ↦ L^b; « lisse » with quasi-isomorphisme,
+% L^b localement constant. Question (1) is restated accordingly.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-23 (second pass) — question (2) re-read
+% on the facsimile: « pour i ≥ 0 », the two brackets (« même sans supposer L, M lisses ?
+% et peut-on remplacer les L, M par L_•, M_• ? »; « ≀ Ext_Z(∫_A L, ∫_A M) si A asph. »);
+% the footnote calling question (1) trivial for A aspherical corrected; i = 0 fails
+% for A = Δ (the edition's check).
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-23 (third pass) — question (3) read on
+% the facsimile and restated (realising the Postnikov truncation of L^b by L → L'); the
+% case A = Δ checked (the edition's).
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-23 (fourth pass) — p. 3 read on the
+% facsimile: B), C), the box « c-lisse / c-propre », « 4.11. », the sketches and the
+% columns « lisse : LH_•(L | A/·) » / « colisse : LH^•(L | b\B) », which confirm the
+% slice reading of A_a; the sentence on a « mise au propre » that « n'a pas abouti » dropped.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-23 (fifth pass) — p. 4, transcribed from
+% the facsimile, given a section (the co-Yoneda computation of L ↦ L^{(a)} ∗ L^B on
+% generators), replacing « the only sheet this reading draws nothing from ».
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-23 (sixth pass) — p. 1 re-read on the
+% facsimile: pp. 1 and 2 are the two faces of one sheet (p. 1 carries the show-through
+% of p. 2); the résumé's « quatre feuilles » changed to « quatre pages ».
 %
 % This is the folder whose transcription carries the heaviest apparatus of the
 % eight read in this pass, and that governs what this reading may do. Where the
 % page is illegible the reading says so and stops; it does not complete a
 % definition from what the surrounding notation makes plausible. Two of the three
 % numbered questions are therefore given with a gap in them, which is the honest
-% state of the document.
+% state of the document. (Since the re-reading of 2026-11-23 the three questions
+% are legible in full, the class W and a few words apart; « négligeable » is still
+% incomplete.)
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -28,9 +53,10 @@
 \section*{Résumé}
 
 \begin{resume}
-Quatre feuilles de listing d'ordinateur, écrites en travers du papier, d'une
-écriture très petite et très rapide, avec les colonnes imprimées qui
-transparaissent sous chaque ligne. Un seul mot en tête, à l'encre :
+Quatre pages de listing d'ordinateur --- les deux premières sont les deux faces
+d'une même feuille ---, écrites en travers du papier, d'une écriture très petite
+et très rapide, avec les colonnes imprimées qui transparaissent sous chaque
+ligne. La première page ne porte qu'un mot, à l'encre :
 \emph{Linéarisation}.
 
 Le mot désigne un procédé et non un objet. En voici le principe, dans un cas
@@ -49,10 +75,11 @@ pour lesquels la linéarisation ne perd \emph{rien}. Il les appelle les objets
 \emph{lisses}. Symétriquement, elles cherchent ceux pour lesquels elle perd
 tout : les objets \emph{négligeables}.
 
-Une fois ces deux classes définies, trois questions sont posées, et elles ont
-toutes la même forme : est-ce que la restriction aux objets lisses fait de la
-linéarisation une équivalence ? Est-ce qu'elle préserve les groupes
-d'extensions ? Le programme est celui de la correspondance de Dold--Kan --- qui,
+Une fois ces deux classes définies, trois questions sont posées, toutes de la
+même forme : est-ce que la restriction aux objets lisses fait de la
+linéarisation une équivalence --- vers des complexes « à coefficients
+tordus », localement constants ? Est-ce qu'elle préserve les groupes
+d'extensions ? Peut-on réaliser ses troncatures par des préfaisceaux ? Le programme est celui de la correspondance de Dold--Kan --- qui,
 sur les ensembles simpliciaux, identifie exactement les objets simpliciaux
 abéliens et les complexes de chaînes --- transporté sur une catégorie $A$
 quelconque. La page le dit d'ailleurs sans détour : \emph{OK pour $A =
@@ -63,7 +90,7 @@ Ce dossier est le plus difficile à lire du groupe auquel il appartient, et
 cette lecture le dit plutôt que de le masquer : plusieurs des définitions qu'il
 pose ont, à leur endroit décisif, un mot qui ne se lit pas.
 
-\keywords{linearization, Dold-Kan correspondence, smooth object, derived category of presheaves, chain complex with twisted coefficients}
+\keywords{linearization, Dold-Kan correspondence, smooth object, derived category of presheaves, chain complex with twisted coefficients, local system, test category, Postnikov truncation}
 \end{resume}
 
 \pagerange{1}{2}
@@ -91,7 +118,7 @@ flèche naturelle
 \[
 \int_{A_{a}} L_{a} \longrightarrow \int_{A_{b}} L_{b}
 \]
-est un isomorphisme. Les deux membres sont ensuite réécrits, par une chaîne
+est un quasi-isomorphisme. Les deux membres sont ensuite réécrits, par une chaîne
 d'égalités que la page pose verticalement :
 \[
 \int_{A_{a}} L_{a} = \int_{A} L^{(a)} = L^{(a)} * L^{A^{\circ}},
@@ -100,13 +127,16 @@ d'égalités que la page pose verticalement :
 \]
 
 La condition est donc : la valeur de la convolution ne dépend pas du point où
-on la prend.\footnote{Le mot qui qualifie la flèche est écrit très vite et n'est
-pas assuré : la transcription le laisse en blanc. Ce pourrait être
-« isomorphisme » ou « quasi-isomorphisme », et la différence n'est pas anodine
---- dans un cadre dérivé c'est la seconde qui est la bonne notion. On a retenu
-la première parce que c'est celle qui rend la définition la plus faible, donc
-la classe des objets lisses la plus large, et parce que rien sur la page
-n'impose l'autre ; le choix est le nôtre et il est signalé.} Une lecture
+on la prend.\footnote{Le mot qui qualifie la flèche est écrit très vite ; relu
+sur le fac-similé, il commence par un $q$ et finit en « -iso », d'où
+« quasi-isomorphisme », lecture probable mais non vérifiée par un lecteur. Si
+l'on lit $\int$ comme l'homologie de Grothendieck d'un préfaisceau abélien (le
+foncteur dérivé à gauche de la colimite, à valeurs dans la catégorie dérivée
+des complexes de groupes abéliens de degrés positifs), les deux lectures
+reviennent au même : un isomorphisme de la catégorie dérivée est un
+quasi-isomorphisme de complexes. C'est la lecture de L.~Hubert, \emph{Correspondances
+de Dold--Kan homotopiques}, thèse, Aix-Marseille, 2025, § 1.4--1.6, où
+l'identité $\int_{A_{/a}} L = \int_{A} L^{(a)}$ est démontrée.} Une lecture
 possible, et qui est celle que le mot \emph{lisse} suggère, est que la classe
 ainsi définie est celle des préfaisceaux « localement constants » du point de
 vue de la linéarisation : ceux dont la linéarisation ne varie pas le long des
@@ -130,10 +160,14 @@ Ce que la page fournit ensuite est l'objet sur lequel tout repose : on pose
 L^{b} = \bigl(a \mapsto L^{(a)} \otimes \ldots \bigr)
 \qquad\text{dans } D_{\bullet}(\hat{B}_{\mathrm{ab}}),
 \]
-et l'on note que c'est un complexe de chaînes à coefficients
-tordus.\footnote{Le second facteur du produit tensoriel n'est pas lisible, non
-plus que l'adjectif qui qualifie le complexe ; la torsion des coefficients,
-elle, est écrite et lisible. C'est le point important : $L^{b}$ n'est pas un
+et l'on note que c'est un complexe \emph{localement constant}, à coefficients
+tordus.\footnote{Le second facteur du produit tensoriel n'est pas lisible. Les
+mots « loc. const. », abrégés, sont relus sur le fac-similé (lecture probable,
+non vérifiée par un lecteur) ; le mot abrégé qui les précède ne l'est pas. La
+torsion des coefficients, elle, est écrite et lisible. Par définition de
+\emph{lisse}, la valeur de $L^{b}$ en $a$, qui est $\int_{A} L^{(a)}$, ne change
+pas le long des flèches de $A$ : être lisse, c'est exactement avoir un $L^{b}$
+localement constant. C'est le point important : $L^{b}$ n'est pas un
 complexe à coefficients constants, et c'est ce qui empêche de traiter la
 linéarisation comme une simple homologie.}
 
@@ -172,36 +206,106 @@ Le premier cas est affirmé, le second est demandé. Autrement dit : la
 correspondance est acquise sur la catégorie des simplexes, et la question est de
 savoir si elle survit au passage aux catégories de tranches --- premier pas hors
 de $\Delta$, et le plus modeste qu'on puisse faire.\footnote{Une note écrite en
-regard, à demi lisible, rappelle que la construction se fait « comme
-$M_{\bullet} \mapsto M^{b}$ », c'est-à-dire par le foncteur qui a été défini
-plus haut. Un mot de cette note est illisible.}
+regard dit, relue sur le fac-similé : « $\wr$ par Quillen, peut se définir aussi
+comme $M_{\bullet} \mapsto M_{\bullet}^{b}$ ». Un trait vertical y joint le but
+$D^{lc}(\hat{B}_{k})$ à une seconde catégorie, $D^{lc}_{\bullet}(\hat{A}_{k})$,
+écrite au-dessous.}
+
+La note qui accompagne la question fixe ce que la question demande. Le but
+$D^{lc}(\hat{B}_{k})$ est équivalent, « par Quillen », à
+$D^{lc}_{\bullet}(\hat{A}_{k})$, la catégorie dérivée des complexes de
+préfaisceaux sur $A$ dont l'homologie est localement constante. C'est
+l'invariance homotopique des coefficients localement constants : ils ne
+dépendent que du type d'homotopie de $A$, et sont les systèmes locaux sur ce
+type d'homotopie. La flèche, elle, peut se définir comme $L \mapsto L^{b}$, avec
+$L^{b}(a) = \int_{A} L^{(a)}$. Que $L^{b}$ tombe dans les complexes localement
+constants est exactement la lissité de $L$. La question (1) se lit donc : le
+foncteur $L \mapsto L^{b}$, des préfaisceaux lisses localisés en une classe
+$W_{y}$ de flèches vers les complexes localement constants sur $A$, est-il une
+équivalence ?\footnote{L'indice de $W$ se lit $y$ ou $q$, avec un « ? »
+au-dessous, et une ligne biffée plus haut commençait par un $W_{q}$ ; si c'est
+$q$, ce sont vraisemblablement les flèches que $L \mapsto L^{b}$ envoie sur des
+quasi-isomorphismes, mais la page ne le dit pas. Le « par Quillen » renvoie sans
+doute à D.~Quillen, « Higher algebraic $K$-theory I » (1973), § 1, où les
+coefficients localement constants sur une petite catégorie sont identifiés aux
+systèmes locaux sur son classifiant ; c'est notre rapprochement.} Pour
+$A = \Delta$, qui est asphérique, les complexes localement constants sont
+constants. Tout groupe abélien simplicial est lisse (par Eilenberg--Zilber,
+$L \otimes \mathbb{Z}\Delta[n] \to L$ est un quasi-isomorphisme), et la
+réponse est la correspondance de Dold--Kan homotopique : c'est le « OK » de la
+page.\footnote{Ce contrôle est le nôtre. La forme à coefficients constants de
+la question, pour une catégorie test quelconque, est la conjecture de
+\emph{Pursuing Stacks} que Hubert démontre pour les catégories test de
+Whitehead (thèse citée, théorème 3.5.22) ; la forme à coefficients
+localement constants que pose ce dossier n'a pas été trouvée imprimée.}
 
 \subsection*{(2) Les extensions}
 
-Si $L$ et $M$ sont dans $\mathrm{Lisse}_{\mathbb{Z}}(A)$, a-t-on
+Si $L$ et $M$ sont dans $\mathrm{Lisse}_{\mathbb{Z}}(A)$, la flèche
 \[
 \mathrm{Ext}^{i}_{\mathbb{Z}_{A}}(L, M) \longrightarrow
-\mathrm{Ext}^{i}_{\mathbb{Z}_{B}}(L^{b}, M^{b}) \;?
+\mathrm{Ext}^{i}_{\mathbb{Z}_{B}}(L^{b}, M^{b})
 \]
+est-elle bijective pour $i \geq 0$ ?\footnote{« pour $i \geq 0$ » est relu sur le
+fac-similé ; le signe pourrait être $>$. La page écrit « a-t-on » devant la
+flèche, et le mot « bijective » est le nôtre.}
 
-C'est la question 1 rendue quantitative : une équivalence de catégories induit
-des isomorphismes sur les groupes d'extensions, et vérifier ces derniers est le
-moyen usuel d'attaquer la première. Deux remarques l'accompagnent entre
-crochets. La première demande si cela vaudrait \emph{sans} supposer $L$ et $M$
-lisses --- c'est-à-dire si l'hypothèse de lissité est nécessaire ou seulement
-commode. La seconde, écrite plus haut, note que
-$D_{\bullet}(\mathrm{Ab}) \cong \mathrm{Hot}_{ab}$ lorsque $A$ est
-asphérique.\footnote{Cette dernière est le cas dégénéré qui sert de contrôle :
-quand $A$ est asphérique, la catégorie dérivée des groupes abéliens est
-équivalente à la catégorie homotopique abélienne, et la question 1 y est donc
-triviale. Que ce contrôle soit noté juste à côté de la question générale
-n'est pas indifférent.}
+C'est la question 1 vue sur les groupes d'extensions : à gauche, les
+extensions entre préfaisceaux abéliens ; à droite, entre les complexes
+localement constants qui leur correspondent. Deux crochets l'accompagnent. Le
+premier demande si cela vaudrait \emph{même sans} supposer $L$ et $M$ lisses,
+et si l'on peut remplacer $L$, $M$ par des complexes $L_{\bullet}$,
+$M_{\bullet}$. Le second identifie le membre de droite quand $A$ est asphérique
+:
+\[
+\mathrm{Ext}^{i}_{\mathbb{Z}_{B}}(L^{b}, M^{b}) \simeq
+\mathrm{Ext}^{i}_{\mathbb{Z}}\Bigl(\int_{A} L, \int_{A} M\Bigr).
+\]
+Les complexes localement constants sur une catégorie asphérique sont en effet
+constants, et l'on retrouve la remarque écrite au bas de la colonne de la
+question 1 : $D_{\bullet}(\mathrm{Ab}) \cong \mathrm{Hot}_{ab}$ si $A$ est
+asphérique.\footnote{Cette remarque n'est pas un cas trivial de la question 1.
+Pour $A$ asphérique, la question 1 devient : la linéarisation
+$L \mapsto \int_{A} L$, de $\hat{A}_{\mathrm{ab}}$ localisée vers la catégorie
+dérivée des groupes abéliens, est-elle une équivalence ? C'est la
+correspondance de Dold--Kan homotopique, connue pour $\Delta$ et conjecturée
+dans \emph{Pursuing Stacks} pour les catégories test ; Hubert la démontre pour
+les catégories test de Whitehead (thèse citée plus haut, théorème 3.5.22). Une
+première version de cette lecture la disait triviale à tort.}
+
+Lue avec $i = 0$, la question demande trop, dès $A = \Delta$.\footnote{Contrôle de
+cette édition. Le groupe abélien simplicial
+$L = \mathbb{Z}\Delta[1]/\mathbb{Z}\{0\}$ est contractile, et lisse comme tous
+les groupes abéliens simpliciaux. Pourtant $\mathrm{Hom}(L, L)$ contient
+l'identité, alors que
+$\mathrm{Ext}^{0}_{\mathbb{Z}}(\int_{\Delta} L, \int_{\Delta} L)$ est nul,
+puisque $\int_{\Delta} L$ est acyclique.} Les $\mathrm{Ext}^{0}$ de gauche sont
+des morphismes de préfaisceaux, ceux de droite des morphismes de la
+catégorie dérivée, et une équivalence après localisation ne les identifie pas.
+La question a donc son sens pour $i > 0$, ou avec, à gauche, des $\mathrm{Ext}$
+pris dans la catégorie localisée ; la page ne tranche pas.
 
 \subsection*{(3)}
 
-La troisième question commence --- « supposons $L$ lisse » --- et sa suite n'est
-pas lisible.\footnote{Elle est écrite en bas de feuillet, sur la portion la plus
-sombre du listing. On ne restitue rien.}
+Soient $L$ lisse et $N \in \mathbb{N}$. On cherche un préfaisceau abélien $L'$
+et une flèche $L \to L'$ telle que $L^{b} \to L'^{b}$ identifie $L'^{b}$ au
+tronqué de $L^{b}$ en degrés $\leq N$.\footnote{Lu sur le fac-similé ; la
+première lecture s'arrêtait à « supposons $L$ lisse ». Une première version,
+barrée, partait d'une hypothèse d'annulation « $(L^{b}) = 0$ pour $i \leq N$ »
+et cherchait « un $L'$ ». Le mot « tronqué » est une lecture probable, et un
+petit mot ajouté au-dessus de « de $L^{b}$ » reste illisible.} Autrement dit :
+la tour de Postnikov du complexe localement constant $L^{b}$ se
+réalise-t-elle par des préfaisceaux, c'est-à-dire en amont de la
+linéarisation ? C'est la question 1 posée étage par étage : si $L \mapsto L^{b}$
+est une équivalence, la troncature, qui existe en aval, se relève en amont, à équivalence près ; la question demande davantage, une flèche $L \to L'$ de préfaisceaux.
+
+Pour $A = \Delta$, la réponse est oui.\footnote{Contrôle de cette édition. Pour
+un groupe abélien simplicial $L$, $L^{b}$ est le complexe normalisé $NL$ ;
+le quotient $NL \to \tau_{\leq N} NL$, qui remplace $NL_{N}$ par
+$NL_{N}/d(NL_{N+1})$ et annule les degrés $> N$, est un morphisme surjectif de
+complexes, et la correspondance de Dold--Kan le réalise par un morphisme de
+groupes abéliens simpliciaux $L \to L'$.} Hors de $\Delta$, et d'abord pour
+$A = \Delta_{/X}$, la page ne dit rien.
 
 \pagerange{3}{3}
 \section*{Les trois programmes}
@@ -224,22 +328,79 @@ Trois programmes sont ensuite listés :
 \begin{itemize}
 \item[A)] $D^{b}_{lc}(\hat{A}_{k})$, etc.
 \item[B)] $D^{-}_{lc}(\hat{A}_{h}) \rightleftarrows D^{-}_{lc}(\hat{B}_{h})$,
-avec le mot \emph{équivalence} souligné --- c'est la question 1, reposée avec
-des catégories dérivées bornées d'un côté seulement.\footnote{Une note ajoute :
-« NB : on a $D^{-}(\hat{A}_{k}) \to D^{-}(\hat{B}_{h})$ », suivie d'un membre
-illisible. Les indices $k$ et $h$ alternent d'une ligne à l'autre sans que la
-page dise s'ils désignent la même chose ; on les reproduit tels quels plutôt
+deux foncteurs « équivalences quasi-inverses l'une de l'autre » --- c'est la
+question 1 reposée avec des catégories dérivées bornées d'un côté
+seulement.\footnote{« équivalences quasi-inverses » est relu sur le fac-similé
+(lecture probable). Une note ajoute : « NB : on a \ldots{}
+$D^{-}(\hat{A}_{k}) \to D^{-}(\hat{B}_{h})$ », le mot qui suit « on a »
+n'étant pas lu. Les indices $k$ et $h$ alternent d'une ligne à l'autre sans que
+la page dise s'ils désignent la même chose ; on les reproduit tels quels plutôt
 que de les uniformiser.}
-\item[C)] Les objets \emph{lisses} de $\hat{A}_{k}$, dans un cadre annoncé comme
-plus général, avec une notation $\hat{A}_{k\text{-lisse}}$ substituée à un
-$\mathrm{Lisse}_{k}$ barré, et un $W$ isolé.
+\item[C)] Les objets \emph{lisses} de $\hat{A}_{k}$ --- « plus généralement, de
+$D^{-}(\hat{A}_{k})$, mais c'est moins intéressant » --- avec une notation
+$\hat{A}_{k\text{-lisse}}$ substituée à un $\mathrm{Lisse}_{k}$ barré, un $W$, et
+la localisation $W^{-1}_{\mathrm{lisse}}$.\footnote{La parenthèse et
+$W^{-1}_{\mathrm{lisse}}$ sont relus sur le fac-similé ; « moins intéressant »
+est une lecture probable.}
 \end{itemize}
 
-Ce changement de notation --- un indice à la place d'un nom --- est le seul
-signe, dans tout le dossier, d'un travail de mise au propre. Il n'a pas
-abouti : le quatrième feuillet reprend les mêmes matières sans les mener plus
-loin, et rien n'y forme un énoncé qu'on puisse détacher.\footnote{On ne le
-découpe donc pas en propositions qu'il ne porte pas. C'est le seul feuillet
-écrit du dossier dont cette lecture ne tire rien.}
+À droite, dans un cadre, deux variantes du mot : \emph{c-lisse} et
+\emph{c-propre}, et une date, « 4.11. ».\footnote{Vraisemblablement le
+4~novembre ; l'année n'est pas écrite. L'expansion du préfixe « c- » n'est pas
+sur la page.}
+
+Le bas du feuillet donne la clé de la définition de la page 2. Des croquis de
+tranches ($X/b \to Y/b$ au-dessus d'une flèche $X \to Y$) et de cotranches
+($b \backslash Y$, $b' \backslash Y$ pour $b \to b'$) précèdent deux colonnes
+titrées et soulignées :
+\[
+\begin{array}{ll}
+\text{lisse} & \text{colisse} \\
+LH_{\bullet}(L \mid A/\cdot) & LH^{\bullet}(L \mid b\backslash B)
+\end{array}
+\]
+La lissité porte sur l'homologie (dérivée à gauche) de $L$ sur les tranches
+$A/a$, c'est-à-dire sur les $\int_{A_{a}} L_{a}$ de la page 2. La notion duale,
+« colisse », porterait sur la cohomologie sur les
+cotranches.\footnote{Relu sur le fac-similé (2026-11-23), non vérifié par un
+lecteur. Les croquis et ces deux colonnes manquaient à la première
+transcription. La lecture de la seconde colonne, $LH^{\bullet}(L \mid
+b\backslash B)$, est incertaine. La première confirme que $A_{a}$ désigne la
+tranche $A/a$, ce que cette lecture avait supposé à la page 2.}
+
+\pagerange{4}{4}
+\section*{Un calcul (page 4)}
+
+Le quatrième feuillet calcule. Il part de la formule de co-Yoneda : la
+convolution d'un préfaisceau $F$ avec le représentable en $b$ est la valeur de
+$F$ en $b$,
+\[
+F * k^{(b^{\circ})} \simeq F(b),
+\qquad\text{d'où}\qquad
+L^{(a)} * h^{(b^{\circ})} \simeq L(b)^{(\mathrm{Hom}_{A}(b, a))},
+\]
+la somme directe de copies de $L(b)$ indexée par les flèches $b \to a$. Il
+évalue ainsi la construction $L \mapsto L^{(a)} * L^{B}$ de la page 2 sur des
+objets de base, sommes de $L_{i}(b_{\beta})$ indexées par des ensembles de
+flèches. Il obtient en $x$ une somme
+\[
+\bigoplus_{\alpha, \beta, i} L_{i}(b_{\beta})^{(\mathrm{Hom}(b_{\beta}, a_{\alpha})
+\times \mathrm{Hom}_{A}(x, a_{\alpha}))},
+\]
+à travers une chaîne d'isomorphismes écrite en colonne.\footnote{Transcrit sur
+le fac-similé le 2026-11-23 ; la première lecture tenait ce feuillet pour trop
+raturé. Les indices $\alpha$, $\beta$, $i$ et les exposants sont souvent
+incertains, et un membre de la chaîne est surchargé : on n'en donne que la
+forme, sans en garantir chaque terme.} La flèche étudiée est écrite
+$D^{b}_{lc}(\hat{A}_{k}) \to D^{b}_{lc}(\hat{B}_{h})$,
+$L_{\bullet} \mapsto L_{\bullet}^{(a)} * L_{\bullet}^{B}$. Une accolade énumère
+les structures qui y interviennent : $LH_{\bullet}^{(k)}$, $DR_{k}$,
+$\mathrm{Add}_{k}(A)$, $D^{b}_{lc}(\hat{A}_{k})$.\footnote{Les mots qui suivent
+$LH_{\bullet}^{(k)}$ et $DR_{k}$ ne sont lus qu'en partie, et la page ne dit pas
+ce que désignent $DR_{k}$ ni $\mathrm{Add}_{k}(A)$ ; on ne les développe pas.}
+
+C'est le calcul qui sous-tend la question 1 : si l'on veut que
+$L \mapsto L^{b}$ soit une équivalence, il faut savoir ce qu'elle fait sur des
+générateurs. La page s'arrête avant d'en tirer une conclusion.
 
 \end{document}

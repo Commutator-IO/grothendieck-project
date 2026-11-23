@@ -1,0 +1,73 @@
+\section{The generator as a software pipeline}\label{sec:intro}
+
+\subsection{Bridges}
+
+O.~Caramello's \emph{bridges} \cite{caramello-unification,caramello-tst} start from the observation that a \emph{topos} (a category that behaves like the category of sets) can be presented in many ways that look unrelated: as the actions of a monoid, as the representations of a quiver, as the sheaves on a space, as the models of a logical theory. A property of the topos, such as \q{the law of excluded middle holds}, can be characterised on each presentation. Two characterisations of one property, on two presentations of one topos, give a theorem relating the two presentations, in which the topos no longer appears. In Lean terms: two lemmas \texttt{P E ↔ Q₁ C} and \texttt{P E ↔ Q₂ D}, for an equivalence \texttt{E ≌ PSh C} and \texttt{E ≌ PSh D}, chain into \texttt{Q₁ C ↔ Q₂ D}.
+
+In a talk at Mines Paris on 17 September 2024 \cite{caramello-mines}, Caramello proposed to automate this: a proof assistant would take \q{a database of topos equivalences} (the \emph{decks} of the bridges) and \q{a database of characterizations of topos-theoretic invariants in terms of different presentations for toposes} (their \emph{arches}), and combine them \q{to generate concrete correspondences between `unravelings' of a given invariant in terms of different presentations for a given topos} \cite[slide 11]{caramello-mines}. The results, she warns, \q{can be rather `weird' according to the usual mathematical standards}, but \q{with a careful choice of topos equivalences and invariants, one can easily get interesting and natural mathematical results} \cite[slide 8]{caramello-mines}.
+
+\subsection{The pipeline}
+
+We run such a generator by hand and describe it the way one describes a data pipeline: what goes in, what each stage does, what comes out, and how the outputs are tested.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[st/.style={draw,rounded corners,align=center,font=\small,minimum height=9mm,text width=25mm},db/.style={draw,align=center,font=\small,minimum height=9mm,text width=25mm,fill=blue!6},ok/.style={draw,rounded corners,align=center,font=\small,minimum height=9mm,text width=25mm,fill=green!8},>=Stealth,node distance=5mm]
+\node[db] (decks) at (0,1) {deck registry\\ \footnotesize shapes $C$};
+\node[db] (arches) at (0,-1) {arch registry\\ \footnotesize Lean lemmas};
+\node[st] (join) at (3.4,0) {1.~join\\ \footnotesize deck $\times$ arch};
+\node[st] (spec) at (6.8,0) {2.~specialise\\ \footnotesize compute on $C$};
+\node[st] (unf) at (10.2,0) {3.~unfold\\ \footnotesize elementary terms};
+\node[st] (rw) at (10.2,-2.2) {4.~rewrite\\ \footnotesize readable statement};
+\node[ok] (ver) at (6.8,-2.2) {5.~verify\\ \footnotesize Lean + direct proof};
+\node[ok] (nov) at (3.4,-2.2) {6.~novelty filter\\ \footnotesize literature};
+\node[st] (out) at (0,-3.3) {output\\ \footnotesize new theorems};
+\node[st] (cal) at (3.4,-4.2) {calibration\\ \footnotesize known results};
+\draw[->] (decks) -- (join); \draw[->] (arches) -- (join);
+\draw[->] (join) -- (spec); \draw[->] (spec) -- (unf); \draw[->] (unf) -- (rw);
+\draw[->] (rw) -- (ver); \draw[->] (ver) -- (nov); \draw[->] (nov) -- (out); \draw[->] (nov) -- (cal);
+\end{tikzpicture}
+\caption{The generator, stage by stage. Blue: inputs. Green: the two test stages.}\label{fig:pipeline}
+\end{figure}
+
+\begin{description}
+\item[Arch registry.] Five lemmas of the form \texttt{(property of PSh C) ↔ (condition on C)}, proved in Lean~4 in the library \lp{} of lean-pool (\S\ref{sec:registry}). They are the trusted core: every later stage specialises them.
+\item[Deck registry.] Small categories $C$ whose presheaves are a familiar structure: $\B M$ for a monoid $M$ (its actions), the free category of a quiver (its representations), $\Delta$ (simplicial sets), a preorder (functors on it, or sheaves on its Alexandrov space). The book of La Palme Reyes, Reyes and Zolfaghari \cite{reyes-generic} is a catalogue of such decks, each familiar structure presented by its \q{generic figures}.
+\item[1. Join.] Pair every deck with every arch.
+\item[2. Specialise.] Instantiate the arch at the deck and compute the condition on $C$: for instance, the Ore condition on $\B M$ becomes $aM\cap bM\neq\emptyset$.
+\item[3. Unfold.] Translate the property of the topos into the language of the structures, with one rule per property (Lemma~\ref{lem:neg} for negation).
+\item[4. Rewrite.] Reformulate the condition on $C$ in the usual language of the field (minimal right ideals, outgoing arrows, \dots). This stage needs a human, or a language model.
+\item[5. Verify.] Two independent tests: a Lean proof of the specialised statement, as a corollary of the arch; and a direct proof without topoi, readable by a third-year student.
+\item[6. Novelty filter.] Look the statement up in the matching dataset of TheoremGraph and with the semantic search of TheoremSearch, then in the literature. Statements found in print go to a calibration log (\S\ref{sec:calibration}); the rest form the output (\S\ref{sec:machines}--\ref{sec:shapes}).
+\end{description}
+
+Each theorem below is printed with its \emph{trace}, which records what stages 1--6 produced for it.
+
+\subsection{Outputs}
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}X l}
+\toprule
+deck & generated statement & \S\\
+\midrule
+representations of a quiver $R$ & weak excluded middle $\iff$ at most one outgoing arrow per vertex & \ref{sec:machines}\\
+automata over $\Sigma$ & weak excluded middle $\iff|\Sigma|\le 1$ & \ref{sec:machines}\\
+representations of quivers & equivalent categories $\iff$ isomorphic quivers; essential points $=$ vertices & \ref{sec:machines}\\
+representations of the $n$-cycle & exactly $2^n+1$ subtopoi: invert any set of arrows, or collapse & \ref{sec:machines}\\
+$T_n$, $PT_n$, $I_n$, $O_n$, $M_n(\mathbb F_q)$-sets & $n$, $n{+}1$, $n{+}1$, $n$, $n{+}1$ essential points; $n{+}1$, $n{+}2$, $n{+}2$, $n{+}1$, $n{+}2$ subtopoi & \ref{sec:finite}\\
+corners $eMe$, $1\in MeM$ & the Ore condition transfers (at once from published Morita theorems) & \ref{sec:finite}\\
+$M_n(k)$-sets; $[\mathrm{Sub}(V),\Set]$ & $M_n(k)$-sets $\simeq M_m(k)$-sets iff $n = m$; the subspace lattice determines $\dim V$, and the field when $\dim V\ge 3$ & \ref{sec:linear}\\
+$(\mathbb Z/n,\cdot)$-sets & $2^{\omega(n)}$ essential points, $D(\omega(n))$ subtopoi (Dedekind numbers) & \ref{sec:linear}\\
+sheaves on a compact Hausdorff space $X$ & De Morgan $\iff$ $C(X,\mathbb R)$ Dedekind complete (combining published theorems); for metrisable $X$, $\iff$ $X$ finite & \ref{sec:analysis}\\
+graphs, simplicial sets, trees, \dots & weak excluded middle, case by case (at once from the bridge) & \ref{sec:shapes}\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+None of these is deep; \S\ref{sec:limits} discusses what that means for the method. We write for an engineer who writes Lean and thinks in pipelines: the theory takes one short section, we quote the Lean statements, and most of the space goes to the outputs and to what each stage did.
+
+\subsection{Plan}
+
+Section~\ref{sec:toolbox} gives the four definitions the text needs and the registry: the five arches that drive the outputs, and the decks. Section~\ref{sec:method} turns the pipeline into a recipe, with a table of invariants, a checklist for recognising decks, a Lean template and a search protocol. Sections~\ref{sec:machines} to~\ref{sec:shapes} give the outputs, deck by deck: quivers, monoids, analysis, linear algebra and arithmetic, combinatorial topoi. Section~\ref{sec:equivalences} runs the same machinery backwards to show that pairs of classical third-year theorems (Birkhoff and finite $T_0$ spaces, Cayley and the reconstruction of a group, Galois theory and covering spaces) are two readings of one bridge. Section~\ref{sec:calibration} lists the outputs already in print, and Section~\ref{sec:limits} discusses the limits of the approach and the lessons for an automatic generator. Appendix~\ref{app:novelty} gives the novelty filter in detail, with the sources searched, and Appendix~\ref{sec:lean-lit} lists the Lean files and declarations.
+
+A companion note \cite{bridges-notes} applies the generator to Grothendieck's notes: three more arches (two-valued, connected, presheaf topos of a preorder), proved in Lean and read on decks that recur in his notes; the precedents found there; and the topos of pseudo-fields, for which he gives three presentations.

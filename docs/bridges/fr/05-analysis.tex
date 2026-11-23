@@ -1,0 +1,40 @@
+\section{Analyse: faisceaux sur les espaces compacts et treillis de Banach}\label{sec:analysis}
+
+Jusqu'ici, les tabliers étaient des topos de préfaisceaux. En analyse, les tabliers naturels sont des topos de \emph{faisceaux} sur un espace topologique $X$: un faisceau associe un ensemble $F(U)$ à chaque ouvert, avec des restrictions, de sorte que des sections locales compatibles se recollent de façon unique (fonctions continues, solutions d'une équation différentielle, sections d'un fibré). La négation se calcule sur les ouverts: le pseudo-complémentaire d'un ouvert $U$ est l'intérieur de son complémentaire. Deux caractérisations classiques des topos de faisceaux sur un espace jouent ici le rôle d'arches (ce sont les pendants topologiques des ponts~\ref{br:bool} et~\ref{br:dm}; elles ne font pas partie des cinq arches démontrées en Lean et ne sont pas formalisées):
+\begin{itemize}
+\item $\Sh(X)$ est booléen si et seulement si toute partie ouverte de $X$ est fermée (le pseudo-complémentaire de $U$ est $X\setminus\overline U$, et $U\cup(X\setminus\overline U) = X$ si et seulement si $\overline U\subseteq U$);
+\item $\Sh(X)$ est de De Morgan si et seulement si $X$ est \emph{extrêmement discontinu}: l'adhérence de tout ouvert est ouverte \cite{johnstone-demorgan}. Sur les ouverts, $\neg U = X\setminus\overline U$ et $\neg\neg U = \operatorname{int}\overline U$, et $\neg U\cup\neg\neg U = X$ si et seulement si $\overline U\subseteq\operatorname{int}\overline U$, c'est-à-dire si et seulement si $\overline U$ est ouvert.
+\end{itemize}
+L'autre vocabulaire est celui de l'analyse fonctionnelle: par la dualité de Gelfand, un espace compact $X$ revient au même que la C$^*$-algèbre commutative $C(X)$, ou que le treillis de Banach $C(X,\mathbb R)$.
+
+\begin{theorem}\label{th:analysis}
+Soit $X$ un espace compact (séparé).
+\begin{enumerate}
+\item $\Sh(X)$ est booléen si et seulement si $X$ est fini, si et seulement si $C(X)$ est de dimension finie.
+\item $\Sh(X)$ est de De Morgan si et seulement si le treillis $C(X,\mathbb R)$ est \emph{complet au sens de Dedekind}: toute famille majorée de fonctions continues a une borne supérieure parmi les fonctions continues.
+\item Si $X$ est métrisable, $\Sh(X)$ est de De Morgan si et seulement si $X$ est fini. En particulier, les topos des faisceaux sur $[0,1]$, sur le cercle, sur l'ensemble de Cantor ne sont pas de De Morgan, tandis que les topos des faisceaux sur le compactifié de Stone--Čech $\beta\mathbb N$ et sur le spectre de Gelfand de $L^\infty[0,1]$ sont de De Morgan et non booléens.
+\end{enumerate}
+\end{theorem}
+
+\begin{trace}
+\item[tablier] $\Sh(X)$, $X$ compact, avec $X = $ le spectre de Gelfand de $C(X)$.
+\item[arche] les deux caractérisations classiques ci-dessus (ouverts fermés; extrêmement discontinu \cite{johnstone-demorgan}).
+\item[spécialiser] pour $X$ compact: tout ouvert est fermé $\iff$ $X$ discret $\iff$ $X$ fini; extrêmement discontinu $\iff$ $C(X,\mathbb R)$ complet au sens de Dedekind (\cite[Th.~14]{stone-bounded}, et Nakano \cite{nakano}); un espace compact métrisable extrêmement discontinu est fini.
+\item[réécrire] tout énoncer sur $C(X)$.
+\item[vérifier] preuve directe ci-dessous; absent de la bibliothèque Lean (Mathlib a \texttt{ExtremallyDisconnected} et \texttt{Stonean}, mais pas $\Sh(X)$ comme topos muni de sa négation).
+\item[nouveauté] la forme interne est publiée: Johnstone montre que $\Sh(X)$ est de De Morgan si et seulement si son objet des réels de Dedekind est intérieurement conditionnellement complet \cite{johnstone-demorgan}; la forme externe (2), énoncée sur $C(X,\mathbb R)$, qui combine ce résultat avec ceux de Stone et de Nakano \cite{stone-bounded,nakano}, et le cas métrisable (3) n'ont pas été trouvés.
+\end{trace}
+
+\direct{} (1) Si tout ouvert est fermé, tout singleton (fermé, car $X$ est séparé) a un complémentaire ouvert qui est fermé, donc les singletons sont ouverts; $X$ est discret et compact, donc fini. Alors $C(X)\cong\mathbb C^{X}$. (2) C'est un corollaire de deux théorèmes classiques: $\Sh(X)$ est de De Morgan si et seulement si $X$ est extrêmement discontinu (Johnstone \cite{johnstone-demorgan}; le calcul de la négation sur les ouverts est rappelé plus haut), et, pour $X$ compact séparé, $X$ est extrêmement discontinu si et seulement si $C(X,\mathbb R)$ est complet au sens de Dedekind (Stone \cite[Th.~14]{stone-bounded} et Nakano \cite{nakano}). Nous citons le sens \q{extrêmement discontinu implique complet au sens de Dedekind}; l'autre se voit facilement. Pour un ouvert $U$, tout majorant continu des fonctions $0\le g\le 1$ à support dans $U$ est $\ge 1$ sur $\overline U$ (Urysohn), et, pour $x\notin\overline U$, l'un de ces majorants s'annule en $x$; une borne supérieure dans $C(X,\mathbb R)$ est donc nécessairement la fonction indicatrice de $\overline U$, qui n'est continue que si $\overline U$ est ouvert. (3) Dans un espace métrisable extrêmement discontinu, toute suite convergente de points distincts $x_n\to x$ donne des ouverts disjoints $U$, $V$ autour de $\{x_{2n}\}$ et de $\{x_{2n+1}\}$ dont les adhérences contiennent toutes deux $x$; or, dans un tel espace, deux ouverts disjoints ont des adhérences disjointes. Un espace compact métrisable de ce type n'a donc aucune suite convergente non triviale, et il est fini. L'espace $\beta\mathbb N$ et le spectre de $L^\infty[0,1]$ sont extrêmement discontinus (le second parce que $L^\infty[0,1]$ est complet au sens de Dedekind), et infinis.\qed
+
+\inwords{} La logique intuitionniste des \q{fonctions continues sur $X$} vérifie $\neg p\vee\neg\neg p$ exactement quand les bornes supérieures de fonctions continues restent continues. Sur $[0,1]$, c'est faux: les fonctions $\min(1, n\cdot\max(0, x-\tfrac12))$ sont majorées par $1$, et leur borne supérieure, l'indicatrice de $(\tfrac12,1]$, n'est pas continue; sur le spectre de $L^\infty$, où toute famille bornée a une borne supérieure essentielle, c'est vrai.
+
+\subsection{Un espace, trois théorèmes classiques}
+
+Voici une équivalence classique, du type de celles du \S\ref{sec:equivalences}. Un espace sobre est déterminé par son topos des faisceaux: $\Sh(X)\simeq\Sh(Y)$ si et seulement si $X\cong Y$, les points de $\Sh(X)$ étant les points de $X$. Pour les espaces compacts (qui sont sobres), on lit le même invariant, l'espace des points, sur trois présentations:
+\begin{itemize}
+\item sur $\Sh(X)$: deux espaces compacts dont les topos des faisceaux sont équivalents sont homéomorphes;
+\item sur l'anneau $C(X)$: le \emph{théorème de Gelfand--Kolmogorov}, $C(X)\cong C(Y)$ comme anneaux si et seulement si $X\cong Y$ (les points sont les idéaux maximaux);
+\item sur l'espace de Banach $C(X)$: le \emph{théorème de Banach--Stone}, $C(X)$ et $C(Y)$ sont linéairement isométriques si et seulement si $X\cong Y$ (les points sont les points extrémaux de la boule unité du dual, au signe près).
+\end{itemize}
+Ces trois énoncés classiques se démontrent dans trois cours différents; le pont dit qu'ils n'en font qu'un, \q{l'espace des points est un invariant}, lu sur trois présentations du même objet.

@@ -84,3 +84,25 @@ The counts are the same for all five q of each type. This is evidence that the f
 - Steps 1 and 2 are standard arguments. They are not machine-checked; only the
   enumeration after them is.
 - This is not a proof for general G. Larger ranks (A3, B3, ...) were not attempted.
+
+## Type B_n modulo primes (`kostant_bn.py`)
+
+    python3 -I computations/kostant/kostant_bn.py 7     # B_2 to B_7, a few seconds
+
+For E0 = e + e_{-theta} in so(2n+1), it checks that every Borel subgroup through the
+centraliser of E0 is opposite to the upper triangular one: for each isotropic choice of k
+eigenvectors (k <= n), the minor of their last k coordinates is nonzero. It computes modulo a
+prime p = 1 mod 2n in which the eigenvalues of E0 are distinct; a minor nonzero modulo p is
+nonzero in characteristic 0. Result: no vanishing minor for n = 2..7 (8, 26, 80, 242, 728,
+2186 minors). The general statement, in every type, is Theorem 2.1 of
+`docs/kostant/article.tex`; this script is an independent check of it.
+
+## Classes of quadruples and exterior automorphisms (`kostant_quadruples.py`)
+
+Needs numpy. For the second question of the letter: lists the classes of quadruples as orbits
+of N(T) ∩ N(T') on pairs of Borel subgroups, checks their number against
+card(W)^2/(h z phi(h)), and computes the action of the exterior automorphisms, the classes
+they fix and the canonical pair D_± (adapted B, Coxeter B'). Results (classes fixed by the
+exterior automorphisms): A2 0 of 2, A3 8 of 18, A4 0 of 144, A5 192 of 7200, A6 0 of 86400,
+D4 96 per transposition and 12 per 3-cycle of 768, D5 2304 of 28800. See section 8 of
+`docs/kostant/article.tex`.

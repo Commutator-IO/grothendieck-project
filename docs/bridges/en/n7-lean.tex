@@ -1,0 +1,19 @@
+\section{Lean}\label{sec:nlean}
+
+The three arches of \S\ref{sec:morearches} are proved in the Lake package \texttt{lean/bridges} of this edition's repository (\url{https://github.com/Commutator-IO/grothendieck-project}), which depends on lean-pool at a fixed revision; the corollaries on the decks of Grothendieck's notes are formalised there too. The five arches of \lp{}, in lean-pool, are proved in Lean~4 with Mathlib, with no axioms beyond \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. This statement describes the development; the files contain no \texttt{\#print axioms} command, and we do not record a separate check for them. For \texttt{lean/bridges}, the continuous integration of this edition's repository runs an axiom audit on every change: at the version described here it covered 437 declarations, all within \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. The files of the package used here are the following; the others serve the companion article \cite{bridges-generator}.
+\begin{itemize}
+\item \lean{PreorderPresheaves.lean} (\lean{exists_preorder_moritaEquivalentCat_iff_isThin}, after Grothendieck's exercise in folder 161-3, p.~26); \lean{SubterminalArches.lean} (the two-valued and connected arches: \lean{forall_subfunctor_terminal_eq_bot_or_eq_top_iff}, \lean{isConnected_iff_forall_isCompl}); \lean{GrothendieckDecks.lean} (the decks of Grothendieck's notes: \lean{simplexCategory_twoValued}, \lean{simplexCategory_isConnected}, \lean{simplexCategory_not_spatial}, \lean{singleObj_twoValued}, \lean{singleObj_isConnected}, \lean{singleObj_spatial_iff}, \lean{preorder_twoValued_iff}).
+\end{itemize}
+Not formalised: the equivalence between the presheaf topos of a preorder and the topos of a space (Bridge~\ref{br:spatial}), the second exercise of folder 161-3, p.~26 (\S\ref{sec:precedents}), and the statements of \S\ref{sec:pseudofields}.
+
+\begin{center}\scriptsize\emergencystretch=3em
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.9cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.2cm}}
+\toprule
+statement & Lean declaration & file & status\\
+\midrule
+small categories: presheaf topos of a preorder iff thin (Grothendieck, 161-3, p.~26) & \lean{exists_preorder_moritaEquivalentCat_iff_isThin} & \lean{PreorderPresheaves} & proved in Lean\\
+two-valued and connected arches (Bridges~\ref{br:twoval} and~\ref{br:conn}) & \lean{forall_subfunctor_terminal_eq_bot_or_eq_top_iff}, \lean{isConnected_iff_forall_isCompl} & \lean{SubterminalArches} & proved in Lean\\
+decks of Grothendieck's notes: $\Delta$, groups, preorders (\S\ref{sec:grdecks}) & \lean{simplexCategory_twoValued}, \lean{simplexCategory_isConnected}, \lean{simplexCategory_not_spatial}, \lean{singleObj_twoValued}, \lean{singleObj_isConnected}, \lean{singleObj_spatial_iff}, \lean{preorder_twoValued_iff} & \lean{GrothendieckDecks} & proved in Lean\\
+\bottomrule
+\end{tabularx}
+\end{center}
