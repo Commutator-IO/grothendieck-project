@@ -2,7 +2,7 @@ import { defineConfig, loadEnv, type Plugin } from 'vite'
 import { request } from 'node:https'
 import { existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import allowedEditions from './relay/allowed.json'
+import allowedEditions from './relay/allowed.json' with { type: 'json' }
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
