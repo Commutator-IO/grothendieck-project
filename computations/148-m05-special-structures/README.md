@@ -70,8 +70,27 @@ nodes in fixed charts.
   G̃ = G ≅ ℤ/4 is for the structure « point + **oriented** square », whose
   orientation that symmetry reverses. The count, 30, is unaffected.
 
-So 542 = 662 − 120: the chart is this set minus the orbit Tw₁/₄ II₁. Either
-the page's notion of special structure is narrower at the tetrahedral node,
-in a way the leaves do not state, or the chart leaves one type out. The
+So 542 = 662 − 120: the chart is this set minus the orbit Tw₁/₄ II₁.
+
+**Page 30 decides it** (facsimile re-read at 400 dpi, 2026-11-23). The note of
+II₁ reads « r ∈ J × E ; τ⁰_r : II₁(J, E) → II₁(u_ω(r)) où u_ω = ω × (−1) sur
+J × E », and the six « sommets-repères » u₀, …, u₅ are drawn on the red cutting
+circle. So the page takes six structures over each equianharmonic point,
+cyclically permuted by τ⁰_r = tw₁/₆ (u_ω has order 6), and never forms the
+quarter-twist of II₁, while it writes out II′₂ = Tw₁/₄ II₂. The page's notion
+is narrower than the definition above at the tetrahedral node, and 542 is exact
+for it.
+
+**The drawing of II₁ decides which real orbit** (re-read at 600 dpi). Below the
+red circle a small cap carries the three points of J: 0, a point whose label
+is blackened, and P̄. Three great circles, the mirrors through the node, each
+pass through one of them and cut the red circle in the six u_i. 1 and ∞, the
+two points of E, lie on the mirror through 0. The drawn structure is real for
+the reflection fixing 0, 1 and ∞ and exchanging P and P̄. That reflection fixes
+both points of E, so the page's II₁ is the orbit printed in `results.txt` with
+antiholomorphic relabelling `01243` (ray 0.833π). The orbit left out,
+Tw₁/₄ II₁, is the one with relabelling `10243`, whose real structure exchanges
+the two points of E. (The indexing by J × E alone cannot tell them apart: both
+are six rays a sixth of a turn apart.) The
 arrows (1620 in fourteen orbits) are not tested: their definition is not on
 the leaves.
