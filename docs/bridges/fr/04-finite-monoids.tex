@@ -31,9 +31,9 @@ le monoïde bicyclique $\langle p,q\mid pq=1\rangle$ & $1$ & ---\\
 \begin{trace}
 \item[tablier] $M$-ensembles à droite.
 \item[arche] Pont~\ref{br:pts} (points essentiels $\simeq\Kar(\B M)^{\op}$), et pont~\ref{br:sub}.
-\item[spécialiser] objets de $\Kar(\B M)$: les idempotents; isomorphisme: $\approx$. Lean: \lean{nonempty_essentialPoint_iso_iff}, \lean{exists_iso_essentialPoint} (branche \texttt{mycaule/topos-bridges-examples}, commit \texttt{28ed796}).
+\item[spécialiser] objets de $\Kar(\B M)$: les idempotents; isomorphisme: $\approx$. Lean: \lean{nonempty_essentialPoint_iso_iff}, \lean{exists_iso_essentialPoint} (\lean{EssentialPoints.lean}).
 \item[réécrire] compter les classes d'idempotents pour $\approx$, monoïde par monoïde: ce sont les rangs.
-\item[vérifier] Lean, pour les matrices sur un corps quelconque: \lean{karoubiRel_iff_rank_eq} ($e\approx f\iff\operatorname{rk}e=\operatorname{rk}f$) et \lean{essentialPointClassesEquivFin} ($n+1$ classes de points essentiels) (branche \texttt{mycaule/topos-bridges-examples}, commit \texttt{28ed796}); pour $T_n$, \lean{nonempty_karoubiMk_iso_iff_card_eq} et \lean{karoubiClassesEquivFin} (exactement $n$ classes) (branche \texttt{mycaule/topos-bridges-new}, commit \texttt{463752c}); les autres lignes, et tous les dénombrements de sous-topos, par la preuve directe seule.
+\item[vérifier] Lean, pour les matrices sur un corps quelconque: \lean{karoubiRel_iff_rank_eq} ($e\approx f\iff\operatorname{rk}e=\operatorname{rk}f$) et \lean{essentialPointClassesEquivFin} ($n+1$ classes de points essentiels) (\lean{EssentialPoints.lean}); pour $T_n$, \lean{nonempty_karoubiMk_iso_iff_card_eq} et \lean{karoubiClassesEquivFin} (exactement $n$ classes) (\lean{KaroubiMonoid.lean}); les autres lignes, et tous les dénombrements de sous-topos, par la preuve directe seule.
 \item[nouveauté] les correspondances sont publiées \cite{rogers-1905,pirashvili-jncg}, avec l'exemple $T_3$ \cite[Ex.~6.1.5]{pirashvili-jncg}; les dénombrements pour $n$ quelconque et pour ces monoïdes n'ont pas été trouvés.
 \end{trace}
 
@@ -49,7 +49,7 @@ Soit $e$ un idempotent d'un monoïde $M$ tel que $1\in MeM$, disons $1 = res$. A
 \begin{trace}
 \item[tablier] $\PSh(\B M)\simeq\PSh(\B(eMe))$: avec $a = esf$, $b = fre$, tout idempotent $f$ de $M$ est isomorphe dans $\Kar(\B M)$ à l'idempotent $esfre$ de $eMe$; puis le pont~\ref{br:morita}.
 \item[arche] invariance de Morita de la condition d'Ore (\lean{rightOreCondition_iff_of_moritaEquivalentCat}).
-\item[vérifier] preuve directe ci-dessous; Lean: \lean{forall_exists_mul_eq_mul_iff_cornerMonoid} (l'énoncé algébrique), et comme corollaire des ponts \lean{karoubiCornerEquiv}, \lean{moritaEquivalentCat_cornerMonoid}, \lean{rightOreCondition_singleObj_iff_cornerMonoid} (branche \texttt{mycaule/topos-bridges-new}, commit \texttt{463752c}).
+\item[vérifier] preuve directe ci-dessous; Lean: \lean{forall_exists_mul_eq_mul_iff_cornerMonoid} (l'énoncé algébrique), et comme corollaire des ponts \lean{karoubiCornerEquiv}, \lean{moritaEquivalentCat_cornerMonoid}, \lean{rightOreCondition_singleObj_iff_cornerMonoid} (\lean{Corners.lean}).
 \item[nouveauté] conséquence immédiate de résultats publiés (théorème de Morita pour les monoïdes \cite{knauer,banaschewski,rogers-1905} et \cite[Th.~2.31]{hemelaer-rogers}); non trouvé sous forme d'énoncé.
 \end{trace}
 

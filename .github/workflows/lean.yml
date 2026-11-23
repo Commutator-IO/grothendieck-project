@@ -35,3 +35,15 @@ jobs:
           lake-package-directory: lean
           axiom-audit: true
 
+  # The generated theorems of the draft docs/bridges, in the Lake package lean/bridges: they are
+  # stated and proved on top of lean-pool's ToposTheoreticBridges, pinned in its lakefile.
+  bridges:
+    name: lake build (bridges)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: lean/bridges
+          axiom-audit: true

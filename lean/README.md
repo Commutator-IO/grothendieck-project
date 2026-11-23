@@ -8,6 +8,18 @@ Look there for them, their build and their CI.
 Two libraries stay in this repository: `Bourbaki/` (the rédactions of the Bourbaki archive) and
 `Quillen/` (Daniel Quillen's notebooks).
 
+A third package, `bridges/`, holds the Lean proofs of the draft article `docs/bridges` («
+New theorems from topos-theoretic bridges »): the generated theorems, stated and proved on top
+of the bridges of lean-pool's `ToposTheoreticBridges`, which it requires at a fixed revision (its
+own `lakefile.toml` and `lean-toolchain`, and a job of its own in `.github/workflows/lean.yml`).
+Its files are in `bridges/Bridges/`, one per theme: monoids, preorders, combinatorics, essential
+points, corners, finite monoids, Karoubi envelopes of monoids, topologies on `ℕ`, and quivers
+(De Morgan and Boolean, Morita and essential points, the cyclic quiver).
+
+```bash
+cd lean/bridges && lake exe cache get && lake build
+```
+
 ## Bourbaki and Quillen
 
 Lean 4 proofs, against mathlib, of statements made by a rédaction of the Bourbaki archive or a

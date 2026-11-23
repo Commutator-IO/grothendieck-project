@@ -31,9 +31,9 @@ the bicyclic monoid $\langle p,q\mid pq=1\rangle$ & $1$ & ---\\
 \begin{trace}
 \item[deck] right $M$-sets.
 \item[arch] Bridge~\ref{br:pts} (essential points $\simeq\Kar(\B M)^{\op}$), and Bridge~\ref{br:sub}.
-\item[specialise] objects of $\Kar(\B M)$: idempotents; isomorphism: $\approx$. Lean: \lean{nonempty_essentialPoint_iso_iff}, \lean{exists_iso_essentialPoint} (branch \texttt{mycaule/topos-bridges-examples}, commit \texttt{28ed796}).
+\item[specialise] objects of $\Kar(\B M)$: idempotents; isomorphism: $\approx$. Lean: \lean{nonempty_essentialPoint_iso_iff}, \lean{exists_iso_essentialPoint} (\lean{EssentialPoints.lean}).
 \item[rewrite] count the classes of idempotents under $\approx$ monoid by monoid: they are the ranks.
-\item[verify] Lean, for matrices over any field: \lean{karoubiRel_iff_rank_eq} ($e\approx f\iff\operatorname{rk}e=\operatorname{rk}f$) and \lean{essentialPointClassesEquivFin} ($n+1$ classes of essential points) (branch \texttt{mycaule/topos-bridges-examples}, commit \texttt{28ed796}); for $T_n$, \lean{nonempty_karoubiMk_iso_iff_card_eq} and \lean{karoubiClassesEquivFin} (exactly $n$ classes) (branch \texttt{mycaule/topos-bridges-new}, commit \texttt{463752c}); the other rows, and all the subtopos counts, by the direct proof only.
+\item[verify] Lean, for matrices over any field: \lean{karoubiRel_iff_rank_eq} ($e\approx f\iff\operatorname{rk}e=\operatorname{rk}f$) and \lean{essentialPointClassesEquivFin} ($n+1$ classes of essential points) (\lean{EssentialPoints.lean}); for $T_n$, \lean{nonempty_karoubiMk_iso_iff_card_eq} and \lean{karoubiClassesEquivFin} (exactly $n$ classes) (\lean{KaroubiMonoid.lean}); the other rows, and all the subtopos counts, by the direct proof only.
 \item[novelty] the correspondences are in print \cite{rogers-1905,pirashvili-jncg}, with the example $T_3$ \cite[Ex.~6.1.5]{pirashvili-jncg}; the counts for general $n$ and for these monoids not found.
 \end{trace}
 
@@ -49,7 +49,7 @@ Let $e$ be an idempotent of a monoid $M$ with $1\in MeM$, say $1 = res$. Then $a
 \begin{trace}
 \item[deck] $\PSh(\B M)\simeq\PSh(\B(eMe))$: with $a = esf$, $b = fre$, every idempotent $f$ of $M$ is isomorphic in $\Kar(\B M)$ to the idempotent $esfre$ of $eMe$; then Bridge~\ref{br:morita}.
 \item[arch] Morita invariance of the Ore condition (\lean{rightOreCondition_iff_of_moritaEquivalentCat}).
-\item[verify] direct proof below; Lean: \lean{forall_exists_mul_eq_mul_iff_cornerMonoid} (the algebraic statement), and as a corollary of the bridges \lean{karoubiCornerEquiv}, \lean{moritaEquivalentCat_cornerMonoid}, \lean{rightOreCondition_singleObj_iff_cornerMonoid} (branch \texttt{mycaule/topos-bridges-new}, commit \texttt{463752c}).
+\item[verify] direct proof below; Lean: \lean{forall_exists_mul_eq_mul_iff_cornerMonoid} (the algebraic statement), and as a corollary of the bridges \lean{karoubiCornerEquiv}, \lean{moritaEquivalentCat_cornerMonoid}, \lean{rightOreCondition_singleObj_iff_cornerMonoid} (\lean{Corners.lean}).
 \item[novelty] immediate from published results (Morita theorem for monoids \cite{knauer,banaschewski,rogers-1905} and \cite[Thm~2.31]{hemelaer-rogers}); not found stated.
 \end{trace}
 

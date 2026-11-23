@@ -20,7 +20,7 @@ Le topos $\mathrm{Rep}(R)$ est de De Morgan (pour toute sous-représentation, to
 \item[spécialiser] $f\circ h = g\circ k$ est une égalité de chemins, donc l'un de $f$, $g$ est un segment final de l'autre; Ore sur $\mathrm{Paths}(R^{\op})$ $\iff$ de deux chemins aboutissant à un même sommet de $R^{\op}$, l'un est un segment final de l'autre $\iff$ aucun sommet de $R^{\op}$ n'a deux flèches entrantes. Une catégorie libre est un groupoïde si et seulement si elle n'a aucune flèche.
 \item[déplier] Lemme~\ref{lem:neg}: $\neg A$ = évitants, $\neg\neg A$ = attirés.
 \item[réécrire] deux flèches entrantes dans $R^{\op}$ = deux flèches sortantes dans $R$.
-\item[vérifier] preuve directe ci-dessous; Lean: \lean{isDeMorganTopos_paths_iff} et \lean{isBooleanTopos_paths_iff}, à partir de \lean{rightOreCondition_paths_iff} (dans la convention de Lean, les préfaisceaux sur \texttt{Paths Q} sont les représentations du carquois opposé, et la condition s'écrit \q{au plus une flèche entrante en chaque sommet de $Q$}) (branche \texttt{mycaule/topos-bridges-new}, commit \texttt{463752c}).
+\item[vérifier] preuve directe ci-dessous; Lean: \lean{isDeMorganTopos_paths_iff} et \lean{isBooleanTopos_paths_iff}, à partir de \lean{rightOreCondition_paths_iff} (dans la convention de Lean, les préfaisceaux sur \texttt{Paths Q} sont les représentations du carquois opposé, et la condition s'écrit \q{au plus une flèche entrante en chaque sommet de $Q$}) (\lean{QuiversDeMorgan.lean}).
 \item[nouveauté] un cas particulier est publié (le carquois $\bullet\leftarrow\bullet\to\bullet$, \cite[\S4.1.4]{caramello-chamoun}); la caractérisation n'a pas été trouvée.
 \end{trace}
 
@@ -45,7 +45,7 @@ Une action de $\Sigma^*$ est une représentation du carquois à un sommet et $|\
 \end{proof}
 
 \begin{trace}
-\item[vérifier] Lean: \lean{isDeMorganTopos_singleObj_freeMonoid_unit} (une lettre), \lean{not_isDeMorganTopos_freeMonoid_two} (deux lettres), à partir de \lean{isDeMorganTopos_singleObj_iff} (branche \texttt{mycaule/topos-bridges-examples}, commit \texttt{28ed796}).
+\item[vérifier] Lean: \lean{isDeMorganTopos_singleObj_freeMonoid_unit} (une lettre), \lean{not_isDeMorganTopos_freeMonoid_two} (deux lettres), à partir de \lean{isDeMorganTopos_singleObj_iff} (\lean{Monoids.lean}).
 \item[nouveauté] le topos des automates est classique; cette propriété n'a pas été trouvée dans la littérature.
 \end{trace}
 
@@ -60,7 +60,7 @@ Deux carquois $R$ et $R'$ ont des catégories de représentations ensemblistes �
 \item[arche] Pont~\ref{br:morita}: $\iff\Kar(C_R)\simeq\Kar(C_{R'})$.
 \item[spécialiser] une catégorie libre est karoubienne (les chemins idempotents sont des identités), donc $\Kar(C_R)\simeq C_R$; elle est squelettique et sans isomorphisme autre que les identités, donc une équivalence $C_R\simeq C_{R'}$ est un isomorphisme de catégories.
 \item[réécrire] un isomorphisme de catégories libres envoie les flèches indécomposables (chemins de longueur $1$) sur des flèches indécomposables; il est donc induit par un isomorphisme $R^{\op}\cong R'^{\op}$.
-\item[vérifier] preuve directe dans la trace; Lean: \lean{moritaEquivalentCat_paths_iff}, \lean{nonempty_representations_equiv_iff}, à partir de \lean{paths_eq_id_of_idempotent}, \lean{paths_nonempty_iso_iff} et \lean{nonempty_paths_equiv_iff} (une équivalence de catégories libres induit un isomorphisme de carquois, via \lean{pathLength_eq_one_iff_indecomposable}) (branche \texttt{mycaule/topos-bridges-quivers}, commit \texttt{2a32779}).
+\item[vérifier] preuve directe dans la trace; Lean: \lean{moritaEquivalentCat_paths_iff}, \lean{nonempty_representations_equiv_iff}, à partir de \lean{paths_eq_id_of_idempotent}, \lean{paths_nonempty_iso_iff} et \lean{nonempty_paths_equiv_iff} (une équivalence de catégories libres induit un isomorphisme de carquois, via \lean{pathLength_eq_one_iff_indecomposable}) (\lean{QuiversMorita.lean}).
 \item[nouveauté] non trouvé comme énoncé sur les carquois; chaque étape est publiée (Morita par l'enveloppe de Karoubi \cite[Lemme~1.1.3]{rogers-thesis}, d'après \cite[A1.1.9--10]{elephant}).
 \end{trace}
 
@@ -74,7 +74,7 @@ Les points essentiels de $\mathrm{Rep}(R)$ (foncteurs vers les ensembles qui pr�
 
 \begin{trace}
 \item[arche] Pont~\ref{br:pts}: points essentiels $\simeq\Kar(C_R)^{\op}\simeq C_R^{\op} = \mathrm{Paths}(R^{\op})^{\op}\cong\mathrm{Paths}(R)$.
-\item[vérifier] Lean: \lean{essentialPointPathsEquiv}, \lean{nonempty_evaluationPoint_iso_iff}, \lean{exists_iso_evaluationPoint} (branche \texttt{mycaule/topos-bridges-quivers}, commit \texttt{2a32779}).
+\item[vérifier] Lean: \lean{essentialPointPathsEquiv}, \lean{nonempty_evaluationPoint_iso_iff}, \lean{exists_iso_evaluationPoint} (\lean{QuiversMorita.lean}).
 \item[nouveauté] le fait général (une petite catégorie se retrouve, à complétion idempotente près, à partir des points essentiels de ses préfaisceaux) est publié \cite[\S4.2.1]{rogers-thesis}; la version pour les carquois n'a pas été trouvée.
 \end{trace}
 
@@ -91,7 +91,7 @@ Le topos $\mathrm{Rep}(Z_n)$ a exactement $2^n + 1$ sous-topos: pour chaque ense
 \item[arche] Pont~\ref{br:sub}: sous-topos $\leftrightarrow$ topologies de Grothendieck sur $C$.
 \item[spécialiser] classer les topologies sur $C$ (ci-dessous): la topologie dégénérée, ou une par partie de l'ensemble des sommets.
 \item[déplier] identifier les faisceaux: une représentation est un faisceau si et seulement si les flèches issues des sommets du complémentaire de la partie sont bijectives.
-\item[vérifier] preuve directe ci-dessous; Lean: \lean{card_grothendieckTopology} (exactement $2^n+1$ topologies), \lean{topologyEquiv} (une bijection avec \texttt{Option (Set (ZMod n))}), \lean{eq_top_or_eq_topologyOf} et \lean{CyclicSite.card_grothendieckTopology_one} pour $n = 1$; la description des faisceaux de chaque topologie n'est pas formalisée (branche \texttt{mycaule/topos-bridges-quivers}, commit \texttt{2a32779}).
+\item[vérifier] preuve directe ci-dessous; Lean: \lean{card_grothendieckTopology} (exactement $2^n+1$ topologies), \lean{topologyEquiv} (une bijection avec \texttt{Option (Set (ZMod n))}), \lean{eq_top_or_eq_topologyOf} et \lean{CyclicSite.card_grothendieckTopology_one} pour $n = 1$; la description des faisceaux de chaque topologie n'est pas formalisée (\lean{QuiversCyclic.lean}).
 \item[nouveauté] pour $n = 1$, le résultat découle de la description par Pirashvili des sous-topos des $M$-ensembles pour $M$ commutatif \cite[Cor.~4.3.11]{pirashvili-jpaa}; pour $n\ge 2$, il n'a pas été trouvé. Pour les carquois \emph{sans} cycle orienté, les topologies de Grothendieck sur la catégorie des chemins sont connues: il y en a $2^m$ pour $m$ sommets, une par ensemble de sommets \cite[Cor.~4.3]{schmid} (d'après une note non publiée de Murfet); le cas cyclique est d'une autre nature.
 \end{trace}
 
