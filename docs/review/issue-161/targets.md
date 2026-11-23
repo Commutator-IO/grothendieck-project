@@ -78,6 +78,26 @@ What the numbers say:
 Ranks 2, 3 and 7 depend on rank 1: their files use `MorphismOfTopoi`. As the issue proposes,
 submit rank 1 alone, see how long its review takes, then go on.
 
+## Next claims (23 Nov)
+
+Two claims are open: AxiomMath/Stacks#25 (00XA, 00XC) and AxiomMath/Stacks#26 (00XL, 00XR,
+00XX). No further claim goes out until one of them gets a first answer, and after that at most
+two are open at a time. « Files » counts the Frontier files the move needs: the import closure
+inside the library, the file itself included.
+
+| Order | Claim | Files | Condition |
+|---|---|---|---|
+| 1 | 00EQ + 00NX: gluing modules on a standard cover, finite projective modules (`RingTheory/Localization/Glueing/Modules.lean`, `RingTheory/Module/LocallyFree/FiniteProjective.lean`) | 3 | independent |
+| 2 | 00YQ: Deligne's criterion for enough points (`CategoryTheory/Sites/Point/CriterionForExistenceOfPoints/DeligneCriterion.lean`) | 2 | independent |
+| 3 | 047L: group schemes over a field are separated (`AlgebraicGeometry/GroupScheme/OverField/Separated.lean`) | 2 | independent |
+| 4 | 00XO: the morphism of topoi of a merely cocontinuous functor. It is a new formalization: the Frontier declarations tagged 00XO are unbundled or also assume continuity | a few lines on top of 00XL | after #25 |
+| 5 | 04GZ, 04IP: localization of topoi (`CategoryTheory/Sites/ToposLocalizationSheaf.lean`, `…/SliceTopos/LocalizationMorphism.lean`) | 5–6 | after #25 |
+| 6 | 00Y4, 00YA, 00YC: points of topoi (`CategoryTheory/Sites/Point/`) | 6 | after #25 |
+| 7 | 00QO: finitely presented algebras (`Algebra/Category/Ring/FinitePresentation.lean`) | 3 | independent, less useful |
+| 8 | 08WL/08WM, then 08XA: universally injective maps, then descent along them (`AlgebraicGeometry/Descent/`) | 4, then 17 | independent |
+
+Out of reach as a single claim: 03BM (512 files) and 047N/047P (about 525 files each).
+
 ## Open points
 
 - Unchecked: the SGA 4 references on `MorphismOfTopoi.id`, `comp` and `Functor.IsMorphismOfSites`
