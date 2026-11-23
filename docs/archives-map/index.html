@@ -58,6 +58,19 @@ th,td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:right}
 th:first-child,td:first-child{text-align:left}
 th{color:var(--ink2);font-weight:600}
 .themebtn{margin-left:auto}
+
+.scale{max-width:1280px;margin:0 auto;padding:6px 16px 14px}
+.scale h2{font:600 15px/1.3 system-ui,sans-serif;margin:8px 0 2px}
+.scale p{margin:0 0 8px;color:var(--ink2);font-size:12.5px;max-width:80ch}
+.sr{display:grid;grid-template-columns:150px 1fr;gap:8px;align-items:center;margin:3px 0;font-size:13px}
+.sr .lab{color:var(--ink2)}
+.sr .trk{display:flex;align-items:center;gap:8px}
+.sr .b{height:10px;border-radius:0 4px 4px 0;background:var(--ink3);min-width:2px}
+.sr .b.me{background:var(--ink)}
+.sr .v{font-variant-numeric:tabular-nums;color:var(--ink)}
+.sr .v i{color:var(--ink2);font-style:normal}
+.grp{margin:10px 0 2px;font-weight:600;font-size:13px}
+@media (max-width:640px){.sr{grid-template-columns:110px 1fr}}
 @media (max-width:640px){#cv,#gl{height:60vh}}
 </style>
 </head>
@@ -68,6 +81,7 @@ th{color:var(--ink2);font-weight:600}
   <p class="sub">Every Lean file of <a href="https://github.com/Commutator-IO/GrothendieckArchivesProofs" style="color:inherit">Commutator-IO/GrothendieckArchivesProofs</a> and each declaration in it, laid out as a treemap or a city, to set beside the Stacks project's own graph at stacks.axiommath.ai/graph.</p>
   <div class="hero" id="hero"></div>
 </header>
+<section class="scale" id="scale" aria-label="Size compared with the Stacks library in Lean"></section>
 <div class="bar">
   <div class="seg" role="group" aria-label="Layout">
     <button id="bT" aria-pressed="true">Treemap</button><button id="bC" aria-pressed="false">City</button>
@@ -268,6 +282,20 @@ $('q').oninput=e=>{state.q=e.target.value.trim();render()};
 $('legend').addEventListener('change',e=>{on[e.target.dataset.k]=e.target.checked;render()});
 $('theme').onclick=()=>{const d=document.documentElement;const dark=d.dataset.theme==='dark'||(!d.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);d.dataset.theme=dark?'light':'dark';render()};
 addEventListener('resize',()=>render());
+
+// ---- scale: this repository beside the Stacks library and its sister projects (figures from stacks.axiommath.ai, 23 Nov 2026)
+const REF=[
+ {n:'Stacks library',files:62975,decl:663090,lines:15800000},
+ {n:'Minimal model program',files:2268,lines:2054275},
+ {n:'Weil conjectures',files:979,lines:213157},
+ {n:"Faltings' theorem",files:431,lines:124108}];
+(function(){
+  const me={n:'This repository',files:files.length,decl:files.reduce((a,f)=>a+f.decls.length,0),lines:files.reduce((a,f)=>a+f.lines,0)};
+  const rows=(key,label,list)=>{const max=Math.max(...list.map(x=>x[key]));
+    return `<div class="grp">${label}</div>`+list.sort((a,b)=>b[key]-a[key]).map(x=>`<div class="sr"><span class="lab">${x.n}</span><span class="trk"><span class="b${x===me?' me':''}" style="width:${Math.max(0.4,100*x[key]/max*0.7)}%"></span><span class="v">${key==='lines'&&x[key]>=1e6?(x[key]/1e6).toFixed(1)+'M':fmt(x[key])}${x===me?` <i>· ${(100*x[key]/max).toFixed(x[key]/max<0.1?1:0)}% of the largest</i>`:''}</span></span></div>`).join('')};
+  $('scale').innerHTML='<h2>Scale</h2><p>On one linear axis per measure, against the Stacks project formalised in Lean and three projects built on it. The Stacks figures are those on its home page; its “declarations” are counted by its own tooling, mine by a keyword scan of top-level <code>theorem</code>, <code>def</code>, <code>structure</code> and the like, so the two counts are of the same order of idea, not the same quantity.</p>'
+   +rows('files','Lean files',[me,...REF])+rows('decl','Declarations',[me,REF[0]])+rows('lines','Lines of Lean',[me,...REF]);
+})();
 drawTable();render();
 </script>
 </body>
