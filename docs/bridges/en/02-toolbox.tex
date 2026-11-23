@@ -1,6 +1,6 @@
 \section{Toolbox: four definitions and the registry}\label{sec:toolbox}
 
-This section holds all the theory the rest of the text needs: four definitions, then the registry, which contains the five lemmas that drive the outputs, three more arches, and the decks.
+This section holds all the theory the rest of the text needs: four definitions, then the registry, which contains the five lemmas that drive the outputs, and the decks.
 
 \subsection{Shapes and presheaves}
 
@@ -84,32 +84,6 @@ The subtopoi of $\PSh(C)$ (full subcategories closed under limits whose inclusio
 
 Every statement below is one of these five lemmas, specialised to a shape and unfolded with Lemma~\ref{lem:neg}.
 
-\subsubsection{Three more arches}\label{sec:morearches}
-
-The registry has three more arches. So far we have applied them only to the decks taken from Grothendieck's notes, below, and to his pseudo-fields (\S\ref{sec:pseudofields}); none of the outputs of Sections~\ref{sec:machines} to~\ref{sec:shapes} comes from them.
-
-\begin{bridge}[Two-valued]\label{br:twoval}
-The subterminal objects of $\PSh(C)$ (its \q{opens}) correspond to the sieves of $C$ \cite[IV~8.4.4]{sga4}. Hence $\PSh(C)$ has no subterminal objects besides $0$ and $1$ iff for any two objects $a$, $b$ of $C$ there is an arrow $a\to b$. For $C$ empty the topos is degenerate and the condition holds vacuously, so the statement is about nonempty $C$. Lean: \lean{forall_subfunctor_terminal_eq_bot_or_eq_top_iff}.
-\end{bridge}
-
-\begin{bridge}[Connected]\label{br:conn}
-$\PSh(C)$ is connected and nonempty in the sense of \cite[IV~8.7~e)]{sga4} (every partition of its final object has exactly one nonempty part) iff $C$ is connected, a fact recalled as known in \cite[Ex.~3.6]{hora-kamio}. In terms of subterminal objects: $C$ is nonempty and the only complemented subterminal objects are $0$ and $1$. Lean: \lean{isConnected_iff_forall_isCompl}.
-\end{bridge}
-
-\begin{bridge}[Spatial]\label{br:spatial}
-$\PSh(C)$ is equivalent to the presheaf topos of a preorder, and so to the topos of sheaves on its Alexandrov space, iff $C$ is thin. Grothendieck states it as an exercise \cite[p.~26]{grothendieck-161-3}; see \S\ref{sec:precedents}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}, which states the preorder form; that the topos is then the topos of a space is Grothendieck's equivalence, from the same exercise, and is not formalised here.
-\end{bridge}
-
 \subsubsection{The decks}
 
 The deck registry holds the shapes of the table above, with their presheaves, and the shapes introduced with each output in \S\ref{sec:machines}--\ref{sec:shapes}. Step~2 of \S\ref{sec:method} explains how to recognise a new deck.
-
-\subsubsection{The decks of Grothendieck's notes}\label{sec:grdecks}
-
-Three decks recur in Grothendieck's working notes. Here is what the three arches above say about them (Lean: \lean{GrothendieckDecks.lean}).
-\begin{itemize}
-\item The simplex category $\Delta$, the first test category of \emph{Pursuing Stacks} (folders 108 and 118 of the fonds): simplicial sets form a two-valued and connected topos, since there is a constant map between any two objects of $\Delta$; this topos is not the presheaf topos of a preorder, since the two vertices of $[1]$ are two maps $[0]\to[1]$ (\lean{simplexCategory_twoValued}, \lean{simplexCategory_isConnected}, \lean{simplexCategory_not_spatial}).
-\item A group $G$ as a one-object groupoid, whose presheaf topos is $\B G$ (folder 161-6, p.~22, where Grothendieck reduces a question to this case): the topos is two-valued (as \cite[IV~8.4.3]{sga4} notes for any monoid) and connected, and it is the presheaf topos of a preorder iff $G$ is trivial (\lean{singleObj_twoValued}, \lean{singleObj_isConnected}, \lean{singleObj_spatial_iff}).
-\item A preordered set $I$, whose presheaf topos $\widehat I$ is $\mathrm{Top}(I)$ (folder 37, p.~48; folder 161-3, p.~26): the topos is two-valued iff any two elements are comparable both ways, that is, iff its posetal quotient has at most one point (\lean{preorder_twoValued_iff}).
-\end{itemize}
-These are immediate corollaries. We record them because they are the first entries of the registry taken from the fonds.

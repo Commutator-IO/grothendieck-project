@@ -200,12 +200,21 @@ const DRAFTS: ArticleItem[] = [
   },
   {
     id: 'article-bridges',
-    title: 'New theorems from topos-theoretic bridges: a theorem generator run by hand, described as a software pipeline',
+    title: 'Topos-theoretic bridges as a theorem generator',
     lang: 'English and French',
-    what: "Draft. O. Caramello's « bridges » read one invariant of a topos on two of its presentations, and her Mines talk (2024) proposes to generate theorems by combining a database of topos equivalences with a database of such readings. This text runs a small generator by hand and describes it as a software pipeline (registries, join, specialise, unfold, rewrite, verify in Lean and by hand, novelty filter), with five bridges proved in Lean in lean-pool as arches. It keeps only outputs not found in print: set-valued quiver representations satisfy ¬p∨¬¬p iff the quiver is deterministic, are determined by the quiver, and on the n-cycle have exactly 2^n+1 subtopoi; counts of points and subtopoi for T_n, PT_n, I_n, O_n, M_n(F_q); M_n(k)-sets determine n; (Z/n,·)-sets have Dedekind-number many subtopoi; for compact X, Sh(X) is De Morgan iff C(X,R) is Dedekind complete. With a practical method, classical L3 theorems read as one bridge (Birkhoff, Cayley, Galois, Banach–Stone), a calibration log of known outputs, and the limits of the approach.",
+    what: "Draft. O. Caramello's « bridges » read one invariant of a topos on two of its presentations. This text runs a small generator by hand and describes it as a software pipeline: five bridges proved in Lean as arches, small categories as decks, then specialise, rewrite, verify in Lean and by hand, and filter for novelty (TheoremGraph, TheoremSearch, OEIS). It keeps the outputs not found in print: quiver representations, transformation monoids, matrix monoids, (Z/n,·)-sets with Dedekind numbers of subtopoi, compact Hausdorff spaces; with a calibration log of the known outputs and the limits of the approach.",
     pdf: '/article/grothendieck-bridges.pdf',
     src: 'docs/bridges/article.tex',
     more: [{ label: 'Version française', href: '/article/grothendieck-bridges-fr.pdf' }],
+  },
+  {
+    id: 'article-bridges-notes',
+    title: "Bridges in Grothendieck's notes",
+    lang: 'English and French',
+    what: "Draft, companion to the previous one. Three more arches (two-valued, connected, presheaves on a preorder), proved in Lean and read on the decks of Grothendieck's notes; his own bridges in folders 161-3 (an exercise, proved in Lean), 37 and 161-2 (sub-theories and subtopoi); the topos of pseudo-fields with his three presentations, one of them checked, and the answer to his question on points (Makkai–Reyes); and the link with stacks, with the Picard group of [M₀,ₙ/𝔖ₙ₋₁] from folder 146 as a finer arch.",
+    pdf: '/article/grothendieck-bridges-notes.pdf',
+    src: 'docs/bridges/notes.tex',
+    more: [{ label: 'Version française', href: '/article/grothendieck-bridges-notes-fr.pdf' }],
   },
 ];
 

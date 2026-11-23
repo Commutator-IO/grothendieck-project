@@ -1,0 +1,43 @@
+\section{Notations et les cinq arches}\label{sec:recall}
+
+Nous reprenons les notations de l'article associé \cite{bridges-generator}, que nous rappelons brièvement. Une petite catégorie $C$ est une \emph{forme}. Un \emph{préfaisceau} sur $C$ est un foncteur $C^{\op}\to\Set$, en Lean \texttt{Cᵒᵖ ⥤ Type u}; les préfaisceaux sur $C$ forment le topos $\PSh(C)$, que Grothendieck note $\widehat C$. Un \emph{tablier} est une forme dont les préfaisceaux constituent une structure familière. La négation $\neg A$ d'un sous-préfaisceau $A\subseteq F$ est le plus grand sous-préfaisceau de $F$ disjoint de $A$. Le topos $\PSh(C)$ est \emph{booléen} si $A\cup\neg A = F$ pour tout $A\subseteq F$ (tiers exclu), et \emph{de De Morgan} si $\neg A\cup\neg\neg A = F$ pour tout $A\subseteq F$ (tiers exclu faible). La catégorie $C$ vérifie la \emph{condition d'Ore} si toute paire de flèches de même but $f : Y\to X$, $g : Z\to X$ se complète en un carré commutatif $f\circ h = g\circ k$. L'\emph{enveloppe de Karoubi} $\Kar(C)$ ajoute un objet pour chaque flèche idempotente $e = e\circ e$, et contient $C$ comme sous-catégorie pleine. La catégorie $C$ est \emph{mince} s'il existe au plus une flèche entre deux objets quelconques.
+
+L'article associé fait tourner son générateur sur cinq arches, démontrées en Lean~4 dans la bibliothèque \lp{} de lean-pool:
+\begin{itemize}
+\item \emph{booléen:} $\PSh(C)$ est booléen si et seulement si $C$ est un groupoïde;
+\item \emph{De Morgan:} $\PSh(C)$ est de De Morgan si et seulement si $C$ vérifie la condition d'Ore;
+\item \emph{Morita:} on a $\PSh(C)\simeq\PSh(D)$ si et seulement si $\Kar(C)$ et $\Kar(D)$ sont équivalentes;
+\item \emph{points essentiels:} les foncteurs $\PSh(C)\to\Set$ qui préservent toutes les limites et toutes les colimites forment une catégorie équivalente à $\Kar(C)^{\op}$;
+\item \emph{sous-topos:} les sous-topos de $\PSh(C)$ correspondent, en renversant l'ordre, aux topologies de Grothendieck sur $C$.
+\end{itemize}
+
+\section{Trois arches de plus}\label{sec:morearches}
+
+Nous ajoutons trois arches au registre de l'article associé \cite{bridges-generator}. Nous ne les avons encore appliquées qu'aux tabliers tirés des notes de Grothendieck (\S\ref{sec:grdecks}) et à ses pseudo-corps (\S\ref{sec:pseudofields}); aucun des résultats de l'article associé n'en vient. Nous les numérotons de F à H, à la suite des cinq arches A à E de l'article associé.
+\setcounter{bridge}{5}
+
+\begin{bridge}[Deux valeurs]\label{br:twoval}
+Les sous-objets de l'objet final de $\PSh(C)$ (ses \q{ouverts}) correspondent aux cribles de $C$ \cite[IV~8.4.4]{sga4}. Ainsi $\PSh(C)$ n'a pas d'autre sous-objet de l'objet final que $0$ et $1$ si et seulement si, pour deux objets quelconques $a$, $b$ de $C$, il existe une flèche $a\to b$. Pour $C$ vide, le topos est dégénéré et la condition est vérifiée par vacuité: l'énoncé porte donc sur les $C$ non vides. Lean: \lean{forall_subfunctor_terminal_eq_bot_or_eq_top_iff}.
+\end{bridge}
+
+\begin{bridge}[Connexe]\label{br:conn}
+$\PSh(C)$ est connexe non vide au sens de \cite[IV~8.7~e)]{sga4} (toute partition de l'objet final a exactement une partie non vide) si et seulement si $C$ est connexe, fait rappelé comme connu dans \cite[ex.~3.6]{hora-kamio}. En termes de sous-objets de l'objet final: $C$ est non vide et les seuls sous-objets complémentés de l'objet final sont $0$ et $1$. Lean: \lean{isConnected_iff_forall_isCompl}.
+\end{bridge}
+
+\begin{bridge}[Spatial]\label{br:spatial}
+$\PSh(C)$ est équivalent au topos de préfaisceaux d'un préordre, donc au topos des faisceaux sur son espace d'Alexandrov, si et seulement si $C$ est mince. Grothendieck le donne en exercice \cite[p.~26]{grothendieck-161-3}; voir le \S\ref{sec:precedents}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}, qui énonce la forme relative aux préordres; que le topos soit alors celui d'un espace relève de l'équivalence de Grothendieck, tirée du même exercice, et n'est pas formalisé ici.
+\end{bridge}
+
+Sur les deux principaux tabliers de l'article associé, les $M$-ensembles à droite et les représentations d'un carquois, elles se lisent ainsi.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+\toprule
+invariant & lecture sur $C$ & sur les $M$-ensembles à droite & sur les représentations d'un carquois\\
+\midrule
+deux valeurs & une flèche entre deux objets quelconques & toujours & fortement connexe\\
+connexe & $C$ connexe & toujours & connexe\\
+préordre (spatial) & $C$ mince & $M$ trivial & au plus un chemin entre deux sommets\\
+\bottomrule
+\end{tabularx}
+\end{center}
