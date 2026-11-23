@@ -12,7 +12,7 @@ Call an element $x\in F(v)$ \emph{avoiding} a sub-representation $A$ if no image
 $\mathrm{Rep}(R)$ is a De Morgan topos (every element is avoiding or attracted, for every sub-representation) iff every vertex of $R$ has at most one outgoing arrow. It is a Boolean topos iff $R$ has no arrows.
 \end{theorem}
 
-\emph{Dictionary for Lean.} In Lean, presheaves on \texttt{Paths Q} are the representations of the opposite quiver $Q^{\op}$, so Lean's \texttt{Q} is our $R^{\op}$ and $C_R = \mathrm{Paths}(R^{\op})$; Lean's \q{at most one incoming arrow per vertex of \texttt{Q}} is our \q{at most one outgoing arrow per vertex of $R$}.
+\emph{Dictionary for Lean.} Presheaves on \texttt{Paths Q} are the representations of the opposite quiver $Q^{\op}$, so Lean's \texttt{Q} is our $R^{\op}$, and $C_R = \mathrm{Paths}(R^{\op})$. Lean's \q{at most one incoming arrow per vertex of \texttt{Q}} then reads \q{at most one outgoing arrow per vertex of $R$}.
 
 \begin{trace}
 \item[deck] $\mathrm{Rep}(R) = \PSh(\mathrm{Paths}(R^{\op}))$.
@@ -20,11 +20,11 @@ $\mathrm{Rep}(R)$ is a De Morgan topos (every element is avoiding or attracted, 
 \item[specialise] $f\circ h = g\circ k$ is an equality of paths, so one of $f$, $g$ is a final segment of the other; Ore on $\mathrm{Paths}(R^{\op})$ $\iff$ of any two paths ending at a vertex of $R^{\op}$, one is a final segment of the other $\iff$ no vertex of $R^{\op}$ has two incoming arrows. A free category is a groupoid iff it has no arrows.
 \item[unfold] Lemma~\ref{lem:neg}: $\neg A$ = avoiding, $\neg\neg A$ = attracted.
 \item[rewrite] two incoming arrows in $R^{\op}$ = two outgoing arrows in $R$.
-\item[verify] direct proof below; Lean: \lean{isDeMorganTopos_paths_iff} and \lean{isBooleanTopos_paths_iff}, from \lean{rightOreCondition_paths_iff} (in Lean's convention, presheaves on \texttt{Paths Q} are representations of the opposite quiver, so the condition reads \q{at most one incoming arrow per vertex of $Q$}) (\lean{QuiversDeMorgan.lean}).
+\item[verify] direct proof below; Lean: \lean{isDeMorganTopos_paths_iff} and \lean{isBooleanTopos_paths_iff}, from \lean{rightOreCondition_paths_iff}, whose condition, in Lean's convention, reads \q{at most one incoming arrow per vertex of $Q$} (\lean{QuiversDeMorgan.lean}).
 \item[novelty] one special case is in print (the quiver $\bullet\leftarrow\bullet\to\bullet$, \cite[\S4.1.4]{caramello-chamoun}); the characterisation not found.
 \end{trace}
 
-\direct{} If every vertex has at most one outgoing arrow, the paths from $v$ form one sequence $p_0\subset p_1\subset\cdots$, each extending the previous one; if $F(p_k)(x)\in A$, then from any image $F(p_j)(x)$ the further image $F(p_{\max(j,k)})(x)$ lies in $A$. Conversely, for two arrows $a : v\to w$ and $b : v\to w'$, let $F(u)$ be the set of paths from $v$ to $u$ (maps extend paths), $A$ the paths beginning with $a$, and $x$ the empty path at $v$ (Figure~\ref{fig:branch}): it is neither avoiding nor attracted. For the Boolean case, let $a : v\to w$ be any arrow (a loop is allowed) and take the same $F$, the same $A$ (a sub-representation, since extending a path keeps its first arrow) and the same $x$: $x$ is not in $A$, as the empty path does not begin with $a$, and its image along $a$, the path $a$, is in $A$, so $x$ is not in $\neg A$ either. This works whether or not $w$ reaches $v$, and for any number of outgoing arrows.\qed
+\direct{} If every vertex has at most one outgoing arrow, the paths from $v$ form one sequence $p_0\subset p_1\subset\cdots$, each extending the previous one; if $F(p_k)(x)\in A$, then from any image $F(p_j)(x)$ the further image $F(p_{\max(j,k)})(x)$ lies in $A$. Conversely, for two arrows $a : v\to w$ and $b : v\to w'$, let $F(u)$ be the set of paths from $v$ to $u$ (maps extend paths), $A$ the paths beginning with $a$, and $x$ the empty path at $v$ (Figure~\ref{fig:branch}): it is neither avoiding nor attracted. For the Boolean case, take any arrow $a : v\to w$ (possibly a loop) and the same $F$, $A$ and $x$; $A$ is a sub-representation because extending a path keeps its first arrow. The empty path does not begin with $a$, so $x$ is not in $A$; its image along $a$ is the path $a$, which lies in $A$, so $x$ is not in $\neg A$ either. The argument holds whether or not $w$ reaches $v$, and for any number of outgoing arrows.\qed
 
 \begin{figure}[ht]
 \centering
@@ -64,7 +64,7 @@ Two quivers $R$ and $R'$ have equivalent categories of representations in sets i
 \item[novelty] not found as a statement about quivers; each step is in print (Morita via the Karoubi envelope \cite[Lemma~1.1.3]{rogers-thesis}, after \cite[A1.1.9--10]{elephant}).
 \end{trace}
 
-\inwords{} For representations of \emph{linear} algebras, very different quivers can have equivalent derived categories of representations (module categories of basic path algebras, by contrast, also remember the quiver); in sets, there is no such phenomenon: the category of set-valued representations remembers the quiver.
+\inwords{} For representations of \emph{linear} algebras, very different quivers can have equivalent derived categories of representations (module categories of basic path algebras, by contrast, also remember the quiver). In sets the phenomenon disappears, and the category of set-valued representations remembers the quiver.
 
 \subsection{Essential points: the vertices}
 
@@ -92,7 +92,7 @@ $\mathrm{Rep}(Z_n)$ has exactly $2^n + 1$ subtopoi: for each set $S$ of arrows, 
 \item[specialise] classify the topologies on $C$ (below): degenerate, or one for each subset of vertices.
 \item[unfold] identify the sheaves: a representation is a sheaf iff the arrows leaving the vertices of the subset's complement are bijective.
 \item[verify] direct proof below; Lean: \lean{card_grothendieckTopology} (exactly $2^n+1$ topologies), \lean{topologyEquiv} (a bijection with \texttt{Option (Set (ZMod n))}), \lean{eq_top_or_eq_topologyOf}, and \lean{CyclicSite.card_grothendieckTopology_one} for $n = 1$; the description of the sheaves of each topology is not formalised (\lean{QuiversCyclic.lean}).
-\item[novelty] for $n = 1$ it follows from Pirashvili's description of the subtopoi of $M$-sets for commutative $M$ \cite[Cor.~4.3.11]{pirashvili-jpaa}; for $n\ge 2$ not found. For quivers \emph{without} oriented cycles, the Grothendieck topologies on the path category are known: there are $2^m$ of them for $m$ vertices, one for each set of vertices \cite[Cor.~4.3]{schmid} (after an unpublished note of Murfet); the cyclic case differs in kind.
+\item[novelty] for $n = 1$ it follows from Pirashvili's description of the subtopoi of $M$-sets for commutative $M$ \cite[Cor.~4.3.11]{pirashvili-jpaa}; for $n\ge 2$ not found. For quivers \emph{without} oriented cycles, the Grothendieck topologies on the path category are known: there are $2^m$ of them for $m$ vertices, one for each set of vertices \cite[Cor.~4.3]{schmid} (after an unpublished note of Murfet); the cyclic case behaves differently.
 \end{trace}
 
 \direct{} In $C$, for each vertex $v$ and each $\ell\ge 0$ there is exactly one path of length $\ell$ ending at $v$ (it starts at $v+\ell$). A sieve on $v$ is closed under lengthening, so it is $\emptyset$ or $S_{v,k} = \{\text{paths of length}\ge k\}$ for some $k\ge 0$; $S_{v,0}$ is the maximal sieve. Pulling back $S_{v,k}$ along the path of length $m$ into $v$ gives $S_{v+m,\max(k-m,0)}$.
