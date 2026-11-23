@@ -22,10 +22,11 @@ aspherical for every object `a`; a weak test category needs `A/L` aspherical.
 
 ## Results
 
-* Monoids of order ≤ 5 (273): `A/L` and `A/(a × L)` are never aspherical, so
+* Monoids of order ≤ 6 (2510): `A/L` and `A/(a × L)` are never aspherical, so
   none is a weak test category or a local test category (usual weak
-  equivalences). The 223 Ore monoids are covered by the theorem of the note;
-  for the 50 others H₁(A/(a × L); Q) has rank 4 to 224.
+  equivalences). The 2015 Ore monoids are covered by the theorem of the note;
+  for the 495 others H₁(A/(a × L); Q) has rank 4 to 743. Order ≤ 5 alone:
+  50 non-Ore monoids, rank 4 to 224 (`results-5.txt`); order 6 took 13 min.
 * Posets on ≤ 6 points: χ(A/L) ≠ 1 whenever χ(A) = 1, so none is a weak test
   category. (No finite poset is a local test category, by the theorem: the
   slice over a minimal element is the point.)
