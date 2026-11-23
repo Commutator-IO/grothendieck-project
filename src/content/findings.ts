@@ -1189,7 +1189,7 @@ export const FINDINGS: Finding[] = [
     basis:
       'Page 47 writes the axiom as the epimorphicity of {V(p·1_A) → e, ⋂_n (e)_{n·1_A} → e}, notes that the infinite intersection « ne donne pas l’existence d’un topos classifiant » by the open-condition route, defines the topology « top car » as the infimum of the « top car p » and observes it is not quasi-compact; pages 47–48 work out the gluing criterion and check it for V = X_{car > 0}, W = X_{car 0}, where V ∧ W is the open of the zero ring; page 49 proposes X_car ≅ R̂_car for R_car the schemes of finite type over the prime fields, glued under the empty scheme.',
     ours:
-      'The statement of the gluing criterion in the form above is the edition’s mise en forme of a brouillon (page 48); the reading records that X_car ≅ R̂_car is posed without proof and that the ℚ-schemes lie in Pro R rather than in R. The non-coherence is the page’s (« topos non cohérent », encircled).',
+      'The statement of the gluing criterion in the form above is the edition’s mise en forme of a brouillon (page 48); the reading records that X_car ≅ R̂_car is posed without proof and that the ℚ-schemes lie in Pro R rather than in R. The non-coherence is the page’s (« topos non cohérent », encircled). Refutation and the precise lemma, 2026-11-23 (issue #185, docs/bridges notes §« Rings of definite characteristic »), the edition’s own argument, not checked by a specialist: (1) the gluing lemma, made precise, is true — for subtopoi V, W of a topos B, the gluing problem has a solution iff there are subterminals U′, U″ of B with W ∧ o(U′) ≤ V, V ∧ o(U″) ≤ W and V ∨ W ≤ o(U′ ∨ U″), and the solution is then V ∨ W; proof from the distributivity of the lattice of subtopoi and the locality of factoring through a subtopos, no gluing needed (the page’s « (à vérifier) »). (2) For V = X_{car>0}, W = X_ℚ in R̂ the condition fails: W ≤ o(U) forces U to contain a ring with a map to ℚ, hence some 𝔽_p, which lies in V and not in W. So no subtopos classifies the rings locally of characteristic p or 0, and the page’s « Donc OK » and the N.B. that V ∧ W open in V and in W suffices are wrong. (3) R̂_car is the gluing of V and W along the point V ∧ W, but R̂_car → R̂ is not an embedding, so X_car ≅ R̂_car holds only for the glued topos, not for a subtopos such as R̃_top.car. (4) Item 21’s « assez de points ssi chacun des Z(p) en a assez » holds for the glued topos.',
     literature: [
       "M. Hutzler, Syntactic presentations for glued toposes and for crystalline toposes (arXiv 2206.11244) — presentations of a topos from a cover by open subtoposes; found by search, the characteristic example not seen there",
       "P. T. Johnstone, Sketches of an Elephant, A4.5 — joins and meets of subtoposes; cited from memory",
@@ -1197,10 +1197,10 @@ export const FINDINGS: Finding[] = [
       "Web search, 5 September 2026: « classifying topos rings of characteristic p or characteristic zero geometric theory subtopos union open » — nothing on this theory",
       "Web search, 2026-11-23, for classifying-topos treatments of rings of characteristic p or 0 as a non-open subtopos and joins of subtoposes: found O. Caramello and P. T. Johnstone, De Morgan's law and the theory of fields (arXiv 0808.1972), and O. Caramello, Universal models and definability (arXiv 0906.3061), which (per search summaries only) discuss geometric formulas expressing that the characteristic lies in a set of primes and 0 for regular rings. Neither was read; neither, per summaries, treats rings of definite characteristic as a join of subtoposes.",
     ],
-    status: 'candidate',
-    settle: 
-      "Two checks: whether « rings of definite characteristic » occurs as an example of a non-coherent quotient of the theory of rings anywhere (Johnstone 1977, Elephant D3, Hutzler); and whether the join sup(V, W) in Elephant A4.5 terms is the glued topos the page describes, which would make the criterion a corollary of the general theory of joins. Re-searched 2026-11-23 (one WebSearch): nothing on this example; Caramello–Johnstone 0808.1972 and Caramello 0906.3061 are the next places to check for the characteristic condition, together with Elephant A4.5 (joins) and A4.6 (gluing along an open).",
-    reach: 'beyond',
+    status: 'refuted',
+    settle:
+      "Refuted for the statement as read (the classifying subtopos does not exist); what remains: a specialist's check of the argument in docs/bridges/notes.tex, and a literature search for the gluing lemma in the form proved (none found in Johnstone, Elephant A4.5, cited from memory). The order-theoretic core is being formalised in GrothendieckArchivesProofs (issue #185).",
+    reach: 'doubtful',
     theory: "topoi",
     onPage: 'partial',
   },

@@ -1,0 +1,80 @@
+\section{Anneaux de caractéristique définie : un recollement qui n'est pas un sous-topos}\label{sec:characteristic}
+
+Aux pages~47 à~49 du dossier 161-2 \cite{grothendieck-161-2}, article~20 de sa liste, Grothendieck considère les anneaux qui sont, localement, de caractéristique $p$ pour un nombre premier $p$, ou de caractéristique $0$. Dans le topos $B = X_{\mathrm{ann}} \simeq \widehat R$ qui classifie les anneaux ($R$ les schémas affines de type fini sur $\mathbb Z$), ce sont les morphismes qui se factorisent localement par l'un de deux sous-topos :
+\begin{itemize}
+\item $V = X_{\mathrm{car}>0}$, réunion des sous-topos ouverts $\widehat R_{\mathbb Z/p}$, qui est ouvert : $V = o(U_V)$, où $U_V \subseteq 1$ est le crible des schémas qui s'envoient dans un $\operatorname{Spec}\mathbb F_p$ ;
+\item $W = X_{\mathrm{car}\,0} \simeq \widehat{R_{\mathbb Q}}$, les $\mathbb Q$-algèbres, intersection des ouverts $o(\operatorname{Spec}\mathbb Z[1/n])$, qui n'est pas ouvert.
+\end{itemize}
+Il note que la condition fait intervenir une limite projective infinie, et ne donne donc pas de topos classifiant par la voie habituelle. Il cherche alors un sous-topos $Z \subseteq B$ qui classifie la condition, énonce un critère d'existence (p.~48), dont une étape est marquée \q{(à vérifier)}, vérifie le critère dans ce cas (\q{Donc OK}), et identifie le résultat au topos des préfaisceaux sur la catégorie $R_{\mathrm{car}}$ des schémas de type fini sur un corps premier, $\mathbb Q$ compris, recollés le long du schéma vide (p.~49). Nous rendons le critère précis et le démontrons, et constatons qu'il est en défaut dans ce cas : aucun sous-topos de $\widehat R$ ne classifie les anneaux de caractéristique définie. Le topos recollé existe, mais ce n'est pas un sous-topos.
+
+\subsection{Le lemme de recollement}
+
+Nous utilisons quatre faits classiques sur un topos $B$ \cite[\S A4.5]{elephant} :
+\begin{enumerate}
+\item[(F1)] les sous-topos de $B$ forment une algèbre de co-Heyting, en particulier un treillis distributif, de borne supérieure $\vee$ et de borne inférieure $\wedge$ ;
+\item[(F2)] pour un sous-objet $U$ de l'objet final, un morphisme géométrique $f\colon \mathcal E\to B$ se factorise par le sous-topos ouvert $o(U)$ si et seulement si $f^*U = 1$ ; $f$ se factorise par $Y_1\wedge Y_2$ si et seulement s'il se factorise par $Y_1$ et par $Y_2$ ; enfin $o(U')\vee o(U'') = o(U'\vee U'')$ ;
+\item[(F3)] se factoriser par un sous-topos est une propriété locale sur la source : si $\mathcal E$ est recouvert par des sous-objets $e_i$ de l'objet final ($\bigvee e_i = 1$) et si chaque restriction $f|_{\mathcal E/e_i}$ se factorise par $Y$, alors $f$ aussi (la condition est que $f^*$ inverse les monomorphismes denses de $Y$, et l'inversibilité est locale) ;
+\item[(F4)] les sous-topos ouverts d'un sous-topos $Z\subseteq B$ sont les $Z\wedge o(U)$, $U$ sous-objet de l'objet final de $B$ (un sous-objet de l'objet final de $Z$ en est un de $B$).
+\end{enumerate}
+Soient $V$, $W$ deux sous-topos de $B$. Disons que $f\colon\mathcal E\to B$ est \emph{localement dans $V$ ou $W$} s'il existe des sous-objets $e'$, $e''$ de l'objet final de $\mathcal E$ avec $e'\vee e'' = 1$, $f|_{e'}$ se factorisant par $V$ et $f|_{e''}$ par $W$. Le \emph{problème de recollement} demande un sous-topos $Z$ tel que $f$ se factorise par $Z$ si et seulement si $f$ est localement dans $V$ ou $W$.
+
+\begin{theorem}[Dossier 161-2, p.~48, rendu précis]\label{th:gluing}
+Les conditions suivantes sont équivalentes :
+\begin{enumerate}
+\item le problème de recollement a une solution ;
+\item $V\vee W$ est réunion de deux sous-topos ouverts, l'un contenu dans $V$ et l'autre dans $W$ ;
+\item il existe des sous-objets $U'$, $U''$ de l'objet final de $B$ tels que
+\[
+W\wedge o(U')\le V,\qquad V\wedge o(U'')\le W,\qquad V\vee W\le o(U'\vee U'').
+\]
+\end{enumerate}
+La solution est alors $Z = V\vee W$, et $Z' = V\wedge o(U')$, $Z'' = W\wedge o(U'')$ satisfont aux conditions de Grothendieck $V = Z'\vee(Z''\wedge V)$ et $W = Z''\vee(Z'\wedge W)$, avec $Z'\wedge W$ ouvert dans $W$ et $Z''\wedge V$ ouvert dans $V$.
+\end{theorem}
+
+\begin{proof}
+(1)$\Rightarrow$(2). Soit $Z$ une solution. L'identité de $V$ est localement dans $V$ ou $W$, donc $V\le Z$, et de même $W\le Z$. L'inclusion de $Z$ se factorise par $Z$, elle est donc localement dans $V$ ou $W$ : $Z$ est recouvert par deux sous-topos ouverts $Z_1\le V$, $Z_2\le W$. Alors $Z = Z_1\vee Z_2\le V\vee W\le Z$. (C'est l'argument de nécessité de Grothendieck, p.~47.)
+
+(2)$\Rightarrow$(3). D'après (F4), les deux ouverts sont $Z\wedge o(U')$ et $Z\wedge o(U'')$, avec $Z = V\vee W$. De $Z\wedge o(U')\le V$ on tire $W\wedge o(U')\le V$, et de même pour $U''$ ; et $Z = (Z\wedge o(U'))\vee(Z\wedge o(U''))\le o(U'\vee U'')$.
+
+(3)$\Rightarrow$(1). Posons $Z = V\vee W$. Par distributivité (F1), $Z\wedge o(U') = (V\wedge o(U'))\vee(W\wedge o(U'))\le V$, et $Z\wedge o(U'')\le W$. Si $f$ est localement dans $V$ ou $W$, il se factorise par $Z$ d'après (F3). Réciproquement, si $f$ se factorise par $Z$, posons $e' = f^*U'$ et $e'' = f^*U''$ : alors $e'\vee e'' = f^*(U'\vee U'') = 1$ puisque $Z\le o(U'\vee U'')$, et $f|_{e'}$ se factorise par $Z\wedge o(U')\le V$ d'après (F2), et $f|_{e''}$ par $W$.
+
+Pour la forme de Grothendieck : $V = V\wedge o(U'\vee U'') = (V\wedge o(U'))\vee(V\wedge o(U''))$ d'après (F1), et $V\wedge o(U'') = Z''\wedge V$ puisque $V\wedge o(U'')\le W$ ; de même pour $W$. Enfin $Z'\wedge W = W\wedge o(U')$ est ouvert dans $W$, et $Z''\wedge V$ est ouvert dans $V$.
+\end{proof}
+
+\begin{remark}
+À la page~48, Grothendieck démontre la suffisance en recollant $Z'$ et $Z''$ le long de leur intersection, et marque le plongement dans $B$ qui en résulte \q{(à vérifier)}. La condition~(3) évite le recollement : la solution est la borne supérieure $V\vee W$, qui existe en tout cas. Ce que le critère ajoute, c'est la \emph{forme} des ouverts : $Z'$ doit être découpé dans $V$ par un ouvert $o(U')$ de $B$ dont la trace sur $W$ est déjà contenue dans $V$, et symétriquement. Le lemme est élémentaire une fois (F1) à (F4) admis, mais nous ne l'avons trouvé énoncé ni dans \cite{elephant} ni ailleurs.
+\end{remark}
+
+\subsection{Le cas de la caractéristique}
+
+\begin{proposition}\label{prop:nocar}
+Pour $B = \widehat R$, $V = X_{\mathrm{car}>0}$ et $W = X_{\mathrm{car}\,0}$, la condition~(3) du théorème~\ref{th:gluing} est en défaut. Aucun sous-topos de $\widehat R$ ne classifie donc les anneaux qui sont localement de caractéristique $p>0$ ou de caractéristique $0$.
+\end{proposition}
+
+\begin{proof}
+Un sous-objet de l'objet final de $\widehat R$ est un crible $S$ sur $\operatorname{Spec}\mathbb Z$, c'est-à-dire un ensemble d'anneaux de présentation finie stable par les morphismes d'anneaux qui en partent, et le point de $\widehat R$ défini par un anneau $C$ est dans $o(S)$ si et seulement si un $A\in S$ admet un morphisme $A\to C$ (pour $C$ de présentation finie : si et seulement si $C\in S$). Deux observations.
+
+(a) \emph{$W\le o(S)$ force $S$ à contenir un $\mathbb F_p$.} L'image inverse de $S$ dans $W\simeq\widehat{R_{\mathbb Q}}$ vaut $1$ si et seulement si sa valeur en $\mathbb Q$ est non vide, c'est-à-dire si $S$ contient un anneau de présentation finie $A$ muni d'un morphisme $A\to\mathbb Q$. L'image d'un tel morphisme est un sous-anneau de type fini $\mathbb Z[1/n]$ de $\mathbb Q$, donc $A$ s'envoie dans $\mathbb F_p$ pour tout premier $p\nmid n$, et $\mathbb F_p\in S$.
+
+(b) \emph{$\mathbb F_p$ est dans $V$ et pas dans $W$, et $\mathbb Q$ est dans $W$ et pas dans $V$} : un anneau de caractéristique $p$ n'inverse aucun multiple de $p$, et $\mathbb Q$ ne s'envoie dans aucun $\mathbb F_p$.
+
+Supposons (3). Comme $W\le o(U'\vee U'')$ et que la borne supérieure de deux cribles est leur réunion, l'argument de (a) fournit un anneau $A$ muni d'un morphisme $A\to\mathbb Q$ dans $U'$ ou dans $U''$. Si $A\in U'$, alors $W\wedge o(U') = W$ (l'image inverse de $U'$ dans $W$ vaut déjà $1$), donc $W\le V$, ce qui contredit (b) en $\mathbb Q$. Si $A\in U''$, alors $\mathbb F_p\in U''$ pour un $p$ d'après (a), donc le point $\mathbb F_p$ est dans $V\wedge o(U'')\le W$, ce qui contredit (b).
+\end{proof}
+
+Le \q{Donc OK} de Grothendieck ne tient donc pas. Ce que sa vérification établit, c'est que $V\wedge W$ est ouvert dans $V$ et dans $W$ : c'est l'ouvert $o(\emptyset)$ de l'anneau nul. Son N.B.\ de la page~48 affirme que cela suffit ; la proposition~\ref{prop:nocar} montre que non. Dans les notations du théorème~\ref{th:gluing}, le plus grand ouvert $Z'$ de $V$ de la forme voulue est $V$ lui-même, mais le plus grand ouvert $Z''$ de $W$ de cette forme est le point $o(\emptyset)\wedge W$, et $W\ne Z''\vee(Z'\wedge W)$.
+
+\paragraph{Ce qui subsiste : le topos recollé.} Un préfaisceau sur $R_{\mathrm{car}}$, somme amalgamée des $R_p$ ($p$ premier ou $0$, $R_0 = R_{\mathbb Q}$) le long de leur objet initial $\emptyset$, est une famille de préfaisceaux $F_p$ sur les $R_p$ dont les valeurs $F_p(\emptyset)$ sont identifiées. Ainsi $\widehat{R_{\mathrm{car}}}$ est le topos obtenu en recollant les $\widehat{R_p}$ le long de leur point ouvert commun $o(\emptyset)$ : c'est la \q{2-somme amalgamée sous le topos ponctuel} de l'article~21 ; en regroupant les premiers, c'est $V$ et $W$ recollés le long de $V\wedge W$, et le N.B.\ de Grothendieck identifie lui-même $V$ à $\widehat{R_{\mathrm{car}>0}}$. Les inclusions de $V$ et de $W$ se recollent en un morphisme géométrique $\widehat{R_{\mathrm{car}}}\to\widehat R$.
+
+\begin{corollary}
+Le morphisme $\widehat{R_{\mathrm{car}}}\to\widehat R$ n'est pas un plongement. Le topos $\widehat{R_{\mathrm{car}}}$ n'est donc pas équivalent, au-dessus de $\widehat R$, à un sous-topos de $\widehat R$ ; en particulier ni à $V\vee W$, ni au topos des faisceaux $\widetilde R_{\mathrm{top.car}}$ pour la topologie \q{top car} de la page~47.
+\end{corollary}
+
+\begin{proof}
+S'il était un plongement d'image $Z$, les sous-topos ouverts $V$ et $W$ de $\widehat{R_{\mathrm{car}}}$, qui le recouvrent, seraient des sous-topos ouverts de $Z$ contenus dans $V$ et $W$ et le recouvrant, de sorte que la condition (2) du théorème~\ref{th:gluing} serait satisfaite, contrairement à la proposition~\ref{prop:nocar}.
+\end{proof}
+
+L'identification $X_{\mathrm{car}}\simeq\widehat{R_{\mathrm{car}}}$ de la page~49 est donc juste si $X_{\mathrm{car}}$ désigne le topos recollé, et fausse s'il désigne un sous-topos de $\widehat R$, ce qui est la façon dont la page~47 l'introduit ($X_{\mathrm{car}} = \widetilde R_{\mathrm{top.car}}$). Comme son morphisme vers $\widehat R$ n'est pas un plongement, le topos recollé ne classifie pas une propriété de l'anneau.
+
+\paragraph{Les points.} L'article~21 affirme que le topos recollé à partir de sous-topos $Z(p)$ des $\widehat{R_p}$ a assez de points si et seulement si chaque $Z(p)$ en a assez. C'est exact : un topos recouvert par des sous-topos ouverts qui ont assez de points en a assez, et un sous-topos ouvert d'un topos qui a assez de points en a assez. Pour $\widehat{R_{\mathrm{car}}}$ lui-même, topos de préfaisceaux, c'est immédiat.
+
+\leanentry{} Le cœur ordinal du théorème~\ref{th:gluing}, l'équivalence de~(2) et~(3) dans un treillis distributif, est en cours de formalisation dans le dépôt des preuves ; la proposition~\ref{prop:nocar} n'est pas formalisée.
