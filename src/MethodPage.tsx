@@ -29,15 +29,6 @@ const ARTICLES: ArticleItem[] = [
     src: 'docs/rhm/article.tex',
   },
   {
-    id: 'article-problems',
-    title: "Open Questions from Grothendieck's Montpellier Notes: Thirteen Statements a Formalisation Could Not Reach",
-    lang: 'English',
-    what: 'Statements from the folders that the formalisation could not settle, each with its page, the context, what the literature search found, the ideas of proof, and what would settle it.',
-    pdf: '/article/grothendieck-problems.pdf',
-    more: [{ label: 'Hexagon (part II)', href: 'https://hexagonmath.org/2611.00125v1' }],
-    src: 'docs/problems/article.tex',
-  },
-  {
     id: 'article-carbon',
     title: "Transcrire Grothendieck avec un modèle de langage : combien de carbone ?",
     lang: 'French',
@@ -135,15 +126,6 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     src: 'docs/buffalo-open/article.tex',
   },
   {
-    id: 'article-effective',
-    title: "Non-effective finite equivalence relations on finite schemes over a field: Venken's example checked, and a second one",
-    lang: 'English',
-    what: "The problem he gave at Buffalo on 11 July 1973, first asked in FGA (1961): is every finite equivalence relation on a finite scheme over a field effective? No: Venken had answered it in 1971, in a corollary of a note on flat descent (a local Artin algebra of dimension 33). The note checks his example by machine and gives a second one, of length 15 (16 in characteristic 2) in two variables, from Raicu's relation on the plane, certified over every field.",
-    pdf: '/article/grothendieck-effective.pdf',
-    src: 'docs/effective/article.tex',
-    more: [{ label: 'Note de lecture (fr)', href: '/article/grothendieck-effective-note-fr.pdf' }],
-  },
-  {
     id: 'article-qcoh-descent',
     title: 'Descent of quasi-coherent sheaves along universal effective epimorphisms of schemes',
     lang: 'English',
@@ -160,14 +142,6 @@ const SOUS_ARTICLES: typeof ARTICLES = [
     pdf: '/article/grothendieck-problem-three.pdf',
     src: 'docs/problem-three/article.tex',
     more: [{ label: 'Note de lecture (fr)', href: '/article/grothendieck-problem-three-note-fr.pdf' }],
-  },
-  {
-    id: 'article-kostant',
-    title: "Kostant's tori in apposition: the Borel subgroups are opposite in type A",
-    lang: 'English',
-    what: "Grothendieck's letter to Kostant of 22 October 1969 asks whether, for maximal tori in apposition, the Borel subgroups through them are in general position. For PGL_n and every n the answer is yes, for all n! Borels through the second torus: every flag stable under a cyclic element with nonzero coefficients is transverse to the standard one. A weighted-shift proof, formalised in Lean 4, and a second by Vandermonde determinants; the other types and the question of a distinguished class stay open.",
-    pdf: '/article/grothendieck-kostant.pdf',
-    src: 'docs/kostant/article.tex',
   },
   {
     id: 'article-loday-filtration',
