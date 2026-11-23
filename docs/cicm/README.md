@@ -50,7 +50,7 @@ review is double-blind: if it is, an anonymous version is needed).
   move `SNAPSHOT`, rerun `figures.mjs` and reread the paragraphs that comment
   on the numbers.
 - The section on the Mathlib pull requests was removed on 29 October 2026;
-  the upstream lemmas are presented only through the Tau Ceti roadmap (#1431).
+  the upstream lemmas are presented through Lean Pool (merged projects, November 2026) and the Tau Ceti roadmap (#1431).
 - The conjectures table is taken from `docs/conjectures/article.tex`, whose
   readings are machine transcriptions; its dates and pages are not checked
   on the facsimile (the caption says so).
