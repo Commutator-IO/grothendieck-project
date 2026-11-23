@@ -59,6 +59,7 @@ const FONDS_PAGES: { path: string; label: string }[] = [
   { path: '/diagrams/', label: 'Diagrams' },
   { path: '/formulas/', label: 'Formulas' },
   { path: '/maps/', label: 'Maps' },
+  { path: '/built/', label: 'Built' },
 ];
 // The row shows the first few; the rest, and the project's pages, fold into « More » (2 November 2026: twelve tabs beside the switch were too many).
 const FONDS_SHOWN = 5;

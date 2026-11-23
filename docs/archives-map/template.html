@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Built — Lean proofs of the Grothendieck archives</title>
+<meta name="description" content="Every Lean file and declaration of GrothendieckArchivesProofs, as a treemap or a city.">
+<style>
+:root{
+  color-scheme:light;
+  --surface:#fcfcfb; --panel:#f3f2ef; --line:#dcdad4; --grid:#e8e6e0;
+  --ink:#0b0b0b; --ink2:#52514e; --ink3:#7a7872;
+  --k-theorem:#2a78d6; --k-def:#eb6834; --k-type:#1baf7a; --k-inst:#6250d6; --k-other:#9a988f;
+  --folder:#ecebe6; --folder-edge:#d3d1c9;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --surface:#1a1a19; --panel:#242423; --line:#3a3a38; --grid:#2c2c2a;
+  --ink:#f0efec; --ink2:#c3c2b7; --ink3:#8d8c85;
+  --k-theorem:#3987e5; --k-def:#d95926; --k-type:#199e70; --k-inst:#9085e9; --k-other:#77766f;
+  --folder:#222221; --folder-edge:#343432;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --surface:#1a1a19; --panel:#242423; --line:#3a3a38; --grid:#2c2c2a;
+  --ink:#f0efec; --ink2:#c3c2b7; --ink3:#8d8c85;
+  --k-theorem:#3987e5; --k-def:#d95926; --k-type:#199e70; --k-inst:#9085e9; --k-other:#77766f;
+  --folder:#222221; --folder-edge:#343432;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--surface);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{padding:20px 16px 8px;max-width:1280px;margin:0 auto}
+h1{font:600 22px/1.2 Georgia,"Source Serif 4",serif;margin:0 0 4px}
+.sub{color:var(--ink2);margin:0 0 14px;max-width:70ch}
+.hero{display:flex;gap:28px;flex-wrap:wrap;margin:6px 0 4px}
+.hero div b{display:block;font:600 24px/1.1 Georgia,serif;font-variant-numeric:tabular-nums}
+.hero div span{color:var(--ink2);font-size:12px}
+.bar{max-width:1280px;margin:0 auto;padding:8px 16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{all:unset;cursor:pointer;padding:6px 12px;color:var(--ink2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+select,input[type=search]{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit}
+.legend{max-width:1280px;margin:0 auto;padding:2px 16px 8px;display:flex;gap:16px;flex-wrap:wrap;color:var(--ink2);font-size:13px}
+.legend label{display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.dot{width:10px;height:10px;border-radius:2px;display:inline-block}
+.crumbs{max-width:1280px;margin:0 auto;padding:0 16px 6px;color:var(--ink2);font-size:13px;min-height:22px}
+.crumbs button{all:unset;cursor:pointer;color:var(--k-theorem);text-decoration:underline}
+#stage{position:relative;max-width:1280px;margin:0 auto;padding:0 16px}
+#cv,#gl{display:block;width:100%;height:min(72vh,720px);background:var(--panel);border:1px solid var(--line);border-radius:8px}
+#gl{display:none}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--surface);padding:6px 9px;border-radius:6px;font-size:12px;max-width:360px;display:none;z-index:5;line-height:1.35}
+#tip code{font:12px ui-monospace,Menlo,monospace;word-break:break-all}
+.note{max-width:1280px;margin:0 auto;padding:10px 16px;color:var(--ink2);font-size:12.5px}
+details{max-width:1280px;margin:0 auto;padding:6px 16px 28px}
+summary{cursor:pointer;color:var(--ink2)}
+table{border-collapse:collapse;width:100%;margin-top:8px;font-variant-numeric:tabular-nums;font-size:13px}
+th,td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--ink2);font-weight:600}
+.themebtn{margin-left:auto}
+@media (max-width:640px){#cv,#gl{height:60vh}}
+</style>
+</head>
+<body>
+<nav style="max-width:1280px;margin:0 auto;padding:14px 16px 0;font-size:13px"><a href="/" style="color:var(--ink2)">← Grothendieck archives</a></nav>
+<header>
+  <h1>GrothendieckArchivesProofs, as a map</h1>
+  <p class="sub">Every Lean file of <a href="https://github.com/Commutator-IO/GrothendieckArchivesProofs" style="color:inherit">Commutator-IO/GrothendieckArchivesProofs</a> and each declaration in it, laid out as a treemap or a city, to set beside the Stacks project's own graph at stacks.axiommath.ai/graph.</p>
+  <div class="hero" id="hero"></div>
+</header>
+<div class="bar">
+  <div class="seg" role="group" aria-label="Layout">
+    <button id="bT" aria-pressed="true">Treemap</button><button id="bC" aria-pressed="false">City</button>
+  </div>
+  <select id="proj" aria-label="Project"></select>
+  <select id="metric" aria-label="Size by">
+    <option value="decl">Size: declarations</option>
+    <option value="lines">Size: lines</option>
+  </select>
+  <input id="q" type="search" placeholder="Search a declaration" aria-label="Search a declaration">
+  <button class="seg" id="theme" style="all:unset;cursor:pointer;padding:6px 10px;border:1px solid var(--line);border-radius:6px;color:var(--ink2)" aria-label="Toggle theme">◐</button>
+</div>
+<div class="legend" id="legend"></div>
+<div class="crumbs" id="crumbs"></div>
+<div id="stage"><canvas id="cv"></canvas><div id="gl"></div></div>
+<div class="note" id="note"></div>
+<details><summary>Table view</summary><table id="tbl"></table></details>
+<div id="tip"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const DATA=/*DATA*/null;
+const KINDS=[
+ ['theorem','Theorem / lemma','--k-theorem'],
+ ['def','Definition','--k-def'],
+ ['type','Structure, class, inductive','--k-type'],
+ ['inst','Instance, abbrev','--k-inst'],
+ ['other','Other (example, axiom…)','--k-other']];
+const KMAP={theorem:'theorem',def:'def',structure:'type',class:'type',inductive:'type',instance:'inst',abbrev:'inst',example:'other',axiom:'other',opaque:'other'};
+const on=Object.fromEntries(KINDS.map(k=>[k[0],true]));
+const $=id=>document.getElementById(id);
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const fmt=n=>n.toLocaleString('en-US');
+const state={layout:'treemap',proj:'ALL',metric:'decl',zoom:[],q:''};
+
+// ---- data: tree of folders → files → declarations
+const files=DATA.files.map(f=>({...f,top:f.path.includes('/')?f.path.split('/')[0]:'(root)',
+  decls:f.decls.map(d=>({...d,kc:KMAP[d.k]||'other',file:f.path}))}));
+const projects=[...new Set(files.map(f=>f.top))].sort();
+$('proj').innerHTML='<option value="ALL">All projects</option>'+projects.map(p=>`<option>${p}</option>`).join('');
+
+$('hero').innerHTML=[['Lean files',files.length],['Declarations',files.reduce((a,f)=>a+f.decls.length,0)],['Lines of Lean',files.reduce((a,f)=>a+f.lines,0)]]
+  .map(([l,n])=>`<div><b>${fmt(n)}</b><span>${l}</span></div>`).join('')+`<div><b>${DATA.commit}</b><span>commit</span></div>`;
+$('legend').innerHTML=KINDS.map(k=>`<label><input type="checkbox" data-k="${k[0]}" checked><span class="dot" style="background:var(${k[2]})"></span>${k[1]}</label>`).join('');
+
+function visibleDecls(f){
+  const q=state.q.toLowerCase();
+  return f.decls.filter(d=>on[d.kc]&&(!q||d.n.toLowerCase().includes(q)));
+}
+function buildTree(){
+  const root={name:'GrothendieckArchivesProofs',children:[]};
+  for(const f of files){
+    if(state.proj!=='ALL'&&f.top!==state.proj) continue;
+    const ds=visibleDecls(f); if(!ds.length) continue;
+    const parts=f.path.split('/'); const fn=parts.pop();
+    let node=root;
+    for(const p of parts){let c=node.children.find(x=>x.name===p&&x.children);if(!c){c={name:p,children:[]};node.children.push(c)}node=c}
+    const val=state.metric==='decl'?ds.length:ds.reduce((a,d)=>a+d.len,0);
+    node.children.push({name:fn,file:f,ds,value:val});
+  }
+  let n=root;
+  for(const z of state.zoom){const c=n.children&&n.children.find(x=>x.name===z&&x.children);if(!c)break;n=c}
+  return n;
+}
+function kindColors(){return Object.fromEntries(KINDS.map(k=>[k[0],css(k[2])]))}
+
+// ---- treemap (canvas)
+const cv=$('cv'),ctx=cv.getContext('2d');
+let sq=[],rects=[];
+function drawTreemap(){
+  const dpr=window.devicePixelRatio||1,W=cv.clientWidth,H=cv.clientHeight;
+  cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,W,H);
+  const top=buildTree();
+  const h=d3.hierarchy(top).sum(d=>d.value||0).sort((a,b)=>b.value-a.value);
+  d3.treemap().size([W-8,H-8]).paddingInner(2).paddingOuter(3).paddingTop(d=>d.depth<=3?15:3).tile(d3.treemapSquarify)(h);
+  const C=kindColors();sq=[];rects=[];
+  const f1=css('--folder'),f2=css('--folder-edge'),ink=css('--ink2');
+  ctx.save();ctx.translate(4,4);ctx.font='11px system-ui,sans-serif';ctx.textBaseline='top';
+  h.each(n=>{
+    const w=n.x1-n.x0,hh=n.y1-n.y0;
+    if(n.children){
+      ctx.fillStyle=f1;ctx.fillRect(n.x0,n.y0,w,hh);ctx.strokeStyle=f2;ctx.strokeRect(n.x0+.5,n.y0+.5,w-1,hh-1);
+      if(n.depth<=3&&w>40){ctx.fillStyle=ink;ctx.save();ctx.beginPath();ctx.rect(n.x0,n.y0,w,14);ctx.clip();ctx.fillText(n.data.name,n.x0+4,n.y0+2);ctx.restore()}
+      if(n.depth>=1&&n.depth<=3)rects.push({x:n.x0+4,y:n.y0+4,w,h:15,path:n.ancestors().reverse().slice(1).map(a=>a.data.name)});
+    }else{
+      const ds=n.data.ds;
+      const pad=1,aw=w-2*pad,ah=hh-2*pad;
+      if(aw<2||ah<2){ctx.fillStyle=C[ds[0].kc];ctx.fillRect(n.x0,n.y0,Math.max(w,1),Math.max(hh,1));return}
+      // grid of squares sized to fit all declarations
+      let s=Math.sqrt(aw*ah/ds.length),cols=Math.max(1,Math.floor(aw/s));
+      s=aw/cols;let rows=Math.ceil(ds.length/cols);
+      while(rows*s>ah&&cols<ds.length){cols++;s=aw/cols;rows=Math.ceil(ds.length/cols)}
+      const sz=Math.max(1,s-(s>4?1:0));
+      const sorted=ds.slice().sort((a,b)=>KINDS.findIndex(k=>k[0]===a.kc)-KINDS.findIndex(k=>k[0]===b.kc));
+      sorted.forEach((d,i)=>{
+        const x=n.x0+pad+(i%cols)*s,y=n.y0+pad+Math.floor(i/cols)*s;
+        if(y+sz>n.y1+0.5)return;
+        ctx.fillStyle=C[d.kc];ctx.fillRect(x,y,sz,sz);sq.push({x:x+4,y:y+4,s:sz,d});
+      });
+    }
+  });
+  ctx.restore();
+  $('note').textContent=`${fmt(sq.length)} declarations drawn${state.q?` matching “${state.q}”`:''}. Click a folder title to zoom; hover a square for its name and line.`;
+}
+cv.addEventListener('mousemove',e=>{
+  if(state.layout!=='treemap')return;
+  const r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+  let hit=null;for(let i=sq.length-1;i>=0;i--){const s=sq[i];if(x>=s.x&&x<=s.x+Math.max(s.s,2)&&y>=s.y&&y<=s.y+Math.max(s.s,2)){hit=s.d;break}}
+  const fr=!hit&&rects.find(q=>x>=q.x&&x<=q.x+q.w&&y>=q.y&&y<=q.y+q.h);
+  cv.style.cursor=fr?'pointer':'default';
+  if(hit)tip(e,hit);else hideTip();
+});
+cv.addEventListener('mouseleave',hideTip);
+cv.addEventListener('click',e=>{
+  const r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+  const fr=rects.find(q=>x>=q.x&&x<=q.x+q.w&&y>=q.y&&y<=q.y+q.h);
+  if(fr){state.zoom=state.zoom.concat(fr.path.slice(state.zoom.length));render()}
+});
+const tipEl=$('tip');
+function tip(e,d){
+  const kn=KINDS.find(k=>k[0]===d.kc)[1];
+  tipEl.innerHTML=`<b>${d.n}</b><br>${kn} (${d.k}) · ${d.len} lines<br><code>${d.file}:${d.l}</code>`;
+  tipEl.style.display='block';tipEl.style.left=Math.min(e.clientX+14,innerWidth-380)+'px';tipEl.style.top=(e.clientY+14)+'px';
+}
+function hideTip(){tipEl.style.display='none'}
+
+// ---- city (three.js)
+let three=null;
+function initThree(){
+  const el=$('gl');const W=el.clientWidth,H=el.clientHeight;
+  const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(W,H);
+  el.innerHTML='';el.appendChild(renderer.domElement);renderer.domElement.style.cssText='display:block;width:100%;height:100%';
+  const scene=new THREE.Scene();const cam=new THREE.PerspectiveCamera(45,W/H,1,20000);
+  const ctl=new THREE.OrbitControls(cam,renderer.domElement);ctl.enableDamping=true;
+  scene.add(new THREE.HemisphereLight(0xffffff,0x888888,.9));const dl=new THREE.DirectionalLight(0xffffff,.7);dl.position.set(-300,600,200);scene.add(dl);
+  three={renderer,scene,cam,ctl,mesh:null,ground:null,ray:new THREE.Raycaster(),items:[]};
+  (function loop(){requestAnimationFrame(loop);if(state.layout==='city'){ctl.update();renderer.render(scene,cam)}})();
+  renderer.domElement.addEventListener('mousemove',e=>{
+    if(!three.mesh)return;const r=renderer.domElement.getBoundingClientRect();
+    const m=new THREE.Vector2(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1);
+    three.ray.setFromCamera(m,cam);const h=three.ray.intersectObject(three.mesh)[0];
+    if(h&&h.instanceId!=null)tip(e,three.items[h.instanceId]);else hideTip();
+  });
+  renderer.domElement.addEventListener('mouseleave',hideTip);
+}
+function drawCity(){
+  if(!three)initThree();
+  const el=$('gl'),W=el.clientWidth,H=el.clientHeight;three.renderer.setSize(W,H);three.cam.aspect=W/H;three.cam.updateProjectionMatrix();
+  const top=buildTree();
+  // layout: leaves are declarations
+  const leafTree=(n)=>n.children?{name:n.name,children:n.children.map(leafTree)}:{name:n.name,children:n.ds.map(d=>({d,value:state.metric==='decl'?1:d.len}))};
+  const h=d3.hierarchy(leafTree(top)).sum(d=>d.value||0).sort((a,b)=>b.value-a.value);
+  const S=900;d3.treemap().size([S,S]).paddingInner(.6).paddingOuter(1.2).paddingTop(0).tile(d3.treemapSquarify)(h);
+  const leaves=h.leaves().filter(n=>n.data.d);
+  const C=kindColors();
+  if(three.mesh){three.scene.remove(three.mesh);three.mesh.geometry.dispose();three.mesh.material.dispose()}
+  if(three.ground){three.scene.remove(three.ground)}
+  const geo=new THREE.BoxGeometry(1,1,1);const mat=new THREE.MeshLambertMaterial({color:0xffffff});
+  const mesh=new THREE.InstancedMesh(geo,mat,leaves.length);const dum=new THREE.Object3D();const col=new THREE.Color();
+  three.items=leaves.map(n=>n.data.d);
+  leaves.forEach((n,i)=>{
+    const w=Math.max(.4,n.x1-n.x0),dp=Math.max(.4,n.y1-n.y0),ht=Math.max(.6,Math.sqrt(n.data.d.len)*2.4);
+    dum.position.set(n.x0+w/2-S/2,ht/2,n.y0+dp/2-S/2);dum.scale.set(w,ht,dp);dum.updateMatrix();mesh.setMatrixAt(i,dum.matrix);
+    mesh.setColorAt(i,col.set(C[n.data.d.kc]));
+  });
+  mesh.instanceMatrix.needsUpdate=true;if(mesh.instanceColor)mesh.instanceColor.needsUpdate=true;
+  three.scene.add(mesh);three.mesh=mesh;
+  const gm=new THREE.Mesh(new THREE.PlaneGeometry(S+20,S+20),new THREE.MeshBasicMaterial({color:new THREE.Color(css('--folder'))}));
+  gm.rotation.x=-Math.PI/2;three.scene.add(gm);three.ground=gm;
+  three.scene.background=new THREE.Color(css('--panel'));
+  three.cam.position.set(-S*.55,S*.75,S*.9);three.ctl.target.set(0,0,0);three.ctl.update();
+  $('note').textContent=`${fmt(leaves.length)} declarations; footprint = size share, height = √(lines of the declaration). Drag to orbit, scroll to zoom, hover for details.`;
+}
+
+// ---- table
+function drawTable(){
+  const rows={};
+  for(const f of files){for(const d of f.decls){const r=rows[f.top]||(rows[f.top]={files:new Set(),lines:0,theorem:0,def:0,type:0,inst:0,other:0,seen:new Set()});r.files.add(f.path);r[d.kc]++}
+    (rows[f.top]||(rows[f.top]={files:new Set(),lines:0,theorem:0,def:0,type:0,inst:0,other:0,seen:new Set()})).lines+=f.lines;}
+  $('tbl').innerHTML='<tr><th>Project</th><th>Files</th><th>Lines</th>'+KINDS.map(k=>`<th>${k[1]}</th>`).join('')+'</tr>'+
+   Object.entries(rows).sort((a,b)=>b[1].lines-a[1].lines).map(([p,r])=>`<tr><td>${p}</td><td>${fmt(r.files.size)}</td><td>${fmt(r.lines)}</td>${KINDS.map(k=>`<td>${fmt(r[k[0]])}</td>`).join('')}</tr>`).join('');
+}
+
+function render(){
+  const parts=['All'].concat(state.zoom);
+  $('crumbs').innerHTML=parts.map((p,i)=>i===parts.length-1?`<b>${p}</b>`:`<button data-i="${i}">${p}</button>`).join(' / ');
+  if(state.layout==='treemap')drawTreemap();else drawCity();
+}
+$('crumbs').addEventListener('click',e=>{const b=e.target.closest('button');if(b){state.zoom=state.zoom.slice(0,+b.dataset.i);render()}});
+function setLayout(l){state.layout=l;$('bT').setAttribute('aria-pressed',l==='treemap');$('bC').setAttribute('aria-pressed',l==='city');
+  $('cv').style.display=l==='treemap'?'block':'none';$('gl').style.display=l==='city'?'block':'none';hideTip();render()}
+$('bT').onclick=()=>setLayout('treemap');$('bC').onclick=()=>setLayout('city');
+$('proj').onchange=e=>{state.proj=e.target.value;state.zoom=[];render()};
+$('metric').onchange=e=>{state.metric=e.target.value;render()};
+$('q').oninput=e=>{state.q=e.target.value.trim();render()};
+$('legend').addEventListener('change',e=>{on[e.target.dataset.k]=e.target.checked;render()});
+$('theme').onclick=()=>{const d=document.documentElement;const dark=d.dataset.theme==='dark'||(!d.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);d.dataset.theme=dark?'light':'dark';render()};
+addEventListener('resize',()=>render());
+drawTable();render();
+</script>
+</body>
+</html>
