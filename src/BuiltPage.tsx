@@ -49,9 +49,9 @@ const LEAN_ARTICLES: ArticleItem[] = [
   },
   {
     id: 'article-kostant',
-    title: "Kostant's tori in apposition: the Borel subgroups are opposite in type A",
+    title: "Kostant's tori in apposition: the Borel subgroups are opposite",
     lang: 'English',
-    what: "Grothendieck's letter to Kostant of 22 October 1969 asks whether, for maximal tori in apposition, the Borel subgroups through them are in general position. For PGL_n and every n the answer is yes, for all n! Borels through the second torus: every flag stable under a cyclic element with nonzero coefficients is transverse to the standard one. A weighted-shift proof, formalised in Lean 4, and a second by Vandermonde determinants; the other types and the question of a distinguished class stay open.",
+    what: "Grothendieck's letter to Kostant of 22 October 1969 asks whether, for maximal tori in apposition, the Borel subgroups through them are in general position. Yes, in every type: all |W| Borel subgroups through the centraliser of a cyclic element are opposite to B, and to B⁻. The proof is a short consequence of Kostant (1959) and of a lemma of Bălibanu (2023), given in full; in the classical types the statement becomes the transversality of flags stable under a cyclic matrix, proved directly and formalised in Lean 4. The question of a distinguished class stays open.",
     pdf: '/article/grothendieck-kostant.pdf',
     src: 'docs/kostant/article.tex',
   },
