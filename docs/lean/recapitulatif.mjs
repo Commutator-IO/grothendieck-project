@@ -63,7 +63,7 @@ for (const m of proofs.matchAll(/verdict: (\[[^\]]*\]|'[^']+'|"[^"]+"),\s*lean: 
 }
 
 // The path of each Lean file under Grothendieck/, from the lean fields of the cards
-// (\\verifie gives only the bare name, the proofs repository files it under a topic directory).
+// (\verifie gives only the bare name, the proofs repository files it under a topic directory).
 const leanPath = {};
 for (const m of proofs.matchAll(/lean: ['"]lean\/Grothendieck\/([^'"]+)\.lean['"]/g)) {
   leanPath[m[1].split('/').pop()] ??= m[1];
