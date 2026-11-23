@@ -48,14 +48,6 @@ const SOUS_ARTICLES: ArticleItem[] = [
     pdf: '/article/poeme-grothendieckien.pdf',
     more: [{ label: 'PDF (italiano)', href: '/article/poema-grothendieckiano.pdf' }],
     src: 'docs/recollement/article.tex',
-  },  {
-    id: 'article-bridges',
-    title: 'New theorems from topos-theoretic bridges: a theorem generator run by hand, described as a software pipeline',
-    lang: 'English and French',
-    what: "Draft. O. Caramello's « bridges » read one invariant of a topos on two of its presentations, and her Mines talk (2024) proposes to generate theorems by combining a database of topos equivalences with a database of such readings. This text runs a small generator by hand and describes it as a software pipeline (registries, join, specialise, unfold, rewrite, verify in Lean and by hand, novelty filter), with five bridges proved in Lean in lean-pool as arches. It keeps only outputs not found in print: set-valued quiver representations satisfy ¬p∨¬¬p iff the quiver is deterministic, are determined by the quiver, and on the n-cycle have exactly 2^n+1 subtopoi; counts of points and subtopoi for T_n, PT_n, I_n, O_n, M_n(F_q); M_n(k)-sets determine n; (Z/n,·)-sets have Dedekind-number many subtopoi; for compact X, Sh(X) is De Morgan iff C(X,R) is Dedekind complete. With a practical method, classical L3 theorems read as one bridge (Birkhoff, Cayley, Galois, Banach–Stone), a calibration log of known outputs, and the limits of the approach.",
-    pdf: '/article/grothendieck-bridges.pdf',
-    src: 'docs/bridges/article.tex',
-    more: [{ label: 'Version française', href: '/article/grothendieck-bridges-fr.pdf' }],
   },
 ];
 
