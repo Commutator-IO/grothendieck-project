@@ -5,6 +5,32 @@
 \end{itemize}
 
 \begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 113 à 119, les cartes sphériques à au plus six brins, groupes de degré~6 corrigés\pisteresolue{138-spherical-maps-census-6}]\verifie[\leanblobmain]{Folder138}
+Une carte à $n$ brins est un couple $(\sigma, \alpha)$ de permutations de $\{1, \ldots, n\}$ avec $\alpha^2 = 1$ : les cycles de $\sigma$ sont les sommets, ceux de $\alpha$ les arêtes, un point fixe de $\alpha$ étant un brin qui finit librement, et ceux de $\sigma\alpha$ les faces. Elle est sphérique si $\langle \sigma, \alpha \rangle$ est transitif et si $S + A + F = n + 2$. À homéomorphisme de la sphère près, réflexions comprises, il y a $1$, $3$, $3$, $9$, $13$ et $42$ cartes sphériques à $n = 1, \ldots, 6$ brins, et, pour $n = 6$, $11$, $7$, $6$, $4$, $6$, $4$, $1$, $2$, $1$ et $0$ cartes dans les classes a) à j) des degrés des sommets ($6$ ; $5\,1$ ; $4\,2$ ; $4\,1\,1$ ; $3\,3$ ; $3\,2\,1$ ; $3\,1\,1\,1$ ; $2\,2\,2$ ; $2\,2\,1\,1$ ; $2\,1\,1\,1\,1$, \q{impossible}). Les ordres des groupes d'automorphismes complets sont ceux de la page pour $n \leq 5$ ; pour $n = 6$, ils sont
+\[
+\begin{array}{ll}
+\text{a)} & 12, 6, 4, 4, 4, 4, 2, 2, 2, 2, 1\\
+\text{b)} & 2, 2, 2, 2, 2, 1, 1\\
+\text{c)} & 4, 2, 2, 2, 2, 1\\
+\text{d)} & 4, 4, 2, 2
+\end{array}
+\qquad
+\begin{array}{ll}
+\text{e)} & 12, 4, 4, 4, 4, 2\\
+\text{f)} & 2, 2, 2, 1\\
+\text{g)} & 6\\
+\text{h)} & 12, 4 \qquad \text{i)}\ \ 4
+\end{array}
+\]
+\end{theoreme*}
+\end{encadre}
+{\small La page dresse le tableau à la main, chaque carte dessinée avec son groupe et son type ; la lecture ne l'avait pas vérifié carte par carte, et c'est l'édition qui lit les objets comme des cartes à brins libres, ce que les types imposent.
+
+\emph{Démonstration.} Le calcul est vérifié par le noyau de Lean, sans \texttt{native\_decide}, sur trois faits démontrés en général. Toute involution est conjuguée à $(1\,2)(3\,4)\cdots$, selon le nombre de ses points non fixes, si bien que toute carte est isomorphe à l'une des $n!\,(\lfloor n/2 \rfloor + 1)$ candidates, $2880$ pour $n = 6$. Les nombres de cycles et la connexité se lisent sur des tables. Dans une carte connexe, un homéomorphisme est déterminé par l'image d'un brin, tout brin étant atteint depuis le premier par un mot en $\sigma$ et~$\alpha$ ; deux cartes sont donc homéomorphes si et seulement si l'une des $2n$ renumérotations ainsi obtenues convient, et les automorphismes se comptent de même. On vérifie alors que chaque candidate est non connexe, ou non sphérique, ou homéomorphe à l'une des cartes de la liste, et que celles-ci sont sphériques et deux à deux non homéomorphes. L'ordre du groupe complet est le nombre des renumérotations qui envoient la carte sur elle-même ou sur son image miroir $(\sigma^{-1}, \alpha)$. Voir \texttt{card\_census}, \texttt{card\_census\_six} et \texttt{fullAutOrder\_reps1} à \texttt{fullAutOrder\_reps6} dans \href{\leanblobmain/Combinatorics/Folder138.lean}{\texttt{Combinatorics/\allowbreak{}Folder138.\allowbreak{}lean}}, avec mathlib seule.
+
+Les nombres de la page sont justes, classe par classe. Ses groupes sont faux d'un facteur~$2$ dans quatre classes de degré~$6$ : en a), la page a cinq $\mathbf Z/2$ et trois groupes d'ordre~$4$, il y en a quatre de chaque ; en b), quatre $\mathbf Z/2$ et trois groupes triviaux, pour cinq et deux ; en c), cinq $\mathbf Z/2$ et un groupe trivial, pour un groupe d'ordre~$4$, quatre $\mathbf Z/2$ et un groupe trivial ; en d), trois $\mathbf Z/2$ et un $\mathbf Z/2 \times \mathbf Z/2$, pour deux et deux. Les groupes sont comptés, non identifiés. Ne sont pas formalisés : les types des cartes et les paires duales que la page joint par des accolades ; quelle carte dessinée porte un groupe erroné, les cartes n'étant appariées aux classes calculées que par les degrés des sommets. On se reportera aux notes de Grothendieck (\lot{138}{6}{113}).\par}
+
+\begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 122 à 124 et 127, opérations sur les cartes\piste{138-operations-belyi-extending}]\nonverifie
 Une opération sur les cartes orientées donnée par une partie $A$ de la sphère de référence, tirée en arrière le long du revêtement $f : X \to S$ de chaque carte, est, sauf un cas exceptionnel, la composition avec un revêtement $\varphi : S \to S$ ramifié seulement au-dessus de $0$, $1$, $\infty$, avec $\varphi^{-1}\{0, 1, \infty\} \supset \{0, 1, \infty\}$ et une ramification $2$ au-dessus de $1$, de sorte que $A = \varphi^{-1}([0, 1])$. La page demande ce qu'il advient dans le cas exceptionnel.
 \end{theoreme*}
