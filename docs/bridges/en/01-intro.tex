@@ -31,7 +31,7 @@ We run such a generator by hand and describe it the way one describes a data pip
 \end{figure}
 
 \begin{description}
-\item[Arch registry.] Five lemmas of the form \texttt{(property of PSh C) ↔ (condition on C)}, proved in Lean~4 in the library \lp{} of lean-pool (\S\ref{sec:toolbox}). They are the trusted core, and everything downstream specialises them. Three more (two-valued, connected, spatial; \S\ref{sec:morearches}) are proved in \texttt{lean/bridges} and so far joined only with the decks of Grothendieck's notes (\S\ref{sec:grdecks}).
+\item[Arch registry.] Five lemmas of the form \texttt{(property of PSh C) ↔ (condition on C)}, proved in Lean~4 in the library \lp{} of lean-pool (\S\ref{sec:registry}). They are the trusted core, and everything downstream specialises them. Three more (two-valued, connected, spatial; \S\ref{sec:morearches}) are proved in \texttt{lean/bridges} and so far joined only with the decks of Grothendieck's notes (\S\ref{sec:grdecks}).
 \item[Deck registry.] Small categories $C$ whose presheaves are a familiar structure: $\B M$ for a monoid $M$ (its actions), the free category of a quiver (its representations), $\Delta$ (simplicial sets), a preorder (functors on it, or sheaves on its Alexandrov space). The book of La Palme Reyes, Reyes and Zolfaghari \cite{reyes-generic} is a catalogue of such decks, each familiar structure presented by its \q{generic figures}.
 \item[1. Join.] Pair every deck with every arch.
 \item[2. Specialise.] Instantiate the arch at the deck and compute the condition on $C$: for instance, the Ore condition on $\B M$ becomes $aM\cap bM\neq\emptyset$.
@@ -41,7 +41,7 @@ We run such a generator by hand and describe it the way one describes a data pip
 \item[6. Novelty filter.] Look the statement up in the matching dataset of TheoremGraph and in the semantic search of TheoremSearch, then in the literature. Statements found in print go to a calibration log (\S\ref{sec:calibration}); the rest form the output (\S\ref{sec:machines}--\ref{sec:shapes}).
 \end{description}
 
-Each theorem below is printed with its \emph{trace}: the values at stages 1--6. Section~\ref{sec:method} turns the pipeline into a recipe, with a table of invariants, a checklist for recognising decks, a Lean template and a search protocol. Section~\ref{sec:equivalences} runs the same machinery backwards to show that pairs of classical third-year theorems (Birkhoff and finite $T_0$ spaces, Cayley and the reconstruction of a group, Galois theory and covering spaces) are two readings of one bridge.
+Each theorem below is printed with its \emph{trace}: the values at stages 1--6.
 
 \subsection{Outputs}
 
@@ -65,3 +65,7 @@ graphs, simplicial sets, trees, \dots & weak excluded middle, case by case (at o
 \end{center}
 
 None of these is deep, and \S\ref{sec:limits} discusses what that implies for the method. We write for an engineer who writes Lean and thinks in pipelines, so the theory occupies one short section, the Lean statements are quoted, and most of the space goes to the outputs and to what each stage did.
+
+\subsection{Plan}
+
+Section~\ref{sec:toolbox} gives the four definitions the text needs and the registry: the five arches that drive the outputs, three more arches, and the decks, among them those of Grothendieck's notes. Section~\ref{sec:method} turns the pipeline into a recipe, with a table of invariants, a checklist for recognising decks, a Lean template and a search protocol. Sections~\ref{sec:machines} to~\ref{sec:shapes} give the outputs, deck by deck: quivers, monoids, analysis, linear algebra and arithmetic, combinatorial topoi. Section~\ref{sec:equivalences} runs the same machinery backwards to show that pairs of classical third-year theorems (Birkhoff and finite $T_0$ spaces, Cayley and the reconstruction of a group, Galois theory and covering spaces) are two readings of one bridge, and Section~\ref{sec:precedents} collects the precedents in Grothendieck's notes. Section~\ref{sec:calibration} lists the outputs already in print, and Section~\ref{sec:limits} discusses the limits of the approach and the lessons for an automatic generator. Appendix~\ref{app:novelty} gives the novelty filter in detail, with the sources searched, and Appendix~\ref{sec:lean-lit} the Lean files and declarations.

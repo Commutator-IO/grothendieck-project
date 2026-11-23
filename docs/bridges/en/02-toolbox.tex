@@ -1,6 +1,6 @@
-\section{Toolbox: four definitions and the arches}\label{sec:toolbox}
+\section{Toolbox: four definitions and the registry}\label{sec:toolbox}
 
-The rest of the text needs only four definitions and the five lemmas that form the arch registry.
+The rest of the text needs only four definitions and the registry: the five lemmas that drive the outputs, three more arches, and the decks.
 
 \subsection{Shapes and presheaves}
 
@@ -46,7 +46,9 @@ Informally, De Morgan is a \emph{stability} property: \q{$A$ can be reached} can
 
 $C$ satisfies the \emph{Ore condition} if every cospan $f : Y\to X$, $g : Z\to X$ completes to a commutative square $f\circ h = g\circ k$. For $\B M$: for all $a,b\in M$ there are $c,d$ with $ac = bd$, i.e.\ $aM\cap bM\neq\emptyset$ (any two elements have a common right multiple). It holds for groups, commutative monoids, monoids with a zero, categories with an initial object or with pullbacks, and chains.
 
-\subsection{The five arches}
+\subsection{The registry}\label{sec:registry}
+
+\subsubsection{The five arches}
 
 The library \lp{} proves the following five bridges in Lean~4. We quote the main declarations; the first two are given with their exact statements.
 
@@ -82,7 +84,7 @@ The subtopoi of $\PSh(C)$ (full subcategories closed under limits whose inclusio
 
 Every statement below is one of these five lemmas, specialised to a shape and unfolded with Lemma~\ref{lem:neg}.
 
-\subsection{Three more arches}\label{sec:morearches}
+\subsubsection{Three more arches}\label{sec:morearches}
 
 Three further arches belong in the registry. They have been joined so far only with the decks of Grothendieck's notes, below; no output of the later sections comes from them.
 
@@ -95,10 +97,14 @@ $\PSh(C)$ is connected and nonempty in the sense of \cite[IV~8.7]{sga4} (every p
 \end{bridge}
 
 \begin{bridge}[Spatial]\label{br:spatial}
-$\PSh(C)$ is equivalent to the presheaf topos of a preorder, and so to the topos of sheaves on its Alexandrov space, iff $C$ is thin. Grothendieck states it as an exercise \cite[p.~26]{grothendieck-161-3}; see \S\ref{sec:equivalences}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}.
+$\PSh(C)$ is equivalent to the presheaf topos of a preorder, and so to the topos of sheaves on its Alexandrov space, iff $C$ is thin. Grothendieck states it as an exercise \cite[p.~26]{grothendieck-161-3}; see \S\ref{sec:precedents}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}.
 \end{bridge}
 
-\subsection{The decks of Grothendieck's notes}\label{sec:grdecks}
+\subsubsection{The decks}
+
+The deck registry holds the shapes of the table above, with their presheaves, and the shapes introduced with each output in \S\ref{sec:machines}--\ref{sec:shapes}; Step~2 of \S\ref{sec:method} says how to recognise a new one.
+
+\subsubsection{The decks of Grothendieck's notes}\label{sec:grdecks}
 
 Three decks recur in Grothendieck's working notes, and the three arches above read them as follows (Lean: \lean{GrothendieckDecks.lean}).
 \begin{itemize}

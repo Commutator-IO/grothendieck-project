@@ -1,6 +1,4 @@
-\section{Lean, literature, and lessons for automation}\label{sec:lean-lit}
-
-\subsection{Lean status}
+\section{Lean}\label{sec:lean-lit}
 
 The five arches are proved in Lean~4 with Mathlib in \lp{}, with no axioms beyond \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. This describes the development: the files contain no \texttt{\#print axioms} command, and we do not record a separate check. The generated statements are formalised as corollaries of the arches in the Lake package \texttt{lean/bridges} of the repository of this edition (\url{https://github.com/Commutator-IO/grothendieck-project}), which requires lean-pool at a fixed revision. The package has the following files:
 \begin{itemize}
@@ -36,18 +34,3 @@ graphs, simplicial sets, augmented, $\mathsf{Fin}$, trees & \lean{not_isDeMorgan
 \bottomrule
 \end{tabularx}
 \end{center}
-
-\subsection{How we searched}
-
-For each statement of \S\ref{sec:machines}--\ref{sec:shapes} we searched Johnstone's \emph{Elephant}, Caramello's papers and book (including \cite{caramello-chamoun}), the papers and thesis of Hemelaer and Rogers on toposes of monoid actions \cite{hemelaer-rogers,rogers-1905,rogers-thesis}, the literature on Morita equivalence and Green's relations of monoids, the literature on synchronizing automata, the nLab, and general web and preprint searches. \q{Not found} means exactly that; several statements are elementary and may well be folklore, and we would welcome references.
-
-
-\subsection{Lessons for an automatic generator}
-
-\begin{enumerate}
-\item Choosing decks is the creative step. The new outputs came from decks that we did not find paired with these arches: quivers and transformation monoids. A useful database of decks records facts of the form \q{this familiar structure is a presheaf on that shape}.
-\item Unfolding is mechanical. Lemma~\ref{lem:neg} is the only rule needed to turn \q{De Morgan} into a statement about states and traps. A generator needs one such rule per invariant.
-\item Rewriting is where the work goes. The raw output for automata is \q{$\B(\Sigma^*)$ satisfies \texttt{RightOreCondition}}; the readable statement is about the outgoing arrows of a vertex (Theorem~\ref{th:quivers}). The talk assigns this step to rewriting systems and language models \cite[slide 17]{caramello-mines}.
-\item Filtering against the literature is necessary. Three of our candidates were found in print only at this stage (\S\ref{sec:calibration}); the number of pairs tried was not recorded, so no proportion can be given. A generator without a novelty filter reports known results as new.
-\item Every output here has a direct proof: short for most, a page for the cyclic quiver, and longer for $(\mathbb Z/n,\cdot)$ and the compact Hausdorff statement, which use cited theorems (Pirashvili's classification, with a Ramsey-type factorisation; Stone and Nakano). For deeper decks a direct proof may not exist, and the formal proof of the arch in Lean is then the only guarantee, which is why the arches are formalised first.
-\end{enumerate}

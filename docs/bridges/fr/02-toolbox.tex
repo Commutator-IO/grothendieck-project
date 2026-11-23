@@ -1,6 +1,6 @@
-\section{Boîte à outils: quatre définitions et les arches}\label{sec:toolbox}
+\section{Boîte à outils: quatre définitions et le registre}\label{sec:toolbox}
 
-Cette section contient toute la théorie dont la suite a besoin: quatre définitions, et les cinq lemmes qui forment le registre des arches.
+Cette section contient toute la théorie dont la suite a besoin: quatre définitions, puis le registre, qui comprend les cinq lemmes dont viennent les résultats, trois arches de plus et les tabliers.
 
 \subsection{Formes et préfaisceaux}
 
@@ -46,7 +46,9 @@ Informellement, De Morgan est une propriété de \emph{stabilité}: \q{$A$ est a
 
 La catégorie $C$ vérifie la \emph{condition d'Ore} si toute paire de flèches de même but $f : Y\to X$, $g : Z\to X$ se complète en un carré commutatif $f\circ h = g\circ k$. Pour $\B M$: pour tous $a,b\in M$, il existe $c,d$ avec $ac = bd$, c'est-à-dire $aM\cap bM\neq\emptyset$ (deux éléments quelconques ont un multiple à droite commun). Elle est vraie pour les groupes, les monoïdes commutatifs, les monoïdes à zéro, les catégories ayant un objet initial ou des produits fibrés, et les chaînes.
 
-\subsection{Les cinq arches}
+\subsection{Le registre}\label{sec:registry}
+
+\subsubsection{Les cinq arches}
 
 La bibliothèque \lp{} démontre en Lean~4 les cinq ponts suivants. Nous citons les déclarations principales; les deux premières sont données avec leur énoncé exact.
 
@@ -82,7 +84,7 @@ Les sous-topos de $\PSh(C)$ (sous-catégories pleines stables par limites dont l
 
 C'est tout. Chaque énoncé qui suit est l'un de ces cinq lemmes, spécialisé à une forme et déplié à l'aide du lemme~\ref{lem:neg}.
 
-\subsection{Trois arches de plus}\label{sec:morearches}
+\subsubsection{Trois arches de plus}\label{sec:morearches}
 
 Trois autres arches ont leur place dans le registre. Elles n'ont été jointes pour l'instant qu'aux tabliers des notes de Grothendieck, ci-dessous; aucun résultat des sections suivantes n'en provient.
 
@@ -95,10 +97,14 @@ $\PSh(C)$ est connexe non vide au sens de \cite[IV~8.7]{sga4} (toute partition d
 \end{bridge}
 
 \begin{bridge}[Spatial]\label{br:spatial}
-$\PSh(C)$ est équivalent au topos de préfaisceaux d'un préordre, donc au topos des faisceaux sur son espace d'Alexandrov, si et seulement si $C$ est mince. Grothendieck l'énonce comme exercice \cite[p.~26]{grothendieck-161-3}; voir le \S\ref{sec:equivalences}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}.
+$\PSh(C)$ est équivalent au topos de préfaisceaux d'un préordre, donc au topos des faisceaux sur son espace d'Alexandrov, si et seulement si $C$ est mince. Grothendieck l'énonce comme exercice \cite[p.~26]{grothendieck-161-3}; voir le \S\ref{sec:precedents}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}.
 \end{bridge}
 
-\subsection{Les tabliers des notes de Grothendieck}\label{sec:grdecks}
+\subsubsection{Les tabliers}
+
+Le registre des tabliers contient les formes du tableau ci-dessus, avec leurs préfaisceaux, et les formes introduites avec chaque résultat aux \S\ref{sec:machines}--\ref{sec:shapes}; l'étape~2 du \S\ref{sec:method} indique comment en reconnaître une nouvelle.
+
+\subsubsection{Les tabliers des notes de Grothendieck}\label{sec:grdecks}
 
 Trois tabliers reviennent dans les notes de travail de Grothendieck, et les trois arches ci-dessus les lisent ainsi (Lean: \lean{GrothendieckDecks.lean}).
 \begin{itemize}
