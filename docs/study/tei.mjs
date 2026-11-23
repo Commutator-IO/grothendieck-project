@@ -854,6 +854,9 @@ copyFileSync(resolve(root, 'docs/moduli/article.pdf'), resolve(served, 'grothend
 // Topos-theoretic bridges as a theorem generator, at undergraduate level (docs/bridges/), a draft.
 copyFileSync(resolve(root, 'docs/bridges/article.pdf'), resolve(served, 'grothendieck-bridges.pdf'));
 copyFileSync(resolve(root, 'docs/bridges/article-fr.pdf'), resolve(served, 'grothendieck-bridges-fr.pdf'));
+// Its companion note on Grothendieck's notes (docs/bridges/notes*.tex).
+copyFileSync(resolve(root, 'docs/bridges/notes.pdf'), resolve(served, 'grothendieck-bridges-notes.pdf'));
+copyFileSync(resolve(root, 'docs/bridges/notes-fr.pdf'), resolve(served, 'grothendieck-bridges-notes-fr.pdf'));
 // The carbon article (docs/carbon/), a draft: what the project cost in energy and CO2e.
 copyFileSync(resolve(root, 'docs/carbon/article.pdf'), resolve(served, 'grothendieck-carbon.pdf'));
 // The sixth, the statements read in Bourbaki rédactions and proved in Lean (docs/bourbaki-lean/).

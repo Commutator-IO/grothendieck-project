@@ -1,0 +1,23 @@
+\section{Champs et arches plus fines}\label{sec:stacks}
+
+Les arches utilisées jusqu'ici répondent par oui ou par non: booléen ou non, connexe ou non. Les champs de Grothendieck suggèrent des arches qui calculent.
+
+\subsection{Un topos classifiant représente un champ}
+
+Le topos classifiant $\Set[\mathbb T]$ d'une théorie géométrique $\mathbb T$ représente, sur la 2-catégorie des topos de Grothendieck, le pseudo-foncteur qui associe à un topos $\mathcal E$ la catégorie des modèles de $\mathbb T$ dans $\mathcal E$ \cite{caramello-tst}: classifier des structures, c'est représenter un champ de modèles. Le cas le plus simple est le tablier $\B G$ d'un groupe, lu au \S\ref{sec:grdecks}: son topos classifie les $G$-torseurs, c'est donc le champ des torseurs, et les gerbes de Giraud, classées par un $H^2$ non abélien \cite{giraud}, prolongent la même idée.
+
+\subsection{Les champs quotients, tabliers à deux présentations}
+
+Un champ quotient $[X/G]$ a deux présentations: par le groupoïde $X\times G\rightrightarrows X$, dont le topos est celui des faisceaux $G$-équivariants sur $X$, et comme problème de modules, champ des familles d'un certain type d'objets. Lire un invariant sur les deux est un pont au sens de cette note, et les invariants qui conviennent aux champs sont numériques ou algébriques plutôt que logiques: le groupe de Picard, la cohomologie, les points. Le calcul de Mumford, $\operatorname{Pic}(\mathcal M_{1,1})\cong\mathbb Z/12$ \cite{mumford}, en est l'archétype: un invariant d'un problème de modules obtenu à partir d'une présentation explicite.
+
+\subsection{Un exemple tiré du fonds}
+
+Dans le dossier 146, Grothendieck dresse, pour $n$ points marqués sur la droite projective, la table des ordres de la droite tangente au dernier point, fibré en droites sur $M_{0,n}$ qui descend au quotient par $\mathfrak S_{n-1}$; il donne les ordres pour quatre points, et seulement des conjectures pour cinq et six. L'article de l'édition consacré à cette table \cite{hua-tangent} lit le groupe de Picard sur une seconde présentation du champ: $[M_{0,n}/\mathfrak S_{n-1}]$ est le champ des polynômes unitaires sans facteur carré de degré $n-1$ modulo le groupe affine, et sur cette présentation $\operatorname{Pic}[M_{0,n}/\mathfrak S_{n-1}]$ est cyclique d'ordre $(n-1)(n-2)$, engendré par la droite tangente, en caractéristique nulle et pour tout $n\ge3$. Pour $n$ pair et $n\ge6$, le groupe était connu par l'anneau de Chow entier calculé par Edidin et Hu \cite{edidin-hu}. C'est un pont avec une arche de Picard, et il donne un énoncé que nos recherches n'ont pas trouvé publié pour $n$ impair; la preuve et sa formalisation en Lean sont dans \cite{hua-tangent}.
+
+\subsection{Les champs au sens homotopique}
+
+\emph{À la poursuite des champs} \cite{maltsiniotis} traite d'abord des champs au sens homotopique, et ses catégories test sont des ponts d'une autre sorte encore: une catégorie $A$ est une catégorie test quand les préfaisceaux sur $A$ modélisent les types d'homotopie, et les conditions que donne Grothendieck (conditions d'asphéricité sur $A$, existence d'un intervalle séparant dans $\widehat A$) lisent une propriété homotopique de $\widehat A$ sur la catégorie $A$. Le tablier $\Delta$ du \S\ref{sec:grdecks} est la première catégorie test, et les dossiers 108, 118 (le tapuscrit du premier chapitre) et 134-2 du fonds travaillent ces conditions.
+
+\subsection{Un programme}
+
+Ces exemples suggèrent pour le générateur une famille d'arches plus fines: pour un champ quotient $[X/G]$, ou plus généralement un champ muni d'une présentation explicite par un groupoïde, le groupe de Picard, la cohomologie et les points, lus sur la présentation et comparés à la description modulaire. À la différence des arches du \S\ref{sec:morearches}, elles produisent des nombres et des groupes, si bien que leurs résultats peuvent être confrontés à des tables, comme celle de Grothendieck au dossier 146, et à l'OEIS. Nous n'avons pas fait tourner le générateur avec elles; cette section ne fait que consigner le lien et un exemple traité.
