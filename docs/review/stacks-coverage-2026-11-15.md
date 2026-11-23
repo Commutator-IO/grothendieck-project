@@ -193,7 +193,7 @@ algebraic-geometry records, 532 were `partial` and 239 `not-formalised`; topos a
 add 353 and 192. They were screened by the reason their note gives (a notion or theorem missing
 from Mathlib) and matched against the same Stacks copy as above, by tag, by declaration name and
 by reading statements. « Closure » counts Stacks files as above, with the number not yet vendored
-in brackets. Rows 1–15 are proved in `lean/Buffalo/AG/Part04Stacks.lean`, `Part05Stacks.lean`,
+in brackets. Rows 1–15 are proved in `lean/Buffalo/AlgebraicGeometry/AGPart04Stacks.lean`, `Part05Stacks.lean`,
 `Part06Stacks.lean`, `Part06dStacks.lean` and `Part07Stacks.lean`, and their records updated.
 
 | # | Buffalo entry (AG unless said) | Missing piece | Stacks declaration(s), file, tier | Closure | Feasibility |
