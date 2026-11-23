@@ -63,6 +63,7 @@ const FONDS_PAGES: { path: string; label: string }[] = [
 // The row shows the first few; the rest, and the project's pages, fold into « More » (2 November 2026: twelve tabs beside the switch were too many).
 const FONDS_SHOWN = 5;
 const PROJECT_PAGES: { path: string; label: string }[] = [
+  { path: '/built/', label: 'Built with Lean' },
   { path: '/method/', label: 'Method' },
   { path: '/contribute/', label: 'Contribute' },
 ];

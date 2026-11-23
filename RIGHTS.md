@@ -15,13 +15,14 @@ ours to give**:
 - `scripts/` — the mirroring, tiling, rendering, TEI, PDF and manifest tooling
 - `src/`, `relay/`, `public/vendor/`, the build configuration — the site and
   the facsimile relay
-- `lean/` — the Lean proofs and their build files (since 17 October 2026). The
-  statements they check are mathematics, which nobody owns; the code is ours.
-  The few words of the manuscripts quoted in their comments, in « », stay
-  under the rights described below for `transcripts/`. `lean/Stacks/` is not
-  ours and not under CC0: it is a verbatim copy of files of AxiomMath's
-  Stacks library, under the Apache License 2.0 (`lean/Stacks/LICENSE`,
-  `lean/Stacks/NOTICE.md`)
+- `lean/` — the Lean files still kept here (Bourbaki, Quillen) and their build
+  files. The statements they check are mathematics, which nobody owns; the code
+  is ours. The few words of the manuscripts quoted in their comments, in « »,
+  stay under the rights described below for `transcripts/`. The Lean proofs of
+  Grothendieck's folders moved on 2026-11 to
+  [GrothendieckArchivesProofs](https://github.com/Commutator-IO/GrothendieckArchivesProofs),
+  which is under the Apache License 2.0 (its `LICENSE`), with the licences of
+  the third-party code it copies listed file by file in its `NOTICE`
 - `src/content/catalogue.ts` and `src/content/books.json` as *arrangements* —
   the data is read from Montpellier's inventory and the facts in it are theirs
 

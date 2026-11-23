@@ -5,7 +5,7 @@ transcripts/82/82.modern.tex, pp. 77–78). For a quaternion algebra M over a ba
 2 = 0, g̃ = {Trd = 0} ⊃ O·1 = ker φ (φ(u,v) = Trd(uv), q = −det), X = Var(q) the conic of
 isotropic lines; the map (60) X → P(g̃/O), L ↦ L^⊥, is the relative Frobenius
 X → X^(2) followed by a canonical isomorphism (61) P(g̃/O) ≅ X^(2); it is finite, flat of
-rank 2 and radicial. The split case is proved in Lean (lean/Grothendieck/Folder82.lean);
+rank 2 and radicial. The split case is proved in Lean (lean/Grothendieck/AlgebraicGeometry/Folder82.lean);
 the twisted case was unchecked.
 
 **What is tested.** The algebras [a,b): i² = i + a, j² = b, ji = (i+1)j, b a unit — the

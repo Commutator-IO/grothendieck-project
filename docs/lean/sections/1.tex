@@ -62,7 +62,7 @@ Soient $T : E \to F$ linéaire, $I$ un ensemble fini à au plus $n$ éléments, 
 \]
 \end{lemme}
 
-\general{SingularValuesSigmaTwo}
+\generalpool{LinearAlgebraCombinatoricsAndAnalysis}{SingularValuesSigmaTwo}
 
 \begin{proof}[Démonstration du premier énoncé]
 (1) Appliquons le lemme~\ref{lem:1-schmidt} à $w = u + v$, et soit $I$ l'ensemble des $j < d$ tels que $j < n$ ; il a $\min(n, d)$ éléments. Comme $s_j(w) = 0$ pour $j \geq d$, $\sum_{j < n} s_j(w) = \sum_{j \in I} s_j(w) = \sum_{j \in I} \langle f_j, w e_j\rangle$, et cette somme est égale à
@@ -112,7 +112,7 @@ somme des mineurs principaux mixtes d'ordre~$2$ des matrices $(\langle y_i, Tx_j
 Pour des scalaires $a_i$, $b_i$ indexés par un ensemble fini $I$, $\sum_{i,j \in I} |a_i b_j - a_j b_i|^2 \leq 2 \sum_i |a_i|^2 \sum_i |b_i|^2$. En particulier $\Lambda_{kl} \leq 2\,p_k\,p'_l$, où $p'_l$ est formé avec $(g'_l)$.
 \end{lemme}
 
-\general{SingularValuesSigmaTwo}
+\generalpool{LinearAlgebraCombinatoricsAndAnalysis}{SingularValuesSigmaTwo}
 
 \begin{lemme}[poids pour $\sigma^2$]\label{lem:1-poids2}
 Soient $K$ un ensemble fini, $G \subseteq K$, des réels $s_k \geq 0$ et $\theta \geq 0$ avec $s_k \geq \theta$ pour $k \in G$ et $s_k \leq \theta$ pour $k \notin G$. Soient $(\alpha_{kl})$ symétrique, à coefficients dans $[0,1]$, de diagonale nulle, et $p_k \in [0,1]$ avec $\sum_k p_k \leq |G|$ et $\sum_l \alpha_{kl} \leq (|G| - 1)\,p_k$ pour tout~$k$. Alors
@@ -169,7 +169,7 @@ Soient $A, B$ des matrices carrées complexes. Pour tout $k$,
 et $|\det(1 + A + B)| \leq \frac12 \big[\det(1 + |A| + |B|) + \det(1 + |A^*| + |B^*|)\big]$.
 \end{theoreme}
 \end{encadre}
-L'énoncé tient tel que la page l'écrit (Lean : \href{\leanblob/Folder1.lean}{\texttt{corollaire2}, \texttt{corollaire3}}). La même démonstration donne la forme géométrique, énoncé de l'édition : $|\det(1 + A + B)|^2 \leq \det(1 + |A| + |B|) \det(1 + |A^*| + |B^*|)$.
+L'énoncé tient tel que la page l'écrit (Lean : \href{\leanblob/LinearAlgebra/Folder1.lean}{\texttt{corollaire2}, \texttt{corollaire3}}). La même démonstration donne la forme géométrique, énoncé de l'édition : $|\det(1 + A + B)|^2 \leq \det(1 + |A| + |B|) \det(1 + |A^*| + |B^*|)$.
 
 \begin{remarque}
 La démonstration n'est pas le développement multilinéaire de la page. La matrice par blocs $\left(\begin{smallmatrix} |A| & A^* \\ A & |A^*| \end{smallmatrix}\right)$ est $|H| + H$ pour $H = \left(\begin{smallmatrix} 0 & A^* \\ A & 0 \end{smallmatrix}\right)$, donc positive ; on ajoute celles de $A$ et de $B$, on restreint aux mineurs principaux, où le complément de Schur et la croissance du déterminant donnent $|\det T_S|^2 \leq \det P_S \det Q_S$, puis on applique l'inégalité de Cauchy--Schwarz à la somme des mineurs. Le cas des opérateurs nucléaires n'est pas formalisé.
@@ -196,7 +196,7 @@ Soient $E$, $F$ des espaces hilbertiens complexes de dimension finie et $u, v : 
 Par conséquent, pour tout $n$ et tout $r \geq 0$, $\prod_{i<n}(1 + r s_i(u+v)) \leq \prod_{i<n}(1 + r s_i(u)) \prod_{i<n}(1 + r s_i(v))$, et, pour $0 < p < 1$, $\sum_{i<n} s_i(u+v)^p \leq \sum_{i<n} s_i(u)^p + \sum_{i<n} s_i(v)^p$.
 \end{theoreme}
 \end{encadre}
-L'énoncé tient tel que la page l'écrit, pour tout $m$, en dimension finie (Lean : \href{\leanblob/Folder1.lean}{\texttt{sigma\_system}, \texttt{prod\_one\_add\_singularValues\_add\_le}, \texttt{sum\_singularValues\_rpow\_add\_le}}). Pour $m > n$, le premier membre est nul. La démonstration utilise les coefficients $\alpha_m(M) = \sum_{|K| = m} \det M_K$ du paragraphe précédent, pour des matrices carrées quelconques, et quatre lemmes de matrices.
+L'énoncé tient tel que la page l'écrit, pour tout $m$, en dimension finie (Lean : \href{\leanblob/LinearAlgebra/Folder1.lean}{\texttt{sigma\_system}, \texttt{prod\_one\_add\_singularValues\_add\_le}, \texttt{sum\_singularValues\_rpow\_add\_le}}). Pour $m > n$, le premier membre est nul. La démonstration utilise les coefficients $\alpha_m(M) = \sum_{|K| = m} \det M_K$ du paragraphe précédent, pour des matrices carrées quelconques, et quatre lemmes de matrices.
 
 \begin{lemme}\label{lem:1-matrices}
 \begin{enumerate}
@@ -252,7 +252,7 @@ La page majore $\|(\Lambda^p u) \wedge (\Lambda^q v)\|_1$ par $p!\,q!\,\|\Lambda
 Soient $E$, $F$ des espaces euclidiens réels de dimension finie et $u, v : E \to F$ linéaires. Pour tous entiers $n$ et $m$, $\sigma_n^m(u+v) \leq \sum_{p=0}^{m} \sigma_n^p(u)\,\sigma_n^{m-p}(v)$ ; par conséquent la forme produit~(15) vaut pour tout $n$ et tout $r \geq 0$, et $\sum_{i<n} s_i(u+v)^p \leq \sum_{i<n} s_i(u)^p + \sum_{i<n} s_i(v)^p$ pour $0 < p < 1$.
 \end{theoreme}
 \end{encadre}
-L'énoncé tient tel que la page l'écrit (Lean : \href{\leanblob/Folder1.lean}{\texttt{sigma\_system\_real}, \texttt{prod\_one\_add\_singularValues\_add\_le\_real}, \texttt{sum\_singularValues\_rpow\_add\_le\_real}}).
+L'énoncé tient tel que la page l'écrit (Lean : \href{\leanblob/LinearAlgebra/Folder1.lean}{\texttt{sigma\_system\_real}, \texttt{prod\_one\_add\_singularValues\_add\_le\_real}, \texttt{sum\_singularValues\_rpow\_add\_le\_real}}).
 \begin{proof}
 On complexifie. Soient $M$ la matrice réelle de $u$ dans des bases orthonormées de $E$ et de $F$, et $u_{\mathbb C} : \mathbb C^{\dim E} \to \mathbb C^{\dim F}$ l'application de matrice $M$ lue sur $\mathbb C$. La matrice de $u^*u$ dans la base orthonormée de $E$ est $M^{\mathsf T} M$, celle de $u_{\mathbb C}^* u_{\mathbb C}$ est $M^* M = M^{\mathsf T} M$ lue sur $\mathbb C$ : les deux opérateurs ont le même polynôme caractéristique, à l'inclusion $\mathbb R \subset \mathbb C$ près. Les valeurs propres d'un opérateur autoadjoint, rangées par ordre décroissant, sont les racines de ce polynôme ainsi rangées ; le polynôme réel est scindé sur $\mathbb R$, et ses racines dans $\mathbb C$ sont les mêmes. Donc $u^*u$ et $u_{\mathbb C}^*u_{\mathbb C}$ ont les mêmes valeurs propres, et $s_i(u_{\mathbb C}) = s_i(u)$ pour tout $i$. Comme $(u+v)_{\mathbb C} = u_{\mathbb C} + v_{\mathbb C}$, le théorème complexe appliqué à $u_{\mathbb C}$ et $v_{\mathbb C}$ donne~(16) ; (15) et la sous-additivité s'en déduisent comme sur $\mathbb C$.
 \end{proof}
@@ -266,7 +266,7 @@ Soient $E$, $F$ des espaces hilbertiens complexes de dimension finie, $u : E \to
 où $\alpha_m(wu)$ est le coefficient de $X^m$ dans $\det(1 + X\,wu)$, calculé dans une base quelconque de $E$.
 \end{theoreme}
 \end{encadre}
-L'énoncé tient tel que la page l'écrit, sous la forme de la première égalité ; la page le pose pour $0 \leq m \leq n$, et il vaut pour tous $m$, $n$, les deux membres étant nuls si $m > n$. La borne supérieure est atteinte, comme la page le montre avec $v_n = \sum_1^n \bar f_i \otimes e_i$, le $w_0$ de la démonstration ci-dessous (Lean : \href{\leanblob/Folder1.lean}{\texttt{isGreatest\_norm\_alpha\_comp}, \texttt{norm\_alpha\_comp\_le}}). La seconde forme, $\sup_w \alpha_m(|wu|)$, n'est pas formalisée.
+L'énoncé tient tel que la page l'écrit, sous la forme de la première égalité ; la page le pose pour $0 \leq m \leq n$, et il vaut pour tous $m$, $n$, les deux membres étant nuls si $m > n$. La borne supérieure est atteinte, comme la page le montre avec $v_n = \sum_1^n \bar f_i \otimes e_i$, le $w_0$ de la démonstration ci-dessous (Lean : \href{\leanblob/LinearAlgebra/Folder1.lean}{\texttt{isGreatest\_norm\_alpha\_comp}, \texttt{norm\_alpha\_comp\_le}}). La seconde forme, $\sup_w \alpha_m(|wu|)$, n'est pas formalisée.
 \begin{proof}
 Le coefficient $\alpha_m$ de la matrice d'un endomorphisme ne dépend pas de la base : un changement de base conjugue la matrice, et le lemme~\ref{lem:1-matrices}~(1) s'applique. \emph{Majoration.} Soit $w$ comme dans l'énoncé, et $w^* : E \to F$ son adjoint, contraction de même rang. Soient $(e_i, f_i)$ les vecteurs de Schmidt de $w^*$ et $t_i = s_i(w^*)$ ; alors $t_i \leq 1$, $t_i = 0$ pour $i \geq n$, et $w^* e_i = t_i f_i$. Dans la base $(e_i)$, la matrice de $wu$ a pour coefficients $\langle e_i, wu\,e_j\rangle = \langle w^* e_i, u e_j\rangle = t_i \langle f_i, u e_j\rangle$ ; elle s'écrit $DN$ avec $D = \operatorname{diag}(\sqrt{t_i})$ et $N_{ij} = \sqrt{t_i}\langle f_i, u e_j\rangle$, et $\alpha_m(DN) = \alpha_m(ND)$, où $(ND)_{ij} = \langle y_i, u x_j\rangle$ pour $x_j = \sqrt{t_j}\, e_j$ et $y_i = \sqrt{t_i}\, f_i$. Ces deux familles sont orthogonales, de normes $\leq 1$ et nulles à partir de l'indice $n$. Comme dans la démonstration du théorème complexe, la compression $(\langle y_i, u x_j\rangle)$ se factorise en $(S_u^{1/2}\Phi)^*(S_u^{1/2}\Psi)$ ; l'inégalité de Cauchy--Schwarz sur les mineurs (lemme~\ref{lem:1-matrices}~(4), sommée sur les parties $K$) et le lemme~\ref{lem:1-entrelacement} appliqué à chaque facteur donnent $|\alpha_m(ND)| \leq \sigma_n^m(u)^{1/2}\,\sigma_n^m(u)^{1/2}$. \emph{Égalité.} Soient $(e_j, f_j)$ les vecteurs de Schmidt de $u$ et $w_0 = \sum_{j<n} e_j \langle f_j, \cdot\rangle$ ; c'est une contraction par l'inégalité de Bessel, de rang $\leq n$, et la matrice de $w_0 u$ dans la base $(e_j)$ est la compression $C_u$, diagonale de coefficients $s_j(u)$ pour $j < n$ ; donc $\alpha_m(w_0 u) = \sigma_n^m(u)$.
 \end{proof}

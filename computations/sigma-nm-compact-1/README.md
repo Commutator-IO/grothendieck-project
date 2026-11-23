@@ -6,7 +6,7 @@ for compact operators u, v between Hilbert spaces and 0 ≤ m ≤ n,
 ∏_{i<n}(1 + r sᵢ(u+v)) ≤ ∏(1 + r sᵢ(u)) ∏(1 + r sᵢ(v)) for r ≥ 0.
 
 **Status.** In finite dimension this is proved in Lean (`sigma_system`, `sigma_system_real`,
-`prod_one_add_singularValues_add_le_real`, lean/Grothendieck/Folder1.lean). What is not formalised
+`prod_one_add_singularValues_add_le_real`, lean/Grothendieck/LinearAlgebra/Folder1.lean). What is not formalised
 is only the passage to compact operators. That step is not a finite computation: if P_N is the
 projection on the first N vectors of a basis, ‖P_N w P_N − w‖ → 0 for compact w, and
 |sᵢ(a) − sᵢ(b)| ≤ ‖a − b‖ (Weyl), so each side, a polynomial in finitely many sᵢ, is the limit

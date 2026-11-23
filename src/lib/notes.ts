@@ -339,6 +339,12 @@ export function attachNotes(opts: NotesOptions): () => void {
 
   const W = win as Window & typeof globalThis;
   const hasHighlight = typeof W.CSS !== 'undefined' && 'highlights' in W.CSS && typeof W.Highlight !== 'undefined';
+  if (hasHighlight && !doc.getElementById('gn-note-style')) {
+    const style = doc.createElement('style');
+    style.id = 'gn-note-style';
+    style.textContent = '::highlight(gn-note) { background-color: rgb(241 220 159 / 0.65); }';
+    doc.head.append(style);
+  }
   const paint = () => {
     if (!hasHighlight) return;
     const nodes = textNodes(root);

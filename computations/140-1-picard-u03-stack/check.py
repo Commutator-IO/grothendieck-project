@@ -1,6 +1,6 @@
 """Folder 140-1, pp. 22, 24, 29: Picard group of the stack [U_{0,3}/S_3].
 
-What Lean (lean/Grothendieck/Folder140_1.lean) leaves open and is finite:
+What Lean (lean/Grothendieck/AlgebraicGeometry/Folder140_1.lean) leaves open and is finite:
 
 E. Equivariance of the identification O(U_{0,3})^* = k^* x V(J).
    S_3 acts on P^1 by the Mobius maps permuting p_0 = 0, p_1 = 1, p_2 = oo,

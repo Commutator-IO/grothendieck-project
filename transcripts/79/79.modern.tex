@@ -13,7 +13,7 @@
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-11 — first pass, unchecked against the pages by a human.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — footnotes added from the Lean checks
-% (lean/Grothendieck/Folder79.lean): distance <= 3 over semi-local rings and stable range
+% (lean/Grothendieck/Combinatorics/Folder79.lean): distance <= 3 over semi-local rings and stable range
 % one (pp. 19-20, Bass 1964, mathlib CRT, open PR 44734, Singerman-Strudwick Thm 11); the
 % commutant over any ring, without 2 != 0 or bijectivity (pp. 92-95); the twist in the
 % model (pp. 96-101, 136-140); the distance-3 argument of p. 188 (abstract part, model,
@@ -487,7 +487,7 @@ relier par des chaînes de bases, ce qui est toujours possible sur un anneau
 semi-local. On trouve même que deux sommets de $SP_M$ sont à distance au plus
 $3$ quand $\Lambda$ est semi-local, la borne étant atteinte pour l'icosaèdre
 ($\Lambda = \mathbf{Z}/5\mathbf{Z}$)\footnote{Vérifié en Lean
-(lean/Grothendieck/Folder79.lean, \texttt{semilocal\_dist\_three}) pour tout
+(lean/Grothendieck/Combinatorics/Folder79.lean, \texttt{semilocal\_dist\_three}) pour tout
 anneau commutatif n'ayant qu'un nombre fini d'idéaux maximaux, donc pour les
 anneaux locaux, les corps et les $\mathbf{Z}/n\mathbf{Z}$, et pour toute jauge
 $e$ : il existe $z_1, z_2 \in M^{*}$ avec $x \wedge z_1 = z_1 \wedge z_2 = z_2
@@ -1149,7 +1149,7 @@ D'où deux cas :
 Le cas typique de 1) est $\Lambda = \mathbf{Z}/4\mathbf{Z}$ : $Z'_\Lambda$ est
 trivial, mais les permutations des six sommets de l'octaèdre qui commutent aux
 rotations ne se réduisent pas à l'identité --- il y a l'antipodie de
-l'octaèdre\footnote{Vérifié en Lean (lean/Grothendieck/Folder79.lean,
+l'octaèdre\footnote{Vérifié en Lean (lean/Grothendieck/Combinatorics/Folder79.lean,
 \texttt{commutant}, \texttt{commutant\_converse},
 \texttt{exceptional\_zmod\_iff}), sous une forme plus générale que la page :
 sur tout anneau commutatif, sans supposer $2 \neq 0$ ni la bijectivité, une
@@ -1200,7 +1200,7 @@ translation de $k$ crans devient donc une translation de $\mu k$ crans :
 $\lambda_{\Gamma, s} = \pm\mu$, et l'application est $T_\mu \mapsto \mu$ modulo
 $\pm 1$, sans exposant. Les formules (65) et (66) portent un exposant illisible
 (« un $4$ ? ») qu'on ne restitue pas. Ces identités sont vérifiées en Lean
-(lean/Grothendieck/Folder79.lean, \texttt{twist\_edge}), sur tout anneau
+(lean/Grothendieck/Combinatorics/Folder79.lean, \texttt{twist\_edge}), sur tout anneau
 commutatif : tordre une extrémité par $\mu$ change les arêtes de type $\pm e$ en
 arêtes de type $\pm\mu e$, et l'indice $k$ de l'étoile devient $\mu k$.}.
 
@@ -1494,7 +1494,7 @@ son propre mérite »\footnote{Dans le modèle (de nous) : pour $\lambda =
 T_\mu$, l'étoile de $\dot x$ est $\{y + kx\}$ ; pour $A_0$, $y + kx$ est voisin
 de $y + (k \pm 1)x$, pour $A_{T_\mu}$ de $y + (k \pm \mu)x$. Donc $\nu = \mu$,
 et l'injection $Z \to Z'_n$ est l'isomorphisme $T_\mu \mapsto \mu$. Ce
-calcul dans le modèle est vérifié en Lean (lean/Grothendieck/Folder79.lean,
+calcul dans le modèle est vérifié en Lean (lean/Grothendieck/Combinatorics/Folder79.lean,
 \texttt{twist\_edge}), sur tout anneau commutatif ; l'action de $Z'_n$ sur les
 structures de polygone d'un ensemble quelconque, l'axiome To 6 dans le cadre
 abstrait et l'injection qui en découle ne le sont pas.}.
@@ -1829,7 +1829,7 @@ la page 275, énoncé plus tard : deux sommets distincts de même étoile formen
 une double pyramide, qui n'est régulière que pour l'octaèdre. Le passage de
 « un voisin commun » à « même étoile » utilise que $G_{0s}$ fixe aussi
 $\lambda^{-1}s$ et est transitif sur l'étoile de $s$. Vérifié en Lean
-(lean/Grothendieck/Folder79.lean, \texttt{homothety\_dist\_ge\_three}) dans
+(lean/Grothendieck/Combinatorics/Folder79.lean, \texttt{homothety\_dist\_ge\_three}) dans
 le cadre abstrait du graphe de classes $H/U_0$, avec $\sigma^2 \in U_0$ : une
 permutation $\lambda \neq 1$ qui commute à $H$ n'a pas de point fixe, n'envoie
 $s$ sur un voisin que si $s$ n'a qu'un voisin, et si $s$ et $\lambda s$ ont un
@@ -2159,7 +2159,7 @@ groupe unipotent supérieur, $U_1$ l'inférieur, $T_H$ le tore diagonal $\simeq
 (\mathbf{Z}/n)^{*}/\{\pm 1\}$, $\sigma = \bigl(\begin{smallmatrix} 0 & -1 \\ 1 &
 0 \end{smallmatrix}\bigr)$ ; c) est l'unicité de la décomposition de Gauss (ici
 sous la forme $UDL$) sur la grosse cellule de Bruhat. L'équivalence (89)
-elle-même est vérifiée en Lean (lean/Grothendieck/Folder79.lean,
+elle-même est vérifiée en Lean (lean/Grothendieck/Combinatorics/Folder79.lean,
 \texttt{homothetyEquiv}), dans les deux sens, pour tout groupe $H$, tout
 sous-groupe $U_0$ et tout $\sigma$ avec $\sigma^2 \in U_0$ et $U_0 \cap U_1 =
 1$, y compris la réciproque que la page 247 vérifie sur des lignes en partie
@@ -2313,7 +2313,7 @@ tout $x \in M^{*}$, $u \wedge x$ inversible entraîne $u' \wedge x \in \{\pm u
 \[
   2\Lambda = \{0, 2\} \neq \{0\} ,
 \]
-c'est-à-dire\footnote{Vérifié en Lean (lean/Grothendieck/Folder79.lean,
+c'est-à-dire\footnote{Vérifié en Lean (lean/Grothendieck/Combinatorics/Folder79.lean,
 \texttt{same\_star\_iff}) sur tout anneau commutatif : l'hypothèse
 « semi-local » n'est pas nécessaire, et il suffit des voisins d'un seul type,
 les $z$ tels que $u \wedge z = 1$. Si $u \wedge y = 1$, $u'$ a les voisins de
@@ -2339,7 +2339,7 @@ sans point fixe, avec $\mathrm{Et}_i(a(u)) = \mathrm{Et}_i(u)$ pour tout type
 $i$, et $a \in \mathrm{GL}'(M)^{\pm}$, de déterminant $-1$\footnote{Pour
 $\Lambda = \mathbf{Z}/4$, on vérifie (de nous) que $a$ est la classe de la
 matrice $\bigl(\begin{smallmatrix} 1 & 2 \\ 2 & -1 \end{smallmatrix}\bigr)$, de
-déterminant $-5 = -1$. Vérifié en Lean (lean/Grothendieck/Folder79.lean,
+déterminant $-5 = -1$. Vérifié en Lean (lean/Grothendieck/Combinatorics/Folder79.lean,
 \texttt{same\_star\_iff}) sur tout anneau tel que $2\Lambda \subset \{0,
 2\}$ : cette matrice envoie $x$ sur $\pm(x + 2y)$, a pour déterminant $-1$ et
 pour carré $1$.}. Pour $\Lambda = \mathbf{Z}/4$ c'est l'antipodie de

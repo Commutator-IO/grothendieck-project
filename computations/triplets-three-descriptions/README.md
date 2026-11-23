@@ -9,7 +9,7 @@ from it) are described equivalently by
     x³ + bx + c with invertible discriminant;
 (C) the invariant j = q(s) of formula (11), which determines the triple where j(j − 1) is
     invertible (pp. 41–43).
-Lean (lean/Grothendieck/Folder62.lean) has the invariant fibre by fibre over a field; the
+Lean (lean/Grothendieck/AlgebraicGeometry/Folder62.lean) has the invariant fibre by fibre over a field; the
 descriptions over a base are not formalised.
 
 **How.** Over S = Spec F_p, p = 5, 7, …, 31, the groupoid of triples is computed four ways,

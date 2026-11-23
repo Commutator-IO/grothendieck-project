@@ -175,7 +175,7 @@ The pseudolines are written in hex digits.
 
 `three_pencil.py` tests Problem 14 of the problems paper (pp. 39–54: is a
 bigon-free arrangement determined by its labelled skeleton?) on the case
-that Lean leaves open. `full_of_fourth'` (`lean/Grothendieck/Folder80Maps3.lean`)
+that Lean leaves open. `full_of_fourth'` (`lean/Grothendieck/Combinatorics/Folder80Maps3.lean`)
 proves it when every triangle has a fourth pseudoline through none of its
 vertices. A triangle without one has three multiple vertices with every other
 pseudoline through one of them. So the open case is the arrangements lying in
@@ -317,7 +317,7 @@ The problems paper now answers Problem 14 by an argument on chirotopes. An isomo
 labelled skeleta with permutation s keeps, along each pseudoline, the cyclic order of the
 vertices up to reversal. So ψ = χ′∘s · χ is, at each pseudoline, a constant times a cut. The
 argument shows that such a ψ is a reorientation, provided every pseudoline carries three
-vertices. The steps are proved in Lean in `lean/Grothendieck/Folder80Signs.lean`.
+vertices. The steps are proved in Lean in `lean/Grothendieck/Combinatorics/Folder80Signs.lean`.
 
 The script checks the same linear algebra over 𝔽₂ on each intersection lattice of
 `out/all_n.txt`. It computes the dimension of the sign functions that are balanced on the

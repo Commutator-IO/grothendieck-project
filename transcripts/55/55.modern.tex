@@ -391,7 +391,7 @@ de $y$ soit nulle sur $U$.
 \end{enumerate}
 Alors, pour tout $F$ cohérent, toute suite croissante de sous-Modules cohérents
 de $F$ est stationnaire.\footnote{Vérifié en partie en Lean, dans
-\texttt{lean/Grothendieck/Folder55.lean}. Le lemme B y est démontré avec (v)
+\texttt{lean/Grothendieck/AlgebraicGeometry/Folder55.lean}. Le lemme B y est démontré avec (v)
 remplacé par l'uniformité qu'elle doit fournir : sur un espace
 quasi-compact, une suite croissante de sous-faisceaux dont les germes se
 stabilisent en chaque point (ce que donnent des fibres noethériennes,
@@ -405,15 +405,19 @@ abstraitement (\texttt{isNoetherianRing\_of\_tilde}). Ne sont pas formalisés
 le passage de (v) à l'uniformité, qui demande les faisceaux cohérents et la
 décomposition primaire, ni les $\widetilde{I}$ du lemme A. Pour un espace
 annelé quelconque, (i) à (v) ne suffisent pas : un contre-exemple, formalisé
-à moitié (GrothendieckArchivesProofs, Grothendieck/Folder55LemmaB.lean,
+(GrothendieckArchivesProofs, Grothendieck/AlgebraicGeometry/Folder55LemmaB.lean,
 \texttt{G\_not\_stationary}, \texttt{G\_not\_uniform}), a un point $\infty$ et
 des morceaux $\{c_{n}, e_{n}, o_{n}, d_{n}\}$ qui s'y accumulent, vérifie (i),
 (ii), (iv), (v), et porte une suite croissante d'Idéaux cohérents
 $\mathcal{G}_{j}$, tous de germe nul en $\infty$, jamais stationnaire. Lean
-démontre la partie topologique et sur les sections ; la cohérence
-(Stacks, 01BV) de $\mathcal{O}$ et des $\mathcal{G}_{j}$, les fibres et leur
-noethérianité, et (v) pour les Idéaux cohérents non nuls sont argumentés sur
-papier. Dans le cadre de la page (espaces analytiques ou schémas
+démontre la partie topologique et sur les sections, la cohérence (Stacks,
+01BV) de $\mathcal{O}$ et des $\mathcal{G}_{j}$ et la noethérianité des fibres
+(Folder55Coherent.lean, Folder55Ideals.lean), puis (v) pour tout Idéal de type
+fini, donc pour tout Idéal cohérent, par la construction du faisceau d'anneaux
+$\mathcal{O}/\mathcal{J}$, de support fermé (Folder55Quotients.lean,
+\texttt{identity\_principle\_quotient}, \texttt{lemmeB\_counterexample\_v}) ;
+l'espace annelé $Y$ n'y est pas construit pour lui-même, $\mathcal{O}/\mathcal{J}$
+sur $X$ en tenant lieu. Dans le cadre de la page (espaces analytiques ou schémas
 noethériens, à fixer sur le fac-similé), le lemme B reste ouvert.}
 
 \textbf{Corollaire.} Sous (i) à (v), et sous les hypothèses du lemme A,

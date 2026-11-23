@@ -6,7 +6,7 @@ Tests what Lean leaves open in « Picard du champ [U₀,₃/𝔖₃] » (appendi
 
 ## Already settled in Lean
 
-`lean/Grothendieck/Folder140_1.lean` (see `lean/README.md`, row 140-1) proves
+`lean/Grothendieck/AlgebraicGeometry/Folder140_1.lean` (see `lean/README.md`, row 140-1) proves
 the following:
 
 * H¹(𝔖₃, O(U₀,₃)^*) ≅ ℤ/6, and ℤ/3 when 2 = 0, in the model k^* × V(J) of the

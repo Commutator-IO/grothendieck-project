@@ -12,7 +12,7 @@ in `\pagerange{37}{40}` and `\pagerange{41}{43}`. Pages 61–63 of the folder ar
 the « diagramme fondamental » and the census of inclusions. The appendix row
 and the `\lot{151}{4}{61}` link should be checked.
 
-`lean/Grothendieck/Folder151.lean` proves the colimit-in-Top statements of
+`lean/Grothendieck/Topology/Folder151.lean` proves the colimit-in-Top statements of
 pp. 62–68 (the depth-2 counterexample and depth one). It proves nothing about
 this example.
 

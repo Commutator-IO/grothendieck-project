@@ -1,4 +1,4 @@
-# Certificates for lean/Grothendieck/EffectiveVenken.lean (Venken, CRAS 272 (1971), A1553-A1554, Cor. 3.1).
+# Certificates for lean/Grothendieck/AlgebraicGeometry/EffectiveVenken.lean (Venken, CRAS 272 (1971), A1553-A1554, Cor. 3.1).
 # Usage: python3 lean_cert.py OUTDIR  (writes OUTDIR/cert.json and OUTDIR/lean-data.txt, the Lean data blocks).
 # Everything is over Z; every pivot is checked to be +-1, so the certificates hold over every commutative ring.
 import itertools, sys, json

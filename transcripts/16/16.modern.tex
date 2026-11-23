@@ -116,7 +116,7 @@
 % dating 1966-1967 is the archivists'.
 %
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — refined with the Lean checks
-% of lean/Grothendieck/Folder16.lean, mathlib and the literature of the
+% of lean/Grothendieck/AlgebraicGeometry/Folder16.lean, mathlib and the literature of the
 % folder's findings: the universal ring of no. 7 cannot be built over Z on the
 % exterior algebra for n >= 2 (model taken over Q); Lean and mathlib footnotes
 % on the sl2 normalisation, no. 5, the commutator, the Hodge algebras of order
@@ -415,7 +415,7 @@ w'_{i}v'_{i} = \pi_{i}\,w_{i}\,\pi_{2n-i}\,v_{i}\,\pi_{i} = \pi_{i}^{3} = \pi_{i
 \qquad v'_{i}w'_{i} = \pi_{2n-i} .
 \]
 Les deux projecteurs sont donc des produits d'éléments de $\mathcal{E}$.\footnote{Vérifié en Lean
-(lean/Grothendieck/Folder16.lean, \texttt{projecteurs\_mem},
+(lean/Grothendieck/AlgebraicGeometry/Folder16.lean, \texttt{projecteurs\_mem},
 \texttt{projecteurs\_mem\_lefschetz}) : dans un anneau muni d'idempotents de
 graduation, des inverses unilatères $w_{i} \in \mathcal{E}$ de $L^{n-i}$
 mettent chaque $\pi_{i}$ dans $\mathcal{E}$, sur $\mathbb{Z}$ et sans module.
@@ -494,7 +494,7 @@ $\Lambda L x = (n-i)\,x$ et non $x$.\footnote{Ces formules de la
 représentation de $\mathfrak{sl}_{2}$ --- sur un vecteur primitif de poids
 $\mu$, $\Lambda L^{k+1}x = (k+1)(\mu-k)\,L^{k}x$ --- sont dans mathlib
 (\texttt{IsSl2Triple.HasPrimitiveVectorWith}) ; la vérification en Lean
-(lean/Grothendieck/Folder16.lean, \texttt{sl2\_normalisation},
+(lean/Grothendieck/AlgebraicGeometry/Folder16.lean, \texttt{sl2\_normalisation},
 \texttt{identification\_seulement\_si}) établit en outre que ce $\Lambda$ ne
 satisfait $\Lambda L x = x$ sur une classe primitive, comme le demande
 $(6.7)$, que si $\mu = 1$.}\footnote{Le choix n'est pas anodin et les
@@ -618,7 +618,7 @@ l'identification, et la transcription révisée la porte ; l'erreur est sur la
 page et n'est pas réparée ici. Elle est d'ailleurs sans conséquence pour la
 Proposition qui suit, dont la démonstration n'utilise que les relations
 $(6.15)$ et jamais la contraction. Vérifié en Lean
-(lean/Grothendieck/Folder16.lean, \texttt{lambda0\_L0\_un},
+(lean/Grothendieck/AlgebraicGeometry/Folder16.lean, \texttt{lambda0\_L0\_un},
 \texttt{lambda0\_L0\_un\_ne\_un}) : $\Lambda_{0}L_{0}(1) = n$, donc
 $\neq 1$ pour $n \neq 1$ en caractéristique nulle.}
 
@@ -637,7 +637,7 @@ sous-anneau de $\operatorname{End}_{\mathbb{Q}}(\Lambda M_{0} \otimes
 $\pi_{i}$.\footnote{Correction de l'édition, du 17 octobre 2026 ; la première
 version de cette lecture gardait $\Phi_{0} = \mathbb{Z}[L_{0}, \Lambda_{0}]
 \subset \operatorname{End}(\Lambda M_{0})$ sur $\mathbb{Z}$. Vérifié en Lean
-(lean/Grothendieck/Folder16.lean, \texttt{not\_exists\_xi}$_{0}$\texttt{\_pow\_mul\_eq\_vol},
+(lean/Grothendieck/AlgebraicGeometry/Folder16.lean, \texttt{not\_exists\_xi}$_{0}$\texttt{\_pow\_mul\_eq\_vol},
 \texttt{L}$_{0}$\texttt{\_pow\_ne\_vol}) : pour $n \geqslant 2$, $\xi_{0}^{n} \wedge y$
 n'est jamais la classe de volume de $\Lambda\,\mathbb{Z}^{2n}$, $\xi_{0}^{2}$
 étant pair. La propriété universelle de la Proposition qui suit, et
@@ -689,7 +689,7 @@ $\sum_{i \geqslant n}\pi_{i,0} - \sum_{i \leqslant n}\pi_{i,0}$ et ne retient
 que les extrémités des chaînes. La graduation doit donc être fournie
 séparément.\footnote{Ce calcul est une conséquence immédiate des deux
 relations $(6.7)$ ; le dossier ne l'écrit pas et ne mentionne jamais
-$\mathfrak{sl}_{2}$. Vérifié en Lean (lean/Grothendieck/Folder16.lean,
+$\mathfrak{sl}_{2}$. Vérifié en Lean (lean/Grothendieck/AlgebraicGeometry/Folder16.lean,
 \texttt{commutateur\_pseudo\_inverse}).}
 
 \subsection*{Le n° 8, resté ouvert}
@@ -844,7 +844,7 @@ ces pages qu'elles se lisent chacune sur une seule des trois données :
 \end{itemize}
 
 Ces énoncés sont justes tels quels.\footnote{Vérifié en Lean
-(lean/Grothendieck/Folder16.lean, \texttt{DonneesHodge.produit\_force},
+(lean/Grothendieck/AlgebraicGeometry/Folder16.lean, \texttt{DonneesHodge.produit\_force},
 \texttt{DonneesHodge.mul\_anticomm\_of\_impair}, \texttt{DonneesHodge.assoc\_iff},
 \texttt{DonneesHodge.lefschetz\_iff}, \texttt{DonneesHodge.poincare\_iff}). Le
 produit $H^{1} \times H^{2} \to H^{3}$ ci-dessus est le seul compatible avec
@@ -863,7 +863,7 @@ quadrilinéaire $\chi$ définie par
 $x\,y\,z\,t = \chi(x,y,z,t)\,\xi^{2}$, qui est alternée exactement quand la loi
 est associative,\footnote{L'identité quadrilinéaire d'associativité équivaut à
 $\chi(x,y,y,t) = 0$, c'est-à-dire à l'alternance de $\chi$ ; vérifié en Lean
-(lean/Grothendieck/Folder16.lean, \texttt{DonneesHodge.identite\_iff\_chi}). La
+(lean/Grothendieck/AlgebraicGeometry/Folder16.lean, \texttt{DonneesHodge.identite\_iff\_chi}). La
 page dit $\chi$ alternée sans le relier à l'associativité.} et observe que la forme $Q \oplus 1$
 induite sur $\Lambda^{2}V$ par $\alpha$ se factorise à travers $\chi$. Toute
 l'algèbre se ramène alors à la donnée de
@@ -883,7 +883,7 @@ $\varphi(x,y) = Q(\alpha(x \wedge y), \xi)$ non dégénérée.\footnote{Avec
 $W = \xi^{\perp}$, $\varphi = \tilde Q(\alpha(\cdot), \xi)$ et $\psi = \alpha -
 \varphi\,\xi$, $\tilde Q$ est non dégénérée si et seulement si sa restriction à
 $W$ l'est, parce que $\tilde Q(\xi,\xi) = 1$ : les deux formulations ont donc
-les mêmes conditions. Vérifié en Lean (lean/Grothendieck/Folder16.lean,
+les mêmes conditions. Vérifié en Lean (lean/Grothendieck/AlgebraicGeometry/Folder16.lean,
 \texttt{reformulation\_spec}) ; la question de finitude du feuillet 28 ne
 l'est pas.} Le gain est que la
 polarisation $\xi$ devient un \emph{paramètre} de la structure, et non plus une
@@ -1270,7 +1270,7 @@ rationnels, donc $w^{-1}$ est algébrique, donc $w^{-1}u = v^{-1}$ aussi ---
 c'est-à-dire l'inverse de $L_{X}^{n-i}$.\footnote{Le tapuscrit écrit la
 relation de Cayley--Hamilton en $u$ alors que ses coefficients sont ceux de
 $w$ ; elle est rétablie en $w$ ici. L'argument est juste tel quel : vérifié
-en Lean (lean/Grothendieck/Folder16.lean, \texttt{inverse\_mem\_of\_charpoly},
+en Lean (lean/Grothendieck/AlgebraicGeometry/Folder16.lean, \texttt{inverse\_mem\_of\_charpoly},
 \texttt{inverse\_Lefschetz\_algebrique}), où « algébrique » est
 l'appartenance à des ensembles d'applications stables par composition et par
 les scalaires de $F$ ; le théorème de Cayley--Hamilton y est celui de mathlib,
@@ -1343,7 +1343,7 @@ introduction aux motifs} (2004), chapitre 5, reste à lire.}
 Tout vient de ce que $A_{\chi}(T)^{0}$ résulte de la conjonction de
 $A'_{\chi}(T)^{0}$ et $A''_{\chi}(T)^{0}$, comme on le voit en décomposant
 l'opérateur de la dimension critique à travers la section hyperplane.\footnote{Vérifié en Lean à l'intérieur d'une théorie de Weil classique
-(GrothendieckArchivesProofs, Grothendieck/Folder16Problem5.lean, avec la bibliothèque Stacks d'AxiomMath,
+(GrothendieckArchivesProofs, Grothendieck/AlgebraicGeometry/Folder16Problem5.lean, avec la bibliothèque Stacks d'AxiomMath,
 Stacks 0FGV), les théorèmes de Lefschetz, $L = \varphi_*\varphi^*$ et la formule de
 projection étant pris pour hypothèses : le pas demande davantage que la page.
 Pour $n$ impair, $A^{0} \Leftrightarrow A'^{0} + A''^{0}$ tient si les classes

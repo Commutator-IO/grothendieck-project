@@ -426,13 +426,22 @@ est plat, $R$ est plat sur $Y$, et $R \to P = X \times_Y X$ est un morphisme de
 $Y$-schémas plats qui se réduit modulo l'idéal nilpotent $\mathcal{J}_Y$ en
 l'isomorphisme $R_0 \simeq P_0 = X_0 \times_{Y_0} X_0$ ; c'est donc un
 isomorphisme.\footnote{Les deux pas de cette page sont vérifiés en Lean dans le cas
-affine (GrothendieckArchivesProofs, Grothendieck/Folder126NilpotentQuotient.lean,
+affine (GrothendieckArchivesProofs, Grothendieck/AlgebraicGeometry/Folder126NilpotentQuotient.lean,
 \texttt{flat\_and\_bijective\_of\_thickening}) : $X$ est plat sur $Y$ (Stacks
 063Y), et une application linéaire de but plat, bijective modulo un idéal nilpotent,
 est bijective (\texttt{bijective\_of\_lTensor\_quotient\_nilpotent\_of\_flat}).
-L'effectivité au niveau des schémas, la descente de $\mathcal{J}_X$ en
-$\mathcal{J}_Y$ (prise pour hypothèse) et l'exactitude de $0 \to \mathcal{J}_Y \to
-\mathcal{O}_Y \to \mathcal{O}_{Y_0} \to 0$ ne sont pas formalisées.}\footnote{L'énoncé utilisé — un morphisme de $Y$-schémas plats
+Toujours dans le cas affine, pour un idéal $\mathcal{J}_X$ nilpotent et sans
+réduction au cas de carré nul, Lean construit aussi $\mathcal{O}_Y$ comme anneau
+des invariants $\operatorname{Ker}(\mathcal{O}_X \rightrightarrows \mathcal{O}_R)$,
+démontre l'exactitude de $0 \to \mathcal{J}_Y \to \mathcal{O}_Y \to
+\mathcal{O}_{Y_0} \to 0$ par le complexe d'Amitsur (Stacks 023M), la descente de
+$\mathcal{J}_X$ (Stacks 023N) et la platitude de $X$ sur $Y$
+(Grothendieck/AlgebraicGeometry/Folder126NilpotentDescent.lean, Grothendieck/AlgebraicGeometry/Folder126NilpotentFlat.lean,
+\texttt{ker\_toBase\_eq\_and\_surjective}, \texttt{flat\_eqLocus\_of\_isNilpotent}).
+Ne sont pas formalisés : un $Y_0$ non affine, l'annulation de
+$\check H^0(X_0/Y_0, \mathcal{H}^1(\mathcal{J}_Y))$ de la remarque 2, le
+recollement de $Y$ et l'effectivité de $R$ ; le nerf $R \times_X R$ et
+l'isomorphisme $R_0 \simeq X_0 \times_{Y_0} X_0$ sont pris pour hypothèses.}\footnote{L'énoncé utilisé — un morphisme de $Y$-schémas plats
 qui est un isomorphisme modulo un idéal nilpotent de $Y$ en est un — est
 classique (il découle du même critère de platitude) ; la page conclut « donc
 $R \to P$ est un isomorphisme, o.k. ».}
@@ -639,16 +648,20 @@ $f$ se factorise en
 \]
 où $f_1$ est fini, surjectif et radiciel, et $f_2$ un revêtement étale (fini
 étale). De plus tout $Y$-morphisme $X \to Z$, avec $Z$ étale sur $Y$, se
-factorise de façon unique par $X^{\text{ét}}$.\footnote{Vérifié en Lean sous sa forme locale, avec
-« univ. ouvert » pour hypothèse (GrothendieckArchivesProofs,
-Grothendieck/Folder126RadicialEtale.lean,
-\texttt{radicial\_etale\_factorisation\_of\_strictlyHenselian}, avec la bibliothèque Stacks d'AxiomMath,
-Stacks 04GJ) : sur un anneau local strictement hensélien, une algèbre finie dont le
-spectre s'envoie ouvertement et dont les fibres géométriques ont toutes $n$ points
-est produit de $n$ facteurs radiciels, et $R^{n} \to A$ a la propriété universelle
-contre les algèbres finies étales déployées. L'énoncé global (descente étale), la
-propriété contre toute algèbre finie étale (Stacks 04GL) et l'invariance
-topologique du site étale ne sont pas formalisés.}\footnote{« Univ. ouvert » est
+factorise de façon unique par $X^{\text{ét}}$.\footnote{Vérifié en Lean tel quel, avec
+« univ. ouvert » pour hypothèse et sans l'hypothèse noethérienne, pour un schéma
+$Y$ quelconque (GrothendieckArchivesProofs, Grothendieck/AlgebraicGeometry/Folder126Glue.lean,
+\texttt{radicial\_etale\_factorisation}, avec la bibliothèque Stacks d'AxiomMath) :
+$f_1$ est un homéomorphisme universel (Stacks 04DF), fini puisque $X$ l'est sur $Y$ ;
+la propriété universelle et l'unicité de la factorisation sont l'invariance
+topologique du site étale, sous la forme de la pleine fidélité (Stacks 0BTY) ;
+l'existence est étale-locale (Stacks 02LO), descendue sur une base quasi-compacte et
+quasi-séparée (Stacks 02W8), puis recollée sur les ouverts affines (Stacks 01LH).
+L'énoncé, récrit avec mathlib seule (Challenge/Folder126.lean), est comparé à la
+preuve par \texttt{lake comparator}. La forme locale, sur un anneau local
+strictement hensélien (Stacks 04GJ), est
+\texttt{radicial\_etale\_factorisation\_of\_strictlyHenselian} dans
+Grothendieck/AlgebraicGeometry/Folder126RadicialEtale.lean.}\footnote{« Univ. ouvert » est
 ajouté en interligne, d'une lecture incertaine ; c'est lui qui fait marcher
 l'argument de la page 19. La page ajoute qu'« on peut supprimer » l'hypothèse
 « $d(y)$ constant » quand $Y$ est connexe, « quitte à remplacer $Y$ par une

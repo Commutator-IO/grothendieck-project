@@ -84,3 +84,15 @@ The counts are the same for all five q of each type. This is evidence that the f
 - Steps 1 and 2 are standard arguments. They are not machine-checked; only the
   enumeration after them is.
 - This is not a proof for general G. Larger ranks (A3, B3, ...) were not attempted.
+
+## Type B_n modulo primes (`kostant_bn.py`)
+
+    python3 -I computations/kostant/kostant_bn.py 7     # B_2 to B_7, a few seconds
+
+For E0 = e + e_{-theta} in so(2n+1), it checks that every Borel subgroup through the
+centraliser of E0 is opposite to the upper triangular one: for each isotropic choice of k
+eigenvectors (k <= n), the minor of their last k coordinates is nonzero. It computes modulo a
+prime p = 1 mod 2n in which the eigenvalues of E0 are distinct; a minor nonzero modulo p is
+nonzero in characteristic 0. Result: no vanishing minor for n = 2..7 (8, 26, 80, 242, 728,
+2186 minors). The general statement, in every type, is Theorem 2.1 of
+`docs/kostant/article.tex`; this script is an independent check of it.

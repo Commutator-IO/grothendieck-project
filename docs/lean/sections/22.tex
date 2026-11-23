@@ -22,7 +22,7 @@ Pour un homomorphisme $g : M \to N$, notons $c_M : M \otimes P \to \prod_i (M \o
 Pour tout entier $n$, $c_{A^n}$ est bijectif.
 \end{lemme}
 
-\general{FinitePresentationPiRightHomBijective}
+\generalpool{CommutativeAlgebraToolkit}{FinitePresentationPiRightHomBijective}
 
 \begin{proof}[Démonstration du lemme 3.3]
 C'est celle du feuillet. Le module $M$ étant de présentation finie, il existe une suite exacte $A^m \xrightarrow{f} A^n \xrightarrow{g} M \to 0$ de modules libres \emph{de type fini}. Comme le produit tensoriel est exact à droite, on obtient deux suites exactes
@@ -47,13 +47,13 @@ Le membre de gauche est injectif : $c_J$ l'est par le lemme~3.3, $J$ étant de p
 Tout $A$-module de type fini est de présentation finie si et seulement si $A$ est noethérien.
 \end{lemme}
 
-\general{IsNoetherianRingIffFinitePresentation}
+\generalpool{CommutativeAlgebraToolkit}{IsNoetherianRingIffFinitePresentation}
 
 \begin{lemme}\label{lem:22-prod2}
 Le produit de deux modules plats est plat.
 \end{lemme}
 
-\general{FlatProdPi}
+\generalpool{CommutativeAlgebraToolkit}{FlatProdPi}
 
 \begin{proof}[Démonstration du corollaire 3.5, pour un système indexé par $\mathbb N$]
 Chaque $\pi_n : P_{n+1} \to P_n$ est surjective et $P_n$ est projectif, donc $\pi_n$ admet une section $s_n : P_n \to P_{n+1}$, $\pi_n \circ s_n = \mathrm{id}$. Le noyau $K_n$ de $\pi_n$ est un facteur direct de $P_{n+1}$ (un projecteur sur $K_n$ est $\mathrm{id} - s_n \circ \pi_n$), donc projectif, en particulier plat. Soit $\Phi : \varprojlim_n P_n \to P_0 \times \prod_n K_n$ l'application
@@ -98,7 +98,7 @@ Supposons $A$ formellement lisse sur $k$. La suite de Jacobi--Zariski
 \[ H_1(L_{A/k}) \xrightarrow{\ \delta\ } A \otimes_k \Omega_{k/\mathbf Q} \xrightarrow{\ \iota\ } \Omega_{A/\mathbf Q} \longrightarrow \Omega_{A/k} \longrightarrow 0 \]
 est exacte. Comme $H_1(L_{A/k}) = 0$ et que $\Omega_{A/k}$ est projectif, elle est scindée, et $\iota$ a une rétraction $A$-linéaire $r$ : c'est l'énoncé général rappelé à la suite de la démonstration. Alors $D = r \circ d_A$ est une dérivation de $A$ dans $A \otimes_k \Omega_{k/\mathbf Q}$, et $D(c) = r(\iota(1 \otimes dc)) = 1 \otimes dc$ pour $c \in k$ : c'est le cas exclu au paragraphe précédent.
 \end{proof}
-\general{FormallySmoothMapBaseChange}
+\general{RingTheory/Folder22}
 
 La page~23 dit la même chose pour tout corps : sous l'hypothèse \q{de dimension infinie}, elle conclut par la négative. C'est l'énoncé que l'édition avait démontré en partant de l'exemple.
 
@@ -110,7 +110,7 @@ Soient $k$ un anneau commutatif et $K$ un corps qui est une $k$-algèbre, avec $
 Les $da$, $a \in K$, engendrent $\Omega_{K/k}$ ; on en extrait une base, infinie par hypothèse, et une suite injective $da_0, da_1, \ldots$ de vecteurs de cette base. Le lemme~\ref{lem:22-obstruction} exclut alors $D$, et la seconde moitié de la démonstration précédente, où $\mathbf Q$ est remplacé par $k$, montre que la lissité formelle donnerait une telle $D$.
 \end{proof}
 
-\noindent Voir \texttt{no\_derivation\_of\_field} et \texttt{not\_formallySmooth\_of\_field} dans \href{\leanblob/Folder22.lean}{\texttt{Folder22.\allowbreak{}lean}}. La page prend $n > 0$ variables $t_1, \ldots, t_n$ ; l'énoncé suivant ramène ce cas à une seule variable. Elle conclut que $A$ \q{n'est pas f.\ lisse sur $K$ relativement à $k$, et a fortiori n'est pas f.\ lisse sur $k$} : le \q{relativement à $k$} nomme vraisemblablement l'obstruction ci-dessus, et le \q{a fortiori} suppose une notion relative que le dossier ne définit pas ; il n'est pas démontré ici. Pour $k = \mathbf Q$ et $K = \mathbf Q(x_i : i \in I)$, c'est l'exemple des pages~22 et~24.
+\noindent Voir \texttt{no\_derivation\_of\_field} et \texttt{not\_formallySmooth\_of\_field} dans \href{\leanblob/RingTheory/Folder22.lean}{\texttt{Folder22.\allowbreak{}lean}}. La page prend $n > 0$ variables $t_1, \ldots, t_n$ ; l'énoncé suivant ramène ce cas à une seule variable. Elle conclut que $A$ \q{n'est pas f.\ lisse sur $K$ relativement à $k$, et a fortiori n'est pas f.\ lisse sur $k$} : le \q{relativement à $k$} nomme vraisemblablement l'obstruction ci-dessus, et le \q{a fortiori} suppose une notion relative que le dossier ne définit pas ; il n'est pas démontré ici. Pour $k = \mathbf Q$ et $K = \mathbf Q(x_i : i \in I)$, c'est l'exemple des pages~22 et~24.
 
 \begin{encadre}
 \begin{theoreme}[Grothendieck, page 23, en $n$ variables\piste{22-p23-proposition-reconstruction}]
@@ -124,7 +124,7 @@ Soit $\iota : K[[t]] \to A$ le morphisme de $K$-algèbres $f(t) \mapsto f(t_1)$,
 Supposons enfin $A$ formellement lisse sur $K$. Comme pour une variable, la suite de Jacobi--Zariski, avec $H_1(L_{A/K}) = 0$ et $\Omega_{A/K}$ projectif, fournit une rétraction $A$-linéaire $r$ de $\iota : A \otimes_K \Omega_{K/k} \to \Omega_{A/k}$, et $r \circ d_A$ est une dérivation de $A$ dans $A \otimes_K \Omega_{K/k}$ qui envoie $c \in K$ sur $r(\iota(1 \otimes dc)) = 1 \otimes dc$ : c'est ce que l'on vient d'exclure.
 \end{proof}
 
-\noindent Voir \texttt{incl}, \texttt{proj}, \texttt{no\_derivation\_mv} et \texttt{not\_formallySmooth\_mv} (qui applique \texttt{retraction\_of\_formallySmooth}) dans \href{\leanblob/Folder22.lean}{\texttt{Folder22.\allowbreak{}lean}}, où les variables sont indexées par un ensemble fini non vide quelconque.
+\noindent Voir \texttt{incl}, \texttt{proj}, \texttt{no\_derivation\_mv} et \texttt{not\_formallySmooth\_mv} (qui applique \texttt{retraction\_of\_formallySmooth}) dans \href{\leanblob/RingTheory/Folder22.lean}{\texttt{Folder22.\allowbreak{}lean}}, où les variables sont indexées par un ensemble fini non vide quelconque.
 
 \begin{remarque}
 La conclusion de l'exemple est de la lecture : la page~24 s'arrête sur la construction de la série. Les pages~22 et~23 se ramènent d'abord au cas $D(t) = 0$ : $D(t)$ est une combinaison linéaire finie de $dx_i$, $i \in J$, et l'on remplace $\mathbf Q$ par le sous-corps $k_0$ engendré par les $x_i$, $i \in J$ (à la page~23, $k$ par une extension de type fini $K'$). Ce pas n'est pas nécessaire : il suffit de prendre $n$ assez grand pour que la coordonnée d'indice $i_n$ de $D(t)$ soit déjà nulle. La page~24 choisit ensuite $a_n$ tel que $d_{K/k}\,a_n \neq 0$, après avoir biffé $D_{i_n}(a_n) \neq 0$. La condition retenue ne suffit pas : si tous les $a_n$ sont égaux et $D(t) = 0$, $D(\sum a_n t^n)$ n'a qu'une coordonnée non nulle. C'est la condition biffée, une coordonnée d'indice $i_n$ non nulle, dont se sert le lemme~\ref{lem:22-obstruction}. La caractéristique~$0$ ne sert pas : le théorème~\ref{prop:22-corps} vaut en caractéristique $p$, par exemple pour $\mathbb F_p(x_i : i \in I)$, $I$ infini. La piste demande si l'exemple figure dans EGA~$0_{\mathrm{IV}}$ ou chez Matsumura ; le projet Stacks n'énonce la lissité formelle de $K[[x]]$ que pour la topologie $(x)$-adique \cite[tags 07EL et 07EM]{stacks}.
@@ -182,12 +182,18 @@ Soit $k$ un anneau commutatif. Alors $k \to k[[t]]$ est formellement lisse pour 
 Soit $c \in C$ un relèvement de $\psi(t)$. Si $\psi(t^m) = 0$, alors $c^m \in J$, donc $c^{2m} = 0$ : $c$ est nilpotent. Une série $\sum a_n t^n$ évaluée en $c$ est alors une somme finie, et $f \mapsto f(c)$ est un morphisme de $k$-algèbres $k[[t]] \to C$. Composé avec $C \to C/J$, il coïncide avec $\psi$ sur $k$ et en $t$. Deux tels morphismes sont égaux : on écrit $f = \sum_{n < m} a_n t^n + t^m g$, et $t^m$ s'envoie sur $0$ par les deux.
 \end{proof}
 
-\noindent La notion est celle de l'étiquette 07NI du Stacks Project, sous la forme élémentaire de 07EC (EGA~$0_{\mathrm{IV}}$~19.3.1), prise dans la bibliothèque d'AxiomMath \cite{axiomstacks}. Voir \texttt{formallySmoothNAdic\_C\_X} et \texttt{adic\_not\_discrete} dans \href{\leanblobmain/Folder22Adic.lean}{\texttt{Folder22Adic.\allowbreak{}lean}}. La démonstration ne demande rien sur $k$ : le contraste de la page tient tout entier à la topologie. Le théorème de la page sur les corps, qui passe par les anneaux de Cohen, n'est pas repris ici.
+\noindent La notion est celle de l'étiquette 07NI du Stacks Project, sous la forme élémentaire de 07EC (EGA~$0_{\mathrm{IV}}$~19.3.1), prise dans la bibliothèque d'AxiomMath \cite{axiomstacks}. Voir \texttt{formallySmoothNAdic\_C\_X} et \texttt{adic\_not\_discrete} dans \href{\leanblobmain/RingTheory/Folder22Adic.lean}{\texttt{Folder22Adic.\allowbreak{}lean}}. La démonstration ne demande rien sur $k$ : le contraste de la page tient tout entier à la topologie. Le théorème de la page sur les corps, qui passe par les anneaux de Cohen, n'est pas repris ici.
 
 \begin{theoreme}[Pages 12 à 18, corollaire~3.13 sans hypothèse sur l'extension résiduelle, et question~1]\verifie[\leanblobmain]{Folder22CohenAlgebras}
 Soit $f : A \to B$ un homomorphisme local d'anneaux locaux noethériens, de corps résiduel $k = A/\mathfrak m_A$. Alors $f$ est formellement lisse pour la topologie $\mathfrak m_B$-adique si et seulement si $B$ est plat sur $A$ et la fibre spéciale $k \otimes_A B$ est géométriquement régulière sur~$k$. Sur un corps $k$, une $k$-algèbre locale noethérienne est formellement lisse pour sa topologie $\mathfrak m$-adique si et seulement si elle est géométriquement régulière, et elle est alors régulière.
 \end{theoreme}
 
-\noindent C'est l'étiquette 07NQ du Stacks Project, avec 07EL et 07EI pour le cas d'un corps, prises dans la bibliothèque d'AxiomMath \cite{axiomstacks}. Voir \texttt{corollaire3\_13}, \texttt{question1}, \texttt{isRegularLocalRing\_of\_formallySmoothNAdic} et \texttt{corollaire3\_9} dans \href{\leanblobmain/Folder22CohenAlgebras.lean}{\texttt{Folder22CohenAlgebras.\allowbreak{}lean}}. L'hypothèse de multiplicité radicielle finie, ou $\mathfrak m_B = \mathfrak m_A B$, tombe : le N.B. de la page~14 la dit \q{très probablement inutile}. La question~1 de la page~18 reçoit une réponse affirmative, sans hypothèse de finitude. Le même fichier démontre l'existence dans le corollaire~3.10 pour $A$ complet, sans séparabilité, et celle du corollaire~3.12 (\texttt{corollaire3\_10}, \texttt{corollaire3\_12\_existence}, étiquette 07NR).
+\noindent C'est l'étiquette 07NQ du Stacks Project, avec 07EL et 07EI pour le cas d'un corps, prises dans la bibliothèque d'AxiomMath \cite{axiomstacks}. Voir \texttt{corollaire3\_13}, \texttt{question1}, \texttt{isRegularLocalRing\_of\_formallySmoothNAdic} et \texttt{corollaire3\_9} dans \href{\leanblobmain/RingTheory/Folder22CohenAlgebras.lean}{\texttt{Folder22CohenAlgebras.\allowbreak{}lean}}. L'hypothèse de multiplicité radicielle finie, ou $\mathfrak m_B = \mathfrak m_A B$, tombe : le N.B. de la page~14 la dit \q{très probablement inutile}. La question~1 de la page~18 reçoit une réponse affirmative, sans hypothèse de finitude. Le même fichier démontre l'existence dans le corollaire~3.10 pour $A$ complet, sans séparabilité, et celle du corollaire~3.12 (\texttt{corollaire3\_10}, \texttt{corollaire3\_12\_existence}, étiquette 07NR).
 
-Ne sont pas démontrés ici : la non-ramification et l'étalitude formelles pour des topologies préadiques, et leurs critères de relèvement ; dans le corollaire~3.5, la réduction à un système indexé par $\mathbb N$ ; les algèbres de Cohen et les numéros~3.2, 3.6, 3.8 et~3.11, l'unicité dans les corollaires~3.10 et~3.12 et l'équivalence 1)~$\Leftrightarrow$~2) de~3.12, le corollaire~3.10 pour $A$ non complet, les questions~3) et~4) des pages 19 et~20 ; le \q{a fortiori \ldots\ sur $k$} de la page~23 ; la seconde variante de la page~28, avec $a_1$ algébrique sur $\mathbb F$ ; les pages~1 à~8, 18 à~21, 25 et~27.
+\begin{theoreme}[Pages 15 à 17, unicité dans les corollaires~3.10 et~3.12, et 3.12 1)~$\Leftrightarrow$~2)]\verifie[\leanblobmain]{Folder22Uniqueness}
+Soient $A$ un anneau local de corps résiduel $k$, $B$ une $A$-algèbre locale noethérienne complète, formellement lisse sur $A$ pour sa topologie $\mathfrak m_B$-adique, $B'$ une $A$-algèbre locale noethérienne complète et plate sur $A$, et $e_0 : k \otimes_A B \simeq k \otimes_A B'$ un isomorphisme de $k$-algèbres. Il existe un isomorphisme de $A$-algèbres $B \simeq B'$ qui induit $e_0$. En particulier, deux $A$-algèbres locales noethériennes complètes, plates et formellement lisses, dont les fibres spéciales sont identifiées à une même $k$-algèbre $K$, sont isomorphes sur $A$, de façon compatible aux identifications. Si $f : A \to B$ est un homomorphisme local d'anneaux locaux noethériens avec $\mathfrak m_B = \mathfrak m_A B$, alors $f$ est formellement lisse pour la topologie $\mathfrak m_B$-adique si et seulement si $B$ est plat sur $A$ et l'extension résiduelle est séparable.
+\end{theoreme}
+
+\noindent La lissité formelle relève $B \to k \otimes_A B \simeq k \otimes_A B' = B'/\mathfrak m_A B'$ en $\varphi : B \to B'$, pas à pas le long des $B'/J^{n+1} \to B'/J^n$, $J = \mathfrak m_A B'$, puis par passage à la limite. Comme $\varphi$ est surjectif modulo $J$, que $B$ est complet et $B'$ séparé, $\varphi$ est surjectif ; il est injectif par le critère local de platitude (étiquette 00MK du Stacks Project), $B'$ étant plat et $\varphi$ injectif modulo $\mathfrak m_A$. Pour 3.12, le corollaire~3.9 ramène la lissité formelle à celle de la fibre spéciale, qui est ici le corps résiduel de~$B$, et la lissité formelle d'une extension de corps est sa séparabilité. Voir \texttt{exists\_algHom\_lift}, \texttt{bijective\_of\_lift}, \texttt{corollaire3\_10\_uniqueness}, \texttt{corollaire3\_12\_uniqueness} et \texttt{corollaire3\_12} dans \href{\leanblobmain/RingTheory/Folder22Uniqueness.lean}{\texttt{Folder22Uniqueness.\allowbreak{}lean}}, sur la bibliothèque Stacks d'AxiomMath \cite{axiomstacks}. L'unicité demande moins que la page : seule la source doit être formellement lisse et seul le but plat, et $A$ n'a besoin d'être ni complet ni noethérien. L'isomorphisme n'est pas unique, un anneau de Cohen ayant des automorphismes qui induisent l'identité sur $K$, et la page ne le prétend pas.
+
+Ne sont pas démontrés ici : la non-ramification et l'étalitude formelles pour des topologies préadiques, et leurs critères de relèvement ; dans le corollaire~3.5, la réduction à un système indexé par $\mathbb N$ ; les algèbres de Cohen et les numéros~3.2, 3.6, 3.8 et~3.11, l'existence dans le corollaire~3.10 pour $A$ non complet, les questions~3) et~4) des pages 19 et~20 ; le \q{a fortiori \ldots\ sur $k$} de la page~23 ; la seconde variante de la page~28, avec $a_1$ algébrique sur $\mathbb F$ ; les pages~1 à~8, 18 à~21, 25 et~27.
