@@ -1,0 +1,96 @@
+\section{Linear algebra and arithmetic}\label{sec:linear}
+
+Topoi are made of sets, so linear algebra enters through \emph{set-valued} structures attached to vector spaces: actions of matrix monoids, functors on lattices of subspaces. The answers differ from the linear ones.
+
+\subsection{Matrix monoids: Morita equivalence remembers the size}
+
+For rings, Morita theory says that $M_n(k)$-modules and $k$-modules are equivalent categories for every $n$. For sets, the opposite holds.
+
+\begin{theorem}\label{th:matrixmorita}
+Let $k$ be a field and $M_n(k)$ the monoid of $n\times n$ matrices under multiplication.
+\begin{enumerate}
+\item Right $M_n(k)$-sets are equivalent to presheaves on the category $\mathsf{Vect}_{\le n}$ of $k$-vector spaces of dimension at most $n$.
+\item Right $M_n(k)$-sets and right $M_m(k)$-sets are equivalent categories iff $n = m$.
+\end{enumerate}
+\end{theorem}
+
+\begin{trace}
+\item[deck] $\PSh(\B M_n(k))$.
+\item[arch] Bridge~\ref{br:morita} (Karoubi envelope).
+\item[specialise] $\Kar(\B M_n(k))$: objects are projections $e$, arrows $e\to f$ are matrices $a$ with $a = fae$, i.e.\ linear maps $\operatorname{im}e\to\operatorname{im}f$; so $e\mapsto\operatorname{im}e$ is an equivalence $\Kar(\B M_n(k))\simeq\mathsf{Vect}_{\le n}$. Isomorphism classes: dimensions $0,\dots,n$.
+\item[rewrite] (2): equivalent Karoubi envelopes would have the same number $n+1$, $m+1$ of isomorphism classes of objects.
+\item[verify] Lean: \lean{karoubiRel_iff_rank_eq} (projections are isomorphic in $\Kar$ iff they have the same rank) and \lean{essentialPointClassesEquivFin} (\lean{EssentialPoints.lean}); the equivalence with $\mathsf{Vect}_{\le n}$ and the deduction of (2) by the direct argument only.
+\item[novelty] not found as stated; (2) follows from the Morita theorem for monoids, since in $M_n(k)$ one-sided inverses are inverses, so Morita equivalence is isomorphism \cite[Cor.~1.6.2]{rogers-thesis}. The linear analogue (the Karoubi envelope of $k[M_n(\mathbb F_q)]$-modules) is studied in \cite{kuhn}; the set-valued description (1) we did not find.
+\end{trace}
+
+\direct{} An arrow $e\to f$ in $\Kar(\B M_n(k))$ is a matrix $a$ with $fae = a$; restricting to $\operatorname{im}e$ gives a linear map $\operatorname{im}e\to\operatorname{im}f$, and every linear map arises from exactly one such $a$ (extend by $0$ on $\ker e$). Every space of dimension $\le n$ is the image of a projection. So $\Kar(\B M_n(k))\simeq\mathsf{Vect}_{\le n}$, and Bridge~\ref{br:morita} gives (1). For (2), an equivalence of categories preserves the number of isomorphism classes of objects, $n+1$ on one side and $m+1$ on the other.\qed
+
+\inwords{} The set-valued representation theory of the matrix monoid sees the size of the matrices; the linear one does not. The reason is visible in the Karoubi envelope: for $M_n(k)$-sets it is $\mathsf{Vect}_{\le n}$, which contains no space of dimension above $n$, whereas for modules one also adds finite direct sums, which produce $k^m$ for every $m$ and make $M_n(k)$ and $k$ Morita equivalent.
+
+\subsection{Lattices of subspaces}
+
+Let $\mathrm{Sub}(V)$ be the lattice of subspaces of a finite-dimensional vector space $V$, and consider the topos $[\mathrm{Sub}(V),\Set]$ of functors on it, i.e.\ the sheaves on its Alexandrov space.
+
+\begin{theorem}\label{th:subspaces}
+\begin{enumerate}
+\item $[\mathrm{Sub}(V),\Set]$ is De Morgan and, if $V\neq 0$, not Boolean.
+\item $[\mathrm{Sub}(V),\Set]\simeq[\mathrm{Sub}(W),\Set]$ iff $\mathrm{Sub}(V)\cong\mathrm{Sub}(W)$. The topos determines $\dim V$ (the height of the lattice), and, if $\dim V\ge 3$, the field up to isomorphism; in dimension $2$ it determines only $|k|$, hence $k$ when $k$ is finite.
+\item Its essential points are the evaluations at the subspaces of $V$; over $\mathbb F_q$ there are $\sum_{k=0}^{n}\binom nk_q$ of them (Gaussian binomial coefficients).
+\end{enumerate}
+\end{theorem}
+
+\begin{trace}
+\item[deck] $[\mathrm{Sub}(V),\Set] = \PSh(\mathrm{Sub}(V)^{\op})$.
+\item[arch] Bridge~\ref{br:dm} (a lattice is confluent), Bridge~\ref{br:bool}, Bridge~\ref{br:morita} (a poset is its own Karoubi envelope), Bridge~\ref{br:pts}.
+\item[rewrite] (2) by the fundamental theorem of projective geometry: for $\dim V\ge 3$, a lattice isomorphism $\mathrm{Sub}(V)\cong\mathrm{Sub}(W)$ is induced by a semilinear bijection \cite{artin-geometric}; over $\mathbb F_q$ with $n = 2$, the number $q+1$ of lines determines $q$.
+\item[verify] Lean: \lean{isDeMorganTopos_functor_preorder_iff}, \lean{moritaEquivalentCat_preorder_iff}; the rest by the direct argument.
+\item[novelty] not found; the ingredients are classical (a poset is its own Karoubi envelope; the fundamental theorem of projective geometry \cite{artin-geometric}).
+\end{trace}
+
+\subsection{The multiplicative monoid of $\mathbb Z/n$}
+
+\begin{theorem}\label{th:zn}
+Let $n\ge 2$ and let $\omega(n)$ be the number of distinct prime factors of $n$. The topos of sets with an action of the multiplicative monoid $(\mathbb Z/n,\cdot)$
+\begin{enumerate}
+\item is De Morgan and not Boolean;
+\item has exactly $2^{\omega(n)}$ essential points up to isomorphism;
+\item has exactly $D(\omega(n))$ subtopoi, where $D(k)$ is the $k$-th Dedekind number, the number of monotone Boolean functions of $k$ variables: $D(1) = 3$, $D(2) = 6$, $D(3) = 20$, $D(4) = 168$, $D(5) = 7581$.
+\end{enumerate}
+\end{theorem}
+
+\begin{trace}
+\item[deck] $\PSh(\B(\mathbb Z/n,\cdot))$.
+\item[arch] Bridges~\ref{br:dm}, \ref{br:bool}, \ref{br:pts}, and for finite monoids the classification of subtopoi by two-sided idempotent ideals \cite[Prop.~6.1.2]{pirashvili-jncg}.
+\item[specialise] $0$ is a zero, so Ore holds; the class of a prime factor of $n$ is not invertible. The monoid is commutative, so essential points are the idempotents; by the Chinese remainder theorem the idempotents of $\mathbb Z/n$ correspond to the subsets of the prime factors of $n$. Idempotent ideals: below.
+\item[verify] direct proof below; Lean: not formalised (the classification of subtopoi of finite monoids by idempotent ideals is not in the library); the counts were also enumerated by machine (novelty line).
+\item[novelty] the general theory is in print (\cite[Prop.~6.1.2, Prop.~6.3.1, Thm~5.6.1]{pirashvili-jncg}: subtopoi $\leftrightarrow$ down-sets of the poset of $\mathcal J$-classes of idempotents); the monoid $(\mathbb Z/n,\cdot)$, the counts and the Dedekind numbers not found. Machine enumerations were run for $n\le 60$ and $n = 210, 2310$, and, directly from the axioms of a Grothendieck topology, for $n\le 30$; they are not part of the Lean development, and no script or commit for them is recorded here. For $n>30$ they go through the classification of idempotent ideals \cite{pirashvili-jncg}, so for those values they do not check the topologies independently of that classification.
+\end{trace}
+
+\direct{} (1), (2) as in the trace. For (3), subtopoi correspond to the two-sided ideals $I$ of the finite monoid $M = (\mathbb Z/n,\cdot)$ with $I^2 = I$, the empty ideal included \cite[Prop.~6.1.2]{pirashvili-jncg}. In a finite monoid an idempotent ideal is generated by its idempotents: if $I = I^2$, every $x\in I$ is a product of arbitrarily many elements of $I$, and a long enough product in a finite semigroup factors as $uev$ with $e$ idempotent, $e$ a product of elements of $I$. So the idempotent ideals are the unions of principal ideals $eM$, $e$ idempotent, and $eM\subseteq fM$ iff $e = ef$. Writing $e\leftrightarrow S_e\subseteq\{\text{primes of }n\}$ (the primes $p$ with $e\equiv 1\bmod p^{v_p(n)}$), $e = ef$ iff $S_e\subseteq S_f$; so idempotent ideals correspond to the down-closed families of subsets of an $\omega(n)$-element set, whose number is the Dedekind number $D(\omega(n))$.\qed
+
+\begin{example}
+For $n = p$ prime: three subtopoi (all $(\mathbb Z/p,\cdot)$-sets; the ideal $\{0\}$; the degenerate one). For $n = p^2$ also three: the ideal $p\,\mathbb Z/p^2$ is not idempotent, since its square is $\{0\}$. For $n = 30$: $2^3 = 8$ essential points and $D(3) = 20$ subtopoi.
+\end{example}
+
+\subsection{Other areas of a third-year curriculum}
+
+The method applies wherever a familiar structure is a topos with a second presentation. Roughly, the decks sit in the third-year curriculum as follows:
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}X}
+\toprule
+area & decks\\
+\midrule
+group theory & $G$-sets, Cayley, orbit decomposition (\S\ref{sec:equivalences})\\
+rings, fields, Galois & multiplicative monoids, Galois categories (\S\ref{sec:equivalences})\\
+linear algebra & matrix monoids, lattices of subspaces (this section)\\
+arithmetic & $(\mathbb Z/n,\cdot)$, divisibility orders (this section, \S\ref{sec:calibration})\\
+general topology & sheaves on spaces, Alexandrov spaces (\S\ref{sec:analysis}, \S\ref{sec:calibration})\\
+functional analysis & $C(X)$ and Gelfand duality (\S\ref{sec:analysis})\\
+measure and probability & measure algebras, which are complete Boolean algebras, and their Boolean topoi of sheaves\\
+differential equations & sheaves of solutions; discrete dynamical systems (\S\ref{sec:machines})\\
+combinatorics, graphs & quivers, graphs, simplicial sets (\S\ref{sec:machines}, \S\ref{sec:shapes})\\
+logic & classifying topoi, quotients and topologies (\S\ref{sec:calibration})\\
+\bottomrule
+\end{tabularx}
+\end{center}

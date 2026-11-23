@@ -1,0 +1,71 @@
+\section{Le générateur comme pipeline logicielle}\label{sec:intro}
+
+\subsection{Les ponts}
+
+Les \emph{ponts} d'O.~Caramello \cite{caramello-unification,caramello-tst} reposent sur une observation. Un \emph{topos} (une catégorie qui se comporte comme la catégorie des ensembles) peut se présenter de bien des manières qui semblent sans rapport: comme les actions d'un monoïde, comme les représentations d'un carquois, comme les faisceaux sur un espace, comme les modèles d'une théorie logique. Une propriété du topos, par exemple \q{le tiers exclu est vrai}, peut se caractériser sur chaque présentation. Deux caractérisations d'une même propriété, sur deux présentations d'un même topos, donnent un théorème qui relie les deux présentations et où le topos n'apparaît plus. Dans le langage de Lean: deux lemmes \texttt{P E ↔ Q₁ C} et \texttt{P E ↔ Q₂ D}, pour des équivalences \texttt{E ≌ PSh C} et \texttt{E ≌ PSh D}, se composent en \texttt{Q₁ C ↔ Q₂ D}.
+
+Dans un exposé aux Mines Paris, le 17 septembre 2024 \cite{caramello-mines}, Caramello a proposé d'automatiser ce procédé: un assistant de preuve prendrait \q{une base de données d'équivalences de topos} (les \emph{tabliers} des ponts) et \q{une base de données de caractérisations d'invariants topos-théoriques en termes de différentes présentations des topos} (leurs \emph{arches}), et les combinerait \q{pour engendrer des correspondances concrètes entre des «~dépliages~» d'un invariant donné en termes de différentes présentations d'un même topos} \cite[transparent 11]{caramello-mines}. Les résultats, prévient-elle, \q{peuvent être assez «~bizarres~» selon les critères mathématiques habituels}, mais \q{avec un choix soigneux d'équivalences de topos et d'invariants, on peut facilement obtenir des résultats mathématiques intéressants et naturels} \cite[transparent 8]{caramello-mines}. Les citations sont traduites de l'anglais par nos soins.
+
+\subsection{La pipeline}
+
+Ce texte fait tourner un tel générateur à la main et le décrit à la manière d'une pipeline de données: les entrées, le rôle de chaque étape, les sorties, la façon de tester les résultats.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[st/.style={draw,rounded corners,align=center,font=\small,minimum height=9mm,text width=25mm},db/.style={draw,align=center,font=\small,minimum height=9mm,text width=25mm,fill=blue!6},ok/.style={draw,rounded corners,align=center,font=\small,minimum height=9mm,text width=25mm,fill=green!8},>=Stealth,node distance=5mm]
+\node[db] (decks) at (0,1) {registre des tabliers\\ \footnotesize formes $C$};
+\node[db] (arches) at (0,-1) {registre des arches\\ \footnotesize lemmes Lean};
+\node[st] (join) at (3.4,0) {1.~jointure\\ \footnotesize tablier $\times$ arche};
+\node[st] (spec) at (6.8,0) {2.~spécialiser\\ \footnotesize calculer sur $C$};
+\node[st] (unf) at (10.2,0) {3.~déplier\\ \footnotesize termes élémentaires};
+\node[st] (rw) at (10.2,-2.2) {4.~réécrire\\ \footnotesize énoncé lisible};
+\node[ok] (ver) at (6.8,-2.2) {5.~vérifier\\ \footnotesize Lean + preuve directe};
+\node[ok] (nov) at (3.4,-2.2) {6.~filtre de nouveauté\\ \footnotesize littérature};
+\node[st] (out) at (0,-3.3) {sortie\\ \footnotesize théorèmes nouveaux};
+\node[st] (cal) at (3.4,-4.2) {étalonnage\\ \footnotesize résultats connus};
+\draw[->] (decks) -- (join); \draw[->] (arches) -- (join);
+\draw[->] (join) -- (spec); \draw[->] (spec) -- (unf); \draw[->] (unf) -- (rw);
+\draw[->] (rw) -- (ver); \draw[->] (ver) -- (nov); \draw[->] (nov) -- (out); \draw[->] (nov) -- (cal);
+\end{tikzpicture}
+\caption{Le générateur, étape par étape. En bleu: les entrées. En vert: les deux étapes de test.}\label{fig:pipeline}
+\end{figure}
+
+\begin{description}
+\item[Registre des arches.] Cinq lemmes de la forme \texttt{(propriété de PSh C) ↔ (condition sur C)}, démontrés en Lean~4 dans la bibliothèque \lp{} de lean-pool (\S\ref{sec:registry}). C'est le noyau de confiance: tout ce qui suit est une spécialisation de ces lemmes. Trois autres (deux valeurs, connexe, spatial; \S\ref{sec:morearches}) sont démontrées dans \texttt{lean/bridges} et jointes pour l'instant aux seuls tabliers des notes de Grothendieck (\S\ref{sec:grdecks}).
+\item[Registre des tabliers.] De petites catégories $C$ dont les préfaisceaux forment une structure familière: $\B M$ pour un monoïde $M$ (ses actions), la catégorie libre d'un carquois (ses représentations), $\Delta$ (les ensembles simpliciaux), un préordre (les foncteurs sur ce préordre, ou les faisceaux sur son espace d'Alexandrov). Le livre de La Palme Reyes, Reyes et Zolfaghari \cite{reyes-generic} est un catalogue de tels tabliers, chaque structure familière y étant présentée par ses \q{figures génériques}.
+\item[1. Jointure.] Associer chaque tablier à chaque arche.
+\item[2. Spécialiser.] Instancier l'arche sur le tablier et calculer la condition sur $C$: par exemple, la condition d'Ore sur $\B M$ devient $aM\cap bM\neq\emptyset$.
+\item[3. Déplier.] Traduire la propriété du topos dans le langage des structures, avec une règle par propriété (le lemme~\ref{lem:neg} pour la négation).
+\item[4. Réécrire.] Reformuler la condition sur $C$ dans le langage usuel du domaine (idéaux à droite minimaux, flèches sortantes, etc.). C'est l'étape où il faut un humain, ou un modèle de langage.
+\item[5. Vérifier.] Deux tests indépendants: une preuve Lean de l'énoncé spécialisé, comme corollaire de l'arche; et une preuve directe, sans topos, lisible par un étudiant de troisième année de licence.
+\item[6. Filtre de nouveauté.] Chercher l'énoncé dans le jeu de données d'appariements de TheoremGraph et par la recherche sémantique de TheoremSearch, puis dans la littérature. Les résultats dont on trouve une publication vont au journal d'étalonnage (\S\ref{sec:calibration}); les autres forment la sortie (\S\ref{sec:machines}--\ref{sec:shapes}).
+\end{description}
+
+Chaque théorème ci-dessous est accompagné de sa \emph{trace}: les valeurs prises aux étapes 1 à 6.
+
+\subsection{Résultats}
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}X l}
+\toprule
+tablier & énoncé engendré & \S\\
+\midrule
+représentations d'un carquois $R$ & tiers exclu faible $\iff$ au plus une flèche sortante par sommet & \ref{sec:machines}\\
+automates sur $\Sigma$ & tiers exclu faible $\iff|\Sigma|\le 1$ & \ref{sec:machines}\\
+représentations de carquois & catégories équivalentes $\iff$ carquois isomorphes; points essentiels $=$ sommets & \ref{sec:machines}\\
+représentations du $n$-cycle & exactement $2^n+1$ sous-topos: inverser un ensemble quelconque de flèches, ou tout écraser & \ref{sec:machines}\\
+$T_n$-, $PT_n$-, $I_n$-, $O_n$-, $M_n(\mathbb F_q)$-ensembles & $n$, $n{+}1$, $n{+}1$, $n$, $n{+}1$ points essentiels; $n{+}1$, $n{+}2$, $n{+}2$, $n{+}1$, $n{+}2$ sous-topos & \ref{sec:finite}\\
+coins $eMe$, $1\in MeM$ & la condition d'Ore se transfère (aussitôt, par des théorèmes de Morita publiés) & \ref{sec:finite}\\
+$M_n(k)$-ensembles; $[\mathrm{Sub}(V),\Set]$ & $M_n(k)$-ensembles $\simeq M_m(k)$-ensembles si et seulement si $n = m$; le treillis des sous-espaces détermine $\dim V$, et le corps lorsque $\dim V\ge 3$ & \ref{sec:linear}\\
+$(\mathbb Z/n,\cdot)$-ensembles & $2^{\omega(n)}$ points essentiels, $D(\omega(n))$ sous-topos (nombres de Dedekind) & \ref{sec:linear}\\
+faisceaux sur un espace compact séparé $X$ & De Morgan $\iff$ $C(X,\mathbb R)$ complet au sens de Dedekind (par combinaison de théorèmes publiés); pour $X$ métrisable, $\iff$ $X$ fini & \ref{sec:analysis}\\
+graphes, ensembles simpliciaux, arbres, etc. & tiers exclu faible, cas par cas (aussitôt, par le pont) & \ref{sec:shapes}\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Aucun de ces résultats n'est profond; le \S\ref{sec:limits} examine ce qu'il faut en conclure sur la méthode. Nous écrivons pour un ingénieur qui pratique Lean et raisonne en pipelines: la théorie tient en une courte section, les énoncés Lean sont cités, et la place va aux résultats et au travail de chaque étape.
+
+\subsection{Plan}
+
+La section~\ref{sec:toolbox} donne les quatre définitions dont le texte a besoin, et le registre: les cinq arches dont viennent les résultats, trois arches de plus, et les tabliers, parmi lesquels ceux des notes de Grothendieck. La section~\ref{sec:method} fait de la pipeline une recette pratique, avec une table des invariants, une liste de contrôle pour reconnaître les tabliers, un modèle de code Lean et un protocole de recherche bibliographique. Les sections~\ref{sec:machines} à~\ref{sec:shapes} donnent les résultats, tablier par tablier: carquois, monoïdes, analyse, algèbre linéaire et arithmétique, topos combinatoires. La section~\ref{sec:equivalences} fait tourner la même machinerie à rebours pour montrer que des paires de théorèmes classiques de troisième année de licence (Birkhoff et les espaces $T_0$ finis, Cayley et la reconstruction d'un groupe, la théorie de Galois et les revêtements) sont deux lectures d'un même pont, et la section~\ref{sec:precedents} rassemble les précédents tirés des notes de Grothendieck. La section~\ref{sec:calibration} recense les résultats déjà publiés, et la section~\ref{sec:limits} examine les limites de la démarche et les leçons à en tirer pour un générateur automatique. L'annexe~\ref{app:novelty} détaille le filtre de nouveauté, avec les sources consultées, et l'annexe~\ref{sec:lean-lit} les fichiers et les déclarations Lean.

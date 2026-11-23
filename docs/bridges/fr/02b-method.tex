@@ -1,0 +1,69 @@
+\section{Une méthode pratique pour produire des théorèmes}\label{sec:method}
+
+Cette section fait de la pipeline de la figure~\ref{fig:pipeline} une recette qu'un étudiant, ou un programme, peut suivre. Chaque étape a une entrée, une sortie et un contrôle.
+
+\subsection{Étape 1: choisir un invariant lisible des deux côtés}
+
+On part du registre des arches. Pour les topos de préfaisceaux, chaque arche vient avec une lecture sur la forme $C$ et une \emph{règle de dépliage} qui traduit la propriété du topos en une phrase sur les structures:
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+\toprule
+invariant & lecture sur $C$ & sur les $M$-ensembles à droite & sur les représentations d'un carquois\\
+\midrule
+booléen & groupoïde & $M$ est un groupe & aucune flèche\\
+De Morgan & condition d'Ore & $aM\cap bM\neq\emptyset$ & $\le 1$ flèche sortante par sommet\\
+classe de Morita & $\Kar(C)$ & coins $eMe$, $1\in MeM$ & le carquois lui-même\\
+points essentiels & objets de $\Kar(C)$ & idempotents modulo $\mathcal D$ & sommets\\
+sous-topos & topologies sur $C$ & idéaux idempotents ($M$ fini) & par ex.\ $2^n+1$ pour le $n$-cycle\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\emph{Contrôle:} l'invariant doit être invariant par équivalence de catégories. Les propriétés énoncées à l'aide de sous-objets, de limites et de colimites le sont; celles qui font référence à une présentation choisie (\q{la forme a trois objets}) ne le sont pas.
+
+\subsection{Étape 2: reconnaître un tablier}
+
+Une structure est un topos de préfaisceaux quand elle a l'anatomie suivante:
+\begin{enumerate}
+\item un ensemble de données en chaque \q{lieu} (un objet de $C$);
+\item une manière de transporter les données le long de \q{relations} entre les lieux (les applications de restriction), contravariante et compatible à la composition;
+\item aucune équation ni condition de recollement supplémentaire.
+\end{enumerate}
+Si (3) est en défaut parce que les données doivent se recoller (fonctions sur des ouverts, sections d'un revêtement), la structure est un topos de faisceaux sur un site; l'arche du pont~\ref{br:sub} s'applique encore, les quatre autres demandent des versions pour les sites. Tabliers typiques: actions d'un monoïde ($C = \B M$), représentations d'un carquois ($C$ = catégorie libre), objets simpliciaux ($C = \Delta$), familles indexées par un préordre ($C = P^{\op}$), modèles d'une théorie de Horn ($C$ = opposée des modèles de présentation finie). \emph{Contrôle:} écrire $C$ explicitement et vérifier, sur un ou deux exemples, qu'un préfaisceau sur $C$ est bien la structure visée; le côté de l'action et le sens des flèches sont les sources d'erreur habituelles.
+
+\subsection{Étape 3: spécialiser l'arche}
+
+On calcule la lecture sur $C$. Deux heuristiques couvrent la plupart des cas:
+\begin{itemize}
+\item \emph{Tester sur les représentables.} Une propriété de tous les préfaisceaux se décide en général sur les préfaisceaux représentables $\y U = \Hom(-,U)$ et leurs cribles; c'est ainsi que sont démontrés les ponts~\ref{br:bool} et~\ref{br:dm}, et ainsi que l'on construit des contre-exemples (figure~\ref{fig:branch}).
+\item \emph{Utiliser une forme normale pour les flèches.} Dans une catégorie libre, les flèches sont des chemins; dans $\B M$, des éléments; dans un préordre, il y en a au plus une. La condition devient un énoncé sur des mots, des éléments ou des inégalités.
+\end{itemize}
+\emph{Contrôle:} énumérer les petits cas par machine quand c'est possible (petits monoïdes, petits carquois) et comparer avec la condition spécialisée.
+
+\subsection{Étape 4: déplier et réécrire}
+
+On traduit la propriété du topos avec la règle de dépliage (le lemme~\ref{lem:neg} pour la négation), puis on traduit la condition sur $C$ dans le vocabulaire usuel du domaine (idéaux à droite minimaux, degré sortant, rang). On garde les deux formes: la forme brute est celle que Lean démontre, la forme réécrite est celle que comprend un lecteur.
+
+\subsection{Étape 5: vérifier deux fois}
+
+\emph{En Lean.} Un énoncé engendré est un corollaire en deux lignes de l'arche, une fois la condition sur $C$ démontrée. Le schéma, tiré de la bibliothèque:
+\begin{leancode}
+theorem isDeMorganTopos_singleObj_iff :
+    IsDeMorganTopos ((SingleObj M)ᵒᵖ ⥤ Type) ↔ ∀ a b : M, ∃ c d : M, a * c = b * d := by
+  rw [isDeMorganTopos_presheaf_iff_rightOreCondition, rightOreCondition_singleObj_iff]
+
+theorem not_isDeMorganTopos_freeMonoid_two :
+    ¬ IsDeMorganTopos ((SingleObj (FreeMonoid (Fin 2)))ᵒᵖ ⥤ Type) := by
+  rw [isDeMorganTopos_singleObj_iff]
+  -- reste : x et y n'ont pas de multiple à droite commun dans le monoïde libre
+\end{leancode}
+Tout le travail est dans le lemme sur $C$ (ici \lean{rightOreCondition_singleObj_iff}), qui relève de l'algèbre ou de la combinatoire ordinaires. \emph{À la main.} On écrit une preuve directe qui n'utilise pas les topos; si elle est bien plus difficile que le pont, le pont a apporté quelque chose.
+
+\subsection{Étape 6: filtrer la nouveauté}
+
+On résume l'énoncé réécrit en une phrase, d'après sa forme Lean, et l'on cherche ce résumé dans le jeu de données d'appariements de TheoremGraph \cite{theoremgraph-matching}; on le décrit en langue naturelle à la recherche sémantique de TheoremSearch \cite{theoremsearch}; on cherche les résultats numériques dans l'OEIS \cite{oeis}; on cherche enfin à la main dans la littérature, l'énoncé réécrit dans le vocabulaire de son domaine aussi bien que l'énoncé topos-théorique. Les énoncés trouvés sont consignés au journal d'étalonnage (\S\ref{sec:calibration}). Une réponse négative ne prouve rien, puisque \q{non trouvé} ne veut pas dire \q{nouveau}; l'annexe~\ref{app:novelty} détaille chaque passage, ses paramètres et ses résultats.
+
+\subsection{Étape 7: décider si c'est intéressant}
+
+Un énoncé engendré mérite d'être gardé quand (a) il relie deux vocabulaires que l'on ne relie pas d'habitude, (b) sa forme réécrite est courte, (c) sa preuve directe n'est pas immédiate \emph{ou} la question à laquelle il répond n'avait pas été posée. Un candidat qui échoue aux trois critères est écarté; le nombre de candidats écartés n'a pas été consigné (\S\ref{sec:calibration}), et le classement des candidats est une limite de la méthode (\S\ref{sec:limits}).

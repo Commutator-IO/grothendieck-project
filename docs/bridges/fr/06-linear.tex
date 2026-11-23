@@ -1,0 +1,96 @@
+\section{Algèbre linéaire et arithmétique}\label{sec:linear}
+
+Les topos sont faits d'ensembles; l'algèbre linéaire y entre donc par des structures \emph{ensemblistes} attachées aux espaces vectoriels: actions de monoïdes de matrices, foncteurs sur des treillis de sous-espaces. Les réponses ne sont pas celles de la théorie linéaire.
+
+\subsection{Monoïdes de matrices: l'équivalence de Morita garde la mémoire de la taille}
+
+Pour les anneaux, la théorie de Morita dit que les $M_n(k)$-modules et les $k$-modules forment des catégories équivalentes, pour tout $n$. Pour les ensembles, c'est le contraire.
+
+\begin{theorem}\label{th:matrixmorita}
+Soit $k$ un corps et $M_n(k)$ le monoïde des matrices $n\times n$ pour la multiplication.
+\begin{enumerate}
+\item Les $M_n(k)$-ensembles à droite sont équivalents aux préfaisceaux sur la catégorie $\mathsf{Vect}_{\le n}$ des $k$-espaces vectoriels de dimension au plus $n$.
+\item Les $M_n(k)$-ensembles à droite et les $M_m(k)$-ensembles à droite forment des catégories équivalentes si et seulement si $n = m$.
+\end{enumerate}
+\end{theorem}
+
+\begin{trace}
+\item[tablier] $\PSh(\B M_n(k))$.
+\item[arche] Pont~\ref{br:morita} (enveloppe de Karoubi).
+\item[spécialiser] $\Kar(\B M_n(k))$: les objets sont les projecteurs $e$, les flèches $e\to f$ sont les matrices $a$ telles que $a = fae$, c'est-à-dire les applications linéaires $\operatorname{im}e\to\operatorname{im}f$; donc $e\mapsto\operatorname{im}e$ est une équivalence $\Kar(\B M_n(k))\simeq\mathsf{Vect}_{\le n}$. Classes d'isomorphisme: les dimensions $0,\dots,n$.
+\item[réécrire] (2): des enveloppes de Karoubi équivalentes auraient le même nombre, $n+1$ et $m+1$, de classes d'isomorphisme d'objets.
+\item[vérifier] Lean: \lean{karoubiRel_iff_rank_eq} (deux projecteurs sont isomorphes dans $\Kar$ si et seulement s'ils ont le même rang) et \lean{essentialPointClassesEquivFin} (\lean{EssentialPoints.lean}); l'équivalence avec $\mathsf{Vect}_{\le n}$ et la déduction de (2) par l'argument direct seul.
+\item[nouveauté] non trouvé sous cette forme; (2) découle du théorème de Morita pour les monoïdes, puisque dans $M_n(k)$ un inverse à gauche ou à droite est un inverse bilatère, de sorte que l'équivalence de Morita s'y réduit à l'isomorphisme \cite[Cor.~1.6.2]{rogers-thesis}. L'analogue linéaire (l'enveloppe de Karoubi des $k[M_n(\mathbb F_q)]$-modules) est étudié dans \cite{kuhn}; la description ensembliste (1) n'a pas été trouvée.
+\end{trace}
+
+\direct{} Une flèche $e\to f$ dans $\Kar(\B M_n(k))$ est une matrice $a$ telle que $fae = a$; sa restriction à $\operatorname{im}e$ est une application linéaire $\operatorname{im}e\to\operatorname{im}f$, et toute application linéaire provient d'un unique tel $a$ (on prolonge par $0$ sur $\ker e$). Tout espace de dimension $\le n$ est l'image d'un projecteur. Donc $\Kar(\B M_n(k))\simeq\mathsf{Vect}_{\le n}$, et le pont~\ref{br:morita} donne (1). Pour (2), une équivalence de catégories préserve le nombre de classes d'isomorphisme d'objets, $n+1$ d'un côté et $m+1$ de l'autre.\qed
+
+\inwords{} La théorie des représentations ensemblistes du monoïde de matrices voit la taille des matrices; la théorie linéaire ne la voit pas. La raison se lit dans l'enveloppe de Karoubi: pour les $M_n(k)$-ensembles, c'est $\mathsf{Vect}_{\le n}$, qui ne contient aucun espace de dimension supérieure à $n$, alors que, pour les modules, on ajoute aussi les sommes directes finies, qui produisent $k^m$ pour tout $m$ et rendent $M_n(k)$ et $k$ équivalents au sens de Morita.
+
+\subsection{Treillis de sous-espaces}
+
+Soit $\mathrm{Sub}(V)$ le treillis des sous-espaces d'un espace vectoriel $V$ de dimension finie, et considérons le topos $[\mathrm{Sub}(V),\Set]$ des foncteurs sur ce treillis, c'est-à-dire des faisceaux sur son espace d'Alexandrov.
+
+\begin{theorem}\label{th:subspaces}
+\begin{enumerate}
+\item $[\mathrm{Sub}(V),\Set]$ est de De Morgan et, si $V\neq 0$, non booléen.
+\item $[\mathrm{Sub}(V),\Set]\simeq[\mathrm{Sub}(W),\Set]$ si et seulement si $\mathrm{Sub}(V)\cong\mathrm{Sub}(W)$; le topos détermine $\dim V$ (la hauteur du treillis) et, si $\dim V\ge 3$, le corps à isomorphisme près; en dimension $2$ il ne détermine que $|k|$, donc $k$ lorsque $k$ est fini.
+\item Ses points essentiels sont les évaluations aux sous-espaces de $V$; sur $\mathbb F_q$, il y en a $\sum_{k=0}^{n}\binom nk_q$ (coefficients binomiaux de Gauss).
+\end{enumerate}
+\end{theorem}
+
+\begin{trace}
+\item[tablier] $[\mathrm{Sub}(V),\Set] = \PSh(\mathrm{Sub}(V)^{\op})$.
+\item[arche] Pont~\ref{br:dm} (un treillis est confluent), pont~\ref{br:bool}, pont~\ref{br:morita} (un ensemble ordonné est sa propre enveloppe de Karoubi), pont~\ref{br:pts}.
+\item[réécrire] (2) par le théorème fondamental de la géométrie projective: pour $\dim V\ge 3$, un isomorphisme de treillis $\mathrm{Sub}(V)\cong\mathrm{Sub}(W)$ est induit par une bijection semi-linéaire \cite{artin-geometric}; sur $\mathbb F_q$ avec $n = 2$, le nombre $q+1$ de droites détermine $q$.
+\item[vérifier] Lean: \lean{isDeMorganTopos_functor_preorder_iff}, \lean{moritaEquivalentCat_preorder_iff}; le reste par l'argument direct.
+\item[nouveauté] non trouvé; les ingrédients sont classiques (un ensemble ordonné est sa propre enveloppe de Karoubi; théorème fondamental de la géométrie projective \cite{artin-geometric}).
+\end{trace}
+
+\subsection{Le monoïde multiplicatif de $\mathbb Z/n$}
+
+\begin{theorem}\label{th:zn}
+Soit $n\ge 2$ et soit $\omega(n)$ le nombre de facteurs premiers distincts de $n$. Le topos des ensembles munis d'une action du monoïde multiplicatif $(\mathbb Z/n,\cdot)$
+\begin{enumerate}
+\item est de De Morgan et non booléen;
+\item a exactement $2^{\omega(n)}$ points essentiels à isomorphisme près;
+\item a exactement $D(\omega(n))$ sous-topos, où $D(k)$ est le $k$-ième nombre de Dedekind, le nombre de fonctions booléennes monotones de $k$ variables: $D(1) = 3$, $D(2) = 6$, $D(3) = 20$, $D(4) = 168$, $D(5) = 7581$.
+\end{enumerate}
+\end{theorem}
+
+\begin{trace}
+\item[tablier] $\PSh(\B(\mathbb Z/n,\cdot))$.
+\item[arche] Ponts~\ref{br:dm}, \ref{br:bool}, \ref{br:pts} et, pour les monoïdes finis, la classification des sous-topos par les idéaux bilatères idempotents \cite[Prop.~6.1.2]{pirashvili-jncg}.
+\item[spécialiser] $0$ est un zéro, donc Ore est vérifiée; la classe d'un facteur premier de $n$ n'est pas inversible. Le monoïde est commutatif, donc les points essentiels sont les idempotents; par le théorème chinois, les idempotents de $\mathbb Z/n$ correspondent aux parties de l'ensemble des facteurs premiers de $n$. Idéaux idempotents: voir ci-dessous.
+\item[vérifier] preuve directe ci-dessous; Lean: non formalisé (la classification des sous-topos des monoïdes finis par les idéaux idempotents n'est pas dans la bibliothèque); les dénombrements ont aussi été obtenus par énumération sur ordinateur (voir la ligne de nouveauté).
+\item[nouveauté] la théorie générale est publiée (\cite[Prop.~6.1.2, Prop.~6.3.1, Th.~5.6.1]{pirashvili-jncg}: sous-topos $\leftrightarrow$ parties commençantes de l'ensemble ordonné des $\mathcal J$-classes d'idempotents); le monoïde $(\mathbb Z/n,\cdot)$, les décomptes et les nombres de Dedekind n'ont pas été trouvés. Des énumérations par ordinateur ont été faites pour $n\le 60$ et $n = 210, 2310$ et, directement à partir des axiomes d'une topologie de Grothendieck, pour $n\le 30$; elles ne font pas partie du développement Lean, et aucun script ni commit n'en est consigné ici. Pour $n>30$, elles passent par la classification des idéaux idempotents \cite{pirashvili-jncg} et ne vérifient donc pas les topologies indépendamment de cette classification.
+\end{trace}
+
+\direct{} (1) et (2): comme dans la trace. Pour (3), les sous-topos correspondent aux idéaux bilatères $I$ du monoïde fini $M = (\mathbb Z/n,\cdot)$ tels que $I^2 = I$, l'idéal vide compris \cite[Prop.~6.1.2]{pirashvili-jncg}. Dans un monoïde fini, un idéal idempotent est engendré par ses idempotents: si $I = I^2$, tout $x\in I$ est un produit d'éléments de $I$ en nombre arbitrairement grand, et un produit assez long dans un demi-groupe fini se factorise en $uev$ avec $e$ idempotent, $e$ produit d'éléments de $I$. Les idéaux idempotents sont donc les réunions d'idéaux principaux $eM$, $e$ idempotent, et $eM\subseteq fM$ si et seulement si $e = ef$. En écrivant $e\leftrightarrow S_e\subseteq\{\text{facteurs premiers de }n\}$ (les premiers $p$ tels que $e\equiv 1\bmod p^{v_p(n)}$), on a $e = ef$ si et seulement si $S_e\subseteq S_f$; les idéaux idempotents correspondent donc aux familles, stables vers le bas, de parties d'un ensemble à $\omega(n)$ éléments, dont le nombre est le nombre de Dedekind $D(\omega(n))$.\qed
+
+\begin{example}
+Pour $n = p$ premier: trois sous-topos (tous les $(\mathbb Z/p,\cdot)$-ensembles; l'idéal $\{0\}$; le sous-topos dégénéré). Pour $n = p^2$, trois aussi: l'idéal $p\,\mathbb Z/p^2$ n'est pas idempotent, puisque son carré est $\{0\}$. Pour $n = 30$: $2^3 = 8$ points essentiels et $D(3) = 20$ sous-topos.
+\end{example}
+
+\subsection{Autres domaines du programme de troisième année}
+
+La même méthode s'applique partout où une structure familière est un topos ayant une seconde présentation. Une carte sommaire du programme de troisième année de licence:
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}X}
+\toprule
+domaine & tabliers\\
+\midrule
+théorie des groupes & $G$-ensembles, Cayley, décomposition en orbites (\S\ref{sec:equivalences})\\
+anneaux, corps, Galois & monoïdes multiplicatifs, catégories galoisiennes (\S\ref{sec:equivalences})\\
+algèbre linéaire & monoïdes de matrices, treillis de sous-espaces (cette section)\\
+arithmétique & $(\mathbb Z/n,\cdot)$, ordres de divisibilité (cette section, \S\ref{sec:calibration})\\
+topologie générale & faisceaux sur des espaces, espaces d'Alexandrov (\S\ref{sec:analysis}, \S\ref{sec:calibration})\\
+analyse fonctionnelle & $C(X)$ et dualité de Gelfand (\S\ref{sec:analysis})\\
+mesure et probabilités & algèbres de mesure, qui sont des algèbres de Boole complètes, et leurs topos booléens de faisceaux\\
+équations différentielles & faisceaux de solutions; systèmes dynamiques discrets (\S\ref{sec:machines})\\
+combinatoire, graphes & carquois, graphes, ensembles simpliciaux (\S\ref{sec:machines}, \S\ref{sec:shapes})\\
+logique & topos classifiants, quotients et topologies (\S\ref{sec:calibration})\\
+\bottomrule
+\end{tabularx}
+\end{center}

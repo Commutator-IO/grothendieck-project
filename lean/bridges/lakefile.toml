@@ -1,0 +1,25 @@
+name = "bridges"
+version = "0.1.0"
+defaultTargets = ["Bridges"]
+requiresModuleSystem = true
+
+# The Lean proofs of the draft article docs/bridges (« New theorems from topos-theoretic bridges »):
+# the generated theorems, stated and proved against the bridges of lean-pool's ToposTheoreticBridges.
+# The files were written on top of lean-pool at the revision below; they declare their names in the
+# namespace LeanPool.ToposTheoreticBridges.Examples, so that unqualified names resolve as in the pool.
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+# A `sorry` is a warning, and a proof with a warning in it proves nothing.
+warningAsError = true
+
+[[require]]
+name = "lean-pool"
+git = "https://github.com/LeanPool/lean-pool"
+rev = "50fe1aa175927542762d995ab53a7deda44a5736"
+
+[[lean_lib]]
+name = "Bridges"

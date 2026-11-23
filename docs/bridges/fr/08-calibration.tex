@@ -1,0 +1,41 @@
+\section{Étalonnage: les résultats connus retrouvés}\label{sec:calibration}
+
+Un générateur de théorèmes doit être testé sur des entrées dont les sorties sont connues. Appliqué aux tabliers les plus simples, le nôtre produit les résultats suivants, tous publiés sauf un, que Grothendieck énonce comme exercice dans une note non publiée. Nous en avions cru trois nouveaux (le critère pour les monoïdes finis, les points essentiels comme idempotents, les sous-topos des $\mathbb N$-ensembles), jusqu'à ce que la recherche bibliographique de l'étape~6 les retrouve; pour les autres lignes, l'article ne consigne pas si nous les avions crus nouveaux. Nous les citons seulement pour montrer que la machine est correcte, et non comme des résultats nouveaux. De l'exécution, l'article ne consigne que ce qui suit.
+
+\begin{center}\small
+\begin{tabular}{@{}p{0.8\linewidth}r@{}}
+\toprule
+élément & nombre\\
+\midrule
+énoncés du journal d'étalonnage (lignes ci-dessous) & 14\\
+énoncés du tableau des résultats du \S\ref{sec:intro} (lignes, certaines regroupant plusieurs énoncés) & 10\\
+énoncés d'abord crus nouveaux, puis trouvés publiés & 3\\
+couples (tablier, arche) essayés & non consigné\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.3cm}}
+\toprule
+tablier $\times$ arche & énoncé engendré & publié\\
+\midrule
+$M$-ensembles $\times$ booléen & tiers exclu si et seulement si $M$ est un groupe (Lean: \lean{isBooleanTopos_singleObj_iff}) & \cite[Th.~2.4]{hemelaer-rogers}\\
+$M$-ensembles $\times$ De Morgan & tiers exclu faible si et seulement si $aM\cap bM\neq\emptyset$ (Lean: \lean{isDeMorganTopos_singleObj_iff}) & \cite[Th.~2.31]{hemelaer-rogers}\\
+espace d'Alexandrov $\times$ De Morgan, topologie & un préordre est confluent si et seulement si son espace d'Alexandrov est extrêmement discontinu (Lean: \lean{extremallyDisconnected_iff_confluent}) & \cite[Prop.~7.10]{caramello-stone}\\
+préordres $\times$ Morita & topos équivalents si et seulement si les réflexions ordonnées sont isomorphes (Lean: \lean{moritaEquivalentCat_preorder_iff}) & \cite[A1.1.9--10]{elephant}, \cite[\S4.1]{caramello-stone}\\
+$M$-ensembles finis $\times$ De Morgan & tiers exclu faible si et seulement s'il y a un seul idéal à droite minimal & dual de \cite[Th.~5.21]{gould} avec \cite[Th.~2.31]{hemelaer-rogers}\\
+$M$-ensembles $\times$ De Morgan & monoïdes ayant un élément absorbant à gauche ($mz = z$), par ex.\ monoïdes de transitions des automates synchronisants & \cite[Th.~2.2.56]{rogers-thesis}\\
+$M$-ensembles $\times$ points & points essentiels $\leftrightarrow$ idempotents à $\mathcal D$ près ($\mathcal J$ pour $M$ fini) & \cite[Cor.~4.2]{rogers-1905}, \cite[Th.~5.6.1]{pirashvili-jncg}\\
+$M$-ensembles $\times$ sous-topos & $M$ fini: idéaux bilatères idempotents & \cite[Prop.~6.1.2]{pirashvili-jncg}\\
+$\mathbb N$-ensembles $\times$ sous-topos & exactement trois: tout, les $\mathbb Z$-ensembles, le dégénéré & d'après \cite[Cor.~4.3.11]{pirashvili-jpaa}\\
+$M$-ensembles $\times$ Morita & $M\sim N$ si et seulement si $N\cong eMe$ avec $1\in MeM$ & \cite{knauer,banaschewski}, \cite[Cor.~6.6]{rogers-1905}\\
+théories de Horn $\times$ De Morgan & topos classifiant de De Morgan & \cite[Th.~3.5]{caramello-demorgan}\\
+torseurs $\times$ Morita & $G$-torseurs et $H$-torseurs Morita-équivalents si et seulement si $G\cong H$ & classique (le seul point essentiel des $G$-ensembles a pour groupe d'automorphismes $G$, \S\ref{sec:equivalences})\\
+quotients $\times$ sous-topos & intersection des anneaux locaux et des anneaux intègres & \cite[\S18]{caramello-lattices}\\
+petites catégories $\times$ Morita & $\widehat C$ est le topos de préfaisceaux d'un préordre si et seulement si $C$ est mince (Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}) & non publié comme tel; exercice d'une note non publiée \cite[p.~26]{grothendieck-161-3} (\S\ref{sec:precedents})\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Un résultat mérite qu'on s'y arrête: les mathématiques en sont connues, mais sa lecture est nouvelle. Pour un système de réécriture abstrait $(S,\to)$, on munit $S$ de la topologie dont les ouverts sont les ensembles de termes stables par réécriture. Alors \emph{le système est confluent (Church--Rosser) si et seulement si cet espace est extrêmement discontinu}: c'est la troisième ligne du tableau appliquée au préordre $\to^*$. La confluence de la $\beta$-réduction dit donc que l'espace des $\lambda$-termes, muni des ensembles stables par $\beta$-réduction comme ouverts, est extrêmement discontinu. Nous n'avons pas trouvé cette lecture dans la littérature sur la réécriture, mais, comme c'est une simple reformulation d'un théorème publié, nous ne la comptons pas comme nouvelle.
