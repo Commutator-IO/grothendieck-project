@@ -202,7 +202,7 @@ const DRAFTS: ArticleItem[] = [
     id: 'article-bridges',
     title: 'Topos-theoretic bridges as a theorem generator',
     lang: 'English and French',
-    what: "Draft. O. Caramello's « bridges » read one invariant of a topos on two of its presentations. This text runs a small generator by hand and describes it as a software pipeline: five bridges proved in Lean as arches, small categories as decks, then specialise, rewrite, verify in Lean and by hand, and filter for novelty (TheoremGraph, TheoremSearch, OEIS). It keeps the outputs not found in print: quiver representations, transformation monoids, matrix monoids, (Z/n,·)-sets with Dedekind numbers of subtopoi, compact Hausdorff spaces; with a calibration log of the known outputs and the limits of the approach.",
+    what: "Draft. O. Caramello's « bridges » read one invariant of a topos on two of its presentations, and her Mines talk (2024) proposes to generate theorems by combining a database of topos equivalences with a database of such readings. This text runs a small generator by hand and describes it as a software pipeline (registries, join, specialise, unfold, rewrite, verify in Lean and by hand, novelty filter), with five bridges proved in Lean in lean-pool as arches.",
     pdf: '/article/grothendieck-bridges.pdf',
     src: 'docs/bridges/article.tex',
     more: [{ label: 'Version française', href: '/article/grothendieck-bridges-fr.pdf' }],
