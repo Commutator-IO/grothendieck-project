@@ -158,16 +158,15 @@ function drawTreemap(){
     }else{
       const ds=n.data.ds;
       const pad=1,aw=w-2*pad,ah=hh-2*pad;
-      if(aw<2||ah<2){ctx.fillStyle=C[ds[0].kc];ctx.fillRect(n.x0,n.y0,Math.max(w,1),Math.max(hh,1));return}
-      // grid of squares sized to fit all declarations
-      let s=Math.sqrt(aw*ah/ds.length),cols=Math.max(1,Math.floor(aw/s));
-      s=aw/cols;let rows=Math.ceil(ds.length/cols);
+      if(aw<2||ah<2){ctx.fillStyle=C[ds[0].kc];ctx.fillRect(n.x0,n.y0,Math.max(w,1),Math.max(hh,1));ds.forEach(d=>sq.push({x:n.x0+4,y:n.y0+4,s:Math.max(w,1),d}));return}
+      // grid of squares sized to fit all declarations: widen the grid until every row fits
+      let cols=Math.max(1,Math.floor(aw/Math.sqrt(aw*ah/ds.length))),s=aw/cols,rows=Math.ceil(ds.length/cols);
       while(rows*s>ah&&cols<ds.length){cols++;s=aw/cols;rows=Math.ceil(ds.length/cols)}
-      const sz=Math.max(1,s-(s>4?1:0));
+      s=Math.min(s,ah/rows);
+      const sz=Math.max(.5,s-(s>4?1:0));
       const sorted=ds.slice().sort((a,b)=>KINDS.findIndex(k=>k[0]===a.kc)-KINDS.findIndex(k=>k[0]===b.kc));
       sorted.forEach((d,i)=>{
         const x=n.x0+pad+(i%cols)*s,y=n.y0+pad+Math.floor(i/cols)*s;
-        if(y+sz>n.y1+0.5)return;
         ctx.fillStyle=C[d.kc];ctx.fillRect(x,y,sz,sz);sq.push({x:x+4,y:y+4,s:sz,d});
       });
     }
