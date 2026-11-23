@@ -70,8 +70,17 @@ nodes in fixed charts.
   G̃ = G ≅ ℤ/4 is for the structure « point + **oriented** square », whose
   orientation that symmetry reverses. The count, 30, is unaffected.
 
-So 542 = 662 − 120: the chart is this set minus the orbit Tw₁/₄ II₁. Either
-the page's notion of special structure is narrower at the tetrahedral node,
-in a way the leaves do not state, or the chart leaves one type out. The
+So 542 = 662 − 120: the chart is this set minus the orbit Tw₁/₄ II₁.
+
+**Page 30 decides it** (facsimile re-read at 400 dpi, 2026-11-23). The note of
+II₁ reads « r ∈ J × E ; τ⁰_r : II₁(J, E) → II₁(u_ω(r)) où u_ω = ω × (−1) sur
+J × E », and the six « sommets-repères » u₀, …, u₅ are drawn on the red cutting
+circle. So the page takes six structures over each equianharmonic point,
+cyclically permuted by τ⁰_r = tw₁/₆ (u_ω has order 6), and never forms the
+quarter-twist of II₁, while it writes out II′₂ = Tw₁/₄ II₂. The page's notion
+is narrower than the definition above at the tetrahedral node, and 542 is exact
+for it. Which of the two real orbits is the page's II₁ is not decided by the
+leaf: both are six rays a sixth of a turn apart and admit the same indexing by
+J × E. The
 arrows (1620 in fourteen orbits) are not tested: their definition is not on
 the leaves.
