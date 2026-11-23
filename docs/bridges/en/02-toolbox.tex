@@ -84,7 +84,7 @@ Every statement below is one of these five lemmas, specialised to a shape and un
 
 \subsection{Three more arches}\label{sec:morearches}
 
-Three further arches belong in the registry. They have not yet been joined with the decks of this article, so no output below comes from them.
+Three further arches belong in the registry. They have been joined so far only with the decks of Grothendieck's notes, below; no output of the later sections comes from them.
 
 \begin{bridge}[Two-valued]\label{br:twoval}
 The subterminal objects of $\PSh(C)$ (its \q{opens}) correspond to the sieves of $C$ \cite[IV~8.4.4]{sga4}. Hence $\PSh(C)$ has no subterminal objects besides $0$ and $1$ iff for any two objects $a$, $b$ of $C$ there is an arrow $a\to b$. Lean: \lean{forall_subfunctor_terminal_eq_bot_or_eq_top_iff}.
@@ -97,3 +97,13 @@ $\PSh(C)$ is connected and nonempty in the sense of \cite[IV~8.7]{sga4} (every p
 \begin{bridge}[Spatial]\label{br:spatial}
 $\PSh(C)$ is equivalent to the presheaf topos of a preorder, and so to the topos of sheaves on its Alexandrov space, iff $C$ is thin. Grothendieck states it as an exercise \cite[p.~26]{grothendieck-161-3}; see \S\ref{sec:equivalences}. Lean: \lean{exists_preorder_moritaEquivalentCat_iff_isThin}.
 \end{bridge}
+
+\subsection{The decks of Grothendieck's notes}\label{sec:grdecks}
+
+Three decks recur in Grothendieck's working notes, and the three arches above read them as follows (Lean: \lean{GrothendieckDecks.lean}).
+\begin{itemize}
+\item The simplex category $\Delta$, the first test category of \emph{Pursuing Stacks} (folders 108 and 118 of the fonds): simplicial sets form a two-valued and connected topos, since there is a constant map between any two objects of $\Delta$, and not the presheaf topos of a preorder, since the two vertices of $[1]$ are two maps $[0]\to[1]$ (\lean{simplexCategory_twoValued}, \lean{simplexCategory_isConnected}, \lean{simplexCategory_not_spatial}).
+\item A group $G$ as a one-object groupoid, whose presheaf topos is $\B G$ (folder 161-6, p.~22, where Grothendieck reduces a question to this case): two-valued, as \cite[IV~8.4.3]{sga4} notes for any monoid, connected, and the presheaf topos of a preorder iff $G$ is trivial (\lean{singleObj_twoValued}, \lean{singleObj_isConnected}, \lean{singleObj_spatial_iff}).
+\item An ordered set $I$, whose presheaf topos $\widehat I$ is $\mathrm{Top}(I)$ (folder 37, p.~48; folder 161-3, p.~26): two-valued iff any two elements are comparable both ways, that is iff its posetal quotient has at most one point (\lean{preorder_twoValued_iff}).
+\end{itemize}
+These are immediate corollaries, recorded because they are the first entries of the registry taken from the fonds.
