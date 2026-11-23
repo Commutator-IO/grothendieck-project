@@ -17,6 +17,7 @@ export const STARS: Record<string, 1 | 2 | 3> = {
   'article-qcoh-descent': 2,
   'article-problem-three': 2,
   'article-kostant': 2,
+  'article-bridges': 2,
   'article-polytopes': 2,
   'article-moduli': 2,
   'article-quillen-lean': 2,
