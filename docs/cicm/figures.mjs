@@ -30,7 +30,15 @@ import { resolve } from 'node:path';
 const here = import.meta.dirname;
 const root = resolve(here, '../..');
 const git = (...a) => execFileSync('git', a, { cwd: root, encoding: 'utf8', maxBuffer: 1 << 28 });
-const SNAPSHOT = '81dcfafa2269617b8a02c39a86304cf7359aa78e';
+const SNAPSHOT = '017e99bb7f3afb7fe4840c72fcc2914d92af50ab';
+// The Lean proofs of the fonds live in GrothendieckArchivesProofs since 22 November 2026 (#17);
+// PROOFS is a clone of it (set PROOFS_REPO), read at PROOFS_SNAPSHOT. The history of `lean/` in
+// this repository up to LEAN_LAST (the commit before the move) is counted with it.
+const PROOFS_REPO = process.env.PROOFS_REPO ?? resolve(root, '../GrothendieckArchivesProofs');
+const PROOFS_SNAPSHOT = '2500b677a0b6bafc24d131faf4aa032919acfa06';
+const LEAN_LAST = '03e68ee4^';
+const pgit = (...a) => execFileSync('git', ['-C', PROOFS_REPO, ...a], { encoding: 'utf8', maxBuffer: 1 << 28 });
+const pat = (path) => pgit('show', `${PROOFS_SNAPSHOT}:${path}`);
 const at = (path) => git('show', `${SNAPSHOT}:${path}`);
 const short = SNAPSHOT.slice(0, 7);
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -39,23 +47,22 @@ const snapDate = longDate(git('log', '-1', '--format=%cs', SNAPSHOT).trim());
 const sum = (xs) => xs.reduce((a, b) => a + b, 0);
 const startsWith = (text, word) => text.split('\n').filter((l) => l.startsWith(word)).length;
 
-// Theorems per file. Files only: the Upstream/ directory of shared general
-// lemmas belongs to no part, and is counted apart.
-const files = git('ls-tree', '--name-only', SNAPSHOT, 'lean/Grothendieck/').trim().split('\n').filter((f) => f.endsWith('.lean'));
+// Theorems per file. A folder has one file `Folder<cote>.lean` or several
+// (`Folder101Ext.lean`…), and some files belong to no folder (`IhesSGA6_2_3.lean`,
+// `EffectiveVenken.lean`); the shared `Attr.lean` is not a proof.
+const files = pgit('ls-tree', '-r', '--name-only', PROOFS_SNAPSHOT, 'Grothendieck/').trim().split('\n').filter((f) => !/\/Attr\.lean$/.test(f));
 const count = {};
 let lines = 0;
 let lemmas = 0;
 let privates = 0;
 for (const f of files) {
-  const text = at(f);
+  const text = pat(f);
   count[f.replace(/^.*\//, '').replace(/\.lean$/, '')] = startsWith(text, 'theorem ');
   lines += text.split('\n').length - (text.endsWith('\n') ? 1 : 0);
   lemmas += startsWith(text, 'lemma ');
   privates += startsWith(text, 'private theorem ');
 }
 const total = sum(Object.values(count));
-const upstream = git('ls-tree', '-r', '--name-only', SNAPSHOT, 'lean/Grothendieck/Upstream/').trim().split('\n').filter((f) => f.endsWith('.lean'));
-const upstreamDecls = sum(upstream.map((f) => at(f).split('\n').filter((l) => /^(theorem|lemma) /.test(l)).length));
 
 // Section name in the appendix -> Lean file stem.
 const stem = (s) => (s.startsWith('bourbaki-') ? 'Bourbaki' + s.slice(9) : 'Folder' + s.replace(/-/g, '_'));
@@ -107,10 +114,14 @@ for (const line of tex.split('\n')) {
   m = line.match(/^\\input\{sections\/([^/}]+)\}/);
   if (m && parts.length) {
     const s = stem(m[1]);
-    if (!(s in count)) continue; // a section whose proof is not yet committed
+    // the folder's own file and its sub-files (Folder101 -> Folder101Ext, not Folder1012)
+    const mine = Object.keys(count).filter((k) => k === s || (k.startsWith(s) && /[A-Z]/.test(k[s.length])));
+    if (!mine.length) continue; // a section whose proof is not yet committed
     parts.at(-1).folders.push(m[1]);
-    parts.at(-1).n += count[s];
-    seen.add(s);
+    for (const k of mine) {
+      parts.at(-1).n += count[k];
+      seen.add(k);
+    }
   }
 }
 const sections = parts.flatMap((p) => p.folders);
@@ -123,7 +134,7 @@ const rows = [...parts].reverse();
 const coords = rows.map((p) => `(${p.n},{${p.name}})`).join(' ');
 const sym = rows.map((p) => `{${p.name}}`).join(',');
 const empty = parts.filter((p) => p.n === 0).length;
-const out = `% Drawn by docs/cicm/figures.mjs from lean/Grothendieck/*.lean at ${short}
+const out = `% Drawn by docs/cicm/figures.mjs from Grothendieck/ of GrothendieckArchivesProofs at ${PROOFS_SNAPSHOT.slice(0, 7)}
 % and the parts of docs/lean/article.tex. Do not edit by hand.
 \\begin{figure}[t]\\centering
 \\begin{tikzpicture}
@@ -136,7 +147,7 @@ const out = `% Drawn by docs/cicm/figures.mjs from lean/Grothendieck/*.lean at $
 \\addplot[fill=black!35, draw=black!60] coordinates {${coords}};
 \\end{axis}
 \\end{tikzpicture}
-\\caption{Lean theorems per theme, the themes being the ${parts.length} parts of the written-out appendix in their order (${inParts.toLocaleString('en-US')} of the ${total.toLocaleString('en-US')} theorems; ${missing.length ? `the files ${missing.join(', ')} belong to no part` : 'every file belongs to a part'}). The ${empty} parts at zero hold only statements left unproved.}\\label{fig:themes}
+\\caption{Lean theorems per theme, the themes being the ${parts.length} parts of the written-out appendix in their order (${inParts.toLocaleString('en-US')} of the ${total.toLocaleString('en-US')} theorems; ${missing.length ? `${missing.length} files with ${(total - inParts).toLocaleString('en-US')} theorems, mostly sub-files of folders the appendix has not yet written up, belong to no part` : 'every file belongs to a part'}). The ${empty} parts at zero hold only statements left unproved.}\\label{fig:themes}
 \\end{figure}
 `;
 writeFileSync(resolve(here, 'fig-themes.tex'), out);
@@ -181,15 +192,15 @@ const macros = {
   SnapshotDate: snapDate,
   Files: n(files.length),
   FolderFiles: n(files.filter((f) => /\/Folder/.test(f)).length),
-  BourbakiFiles: n(files.filter((f) => /\/Bourbaki/.test(f)).length),
+  OtherFiles: n(files.filter((f) => !/\/Folder/.test(f)).length),
+  FoldersProved: n(sections.length),
   Lines: n(lines),
   Theorems: n(total),
   Lemmas: n(lemmas),
   PrivateTheorems: n(privates),
-  UpstreamFiles: n(upstream.length),
-  UpstreamDecls: n(upstreamDecls),
-  Commits: n(Number(git('rev-list', '--count', SNAPSHOT, '--', 'lean').trim())),
-  FirstCommit: longDate(git('log', '--reverse', '--format=%cs', SNAPSHOT, '--', 'lean/Grothendieck').split('\n')[0]),
+  Commits: n(Number(git('rev-list', '--count', LEAN_LAST, '--', 'lean').trim()) + Number(pgit('rev-list', '--count', PROOFS_SNAPSHOT).trim())),
+  FirstCommit: longDate(git('log', '--reverse', '--format=%cs', LEAN_LAST, '--', 'lean/Grothendieck').split('\n')[0]),
+  ProofsSnapshot: `\\texttt{${PROOFS_SNAPSHOT.slice(0, 7)}}`,
   Cards: n(verdicts.length),
   Holds: n(verdict('holds')),
   MoreGenerally: n(verdict('holds, more generally')),
