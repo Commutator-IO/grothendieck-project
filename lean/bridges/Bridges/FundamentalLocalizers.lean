@@ -39,8 +39,13 @@ Main results:
   a weak test category nor a local test category. With `C = ULift Bool` (the category `Δ₁`), the
   functors `A/a ⥤ Δ₁` that are constant at the top form a union of components of the category of
   elements of `i_A^*(Δ₁)`: the Ore condition lets a value `⊥` travel along every arrow;
-* `not_isWeakTest_of_isDeMorganTopos`, `not_isDeMorganTopos_of_isWeakTest`,
-  `not_isDeMorganTopos_over_of_isLocalTest`: the same through the De Morgan arch, and backwards;
+* `not_isWeakTest_of_isDeMorganTopos`, `not_isDeMorganTopos_of_isWeakTest`: the same through the
+  De Morgan arch, and backwards;
+* `not_isDeMorganTopos_over_of_isLocalTest`, `not_isDeMorganTopos_slice_of_isLocalTest`: for a
+  local test category `A` and a nonempty presheaf `X`, the slice topos `Â/X ≃ (A/X)^` is not De
+  Morgan. The Ore condition would pass from `A/X` to its slice over an object `p`, then, along a
+  section of the projection (`overCostructuredArrowSection`, `rightOreCondition_of_iso`), to the
+  weak test category `A/p.left`;
 * corollaries: `Δᵒᵖ` (folder 108, p. 2, question 6), groupoids, preorders with down-directed
   principal down-sets and total orders (`ℤ`), monoids with common right multiples (`ℕ`), finite
   monoids with a single minimal right ideal (through `FiniteMonoids.lean`), free categories
@@ -581,5 +586,68 @@ theorem isAspherical_zigZag_and_not_isAspherical_zigZagProd {L : FundamentalLoca
   ⟨isAspherical_zigZag L, not_isAspherical_zigZagProd hL⟩
 
 end AsphericalZigZag
+
+section GeneralSlices
+
+/-- The right Ore condition passes along a functor with a section up to isomorphism. -/
+theorem rightOreCondition_of_iso {C D : Type*} [Category C] [Category D] (G : C ⥤ D)
+    (F : D ⥤ C) (e : G ⋙ F ≅ 𝟭 C) (hD : GrothendieckTopology.RightOreCondition D) :
+    GrothendieckTopology.RightOreCondition C := fun {X Y Z} f g => by
+  obtain ⟨W, h, k, hk⟩ := hD (G.map f) (G.map g)
+  refine ⟨F.obj W, F.map h ≫ e.hom.app Y, F.map k ≫ e.hom.app Z, ?_⟩
+  have := congrArg (fun m => F.map m ≫ e.hom.app X) hk
+  simp only [Functor.map_comp, Category.assoc] at this
+  have nf := e.hom.naturality f
+  have ng := e.hom.naturality g
+  simp only [Functor.comp_map, Functor.id_map] at nf ng
+  rw [Category.assoc, Category.assoc, ← nf, ← ng]
+  exact this
+
+section Slices
+
+variable {C D : Type*} [Category C] [Category D] (S : C ⥤ D) (T : D)
+
+/-- The section `C/p.left ⥤ (C/T)/p` of the projection, for `p` in `CostructuredArrow S T`. -/
+@[simps]
+def overCostructuredArrowSection (p : CostructuredArrow S T) :
+    Over p.left ⥤ Over p where
+  obj Y := Over.mk (CostructuredArrow.homMk Y.hom rfl :
+    CostructuredArrow.mk (S.map Y.hom ≫ p.hom) ⟶ p)
+  map {Y Y'} φ := Over.homMk (CostructuredArrow.homMk φ.left (by
+      change S.map φ.left ≫ S.map Y'.hom ≫ p.hom = S.map Y.hom ≫ p.hom
+      rw [← Over.w φ, Functor.map_comp, Category.assoc]))
+    (CostructuredArrow.hom_ext _ _ (by simp))
+
+/-- The section is a section of the projection `(C/T)/p ⥤ C/p.left`, up to isomorphism. -/
+def overCostructuredArrowSectionCompPostIso (p : CostructuredArrow S T) :
+    overCostructuredArrowSection S T p ⋙ Over.post (CostructuredArrow.proj S T) ≅ 𝟭 _ :=
+  NatIso.ofComponents (fun Y => Over.isoMk (Iso.refl _) (Category.id_comp _)) fun _ => by
+    ext; exact (Category.comp_id _).trans (Category.id_comp _).symm
+
+end Slices
+
+/-- **Slices of a local test category are not De Morgan.** If `A` is a local test category and
+`X` is a nonempty presheaf on `A`, the slice topos `Â/X ≃ (A/X)^`, with `A/X` the category
+`CostructuredArrow yoneda X`, is not De Morgan. Indeed if `A/X` satisfied the right Ore
+condition, so would its slice over an object `p`, hence so would `A/p.left`, which is a weak test
+category. -/
+theorem not_isDeMorganTopos_slice_of_isLocalTest {A : Type u} [SmallCategory A]
+    {L : FundamentalLocalizer.{u}} (hL : L.AsphericalConnected) (h : IsLocalTest A L)
+    (X : Aᵒᵖ ⥤ Type u) (p : CostructuredArrow yoneda X) :
+    ¬ IsDeMorganTopos ((CostructuredArrow yoneda X)ᵒᵖ ⥤ Type u) := by
+  rw [isDeMorganTopos_presheaf_iff_rightOreCondition]
+  intro hO
+  have : Nonempty (Over p.left) := ⟨Over.mk (𝟙 _)⟩
+  exact not_isWeakTest hL (rightOreCondition_of_iso _ _
+    (overCostructuredArrowSectionCompPostIso yoneda X p) (rightOreCondition_over hO p)) (h p.left)
+
+/-- The same, for a section `x` of `X` over an object `a`. -/
+theorem not_isDeMorganTopos_slice_of_isLocalTest' {A : Type u} [SmallCategory A]
+    {L : FundamentalLocalizer.{u}} (hL : L.AsphericalConnected) (h : IsLocalTest A L)
+    (X : Aᵒᵖ ⥤ Type u) {a : A} (x : X.obj (Opposite.op a)) :
+    ¬ IsDeMorganTopos ((CostructuredArrow yoneda X)ᵒᵖ ⥤ Type u) :=
+  not_isDeMorganTopos_slice_of_isLocalTest hL h X (CostructuredArrow.mk (yonedaEquiv.symm x))
+
+end GeneralSlices
 
 end LeanPool.ToposTheoreticBridges.Examples
