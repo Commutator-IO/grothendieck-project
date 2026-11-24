@@ -28,6 +28,7 @@
   - Ch. II §2–§3 (from SGA 4).
   - Ch. III §7 (FAC sheaves) and §12 (examples).
   - The §14 appendix, which is from the **topos** course (4 April 1973), not from this one.
+- **The §14 appendix against the topos course of 4 April:** checked on 24 November 2026 in section 5 (6 proposed corrections or settled readings, 2 attributions the notes supply, 5 slips in the notes; the page mapping of `src/content/buffalo-gaeta.json` redone).
 
 ## Status (7 November 2026)
 
@@ -262,3 +263,79 @@ These are slips in Gaeta's bracketed interpolations or in passages the lecture d
 - 3 July: ample sheaves; quasi-affine, radicial, open and flat morphisms.
 - 9–10 July: flatness criteria; faithfully flat descent of properties, modules, subobjects, morphisms and affine schemes; Chevalley's theorem; effective descent; group actions.
 - 11 July (3ULFIl_2Wis-19834, -22716): descent for families, the fpqc, fppf and étale topologies, quotients and algebraic spaces.
+
+## 5. The topos course of 4 April against the appendix (Ch. III §14), checked 24 November 2026
+
+Gaeta's appendix « Sheaves of sets » (printed pp. 147–162, scan pp. 151–166) writes up the first session of the **topos** course, 4 April 1973, video URU5jgTvjhU, from 0:00:11 to the caption gap that ends at 1:12:14. It was checked against our transcripts URU5jgTvjhU-0000 (side A, 0:00–49:11) and URU5jgTvjhU-02951 (side B, 49:11–1:36:58), the raw captions, boards URU5jgTvjhU-0000 and -2951, and the topos index. Side A's doubtful hearings were checked on the audio on 30 October; side B is a first pass from the captions, on a side flagged for poor sound. Nothing was listened to for this check. The notes follow the lecture closely, often sentence by sentence, and they add a few short remarks of their own.
+
+**Summary.**
+- **Our transcripts, 6 items:**
+  - misheard term: 2 (0:28:26, 0:29:29);
+  - garbled statement: 2 (0:26:19, a slip of the lecture that the notes repeat; 0:55:46);
+  - supplied words or doubtful marks the notes confirm: 2 groups (0:03:26; 1:01:32 and 1:05:06).
+- **Attributions the notes supply:** 2 (Schanuel at 0:32:45, Duskin at 0:53:37).
+- **Formulas:** no disagreement. Board 1685 already has the C^r the notes have; board 1600 repeats the slip of 0:26:19.
+- **The notes wrong and the recording right:** 5 places, all minor.
+- **Mapping:** the page-by-page rows of `src/content/buffalo-gaeta.json` were redone from this reading; the earlier rows put the opening on p. 148 and several boundaries one paragraph late.
+
+### Mapping: notes → recording
+
+| Notes (printed pp.) | Content | Recording (URU5jgTvjhU) |
+|---|---|---|
+| 147 | Gaeta's preface to the appendix; his opening (topoi as general topology, prerequisites, a review of sheaves) | 0:00:11–0:03:25 |
+| 148 | Op(X) as an ordered set and a category; presheaf as a contravariant functor | 0:03:26–0:06:41 |
+| 149 | restriction maps, transitivity, identity; Presh(X); homomorphism of presheaves (start) | 0:06:42–0:08:51 |
+| 150 | homomorphisms commute with restriction, composition; §14.2 begins: the map F(U) → ∏ F(Uᵢ) | 0:08:52–0:12:10 |
+| 151 | separated presheaves; sections and restriction; the matching condition (2.3) | 0:12:11–0:14:18 |
+| 152 | Def. 1.1 (sheaf), the exact sequence (2.4); Top(X) a full subcategory of Presh(X) | 0:14:19–0:18:46 |
+| 153 | the sheaf of maps E^U; subpresheaf, condition a) | 0:18:47–0:22:01 |
+| 154 | condition b) (subfunctor); subsheaf; separated; local type | 0:22:02–0:26:18 |
+| 155 | continuous maps into E; differentiable maps (C^r); « ad libitum »; fibre spaces announced | 0:26:19–0:30:37 |
+| 156 | sections of a fibre space; the remark from the room on E × X | 0:30:38–0:34:58 |
+| 157 | Radon measures, distributions, closed subsets, analytic subsets; local to global; the sheaf Ẽ named | 0:34:59–0:42:32 |
+| 158 | the functor Fib(X) → Top(X); is it fully faithful?; the case X = a point (start) | 0:42:33–0:45:44 |
+| 159 | Fib(pt) ≃ spaces, the forgetful functor, not fully faithful; §14.3: discrete spaces over a point, the generalisation sought | 0:45:45–0:51:21 |
+| 160 | étale maps (definition, the « domaines étalés »); examples U ⊂ X and I × X | 0:51:22–0:57:13, except the next row |
+| 161 | the exchange on the word « étale » and « local homeomorphism » (printed after the theorem) | 0:53:37–0:54:39 |
+| 161 | the equivalence Ét(X) ≃ Top(X) (3.1), the two languages; the question on Riemann surfaces; x ↦ xⁿ (start) | 0:57:14–1:03:58 |
+| 162 | the n-th roots, f restricted to ℂ* étale, 0 a ramification point; dominant morphisms of curves; the universal covering | 1:03:59–1:12:13 (from 1:05:06 in the caption gap) |
+
+### Discrepancies, by side
+
+#### URU5jgTvjhU-0000 (4 April, tape 1, side A)
+
+- **0:03:26**, supplied word confirmed. Ours has « under [finite] intersections », the captions only « under intersections ». The notes (p. 148) and board 240 have finite intersections, and the axiom requires it. No change.
+- **0:26:19**, garbled statement, the lecturer's slip, which the notes repeat. To bring the sheaf of all maps under the sheaf of continuous maps, he says one can give a set the discrete topology. The captions have « discrete », as do board 1600 and the notes (p. 155, footnote 1). With the discrete topology the continuous maps U → E are the locally constant maps, not all maps; the coarse (indiscrete) topology gives all maps. Correction: an editorial note « [read: the coarse topology; with the discrete one the continuous maps are the locally constant ones] », and the same on board 1600.
+- **0:28:26**, misheard term. Ours has « C^∞ or C^α ». The captions have « C alpha ». The notes (p. 155) have C^r (r ≥ 1) and C^∞, board 1685 has C^r, and our own next sentence says « r times differentiable ». Correction: « C^∞ or C^r ».
+- **0:29:29**, misheard terms and a dropped phrase. Ours has « compact analytic varieties or compact analytic spaces, [and so on] ». The captions have « compact analytic varieties or competitic spaces all the bright varieties like spaces ». The notes (p. 155) list analytic varieties and then algebraic varieties. « All the bright varieties » is very likely « algebraic varieties », and « competitic » may be « complex analytic ». Correction: « complex [?] analytic varieties or complex analytic spaces, [algebraic] varieties, algebraic spaces [?] » (to listen).
+- **0:32:45**, attribution. Ours marks the remark on E × X as « said by someone in the room ». The notes (p. 156) name Schanuel, and say that Grothendieck agrees. Correction: « (said by someone in the room; Schanuel, according to Gaeta's notes) ».
+
+#### URU5jgTvjhU-02951 (4 April, tape 1, side B)
+
+- **0:53:37**, attribution. The interjection « But local homeomorphism is a — » is from the room. The notes (p. 161) name Duskin. Correction: mark it as said in the room, « (Duskin, according to Gaeta's notes) ».
+- **0:55:46**, garbled statement. Ours ends the covering-space example with « They are in fact [?] [étale] in the sense of [?] topology [?] ». The notes have no general covering-space example, but their third example (p. 162) is a covering « étale everywhere », and board 3370 lists covering spaces among the étale maps. The sense is settled: covering spaces are étale. Correction: « They are in fact [étale] », the rest kept with its [?] (to listen).
+- **1:01:32 and 1:05:06**, supplied words confirmed. The notes (p. 161) have the question on Riemann surfaces and the answer « provided you drop the branch points », and state that f restricted to ℂ* is étale. That confirms « [Riemann] », « [at the ramification] points », « [the rami]fication » and « [restricted to C*] ». Boards 3770 and 3906 agree. No change; « [sheaves] » at 1:01:32 stays doubtful.
+
+### Notes wrong, recording right
+
+- **p. 152**, symbol. The kernel of the double arrow is written as starting from F(Uᵢ) instead of ∏ᵢ F(Uᵢ). The recording (0:15:22) and (2.4) on the same page have the product.
+- **p. 154, footnote 1**, garbled definition. A property of open sets is called local if it « holds in X » when it holds on the opens of a covering. It should hold on U if and only if it holds on each Uᵢ, as the recording says at 0:25:16. This is Gaeta's footnote.
+- **p. 156**, a hypothesis added and a slip. The remark from the room, that continuous maps U → E are the sections of E × X → X over U, holds for any topological space E (0:32:45–0:34:58). The notes restrict it to E discrete, where it gives only locally constant maps, and write x ↦ (x, f(e)) for x ↦ (x, f(x)).
+- **p. 159**, imprecise. « A sheaf over a one-point space is known iff we know the corresponding E. » The recording (0:46:51–0:47:55) says the functor Γ of global sections is an equivalence Top(pt) ≃ Sets: a sheaf on a point is known from its set of sections. The notes also leave out Γ_U and Γ.
+- **p. 161, typing**, « jiggle back and forth » for « juggle » (recording 1:00:29).
+
+### On one side only
+
+**In the recording, not in the notes:**
+- the question to the room whether everyone knows what a sheaf is (0:17:33);
+- the references and the exchange on textbooks: Godement and Bredon, and « It doesn't contain Čech theory » (0:39:18–0:40:24). The notes mention Godement only in Gaeta's preface;
+- the functors Γ_U and Γ (0:46:51);
+- why « local homeomorphism » is misleading: it does not say that π(V) is open (0:53:37);
+- covering spaces as a third example (0:55:46–0:57:13);
+- his remark that the course gives the main ideas, not proofs, with the room citing Godement for the equivalence (0:57:14–0:58:19); the exchange on when to stop (1:00:29);
+- everything from 1:12:14 on: inverse limits as kernels of pairs of maps between products, Ĉ, limits of sheaves computed sectionwise, finite limits of étale spaces, algebraic structures in a category, direct limits. The appendix ends at p. 162 with the étale examples.
+
+**In the notes, not in our transcripts:**
+- Gaeta's preface to the appendix (p. 147) and his footnotes on terminology (pp. 148–149);
+- his footnote that Grothendieck told him the German also says « étale » (p. 161);
+- what falls in our caption gap, 1:05:06–1:12:14 (p. 162): the n copies of a neighbourhood of x ≠ 0, 0 as a ramification point, dominant morphisms of curves, the universal covering. As section 4 says, the gap could be filled in summary from the notes, or by listening.
