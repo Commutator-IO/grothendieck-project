@@ -251,7 +251,7 @@ export function BuiltPage() {
               the open problems of both stated as propositions.
             </p>
             <p className="mt-3 text-[13px] leading-relaxed text-ink-500">
-              About 157,000 lines of Lean in 443 files, drawing on 149 modules of the Stacks library.
+              About 159,000 lines of Lean in 448 files, drawing on 151 modules of the Stacks library.
             </p>
             <p className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[13.5px]">
               <a href="/built/map/?layout=city&links=1" className={link}>See it in the city &rarr;</a>
