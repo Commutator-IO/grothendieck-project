@@ -6,6 +6,7 @@ Authors: Michel Hua
 module
 
 public import Bridges.CubeTest
+public import Bridges.GrothendieckCriterion
 
 /-!
 # Joyal's category `Θ₂`
@@ -24,6 +25,9 @@ Berger's wreath product `Δ ≀ Δ`, in a form fit for computation:
 * `Theta2.proj`: the projection `Θ₂ ⥤ Δ`;
 * `Theta2.not_rightOreCondition`: `Θ₂` does not satisfy the right Ore condition, so the De Morgan
   obstruction of `Bridges.FundamentalLocalizers` does not apply to it.
+* `Theta2.arrowSegment`, `Theta2.isLocalTest_of_arrow`: the one-cell `[1](0)` with its two vertices
+  is a separating segment, so by Grothendieck's criterion (iii) ⇒ (i) `Θ₂` is a local test
+  category as soon as every `Θ₂/(a × [1](0))` is aspherical. That asphericity is not proved.
 
 That `Θ₂` (and `Θ`) is a test category (Cisinski–Maltsiniotis, Berger) is **not** formalised.
 The cone method of `Bridges.SimplexTest` and the cylinder method of `Bridges.CubeTest` do not
@@ -215,6 +219,28 @@ theorem not_rightOreCondition : ¬ GrothendieckTopology.RightOreCondition Theta2
   obtain ⟨w, k, l, hkl⟩ := h (vertex 0) (vertex 1)
   have h01 : (0 : Fin 2) = 1 := congrArg (fun φ : _ ⟶ _ => (Hom.φ φ) 0) hkl
   exact absurd h01 (by decide)
+
+/-- The segment `[1](0)` of `Θ₂`: the representable one-cell with its two vertices. -/
+def arrowSegment : Segment Theta2 where
+  I := yoneda.obj arrow
+  e₀ b := toPt b.unop ≫ vertex 0
+  e₁ b := toPt b.unop ≫ vertex 1
+  map_e₀ g := by
+    change g.unop ≫ toPt _ ≫ vertex 0 = toPt _ ≫ vertex 0
+    rw [← Category.assoc, ptIsTerminal.hom_ext (g.unop ≫ toPt _) (toPt _)]
+  map_e₁ g := by
+    change g.unop ≫ toPt _ ≫ vertex 1 = toPt _ ≫ vertex 1
+    rw [← Category.assoc, ptIsTerminal.hom_ext (g.unop ≫ toPt _) (toPt _)]
+
+theorem arrowSegment_isSeparating : arrowSegment.IsSeparating := fun b h => by
+  have h01 : (0 : Fin 2) = 1 := congrArg (fun φ : b.unop ⟶ arrow => (Hom.φ φ) 0) h
+  exact absurd h01 (by decide)
+
+/-- **`Θ₂` is a local test category as soon as the segment `[1](0)` is locally aspherical**, by
+Grothendieck's criterion (iii) ⇒ (i). -/
+theorem isLocalTest_of_arrow (L : FundamentalLocalizer.{0})
+    (h : IsLocallyAspherical L arrowSegment.I) : IsLocalTest Theta2 L :=
+  isLocalTest_of_segment L arrowSegment arrowSegment_isSeparating h
 
 end Theta2
 end LeanPool.ToposTheoreticBridges.Examples
