@@ -7058,9 +7058,9 @@ export const FINDINGS: Finding[] = [
       'R. Brown, « The origins of Alexander Grothendieck’s “Pursuing Stacks” », groupoids.org.uk/pstacks.htm — mentions corrections of the 1982 translation of the Breen letters by J.-L. Loday and L. Breen, not a correction list of the 1983–84 typescript',
       'A. Grothendieck, Pursuing Stacks, ed. M. Carmona with U. Buchholtz, arXiv:2111.01000v2 (2021) — front matter and Preface searched for a correction list; none found; dated margins used for p. 89, 343, 555',
     ],
-    status: 'candidate',
+    status: 'confirmed',
     settle:
-      'A person reads the two « Sent » dates on the facsimile, and checks the introduction of the SMF edition (Documents Mathématiques 20, 2022) and the Bangor correspondence for an account of who corrected the typescript’s English and when. Machine pass on the facsimile, 2026-11-23, not checked by a reader: « Sent 19/12/83 » follows the p.100 entry on p. 20 and « Sent 6/2/84 » the p.354 entry on p. 28; the list stops at p557 on p. 37; the inventory’s dates for the typescript’s chapters agree.',
+      'A person reads the two « Sent » dates on the facsimile, and checks the introduction of the SMF edition (Documents Mathématiques 20, 2022) and the Bangor correspondence for an account of who corrected the typescript’s English and when. Machine pass on the facsimile, 2026-11-23, not checked by a reader: « Sent 19/12/83 » follows the p.100 entry on p. 20 and « Sent 6/2/84 » the p.354 entry on p. 28; the list stops at p557 on p. 37; the inventory’s dates for the typescript’s chapters agree. Confirmed on the facsimile by Michel Hua, 2026-11-24: « Sent 19/12/83 » on p. 20, « Sent 6/2/84 » on p. 28, the list ending at p557 on p. 37.',
   },
 // Folder 117 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over a reading also made on Opus 5.5.
 // Candidate pool (pp. 1-24) was almost entirely matches already footnoted in 117.modern.tex (prederivator, Der 1-5,
