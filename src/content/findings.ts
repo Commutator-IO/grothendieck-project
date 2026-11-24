@@ -5371,9 +5371,9 @@ export const FINDINGS: Finding[] = [
       'Inventory titles of 156-6 (« notes manuscrites (18-20/06/1986) ») and 156-7 (« (23-26/06/1986) ») in src/content/catalogue.ts',
       'Transcription 156-7, batch 1 (batch-01.fr.tex), page 1: « 23 juin »',
     ],
-    status: 'candidate',
+    status: 'confirmed',
     settle:
-      'A person reads « 21. juin » on facsimile page 64 and « 22. Juin » on page 87 of 156-6, confirming the day numerals; if they stand, the inventory range should read 18-22/06/1986. Machine pass on the facsimile, 2026-11-23, not checked by a reader: « 21. juin » on p. 64 and « 22. Juin » on p. 87 are clear and underlined.',
+      'A person reads « 21. juin » on facsimile page 64 and « 22. Juin » on page 87 of 156-6, confirming the day numerals; if they stand, the inventory range should read 18-22/06/1986. Machine pass on the facsimile, 2026-11-23, not checked by a reader: « 21. juin » on p. 64 and « 22. Juin » on p. 87 are clear and underlined. Confirmed on the facsimile by Michel Hua, 2026-11-24: « 21. juin » on p. 64 (batch 4) and « 22. Juin » on p. 87 (batch 5).',
   },
 // Candidate entries for folder 156-7 (find-novelty, Opus 5.5 on an Opus 5.5 reading, 2026-10-10). Not merged into src/content/findings.ts.
 // No mathematical entry: the candidate pool is matches the reading already footnotes (Birkhoff 1937 for the join-irreducible representation, p. 5; Nielsen-Plotkin-Winskel 1981 prime event structures, p. 5; Björner 1984 simplicial posets, p. 13; Birkhoff 1940 polarities and Dacey 1968 orthogonality spaces for the support lattice, pp. 61-63; Husimi 1937 orthomodular law for the graph counter-example of p. 98, and the non-distributivity of pp. 81-83, which is a standard property of orthocomplemented lattices of this kind; complete atomic Boolean algebras for the Proposition of p. 80), axiomatics internal to his framework (At, ML, MΛ, Prat, Mag), statements the reading had to repair (pp. 5, 13, 25-26, 29, 54-58, 91, 103), or statements the folder announces without proof (p. 22 b)-d), p. 42, p. 93 (b)-(c), p. 100, p. 104), which the skill excludes. Nothing was looked up in the literature for this pass beyond those footnotes.
