@@ -17,13 +17,15 @@ records the boundary and the build breaks if it moves.
 
 1. **Join and specialise** (stages 1–2): the four readings of the Boolean and De Morgan arches
    on the decks `SingleObj M` and `Paths Q`.
-2. **Specialise, then close**: corollaries where the deck condition is a known fact
-   (`Group.isUnit`).
+2. **Specialise, then close**: a corollary whose deck condition is a known fact
+   (`Group.isUnit`), proved only once that fact is given as a rule.
 3. **Witnesses**: corollaries whose deck condition is an existential (`a * c = b * d` with
    `c = b`, `d = a`, or `c = d = 0`): the witness has to be found.
 4. **Transfer along a deck equivalence** (Morita): this rewrites in the other direction, from
    the category to the topos, then uses the invariance of the property under equivalence.
 -/
+
+public section
 
 namespace LeanPool.ToposTheoreticBridges.Examples
 
@@ -51,21 +53,27 @@ example (Q : Type (u + 1)) [Quiver.{u + 1} Q] :
 
 /-! ## 2. Specialise, then close -/
 
+-- The deck condition `∀ m : G, IsUnit m` is not closed: `Group.isUnit` is not a `simp` lemma.
 example (G : Type) [Group G] : IsBooleanTopos ((SingleObj G)ᵒᵖ ⥤ Type) := by
-  aesop (rule_sets := [Bridges])
+  fail_if_success aesop (config := { terminal := true }) (rule_sets := [Bridges])
+  exact isBooleanTopos_singleObj_of_group G
+
+-- With `Group.isUnit` added as a rule, it is.
+example (G : Type) [Group G] : IsBooleanTopos ((SingleObj G)ᵒᵖ ⥤ Type) := by
+  aesop (rule_sets := [Bridges]) (add safe apply Group.isUnit)
 
 /-! ## 3. Witnesses -/
 
 example (M : Type) [CommMonoid M] : IsDeMorganTopos ((SingleObj M)ᵒᵖ ⥤ Type) := by
-  fail_if_success aesop (rule_sets := [Bridges])
+  fail_if_success aesop (config := { terminal := true }) (rule_sets := [Bridges])
   exact isDeMorganTopos_singleObj_of_commMonoid M
 
 example (M : Type) [MonoidWithZero M] : IsDeMorganTopos ((SingleObj M)ᵒᵖ ⥤ Type) := by
-  fail_if_success aesop (rule_sets := [Bridges])
+  fail_if_success aesop (config := { terminal := true }) (rule_sets := [Bridges])
   exact isDeMorganTopos_singleObj_of_monoidWithZero M
 
 example : ¬ IsDeMorganTopos ((SingleObj (FreeMonoid (Fin 2)))ᵒᵖ ⥤ Type) := by
-  fail_if_success aesop (rule_sets := [Bridges])
+  fail_if_success aesop (config := { terminal := true }) (rule_sets := [Bridges])
   exact not_isDeMorganTopos_freeMonoid_two
 
 /-! ## 4. Transfer along a deck equivalence -/
@@ -74,7 +82,7 @@ example : ¬ IsDeMorganTopos ((SingleObj (FreeMonoid (Fin 2)))ᵒᵖ ⥤ Type) :
 -- condition: the arch would have to be used from right to left.
 example {C D : Type u} [SmallCategory C] [SmallCategory D] (h : MoritaEquivalentCat C D) :
     IsGroupoid C ↔ IsGroupoid D := by
-  fail_if_success aesop (rule_sets := [Bridges])
+  fail_if_success aesop (config := { terminal := true }) (rule_sets := [Bridges])
   exact isGroupoid_iff_of_moritaEquivalentCat h
 
 /-- The arch read from right to left, as a lemma of its own: Aesop's `simp` rules take no `←`
