@@ -68,3 +68,13 @@ mxy ⊗ w is not in J. Same over Q and F_p, p = 2, 3, 5, 7, 11, 101. Footnote id
 in degree 4. Every pivot over Q is ±1 (`venken.py 0` prints the primes dividing a pivot: none,
 `venken/out-Q.txt`), so the elimination runs over Z and the result holds over every field. The Raicu examples above are now a second, smaller example (length 15,
 two variables); `docs/effective/article.tex` is rewritten accordingly.
+
+## What « 27 » counts (25 November 2026)
+
+`raicu/scan.py` now prints, degree by degree, the dimension of the space of forms a in k[x1,x2]_d with
+a(x) − a(y) ∈ I + K, and tests the witness. For EXP=2,2,2 these are 0, 2, 1, 3, 6, 7, 8 for d = 1..7,
+total 27, over Q and over F_p for the seven pivot primes (`raicu/out-length15.txt`). The 27 forms are the
+homogeneous lifts of the invariants, the forms of (f1², f2², f3²) (which lift 0) included; they are not
+« independent differences modulo I + K », as the first version of the article said. Subtracting the
+forms of the ideal, dim B_d = 0, 2, 1, 1, 2, 0, 0 (0, 2, 1, 1, 2, 1, 0 in characteristic 2): B = C outside
+characteristic 2, and B = C ⊕ A_6 in characteristic 2.

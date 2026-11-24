@@ -1,4 +1,8 @@
-# Full check on the finite k-scheme Z = V(f1^3, f2^3, f3^2) (length 27): compare I_Z and J_{B_Z} in every degree.
+# Full check on the finite k-scheme Z = V(f1^a, f2^b, f3^c), (a, b, c) read from EXP (default 3,3,2, length 27):
+# compare I_Z and J_{B_Z} in every degree. Usage: EXP=2,2,2 python3 scan.py P  (P = 0 for Q, else a prime).
+# For each degree d <= 7 it prints the dimension of the space of forms a in k[x1,x2]_d with
+# a(x) - a(y) in (I+K)_d: homogeneous lifts of invariants, the forms of (f1^a, f2^b, f3^c) included
+# (they lift 0), and then their total.
 import sys
 P=int(sys.argv[1])
 sys.argv=[sys.argv[0],str(P)]
@@ -25,6 +29,7 @@ for d in range(1,8):
     ms=[m for m in monos(n,d) if m[2]==m[3]==0]
     D=[add({m:F(1)},{(0,0,m[0],m[1]):F(1)},-1) for m in ms]
     Id=homog_part(IZ,n,d)
+    n0=len(Bg)
     rows=[(v,{}) for v in Id]+[(v,{j:F(1)}) for j,v in enumerate(D)]
     piv={}
     for v,t in rows:
@@ -38,10 +43,13 @@ for d in range(1,8):
             m=max(v);c=inv(v[m]);piv[m]=({k:norm(c*x) for k,x in v.items()},{k:norm(c*x) for k,x in t.items()})
         elif t:
             Bg.append(add({ms[j]:c for j,c in t.items()},{(0,0,ms[j][0],ms[j][1]):c for j,c in t.items()},-1))
-print('invariant differences found:',len(Bg))
+    print('degree',d,': forms a with a(x)-a(y) in I+K:',len(Bg)-n0)
+print('forms of degree <= 7 with a(x)-a(y) in I+K (lifts of invariants, forms of the ideal included):',len(Bg))
 bad=[]
 for d in range(1,15):
     a=rank_and_member(homog_part(IZ,n,d)); b=rank_and_member(homog_part(Bg+KK,n,d))
     # J_B + K subset I_Z always; compare dims
     if a!=b: bad.append((d,a,b))
 print('degrees where I_Z != J_B + K (d, dim I_Z, dim J_B+K):',bad)
+_,inI=rank_and_member(homog_part(IZ,n,5),f); _,inJ=rank_and_member(homog_part(Bg+KK,n,5),f)
+print('witness (x1y2-x2y1)y2^3 in (I+K)_5:',inI,' in (J+K)_5:',inJ)
