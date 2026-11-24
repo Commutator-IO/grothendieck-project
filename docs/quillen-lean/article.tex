@@ -1,8 +1,13 @@
 \documentclass[11pt]{article}
 \usepackage{fontspec}
-% Charter and Menlo (macOS); elsewhere, XCharter and DejaVu Sans Mono, from which they derive.
-\IfFontExistsTF{Charter}{\setmainfont{Charter}}{\setmainfont{XCharter}}
-\IfFontExistsTF{Menlo}{\setmonofont{Menlo}[Scale=0.82]}{\setmonofont{DejaVu Sans Mono}[Scale=0.82]}
+% XCharter and DejaVu Sans Mono, loaded by file name from the TeX distribution, so that the build
+% never looks up system fonts (on a CI runner that scan reads every font installed, and the PDF
+% depends on the machine). XCharter is Charter, DejaVu Sans Mono the source of Menlo.
+\setmainfont{XCharter}[Extension=.otf, UprightFont=*-Roman, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\setmonofont{DejaVuSansMono}[Extension=.ttf, BoldFont=*-Bold, ItalicFont=*-Oblique, BoldItalicFont=*-BoldOblique, Scale=0.82]
+% The one character of the Lean names that DejaVu Sans Mono lacks.
+\usepackage{newunicodechar}
+\newunicodechar{⊓}{\ensuremath{\sqcap}}
 \usepackage{polyglossia}\setmainlanguage{english}
 \usepackage{microtype}
 \usepackage[most]{tcolorbox}
@@ -49,10 +54,28 @@
 \newtheorem{exemple}[lemme]{Example}
 \theoremstyle{remark}
 \newtheorem*{remarque}{Remark}
-\raggedbottom\emergencystretch=1.5em
+\raggedbottom\emergencystretch=3em
+% Room for three-digit page and section numbers in the table of contents.
+\makeatletter\renewcommand{\@pnumwidth}{2.2em}\patchcmd{\l@section}{1.5em}{2.1em}{}{}\makeatother
+\hbadness=5000
 % Long Lean names (\texttt{A.b\_c\_d}) may break after an underscore.
 \let\bkunderscore\_
 \renewcommand{\_}{\bkunderscore\allowbreak}
+% They may also break before a capital (camelCase) and after « . » or « / » (namespaces,
+% paths), without a hyphen, as \url does: XeTeX inter-character classes, switched on only
+% inside \texttt, so the text fonts are untouched.
+\newXeTeXintercharclass\ttlowerclass
+\newXeTeXintercharclass\ttupperclass
+\newXeTeXintercharclass\ttsepclass
+\count255=`a \loop\XeTeXcharclass\count255=\ttlowerclass\ifnum\count255<`z\advance\count255 by 1\repeat
+\count255=`0 \loop\XeTeXcharclass\count255=\ttlowerclass\ifnum\count255<`9\advance\count255 by 1\repeat
+\count255=`A \loop\XeTeXcharclass\count255=\ttupperclass\ifnum\count255<`Z\advance\count255 by 1\repeat
+\XeTeXcharclass`.=\ttsepclass \XeTeXcharclass`/=\ttsepclass
+\XeTeXinterchartoks\ttlowerclass\ttupperclass={\allowbreak}
+\XeTeXinterchartoks\ttsepclass\ttlowerclass={\allowbreak}
+\XeTeXinterchartoks\ttsepclass\ttupperclass={\allowbreak}
+\let\origtexttt\texttt
+\renewcommand{\texttt}[1]{\origtexttt{\XeTeXinterchartokenstate=1 #1}}
 
 \title{\Large Daniel Quillen's Notebooks: Statements Proved in Lean}
 \author{Michel Hua\\ \small Independent researcher, Paris\\ \small \texttt{michel@commutator.io}}
@@ -382,7 +405,7 @@ Notebook & Statement & Verdict & Lean file & \S\\
 
 The statements proved here are read from transcriptions of the notebooks produced by Anthropic language models (Claude) under editorial rules written by the author; these transcriptions have not been fully reviewed by a person. The formal proofs were written in Lean~4 by Claude Opus~5.5, under the author's direction, and Lean mechanically checks their correctness against the mathlib library. The same model drew from them the written-out proofs of this document. The author reviewed the choice of statements and the text, and takes full responsibility for them. Lean guarantees that a statement holds under the hypotheses as written. It guarantees neither that the statement faithfully renders the page, nor that it is new.
 
-\begin{thebibliography}{99}\small
+\begin{thebibliography}{99}\small\raggedright
 \bibitem{ass1994} J.~Avron, R.~Seiler and B.~Simon, \q{The index of a pair of projections}, \emph{Journal of Functional Analysis} 120 (1994), no.\,1, 220--237; doi:10.1006/jfan.1994.1031.
 \bibitem{lean4} L.~de Moura and S.~Ullrich, \q{The Lean~4 theorem prover and programming language}, in \emph{Automated Deduction -- CADE~28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635; doi:10.1007/978-3-030-79876-5\_37.
 \bibitem{mathlib2020} The mathlib Community, \q{The Lean mathematical library}, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP~2020)}, ACM, 2020, 367--381; doi:10.1145/3372885.3373824.
