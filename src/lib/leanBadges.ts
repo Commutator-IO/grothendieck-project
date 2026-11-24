@@ -1,6 +1,7 @@
 import { useEffect, type RefObject } from 'react';
 import LEAN_PAGES from '../content/lean-pages.json';
 import LITERATURE_PAGES from '../content/literature-pages.json';
+import PRINT_PAGES from '../content/print-pages.json';
 
 /**
  * Badges beside the pages of a reading that something else of the edition rests on:
@@ -10,7 +11,10 @@ import LITERATURE_PAGES from '../content/literature-pages.json';
  *    (scripts/lean-lines.mjs → src/content/lean-pages.json); green when the statement holds,
  *    amber when partly proved, pink when the page is wrong;
  *  - « In print » and the first source of a finding found later in the literature, opening its
- *    card on the Findings tab (scripts/literature-pages.mjs → src/content/literature-pages.json).
+ *    card on the Findings tab (scripts/literature-pages.mjs → src/content/literature-pages.json);
+ *  - « His print » and the passage of his own published texts (EGA, SGA, FGA, PTT…) that the pages
+ *    draft, share statements with, or prove where the print only announces it
+ *    (src/content/publications.json → src/content/print-pages.json), opening the printed text.
  *
  * The reading views are frames with their own stylesheet (ar5iv's), so a badge carries its style
  * inline and is added to the frame's document after it loads, beside the page marker
@@ -23,6 +27,8 @@ type Card = { batch: number; page: string; name: string; verdict: string; href: 
 type Print = { id: string; page: string; name: string; refs: string[] };
 const CARDS = LEAN_PAGES as unknown as Record<string, Card[]>;
 const PRINTS = LITERATURE_PAGES as unknown as Record<string, Print[]>;
+type Own = { page: string; name: string; kind: string; note: string; href: string };
+const OWN = PRINT_PAGES as unknown as Record<string, Own[]>;
 
 /** One thing a badge stands for, whatever its kind. */
 type Item = { page: string; text: string; listText: string; title: string; href: string; colour: readonly string[] };
@@ -42,6 +48,7 @@ const LEAN_COLOURS = {
   holds: ['#128557', '#eaf6ef', '#b9dfc9'],
 } as const;
 const PRINT_COLOUR = ['#38539d', '#eef1fa', '#c6d0ec'] as const;
+const OWN_COLOUR = ['#7a4a14', '#f8f0e4', '#e2cba7'] as const;
 const leanColour = (verdict: string) => (/false|refuted/.test(verdict) ? LEAN_COLOURS.false : /partly/.test(verdict) ? LEAN_COLOURS.partly : LEAN_COLOURS.holds);
 const short = (s: string) => (s.length > 48 ? `${s.slice(0, 46).replace(/\s+\S*$/, '')}…` : s);
 
@@ -63,6 +70,16 @@ const printItems = (cote: string): Item[] =>
     title: `Found later in the literature (pages ${f.page}): ${f.refs.join(' · ')}. Opens the finding.`,
     href: `/findings/#${f.id}`,
     colour: PRINT_COLOUR,
+  }));
+
+const ownItems = (cote: string): Item[] =>
+  (OWN[cote] ?? []).map((o) => ({
+    page: o.page,
+    text: `His print · ${short(o.name)}`,
+    listText: o.name,
+    title: `${o.name}: these pages ${o.kind}. ${o.note} Opens the printed text.`,
+    href: o.href,
+    colour: OWN_COLOUR,
   }));
 
 const pill = ([fg, bg, border]: readonly string[]) =>
@@ -140,10 +157,11 @@ export function attachLeanBadges(doc: Document, cote: string): () => void {
       mixed: (its) => leanColour(its.map((i) => i.title).join(' ')),
     },
     { items: printItems(cote), noun: 'In print · findings', mixed: () => PRINT_COLOUR },
+    { items: ownItems(cote), noun: 'His print · passages', mixed: () => OWN_COLOUR },
   ]);
 }
 
-const hasBadges = (cote: string) => (CARDS[cote]?.length ?? 0) + (PRINTS[cote]?.length ?? 0) > 0;
+const hasBadges = (cote: string) => (CARDS[cote]?.length ?? 0) + (PRINTS[cote]?.length ?? 0) + (OWN[cote]?.length ?? 0) > 0;
 
 /** The badges on a reading frame, added when its document loads and removed with it. */
 export function useLeanBadges(frame: RefObject<HTMLIFrameElement | null>, url: string, enabled: boolean, cote: string) {

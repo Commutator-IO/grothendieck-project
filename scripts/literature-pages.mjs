@@ -7,7 +7,7 @@
  *
  *   npm run literature-pages
  */
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { FINDINGS } from '../src/content/findings.ts';
 
@@ -44,3 +44,39 @@ for (const n of FINDINGS) {
 }
 writeFileSync(resolve(root, 'src/content/literature-pages.json'), JSON.stringify(out));
 console.log(`literature-pages: ${Object.values(out).flat().length} findings in ${Object.keys(out).length} folders`);
+
+// His own printed texts (src/content/publications.json): a folder holding a draft of a published
+// passage, statements shared with one, or what the print only announces. Their pages are written
+// for a reader (« batch 2, pp. 27–36 », « batches 3–4 »): the pages when given, else the first
+// page of each batch named (batches of twenty).
+const PUB = JSON.parse(readFileSync(resolve(root, 'src/content/publications.json'), 'utf8'));
+const TEXT = Object.fromEntries(PUB.texts.map((t) => [t.id, t]));
+const KIND = { draft: 'are a draft of the printed passage', partial: 'share statements with the printed passage', open: 'prove what the print only announces or leaves open', edition: 'are edited in print' };
+const SHORT = { ptt: 'PTT', fga: 'FGA', chern: 'Classes de Chern', sga1: 'SGA 1', ega3: 'EGA III', sga3: 'SGA 3', ega4: 'EGA IV', dix: 'Dix exposés', lm: 'Longue Marche', ps: 'Pursuing Stacks' };
+function pagesOf(spec) {
+  const pp = /pp?\.\s*([\d–,\s-]+)/.exec(spec);
+  if (pp) return pp[1].replace(/[\s,]+$/, '').trim();
+  const b = /batch(?:es)?\s+([\d–\s,and-]+)/.exec(spec);
+  if (!b) return null;
+  const nums = b[1].split(/,|and/).flatMap((r) => {
+    const [x, y] = r.split(/[–-]/).map((n) => Number.parseInt(n, 10));
+    return Number.isFinite(x) ? (Number.isFinite(y) ? Array.from({ length: y - x + 1 }, (_, i) => x + i) : [x]) : [];
+  });
+  return nums.map((n) => `${(n - 1) * 20 + 1}`).join(', ') || null;
+}
+const prints = {};
+for (const l of PUB.links) {
+  const page = pagesOf(l.pages);
+  const t = TEXT[l.text];
+  if (!page || !t) continue;
+  (prints[l.folder] ??= []).push({
+    page,
+    // « 0_IV » is EGA's chapter 0 of volume IV, printed with the IV as a subscript.
+    name: l.where === t.title || l.where === SHORT[l.text] ? SHORT[l.text] ?? t.title : `${SHORT[l.text] ?? t.title} ${l.where.replace('0_IV', '0ᵢᵥ')}`,
+    kind: KIND[l.kind] ?? l.kind,
+    note: l.note.length > 220 ? `${l.note.slice(0, 218)}…` : l.note,
+    href: t.url,
+  });
+}
+writeFileSync(resolve(root, 'src/content/print-pages.json'), JSON.stringify(prints));
+console.log(`print-pages: ${Object.values(prints).flat().length} of ${PUB.links.length} links to his printed texts, in ${Object.keys(prints).length} folders`);
