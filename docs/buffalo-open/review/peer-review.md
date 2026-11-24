@@ -74,3 +74,47 @@ Checked and correct as framed: 1:26:22 and 7:31:23 (presheaf topoi; "essential t
 1. Whether to keep "False" in Problem 1 on the strength of the (e) retraction (M1).
 2. AR 2.78, 6.22 and ch. 6, and GU 7.13, were checked against nLab only.
 3. The transcripts are uncorrected. Short phrases attributed to him ("a feeling", "problem three", "the main conjecture", "you asked for an open problem") were found in them, but not checked against the audio.
+
+## Second pass, 24 November 2026 (changes since 7 November)
+
+Scope: `git diff fdd65803 HEAD -- docs/buffalo-open/article.tex` (the version of 16 November): the new Problem 1 status, the rewritten status of problem three, the new Problem `p:qcoh`, the Venken paragraph of §Effectivity, the Lean column and its sentence, the abstract, the closing paragraph and the acknowledgement. Intake revalidated with `validate_review_intake.py` (READY_FOR_LOCAL_REVIEW; public preprint, author-requested reader, no conflicts, local only). Unchanged parts were not re-reviewed.
+
+### Verification of the new (e) arguments
+
+| Argument | Check | Result |
+|---|---|---|
+| (B) alone is local connectedness | With X_ij = 1, (B) gives ∏Δ(J_i) ≅ Δ(∏J_i), so Δ preserves products, hence has a left adjoint. Conversely, if Δ preserves products, ∏_i ∐_j X_ij lies over Δ(∏J_i) = ∐_f 1, and its fibre over f is ∏_i X_{i f(i)} (coproducts universal, limits commute) | correct (with choice in Set) |
+| Sh(Cantor set): (A) and not (B) | Not locally connected, so not (B). For (A): over a compact clopen U, a locally liftable section lifts on a finite clopen partition, and lifts on disjoint pieces glue; so every epimorphism is surjective on compact clopens and products of epimorphisms are epimorphisms | correct |
+| Sh(ℝ): (B) and not (A) | Locally connected. Covers by intervals of length 1/n give epimorphisms F_n → 1 whose product has no local section | correct |
+| [0,1) with the opens [0,a) | The frame is the complete chain [0,1], completely distributive, so (A) and (B) by the localic criterion. [0,a) is the join of the [0,b), b < a, so no nonzero element is completely join-prime and y([0,a)) is not projective (the cover by the [0,b) does not split) | correct; it replaces the Scott example of 7 November, which is also valid |
+| Presheaf topoi = (B) + enough projectives | In a locally connected topos a projective is a sum of connected projectives; with enough of them the indecomposable projectives generate, and Bunge applies | correct; Bunge is cited again (he had been dropped with the old argument) |
+| Localic case, (A)+(B) ⇔ L completely distributive | Products of subterminals are meets; applying (A) and (B) to ∐_j U_ij gives ∧_i∨_j U_ij ≤ ∨_f∧_i U_{i f(i)} | one direction re-derived; the converse and the two other equivalences of the status are stated as checked but not written out (minor m10) |
+| Problem three, small D, {2} → Set, Adámek–Rosický | Against `docs/problem-three/article.tex` (abstract, Prop. on the saturation, §7) and `Buffalo/CategoryTheory/ProblemThree.lean` (`equivEqualizer`, `saturation_two`, `not_saturation_one`, `not_isCardinalPresentable`; no `sorry`, no axiom) | consistent |
+| Problem `p:qcoh` | Against `docs/qcoh-descent/article.tex` (Theorems A–C, the section on butterfly points) and `Buffalo/AlgebraicGeometry/QcohDescent.lean` (`descend_bijective`, `isEqualizer_iff_bijective`, `equalizerCondition_iff_isPure`; no `sorry`, no axiom) | consistent |
+| Effectivity, Venken | Against `docs/effective/article.tex`: Corollary 3.1, a local Artin algebra of dimension 33 in six variables, any field; the second example of length 15 (16 in characteristic 2) | consistent; see the citation report for the source itself |
+
+### Major comments
+
+**M5. Problem `p:qcoh`: his stance was overstated.**
+*Location:* framing paragraph of `p:qcoh`, its status, the table (« doubts it »), the abstract and the closing paragraph (« his doubt … about full faithfulness », counted as a sixth failed expectation).
+*Observation:* in the transcript at 6:27:24 (`3ULFIl_2Wis`) he says it is not known whether quasi-coherent sheaves descend, or whether pulling back is faithful, then « maybe we can prove that »; the doubt that follows (« I doubt very much… ») is attached, as the sentence runs, to the other properties of faithfully flat quasi-compact morphisms. The transcript is uncorrected and the sentence is hard to parse, but it does not support a doubt about full faithfulness.
+*Action taken:* the framing now reports « not known » and « may be provable », says what the doubt seems to concern, and that the transcript is uncertain there; the status no longer says « against his doubt »; the table stance is « not known »; the abstract no longer lists it among the expectations that failed, and the closing paragraph counts five, as on 7 November, and says that what he called unknown is mostly settled. The companion `docs/qcoh-descent/article.tex` has the same wording in its abstract (« he doubted it could be proved »); it is outside this pass and should be aligned.
+
+**M6. Stale Lean paths.**
+*Observation:* `Buffalo/ProblemThree.lean` and `Buffalo/QcohDescent.lean` no longer exist since `Buffalo/` was moved into Mathlib's topic directories.
+*Action taken:* now `Buffalo/CategoryTheory/ProblemThree.lean` and `Buffalo/AlgebraicGeometry/QcohDescent.lean`. The seven names of the Lean column all exist in `OpenProblems/Buffalo.lean` as propositions (`def`), none proved.
+
+### Minor comments
+
+- m9. Table, Problem 1: still gave the Scott example, which the status no longer uses. Now « sheaves on the chain [0,1) », as in the text.
+- m10. Problem 1: three equivalences are « checked … but not written out ». A one-line sketch per equivalence, or a pointer to where it is written, would let a reader check them. Not changed.
+- m11. Lean column sentence: « where the answer is negative, the proposition is his expectation » is wrong for effectivity, where he expected no and the proposition is the positive question. Reworded.
+- m12. Problem three: the two statements of the course on topoi now carry their timestamps (1:51:23, 1:59:07 on `ORG14LNb5gE`), as in the companion article; both checked in the transcript.
+- m13. Abstract: « large classes of limits » now « mixed large classes of limits and colimits », as in the text; « two years before he asked it » now « before he raised it again at Buffalo », since FGA posed it in 1961.
+- m14. Kelly §3.5 bounds the closure by the number of *objects* of the shapes; « fewer than ρ arrows » implies it. Not changed.
+- m15. The PDF compiles with no errors and no overfull box; the four underfull boxes of the bibliography were there before. `\raggedbottom` added (9 pages).
+
+### Remaining doubts for the author
+
+4. M5 rests on an uncorrected transcript; the audio at 6:27:24–6:28:27 would settle what the doubt refers to.
+5. The three unwritten equivalences of Problem 1 (m10), and Adámek–Rosický Example 6.38 (not opened).
