@@ -100,6 +100,7 @@
 %   129, 136, 143, 144, 148.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-11-24 — prose of the summary and of some passages reworded, no change to the mathematics or the notes' content.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-11-24 — corrected after the referee report docs/review/modern/1.md (major issues and clear minor ones).
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-24 — Lean footnote of pages 71-73 updated: the system for all m and n (over C and R) and Prop. 3 as a greatest element are now verified in finite dimension.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -1681,9 +1682,20 @@ valeurs singulières $(2, 1, 1, 1)$, la somme des trois plus grands produits
 $s_is_j$ vaut $6$ et $\sigma_3^2 = 5$. L'implication du système vers la forme
 produit, coefficient par coefficient, est vérifiée pour tout $n$
 (\texttt{prod\_le\_of\_sigma\_system}), d'où la forme produit pour $n \leq 2$
-(\texttt{prod\_le\_of\_le\_two}). Ne sont pas vérifiés : le système pour
-$3 \leq m \leq n$, la proposition 3 en général, et le passage aux opérateurs
-compacts.}
+(\texttt{prod\_le\_of\_le\_two}). Le système est vérifié depuis pour tous $m$
+et $n$, pour des applications linéaires entre espaces préhilbertiens complexes
+de dimension finie (\texttt{sigma\_system}), d'où la forme produit pour tout $n$
+(\texttt{prod\_one\_add\_singularValues\_add\_le}) ; la démonstration garde le
+développement par $\Lambda^m$, écrit avec les mineurs principaux, mais ne
+majore pas séparément les termes mixtes et n'utilise pas la constante
+$p!\,q!/(p+q)!$. Il l'est aussi sur $\mathbf{R}$, par complexification
+(\texttt{sigma\_system\_real}). La proposition 3 est vérifiée sous la forme
+d'un plus grand élément, en dimension finie sur $\mathbf{C}$ : $\sigma_n^m(u)$
+est la plus grande valeur de $|\alpha_m(wu)|$ pour $w$ contractante de rang
+$\leq n$, atteinte en $w_0 = \sum_{j \leq n} \bar{f}_j \otimes e_j$
+(\texttt{isGreatest\_norm\_alpha\_comp}). Ne sont pas vérifiés : la seconde
+forme $\sup \alpha_m(|wu|)$ de la proposition 3, la proposition 3 sur
+$\mathbf{R}$, et le passage aux opérateurs compacts.}
 
 \emph{Proposition 3.} Pour $u$ compact et $0 \leq m \leq n$,
 \[
