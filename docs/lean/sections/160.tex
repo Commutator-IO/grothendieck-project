@@ -2,9 +2,11 @@
 
 La cote 160, \emph{Schémas [en] groupes : notes manuscrites (s.d.)}, est rangée dans le groupe \q{Dérivateurs} que l'inventaire date de 1990-[1991] ; ses vingt-deux pages traitent des sous-groupes finis de $\mathbb G_a$ en caractéristique $p$. Aux pages~7 à~9, le déterminant de Moore $\Delta_n(\xi) = \det(\xi_j^{p^i})$ donne par la règle de Cramer les coefficients $A_i$ de la relation $\xi_k^{p^n} + A_{n-1}\xi_k^{p^{n-1}} + \dots + A_0 \xi_k = 0$, et la page~9 affirme sans raison que $\Delta_n$ divise les numérateurs (\lot{160}{1}{9}). Les pages~14 et~15 transposent la construction à un faisceau $E$ localement libre de rang~$n$ muni de $u : E^{(p)} \simeq E$ : $\Delta_n^E$ est homogène de degré $\frac{p^n-1}{p-1}$, les $A_i^E$, définis hors du diviseur des zéros de $\Delta_n^E$, s'étendent à $V(E)$ tout entier, et $A_0^E = \pm(\Delta_n^E)^{p-1}$ (\lot{160}{1}{14}). On traite ici le cas où $E$ est trivialisé et $u$ l'identité.
 
+\begin{encadre}
 \begin{theoreme}[D'après les pages 9, 14 et 15, $E$ trivialisé\piste{160-relative-moore-determinant}]
 Soit $p$ premier. Sur tout anneau commutatif, $\Delta_n(c\xi) = c^{(p^n-1)/(p-1)}\Delta_n(\xi)$. Il existe des polynômes $A_0, \dots, A_{n-1} \in \mathbf F_p[X_1, \dots, X_n]$ tels que, pour toute $\mathbf F_p$-algèbre $S$ et tout $\xi \in S^n$, $\xi_k^{p^n} + \sum_i A_i(\xi)\, \xi_k^{p^i} = 0$ pour tout $k$ ; si $\Delta_n(\xi)$ est inversible, les $A_i(\xi)$ sont les seuls coefficients de cette relation. Enfin $A_0 = (-1)^n \Delta_n^{p-1}$.
 \end{theoreme}
+\end{encadre}
 
 \noindent L'énoncé tient : voir \texttt{moore\_smul'}, \texttt{dickson\_relation\_eval}, \texttt{dickson\_unique} et \texttt{A\_zero\_eval} dans \href{\leanblob/RingTheory/Folder160.lean}{\texttt{Folder160.\allowbreak{}lean}}, avec le signe $(-1)^n$ que page et lecture laissent en $\pm$.
 
@@ -44,9 +46,11 @@ Les familles $e$ et $f$ sont deux bases de $M$ ; la matrice de passage $P$, de c
 
 \noindent\emph{Le théorème de Dickson.} Les pages~9 à~12 en tirent les invariants de $\Gamma_n = \mathrm{GL}_n(\mathbf F_p)$ et de $S\Gamma_n = \mathrm{SL}_n(\mathbf F_p)$, opérant sur $\mathbf F_p[X_1, \dots, X_n]$ par $X_j \mapsto \sum_k g_{jk} X_k$ (\lot{160}{1}{9}).
 
+\begin{encadre}
 \begin{theoreme}[Dickson, pages 9 à 12\piste{160-relative-moore-determinant}]
 Soit $p$ premier. Un polynôme $f \in \mathbf F_p[X_1, \dots, X_n]$ est invariant par $\mathrm{GL}_n(\mathbf F_p)$ si et seulement s'il appartient à la sous-algèbre engendrée par $A_0, \dots, A_{n-1}$, et ceux-ci sont algébriquement indépendants : $\mathbf F_p[X_1, \dots, X_n]^{\mathrm{GL}_n(\mathbf F_p)} = \mathbf F_p[A_0, \dots, A_{n-1}]$ est une algèbre de polynômes. De même $\mathbf F_p[X_1, \dots, X_n]^{\mathrm{SL}_n(\mathbf F_p)} = \mathbf F_p[\Delta_n, A_1, \dots, A_{n-1}]$, algèbre de polynômes en $\Delta_n, A_1, \dots, A_{n-1}$.
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}[Esquisse]
 La démonstration vérifiée est la démonstration galoisienne, non celle de la page, qui passe par le Main Theorem de Zariski. Les $A_i$ sont invariants : $g$ permute les formes $\lambda \cdot X$, donc fixe $\prod_\lambda (T - \lambda \cdot X)$ ; et $\Delta_n(g \cdot X) = \det(g)\,\Delta_n(X)$. Chaque $X_k$ est racine du polynôme unitaire $\prod_\lambda (T - \lambda \cdot X)$, à coefficients dans $\mathbf F_p[A]$ ; $\mathbf F_p[X]$ est donc entier sur $\mathbf F_p[A]$, et les $n$ éléments $A_i$, qui engendrent une algèbre sur laquelle une algèbre de degré de transcendance $n$ est algébrique, sont algébriquement indépendants ; de même pour $\Delta_n, A_1, \dots, A_{n-1}$, puisque $A_0 = (-1)^n \Delta_n^{p-1}$. Le corps $\mathbf F_p(X)$ est le corps de décomposition sur $\mathbf F_p(A)$ de ce polynôme, séparable puisque sa dérivée est la constante $A_0 \neq 0$ ; c'est une extension galoisienne. Un automorphisme $\sigma$ de $\mathbf F_p(X)$ au-dessus de $\mathbf F_p(A)$ envoie chaque $X_k$ sur une racine, soit une forme $\lambda_k \cdot X$ ; il agit donc comme la matrice $g$ de lignes $\lambda_k$, qui est inversible puisque $\sigma$ est injectif. Un invariant $f$ est fixé par tous les $\sigma$, donc appartient à $\mathbf F_p(A)$ ; entier sur $\mathbf F_p[A]$, algèbre de polynômes donc intégralement close, il appartient à $\mathbf F_p[A]$. Pour $\mathrm{SL}_n$, on prend le corps $\mathbf F_p(\Delta_n, A_1, \dots, A_{n-1})$ : un $\sigma$ qui le fixe fixe $\Delta_n$, donc $\det g = 1$. Voir \texttt{dickson\_theorem}, \texttt{dickson\_algebraicIndependent}, \texttt{dickson\_theorem\_SL} et \texttt{dicksonSL\_algebraicIndependent}, qui s'appuient sur \texttt{IsGalois.\allowbreak{}of\_separable\_splitting\_field}, \texttt{IsGalois.\allowbreak{}mem\_bot\_iff\_fixed} et le degré de transcendance de Mathlib.

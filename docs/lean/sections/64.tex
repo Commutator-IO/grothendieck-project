@@ -2,9 +2,11 @@
 
 La cote 64, \emph{Modules courbes elliptiques en caractéristiques $\neq 2$ : notes manuscrites (s.d.)}, cent cinquante-six pages que l'inventaire date \q{[à partir de 1980-1982]}, consacre sa partie~II aux structures octaédrales dans $\mathbf P^1$ (pages~43 à~52, \lot{64}{3}{44}). Une action fidèle du groupe de Klein se met localement sous la forme $\sigma_1(z) = -z$, $\sigma_2(z) = 1/z$, et la somme des axes est la configuration octaédrale $\Delta = \{0, \infty, \pm 1, \pm i\}$. Pour identifier $\mathrm{Aut}(X, \Delta)$ au groupe des rotations de l'octaèdre, la page~48 calcule le fixateur de deux sommets non opposés, $\infty$ et $-1$ : un tel automorphisme s'écrit $z \mapsto az + (a - 1)$, et s'il n'est pas l'identité il permute $\{0, 1, i, -i\}$. Les quatre conditions sur $a$ qui en résultent ont, dit la page, une intersection vide hors des caractéristiques $2$ et~$5$. La marge note que $a^4 = \pm 4$ \q{ne peut être $= 1$ qu'en car.\ $3$ et $5$}, et la lecture ajoute l'hypothèse \q{$5$ inversible} partout où elle sert.
 
+\begin{encadre}
 \begin{theoreme}[Grothendieck, page 48]\label{thm:64-fixateur}
 Soit $K$ un corps où $2 \neq 0$, et $i \in K$ avec $i^2 = -1$. Si $z \mapsto az + (a - 1)$ envoie $\{0, 1, i, -i\}$ dans lui-même, alors $5(a - 1) = 0$. En particulier, si $5 \neq 0$ dans $K$, le fixateur de $\infty$ et $-1$ dans $\mathrm{Aut}(\mathbf P^1_K, \Delta)$ est trivial.
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}
 Les quatre points sont distincts, puisque $2 \neq 0$. Si $a = 0$, l'image de $0$ est $-1$, qui n'est aucun des quatre points. Sinon l'application est injective, donc permute les quatre points, et conserve leur somme, qui vaut~$1$ ; or elle la change en $a \cdot 1 + 4(a - 1) = 5a - 4$. D'où $5(a - 1) = 0$.
@@ -27,9 +29,11 @@ Les six points de $\Delta$ sont les sommets d'un octaèdre dont les sommets oppo
 \end{tikzpicture}
 \end{center}
 
+\begin{encadre}
 \begin{contrexemple}[énoncé de l'édition, d'après la note de la lecture à la page 49]\label{ce:64-car5}
 En caractéristique~$5$, le fixateur de $\infty$ et $-1$ n'est pas trivial : $z \mapsto 2z + 1$ permute $\{0, 1, i, -i\}$. Sur $\mathbf F_5$, avec $i = 2$, la configuration $\Delta$ est $\mathbf P^1(\mathbf F_5)$ tout entier ; les bijections de $\mathbf P^1(\mathbf F_5)$ induites par $\mathrm{GL}_2(\mathbf F_5)$, qui préservent toutes $\Delta$, sont au nombre de $120$ et non de $24$, et le fixateur de $\infty$ et $-1$ est formé de l'identité et des $z \mapsto az + (a - 1)$ pour $a = 2, 3, 4$.
 \end{contrexemple}
+\end{encadre}
 
 \begin{proof}
 Comme $i^2 = -1 = 4$, $i = \pm 2$. Pour $i = 2$, l'application $z \mapsto 2z + 1$ envoie $0 \mapsto 1 \mapsto 3 = -i \mapsto 2 = i \mapsto 0$ ; de même pour $i = -2$. Sur $\mathbf F_5$, les six points $\infty, 0, 1, -1, 2, -2$ sont les six points de $\mathbf P^1(\mathbf F_5)$. Le décompte des bijections induites et du fixateur se fait sur les $625$ matrices de $M_2(\mathbf F_5)$ ; Lean le vérifie par calcul (\texttt{card\_pgl}, \texttt{card\_fixer}).

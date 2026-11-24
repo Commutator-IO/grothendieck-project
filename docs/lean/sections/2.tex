@@ -6,13 +6,16 @@ La cote 2, \emph{Théorème de Riemann-Roch}, notes que l'inventaire dit antéri
 
 Le premier énoncé calcule la classe de Chern totale du faisceau d'un point de $\mathbf P^r$. Pour $r = 1$ on trouve $1 + \eta$, pour $r = 2$, $1 - \eta^2$, et pour $r = 3$, $1 + 2\eta^3$ : le coefficient $(r-1)!$ grandit avec la dimension. Le second en tire une conséquence : si la classe $y$ du diviseur $Y$ est tuée par $(r-1)!$, le terme correctif disparaît, et l'image directe $i_!(\mathcal O_Y)$ a pour classe de Chern totale~$1$. Si cette classe est non nulle dans $K$, elle échappe entièrement aux classes de Chern entières ; c'est l'énoncé encadré plus bas, dont la non-nullité n'est pas vérifiée. Pour $r \leq 2$, le coefficient vaut $\pm 1$, l'hypothèse force $y = 0$, et le phénomène ne se produit pas.
 
+\begin{encadre}
 \begin{theoreme}[Grothendieck, page 9, la classe de Chern d'un point\piste{2-trivial-total-chern-class}]\label{thm:2-point}
 Soient $r \geq 1$ et $A$ un anneau commutatif. Dans $A[\eta]/(\eta^{r+1})$,
 \[
   \prod_{i=0}^{r} (1 - i\eta)^{(-1)^i\binom ri} \;=\; 1 + (-1)^{r-1}(r-1)!\,\eta^r .
 \]
 \end{theoreme}
+\end{encadre}
 
+\begin{encadre}
 \begin{theoreme}[D'après la page 13, la classe de Chern de $i_!(\mathcal O_Y)$]\label{thm:2-immersion}
 Soient $r \geq 1$, $A$ un anneau commutatif et $y \in A$ tel que $1 - y$ soit inversible (par exemple $y$ nilpotent) et $(r-1)!\,y = 0$. Dans $A[\eta]/(\eta^{r+1})$,
 \[
@@ -20,11 +23,13 @@ Soient $r \geq 1$, $A$ un anneau commutatif et $y \in A$ tel que $1 - y$ soit in
 \]
 c'est-à-dire $c(i_!(\mathcal O_Y)) = 1$ dans ce modèle.
 \end{theoreme}
+\end{encadre}
 
 \noindent Les deux énoncés tiennent tels que la lecture les donne (\texttt{chernPoint}, \texttt{chernImmersion}, dans \href{\leanblob/AlgebraicGeometry/Folder2.lean}{\texttt{Folder2.\allowbreak{}lean}}). Le premier est démontré sur $\mathbf Z$ par la dérivée logarithmique, au lieu du logarithme de la lecture, puis transporté à tout anneau ; le second en découle, le produit des dénominateurs étant celui des numérateurs où $\eta$ est remplacé par $\eta/(1 - y)$. La page~13 suppose $y$ dans $A^1(X)$ ; seules servent l'inversibilité de $1 - y$ et l'hypothèse $(r-1)!\,y = 0$.
 
 Au bas de la page~13, un \emph{N.B.} donne lui-même l'exemple : $X$ une courbe elliptique d'origine $0$, $a \neq 0$ un point tel que $a + a = 0$, $x = (a) - (0)$ la classe d'un diviseur de degré zéro, et $r = 3$. La page affirme que $y = i_!(x)$ n'est pas nul, et que pourtant \q{les coefficients de la classe de Chern sont nuls}. Dans le même modèle, $x = [\mathcal O_a] - [\mathcal O_0] = [\mathcal O(-0)] - [\mathcal O(-a)]$, et l'on note $p$, $q$ les classes des points $0$ et $a$ dans $A^1(X)$. Sur une courbe, $p^2 = q^2 = 0$, et $a + a = 0$ donne $2(p - q) = 0$.
 
+\begin{encadre}
 \begin{theoreme}[Grothendieck, page 13, le \emph{N.B.} : la classe de Chern de $i_!(x)$]\label{thm:2-nb}
 Soient $r \geq 1$, $A$ un anneau commutatif et $p, q \in A$ tels que $p^2 = q^2 = 0$ et $r!\,(p - q) = 0$. Dans $A[\eta]/(\eta^{r+1})$,
 \[
@@ -32,6 +37,7 @@ Soient $r \geq 1$, $A$ un anneau commutatif et $p, q \in A$ tels que $p^2 = q^2 
 \]
 Pour $r = 3$, l'hypothèse $2(p - q) = 0$ suffit.
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}C'est encore le même calcul. Si $u$ est un élément inversible de $A$, le produit des $(u - i\eta)^{(-1)^i\binom ri}$ est celui du théorème~\ref{thm:2-point} où $\eta$ est remplacé par $\eta/u$, les exposants étant de somme nulle ; il vaut donc $1 + (-1)^{r-1}(r-1)!\,u^{-r}\eta^r$. Le quotient des deux produits, pour $u = 1 - p$ et $v = 1 - q$, vaut $1$ dès que $(r-1)!\,(u^{-r} - v^{-r}) = 0$. Comme $p^2 = 0$, $(1 - p)^{-1} = 1 + p$ et $(1 + p)^r = 1 + rp$, de sorte que $(r-1)!\,(u^{-r} - v^{-r}) = r!\,(p - q)$. Pour $r = 3$, $r! = 6 = 3 \cdot 2$.\end{proof}
 

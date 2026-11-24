@@ -4,9 +4,11 @@ La cote 29 réunit, entre 1959 et 1969, les notes de Grothendieck sur le groupe 
 
 \noindent\emph{Ramification modérée.} Le cadre est celui de SGA~1, exposé~XIII, et de son appendice~I : pour $X$ strictement local régulier et $D$ à croisements normaux de branches indexées par $C$, le groupe fondamental modéré de $X \smallsetminus D$ est $\prod_{\ell \neq p} \mathbf Z_\ell(1)^C$ (corollaire~5.3 de l'appendice, dans l'édition de 2003 \cite{sga1}), et l'on cherche ici sa fonctorialité. Le groupe fondamental modéré d'un voisinage formel d'un diviseur à croisements normaux, objet des pages~87 à~97 et de l'échange avec Murre, est aussi le sujet du livre de Grothendieck et Murre (1971) \cite{grothendieckmurre1971}. Les pages~190 à~200 cherchent un cadre axiomatique, les \q{domaines de ramification}, et réalisent les revêtements modérés comme revêtements étales d'un champ (ci-dessous). La monodromie modérée à plusieurs paramètres de la cote~34 et la dimension cohomologique de la cote~31, de la même période, sont encadrées dans les parties \q{Groupes fondamentaux et théorie de Galois} et \q{Cohomologie étale et $\ell$-adique}.
 
+\begin{encadre}
 \begin{theoreme}[Grothendieck, page 120, le critère\piste{29-inertia-matrix-determinant}]\label{thm:29-critere}
 Soient $C$, $C'$ des ensembles finis, $N$ une matrice entière de lignes indexées par $C'$ et de colonnes par $C$, et $p$ un nombre premier ou $p = 1$ (l'exposant caractéristique). L'application $\mathbf Z_\ell^C \to \mathbf Z_\ell^{C'}$ de matrice $N$ est bijective pour tout nombre premier $\ell \neq p$ si et seulement si $\operatorname{card} C = \operatorname{card} C'$ et, les colonnes étant mises en bijection avec les lignes, l'entier $\det N$ vaut $\pm p^k$ pour un $k \geq 0$.
 \end{theoreme}
+\end{encadre}
 
 \noindent L'énoncé tient tel que la page le donne, par l'argument d'une ligne de la lecture (\texttt{criterion}, dans \href{\leanblob/AlgebraicGeometry/Folder29.lean}{\texttt{Folder29.\allowbreak{}lean}}). L'égalité des cardinaux vient d'une seule valeur de $\ell$ ; le choix de la bijection entre colonnes et lignes ne change le déterminant que d'un signe.
 
@@ -24,9 +26,11 @@ Dans la situation ci-dessus, l'application induite sur l'inertie modérée est l
 
 Dans la vérification, la classe des morphismes trivialisants est un paramètre $E$, puisque mathlib n'a pas les morphismes de descente effective universelle ; on n'en utilise que les propriétés que la page utilise. On note $\mathrm{Triv}_n(E)$ la classe des $f : X \to Y$ pour lesquels il existe $g : Y' \to Y$ dans $E$ avec $X \times_Y Y' \simeq [1, n]_{Y'}$ au-dessus de $Y'$.
 
+\begin{encadre}
 \begin{contrexemple}[Grothendieck, page 214, la Conclusion telle qu'elle est écrite\piste{29-degree-n-as-primitive}]
 Les conditions a) à e) ne déterminent pas la notion de degré. Si $\mathrm{deg}$ les vérifie, la classe $\mathrm{deg}^{\leq}$, où $\mathrm{deg}^{\leq}_0 = \mathrm{deg}_0$ et où $f$ est de degré~$n \geq 1$ s'il est de degré~$k$ pour un $1 \leq k \leq n$, les vérifie aussi. Dans la catégorie des ensembles finis, avec pour $E$ les surjections, le degré usuel (toutes les fibres ont $n$ éléments) et son $\mathrm{deg}^{\leq}$ sont deux notions distinctes : l'identité d'un point y est de degré~$1$ et~$2$.
 \end{contrexemple}
+\end{encadre}
 
 \begin{proof}
 Pour $\mathrm{deg}^{\leq}$, a), c), d$'$) et e) se lisent sur $\mathrm{deg}$, d) vient de ce qu'un degré $k \geq 1$ est encore $\geq 1$, et b) de ce que $1 \leq k_1 \leq n_1$ et $1 \leq k_2 \leq n_2$ donnent $k_1 + k_2 \leq n_1 + n_2$. Dans les ensembles finis, le degré usuel vérifie a) à e) : les fibres se conservent par changement de base et s'additionnent sur une somme, $Y_n$ est l'ensemble des points dont la fibre a $n$ éléments, une fibre non vide donne la surjectivité. L'identité d'un point n'y est pas de degré~$2$.
@@ -40,9 +44,11 @@ Le pas de la page~214 qui cède est \q{donc par 3 b) et f) on voit que $X'_1 \to
 
 \noindent que le degré usuel des ensembles finis vérifie, et que $\mathrm{deg}^{\leq}$ ne vérifie pas.
 
+\begin{encadre}
 \begin{theoreme}[d'après les pages 212 et 214, avec la condition (u)\piste{29-degree-n-as-primitive}]
 Soit $C$ une catégorie à produits fibrés, finitairement extensive (sommes finies disjointes et universelles), dans laquelle tout monomorphisme est l'inclusion d'un sommande direct. Soit $E$ une classe de morphismes contenant les identités, stable par composition, et dont tout changement de base d'un élément est un épimorphisme. Si $\mathrm{deg}$ vérifie a) à e) pour $E$ et la condition (u), alors pour tout~$n$, $\mathrm{deg}_n = \mathrm{Triv}_n(E)$. En particulier deux telles notions de degré coïncident.
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}
 \emph{Sens direct}, par récurrence sur $n$, en suivant la page~214. Pour $n = 0$, $X$ est vide par e), et $g = \mathrm{id}_Y$ convient. Pour $n \geq 1$, $f$ est dans $E$ par d) ; on change de base par $f$ lui-même : $q : X' = X \times_Y X \to X$ est de degré~$n$ par a). La diagonale est un monomorphisme, donc $X' = X \sqcup X'_1$, la diagonale étant une section de $q$. \emph{Simplification} : on décompose $X = \coprod_j Z_j$ par d$'$) pour $r : X'_1 \to X$. Au-dessus de $Z_j$, la somme universelle donne $X' \times_X Z_j = Z_j \sqcup (X'_1 \times_X Z_j)$, de degré $1 + j$ par b) et c), et de degré~$n$ par a) ; par (u), $Z_j$ est vide pour $j \neq n - 1$, donc $Z_{n-1} = X$ et $r$ est de degré $n - 1$. La récurrence fournit $h : W \to X$ dans $E$ avec $X'_1 \times_X W \simeq [1, n-1]_W$ ; alors $h f$ est dans $E$, et $X \times_Y W = X' \times_X W = W \sqcup (X'_1 \times_X W) \simeq [1, n]_W$.

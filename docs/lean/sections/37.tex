@@ -12,9 +12,11 @@ Pour $a \in P$ et $i, l \geq 0$, $\lambda_i(a \cdot X_lT^l)$ vaut $\varepsilon(a
 Tout monôme de $a\,X_lT^l$ est divisible par $X_lT^l$. Le monôme $X_iT^i$ ne l'est que si $l = i$, et le coefficient de $X_iT^i$ dans $a\,X_iT^i$ est alors celui du monôme $1$ dans $a$. Tout monôme de $a\,T^{n+1}$ a un degré en $T$ au moins $n + 1 > i$.
 \end{proof}
 
+\begin{encadre}
 \begin{theoreme}[Grothendieck, page 92, minimalité des générateurs\piste{37-ega-i-10-10-5-counterexample}]\label{thm:37-minimal}
 L'idéal $J_n$ de $A_n$ est engendré par $n + 1$ éléments et ne l'est par aucune famille de moins de $n + 1$ éléments.
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}
 Soient $g_1, \ldots, g_m$ des générateurs de $J_n$. On écrit chaque $X_jT^j$, $0 \leq j \leq n$, comme combinaison $\sum_r a_{jr}g_r$, et chaque $g_r$ comme combinaison $\sum_l b_{rl}X_lT^l$, puis on relève tout dans $P$ : les égalités y valent à un multiple de $T^{n+1}$ près. Appliquons $\lambda_i$, $i \leq n$, à la première. Par le lemme~\ref{lem:37-lambda}, le membre de gauche donne $\delta_{ij}$, le multiple de $T^{n+1}$ ne contribue pas, et chaque $a_{jr}g_r$ donne $\sum_l \lambda_i(a_{jr}b_{rl}X_lT^l) = \varepsilon(a_{jr})\,\varepsilon(b_{ri})$. Les matrices $E = (\varepsilon(a_{jr}))$, de taille $(n+1) \times m$, et $L = (\varepsilon(b_{ri}))$, de taille $m \times (n+1)$, à coefficients dans $k$, vérifient donc $EL = 1$. Le rang de l'identité, $n + 1$, est au plus celui de $E$, lui-même au plus $m$.
@@ -36,9 +38,11 @@ Soient $S$ un anneau commutatif, $J$ un idéal de $S$, $F$ un $S$-module project
 Soit $\varphi' : F \to S/J$ le composé de $\varphi$ et de l'isomorphisme. Comme $F$ est projectif, $\varphi'$ se relève en $\psi : F \to S$ ; comme $\varphi'$ est surjective, il existe $x_0 \in F$ d'image la classe de $1$, et l'on pose $\chi(s) = s x_0$. Alors $c = 1 - \psi(x_0)$ est dans $J$, et les $\psi(\gamma(v_r))$, pour des générateurs $v_1, \ldots, v_p$ de $K$, aussi, puisque $\varphi \circ \gamma = 0$. Réciproquement, pour $x \in J$, $\varphi'(\chi(x))$ est la classe de $x$, nulle, donc $\chi(x) = \gamma(y)$ pour un $y \in K$, et $x = xc + x\,\psi(x_0) = xc + \psi(\gamma(y))$ est dans l'idéal engendré par $c$ et les $\psi(\gamma(v_r))$.
 \end{proof}
 
+\begin{encadre}
 \begin{theoreme}[D'après la page 92, contre-exemple à EGA~I 10.10.5, sous une forme plus générale\piste{37-ega-i-10-10-5-counterexample}]\label{thm:37-contre}
 Soient $A$ un anneau commutatif quelconque et, pour tout $n$, un homomorphisme d'anneaux quelconque $A \to A_n$. Il n'existe pas de $A$-module de présentation finie $M$ tel que $A_n \otimes_A M \simeq M_n$ comme $A_n$-modules pour tout $n$. En particulier, pour $A = B[[T]]$ et ses réductions, le système compatible $(M_n)$ de modules de présentation finie ne vient d'aucun $A$-module de présentation finie : la condition b) d'EGA~I 10.10.5 n'entraîne pas a) et c) sans hypothèse noethérienne.
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}
 Soit $A^p \xrightarrow{\gamma_0} A^q \xrightarrow{\varphi_0} M \to 0$ une présentation. Le produit tensoriel par $A_n$ est exact à droite : $A_n \otimes_A A^p \to A_n \otimes_A A^q \to A_n \otimes_A M \to 0$ est exact, le module du milieu est libre, et celui de gauche est engendré par $p$ éléments. Si $A_n \otimes_A M \simeq A_n/J_n$, le lemme~\ref{lem:37-schanuel} engendre $J_n$ par $p + 1$ éléments, et le théorème~\ref{thm:37-minimal} donne $n + 1 \leq p + 1$ pour tout $n$, ce qui est absurde pour $n = p + 1$.

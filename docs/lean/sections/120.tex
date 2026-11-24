@@ -30,9 +30,11 @@ Soient $R$ un anneau sans diviseur de zéro, $X$ un ensemble, $(f_\alpha)_{\alph
 Un zéro commun des $f_\alpha$ annule les $f_\alpha g_\beta$. Pour la séparation, si un $f_\alpha$ sépare $x$ et $y$, c'est fini. Sinon $f_\alpha(x) = f_\alpha(y)$ pour tout $\alpha$ ; on choisit $\alpha$ avec $\lambda = f_\alpha(x) \neq 0$ et $\beta$ avec $g_\beta(x) \neq g_\beta(y)$. Alors $f_\alpha g_\beta(x) - f_\alpha g_\beta(y) = \lambda\,(g_\beta(x) - g_\beta(y))$ n'est pas nul, puisque $R$ n'a pas de diviseur de zéro.
 \end{proof}
 
+\begin{encadre}
 \begin{theoreme}[Pages 22 et 23, écrasement sur un corps, forme corrigée par l'édition\piste{120-collapse-separation-over-a-field}]\label{thm:120-ecrasement}
 Supposons (M$'$1) à (M$'$4) et (M11), $R$ étant un corps. Soient $X \in \mathcal M_I$, des fonctions modérées $f_\alpha$ sur $X$ en nombre fini, des $e_\alpha \in R_0$, $Y = \bigcap_\alpha f_\alpha^{-1}(e_\alpha)$, et des fonctions modérées $g_\beta$ qui plongent $X$. Les fonctions $f_\alpha - e_\alpha$ et $(f_\alpha - e_\alpha)\,g_\beta$ sont modérées, ont $Y$ pour lieu des zéros communs, et séparent les points de $X \smallsetminus Y$. En particulier $Y$ est le lieu des zéros communs d'une famille finie de fonctions modérées qui sépare les points de $X \smallsetminus Y$ : la seconde moitié de (M6) découle de la première, et $X/Y$ est un espace modéré au sens strict.
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}
 Par le lemme~\ref{lem:120-anneau}, la constante $e_\alpha$ est modérée parce que $e_\alpha \in R_0$, donc $f_\alpha - e_\alpha$ aussi, et les produits $(f_\alpha - e_\alpha)\,g_\beta$ le sont. Les zéros communs des $f_\alpha - e_\alpha$ forment $Y$. Pour $x \neq y$ dans $X \smallsetminus Y$, un $f_\alpha - e_\alpha$ ne s'annule pas en $x$, et comme les $g_\beta$ plongent $X$, l'un d'eux sépare $x$ et $y$ : le lemme~\ref{lem:120-separation} conclut. Pour l'énoncé d'existence, les coordonnées, modérées par le lemme~\ref{lem:120-anneau}, plongent $X$, et la famille est indexée par $A \sqcup (A \times I)$, qui est fini.
@@ -44,6 +46,7 @@ L'énoncé tient tel que la lecture le donne, et plus généralement. Ni (M$'$3)
 
 \noindent\emph{Sommes amalgamées (pages 8 à 13).} On ajoute (M5$'$), $\emptyset \in \mathcal M_I$ et la stabilité par réunion de deux parties (page~9) ; (M6), toute partie modérée $Z$ d'un $X \in \mathcal M_I$ est la fibre $F^{-1}(e)$, $e \in R_0^A$, d'une famille modérée finie $F$ injective hors de $Z$ ; (M7), une fonction modérée sur $Z$ se prolonge en une fonction modérée sur $X$ (page~12). Un espace est un $X \in \mathcal M_I$, une application modérée une famille à graphe modéré.
 
+\begin{encadre}
 \begin{theoreme}[D'après les pages 10 à 13, conclusion restituée par la lecture\piste{120-axiomatic-pushouts-along-embeddings}]
 Supposons $R$ non vide et (M5$'$). Soient $i_1 : Z \hookrightarrow X_1$ et $i_2 : Z \hookrightarrow X_2$ deux plongements modérés.
 \begin{enumerate}
@@ -52,6 +55,7 @@ Supposons $R$ non vide et (M5$'$). Soient $i_1 : Z \hookrightarrow X_1$ et $i_2 
 \item (Critère de la page~10, nécessité.) Inversement, si une partie modérée $P \subset R^N$ et des familles modérées $q_1 : X_1 \to P$, $q_2 : X_2 \to P$ forment une somme amalgamée dans les ensembles ($q_1 i_1 = q_2 i_2$ sur $Z$, $P = q_1(X_1) \cup q_2(X_2)$, et toute paire d'applications vers un ensemble non vide compatibles sur $Z$ se factorise par $P$), les coordonnées de $q_1$ et $q_2$ sont des fonctions modérées vérifiant a), b), c). Les conditions a), b), c) équivalent donc à l'existence d'une somme amalgamée modérée que l'oubli respecte.
 \end{enumerate}
 \end{theoreme}
+\end{encadre}
 
 \noindent L'énoncé tient (\href{\leanblob/Topology/Folder120.lean}{\texttt{pushout\_of\_criterion}}, \href{\leanblob/Topology/Folder120.lean}{\texttt{pushout\_exists}}), y compris la conclusion restituée à la page~13 : les deux images se rencontrent exactement le long de $Z$. La nécessité tient aussi (\href{\leanblob/Topology/Folder120.lean}{\texttt{criterion\_of\_pushout}}, \href{\leanblob/Topology/Folder120.lean}{\texttt{criterion\_iff}}) : le plongement $F$ de la lecture est l'inclusion $P \subset R^N$, et $f = q_1$, $g = q_2$. Pour b), on factorise par $P$ le couple à valeurs dans les propositions $u_1(y) = (y = x)$, $u_2(y) = (\exists z \in Z,\ y = i_2 z \text{ et } i_1 z = x)$, compatible sur $Z$ parce que $i_2$ est injectif : $q_1 x = q_1 x'$ force $x' = x$. Pour c), le couple $u_1 = \mathrm{vrai}$, $u_2(y) = (y \in i_2(Z))$ montre que $q_1 x_1 = q_2 x_2$ force $x_2 \in i_2(Z)$, ce qui est plus fort que c). Ni (M5$'$), ni (M6), ni (M7), ni le caractère modéré de $P$ ne servent à cette direction ; l'injectivité de $i_1$ et $i_2$ y sert.
 

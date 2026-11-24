@@ -2,9 +2,11 @@
 
 La cote 5, \emph{Cristaux et cohomologie de De Rham : généralités, correspondances Deligne et Berthelot}, que l'inventaire date de 1965--1969, porte sur les puissances divisées et les sites cristallins. À la page~4, l'algèbre locale artinienne universelle sur $W(k)$ dont l'idéal maximal porte des puissances divisées nulles en degrés $\geq p^{\nu+1}$ est présentée comme $W[\Lambda_0, \dots, \Lambda_\nu]/(\Lambda_i^p - q_i\Lambda_{i+1}, \Lambda_\nu^p, \Lambda_0 - p)$, où $\Lambda_i = \gamma_{p^i}(p)$ et $q_i = (p^{i+1})!/((p^i)!)^p$ (\lot{5}{1}{4}) ; la relation est $\gamma_{p^i}(x)^p = q_i\, \gamma_{p^{i+1}}(x)$. Une note de la lecture s'appuie sur $v_p(q_\nu) = 1$.
 
+\begin{encadre}
 \begin{theoreme}[Énoncé de l'édition, d'après la page 4\piste{5-universal-artinian-pd-normal-form}]
 Pour tout entier $p$ et tout $i$, $((p^i)!)^p\, q_i = (p^{i+1})!$ : $q_i$ est un entier, le coefficient multinomial de $p$ blocs de taille $p^i$. Si $p$ est premier, $(p-1)\, v_p((p^i)!) = p^i - 1$ et $v_p(q_i) = 1$.
 \end{theoreme}
+\end{encadre}
 
 \noindent L'énoncé tient. La valuation vient de la formule de Legendre sous la forme $v_p((pm)!) = v_p(m!) + m$ ; voir les théorèmes \texttt{factorial\_eq\_mul\_q}, \texttt{q\_eq\_multinomial} et \texttt{padicValNat\_q} de \href{\leanblob/RingTheory/Folder5.lean}{\texttt{Folder5.\allowbreak{}lean}}.
 
@@ -14,9 +16,11 @@ A^{(\nu)} = W[\Lambda_0, \ldots, \Lambda_\nu] \big/ \bigl(\Lambda_i^{p} - q_i\La
 \]
 qui est bien le quotient de $W[\Lambda]$ par toutes les relations de la page (\texttt{presentation}), et $J = (\Lambda_0, \ldots, \Lambda_\nu) \subset W^{(\nu)}$.
 
+\begin{encadre}
 \begin{theoreme}[Grothendieck, page 4, universalité de la présentation\piste{5-universal-artinian-pd-normal-form}]
 L'idéal $J$ de $W^{(\nu)}$ porte une structure de puissances divisées $\delta$ telle que $\delta_{p^i}(p) = \Lambda_i$ pour $0 \leq i \leq \nu$ et $\delta_n(y) = 0$ pour $y \in J$ et $n \geq p^{\nu+1}$. Pour toute $W$-algèbre $T$ munie d'un idéal $I$ à puissances divisées $\gamma$ tel que $p \in I$ et $\gamma_n(p) = 0$ pour $n \geq p^{\nu+1}$, il existe un unique morphisme de $W$-algèbres $W^{(\nu)} \to T$ compatible aux puissances divisées ; il envoie $\Lambda_i$ sur $\gamma_{p^i}(p)$.
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}
 \emph{Un plongement.} Soit $K$ le corps des fractions de $W$ et $B = K[X]/(X^{p^{\nu+1}})$. L'application $\psi : \Lambda_i \mapsto X^{p^i}/(p^i)!$ respecte les relations, puisque $((p^i)!)^p q_i = (p^{i+1})!$, et définit $\psi : A^{(\nu)} \to B$. Elle est injective. D'une part les monômes $\Lambda^a$ à exposants $0 \leq a_i < p$ engendrent $A^{(\nu)}$ comme $W$-module : leur $W$-module est stable par multiplication par chaque $\Lambda_j$, grâce à la retenue de la page~8 ($\Lambda_j^{p} = q_j\Lambda_{j+1}$, ou $0$ si $j = \nu$). D'autre part $\psi(\Lambda^a)$ est un multiple non nul de $X^{\sum a_i p^i}$, et ces exposants sont distincts et $< p^{\nu+1}$ (écriture en base $p$). Un élément $\sum w_a \Lambda^a$ de noyau nul a donc tous ses $w_a$ nuls.
@@ -30,9 +34,11 @@ L'idéal $J$ de $W^{(\nu)}$ porte une structure de puissances divisées $\delta$
 
 \noindent L'énoncé tient, sous une forme plus forte que celle de la page : ni la locali\-té, ni l'artinianité, ni le corps résiduel n'interviennent, et l'hypothèse sur $T$ ne porte que sur les $\gamma_n(p)$. Lean : \texttt{universal}, \texttt{dpWν}, \texttt{dpWν\_p}, \texttt{dpWν\_eq\_zero}, \texttt{presentation} ; pour les étapes, \texttt{boxSpan\_eq\_top} (la retenue), \texttt{deg\_injective}, \texttt{psi\_injective}, \texttt{dpow\_split} et \texttt{choose\_pow\_mul\_pow\_modEq} (Lucas), \texttt{psi\_hmem}, \texttt{dpIbar}, \texttt{isSubDPIdeal\_Kp}, dans \href{\leanblob/RingTheory/Folder5.lean}{\texttt{Folder5.\allowbreak{}lean}}.
 
+\begin{encadre}
 \begin{theoreme}[Grothendieck, pages 5 et 6, la suffisance du lemme\piste{5-universal-artinian-pd-normal-form}]
 Soient $\lambda_0, \ldots, \lambda_\nu \in W$ avec $\lambda_0 = p$ et $\lambda_i^p = q_i\lambda_{i+1}$ (ainsi $\lambda_i = p^{p^i}/(p^i)!$), et $\Theta_i = \Lambda_i - \lambda_i$. Dans $W^{(\nu)}$, on a $p^i\Theta_i = 0$ pour $0 \leq i \leq \nu$ et $p^\nu\lambda_\nu^p = 0$ ; si $\lambda_\nu = p^m u$ avec $u$ inversible, $p^{\nu + pm} = 0$.
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}
 Récurrence sur $i$, comme à la page~6 : $\Theta_0 = \Lambda_0 - p = 0$. Si $p^i\Theta_i = 0$, la différence $\Lambda_i^p - \lambda_i^p = q_i\Theta_{i+1}$ est un multiple de $\Lambda_i - \lambda_i = \Theta_i$, donc $p^i q_i \Theta_{i+1} = 0$ ; comme $q_i = p\,r_i$ avec $r_i$ premier à $p$ ($v_p(q_i) = 1$), $p^{i+1}\Theta_{i+1} = 0$. Pour $i = \nu$, $\Lambda_\nu^p = 0$ donne de même $p^\nu\lambda_\nu^p = 0$. On n'a pas besoin de développer le binôme.
@@ -42,6 +48,7 @@ Récurrence sur $i$, comme à la page~6 : $\Theta_0 = \Lambda_0 - p = 0$. Si $p^
 
 La nécessité, que la page laisse \q{au lecteur} avec un point d'exclamation en marge, est démontrée elle aussi. Pour un exposant $a = (a_0, \ldots, a_\nu)$, $0 \leq a_i < p$, notons $\operatorname{ord}(a)$ l'indice du premier exposant non nul de $a$, et $\operatorname{ord}(0) = c(\nu) = \nu + pm$.
 
+\begin{encadre}
 \begin{theoreme}[Grothendieck, pages 5 et 6, le lemme et son corollaire\piste{5-universal-artinian-pd-normal-form}]
 Soient $\lambda_i$ comme ci-dessus, avec $\lambda_\nu = p^m u$, $u$ inversible, et $\Theta_i = \Lambda_i - \lambda_i$.
 \begin{enumerate}
@@ -52,6 +59,7 @@ Soient $\lambda_i$ comme ci-dessus, avec $\lambda_\nu = p^m u$, $u$ inversible, 
 \item Si $W$ est un anneau de valuation discrète d'uniformisante $p$, $W^{(\nu)}$ est de longueur $\sum_a \operatorname{ord}(a) = p + p^2 + \cdots + p^\nu + pm$.
 \end{enumerate}
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}
 \emph{La retenue dans les $\Theta_i$.} En développant $\Lambda_i^p = (\Theta_i + \lambda_i)^p$ et en utilisant $\lambda_i^p = q_i\lambda_{i+1}$, on trouve

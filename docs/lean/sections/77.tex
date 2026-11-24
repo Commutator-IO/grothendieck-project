@@ -151,9 +151,11 @@ Posons $A_\Delta = \mathbf Z[1/3]$ et $B_\Delta = A_\Delta[U]/(U^2 - 3)$. Le pol
 
 Le contre-exemple est formalisé tel que la page écrit c), avec $\mathbf Z[1/6]$ réalisé comme $\mathbf Z[1/3][1/2]$ ; le lemme \texttt{quadAlg\_away} établit, sur un anneau commutatif quelconque $R$, l'isomorphisme $(R[U]/(U^2 - d))_s \simeq R_s[U]/(U^2 - d)$ (Lean : \href{\leanblob/RingTheory/Folder77.lean}{\texttt{extension\_across\_two\_counterexample}, \texttt{quadAlg\_away}, \texttt{sq\_sub\_four\_mul\_ne\_three}}). Ici $B_\Delta$ n'est pas étale sur $\mathbf Z[1/3]$, puisque son discriminant $12$ n'y est pas inversible : le contre-exemple ne contredit donc pas la proposition lue avec \q{finie étale}, démontrée ci-dessous, dont ce fait est d'ailleurs une conséquence (corollaire~\ref{cor:77-B3}).
 
+\begin{encadre}
 \begin{theoreme}[page 85, c) $\Rightarrow$ a) avec \q{finie étale}\piste{77-discriminant-extension-across-2}]\label{thm:77-p85}
 Soient $A$ un anneau commutatif où $2$ est régulier, tel que $A_0 = A/2A$ soit intègre et intégralement clos, et $\Delta \in A$ avec $\Delta \notin 2A$. S'il existe une $A_\Delta$-algèbre finie étale $B_\Delta$ et un isomorphisme de $A_\Delta$-algèbres $(B_\Delta)_2 \simeq A_{2\Delta}[U]/(U^2 - \Delta)$, alors il existe $b, c \in A$ avec $b^2 - 4c = \Delta$. De plus, deux morphismes de $A_\Delta$-algèbres $B_\Delta \to B'_\Delta$ compatibles avec de tels isomorphismes pour $B_\Delta$ et $B'_\Delta$ sont égaux.
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}[Esquisse]
 Soit $P = 2A_\Delta$, premier puisque $\Delta \notin 2A$, et $R = (A_\Delta)_P$ : c'est un anneau local d'idéal maximal $2R$, et aussi le localisé de $A$ en $2A$. Soit $C = R \otimes_{A_\Delta} B_\Delta$, réalisé comme localisé de $B_\Delta$ ; $C$ est fini et non ramifié sur $R$, sans $2$-torsion ($B_\Delta$ est plat et $2$ régulier), non nul (puisque $A_\Delta \to B_\Delta$ est injectif, ce que donne l'isomorphisme après inversion de~$2$). Une racine de $U^2 = \Delta$ dans $(B_\Delta)_2$ fournit $v \in C$ avec $v^2 = 4^n\Delta$.

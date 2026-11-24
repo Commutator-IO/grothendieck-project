@@ -87,9 +87,11 @@ Pour $j \in I$, soit $p_j : A \otimes_k M \to A$ l'application $A$-linéaire $f 
 dont le coefficient de $t^n$ est $1$. Or $E(f) = 0$, et $1 \neq 0$ dans $k$.
 \end{proof}
 
+\begin{encadre}
 \begin{theoreme}[D'après les pages 22 et 24, obstruction différentielle sur {$k[[t]]$}, topologie discrète, forme complétée par l'édition\pisteresolue{22-power-series-discrete-obstruction}]
 Soient $k = \mathbf Q(x_i : i \in I)$, avec $I$ infini, et $A = k[[t]]$. Les $dx_i$ forment une base de $\Omega_{k/\mathbf Q}$, si bien que $A \otimes_k \Omega_{k/\mathbf Q} \simeq A^{(I)}$ ; aucune dérivation $D : A \to A \otimes_k \Omega_{k/\mathbf Q}$ ne vérifie $D(c) = 1 \otimes dc$ pour tout $c \in k$, et $A$ n'est pas formellement lisse sur $k$ pour la topologie discrète.
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}
 Les $dx_i$ forment une base de $\Omega_{P/\mathbf Q}$, pour $P = \mathbf Q[x_i : i \in I]$. Le corps $k$ est un localisé de $P$, donc formellement étale sur $P$, et $k \otimes_P \Omega_{P/\mathbf Q} \to \Omega_{k/\mathbf Q}$ est un isomorphisme ; les $dx_i$ forment donc une base de $\Omega_{k/\mathbf Q}$. Si $D$ existait, on choisirait une suite injective $(i_n)$ dans $I$ et $a_n = x_{i_n}$ : le lemme~\ref{lem:22-obstruction} interdit $D(x_{i_n}) = 1 \otimes dx_{i_n}$.
@@ -102,9 +104,11 @@ est exacte. Comme $H_1(L_{A/k}) = 0$ et que $\Omega_{A/k}$ est projectif, elle e
 
 La page~23 dit la même chose pour tout corps : sous l'hypothèse \q{de dimension infinie}, elle conclut par la négative. C'est l'énoncé que l'édition avait démontré en partant de l'exemple.
 
+\begin{encadre}
 \begin{theoreme}[Grothendieck, page 23, pour une seule variable]\label{prop:22-corps}
 Soient $k$ un anneau commutatif et $K$ un corps qui est une $k$-algèbre, avec $\Omega_{K/k}$ de dimension infinie sur $K$. Aucune dérivation $D : K[[t]] \to K[[t]] \otimes_K \Omega_{K/k}$ ne vérifie $D(c) = 1 \otimes dc$ pour tout $c \in K$, et $K[[t]]$ n'est pas formellement lisse sur $K$ pour la topologie discrète.
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}
 Les $da$, $a \in K$, engendrent $\Omega_{K/k}$ ; on en extrait une base, infinie par hypothèse, et une suite injective $da_0, da_1, \ldots$ de vecteurs de cette base. Le lemme~\ref{lem:22-obstruction} exclut alors $D$, et la seconde moitié de la démonstration précédente, où $\mathbf Q$ est remplacé par $k$, montre que la lissité formelle donnerait une telle $D$.
@@ -176,9 +180,11 @@ Soient $p$ un nombre premier, $K = \mathbb F_p(x, b_0, \ldots, b_{p-1})$, $a_i =
 C'est l'argument de la spécialisation. Il vaut pour tout plongement $k \to K$, où $k = \mathbb F_p(x, y)$, avec $dy = y'\,dx$ pour toute dérivation de $K$ et $y' \notin k$ : si $c = w^p \in k'$, la règle de dérivation des fonctions composées pour $\partial_x$ donne $0 = \partial c/\partial x + y'\, \partial c/\partial y$, donc $\partial c/\partial y = 0$, et $\partial/\partial y$ fournit une forme linéaire qui tue les $dc \otimes 1$, $c \in k'$, et vaut $1$ sur $dy - y'\,dx$. Ici $dy = y'\,dx$ car les $a_i$ sont des puissances $p$-ièmes. Reste $y' \notin k$, conséquence de l'indépendance algébrique de $x, y, y'$ : la spécialisation $b_0 \mapsto T_1$, $b_1 \mapsto T_2$, $b_i \mapsto 0$ pour $i \geq 2$ envoie $(x, y, y')$ sur $(T_0, T_1^p + T_2^p T_0, T_2^p)$, le triplet de la spécialisation, dont l'indépendance est démontrée plus haut. On conclut comme pour $a_1$ (Lean : \texttt{contre\_exemple\_general}, \texttt{contre\_exemple\_general\_span}, \texttt{not\_injective\_to\_omega}, \texttt{ker\_not\_span}, \texttt{tripleG\_injective}).
 \end{proof}
 
+\begin{encadre}
 \begin{theoreme}[Pages 22 et 24, la moitié $t$-adique\pisteresolue{22-power-series-discrete-obstruction}]\verifie[\leanblobmain]{RingTheory/Folder22Adic}
 Soit $k$ un anneau commutatif. Alors $k \to k[[t]]$ est formellement lisse pour la topologie $t$-adique : pour toute $k$-algèbre $C$, tout idéal $J$ de $C$ de carré nul et tout morphisme de $k$-algèbres $\psi : k[[t]] \to C/J$ qui annule une puissance de $t$, il existe un morphisme de $k$-algèbres $k[[t]] \to C$ qui relève $\psi$. En particulier, pour $k = \mathbf Q(x_i : i \in I)$ avec $I$ infini, $k[[t]]$ est formellement lisse sur $k$ pour la topologie $t$-adique, et ne l'est pas pour la topologie discrète (théorème précédent).
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}
 Soit $c \in C$ un relèvement de $\psi(t)$. Si $\psi(t^m) = 0$, alors $c^m \in J$, donc $c^{2m} = 0$ : $c$ est nilpotent. Une série $\sum a_n t^n$ évaluée en $c$ est alors une somme finie, et $f \mapsto f(c)$ est un morphisme de $k$-algèbres $k[[t]] \to C$. Composé avec $C \to C/J$, il coïncide avec $\psi$ sur $k$ et en $t$. Deux tels morphismes sont égaux : on écrit $f = \sum_{n < m} a_n t^n + t^m g$, et $t^m$ s'envoie sur $0$ par les deux.
@@ -186,15 +192,19 @@ Soit $c \in C$ un relèvement de $\psi(t)$. Si $\psi(t^m) = 0$, alors $c^m \in J
 
 \noindent La notion est celle de l'étiquette 07NI du Stacks Project, sous la forme élémentaire de 07EC (EGA~$0_{\mathrm{IV}}$~19.3.1), prise dans la bibliothèque d'AxiomMath \cite{axiomstacks}. Voir \texttt{formallySmoothNAdic\_C\_X} et \texttt{adic\_not\_discrete} dans \href{\leanblobmain/RingTheory/Folder22Adic.lean}{\texttt{Folder22Adic.\allowbreak{}lean}}. La démonstration ne demande rien sur $k$ : le contraste de la page tient tout entier à la topologie. Le théorème de la page sur les corps, qui passe par les anneaux de Cohen, n'est pas repris ici.
 
+\begin{encadre}
 \begin{theoreme}[Pages 12 à 18, corollaire~3.13 sans hypothèse sur l'extension résiduelle, et question~1]\verifie[\leanblobmain]{RingTheory/Folder22CohenAlgebras}
 Soit $f : A \to B$ un homomorphisme local d'anneaux locaux noethériens, de corps résiduel $k = A/\mathfrak m_A$. Alors $f$ est formellement lisse pour la topologie $\mathfrak m_B$-adique si et seulement si $B$ est plat sur $A$ et la fibre spéciale $k \otimes_A B$ est géométriquement régulière sur~$k$. Sur un corps $k$, une $k$-algèbre locale noethérienne est formellement lisse pour sa topologie $\mathfrak m$-adique si et seulement si elle est géométriquement régulière, et elle est alors régulière.
 \end{theoreme}
+\end{encadre}
 
 \noindent C'est l'étiquette 07NQ du Stacks Project, avec 07EL et 07EI pour le cas d'un corps, prises dans la bibliothèque d'AxiomMath \cite{axiomstacks}. Voir \texttt{corollaire3\_13}, \texttt{question1}, \texttt{isRegularLocalRing\_of\_formallySmoothNAdic} et \texttt{corollaire3\_9} dans \href{\leanblobmain/RingTheory/Folder22CohenAlgebras.lean}{\texttt{Folder22CohenAlgebras.\allowbreak{}lean}}. L'hypothèse de multiplicité radicielle finie, ou $\mathfrak m_B = \mathfrak m_A B$, tombe : le N.B. de la page~14 la dit \q{très probablement inutile}. La question~1 de la page~18 reçoit une réponse affirmative, sans hypothèse de finitude. Le même fichier démontre l'existence dans le corollaire~3.10 pour $A$ complet, sans séparabilité, et celle du corollaire~3.12 (\texttt{corollaire3\_10}, \texttt{corollaire3\_12\_existence}, étiquette 07NR).
 
+\begin{encadre}
 \begin{theoreme}[Pages 15 à 17, unicité dans les corollaires~3.10 et~3.12, et 3.12 1)~$\Leftrightarrow$~2)]\verifie[\leanblobmain]{RingTheory/Folder22Uniqueness}
 Soient $A$ un anneau local de corps résiduel $k$, $B$ une $A$-algèbre locale noethérienne complète, formellement lisse sur $A$ pour sa topologie $\mathfrak m_B$-adique, $B'$ une $A$-algèbre locale noethérienne complète et plate sur $A$, et $e_0 : k \otimes_A B \simeq k \otimes_A B'$ un isomorphisme de $k$-algèbres. Il existe un isomorphisme de $A$-algèbres $B \simeq B'$ qui induit $e_0$. En particulier, deux $A$-algèbres locales noethériennes complètes, plates et formellement lisses, dont les fibres spéciales sont identifiées à une même $k$-algèbre $K$, sont isomorphes sur $A$, de façon compatible aux identifications. Si $f : A \to B$ est un homomorphisme local d'anneaux locaux noethériens avec $\mathfrak m_B = \mathfrak m_A B$, alors $f$ est formellement lisse pour la topologie $\mathfrak m_B$-adique si et seulement si $B$ est plat sur $A$ et l'extension résiduelle est séparable.
 \end{theoreme}
+\end{encadre}
 
 \noindent La lissité formelle relève $B \to k \otimes_A B \simeq k \otimes_A B' = B'/\mathfrak m_A B'$ en $\varphi : B \to B'$, pas à pas le long des $B'/J^{n+1} \to B'/J^n$, $J = \mathfrak m_A B'$, puis par passage à la limite. Comme $\varphi$ est surjectif modulo $J$, que $B$ est complet et $B'$ séparé, $\varphi$ est surjectif ; il est injectif par le critère local de platitude (étiquette 00MK du Stacks Project), $B'$ étant plat et $\varphi$ injectif modulo $\mathfrak m_A$. Pour 3.12, le corollaire~3.9 ramène la lissité formelle à celle de la fibre spéciale, qui est ici le corps résiduel de~$B$, et la lissité formelle d'une extension de corps est sa séparabilité. Voir \texttt{exists\_algHom\_lift}, \texttt{bijective\_of\_lift}, \texttt{corollaire3\_10\_uniqueness}, \texttt{corollaire3\_12\_uniqueness} et \texttt{corollaire3\_12} dans \href{\leanblobmain/RingTheory/Folder22Uniqueness.lean}{\texttt{Folder22Uniqueness.\allowbreak{}lean}}, sur la bibliothèque Stacks d'AxiomMath \cite{axiomstacks}. L'unicité demande moins que la page : seule la source doit être formellement lisse et seul le but plat, et $A$ n'a besoin d'être ni complet ni noethérien. L'isomorphisme n'est pas unique, un anneau de Cohen ayant des automorphismes qui induisent l'identité sur $K$, et la page ne le prétend pas.
 

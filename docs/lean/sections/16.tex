@@ -278,9 +278,11 @@ Avec les conventions précédentes, si tous les $p_{j,\beta}$ sont dans le sous-
 On a $\pi_a = \pi_a \sum_{j,\beta} p_{j,\beta} = \sum_{j + 2\beta = a} p_{j,\beta}$, puisque $\pi_a p_{j,\beta}$ vaut $p_{j,\beta}$ si $a = j + 2\beta$ et $0$ sinon (\texttt{DecompositionPrimitive.\allowbreak{}proj\_eq\_sum}, \texttt{projecteurs\_mem\_of\_primitifs}).
 \end{proof}
 
+\begin{encadre}
 \begin{contrexemple}[page 9, (3) n'entraîne ni (1) ni (2)\piste{16-graded-ring-lefschetz-criterion}]
 Soient $R$ un anneau commutatif non nul ($\mathbf Z$ par exemple), $E = M_2(R)$ et $n = 1$, avec $M^0 = R e_1$, $M^1 = 0$, $M^2 = R e_2$, soit $\pi_0 = e_{11}$, $\pi_2 = e_{22}$, $\pi_1 = 0$, et $L = e_{21}$, de degré~$2$. La décomposition primitive est $P^0 = R e_1$, $L P^0 = R e_2$, $P^1 = 0$, soit $p_{0,0} = e_{11}$, $p_{0,1} = e_{22}$, $p_{1,0} = 0$. Dans $E$, $L \colon M^0 \to M^2$ a pour inverse $w_0 = e_{12}$, de degré $-2$, et $(6.3)$ vaut. Soit $\mathcal E$ le sous-anneau des matrices triangulaires inférieures. Il contient $L$, tous les $\pi_a$ et tous les $p_{j,\beta}$ : (3) est satisfaite. Mais aucun $w \in \mathcal E$ ne vérifie $w L \pi_0 = \pi_0$, et aucun $\Lambda \in \mathcal E$ ne vérifie $L\Lambda = 1 - p_{0,0} - p_{1,0}$.
 \end{contrexemple}
+\end{encadre}
 
 \begin{proof}
 Le coefficient $(1,1)$ de $w L \pi_0 = w\, e_{21}\, e_{11}$ est $w_{12}$, qui est nul dans $\mathcal E$, alors qu'il vaut $1$ dans $\pi_0$. De même, le coefficient $(2,2)$ de $L\Lambda = e_{21}\Lambda$ est $\Lambda_{12} = 0$, alors qu'il vaut $1$ dans $1 - e_{11} = e_{22}$. Les vérifications de \texttt{Graduation} et de \texttt{DecompositionPrimitive} se font coefficient par coefficient (\texttt{graduation\_c}, \texttt{decomposition\_c}, \texttt{reciproque\_trois\_un\_fausse}).

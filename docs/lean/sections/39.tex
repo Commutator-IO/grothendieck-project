@@ -52,9 +52,11 @@ Ne sont pas démontrés ici : la préparation (unité $\times$ polynôme disting
 
 \paragraph{L'axiomatique des pages 9 à 14.} Sur un anneau commutatif $k$ quelconque, pour une famille $A_n \subset S_n = k[[t_1, \ldots, t_n]]$, la seconde rédaction pose (I) $t_i \in A_n$ ; (S) si $\varphi \in A_n$ et si $f_1, \ldots, f_n \in A_m$ ont des termes constants nilpotents, $\varphi(f_1, \ldots, f_n) \in A_m$ ; (R) les $A_n$ sont des sous-anneaux unitaires ; (H) l'inverse d'un $A$-morphisme $X_n \to X_n$ qui est un isomorphisme formel est un $A$-morphisme ; (D) les coefficients de $f \in A_{n+m}$ en ses $m$ dernières variables sont dans $A_n$. La page tire de (H) le corollaire~1 (si $f \in A_n$ et si $f(0)$ est inversible dans $k$, $f^{-1} \in A_n$), le corollaire~2 (le couple $(A_n, A_n \cap \mathfrak m_n)$ est zariskien et hensélien) et le corollaire~3 (les fonctions implicites), puis de (D) l'inclusion $A_n \subset k_0[[t]]$, $k_0 = A_0$ (\lot{39}{1}{11}, \lot{39}{1}{12}, \lot{39}{1}{14}). La démonstration du corollaire~1 substitue $t_{n+1} = 1$, substitution que (S) interdit ; la lecture le démontre avec (D) et ne tient le couple pour hensélien que sous (D). On lit ici \q{isomorphisme formel} comme \q{admet un inverse pour la substitution}, et $\mathfrak m_n$ comme l'idéal des séries sans terme constant.
 
+\begin{encadre}
 \begin{theoreme}[Grothendieck, page 12, corollaires 2 et 3\piste{39-inverse-function-axioms-henselian}]\label{thm:39-hensel}
 Supposons (I), (S), (R), (H). Si $P \in A_{n+1}$, vu comme série en $(Z, t_1, \ldots, t_n)$, vérifie $P(0) = 0$ et si $\partial P/\partial Z\,(0)$ est inversible dans $k$, l'unique $F \in S_n$ tel que $F(0) = 0$ et $P(F(t), t) = 0$ est dans $A_n$. Le couple $(A_n, A_n \cap \mathfrak m_n)$ est hensélien, en particulier zariskien.
 \end{theoreme}
+\end{encadre}
 
 \begin{proof}
 \emph{Existence et unicité de $F$.} Vu dans $S_n[[Z]]$, $P$ a son terme constant $g_0$ dans l'idéal $I$ des variables, pour lequel $S_n$ est séparé et complet, et son coefficient $g_1$ de $Z$ inversible. La division de Weierstrass de $Z$ par $P$ donne $Z = qP + r$, $r \in S_n$. Le coefficient de $Z$ donne $1 = g_0 q_1 + g_1 q_0$, et $g_0 \in I$ est dans le radical, donc $q_0$ et $q$ sont inversibles ; ainsi $P = q^{-1}(Z - r)$ avec $r = -g_0 q_0 \in I$. La substitution $Z \mapsto G$, $G(0) = 0$, est un morphisme d'anneaux $S_{n+1} \to S_n$ qui envoie $q^{-1}$ sur un inversible : $P(G, t) = 0$ si et seulement si $G = r$.
@@ -66,16 +68,20 @@ Supposons (I), (S), (R), (H). Si $P \in A_{n+1}$, vu comme série en $(Z, t_1, \
 
 \noindent Le couple est donc hensélien sous (H) seul, sans la condition (D) que la lecture ajoute : le corollaire~3 ne passe pas par le corollaire~1, et seule la forme forte du corollaire~1 demande davantage. Voir \texttt{implicit\_function}, \texttt{implicit\_mem}, \texttt{hensel\_mem} et \texttt{henselianRing} dans \href{\leanblob/RingTheory/Folder39.lean}{\texttt{Folder39.\allowbreak{}lean}}.
 
+\begin{encadre}
 \begin{contrexemple}[énoncé de l'édition]\label{cex:39}
 Sur $k = \mathbb Q$, les séries à terme constant entier, $A_n = \{ f \in S_n : f(0) \in \mathbb Z \}$, vérifient (I), (S), (R), (H), et $2 \in A_0$, inversible dans $\mathbb Q$, n'a pas d'inverse dans $A_0$. Le corollaire~1 de la page~11 ne découle pas de (I), (S), (R), (H).
 \end{contrexemple}
+\end{encadre}
 
 \begin{proof}
 Un nilpotent de $\mathbb Q$ est nul ; une substitution par des séries sans terme constant conserve le terme constant, et un inverse pour la substitution est sans terme constant.
 \end{proof}
 
+\begin{encadre}
 \begin{theoreme}[D'après les pages 11 et 14, avec (D)]
 Supposons (I), (S), (R), (H), (D). Si $f \in A_n$ et si $f(0)$ est inversible dans $k$, alors $f^{-1} \in A_n$. Sous (D) seule, $A_n \subset k_0[[t_1, \ldots, t_n]]$.
 \end{theoreme}
+\end{encadre}
 
 \noindent L'énoncé tient, et (D) ne sert au corollaire~1 que pour $n = 0$ : l'inverse de $s \mapsto f(0)s$ est dans $A_1$ par (H), son coefficient $f(0)^{-1}$ dans $A_0$ par (D), et le théorème~\ref{thm:39-hensel} appliqué à $fZ - 1$ en $a_0 = f(0)^{-1}$ donne $f^{-1}$. Voir \texttt{inv\_mem}, \texttt{coeff\_mem}, \texttt{intConst\_isFormalClass} et \texttt{intConst\_not\_inv\_mem}. Ne sont pas démontrés : la forme jacobienne de (H) pour un morphisme quelconque, les produits fibrés transversaux, les sous-schémas formels, les parties principales, la question de fidèle platitude de la page~12, et la première rédaction (pages~2 à~7).
