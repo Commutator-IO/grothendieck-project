@@ -44,6 +44,7 @@
 %   the counterexample on [0, 1] footnoted with its Lean check (compatible_not_determined,
 %   not_strictlyCompatible_singleton_zero, eq_of_strictlyCompatible); the categories
 %   of the Proposition and the general functor not formalised.
+% Revised: Fable 5.2 (claude-fable-5-2), 2026-11-24 — pp. 19 and 47: follows the revised transcription (#145).
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -443,9 +444,9 @@ $X^{\sharp}$ ; on passe du second au premier par $X = X^{\sharp}
 seulement compatible. Elle est fausse sous cette forme : la trace $X_i \cap Y$
 n'est pas déterminée par les données de droite dès qu'elle déborde l'image de
 $\dot X_i$. Il faut soit la strictité au sens $X_i \cap Y = f(\dot X_i)$, que
-la page impose elle-même en bas de la page 16, soit ajouter les $X_i \cap Y$ aux données. On a retenu la première. Argument revu par une seconde lecture automatique (Opus 5.5), 21 octobre 2026 : l'objection tient : pour $X = [0,1]$, $Y = \{0\}$, $T = [0,\frac12]$, les fermés $X_1 = \{0\}$ et $X_1 = \emptyset$ sont compatibles avec $T$ et ont les mêmes données de droite. Elle vaut encore si l'on demande seulement que $T$ soit strict, comme le faisait la définition de « strictement compatible » donnée plus haut ; on y a donc ajouté la condition $X_i \cap Y = f(\dot X_i)$, que cette note retenait. Lean vérifie ce contre-exemple (lean/Grothendieck/Topology/Folder150.lean, \texttt{compatible\_not\_determined}, \texttt{not\_strictlyCompatible\_singleton\_zero}, \texttt{eq\_of\_strictlyCompatible}) : avec $T = [0, \frac12]$, contracté par $t \mapsto \lambda t$, et le collier $[\frac12, \frac34]$ de $\dot T = \{\frac12\}$ dans $X^{\sharp} = [\frac12, 1]$, les fermés $\{0\}$ et $\emptyset$ sont compatibles avec $T$ et avec le collier et ont la même trace sur $X^{\sharp}$ ; $\{0\}$ ne vérifie pas $X_1 \cap Y = f(\dot X_1)$ ; et, sous cette condition, tout fermé compatible est déterminé par sa trace sur $X^{\sharp}$. Seul l'exemple est formalisé, non les catégories de la proposition ; voir l'annexe Lean, section 150.}. Le voisinage $T$ est strict et transverse
+la page impose elle-même en bas de la page 16, soit ajouter les $X_i \cap Y$ aux données. On a retenu la première. Argument revu par une seconde lecture automatique (Opus 5.5), 21 octobre 2026 : l'objection tient : pour $X = [0,1]$, $Y = \{0\}$, $T = [0,\frac12]$, les fermés $X_1 = \{0\}$ et $X_1 = \emptyset$ sont compatibles avec $T$ et ont les mêmes données de droite. Elle vaut encore si l'on demande seulement que $T$ soit strict, comme le faisait la définition de « strictement compatible » donnée plus haut ; on y a donc ajouté la condition $X_i \cap Y = f(\dot X_i)$, que cette note retenait. Lean vérifie ce contre-exemple (lean/Grothendieck/Topology/Folder150.lean, \texttt{compatible\_not\_determined}, \texttt{not\_strictlyCompatible\_singleton\_zero}, \texttt{eq\_of\_strictlyCompatible}) : avec $T = [0, \frac12]$, contracté par $t \mapsto \lambda t$, et le collier $[\frac12, \frac34]$ de $\dot T = \{\frac12\}$ dans $X^{\sharp} = [\frac12, 1]$, les fermés $\{0\}$ et $\emptyset$ sont compatibles avec $T$ et avec le collier et ont la même trace sur $X^{\sharp}$ ; $\{0\}$ ne vérifie pas $X_1 \cap Y = f(\dot X_1)$ ; et, sous cette condition, tout fermé compatible est déterminé par sa trace sur $X^{\sharp}$. Seul l'exemple est formalisé, non les catégories de la proposition ; voir l'annexe Lean, section 150.}. Si le voisinage $T$ est strict, il est strictement transverse
 aux $X_i$ si et seulement si $\dot X$ est à collier dans $X^{\sharp}$, compatible
-avec les $X^{\sharp}_i$ ; il est équisingulier pour les $X_i$ si et seulement si
+avec les $X^{\sharp}_i$\footnote{La page : « Si $T$ voisinage conique strict, pour que $T$ soit strictement transversal aux $X_i$, il faut et il suffit que $\dot X$ soit un sous-espace bordant de $X^{*}$, compatible avec les $X_i^{*}$ », où « transversal » est douteux ; lecture de la révision du 24 novembre 2026 sur le fac-similé, passage machine non relu par un lecteur. « Strict » y est une hypothèse sur $T$, et non une partie de ce qui est caractérisé, comme la lecture l'écrivait d'abord.} ; il est équisingulier pour les $X_i$ si et seulement si
 $\dot X \to Y$, avec les $\dot X_i = X_i \cap \dot X$, est une fibration
 localement triviale simultanée.
 
@@ -727,7 +728,7 @@ soit lisse, c'est-à-dire à fibres sans bord. Plus généralement, pour $d =
 bords de $\Sigma_{d'} \to \Sigma_d$ est stratifié par les drapeaux non vides de
 $I_{]i_p, i_{p+1}[} \amalg \cdots \amalg I_{]i_{n-1}, i_n[}$, et la fibration est
 lisse si et seulement si chacun de $i_p, i_{p+1}, …, i_n$ est successeur
-immédiat du précédent — « à partir de $i_p$, pas de $i_1$ ! ». C'est l'énoncé b) de
+immédiat du précédent — « à partir de $i_p$, pas de $i_1$ ! »\footnote{La page 47 : « chaque terme (sauf le premier) est successeur dans $I$ du précédent » ; « dans $I$ » est un ajout sûr, la parenthèse un ajout douteux (lecture de la révision du 24 novembre 2026 sur le fac-similé, passage machine non relu par un lecteur). Le premier terme, $i_p$, n'a pas de précédent dans la suite.}. C'est l'énoncé b) de
 la page 1, désormais démontré.
 
 \pagerange{47}{54}
