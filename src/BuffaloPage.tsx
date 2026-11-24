@@ -333,14 +333,14 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
                 {LEAN[i.lean].chip}
               </button>
             )}
-            {course === 'Algebraic geometry' && (() => {
+            {(() => {
               const g = gaetaPage(i.v, i.t);
               return g ? (
                 <a
                   href={`${GAETA_PDF}#page=${g.first + GAETA.offset}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  title="The page of Gaeta's written notes of this course that this passage follows (a student's notes, not Grothendieck's)"
+                  title={course === 'Algebraic geometry' ? "The page of Gaeta's written notes of this course that this passage follows (a student's notes, not Grothendieck's)" : "Gaeta's written notes of the algebraic geometry course take this passage into their appendix on sheaves, pp. 147–162 (a student's notes, not Grothendieck's)"}
                   className="tabular whitespace-nowrap text-[10.5px] text-ink-400 hover:text-brand-600"
                 >
                   Gaeta p.{g.first}
