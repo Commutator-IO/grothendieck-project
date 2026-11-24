@@ -4,6 +4,7 @@ import { useHashTarget } from './components/Anchors.tsx';
 import { Footer, Header } from './components/Frame.tsx';
 import { FINDINGS } from './content/findings.ts';
 import { PROOFS } from './content/proofs.ts';
+import leanCardsRaw from './content/lean-cards.json';
 import { PLAIN } from './content/summary.ts';
 import { FindingsChart } from './components/FindingsChart.tsx';
 import { SeeAlso, ThreadsSection } from './components/Threads.tsx';
@@ -532,6 +533,15 @@ function Pager({
 const proofCote = (p: (typeof PROOFS)[number]) => p.cote ?? (isIhes(p.folder) ? `IHÉS ${p.folder}` : `n° ${p.folder}`);
 const proofHref = (p: (typeof PROOFS)[number]) =>
   p.href ?? (isIhes(p.folder) ? `/illusie/#${p.folder}/${p.batch}/p${parseInt(p.page, 10)}` : `/fonds/#${p.folder}/${p.batch}/p${p.page}`);
+// Where each card's theorems are: file and line at the commit of GrothendieckArchivesProofs the links
+// were made from (scripts/lean-lines.mjs). A theorem not found there links to the card's file on main.
+const LEAN_CARDS = leanCardsRaw as unknown as { sha: string; paths: string[]; cards: Record<string, Record<string, [number, number]>> };
+const PROOFS_REPO = 'https://github.com/Commutator-IO/GrothendieckArchivesProofs';
+const proofFile = (p: (typeof PROOFS)[number]) => p.lean.replace(/^lean\//, '');
+const theoremHref = (p: (typeof PROOFS)[number], t: string) => {
+  const hit = LEAN_CARDS.cards[proofFile(p)]?.[t];
+  return hit ? `${PROOFS_REPO}/blob/${LEAN_CARDS.sha}/${LEAN_CARDS.paths[hit[0]]}#L${hit[1]}` : `${PROOFS_REPO}/blob/main/${proofFile(p)}`;
+};
 const proofCtx = (p: (typeof PROOFS)[number]): CommentContext => ({
   kind: 'proof',
   label: `${proofCote(p)} · ${p.name}`,
@@ -588,10 +598,15 @@ function ProvedInLean() {
               {notation(p.found)}
             </p>
             <p className="mt-2 text-[12px] text-ink-400 [overflow-wrap:anywhere]">
-              <a href={`https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/${p.lean.replace(/^lean\//, '')}`} className="hover:text-brand-700">
+              <a href={`${PROOFS_REPO}/blob/main/${proofFile(p)}`} className="hover:text-brand-700">
                 {p.lean}
               </a>{' '}
-              · {p.theorems.map((t) => <code key={t} className="mr-1.5 inline-block max-w-full text-[11.5px] [overflow-wrap:anywhere]">{t}</code>)}
+              ·{' '}
+              {p.theorems.map((t) => (
+                <a key={t} href={theoremHref(p, t)} title="Open this theorem at its line" className="mr-1.5 inline-block max-w-full hover:text-brand-700">
+                  <code className="text-[11.5px] [overflow-wrap:anywhere]">{t}</code>
+                </a>
+              ))}
             </p>
           </article>
         ))}

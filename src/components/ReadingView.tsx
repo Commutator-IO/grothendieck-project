@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import { FacsimilePane, type OpenBatch } from './FacsimilePane.tsx';
 import { useReadingFrame } from './TranscriptPane.tsx';
 import { batchCount, batchRange } from '../lib/batches.ts';
+import { useLeanBadges } from '../lib/leanBadges.ts';
 
 /**
  * The reading view of a collection beside the fonds — the Fonds
@@ -70,6 +71,8 @@ export function ReadingView({
   const frame = useRef<HTMLIFrameElement>(null);
   const report = useCallback((p: number) => onPage(p), [onPage]);
   const height = useReadingFrame(frame, url, present, report);
+  // The Lean badges of the proof cards on this document (the IHÉS items have some), as in the fonds.
+  useLeanBadges(frame, url, present, label);
 
   return (
     <>

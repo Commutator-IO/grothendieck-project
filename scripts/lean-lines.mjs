@@ -129,4 +129,13 @@ for (const course of ['buffalo-topos', 'buffalo-ag', 'buffalo-groupes']) {
 
 writeFileSync(resolve(root, 'src/content/lean-lines.json'), JSON.stringify(out));
 writeFileSync(resolve(root, 'src/content/lean-pages.json'), JSON.stringify(pages));
+// For the proof cards of the Findings tab: each card's theorems, with their file (an index into
+// `paths`) and line, so that a card links its theorems where they are.
+const paths = [];
+const pathIx = (p) => (paths.includes(p) ? paths.indexOf(p) : paths.push(p) - 1);
+const cardLines = {};
+for (const [file, ths] of Object.entries(out.files)) {
+  cardLines[file] = Object.fromEntries(Object.entries(ths).map(([t, [p, line]]) => [t, [pathIx(p), line]]));
+}
+writeFileSync(resolve(root, 'src/content/lean-cards.json'), JSON.stringify({ sha, paths, cards: cardLines }));
 console.log(`lean-lines: ${Object.values(out.files).reduce((n, o) => n + Object.keys(o).length, 0)} card theorems, ${Object.keys(out.names).length} Buffalo declarations, ${missing} not found, at ${sha.slice(0, 7)}`);
