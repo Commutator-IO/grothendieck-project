@@ -9,6 +9,8 @@ public import Bridges.FiniteMonoids
 public import Bridges.QuiversDeMorgan
 public import Bridges.TestCategories
 public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.Comma.Presheaf.Basic
+public import Mathlib.CategoryTheory.Limits.Over
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Basic
 public import Mathlib.CategoryTheory.Groupoid
 public import Mathlib.CategoryTheory.Limits.Preorder
@@ -46,6 +48,10 @@ Main results:
   Morgan. The Ore condition would pass from `A/X` to its slice over an object `p`, then, along a
   section of the projection (`overCostructuredArrowSection`, `rightOreCondition_of_iso`), to the
   weak test category `A/p.left`;
+* `isDeMorganTopos_over_iff`, `not_isDeMorganTopos_overPresheaf_of_isLocalTest`: the same for the
+  slice topos `Â/X` itself, through Mathlib's equivalence `Â/X ≌ (A/X)^`
+  (`overEquivPresheafCostructuredArrow`); the instances `IsDeMorganTopos` needs on `Over X`
+  (strong epi–mono factorisations, monos out of the initial object) are transported along it;
 * corollaries: `Δᵒᵖ` (folder 108, p. 2, question 6), groupoids, preorders with down-directed
   principal down-sets and total orders (`ℤ`), monoids with common right multiples (`ℕ`), finite
   monoids with a single minimal right ideal (through `FiniteMonoids.lean`), free categories
@@ -649,5 +655,38 @@ theorem not_isDeMorganTopos_slice_of_isLocalTest' {A : Type u} [SmallCategory A]
   not_isDeMorganTopos_slice_of_isLocalTest hL h X (CostructuredArrow.mk (yonedaEquiv.symm x))
 
 end GeneralSlices
+
+section OverPresheaf
+variable {A : Type u} [SmallCategory A] (X : Aᵒᵖ ⥤ Type u)
+
+/-- `Â/X` has strong epi–mono factorisations, transported from `(A/X)^`. -/
+instance : HasStrongEpiMonoFactorisations (Over X) :=
+  (overEquivPresheafCostructuredArrow X).inverse.hasStrongEpiMonoFactorisations_imp_of_isEquivalence
+
+/-- In `Â/X` the maps out of the initial object are monomorphisms, transported from `(A/X)^`. -/
+instance : InitialMonoClass (Over X) := by
+  let e := overEquivPresheafCostructuredArrow X
+  have hI : IsInitial (e.inverse.obj (⊥_ _)) := initialIsInitial.isInitialObj e.inverse _
+  refine InitialMonoClass.of_isInitial hI fun Y => ?_
+  have : hI.to Y = e.inverse.map (initial.to (e.functor.obj Y)) ≫ e.unitInv.app Y :=
+    hI.hom_ext _ _
+  rw [this]
+  infer_instance
+
+/-- **`Â/X ≃ (A/X)^`, for De Morgan.** The slice topos `Â/X` is De Morgan iff the presheaf topos
+of `A/X` is (Mathlib's `overEquivPresheafCostructuredArrow`, Kashiwara–Schapira Lemma 1.4.12). -/
+theorem isDeMorganTopos_over_iff :
+    IsDeMorganTopos (Over X) ↔ IsDeMorganTopos ((CostructuredArrow yoneda X)ᵒᵖ ⥤ Type u) :=
+  isDeMorganTopos_congr (overEquivPresheafCostructuredArrow X)
+
+end OverPresheaf
+
+/-- **Slices of a local test topos are not De Morgan.** For a local test category `A` and a
+presheaf `X` with a section, the slice topos `Â/X` is not De Morgan. -/
+theorem not_isDeMorganTopos_overPresheaf_of_isLocalTest {A : Type u} [SmallCategory A]
+    {L : FundamentalLocalizer.{u}} (hL : L.AsphericalConnected) (h : IsLocalTest A L)
+    (X : Aᵒᵖ ⥤ Type u) {a : A} (x : X.obj (op a)) : ¬ IsDeMorganTopos (Over X) := by
+  rw [isDeMorganTopos_over_iff]
+  exact not_isDeMorganTopos_slice_of_isLocalTest' hL h X x
 
 end LeanPool.ToposTheoreticBridges.Examples
