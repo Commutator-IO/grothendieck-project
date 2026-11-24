@@ -18,3 +18,4 @@ public import Bridges.QuiversMorita
 public import Bridges.SimplexTest
 public import Bridges.SubterminalArches
 public import Bridges.TestCategories
+public import Bridges.Theta2
