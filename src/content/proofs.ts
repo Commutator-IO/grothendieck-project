@@ -257,6 +257,19 @@ export const PROOFS: Proof[] = [
     theorems: ['toPoly_Fr', 'toPoly_D', 'Φ_D', 'Φ_surjective', 'exists_single', 'ker_Φ', 'quotientEquiv'],
   },
   {
+    folder: '43',
+    batch: 4,
+    page: '70–74',
+    name: 'The local cohomology of 𝔾_a on a regular local ring',
+    statement:
+      'For A a regular local ring of Krull dimension d with maximal ideal 𝔪, H^i_𝔪(A) = 0 for every integer i ≠ d: the case G = 𝔾_a of the concentration of pages 70–73, the step of page 72 (« H^i(Spec A − a, 𝔾_a) = H^{i+1}_𝔪(A) » vanishes outside i = d − 1) on which the dévissage of a commutative algebraic group G rests.',
+    found:
+      'Holds for every regular local ring: no algebraically closed field, no field at all, no hypothesis on the residue field (GrothendieckArchivesProofs #83; Grothendieck/RingTheory/Folder43LocalCohomology.lean, on the Stacks library). The vanishing is proved for the local cohomology of the module A in the coreflection model of Stacks Tag 0A6Q (isZero_localCohomology_of_ne) and for the right derived functor of sections with support in V(𝔪) (isZero_localCohomologyWithSupportIn_of_ne). A regular local ring is Cohen–Macaulay (EGA 0 17.1.3), so its depth along 𝔪 is d; local cohomology vanishes below the depth (Stacks Tag 0AVZ) and above the dimension (Krull’s height theorem), and the two models agree over a noetherian ring (Stacks Tag 0955). The page’s H^i_a(Spec A, 𝔾_a) is the Zariski cohomology with support of 𝒪_X; its comparison with the module statement is in the libraries only conditionally, or for d ≤ 1, so the statement is the module one. Not formalised: every G other than 𝔾_a (Chevalley’s structure theorem and the composition series of the unipotent part by 𝔾_a are in neither library); the vanishing of H^i(Spec A − a, 𝔾_m); the formulas H^1_a = G(K)/G(A) for d = 1 and H^d_a(G) = H^{d−1}(Spec A − a, U) for d ≥ 2; the non-vanishing of H^d_𝔪(A); the exactness of G ↦ H^d_a(G) and the local Jacobian of page 74.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/RingTheory/Folder43LocalCohomology.lean',
+    theorems: ['isZero_localCohomology_of_ne', 'isZero_localCohomologyWithSupportIn_of_ne'],
+  },
+  {
     folder: '158',
     batch: 3,
     page: '21–41, 44, 50–53',
