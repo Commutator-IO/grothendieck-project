@@ -69,8 +69,70 @@ Soit $u$ strictement comparable à $z_1$ et à $z_2$. S'il est sous $z_1$ et au-
 \end{proof}
 
 \begin{remarque}
-La page~82 donne à $I$ et à $I'$ des extrémités, la page~81 prend pour lieux intérieurs $]0,1[ \times ]0,1[$. L'énoncé démontré porte sur les lieux intérieurs ; les lieux $0$ et $1$, de supports $\{0\}$ et $\{1\}$, sont laissés de côté. Ni la densité ni les extrémités ne servent ; il suffit que les brins n'aient pas de plus petit élément, et sans cette hypothèse $\{z\}$ peut cesser d'être un support. Dans le produit de deux chaînes à trois éléments $0 < 1 < 2$, le support de $\{(0, 2)\}$ contient $(1, 1)$ (vérifié en Lean par énumération). La page écrit enfin \q{on n'a pas la propriété modulaire}, suivi d'un mot non lu, à côté de la distributivité. L'exemple réfute la distributivité ; on ne dit rien ici de la modularité.
+La page~82 donne à $I$ et à $I'$ des extrémités, la page~81 prend pour lieux intérieurs $]0,1[ \times ]0,1[$. L'énoncé démontré porte sur les lieux intérieurs ; les lieux $0$ et $1$, de supports $\{0\}$ et $\{1\}$, sont laissés de côté. Ni la densité ni les extrémités ne servent ; il suffit que les brins n'aient pas de plus petit élément, et sans cette hypothèse $\{z\}$ peut cesser d'être un support. Dans le produit de deux chaînes à trois éléments $0 < 1 < 2$, le support de $\{(0, 2)\}$ contient $(1, 1)$ (vérifié en Lean par énumération). La page écrit enfin \q{on n'a pas la propriété modulaire}, suivi d'un mot non lu, à côté de la distributivité. L'exemple réfute la distributivité ; la modularité n'est réfutée ci-dessous que sur une grille finie, celle de $5 \times 5$ lieux.
 \end{remarque}
+
+\subsection*{La ficelle dans le treillis des supports}
+
+Le théorème précédent calcule avec les singletons $\{z\}$. La page calcule avec les supports $A_z = \mathrm{supp}\{z\}$ engendrés par les lieux, qui ne sont des singletons que sous l'hypothèse du théorème. La lecture, et l'édition après elle, énoncent le calcul pour deux ensembles totalement ordonnés quelconques, avec $A_z = \{z\}$. Le fichier \href{\leanblobmain/Order/Folder156_7Ficelle.lean}{\texttt{Folder156\_7Ficelle.\allowbreak{}lean}} reprend la question dans le treillis des supports lui-même, sans hypothèse sur les brins, et trouve qu'il faut une hypothèse sur $z_1$ et $z_2$. On dit que $z_1 = (x_1, x'_1)$ est un \emph{anti-coin} si $x_1$ est le plus petit élément de $I$ et $x'_1$ le plus grand de $I'$, et que $z_2 = (x_2, x'_2)$ en est un si $x_2$ est le plus grand élément de $I$ et $x'_2$ le plus petit de $I'$. Comme plus haut, $z < z'$ est l'ordre produit strict : $z \leq z'$ sur les deux coordonnées et $z \neq z'$.
+
+\begin{lemme}[position des lieux d'un support engendré]\label{lem:156-7-position}
+Soient $z = (c, d)$ et $w \in A_z$. Si $u < z$, alors $u < w$ ; si $z < u$, alors $w < u$. Par conséquent, si $d$ n'est pas le plus petit élément de $I'$, $c$ est inférieur ou égal à la première coordonnée de $w$, et si $d$ n'est pas le plus grand, $c$ lui est supérieur ou égal ; de même, sur le second brin, selon que $c$ est ou non le plus petit ou le plus grand élément de $I$. En particulier $A_z = \{z\}$ dès que l'une des coordonnées de $z$ n'est ni le plus petit ni le plus grand élément de son brin.
+\end{lemme}
+
+\begin{proof}
+Le lieu $w$ n'est pas strictement comparable à $z$ : il serait sinon dans $\mathrm{cosupp}\{z\}$ et devrait être strictement comparable à lui-même. Si $u < z$, $u$ est dans $\mathrm{cosupp}\{z\}$, donc strictement comparable à $w$ ; $w < u$ donnerait $w < z$, et c'est donc $u < w$. Le cas $z < u$ est symétrique. Si $d' < d$, le lieu $(c, d')$ est sous $z$, donc sous $w$, et $c$ est inférieur ou égal à la première coordonnée de $w$ ; si $d < d''$, $(c, d'')$ est au-dessus de $z$, donc de $w$. Si $c$ n'est ni le plus petit ni le plus grand élément de $I$, les deux inégalités sur le second brin donnent à $w$ la seconde coordonnée $d$ : $w$ est comparable à $z$, et, ne l'étant pas strictement, lui est égal. De même sur l'autre brin.
+\end{proof}
+
+\begin{encadre}
+\begin{theoreme}[énoncé de l'édition, pages 82 et 83, corrigé par l'hypothèse des anti-coins\piste{156-7-two-strand-supports-not-distributive}]\label{thm:156-7-supports}
+Soient $I$, $I'$ deux ensembles totalement ordonnés, $z_1 = (x_1, x'_1)$, $z_2 = (x_2, x'_2)$ et $z_3 = (x_3, x'_3)$ avec $x_1 < x_3 < x_2$ et $x'_2 < x'_3 < x'_1$. Si ni $z_1$ ni $z_2$ n'est un anti-coin,
+\[
+A_{z_3} \wedge (A_{z_1} \vee A_{z_2}) = A_{z_3} \neq \varnothing , \qquad (A_{z_3} \wedge A_{z_1}) \vee (A_{z_3} \wedge A_{z_2}) = \varnothing ,
+\]
+et le treillis des supports n'est pas distributif. L'hypothèse est satisfaite si $I$ et $I'$ n'ont pas de plus petit élément, comme les brins $]0, 1[$ de la page.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Le lieu $z_3$ est dans $A_{z_1} \vee A_{z_2} = \mathrm{supp}\{z_1, z_2\}$, par le calcul fait plus haut, qui ne supposait rien des brins. Comme $x_3$ n'est ni le plus petit ni le plus grand élément de $I$, $A_{z_3} = \{z_3\}$ par le lemme~\ref{lem:156-7-position}, d'où la première égalité. Si $x_1$ n'est pas le plus petit élément de $I$, le lemme dit que tout lieu de $A_{z_1}$ a une seconde coordonnée au moins égale à $x'_1$, alors que $x'_3 < x'_1$ ; si $x'_1$ n'est pas le plus grand élément de $I'$, tout lieu de $A_{z_1}$ a une première coordonnée au plus égale à $x_1$, alors que $x_1 < x_3$. Hors du cas où $z_1$ est un anti-coin, $z_3 \notin A_{z_1}$, et de même $z_3 \notin A_{z_2}$. Les intersections $A_{z_3} \cap A_{z_1}$ et $A_{z_3} \cap A_{z_2}$ sont donc vides, et le plus petit support est $\varnothing$, aucun lieu n'étant disjoint de lui-même. Sans plus petit élément, ni $x_1$ ni $x'_2$ ne sont le plus petit élément de leur brin.
+\end{proof}
+
+\begin{encadre}
+\begin{contrexemple}[l'hypothèse des anti-coins ne peut pas être omise]\label{ce:156-7-coin}
+Soient $I = I' = \{0, 1, 2\}$, $z_1 = (0, 2)$, $z_2 = (2, 0)$ et $z_3 = (1, 1)$. Alors $z_3 \in A_{z_1} \cap A_{z_2}$, et
+\[
+A_{z_3} \wedge (A_{z_1} \vee A_{z_2}) = (A_{z_3} \wedge A_{z_1}) \vee (A_{z_3} \wedge A_{z_2}) = A_{z_3} = \{z_3\} .
+\]
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+Les lieux strictement comparables à $(0, 2)$ sont $(0, 0)$ et $(0, 1)$, au-dessous, $(1, 2)$ et $(2, 2)$, au-dessus ; $(1, 1)$ est strictement au-dessus des deux premiers et strictement au-dessous des deux autres, donc dans $A_{(0, 2)}$. De même pour $(2, 0)$. Le lemme~\ref{lem:156-7-position} donne $A_{z_3} = \{z_3\}$, et les deux membres valent $\{z_3\}$. Lean le vérifie par énumération.
+\end{proof}
+
+La lecture avait vérifié par le calcul, sur la grille $\{0, \ldots, 4\}^2$ et avec $z_1 = (1, 3)$, $z_2 = (3, 1)$, $z_3 = (2, 2)$, que les supports n'y sont ni modulaires ni orthomodulaires, et elle écrivait que chaque $A_z$ y est $\{z\}$. Ce dernier point est trop fort.
+
+\begin{encadre}
+\begin{theoreme}[énoncé de l'édition, la grille $5 \times 5$\piste{156-7-two-strand-supports-not-distributive}]\label{thm:156-7-grille}
+Sur $I = I' = \{0, \ldots, 4\}$, $A_z = \{z\}$ si et seulement si $z$ n'est pas l'un des deux anti-coins $(0, 4)$ et $(4, 0)$. Pour $z_1 = (1, 3)$ et $z_2 = (3, 1)$, on a $A_{z_1} \leq A_{z_1} \vee A_{z_2}$ mais
+\[
+A_{z_1} \vee \bigl((A_{z_1} \vee A_{z_2}) \wedge \complement A_{z_1}\bigr) \neq A_{z_1} \vee A_{z_2} :
+\]
+le treillis des supports n'est pas orthomodulaire, et il n'est pas modulaire. Si l'on lit $z < z'$ comme une inégalité stricte sur les deux coordonnées, les mêmes lieux, avec $z_3 = (2, 2)$, réfutent la distributivité de la même façon.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Les calculs portent sur les $25$ lieux et sont faits par énumération ; Lean les vérifie dans le noyau. Pour la modularité : $A \vee \complement A$ est le plus grand support pour tout support $A$, puisque le cosupport de $A \cup \mathrm{cosupp}\, A$ est formé de lieux disjoints d'eux-mêmes, donc vide. La loi modulaire appliquée à $A_{z_1} \leq A_{z_1} \vee A_{z_2}$ et à $\complement A_{z_1}$ donnerait $A_{z_1} \vee \bigl(\complement A_{z_1} \wedge (A_{z_1} \vee A_{z_2})\bigr) = (A_{z_1} \vee \complement A_{z_1}) \wedge (A_{z_1} \vee A_{z_2}) = A_{z_1} \vee A_{z_2}$, que le calcul dément.
+\end{proof}
+
+\begin{remarque}
+L'hypothèse des anti-coins est exactement celle qu'il faut pour que $z_3$ ne soit ni dans $A_{z_1}$ ni dans $A_{z_2}$. Elle ne touche pas la page, dont les brins $]0, 1[$ n'ont pas de plus petit élément ; elle corrige l'énoncé général de la lecture, et la phrase \q{$A_z = \{z\}$}, qui ne vaut qu'au voisinage d'un lieu dont une coordonnée n'est pas extrême.
+\end{remarque}
+
+\begingroup\raggedright
+\noindent\emph{Portée de la vérification.} Lean démontre ces énoncés dans \href{\leanblobmain/Order/Folder156_7Ficelle.lean}{\texttt{Folder156\_7Ficelle.\allowbreak{}lean}}, où le treillis des supports est le treillis des concepts de mathlib pour la relation de comparabilité stricte (\texttt{Supports}), dont les extensions sont les parties $A = A^{\perp\perp}$, et $A_z$ le concept engendré par $z$ (\texttt{lieu}). Le lemme~\ref{lem:156-7-position} est \texttt{lt\_of\_mem\_of\_lt}, \texttt{lt\_of\_mem\_of\_gt}, \texttt{fst\_le\_of\_mem} et ses trois variantes, avec \texttt{extent\_lieu\_eq\_singleton} et \texttt{extent\_lieu\_between} ; le théorème~\ref{thm:156-7-supports} est \texttt{supports\_not\_distrib}, avec \texttt{mem\_extent\_lieu\_sup\_of\_between}, \texttt{not\_mem\_extent\_lieu\_left} et \texttt{not\_mem\_extent\_lieu\_right}, et la non-distributivité \texttt{not\_distrib\_of\_between} et \texttt{not\_distrib\_of\_noMinOrder} ; le contre-exemple~\ref{ce:156-7-coin} est \texttt{fin3\_distrib\_corner} ; le théorème~\ref{thm:156-7-grille} est \texttt{fin5\_extent\_lieu}, \texttt{fin5\_extent\_lieu\_iff}, \texttt{fin5\_not\_orthomodular}, \texttt{fin5\_not\_modular} (par \texttt{sup\_orth}) et \texttt{fin5\_strictBoth\_not\_distrib}.\par\endgroup
 
 \subsection*{Le lemme de la page 97, réfuté page 98}
 
@@ -105,4 +167,4 @@ Le cosupport d'un sommet est l'ensemble de ses voisins, et le cosupport d'une pa
 Le Lemme~3 est la \emph{loi orthomodulaire} : pour $S' \leq \complement S$, $S' = (S \vee S') \wedge \complement S$. Le graphe de la page~98 est le graphe de disjonction du modèle à sept éléments de la section~\ref{sec:156-4} : les paires disjointes y sont $\{a, b\}$, $\{b, c\}$, $\{c, d\}$, la chaîne $a - b - c - d$, et ses parties saturées $\varnothing$, $\{b\}$, $\{c\}$, $\{a, c\}$, $\{b, d\}$, $\mathcal M$ sont celles de la chaîne, avec $A = b$ et $B = c$. Le graphe qui réfute dans l'édition la présomption d'une algèbre de Boole de la première mouture est donc celui que Grothendieck trouve lui-même, deux semaines plus tard, contre son propre lemme. La conclusion est plus forte : ce treillis hexagonal, l'orthotreillis classique à six éléments, n'est même pas orthomodulaire. La page~98 ne renonce pas : la formule $S_{A \smallsetminus B} = S_A \cap \complement S_B$ devrait être vraie, écrit-il, \q{du moins sous l'hypothèse de divisibilité At\,L1}.
 \end{remarque}
 
-Ne sont pas démontrés ici : les axiomes de l'atelier (pages~1 à~60) et l'identification de $\Sigma_{\mathfrak F}$ à $\Sigma_{\mathcal M}$ (page~61) ; le changement d'ensemble de référence $\Lambda$ (pages~64 à~68) ; les Lemmes des pages~76 à~79 sous les seules hypothèses (iii)$_{\mathcal M}$, (vi\,a)$_{\mathcal M}$ et Hyp. ; l'unicité de $P$ annoncée page~81 ; le théorème de la page~93 sur les intérieurs et ce que la page~98 espère sous At\,L1 ; les magasins (pages~101 à~113).
+Ne sont pas démontrés ici : les axiomes de l'atelier (pages~1 à~60) et l'identification de $\Sigma_{\mathfrak F}$ à $\Sigma_{\mathcal M}$ (page~61) ; le changement d'ensemble de référence $\Lambda$ (pages~64 à~68) ; les Lemmes des pages~76 à~79 sous les seules hypothèses (iii)$_{\mathcal M}$, (vi\,a)$_{\mathcal M}$ et Hyp. ; l'unicité de $P$ annoncée page~81 ; le théorème de la page~93 sur les intérieurs et ce que la page~98 espère sous At\,L1 ; pour la ficelle, l'absence de modularité et d'orthomodularité sur les grilles $m \times n$ autres que $5 \times 5$, que la lecture vérifie par le calcul, la lecture de $z < z'$ stricte sur les deux coordonnées hors de la grille $5 \times 5$, et, pour les brins denses $]0, 1[$, l'orthomodularité et la modularité ; les magasins (pages~101 à~113).

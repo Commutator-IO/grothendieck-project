@@ -1,0 +1,69 @@
+\section[Cote 75 : orientation d'une somme directe indexée par un ensemble sans ordre]{Cote 75 : orientation d'une somme directe indexée par un ensemble sans ordre\protect\verifie[\leanblobmain]{LinearAlgebra/Folder75}}\label{sec:75}
+
+La cote 75, \emph{Cours C4, DEA : notes manuscrites (s.d.), lettre (1978), tapuscrit (1977-1978)}, trente-deux pages que l'inventaire date \q{1977-1978}, prépare deux cours de Montpellier, sur la géométrie de l'icosaèdre et sur les polygones réguliers au-dessus d'un anneau quelconque. L'outil qui organise les feuillets est le torseur. Les pages~24 et~25 définissent de trois façons l'ensemble $\omega$ des orientations, chaque fois un torseur sous $\{\pm 1\}$ : celui d'un espace vectoriel réel, par les bases modulo $\mathrm{GL}^+$ ; celui d'un module quadratique à base orthonormale, par ces bases modulo $\mathrm{SO}$ ; celui d'un ensemble fini, par les numérotations modulo le groupe alterné. Les pages~26 et~27 écrivent ensuite des \q{formules d'associativité} (\lot{75}{2}{26}). Pour une famille finie $(E_i)_{i \in I}$ d'espaces vectoriels réels de dimensions $d_i$, indexée par un ensemble $I$ sans ordre, et $I^-$ l'ensemble des indices de dimension impaire, la page encadre un isomorphisme canonique
+\[
+\omega_{\bigoplus_i E_i} \simeq \omega_{I^-} \wedge \bigwedge_{i \in I} \omega_{E_i} .
+\]
+Elle le construit en concaténant des bases des $E_i$ le long d'une numérotation de $I$, et s'arrête au milieu de la vérification des signes, sur \q{la matrice de passage est de dét.~$+1$ en tous cas\dots}. La page~27 énonce la même formule pour les modules quadratiques et, pour une application d'ensembles finis $p : J \to I$, $\omega_J \simeq \omega_{I^-} \wedge \bigwedge_i \omega_{p^{-1}(i)}$, où $I^-$ est l'ensemble des $i$ dont la fibre est de cardinal impair (\lot{75}{2}{27}). La lecture complète le calcul : échanger deux blocs consécutifs de tailles $d$ et $d'$ coûte $(-1)^{d d'}$. C'est la règle de signe de Koszul. On démontre ici cette règle sous la forme qui rend l'isomorphisme bien défini.
+
+\noindent\emph{Conventions.} Une \emph{numérotation} d'un ensemble fini $X$ de cardinal $n$ est une bijection $e : X \to \{1, \ldots, n\}$. Deux numérotations $f$, $g$ diffèrent par la permutation $g^{-1} \circ f$ de $X$, et une \emph{inversion} de $(f, g)$ est un couple $(x, y)$ tel que $f(x) < f(y)$ et $g(y) < g(x)$. On fixe des entiers $d_i$, $i \in I$, et l'on pose $I^- = \{i \mid d_i \text{ impair}\}$. Une numérotation $e$ de $I$ numérote la réunion disjointe $\Sigma = \coprod_i \{1, \ldots, d_i\}$ par l'ordre lexicographique de $(e(i), a)$ : c'est la \emph{concaténation} $c_e$ des blocs dans l'ordre de $e$. Elle numérote aussi $I^-$ par l'ordre que $e$ y induit, et l'on note $\varepsilon(e, e')$ la signature de la permutation de $I^-$ par laquelle diffèrent les numérotations induites par $e$ et $e'$. La somme directe $\bigoplus_i E_i$ est le produit $\prod_i E_i$, $I$ étant fini.
+
+\begin{lemme}[signature d'un changement de numérotation]\label{lem:75-inversions}
+Deux numérotations $f$, $g$ d'un ensemble fini $X$ diffèrent par une permutation de signature $(-1)^N$, où $N$ est le nombre d'inversions de $(f, g)$.
+\end{lemme}
+
+\begin{proof}
+Transportée sur $\{1, \ldots, n\}$ par $g$, la permutation est $\tau = f \circ g^{-1}$, et sa signature est $(-1)$ à la puissance du nombre de couples $u < v$ tels que $\tau(v) < \tau(u)$. Le couple $(x, y) = (g^{-1}(v), g^{-1}(u))$ de $X$ vérifie alors $g(x) > g(y)$ et $f(x) < f(y)$ : c'est une inversion de $(f, g)$, et l'on obtient ainsi chaque inversion une fois.
+\end{proof}
+
+\begin{encadre}
+\begin{theoreme}[énoncé de l'édition, pages 26 et 27, la règle des signes\piste{75-unordered-orientation-of-direct-sum}]\label{thm:75-signe}
+Soient $e$ et $e'$ deux numérotations de $I$. Les concaténations $c_e$ et $c_{e'}$ diffèrent par une permutation de $\Sigma$ de signature
+\[
+\prod_{(i, j)} (-1)^{d_i d_j} = \varepsilon(e, e') ,
+\]
+le produit portant sur les couples $(i, j)$ que $e$ et $e'$ rangent dans des ordres différents. En particulier elle ne dépend de $e$ et $e'$ que par l'ordre qu'ils induisent sur $I^-$, à permutation paire près.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Par le lemme~\ref{lem:75-inversions}, il suffit de compter les inversions de $(c_e, c_{e'})$. Deux éléments $(i, a)$ et $(j, b)$ d'un même bloc, $i = j$, sont rangés par $a$ et $b$ dans les deux concaténations : ils ne forment jamais une inversion. Pour $i \neq j$, ils sont rangés par $e(i)$, $e(j)$ dans l'une, par $e'(i)$, $e'(j)$ dans l'autre, et forment une inversion si et seulement si $(i, j)$ en est une de $(e, e')$. Chaque inversion $(i, j)$ de $(e, e')$ donne donc $d_i d_j$ inversions de $(c_e, c_{e'})$, d'où la signature $\prod (-1)^{d_i d_j}$. Le facteur $(-1)^{d_i d_j}$ vaut $-1$ si et seulement si $d_i$ et $d_j$ sont impairs, et le produit est $(-1)$ à la puissance du nombre d'inversions de $(e, e')$ dont les deux termes sont dans $I^-$. Ce sont exactement les inversions des numérotations que $e$ et $e'$ induisent sur $I^-$, qui sont rangées comme par $e$ et $e'$ ; le lemme~\ref{lem:75-inversions} appliqué à $I^-$ donne $\varepsilon(e, e')$.
+\end{proof}
+
+\begin{encadre}
+\begin{theoreme}[énoncé de l'édition, page 26, déterminant et orientation\piste{75-unordered-orientation-of-direct-sum}]\label{thm:75-det}
+Soient $R$ un anneau commutatif, $E_i$ des $R$-modules, et pour chaque $i$ deux bases $b_i$, $b'_i$ de $E_i$ indexées par $\{1, \ldots, d_i\}$. Notons $B_e$ la base de $\prod_i E_i$ obtenue en concaténant les $b_i$ dans l'ordre de $e$, et $B'_{e'}$ celle des $b'_i$ dans l'ordre de $e'$. Alors
+\[
+\det\nolimits_{B_e}(B'_{e'}) = \varepsilon(e, e') \prod_{i \in I} \det\nolimits_{b_i}(b'_i) .
+\]
+Si $R$ est un anneau ordonné, par exemple $\mathbf R$, et si chaque $b'_i$ a l'orientation de $b_i$, les bases $B_e$ et $B'_{e'}$ ont la même orientation si $\varepsilon(e, e') = 1$, des orientations opposées si $\varepsilon(e, e') = -1$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Les familles $(b_i)$ et $(b'_i)$ définissent deux bases du produit, indexées par $\Sigma$, et la matrice de passage de l'une à l'autre est diagonale par blocs, de blocs les matrices de passage de $b_i$ à $b'_i$. Son déterminant est le produit des déterminants des blocs, $\prod_i \det_{b_i}(b'_i)$ ; c'est le déterminant d'une matrice triangulaire par blocs pour un ordre quelconque sur $I$. Les bases $B_e$ et $B'_{e'}$ sont ces deux bases renumérotées par $c_e$ et par $c_{e'}$. Renuméroter les vecteurs de $B'_{e'}$ par $c_e$ au lieu de $c_{e'}$, c'est les permuter par la permutation du théorème~\ref{thm:75-signe}, ce qui multiplie le déterminant, forme multilinéaire alternée, par sa signature $\varepsilon(e, e')$. Pour l'orientation, les $\det_{b_i}(b'_i)$ sont positifs, leur produit aussi, et le signe de $\det_{B_e}(B'_{e'})$ est celui de $\varepsilon(e, e')$.
+\end{proof}
+
+Le théorème~\ref{thm:75-det} est la vérification que la page interrompt. Changer une base $b_i$ sans changer son orientation, ou changer la numérotation de $I$ sans changer l'orientation induite sur $I^-$, ne change pas l'orientation de la base concaténée ; changer l'une des orientations la renverse. L'application qui envoie une orientation de $I^-$ et des orientations des $E_i$ sur l'orientation de $\bigoplus_i E_i$ est donc bien définie, et compatible à l'action de $\{\pm 1\}$ sur chaque facteur : c'est l'isomorphisme encadré. Les numérotations de $I^+$ n'interviennent pas, et l'on peut concaténer selon n'importe quel ordre de $I$ qui induit l'ordre voulu sur $I^-$, comme le note la marge.
+
+\begin{encadre}
+\begin{corollaire}[énoncé de l'édition, page 27, le cas des ensembles finis\piste{75-unordered-orientation-of-direct-sum}]\label{cor:75-fibres}
+Soit $p : J \to I$ une application d'ensembles finis, et $d_i$ le cardinal de la fibre $J_i = p^{-1}(i)$. Une numérotation $e$ de $I$ et des numérotations $f_i$ des fibres définissent une numérotation de $J$, par concaténation des $f_i$ dans l'ordre de $e$. Si l'on remplace $e$ par $e'$ et les $f_i$ par $f'_i$, la numérotation de $J$ change par une permutation de signature
+\[
+\varepsilon(e, e') \prod_{i \in I} \operatorname{sgn}(f'^{-1}_i \circ f_i) .
+\]
+\end{corollaire}
+\end{encadre}
+
+\begin{proof}
+La réunion des fibres identifie $J$ à $\coprod_i J_i$, et les $f_i$ l'identifient à $\Sigma$. Le changement se décompose en la permutation de $\Sigma$ qui remplace chaque $f_i$ par $f'_i$ dans son bloc, suivie, à conjugaison près, de la permutation du théorème~\ref{thm:75-signe}. La signature d'une permutation de $\coprod_i J_i$ qui préserve chaque bloc est le produit des signatures sur les blocs : c'est le théorème~\ref{thm:75-det} sur $R = \mathbf Z$, pour la matrice de la permutation, qui est diagonale par blocs. La signature étant un morphisme, et invariante par conjugaison, le produit des deux facteurs est la signature cherchée.
+\end{proof}
+
+\begin{remarque}
+Le corollaire est la règle de signe de l'isomorphisme $\omega_J \simeq \omega_{I^-} \wedge \bigwedge_i \omega_{J_i}$ de la page~27. La lecture le déduit du cas des espaces vectoriels appliqué à $\mathbf R^J = \bigoplus_i \mathbf R^{J_i}$ ; la démonstration ci-dessus passe par le théorème~\ref{thm:75-signe} directement, et n'utilise le déterminant que sur $\mathbf Z$, pour la signature d'une permutation qui préserve les blocs. Une fibre vide est de cardinal pair et n'intervient pas. Le théorème~\ref{thm:75-det} vaut sur tout anneau commutatif : la page ne l'écrit que pour les espaces réels, mais l'identité de déterminants est celle dont la version quadratique, sur un anneau connexe où $2$ est inversible, aura besoin.
+\end{remarque}
+
+\begingroup\raggedright
+\noindent\emph{Portée de la vérification.} Lean démontre ces énoncés dans \href{\leanblobmain/LinearAlgebra/Folder75.lean}{\texttt{Folder75.\allowbreak{}lean}}, espace \texttt{Grothendieck.\allowbreak{}Folder75}, sur mathlib seule : le lemme~\ref{lem:75-inversions} est \texttt{sign\_trans\_symm} ; le théorème~\ref{thm:75-signe} est \texttt{sign\_concat\_eq\_prod} (le produit sur les inversions) et \texttt{sign\_concat} (son égalité à $\varepsilon(e, e')$, noté \texttt{oddSign}, que \texttt{oddSign\_eq} écrit comme $(-1)$ au nombre d'inversions dans $I^-$) ; le théorème~\ref{thm:75-det} est \texttt{det\_concatBasis}, sur un anneau commutatif, et \texttt{orientation\_concatBasis}, sur un anneau ordonné ; le corollaire~\ref{cor:75-fibres} est \texttt{sign\_fibreNumbering}, et \texttt{sign\_fibreNumbering\_of\_eq} le cas où seule la numérotation de $I$ change. Deux lemmes absents de mathlib y sont démontrés : le déterminant d'un changement de base de $\prod_i E_i$ qui préserve les facteurs (\texttt{det\_pi\_basis}, par le déterminant d'une matrice triangulaire par blocs) et la signature d'une permutation d'un type somme qui préserve les blocs (\texttt{sign\_sigmaCongrRight}, qui s'en déduit). La formalisation ne trouve rien de faux.\par\endgroup
+
+Ne sont pas démontrés ici : l'isomorphisme encadré comme isomorphisme de $\{\pm 1\}$-torseurs, les torseurs $\omega_{I^-}$, $\omega_{E_i}$ et leur produit contracté n'étant pas définis en Lean (ce qui est démontré est la règle des signes qui rend l'application bien définie) ; la version pour les modules quadratiques à base orthonormale sur un anneau connexe où $2$ est inversible, dont l'identité de déterminants est démontrée mais non les bases orthonormales ni le fait que leurs changements soient de déterminant $\pm 1$ ; la compatibilité des isomorphismes a), b) et c) que la page se donne à établir ; le cas d'un drapeau, $\omega_E \simeq \bigwedge_i \omega_{E_i/E_{i-1}}$, que la page pose sans démonstration ; et le reste du dossier, torseurs, contours, polygones réguliers et isomorphismes exceptionnels.
