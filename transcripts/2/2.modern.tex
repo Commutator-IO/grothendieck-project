@@ -13,7 +13,7 @@
 % pages by a human.
 %
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
-% check (lean/Grothendieck/AlgebraicGeometry/Folder2.lean): the computations of pp. 9 and 13
+% check (GrothendieckArchivesProofs, Grothendieck/AlgebraicGeometry/Folder2.lean): the computations of pp. 9 and 13
 % hold as read, over any commutative ring (chernPoint, chernImmersion);
 % p. 13 uses only 1 - x' invertible and (r-1)! x' = 0. Mathlib: the sums
 % sum (-1)^i binom(r,i) i^m are r-th forward differences
@@ -58,6 +58,7 @@
 %   non-vanishing of y is not formalised. P. 21: the case n <= 2 marked as the
 %   edition's, the torsion statements as the page's.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-11-24 — prose of the summary and of some passages reworded, no change to the mathematics or the notes' content.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-24 — corrected after the referee report docs/review/modern/2.md (major issues and clear minor ones).
 %
 % Scope: one document for the shelfmark, its three batches read as one folder.
 % Twenty-eight of the forty-four leaves carry mathematics; five are covers in
@@ -80,7 +81,9 @@
 %
 %   pp. 2-3    RIEMANN-ROCH ON A CURVE, BEFORE THE LETTER K. The ring E of
 %              classes of coherent sheaves, its subgroups E_0, N, D, L and the
-%              subalgebra Phi; E = Phi + D, E/N = Z + P; R.R. in one line,
+%              subalgebra Phi; E = Phi + D (true only on the subgroup E' of
+%              bundles and O_D, where the Proposition is restated as a
+%              presentation), E/N = Z + P; R.R. in one line,
 %              int(F) = K_1(c(F)(1 - K/2)).
 %   pp. 4-7    THE SAME IN K-THEORY, dim <= 1. K^.(X) and K_.(X), rank and
 %              length augmentations, the gamma-filtration, Pic(X), pi_0(X), the
@@ -259,12 +262,13 @@ parfaitement triviale : il suffit d'une classe de torsion tuée par $(r-1)!$,
 et c'est le contre-exemple de la page 13. Et enfin, quoique aucun feuillet ne
 l'écrive, comme le coefficient qui relie le logarithme de la classe de Chern
 totale au caractère de Chern, dont la page 43 calcule les deux premiers termes.
-Quand Grothendieck, quelques années plus tard, cherchera un
-« Riemann-Roch sans dénominateurs », c'est contre ce facteur qu'il se battra.
+Le « Riemann-Roch sans dénominateurs », qui viendra plus tard, porte
+précisément sur ce facteur.
 
 Le dossier lui-même n'est pas un texte suivi, mais un paquet. Cinq chemises
 inscrites de sa main le découpent en cinq courses (« Classique pour les
-Courbes », « Contre-exemples », « Cas des schémas », « Construction des Chern
+Courbes »\footnote{La transcription marque ce premier titre comme
+incertain.}, « Contre-exemples », « Cas des schémas », « Construction des Chern
 covariants », « R.R. des surfaces »), écrites sur trois sortes de papier,
 dont les versos d'un texte dactylographié qui n'est pas de lui. Et ces courses
 ne peuvent pas être contemporaines : certaines ne connaissent que les faisceaux
@@ -279,7 +283,7 @@ c'est, pour un lecteur d'archives, la question centrale du dossier.
 Ce ne sont ni des notes de lecture ni une rédaction. On y voit quelqu'un
 recommencer le même calcul dans plusieurs langages successifs, se poser des
 questions par écrit, comme « Est-ce que $\varphi_{K}$ est toujours bijectif ??? »,
-et y répondre deux lignes plus bas, « Non », en encadrant le mot. Plusieurs
+et y répondre sur la même ligne, « Non », en encadrant le mot. Plusieurs
 feuillets s'arrêtent au milieu d'une phrase, un autre porte un titre sous lequel
 rien n'est écrit, et le dernier s'interrompt six lignes après son début, à une
 identification près de la formule d'adjonction qu'il allait obtenir. Le dossier
@@ -518,26 +522,25 @@ d'Euler-Poincaré de la formule (1) n'est pas finie. Elles sont ajoutées ici.}
 
 \subsection*{L'anneau des classes}
 
-On considère le groupe libre sur les faisceaux cohérents sur $X$, et l'on y
-impose une relation par suite exacte courte : pour toute
-$0 \to F' \to F \to F'' \to 0$, la classe de $F$ est la somme de celles de
-$F'$ et de $F''$. Le produit tensoriel en fait un anneau, que le feuillet note
-$E$. C'est le groupe que l'on appelle aujourd'hui $K_{0}(X)$ ; la lettre $K$ ne
-figure pas sur ces deux pages.\footnote{La page 2 se sert de la lettre $E$ à la
-fois pour l'anneau et pour un fibré vectoriel, dans la même proposition. Les
-fibrés sont écrits $V$, $V'$, $V''$ ici.}
+On considère le groupe libre $E$ sur les classes d'isomorphie de faisceaux
+cohérents sur $X$, et l'on y impose une relation par suite exacte courte : pour
+toute $0 \to F' \to F \to F'' \to 0$, la classe de $F$ est la somme de celles
+de $F'$ et de $F''$. Le quotient, que le produit tensoriel fait anneau, est
+l'anneau des classes ; c'est le groupe que l'on appelle aujourd'hui $K_{0}(X)$,
+et la lettre $K$ ne figure pas sur ces deux pages.\footnote{La page 2 se sert de
+la lettre $E$ à la fois pour l'anneau des classes et pour un fibré vectoriel,
+dans la même proposition. Les fibrés sont écrits $V$, $V'$, $V''$ ici.}
 
 Le feuillet distingue dans $E$ les sous-objets suivants.
 
 \begin{itemize}
   \item $N$, le sous-groupe engendré par les éléments $(F) - (F') - (F'')$,
   c'est-à-dire, dans le groupe libre, ce que l'on quotiente.\footnote{Le
-  feuillet travaille donc simultanément dans le groupe libre et dans son
-  quotient, sans le dire. Les énoncés $E/N \simeq \cdots$ n'ont de sens que
-  dans le premier ; les lignes qui identifient $E$ à l'anneau des classes n'ont
-  de sens que dans le second. La lecture suit cet usage, qui est cohérent
-  pourvu qu'on prenne $E$ pour le groupe libre et $E/N$ pour l'anneau des
-  classes proprement dit.}
+  feuillet définit $E$ comme l'anneau des classes, « mod.\ les $(F) - (F') -
+  (F'')$ », puis $N$ comme le « sous-groupe de $E$ engendré par » ces mêmes
+  éléments, qui y sont nuls : la page se contredit. Les énoncés $E/N \simeq
+  \cdots$ n'ont de sens que si $E$ est le groupe libre, et c'est ainsi que la
+  lecture prend $E$ ; l'anneau des classes est $E/N$.}
   \item $\mathcal{D}$, le sous-groupe engendré par les faisceaux gratte-ciel
   $k_{x}$ : c'est le groupe des diviseurs.
   \item $\mathcal{L} \subset \mathcal{D}$, le groupe des diviseurs
@@ -571,10 +574,24 @@ forcément le groupe des classes de diviseurs, et c'est ce groupe qui reçoit
 $c^{1}$ et qui contient la classe canonique $K$ de la formule (1). Aucune autre
 lecture ne rend ces quatre emplois compatibles.}
 
+Pris à la lettre, les deux premiers énoncés étoilés ne valent ni dans le groupe
+libre $E$ ni dans l'anneau des classes $E/N$.\footnote{Dans le groupe libre,
+l'élément de base $[k_{x} \oplus k_{x}]$, ou $[\mathcal{O}_{2x}]$, n'est ni dans
+le sous-groupe engendré par les fibrés ni dans celui qu'engendrent les $k_{x}$ :
+$E \neq \Phi + \mathcal{D}$. Dans $E/N$, en revanche, $\Phi \cap \mathcal{D}
+\neq 0$, puisque $[k_{x}] = [\mathcal{O}_{X}] - [\mathcal{O}_{X}(-x)]$.} Ils
+deviennent exacts si l'on remplace $E$ par son sous-groupe $E'$ engendré par
+les classes de fibrés vectoriels et par celles des faisceaux $\mathcal{O}_{D}$,
+$D$ diviseur effectif non nul, et $\mathcal{D}$ par le sous-groupe $\mathcal{D}'$
+qu'engendrent ces derniers : alors $E' = \Phi + \mathcal{D}'$ et $\Phi \cap
+\mathcal{D}' = 0$, puisque ce sont des éléments de base distincts du groupe
+libre. C'est dans ce cadre que la proposition qui suit est vraie.
+
 \subsection*{La proposition, et ce qu'elle sert à établir}
 
-\textbf{Proposition (page 2).} \emph{Le sous-groupe $N$ est engendré par les
-éléments}
+\textbf{Proposition (page 2), sous une forme exacte.} \emph{Le noyau de
+l'application canonique de $E'$ dans l'anneau des classes $E/N$ est engendré
+par les éléments}
 \[
   c(V) - c(V') - c(V''), \qquad
   c(V) - c(W) - c\bigl(\mathcal{O}_{X}(V)/f\,\mathcal{O}_{X}(W)\bigr),
@@ -586,7 +603,18 @@ nulle.}\footnote{Le feuillet qualifie $f$ d'« homomorphisme non nul », lecture
 donnée comme incertaine par la transcription ; le membre de droite n'a de sens
 que si $f$ est injective, ce qu'un homomorphisme non nul de fibrés en droites
 assure sur une courbe intègre. La restriction aux fibrés de rang $1$ est celle
-du feuillet.}
+du feuillet. La page dit « $N$ est engendré par » ; pour $N$ tout entier,
+c'est faux : la relation $[k_{x} \oplus k_{x}] - 2[k_{x}]$ est dans $N$, et
+l'élément de base $[k_{x} \oplus k_{x}]$ ne figure dans aucun des générateurs
+proposés, qui ne font intervenir que des fibrés et des faisceaux
+$\mathcal{O}_{D}$. La forme donnée ici est vraie. Modulo ces éléments, chaque
+$[\mathcal{O}_{D}]$ est égal à $c(\mathcal{O}_{X}(D)) - c(\mathcal{O}_{X})$, de
+sorte que le quotient de $E'$ est engendré par les fibrés, et que l'application
+du groupe de Grothendieck des fibrés vers ce quotient est surjective ; sa
+composée avec l'application vers $E/N$ est l'isomorphisme $K^{0}(X) \simeq
+K_{0}(X)$ d'une courbe non singulière, où tout faisceau cohérent a une
+résolution de longueur $1$ par des fibrés. Elle est donc bijective, et le
+quotient de $E'$ s'identifie à $E/N$.}
 
 Le feuillet reformule aussitôt la seconde famille : ses éléments sont aussi
 ceux de la forme $\lambda(D + D') - \lambda(D') - [\mathcal{O}_{D}]$, où
@@ -673,8 +701,8 @@ $X$ un schéma noethérien de dimension $\leqslant 1$ admettant un faisceau
 inversible ample.\footnote{Le feuillet écrit « préschéma », qui est la
 convention des \emph{Éléments} ; et il avait d'abord écrit « avec », biffé et
 remplacé par « admettant un Module inversible ample ». L'hypothèse d'amplitude
-n'est pas décorative : c'est elle qui donne le théorème de structure des fibrés
-utilisé plus bas.} On dispose de deux groupes de Grothendieck, celui des fibrés
+n'est pas décorative : c'est elle qui donne aux fibrés la filtration à quotients
+inversibles utilisée plus bas.} On dispose de deux groupes de Grothendieck, celui des fibrés
 vectoriels $K^{\bullet}(X)$, contravariant, et celui des faisceaux cohérents
 $K_{\bullet}(X)$, covariant.\footnote{Il les écrit avec un point surélevé et un
 point souscrit. Ce sont les groupes que l'on note aujourd'hui $K^{0}(X)$ et
@@ -703,12 +731,19 @@ c'est-à-dire
   \operatorname{cl}(V) \;=\; \sum_{i} \bigl(\operatorname{rg}_{i}(V) - 1\bigr)\,1_{i}
   \;+\; \operatorname{cl}(\det V).
 \]
-La raison est que sur un tel $X$ tout fibré vectoriel est somme directe d'un
-fibré trivial et de son déterminant.\footnote{Le feuillet ne donne pas cette
-raison et laisse illisible la phrase qui suivait « faisceau loc. libre de rang
-», ainsi que le rang lui-même, lu $0$. C'est le théorème de structure des
-fibrés sur un schéma de dimension $\leqslant 1$ à faisceau ample, et c'est là
-que sert l'hypothèse d'amplitude.} On pose $B^{\bullet}(X) = \mathbb{Z}^{\pi_{0}(X)}
+C'est une identité dans $K^{\bullet}(X)$, non un isomorphisme de fibrés :
+sur $\mathbb{P}^{1}$, $\mathcal{O}(1) \oplus \mathcal{O}(1)$ n'est pas
+isomorphe à $\mathcal{O} \oplus \mathcal{O}(2)$. Grâce au faisceau ample, tout
+fibré vectoriel admet une filtration à quotients inversibles $L_{j}$, d'où
+$\operatorname{cl}(V) = \sum_{j} \operatorname{cl}(L_{j})$ ; et comme l'idéal
+d'augmentation de $K^{\bullet}(X)$ est de carré nul en dimension $\leqslant
+1$, $\sum_{j} (\operatorname{cl}(L_{j}) - 1) = \operatorname{cl}(\det V) -
+1$.\footnote{Le feuillet ne donne pas cette raison et laisse illisible la
+phrase qui suivait « faisceau loc. libre de rang », ainsi que le rang
+lui-même, lu $0$. L'hypothèse d'amplitude sert à la filtration : un tordu
+$V(n)$ assez grand est engendré par ses sections. La version précédente de
+cette lecture invoquait une décomposition en somme directe, fausse sur une
+courbe projective.} On pose $B^{\bullet}(X) = \mathbb{Z}^{\pi_{0}(X)}
 \times \operatorname{Pic}(X)$ ; avec ces identifications, le caractère de
 Chern $K^{\bullet}(X) \to B^{\bullet}(X)$ est l'identité.
 
@@ -780,9 +815,9 @@ $1_{\bullet} = \sum_{i} \mu_{i} 1_{i} + \delta_{\varepsilon}$, et vaut
   \qquad n \in \mathbb{Z},\ \xi \in \operatorname{Pic}(X).
 \]
 Les feuillets ne disent pas que cette flèche est simplement la multiplication par la classe de $\mathcal{O}_{X}$ dans
-$K_{\bullet}(X)$ : $K_{\bullet}$ est un module sur $K^{\bullet}$, et l'unique
-morphisme de modules $K^{\bullet} \to K_{\bullet}$ est $x \mapsto
-x \cdot [\mathcal{O}_{X}]$. La formule s'obtient alors en développant
+$K_{\bullet}(X)$ : $K_{\bullet}$ est un module sur $K^{\bullet}$, et le
+morphisme de modules $K^{\bullet} \to K_{\bullet}$ qui envoie $1$ sur
+$[\mathcal{O}_{X}]$ est $x \mapsto x \cdot [\mathcal{O}_{X}]$. La formule s'obtient alors en développant
 $(n + \xi)\cdot 1_{\bullet}$ et en observant que $\xi \cdot \delta_{\varepsilon} = 0$
 pour raison de degré, tandis que $\xi \cdot 1_{i} = u_{i}(\xi)$ par l'opération
 que la page 6 vient de poser.\footnote{C'est donc, en langage moderne, la flèche
@@ -846,7 +881,7 @@ C'est le premier visage du nombre du dossier : la classe de Chern de dimension
 maximale du faisceau structural d'un point de $\mathbb{P}^{r}$ n'est pas la
 classe de ce point, mais son multiple par
 $(-1)^{r-1}(r-1)!$.\footnote{Vérifié en Lean
-(lean/Grothendieck/AlgebraicGeometry/Folder2.lean, \texttt{chernPoint}) pour tout $r \geqslant 1$
+(GrothendieckArchivesProofs, Grothendieck/AlgebraicGeometry/Folder2.lean, \texttt{chernPoint}) pour tout $r \geqslant 1$
 et dans $A[\eta]/(\eta^{r+1})$ pour tout anneau commutatif $A$ : la formule
 n'a pas besoin des dénominateurs du logarithme. La vérification passe par la
 dérivée logarithmique sur $\mathbb{Z}$, puis transporte l'identité à $A$. Les
@@ -865,8 +900,8 @@ résultat auquel il arrive est
   \Bigl[\, \varepsilon(x) + \sum_{i \geqslant 1}
   Q^{(r)}_{i}\bigl(c^{1}(x), \ldots, c^{i}(x)\bigr) \Bigr],
 \]
-où $Q^{(r)}_{i-r}$ est, par définition, la partie linéaire en la variable de
-degré $r$ du polynôme universel $Q_{i}$ qui exprime $c^{i}$ d'un produit ---
+où $Q^{(r)}_{i}$ est, par définition, la partie linéaire en la variable de
+degré $r$ du polynôme universel $Q_{r+i}$ qui exprime $c^{r+i}$ d'un produit ---
 les termes de degré $\geqslant 2$ en cette variable disparaissant puisque
 $(\eta^{r})^{2} = 0$.\footnote{La page 9 développe $c(x) \ast (1 - i\eta)$ en
 $\sum_{j \leqslant k} c^{j}(x)(-i\eta)^{k-j}$, sans les coefficients
@@ -926,7 +961,7 @@ Par conséquent :
 
 \textbf{Si $(r-1)!\,x' = 0$ dans $A^{1}(X)$, alors
 $c\bigl(i_{!}(\mathcal{O}_{Y})\bigr) = 1$.}\footnote{Vérifié en Lean
-(lean/Grothendieck/AlgebraicGeometry/Folder2.lean, \texttt{chernImmersion}) dans le modèle du
+(GrothendieckArchivesProofs, Grothendieck/AlgebraicGeometry/Folder2.lean, \texttt{chernImmersion}) dans le modèle du
 principe de scindage, avec $c(L^{-i} \otimes \mathcal{O}(-Y)) = 1 - x' -
 i\eta$ : le calcul tient tel quel, et n'utilise que l'inversibilité de
 $1 - x'$ (automatique, $x'$ étant nilpotent dans $\widetilde{A}(X)$) et
@@ -954,7 +989,7 @@ l'avait suivie ; mais $i_{!}(\mathcal{O}_{Y}) = [\mathcal{O}_{Y}] \otimes
 d'un point, et c'est sur elle que porte tout le calcul.} Comme
 $(r-1)! = 1$ pour $r \leqslant 2$, cette hypothèse force alors $x' = 0$ ; mais
 elle n'est que suffisante : le calcul exact donne
-$c(i_!x) = 1 + (-1)^{r-1} r!\,x'\,\eta^r$ lorsque $x'^2 = 0$, si bien que $r!\,x' = 0$
+$c(i_!x) = 1 - (-1)^{r-1} r!\,x'\,\eta^r$ lorsque $x'^2 = 0$, si bien que $r!\,x' = 0$
 suffit, et le phénomène apparaît déjà pour $r = 2$ avec un point d'ordre~$2$
 (édition, \texttt{computations/chern-trivial-2}).
 Reste à produire un $x' \neq 0$ tué par $(r-1)!$, et le feuillet le fait
@@ -967,8 +1002,8 @@ elliptique $X$ d'origine $0$, soit $a \neq 0$ un point tel que $a + a = 0$, et
 $x = (a) - (0) \in K(X)$ la classe d'un diviseur de degré zéro ; sa première
 classe de Chern $x'$ est d'ordre $2$, donc tuée par $(3-1)! = 2$. Alors
 $y = i_{!}(x)$, dans $K(X \times \mathbb{P}^{3})$, n'est pas nul, et pourtant
-« les coefficients de la classe de Chern sont nuls ; sans qu'elle soit
-nulle ».\footnote{C'est le même calcul, appliqué à une classe de rang $0$
+« les coefficients […] de la classe de Chern sont nuls ; sans que elle soit
+nulle », quelques mots du début restant illisibles.\footnote{C'est le même calcul, appliqué à une classe de rang $0$
 au lieu de $[\mathcal{O}_{Y}]$ : $x$ n'ayant sur une courbe que
 $\operatorname{ch}_{1}(x) = x'$, la formule donnée en note à propos des $Q^{(r)}_{i}$ donne
 $c(i_{!}x) = 1 - (-1)^{r-1}\, r!\, x'\,\eta^{r}$, qui vaut $1$ dès que
@@ -1015,8 +1050,7 @@ l'isomorphisme canonique de $\mathcal{O}$-Modules
 \[
   u^{*} u_{*}(F) \;\simeq\; \bigsqcup_{G'/G} F ,
 \]
-la somme portant sur les classes à gauche, $G$ permutant les facteurs par
-translation.\footnote{Le feuillet écrit $F^{(G'/G)}$, notation qui se lit aussi
+la somme portant sur les classes à gauche.\footnote{Le feuillet écrit $F^{(G'/G)}$, notation qui se lit aussi
 bien comme un produit. Pour un indice fini les deux coïncident ; l'hypothèse
 d'indice fini n'est pas sur le feuillet et est ajoutée ici.} Les
 sous-catégories pleines des Modules libres, localement libres, libres de type
@@ -1031,15 +1065,16 @@ associatif, et des isomorphismes fonctoriels
   u_{*}\bigl(F \otimes u^{*}(G')\bigr) \simeq u_{*}(F) \otimes G' ,
 \]
 la seconde étant la formule de projection. Pour $F \in A(\mathcal{X}, G)$ et
-$H$ un second groupe, $G \in A(\mathcal{X}, H)$, on pose
+$H$ un second groupe, $M \in A(\mathcal{X}, H)$, on pose
 \[
-  F \boxtimes G \;=\; \mathrm{pr}_{1}^{*}(F) \otimes \mathrm{pr}_{2}^{*}(G)
+  F \boxtimes M \;=\; \mathrm{pr}_{1}^{*}(F) \otimes \mathrm{pr}_{2}^{*}(M)
   \;\in\; A(\mathcal{X}, G \times H),
 \]
-produit compatible aux images inverses, $(u \times v)^{*}(F \boxtimes G)
-\simeq u^{*}(F) \boxtimes v^{*}(G)$ ; et le produit tensoriel ordinaire se
-retrouve par restriction le long de la diagonale : $F \otimes G = (\mathrm{diag}_{G})^{*}(F \boxtimes
-G)$.\footnote{Le feuillet écrit l'objet dans $A(\mathcal{X}, H \times G)$ alors
+produit compatible aux images inverses, $(u \times v)^{*}(F \boxtimes M)
+\simeq u^{*}(F) \boxtimes v^{*}(M)$ ; et le produit tensoriel ordinaire se
+retrouve par restriction le long de la diagonale : pour $H = G$, $F \otimes M =
+(\mathrm{diag}_{G})^{*}(F \boxtimes M)$.\footnote{Le module est ici nommé $M$ ; le
+feuillet le nomme $G$, comme le groupe.}\footnote{Le feuillet écrit l'objet dans $A(\mathcal{X}, H \times G)$ alors
 que la définition le place dans $A(\mathcal{X}, G \times H)$ ; c'est une
 inversion sans conséquence, les deux catégories étant canoniquement
 isomorphes.}
@@ -1281,7 +1316,7 @@ justifient la surjectivité de $\psi_{B}$ sont en partie illisibles.}
 \textbf{Corollaire.} \emph{$\varphi_{K}$ est toujours surjectif, et son noyau
 est un groupe de torsion.}
 
-La proposition vient de ce que $CB$, anneau de polynômes, est sans torsion :
+La proposition vient de ce que $CB$ est sans torsion, ce que la page affirme :
 un élément de degré $i$ du noyau de $\varphi_{B}$ est tué par $(i-1)!$, donc
 nul. Le corollaire, de ce que $GB \to GK$ est surjectif pour la première
 assertion, et de $\psi_{K}\varphi_{K} = (-1)^{i-1}(i-1)!$ pour la seconde : le
@@ -1314,7 +1349,7 @@ pas nul. Un homomorphisme surjectif d'un anneau avec torsion sur un anneau sans
 torsion n'est pas injectif : $\varphi_{K}$ ne l'est donc pas. Pour $n \leqslant
 2$, au contraire, $(n-1)! = 1$, la relation est $\zeta^{n} = 0$ et $\varphi_{K}$
 est bijectif ; la page fait elle-même la restriction, « si $n-1>1$ ».\footnote{Vérifié en Lean
-(lean/Grothendieck/AlgebraicGeometry/Folder2.lean, \texttt{$\varphi$\_not\_injective},
+(GrothendieckArchivesProofs, Grothendieck/AlgebraicGeometry/Folder2.lean, \texttt{$\varphi$\_not\_injective},
 \texttt{$\zeta$\_pow\_ne\_zero}, \texttt{factorial\_mul\_$\zeta$\_pow},
 \texttt{GK\_torsionFree}, \texttt{$\varphi$\_bijective\_of\_le\_two},
 \texttt{exists\_chern}), dans la présentation de $CK$ par $\zeta = c^{1}(L)$ et
@@ -1524,7 +1559,7 @@ ce que la disposition des formules et les mots lus imposent, et rien n'est
 reconstruit au-delà. C'est, en termes
 d'aujourd'hui, la construction d'une transformation naturelle de la $K$-théorie
 vers l'homologie commutant aux images directes propres, ce que le théorème
-de Riemann-Roch singulier fera vingt ans plus tard.}
+de Riemann-Roch singulier fera dans les années 1970.}
 
 La page 37 dresse une échelle à quatre montants comparant les deux variances :
 
@@ -1868,13 +1903,20 @@ Le dernier feuillet applique ceci à $f : \widetilde{C} \to Y$, la normalisée
 d'une courbe $C$ tracée sur la surface, avec $\xi = [\mathcal{O}_{\widetilde{C}}]$.
 Il trouve
 \[
-  c^{2}\bigl(\mathcal{O}_{C}\bigr) \;=\; \tfrac{1}{2}
+  c^{2}\bigl(f_{*}\mathcal{O}_{\widetilde{C}}\bigr) \;=\; \tfrac{1}{2}
   \Bigl[\,C^{2} - C\cdot k_{Y} + f_{*}\bigl(k_{\widetilde{C}}\bigr)\,\Bigr],
 \]
+\footnote{La page écrit $c^{2}(\mathcal{O}_{C})$, « la dernière classe de
+Chern d'une courbe $C$ dans la surface ». Le calcul porte sur $f_{!}\xi =
+[f_{*}\mathcal{O}_{\widetilde{C}}]$, $f$ étant fini, et cette classe est celle
+de $\mathcal{O}_{C}$ lorsque $C$ est lisse. Pour $C$ singulière,
+$[f_{*}\mathcal{O}_{\widetilde{C}}] = [\mathcal{O}_{C}] + [Q]$, où $Q =
+f_{*}\mathcal{O}_{\widetilde{C}}/\mathcal{O}_{C}$ est de support fini et de
+longueur $\delta$, et le degré de $c^{2}$ diminue de $\delta$.}
 puis, $Y$ étant compacte et $\widetilde{C}$ de genre $g$, en prenant le degré
 des deux membres :
 \[
-  \deg c^{2}\bigl(\mathcal{O}_{C}\bigr)
+  \deg c^{2}\bigl(f_{*}\mathcal{O}_{\widetilde{C}}\bigr)
   \;=\; \tfrac{1}{2}\bigl[\,C^{2} - C\cdot k_{Y} + 2g - 2\,\bigr]
   \;=\; \tfrac{1}{2}\bigl(C^{2} - C\cdot k_{Y}\bigr) + g - 1 .
 \]
@@ -1889,8 +1931,9 @@ $K_{p}$ de la page 41.}
 Le feuillet s'arrête là, et le reste de la page est blanc : c'est la fin du
 dossier. Or il est à une identification de la formule d'adjonction. La classe
 $[\mathcal{O}_{C}]$ vaut $1 - [\mathcal{O}_{Y}(-C)]$ dans $K(Y)$, d'où
-$c(\mathcal{O}_{C}) = (1-C)^{-1}$ et $c^{2}(\mathcal{O}_{C}) = C^{2}$ lorsque
-$C$ est lisse. Égaler les deux valeurs donne
+$c(\mathcal{O}_{C}) = (1-C)^{-1}$ et $c^{2}(\mathcal{O}_{C}) = C^{2}$ ; lorsque
+$C$ est lisse, $f_{*}\mathcal{O}_{\widetilde{C}} = \mathcal{O}_{C}$, et égaler
+les deux valeurs donne
 \[
   C^{2} \;=\; \tfrac{1}{2}\bigl(C^{2} - C\cdot k_{Y}\bigr) + g - 1,
   \qquad \text{c'est-à-dire} \qquad
@@ -1900,9 +1943,9 @@ C'est la formule d'adjonction, obtenue comme corollaire de
 Grothendieck-Riemann-Roch pour la normalisée d'une courbe sur une
 surface.\footnote{Ce dernier pas n'est pas sur le feuillet. Il calcule le
 premier membre et s'arrête ; le second calcul, immédiat, n'est nulle part dans
-le dossier, et le rapprochement est de cette lecture. On notera qu'écrite dans
-ce sens, la formule vaut pour $C$ lisse ; pour $C$ singulière, c'est la version
-de gauche qui reste vraie et qui définit le genre géométrique de la
-normalisée, et c'est sans doute pourquoi il l'a écrite dans ce sens-là.}
+le dossier, et le rapprochement est de cette lecture. Pour $C$ singulière, le degré de
+$c^{2}(f_{*}\mathcal{O}_{\widetilde{C}})$ est $C^{2} - \delta$ (note
+précédente), et l'on obtient $2(g + \delta) - 2 = C^{2} + C\cdot k_{Y}$ : la
+formule d'adjonction pour le genre arithmétique $g + \delta$ de $C$.}
 
 \end{document}
