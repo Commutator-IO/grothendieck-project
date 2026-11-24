@@ -2673,9 +2673,9 @@ export const FINDINGS: Finding[] = [
       'Transcription 11, batch 3 (batch-03.fr.tex), header and pages 45–50',
       'Modernised reading 11 (11.modern.tex), « Unités, et l’arrêt »',
     ],
-    status: 'candidate',
+    status: 'confirmed',
     settle:
-      'A person checks on the facsimile whether the comma of page 47 falls at the foot of the leaf or above blank space, and whether any leaf of the fonds carries the sentence on. Blank space below would make the stop an abandonment rather than a loss. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the sentence stops at « conditions, » about three quarters down the leaf; the lower quarter is blank.',
+      'A person checks on the facsimile whether the comma of page 47 falls at the foot of the leaf or above blank space, and whether any leaf of the fonds carries the sentence on. Blank space below would make the stop an abandonment rather than a loss. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the sentence stops at « conditions, » about three quarters down the leaf; the lower quarter is blank. Confirmed on the facsimile by Michel Hua, 2026-11-24: the sentence stops at « conditions, » and the rest of the page is blank.',
   },
   {
     id: '113-listing-stamps-bound-below-only',
