@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Basic
 public import Mathlib.CategoryTheory.Groupoid
 public import Mathlib.CategoryTheory.Limits.Preorder
+public import Mathlib.Data.Fintype.Pigeonhole
 
 /-!
 # Test categories, axiomatically
@@ -45,6 +46,9 @@ Main results:
   monoids with a single minimal right ideal (through `FiniteMonoids.lean`), free categories
   on quivers with at most one arrow into each vertex, and preorders with a minimal element (local
   test only);
+* `exists_source_of_acyclic`, `not_isLocalTest_paths_of_acyclic`: a finite nonempty quiver without
+  cycles has a source, the slice of the free category over it is the point
+  (`rightOreCondition_over_paths_of_source`), so the free category is not a local test category;
 * `not_isPreconnected_zigZagProd`, `not_isAspherical_zigZagProd` (folder 118, p. 36): the product
   of the zigzags `Zₙ`, each connected, is not connected, hence not aspherical. That each `Zₙ` is
   aspherical is not formalised.
@@ -265,6 +269,111 @@ theorem not_isTest_finite_monoid {L : FundamentalLocalizer.{0}} (hL : L.Aspheric
     (M : Type) [Monoid M] [Finite M] (h : ∃! I : Set M, Minimal IsRightIdeal I) :
     ¬ IsWeakTest (SingleObj M) L ∧ ¬ IsLocalTest (SingleObj M) L :=
   not_isTest_singleObj hL M (forall_exists_mul_eq_mul_iff_existsUnique_minimal.2 h)
+
+section Acyclic
+
+open Quiver
+
+variable {Q : Type (u + 1)} [Quiver.{u + 1} Q]
+
+/-- Two paths of length zero with the same ends are equal. -/
+theorem path_eq_of_length_eq_zero {a b : Q} (p q : Path a b) (hp : p.length = 0)
+    (hq : q.length = 0) : p = q := by
+  cases p with
+  | nil => cases q with
+    | nil => rfl
+    | cons q e => simp at hq
+  | cons p e => simp at hp
+
+/-- A path into a vertex that receives no arrow has length zero. -/
+theorem path_length_eq_zero_of_source {v : Q} (hv : ∀ w, IsEmpty (w ⟶ v)) {a b : Q}
+    (p : Path a b) (hb : b = v) : p.length = 0 := by
+  cases p with
+  | nil => rfl
+  | cons p e => subst hb; exact (hv _).elim e
+
+/-- A path into a vertex that receives no arrow starts at that vertex. -/
+theorem eq_of_path_of_source {v : Q} (hv : ∀ w, IsEmpty (w ⟶ v)) {a b : Q} (p : Path a b)
+    (hb : b = v) : a = b := by
+  cases p with
+  | nil => rfl
+  | cons p e => subst hb; exact (hv _).elim e
+
+/-- A vertex of `Q`, as an object of the free category. -/
+def toPaths (v : Q) : Paths Q := v
+
+/-- **Sources.** In the free category on a quiver, the slice over a vertex that receives no
+arrow satisfies the right Ore condition: it is equivalent to the point. -/
+theorem rightOreCondition_over_paths_of_source (v : Q) (hv : ∀ w, IsEmpty (w ⟶ v)) :
+    GrothendieckTopology.RightOreCondition (Over (toPaths v)) := by
+  have hsub : ∀ {a : Paths Q} (p q : a ⟶ toPaths v), p = q := fun p q =>
+    path_eq_of_length_eq_zero p q (path_length_eq_zero_of_source hv p rfl)
+      (path_length_eq_zero_of_source hv q rfl)
+  have hleft : ∀ {Y X : Over (toPaths v)} (f f' : Y ⟶ X), f = f' := fun {Y X} f f' => by
+    have hl : ∀ g : Y ⟶ X, Path.length (V := Q) g.left = 0 := fun g => by
+      have hw : Path.comp (V := Q) g.left X.hom = Y.hom := Over.w g
+      have := congrArg Path.length hw
+      have h0 := path_length_eq_zero_of_source hv (Y.hom : Path (V := Q) Y.left v) rfl
+      have hc : (Path.comp (V := Q) g.left X.hom).length =
+          Path.length (V := Q) g.left + Path.length (V := Q) X.hom := Path.length_comp _ _
+      omega
+    exact Over.OverMorphism.ext (path_eq_of_length_eq_zero _ _ (hl f) (hl f'))
+  intro X Y Z f g
+  have hY := eq_of_path_of_source hv (Y.hom : Path (V := Q) Y.left v) rfl
+  have hZ := eq_of_path_of_source hv (Z.hom : Path (V := Q) Z.left v) rfl
+  exact ⟨Y, 𝟙 Y, Over.homMk (eqToHom (hY.trans hZ.symm)) (hsub _ _), hleft _ _⟩
+
+/-- In the free category on a quiver, a vertex that receives no arrow makes the slice over it
+satisfy the right Ore condition, so the free category is not a local test category. -/
+theorem not_isLocalTest_paths_of_source {L : FundamentalLocalizer.{u + 1}}
+    (hL : L.AsphericalConnected) (v : Q) (hv : ∀ w, IsEmpty (w ⟶ v)) :
+    ¬ IsLocalTest (Paths Q) L :=
+  not_isLocalTest_of_over hL _ (rightOreCondition_over_paths_of_source v hv)
+
+/-- A path that ends where it starts is a cycle; under acyclicity it is trivial. -/
+theorem path_length_eq_zero_of_acyclic (hac : ∀ (v : Q) (p : Path v v), p.length = 0)
+    {a b : Q} (p : Path a b) (h : a = b) : p.length = 0 := by
+  subst h
+  exact hac _ p
+
+/-- **Finite acyclic quivers have a source.** -/
+theorem exists_source_of_acyclic [Finite Q] [Nonempty Q]
+    (hac : ∀ (v : Q) (p : Path v v), p.length = 0) : ∃ v : Q, ∀ w, IsEmpty (w ⟶ v) := by
+  by_contra! h
+  choose pred e using fun x : Q => (h x)
+  let arr : ∀ x : Q, pred x ⟶ x := fun x => Classical.choice (e x)
+  let seq : ℕ → Q := fun n => Nat.rec (Classical.arbitrary Q) (fun _ x => pred x) n
+  let down : ∀ i k, Path (seq (i + k)) (seq i) := fun i k =>
+    Nat.rec (motive := fun k => Path (seq (i + k)) (seq i)) Path.nil
+      (fun k p => (arr (seq (i + k))).toPath.comp p) k
+  have hlen : ∀ i k, (down i k).length = k := fun i k => by
+    induction k with
+    | zero => rfl
+    | succ k ih =>
+      change ((arr (seq (i + k))).toPath.comp (down i k)).length = k + 1
+      rw [Path.length_comp, Path.length_toPath, ih]
+      omega
+  obtain ⟨x, y, hxy, hseq⟩ := Finite.exists_ne_map_eq_of_infinite seq
+  rcases lt_or_gt_of_ne hxy with hlt | hlt
+  · have := path_length_eq_zero_of_acyclic hac (down x (y - x))
+      (by rw [Nat.add_sub_cancel' hlt.le]; exact hseq.symm)
+    rw [hlen] at this
+    omega
+  · have := path_length_eq_zero_of_acyclic hac (down y (x - y))
+      (by rw [Nat.add_sub_cancel' hlt.le]; exact hseq)
+    rw [hlen] at this
+    omega
+
+/-- **Finite acyclic free categories.** The free category on a finite nonempty quiver without
+cycles is not a local test category: the quiver has a source, and the slice over it is the
+point. -/
+theorem not_isLocalTest_paths_of_acyclic {L : FundamentalLocalizer.{u + 1}}
+    (hL : L.AsphericalConnected) [Finite Q] [Nonempty Q]
+    (hac : ∀ (v : Q) (p : Path v v), p.length = 0) : ¬ IsLocalTest (Paths Q) L :=
+  let ⟨v, hv⟩ := exists_source_of_acyclic hac
+  not_isLocalTest_paths_of_source hL v hv
+
+end Acyclic
 
 section ZigZag
 
