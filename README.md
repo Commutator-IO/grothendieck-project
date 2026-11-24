@@ -426,7 +426,7 @@ Each statement, its proof written out in French and what the verification
 found are in the appendix [`docs/lean/article.tex`](docs/lean/article.tex),
 served as [/article/grothendieck-lean.pdf](https://grothendieck.commutator.io/article/grothendieck-lean.pdf)
 and linked from Findings and Method. It is on Hexagon as
-[2611.00125](https://hexagonmath.org/2611.00125v1), and its proofs are
+[2611.00125v3](https://hexagonmath.org/pdf/2611.00125v3), and its proofs are
 registered in the Palomar Registry as
 [PALOMAR-2026-11-07-000003](https://palomar-registry.org/entry.html?id=PALOMAR-2026-11-07-000003),
 from the repository
