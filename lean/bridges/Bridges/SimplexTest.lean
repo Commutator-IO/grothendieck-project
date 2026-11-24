@@ -24,12 +24,12 @@ no hypothesis on `W` (not even `AsphericalConnected`):
 * `isAspherical_of_contraction`: a category with an endofunctor `t` and natural transformations
   `𝟭 ⟶ t ⟵ const d` is aspherical (the constant functor is in `W`, and the functor to the point is
   a retract of it);
-* `ConeData`, `ConeData.isWeakTest`: a category with a « cone » structure (an endofunctor `T`
-  adding a final vertex, `ι : 𝟭 ⟶ T` mono, a vertex `π : const p ⟶ T`, and a decidable
-  factorisation through `ι`) is a weak test category. For `C` with a terminal object, the
-  contraction of `A/i_A^*(C)` sends `(a, F)` to `(T a, F⁺)`, where `F⁺ : A/T a ⥤ C` is `F` on what
-  factors through `ι a` and the terminal object elsewhere (`ConeData.chi`, `ConeData.plus`); `ι`
-  and `π` give `𝟭 ⟶ t ⟵ const (p, ⋆)`;
+* `FacData`, `ConeData`, `ConeData.isWeakTest`: a category with a « cone » structure (an
+  endofunctor `T` adding a final vertex, `ι : 𝟭 ⟶ T` mono, a vertex `π : const p ⟶ T`, and a
+  decidable factorisation through `ι`) is a weak test category. For `C` with a terminal object,
+  the contraction of `A/i_A^*(C)` sends `(a, F)` to `(T a, F⁺)`, where `F⁺ : A/T a ⥤ C` is `F`
+  on what factors through `ι a` and the terminal object elsewhere (`FacData.chi`,
+  `FacData.plus`); `ι` and `π` give `𝟭 ⟶ t ⟵ const (p, ⋆)`;
 * `SimplexCone.coneData`, `SimplexCone.coneDataOver`: the cone data of `Δ` (`[n] ↦ [n + 1]`) and
   of every slice `Δ/b` (the new vertex over the top of `b`);
 * `isWeakTest_simplexCategory`, `isLocalTest_simplexCategory`, `isTest_simplexCategory`: `Δ` is a
@@ -107,21 +107,26 @@ theorem isAspherical_of_contraction {D : Type} [SmallCategory D] (t : D ⥤ D) (
 
 end Homotopy
 
-/-- A cone structure on `A`: adding a final vertex `T a` to each object `a`. -/
-structure ConeData (A : Type) [SmallCategory A] where
+/-- An extension structure on `A`: an endofunctor `T` with a monomorphism `ι : 𝟭 ⟶ T`, such that
+factoring through `ι` is reflected by `T`. -/
+structure FacData (A : Type) [SmallCategory A] where
   T : A ⥤ A
   ι : 𝟭 A ⟶ T
   mono : ∀ a, Mono (ι.app a)
-  p : A
-  π : (Functor.const A).obj p ⟶ T
-  not_fac_π : ∀ {z a : A} (h : z ⟶ p) (g : z ⟶ a), g ≫ ι.app a ≠ h ≫ π.app a
   fac_of : ∀ {z a b : A} (f : a ⟶ b) (k : z ⟶ T.obj a) (g : z ⟶ b),
     g ≫ ι.app b = k ≫ T.map f → ∃ g' : z ⟶ a, g' ≫ ι.app a = k
 
-namespace ConeData
+/-- A cone structure on `A`: adding a final vertex `T a` to each object `a`, the vertex being
+`π a : p ⟶ T a`, natural in `a`. -/
+structure ConeData (A : Type) [SmallCategory A] extends FacData A where
+  p : A
+  π : (Functor.const A).obj p ⟶ T
+  not_fac_π : ∀ {z a : A} (h : z ⟶ p) (g : z ⟶ a), g ≫ ι.app a ≠ h ≫ π.app a
+
+namespace FacData
 
 attribute [local instance] Classical.propDecidable
-variable {A : Type} [SmallCategory A] (D : ConeData A)
+variable {A : Type} [SmallCategory A] (D : FacData A)
 
 /-- `Z` factors through `ι a`. -/
 def Fac {a : A} (Z : Over (D.T.obj a)) : Prop := ∃ g : Z.left ⟶ a, g ≫ D.ι.app a = Z.hom
@@ -231,14 +236,18 @@ theorem map_ι_comp_chi (a : A) : Over.map (D.ι.app a) ⋙ D.chi a = WithTermin
   simp only [Category.assoc, eqToHom_trans, eqToHom_trans_assoc]
   rfl
 
-theorem not_fac_map_π {a : A} (X : Over D.p) : ¬ D.Fac ((Over.map (D.π.app a)).obj X) :=
-  fun ⟨g, hg⟩ => D.not_fac_π X.hom g hg
+theorem not_fac_map_of {a x : A} {v : x ⟶ D.T.obj a}
+    (hv : ∀ {z : A} (h : z ⟶ x) (g : z ⟶ a), g ≫ D.ι.app a ≠ h ≫ v) (X : Over x) :
+    ¬ D.Fac ((Over.map v).obj X) :=
+  fun ⟨g, hg⟩ => hv X.hom g hg
 
-/-- `χ_a` restricted along `π a` is constant at the added terminal object. -/
-theorem map_π_comp_chi (a : A) :
-    Over.map (D.π.app a) ⋙ D.chi a = (Functor.const _).obj WithTerminal.star :=
-  CategoryTheory.Functor.ext (fun X => chiObj_neg (not_fac_map_π X)) fun _ Y _ =>
-    (chiTerminal (not_fac_map_π Y)).hom_ext _ _
+/-- `χ_a` restricted along a map `v` that nothing factors through `ι a` along is constant at the
+added terminal object. -/
+theorem map_comp_chi_of {a x : A} {v : x ⟶ D.T.obj a}
+    (hv : ∀ {z : A} (h : z ⟶ x) (g : z ⟶ a), g ≫ D.ι.app a ≠ h ≫ v) :
+    Over.map v ⋙ D.chi a = (Functor.const _).obj WithTerminal.star :=
+  CategoryTheory.Functor.ext (fun X => chiObj_neg (not_fac_map_of hv X)) fun _ Y _ =>
+    (chiTerminal (not_fac_map_of hv Y)).hom_ext _ _
 
 theorem comp_T_eq {a b : A} (f : a ⟶ b) {Z : Over (D.T.obj a)} (h : D.Fac Z) :
     (h.choose ≫ f) ≫ D.ι.app b = Z.hom ≫ D.T.map f := by
@@ -294,7 +303,7 @@ theorem map_T_comp_chi {a b : A} (f : a ⟶ b) :
     rfl
   · exact (chiTerminal h).hom_ext _ _
 
-end ConeData
+end FacData
 section Plus
 variable {C : Type} [SmallCategory C] [HasTerminal C]
 
@@ -321,8 +330,8 @@ theorem map_comp_ext' {X Y : Type} [Category X] [Category Y] (G : X ⥤ Y) (F : 
 
 end Plus
 
-namespace ConeData
-variable {A : Type} [SmallCategory A] (D : ConeData A) {C : Type} [SmallCategory C] [HasTerminal C]
+namespace FacData
+variable {A : Type} [SmallCategory A] (D : FacData A) {C : Type} [SmallCategory C] [HasTerminal C]
 
 /-- `F⁺ : A/T a ⥤ C`: `F` on what factors through `ι a`, the terminal object elsewhere. -/
 noncomputable def plus {a : A} (F : Over a ⥤ C) : Over (D.T.obj a) ⥤ C := D.chi a ⋙ ext' F
@@ -330,9 +339,10 @@ noncomputable def plus {a : A} (F : Over a ⥤ C) : Over (D.T.obj a) ⥤ C := D.
 theorem map_ι_comp_plus {a : A} (F : Over a ⥤ C) : Over.map (D.ι.app a) ⋙ D.plus F = F := by
   rw [plus, ← Functor.assoc, map_ι_comp_chi, incl_comp_ext']
 
-theorem map_π_comp_plus {a : A} (F : Over a ⥤ C) :
-    Over.map (D.π.app a) ⋙ D.plus F = (Functor.const _).obj (⊤_ C) := by
-  rw [plus, ← Functor.assoc, map_π_comp_chi, const_comp_ext']
+theorem map_comp_plus_of {a x : A} {v : x ⟶ D.T.obj a}
+    (hv : ∀ {z : A} (h : z ⟶ x) (g : z ⟶ a), g ≫ D.ι.app a ≠ h ≫ v) (F : Over a ⥤ C) :
+    Over.map v ⋙ D.plus F = (Functor.const _).obj (⊤_ C) := by
+  rw [plus, ← Functor.assoc, map_comp_chi_of hv, const_comp_ext']
 
 theorem map_T_comp_plus {a b : A} (f : a ⟶ b) (G : Over b ⥤ C) :
     Over.map (D.T.map f) ⋙ D.plus G = D.plus (Over.map f ⋙ G) := by
@@ -340,10 +350,6 @@ theorem map_T_comp_plus {a b : A} (f : a ⟶ b) (G : Over b ⥤ C) :
 
 /-- The underlying object of an element. -/
 abbrev E (A : Type) [SmallCategory A] (C : Type) [SmallCategory C] := (iStar A C).Elementsᵒᵖ
-
-/-- The cone point of `A/i_A^*(C)`: the vertex `p` with the constant functor. -/
-noncomputable def pt (C : Type) [SmallCategory C] [HasTerminal C] : E A C :=
-  op ((iStar A C).elementsMk (op D.p) ((Functor.const _).obj (⊤_ C)))
 
 /-- The functor carried by an element. -/
 abbrev valF {C : Type} [SmallCategory C] (X : E A C) : Over X.unop.obj.unop ⥤ C := X.unop.val
@@ -365,10 +371,22 @@ noncomputable def coneι (C : Type) [SmallCategory C] [HasTerminal C] : 𝟭 (E 
     change (φ.unop.hom.unop ≫ D.ι.app _).op = (D.ι.app _ ≫ D.T.map φ.unop.hom.unop).op
     exact congrArg Quiver.Hom.op (D.ι.naturality φ.unop.hom.unop)))
 
+end FacData
+
+namespace ConeData
+variable {A : Type} [SmallCategory A] (D : ConeData A) {C : Type} [SmallCategory C] [HasTerminal C]
+
+open FacData
+
+/-- The cone point of `A/i_A^*(C)`: the vertex `p` with the constant functor. -/
+noncomputable def pt (C : Type) [SmallCategory C] [HasTerminal C] : E A C :=
+  op ((iStar A C).elementsMk (op D.p) ((Functor.const _).obj (⊤_ C)))
+
 /-- `const pt ⟶ cone`, by `π`. -/
 noncomputable def coneπ (C : Type) [SmallCategory C] [HasTerminal C] :
-    (Functor.const (E A C)).obj (D.pt C) ⟶ D.cone C where
-  app X := Quiver.Hom.op ⟨(D.π.app X.unop.obj.unop).op, map_π_comp_plus D (valF X)⟩
+    (Functor.const (E A C)).obj (D.pt C) ⟶ D.toFacData.cone C where
+  app X := Quiver.Hom.op ⟨(D.π.app X.unop.obj.unop).op,
+    map_comp_plus_of D.toFacData D.not_fac_π (valF X)⟩
   naturality X Y φ := Quiver.Hom.unop_inj (Functor.Elements.Hom.ext (by
     change (𝟙 _ ≫ D.π.app _).op = (D.π.app _ ≫ D.T.map φ.unop.hom.unop).op
     exact congrArg Quiver.Hom.op (D.π.naturality φ.unop.hom.unop)))
@@ -376,7 +394,7 @@ noncomputable def coneπ (C : Type) [SmallCategory C] [HasTerminal C] :
 include D in
 /-- **A category with cone data is a weak test category**, for every fundamental localizer. -/
 theorem isWeakTest (L : FundamentalLocalizer.{0}) : IsWeakTest A L := fun C _ _ =>
-  isAspherical_of_contraction L (D.cone C) (D.pt C) (D.coneι C) (D.coneπ C)
+  isAspherical_of_contraction L (D.toFacData.cone C) (D.pt C) (D.toFacData.coneι C) (D.coneπ C)
 
 end ConeData
 
