@@ -48,9 +48,9 @@
 % pas vers main : le code continue d'évoluer après la publication.
 \newcommand{\leanref}{article-lean-2026-10b}
 \newcommand{\leanblob}{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/Grothendieck}
-\newcommand{\general}[1]{\par\noindent\textit{Résultat général, démontré en Lean dans}\newline\href{\leanblob/#1.lean}{\texttt{Grothendieck/\allowbreak\detokenize{#1}.lean}}\textit{ ; la démonstration n'est pas reprise ici.}\par}
+\newcommand{\general}[1]{\par{\raggedright\noindent\textit{Résultat général, démontré en Lean dans}\newline\href{\leanblob/#1.lean}{\texttt{Grothendieck/\allowbreak\detokenize{#1}.lean}}\textit{ ; la démonstration n'est pas reprise ici.}\par}}
 % Un fichier ajouté après l'étiquette n'y existe pas : son lien pointe vers main (\verifie[\leanblobmain]{...}).
-\newcommand{\generalpool}[2]{\par\noindent\textit{Résultat général, démontré en Lean dans}\newline\href{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/LeanPool/#1/#2.lean}{\texttt{LeanPool/\allowbreak\detokenize{#1}/\allowbreak\detokenize{#2}.lean}}\textit{ ; la démonstration n'est pas reprise ici.}\par}
+\newcommand{\generalpool}[2]{\par{\raggedright\noindent\textit{Résultat général, démontré en Lean dans}\newline\href{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/LeanPool/#1/#2.lean}{\texttt{LeanPool/\allowbreak\detokenize{#1}/\allowbreak\detokenize{#2}.lean}}\textit{ ; la démonstration n'est pas reprise ici.}\par}}
 \newcommand{\leanblobmain}{https://github.com/Commutator-IO/GrothendieckArchivesProofs/blob/main/Grothendieck}
 \newcommand{\verifie}[2][\leanblob]{\footnote{Preuve vérifiée : \href{#1/#2.lean}{\texttt{Grothendieck/\detokenize{#2}.lean}}.}}
 % Un énoncé lié à l'un des théorèmes numérotés de la frise des œuvres (onglet
@@ -101,9 +101,27 @@
 \theoremstyle{remark}
 \newtheorem*{remarque}{Remarque}
 \raggedbottom\emergencystretch=3em
+% Report only underfull lines that show (badness above 5000); looser ones are the price of
+% justified French with long Lean names, and are fixed at the source when they show.
+\hbadness=5000
 % Long Lean names (\texttt{A.b\_c\_d}) may break after an underscore, without a hyphen.
 \let\bkunderscore\_
 \renewcommand{\_}{\bkunderscore\allowbreak}
+% They may also break before a capital (camelCase) and after « . » or « / » (namespaces,
+% paths), again without a hyphen, as \url does: XeTeX inter-character classes, switched
+% on only inside \texttt, so the text fonts are untouched.
+\newXeTeXintercharclass\ttlowerclass
+\newXeTeXintercharclass\ttupperclass
+\newXeTeXintercharclass\ttsepclass
+\count255=`a \loop\XeTeXcharclass\count255=\ttlowerclass\ifnum\count255<`z\advance\count255 by 1\repeat
+\count255=`0 \loop\XeTeXcharclass\count255=\ttlowerclass\ifnum\count255<`9\advance\count255 by 1\repeat
+\count255=`A \loop\XeTeXcharclass\count255=\ttupperclass\ifnum\count255<`Z\advance\count255 by 1\repeat
+\XeTeXcharclass`.=\ttsepclass \XeTeXcharclass`/=\ttsepclass
+\XeTeXinterchartoks\ttlowerclass\ttupperclass={\allowbreak}
+\XeTeXinterchartoks\ttsepclass\ttlowerclass={\allowbreak}
+\XeTeXinterchartoks\ttsepclass\ttupperclass={\allowbreak}
+\let\origtexttt\texttt
+\renewcommand{\texttt}[1]{\origtexttt{\XeTeXinterchartokenstate=1 #1}}
 
 \title{\Large Annexe. Énoncés des lectures modernisées démontrés}
 \author{Michel Hua\\ \small Chercheur indépendant, Paris\\ \small \texttt{michel@commutator.io}}
@@ -343,7 +361,7 @@ Les énoncés démontrés ici sont tirés des lectures modernisées du fonds. Ce
 
 L'auteur remercie tout particulièrement M.~Planat, qui a lu plusieurs parties de cette annexe, ainsi que D.~M.~Roberts, C.~et C.~Vuong, C.~Birkbeck, D.-C.~Cisinski, D.~Edidin et F.~Charles pour leurs remarques.
 
-\begin{thebibliography}{99}\small
+\begin{thebibliography}{99}\small\raggedright
 \bibitem{adamekrosicky1994} J.~Adámek et J.~Rosický, \emph{Locally Presentable and Accessible Categories}, London Mathematical Society Lecture Note Series 189, Cambridge University Press, 1994 ; doi:10.1017/CBO9780511600579.
 \bibitem{andre2004} Y.~André, « Sur la conjecture des $p$-courbures de Grothendieck--Katz et un problème de Dwork », dans \emph{Geometric aspects of Dwork theory}, vol.~I, Walter de Gruyter, Berlin, 2004, 55--112 ; doi:10.1515/9783110198133.1.55.
 \bibitem{antieaumeier2020} B.~Antieau et L.~Meier, « The Brauer group of the moduli stack of elliptic curves », \emph{Algebra \& Number Theory} 14 (2020), 2295--2333 ; doi:10.2140/ant.2020.14.2295 ; arXiv:1608.00851.

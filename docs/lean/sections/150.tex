@@ -64,7 +64,8 @@ Une partie conique $C$ de $T$ est $T$ tout entier si elle contient $\frac12$, pu
 Le collier ne sert pas à la démonstration de l'énoncé : dans l'exemple, la condition stricte suffit. La page laisse deux réparations possibles : demander la condition stricte, ou ajouter les traces $X_i \cap Y$ aux données de droite. La lecture a retenu la première, et l'exemple montre qu'elle répare le défaut qu'il met en évidence ; il ne démontre pas la proposition corrigée en général.
 \end{remarque}
 
-\noindent\emph{Portée de la vérification.} Lean traite l'exemple seul, dans $\mathbb R$ : les parties $X$, $Y$, $T$, $\dot T$, $X^\sharp$ et le collier y sont des intervalles explicites, et les notions de partie conique, de compatibilité, de compatibilité au collier et de compatibilité stricte y sont écrites pour cette action. Il démontre que $T$ est conique et strict (\texttt{isConic\_T}, \texttt{T\_eq\_half\_smul}), le contre-exemple (\texttt{compatible\_not\_determined}, \texttt{not\_strictlyCompatible\_singleton\_zero}) et l'énoncé (\texttt{eq\_of\_strictlyCompatible}). Ne sont pas formalisés : les deux catégories de la proposition et le foncteur de recollement $X = X^\sharp \amalg_{\dot X} \mathcal C(f)$ pour des espaces quelconques, la transversalité et l'équisingularité de la même page. Mathlib n'a pas les espaces stratifiés ni les voisinages coniques.
+\begingroup\raggedright
+\noindent\emph{Portée de la vérification.} Lean traite l'exemple seul, dans $\mathbb R$ : les parties $X$, $Y$, $T$, $\dot T$, $X^\sharp$ et le collier y sont des intervalles explicites, et les notions de partie conique, de compatibilité, de compatibilité au collier et de compatibilité stricte y sont écrites pour cette action. Il démontre que $T$ est conique et strict (\texttt{isConic\_T}, \texttt{T\_eq\_half\_smul}), le contre-exemple (\texttt{compatible\_not\_determined}, \texttt{not\_strictlyCompatible\_singleton\_zero}) et l'énoncé (\texttt{eq\_of\_strictlyCompatible}). Ne sont pas formalisés : les deux catégories de la proposition et le foncteur de recollement $X = X^\sharp \amalg_{\dot X} \mathcal C(f)$ pour des espaces quelconques, la transversalité et l'équisingularité de la même page. Mathlib n'a pas les espaces stratifiés ni les voisinages coniques.\par\endgroup
 
 Ne sont pas démontrés ici, de la même cote :
 
@@ -78,7 +79,7 @@ Dans le déploiement d'une stratification équisingulière non singulière, pré
 \noindent\emph{Le critère combinatoire, vérifié.} Le théorème reste non démontré, mais sa partie purement ordinale est vérifiée par Lean (\texttt{Folder150.Flags}). Soit $I$ un ensemble ordonné quelconque, $d' = (i_1 < \dots < i_n)$ un drapeau, $m = i_p$ l'un de ses termes et $d = (i_1, \dots, i_p)$ le segment initial qu'il détermine. On note $J$ la réunion des intervalles ouverts $]i_k, i_{k+1}[$, $p \leq k < n$, et l'on appelle \emph{drapeaux au-dessus de $d'$} les drapeaux $e \supset d'$ qui ont les mêmes termes que $d'$ jusqu'à $i_p$ et le même dernier terme $i_n$ : ce sont les indices des strates $\Sigma_e$ du bord des fibres.
 
 \begin{encadre}
-\begin{enonce}[énoncé de l'édition, pages~45 à~47, partie combinatoire]
+\begin{enonce}[énoncé de l'édition, pages~45 à~47, partie combinatoire]\leavevmode
 \begin{enumerate}
 \item[(i)] $J$ est la somme ordinale des $I_{]i_k, i_{k+1}[}$ : un point d'un intervalle est en dessous de tout point d'un intervalle plus haut. C'est l'ensemble des points hors de $d'$, strictement compris entre $i_p$ et $i_n$ et comparables à tous les termes de $d'$.
 \item[(ii)] $e \mapsto e \smallsetminus d'$ est un isomorphisme d'ensembles ordonnés (par inclusion) des drapeaux au-dessus de $d'$ sur les drapeaux de $J$, qui envoie $d'$ sur le drapeau vide.
