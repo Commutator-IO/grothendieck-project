@@ -49,9 +49,12 @@ Main results:
 * `exists_source_of_acyclic`, `not_isLocalTest_paths_of_acyclic`: a finite nonempty quiver without
   cycles has a source, the slice of the free category over it is the point
   (`rightOreCondition_over_paths_of_source`), so the free category is not a local test category;
-* `not_isPreconnected_zigZagProd`, `not_isAspherical_zigZagProd` (folder 118, p. 36): the product
-  of the zigzags `Zₙ`, each connected, is not connected, hence not aspherical. That each `Zₙ` is
-  aspherical is not formalised.
+* `not_isPreconnected_zigZagProd`, `not_isAspherical_zigZagProd`, `isAspherical_zigZag`,
+  `isAspherical_zigZag_and_not_isAspherical_zigZagProd` (folder 118, p. 36): each zigzag `Zₙ` is
+  aspherical, from the axioms alone (by induction on `n`: when the new arrow is `n → n + 1`, the
+  relative Theorem A applied to the inclusion, whose slices have a terminal object; when it is
+  `n + 1 → n`, the same for the retraction sending `n + 1` to `n`, then two out of three), while
+  their product is not connected, hence not aspherical.
 -/
 
 @[expose] public section
@@ -459,5 +462,124 @@ theorem not_isAspherical_zigZagProd {L : FundamentalLocalizer.{0}}
   fun h => not_isPreconnected_zigZagProd (hL _ h).toIsPreconnected
 
 end ZigZag
+
+section AsphericalZigZag
+
+/-- A functor between two categories with a terminal object is a `W`-equivalence. -/
+theorem FundamentalLocalizer.mem_of_hasTerminal (L : FundamentalLocalizer.{u}) {A B : Type u}
+    [SmallCategory A] [SmallCategory B] [HasTerminal A] [HasTerminal B] (F : A ⥤ B) : L.W F :=
+  L.of_comp_right F (Functor.star B : B ⥤ Discrete PUnit.{u + 1}) (L.star_mem_of_hasTerminal B)
+    (by rw [Functor.punit_ext' (F ⋙ _) (Functor.star A)]; exact L.star_mem_of_hasTerminal A)
+
+/-- A thin category with an object that receives an arrow from every object has a terminal
+object. -/
+theorem hasTerminal_of_thin {C : Type*} [Category C] [Quiver.IsThin C] (t : C)
+    (h : ∀ x, Nonempty (x ⟶ t)) : HasTerminal C :=
+  (IsTerminal.ofUniqueHom (fun x => (h x).some) fun _ _ => Subsingleton.elim _ _).hasTerminal
+
+instance {C D : Type*} [Category C] [Category D] [Quiver.IsThin C] (S : C ⥤ D) (T : D) :
+    Quiver.IsThin (CostructuredArrow S T) :=
+  fun _ _ => ⟨fun f g => CostructuredArrow.hom_ext f g (Subsingleton.elim _ _)⟩
+
+namespace ZigZag
+
+/-- The value of an object of the zigzag. -/
+abbrev v {n : ℕ} (i : ZigZag n) : ℕ := Fin.val (n := n + 1) i
+
+theorem v_lt {n : ℕ} (i : ZigZag n) : v i < n + 1 := Fin.isLt (n := n + 1) i
+
+@[simp] theorem v_mk {n m : ℕ} (h : m < n + 1) : v (ZigZag.mk m h) = m := rfl
+
+theorem le_iff_v {n : ℕ} {i j : ZigZag n} :
+    i ≤ j ↔ v i = v j ∨ (v i % 2 = 0 ∧ (v j = v i + 1 ∨ v j + 1 = v i)) := by
+  rw [ZigZag.le_iff]
+  exact or_congr_left Fin.ext_iff
+
+/-- The inclusion `Zₙ ⥤ Zₙ₊₁`. -/
+def incl (n : ℕ) : ZigZag n ⥤ ZigZag (n + 1) :=
+  Monotone.functor (f := fun x => ZigZag.mk (v x) (by have := v_lt x; omega)) fun x y h => by
+    rw [le_iff_v] at h ⊢
+    simpa using h
+
+/-- The retraction `Zₙ₊₁ ⥤ Zₙ` sending `n + 1` to `n`, for `n` odd. -/
+def retr (n : ℕ) (hn : n % 2 = 1) : ZigZag (n + 1) ⥤ ZigZag n :=
+  Monotone.functor (f := fun x => ZigZag.mk (min (v x) n) (by omega)) fun x y h => by
+    have := v_lt x; have := v_lt y
+    rw [le_iff_v] at h ⊢
+    simp only [v_mk]
+    omega
+
+@[simp] theorem v_incl {n : ℕ} (x : ZigZag n) : v ((incl n).obj x) = v x := rfl
+
+@[simp] theorem v_retr {n : ℕ} (hn : n % 2 = 1) (x : ZigZag (n + 1)) :
+    v ((retr n hn).obj x) = min (v x) n := rfl
+
+theorem ext {n : ℕ} {i j : ZigZag n} (h : v i = v j) : i = j := Fin.ext h
+
+theorem incl_retr (n : ℕ) (hn : n % 2 = 1) : incl n ⋙ retr n hn = 𝟭 _ :=
+  CategoryTheory.Functor.ext (fun x => ext (by have := v_lt x; simp; omega))
+    (fun _ _ _ => Subsingleton.elim _ _)
+
+/-- The inclusion `Zₙ ⥤ Zₙ₊₁` is a `W`-equivalence. -/
+theorem incl_mem (L : FundamentalLocalizer.{0}) (n : ℕ) : L.W (incl n) := by
+  rcases Nat.mod_two_eq_zero_or_one n with hn | hn
+  · -- the new arrow is `n → n + 1`: Theorem A on the inclusion, whose slices have a top
+    refine L.mem_of_costructuredArrow (incl n) (𝟭 _) fun c => ?_
+    have := v_lt c
+    have : HasTerminal (CostructuredArrow (incl n ⋙ 𝟭 _) c) := by
+      refine hasTerminal_of_thin (CostructuredArrow.mk (Y := ZigZag.mk (min (v c) n) (by omega))
+        (homOfLE (le_iff_v.2 ?_))) fun x => ⟨CostructuredArrow.homMk (homOfLE (le_iff_v.2 ?_))
+          (Subsingleton.elim _ _)⟩
+      · simp; omega
+      · have hx := le_iff_v.1 (leOfHom x.hom)
+        have := v_lt x.left
+        simp at hx ⊢
+        omega
+    have : HasTerminal (CostructuredArrow (𝟭 (ZigZag (n + 1))) c) :=
+      hasTerminal_of_thin (CostructuredArrow.mk (𝟙 c)) fun x =>
+        ⟨CostructuredArrow.homMk x.hom (Subsingleton.elim _ _)⟩
+    exact L.mem_of_hasTerminal _
+  · -- the new arrow is `n + 1 → n`: the retraction is a `W`-equivalence by Theorem A
+    have hr : L.W (retr n hn) := by
+      refine L.mem_of_costructuredArrow (retr n hn) (𝟭 _) fun c => ?_
+      have := v_lt c
+      have : HasTerminal (CostructuredArrow (retr n hn ⋙ 𝟭 _) c) := by
+        refine hasTerminal_of_thin (CostructuredArrow.mk (Y := (incl n).obj c)
+          (homOfLE (le_iff_v.2 ?_))) fun x => ⟨CostructuredArrow.homMk (homOfLE (le_iff_v.2 ?_))
+            (Subsingleton.elim _ _)⟩
+        · simp; omega
+        · have hx := le_iff_v.1 (leOfHom x.hom)
+          have := v_lt x.left
+          simp at hx ⊢
+          omega
+      have : HasTerminal (CostructuredArrow (𝟭 (ZigZag n)) c) :=
+        hasTerminal_of_thin (CostructuredArrow.mk (𝟙 c)) fun x =>
+          ⟨CostructuredArrow.homMk x.hom (Subsingleton.elim _ _)⟩
+      exact L.mem_of_hasTerminal _
+    exact L.of_comp_right _ _ hr (by rw [incl_retr]; exact L.id_mem _)
+
+end ZigZag
+
+/-- **Zigzags are aspherical**, for every fundamental localizer. -/
+theorem isAspherical_zigZag (L : FundamentalLocalizer.{0}) (n : ℕ) : L.IsAspherical (ZigZag n) := by
+  induction n with
+  | zero =>
+    have : HasTerminal (ZigZag 0) := hasTerminal_of_thin (ZigZag.mk 0 (by omega)) fun x =>
+      ⟨homOfLE (ZigZag.le_iff_v.2 (Or.inl (by have := ZigZag.v_lt x; simp; omega)))⟩
+    exact L.star_mem_of_hasTerminal _
+  | succ n ih =>
+    refine L.of_comp_left (ZigZag.incl n) _ (ZigZag.incl_mem L n) ?_
+    rw [Functor.punit_ext' (ZigZag.incl n ⋙ _) (Functor.star _)]
+    exact ih
+
+/-- **Folder 118, p. 36.** For a fundamental localizer whose aspherical categories are connected,
+every zigzag `Zₙ` is aspherical while their product is not: an infinite product of aspherical
+categories need not be aspherical. -/
+theorem isAspherical_zigZag_and_not_isAspherical_zigZagProd {L : FundamentalLocalizer.{0}}
+    (hL : L.AsphericalConnected) :
+    (∀ n, L.IsAspherical (ZigZag n)) ∧ ¬ L.IsAspherical ZigZagProd :=
+  ⟨isAspherical_zigZag L, not_isAspherical_zigZagProd hL⟩
+
+end AsphericalZigZag
 
 end LeanPool.ToposTheoreticBridges.Examples
