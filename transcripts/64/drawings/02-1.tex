@@ -5,6 +5,7 @@
 % Coordinates: 1 unit = 0.45 mm = 1/100 of the crop width (bbox in page fractions: [0.27, 0.14, 0.38, 0.21]).
 % Redrawn by Claude (claude-fable-5-2), issue #128, 2026-11-12; not checked by a human; not compiled (no TeX in the session).
 % Overlaid by Claude (claude-opus-5-5) 2026-11-12 (issue #128): rasterised from its own coordinates over the 400 dpi colour facsimile and found to match it. Not compiled. Status: ok.
+% Redrawn 2026-11-24 (Claude Opus 5.5, at Michel Hua's request): as a regular cube in oblique perspective rather than the traced, skewed one; same vertex colouring, every edge joining a full vertex to an open one, the three edges at the hidden vertex dashed (on the page he broke two of them). Compiled.
 % Rights: reproduces part of the work -- behind RENDER_TRANSCRIPTS, never published by itself.
 \documentclass[tikz,border=3pt]{standalone}
 \usepackage{amsmath,amssymb}
@@ -12,20 +13,22 @@
 \tikzset{pencil/.style={black!45}, struck/.style={black!35}, mpt/.style={circle,draw,inner sep=1.3pt}, pt/.style={circle,fill,inner sep=0.9pt}, opt/.style={circle,draw,fill=white,inner sep=1.1pt}}
 \begin{document}
 \begin{tikzpicture}[x=0.45mm,y=0.45mm,line cap=round,line join=round,font=\scriptsize]
-\draw (19,-40) -- (49,-47) -- (47,-76) -- (19,-76) -- cycle;
-\draw (33,-28) -- (66,-30) -- (65,-62);
-\draw[dashed] (65,-62) -- (30,-60) -- (33,-28);
-\draw (19,-40) -- (33,-28);
-\draw (49,-47) -- (66,-30);
-\draw (47,-76) -- (65,-62);
-\draw (19,-76) -- (30,-60);
-\node[pt] at (19,-40) {};
-\node[pt] at (47,-76) {};
-\node[pt] at (66,-30) {};
-\node[pt] at (30,-60) {};
-\node[opt] at (49,-47) {};
-\node[opt] at (19,-76) {};
-\node[opt] at (33,-28) {};
-\node[opt] at (65,-62) {};
+% A regular cube in oblique perspective: front face a square of side 30, the back face shifted by (15,14).
+\coordinate (FTL) at (19,-46); \coordinate (FTR) at (49,-46); \coordinate (FBR) at (49,-76); \coordinate (FBL) at (19,-76);
+\coordinate (BTL) at (34,-32); \coordinate (BTR) at (64,-32); \coordinate (BBR) at (64,-62); \coordinate (BBL) at (34,-62);
+\draw (FTL) -- (FTR) -- (FBR) -- (FBL) -- cycle;
+\draw (FTL) -- (BTL) -- (BTR) -- (FTR);
+\draw (BTR) -- (BBR) -- (FBR);
+% The three edges at the hidden vertex, dashed.
+\draw[dashed] (BTL) -- (BBL) -- (BBR);
+\draw[dashed] (BBL) -- (FBL);
+\node[pt] at (FTL) {};
+\node[pt] at (FBR) {};
+\node[pt] at (BTR) {};
+\node[pt] at (BBL) {};
+\node[opt] at (FTR) {};
+\node[opt] at (FBL) {};
+\node[opt] at (BTL) {};
+\node[opt] at (BBR) {};
 \end{tikzpicture}
 \end{document}
