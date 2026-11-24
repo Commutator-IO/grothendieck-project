@@ -1,8 +1,10 @@
 \documentclass[11pt]{article}
 \usepackage{fontspec}
-% Charter et Menlo (macOS) ; ailleurs, XCharter et DejaVu Sans Mono, dont ils dérivent.
-\IfFontExistsTF{Charter}{\setmainfont{Charter}}{\setmainfont{XCharter}}
-\IfFontExistsTF{Menlo}{\setmonofont{Menlo}[Scale=0.82]}{\setmonofont{DejaVu Sans Mono}[Scale=0.82]}
+% XCharter et DejaVu Sans Mono, chargées par leurs fichiers, que tectonic prend dans sa distribution :
+% chercher une police par son nom fait parcourir les polices du système (« accessing absolute path »)
+% et donne un PDF différent d'une machine à l'autre.
+\setmainfont{XCharter}[Extension=.otf, UprightFont=*-Roman, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\setmonofont{DejaVuSansMono}[Extension=.ttf, BoldFont=*-Bold, ItalicFont=*-Oblique, BoldItalicFont=*-BoldOblique, Scale=0.82]
 \usepackage{polyglossia}\setmainlanguage{french}\setotherlanguage{english}
 \usepackage{microtype}
 \usepackage[most]{tcolorbox}
@@ -38,7 +40,9 @@
 \newcommand{\q}[1]{«\,#1\,»}
 % Une cote, un lot, une page : l'adresse de toute affirmation.
 \newcommand{\cote}[1]{\mbox{n\textsuperscript{o}\,#1}}
-\newcommand{\lot}[3]{\href{https://grothendieck.commutator.io/\##1/#2/p#3}{#1, lot #2, p.~#3}}
+% A link that a page break splits makes xdvipdfmx drop it (« Can't begin an annotation when one is
+% pending »): the reference is kept on one line.
+\newcommand{\lot}[3]{\mbox{\href{https://grothendieck.commutator.io/\##1/#2/p#3}{#1, lot #2, p.~#3}}}
 % Le fichier de la preuve vérifiée, une fois par section.
 % Un lemme général que la bibliothèque du projet démontre une fois pour toutes : dans LeanPool/<projet>/
 % (\generalpool{<projet>}{<fichier>}), ou dans le fichier du dossier qui s'en sert
