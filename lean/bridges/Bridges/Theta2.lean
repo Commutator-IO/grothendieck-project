@@ -32,7 +32,8 @@ apply. A final one-cell `[m + 1](a, 0)` would need, for a map `φ`, a vertex of 
 `[m](a) ↦ [m](a₁ + 1, …, a_m + 1)`, is a functor with two natural ends. But a map that collapses
 a cell forgets the components over it, so factoring through the first end is not reflected and
 the contraction `(a, F) ↦ (T a, F⁺)` is not natural. The known proofs go through Grothendieck's
-criterion (Cisinski, Th. 4.1.19), or through the stability of test categories under `Δ ≀ -`.
+criterion (Cisinski, Th. 4.1.19, now `isLocalTest_iff_isLocallyAspherical` in
+`Bridges.GrothendieckCriterion`), or through the stability of test categories under `Δ ≀ -`.
 -/
 
 @[expose] public section

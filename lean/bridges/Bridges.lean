@@ -6,6 +6,7 @@ public import Bridges.CubeTest
 public import Bridges.EssentialPoints
 public import Bridges.FiniteMonoids
 public import Bridges.FundamentalLocalizers
+public import Bridges.GrothendieckCriterion
 public import Bridges.GrothendieckDecks
 public import Bridges.KaroubiMonoid
 public import Bridges.Monoids
