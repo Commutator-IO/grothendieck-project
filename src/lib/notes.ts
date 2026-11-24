@@ -64,7 +64,7 @@ function save(scope: string, notes: Note[]) {
 
 /* ---------- the root's text, flattened ---------- */
 
-const SKIP = '.katex-mathml, .tr-page, .tr-demo-diag, [data-notes-skip]';
+const SKIP = '.katex-mathml, .tr-page, .tr-lean, .tr-demo-diag, [data-notes-skip]';
 
 function textNodes(root: Element) {
   const doc = root.ownerDocument;

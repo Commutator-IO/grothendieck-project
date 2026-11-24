@@ -131,7 +131,7 @@ type IndexItem =
   | { k: 'topic'; text: string }
   | { k: 'session'; text: string }
   | { k: 'side'; text: string }
-  | { k: 'entry'; v: string; t: number; w?: number; ts: string; text: string; kind?: Kind; name?: string };
+  | { k: 'entry'; v: string; t: number; w?: number; ts: string; text: string; kind?: Kind; name?: string; lean?: LeanStatus };
 type Kind = 'def' | 'thm' | 'prop' | 'ex' | 'cex' | 'rem' | 'q' | 'disc' | 'read';
 // The kinds of entry, labelled as in a course; the colours are those of the PDF.
 const KIND: Record<Kind, { label: string; color: string; italic?: boolean }> = {
@@ -146,6 +146,75 @@ const KIND: Record<Kind, { label: string; color: string; italic?: boolean }> = {
   read: { label: 'Reading', color: '#6B5B3E' },
 };
 type CourseIndex = { pdf: string; entries: number; items: IndexItem[]; refs?: string[] };
+
+// Where an entry stands in Lean (docs/buffalo-*/lean/PartNN.json). The index carries the status only;
+// the note and the declarations, with file and line pinned to a commit of GrothendieckArchivesProofs,
+// are in src/content/buffalo-lean.json, fetched the first time a reader opens one.
+type LeanStatus = 'proved' | 'mathlib' | 'partial' | 'false' | 'def';
+const LEAN: Record<LeanStatus, { chip: string; label: string; color: string }> = {
+  proved: { chip: 'Lean ✓', label: 'Proved in Lean', color: '#128557' },
+  mathlib: { chip: 'mathlib', label: 'Already in mathlib', color: '#38539d' },
+  partial: { chip: 'Lean ½', label: 'Partly proved in Lean', color: '#a16207' },
+  false: { chip: 'Lean ✗', label: 'Shown false in Lean', color: '#b4235a' },
+  def: { chip: 'Lean def', label: 'Formalised as a definition', color: '#5E5E5E' },
+};
+type LeanDetail = { sha: string; files: string[]; entries: Record<string, { s: LeanStatus; n: string; d: [string, number, number][]; m: string[] }> };
+let leanDetail: Promise<LeanDetail> | null = null;
+const loadLean = () => (leanDetail ??= import('./content/buffalo-lean.json').then((m) => m.default as unknown as LeanDetail));
+const PROOFS_REPO = 'https://github.com/Commutator-IO/GrothendieckArchivesProofs';
+
+/** The note and the declarations of one entry, under its statement. */
+function LeanPanel({ id }: { id: string }) {
+  const [data, setData] = useState<LeanDetail | null>(null);
+  useEffect(() => {
+    loadLean().then(setData);
+  }, []);
+  const e = data?.entries[id];
+  if (!data) return <p className="mt-1 text-[12px] text-ink-400">Loading…</p>;
+  if (!e) return null;
+  return (
+    <div className="mt-1.5 rounded-md border border-ink-200 bg-ink-50 px-3 py-2 text-[12.5px] leading-snug text-ink-700">
+      <p>
+        <b style={{ color: LEAN[e.s].color }}>{LEAN[e.s].label}.</b> {e.n}
+      </p>
+      {e.d.length > 0 && (
+        <ul className="mt-1.5 space-y-0.5">
+          {e.d.map(([name, f, line]) => (
+            <li key={name} className="[overflow-wrap:anywhere]">
+              <a
+                href={`${PROOFS_REPO}/blob/${data.sha}/${data.files[f]}#L${line}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[11.5px] text-brand-700 underline decoration-brand-200 underline-offset-2 hover:text-brand-800"
+              >
+                {name.split('.').slice(-2).join('.')}
+              </a>{' '}
+              <span className="text-[11px] text-ink-400">{data.files[f]}:{line}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      {e.m.length > 0 && (
+        <p className="mt-1 text-[11.5px] text-ink-500">
+          mathlib:{' '}
+          {e.m.map((m, k) => (
+            <span key={m}>
+              {k > 0 && ', '}
+              <a
+                href={`https://leanprover-community.github.io/mathlib4_docs/find/?pattern=${encodeURIComponent(m)}#doc`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono hover:text-brand-700"
+              >
+                {m}
+              </a>
+            </span>
+          ))}
+        </p>
+      )}
+    </div>
+  );
+}
 const loadIndex = () => import('./content/buffalo-index.json').then((m) => m.default as unknown as Record<string, CourseIndex>);
 
 // Gaeta's written notes of the algebraic geometry course: the page of the notes that an entry of the
@@ -203,6 +272,9 @@ function Typeset({ text, prefix = '' }: { text: string; prefix?: string }) {
 
 /** One course's index, typeset like the transcripts' reading view; a timestamp plays the tape there. */
 function CourseIndexView({ course, index, playing, onPlay }: { course: string; index: CourseIndex; playing: { id: string; t: number } | null; onPlay: (id: string, t: number) => void }) {
+  // The entries whose Lean panel is open, by video and second.
+  const [open, setOpen] = useState<Set<string>>(() => new Set());
+  const toggle = (id: string) => setOpen((o) => { const n = new Set(o); if (n.has(id)) n.delete(id); else n.add(id); return n; });
   // Select words in an entry to comment on them in a prefilled issue, as on the reading view.
   const root = useComments<HTMLDivElement>('buffalo', `Buffalo — ${course}`);
   return (
@@ -235,6 +307,7 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
             >
               {i.ts}
             </button>
+            <div className="min-w-0">
             <p className={i.kind && KIND[i.kind]?.italic ? 'italic' : undefined}>
               {i.kind && KIND[i.kind] && (
                 <b className="mr-1.5 not-italic" style={{ color: KIND[i.kind].color }}>
@@ -244,7 +317,22 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
               )}
               <Typeset text={i.text} />
             </p>
+            {i.lean && open.has(`${i.v}-${i.t}`) && <LeanPanel id={`${i.v}-${i.t}`} />}
+            </div>
             <div className="flex flex-col items-end self-start">
+            {i.lean && (
+              <button
+                type="button"
+                onClick={() => toggle(`${i.v}-${i.t}`)}
+                aria-expanded={open.has(`${i.v}-${i.t}`)}
+                title={`${LEAN[i.lean].label}: show the declarations`}
+                onMouseEnter={() => void loadLean()}
+                className="tabular whitespace-nowrap rounded px-1 text-[10.5px] font-semibold hover:bg-ink-100"
+                style={{ color: LEAN[i.lean].color }}
+              >
+                {LEAN[i.lean].chip}
+              </button>
+            )}
             {course === 'Algebraic geometry' && (() => {
               const g = gaetaPage(i.v, i.t);
               return g ? (

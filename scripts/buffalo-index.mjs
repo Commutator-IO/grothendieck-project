@@ -12,7 +12,7 @@
  * mathematics is passed through for KaTeX. \bibitem{key} and \cite{key} give the numbered references. Anything else in a statement raises.
  */
 import { burstsByVideo, setWritingTimes } from './lib/chalk.mjs';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
@@ -64,7 +64,30 @@ function prose(t, cites = {}) {
     .replace(/\uE000(\d+)\uE000/g, (_, n) => math[n]);
 }
 
+// Where the index entries stand in Lean (docs/buffalo-*/lean/PartNN.json, written with the Lean files,
+// keyed by video and second), with each declaration's file and line from src/content/lean-lines.json
+// (npm run lean-lines). Only the statuses that point at a proof or a formal definition are kept.
+const LINES = JSON.parse(readFileSync(resolve(root, 'src/content/lean-lines.json'), 'utf8'));
+const SHOWN = new Set(['proved', 'mathlib', 'partial', 'false', 'def']);
+function leanStatus(dir) {
+  const st = new Map();
+  const ldir = resolve(root, 'docs', dir, 'lean');
+  for (const f of readdirSync(ldir).filter((n) => /^Part\d+\.json$/.test(n))) {
+    for (const e of JSON.parse(readFileSync(resolve(ldir, f), 'utf8'))) {
+      if (!SHOWN.has(e.status)) continue;
+      const d = (e.lean ?? []).filter((n) => LINES.names[n]).map((n) => [n, ...LINES.names[n]]);
+      if (d.length || e.status === 'mathlib') st.set(e.key, { s: e.status, n: e.note ?? '', d, m: e.mathlib ?? [] });
+    }
+  }
+  return st;
+}
+
 const out = {};
+// The detail (the note, the declarations with file and line) goes to a file of its own, fetched when
+// a reader first opens one; the index itself carries only each entry's status.
+const files = [];
+const fileIx = (p) => (files.includes(p) ? files.indexOf(p) : files.push(p) - 1);
+const detail = {};
 for (const [id, dir] of Object.entries(COURSES)) {
   const src = readFileSync(resolve(root, 'docs', dir, 'index.tex'), 'utf8');
   const body = src.slice(src.indexOf('\\begin{document}'));
@@ -107,7 +130,17 @@ for (const [id, dir] of Object.entries(COURSES)) {
     timed += setWritingTimes(items.filter((x) => x.k === 'entry' && x.v === v), bursts.get(v));
   }
   console.log(`${id}: ${timed} entries timed by the chalk`);
+  const st = leanStatus(dir);
+  let withLean = 0;
+  for (const x of items) {
+    if (x.k !== 'entry') continue;
+    const l = st.get(`${x.v}-${x.t}`);
+    if (l) { x.lean = l.s; detail[`${x.v}-${x.t}`] = l; withLean++; }
+  }
+  console.log(`${id}: ${withLean} entries with a Lean status, of ${st.size} in the status files`);
   out[id] = { pdf: `/article/${dir}.pdf`, entries: items.filter((x) => x.k === 'entry').length, items, refs: refsHtml };
   console.log(`${id}: ${out[id].entries} entries, ${items.filter((x) => x.k === 'topic').length} topics`);
 }
 writeFileSync(resolve(root, 'src/content/buffalo-index.json'), JSON.stringify(out));
+for (const l of Object.values(detail)) l.d = l.d.map(([name, path, line]) => [name, fileIx(path), line]);
+writeFileSync(resolve(root, 'src/content/buffalo-lean.json'), JSON.stringify({ sha: LINES.sha, files, entries: detail }));

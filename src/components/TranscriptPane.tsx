@@ -10,6 +10,7 @@ import {
 import { documentsFor, editionOf } from '../content/books.ts';
 import type { Edition, PaneView, TranscriptEntry } from '../lib/types.ts';
 import { attachNotes } from '../lib/notes.ts';
+import { attachLeanBadges } from '../lib/leanBadges.ts';
 
 /**
  * The transcript, rendered from LaTeX, in the left pane.
@@ -258,6 +259,25 @@ export function TranscriptPane({
   const folder = folderTranscription(manifest, cote, pages);
 
   const height = useReadingFrame(frame, url, present && !isCommunity, onPage);
+
+  /** Badges beside the pages a Lean proof card cites (src/lib/leanBadges.ts). */
+  useEffect(() => {
+    if (!present || isCommunity) return;
+    const el = frame.current;
+    if (!el) return;
+    let detach = () => {};
+    const attach = () => {
+      detach();
+      const doc = el.contentDocument;
+      if (doc?.querySelector('[data-page]')) detach = attachLeanBadges(doc, cote);
+    };
+    el.addEventListener('load', attach);
+    if (el.contentDocument?.readyState === 'complete') attach();
+    return () => {
+      el.removeEventListener('load', attach);
+      detach();
+    };
+  }, [present, isCommunity, url, cote]);
 
   /**
    * Comments on a passage (src/lib/notes.ts). The reading view is a
