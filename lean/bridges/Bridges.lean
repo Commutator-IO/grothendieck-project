@@ -1,5 +1,6 @@
 module
 
+public import Bridges.Aesop.Experiment
 public import Bridges.Combinatorics
 public import Bridges.Corners
 public import Bridges.CubeTest
