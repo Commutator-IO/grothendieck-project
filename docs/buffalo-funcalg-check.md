@@ -266,6 +266,8 @@ These are slips in Gaeta's bracketed interpolations or in passages the lecture d
 
 ## 5. The topos course of 4 April against the appendix (Ch. III §14), checked 24 November 2026
 
+**Status (24 November 2026).** Michel approved the six items; all six were applied to the local transcripts (URU5jgTvjhU-0000 and -02951, with a « Fourth pass, 2026-11-24 » header line), the editorial note on board 1600 (`public/buffalo-boards/URU5jgTvjhU-0000.json`), and the storyboard, literal transcripts and subtitles of grothendieck-transcripts.
+
 Gaeta's appendix « Sheaves of sets » (printed pp. 147–162, scan pp. 151–166) writes up the first session of the **topos** course, 4 April 1973, video URU5jgTvjhU, from 0:00:11 to the caption gap that ends at 1:12:14. It was checked against our transcripts URU5jgTvjhU-0000 (side A, 0:00–49:11) and URU5jgTvjhU-02951 (side B, 49:11–1:36:58), the raw captions, boards URU5jgTvjhU-0000 and -2951, and the topos index. Side A's doubtful hearings were checked on the audio on 30 October; side B is a first pass from the captions, on a side flagged for poor sound. Nothing was listened to for this check. The notes follow the lecture closely, often sentence by sentence, and they add a few short remarks of their own.
 
 **Summary.**
