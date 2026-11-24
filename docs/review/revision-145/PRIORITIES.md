@@ -6,6 +6,19 @@ Revised whole by Fable 5.2 so far: 21 folders (1, 46, 62, 76, 81, 85, 86, 87, 89
 The pass itself follows the rules of #145 and of `/transcribe-grothendieck` (revision on the
 facsimile, `% Revised: Fable 5.2 …` line, `npm run render` and `npm run tei`).
 
+## Which pages are already done
+
+The registry is [`pages.json`](pages.json): one entry per folder, batch, pass and scope
+(`blind`, `full`, `statements`, `flags`), seeded on 24 November 2026 from the records of this
+directory and from the `% Revised:` lines of the batches. The tables below are a snapshot of
+that day; the registry is what counts.
+
+- Before a pass: `npm run revised -- --todo <cote> <pages…>` prints the pages that have no
+  pass of scope `statements`, `full` or `blind`. Only those are read. `flags` does not count
+  as read: on such a page only the marked words were looked at, sometimes one word.
+- After a pass: add its pages to `pages.json`, in the same commit as the record.
+- `npm run revised -- <cote>` lists every pass recorded for a folder.
+
 ## What to look for on each crop
 
 The defects known in first passes of this kind, and what they mean for the pass:

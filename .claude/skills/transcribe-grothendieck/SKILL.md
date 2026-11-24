@@ -482,6 +482,14 @@ on a crop — old right, new right, or undecidable, in which case the old text
 stands. Its header line reads `% Revised: Fable 5.2 (claude-fable-5-2),
 <date> — read again on the facsimile, not checked by a reader.`
 
+Before a revision pass, ask the registry which of the pages are still to
+read: `npm run revised -- --todo <cote> <pages…>` (it reads
+`docs/review/revision-145/pages.json`), and read only those; afterwards add
+the pages of the pass to that file, with their scope (`blind`, `full`,
+`statements`, `flags`), in the same commit as the record. Two passes ran
+over the same pages of folders 79 and 93 in November 2026 because the only
+trace was in prose.
+
 Record the revision in the header, under the `% Pass:` line, in the same form:
 `% Revised: Opus 5.5 (claude-opus-5-5), <date> — <what changed>.` — the model
 actually used, as for the pass. The account may run on over the following
