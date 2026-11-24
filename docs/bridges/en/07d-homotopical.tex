@@ -1,0 +1,26 @@
+\section{A seventh arch, from homotopy theory: test categories}\label{sec:homotopical}
+
+Grothendieck's \emph{test categories} are the small categories $A$ whose presheaves model homotopy types; $\Delta$ is the first example. Their characterisation reads one object of $\PSh(A)$, the subobject classifier, homotopically, so it can be run as an arch whose other side is the logical reading of the same object given by Bridge~\ref{br:dm}. The companion note \cite[section \q{Test categories and the De Morgan arch}]{bridges-notes} does this on the questions of Grothendieck's folders 108, 118 and 134-2; we give the output here.
+
+Fix a fundamental localizer $W$ on small categories other than the two coarse ones (for instance the functors whose nerve is a weak equivalence). For a presheaf $X$ write $A/X$ for its category of elements. The \emph{Lawvere object} $L_A$ is the presheaf of sieves, that is, the subobject classifier of $\PSh(A)$. A \emph{weak test category} is one for which $A/L_A$ is aspherical, among other conditions, and a \emph{local test category} one whose slices $A/a$ are weak test categories \cite[Déf.~4.1.8, 4.1.12]{cisinski-308}.
+
+\begin{bridge}[Test categories]\label{br:test}
+$A$ is a local test category iff $L_A$ is locally aspherical: $A/(a\times L_A)$ is $W$-aspherical for every object $a$ \cite[Th.~4.1.19]{cisinski-308}, \cite[Th.~1.5.6]{maltsiniotis-301}. Lean: not formalised; Mathlib has no fundamental localizers. The file \texttt{lean/bridges/Bridges/FundamentalLocalizers.lean} of the edition proves the consequences below in an axiomatic setting.
+\end{bridge}
+
+\begin{theorem}\label{th:testore}
+A nonempty small category satisfying the Ore condition is neither a weak nor a local test category. Equivalently, the presheaf topos of a weak or local test category is never De Morgan; for a local test category $A$, no slice $\PSh(A)/X$ with $X$ nonempty is De Morgan either.
+\end{theorem}
+
+\begin{trace}
+\item[deck] $\PSh(A)$ for a small category $A$, with its subobject classifier $L_A$.
+\item[arch] Bridge~\ref{br:dm} on one side, Bridge~\ref{br:test} on the other.
+\item[specialise] the Ore condition says that a nonempty sieve never pulls back to the empty sieve; equivalently the empty sieves split off: $L_A = L_A^{\emptyset}\sqcup L_A^{+}$. This is the topos-theoretic statement that $\bot\colon 1\to\Omega$ has a complement, which characterises De Morgan topoi \cite[\S1]{caramello-demorgan}, \cite[Prop.~14]{caramello-chamoun}.
+\item[rewrite] then $A/(a\times L_A)$ is the disjoint union of two nonempty pieces (the empty and the maximal sieve on $a$), so it is not connected; for a non-coarse $W$ an aspherical category is connected \cite[Lemme~1.7.22]{maltsiniotis-301}.
+\item[verify] the direct argument is the rewrite step; Lean: axiomatic only (\lean{not_isDeMorganTopos_slice_of_isLocalTest}, in the edition's \texttt{lean/bridges}).
+\item[novelty] not found as such; see below.
+\end{trace}
+
+\noindent The slices follow since $A/X$ is a local test category when $A$ is \cite[Prop.~4.1.14 (v)]{cisinski-308}, \cite[Rem.~1.5.4 b)]{maltsiniotis-301}, and $\PSh(A)/X\simeq\PSh(A/X)$. So simplicial sets, cubical sets, $\Theta$-sets and dendroidal sets are not De Morgan topoi, nor is any of their slices; in $\Delta$ the cospan $[0]\rightrightarrows[1]$ of the two faces has no completion. The converse fails: $\Delta$ does not satisfy the Ore condition and is a test category.
+
+\status{} Not found as such, in \cite{cisinski-308}, \cite{maltsiniotis-301}, \emph{Pursuing Stacks} or through TheoremSearch and alphaXiv: none of the test-category texts mentions the Ore condition or De Morgan's law, though \emph{Pursuing Stacks} \S88 says without proof that a test category has no initial object. The statement is an immediate combination of Caramello--Chamoun (De Morgan iff $\bot$ is complemented), Cisinski's Theorem~4.1.19 and Maltsiniotis's Lemma~1.7.22. The nearest published result is Mielke's: a topos is De Morgan iff it is \emph{locally homotopically trivial}, every interval in a slice splitting into two pieces that separate its ends, the Ore condition being the presheaf form \cite[Th.~1.5, Cor.~1.6]{mielke}. His intervals are linearly ordered and his homotopy is not Grothendieck's asphericity, so Theorem~\ref{th:testore} is not a case of his, but the mechanism is the same: in a De Morgan topos the object of truth values falls apart.
