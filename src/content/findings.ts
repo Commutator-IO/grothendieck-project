@@ -969,9 +969,9 @@ export const FINDINGS: Finding[] = [
     ours:
       'The reconstruction of the 1967 sequence is the transcription’s, from the datelines and from Murre’s reference to the enclosed sketch; the six paginations are recorded batch by batch in the transcription headers. The modernised reading states the consequence — that the argument and the pagination cross — which no single page can.',
     literature: [],
-    status: 'candidate',
+    status: 'confirmed',
     settle:
-      'Checkable directly against the facsimile: read the four datelines of pages 2, 4 and 9 and the undated reply at 7, and confirm the six self-paginations in the top corners. Nothing here depends on the literature. What is not established, and is not claimed, is any date for the undated runs: the inventory’s « 1959-1969 » is its own and covers the shelfmark whole. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the datelines read 16 May 1967 (p. 2), 29 March 1967 (p. 4), none (p. 7) and 29.4.67 (p. 9); the month of the 1959 letter is doubtful; the six self-paginations are confirmed. Precisions: the I–VI run is on pp. 47–57 (p. 46 is a wrapper); the 1969 letter starts at p. 78 (p. 77 is a wrapper); the « Compléments SGA / 1960 » wrapper is p. 143; and 1–16 on pp. 190–206 reads as one continuous series rather than a restart at 11.',
+      'Checkable directly against the facsimile: read the four datelines of pages 2, 4 and 9 and the undated reply at 7, and confirm the six self-paginations in the top corners. Nothing here depends on the literature. What is not established, and is not claimed, is any date for the undated runs: the inventory’s « 1959-1969 » is its own and covers the shelfmark whole. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the datelines read 16 May 1967 (p. 2), 29 March 1967 (p. 4), none (p. 7) and 29.4.67 (p. 9); the month of the 1959 letter is doubtful; the six self-paginations are confirmed. Precisions: the I–VI run is on pp. 47–57 (p. 46 is a wrapper); the 1969 letter starts at p. 78 (p. 77 is a wrapper); the « Compléments SGA / 1960 » wrapper is p. 143; and 1–16 on pp. 190–206 reads as one continuous series rather than a restart at 11. Confirmed on the facsimile by Michel Hua, 2026-11-24.',
   },
   {
     id: '54-universal-extension-de-rham-dual',
