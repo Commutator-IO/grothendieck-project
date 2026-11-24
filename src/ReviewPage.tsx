@@ -75,6 +75,7 @@ const KIND_NAME: Record<ReviewKind, string> = {
   paper: 'Printed side of reused paper',
   quoted: 'Words quoted outside the edition',
   drawing: 'Doubtful drawing',
+  finding: 'Finding to confirm',
 };
 
 /**

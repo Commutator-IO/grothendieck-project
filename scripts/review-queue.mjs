@@ -319,6 +319,7 @@ function push(it, snip) {
     details: it.details ?? null,
     context: it.context ?? null,
     ...(it.drawing ? { drawing: it.drawing } : {}),
+    ...(it.finding ? { finding: it.finding } : {}),
     link: `/fonds/#${it.cote}/${batch}/${edition}${page ? `/p${page}` : ''}`,
   });
   if (snip) snippets[id] = snip;
@@ -1016,6 +1017,72 @@ for (const READINGS of readingFiles) {
     }, null);
     if (items.at(-1)?.id === id) readingClaims[id] = { where, ours, alternative };
   }
+}
+
+/* ---------- the findings to confirm on the facsimile ---------- */
+
+// The rows of src/content/findings.ts that a machine pass checked on the
+// facsimile (« Machine pass on the facsimile, 2026-11-… » in settle), and the
+// rows that this pass refuted or corrected there, are put to a reader of the
+// hand: only a person may set `confirmed`, and a row leaves the queue when it
+// is. A row whose settle already records a person's check of that pass
+// (« … by Michel Hua, 2026-11-24 », « with Michel Hua's agreement ») is left out.
+const FINDINGS_SRC = readFileSync(join(ROOT, 'src/content/findings.ts'), 'utf8');
+function tsString(block, name) {
+  const m = new RegExp(`\\n\\s*${name}:\\s*(['"])`).exec(block);
+  if (!m) return null;
+  const q = m[1];
+  let i = m.index + m[0].length;
+  let out = '';
+  for (; i < block.length; i++) {
+    const c = block[i];
+    if (c === '\\') { out += block[i + 1]; i++; continue; }
+    if (c === q) break;
+    out += c;
+  }
+  return out;
+}
+const findingRows = [];
+for (const m of FINDINGS_SRC.matchAll(/\n\s*\{\n\s*id: '([^']+)',([\s\S]*?)\n\s*\},/g)) {
+  const block = m[2];
+  findingRows.push({
+    id: m[1],
+    cote: /cote: '([^']+)'/.exec(block)?.[1],
+    pages: /pages: '([^']*)'/.exec(block)?.[1] ?? '',
+    kind: /kind: '(\w+)'/.exec(block)?.[1],
+    status: /status: ['"](\w+)['"]/.exec(block)?.[1],
+    claim: tsString(block, 'claim'),
+    settle: tsString(block, 'settle') ?? '',
+    ours: tsString(block, 'ours') ?? '',
+  });
+}
+const HUMAN = /(?:by|with) Michel Hua(?:'s|’s)? (?:agreement|, 2026-11-24)|by Michel Hua, 2026-11-24/;
+for (const r of findingRows) {
+  if (!r.cote || r.status === 'confirmed' || !isFolder(r.cote) || !r.claim) continue;
+  if (HUMAN.test(r.settle)) continue;
+  const changed = /(?:Refuted|Claim corrected) 2026-11-2\d|the claim was rewritten on 2026-11-2\d/.exec(r.settle);
+  // A refutation by a counterexample (85-dinfty) is a question for a mathematician, not a reading of the page.
+  if (changed && !/facsimile/.test(`${r.ours} ${r.settle}`)) continue;
+  const machine = /Machine pass on the facsimile, 2026-11-2\d[^:]*:\s*([^]*?)(?=\s+(?:Re-check|Checked|Refuted|Claim corrected|Transcription revised|Pages 9 and 10)\b|$)/.exec(r.settle);
+  if (!changed && !(machine && r.status === 'candidate')) continue;
+  const page = Number(/\d+/.exec(r.pages)?.[0]) || null;
+  const refuted = r.status === 'refuted';
+  push({
+    id: `finding-${r.id}`,
+    section: changed ? 'Findings refuted or corrected on the facsimile (November 2026)' : 'Codicological findings to confirm on the facsimile',
+    kind: 'finding',
+    cote: r.cote,
+    page,
+    finding: r.id,
+    prompt: changed
+      ? (refuted ? 'A machine reading of the facsimile refuted this finding. Does the page bear the refutation out?' : 'A machine reading of the facsimile corrected this finding. Does the page bear the corrected statement out?')
+      : 'Does the facsimile show what this finding says?',
+    hint: `The pages named by the finding: ${r.pages ? `pp. ${r.pages}` : 'see the row'} of folder ${r.cote}. Look at the facsimile, not the transcription; a faint show-through may need the page mirrored and its contrast raised.`,
+    choices: [C('Yes, the page shows it', 'right'), C('No, the page shows otherwise', 'other', 'What the page has'), C('Partly', 'other', 'Which part holds and which does not')],
+    claim: r.claim,
+    details: machine ? `Machine pass: ${machine[1].trim().slice(0, 900)}` : (changed ? r.settle.slice(changed.index, changed.index + 900) : null),
+    context: `Row ${r.id} of the Findings tab. A « yes » lets it be set to confirmed (only a person may); the answer is applied in src/content/findings.ts.`,
+  }, null);
 }
 
 writeFileSync(

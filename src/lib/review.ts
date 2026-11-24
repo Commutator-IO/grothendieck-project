@@ -9,7 +9,7 @@ import { REPO, shortQuote } from './report.ts';
  * and then only GitHub's own form opens, for the reader to submit or not.
  */
 
-export type ReviewKind = 'ill' | 'uncertain' | 'add' | 'supplied' | 'date' | 'letter' | 'argument' | 'reference' | 'hypothesis' | 'imprecise' | 'unproved' | 'paper' | 'quoted' | 'drawing';
+export type ReviewKind = 'ill' | 'uncertain' | 'add' | 'supplied' | 'date' | 'letter' | 'argument' | 'reference' | 'hypothesis' | 'imprecise' | 'unproved' | 'paper' | 'quoted' | 'drawing' | 'finding';
 
 export interface ReviewItem {
   id: string;
@@ -34,6 +34,8 @@ export interface ReviewItem {
   context: string | null;
   /** A doubtful drawing of #128: its id in transcripts/<cote>/drawings/drawings.json. */
   drawing?: string;
+  /** A row of the Findings tab to confirm on the facsimile: its id in src/content/findings.ts. */
+  finding?: string;
   /** The reading view at that page, on this site. */
   link: string;
 }
@@ -110,7 +112,7 @@ const plain = (s: string) => s.replace(/«\s*/g, '"').replace(/\s*»/g, '"');
 
 /** One answer as a Markdown list item. A proposed reading is cut to fifteen words. */
 export function answerLine(it: ReviewItem, a: Answer): string {
-  const where = [`folder ${it.cote}`, it.drawing ? `drawing ${it.drawing} (#128)` : null, batchName(it.batch), it.page ? `p. ${it.page}` : null].filter(Boolean).join(', ');
+  const where = [`folder ${it.cote}`, it.drawing ? `drawing ${it.drawing} (#128)` : null, it.finding ? `finding ${it.finding}` : null, batchName(it.batch), it.page ? `p. ${it.page}` : null].filter(Boolean).join(', ');
   const parts = [`- \`${it.id}\` — ${where} — **${plain(answerName(it, a))}**`];
   if (a.reading?.trim()) parts.push(`: « ${plain(shortQuote(a.reading, 15))} »`);
   const lines = [parts.join(''), `  - Asked: ${plain(it.prompt)}`];
