@@ -7208,9 +7208,9 @@ export const FINDINGS: Finding[] = [
       'Transcription 23, batch 4 (batch-04.fr.tex), leaves 61–64 and header',
       'Modernised reading 23.modern.tex, header points 1–2 and section XI',
     ],
-    status: 'candidate',
+    status: 'confirmed',
     settle:
-      'A person checks on the facsimile that leaves 61–64 carry the author’s numbers 3–6 in the same ink and hand as « 2 » on leaf 60, and that paper and ink of 59–64 agree; the dates of the three letters read on the facsimile settle the order. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the dates read 15 décembre 1966 (p. 55), 29 octobre 1966 (p. 57), 17 octobre 1966 (p. 59), in reverse date order; pp. 60–64 carry Deligne’s numbers « 2 » to « 6 », written alike, and p. 59 none; pp. 59–64 are one buff squared paper, different from the other two letters; the join A′ = A[[T_i]] / « Remplaçant A par A′ » and the « pg 2 » reference on p. 64 are on the pages.',
+      'A person checks on the facsimile that leaves 61–64 carry the author’s numbers 3–6 in the same ink and hand as « 2 » on leaf 60, and that paper and ink of 59–64 agree; the dates of the three letters read on the facsimile settle the order. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the dates read 15 décembre 1966 (p. 55), 29 octobre 1966 (p. 57), 17 octobre 1966 (p. 59), in reverse date order; pp. 60–64 carry Deligne’s numbers « 2 » to « 6 », written alike, and p. 59 none; pp. 59–64 are one buff squared paper, different from the other two letters; the join A′ = A[[T_i]] / « Remplaçant A par A′ » and the « pg 2 » reference on p. 64 are on the pages. Confirmed on the facsimile by Michel Hua, 2026-11-24: the dates 15 décembre 1966 (p. 55), 29 octobre 1966 (p. 57) and 17 octobre 1966 (p. 59).',
   },
   {
     id: '23-finite-normalisation-quotient-of-regular',
