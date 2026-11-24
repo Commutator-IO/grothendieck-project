@@ -28,6 +28,18 @@ is aspherical (`isLocalTest_iff_isLocallyAspherical`). No hypothesis on `W` is n
   `Δ¹ × C ⥤ C` of `C` onto its terminal object (`contr`) gives `i_A^*(Δ¹ × C) ⟶ i_A^*(C)`. Its
   end `0` is the identity, and its end `1` factors through the terminal presheaf. So
   `A/(a × i_A^*(C))` retracts onto `A/(a × 1) = A/a`, which has a terminal object.
+
+Condition (iii) of the same theorem, a separating locally aspherical segment:
+
+* `Segment`, `Segment.IsSeparating`: a presheaf `I` with two global sections, disjoint;
+* `Segment.charF`, `Segment.hom`: a point `x ∈ I(b)` gives `χ_x : A/b ⥤ Δ¹`, `0` where `x`
+  restricts to the end `0`. Then `(F, x) ↦ (χ_x, F)` followed by the contraction of `C` is a
+  homotopy `i_A^*(C) × I ⟶ i_A^*(C)` from the identity (end `0`) to a map through the terminal
+  presheaf (end `1`, by separation);
+* `fstM_mem`: if `I` is locally aspherical, `A/(a × X × I) ⥤ A/(a × X)` is a `W`-equivalence
+  (Theorem A, slices retracting onto `A/(b × I)`);
+* `isLocalTest_of_segment` ((iii) ⇒ (i)), and `isLocalTest_iff_exists_segment` ((i) ⇔ (iii)),
+  the converse through the Lawvere segment `L_A` with its constant sections (`lawvereSegment`).
 -/
 
 @[expose] public section
@@ -393,5 +405,265 @@ theorem isLocalTest_iff_isLocallyAspherical (L : FundamentalLocalizer.{0}) :
   · intro hL a C _ _
     exact (isAspherical_slice_iff C a L).2
       (isAspherical_prodY_of_pmap A L C a (pmap_mem L hL C a))
+
+section Segments
+
+/-- **Homotopy retraction, abstractly.** A homotopy `H : Y ⟶ X` between the identity and a map
+through the terminal presheaf, along a projection `p : Y ⟶ X` with sections `s₀, s₁` that
+`A/(a × -)` sends to a `W`-equivalence, makes `A/(a × X)` aspherical. -/
+theorem isAspherical_prodY_of_homotopy (L : FundamentalLocalizer.{0}) (a : A)
+    {X Y : Aᵒᵖ ⥤ Type} (p : Y ⟶ X) (s₀ s₁ : X ⟶ Y) (H : Y ⟶ X) (r : X ⟶ one A)
+    (σ : one A ⟶ X) (h₀ : s₀ ≫ p = 𝟙 X) (h₁ : s₁ ≫ p = 𝟙 X) (hH₀ : s₀ ≫ H = 𝟙 X)
+    (hH₁ : s₁ ≫ H = r ≫ σ) (hσ : σ ≫ r = 𝟙 _) (hp : L.W (hatMap a p)) :
+    L.IsAspherical (El (prodY a X)) := by
+  have hs : ∀ s : X ⟶ Y, s ≫ p = 𝟙 X → L.W (hatMap a s) := fun s h =>
+    L.of_comp_right _ _ hp (by rw [← hatMap_comp, h, hatMap_id]; exact L.id_mem _)
+  have hHm : L.W (hatMap a H) :=
+    L.of_comp_left _ _ (hs s₀ h₀) (by rw [← hatMap_comp, hH₀, hatMap_id]; exact L.id_mem _)
+  have hc : L.W (hatMap a r ⋙ hatMap a σ) := by
+    rw [← hatMap_comp, ← hH₁, hatMap_comp]; exact L.comp_mem _ _ (hs s₁ h₁) hHm
+  have hr : L.W (hatMap a r) := L.of_retract _ _ (by rw [← hatMap_comp, hσ, hatMap_id]) hc
+  have : HasTerminal (El (prodY a (one A))) := (prodOneTerminal A a).hasTerminal
+  unfold FundamentalLocalizer.IsAspherical
+  rw [Functor.punit_ext' (Functor.star _) (hatMap a r ⋙ Functor.star _)]
+  exact L.comp_mem _ _ hr (L.star_mem_of_hasTerminal _)
+
+/-- A segment of `Â`: a presheaf with two global sections. -/
+structure Segment (A : Type) [SmallCategory A] where
+  /-- The presheaf. -/
+  I : Aᵒᵖ ⥤ Type
+  /-- The end `0`. -/
+  e₀ : ∀ b, I.obj b
+  /-- The end `1`. -/
+  e₁ : ∀ b, I.obj b
+  map_e₀ : ∀ {b b'} (g : b ⟶ b'), I.map g (e₀ b) = e₀ b'
+  map_e₁ : ∀ {b b'} (g : b ⟶ b'), I.map g (e₁ b) = e₁ b'
+
+/-- A segment is separating when its two ends are disjoint. -/
+def Segment.IsSeparating (J : Segment A) : Prop := ∀ b, J.e₀ b ≠ J.e₁ b
+
+/-- The presheaf `X × I`. -/
+@[simps]
+def pprod (X I : Aᵒᵖ ⥤ Type) : Aᵒᵖ ⥤ Type where
+  obj b := X.obj b × I.obj b
+  map g := ↾fun p => (X.map g p.1, I.map g p.2)
+  map_id b := by ext p <;> simp
+  map_comp f g := by ext p <;> simp
+
+/-- The projection `X × I ⟶ X`. -/
+def fstM (X I : Aᵒᵖ ⥤ Type) : pprod X I ⟶ X where
+  app _ := ↾Prod.fst
+
+namespace Segment
+variable (J : Segment A)
+
+/-- The section `X ⟶ X × I` at the end `0`. -/
+def sec₀ (X : Aᵒᵖ ⥤ Type) : X ⟶ pprod X J.I where
+  app b := ↾fun x => (x, J.e₀ b)
+  naturality b b' g := by
+    ext x
+    refine Prod.ext rfl ?_
+    change J.e₀ b' = J.I.map g (J.e₀ b)
+    exact (J.map_e₀ g).symm
+
+/-- The section `X ⟶ X × I` at the end `1`. -/
+def sec₁ (X : Aᵒᵖ ⥤ Type) : X ⟶ pprod X J.I where
+  app b := ↾fun x => (x, J.e₁ b)
+  naturality b b' g := by
+    ext x
+    refine Prod.ext rfl ?_
+    change J.e₁ b' = J.I.map g (J.e₁ b)
+    exact (J.map_e₁ g).symm
+
+theorem sec₀_fst (X : Aᵒᵖ ⥤ Type) : J.sec₀ X ≫ fstM X J.I = 𝟙 X := rfl
+theorem sec₁_fst (X : Aᵒᵖ ⥤ Type) : J.sec₁ X ≫ fstM X J.I = 𝟙 X := rfl
+
+theorem map_comp_apply' {b b' b'' : Aᵒᵖ} (f : b ⟶ b') (g : b' ⟶ b'') (x : J.I.obj b) :
+    J.I.map (f ≫ g) x = J.I.map g (J.I.map f x) := by
+  rw [Functor.map_comp]; rfl
+
+open Classical in
+/-- The characteristic map of `x ∈ I(b)`: `0` on the `u : c ⟶ b` with `u^*x` the end `0`, `1`
+elsewhere. -/
+noncomputable def charF {b : Aᵒᵖ} (x : J.I.obj b) : Over b.unop ⥤ Fin 2 where
+  obj u := if J.I.map u.hom.op x = J.e₀ (op u.left) then 0 else 1
+  map {u u'} κ := homOfLE (by
+    have hκ : J.I.map u.hom.op x = J.I.map κ.left.op (J.I.map u'.hom.op x) := by
+      rw [← map_comp_apply', ← op_comp, Over.w κ]
+    by_cases h' : J.I.map u'.hom.op x = J.e₀ (op u'.left)
+    · have h : J.I.map u.hom.op x = J.e₀ (op u.left) := by rw [hκ, h', J.map_e₀]
+      rw [ite_eq_left_iff.2 (fun hn => absurd h hn), ite_eq_left_iff.2 (fun hn => absurd h' hn)]
+    · rw [ite_eq_right_iff.2 (fun hp => absurd hp h')]
+      split_ifs
+      · exact Fin.zero_le _
+      · exact le_rfl)
+  map_id _ := Subsingleton.elim _ _
+  map_comp _ _ := Subsingleton.elim _ _
+
+theorem fin2_ext {D : Type} [Category D] {F G : D ⥤ Fin 2} (h : ∀ d, F.obj d = G.obj d) :
+    F = G := CategoryTheory.Functor.ext h fun _ _ _ => Subsingleton.elim _ _
+
+theorem charF_e₀ (b : Aᵒᵖ) : J.charF (J.e₀ b) = (Functor.const _).obj 0 :=
+  fin2_ext fun u => by simp [charF, J.map_e₀]
+
+theorem charF_e₁ (hJ : J.IsSeparating) (b : Aᵒᵖ) : J.charF (J.e₁ b) = (Functor.const _).obj 1 :=
+  fin2_ext fun u => by simp [charF, J.map_e₁, (hJ _).symm]
+
+theorem charF_map {b b' : Aᵒᵖ} (g : b ⟶ b') (x : J.I.obj b) :
+    Over.map g.unop ⋙ J.charF x = J.charF (J.I.map g x) :=
+  fin2_ext fun u => by
+    have : J.I.map ((Over.map g.unop).obj u).hom.op x = J.I.map u.hom.op (J.I.map g x) := by
+      change J.I.map (u.hom ≫ g.unop).op x = _
+      rw [op_comp, map_comp_apply']; rfl
+    simp only [Functor.comp_obj, charF]
+    split_ifs with h1 h2 h2
+    · rfl
+    · exact absurd (this.symm.trans h1) h2
+    · exact absurd (this.trans h2) h1
+    · rfl
+
+variable (C : Type) [SmallCategory C] [HasTerminal C]
+
+/-- The homotopy `i_A^*(C) × I ⟶ i_A^*(C)`, `(F, x) ↦ (χ_x, F)` followed by the contraction of
+`C` onto its terminal object. -/
+noncomputable def hom : pprod (iStar A C) J.I ⟶ iStar A C where
+  app b := ↾fun p => (J.charF p.2).prod' (p.1 : Over b.unop ⥤ C) ⋙ contr C
+  naturality b b' g := by
+    ext p
+    change (J.charF (J.I.map g p.2)).prod' (Over.map g.unop ⋙ (p.1 : Over b.unop ⥤ C)) ⋙
+      contr C = Over.map g.unop ⋙ (J.charF p.2).prod' (p.1 : Over b.unop ⥤ C) ⋙ contr C
+    rw [← charF_map]; rfl
+
+theorem sec₀_hom : J.sec₀ (iStar A C) ≫ J.hom C = 𝟙 _ := by
+  ext b F
+  change (J.charF (J.e₀ b)).prod' (F : Over b.unop ⥤ C) ⋙ contr C = F
+  rw [charF_e₀]
+  exact const_prod'_uncurry _ 0 F
+
+theorem sec₁_hom (hJ : J.IsSeparating) :
+    J.sec₁ (iStar A C) ≫ J.hom C = rmap A C ≫ σmap A C := by
+  ext b F
+  change (J.charF (J.e₁ b)).prod' (F : Over b.unop ⥤ C) ⋙ contr C = (Functor.const _).obj (⊤_ C)
+  rw [charF_e₁ J hJ]
+  exact (const_prod'_uncurry _ 1 F).trans
+    (CategoryTheory.Functor.ext (fun _ => rfl) fun _ _ _ => terminal.hom_ext _ _)
+
+end Segment
+
+theorem psh_map_comp_apply (X : Aᵒᵖ ⥤ Type) {b b' b'' : Aᵒᵖ} (f : b ⟶ b') (g : b' ⟶ b'')
+    (x : X.obj b) : X.map (f ≫ g) x = X.map g (X.map f x) := by
+  rw [Functor.map_comp]; rfl
+
+theorem psh_map_id_apply (X : Aᵒᵖ ⥤ Type) {b : Aᵒᵖ} (x : X.obj b) : X.map (𝟙 b) x = x := by
+  rw [CategoryTheory.Functor.map_id]; rfl
+
+section SegmentSlices
+variable (X I : Aᵒᵖ ⥤ Type) (a : A) (e : El (prodY a X))
+
+/-- The slice of the projection `A/(a × X × I) ⥤ A/(a × X)` over `e`. -/
+abbrev SrcI := CostructuredArrow (hatMap a (fstM X I) ⋙ 𝟭 _) e
+
+/-- `A/(b × I) ⥤` the slice over `e = (b, f, x)`: `(g, i) ↦ (g ≫ f, g^*x, i)`. -/
+def sliceInI : El (prodY e.unop.obj.unop I) ⥤ SrcI X I a e where
+  obj t := CostructuredArrow.mk (Y := op ((prodY a (pprod X I)).elementsMk t.unop.obj
+      (t.unop.val.1 ≫ e.unop.val.1, (X.map t.unop.val.1.op e.unop.val.2, t.unop.val.2))))
+    (Quiver.Hom.op ⟨t.unop.val.1.op, rfl⟩)
+  map {t t'} φ := CostructuredArrow.homMk (Quiver.Hom.op ⟨φ.unop.hom, by
+      have h1 : φ.unop.hom.unop ≫ t'.unop.val.1 = t.unop.val.1 :=
+        congrArg Prod.fst φ.unop.map_val
+      have h2 : I.map φ.unop.hom t'.unop.val.2 = t.unop.val.2 := congrArg Prod.snd φ.unop.map_val
+      refine Prod.ext ?_ (Prod.ext ?_ ?_)
+      · change φ.unop.hom.unop ≫ t'.unop.val.1 ≫ e.unop.val.1 = t.unop.val.1 ≫ e.unop.val.1
+        rw [← h1, Category.assoc]
+      · change X.map φ.unop.hom (X.map t'.unop.val.1.op e.unop.val.2) =
+          X.map t.unop.val.1.op e.unop.val.2
+        rw [← psh_map_comp_apply, ← h1]; rfl
+      · exact h2⟩) (Quiver.Hom.unop_inj (Functor.Elements.Hom.ext (by
+      have h1 : φ.unop.hom.unop ≫ t'.unop.val.1 = t.unop.val.1 :=
+        congrArg Prod.fst φ.unop.map_val
+      change t'.unop.val.1.op ≫ φ.unop.hom = t.unop.val.1.op
+      rw [← h1]; rfl)))
+  map_id _ := CostructuredArrow.hom_ext _ _ (Quiver.Hom.unop_inj (Functor.Elements.Hom.ext rfl))
+  map_comp _ _ :=
+    CostructuredArrow.hom_ext _ _ (Quiver.Hom.unop_inj (Functor.Elements.Hom.ext rfl))
+
+/-- The slice over `e` ⥤ `A/(b × I)`: keep the point of `I`. -/
+def sliceOutI : SrcI X I a e ⥤ El (prodY e.unop.obj.unop I) where
+  obj s := op ((prodY e.unop.obj.unop I).elementsMk s.left.unop.obj
+    (s.hom.unop.hom.unop, s.left.unop.val.2.2))
+  map {s s'} ψ := Quiver.Hom.op ⟨ψ.left.unop.hom, by
+    have hw := congrArg (fun m => m.unop.hom) ψ.w
+    refine Prod.ext ?_ ?_
+    · change ψ.left.unop.hom.unop ≫ s'.hom.unop.hom.unop = s.hom.unop.hom.unop
+      exact congrArg Quiver.Hom.unop hw
+    · exact congrArg (fun q => q.2.2) ψ.left.unop.map_val⟩
+  map_id _ := Quiver.Hom.unop_inj (Functor.Elements.Hom.ext rfl)
+  map_comp _ _ := Quiver.Hom.unop_inj (Functor.Elements.Hom.ext rfl)
+
+theorem sliceInI_sliceOutI : sliceInI X I a e ⋙ sliceOutI X I a e = 𝟭 _ := rfl
+
+/-- `𝟭 ⟶ sliceOutI ⋙ sliceInI`, the identity on vertices. -/
+def sliceUnitI : 𝟭 (SrcI X I a e) ⟶ sliceOutI X I a e ⋙ sliceInI X I a e where
+  app s := CostructuredArrow.homMk (Quiver.Hom.op ⟨𝟙 _, by
+    have hm := s.hom.unop.map_val
+    have h1 : s.hom.unop.hom.unop ≫ e.unop.val.1 = s.left.unop.val.1 := congrArg Prod.fst hm
+    have h2 : X.map s.hom.unop.hom e.unop.val.2 = s.left.unop.val.2.1 := congrArg Prod.snd hm
+    refine Prod.ext ?_ (Prod.ext ?_ ?_)
+    · change 𝟙 _ ≫ s.hom.unop.hom.unop ≫ e.unop.val.1 = s.left.unop.val.1
+      rw [Category.id_comp, h1]
+    · change X.map (𝟙 _) (X.map s.hom.unop.hom e.unop.val.2) = s.left.unop.val.2.1
+      rw [psh_map_id_apply, h2]
+    · exact psh_map_id_apply I _⟩) (Quiver.Hom.unop_inj (Functor.Elements.Hom.ext (by
+      exact Category.comp_id (obj := Aᵒᵖ) _)))
+  naturality _ _ _ := CostructuredArrow.hom_ext _ _ (Quiver.Hom.unop_inj
+    (Functor.Elements.Hom.ext (by
+      exact (Category.id_comp (obj := Aᵒᵖ) _).trans (Category.comp_id (obj := Aᵒᵖ) _).symm)))
+
+/-- If `I` is locally aspherical, the projection `A/(a × X × I) ⥤ A/(a × X)` is a
+`W`-equivalence: its slices retract onto `A/(b × I)` (Theorem A). -/
+theorem fstM_mem (L : FundamentalLocalizer.{0}) (hI : IsLocallyAspherical L I) :
+    L.W (hatMap a (fstM X I)) := by
+  refine L.mem_of_costructuredArrow _ (𝟭 _) fun e => ?_
+  have hsrc : L.IsAspherical (SrcI X I a e) :=
+    (isAspherical_iff_of_retraction L (sliceInI X I a e) (sliceOutI X I a e)
+      (sliceInI_sliceOutI X I a e) (sliceUnitI X I a e)).2 (hI _)
+  have : HasTerminal (CostructuredArrow (𝟭 (El (prodY a X))) e) :=
+    CostructuredArrow.mkIdTerminal.hasTerminal
+  refine L.of_comp_right _ (Functor.star _) (L.star_mem_of_hasTerminal _) ?_
+  rw [Functor.punit_ext' (_ ⋙ Functor.star _) (Functor.star (SrcI X I a e))]
+  exact hsrc
+
+end SegmentSlices
+
+/-- **Grothendieck's criterion, (iii) ⇒ (i)** (Cisinski, Astérisque 308, Th. 4.1.19): a small
+category with a separating locally aspherical segment is a local test category. -/
+theorem isLocalTest_of_segment (L : FundamentalLocalizer.{0}) (J : Segment A)
+    (hsep : J.IsSeparating) (hloc : IsLocallyAspherical L J.I) : IsLocalTest A L :=
+  fun a C _ _ => (isAspherical_slice_iff C a L).2
+    (isAspherical_prodY_of_homotopy L a (fstM _ J.I) (J.sec₀ _) (J.sec₁ _) (J.hom C)
+      (rmap A C) (σmap A C) (J.sec₀_fst _) (J.sec₁_fst _) (J.sec₀_hom C) (J.sec₁_hom C hsep)
+      (σmap_rmap A C) (fstM_mem _ J.I a L hloc))
+
+/-- The Lawvere segment: `L_A = i_A^*(Δ¹)` with its constant sections `0` and `1`. -/
+def lawvereSegment (A : Type) [SmallCategory A] : Segment A where
+  I := iStar A (Fin 2)
+  e₀ _ := (Functor.const _).obj 0
+  e₁ _ := (Functor.const _).obj 1
+  map_e₀ _ := rfl
+  map_e₁ _ := rfl
+
+theorem lawvereSegment_isSeparating : (lawvereSegment A).IsSeparating := fun b h => by
+  have h01 : (0 : Fin 2) = 1 := congrArg (fun F : Over b.unop ⥤ Fin 2 => F.obj (Over.mk (𝟙 _))) h
+  exact absurd h01 (by decide)
+
+/-- **Grothendieck's criterion, (i) ⇔ (iii)** (Cisinski, Astérisque 308, Th. 4.1.19): a small
+category is a local test category iff it has a separating locally aspherical segment. -/
+theorem isLocalTest_iff_exists_segment (L : FundamentalLocalizer.{0}) :
+    IsLocalTest A L ↔ ∃ J : Segment A, J.IsSeparating ∧ IsLocallyAspherical L J.I :=
+  ⟨fun h => ⟨lawvereSegment A, lawvereSegment_isSeparating,
+      (isLocalTest_iff_isLocallyAspherical L).1 h⟩,
+    fun ⟨J, hs, hl⟩ => isLocalTest_of_segment L J hs hl⟩
+
+end Segments
 
 end LeanPool.ToposTheoreticBridges.Examples
