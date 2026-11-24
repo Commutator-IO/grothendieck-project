@@ -412,7 +412,7 @@ export const FINDINGS: Finding[] = [
     status: 'matched',
     settle:
       'Matched (re-check of 2026-11-23, then issue #187) for the statement about test categories: Pursuing Stacks §88 says, without argument, that no test category has an initial object, and Δ° has one. Still open as a literature question: whether the Ore (De Morgan) form, and the extension to weak test categories, are stated somewhere, for instance in Maltsiniotis’s Astérisque 301 (2005), which was not consulted in its printed form, or in the SMF edition of Pursuing Stacks.',
-    lean: { file: 'lean/bridges/Bridges/TestCategories.lean', found: 'The connectedness core is proved, with Mathlib’s Lawvere object Functor.sieves: the right Ore condition holds iff the pullback of a nonempty sieve is never empty (rightOreCondition_iff_pullback_ne_bot); under it, any presheaf over the Lawvere object with a section over the empty sieve and one over a nonempty sieve has a category of elements that is not connected (not_isPreconnected_elements); hence neither the elements of L nor those of any a × L form a connected category (not_isConnected_elements_sieves, not_isConnected_elements_yonedaProdSieves), and the same follows from the De Morgan arch of lean-pool (not_isConnected_elements_sieves_of_isDeMorganTopos). For Δ°, through its initial object (not_isConnected_elements_sieves_simplexCategory_op). Not formalised: fundamental localizers, test categories and the step from disconnected to non-aspherical, since Mathlib has no theory of fundamental localizers (it has the nerve and simplicial sets, not the weak equivalences of Cat nor Grothendieck’s test notions).' },
+    lean: { file: 'lean/bridges/Bridges/FundamentalLocalizers.lean', found: 'Proved in an axiomatic setting, since Mathlib (and AxiomMath’s Stacks library) has neither the weak equivalences of Cat nor Grothendieck’s test notions. FundamentalLocalizer states Grothendieck’s axioms (weak saturation, categories with a terminal object aspherical, relative Theorem A); iStar is i_A^*; IsWeakTest and IsLocalTest follow Cisinski’s Déf. 4.1.8 and 4.1.12. Under the hypothesis that aspherical categories are connected (AsphericalConnected, which W ⊂ W_0 gives), Δ° is neither a weak nor a local test category (not_isTest_simplexCategory_op), and so is every nonempty category with the right Ore condition (not_isWeakTest, not_isLocalTest): with C = Δ1, the functors A/a ⥤ Δ1 constant at the top form a union of components of A/i_A^*(Δ1). The connectedness core is also in TestCategories.lean, on Mathlib’s Lawvere object (rightOreCondition_iff_pullback_ne_bot, not_isConnected_elements_sieves_simplexCategory_op). By contrast, Δ itself is proved to be a weak and a local test category in SimplexTest.lean, from the axioms alone and for every fundamental localizer (isTest_simplexCategory: a homotopy lemma for natural transformations, and a contraction of Δ/i_Δ^*(C) that adds a final vertex). The cube category □ (faces and degeneracies) is proved a test category in the same way in CubeTest.lean (isTest_cube), with a cylinder [1]^n ↦ [1]^{n+1} in place of the cone. Not formalised: that the usual weak equivalences (through the nerve) form a fundamental localizer inside W_0, and Cisinski’s Prop. 9.3.2.' },
     onPage: 'stated',
   },
   {
@@ -7697,7 +7697,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'The counterexample is elementary and likely folklore (products of categories do not commute with π_0); a reference stating it for fundamental localizers would make the row matched.',
-    reach: 'reachable',
+    lean: { file: 'lean/bridges/Bridges/FundamentalLocalizers.lean', found: 'The zigzags ZigZag n (0 → 1 ← 2 → ⋯, n + 1 objects) are connected, and their product category ZigZagProd (CategoryTheory.pi) is not (not_isPreconnected_zigZagProd): the objects with bounded coordinates form a union of components. Each zigzag is aspherical for every fundamental localizer, from the axioms alone (isAspherical_zigZag: induction on n; when the new arrow is n → n + 1, the relative Theorem A applied to the inclusion Zₙ → Zₙ₊₁, whose slices have a terminal object; when it is n + 1 → n, the same for the retraction sending n + 1 to n, then two out of three). Hence, for a fundamental localizer whose aspherical categories are connected, the Zₙ are aspherical and their product is not (isAspherical_zigZag_and_not_isAspherical_zigZagProd). Not formalised: that the usual weak equivalences, through the nerve, form a fundamental localizer.' },
     onPage: 'stated',
   },
   {
@@ -7720,6 +7720,27 @@ export const FINDINGS: Finding[] = [
     reach: 'beyond',
     theory: 'model structures on Cat (Thomason) and fundamental localizers',
     onPage: 'partial',
+  },
+  {
+    id: '118-local-test-no-de-morgan-slice',
+    cote: '118',
+    pages: '23–25',
+    kind: 'mathematical',
+    claim:
+      'For a local test category A, as page 25 requires for its calculus of fractions, no slice of the presheaf topos is De Morgan: for every nonempty presheaf X, Â/X ≃ (A/X)^ is not De Morgan, for every non-coarse fundamental localizer.',
+    basis:
+      'Page 25 says what the calculus of fractions of pages 23–24 cost: a separating interval I of Â defining a homotopy structure compatible with 𝒲_A, « donc, pratiquement, que A soit une catégorie-test locale ». The page draws no consequence for the topos itself.',
+    ours:
+      'The statement and its proof are the edition’s (issue #187). A/X is a local test category as soon as A is (Cisinski, Astérisque 308, Prop. 4.1.14 (v)); a nonempty category with the right Ore condition is neither a weak nor a local test category, because the empty sieves split off its Lawvere object (row 108-delta-op-not-test); and the presheaf topos of a small category is De Morgan iff the category satisfies the right Ore condition (lean-pool, isDeMorganTopos_presheaf_iff_rightOreCondition). For X empty the slice is the degenerate topos, which is De Morgan, hence « nonempty ». In Lean (lean/bridges/Bridges/TestCategories.lean) only the connectedness ingredients are proved, for any small category (not_isConnected_elements_sieves, not_isDeMorganTopos_of_isConnected_elements_sieves); Mathlib has no fundamental localizers. The axiomatic proof in FundamentalLocalizers.lean (field lean) does not use Prop. 4.1.14 (v). The words « pratiquement » and « catégorie-test locale » of page 25 sit next to two largely illegible marginal notes.',
+    literature: [
+      'Cisinski, Astérisque 308 (2006), Prop. 4.1.14 (v), Th. 4.1.19, Prop. 9.3.2',
+      'Maltsiniotis, La théorie de l’homotopie de Grothendieck, version provisoire 2001, Rem. 6.4 b), Th. 6.6',
+      'TheoremSearch, queries on test categories and the Ore condition, 23 November 2026: nothing on De Morgan slices',
+    ],
+    status: 'candidate',
+    settle:
+      'Look for a statement relating test categories or test topoi to the De Morgan law (or to the Ore condition on the categories A/X) in Maltsiniotis, Astérisque 301 (printed), in Cisinski’s work on test topoi, and in the SMF edition of Pursuing Stacks.',
+    lean: { file: 'lean/bridges/Bridges/FundamentalLocalizers.lean', found: 'Proved in the axiomatic setting of the file (FundamentalLocalizer, IsWeakTest, IsLocalTest after Cisinski’s Déf. 4.1.8 and 4.1.12), under the hypothesis that aspherical categories are connected (AsphericalConnected, which W ⊂ W_0 gives): for a local test category A and a presheaf X with a section, the presheaf topos of A/X (the category CostructuredArrow yoneda X, whose presheaf topos is Â/X) is not De Morgan (not_isDeMorganTopos_slice_of_isLocalTest, and the variant for a section x over an object a). The proof avoids the stability of local test categories under slicing: if A/X satisfied the right Ore condition, so would its slice over an object p (rightOreCondition_over), then the weak test category A/p.left, through a section of the projection (A/X)/p ⥤ A/p.left up to isomorphism (overCostructuredArrowSection, rightOreCondition_of_iso), against not_isWeakTest. The representable case is not_isDeMorganTopos_over_of_isLocalTest. The statement for Â/X itself follows through Mathlib’s equivalence Over X ≌ (A/X)^ (overEquivPresheafCostructuredArrow; isDeMorganTopos_over_iff, not_isDeMorganTopos_overPresheaf_of_isLocalTest), after transporting to Over X the instances that the De Morgan condition needs. Axioms: propext, Classical.choice, Quot.sound.' },
   },
   // Folder 131 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5 (2026-09-24).
   // Sources actually read: J. P. Murre, « Representation of unramified functors. Applications (according to unpublished

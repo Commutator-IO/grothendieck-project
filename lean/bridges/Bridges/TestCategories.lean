@@ -7,6 +7,7 @@ module
 
 public import Bridges.Combinatorics
 public import Bridges.Monoids
+public import Bridges.Preorders
 public import LeanPool.ToposTheoreticBridges.DeMorgan
 public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
 public import Mathlib.CategoryTheory.Elements
@@ -41,6 +42,13 @@ uses:
   and so does `Δᵒᵖ`, whose
   presheaves are the cosimplicial sets (folder 108, p. 2, question 6: « `Δ°` est-elle une
   catégorie test ? non »).
+* `not_isConnected_elements_sieves_preorder`, `not_isConnected_elements_sieves_linearOrder`,
+  `not_isConnected_elements_sieves_int`, `not_isConnected_elements_sieves_multiplicative_nat`:
+  decks with the Ore condition but no object whose slice is the point, such as `ℤ` and the
+  monoid `ℕ`;
+* `not_isDeMorganTopos_of_isConnected_elements_sieves`: read the other way, a category whose
+  Lawvere object has connected elements, as a weak test category does, has a presheaf topos that
+  is not De Morgan.
 -/
 
 @[expose] public section
@@ -150,5 +158,37 @@ theorem not_isConnected_elements_sieves_singleObj (M : Type) [Monoid M]
     ¬ IsConnected (Functor.sieves (SingleObj M)).Elements :=
   have : Nonempty (SingleObj M) := ⟨SingleObj.star M⟩
   not_isConnected_elements_sieves (rightOreCondition_singleObj_iff.2 h)
+
+/-- **Ore orders.** In a nonempty preorder in which any two elements below a common element have
+a common lower bound, the category of elements of the Lawvere object is not connected: the
+preorder is neither a weak test category nor a local test category, even when it has no minimal
+element, so that no slice is the point. -/
+theorem not_isConnected_elements_sieves_preorder (P : Type u) [Preorder P] [Nonempty P]
+    (h : ∀ x y z : P, y ≤ x → z ≤ x → ∃ w, w ≤ y ∧ w ≤ z) :
+    ¬ IsConnected (Functor.sieves P).Elements :=
+  not_isConnected_elements_sieves ((rightOreCondition_preorder_iff P).2 h)
+
+/-- A nonempty total order, such as `ℤ`, `ℚ` or `ℝ`, is neither a weak test category nor a local
+test category. -/
+theorem not_isConnected_elements_sieves_linearOrder (P : Type u) [LinearOrder P] [Nonempty P] :
+    ¬ IsConnected (Functor.sieves P).Elements :=
+  not_isConnected_elements_sieves_preorder P fun _ y z _ _ =>
+    ⟨min y z, min_le_left y z, min_le_right y z⟩
+
+/-- `ℤ`, which has no minimal element. -/
+theorem not_isConnected_elements_sieves_int : ¬ IsConnected (Functor.sieves ℤ).Elements :=
+  not_isConnected_elements_sieves_linearOrder ℤ
+
+/-- The monoid `ℕ`, whose presheaves are the sets with an endomorphism. -/
+theorem not_isConnected_elements_sieves_multiplicative_nat :
+    ¬ IsConnected (Functor.sieves (SingleObj (Multiplicative ℕ))).Elements :=
+  not_isConnected_elements_sieves_singleObj _ fun a b => ⟨b, a, mul_comm a b⟩
+
+/-- **Test categories are not De Morgan.** If the category of elements of the Lawvere object of
+a nonempty `C` is connected, as it is for a weak test category, then the presheaf topos of `C`
+is not De Morgan. -/
+theorem not_isDeMorganTopos_of_isConnected_elements_sieves [Nonempty C]
+    (h : IsConnected (Functor.sieves C).Elements) : ¬ IsDeMorganTopos (Cᵒᵖ ⥤ Type u) :=
+  fun hD => not_isConnected_elements_sieves_of_isDeMorganTopos hD h
 
 end LeanPool.ToposTheoreticBridges.Examples
