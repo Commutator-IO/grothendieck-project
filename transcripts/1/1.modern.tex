@@ -26,7 +26,8 @@
 % Substantive departures from the pages, each footnoted where it occurs:
 %   - page 7: the two formulas for φ_f(t∓0) have their ≤ and < swapped; the
 %     page 26 version is the right way round and is what is given;
-%   - page 28: "Δ(A) < ∞ ⟺ B ∈ a" holds only as ⇐ (counterexample given);
+%   - page 28: "Δ(A) < ∞ ⟺ B ∈ a" holds only as ⇐ (counterexample given,
+%     replaced 2026-11-24 by one that satisfies B ∈ b);
 %   - page 30: Prop. 9 is stated with τ(E) ≤ t and one projector; it needs
 %     τ(E) = t and, for non-normal A, a pair of equivalent projectors — the
 %     proof of Théorème 1 (page 31) is rewritten with that form;
@@ -61,8 +62,8 @@
 % against the pages by a human.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — Théorème 2 of pages
 % 71-73 footnoted with the Lean check (system (16) for m ≤ 2 in finite
-% dimension, and (16) ⟹ (15), proved; m ≥ 3 and the compact case not), with
-% the open mathlib PRs for Cauchy–Binet and Lagrange; the page-73 footnote
+% dimension, and (16) ⟹ (15), proved; m ≥ 3 and the compact case not); the
+% page-73 footnote
 % corrected: Rotfel'd/Thompson cover the product form (15), not the
 % coefficientwise system, whose literature search is not done; the
 % « lettre (1953) » recorded as absent from the scan, the untranscribed
@@ -98,6 +99,7 @@
 %   22, 26, 30, 31, 33, 38, 39, 75, 79, 84, 95, 97, 99, 111, 119, 120, 124,
 %   129, 136, 143, 144, 148.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-11-24 — prose of the summary and of some passages reworded, no change to the mathematics or the notes' content.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-24 — corrected after the referee report docs/review/modern/1.md (major issues and clear minor ones).
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -154,12 +156,14 @@ disponible, et le carton la rappelle aux pages 106 à 118 pour s'en servir.
 Ce détour donne plus que la théorie de Schatten : il atteint les
 \emph{classes pour $p < 1$}, qui ne sont plus des espaces normés, et il y
 démontre l'inégalité $\sum s_i(u+v)^p \leq \sum s_i(u)^p + \sum s_i(v)^p$
-et l'inégalité de Hölder pour tous les exposants. Il démontre aussi, en
-passant, que le déterminant est bien le produit $\prod(1 + \lambda_i)$ des
-valeurs propres, ce qui est la formule de la trace ; et une inégalité,
-$\det(1 + |u + v|) \leq \det(1 + |u|)\det(1 + |v|)$, qu'il publiera
-lui-même dans son exposé au Séminaire Bourbaki de mars 1955 (n°~113) et que
-Rotfel'd puis Seiler et Simon retrouveront en 1967 et 1975.
+et l'inégalité de Hölder pour tous les exposants. Il rassemble aussi, sur
+une page qu'il a biffée, les ingrédients d'une démonstration de l'égalité
+entre le déterminant et le produit $\prod(1 + \lambda_i)$ des valeurs
+propres, c'est-à-dire de la formule de la trace, théorème de Lidskii (1959) ;
+et il démontre une inégalité, $\det(1 + |u + v|) \leq \det(1 + |u|)\det(1 +
+|v|)$, qu'il publiera lui-même dans son exposé au Séminaire Bourbaki de mars
+1955 (n°~113), et qu'on trouve aussi chez Rotfel'd (1967) puis chez Seiler
+et Simon (1975).
 
 Une troisième couche, aux pages 6 à 35, cherche à refaire
 tout cela dans une \emph{algèbre de von Neumann} munie d'une trace, là où
@@ -183,8 +187,8 @@ Le ton est celui d'un cahier de travail. « Je ne connais qu'une méthode
 analytique », écrit-il d'une inégalité qu'une page plus jeune du même
 carton obtient en deux lignes ; « c'est une inégalité remarquable, mais
 n'est pas celle que nous cherchons », d'une étape qui s'avère être la
-bonne ; « est-ce utile ? » et « pas d'importance » en marge de deux
-corollaires. Et, sous un trait au crayon, une question sur les valeurs
+bonne ; « est-ce utile ? » en marge d'un corollaire, et « pas
+d'importance » en réponse à sa propre question sur la convexité uniforme. Et, sous un trait au crayon, une question sur les valeurs
 propres et les valeurs singulières que le texte ne tranche pas, et que
 cette lecture tranche en note. Les noms à chercher ensuite sont ceux de
 Weyl, Ky Fan et Horn pour les inégalités, de Schatten pour les classes,
@@ -441,12 +445,15 @@ $\varphi_f \leq \varphi_g$ si $f \leq g$ ; $\varphi_{\lambda f} =
 \lambda\varphi_f$ pour $\lambda \geq 0$ ; $\varphi_{\alpha(f)} =
 \alpha(\varphi_f)$ pour $\alpha$ croissante sur $\mathbf{R}_{+}$ nulle en
 $0$, en particulier $\varphi_{f^\alpha} = \varphi_f^\alpha$ ;
-$\varphi_{f+g} \leq \varphi_f + \varphi_g$ ; $\varphi_{fg} \leq
-\varphi_f\varphi_g$.\footnote{Les deux dernières se lisent au sens de la
-\emph{sous-majorisation} : $\int_0^t \varphi_{f+g} \leq \int_0^t
-(\varphi_f + \varphi_g)$ pour tout $t$, et de même en produit logarithmique
-pour $fg$. Ponctuellement, $\varphi_{f+g}(t) \leq \varphi_f(t) + \varphi_g(t)$
-est faux ($f$ et $g$ indicatrices d'ensembles disjoints de même mesure $1$
+et, au sens de la \emph{sous-majorisation},
+$\int_0^t \varphi_{f+g} \leq \int_0^t (\varphi_f + \varphi_g)$ et
+$\int_0^t \log\varphi_{fg} \leq \int_0^t \log(\varphi_f\varphi_g)$ pour
+tout $t$ ; ponctuellement, on a seulement $\varphi_{f+g}(s+t) \leq
+\varphi_f(s) + \varphi_g(t)$ et $\varphi_{fg}(s+t) \leq
+\varphi_f(s)\varphi_g(t)$.\footnote{La page 7 écrit les deux dernières
+règles sans décalage, $\varphi_{f+g} \leq \varphi_f + \varphi_g$ et
+$\varphi_{fg} \leq \varphi_f\varphi_g$. Ponctuellement, $\varphi_{f+g}(t)
+\leq \varphi_f(t) + \varphi_g(t)$ est faux ($f$ et $g$ indicatrices d'ensembles disjoints de même mesure $1$
 donnent $\varphi_{f+g} = 1$ sur $]0,2[$ et $\varphi_f + \varphi_g = 0$ sur
 $]1,2[$), et c'est bien sous forme intégrée que la page 7 les utilise
 ensuite (formules (10) et (11)). Le passage qui les commente est en grande
@@ -504,7 +511,7 @@ a alors (17) » ; la première passe lisait « il faut », sans « et il
 suffit ». L'équivalence est fausse. « Il faut » tombe : sur $]0,1[$,
 $f = s^{-1/2}$ sur $]0,\frac12[$ et $0$ ailleurs, $g = (s - \frac12)^{-1/2}$
 sur $]\frac12, 1[$ et $0$ ailleurs, donnent $fg = 0$, alors que
-$\varphi_f\varphi_g$ se comporte comme $1/(2s)$ en $0$. « Il suffit » ne
+$\varphi_f\varphi_g$ se comporte comme $1/s$ en $0$. « Il suffit » ne
 vaut que pour $f$, $g$ positives (c'est alors l'inégalité (17) elle-même) :
 pour des fonctions de signes opposés, $f \geq 0$ et $g \leq 0$ portées par
 le même ensemble, $\varphi_f\varphi_g$ peut être nulle et $fg$ non
@@ -538,12 +545,16 @@ les parties bornées de $L^\infty(K)$ » ; ces mots ne sont pas sur la page
 sur tout $L^\infty(K)$.} Car pour tout $a$
 l'ensemble convexe $A = \{f \in L^\infty(K) : P(f) \leq a\}$ est, par $P_3$,
 fermé pour la convergence en mesure sur les boules de $L^\infty(K)$, donc
-fermé pour la norme de $L^1(K)$ sur ces boules ; or un convexe de
+fermé pour la norme de $L^1(K)$ sur ces boules. Sur une boule de
+$L^\infty(K)$, la convergence pour $\sigma(L^\infty, L^1)$ entraîne la
+convergence faible dans $L^1(K)$, et un convexe fermé pour la norme de $L^1$
+est faiblement fermé dans $L^1$ (Mazur) : l'intersection de $A$ avec chaque
+boule est donc fermée pour $\sigma(L^\infty, L^1)$. Or un convexe de
 $L^\infty(K) = (L^1(K))'$ dont l'intersection avec chaque boule est fermée
-pour la norme de $L^1$ (\emph{a fortiori} pour $\sigma(L^\infty, L^1)$)
-est faiblement fermé.\footnote{C'est le théorème de Banach--Dieudonné, que la
-page 11 nomme (« th. de Banach--Dieudonné ») ; on l'appelle aussi théorème de
-Krein--Šmulian.} Une fonction sur
+pour $\sigma(L^\infty, L^1)$ est faiblement fermé.\footnote{Le résultat
+employé ici est le théorème de Krein--Šmulian. La page 11 nomme le théorème
+de Banach--Dieudonné (« th. de Banach--Dieudonné »), qui en est voisin mais
+distinct.} Une fonction sur
 $K^\infty(]0,\infty[)$ est de Pólya si et seulement si sa restriction à chaque
 $L^\infty(]0,\omega[)$, $\omega < \infty$, l'est.
 
@@ -610,8 +621,8 @@ réarrangement est le sup des fonctionnelles affines invariantes par
 réarrangement, et celles-ci sont données par le produit scalaire des
 réarrangements. C'est l'argument qui, pour les normes, donne la
 représentation d'une norme invariante par réarrangement par sa norme duale
-(Lorentz, Luxemburg) ; ces pages le font sans le nommer, et deux ans avant
-Lorentz, mais rien n'y renvoie à une publication.}
+(Lorentz, Luxemburg) ; ces pages le font sans le nommer, et rien n'y renvoie
+à une publication.}
 
 \emph{Exemples de fonctions de Weyl.} Soit $\alpha$ une fonction sur
 $\mathbf{R}_{+}$, nulle en $0$ si $\omega = +\infty$,\footnote{Page 13 : la
@@ -796,8 +807,8 @@ est le \emph{réarrangement spectral} de $A$ ; on a $\|\varphi_A\|_\infty =
 et, si $\omega = \tau(1) < \infty$, $\Delta(A) = \Delta_A(\omega)$, avec
 $0 \leq \Delta(A) < \infty$.\footnote{$\varphi_A(t) = \mu_t(A)$ de Fack et
 Kosaki : $\mu_t(A) = \inf\{\|A(1-E)\| : E \in \mathcal{P},\ \tau(E) \leq t\}$,
-et c'est la proposition 6 ci-dessous, trente ans plus tôt et pour les
-seuls $A \in \mathfrak{b}$. Pour $\mathcal{M} = L(H)$, $\varphi_A$ est la
+et c'est, pour les seuls $A \in \mathfrak{b}$, la proposition 6
+ci-dessous. Pour $\mathcal{M} = L(H)$, $\varphi_A$ est la
 fonction en escalier $t \mapsto s_{\lceil t\rceil}(A)$.}
 
 Les pages 23 à 25, en grande partie biffées et reprises, remarquent qu'un
@@ -861,10 +872,15 @@ c'est aussi ce que redit le corollaire 5 de la page 34.}
 c'est-à-dire $\varphi_{|A|} = \varphi_{|A^{*}|}$, et par suite $\Phi_{|A|} =
 \Phi_{|A^{*}|}$, $\Psi_{|A|} = \Psi_{|A^{*}|}$, $\Delta_A = \Delta_{A^{*}}$.
 Il suffit de voir $\mu_{A^{*}A} = \mu_{AA^{*}}$, et par le corollaire 4 de le
-voir pour $A \in \mathfrak{a}$ (page 27) ; les deux mesures sont alors, hors de $0$, de
-masse finie et à support dans $[0,\|A\|^2]$, donc déterminées par leurs
-moments $\int x^p\,d\mu$, $p \geq 1$ entier, et $\tau((A^{*}A)^p) =
-\tau((AA^{*})^p)$ résulte de $\tau(RS) = \tau(SR)$.
+voir pour $A \in \mathfrak{a}$ (page 27). Les deux mesures ne sont pas
+nécessairement de masse finie hors de $0$, mais les mesures $x\,d\mu$ le
+sont, de masse $\tau(A^{*}A) = \tau(AA^{*})$ ; elles sont à support dans
+$[0,\|A\|^2]$, donc déterminées par leurs moments $\int x^{p}\,d\mu$,
+$p \geq 1$ entier, qui déterminent à leur tour les mesures $\mu$ hors de $0$ ;
+et $\tau((A^{*}A)^p) = \tau((AA^{*})^p)$ résulte de $\tau(RS) =
+\tau(SR)$.\footnote{La lecture antérieure de cette édition disait les deux
+mesures de masse finie hors de $0$, ce que l'exemple de la note de la
+page 22 dément.}
 
 \pagerange{27}{32}
 \section*{Le déterminant (pages 27 à 32)}
@@ -889,9 +905,15 @@ $|\lambda| < 1$, $\Delta(A) = +\infty$ si $|\lambda| > 1$, et si
 $|\lambda| = 1$ on a $0 \leq \Delta(A) < \infty$ dès que $B \in
 \mathfrak{a}$.\footnote{La page 28 écrit dans ce dernier cas « $\Delta(A) <
 +\infty \Longleftrightarrow B \in \mathfrak{a}$ ». L'implication réciproque
-est fausse : dans $L(H)$ avec $H$ de dimension infinie, $A = 1 - \frac12 E$
-pour un projecteur $E$ de rang et de corang infinis a $\varphi_{|A|} \equiv
-1$, donc $\Delta(A) = 1$, et $B = -\frac12 E$ n'est pas à trace. Elle est
+est fausse : dans $L(H)$ avec $H$ de dimension infinie et $(e_n)$ une base
+orthonormale, $B = -\frac12 \sum_n n^{-1}\,\bar e_n \otimes e_n$ est compact,
+hermitien et non à trace, $A = 1 + B$ a pour valeurs propres les $1 -
+\frac1{2n}$, d'où $A \geq 0$ et $\varphi_{|A|} \equiv 1$ (on ôte un nombre
+fini de vecteurs propres sans abaisser la norme), donc $\Delta(A) = 1$, alors
+que $B \notin \mathfrak{a}$. (La lecture antérieure de cette édition prenait
+$B = -\frac12 E$ avec $E$ projecteur de rang et de corang infinis ; ce $B$
+n'est pas dans $\mathfrak{b}$, et l'exemple ne vérifiait pas l'hypothèse.)
+Elle est
 vraie si $B \geq 0$, puisqu'alors $\varphi_{|1+B|} = 1 + \varphi_B$ et
 $\log(1+\varphi_B)$ est sommable si et seulement si $\varphi_B$ l'est.}
 Seules importent donc les valeurs de $\Delta$ sur $1 + \mathfrak{a}$.
@@ -1050,11 +1072,16 @@ passe (machine, non vérifiée par un lecteur) : l'hypothèse « Supposons
 $\mathcal{A}$ non atomique », cerclée au-dessus de la ligne, et « et borne
 atteinte » ; l'éditeur est interrogé sur la première. La phrase suivante
 porte deux lacunes, « On peut exiger $B$ … si $A$ est hermitien et $B$ …
-hermitien si $A \geq 0$ » ; ce qu'on en donne est ce que fournit le $B =
-EU^{*}$ de la démonstration, $E$ commutant à $A$, et ce que la page 35 dit
-en marge (« se borner à $B \in \mathcal{P}$ si $A \geq 0$ »). Sans
-l'hypothèse non atomique la formule reste vraie par le plongement des pages
-25 et 34, mais la borne peut ne pas être atteinte.}
+hermitien si $A \geq 0$ » ; on en donne ce que fournit le $B = EU^{*}$ de
+la démonstration, $E$ commutant à $A$, et ce que la page 35 dit en marge
+(« se borner à $B \in \mathcal{P}$ si $A \geq 0$ »). Sans l'hypothèse non
+atomique la formule est fausse en général : dans $M_n(\mathbf{C})$ muni de
+la trace usuelle, pour $t$ non entier, le second membre vaut $\sum_{i \leq
+\lfloor t\rfloor} s_i(A)$, et $\Phi_{|A|}(t)$ le dépasse de $(t - \lfloor
+t\rfloor)\,s_{\lfloor t\rfloor + 1}(A)$. Pour une trace finie, le plongement
+des pages 25 et 34 la rétablit à condition de prendre $B$ dans l'algèbre non
+atomique où $\mathcal{M}$ se plonge ; pour une trace seulement semi-finie,
+cette lecture ne l'établit pas.}
 L'inégalité $\geq$ : si $E = \sigma(B)$, $\varphi_{|B|} = \varphi_{|EB|} \leq
 \varphi_E$, et par le corollaire 1, $|\tau(BA)| \leq \int \varphi_E
 \varphi_{|A|} = \int_0^t \varphi_{|A|}$. L'inégalité $\leq$ : si $A = U|A|$,
@@ -1543,19 +1570,24 @@ de façon équivalente, $\alpha_n(u) = \sum_{i_1 < \cdots < i_n} \lambda_{i_1}
 d'où l'on retrouve la formule pour $\alpha_n$ en l'appliquant à
 $\Lambda^n u$. De même $\alpha_n(|u|) = \|\Lambda^n u\|_1 = \sum_{i_1 <
 \cdots < i_n} s_{i_1} \cdots s_{i_n}$.\footnote{C'est le théorème de la
-trace, publié par Lidskii en 1959. \emph{La théorie de Fredholm} (1956),
-exposé que Grothendieck dit lui-même didactique, ne le contient pas. La
-démonstration de ces pages, biffée page 79 et complétée par la proposition
-de la page 110, est la sienne : les coefficients $\alpha_n(u)$ sont majorés
-par ceux de $\det(1+z|u|)$, fonction de genre zéro, les zéros $-1/\lambda_i$
-vérifient $\sum |\lambda_i| < \infty$ par Weyl, donc $\det(1+zu)$ est de
-genre zéro et vaut $\prod(1+z\lambda_i)$. C'est la voie que suit la
-démonstration publiée par B.~Simon (1977), reprise dans \emph{Trace Ideals}
-(2\textsuperscript{e} éd., 2005, lemme~3.6 et théorème~3.7) ; Lidskii passait
-par la forme de Jordan. La forme du lemme, par domination des coefficients, et
-sa démonstration par trois rotations, sont celles du carton. L'ordre des pages
-cache que la démonstration existe ; la remarque des pages 106 à 111 la rend
-visible.}
+trace, dû à Lidskii (1959). Les pages en contiennent les ingrédients : la
+majoration $|\alpha_n(u)| \leq \alpha_n(|u|)$ (corollaire 3 ci-dessus,
+page 78), la sommabilité $\sum |\lambda_i| \leq \|u\|_1$ par le lemme de Weyl
+(page 88), et la proposition des pages 110 et 111 sur une fonction entière
+dont les coefficients sont dominés par ceux d'une fonction de genre zéro,
+proposition démontrée par trois rotations. Le seul endroit où ces
+ingrédients sont assemblés est la page 79, entièrement biffée, qui porte
+aussi une majoration fausse (voir la note de la section des pages 76 à 79).
+Une étape y est de plus admise : les inverses des zéros de $\det(1 - zu)$
+sont les valeurs propres de $u$, comptées avec leur multiplicité algébrique,
+ce qui relève de la théorie de Fredholm classique et doit être invoqué.
+Assemblés, ces ingrédients donnent la démonstration suivante : les
+coefficients $\alpha_n(u)$ sont majorés par ceux de $\det(1+z|u|)$, fonction
+de genre zéro, les zéros $-1/\lambda_i$ vérifient $\sum |\lambda_i| < \infty$,
+donc $\det(1+zu)$ est de genre zéro et vaut $\prod(1+z\lambda_i)$. On peut
+comparer, pour la méthode, la démonstration publiée par B.~Simon (1977),
+reprise dans \emph{Trace Ideals} (2\textsuperscript{e} éd., 2005, lemme~3.6
+et théorème~3.7).}
 
 \emph{Proposition 2.} Pour $u$, $v \in \mathcal{S}_1$ et $p$, $q \geq 0$, en
 notant $(\Lambda^p u) \wedge (\Lambda^q v)$ le produit extérieur de $p$
@@ -1601,9 +1633,9 @@ démontre coefficient par coefficient. Grothendieck l'a publiée lui-même, pour
 opérateurs d'un espace de Hilbert, dans son exposé au Séminaire Bourbaki de mars 1955 (n°~113,
 « Réarrangements de fonctions et inégalités de convexité dans les algèbres
 de von Neumann munies d'une trace », § 6, formules (3) et (4), pp. 138--139,
-texte daté de juin 1957), démontrée « en étudiant les termes du développement en série classique du déterminant de Fredholm » ; pour une algèbre de von Neumann quelconque, il la tient pour plausible et n'en démontre que la forme affaiblie $\Delta_{1+|A+B|} \leq (\Delta_{1+|A|}\Delta_{1+|B|})^{2}$ (3 bis). Le cas général a été démontré par Fack (1983). Elle a été retrouvée par Rotfel'd (1967), comme
+texte daté de juin 1957), démontrée « en étudiant les termes du développement en série classique du déterminant de Fredholm » ; pour une algèbre de von Neumann quelconque, il la tient pour plausible et n'en démontre que la forme affaiblie $\Delta_{1+|A+B|} \leq (\Delta_{1+|A|}\Delta_{1+|B|})^{2}$ (3 bis). Le cas général a été démontré par Fack (1983). On la trouve aussi chez Rotfel'd (1967), comme
 cas d'une inégalité sur les fonctions concaves des valeurs singulières, puis
-par Seiler et Simon (1975), sous le nom desquels on la cite d'ordinaire ;
+chez Seiler et Simon (1975), sous le nom desquels on la cite d'ordinaire ;
 l'historique est rappelé par Fradelizi, Madiman, Meyer et Zvavitch
 (\emph{J. Funct. Anal.} 286, 2024, § 1).}
 
@@ -1633,7 +1665,7 @@ $2n$ nombres $s_1(u), \ldots, s_n(u), s_1(v), \ldots, s_n(v)$ ; le système
 majore donc, coefficient par coefficient, les fonctions symétriques des $n$
 premières valeurs singulières de $u+v$ par celles de la réunion des deux
 listes (remarque de l'édition, que la page ne fait pas).\footnote{Vérifié en Lean, en dimension finie seulement
-(lean/Grothendieck/LinearAlgebra/Folder1.lean). Pour $m = 1$, le système est l'inégalité de
+(GrothendieckArchivesProofs, Grothendieck/LinearAlgebra/Folder1.lean). Pour $m = 1$, le système est l'inégalité de
 Ky Fan $\sum_{i \leq n} s_i(u+v) \leq \sum_{i \leq n} s_i(u) + \sum_{i \leq n}
 s_i(v)$ (\texttt{sum\_singularValues\_add\_le}, \texttt{sigma\_system\_of\_le\_one}),
 démontrée par le principe du maximum ; mathlib définit les valeurs
@@ -1651,8 +1683,7 @@ produit, coefficient par coefficient, est vérifiée pour tout $n$
 (\texttt{prod\_le\_of\_sigma\_system}), d'où la forme produit pour $n \leq 2$
 (\texttt{prod\_le\_of\_le\_two}). Ne sont pas vérifiés : le système pour
 $3 \leq m \leq n$, la proposition 3 en général, et le passage aux opérateurs
-compacts. La formule de Cauchy--Binet et l'inégalité de Lagrange dont la
-preuve se sert sont proposées à mathlib (demandes d'intégration mathlib4 n° 44757 et 44759, ouvertes).}
+compacts.}
 
 \emph{Proposition 3.} Pour $u$ compact et $0 \leq m \leq n$,
 \[
@@ -1677,7 +1708,7 @@ rang $\leq n$, le corollaire 2 donne $|\alpha_m(w(u+v))| \leq
 \sum_p \alpha_p(|wu|)\,\alpha_{m-p}(|wv|) \leq \sum_p \sigma_n^p(u)\,
 \sigma_n^{m-p}(v)$, et l'on prend le sup en $w$ par la proposition 3. La page
 73 juge ce système d'inégalités et sa conséquence, la forme produit,
-« les inégalités les plus fortes possibles » majorant les $s_i(u+v)$ en
+« semblent les inégalités les plus fortes possibles » majorant les $s_i(u+v)$ en
 fonction des $s_i(u)$ et $s_i(v)$, et note qu'on pourrait démontrer
 directement la forme produit à partir de l'inégalité du corollaire 1
 qu'elle généralise, $\det(1 + r|u+v|) \leq \det(1 + r|u|)\det(1 +
@@ -2194,7 +2225,9 @@ inégalité vaut sur $\ell^{N'} \times \ell^{N''}$, et pour $u \in
 \[
   N(vu) \leq N'(u)\,N''(v),
 \]
-par le corollaire 1 du théorème 3 appliqué à la norme $N$. En particulier,
+par le théorème 3 lui-même, appliqué à $f = N$ (qui convient, $N \circ
+\exp$ étant convexe), puis par l'hypothèse sur $N$, $N'$, $N''$. En
+particulier,
 pour les normes polaires, $\|vu\|_1 \leq N(u)\,N^{\circ}(v)$ ; et $N(u^{*}) =
 N(u)$, $N(vu) \leq \|v\|\,N(u)$, $N(uv) \leq \|v\|\,N(u)$, par $s_i(vu) \leq
 \|v\| s_i(u)$.
@@ -2341,8 +2374,9 @@ corollaire 5 du premier théorème de convexité.
 
 D'autres feuillets, d'une écriture posée, sur du papier dont le verso
 imprimé transparaît. Ce sont des rappels, et ils servent à une chose : la
-démonstration du théorème 1 de la page 70, que la proposition de la page
-110 achève.
+démonstration du théorème 1 de la page 70 (le théorème de Lidskii, 1959),
+esquissée et biffée page 79, dont la proposition de la page 110 fournit une
+étape.
 
 \emph{Théorème 1} (Weierstrass). Soit $f$ entière avec $f(0) \neq 0$ et
 $(a_n)$ la suite de ses zéros rangés par modules croissants. Il existe des
@@ -2672,7 +2706,7 @@ somme en $k$ refait les deux $\alpha_n(|A| + |B|)$ et $\alpha_n(|A|' +
 |B|')$.
 \emph{Corollaire 3.} $|\det(1 + A + B)| \leq \frac12\bigl(\det(1 + |A| + |B|)
 + \det(1 + |A|' + |B|')\bigr)$.\footnote{Les corollaires 2 et 3 sont vérifiés
-en Lean pour des matrices complexes (lean/Grothendieck/LinearAlgebra/Folder1.lean,
+en Lean pour des matrices complexes (GrothendieckArchivesProofs, Grothendieck/LinearAlgebra/Folder1.lean,
 \texttt{corollaire2} et \texttt{corollaire3}), $\alpha_k(T)$ étant le
 coefficient de $X^k$ dans $\det(1 + XT)$, avec la forme par la moyenne
 géométrique, $|\det(1 + A + B)|^2 \leq \det(1 + |A| + |B|)\,\det(1 + |A|' +
@@ -2714,8 +2748,7 @@ corollaire 3 qui fait le passage.}
 Il contient le précédent, puisque $|\det(1 + A + B)| \leq \det(1 + |A + B|)$,
 et il en résulte : $|A + B| = U(A + B)$ pour une isométrie partielle $U$,
 et par le corollaire 4, $\det(1 + UA + UB) \leq \det(1 + |UA|)\det(1 + |UB|)$
-avec $|UA| = |A|$ sur le support, donc $\det(1 + |UA|) \leq \det(1 +
-|A|)$.\footnote{Le feuillet collé de la page 125 écrit « $U$ unitaire » et
+avec $|UA| \leq |A|$, donc $\det(1 + |UA|) \leq \det(1 + |A|)$.\footnote{Le feuillet collé de la page 125 écrit « $U$ unitaire » et
 $|UA| = U|A|U^{-1}$, ce qui suppose $U$ unitaire ; pour une isométrie
 partielle $|UA| = (A^{*}U^{*}UA)^{1/2} \leq |A|$, ce qui suffit. Le
 corollaire 5 est l'inégalité déjà rencontrée à la page 71, publiée par
@@ -2824,7 +2857,7 @@ intégrale, et $M_{|A+B|}(v) = \det(1 + v|A + B|) \leq \det(1 + v|A|)\det(1 +
 v|B|) = M_{|A|}(v)\,M_{|B|}(v)$ par le corollaire 5 de la page 124 ; on
 intègre et l'on réapplique le corollaire à $A$ et $B$.\footnote{Cette
 déduction est vérifiée en Lean en dimension finie, pour $0 < p < 1$
-(lean/Grothendieck/LinearAlgebra/Folder1.lean, \texttt{integral\_kernel} et
+(GrothendieckArchivesProofs, Grothendieck/LinearAlgebra/Folder1.lean, \texttt{integral\_kernel} et
 \texttt{sum\_rpow\_le\_of\_prod\_le}) : avec $K_p = \int_0^\infty
 \log(1 + t)\,t^{-1-p}\,dt > 0$, on a $s^p K_p = \int_0^\infty \log(1 +
 vs)\,v^{-1-p}\,dv$ pour $s \geq 0$, et si $\prod_i(1 + r a_i) \leq \prod_i(1 +
@@ -3018,7 +3051,7 @@ ce qui donne déjà la finitude de $S_r(AB)$. Faisant $m \to \infty$ :
 cherchons. » On y remplace $A$ par $\lambda A$ et $B$ par $\mu B$, $\lambda,
 \mu \geq 0$ :
 \[
-  (\lambda\mu)^r S_r(AB) \leq \frac{\lambda^p}{p}\,S_p(A) + \frac{\mu^q}{q}\,S_q(B),
+  (\lambda\mu)^r S_r(AB) \leq \frac{r}{p}\,\lambda^p\,S_p(A) + \frac{r}{q}\,\mu^q\,S_q(B),
 \]
 et avec $a = S_p(A)$, $b = S_q(B)$, $c = S_r(AB)$, $x = \lambda^p$, $y =
 \mu^q$, $\alpha = r/p$, $\beta = r/q$, $\alpha + \beta = 1$ :
@@ -3088,8 +3121,10 @@ $S_{p/r}(H^r - K^r) \leq S_p(H - K)$, est l'inégalité de Birman, Koplienko et
 Solomyak (1975), valable pour toute norme unitairement invariante ; la
 monotonie en $r$ sur $]0, 1]$ s'en déduit en l'appliquant à $H^{r'}$,
 $K^{r'}$. L'inégalité en norme d'opérateur, $\|H^r - K^r\| \leq \|H -
-K\|^r$, est celle de Powers et Størmer (1970) pour $r = 1/2$ et de
-Kittaneh en général.}
+K\|^r$ pour $H$, $K \geq 0$ et $0 < r \leq 1$, résulte de la monotonie
+opératorielle de $t \mapsto t^r$ : avec $\varepsilon = \|H - K\|$, on a $H
+\leq K + \varepsilon$, donc $H^r \leq (K + \varepsilon)^r \leq K^r +
+\varepsilon^r$, et de même en échangeant $H$ et $K$.}
 
 \pagerange{143}{147}
 \section*{Les inégalités de Ky Fan, et les petites valeurs singulières (pages 143 à 147)}
@@ -3114,8 +3149,8 @@ Ky Fan (1951), que la page 38 cite.}
 
 Sous un trait, une question au crayon : peut-on avoir $\limsup
 |\lambda_i(u)|/s_i(u) = +\infty$ ? Et une autre : « Majorations
-individuelles, p.\ ex.\ $|\lambda_i(u)| \leq s_{i/2}(u)$ ou analogue
-? »\footnote{Page 143, dans la lecture de la seconde passe (machine, non
+individuelles, p.\ ex.\ $|\lambda_i(u)| \leq \rho_{i/2}(u)$ ou analogue
+? », où $\rho$ est sa lettre pour $s$.\footnote{Page 143, dans la lecture de la seconde passe (machine, non
 vérifiée par un lecteur) ; les deux mots « Majorations individuelles » sont
 aussi écrits et soulignés dans la marge. La première passe lisait
 « Hypothèse : invraisemblable pour … », et cette édition lui faisait juger
@@ -3174,9 +3209,15 @@ valeurs singulières $\hat{A}_i = (s_\nu(A_i))_\nu$ converge vers $\hat{A}$
 dans $\ell^p$.\footnote{Ni $\hat{A}$ ni l'espace $\Sigma_p$ de la page ne
 sont définis ; on les lit ainsi. Pour $p \geq 1$ c'est l'inégalité de
 Mirsky (1960), $\|(s_\nu(A) - s_\nu(B))\|_N \leq \|A - B\|_N$ pour toute
-norme unitairement invariante ; pour $p < 1$ l'inégalité $\sum |s_\nu(A) -
-s_\nu(B)|^p \leq S_p(A - B)$ est vraie aussi, et le lemme ci-dessous est ce
-qui en tient lieu ici.} Cela résulte du
+norme unitairement invariante. Pour $p < 1$, l'inégalité analogue $\sum
+|s_\nu(A) - s_\nu(B)|^p \leq C\,S_p(A - B)$ est fausse, quelle que soit la
+constante $C$ : une perturbation de rang un peut déplacer toutes les valeurs
+singulières (pour $A = \mathrm{diag}(2,1)$ et $B = A + vv^{*}$, $v = (1,1)$,
+on a $s(B) = ((5 \pm \sqrt5)/2)$, $s(A - B) = (2, 0)$, et pour $p = \frac12$
+le premier membre vaut environ $1{,}89$ et $S_p(A - B) = \sqrt2$ ; en
+dimension $n$, quand $p \to 0$, le premier membre tend vers le nombre de
+valeurs déplacées et le second vers le rang de $A - B$). Le théorème, la
+convergence dans $\ell^p$, est ce que le lemme ci-dessous donne.} Cela résulte du
 
 \emph{Lemme.} Pour tout $\varepsilon > 0$ il existe $\rho > 0$ et $i_0$ tels
 que $\sum_{s_\nu(A_i) \leq \rho} s_\nu(A_i)^p \leq \varepsilon$ pour $i \geq
