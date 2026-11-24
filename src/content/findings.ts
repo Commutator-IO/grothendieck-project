@@ -200,8 +200,8 @@ export const FINDINGS: Finding[] = [
       'Checked at the junction where it matters: page 39 is French on espèces de structure and bound inverted, page 40 is English and upright, ending on “Question. Can we have an equivalence Ĉ ≃ Top(X)?”, page 41 is French again and inverted.',
     ours: null,
     literature: ['Facsimile 161-3, pages 39, 40 and 41, read directly'],
-    status: 'candidate',
-    settle: 'Read the remaining even/odd pairs from 34 to 48 against the facsimile. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the subjects alternate from 34 to 48, topoi on even pages and espèces de structure / λ-types on odd ones; but pp. 42, 44 and 46 are in French (topos morphisms, B_G, Ĉ), not English, contradicting that part of the claim; odd pages 35, 37, 47 are upright and 39, 41, 43, 45 inverted; pp. 43–45 are squared paper, the others ruled. Claim corrected 2026-11-24 after this pass looked at page 42 on the facsimile (PDF p. 43): it is French (« Morphismes de topos », « Exemples de morphismes de topos »), so the even pages are not all English, as the machine pass of 2026-11-23 had found for 42, 44 and 46.',
+    status: 'confirmed',
+    settle: 'Read the remaining even/odd pairs from 34 to 48 against the facsimile. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the subjects alternate from 34 to 48, topoi on even pages and espèces de structure / λ-types on odd ones; but pp. 42, 44 and 46 are in French (topos morphisms, B_G, Ĉ), not English, contradicting that part of the claim; odd pages 35, 37, 47 are upright and 39, 41, 43, 45 inverted; pp. 43–45 are squared paper, the others ruled. Claim corrected 2026-11-24 after this pass looked at page 42 on the facsimile (PDF p. 43): it is French (« Morphismes de topos », « Exemples de morphismes de topos »), so the even pages are not all English, as the machine pass of 2026-11-23 had found for 42, 44 and 46. Correction confirmed on the facsimile by Michel Hua, 2026-11-24: the subjects alternate through page 48, and pages 42, 44 and 46 are in French.',
   },
   {
     id: '161-3-missing-leaf',
