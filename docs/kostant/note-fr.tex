@@ -1,0 +1,229 @@
+% Note de lecture, en français, accompagnant docs/kostant/article.tex :
+% les définitions de l'article reprises depuis le début, sur un ton pédagogique,
+% pour un lecteur qui connaît l'algèbre linéaire mais pas les groupes de Lie.
+% Compilée par tectonic.
+\documentclass[11pt,a4paper]{amsart}
+\usepackage{iftex}
+\ifXeTeX\usepackage{fontspec}\else\usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}\fi
+\usepackage[french]{babel}
+\usepackage{lmodern,microtype,amssymb,mathtools,booktabs}
+\usepackage[margin=2.7cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}
+\theoremstyle{plain}
+\newtheorem{theoreme}{Théorème}
+\newtheorem{lemme}{Lemme}
+\theoremstyle{remark}
+\newtheorem{remarque}{Remarque}
+\newtheorem{exemple}{Exemple}
+
+\newcommand{\C}{\mathbb C}
+\newcommand{\g}{\mathfrak g}
+\newcommand{\tl}{\mathfrak t}
+\newcommand{\bl}{\mathfrak b}
+\newcommand{\PGL}{\mathrm{PGL}}
+
+\title[Note de lecture : les tores en apposition de Kostant]{Les tores en apposition de Kostant :\\ les sous-groupes de Borel sont opposés,\\ note de lecture}
+\author{Michel Hua}
+\address{Commutator, Paris}
+\email{michel@commutator.io}
+\date{24 novembre 2026}
+
+\raggedbottom
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Cette note accompagne l'article \emph{Kostant's tori in apposition: the Borel subgroups are opposite}. Elle en reprend les définitions depuis le début, pour un lecteur qui connaît l'algèbre linéaire mais pas forcément les groupes de Lie, puis suit les démonstrations pas à pas, en commençant par le cas des matrices. Rien n'y est démontré de neuf ; en cas de désaccord, l'article fait foi.
+\end{abstract}
+
+\section{La lettre}
+
+Le dossier 123 du fonds de Montpellier, intitulé \emph{Autour de Kostant}, contient aux pages 21 et 22 une lettre de Grothendieck à Bertram Kostant, datée du 22 octobre 1969. Elle part d'un article de Kostant de 1959 sur le « sous-groupe principal de dimension trois », et pose deux questions sur des quadruplets $(T, B, T', B')$ : deux tores maximaux $T$ et $T'$ d'un groupe de Lie complexe simple, placés l'un par rapport à l'autre d'une façon très particulière que Kostant appelle \emph{apposition}, et deux sous-groupes de Borel $B \supset T$ et $B' \supset T'$.
+\begin{enumerate}
+\item Les sous-groupes $B$ et $B'$ sont-ils toujours « en position générale » ?
+\item Existe-t-il une classe de conjugaison de quadruplets qui soit \emph{distinguée}, et donc invariante par les automorphismes extérieurs du groupe ?
+\end{enumerate}
+L'article répond oui à la première question, dans tous les types. Pour la seconde, il répond non dans le type $A_{2l}$, et propose ailleurs une paire canonique de classes. La lettre affirme aussi, sans démonstration, un comptage des classes de quadruplets ; l'article renvoie pour lui à la note sur les problèmes ouverts et ne le refait pas.
+
+Avant d'entrer dans le détail, voici le cas le plus simple, qui contient déjà toute l'idée.
+
+\begin{exemple}\label{ex:deux}
+Dans $\C^2$, de base $e_0, e_1$, prenons la matrice $E' = \begin{psmallmatrix} 0 & c_0 \\ c_1 & 0 \end{psmallmatrix}$ avec $c_0 c_1 \neq 0$. Ses valeurs propres sont les deux racines carrées $\pm\mu$ de $c_0c_1$, distinctes, et un vecteur propre pour $\mu$ est $(1, \mu/c_0)$. Les deux droites propres ont une seconde coordonnée non nulle : aucune n'est la droite $\langle e_0\rangle$. Dans le langage qui suit, chacun des deux « drapeaux » de $E'$ est opposé au drapeau standard $\langle e_0 \rangle \subset \C^2$. Si au contraire $c_1 = 0$, la seule droite stable est $\langle e_0 \rangle$ elle-même, et tout tombe.
+\end{exemple}
+
+\section{Le vocabulaire}
+
+\subsection{Le cadre}
+
+On fixe une algèbre de Lie complexe simple $\g$ de rang $\ell$ et son groupe adjoint $G$. Pour le lecteur qui préfère les matrices, l'exemple à garder en tête est $\g = \mathfrak{sl}_n(\C)$, les matrices de trace nulle, et $G = \PGL_n(\C)$, les matrices inversibles à un scalaire près, qui agissent sur $\g$ par conjugaison ; le rang est alors $\ell = n-1$.
+
+Une \emph{sous-algèbre de Cartan} $\tl$ est, pour $\mathfrak{sl}_n$, l'ensemble des matrices diagonales, ou un conjugué de celui-ci ; le \emph{tore maximal} $T$ correspondant est le groupe des matrices diagonales inversibles. La conjugaison par $T$ découpe $\g$ en droites propres, les \emph{espaces radiciels} $\g_\alpha$ : pour $\mathfrak{sl}_n$, ce sont les droites des matrices élémentaires $E_{ij}$, $i \neq j$, et la \emph{racine} $\alpha$ est la forme linéaire $\operatorname{diag}(d_1,\dots,d_n) \mapsto d_i - d_j$ par laquelle $\tl$ agit sur $E_{ij}$.
+
+\subsection{Borel, racines positives, hauteur}
+
+Une \emph{sous-algèbre de Borel} $\bl \supset \tl$ est pour $\mathfrak{sl}_n$ l'algèbre des matrices triangulaires supérieures. Elle contient $\tl$ et la moitié des espaces radiciels, ceux des racines dites \emph{positives}. Parmi elles, les racines \emph{simples} $\alpha_1, \dots, \alpha_\ell$ sont celles des $E_{i,i+1}$, juste au-dessus de la diagonale ; toute racine positive est une somme de racines simples à coefficients entiers positifs, et le nombre de termes est sa \emph{hauteur}. La racine positive la plus haute, notée $\theta$, est celle de $E_{1n}$, dans le coin. On note $e_\alpha$ un vecteur non nul de $\g_\alpha$, et $\bl^-$ la sous-algèbre de Borel \emph{opposée}, celle des matrices triangulaires inférieures.
+
+Un \emph{sous-groupe de Borel} $B$ est le groupe correspondant, pour $\PGL_n$ les matrices triangulaires supérieures. Il est le stabilisateur d'un \emph{drapeau complet}, une suite de sous-espaces $0 = V_0 \subset V_1 \subset \dots \subset V_n = \C^n$ avec $\dim V_k = k$ ; pour les triangulaires supérieures, c'est le drapeau standard $F_m = \langle e_0, \dots, e_{m-1}\rangle$.
+
+\begin{definition}
+Deux sous-groupes de Borel sont \emph{opposés}, ou \emph{en position générale}, lorsque leur intersection est un tore maximal. Pour $\PGL_n$, cela revient à dire que leurs drapeaux $V_\bullet$ et $F_\bullet$ vérifient $V_k \cap F_{n-k} = 0$ pour tout $k$.
+\end{definition}
+
+Les triangulaires supérieures et inférieures en sont l'exemple type : elles ne partagent que les diagonales. En général, deux Borel quelconques sont dans une « position relative » mesurée par un élément du groupe de Weyl $W$ (pour $\PGL_n$, le groupe symétrique $S_n$), et la position générale correspond à l'élément le plus long $w_0$.
+
+\subsection{Le nombre de Coxeter et l'élément principal}
+
+Le \emph{nombre de Coxeter} $h$ est la hauteur de $\theta$ plus un ; pour $\mathfrak{sl}_n$, $h = n$. Soit $\rho^\vee \in \tl$ l'élément sur lequel chaque racine prend pour valeur sa hauteur, et $\zeta = e^{2\pi i/h}$. L'\emph{élément principal} $P = \exp(2\pi i \rho^\vee/h)$ agit sur $e_\alpha$ par la multiplication par $\zeta^{\text{hauteur de }\alpha}$. Comme les hauteurs vont de $-(h-1)$ à $h-1$, l'espace propre de $P$ pour la valeur $\zeta$ est engendré par les $e_{\alpha_i}$ et par $e_{-\theta}$ (hauteur $-(h-1) \equiv 1$ modulo $h$), et celui pour $\zeta^{-1}$ par les $e_{-\alpha_i}$ et $e_\theta$. Cette \emph{graduation modulo $h$} est l'outil de tout l'article.
+
+\subsection{Les éléments cycliques et l'apposition}
+
+\begin{definition}
+Un \emph{élément cyclique} est un élément $E' = \sum_{i=1}^{\ell} c_i\, e_{\alpha_i} + c_0\, e_{-\theta}$ dont tous les coefficients $c_0, \dots, c_\ell$ sont non nuls.
+\end{definition}
+
+Pour $\mathfrak{sl}_n$, c'est la matrice qui a des coefficients non nuls juste au-dessus de la diagonale et un dans le coin inférieur gauche :
+\[
+(E'x)_i = c_i\, x_{i+1}, \qquad \text{indices modulo } n.
+\]
+Kostant montre qu'un tel élément est semi-simple régulier ; pour $\mathfrak{sl}_n$, cela veut dire diagonalisable à valeurs propres distinctes. Son centralisateur $\tl'$ est donc une sous-algèbre de Cartan, et le tore correspondant $T'$ est un tore maximal. Kostant dit que $\tl'$ est \emph{en apposition} avec $\tl$ : elle est stable par l'élément principal $P$ de $T$, qui y agit avec une valeur propre racine primitive $h$-ième de l'unité. Il montre aussi que deux paires en apposition sont toujours conjuguées. On peut donc toujours supposer que $T'$ est le centralisateur d'un élément cyclique, et c'est ce que fait l'article.
+
+Pour $\mathfrak{sl}_n$, on calcule tout à la main : $E'^{\,n} = (c_0 \cdots c_{n-1})\cdot 1$, de sorte que les valeurs propres de $E'$ sont les $n$ racines $n$-ièmes distinctes de $c_0\cdots c_{n-1}$. Les sous-groupes de Borel qui contiennent $T'$ sont les stabilisateurs des drapeaux formés de sous-espaces stables par $E'$, c'est-à-dire engendrés pas à pas par des vecteurs propres de $E'$ pris dans un certain ordre : il y en a $n! = |W|$.
+
+\section{Le résultat principal}
+
+\begin{theoreme}[article, théorème 2.1]\label{thm:general}
+Tout sous-groupe de Borel $B' \supset T'$ est opposé à $B$, et aussi à $B^-$.
+\end{theoreme}
+
+La question de Grothendieck portait sur « certains ou tous » les quadruplets ; la réponse est \emph{tous}, et dans tous les types. La démonstration tient en deux lemmes, chacun de quelques lignes.
+
+\subsection{Premier lemme : un élément de $\tl'$ du côté négatif}
+
+\begin{lemme}[lemme 2.2]\label{lem:dual}
+La sous-algèbre $\tl'$ contient un élément $y = \sum_{i\ge1} c'_i\, e_{-\alpha_i} + c'_0\, e_\theta$ dont tous les coefficients $c'_1, \dots, c'_\ell$ sont non nuls.
+\end{lemme}
+
+Voici le fil. Comme $E'$ est un vecteur propre de $P$, l'élément $P$ préserve son centralisateur $\tl'$, qui se découpe donc selon la graduation modulo $h$. La forme de Killing, la forme bilinéaire invariante de $\g$ (pour $\mathfrak{sl}_n$, essentiellement $(X, Y) \mapsto \operatorname{tr}(XY)$), est invariante par $P$ ; elle n'apparie donc la composante de degré $1$ qu'avec celle de degré $-1$. Elle est non dégénérée sur $\tl'$. Comme la composante de degré $1$ de $\tl'$ contient $E' \neq 0$, celle de degré $-1$ contient un $y \neq 0$, qui a la forme annoncée.
+
+Reste à voir que les $c'_i$ sont tous non nuls. Si l'un d'eux, $c'_i$, s'annulait, on choisirait dans $\tl$ un élément $\lambda$ sur lequel toutes les racines $-\alpha_j$ ($j \neq i$) et $\theta$ sont positives ; $y$ vivrait alors dans une sous-algèbre nilpotente, donc serait nilpotent. Mais $y$ est aussi semi-simple, puisqu'il est dans la sous-algèbre de Cartan $\tl'$. Un élément à la fois nilpotent et semi-simple est nul : contradiction.
+
+Kostant donne d'ailleurs cet élément explicitement dans son théorème 6.7 ; la démonstration de l'article évite le calcul des coefficients.
+
+\subsection{Second lemme : un critère d'opposition}
+
+\begin{lemme}[lemme 2.3]\label{lem:opposite}
+Une sous-algèbre de Borel $\bl'$ qui contient un élément de $\sum_{i\ge1} c'_i\, e_{-\alpha_i} + \bl$, avec tous les $c'_i$ non nuls, est opposée à $\bl$.
+\end{lemme}
+
+L'idée est de lire la position relative de $\bl'$ sur l'élément qu'elle contient. Par la décomposition de Bruhat, $\bl'$ s'écrit $\operatorname{Ad}(u\dot w)\,\bl$ avec $u$ unipotent dans $B$ et $w$ dans le groupe de Weyl. Conjuguer par $u^{-1}$ ne modifie pas les composantes sur les $e_{-\alpha_i}$, qui restent toutes non nulles. L'élément obtenu est dans $\operatorname{Ad}(\dot w)\,\bl$, donc toutes les racines $-\alpha_i$ sont dans $w(R^+)$. Alors $w^{-1}$ envoie toutes les racines simples, donc toutes les racines positives, sur des racines négatives, ce qui caractérise l'élément le plus long : $w = w_0$, et $\bl'$ est opposée à $\bl$.
+
+Ce lemme est celui d'Ana Bălibanu (lemme 4.5 de son article sur la compactification partielle du centralisateur universel), énoncé pour la tranche de Kostant ; sa démonstration n'utilise que la forme de l'élément.
+
+\subsection{La conclusion}
+
+La sous-algèbre de Borel de $B'$ contient $\tl'$, donc l'élément $y$ du lemme~\ref{lem:dual}, et le lemme~\ref{lem:opposite} s'applique : $B'$ est opposé à $B$. Pour $B^-$, on échange les rôles des deux côtés : $E'$ lui-même est un élément de $\sum c_i e_{\alpha_i} + \bl^-$ à coefficients non nuls.
+
+\begin{remarque}
+Sur la variété des drapeaux $G/B$, le théorème dit que les $|W|$ points fixes de $T'$ sont tous dans la grosse cellule $Bw_0B/B$. L'hypothèse que tous les $c_i$ sont non nuls est nécessaire : sans elle, $E'$ est nilpotent et n'a pas de tore centralisateur, comme dans l'exemple~\ref{ex:deux} avec $c_1 = 0$.
+\end{remarque}
+
+L'article ne prétend pas que ce théorème est nouveau : ses deux ingrédients sont publiés, chez Kostant et chez Bălibanu, et il en est une conséquence courte. L'auteur n'a trouvé aucune source qui l'énonce ; l'article l'écrit parce qu'il répond à la question de Grothendieck.
+
+\section{Le cas des matrices, sans théorie de Lie}
+
+Pour $\PGL_n$, l'article donne une démonstration qui n'utilise que l'algèbre linéaire, et qui dit même un peu plus.
+
+\begin{theoreme}[théorème 3.1]\label{thm:A}
+Si $W \subseteq \C^n$ est un sous-espace stable par $E'$ de dimension $k$, alors $W \cap F_{n-k} = 0$.
+\end{theoreme}
+
+Tout sous-espace stable est donc transverse au drapeau standard, et pas seulement les termes d'un drapeau.
+
+\subsection{Le décalage pondéré}
+
+L'outil est l'inverse de $E'$, qui est un décalage pondéré : $(Sx)_j = x_{j-1}/c_{j-1}$. Il fait monter chaque coordonnée d'un cran en divisant par le poids, et l'on vérifie en une ligne que $SE' = \mathrm{id}$. Sur un sous-espace $W$ stable par $E'$, la restriction de $E'$ est injective, donc bijective, et $S$ en est l'inverse : $W$ est aussi stable par $S$.
+
+Soit maintenant $v \neq 0$ dans $W \cap F_{n-k}$, et $p$ son indice de plus haute coordonnée non nulle ; comme $v \in F_{n-k}$, on a $p + k \le n-1$. Chaque application de $S$ fait monter le support d'un cran, sans jamais revenir au début puisque $p + k \le n - 1$. Les vecteurs $v, Sv, \dots, S^k v$ ont donc des plus hautes coordonnées non nulles toutes différentes, et sont linéairement indépendants. Ce sont $k+1$ vecteurs de $W$, qui est de dimension $k$ : contradiction.
+
+La démonstration marche sur n'importe quel corps. L'opérateur $S$ est d'ailleurs, dans l'algèbre de Lie, l'élément $y$ du lemme~\ref{lem:dual} : la preuve générale et la preuve matricielle sont la même idée, vue de deux façons.
+
+\subsection{Une seconde démonstration, par Vandermonde}
+
+Les vecteurs propres de $E'$ sont explicites : pour une valeur propre $\mu$, l'équation $E'x = \mu x$ donne $x_j = d_j\, \mu^j$, les poids $d_j = (c_0 \cdots c_{j-1})^{-1}$ ne dépendant pas de $\mu$. Un sous-espace engendré par $k$ vecteurs propres est transverse à $F_{n-k}$ exactement quand la matrice de leurs $k$ dernières coordonnées est inversible ; son déterminant est un déterminant de Vandermonde multiplié par des facteurs non nuls, et il ne s'annule pas puisque les valeurs propres sont distinctes. C'est la démonstration qui vient d'abord à l'esprit, et qui a servi à vérifier $A_2$ à la main : les $36$ paires y sont opposées. L'article a formalisé la première parce qu'elle n'a pas besoin des valeurs propres.
+
+\subsection{La formalisation}
+
+L'énoncé du théorème~\ref{thm:A} est démontré en Lean~4 avec Mathlib, pour tout $n$, sous le nom \texttt{kostantOppositeTypeA}, dans le fichier \texttt{Folder123KostantOpposite.lean} du dépôt GrothendieckArchivesProofs ; les lemmes suivent la démonstration par le décalage pondéré. Reste hors de Lean la traduction : que les Borel contenant $T'$ soient les stabilisateurs des drapeaux stables, et que la position générale s'écrive $V_k \cap F_{n-k} = 0$. Ces deux faits sont classiques, mais Mathlib n'a pas encore les sous-groupes de Borel ni la décomposition de Bruhat à ce degré de généralité.
+
+\section{Les autres groupes classiques}
+
+Pour les groupes symplectiques et orthogonaux, l'élément cyclique est encore une matrice explicite, et l'article adapte l'argument du décalage. Il suffit d'un opérateur qui préserve $W$ et fait avancer chaque coordonnée d'un pas le long d'un chemin de coordonnées : un vecteur de $W$ nul sur les $k$ dernières coordonnées du chemin est alors nul sur tout le chemin.
+\begin{itemize}
+\item En type $C$ ($\mathrm{Sp}_{2n}$), la matrice de $E'$ est un élément cyclique de type $A_{2n-1}$, et le théorème~\ref{thm:A} s'applique tel quel.
+\item En type $B$ ($\mathrm{SO}_{2n+1}$), $E'$ n'est plus inversible : son noyau est une droite. L'article construit un inverse partiel et traite séparément le cas où $E'$ est injectif sur $W$ et celui où il ne l'est pas.
+\item En type $D$ ($\mathrm{SO}_{2n}$), le noyau est un plan, et l'argument ne marche que pour les sous-espaces isotropes de dimension $k < n$ ; il faut l'isotropie pour éliminer le dernier vecteur restant.
+\end{itemize}
+Les trois énoncés sont démontrés en Lean dans \texttt{Folder123KostantClassical.lean}, avec la vérification que les trois matrices sont bien dans les bonnes algèbres de Lie. En type $D$, l'énoncé formel ne couvre pas tout le drapeau ; c'est le théorème général qui le complète.
+
+\section{Les vérifications par le calcul}
+
+Deux calculs contrôlent le théorème~\ref{thm:general} indépendamment de sa démonstration.
+\begin{itemize}
+\item En type $B$, de $B_2$ à $B_7$, tous les mineurs qui décident de l'opposition (de $8$ à $2186$ selon le rang) sont non nuls modulo un nombre premier bien choisi ; un mineur non nul modulo $p$ l'est en caractéristique nulle, ce qui démontre ces cas.
+\item Sur les corps finis $\mathbf F_q$, pour les groupes de types $A_2$, $B_2$ et $G_2$, on compte les orbites de quadruplets, $2$, $4$ et $12$, conformément à la formule de la lettre, et l'on vérifie que dans chaque orbite les deux Borel se coupent selon un tore maximal.
+\end{itemize}
+
+\section{La seconde question : une classe distinguée ?}
+
+\subsection{Pas de classe invariante en type $A_{2l}$}
+
+Les classes de conjugaison de quadruplets sont en nombre fini, et les automorphismes extérieurs du groupe (pour $\PGL_n$, la transposée-inverse, à un automorphisme intérieur près) les permutent. Une classe « distinguée » devrait être fixée par eux.
+
+\begin{theoreme}[théorème 10.1]
+Pour $G = \PGL_n(\C)$ avec $n$ impair, $n \ge 3$, l'automorphisme extérieur ne fixe aucune classe de quadruplets.
+\end{theoreme}
+
+L'argument est arithmétique. Un automorphisme extérieur qui fixerait un quadruplet agirait sur le petit groupe cyclique d'ordre $n$ engendré par l'élément principal par une puissance $k$, avec $k^2 \equiv 1$ modulo $n$. En suivant ce qu'il fait d'un côté sur $T$, de l'autre sur les droites propres de $T'$, on trouve que $k+1$ et $k-1$ sont tous deux premiers à $n$ ; c'est la parité de $n$ qui le donne, par l'unique point fixe de l'involution $i \mapsto n+1-i$. Or $n$ divise $(k-1)(k+1)$ : c'est impossible pour $n > 1$.
+
+En particulier, pour ces groupes, tout quadruplet a un groupe d'automorphismes trivial : c'est la réponse à la parenthèse de la lettre sur ces groupes.
+
+\subsection{Une paire canonique ailleurs}
+
+Dans les autres types calculés, l'article propose une construction géométrique. Le plan de Coxeter est un plan réel de $\tl'$ sur lequel l'élément principal agit comme une rotation d'angle $2\pi/h$ ; il traverse exactement $2h$ chambres de Weyl. On retient les quadruplets où $T'$ est le centralisateur d'un élément cyclique relatif à $B$ et où la chambre de $B'$ rencontre ce plan : ils forment exactement deux classes, $D_+$ et $D_-$, et changer le signe de $e_{-\theta}$ dans la définition de $E'$ les échange. Un automorphisme extérieur fixe ou échange la paire selon un signe $\varepsilon$, qui vaut $-1$ en type $A_{2l}$, en accord avec le théorème précédent, et $+1$ dans les types calculés $A_{2l+1}$, $D_4$, $D_5$.
+
+La paire est donc canonique, mais pas chacune de ses deux classes : le choix entre $D_+$ et $D_-$ dépend du signe de $e_{-\theta}$, qu'aucune normalisation ne fixe. Grothendieck note lui-même, page 34 du dossier, que la droite cyclique est « définie au signe près ». Le tableau de l'article montre en outre qu'il y a, là où elles existent, beaucoup de classes invariantes (par exemple $192$ sur $7200$ en type $A_5$) : l'invariance seule ne suffit pas à en distinguer une.
+
+\section{Questions ouvertes}
+
+Le signe $\varepsilon$ en type $E_6$, et une démonstration uniforme que $\varepsilon = 1$ hors du type $A_{2l}$ ; un choix entre $D_+$ et $D_-$ qui ne dépende pas du signe de $e_{-\theta}$, s'il en existe un ; enfin une démonstration de la description du groupe $N(T) \cap N(T')$ utilisée dans les calculs, qui n'a pas été vérifiée par un spécialiste.
+
+\section{Petit lexique}
+
+\begin{tabular}{@{}p{3.8cm}p{10cm}@{}}
+\toprule
+Terme & À retenir ici \\
+\midrule
+groupe adjoint & le groupe qui agit sur $\g$ par conjugaison ; pour $\mathfrak{sl}_n$, $\PGL_n$ \\[2pt]
+sous-algèbre de Cartan & pour $\mathfrak{sl}_n$, les matrices diagonales, ou un conjugué \\
+tore maximal & le groupe correspondant, les diagonales inversibles \\
+racine & la forme linéaire par laquelle $\tl$ agit sur un espace radiciel \\
+hauteur & le nombre de racines simples dont une racine positive est la somme \\[2pt]
+sous-groupe de Borel & pour $\PGL_n$, les triangulaires supérieures ou un conjugué ; le stabilisateur d'un drapeau complet \\[2pt]
+opposés & deux Borel qui se coupent selon un tore maximal ; deux drapeaux transverses \\[2pt]
+nombre de Coxeter $h$ & la hauteur de la plus haute racine plus un ; $h = n$ pour $\mathfrak{sl}_n$ \\[2pt]
+élément principal & $\exp(2\pi i\rho^\vee/h)$, qui gradue $\g$ par la hauteur modulo $h$ \\[2pt]
+élément cyclique & la somme des vecteurs des racines simples et de la plus basse, à coefficients non nuls \\[2pt]
+apposition & la position de $\tl'$, centralisateur d'un élément cyclique, par rapport à $\tl$ \\[2pt]
+décalage pondéré & l'inverse $S$ de $E'$ en type $A$, qui fait monter les coordonnées d'un cran \\[2pt]
+plan de Coxeter & le plan réel de $\tl'$ où l'élément principal agit par une rotation d'angle $2\pi/h$ \\
+\bottomrule
+\end{tabular}
+
+\section*{Sur la rédaction de cette note}
+
+Note de travail écrite par Claude (Opus~5.5, Anthropic) sous la direction de l'auteur, à partir de \texttt{docs/kostant/article.tex}. Elle ne contient aucun résultat nouveau ; en cas de désaccord, l'article fait foi.
+
+\end{document}
