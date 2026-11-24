@@ -23,6 +23,7 @@
 % Pass: Opus 5 (claude-opus-5), 2026-08-22 — first pass, unchecked against the pages by a human.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-03 — page 8 checked against the facsimile by Michel Hua: in the boxed diagram (3.10) the two vertical strokes are equality signs; case a) of (3.11) reads « i, j, k tous différents », not struck.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-15 — page 8 read again against the facsimile by Michel Hua: the struck words after « Dans ce cas, » are « $\lambda_{i}$ est »; the line on the conditions reads « deux des indices $i, j, k$ consécutifs ». The line was misread in order; it reads « avec i = j ou j = k, dès lors que l'un des deux facteurs de φ_kj φ_ji est l'identité, [illegible] λ_kji l'identité ».
+% Revised: Fable 5.2 (claude-fable-5-2), 2026-11-24 — read again on the facsimile, not checked by a reader. Pp. 4, 7, 9, 15 read a second time (#145); see docs/review/revision-145/19.md.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -132,15 +133,19 @@ par $Y \mapsto \bigl( f(Y),\ f(Y) \xrightarrow{\ f*\beta\ } \varphi f(Y) = fgf(Y
 \page{4}
 \textbf{Théorème 1.12} (\uncertain{Beck}).
 \struck{Supposons que} a) Si dans $A$ les $\mathrm{Ker}$ de doubles flèches
-existent, et \struck{pour} \add{si} $f$ y commute $(\dagger)$, alors 1.11 est
+existent $(*)$, et \struck{pour} \add{si} $f$ y commute $(\dagger)$, alors 1.11 est
 essentiellement surjectif. b) Pour que $h$ soit une équivalence
 [i.e. soit \struck{de plus fidèle} \add{pleinement fidèle}], il faut et il
 suffit que $f$ soit \emph{conservatif}, et que pour toute double flèche $(u,v)$
-de $A$ telle que $\mathrm{Ker}(f(u), f(v))$ existe, $\mathrm{Ker}(u,v)$ existe
+de $A$ telle que $\mathrm{Ker}(f(u), f(v))$ existe, on ait que $\mathrm{Ker}(u,v)$ existe
 et $f$ y commute.
 
-\marginal{$(\dagger)$ il suffit de regarder les doubles flèches $u, v$ de $A$
+\marginal{$(*)$ il suffit de regarder les doubles flèches $u, v$ de $A$
 telles que $\mathrm{Ker}(f(u), f(v))$ existe \quad (condition C)}
+\note{la page porte deux signes de renvoi : un astérisque après « existent »,
+repris en tête de cette note marginale, et un signe entre parenthèses après
+« commute », qui n'est repris nulle part de façon lisible ; la restriction
+porte donc sur l'existence des noyaux}
 
 \marginal{\ill{} auxiliaires a), on établissant que $h$ est une
 \uncertain{équivalence} \ill{}}
@@ -185,10 +190,11 @@ par
   g(X) = \bigl( \varphi(X),\ \varphi(X) \xrightarrow{\ \lambda(X)\ } \varphi^{2}(X) \bigr)
   \tag{2.6}
 \]
-[la condition (1.6) assurant qu'on tombe bien dans $K(\varphi,\alpha,\lambda)$\,!].
+[la condition \add{\uncertain{(1.5)}} (1.6) assurant qu'on tombe bien dans $K(\varphi,\alpha,\lambda)$\,!].
 
 \struck{$\mathrm{Hom}_{A}((X,u), g(Y)) \simeq \mathrm{Hom}_{B}(f(X,u), Y)$ \ill{}}
 
+et \uncertain{on a} évidemment
 \[
   fg = \varphi
   \tag{2.7}
@@ -286,11 +292,12 @@ Donc $f$ est donné par une famille de
   f_{i} : A \longrightarrow B_{i}
   \tag{3.2}
 \]
-et $g$ par une famille de
+et $g$ est \uncertain{construit} quand on connaît des adjoints
 \[
   g_{i} : B_{i} \longrightarrow A ,
   \tag{3.3}
 \]
+par
 \[
   g\bigl( (X_{i})_{i \in I} \bigr) = \prod_{i \in I} g_{i}(X_{i})
   \tag{3.4}
@@ -312,7 +319,7 @@ et supposons que les $f_{j}$ commutent aux produits de type $I$ (p. ex. $f_{j}$
 exacts ; ou $I$ fini). On a alors
 \[
   \mathrm{pr}_{j}\, \varphi\bigl( (X_{i}) \bigr)
-  = \prod_{i \in I} \varphi_{ji}(X_{i})
+  \simeq \prod_{i \in I} \varphi_{ji}(X_{i})
   \tag{3.6}
 \]
 \note{l'auteur écrit deux fois (3.6)}
@@ -407,7 +414,7 @@ et la donnée des \struck{$\alpha$} $\lambda_{kji}$ devient celle de
 $(i,j,k)$ — « dont \struck{sept} 6 \struck{sont triviaux} » — avant de retenir
 les seuls cas non triviaux ci-dessous}
 
-il reste donc les données
+il reste donc des données
 \[
   \left\{
   \begin{array}{l}
@@ -417,15 +424,34 @@ il reste donc les données
   \right.
   \tag{3.14}
 \]
-Il faudrait \struck{\ill{}} expliciter dans ce cas les conditions (1.5) et (1.6),
-qui portent sur
+Il faudrait encore \struck{\ill{}} expliciter dans ce cas les conditions (1.5) et (1.6) ---
 \[
-  \varphi(X', X'') = \bigl( X' \times \varphi'(X'') ,\ \varphi''(X') \times X'' \bigr)
+  \varphi(X', X'') \xrightarrow{\ \lambda\ } \varphi^{2}(X', X'')
+  \rightrightarrows \varphi(X', X'')
 \]
-et sur $\varphi^{2}(X', X'')$.
-\note{le calcul est mené sur trois lignes puis biffé ; il aboutit aux relations
-$\varphi'' * \lambda' = \lambda'' * \varphi''$ et
-$\lambda' * \varphi' = \varphi' * \lambda''$, elles aussi biffées}
+\[
+  \varphi(X', X'') = \bigl( X' \times \varphi'(X'') ,\ X'' \times \varphi''(X') \bigr) ,
+\]
+\[
+  \varphi^{2}(X', X'') = \bigl( X' \times \varphi'(X'') \times \varphi'(X'') \times \varphi' \varphi'' X' ,\
+  X'' \times \varphi''(X') \times \varphi''(X') \times \varphi'' \varphi'(X'') \bigr)
+\]
+\marginal{cf. 1.5 semble OK.}
+\note{les deux égalités sont écrites sous le diagramme, par des signes
+d'égalité verticaux ; au-dessus de la double flèche, l'auteur écrit « sont
+égaux ? ». Le diagramme n'est pas biffé.}
+
+\struck{Par contre, il semble que 1.6 implique des restrictions à $\lambda'$,
+$\lambda''$} \uncertain{Il semble} \struck{\ill{}} qu'il n'y ait
+\uncertain{que} les conditions \ldots :
+\[
+  \varphi'' * \lambda' = \lambda'' * \varphi'' : \varphi'' \longrightarrow \varphi'' \varphi' \varphi'' \ ; \qquad
+  \lambda' * \varphi' = \varphi' * \lambda'' : \varphi' \longrightarrow \varphi' \varphi'' \varphi'
+\]
+\note{deux lignes serrées, la première biffée d'un trait et soulignée de
+tirets, la seconde écrite en interligne et surchargée ; les deux relations sont
+entourées d'un cadre, et la relecture de 2026-11-24 ne les voit pas biffées (la
+première passe les disait biffées). À faire confirmer par un lecteur.}
 
 Explicitons la \struck{catégorie} $A$ en termes de $\varphi'$, $\varphi''$,
 $\lambda'$, $\lambda''$. Elle a pour objets les quadruplets
@@ -625,7 +651,7 @@ Si $h$, $h'$ sont deux foncteurs (contravariants) $C^{\circ} \to {}$%
 \uncertain{$\mathcal{Y}$} \ill{} transformant limites inductives
 
 \page{15}
-en projectives, on \ill{} posant
+en projectives, on \uncertain{montre que}, posant
 \[
   M(h) = h(U) ,
 \]
@@ -641,19 +667,26 @@ Pour le voir, on définit un homomorphisme
   \beta : \mathrm{Hom}_{R^{\circ}}\bigl( M(h), M(h') \bigr)
   \longrightarrow \mathrm{Hom}(h, h')
 \]
-[détails laissés au lecteur]. Donc le foncteur $h \mapsto M(h)$ identifie la
+[détails laissés au lecteur]. Donc le foncteur $T' : h \mapsto M(h)$ identifie la
 catégorie des foncteurs \struck{\ill{}} envisagés à une sous-catégorie de
 $\mathrm{Mod}_{R^{\circ}}$ ($R$-modules à droite).
 
-On va définir un foncteur « inverse » $M \mapsto h_{M}$ de
-$\mathrm{Mod}_{R^{\circ}}$ dans la catégorie de foncteurs envisagée ;
-définissons le foncteur $T'' : \mathrm{Mod}_{R^{\circ}} \to C$, ou plus
+On va définir un « foncteur inverse » $M \mapsto h_{M}$ de
+$\mathrm{Mod}_{R^{\circ}}$ dans la catégorie de foncteurs envisagée. On va
+définir \uncertain{directement} le foncteur $T'' : \mathrm{Mod}_{R^{\circ}} \to C$, ou plus
 simplement
 \[
   T''(M) = M \otimes_{R} U .
 \]
-On va montrer que $T' T''$ est isomorphe à l'identité, donc $T''$ et $T'$ sont
+On va montrer que \struck{\uncertain{si $h$ est un foncteur} $C^{\circ} \to {}$\uncertain{$\mathcal{Y}$}
+du type envisagé, alors} $M = T'$\struck{$T''$}$(T''M)$, donc $T'$\uncertain{$T''$} est
+« surjectif », donc $T''$ et $T'$ sont
 des « équivalences ». On doit donc montrer que
+\note{la première passe lisait « $T' T''$ est isomorphe à l'identité » ; la
+page porte, entre guillemets, « surjectif », et en bout de ligne, après la
+biffure, l'égalité $M = T'(T''M)$, où un $T''$ écrit d'abord après $T'$ est
+surchargé. Dans « donc $T' T''$ est surjectif », le second $T$ n'est pas
+biffé de façon nette ; le sens demande l'essentielle surjectivité de $T'$.}
 \[
   \left\{
   \begin{array}{l}
@@ -662,11 +695,19 @@ des « équivalences ». On doit donc montrer que
   \end{array}
   \right.
 \]
-ce qui est bien connu, à cause de \ill{}. Ainsi, les foncteurs
+ce qui est bien connu, \uncertain{suite du} \ill{} \ldots{} Ainsi, les foncteurs
 \struck{covariants} \add{contravariants} \add{exacts} à valeurs
 $C \to {}$\uncertain{$\mathcal{Y}$}, transformant les limites inductives en
 limites projectives, sont essentiellement les $h_{B}$.
 \marginal{les $h_{B}$}
+\note{un trait épais passe sur « transformant les » ; aucun mot ne les
+remplace, et la phrase est laissée telle que la première passe l'a lue. La
+marge gauche porte en outre, à mi-page, un petit schéma non transcrit : $C$,
+puis les foncteurs contravariants $C \to \mathcal{Y}$, puis la catégorie de
+modules, reliés par des flèches verticales marquées $T''$, $T$ « inj », $T'$
+« inj ». La page note la catégorie des $R$-modules à droite par la même lettre
+gothique que la catégorie but, avec $R^{\circ}$ en exposant ; la
+transcription l'écrit $\mathrm{Mod}_{R^{\circ}}$.}
 
 \subsection*{2. Le couple $(S, T)$ et les morphismes $\varphi$, $\psi$}
 
