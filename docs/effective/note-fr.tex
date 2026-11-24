@@ -9,6 +9,7 @@
 \usepackage[margin=2.7cm]{geometry}
 \usepackage{tikz}
 \usepackage[hidelinks]{hyperref}
+\emergencystretch=2em
 
 \theoremstyle{definition}
 \newtheorem{definition}{Définition}
@@ -29,7 +30,7 @@
 \author{Michel Hua}
 \address{Commutator, Paris}
 \email{michel@commutator.io}
-\date{15 novembre 2026}
+\date{15 novembre 2026 ; révisée le 25 novembre 2026}
 
 \begin{document}
 \maketitle
@@ -64,7 +65,7 @@ Cette égalité paraît tautologique, et pour les ensembles elle l'est. Elle dit
 \caption{Une relation d'équivalence sur $X = \{1, \dots, 6\}$, de classes $\{1,2,3\}$, $\{4,5\}$ et $\{6\}$, dessinée dans $X \times X$ : la réunion des carrés grisés posés sur la diagonale. Pour les ensembles, ces carrés sont exactement les couples de points de même image dans le quotient ; l'article cherche une situation où cette égalité tombe en défaut.}\label{fig:ensembles}
 \end{figure}
 
-La géométrie algébrique remplace les ensembles par des objets plus riches, les \emph{schémas}, dont un point peut porter une structure infinitésimale : une direction, un jet d'ordre deux, une petite épaisseur. Sur ces objets, on sait encore définir une relation d'équivalence et un quotient, mais l'égalité ci-dessus n'est plus automatique. La question posée par Grothendieck en 1961 est de savoir si elle tient dans le cas le plus simple qu'on puisse imaginer : un schéma fini sur un corps, c'est-à-dire, on le verra, une algèbre de dimension finie. La réponse est non. Elle a été donnée par Venken en 1971 ; l'article revérifie son exemple et en construit un second, plus petit.
+La géométrie algébrique remplace les ensembles par des objets plus riches, les \emph{schémas}, dont un point peut porter une structure infinitésimale : une direction, un jet d'ordre deux, une petite épaisseur. Sur ces objets, on sait encore définir une relation d'équivalence et un quotient, mais l'égalité ci-dessus n'est plus automatique. La question posée par Grothendieck en 1961 est de savoir si elle tient dans le cas le plus simple qu'on puisse imaginer : un schéma fini sur un corps, c'est-à-dire, on le verra, une algèbre de dimension finie. La réponse est non. Elle a été donnée par Venken en 1971 ; l'article en construit un second, plus court, sans prétendre qu'il soit minimal, et revérifie celui de Venken.
 
 Pour un lecteur venu des mathématiques appliquées, le point rassurant est que tout se ramène, à la fin, à comparer deux sous-espaces d'un espace vectoriel de dimension finie, de dimensions $269$ et $268$ dans le premier exemple, $52$ et $51$ dans le second. Le reste de la note explique d'où viennent ces deux sous-espaces.
 
@@ -200,7 +201,7 @@ Il faut remarquer que la note de Venken donne la non-effectivité en une ligne, 
 
 \subsection{La vérification}
 
-\begin{proposition}[article, proposition~3]
+\begin{proposition}[article, proposition~8]
 Sur tout corps $K$ :
 \begin{enumerate}
 \item $\dim \mathbf B = 33$, et $\mathbf B$ est nulle en degrés supérieurs à $3$ ;
@@ -222,7 +223,7 @@ Venken observe que l'idéal engendré par $M^2$, $MN$, $N^2$ et les monômes de 
 
 Dans le dépôt, le script \texttt{venken.py} du répertoire \texttt{computations/\allowbreak effective/\allowbreak venken} travaille dans la base des monômes de $\mathbf B^{\otimes 2}$ et $\mathbf B^{\otimes 3}$ et fait les comparaisons par élimination de Gauss sur $\Q$, en arithmétique exacte. Tous les pivots rencontrés valent $\pm 1$. Un lecteur habitué au calcul numérique en verra la portée : diviser par $\pm 1$ ne fait jamais sortir des entiers, donc l'élimination se déroule en fait sur $\Z$, et ses résultats (rangs, noyaux) se réduisent tels quels modulo tout nombre premier $p$. Ils valent donc sur tout corps premier, et de là sur tout corps, car un corps contient $\Q$ ou un $\F_p$ et le rang d'une matrice ne change pas quand on agrandit le corps. Le script a aussi été lancé directement sur $\F_p$ pour $p = 2, 3, 5, 7, 11, 101$, avec le même résultat.
 
-La proposition, à l'exception des dimensions $269$ et $268$, est de plus formalisée en Lean~4 avec Mathlib, sur tout anneau commutatif non nul, à partir de certificats entiers vérifiés par le noyau de Lean. Le fichier \texttt{Grothendieck/\allowbreak EffectiveVenken.lean} du dépôt \url{https://github.com/Commutator-IO/GrothendieckArchivesProofs} démontre (ii), l'égalité de $\mathbf B^{R_V}$ avec l'espace engendré par les dix éléments ci-dessus, et les deux faits $mxy \otimes w \in I_V$, $mxy \otimes w \notin J_{\mathbf B^{R_V}}$ (théorème \texttt{venken\_not\_effective}). Le résumé de l'article précise que la séparation des deux idéaux y est obtenue par une forme linéaire à coefficients entiers : une forme qui s'annule sur $J$ et pas sur le témoin. On retrouvera la même idée dans la démonstration à la main du second exemple.
+La proposition, à l'exception des dimensions $269$ et $268$, est de plus formalisée en Lean~4 avec Mathlib, sur tout anneau commutatif non nul, à partir de certificats entiers vérifiés par le noyau de Lean. Le fichier \texttt{Grothendieck/\allowbreak AlgebraicGeometry/\allowbreak EffectiveVenken.lean} du dépôt \url{https://github.com/Commutator-IO/GrothendieckArchivesProofs} démontre (ii), l'égalité de $\mathbf B^{R_V}$ avec l'espace engendré par les dix éléments ci-dessus, et les deux faits $mxy \otimes w \in I_V$, $mxy \otimes w \notin J_{\mathbf B^{R_V}}$ (théorème \texttt{venken\_not\_effective}). L'article précise que la séparation des deux idéaux y est obtenue par une forme linéaire à coefficients entiers : une forme qui s'annule sur $J$ et pas sur le témoin. On retrouvera la même idée dans la démonstration à la main du second exemple.
 
 \section{La relation de Raicu et sa restriction}
 
@@ -299,12 +300,18 @@ K = (f_1^2, f_2^2, f_3^2)(x) + (f_1^2, f_2^2, f_3^2)(y),
 \]
 de sorte que $A \otimes_k A = k[x, y]/K$. L'idéal de $R_Z$ se relève en $I + K$, et $J_B$ en $J + K$, où $J$ est engendré par les $b(x) - b(y)$, $b$ parcourant des relevés homogènes d'une base de $B$. On travaille donc dans les polynômes en quatre variables, et l'on compare deux idéaux qui contiennent $K$.
 
-\begin{proposition}[article, proposition~5]
-Sur $\Q$ et sur tout corps premier fini, les invariants de $R_Z$ de degré au plus $7$ donnent $27$ différences $b(x) - b(y)$ indépendantes modulo $I + K$, et dans les degrés $d \le 14$ les deux idéaux ne diffèrent qu'en degré $5$, où
+\begin{proposition}[article, proposition~9]
+Sur $\Q$ et sur tout corps premier fini :
+\begin{enumerate}
+\item pour $d = 1, \dots, 7$, les formes $a \in k[x_1, x_2]_d$ telles que $a(x) - a(y) \in I + K$ forment un espace de dimension $0, 2, 1, 3, 6, 7, 8$ respectivement, $27$ en tout ;
+\item dans les degrés $d \le 14$, les deux idéaux ne diffèrent qu'en degré $5$, où
 \[
 \dim_k (I + K)_5 = 52 > 51 = \dim_k (J + K)_5.
 \]
+\end{enumerate}
 \end{proposition}
+
+Le nombre $27$ compte des formes $a$, relevés homogènes des invariants de degré positif, y compris les formes de l'idéal $(f_1^2, f_2^2, f_3^2)$, qui relèvent $0$ ; ce ne sont pas des « différences indépendantes modulo $I + K$ », comme le disait la première version de l'article, puisqu'une telle différence est nulle modulo $I + K$ par définition d'un invariant. En retranchant les formes de l'idéal, l'article obtient $\dim B_d = 0, 2, 1, 1, 2, 0, 0$ pour $d = 1, \dots, 7$ (et $0, 2, 1, 1, 2, 1, 0$ en caractéristique~$2$). La démonstration à la main n'utilise aucun de ces nombres.
 
 D'après la remarque de la section~\ref{sec:lin}, les invariants de degré au moins $8$ ne changent pas $J + K$ en degré $5$ ; l'inégalité stricte en degré $5$ prouve donc que $R_Z$ n'est pas effective. Un témoin est le générateur $(x_1y_2 - x_2y_1)\,y_2^3$ de $I$, l'obstruction de Raicu : il est dans $(I + K)_5$ et pas dans $(J + K)_5$, et l'article l'a vérifié sur $\Q$, $\F_2$ et $\F_3$.
 
@@ -320,7 +327,7 @@ L'idée est familière en calcul formel : une élimination exacte sur $\Q$ reste
 
 \subsection{Deux remarques de l'article}
 
-Pourquoi ce $Z$ ? Parmi les sous-schémas $V(f_1^a, f_2^b, f_3^c)$ avec $a, b, c \le 3$, seize ont été essayés sur $\F_3$, et le plus petit sur lequel l'obstruction survit est $a = b = c = 2$ ; avec les exposants $(3, 3, 2)$ on obtient une longueur $27$, avec des écarts en degrés $5$ et $6$. On ne sait pas s'il existe un exemple plus court, issu d'autres idéaux. Une recherche aléatoire sur $48$ petites algèbres monomiales sur $\F_2$ et $\F_3$ n'a trouvé aucune relation non effective, et le théorème de Raicu sur les relations toriques affines suggère pourquoi. Comparé à celui de Venken, cet exemple a une longueur $15$ (ou $16$) au lieu de $33$, et deux générateurs au lieu de six.
+Pourquoi ce $Z$ ? Parmi les sous-schémas $V(f_1^a, f_2^b, f_3^c)$ avec $a, b, c \le 3$, seize ont été essayés sur $\F_3$, et le plus petit sur lequel l'obstruction survit est $a = b = c = 2$ ; avec les exposants $(3, 3, 2)$ on obtient une longueur $27$, avec des écarts en degrés $5$ et $6$. Nous ne savons pas s'il existe un exemple plus court, issu d'autres idéaux ; l'article ne revendique aucune minimalité. Une recherche aléatoire sur $48$ petites algèbres monomiales sur $\F_2$ et $\F_3$ n'a trouvé aucune relation non effective, et le théorème de Raicu sur les relations toriques affines suggère pourquoi. Comparé à celui de Venken, cet exemple a une longueur $15$ (ou $16$) au lieu de $33$, et deux générateurs au lieu de six.
 
 Grothendieck avait ramené la question au cas d'un corps résiduel algébriquement clos ; les deux exemples ont pour corps résiduel $k$, qu'on peut choisir algébriquement clos. Ils sont aussi gradués, propriété que la question n'exige pas.
 
@@ -360,7 +367,7 @@ C_5 = A_5. \tag{2}
 \]
 En degré $5$, toute fonction est donc un polynôme en $f_1, f_2, f_3$. Ces formules sont à coefficients entiers et valent en toute caractéristique. Les composantes de $C$ en bas degré sont $C_1 = 0$, $C_2 = kf_1 + kf_2$, $C_3 = kf_3$, $C_4 = kf_1f_2$ (car $f_1^2 = f_2^2 = 0$ dans $A$) et $C_5 = A_5$.
 
-\begin{lemme}[article, lemme~8]
+\begin{lemme}[article, lemme~5]
 $(J + K)_5 = L_5$, et $(I + K)_5 = L_5 + kw$.
 \end{lemme}
 
@@ -372,25 +379,29 @@ Si $e \le 4$ : $b(x) - b(y)$ est dans $(I + K)_e$ puisque $b$ est invariant, et 
 Si $e = 5$ : par (2), il existe un polynôme $c$ en $f_1, f_2, f_3$ avec $b - c \in (f_1^2, f_2^2, f_3^2)$ ; alors $b(x) - b(y)$ est congru modulo $K$ à $c(x) - c(y)$, qui est dans $(g_1, g_2, g_3)$, puisque $u(x)v(x) - u(y)v(y) = u(x)\bigl(v(x) - v(y)\bigr) + \bigl(u(x) - u(y)\bigr)v(y)$.
 \end{proof}
 
-Il reste donc à montrer que $w \notin L_5$, c'est-à-dire que la classe de $w$ dans $(A \otimes_C A)_5$ n'est pas nulle. Les invariants de $R_Z$ ne jouent plus aucun rôle. Le lemme rend compte aussi des dimensions de la proposition~5 : $52 = 51 + 1$.
+Il reste donc à montrer que $w \notin L_5$, c'est-à-dire que la classe de $w$ dans $(A \otimes_C A)_5$ n'est pas nulle. Les invariants de $R_Z$ ne jouent plus aucun rôle. Le lemme rend compte aussi des dimensions de la proposition~9 de l'article : $52 = 51 + 1$. Dans l'article, cette démonstration passe par un lemme général (lemme~3) : si la première équation de la relation qui ne vient pas de $C$ est de degré $d$, les invariants de degré $< d$ ne donnent rien de plus que $C$ en degré $d$, et ceux de degré $d$ non plus si $A_d = C_d$.
 
 \subsection{Une présentation de $A \otimes_C A$}
 
 Pour calculer dans $A \otimes_C A$, on décrit $A$ comme module sur $C$ : par quels éléments est-il engendré, et avec quelles relations ?
 
-Dans $A/C^+A = k[x_1, x_2]/(f_1, f_2, f_3)$, où $C^+$ désigne les éléments de $C$ sans terme constant, on a $x_1^2 = 0$ et $x_1x_2 = x_2^2$, donc $x_1^2x_2 = 0$ et $x_1x_2^2 = x_2^3 = 0$ ; cet anneau a pour base $1, x_1, x_2, x_2^2$. Le lemme de Nakayama gradué, qui dit qu'un module gradué est engendré par des relevés d'une base de son quotient par $C^+$, donne alors que
+Dans $A/C_+A = k[x_1, x_2]/(f_1, f_2, f_3)$, où $C_+$ désigne l'idéal d'augmentation de $C$, les éléments sans terme constant, on a $x_1^2 = 0$ et $x_1x_2 = x_2^2$, donc $x_1^2x_2 = 0$ et $x_1x_2^2 = x_2^3 = 0$ ; cet anneau a pour base $1, x_1, x_2, x_2^2$. Le lemme de Nakayama gradué, qui dit qu'un module gradué est engendré par des relevés d'une base de son quotient par $C_+$, donne alors que
 \[
 e_0 = 1, \quad e_1 = x_1, \quad e_2 = x_2, \quad e_3 = x_2^2
 \]
 engendrent $A$ comme $C$-module : toute fonction s'écrit $c_0 + c_1x_1 + c_2x_2 + c_3x_2^2$ avec des $c_j \in C$, pas de façon unique en général.
 
-Soit $E \subset C^4$ le module des relations, les $(c_0, c_1, c_2, c_3)$ tels que $\sum c_j e_j = 0$ dans $A$, gradué par $\deg c_j + \deg e_j$. En tensorisant la suite exacte $0 \to E \to C^4 \to A \to 0$ par $A$ sur $C$, on obtient
+Pour un module gradué $M$, notons $M(-j)$ le module $M$ dont les degrés sont décalés de $j$ : $M(-j)_d = M_{d-j}$. Soit
 \[
-A \otimes_C A = A^4 / A E,
+F = C \oplus C(-1) \oplus C(-1) \oplus C(-2)
 \]
-où $(a_0, a_1, a_2, a_3)$ représente $\sum a_j \otimes e_j$. L'intuition est simple : dans $A \otimes_C A$, les éléments de $C$ traversent le signe $\otimes$. On écrit le second facteur dans les générateurs $e_j$, on fait passer les coefficients $c_j$ à gauche, et l'on obtient un vecteur de $A^4$ ; l'ambiguïté de l'écriture est exactement donnée par les relations.
+le $C$-module libre gradué sur quatre éléments de base de degrés $0, 1, 1, 2$, envoyés sur $e_0, e_1, e_2, e_3$. Soit $E \subset F$ le module gradué des relations : les $(c_0, c_1, c_2, c_3)$ tels que $\sum c_j e_j = 0$ dans $A$. En tensorisant la suite exacte $0 \to E \to F \to A \to 0$ par $A$ sur $C$, on obtient
+\[
+A \otimes_C A = (A \otimes_C F) / A E, \qquad A \otimes_C F = A \oplus A(-1) \oplus A(-1) \oplus A(-2),
+\]
+où $(a_0, a_1, a_2, a_3)$ représente $\sum a_j \otimes e_j$. L'intuition est simple : dans $A \otimes_C A$, les éléments de $C$ traversent le signe $\otimes$. On écrit le second facteur dans les générateurs $e_j$, on fait passer les coefficients $c_j$ à gauche, et l'on obtient un vecteur de $A \otimes_C F$ ; l'ambiguïté de l'écriture est exactement donnée par les relations.
 
-En degré $5$, $(A^4)_5 = A_5 \oplus A_4 \oplus A_4 \oplus A_3$, de dimension $2 + 3 + 3 + 4 = 12$, et $(AE)_5$ est engendré par les produits $ar$ avec $r \in E_d$, $d \le 5$, et $a \in A_{5-d}$. Comme $x_2^4 = f_3e_2$ et $x_1x_2^3 = f_3e_1$, on a $w = x_1 \otimes f_3e_2 - x_2 \otimes f_3e_1$, et la classe de $w$ est
+En degré $5$, $(A \otimes_C F)_5 = A_5 \oplus A_4 \oplus A_4 \oplus A_3$, de dimension $2 + 3 + 3 + 4 = 12$, et $(AE)_5$ est engendré par les produits $ar$ avec $r \in E_d$, $d \le 5$, et $a \in A_{5-d}$. Comme $x_2^4 = f_3e_2$ et $x_1x_2^3 = f_3e_1$, on a $w = x_1 \otimes f_3e_2 - x_2 \otimes f_3e_1$, et la classe de $w$ est
 \[
 W = (0,\ -x_2^4,\ x_1x_2^3,\ 0).
 \]
@@ -417,12 +428,12 @@ Soit $\lambda$ la forme linéaire sur les formes de degré $4$ en $x_1, x_2$ dé
 \[
 \nu(x_1^3) = \nu(x_1^2x_2) = 2, \qquad \nu(x_1x_2^2) = 1, \qquad \nu(x_2^3) = 0,
 \]
-et posons, sur $(A^4)_5$,
+et posons, sur $(A \otimes_C F)_5$,
 \[
 \varphi(a_0, a_1, a_2, a_3) = \lambda(a_1) + \nu(a_3).
 \]
 
-\begin{lemme}[article, lemme~9]
+\begin{lemme}[article, lemme~6]
 $\varphi$ s'annule sur $(AE)_5$, et $\varphi(W) = -1$.
 \end{lemme}
 
@@ -450,11 +461,11 @@ $W$ & $\lambda(-x_2^4)$ & $-1$ \\
 \caption{Les valeurs de $\varphi$ sur les générateurs de $(AE)_5$ et sur la classe $W$ du témoin. Pour $a\rho$, seule la composante $a_1 = af_2$ compte, la dernière étant nulle.}\label{tab:phi}
 \end{table}
 
-\begin{proposition}[article, proposition~10]
+\begin{proposition}[article, proposition~7]
 Sur tout corps, $w \in (I + K)_5$ et $w \notin (J + K)_5$. Donc $R_Z$ n'est pas effective.
 \end{proposition}
 
-La conclusion s'assemble. Par le lemme~9 de l'article, $\varphi$ induit une forme linéaire sur $(A \otimes_C A)_5 = (A^4)_5/(AE)_5$ qui ne s'annule pas sur la classe de $w$ ; donc $w \notin L_5$. Par le lemme~8, $(J + K)_5 = L_5$. Le témoin est dans l'idéal de $R_Z$ et pas dans celui de $Z \times_Y Z$.
+La conclusion s'assemble. Par le lemme~6 de l'article, $\varphi$ induit une forme linéaire sur $(A \otimes_C A)_5 = (A \otimes_C F)_5/(AE)_5$ qui ne s'annule pas sur la classe de $w$ ; donc $w \notin L_5$. Par le lemme~5, $(J + K)_5 = L_5$. Le témoin est dans l'idéal de $R_Z$ et pas dans celui de $Z \times_Y Z$.
 
 Tous les nombres de la démonstration sont des entiers, et le seul qui doive être non nul est $\varphi(W) = -1$. L'argument est donc le même en toute caractéristique, $2$ et $3$ comprises, bien que $A$ soit de longueur $16$ en caractéristique $2$. Il faut noter deux choses que la démonstration ne fait pas. Elle ne détermine pas $B$ : elle utilise seulement que les invariants de degré au plus $4$ donnent des différences dans $L$, et que $A_5 = C_5$. Elle ne transporte pas non plus l'argument de Raicu sur $\A^2$ ; elle compare directement $R_Z$ à $Z \times_{\Spec C} Z$. Le script \texttt{hand.py} du même répertoire vérifie sur $\Z$ chacune des identités employées.
 
@@ -464,7 +475,7 @@ L'exemple de Venken, son algèbre, son idéal et l'énoncé de non-effectivité 
 
 L'article dit aussi les limites du travail. Les deux exemples sont certifiés sur tout corps par ordinateur, et tous deux ont une démonstration à la main : celle de Venken dans sa note, celle du second dans la section~\ref{sec:main}. L'exemple de Venken est formalisé en Lean, sauf le décompte des dimensions en degré~$4$ ; le second ne l'est pas, et n'a pas été relu par un spécialiste de la descente. L'anneau des invariants $B$ du second exemple n'est pas déterminé à la main ; la démonstration n'en a pas besoin.
 
-Sur l'usage des modèles de langage, l'article indique que la question a été repérée dans l'enregistrement de Buffalo et dans l'exposé~212 avec des modèles de langage (Claude Opus~5.5, Anthropic), qui ont aussi trouvé l'exemple de Raicu, proposé la restriction à $Z$, écrit les scripts et une première rédaction, sous la direction de l'auteur. La note de Venken a été lue sur Gallica, et son corollaire~3.1 reconnu comme une réponse à la question, après qu'une première version du texte eut présenté comme nouveau le cas d'un schéma fini sur un corps. La démonstration à la main a été trouvée de la même manière, les scripts servant à chercher la forme $\varphi$. Les propositions~3 et~5 de l'article reposent sur les scripts, que chacun peut relancer, et l'auteur a vérifié les sections~2 et~3 de l'article (l'effectivité comme algèbre linéaire, et l'exemple de Venken).
+Sur l'usage des modèles de langage, l'article indique que la question a été repérée dans l'enregistrement de Buffalo et dans l'exposé~212 avec des modèles de langage (Claude Opus~5.5, Anthropic), qui ont aussi trouvé l'exemple de Raicu, proposé la restriction à $Z$, écrit les scripts et une première rédaction, sous la direction de l'auteur. La note de Venken a été lue sur Gallica, et son corollaire~3.1 reconnu comme une réponse à la question, après qu'une première version du texte eut présenté comme nouveau le cas d'un schéma fini sur un corps. La démonstration à la main a été trouvée de la même manière, les scripts servant à chercher la forme $\varphi$. Les propositions~8 et~9 de l'article reposent sur les scripts, que chacun peut relancer, et l'auteur a vérifié le critère de la section~2 de l'article (l'effectivité comme algèbre linéaire) et l'exemple de Venken (section~4).
 
 \section{Petit lexique}
 
