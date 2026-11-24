@@ -14,5 +14,6 @@ public import Bridges.Preorders
 public import Bridges.QuiversCyclic
 public import Bridges.QuiversDeMorgan
 public import Bridges.QuiversMorita
+public import Bridges.SimplexTest
 public import Bridges.SubterminalArches
 public import Bridges.TestCategories
