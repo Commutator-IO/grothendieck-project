@@ -234,9 +234,9 @@ export const FINDINGS: Finding[] = [
       'Transcription 48, batch 1 (batch-01.fr.tex), pages 1 and 2',
       'Catalogue entry for cote 48 in src/content/catalogue.ts, which reads « Plan EGA VII »',
     ],
-    status: 'candidate',
+    status: 'confirmed',
     settle:
-      'A person reads the two numerals against the facsimile at high resolution and decides whether either is a slip. If both stand, the question becomes which EGA numbering each belongs to, and that is answered from the other plan folders (26 for EGA VI, 35 for SGA 7) rather than from this one. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the cover reads « Plan EGA VII » and p. 2 « EGA Chap. VI »; the third stroke of VII sits at or past the right end of its box, so it may have been added — for a reader.',
+      'A person reads the two numerals against the facsimile at high resolution and decides whether either is a slip. If both stand, the question becomes which EGA numbering each belongs to, and that is answered from the other plan folders (26 for EGA VI, 35 for SGA 7) rather than from this one. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the cover reads « Plan EGA VII » and p. 2 « EGA Chap. VI »; the third stroke of VII sits at or past the right end of its box, so it may have been added — for a reader. Confirmed on the facsimile by Michel Hua, 2026-11-24.',
   },
   {
     id: '48-typescript-leaves-reversed',
@@ -6714,9 +6714,9 @@ export const FINDINGS: Finding[] = [
       'Transcription transcripts/41/batch-01.fr.tex, page 1 (an Opus 5 pass from the facsimile, unchecked by a human)',
       "EGA I (Publ. Math. IHÉS 4, 1960), Introduction, p. 6 (Numdam, read 2026-11-23): the plan lists chapter V « Procédés élémentaires de construction de schémas » and chapter VI « Technique de descente. Méthode générale de construction des schémas ».",
     ],
-    status: 'candidate',
+    status: 'confirmed',
     settle:
-      'Read the chapter numeral on the facsimile of page 1 directly. If it is VI, compare with the plan of the Éléments announced in EGA I (Introduction), where a chapter VI on descent was planned, before saying anything about which work the section was drafted for — the folder itself does not say. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the title leaf reads « Chap VI ». The archivists’ « Construction … (Chap. V) » matches the planned title of chapter V, the leaf’s numeral that of chapter VI (recorded above); the folder does not say which it was drafted for.',
+      'Read the chapter numeral on the facsimile of page 1 directly. If it is VI, compare with the plan of the Éléments announced in EGA I (Introduction), where a chapter VI on descent was planned, before saying anything about which work the section was drafted for — the folder itself does not say. Machine pass on the facsimile, 2026-11-23, not checked by a reader: the title leaf reads « Chap VI ». The archivists’ « Construction … (Chap. V) » matches the planned title of chapter V, the leaf’s numeral that of chapter VI (recorded above); the folder does not say which it was drafted for. Confirmed on the facsimile by Michel Hua, 2026-11-24.',
   },
 // Folder 43 — candidate entries from /find-novelty (Opus 5.5, claude-opus-5-5, on an Opus 5.5 reading of 2026-10-03).
 // Most of the folder's statements are matches already footnoted in 43.modern.tex (Rosenlicht–Serre, Parshin–Beilinson adeles,
