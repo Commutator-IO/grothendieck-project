@@ -53,6 +53,7 @@ const LEAN_ARTICLES: ArticleItem[] = [
     lang: 'English',
     what: "Grothendieck's letter to Kostant of 22 October 1969 asks two questions on quadruples (T, B, T', B') with T, T' maximal tori in apposition. Are B and B' in general position? Yes, in every type: all |W| Borel subgroups through the centraliser of a cyclic element are opposite to B, a short consequence of Kostant (1959) and of a lemma of Bălibanu (2023), given in full and formalised in Lean 4 for the flag forms of the classical types. Is there a distinguished class, invariant under the exterior automorphisms? Not in type A_2l, where the exterior automorphism fixes no class; elsewhere a construction with the Coxeter plane gives a canonical pair of classes, exchanged by the sign of the lowest root vector, and computations list the invariant classes up to A_6 and D_5.",
     pdf: '/article/grothendieck-kostant.pdf',
+    more: [{ label: 'Note de lecture (fr)', href: '/article/grothendieck-kostant-note-fr.pdf' }],
     src: 'docs/kostant/article.tex',
   },
   {
