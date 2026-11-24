@@ -47,6 +47,10 @@ const LEAN_ARTICLES: ArticleItem[] = [
     more: [{ label: 'Hexagon (part II)', href: 'https://hexagonmath.org/pdf/2611.00125v3' }],
     src: 'docs/problems/article.tex',
   },
+];
+
+/** Standalone papers deposited, or being deposited, as preprints (Hexagon). */
+const PREPRINTS: ArticleItem[] = [
   {
     id: 'article-kostant',
     title: "Kostant's tori in apposition: the Borel subgroups are opposite, and there is no distinguished class in type A_2l",
@@ -65,10 +69,6 @@ const LEAN_ARTICLES: ArticleItem[] = [
     src: 'docs/effective/article.tex',
     more: [{ label: 'Note de lecture (fr)', href: '/article/grothendieck-effective-note-fr.pdf' }],
   },
-];
-
-/** Standalone papers already deposited as preprints (Hexagon). */
-const PREPRINTS: ArticleItem[] = [
   {
     id: 'article-bigon',
     title: 'A bigon-free dichotomy for pseudoline arrangements, after a note of Grothendieck',
