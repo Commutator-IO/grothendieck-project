@@ -864,6 +864,7 @@ copyFileSync(resolve(root, 'docs/carbon/article.pdf'), resolve(served, 'grothend
 copyFileSync(resolve(root, 'docs/bourbaki-lean/article.pdf'), resolve(served, 'bourbaki-lean.pdf'));
 // The seventh, the statements read in Quillen's notebooks and proved in Lean (docs/quillen-lean/).
 copyFileSync(resolve(root, 'docs/quillen-lean/article.pdf'), resolve(served, 'quillen-lean.pdf'));
+// Recollements · Incollamenti: no longer listed on the Method page, but both PDFs stay served at their links.
 copyFileSync(resolve(root, 'docs/recollement/article.pdf'), resolve(served, 'poeme-grothendieckien.pdf'));
 copyFileSync(resolve(root, 'docs/recollement/articolo.pdf'), resolve(served, 'poema-grothendieckiano.pdf'));
 // The index of results of the 1973 Buffalo topos course, in our words, not a transcription

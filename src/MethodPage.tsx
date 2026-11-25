@@ -38,19 +38,6 @@ const ARTICLES: ArticleItem[] = [
   },
 ];
 
-/** A draft of the edition that is not about Lean. */
-const SOUS_ARTICLES: ArticleItem[] = [
-  {
-    id: 'article-recollement',
-    title: 'Recollements · Incollamenti',
-    lang: 'French and Italian · typewritten',
-    what: "A short note in the manner of the Éléments: fragments on a site, the stack of their readings, a gerbe and its obstruction, the relative point of view over a base, and a conjecture.",
-    pdf: '/article/poeme-grothendieckien.pdf',
-    more: [{ label: 'PDF (italiano)', href: '/article/poema-grothendieckiano.pdf' }],
-    src: 'docs/recollement/article.tex',
-  },
-];
-
 /** The two books, in French: the tools first, then the sources they were used on. */
 const LIVRES: typeof ARTICLES = [
   {
@@ -107,10 +94,6 @@ export function MethodPage() {
         </header>
 
         <Articles items={[...ARTICLES].sort((x, y) => (STARS[y.id] ?? 0) - (STARS[x.id] ?? 0))} />
-        <Articles id="drafts" title="Drafts" items={[...SOUS_ARTICLES].sort((x, y) => (STARS[y.id] ?? 0) - (STARS[x.id] ?? 0))} />
-        <p className="mt-2 text-[12.5px] text-ink-500">
-          Stars give our estimate of each draft's interest, from ★ to ★★★: what it adds that is new or solid, not how finished it is.
-        </p>
         <Articles id="books" title="The books" items={LIVRES} />
 
         <section className="mt-16">
