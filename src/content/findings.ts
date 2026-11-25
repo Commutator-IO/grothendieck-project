@@ -1516,6 +1516,26 @@ export const FINDINGS: Finding[] = [
       'Nothing further on the mathematics: the distinction between Lⁿ ≠ 0 and the strong Lefschetz property is standard in that literature, and this algebra falls outside it for want of Poincaré duality. Kept as a killed candidate and as the record of a framing that had to be corrected.',
   },
   {
+    id: '16-evanescent-part-carries-the-sign',
+    cote: '16',
+    pages: '33–39',
+    kind: 'mathematical',
+    claim:
+      'The hyperplane induction of pages 33–39 splits H^{n−1}(Y) of a hyperplane section into the part coming from X and the evanescent part E^{n−1} = Ker(φ_*: H^{n−1}(Y) → H^{n+1}(X)); in a Lefschetz-pencil proof of the Riemann hypothesis over finite fields, E^{n−1} is the only piece that enters the trace formula with a definite sign, (−1)^{dim Y}, the rest cancelling against X through the Gysin map, so the route needs no Hodge standard conjecture.',
+    basis:
+      'Page 33 writes E^{n−1} = H^{n−1}(Y)/Im H^{n−1}(X) ≃ Ker(φ_*: H^{n−1}(Y) → H^{n+1}(X)); page 35 gives the decomposition H^d(Y) ≃ ⊕ L_X^j P^i(X) ⊕ E^{n−1} and the Corollaire Ker φ_* ≃ E^{n−1}, with φ_* zero on E^{n−1} and φ_*φ^* = L_X. The pages do not mention Frobenius or a trace formula.',
+    ours:
+      'The link to the Riemann hypothesis is not on the pages. It comes from an outside run by language models, which reads the sign of a step of a recent argument as the class of E^{n−1} in the Grothendieck group; the edition checked only that the run’s locators match these pages (its scan N is our page N − 1). The sign computation itself is not checked here.',
+    literature: [
+      'P. Deligne, « La conjecture de Weil. I », Publ. Math. IHÉS 43 (1974), 273–307: the Lefschetz-pencil proof, in which the vanishing part of the cohomology of the fibres carries the induction (not reopened in this pass).',
+      'SGA 7 II, Exp. XV and XVIII (Deligne, Katz): the evanescent part and the Picard–Lefschetz formulas (not reopened in this pass).',
+    ],
+    status: 'matched',
+    settle:
+      'Reread Weil I §§4–6 to confirm that the evanescent part of pages 33–35 is the vanishing part Deligne uses, and check the outside run’s sign identity (−1)^{D−1}R = Σ(−1)^a Tr W_a(−1) + Σ(−1)^b Tr T_b against Weil I. The route of pages 49–50 through the standard conjectures stays open.',
+    onPage: 'partial',
+  },
+  {
     id: '16-letters-and-interrupted-run',
     cote: '16',
     pages: '30, 31, 39–41, 43, 47',
@@ -7340,7 +7360,26 @@ export const FINDINGS: Finding[] = [
     settle:
       'First read the illegible word before « que l’on a en fait » and the bracket on the facsimile (transcription work, /transcribe-grothendieck): if the page only asks or proposes, the entry reduces to the reading’s footnote being too strong and should be withdrawn; if it asserts, mark refuted on the counterexample above. Independently, check whether the derivation of integrality from indivisibility of roots in the lattice they generate is stated in Bourbaki, Lie VI §1, or in SGA 3 Exp. XXI §1, and mark matched if so. Re-check 2026-11-23: SGA 3 XXI (recorded above) read; Bourbaki, Lie VI §1, not opened. The facsimile reading of the word before « que l’on a en fait » comes first.',
     lean: { file: 'lean/Grothendieck/RepresentationTheory/Folder44.lean', found: "The step from indivisibility holds in general: in any subgroup P of a ℚ-vector space, α indivisible and x − f(x)α ∈ P for x ∈ P give f(x) ∈ ℤ. Axioms a)–c) alone do not give it, as the entry says: Δ = {±3e₁, ±3e₂, ±(e₁ ± e₂)} ⊂ ℤ² satisfies a), b) — with n ∈ ℚ, as the page writes it — and c), its symmetry of 3e₁ of the form x − f(x)·3e₁ is unique, and f(e₁ + e₂) = 2/3 while 3e₁ = 3·e₁ is divisible. One correction to the entry: {3e₁, e₂ − e₁} (the entry’s {e₁, (e₂ − e₁)/3}) is a simple system only with rational coefficients, since e₁ + e₂ = (2/3)·3e₁ + (e₂ − e₁); a member of an integral fundamental system is indivisible, so the bracket’s « part of a fundamental system » is not refuted — what a)–c) fail to provide is such a system." },
+  },  {
+    id: '44-th5-intermediate-jacobian-pairing-false',
+    cote: '44',
+    pages: '3',
+    kind: 'mathematical',
+    claim:
+      'Theorem 5 of page 3 (for a Lefschetz pencil on X of dimension n, with axis section Y, and cycles Z, Z′ of codimensions i, j, i + j = n, restricting to zero on Y, the pairing of their classes z, z′ in the intermediate Jacobians of Y computes the intersection number, ⟨z, z′⟩ = ±Z·Z′) is false as written: the pairing misses a contribution of the nodal fibres.',
+    basis:
+      'Page 3 states the theorem without proof, under the name of Néron and Tate; it is the most written-over statement of the folder: the value group of the pairing and the integer m of the sign (−1)^m are illegible. A marginal N.B. adds that both sides vanish when 2i = 2j.',
+    ours:
+      'The counterexample is the edition’s (2026-11-25), checked by hand after an outside run by language models found it: X = P² × P², n = 4, i = j = 2, Z = a² − ab + b² (a, b the hyperplane classes). As a³ = b³ = 0, Z·Z = 3a²b², so Z·Z = 3. A smooth (1,1) section Y is the flag threefold, on which a² − ab + b² = 0, so Z restricts to zero; H³(Y) = 0, so J²(Y) = 0 and ⟨z, z⟩ = 0 ≠ ±3. A pencil is Σ(λ + kμ) x_k y_k, with three nodal members. The missing term comes from the Weil divisors of the nodal fibres that are not ℚ-Cartier; the per-fibre contributions are not computed. The N.B. fails too for the right-hand side: the middle-degree intersection form is symmetric, and Z·Z = 3 here. The modernised reading’s earlier footnote, which called the pairing alternating, was corrected.',
+    literature: [],
+    status: 'refuted',
+    settle:
+      'Settled for the statement as written (2026-11-25). Open: the corrected formula, with the contribution of each nodal fibre computed, and whether such a corrected form is in the literature on Abel–Jacobi maps of Lefschetz pencils (Griffiths, Zucker, Bloch).',
+    reach: 'doubtful',
+    theory: 'intermediate Jacobians and Chow rings',
+    onPage: 'stated',
   },
+
   {
     id: '46-semilocal-hilbert90-inertia',
     cote: '46',
