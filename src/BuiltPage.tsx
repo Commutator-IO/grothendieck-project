@@ -57,7 +57,10 @@ const PREPRINTS: ArticleItem[] = [
     lang: 'English',
     what: "Grothendieck's letter to Kostant of 22 October 1969 asks two questions on quadruples (T, B, T', B') with T, T' maximal tori in apposition. Are B and B' in general position? Yes, in every type: all |W| Borel subgroups through the centraliser of a cyclic element are opposite to B, a short consequence of Kostant (1959) and of a lemma of Bălibanu (2023), given in full and formalised in Lean 4 for the flag forms of the classical types. Is there a distinguished class, invariant under the exterior automorphisms? Not in type A_2l, where the exterior automorphism fixes no class; elsewhere a construction with the Coxeter plane gives a canonical pair of classes, exchanged by the sign of the lowest root vector, and computations list the invariant classes up to A_6 and D_5.",
     pdf: '/article/grothendieck-kostant.pdf',
-    more: [{ label: 'Note de lecture (fr)', href: '/article/grothendieck-kostant-note-fr.pdf' }],
+    more: [
+      { label: 'Hexagon', href: 'https://hexagonmath.org/2611.01016v1' },
+      { label: 'Note de lecture (fr)', href: '/article/grothendieck-kostant-note-fr.pdf' },
+    ],
     src: 'docs/kostant/article.tex',
   },
   {
@@ -67,7 +70,10 @@ const PREPRINTS: ArticleItem[] = [
     what: "The problem he gave at Buffalo on 11 July 1973, first asked in FGA (1961): is every finite equivalence relation on a finite scheme over a field effective? No: Venken had answered it in 1971, in a corollary of a note on flat descent (a local Artin algebra of dimension 33). The note checks his example by machine and gives a second one, of length 15 (16 in characteristic 2) in two variables, from Raicu's relation on the plane, certified over every field.",
     pdf: '/article/grothendieck-effective.pdf',
     src: 'docs/effective/article.tex',
-    more: [{ label: 'Note de lecture (fr)', href: '/article/grothendieck-effective-note-fr.pdf' }],
+    more: [
+      { label: 'Hexagon', href: 'https://hexagonmath.org/2611.01019v1' },
+      { label: 'Note de lecture (fr)', href: '/article/grothendieck-effective-note-fr.pdf' },
+    ],
   },
   {
     id: 'article-bigon',
@@ -77,7 +83,7 @@ const PREPRINTS: ArticleItem[] = [
     pdf: '/article/grothendieck-bigon.pdf',
     more: [
       { label: 'Hexagon', href: 'https://hexagonmath.org/pdf/2611.00188v2' },
-      { label: 'Palomar', href: 'https://palomar-registry.org/entry.html?id=PALOMAR-2026-11-07-000003' },
+      { label: 'Lean', href: 'https://github.com/Commutator-IO/GrothendieckArchivesProofs' },
       { label: 'Note de lecture (fr)', href: '/article/grothendieck-bigon-note-fr.pdf' },
     ],
     src: 'docs/bigon/article.tex',
@@ -264,7 +270,7 @@ export function BuiltPage() {
         </section>
 
         <Articles id="articles" title="The articles" items={[...LEAN_ARTICLES].sort((x, y) => (STARS[y.id] ?? 0) - (STARS[x.id] ?? 0))} />
-        <Articles id="preprints" title="Preprints" items={[...PREPRINTS].sort((x, y) => (STARS[y.id] ?? 0) - (STARS[x.id] ?? 0))} />
+        <Articles id="preprints" title="Preprints" titlesOnly items={[...PREPRINTS].sort((x, y) => (STARS[y.id] ?? 0) - (STARS[x.id] ?? 0))} />
         <Articles id="drafts" title="Drafts" items={[...DRAFTS].sort((x, y) => (STARS[y.id] ?? 0) - (STARS[x.id] ?? 0))} />
         <p className="mt-2 text-[12.5px] text-ink-500">
           Stars give our estimate of each draft's interest, from ★ to ★★★: what it adds that is new or solid, not how finished it is

@@ -33,7 +33,7 @@ export const STARS: Record<string, 1 | 2 | 3> = {
   'article-bigon': 2,
 };
 
-export function Articles({ id = 'articles', title = 'The articles', items }: { id?: string; title?: string; items: ArticleItem[] }) {
+export function Articles({ id = 'articles', title = 'The articles', items, titlesOnly = false }: { id?: string; title?: string; items: ArticleItem[]; titlesOnly?: boolean }) {
   const pill = 'rounded-full border border-ink-200 px-3 py-0.5 text-[12.5px] text-ink-700 transition hover:border-brand-400 hover:text-brand-700';
   return (
     <section className="mt-10">
@@ -55,7 +55,7 @@ export function Articles({ id = 'articles', title = 'The articles', items }: { i
                 </span>
               )}
             </h3>
-            <p className="mt-2 flex-1 text-[13px] leading-relaxed text-ink-600">{a.what}</p>
+            {titlesOnly ? <div className="flex-1" /> : <p className="mt-2 flex-1 text-[13px] leading-relaxed text-ink-600">{a.what}</p>}
             <p className="mt-3 flex flex-wrap items-center gap-2">
               <a href={a.pdf} className={pill}>
                 PDF
