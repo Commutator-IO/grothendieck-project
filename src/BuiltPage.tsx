@@ -59,6 +59,7 @@ const PREPRINTS: ArticleItem[] = [
     pdf: '/article/grothendieck-kostant.pdf',
     more: [
       { label: 'Hexagon', href: 'https://hexagonmath.org/2611.01016v1' },
+      { label: 'Lean', href: 'https://github.com/Commutator-IO/GrothendieckArchivesProofs' },
       { label: 'Note de lecture (fr)', href: '/article/grothendieck-kostant-note-fr.pdf' },
     ],
     src: 'docs/kostant/article.tex',
@@ -72,6 +73,7 @@ const PREPRINTS: ArticleItem[] = [
     src: 'docs/effective/article.tex',
     more: [
       { label: 'Hexagon', href: 'https://hexagonmath.org/2611.01019v1' },
+      { label: 'Lean', href: 'https://github.com/Commutator-IO/GrothendieckArchivesProofs' },
       { label: 'Note de lecture (fr)', href: '/article/grothendieck-effective-note-fr.pdf' },
     ],
   },
@@ -96,6 +98,7 @@ const PREPRINTS: ArticleItem[] = [
     pdf: '/article/grothendieck-tangent.pdf',
     more: [
       { label: 'Hexagon', href: 'https://hexagonmath.org/pdf/2611.00189v2' },
+      { label: 'Lean', href: 'https://github.com/Commutator-IO/GrothendieckArchivesProofs' },
       { label: 'Note de lecture (fr)', href: '/article/grothendieck-tangent-note-fr.pdf' },
     ],
     src: 'docs/tangent/article.tex',
