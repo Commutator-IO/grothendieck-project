@@ -46,6 +46,7 @@
 % another.
 %
 % Pass: Opus 5 (claude-opus-5), 2026-09-12 — first pass, unchecked against the pages by a human.
+% Revised: Fable 5.2 (claude-fable-5-2), 2026-11-27 — read again on the facsimile, not checked by a reader. Pp. 2, 3, 5, 7, 9 read a second time (#145); see docs/review/revision-145/153.md.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -248,9 +249,18 @@ $\Omega$ opère sur $k_0$, de façon que
 \note{la deuxième ligne est d'abord écrite $(\lambda F)(x) = \lambda F(x)$,
 puis reprise avec les parenthèses}
 
-\uncertain{Lemme} : si $M$ est un $k_0$-module libre, le sous-ens.\ $\Omega_M
-\subset K_0[T] \otimes_{k_0} M$ formé des $F$ tels que $F(x) \in M$
+\uncertain{Lemme} : si $M$ est un $k_0$-module libre, alors le sous-ens.\ $\Omega_M
+\subset K_0[T] \otimes_{K_0} M_{K_0}$ \struck{(\uncertain{i.e.\ applications}
+\ill{} $M$} formé des $F$ tels que $F(x) \in M$
 $\forall x \in k_0$, s'identifie à $\Omega \otimes_{k_0} M$.
+
+\note{le produit tensoriel de la troisième ligne est écrit sur $K_0$
+majuscule, et $M$ y porte l'indice $K_0$ : c'est $K_0[T] \otimes_{K_0}
+M_{K_0}$, où $M_{K_0}$ désigne sans doute $M \otimes_{k_0} K_0$, module
+canoniquement égal à $K_0[T] \otimes_{k_0} M$. Les deux $K$ ont la forme de
+celui de $K_0[T]$ sur la même ligne, non celle du $k_0$ à hampe de
+« $k_0$-module » et de $\Omega \otimes_{k_0} M$. Une parenthèse biffée, sur
+deux lignes, suit $M_{K_0}$}
 
 \note{le mot souligné qui ouvre cet énoncé est formé d'un $L$ suivi de quatre
 jambages ; il est lu « Lemme » et n'est pas assuré}
@@ -263,8 +273,8 @@ F(x+y) \overset{?}{=} \sum_i G_i(x) H_i(y)
 F(xy) \overset{?}{=} \sum_\alpha J_\alpha(x) K_\alpha(y)
 \]
 
-où $\sum_i G_i \otimes H_i$ est un élém.\ bien déterminé de
-$\Omega \otimes_{k_0} \Omega$, et $\sum_\alpha J_\alpha \otimes K_\alpha$ est
+où $\sum_i G_i \otimes_{k_0} H_i$ est un élém.\ bien déterminé de
+$\Omega \otimes_{k_0} \Omega$, et $\sum_\alpha J_\alpha \otimes_{k_0} K_\alpha$ est
 un él.\ bien déterminé de $\Omega \otimes_{k_0} \Omega$.
 
 \marginal{OK si $\Omega$ est un $k_0$-module \emph{libre}}
@@ -272,7 +282,10 @@ un él.\ bien déterminé de $\Omega \otimes_{k_0} \Omega$.
 \note{cette remarque est écrite en biais, à environ 45°, le long du bord gauche
 du feuillet}
 
-En effet, dans $K_0[X,Y] = K_0[X] \otimes_{k_0} K_0[Y]$, on a\supplied{ura}
+En effet, dans $K_0[X,Y] = K_0[X] \otimes_{\uncertain{K_0}} K_0[Y]$\note{l'indice
+du produit tensoriel est repassé à l'encre et se lit $K_0$ ou $k_0$ ;
+l'égalité avec $K_0[X,Y]$ ne vaut que sur $K_0$, et c'est aussi la lettre du
+lemme ci-dessus}, on a\supplied{ura}
 \[
 F(X+Y) \overset{\text{déf}}{=} \Delta_a F(X,Y)
 \]
@@ -304,9 +317,10 @@ F \circ \lambda T = \sum_\alpha J_\alpha(\lambda) K_\alpha
 \page{5}
 
 \textbf{Analyseur} $\Omega$ : c'est un pseudo-anneau non unitaire (i.e.\ un
-groupe additif avec multiplication associative commutative, pas néc.\
-unitaire)
+groupe additif avec multiplication associative biadditive, commutative, pas
+néc.\ unitaire)
 
+\ill{} \uncertain{op.\ notées}
 \[
 x+y, \qquad xy
 \]
@@ -319,9 +333,11 @@ avec une loi d\struck{e composition arbitraire} \add{de monoïde}
 (F,G) \longmapsto F \circ G
 \]
 
-(unité notée \struck{$E$} $I$ ou $T$) pas néc.\ commutative
+unitaire (unité notée \struck{$E$} $I$ ou $T$) pas néc.\ commutative
 
 \note{« de monoïde » est écrit en interligne au-dessus du passage biffé}
+
+\textbf{Axiomes}
 
 \begin{enumerate}
 \item[1)] \textbf{Pour mémoire} :
@@ -333,8 +349,8 @@ x \circ y \ \text{associative, unitaire}
 \end{cases}
 \]
 
-\item[2)] $\forall G \in \Omega$, $F \longmapsto F \circ G$ est un hom.\ de
-pseudo-anneaux, i.e.
+\item[2)] $\forall G \in \Omega$, $F \longmapsto F \circ G : \Omega \to \Omega$ est un hom.\ de
+ps.-anneaux, i.e.
 \[
 \begin{cases}
 (F+F') \circ G = F \circ G + F' \circ G \\
@@ -374,8 +390,8 @@ $\lambda \circ F = \lambda$ $\forall F \in \Omega$.
 $\bigl[$ Ne dépend que de la structure $F \circ G$ $\bigr]$
 
 \textbf{Proposition} \quad L'ens.\ $\Omega_0$ des constantes de $\Omega$ est un
-sous-\ill{} de $\Omega$ \ill{}, car $\lambda \circ \mu = \lambda$ pour
-$\lambda, \mu \in \Omega$. Pour $F \in \Omega$, $\lambda \in \Omega_0$, on a
+sous-\add{ps-}anneau de $\Omega$ [\uncertain{stable par} $\circ$, car
+$\lambda \circ \mu = \lambda$ pour $\lambda, \mu \in \Omega$). Pour $F \in \Omega$, $\lambda \in \Omega_0$, on a
 $F \circ \lambda \in \Omega_0$ (car
 $(F \circ \lambda) \circ G = F \circ (\lambda \circ G) = F \circ \lambda$, le
 $\lambda \circ G$ étant accoladé $\lambda$).
@@ -395,68 +411,76 @@ une unité $1$, et celle-ci est une constante, i.e.
 1 \circ F = 1 \qquad \forall F \in \Omega .
 \]
 
-Dans $\Omega_0$ on a \ill{} unitaire, \ill{}
+\uncertain{Donc} $\Omega_0$ est alors un anneau unitaire, \uncertain{admettant}
+\supplied{la} même unité que $\Omega$
+
+\note{« même » est écrit par son signe $=$, en tête de la dernière ligne ;
+« ps- », pour « pseudo- », est en interligne au-dessus de « anneau » dans la
+proposition, dont le crochet ouvert est refermé par une parenthèse}
 
 \page{7}
 
-\textbf{Ex 1} \quad Soit \struck{$k$ \ill{}} \ill{} $A$ un
-\struck{\ill{}} \ill{},
+\textbf{Ex 1} \quad Soient \struck{$k$ un anneau commutatif,} $A$ un
+\struck{$k$-algèbre} \add{ps.-anneau} comm.,
 \[
 \Omega_A = \operatorname{Appl}(A,A) .
 \]
-Alors on \ill{} que $\operatorname{Appl}(E,A)$, $A$ \ill{} (\ill{} si $A$
-est unitaire), et on \ill{} que \struck{$\operatorname{Appl}$}$(A,A)$, $A$
-\ill{}
-
-$\Omega$ a une structure de \ill{} ses \struck{\ill{}} $A$ est unitaire),
-il y a une structure de composition, \struck{monoïdal} \ill{} unité. Les
-conditions 1°) et 2°) \ill{} vérifiées. Les \struck{\ill{}} « cts » de
-$\Omega$ sont les applications constantes, qui \ill{} $\Omega_0$ \ill{} :
-$A$. (\ill{} unit.)
+Alors en tant que $\operatorname{Appl}(E,A)$, $A$ ps.-ann., $\Omega$ a une
+structure de ps.-ann.\ comm.\ (il est unitaire ssi \struck{$\Omega$} $A$
+est unitaire), et en tant que \struck{$\operatorname{Appl}$}$(A,A)$, $A$
+\uncertain{ens.}, il a une structure de composition, \struck{\ill{}}
+\add{monoïdale}, \uncertain{admettant} $\mathrm{id}_A$ comme unité. Les
+conditions 1°) et 2°) sont vérifiées. Les \struck{\ill{}} éléments « cts » de
+$\Omega$ sont les applications constantes, qui forment un
+sous-\add{ps-}anneau $\Omega_0$ isom.\ à $A$.
 
 \note{« cts » est son abréviation pour « constantes ». Cette page est écrite
-très vite : les formules portent, la prose qui les relie ne porte pas, et elle
-est marquée plutôt que comblée}
+très vite ; relue le 27 novembre 2026 sur des agrandissements, où la prose se
+lit pour l'essentiel. « ps- », « ps.-ann. » abrègent « pseudo- »,
+« pseudo-anneau »}
 
-$\Omega_A$ est \ill{} dans les $A$ l'\ill{}.
+$\Omega_A$ est unitaire ssi $A$ l'est.
 
-\textbf{Variante} : si $A$ est une $k$-algèbre, on peut prendre
-($\Omega_0 \simeq A$),
+\textbf{Variante} : si $A$ est une $k$-algèbre \add{($k$ \uncertain{anneau}
+comm.\ unit.)}, on peut prendre ($\Omega_0 \simeq A$),
 \[
 \underline{\Omega}_{A/k} = \operatorname{End}(W_k(A))
 \]
-\ill{} plus général, si $A$ est une \ill{} \ill{} types, on dispose \ill{}
-Anneau commutatif \uncertain{unitaire} \ill{}
+--- plus général\supplied{emen}t, si $\mathcal{A}$ est un Anneau commutatif sur
+un topos, on définit
 
 \[
-\Omega(\struck{\ill{}}) = \operatorname{End}_{\text{faisceaux d'ens.}}(A) ,
+\Omega(\struck{\ill{}}) = \operatorname{End}_{\text{faisceaux d'ens.}}(\mathcal{A}) ,
 \]
-\ill{} deux structures $xy$ et $\lambda \circ y$ \ill{} (Unitaire si $A$
-l'est)
+avec deux structures \struck{\ill{}} \add{$xy$ et $x \circ y$} (Unitaire si
+$\mathcal{A}$ l'est)
 
 \[
-\boxed{(\Omega_A)_0 \simeq \Gamma A \, ?}
+\boxed{(\Omega_{\mathcal{A}})_0 \simeq \Gamma \mathcal{A} \, ?}
 \]
 
-Dans le cas où $A = k$, on trouve $\Omega \simeq k[T]$, et \ill{} la
-\add{addition,} multiplication \ill{} la bilat.\ des \ill{}
+\note{dans cette variante la lettre est un $A$ cursif, distinct du $A$ droit
+de l'Ex 1 : c'est un Anneau (majuscule de lui) d'un topos}
+
+Dans le cas où $A = k$, on trouve $\Omega \simeq k[T]$, \uncertain{avec} la
+\add{addition,} multiplication et composition habituelles
 
 \ill{} analyseurs \struck{de tous les « standards »} des polynômes. Dans ce
-cas, les conditions 3°) \ill{} vérifiées. Anneau des constantes est $k$.
+cas, la condition 3°) \uncertain{est satisfaite}. Anneau des constantes est $k$.
 
-On peut \ill{} prendre $k[[T]]^{+}$, \ill{} produit et $\lambda \circ y$,
-\ill{} réduit à zéro (ou les $a_0 + a_1T + \cdots$ avec $a_0$
-\uncertain{nilpotent})
+On peut aussi prendre $k[[T]]^{+}$, avec produit et $x \circ y$,
+[l'anneau des cts est réduit à zéro / ou les $a_0 + a_1T + \cdots$ avec $a_0$
+\uncertain{nilpotent}
 
-Soit $\Omega$ un analyseur, \struck{arbitraire} \ill{}, $\Omega_0$ l'ens.\
+Soit $\Omega$ un analyseur, $\Omega_0$ le ps.-anneau
 des cts, alors
 \[
 F \longmapsto (\lambda \mapsto F \circ \lambda) : \Omega \longrightarrow
 \operatorname{Appl}(\Omega_0,\Omega_0) = \Omega_{\Omega_0}
 \]
-est un « hom.\ d'analyseurs », induisant \ill{} sur les \struck{\ill{}}
-constantes. On est content \ill{} que $\Omega \to$
-\struck{$\operatorname{App}$} $\Omega_{\Omega_0}$ soit injectif !
+est un « hom.\ d'analyseurs », induisant une isom.\ sur les
+sous-\add{ps-}anneaux des constantes. On est content \uncertain{quand}
+$\Omega \to$ \struck{$\operatorname{App}$} $\Omega_{\Omega_0}$ est injectif !
 
 \page{9}
 
@@ -467,7 +491,9 @@ commutatifs,
 \Omega = \{\, P \in K_0[T] \mid P(\lambda) \in k_0 \ \ \forall \lambda \in k_0 \,\}
 \]
 structures $+$, $\cdot$, $\circ$ induites par celles de $K_0[T]$. Le cas le
-plus intéressant $\to$ \ill{} celui des corps
+plus intéressant est celui du \uncertain{couple}\note{le mot a le tracé du
+« couple » de la première ligne ; $\mathbb{Z}$ n'étant pas un corps, « des
+corps » ne convient pas}
 ($\mathbb{Z} \subset \mathbb{Q}$ :
 
 \textbf{L'analyseur binomial} \qquad (unitaire)
