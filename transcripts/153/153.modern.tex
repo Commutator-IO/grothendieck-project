@@ -21,6 +21,7 @@
 % the counterexample holds in every characteristic. Cited from the findings:
 % Elliott (arXiv:1109.3848) for the plethory structure of Int(D) over a
 % domain, Cahen-Chabert (1997) through its zbMATH review.
+% Revised: Fable 5.2 (claude-fable-5-2), 2026-11-27 — pp. 3, 5, 7: follows the revised transcription (#145).
 %
 % What the folder is. The definition of an « analyseur » — a commutative
 % pseudo-ring with a second, associative and unital, composition law, right
@@ -46,7 +47,10 @@
 %   the elements of Omega (x) Omega representing F(x+y), F(xy) need Omega
 %   free (his own margin) and K_0 (x) Omega -> K_0[T] injective, which holds
 %   for K_0 a localisation, or flat over k_0 with K_0 (x) K_0 = K_0 (revised
-%   2026-10-17: the first pass assumed K_0 (x) K_0 = K_0 alone).
+%   2026-10-17: the first pass assumed K_0 (x) K_0 = K_0 alone). The index
+%   of the tensor sign in the page's identity is inked over: K_0 or k_0
+%   (revision of 2026-11-27, machine pass, not checked by a reader); over
+%   K_0 the identity is trivial and the departure lies in the next step.
 % — page 5, 3) b): the sum is indexed by i where the family is indexed by
 %   alpha.
 % — page 7: Appl(A,A) satisfies 1) and 2) and not 3) in general (the leaf
@@ -234,7 +238,11 @@ opère sur $k_{0}$ de sorte que $(F + G)(x) = F(x) + G(x)$, $(\lambda F)(x) =
 $F \in K_{0}[T] \otimes_{k_{0}} M$ tels que $F(x) \in M$ pour tout $x \in k_{0}$
 s'identifie à $\Omega \otimes_{k_{0}} M$ --- coordonnée par coordonnée dans une
 base de $M$.\footnote{Le mot souligné qui ouvre l'énoncé est lu « Lemme »
-sans certitude. Vérifié en Lean (lean/Grothendieck/RingTheory/Folder153.lean,
+sans certitude. La page écrit l'ensemble ambiant « $K_{0}[T] \otimes_{K_{0}}
+M_{K_{0}}$ », d'après la révision du 27 novembre 2026 sur le fac-similé, passe
+machine non vérifiée par un lecteur (la première transcription lisait
+$K_{0}[T] \otimes_{k_{0}} M$) ; si $M_{K_{0}}$ est $M \otimes_{k_{0}} K_{0}$,
+c'est le même module. Vérifié en Lean (lean/Grothendieck/RingTheory/Folder153.lean,
 \texttt{lemme\_coordonnees}, \texttt{lemme\_injective},
 \texttt{lemme\_range}) : $F$ a ses valeurs dans $M$ si et seulement si ses
 coordonnées sont dans $\Omega$, $\Omega \otimes M \to K_0[T] \otimes M$ est
@@ -246,8 +254,14 @@ $\mathbf{Q}$ de $\mathbf{Z}$ --- ou, plus généralement, plat sur $k_0$ avec
 $K_{0} \otimes_{k_{0}} K_{0} = K_{0}$ --- et $\Omega$ libre comme
 $k_{0}$-module. Alors
 $K_{0}[X, Y] = K_{0}[X] \otimes_{k_{0}} K_{0}[Y]$\footnote{La page écrit ces deux égalités avec un « ? » au-dessus du signe égal
-et l'identité $K_{0}[X,Y] = K_{0}[X] \otimes_{k_{0}} K_{0}[Y]$ sans hypothèse ;
-sa marge ajoute « OK si $\Omega$ est un $k_{0}$-module \emph{libre} ». La
+et l'identité $K_{0}[X,Y] = K_{0}[X] \otimes K_{0}[Y]$ sans hypothèse ; l'indice
+du produit tensoriel, lu $k_{0}$ par la première transcription, est repassé à
+l'encre et se lit $K_{0}$ ou $k_{0}$ (révision du 27 novembre 2026 sur le
+fac-similé, passe machine non vérifiée par un lecteur, qui retient $K_{0}$ avec
+doute). Écrite sur $K_{0}$, l'identité est triviale, et l'hypothèse ci-dessus
+porte alors sur le pas suivant, de $K_{0}[X] \otimes_{K_{0}} K_{0}[Y]$ à $\Omega
+\otimes_{k_{0}} \Omega$ ; on la discute ici sous la forme sur $k_{0}$. Sa marge
+ajoute « OK si $\Omega$ est un $k_{0}$-module \emph{libre} ». La
 seconde hypothèse est la sienne, la première la nôtre : sans
 $K_0 \otimes_{k_0} K_0 = K_0$, le produit tensoriel sur $k_{0}$ est plus gros
 que $K_{0}[X,Y]$. La première lecture supposait cette seule égalité ; la
@@ -349,9 +363,11 @@ somme directe de groupes abéliens, $\Omega^{0}$ étant un idéal.\footnote{La p
 énonce la décomposition sans la justifier. On a $(F - F(0)) \circ 0 = F(0) -
 F(0) \circ 0 = 0$, $F(0)$ étant une constante, et une constante $\lambda$ telle
 que $\lambda \circ 0 = 0$ est nulle ; $\Omega^{0}$ est un idéal parce que
-$(FG) \circ 0 = (F \circ 0)(G \circ 0)$. Ces vérifications sont les nôtres. Le
-premier adjectif de la proposition est illisible ; « sous-pseudo-anneau » est
-ce que l'argument donne. Vérifié en Lean (lean/Grothendieck/RingTheory/Folder153.lean,
+$(FG) \circ 0 = (F \circ 0)(G \circ 0)$. Ces vérifications sont les nôtres. La
+proposition dit que $\Omega_{0}$ « est un sous-ps-anneau de $\Omega$ [stable par
+$\circ$ », « stable par » lu avec doute (révision du 27 novembre 2026 sur le
+fac-similé, passe machine non vérifiée par un lecteur ; la première
+transcription y laissait deux mots non lus). Vérifié en Lean (lean/Grothendieck/RingTheory/Folder153.lean,
 \texttt{isCompl\_constants\_zeroPart}, \texttt{comp\_mem\_constants}) : la
 décomposition n'utilise ni les conditions 3) ni l'unité $T$.}
 
@@ -367,7 +383,7 @@ applications, satisfait 1) et 2), et il est unitaire si $A$ l'est. Ses constante
 sont les applications constantes, et $(\Omega_{A})_{0} \simeq A$. Il ne satisfait
 pas 3) en général : pour $A$ infini, une application $(x, y) \mapsto F(x + y)$
 n'est pas une somme finie de produits $F'(x)F''(y)$.\footnote{La page dit
-« Les conditions 1°) et 2°) … vérifiées », sans parler de 3), et la
+« Les conditions 1°) et 2°) sont vérifiées », sans parler de 3), et la
 remarque sur 3) est la nôtre. Vérifiée en Lean
 (lean/Grothendieck/RingTheory/Folder153.lean, \texttt{appl\_not\_coaddition}) pour $A$
 anneau commutatif unitaire, non nul et infini : l'indicatrice de $0$ ne
@@ -378,14 +394,16 @@ vérifié par la machine.}
 $\Omega_{A/k} = \mathrm{End}(W_{k}(A))$, avec $\Omega_{0} \simeq A$ ; et plus
 généralement, pour un anneau commutatif $A$ d'un topos,
 $\Omega = \mathrm{End}_{\text{faisceaux d'ens.}}(A)$, muni des lois $xy$ et
-$\lambda \circ y$, unitaire si $A$ l'est. Il se demande, encadré :
+$x \circ y$, unitaire si $A$ l'est. Il se demande, encadré :
 $(\Omega_{A})_{0} \simeq \Gamma A$ ? C'est vrai : une constante $\lambda$ vérifie
 $\lambda = \lambda \circ c_{0}$, où $c_{0}$ est l'endomorphisme constant de valeur
 $0$, donc se factorise par l'objet final, et les constantes sont les sections
 globales de $A$.\footnote{L'argument est le nôtre. La page n'écrit pas ce qu'est
 $W_{k}(A)$ ; on le comprend comme le foncteur $R \mapsto R \otimes_{k} A$ sur les
-$k$-algèbres, et c'est ce qui donne l'exemple suivant pour $A = k$. Plusieurs mots
-de la page sont illisibles.}
+$k$-algèbres, et c'est ce qui donne l'exemple suivant pour $A = k$. La prose de
+la page, d'abord lue par fragments, se lit pour l'essentiel d'après la révision
+du 27 novembre 2026 sur le fac-similé, passe machine non vérifiée par un
+lecteur ; quelques mots y restent douteux.}
 
 \textbf{L'analyseur des polynômes.} Pour $A = k$, on trouve $\Omega \simeq k[T]$,
 avec l'addition, la multiplication et la composition des polynômes : les
@@ -424,7 +442,10 @@ déterminé par ses valeurs sur une partie infinie. Ces deux faits, et
 l'injectivité pour $k[T]$, $k$ intègre infini, sont vérifiés en Lean
 (lean/Grothendieck/RingTheory/Folder153.lean, \texttt{poly\_toAppl\_not\_injective},
 \texttt{poly\_toAppl\_injective}, \texttt{eq\_of\_comp\_intCast}). L'exemple est le nôtre ; la
-phrase de la page est à demi illisible.}
+phrase de la page est lue « On est content quand $\Omega \to
+\Omega_{\Omega_{0}}$ est injectif ! », le mot « quand » avec doute, par la
+révision du 27 novembre 2026 sur le fac-similé, passe machine non vérifiée par
+un lecteur.}
 
 \pagerange{9}{9}
 \section*{Exemples relatifs, et deux analyseurs nommés (page 9)}
