@@ -1,0 +1,22 @@
+# Readings of folder 43 to check on the facsimile (2026-11-27)
+
+Folder 43, p. 72 (batch 04): the questions that the machine revision pass of 27 November 2026 for #145 left to a reader.
+That pass read the pages again on the facsimile and was not checked by a reader; its record is `docs/review/revision-145/43.md`.
+These are the questions of the second sitting of that record (batch 04, page 72); those of the first sitting are in `folder-43-readings-2026-11-24.md`, which this file does not replace.
+Each bullet is one place where the transcription now has one reading and the facsimile decides between it and another; nothing here has been checked by a person.
+Same format as `folder-149-readings-2026-11-11.md`; `scripts/review-queue.mjs` reads every file named
+`folder-<cote>-readings-<date>.md`, one item per open box, with the id `reading-43-<batch>-<line>`.
+
+`- [ ] <cote> p<pages> batch-<NN>:<line> | reading | <where> | <our reading> | <alternative reading>`
+
+`<line>` is the line of `transcripts/43/batch-<NN>.fr.tex` on 27 November 2026 (a letter after the number tells apart two questions on one line).
+Tick a box when its answer is applied; the transcription then gains a `% Revised` line naming the issue that carried the answer.
+
+## 1. P. 72, c)
+
+- [ ] 43 p72 batch-04:832 | reading | words written above the struck passage of line 6 (the transcription gives them in a note) | « propre sur k » | « propre sur la »
+- [ ] 43 p72 batch-04:867 | reading | six lines from the foot of c), « Cette dernière se … les H¹(X − a, 𝔾_a) » | « dévisse en » | « ramène à »
+
+## 2. P. 72, d)
+
+- [ ] 43 p72 batch-04:880 | reading | d), after the struck « Hⁱ(X − a, G) = » | « une suite exacte de faisceaux » | other words (say which)
