@@ -130,6 +130,7 @@
 % Revised: Fable 5.2 (claude-fable-5-2), 2026-11-12 — \drawing marks added for the figures described only in notes: p. 1 (rows of figures), p. 2 (the figures of the envelope), p. 3 (six figures of the right half), p. 5 (the loop at x) (issue 128); the notes are kept, the text is unchanged.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-11-12 — read again on the facsimile (#145, from the drawings pass of #128), not checked by a reader.
 % Applied: p. 1, the segments carry three, four and five marks counting their ends; p. 3, six figures, not four (a segment and an open rectangle besides); notes corrected (the marks already say so).
+% Revised: Fable 5.2 (claude-fable-5-2), 2026-11-27 — read again on the facsimile, not checked by a reader. Pp. 4, 6, 7, 10, 13, 14, 15, 16 read a second time (#145); see docs/review/revision-145/104.md.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -302,40 +303,48 @@ D_n \longrightarrow X \qquad\qquad D_n^{\ill{}}
 
 \[
 t_{n-1}\bigl( (t_n y) - s_n(y) \bigr) - s_{n-1}\bigl( t_n y - s_n y \bigr)
-\qquad (= 0)
 \]
 
-\note{le zéro est écrit sous une accolade qui coiffe toute l'expression}
+\note{un zéro est écrit sous une accolade ; l'accolade ne coiffe que le
+premier terme, $t_{n-1}\bigl((t_n y) - s_n(y)\bigr)$, et non toute
+l'expression}
 
 $\mathrm{E}_0$ \quad \textbf{a)} $\forall\, s' \in F_0'$, $\exists\, s \in F_0$,
-$u \in F_1'$, $f(u) : \ill{} \longrightarrow s'$
+$u \in F_1'$, $f_0(s) \overset{u}{\longrightarrow} s'$
 
-\textbf{b)} $\forall\, s, t \in F_0$, $u' : f(s) \longrightarrow f(t)$
+\textbf{b)} $\forall\, s, t \in F_0$, $u' : f_0(s) \longrightarrow f_0(t)$
 \quad ($u' \in F_1'$), \quad $\exists\, u \in F_1$, $u : s \longrightarrow t$
 --- $\pi_0(f)$ inj.
 
 $\mathrm{E}_1$ \quad \textbf{b')} $\forall\, s, t \in F_0$,
-$u' : f(s) \longrightarrow f(t)$ \quad ($u' \in F_1'$), \quad
+$u' : f_0(s) \longrightarrow f_0(t)$ \quad ($u' \in F_1'$), \quad
 $\exists\, u \in F_1$, $u : s \longrightarrow t$, \quad $f(u) \ill{} u'$
 \quad ($\in F_2$)
+--- $\pi_0(f)$ inj. et $\pi_1(f)$ \uncertain{surj.}
 
 \textbf{c)} \struck{$\forall\, s, t \in F_0$,} $u, v \in F_1$,
 $s_1(u) = s_1(v)$, $t_1(u) = t_1(v)$, et $w' : f(u) \longrightarrow f(v)$
-\quad ($\in F_2'$), \quad $\exists\, w : \ill{}$ \quad ($\in F_2$)
+\quad ($\in F_2'$), \quad $\exists\, w : \struck{\ill{}}
+\uncertain{u \longrightarrow v}$ \quad ($\in F_2$)
 --- $\pi_1(f)$ inj.
 
 $\mathrm{E}_2$ \quad \textbf{c')} $\forall\, (u,v) \in F_1$,
 $s_1(u) = s_1(v)$, $t_1(u) = t_1(v)$, et $w' : f(u) \longrightarrow f(v)$
 \quad ($\in F_2'$), \quad $\exists\, w : u \longrightarrow v$ \quad ($\in F_2$)
-\struck{\ill{}} tel que $w \sim f(w)$
+\struck{\ill{}} tel que $\uncertain{w'} \sim f(w)$
+--- $\pi_1(f)$ inj. et $\pi_2(f)$ \uncertain{surj.}
 
-\note{la dernière ligne écrit $w \sim f(w)$ ; le sens demande $w' \sim f(w)$}
+\note{à la dernière ligne, un petit trait suit le $w$, lu comme un prime :
+$w' \sim f(w)$, ce que le sens demande. Les mentions « $\pi_0(f)$ inj. et
+$\pi_1(f)$ surj. » et « $\pi_1(f)$ inj. et $\pi_2(f)$ surj. » sont écrites
+à droite, à hauteur de b') et de c'), la seconde dans un cadre}
 
 \marginal{($C_i$) $\forall\, w' \in F_i'$, \struck{\ill{}} $\exists\, w \in F_i$
-tel que $f(w) \sim w'$. De plus si $i \geq 1$, on peut \ill{} se donner
-d'avance \ill{} $u = s(w)$, $t = t(w)$, \ill{} aux seules conditions \ill{}
-tels que $f(u) = u'$, \ill{} ; et de plus, si $i - 1 \geq 1$, i.e. $i \geq 2$,
-après $s(u) = s(v)$, $t(u) = t(v)$. (N.B. \ill{} pour que $f(u) = u'$.)}
+tel que $f(w) \sim w'$. De plus si $i \geq 1$, on peut se donner
+d'avance \add{\uncertain{dans $F_{i-1}$}} $u = s_i(w)$, \add{$v =$} $t_i(w)$,
+\uncertain{soumis} aux seules conditions \struck{\ill{}}
+que $f(u) = u'$, $\uncertain{f}(v) = v'$ ; et de plus, si $i - 1 \geq 1$, i.e. $i \geq 2$,
+après $s(u) = s(v)$, $t(u) = t(v)$. (N.B. \ill{} \uncertain{nécessaire} pour que $f(u) = u'$.)}
 
 \note{cette colonne occupe toute la marge droite du feuillet et n'est lisible
 que par fragments}
@@ -437,18 +446,18 @@ $M$-isomorphes à $D'$.
 
 \struck{Soit $K$ un ens.\ ordonné}
 
-Soit $\mathbb{N}$ l'ens.\ (préordonné) des classes d'isom.\ d'objets de $M$
-\note{il est en fait ordonné, grâce à (ii) — l'incise est interlinéaire}
+Soit $\mathbb{N}$ l'ens.\ \add{préordonné} des classes d'isom.\ d'objets de
+$M$. \add{Il est en fait \emph{ordonné}, grâce à (ii).}
 Pour $\forall\, n \in \mathbb{N}$, un \struck{s} objet $D_n$ de
 \struck{$M$} de classe $n$ est déterminé à isom.\ unique près,
-\uncertain{$\therefore$ comme dans (ii)} donc l'ens.\ ordonné
+\uncertain{à cause de} (ii), donc l'ens.\ ordonné
 $\widetilde{D}_n = I_n$ est défini à isom.\ unique près. On a donc
-\struck{\ill{}} une famille $(\widetilde{D}_n)_{n \in \mathbb{N}}$ d'ens.\
+\struck{plus, \ill{}} une famille $(I_n)_{n \in \mathbb{N}}$ d'ens.\
 ordonnés, indexés par l'ensemble ordonné $\mathbb{N}$.
 
 \page{7}
 
-De plus, on se \struck{\ill{}} \uncertain{rappelle} la définition de
+De plus, se \uncertain{rappelant} la définition de
 
 \[
 I_n = \widetilde{D}_n = \text{ens.\ des sous-objets de } D_n
@@ -466,8 +475,9 @@ dont l'image est fournie \struck{dans} de l'ens.\
 \struck{$I_{\leq n}$} \add{des} $\mathbb{N}_{\leq n} = \{n' \in \mathbb{N}
 \mid n' \leq n\}$.
 
-Notons que \uncertain{déjà} $I_n$ a un plus grand élément, qui est
-« $D_n$ » (au sens \uncertain{que c'est} un sous-objet maximal de $D_n$), et
+Notons que \uncertain{chaque} $I_n$ a un plus grand élément, qui est
+« $D_n$ » (\uncertain{en tant que} \ill{} \add{\uncertain{le}} sous-objet
+maximal de $D_n$), et
 que je note $d_n$. On a donc (par (ii))
 
 \[
@@ -485,7 +495,7 @@ l'application
 \qquad u \longmapsto u(d_{n'})
 \]
 
-qui est une bijection des Hom sur l'ens.\ $\tau_n^{-1}(n')$, et considérons
+qui est une bijection des Hom avec l'ens.\ $\tau_n^{-1}(n')$, et considérons
 
 \begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
 \mathrm{Hom}(D_{n'}, D_n) \arrow[r] & \mathrm{Hom}(\widetilde{D}_{n'}, \widetilde{D}_n)
@@ -504,7 +514,8 @@ on en déduit une \struck{bijec\ill{}} application
 
 \note{sous le membre de droite le feuillet porte
 $[\mathrm{Hom}(D_{n'}, D_n)]$ surmonté d'un signe $\simeq$ ; à droite,
-« une des éléments de $I_n$ de type $n'$ »}
+sous une accolade qui souligne $I_{n',n}$, « ens.\ des éléments de $I_n$
+de type $n'$ »}
 
 qui est injective, \add{ou} plus précisément on a la commutativité de
 
@@ -620,24 +631,27 @@ Inversement, de telles données définissent une catégorie $M_0$, satisfaisant 
 
 N.B. Dans les cas que j'ai en tête, $\mathbb{N} = \mathbf{N}$.
 
-\textbf{Ex 1} Catégorie des ens.\ finis tot.\ ordonnés $\Delta_n$, i.e.\ des
-$\Delta_n = \ill{}$ et des applications strictement croissantes
-\note{au-dessus de la ligne, souligné : « $n$-places types »}
+\textbf{Ex 1} Catégorie des ens.\ finis tot.\ ordonnés (ou : des
+\emph{$n$-simplexes} types $\Delta_n = \add{[0, n]}$) et des applications
+strictement croissantes
+\note{le $[0, n]$ est écrit sous la ligne et rattaché par un arc à la place
+qui suit « $\Delta_n =$ »}
 
-\marginal{$I_n = \mathfrak{P}^*(\Delta_n)$, \quad Card $I_n = 2^{n+1} - 1$
-\qquad ($n$-places types)}
+\marginal{$I_n = \mathfrak{P}^*(\Delta_n)$, \quad Card $I_n = 2^{n+1} - 1$}
 
-\textbf{Ex 2} Catégorie des \struck{cubes} \struck{\ill{}} épinglés, i.e.\ des
-\ill{} \struck{\ill{}} combinatoires, \struck{$A$, $\widetilde{A}$, \ill{},
+\textbf{Ex 2} Catégorie des « \struck{cubes} \add{\emph{cubes}}
+épinglés », \struck{i.e.} dont les objets sont les \struck{\ill{}} cubes
+combinatoires, \struck{$A$, $\widetilde{A}$, \ill{},
 $\widetilde{A} = A$} épinglés par un ordre total sur l'ens.\ des paires
-d'hyperfaces, et le choix d'une \ill{} de chaque paire. \ill{} L'épinglage
-d'un cube induit un épinglage de toute face, dans \ill{}
+d'hyperfaces, \struck{ou} et le choix d'une hyperface \uncertain{notée} $+$
+dans chaque paire. \ill{} L'épinglage
+d'un cube induit un épinglage de toute face, dans \struck{\ill{}}
 
 \marginal{$I_n = $ ens.\ des \struck{\ill{}} \uncertain{sections} \ill{}
 $\Delta_{n-1} \times \{\pm 1\} \to \Delta_{\uncertain{n-1}}$ \ill{}
 d'ordres \ill{} épinglés \ill{} \quad Card $I_n = 3^n$}
 
-\textbf{Ex. 3} Catégorie \struck{des} \add{des} \uncertain{hémisphères} $D_n$,
+\textbf{Ex. 3} Catégorie \struck{des} \add{des} \emph{hémisphères} $D_n$,
 où
 
 \[
@@ -657,7 +671,7 @@ dans cette note-là, à côté de l'Ex. 2, et ne porte pas sur l'Ex. 3. Le
 $(\Delta_n \times \{\pm 1\}) \sqcup \{d_n\}$ du corps, dont le cardinal est
 $2n+3$ ; l'écart est signalé et non réparé}
 
-Dans \struck{tous} \add{trois} ces exemples, on a
+Dans \struck{tous} ces \add{trois} exemples, on a
 $I_n^* = I_n \smallsetminus \{d_n\}$
 
 \begin{itemize}
@@ -748,23 +762,23 @@ dites \ill{} $(= K(n))$ \uncertain{admissibles}}
 et la propriété de transitivité pour les applications admissibles
 
 \[
-(2) \qquad \forall\, \xi \in K,\ y \in I_n \ (n = \tau_K(\xi)),
-\quad \text{on a, si } n' = \tau_n(y),
+(2) \qquad \forall\, \xi \in K,\ \eta \in I_n \ (n = \tau_K(\xi)),
+\quad \text{on a, si } n' = \tau_n(\eta),
 \]
 \[
-\struck{H}\ u_\xi^K \circ u_y^n = u_\zeta^K,
-\qquad \text{\add{où} } \zeta = u_\xi^K(y),
+\struck{H}\ u_\xi^K \circ u_\eta^n = u_\zeta^K,
+\qquad \text{où } \zeta = u_\xi^K(\eta),
 \]
 
-mais \struck{(2) Si $\xi \in K$, $y \in K$, alors}
+\uncertain{enfin} \struck{(3) Si $\xi \in K$, $\eta \in K$, alors}
 
 La catégorie dont les objets sont les objets admissibles de $\widehat{M}$, les
-flèches les \uncertain{homs.} entre eux, est équivalente à \ill{} : celle des
+flèches les homs entre eux, est équivalente à celle des
 ens.\ ordonnés $M$-épinglés.
 
-D'autre part les objets quelconques de $\widehat{M}$ et leurs \ill{} se
-reconstituent également, ce sont les \uncertain{applications strictement
-croissantes}
+D'autre part les homs quelconques \add{dans $\widehat{C}$ entre tels objets}
+se reconstituent également, ce sont les applications
+\emph{strictement croissantes}
 
 \[
 K \overset{f}{\longrightarrow} L
@@ -774,53 +788,60 @@ telles que
 
 \begin{itemize}
 \item[a)] $\tau_L \circ f = \tau_K$
-\item[b)] pour $\forall\, \xi \in K$, (on ait, \add{pour $y = f(\xi) \in L$})
+\item[b)] pour $\forall\, \xi \in K$, on ait, \add{posant $\eta = f(\xi) \in L$,}
 la commutativité de
 \end{itemize}
 
 \begin{tikzcd}[column sep=small, row sep=small, nodes={font=\scriptsize}]
-K_{\leq \xi} \arrow[rr, "f|K_{\leq \xi}"] & & K_{\leq y} \\
+K_{\leq \xi} \arrow[rr, "f|K_{\leq \xi}"] & & L_{\leq \eta} \\
 & I_n \arrow[ul, "\sim"] \arrow[ur, "\sim"'] &
 \end{tikzcd}
 
-\note{le sommet de droite est tracé comme un $K$ ; $f$ allant de $K$ dans $L$,
-on attend $L_{\leq y}$, qui est ce qu'écrit la page 14. Les deux obliques ne
-portent qu'un signe d'isomorphie ; ce sont $u_\xi^K$ et $u_y^L$. Où
-$n = \tau_K(\xi) = \tau_L(y)$}
+où $n = \tau_K(\xi) = \tau_L(\eta)$
+
+\note{au sommet de droite un $L$ est repassé en trait gras sur un $K$, et de
+même l'indice de $\tau_L(\eta)$ : c'est $L_{\leq \eta}$, que reprend la
+page 14. Les deux obliques ne portent qu'un signe d'isomorphie ; ce sont
+$u_\xi^K$ et $u_\eta^L$}
 
 \page{14}\note{sa page 5}
 
 ce qui implique en particulier que $f|K_{\leq \xi}$ induit un iso
 
 \[
-K_{\leq \xi} \overset{\sim}{\longrightarrow} L_{\leq y}
+K_{\leq \xi} \overset{\sim}{\longrightarrow} L_{\leq \eta}
 \]
 
 Nous nous intéressons surtout au cas où $f$ est injectif, ce qui correspond
-\struck{\ill{}} au cas \struck{des} des \uncertain{monos} dans $\widehat{C}$.
+\struck{\ill{}} au cas \struck{des} des \emph{monos} dans $\widehat{C}$.
 
-Alors \struck{\ill{}} $f$ induit \struck{\ill{}} un \uncertain{isom.} de $K$
+Alors $f$ induit un \emph{isom.} de $K$
 sur \struck{\ill{}} son image $L' = f(K)$, muni de l'ordre induit par $L$.
-Notons que $L'$ est une partie fermée de $L$ ($x \in L'$, $y \leq x
+Notons que $L'$ est une partie \emph{fermée} de $L$ ($x \in L'$, $y \leq x
 \Rightarrow y \in L'$) et que les parties fermées admettent un $M$-épinglage
 induit \struck{\ill{}} unique, tel que l'inclusion soit admissible (épinglage
-induit) --- et remarquons\supplied{:} que $f$, bien sûr
+induit) --- et remarquons : $f$, bien sûr
 $K \overset{f}{\underset{\sim}{\longrightarrow}} L'$, est compatible avec les
 $M$-épinglages.
 
 \page{15}
 
-Un cas intéressant est celui où $K$ \struck{\ill{} est la partie formée par
-\ill{}} et \ill{} objets modèles, ce qui signifie que $K$ \ill{} est fini, ou
-du moins \supplied{n'a qu'un nombre fini d'}éléments maximaux, et que $K$ est
-engendré par ses éléments maximaux. Pour un tel ens.\ \ill{} \add{le
-\ill{}} \ill{} qui a cette propriété, un $M$-épinglage est connu quand on
-connaît les $u_\alpha^K$ pour $\alpha \in \ill{}$ des \ill{}.
+Un cas intéressant est celui où $\uncertain{X}$ \struck{admet \ill{}
+\uncertain{objets maximaux}, et} est \uncertain{le sup d'un} ens.\ fini de
+sous-objets modèles, ce qui signifie que l'ens.\ des éléments maximaux de $K$
+\add{\uncertain{$= X$}} est fini, et que tout élément de $K$ est majoré par
+un élément maximal. Pour un ens.\ ordonné \uncertain{ayant} \struck{\ill{}}
+\add{\uncertain{la 2ième}} propriété, un $M$-épinglage est connu quand on
+connaît les $u_\alpha^K$ pour $\alpha$ \add{$\in K$} maximal.
 
-La condition pour que les
+\note{à la première ligne la lettre est un $K$ et un $X$ tracés l'un sur
+l'autre ; la suite (« sous-objets modèles ») parle de l'objet $X$. La
+deuxième ligne porte deux couches, la plus basse biffée d'un trait}
+
+La condition pour que des isoms.
 
 \[
-u_\alpha^K : I_{\tau_n(\alpha)} \overset{\sim}{\longrightarrow} K_{\leq \alpha}
+u_\alpha^K : I_{\tau_K(\alpha)} \overset{\sim}{\longrightarrow} K_{\leq \alpha}
 \qquad (\alpha \in \mathrm{Max}\,K)
 \]
 
@@ -832,7 +853,7 @@ $n = \tau_K(\xi)$, les deux iso
 I_n \overset{\sim}{\longrightarrow} K_{\leq \xi}
 \]
 
-définis par l'épinglage \struck{\ill{}} $u_\alpha^K$ de $K_{\leq \alpha}$, et
+définis par l'épinglage \struck{des} $u_\alpha^K$ de $K_{\leq \alpha}$, et
 par l'épinglage $u_\beta^K$ de $K_{\leq \beta}$, soient les
 \uncertain{mêmes}.
 
@@ -840,14 +861,18 @@ par l'épinglage $u_\beta^K$ de $K_{\leq \beta}$, soient les
 
 La catégorie des objets admissibles de $\widehat{C}$ est stable par
 \struck{les} \struck{l'opération} sommes quelconques, et par sommes
-amalgamées $X \sqcup_Z Y$, dans \ill{} $Z \to X$ et $Z \to Y$ des monos, et
+amalgamées $X \sqcup_Z Y$, dans $Z \to X$ et $Z \to Y$ des monos, et
 \add{de la} le foncteur $X \longrightarrow \widetilde{X}$ commutant à ces
-opérations, \ill{} de façon évidente. De plus, les objets de type fini
+opérations, \uncertain{dans un sens} évident. De plus, les objets de type fini
 donnent des objets de t.f., pourvu, toutefois, \add{dans} le cas des sommes,
-qu'elles se bornent à des sommes \uncertain{finies}.
+qu'elles se bornent à des sommes \emph{finies}.
+
+\note{« dans un sens évident » : les deux mots qui précèdent « évident »,
+écrit sans $e$ final, sont de simples ondulations ; la lecture antérieure
+était « de façon évidente »}
 
 N.B. Quand les $I_n$ sont finis, alors les objets \add{adm.} de t.f.\ de
 $\widehat{C}$ \struck{\ill{}} correspondent aux ens.\ ordonnés
-$M$-épinglés $K$ qui sont \uncertain{finis}.
+$M$-épinglés $K$ qui sont \emph{finis}.
 
 \end{document}
