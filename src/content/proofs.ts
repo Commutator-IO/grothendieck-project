@@ -2350,4 +2350,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/AlgebraicGeometry/Folder32PullbackKernelIndex.lean',
     theorems: ['exists_mem_closure_comp_eq_smul', 'smul_eq_zero_of_mem_closure', 'exists_comp_eq_gcd_smul', 'gcd_smul_eq_zero', 'exists_mem_closure_comp_eq_zsmul_id', 'exists_comp_eq_gcd_zsmul_id'],
   },
+  {
+    folder: '9',
+    batch: 2,
+    page: '24, 26',
+    name: 'The determinant of a positive symmetric element: the algebraic core',
+    statement:
+      'In a monoid with involution (StarMul), if Δ(u)Δ(u*) = d and u* = u, then Δ(u)² = d. If moreover Δ is multiplicative with values in an ordered commutative ring and u = v·v with v* = v, then 0 ≤ Δ(u), so with real values Δ(u) = √d. A positive semidefinite real matrix is v·v with v symmetric, and det A = √(det A · det Aᵀ) for A positive semidefinite.',
+    found:
+      'The argument of pages 24 and 26 holds once the identity Δ(u)Δ(u*) = deg u and a symmetric square root are given, and nothing about abelian varieties is formalised (GrothendieckArchivesProofs #92; Grothendieck/AlgebraicGeometry/Folder9SymmetricDeterminant.lean). Page 24 is the step Δ(u)² = d from u* = u; page 26 is the sign, Δ(u) = Δ(v)² ≥ 0 for u = v² with v symmetric. The degree enters only through the value d, so no degree map is defined. In the model case of real matrices, with the transpose as involution and Δ = det, the square root is the one of the continuous functional calculus. Not formalised: abelian varieties, the Rosati involution, T_p and its étale part, deg, and the identity Δ(u)Δ(u*) = deg u, a hypothesis; the passage from End(A) ⊗ Q to End(A) ⊗ R, that is the rationality of Δ on the symmetric part, the multiplicativity of its extension and the symmetric square roots on the positive cone; the case u = w w*.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/AlgebraicGeometry/Folder9SymmetricDeterminant.lean',
+    theorems: ['sq_eq_of_star_eq', 'nonneg_and_sq_eq_of_eq_mul_self', 'eq_sqrt_of_eq_mul_self', 'exists_star_eq_mul_self_eq', 'det_eq_sqrt_det_mul_det_transpose'],
+  },
 ];

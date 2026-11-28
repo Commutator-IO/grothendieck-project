@@ -34,7 +34,21 @@ Pour un schéma abélien $A$ ordinaire localement polarisable sur une base conne
 Pour une variété abélienne ordinaire polarisée $A$ et $u \in \mathrm{End}(A) \otimes \mathbf Q$ symétrique et positif pour l'involution de Rosati, le déterminant de $u$ sur la partie étale du module de Tate $p$-adique vaut $+\sqrt{\deg u}$.
 \end{theoreme*}
 \end{encadre}
-{\small Les feuillets en esquissent une démonstration incomplète : la page~24 ramène l'énoncé au signe, et la page~26 l'obtient par positivité, $u = v^2$ sur le cône positif ; l'identité $\Delta(u)\Delta(u^*) = \deg u$ y repose sur une justification illisible, et la restriction de l'argument de rationalité aux éléments symétriques est de l'édition.\par}
+{\small Les feuillets en esquissent une démonstration incomplète : la page~24 ramène l'énoncé au signe, et la page~26 l'obtient par positivité, $u = v^2$ sur le cône positif ; l'identité $\Delta(u)\Delta(u^*) = \deg u$ y repose sur une justification illisible, et la restriction de l'argument de rationalité aux éléments symétriques est de l'édition. Mathlib n'a pas les variétés abéliennes ni leurs modules de Tate. On se reportera aux notes de Grothendieck (\lot{9}{2}{24}). L'argument des pages~24 et~26 est démontré dans l'encadré suivant ; l'identité $\Delta(u)\Delta(u^*) = \deg u$ y est une hypothèse, et les variétés abéliennes, l'involution de Rosati et la partie étale de $T_p$ n'y figurent pas.\par}
+
+\begin{encadre}
+\begin{enonce}[D'après les pages 24 et 26, le signe du déterminant d'un élément symétrique positif\piste{9-symmetric-positive-det-sqrt-degree}]\verifie[\leanblobmain]{AlgebraicGeometry/Folder9SymmetricDeterminant}
+Soient $M$ un monoïde muni d'une involution $x \mapsto x^*$ telle que $(xy)^* = y^*x^*$, $K$ un anneau commutatif, $\Delta : M \to K$, $u \in M$ et $d \in K$ tels que $\Delta(u)\,\Delta(u^*) = d$.
+\begin{enumerate}
+\item Si $u^* = u$, alors $\Delta(u)^2 = d$.
+\item Si $K$ est un anneau ordonné, $\Delta$ un morphisme de monoïdes et $u = v^2$ avec $v^* = v$, alors $\Delta(u) \geq 0$ et $\Delta(u)^2 = d$ ; si $K = \mathbf R$, $\Delta(u) = \sqrt d$.
+\item Toute matrice réelle symétrique positive $A$ est le carré d'une matrice symétrique, et $\det A = \sqrt{\det A \cdot \det {}^t\!A}$.
+\end{enumerate}
+\end{enonce}
+\end{encadre}
+{\small \emph{Démonstration.} (1) On remplace $u^*$ par $u$ (\texttt{sq\_eq\_of\_star\_eq}). (2) $u^* = v^* v^* = v^2 = u$, d'où $\Delta(u)^2 = d$ par~(1), et $\Delta(u) = \Delta(v)^2 \geq 0$ ; dans $\mathbf R$, la racine carrée positive de $d$ est donc $\Delta(u)$ (\texttt{nonneg\_and\_sq\_eq\_of\_eq\_mul\_self}, \texttt{eq\_sqrt\_of\_eq\_mul\_self}). (3) La racine carrée de $A$ par le calcul fonctionnel continu est symétrique et de carré $A$ (\texttt{exists\_star\_eq\_mul\_self\_eq}) ; on applique~(2) au déterminant, la transposition étant l'involution (\texttt{det\_eq\_sqrt\_det\_mul\_det\_transpose}).
+
+L'énoncé~(1) est le pas de la page~24, (2) celui de la page~26, qui règle le signe que la page~24 laisse ouvert (\q{Il faut encore exorciser le signe}), et (3) le cas modèle des matrices symétriques que la page a en vue ; le degré n'intervient que par la valeur $d$ de $\Delta(u)\Delta(u^*)$. Ne sont pas formalisés les variétés abéliennes, l'involution de Rosati, le module $T_p$ et sa partie étale, le degré et l'identité $\Delta(u)\Delta(u^*) = \deg u$, qui est une hypothèse, ni le passage de $\mathrm{End}(A) \otimes \mathbf Q$ à $\mathrm{End}(A) \otimes \mathbf R$ : la rationalité de $\Delta$ sur la partie symétrique, la multiplicativité de son prolongement et les racines carrées symétriques du cône positif ; le cas $u = ww^*$ n'est pas traité. L'énoncé encadré plus haut reste non démontré.\par}
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 23 à 29 et 33, équivalence d'Albanese\piste{14-albanese-equivalence-ring}]\nonverifie
