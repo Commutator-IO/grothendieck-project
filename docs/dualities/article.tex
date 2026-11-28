@@ -111,6 +111,17 @@ finitely many members of any family whose ideal contains them, are exactly the p
 This is Caramello's recovery through the invariant of compactness \cite[\S3.3, \S4.2]{caramello-stone}.
 The spatial half, with the prime filters as points, is in \S\ref{sec:registry}.
 
+\paragraph{Points.} The passage from locales to spaces uses the points of the topos, read on the
+two sites. Caramello's Theorem~7.4 \cite{caramello-stone}: for a preorder $C$ with a coverage
+$J$, the $J$-prime filters on $C$ (nonempty, down-directed upper sets meeting every covering sieve
+of each of their elements) correspond to the completely prime filters on the frame of $J$-ideals,
+by $\mathfrak F\mapsto\{c\mid {\downarrow_J}c\in\mathfrak F\}$. Lean:
+\lean{Bridges/Dualities/Points.lean}, \lean{primeFilterEquiv}, for every preorder and coverage at
+once; its proof uses that the closure preserves binary meets of lower sets
+(\lean{closure_inter_subset}), the frame law of the ideals. It is the generic step of the spatial
+halves; for distributive lattices it identifies the points of the Stone locale with the prime
+filters, and whether there are enough of them is the prime ideal theorem.
+
 \section{The grid of translations, checked on finite cases}\label{sec:grid}
 Caramello's second use of the bridge transfers an invariant of the topos across a duality, so that a
 property of the structure becomes a property of its locale or space \cite[\S7.3]{caramello-stone}.
