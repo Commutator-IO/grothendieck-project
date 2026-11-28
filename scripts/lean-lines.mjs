@@ -49,9 +49,12 @@ for (const f of leanFiles(repo)) {
     if (ns) return void stack.push(ns[1]);
     const end = /^end\s+(\S+)/.exec(l);
     if (end && stack.at(-1) === end[1]) return void stack.pop();
-    const d = DECL.exec(l);
+    const anon = /^(?:@\[[^\]]*\]\s*)*(?:(?:private|protected|noncomputable|scoped|local)\s+)*instance\s*(?:\[[^\]]*\]\s*)?:\s*([A-Za-z_][\w.]*)/.exec(l);
+    const d = DECL.exec(l) ?? (anon && [l, 'instance', `inst${anon[1].split('.').at(-1)}`]);
     if (!d) return;
-    let name = d[2].replace(/^_root_\./, '');
+    // `name.{u}` (universe parameters) leaves a trailing dot; an anonymous instance is named
+    // inst<Class>, the short form the proof cards use.
+    let name = d[2].replace(/^_root_\./, '').replace(/\.$/, '');
     const full = d[2].startsWith('_root_.') ? name : [...stack, name].join('.');
     if (!byName.has(full)) byName.set(full, [path, i + 1]);
     const short = name.split('.').at(-1);
