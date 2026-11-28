@@ -9,6 +9,8 @@ public import Mathlib.Order.CompleteBooleanAlgebra
 public import Mathlib.Order.Atoms
 public import Mathlib.Order.UpperLower.Basic
 public import Mathlib.Order.Birkhoff
+public import Mathlib.Order.UpperLower.CompleteLattice
+public import Mathlib.Order.UpperLower.Principal
 
 /-!
 # The Comparison Lemma for preorders, and Lindenbaum–Tarski duality as one of its readings
@@ -28,6 +30,9 @@ the subterminal objects, are not formalised; the order isomorphism is.
 * `birkhoffOrderIso`: Birkhoff's representation of a finite distributive lattice, from the
   coherent coverage (finite joins) and the sup-irreducible elements; it agrees with Mathlib's
   `OrderIso.lowerSetSupIrred` (`birkhoffOrderIso_apply`).
+* `orderIsoSupercompact`: preorders and Alexandrov locales. With the trivial coverage the ideals
+  are the lower sets, and a partial order is recovered from them through an invariant, as the
+  supercompact elements, which are the principal lower sets.
 * `completeAtomicBooleanAlgebraOrderIsoSetAtoms`: Lindenbaum–Tarski duality, obtained by taking
   for `C` a complete atomic Boolean algebra with its canonical coverage, for `D` its atoms, and
   reading the two sides: the `J`-ideals of `C` are its principal ideals, and the induced
@@ -319,5 +324,71 @@ theorem birkhoffOrderIso_apply [Fintype L] [DecidablePred (SupIrred (α := L))] 
   SetLike.coe_injective rfl
 
 end Birkhoff
+
+/-! ## Preorders and Alexandrov locales: recovering the structure through an invariant -/
+
+section Alexandrov
+
+open PreorderCoverage
+
+variable (P : Type*) [PartialOrder P]
+
+/-- The trivial coverage: only the principal sieve covers. -/
+def trivialCoverage : PreorderCoverage P where
+  covers a := {Iic a}
+  isLowerSet_of_mem := by
+    rintro a S rfl x y hxy hy
+    exact hxy.trans hy
+  le_of_mem := by
+    rintro a S rfl b hb
+    exact hb
+  stable := by
+    rintro a S rfl b hba
+    exact ⟨Iic b, rfl, fun t ht => ⟨t, ht.trans hba, le_rfl⟩⟩
+
+/-- First reading: the ideals of the trivial coverage are the lower sets, the opens of the
+Alexandrov topology. -/
+def trivialIdealOrderIso : (trivialCoverage P).Ideal ≃o LowerSet P where
+  toFun I := ⟨I.1, I.2.1⟩
+  invFun I := ⟨I, I.lower, by
+    rintro a S rfl hS
+    exact hS le_rfl⟩
+  left_inv I := rfl
+  right_inv I := rfl
+  map_rel_iff' := Iff.rfl
+
+/-- An element `x` of a complete lattice is supercompact when it lies below an element of every
+family whose join it lies below. -/
+def IsSupercompact {L : Type*} [CompleteLattice L] (x : L) : Prop :=
+  ∀ S : Set L, x ≤ sSup S → ∃ s ∈ S, x ≤ s
+
+/-- The supercompact lower sets are the principal ones. -/
+theorem isSupercompact_iff (x : LowerSet P) : IsSupercompact x ↔ ∃ p, x = LowerSet.Iic p := by
+  constructor
+  · intro hx
+    obtain ⟨s, ⟨p, hp, rfl⟩, hxs⟩ := hx (LowerSet.Iic '' (x : Set P)) fun q hq =>
+      LowerSet.mem_sSup_iff.2 ⟨LowerSet.Iic q, ⟨q, hq, rfl⟩, le_rfl⟩
+    exact ⟨p, le_antisymm hxs (LowerSet.Iic_le.2 hp)⟩
+  · rintro ⟨p, rfl⟩ S hS
+    obtain ⟨s, hs, hps⟩ := LowerSet.mem_sSup_iff.1 (LowerSet.Iic_le.1 hS)
+    exact ⟨s, hs, LowerSet.Iic_le.2 hps⟩
+
+theorem isSupercompact_Iic (p : P) : IsSupercompact (LowerSet.Iic p) :=
+  (isSupercompact_iff P _).2 ⟨p, rfl⟩
+
+/-- Second reading, the recovery: a partial order is the poset of supercompact elements of the
+frame of its lower sets, which `trivialIdealOrderIso` identifies with the ideals of the trivial
+coverage. -/
+noncomputable def orderIsoSupercompact : P ≃o {x : LowerSet P // IsSupercompact x} where
+  toFun p := ⟨LowerSet.Iic p, isSupercompact_Iic P p⟩
+  invFun x := ((isSupercompact_iff P _).1 x.2).choose
+  left_inv p :=
+    (LowerSet.Iic_inj.1 ((isSupercompact_iff P _).1 (isSupercompact_Iic P p)).choose_spec).symm
+  right_inv x := Subtype.ext ((isSupercompact_iff P _).1 x.2).choose_spec.symm
+  map_rel_iff' {p q} := by
+    change LowerSet.Iic p ≤ LowerSet.Iic q ↔ p ≤ q
+    simp
+
+end Alexandrov
 
 end Bridges.Dualities

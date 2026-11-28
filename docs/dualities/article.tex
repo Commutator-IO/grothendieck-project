@@ -88,6 +88,17 @@ trivial (\lean{SupIrred.finset_sup_eq}), so its ideals are the lower sets. Lean:
 \lean{birkhoffOrderIso}, and \lean{birkhoffOrderIso_apply} proves it equal to Mathlib's
 \lean{OrderIso.lowerSetSupIrred}.
 
+\begin{bridge}[Preorders and Alexandrov locales]
+A partial order $P$ is recovered from the frame of its lower sets as its supercompact elements.
+\end{bridge}
+\emph{Inputs:} $C=P$; the trivial coverage (only $\downarrow a$ covers $a$); no dense part is
+needed. \emph{Readings:} the ideals are the lower sets (\lean{trivialIdealOrderIso}); and, following
+Caramello's recovery of a structure through an invariant \cite[Thm.~3.27]{caramello-stone}, the
+supercompact elements (below a member of every family whose join they are below) are exactly the
+principal lower sets (\lean{isSupercompact_iff}), so $P\simeq\{x\mid x \text{ supercompact}\}$
+(\lean{orderIsoSupercompact}). This is the localic half of the correspondence between preorders
+and Alexandrov spaces; the spatial half needs the points (\S\ref{sec:registry}).
+
 \section{The registry of targets}\label{sec:registry}
 \begin{center}\small
 \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.6cm}}
@@ -96,7 +107,7 @@ duality (Mathlib) & inputs of the machine & status\\
 \midrule
 Lindenbaum--Tarski & complete atomic Boolean algebra, canonical coverage, atoms & checked in Lean\\
 Birkhoff, finite (\lean{Order/Birkhoff.lean}) & finite distributive lattice, coherent coverage, sup-irreducibles & checked, equal to Mathlib's\\
-preorders and Alexandrov spaces (\lean{AlexandrovDiscrete.lean}) & a preorder, trivial coverage; points: the principal filters & to do\\
+preorders and Alexandrov spaces (\lean{AlexandrovDiscrete.lean}) & a partial order, trivial coverage, recovery by supercompact elements; points: the principal filters & localic half checked; spatial half to do\\
 spatial frames and sober spaces (\lean{FrameAdjunction.lean}) & a frame, canonical coverage; points: completely prime filters \cite[\S4.3]{caramello-stone} & to do\\
 Stone, distributive lattices and Boolean algebras & coherent coverage; points: prime filters, whose existence needs the prime ideal theorem \cite[\S4.2]{caramello-stone} & to do; the choice step is not mechanical\\
 Priestley, Esakia (\lean{Topology/Order/Priestley.lean}) & as Stone, with the order on prime filters & to do; Mathlib has the spaces, not the duality\\
