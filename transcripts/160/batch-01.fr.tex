@@ -5,6 +5,7 @@
 % checked against the pencilled numbers bottom-left.
 % Page 17 is blank and carries no mathematics — absent.
 % Pass: Opus 5 (claude-opus-5), 2026-09-19 — first pass, unchecked against the pages by a human.
+% Revised: Fable 5.2 (claude-fable-5-2), 2026-11-28 — read again on the facsimile, not checked by a reader. Pp. 9, 13, 14 read a second time (#145); see docs/review/revision-145/160.md.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -394,7 +395,7 @@ et
 \[
   \Delta_0 = \pm\,\Delta_n^{p}\,(-1)^n
 \]
-\uncertain{au signe près}
+au signe près
 \note{la puissance de $\Delta_n$ est ici lue $p$ ; le corollaire qui suit
 donne $\Delta_n^{p-1}$ pour $A_0$, ce qui est cohérent avec $\Delta_0 = A_0\Delta_n$}
 \marginal{et \ill{} on a donc}
@@ -405,15 +406,21 @@ donne $\Delta_n^{p-1}$ pour $A_0$, ce qui est cohérent avec $\Delta_0 = A_0\Del
   \qquad (1 \leqslant i \leqslant n)
 \]
 et les $A_i \in k[X_1, \dots, X_n]$ $(0 \leqslant i \leqslant n-1)$ sont
-caractérisés par \uncertain{cette} relation. \struck{En effet} $A_0 = \pm\,\Delta_n^{p-1}$
+caractérisés par \uncertain{cette} relation. \struck{En effet} $A_0 = \pm\,\Delta_n^{p-1}\,(-1)^n$
 \struck{au signe près}
+\note{le facteur $(-1)^n$ suit $\Delta_n^{p-1}$ sur la page, comme dans la
+formule pour $\Delta_0$ du lemme ; le $\pm$ est gardé devant}
 
-\textbf{Cor.\ 2.} Revenons à une \struck{\ill{}} \add{corps $k$ de} car.\ $\mathbb{F}_p$.
-Pour \uncertain{que} l'on ait $\Delta_n(\xi) \neq 0$ i.e. $\xi_1, \dots, \xi_n$
-lin.\ indép.\ sur $\mathbb{F}_p$, il faut et il suffit \uncertain{que} $\Delta_0(\xi) \neq 0$.
+\textbf{Cor.\ 2.} Revenons à une \struck{$k$ \uncertain{quelconque sur}} \add{\uncertain{ext.}\ $k$ de} $\mathbb{F}_p$.
+Pour que l'on ait $\Delta_n(\xi) \neq 0$ i.e. $\xi_1, \dots, \xi_n$
+lin.\ indép.\ sur $\mathbb{F}_p$, il faut et il suffit que $\Delta_0(\xi) \neq 0$.
+\note{l'insertion au-dessus des mots biffés se lit « ext.\ $k$ de », suivie
+directement de $\mathbb{F}_p$ ; l'article « une » demande un féminin}
 \marginal{Cor.\ 2. Les $A_i$ sont \ill{} \struck{\ill{}} des invariants de
 $GL(n,\mathbb{F}_p) = \Gamma_n$. \uncertain{La factorisation} \ill{} ; $A_i$ est
-\uncertain{homogène et de degré} \ill{}}
+\uncertain{homogène de degré} \uncertain{$p^n - p^i$}}
+\note{mention portée en travers dans la marge gauche ; le degré se lit
+$p^n - p^i$, qui est bien le degré de $A_i = \Delta_i/\Delta_n$}
 
 Considérons
 \[
@@ -552,9 +559,13 @@ birationnel, donc (comme $\mathbb{E}^n$ est normal) un iso par le Main Theorem.
 \section*{Structures linéaires, racines $(p-1)$-ièmes, et la version « faisceau »}
 
 \page{13}
-\textbf{Corollaire.} Soit $M \subset \mathbb{G}_{a,S}$ un sous-groupe fini et plat
+\textbf{Corollaire.} Soit $M \subset \mathbb{G}_{a,S}$ un sous-groupe fini \uncertain{étale}
 \struck{loc.\ libre} de rang $p^n$, d'où $a = (a_0, \dots, a_{n-1}) \in \Gamma(S, \mathcal{O})^n$
 tel que $M = \operatorname{Ker} f_a$, \add{$a_0$ inversible.}
+\note{après « fini », la page porte une abréviation « ét.le », lue d'abord
+« et plat » ; la même se retrouve, liée, dans le N.B. du bas de la page
+(« fini étale $M$ »), et l'insertion « $a_0$ inversible » dit que
+$\operatorname{Ker} f_a$ est étale}
 On a alors une correspondance
 \marginal{précise}
 biunivoque entre l'ens.\ des \emph{structures spéciales linéaires}
@@ -565,29 +576,30 @@ i.e. \struck{à} \uncertain{l'image inverse} de $a_0 \in \Gamma(S, \mathcal{O})^
 par $\mathbb{G}_m \xrightarrow{\ x \mapsto x^{p-1}\ } \mathbb{G}_m$, qui est un
 torseur sous $\mu_{p-1,S} \simeq (\mathbb{F}_p^*)_S$.
 
-\textbf{N.B.} \struck{\ill{}} La donnée d'un \uncertain{sous-groupe} fini \ill{} $M$
+\textbf{N.B.} \struck{\ill{}} La donnée d'un \uncertain{$p$-groupe} fini \uncertain{étale} \struck{\ill{}} $M$
 de rang $n$ sur $\mathbb{F}_p$, sur $S$, équivaut : la donnée de $E$ loc.\ libre de
 rang $n$, avec iso
 \[
-  E'^{(p)} \xrightarrow[\ \sim\ ]{\ u\ } E .
+  E^{(p)} \xrightarrow[\ \sim\ ]{\ u\ } E .
 \]
-(On prend $E \simeq M \otimes_{\mathbb{F}_p} \mathcal{O}_S$, \uncertain{on retrouve} $M$
+(On prend $E \simeq M \otimes_{\mathbb{F}_p} \mathcal{O}_S$, on récupère $M$
 comme $M = \operatorname{Ker}\bigl(V(E) \xrightarrow{\ \operatorname{id} - u \circ F_E\ } V(E)\bigr)$.)
-La donnée d'un \uncertain{hom.} $M \to \mathbb{G}_a$ équivaut à la donnée d'un
-\uncertain{hom.} $\mathcal{O}$-lin.\ $E \to \mathcal{O}_S$, i.e. d'une section $\xi$
+La donnée d'un hom.\ $M \to \mathbb{G}_a$ équivaut à la donnée d'un
+hom.\ $\mathcal{O}_S$-lin.\ $E \to \mathcal{O}_S$, i.e. d'une section $\xi$
 de $\check{E}$. Notons que $\check{E}$ est aussi muni d'une structure
 $\check{E}^{(p)} \xrightarrow{\ \check{u}\ } \check{E}$.
 
 \page{14}
-Pour \uncertain{une} section $\xi$ de $\check{E}$ (lié à un hom.\ $\varphi : M \to \mathbb{G}_a$)
+Pour \uncertain{une} section $\xi$ de $\check{E}$ (i.e.\ hom.\ $\varphi : M \to \mathbb{G}_a$)
 on peut considérer la section
 \[
   \xi^{(p)} \overset{\text{df}}{=} u\bigl(\xi^{(F)}\bigr)
 \]
-\marginal{\uncertain{par linéarité}}
+\note{à droite de l'exposant $(F)$, une flèche et la mention « frobénius) »,
+lue d'abord « par linéarité » et placée en marge}
 et par itération les $\xi^{(p^i)}$. \struck{Telles} \uncertain{Elles} correspondent
 aux composés de $\varphi : M \to \mathbb{G}_a$ avec
-$F_{\mathbb{G}_a} : \mathbb{G}_a \to \mathbb{G}_a$, et \add{les} itérés
+$F_{\mathbb{G}_a} : \mathbb{G}_a \to \mathbb{G}_a$, et \add{\uncertain{avec}} \struck{les} itérés
 $F^i_{\mathbb{G}_a}$.
 
 Considérons
@@ -595,7 +607,9 @@ Considérons
   \xi \wedge \xi^{(p)} \wedge \dots \wedge \xi^{(p^{n-1})} \in \Gamma\bigl(\overset{n}{\Lambda}\check{E}\bigr) .
 \]
 On trouve ainsi \struck{une \uncertain{application} polynomiale}
-\marginal{au-dessous de \ill{}}
+\marginal{(\uncertain{au changement} de base)}
+\note{mention portée au-dessus des mots « une application polynomiale »,
+qu'une accolade lui rattache}
 \[
   \Delta^E_n : \check{E} \longrightarrow \overset{n}{\Lambda}\check{E}
 \]
@@ -605,15 +619,15 @@ homogène de degré $1 + p + \dots + p^{n-1} = \dfrac{p^n - 1}{p - 1}$, d'où
   \Delta^E_n : V(E) \longrightarrow V\bigl(\overset{n}{\Lambda}E\bigr)
 \]
 \note{sous les deux membres il écrit $W(\check{E})$ et $W(\overset{n}{\Lambda}\check{E})$}
-\struck{Pour} \struck{\ill{} degré \ill{}}
+\struck{Pour} \struck{\uncertain{Sur chaque fibre,}}
 Considérons l'image inverse dans $V(E)$ de la section nulle de
 $V(\overset{n}{\Lambda}E)$ ; \struck{\ill{}} c'est un diviseur de Cartier relatif,
-dont le complémentaire $V(E)^0$ est un \uncertain{ouvert} schém.\ dense.
-Si $\xi$ est une section de cet \uncertain{ouvert}, les
+dont le complémentaire $V(E)^0$ est un ouvert \uncertain{univ.}\ schém.\ dense.
+Si $\xi$ est une section de cet ouvert, les
 $\xi, \xi^{(p)}, \dots, \xi^{(p^{n-1})}$ forment une base de $\check{E}$, et on peut
 écrire
 \[
-  \xi^{(p^n)} + A_{n-1}(\xi)\,\xi^{(p^{n-1})} + \dots + A_0(\xi)\,\xi = 0
+  \xi^{(p^n)} + A^E_{n-1}(\xi)\,\xi^{(p^{n-1})} + \dots + A^E_0(\xi)\,\xi = 0
 \]
 
 \page{15}
