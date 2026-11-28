@@ -320,6 +320,7 @@ function push(it, snip) {
     context: it.context ?? null,
     ...(it.drawing ? { drawing: it.drawing } : {}),
     ...(it.finding ? { finding: it.finding } : {}),
+    ...(it.priority ? { priority: it.priority } : {}),
     link: `/fonds/#${it.cote}/${batch}/${edition}${page ? `/p${page}` : ''}`,
   });
   if (snip) snippets[id] = snip;
@@ -990,7 +991,10 @@ for (const READINGS of readingFiles) {
     const box = /^\s*- \[([ xX])\]\s+(\S+)\s+p([\d,–-]+)\s+batch-(\d+):(\d+)([a-z]?)\s*\|(.*)$/.exec(raw);
     if (!box || box[1] !== ' ') continue;
     const [, , cote, pp, bb, line, letter, rest] = box;
-    const [type, where, ours, alternative] = rest.split('|').map((x) => x.trim());
+    // A fifth field, « P1 » to « P4 », ranks the question: P1 decides what a finding or a statement
+    // of the edition asserts, P4 is a material detail (ink, accent). Unranked boxes count as P3.
+    const [type, where, ours, alternative, rank] = rest.split('|').map((x) => x.trim());
+    const priority = /^P[1-4]$/.test(rank ?? '') ? Number(rank[1]) : 3;
     const batch = Number(bb);
     const file = `transcripts/${cote}/batch-${bb}.fr.tex`;
     if (type !== 'reading' || !ours || !alternative || !isCote(cote) || !lines(cote, batch)) {
@@ -1006,6 +1010,7 @@ for (const READINGS of readingFiles) {
       id,
       section: `Readings of folder ${cote} to check on the facsimile (#${issue}) · ${heading}`,
       kind: 'uncertain',
+      priority,
       cote,
       batch,
       page: ps[0],
@@ -1071,6 +1076,8 @@ for (const r of findingRows) {
     id: `finding-${r.id}`,
     section: changed ? 'Findings refuted or corrected on the facsimile (November 2026)' : 'Codicological findings to confirm on the facsimile',
     kind: 'finding',
+    // A finding the machine refuted or rewrote on the facsimile ranks with the readings that decide a statement.
+    priority: changed ? 1 : 3,
     cote: r.cote,
     page,
     finding: r.id,
