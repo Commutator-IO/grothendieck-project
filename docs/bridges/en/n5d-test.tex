@@ -4,7 +4,7 @@ This section takes up issue~\#187 of the edition: the questions that folders 108
 
 \subsection{The questions and what is known}
 
-The table lists the questions on test categories, weak, local and strict test categories, asphericity and separating intervals that the three folders leave open, by folder and page of the transcription. Folder 134-2 holds only the plans and tables of contents of \emph{Pursuing Stacks} (its text is printed); for it we give the section the table announces and read the section in the arXiv edition \cite{ps-arxiv}. \q{Ours} marks a step that is the edition's; \q{open} means not found in the sources we read, which are \cite{cisinski-308,maltsiniotis-2001,ps-arxiv,hubert-thesis,hubert-dk}. We did not consult Jardine's papers nor Cisinski's \emph{Higher categories and homotopical algebra}; the printed Astérisque~301 \cite{maltsiniotis-301} was consulted later, for the De Morgan obstruction only.
+The table lists the questions on test categories, weak, local and strict test categories, asphericity and separating intervals that the three folders leave open, by folder and page of the transcription. Folder 134-2 holds only the plans and tables of contents of \emph{Pursuing Stacks} (its text is printed); for it we give the section the table announces and read the section in the arXiv edition \cite{ps-arxiv}. \q{Ours} marks a step that is the edition's; the sources we read are \cite{cisinski-308,maltsiniotis-2001,ps-arxiv,hubert-thesis,hubert-dk}. We did not consult Jardine's papers nor Cisinski's \emph{Higher categories and homotopical algebra}; the printed Astérisque~301 \cite{maltsiniotis-301} was consulted later, for the De Morgan obstruction only.
 
 \begin{center}\scriptsize\emergencystretch=3em
 \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{1.25cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{5.2cm}}
@@ -27,10 +27,6 @@ folder, page & question & status\\
 118, p.~36 & is an infinite product of aspherical objects aspherical? & no, ours (Proposition~\ref{prop:products})\\
 134-2, p.~5, \S\S31--33 & a criterion for test categories, necessity of T1--T3 & settled \cite[Th.~4.1.19]{cisinski-308}, \cite[Th.~6.6]{maltsiniotis-2001}\\
 134-2, p.~6 \S43, p.~9 \S98 & $\Delta^f$ weak test; \q{perplexities about its being aspheric} & settled \cite[\S8]{maltsiniotis-2001}\\
-134-2, p.~9, \S84 & the inclusion $f_!(M_{\mathrm{as}})\subset M'_{\mathrm{as}}$ & left unanswered in \cite[\S88, 1)]{ps-arxiv}; open\\
-134-2, p.~9, \S86 & does a notion of map of asphericity structures exist? & open\\
-134-2, p.~9, \S90 & existence of (perfect) test functors into a modelizer & open in general; for $\Delta\to\mathrm{Cat}$, Thomason's $c\,\mathrm{Sd}^2$ gives a Quillen equivalence \cite[Th.~5.2.12]{cisinski-308}\\
-134-2, p.~9, \S91 & conditions on $A$ for the homotopy types of finite type; test categories with boundary operations & open; for homology, \cite{hubert-dk}\\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -81,13 +77,10 @@ $A/X$ is a local test category \cite[Prop.~4.1.14 (v)]{cisinski-308}, nonempty s
 
 So a test topos is not De Morgan anywhere, not only globally. Proposition~\ref{prop:slices} was not found in print either (same search); it is an immediate consequence of the theorem and of the stability of local test categories under slicing \cite[Prop.~4.1.14 (v)]{cisinski-308}, \cite[Rem.~1.5.4 b)]{maltsiniotis-301}. Nor did we find it said anywhere that simplicial, cubical, $\Theta$- or dendroidal sets do not form De Morgan topoi, although each case is immediate: in $\Delta$, the two faces $[0]\rightrightarrows[1]$ have no common restriction.
 
-\subsection{Finite decks: computations and a conjecture}
+\subsection{Finite decks: computations}
 
 On the decks the generator enumerates, the script \nolinkurl{computations/187-test-categories/finite_test.py} computes the homology in degrees $0$ to $2$, over $\mathbb Q$ and $\mathbb F_2$, of the nerves of $A$, $A/L_A$ and every $A/(a\times L_A)$. For every monoid of order at most~6 (2510 up to isomorphism, from the atlas of the companion article), the homology of $A/L_A$ in degrees at most~2 differs from that of a point, and so does that of $A/(a\times L_A)$: no monoid of order $\le 6$ is a weak test category or a local test category, for the usual weak equivalences. The non-Ore ones, 495 of them, are not covered by Theorem~\ref{th:ore}; for them $H_1(A/(a\times L_A);\mathbb Q)$ has rank between $4$ and $743$. For posets, \nolinkurl{posets_euler.py} computes the Euler characteristic of the finite poset $A/L_A$ by the formula $\chi(A/L_A) = \sum_x |D(\downarrow x)|\,c(x)$, with $D(\downarrow x)$ the down-sets of $\downarrow x$ and $c(x) = 1-\chi(A_{<x})$: on every poset with at most six points and $\chi(A)=1$, $\chi(A/L_A)\ne1$, so no poset with at most six points is a weak test category (a poset with $\chi(A)\ne1$ is not even aspherical).
 
-\begin{remark}[Conjecture]
-No nonempty finite category is a weak test category, nor a local test category. The local case holds for finite posets and finite acyclic free categories (Corollary~\ref{cor:ore}); for monoids we only have the computations above.
-\end{remark}
 
 \subsection{Infinite products}
 
