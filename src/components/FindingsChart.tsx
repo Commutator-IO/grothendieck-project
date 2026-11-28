@@ -21,6 +21,9 @@ interface Part {
 
 const math = () => FINDINGS.filter((n) => n.kind === 'mathematical');
 const isOpen = (n: Finding) => !n.lean && (n.status === 'candidate' || n.status === 'unsearched');
+// A Lean field that opens on « Partly » (or « Reduced, not proved ») records a proof of part of the
+// row only: an algebraic core, a special case or the page's own computation, the rest as hypotheses.
+const isPartial = (n: Finding) => !!n.lean && /^\s*(Partly|Reduced, not proved)/.test(n.lean.found ?? '');
 // Areas that AxiomMath's Lean formalisation of the Stacks Project covers, read from its directories
 // (schemes, étale and crystalline cohomology, stacks, topoi of sites, group schemes, Chow and
 // K-theory, commutative algebra); a theory outside them is beyond both libraries.
@@ -34,7 +37,8 @@ function outcomeParts(): Part[] {
   const reach = (r: Finding['reach'] | 'other') =>
     open.filter((n) => (r === 'other' ? !n.reach || ['imprecise', 'doubtful', 'open-problem'].includes(n.reach) : n.reach === r));
   return [
-    { key: 'lean', label: 'Proved in Lean', note: 'the statement holds as the reading gives it, or more generally, or is corrected by the proof', fill: '#128557', rows: rows.filter((n) => n.lean) },
+    { key: 'lean', label: 'Proved in Lean', note: 'the statement holds as the reading gives it, or more generally, or is corrected by the proof', fill: '#128557', rows: rows.filter((n) => n.lean && !isPartial(n)) },
+    { key: 'partial', label: 'Partly proved in Lean', note: 'an algebraic core, a special case or the page’s own computation is proved, with the rest as hypotheses: what is left needs a theory mathlib and the Stacks library lack (each row’s Lean field says what)', fill: '#7cc49d', rows: rows.filter(isPartial) },
     { key: 'matched', label: 'Found later in the literature', note: 'searched and found in print: kept as a killed candidate', fill: '#38539d', rows: rows.filter((n) => !n.lean && n.status === 'matched') },
     { key: 'refuted', label: 'Shown false as stated', note: 'a counterexample or a contradiction', fill: '#d55181', rows: rows.filter((n) => !n.lean && n.status === 'refuted') },
     { key: 'reachable', label: 'Open, within reach of Lean', note: 'mathlib, or mathlib with AxiomMath’s Lean Stacks library, has the theory the statement needs', fill: '#c9900c', rows: reach('reachable') },
@@ -42,6 +46,28 @@ function outcomeParts(): Part[] {
     { key: 'beyond', label: 'Open, beyond mathlib and Stacks today', note: 'needs a theory neither mathlib nor the Stacks library has (Tannakian categories, derivators, stratified spaces…): provable in principle, not now', fill: '#4a3aa7', rows: reach('beyond').filter((n) => !inStacks(n)) },
     { key: 'other', label: 'Open: doubtful, imprecise or an open problem', note: 'judged: the statement is doubtful as read, too imprecise to formalise as written, or a known open problem', fill: '#eb6834', rows: reach('other') },
   ];
+}
+
+// What the open rows beyond mathlib still need, by family of theory: the blocking point of each.
+const BLOCKS: [string, string, RegExp, string][] = [
+  ['schemes', 'Schemes beyond the basics', /schemes beyond basics|Greenberg|derived categories of quasi-coherent|commutative algebra outside/i, '#38539d'],
+  ['groups', 'Group schemes over a base', /group schemes|reductive|abelian schemes|Néron|p-divisible/i, '#128557'],
+  ['etale', 'Étale and ℓ-adic cohomology', /étale|ℓ-adic|vanishing cycles/i, '#c9900c'],
+  ['stacks', 'Stacks, gerbes, topoi', /stack|gerbe|topoi|Picard categories|Tannakian|fundamental localizers|model structures/i, '#8a7ad6'],
+  ['crys', 'Crystalline, de Rham, motives', /crystalline|de Rham|motives/i, '#d55181'],
+  ['moduli', 'Moduli of curves or abelian varieties', /moduli/i, '#eb6834'],
+  ['topology', 'Algebraic topology, stratified and analytic spaces', /topology|stratified|analytic|branched covers|pseudoline|bordism/i, '#4a3aa7'],
+];
+function blockParts(): Part[] {
+  const open = math().filter((n) => isOpen(n) && n.reach === 'beyond');
+  const seen = new Set<Finding>();
+  const parts: Part[] = BLOCKS.map(([key, label, re, fill]) => {
+    const rows = open.filter((n) => !seen.has(n) && re.test(n.theory ?? ''));
+    rows.forEach((n) => seen.add(n));
+    return { key, label, note: 'the theory the row needs and neither library has yet', fill, rows };
+  });
+  parts.push({ key: 'other', label: 'Other theories', note: 'cycles and intersection theory, Chow rings, and the rest', fill: '#cbc5b5', rows: open.filter((n) => !seen.has(n)) });
+  return parts;
 }
 
 function pageParts(): Part[] {
@@ -106,6 +132,7 @@ function Bar({ title, parts }: { title: string; parts: Part[] }) {
 export function FindingsChart() {
   const outcome = outcomeParts();
   const onPage = pageParts();
+  const blocks = blockParts();
   const beyond = [...outcome.find((p) => p.key === 'stacks')!.rows, ...outcome.find((p) => p.key === 'beyond')!.rows];
   const theories = new Map<string, number>();
   for (const n of beyond) theories.set(n.theory ?? 'unspecified', (theories.get(n.theory ?? 'unspecified') ?? 0) + 1);
@@ -117,16 +144,20 @@ export function FindingsChart() {
         need a theory the library does not yet have, and could be proved once it does. Part of them lie
         in areas that AxiomMath’s Lean formalisation of the Stacks Project now covers. Whether a row
         is within reach, and what his leaves do with it, are the edition's judgements, made on the
-        reading and the finding, not checked by a person.
+        reading and the finding, not checked by a person. « Partly proved in Lean » counts rows where
+        Lean checks a core of the argument (often the page's own computation) with the geometry as
+        hypotheses: what remains is blocked by the same missing theories as the open rows, shown in the
+        last bar.
       </p>
       <Bar title="All mathematical rows, by outcome" parts={outcome} />
       <Bar title="Open rows, by what his own leaves do" parts={onPage} />
+      <Bar title="Open rows beyond mathlib, by the theory that blocks them" parts={blocks} />
       <details className="mt-4 text-[12.5px] text-ink-600">
         <summary className="cursor-pointer text-ink-500 hover:text-brand-700">The figures as a table</summary>
         <table className="mt-2 w-full max-w-[40em] border-collapse">
           <tbody>
-            {[...outcome, ...onPage].map((p) => (
-              <tr key={`${p.key}`} className="border-t border-ink-100">
+            {[...outcome, ...onPage, ...blocks].map((p, i) => (
+              <tr key={`${i}-${p.key}`} className="border-t border-ink-100">
                 <td className="py-1 pr-3 text-ink-800">{p.label}</td>
                 <td className="py-1 pr-3 text-right tabular-nums">{p.rows.length}</td>
                 <td className="py-1 text-ink-500">{p.note}</td>

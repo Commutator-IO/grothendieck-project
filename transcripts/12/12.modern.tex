@@ -55,6 +55,14 @@
 %   p. 63, Tate's theorem reformulated and made precise; p. 75, the footnote no
 %   longer says the page writes f_*(M); p. 85, « La théorie », not « Le
 %   théorème ». Keywords unchanged. Unchecked by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-11-28 — pp. 115-119, after the Lean
+%   formalisation of the count (finding 12-immersion-level-bound): the footnote
+%   on the box no longer says that the page's E_2 bounds allow level n at
+%   E_2^{n,0} (the page writes inf(p, 2n-2-p) for E_2^{p0}, which gives n-2;
+%   the general inf(p, 2n-2q-p) at q = 0 would allow n), and it records that
+%   the summary line of p. 115, level <= Inf(i, 2n-2-i), does not follow from
+%   the page's bounds (E_2^{1,1}, n = 2: level 1 against 0), while the box of
+%   p. 119 does. Keywords unchanged. Unchecked by a human.
 %
 % Scope. Of the 167 leaves, about 125 carry his hand or a typescript of his.
 % The rest (EGA IV galleys, a Bourbaki exposé, an English typescript on Brauer
@@ -2360,9 +2368,16 @@ $(R^{i}j_{*}\mathbb{Q})_{y}$ dans la boîte
 $p, q \in [\max(0, i-n+1), \min(i, n)]$ : poids comme sur la page, niveau
 $\leqslant \inf(i, 2n-1-i) \leqslant \inf(i, n-1)$. C'est l'analogue local de
 8.2.4 (ii), qui borne les types de $H^{i}$ d'une variété de dimension $N$ par
-$[i-N, N]^{2}$ pour $i \geqslant N$. Les tables de la page laissent passer le
-niveau $n$ au terme $E_{2}^{n,0}$, qui est $H^{n}(\pi^{-1}(y))$ ; c'est la
-dimension $n-1$ de la fibre qui l'exclut. La borne est atteinte par le cône sur
+$[i-N, N]^{2}$ pour $i \geqslant N$. La borne $\inf(p, 2n-2q-p)$ des $E_{2}^{pq}$,
+prise en $q = 0$, laisserait passer le niveau $n$ au terme $E_{2}^{n,0}$, qui est
+$H^{n}(\pi^{-1}(y))$ ; la page écrit pour $E_{2}^{p0}$ la borne
+$\inf(p, 2n-2-p)$, qui donne $n-2$ en $E_{2}^{n,0}$, et c'est la dimension $n-1$
+de la fibre qui la justifie. La ligne de résumé de la page 115, « niveau
+$\leqslant \operatorname{Inf}(i, 2n-2-i)$ », ne suit pas des bornes de la page :
+pour $n = 2$, $E_{2}^{1,1}$ a la borne de niveau $\inf(1, 1) = 1$, contre
+$\inf(2, 0) = 0$. L'encadré de la page 119 en suit, et sa forme précise
+$\inf(i, 2n-1-i)$ aussi ; ce décompte est vérifié en Lean (28 novembre 2026),
+la géométrie y étant une hypothèse. La borne est atteinte par le cône sur
 une variété projective lisse $V$ de dimension $n-1$ avec
 $h^{i,0}(V) \neq 0$ : niveau $i$ pour $i \leqslant n-1$, et $n-1$ en
 $i = n$ ; pour $n = 2$ et $V$ une courbe de genre $\geqslant 1$, la fibre de

@@ -55,7 +55,16 @@ L'énoncé~(1) est le pas de la page~24, (2) celui de la page~26, qui règle le 
 Sur les cycles de toute codimension, posons $z \sim 0$ quand $z = Z_*(t)$ pour un cycle $Z$ sur $X \times T$, $T$ projective lisse connexe, et un $0$-cycle $t$ de degré~$0$ sur $T$ tel que $\mathrm{alb}_T(t) = 0$. Cette relation est comprise entre les équivalences rationnelle et algébrique, passe aux produits, aux images réciproques et aux images directes propres, coïncide avec l'équivalence rationnelle sur les diviseurs et avec le degré et la somme d'Albanese sur les $0$-cycles ; dans l'anneau quotient, le produit de deux classes algébriquement triviales est nul.
 \end{theoreme*}
 \end{encadre}
-{\small Les feuillets en esquissent une démonstration incomplète : les théorèmes~1.4 et~1.6 sont démontrés (pages 28 et~29), mais la proposition~1.2~(iii) est laissée \q{à vérifier} (page~27), le~(iv) est fait \q{par l'AQT}, abréviation non reconstituée, et le corollaire~2.4 (page~33) est sans démonstration.\par}
+{\small Les feuillets en esquissent une démonstration incomplète : les théorèmes~1.4 et~1.6 sont démontrés (pages 28 et~29), mais la proposition~1.2~(iii) est laissée \q{à vérifier} (page~27), le~(iv) est fait \q{par l'AQT}, abréviation non reconstituée, et le corollaire~2.4 (page~33) est sans démonstration. Mathlib n'a pas les cycles algébriques ni la variété d'Albanese. On se reportera aux notes de Grothendieck (\lot{14}{2}{29}). Le calcul de la page~29 est démontré dans l'encadré suivant ; l'identification $\mathrm{Alb}(T \times T') = \mathrm{Alb}(T) \times \mathrm{Alb}(T')$ y est une hypothèse.\par}
+
+\begin{encadre}
+\begin{enonce}[D'après la page 29, le produit de deux cycles de degré nul\piste{14-albanese-equivalence-ring}]\verifie[\leanblobmain]{AlgebraicGeometry/Folder14AlbaneseProduct}
+Soient $X$, $X'$ des ensembles, $a : X \to A$ et $a' : X' \to A'$ des applications vers des groupes abéliens, et $z = \sum n_p (p)$, $z' = \sum n'_{p'} (p')$ des $0$-cycles à coefficients entiers. Le produit extérieur $z \times z' = \sum n_p n'_{p'} (p, p')$ est de degré $\deg z \cdot \deg z'$, et sa somme d'Albanese pour $(p, p') \mapsto (a(p), a'(p'))$ est $\bigl(\deg z' \cdot \sum n_p\, a(p),\ \deg z \cdot \sum n'_{p'}\, a'(p')\bigr)$. En particulier le produit de deux cycles de degré~$0$ est de somme d'Albanese nulle, et $((x) - (y)) \times ((x') - (y')) = (x, x') - (x, y') - (y, x') + (y, y')$ est de degré~$0$ et de somme d'Albanese nulle.
+\end{enonce}
+\end{encadre}
+{\small \emph{Démonstration.} Les deux formules sont additives en $z$ et en $z'$ ; sur les cycles $n(p)$ et $n'(p')$ elles se réduisent à $nn'\,(a(p), a'(p')) = (n' \cdot n\,a(p),\ n \cdot n'\,a'(p'))$ (\texttt{deg\_extProd}, \texttt{albSum\_extProd}). Des degrés nuls annulent les deux composantes (\texttt{albSum\_extProd\_eq\_zero}), et le développement du produit est la biadditivité (\texttt{extProd\_sub\_single}, \texttt{deg\_extProd\_sub\_single}, \texttt{albSum\_extProd\_sub\_single}).
+
+C'est le calcul par lequel le théorème~1.6 de la page~29 annule le produit de deux classes algébriquement triviales. L'identification $\mathrm{Alb}(T \times T') = \mathrm{Alb}(T) \times \mathrm{Alb}(T')$ est une hypothèse, inscrite dans l'application d'Albanese $(p, p') \mapsto (a(p), a'(p'))$ du produit. Ne sont pas formalisés les variétés, les cycles de codimension positive, les correspondances et leur composition, l'anneau quotient, la variété et l'application d'Albanese, ni le reste des pages~23 à~29 et~33. Le théorème encadré plus haut reste non démontré.\par}
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 9 et 10, Riemann--Roch et transformation de Fourier sur une base\pisteresolue{47-chow-fourier-todd-over-base}]\nonverifie
@@ -92,7 +101,20 @@ La lettre à Hironaka du 6~juillet 1962 (pp.~226--228) énonce le théorème et 
 Pour un schéma abélien $A/S$ de dimension relative~$2$ et une section $\delta$ de $\mathrm{NS}_{A/S}$ avec $\chi(\delta)$ pair, le torseur $\mathrm{Pic}^\delta_{A/S}$ sous le dual est trivial.
 \end{exemple*}
 \end{encadre}
-{\small La page le donne en exemple d'un calcul (\q{Exemple}, page~13). Les feuillets en esquissent une démonstration incomplète : la page~13 déduit la trivialité des puissances $\chi^{n-2}(\chi - 1)$ et $2\chi^{n-2}$ du torseur, et conclut pour $n = 2$ sur un \q{si} de lecture incertaine ; les compatibilités des trivialisations que les marges demandent ne sont pas démontrées.\par}
+{\small La page le donne en exemple d'un calcul (\q{Exemple}, page~13). Les feuillets en esquissent une démonstration incomplète : la page~13 déduit la trivialité des puissances $\chi^{n-2}(\chi - 1)$ et $2\chi^{n-2}$ du torseur, et conclut pour $n = 2$ sur un \q{si} de lecture incertaine ; les compatibilités des trivialisations que les marges demandent ne sont pas démontrées. Mathlib n'a pas les schémas abéliens ni leurs torseurs de Picard. On se reportera aux notes de Grothendieck (\lot{59}{1}{13}). L'arithmétique de la page~13 est démontrée dans l'encadré suivant ; les identités entre les classes y sont des hypothèses.\par}
+
+\begin{encadre}
+\begin{enonce}[D'après la page 13, l'arithmétique du torseur de Picard\piste{59-surface-even-chi-torsor}]\verifie[\leanblobmain]{AlgebraicGeometry/Folder59SurfaceTorsor}
+Soient $G$, $G'$ des groupes abéliens, $\chi \in \mathbf Z$, $n \geq 2$ et $c \in G$.
+\begin{enumerate}
+\item Si $\chi^{n-2}(\chi - 1)\,c = 0$ et $2\chi^{n-2}c = 0$, alors $\chi^{n-2}\,\mathrm{pgcd}(\chi - 1, 2)\,c = 0$ ; si $\chi$ est pair, $\chi^{n-2}c = 0$, et $c = 0$ pour $n = 2$.
+\item Soient $f' : G \to G'$ et $f'' : G' \to G$ des homomorphismes tels que $f'' \circ f' = \chi^{n-1}$, et $c' = f'(c)$, $c'' = f''(c')$ avec $c'' = \chi^{n-2}c$. Alors $\chi^{n-2}(\chi - 1)\,c = 0$ ; pour $n = 2$, si $2c = 0$ et si $\chi$ est pair, $c = 0$.
+\end{enumerate}
+\end{enonce}
+\end{encadre}
+{\small \emph{Démonstration.} (1) Par Bézout, $\mathrm{pgcd}(\chi - 1, 2) = u(\chi - 1) + 2v$, et $\chi^{n-2}\,\mathrm{pgcd}(\chi - 1, 2)\,c$ est la combinaison $u\,\chi^{n-2}(\chi - 1)c + v\,2\chi^{n-2}c$ (\texttt{zsmul\_eq\_zero\_of\_gcd}) ; pour $\chi$ pair, $\chi - 1$ est impair et le pgcd vaut~$1$ (\texttt{pow\_zsmul\_eq\_zero\_of\_even}, \texttt{eq\_zero\_of\_even}). (2) $\chi^{n-2}(\chi - 1)c = \chi^{n-1}c - \chi^{n-2}c = f''(f'(c)) - c'' = 0$, ce qui demande $n \geq 2$ (\texttt{zsmul\_sub\_one\_eq\_zero\_of\_comp}) ; pour $n = 2$ on conclut par~(1) (\texttt{eq\_zero\_of\_comp\_of\_even}).
+
+$G$ et $G'$ tiennent lieu de $H^1(S, B)$ et $H^1(S, A)$, $f'$ et $f''$ des applications induites par $\tilde\delta'$ et $\tilde\delta''$, et $c$, $c'$, $c''$ des classes de $\mathrm{Pic}^\delta_{A/S}$, $\mathrm{Pic}^{\delta'}_{B/S}$ et $\mathrm{Pic}^{\delta''}_{A/S}$. L'arithmétique de la page~13 tombe juste pour $n \geq 2$. Ne sont pas formalisés les schémas abéliens, leurs duaux, $\mathrm{NS}$, $\mathrm{Pic}^\delta$, $\chi(\delta)$, $H^1(S, -)$ et sa fonctorialité ; l'isomorphisme $(\ast)$, les identités $\delta'' = \chi(\delta)^{n-2}\delta$ et $\tilde\delta''\tilde\delta' = \chi(\delta)^{n-1}$ et la nullité de $2\chi(\delta)^{n-2}c$ sont des hypothèses. L'exemple encadré plus haut reste non démontré.\par}
 
 \begin{encadre}
 \begin{conjecture*}[Grothendieck, pages 7 et 8, intégralité sur une variété abélienne\piste{47-dual-polarisation-divisibility}]

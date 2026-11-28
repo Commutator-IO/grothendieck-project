@@ -2363,4 +2363,69 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/AlgebraicGeometry/Folder9SymmetricDeterminant.lean',
     theorems: ['sq_eq_of_star_eq', 'nonneg_and_sq_eq_of_eq_mul_self', 'eq_sqrt_of_eq_mul_self', 'exists_star_eq_mul_self_eq', 'det_eq_sqrt_det_mul_det_transpose'],
   },
+  {
+    folder: '59',
+    batch: 1,
+    page: '11–13',
+    name: 'The torsor Pic^δ of an abelian surface with χ(δ) even: the arithmetic of the page',
+    statement:
+      'In an abelian group, an element c killed by χ^{n−2}(χ − 1) and by 2χ^{n−2} is killed by χ^{n−2} gcd(χ − 1, 2); for χ even, χ^{n−2}·c = 0, and c = 0 for n = 2. For homomorphisms f′ : G → G′, f″ : G′ → G with f″ ∘ f′ = χ^{n−1}, and classes with c′ = f′c, c″ = f″c′ and c″ = χ^{n−2}·c (n ≥ 2), χ^{n−2}(χ − 1)·c = 0; so for n = 2, 2·c = 0 and χ even, c = 0.',
+    found:
+      'The arithmetic of page 13 comes out, for n ≥ 2, and nothing about abelian schemes is formalised (GrothendieckArchivesProofs c2d8929; Grothendieck/AlgebraicGeometry/Folder59SurfaceTorsor.lean). G and G′ stand for H¹(S, B) and H¹(S, A), f′ and f″ for the maps induced by δ̃′ and δ̃″, c, c′, c″ for the classes of Pic^δ_{A/S}, Pic^{δ′}_{B/S}, Pic^{δ″}_{A/S}. The gcd step is Bézout; χ − 1 is odd when χ is even, so gcd(χ − 1, 2) = 1. The bound n ≥ 2 is needed for χ^{n−1} − χ^{n−2} = χ^{n−2}(χ − 1), and the page is in that range. Not formalised: abelian schemes, their duals, NS, Pic^δ, χ(δ), H¹(S, −) and its functoriality; the isomorphism (*), the identities δ″ = χ(δ)^{n−2}δ and δ̃″δ̃′ = χ(δ)^{n−1} and the vanishing of 2χ(δ)^{n−2}c are hypotheses.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/AlgebraicGeometry/Folder59SurfaceTorsor.lean',
+    theorems: ['zsmul_eq_zero_of_gcd', 'pow_zsmul_eq_zero_of_even', 'eq_zero_of_even', 'zsmul_sub_one_eq_zero_of_comp', 'eq_zero_of_comp_of_even'],
+  },
+  {
+    folder: '14',
+    batch: 2,
+    page: '23–29, 33',
+    name: 'The product of two algebraically trivial classes: the Albanese computation',
+    statement:
+      'For 0-cycles z on X and z′ on X′ (finitely supported functions to ℤ) and maps a : X → A, a′ : X′ → A′ to abelian groups, deg(z × z′) = deg z · deg z′ and the Albanese sum of z × z′ for (p, p′) ↦ (a p, a′ p′) is (deg z′ · Σ n_p a(p), deg z · Σ n′_{p′} a′(p′)). So the exterior product of two cycles of degree 0 has zero Albanese sum; in particular ((x) − (y)) × ((x′) − (y′)) = (x, x′) − (x, y′) − (y, x′) + (y, y′) has degree 0 and zero Albanese sum.',
+    found:
+      'The computation by which Th. 1.6 of page 29 kills the product of two algebraically trivial classes holds, once Alb(T × T′) = Alb(T) × Alb(T′) is given, and nothing about varieties or correspondences is formalised (GrothendieckArchivesProofs 5bc611f; Grothendieck/AlgebraicGeometry/Folder14AlbaneseProduct.lean). The varieties are arbitrary types, their 0-cycles X →₀ ℤ, and the Albanese maps arbitrary maps to abelian groups; the identification of the Albanese of the product is built into the map (p, p′) ↦ (a p, a′ p′), a hypothesis. Not formalised: cycles of positive codimension, correspondences and their composition, the quotient ring, the Albanese variety and map, Th. 1.6 itself and the rest of pp. 23–29 and 33.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/AlgebraicGeometry/Folder14AlbaneseProduct.lean',
+    theorems: ['deg_extProd', 'albSum_extProd', 'albSum_extProd_eq_zero', 'extProd_sub_single', 'deg_extProd_sub_single', 'albSum_extProd_sub_single'],
+  },
+  {
+    folder: '12',
+    batch: 6,
+    page: '115, 117, 119',
+    name: 'Weight and level of Rⁱf_* ℚ_ℓ for an immersion: the count',
+    statement:
+      'Suppose E₂^{pq} ≠ 0 only if p + 2q ≤ 2n, of weight ≤ p + 2q, of level ≤ inf(p, 2n − 2 − p) for q = 0 and ≤ inf(p, 2n − 2q − p) for q ≥ 1, the bounds of page 115. Then every E₂^{p,q} with p + q = i has weight ≤ 2 inf(i, n) and level ≤ inf(i, 2n − 1 − i) ≤ inf(i, n − 1), the box of page 119, and both maxima are attained by these bounds for i ≤ 2n − 1. The summary line of page 115, level ≤ inf(i, 2n − 2 − i), does not follow from them.',
+    found:
+      'The box of page 119 follows from the bounds page 115 writes, and the summary line of page 115 does not (GrothendieckArchivesProofs 78dd65b; Grothendieck/AlgebraicGeometry/Folder12ImmersionLevel.lean). For n = 2, E₂^{1,1} satisfies p + 2q ≤ 2n and has level bound inf(1, 1) = 1, while inf(i, 2n − 2 − i) = 0 for i = 2; the box, level ≤ inf(i, n − 1), and its sharp form inf(i, 2n − 1 − i) hold, and inf(i, 2n − 1 − i) is exactly the level row 0, …, n − 1, n − 1, …, 0 of the framed table of page 119. Weight 2n occurs only at E₂^{2(i−n),2n−i}, of level bound 0. With the general formula inf(p, 2n − 2q − p) at q = 0, E₂^{n,0} would allow level n; the bound inf(p, 2n − 2 − p) the page writes for E₂^{p0} is what gives n − 1. The finding’s claim quotes the box of page 119 and is not affected. Not formalised, and hypotheses: étale cohomology, weights and levels, the factorisation f = h ∘ g (resolution), purity, the spectral sequence and the passage of the bounds from E₂ to the abutment; not formalised either: the lower weight bounds and column-by-column pairings of the tables of pp. 117 and 119, the « + j ? » and relative cases of page 119.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/AlgebraicGeometry/Folder12ImmersionLevel.lean',
+    theorems: ['weight_le', 'level_le_sharp', 'level_le', 'boxed', 'exists_weight_eq', 'exists_level_eq', 'weight_eq_two_mul', 'level_add_one_eq', 'not_summary_bound', 'level_zero_general'],
+  },
+  {
+    folder: '36',
+    batch: 4,
+    page: '60–70',
+    name: 'The defect of the invariant cycle theorem for H¹: the diagram chase',
+    statement:
+      'For 0 → G → P → Q → 0 exact, with ₙA = {x | n·x = 0} and Aₙ = A/nA, the sequence 0 → ₙG → ₙP → ₙQ → Gₙ → Pₙ → Qₙ → 0 is exact. If moreover Pₙ → (P₀)ₙ is injective, P₀ → N is surjective with n-divisible kernel, and H ≃ ₙP, H′ ≃ ₙQ carry u to the map induced on n-torsion, then 0 → ₙG → H → H′ → Ker(Gₙ → Nₙ) → 0 is exact. For 0 → G → N → C → 0 exact, Ker(Gₙ → Nₙ) ≃ ₙC/ₙN, with ₙN ↪ ₙC when G has no n-torsion. pgcd(dᵢ) divides Σ dᵢmᵢ; and for k : T × Γ′ → N zero on T, (t, g) is in Ker kₙ if and only if g is in the kernel for Γ′.',
+    found:
+      'The diagram chase of pages 64 to 70 goes through with the hypotheses named, and nothing geometric is formalised (GrothendieckArchivesProofs c10232a; Grothendieck/AlgebraicGeometry/Folder36InvariantCycleH1.lean). G, P, Q, P₀, N stand for Γ, Pic X, Pic X_η, Pic X₀, NS(X₀), and H, H′ for H¹(X, μₙ) and H¹(X_η̄, μₙ)^I: the exact sequence is the sequence (6) of page 61, with cokernel Ker kₙ, k : Γ → NS(X₀). The connecting map ₙQ → G/nG is defined once and shown independent of the lifts. Not formalised: schemes, Pic, NS, étale cohomology and Kummer theory; the Kummer identifications, the exact sequence 0 → Γ → Pic X → Pic X_η → 0, the lemma Pic(X)ₙ ↪ Pic(X₀)ₙ (S complete) and the n-divisibility of Pic⁰(X₀) are hypotheses; assertions a), b), d), the limit over ℓ^ν and R ⊗ ℤ_ℓ, Corollaries 9, 10 and 15, the case p | n and the Br(K) step of page 70.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/AlgebraicGeometry/Folder36InvariantCycleH1.lean',
+    theorems: ['delta', 'torsMap_injective', 'exact_torsMap', 'exact_torsMap_delta', 'exact_delta_modMap', 'exact_modMap', 'modMap_surjective', 'ker_modMap_comp', 'modMap_injective_of_divisible', 'exact_sequence_six', 'kerModMapEquiv', 'torsMap_injective_of_torsionFree', 'gcd_dvd_sum_mul', 'gcd_eq_one_of_sum_mul_eq_one', 'mk_mem_ker_modMap_prod'],
+  },
+  {
+    folder: '27',
+    batch: 2,
+    page: '28–31',
+    name: 'The inequalities (1)–(10) of the semicontinuity theorem: the arithmetic',
+    statement:
+      'From the identities of page 28, ρ_na = ρ_r + ρ_u, ρ_n = ρ_na + ρ_ab, d_aff = d_ss + d_rad, d = ρ_ab + d_aff, on both fibres, and d = d′: (2) + (5) ⇒ (6), (1) + (5) ⇒ (7), (1) ⇔ (8) and (1) + (4) ⇒ (9); with d_radaff = d − d_ss, (10) ⇔ (4). (3) ⇔ (9) does not follow in either direction, nor (1) + (3) ⇒ (10).',
+    found:
+      'Three of the five implications page 29 writes follow from the identities of page 28, and two do not (GrothendieckArchivesProofs 9cc9ff2; Grothendieck/AlgebraicGeometry/Folder27SemicontinuityRanks.lean). (3) ⇔ (9) fails in both directions with values of actual groups: SL₃ against SL₂ × SL₂ × 𝔾_a² (ρ_ss = ρ′_ss = 2, d_rad = 0 < 2 = d′_rad), and SL₂ × SL₂ × 𝔾_a³ against SL₂ × 𝔾_a × E, dim E = 5 (d_rad = 3 ≥ 1, ρ_ss = 2 > 1, with (1) holding); no family with these fibres is claimed. What the identities give is (1) + (4) ⇒ (9). d_radaff is not defined on the pages; read from the braces of page 29 as d − d_ss = ρ_ab + d_rad, (10) is equivalent to (4), and (1) + (3) ⇒ (10) fails for either direction of (10). So the (3) of page 29 should probably be (4) in both places, a slip of the page or of the transcription; a reader should look at the numerals on page 29 of the facsimile. The directions of (4) and (9) are taken from the columns of page 29. Not formalised: group schemes, the Chevalley decomposition, tori, Cartan subgroups and radicals, the semicontinuity theorem itself, the reduction to a trait and the proofs of pp. 32–36.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/AlgebraicGeometry/Folder27SemicontinuityRanks.lean',
+    theorems: ['ineq6_of_ineq2_ineq5', 'ineq7_of_ineq1_ineq5', 'ineq1_iff_ineq8', 'ineq9_of_ineq1_ineq4', 'not_ineq3_imp_ineq9', 'not_ineq9_imp_ineq3', 'dRadAff', 'ineq10_iff_ineq4', 'not_ineq1_ineq3_imp_ineq10', 'not_ineq1_ineq3_imp_ineq10_ge'],
+  },
 ];
