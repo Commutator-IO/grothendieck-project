@@ -6,7 +6,21 @@
 Soient $f : X \to Y$ propre sur un corps $k$, $Y$ irréductible et lisse de point générique $\eta$, $X_\eta$ non vide, et $N$ le pgcd des degrés des $0$-cycles de $X_\eta$. Il existe une application $H^*(X, G_X) \to H^*(Y, G)$, fonctorielle en le complexe de coefficients étale $G$, dont le composé avec $f^*$ est $N \cdot \mathrm{id}$. Le noyau de $f^*$ est donc tué par l'indice de la fibre générique, sans hypothèse sur la dimension relative.
 \end{theoreme*}
 \end{encadre}
-{\small Le calcul de la page~10 suppose le formalisme de Gysin du \S\,4 pour des $Z_i$ éventuellement singuliers, que le dossier énonce sans le démontrer. Mathlib n'a pas la cohomologie étale. On se reportera aux notes de Grothendieck (\lot{32}{1}{10}).\par}
+{\small Le calcul de la page~10 suppose le formalisme de Gysin du \S\,4 pour des $Z_i$ éventuellement singuliers, que le dossier énonce sans le démontrer. Mathlib n'a pas la cohomologie étale. On se reportera aux notes de Grothendieck (\lot{32}{1}{10}). Le passage des $n_i$ à leur pgcd est démontré dans l'encadré suivant ; la cohomologie étale, les applications de Gysin et l'identité $f_{i*}f_i^* = n_i$ y sont des hypothèses.\par}
+
+\begin{encadre}
+\begin{enonce}[D'après les pages 10 et 11, le cœur algébrique du calcul\piste{32-pullback-kernel-index}]\verifie[\leanblobmain]{AlgebraicGeometry/Folder32PullbackKernelIndex}
+Soient $R$ un anneau, $p : A \to B$ et $t_i : B \to A$ ($i \in I$) des applications $R$-linéaires et $n_i$ des entiers tels que $t_i \circ p = n_i \cdot \mathrm{id}_A$ pour tout~$i$.
+\begin{enumerate}
+\item Pour tout $m$ du sous-groupe de $\mathbf Z$ engendré par les $n_i$, il existe $u$ dans le sous-groupe engendré par les $t_i$ tel que $u \circ p = m \cdot \mathrm{id}_A$ ; en particulier $m$ annule $\operatorname{Ker} p$.
+\item Si $I$ est fini et $N = \operatorname{pgcd}(n_i)$, il existe des entiers $d_i$ tels que $\bigl(\sum_i d_i t_i\bigr) \circ p = N \cdot \mathrm{id}_A$ ; en particulier $N$ annule $\operatorname{Ker} p$.
+\end{enumerate}
+Les deux énoncés valent dans une catégorie préadditive, pour des morphismes $p : X \to Y$ et $t_i : Y \to X$, l'identité $\mathrm{id}_A$ étant remplacée par $\mathrm{id}_X$.
+\end{enonce}
+\end{encadre}
+{\small \emph{Démonstration.} (1) Les $m$ atteints par une combinaison entière des $t_i$ forment un sous-groupe de $\mathbf Z$ qui contient les $n_i$ (\texttt{exists\_mem\_closure\_comp\_eq\_smul}, \texttt{smul\_eq\_zero\_of\_mem\_closure}). (2) Par Bézout dans $\mathbf Z$, $N = \sum_i d_i n_i$, et $\bigl(\sum_i d_i t_i\bigr)(p(a)) = \sum_i d_i n_i\, a = N a$ (\texttt{exists\_comp\_eq\_gcd\_smul}, \texttt{gcd\_smul\_eq\_zero}). Le cas préadditif se démontre de même (\texttt{exists\_mem\_closure\_comp\_eq\_zsmul\_id}, \texttt{exists\_comp\_eq\_gcd\_zsmul\_id}).
+
+Les $t_i$ sont les $f_{i*}u_i^*$ de la page, et les identités $t_i \circ p = n_i$ ses $f_{i*}f_i^* = n_i$ ; les $d_i$ sont ceux de $\sum_i d_i f_{i*}u_i^*$. Dans la catégorie des foncteurs des coefficients vers les modules, dont les morphismes sont les transformations naturelles, le cas préadditif dit qu'une combinaison entière d'applications naturelles en $G$ l'est encore : c'est la fonctorialité en $G$ de l'application de la page, une fois connue celle des $f_{i*}u_i^*$. Ne sont pas formalisés la cohomologie étale, les adhérences $Z_i$ des points fermés de $X_\eta$, les applications de Gysin $f_{i*}$ et l'identité $f_{i*}f_i^* = n_i$, qui sont des hypothèses ; l'énoncé encadré plus haut reste non démontré.\par}
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 40 à 43, permanence de la condition de Lefschetz\piste{58-lef-permanence-projective-flat}]\nonverifie
