@@ -2311,4 +2311,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/LinearAlgebra/Folder75.lean',
     theorems: ['sign_trans_symm', 'sign_concat_eq_prod', 'oddSign_eq', 'sign_concat', 'det_pi_basis', 'det_concatBasis', 'orientation_concatBasis', 'sign_sigmaCongrRight', 'sign_fibreNumbering', 'sign_fibreNumbering_of_eq'],
   },
+  {
+    folder: '6',
+    batch: 3,
+    page: '49–50',
+    name: 'A formal group in no abelian variety: the arithmetic of the argument',
+    statement:
+      'Over a countable domain R (ℤ or ℚ), the units of ℤ_p algebraic over R form a countable set, while ℤ_p* is uncountable: some unit of ℤ_p is transcendental over ℚ. In a field K ⊇ ℚ, if a ≠ 0 is algebraic, t·a is algebraic if and only if t is. For a multiplicative map det : A → K, if det φ is algebraic and nonzero and det((θφ)ⁿ) is algebraic for one n ≥ 1, then det θ is algebraic. For p odd and units u, v of ℤ_p, v = x² − u y² with x, y ∈ ℤ_p.',
+    found:
+      'The arithmetic of pages 49 and 50 holds, and nothing about formal groups is formalised (GrothendieckArchivesProofs #89; Grothendieck/NumberTheory/Folder6.lean). The transcendental units the reading supplies exist by counting: the unit sphere of ℚ_p is open, hence of the cardinality of ℚ_p, at least the continuum, and the algebraic elements are countable. The Weil step is isAlgebraic_det_of_twist: with n = 1 it is the page’s « det φ′ = det φ · det θ serait algébrique, donc det θ aussi », with n ≥ 1 the reading’s finite extension of k, which replaces φ′ = θφ by a power; its contrapositive says that if det θ is transcendental, no power of the twisted Frobenius has an algebraic determinant. The surjectivity of the reduced norm is proved on a quadratic subring: for p odd, a solution of v = x² − u y² modulo p (two sets of (p + 1)/2 values in 𝔽_p must meet) lifts by Hensel along the coordinate that is nonzero modulo p, so the norm of ℤ_p[√u], u a non-square unit, maps its units onto ℤ_p*. Not formalised: formal groups, the forms of G_{1,1}, the twist of the formal group of E by θ and its Frobenius, the embedding into the formal group of an abelian variety; Weil’s theorem, which enters as the hypothesis that det(φ′ⁿ) is algebraic; the quaternion order End(E) ⊗ ℤ_p, its reduced norm and the embedding of ℤ_p[√u] in it, absent from mathlib; and p = 2.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/NumberTheory/Folder6.lean',
+    theorems: ['countable_setOf_isAlgebraic_int', 'countable_setOf_isAlgebraic_rat', 'countable_setOf_isAlgebraic', 'uncountable_units', 'exists_transcendental_unit', 'isAlgebraic_of_mul_isAlgebraic', 'transcendental_mul_isAlgebraic', 'transcendental_det_twist_pow', 'exists_sq_eq_of_toZMod_eq_sq', 'exists_sq_sub_mul_sq_eq', 'isAlgebraic_det_of_twist'],
+  },
 ];
