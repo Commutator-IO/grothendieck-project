@@ -671,7 +671,7 @@ Verdict : *tient tel qu'énoncé* · théorème principal `exists_unique_hom` ·
 | n° | env. | titre / label | Lean | classe | raison |
 |---|---|---|---|---|---|
 | 1 | lemme | `lem:68-deux`  | `two_elem`, `eq_of_inj_of_eq`, `fix_all_or_none` | C | Lemme auxiliaire sur les ensembles à deux éléments, sert seulement aux preuves. |
-| 2 | énoncé | Page 51, l'action de $\mathrm{GL}(n, \mathbf R)$ ♦ | `Theory.fixes_iff_det_pos`, `Theory.map_ne_iff_det_neg`, `Theory.fixes_iff_det_pos'` | A | Piste : action par sg∘det ; « de proche en proche » comblé par transvections. |
+| 2 | énoncé | Page 51, l'action de $\mathrm{GL}(n, \mathbf R)$ ♦ | `Theory.fixes_iff_det_pos`, `Theory.map_ne_iff_det_neg`, `Theory.fixes_iff_det_pos'` | A | Piste : action par sg∘det ; « plus gén., par récurrence » comblé par transvections. |
 | 3 | encadré/théorème | Grothendieck, page 49, théorème, a) et unicité dans b) ♦ | `Hom.bijective`, `Hom.ext_app`, `Hom.isIso` | A | Théorème encadré de la page 49, piste ; n'utilise que la bijectivité de Stokes. |
 | 4 | énoncé | Page 49, théorème, existence dans b) ♦ | `exists_unique_hom` | A | Piste : existence dans b), l'axiome de l'opposé ne sert qu'ici. |
 | 5 | remarque | —  | — | A | Porte la trouvaille : bijectivité axiome, opposé seulement pour l'existence ; fondre au verdict. |
