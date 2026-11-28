@@ -99,6 +99,33 @@ principal lower sets (\lean{isSupercompact_iff}), so $P\simeq\{x\mid x \text{ su
 (\lean{orderIsoSupercompact}). This is the localic half of the correspondence between preorders
 and Alexandrov spaces; the spatial half needs the points (\S\ref{sec:registry}).
 
+\section{The grid of translations, checked on finite cases}\label{sec:grid}
+Caramello's second use of the bridge transfers an invariant of the topos across a duality, so that a
+property of the structure becomes a property of its locale or space \cite[\S7.3]{caramello-stone}.
+Her grid crosses four invariants with three dualities:
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.4cm}@{}}
+\toprule
+invariant & distributive lattices (Stone) & meet-semi\-lattices & preorders (Alexandrov)\\
+\midrule
+Boolean (almost discrete) & Prop.~7.7 & Prop.~7.8(i) & Prop.~7.8(ii)\\
+De Morgan (extremally disconnected) & Prop.~7.9 & Prop.~7.10(i) & Prop.~7.10(ii)\\
+two-valued (trivial, non-empty) & Prop.~7.11(i) & Prop.~7.11(ii) & Prop.~7.11(iii)\\
+Gödel--Dummett & Thm~7.12(i) & Thm~7.12(ii) & Thm~7.12(iii)\\
+\bottomrule
+\end{tabularx}
+\end{center}
+The script \nolinkurl{docs/dualities/grid/caramello_grid.py} checks the statements of this grid on
+finite cases, computing each invariant in the topos itself (for a finite poset $Q$, $[Q,\Set]$
+validates a propositional sequent iff the Kripke frame $(Q,\le)$ does) and comparing it with the
+condition the proposition states on the structure. On every poset with at most five elements, on
+the meet-semilattices among them, and on the finite distributive lattices whose poset of
+join-irreducibles has at most four elements, Props.~7.7(v), 7.8, 7.9(iii), 7.10, 7.11 and
+Thm~7.12(iii) hold with no exception, and each test meets both truth values. Thm~7.12(i) and (ii)
+rest on her notion of a Gödel--Dummett lattice and are not checked. Note the direction: the
+Alexandrov topos of $Q$ is $[Q,\Set]$, covariant, so the amalgamation property of Prop.~7.10(ii)
+is the Ore condition of $Q^{\op}$.
+
 \section{The registry of targets}\label{sec:registry}
 \begin{center}\small
 \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.6cm}}
@@ -126,7 +153,7 @@ to spaces needs enough points, which for Stone duality is the prime ideal theore
 \section{Out of reach}\label{sec:limits}
 To be written: why Gelfand and Pontryagin duality, Morita theory of rings and Tannaka duality are
 not outputs of this machine (no site whose topos carries them; categories of modules are not
-toposes), and what a bridge in the broader sense would need there.
+toposes).
 
 \begin{thebibliography}{9}
 \bibitem{caramello-stone} O.~Caramello, \emph{A topos-theoretic approach to Stone-type dualities},

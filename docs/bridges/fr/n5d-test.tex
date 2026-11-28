@@ -4,7 +4,7 @@ Cette section reprend le ticket~\#187 de l'édition: les questions que les dossi
 
 \subsection{Les questions et ce qu'on en sait}
 
-Le tableau donne les questions sur les catégories test, test faibles, locales et strictes, l'asphéricité et les intervalles séparants que les trois dossiers laissent ouvertes, par dossier et page de la transcription. Le dossier 134-2 ne contient de \emph{Pursuing Stacks} que les plans et tables des matières (le texte est imprimé); on y donne la section qu'annonce la table, lue dans l'édition arXiv \cite{ps-arxiv}. \q{Nôtre} marque une étape qui est de l'édition; \q{ouvert} veut dire: non trouvé dans les sources lues, qui sont \cite{cisinski-308,maltsiniotis-2001,ps-arxiv,hubert-thesis,hubert-dk}. Nous n'avons consulté ni les articles de Jardine, ni \emph{Higher categories and homotopical algebra} de Cisinski; l'Astérisque~301 imprimé \cite{maltsiniotis-301} a été consulté ensuite, pour la seule obstruction de De Morgan.
+Le tableau donne les questions sur les catégories test, test faibles, locales et strictes, l'asphéricité et les intervalles séparants que les trois dossiers laissent ouvertes, par dossier et page de la transcription. Le dossier 134-2 ne contient de \emph{Pursuing Stacks} que les plans et tables des matières (le texte est imprimé); on y donne la section qu'annonce la table, lue dans l'édition arXiv \cite{ps-arxiv}. \q{Nôtre} marque une étape qui est de l'édition; les sources lues sont \cite{cisinski-308,maltsiniotis-2001,ps-arxiv,hubert-thesis,hubert-dk}. Nous n'avons consulté ni les articles de Jardine, ni \emph{Higher categories and homotopical algebra} de Cisinski; l'Astérisque~301 imprimé \cite{maltsiniotis-301} a été consulté ensuite, pour la seule obstruction de De Morgan.
 
 \begin{center}\scriptsize\emergencystretch=3em
 \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{1.25cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{5.2cm}}
@@ -27,10 +27,6 @@ dossier, page & question & statut\\
 118, p.~36 & un produit infini d'objets asphériques est-il asphérique? & non, nôtre (proposition~\ref{prop:products})\\
 134-2, p.~5, \S\S31--33 & un critère pour les catégories test, nécessité de T1--T3 & réglé \cite[th.~4.1.19]{cisinski-308}, \cite[th.~6.6]{maltsiniotis-2001}\\
 134-2, p.~6 \S43, p.~9 \S98 & $\Delta^f$ test faible; \q{perplexities about its being aspheric} & réglé \cite[\S8]{maltsiniotis-2001}\\
-134-2, p.~9, \S84 & l'inclusion $f_!(M_{\mathrm{as}})\subset M'_{\mathrm{as}}$ & laissée sans réponse dans \cite[\S88, 1)]{ps-arxiv}; ouvert\\
-134-2, p.~9, \S86 & existe-t-il une notion de morphisme de structures d'asphéricité? & ouvert\\
-134-2, p.~9, \S90 & existence de foncteurs test (parfaits) vers un modélisateur & ouvert en général; pour $\Delta\to\mathrm{Cat}$, le $c\,\mathrm{Sd}^2$ de Thomason donne une équivalence de Quillen \cite[th.~5.2.12]{cisinski-308}\\
-134-2, p.~9, \S91 & conditions sur $A$ pour les types d'homotopie de type fini; catégories test à opérations de bord & ouvert; pour l'homologie, \cite{hubert-dk}\\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -81,13 +77,10 @@ $A/X$ est une catégorie test locale \cite[prop.~4.1.14 (v)]{cisinski-308}, non 
 
 Un topos test n'est donc De Morgan nulle part, et pas seulement globalement. Nous n'avons pas non plus trouvé la proposition~\ref{prop:slices} imprimée (même recherche); elle découle immédiatement du théorème et de la stabilité des catégories test locales par tranches \cite[prop.~4.1.14 (v)]{cisinski-308}, \cite[rem.~1.5.4 b)]{maltsiniotis-301}. Nous n'avons trouvé nulle part non plus que les ensembles simpliciaux, cubiques, les $\Theta$-ensembles ou les ensembles dendroïdaux ne forment pas des topos de De Morgan, bien que chaque cas soit immédiat: dans $\Delta$, les deux faces $[0]\rightrightarrows[1]$ n'ont pas de restriction commune.
 
-\subsection{Tabliers finis: calculs et conjecture}
+\subsection{Tabliers finis: calculs}
 
 Sur les tabliers qu'énumère le générateur, le script \nolinkurl{computations/187-test-categories/finite_test.py} calcule l'homologie en degrés $0$ à $2$, sur $\mathbb Q$ et $\mathbb F_2$, des nerfs de $A$, de $A/L_A$ et de chaque $A/(a\times L_A)$. Pour tout monoïde d'ordre au plus~6 (2510 à isomorphisme près, d'après l'atlas de l'article associé), l'homologie de $A/L_A$ en degrés au plus~2 diffère de celle d'un point, et celle de $A/(a\times L_A)$ aussi: aucun monoïde d'ordre $\le 6$ n'est test faible ni test local, pour les équivalences faibles usuelles. Les monoïdes non Ore, au nombre de 495, échappent au théorème~\ref{th:ore}; pour eux $H_1(A/(a\times L_A);\mathbb Q)$ est de rang compris entre $4$ et $743$. Pour les ensembles ordonnés, \nolinkurl{posets_euler.py} calcule la caractéristique d'Euler de l'ensemble ordonné fini $A/L_A$ par la formule $\chi(A/L_A) = \sum_x |D(\downarrow x)|\,c(x)$, où $D(\downarrow x)$ est l'ensemble des parties commençantes de $\downarrow x$ et $c(x) = 1-\chi(A_{<x})$: pour tout ensemble ordonné à au plus six éléments et de caractéristique $\chi(A)=1$, $\chi(A/L_A)\ne1$, donc aucun ensemble ordonné à au plus six éléments n'est test faible (un ensemble ordonné de caractéristique $\chi(A)\ne1$ n'est même pas asphérique).
 
-\begin{remark}[Conjecture]
-Aucune catégorie finie non vide n'est test faible, ni test locale. Le cas local est établi pour les ensembles ordonnés finis et les catégories libres finies sans cycle (corollaire~\ref{cor:ore}); pour les monoïdes nous n'avons que les calculs ci-dessus.
-\end{remark}
 
 \subsection{Produits infinis}
 
