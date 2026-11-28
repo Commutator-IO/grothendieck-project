@@ -5,6 +5,7 @@
 % listings (dated 02 JUN 82) — absent, as they should be.
 % Pass: Fable 5 (claude-fable-5), 2026-08-08 — first pass, unchecked against the pages by a human.
 % Revised: Fable 5.2 (claude-fable-5-2), 2026-11-12 — \drawing mark added for the struck first state of the wheel on p. 2, described only in a note (issue 128); recorded with an empty redraw, since it is wholly struck; the note is kept, the text is unchanged.
+% Revised: Fable 5.2 (claude-fable-5-2), 2026-11-28 — read again on the facsimile, not checked by a reader. Pp. 3 read a second time (#145); see docs/review/revision-145/115.md.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -48,14 +49,36 @@ premier état raturé de la roue de la page 5 ; lectures trop incertaines pour
 \note{page 1 de la main de l'auteur}
 En tête, à droite : $\underline{\mathrm{Hom}}_{!}$ : sous-catégorie pleine de
 $\underline{\mathrm{Hom}}$ formée des foncteurs commutant aux
-\uncertain{limites inductives} ; $\underline{\mathrm{Hom}}^{!}$ :
+limites inductives ; $\underline{\mathrm{Hom}}^{!}$ :
 sous-catégorie pleine de $\underline{\mathrm{Hom}}$ formée des foncteurs
-commutant aux \uncertain{limites projectives}.
+commutant aux limites projectives.
+\note{il écrit « sous-cat.\ pleine de $\underline{\mathrm{Hom}}$ formée des
+foncteurs commutant aux $\varinjlim$ », resp.\ « aux
+$\varprojlim$ » : les deux limites sont des « lim » soulignés d'une
+flèche, vers la droite puis vers la gauche, et se lisent sans doute}
 
 En marge gauche : cas $B = A^{\circ}$ : d'où l'élément canonique
-$H = H_{A} \in (A \times A^{\circ})^{\wedge}$ ; \uncertain{les prolongements
-canoniques} $\widehat{A}^{\circ} \hookrightarrow A^{\vee}$, \ldots
-\note{le reste de la colonne marginale est trop raturé pour être transcrit}
+$H = H_{A} \in (A \times A^{\circ})^{\wedge}$, d'où
+$A \hookrightarrow \widehat{A}$, $A^{\circ} \hookrightarrow A^{\vee}$ (les
+plongements can.), $A^{\vee\circ} \xrightarrow{\,!\,} \widehat{A}$,
+$\widehat{A}^{\circ} \xrightarrow{\,!\,} A^{\vee}$ (comm.\ aux limites
+projectives) \uncertain{i.e.\ faisceaux sur $A^{\vee}$ repr.\ $\widehat{A}$,
+ind.\ ds $\widehat{A}$ repr.\ $A^{\vee}$},
+$\widehat{A}^{\circ} \times A^{\vee\circ} \xrightarrow{\,!!\,} (\mathrm{Ens})$
+(bif.\ can.\ sur $\widehat{A}$, $A^{\vee}$) (et $\widehat{A} \to \widehat{A}$
+et $A^{\vee} \to A^{\vee}$ \uncertain{sont} les identités) ;
+$\widehat{A} \simeq \underline{\mathrm{Hom}}^{!}(\widehat{A}^{\circ}, \mathrm{Ens})
+\simeq \underline{\mathrm{Hom}}_{!}(A^{\vee}, \mathrm{Ens})$,
+$A^{\vee} \simeq \underline{\mathrm{Hom}}^{!}(A^{\vee\circ}, \mathrm{Ens})
+\simeq \underline{\mathrm{Hom}}_{!}(\widehat{A}, \mathrm{Ens})$, et itou pour $B$.
+\note{relu sur le fac-similé le 28 novembre 2026 : la colonne marginale n'est
+pas raturée, un trait sinueux la sépare du diagramme. Les plongements sont
+$A \hookrightarrow \widehat{A}$ et $A^{\circ} \hookrightarrow A^{\vee}$ (une
+première lecture donnait $\widehat{A}^{\circ} \hookrightarrow A^{\vee}$). Les
+deux petites lignes après « comm.\ aux $\varprojlim$ » sont écrites
+serrées contre le trait et restent douteuses ; dans la dernière égalité, le
+second membre $\underline{\mathrm{Hom}}_{!}(\widehat{A}, \mathrm{Ens})$ est
+coupé par le trait}
 
 Le diagramme central, simplifié — l'original est un espalier d'une dizaine de
 flèches marquées $\approx$, dont plusieurs biffées :
@@ -73,7 +96,9 @@ flèches marquées $\approx$, dont plusieurs biffées :
 Le dispositif systématique : $A \times B$, avec les projections
 $p_{B} : A\times B \to A$ et $p_{A} : A\times B \to B$.
 \note{l'indice de la projection nomme le facteur supprimé — c'est la seule
-lecture sous laquelle les formules qui suivent concordent entre elles}
+lecture sous laquelle les formules qui suivent concordent entre elles ; le
+petit diagramme de la page le montre, $p_{B}$ sur la flèche vers $A$, $p_{A}$
+sur la flèche vers $B$, prolongées par $q_{A} : A \to e$ et $q_{B} : B \to e$}
 \[
 \underline{\mathrm{Hom}}_{A}(X,Y) \overset{\mathrm{def}}{=}
    p_{B*}\,\underline{\mathrm{Hom}}_{A\times B}(X,Y),
@@ -98,8 +123,8 @@ lecture sous laquelle les formules qui suivent concordent entre elles}
 (en marge : $L \in \widehat{A}$, $M \in \widehat{B}$)
 \[
 X(L,M) = \mathrm{Hom}\bigl(L \boxtimes M,\ X\bigr)
-\simeq \mathrm{Hom}\bigl(L,\ {}^{d}X(M)\bigr)
-\simeq \mathrm{Hom}\bigl(M,\ {}^{s}X(L)\bigr),
+\simeq \mathrm{Hom}_{\widehat{A}}\bigl(L,\ {}^{d}X(M)\bigr)
+\simeq \mathrm{Hom}_{\widehat{B}}\bigl(M,\ {}^{s}X(L)\bigr),
 \qquad\text{où } L \boxtimes M = p_{B}^{*}L \times p_{A}^{*}M .
 \]
 
@@ -107,40 +132,69 @@ X(L,M) = \mathrm{Hom}\bigl(L \boxtimes M,\ X\bigr)
 $L = a \in \mathrm{Ob}\,A$, $M = b \in \mathrm{Ob}\,B$. »
 \note{lecture incertaine des deux membres de droite}
 
-« Soit $X$ ; définissons $B^{\circ} \to \widehat{A}$ (savoir
-$b \mapsto {}^{d}X(b) = \underline{\mathrm{Hom}}_{A}(p_{A}^{*}(b), X)$)
-\ldots{} on trouve $B^{\circ} \to \mathrm{Ens}$ : c'est \ill{}, qui
-s'écrit aussi $\underline{\mathrm{Hom}}_{B}(p_{B}^{*}(L), X) = {}^{s}X(L)$.
-Interprétation \uncertain{duale} pour ${}^{d}X(M)$. »
-\note{passage interligné, lecture partiellement conjecturale}
+« Soit $X$, définissons $B^{\circ} \to \widehat{A}$ (savoir
+$b \mapsto {}^{d}X(b) = \underline{\mathrm{Hom}}_{B}(p_{B}^{*}(L), X)$),
+\uncertain{composons avec} $\widehat{A} \to \mathrm{Ens}$ défini par un
+$L \in \mathrm{Ob}\,\widehat{A}$, par $L' \mapsto \mathrm{Hom}(L, L')$, on
+trouve $B^{\circ} \to \mathrm{Ens}$ :
+\add{$b \mapsto \mathrm{Hom}_{\widehat{A}}(L, {}^{d}X(b))$, i.e.} un élément
+de $\widehat{B}$, qui n'est autre que
+$\underline{\mathrm{Hom}}_{B}(p_{B}^{*}(L), X) = {}^{s}X(L)$.
+Interprétation duale pour ${}^{d}X(M)$. »
+\note{relu sur le fac-similé le 28 novembre 2026. Dans la parenthèse la page
+écrit bien $\underline{\mathrm{Hom}}_{B}(p_{B}^{*}(L), X)$, qui est
+l'expression de ${}^{s}X(L)$ et non celle de ${}^{d}X(b)$
+($= \underline{\mathrm{Hom}}_{A}(p_{A}^{*}(b), X)$ d'après la définition
+donnée plus haut) ; on ne corrige pas. « $b \mapsto
+\mathrm{Hom}_{\widehat{A}}(L, {}^{d}X(b))$, i.e. » est ajouté sous la ligne,
+dans une accolade ; une première rédaction du même ajout, au bout de la ligne
+précédente, est biffée. Les $L$ sont surchargés}
 
 « $(L,M) \mapsto L \boxtimes M : \widehat{A} \times \widehat{B} \to
 (A\times B)^{\wedge}$ est pleinement fidèle. »
 
-« le \ill{} qui est le foncteur canonique \ldots{} dit « de Yoneda » pour
+Sous $(A\times B)^{\wedge}$, relié par un signe $\wr$ vertical :
+$\underline{\mathrm{Hom}}^{!!}(\widehat{A}^{\circ} \times \widehat{B}^{\circ},
+(\mathrm{Ens})) \subset (\widehat{A} \times \widehat{B})^{\wedge}$ ;
+« le \uncertain{composé} est le foncteur canonique dit « de Yoneda » pour
 $\widehat{A} \times \widehat{B}$ »
 \[
-\underline{\mathrm{Hom}}_{A\times B}\bigl(L\boxtimes M',\ L'\boxtimes N'\bigr)
-\simeq \underline{\mathrm{Hom}}_{A}(L,L') \boxtimes
-       \underline{\mathrm{Hom}}_{B}(M',N')
+\mathrm{Hom}_{A\times B}\bigl(L'\boxtimes M',\ L\boxtimes M\bigr)
+\simeq (L \boxtimes M)(L' \boxtimes M')
+\overset{\sim}{\longleftarrow}
+\mathrm{Hom}_{\widehat{A}}(L',L) \times \mathrm{Hom}_{\widehat{B}}(M',M)
+\]
+\[
+\underline{\mathrm{Hom}}_{A\times B}\bigl(L'\boxtimes M',\ L\boxtimes M\bigr)
+\simeq \underline{\mathrm{Hom}}_{\widehat{A}}(L',L) \boxtimes
+       \underline{\mathrm{Hom}}_{\widehat{B}}(M',M)
 \qquad \text{p.ex.}
 \]
 \[
-\underline{\mathrm{Hom}}_{A\times B}\bigl(L\boxtimes M',\ L'\boxtimes e_{B}\bigr)
-\simeq \underline{\mathrm{Hom}}_{A}(L,L') \boxtimes e_{B}
-= p_{B}^{*}\,\underline{\mathrm{Hom}}_{A}(L,L')
+\underline{\mathrm{Hom}}_{A\times B}\bigl(L'\boxtimes M',\ L\boxtimes e_{\widehat{B}}\bigr)
+\simeq \underline{\mathrm{Hom}}_{\widehat{A}}(L',L) \boxtimes e_{\widehat{B}}
 \]
-en particulier, faisant $L' = e_{A}$ : \ldots
-\note{la suite de la ligne est illisible}
+\note{relu sur le fac-similé le 28 novembre 2026. La première de ces trois
+formules manquait. Dans les trois, les primes ont d'abord été portés par les
+seconds arguments, puis biffés là et reportés sur les premiers : on donne
+l'état final, $(L'\boxtimes M', L\boxtimes M)$. Les indices des
+$\underline{\mathrm{Hom}}$ de droite sont $\widehat{A}$ et $\widehat{B}$. Dans
+la troisième, une accolade sous $L \boxtimes e_{\widehat{B}}$ porte
+$p_{B}^{*}L$, et une autre sous le membre de droite porte
+$p_{B}^{*}\,\underline{\mathrm{Hom}}_{\widehat{A}}(L, L')$, où les primes
+n'ont pas été reportés}
 
-$\underline{\mathrm{Hom}}_{A\times B}\bigl(p_{A}^{*}(M), \cdots\bigr)
-\Leftarrow p_{B}^{*}\cdots$ (les flèches étant les flèches canoniques)
-\note{ligne partiellement illisible}
+en particulier, faisant $L' = e_{\widehat{A}}$ et changeant $M'$ en $M$ :
+\[
+\underline{\mathrm{Hom}}_{A\times B}\bigl(p_{A}^{*}(M),\ p_{B}^{*}L\bigr)
+\overset{\sim}{\longleftarrow} p_{B}^{*}L
+\]
+(les flèches étant les flèches canoniques
+$\underline{\mathrm{Hom}}(\alpha, \beta) \leftarrow \beta$)
 
 Posant $X^{M} \overset{\mathrm{def}}{=}
 \underline{\mathrm{Hom}}_{A\times B}\bigl(p_{A}^{*}M,\ X\bigr)$, on trouve
-donc $(p_{B}^{*}L)^{M} \simeq p_{B}^{*}L\cdots$
-\note{fin de formule incertaine}
+donc $(p_{B}^{*}L)^{M} \overset{\sim}{\longleftarrow} p_{B}^{*}L$
 
 \page{5}
 \note{page 2 de la main de l'auteur}
