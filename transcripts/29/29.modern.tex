@@ -73,6 +73,11 @@
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-11-12 — transcription corrected on the facsimile (#145):
 %   p. 86, the base-change cube is now read and stated (T'_o = T_o x_X X' -> T_o x_S S' unramified by
 %   base change, T' sought over T x_S S'); p. 183, the path x ... a is a zigzag of opposite-arrow pairs.
+% Revised: Fable 5.2 (claude-fable-5-2), 2026-11-28 — pp. 171, 190–193, 197, 214: follows the revised transcription (#145).
+%   p. 171: the discrete valuation ring is not said complete (« local complet » struck). p. 190: R4 and the
+%   margins as now read; Prop. 1's insertion footnoted. p. 191: the Corollaire turned round (R_S' inside its
+%   topos). p. 192: « subordonné » is piecewise constant. p. 193: r(X') = r(X''). p. 197: margin condition of
+%   the second corollary. p. 214: the heading is « Corollaire », not « Conclusion ».
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -4351,9 +4356,15 @@ infini »}.
   \item Si $S$ est le spectre d'un anneau de Dedekind,
     $H^{1}_{C_{2}} \xrightarrow{\ \sim\ } H^{1}_{C_{1}}$, d'où
     $H^{1}_{C_{3}} \simeq H^{1}_{C_{2}} \simeq H^{1}_{C_{1}}$.
-  \item Si $S$ est le spectre d'un anneau de valuation discrète complet à corps
+  \item Si $S$ est le spectre d'un anneau de valuation discrète $V$ à corps
     résiduel algébriquement clos, $H^{1}_{C_{i}} \simeq H^{1}(\hat{V}/V, -)$
-    pour $i = 1, 2, 3$ : une seule extension suffit.
+    pour $i = 1, 2, 3$ : une seule extension suffit.\footnote{La page 171
+    biffe « local complet » et porte en marge « de valuation » : l'anneau
+    $V$ n'est pas dit complet, et la comparaison se fait avec $\hat{V}/V$ ;
+    le nom $V$ est ajouté au-dessus de la ligne. Page relue sur le
+    fac-similé le 28 novembre 2026 (\#145), passe machine non vérifiée par
+    un lecteur ; cette lecture modernisée écrivait auparavant « anneau de
+    valuation discrète complet ».}
   \item Si $S$ est le spectre d'un anneau local \emph{complet} $V$ de corps
     résiduel $k$, alors $H^{1}_{C_{5}} \simeq H^{1}_{C_{4}} \simeq
     H^{1}_{C_{3}} \simeq H^{1}_{C_{2}}$, et de plus
@@ -4817,28 +4828,42 @@ Les axiomes sont les suivants.
 \item[\textbf{R2}] Pour $S' \in \mathrm{Et}(S)$ et $X \in R_{S'}$,
   l'application $X' \mapsto r(X')$ est une \emph{bijection} de l'ensemble des
   sous-objets directs de $X$ sur l'ensemble des parties ouvertes et fermées de
-  $r(X)$.
+  $r(X)$.\footnote{La page biffe « sous-objets » et écrit au-dessus un mot lu
+  « sommandes », de lecture douteuse ; le sens est le même. Lecture de la révision du 28 novembre 2026 sur le fac-similé (\#145), passe machine non vérifiée par un lecteur.}
 
 \item[\textbf{R3}] Pour une famille $(X_{i})$, pas nécessairement finie,
   de sous-objets de $X$ telle que les $r(X_{i})$ recouvrent $r(X)$, la famille
   $X_{i} \to X$ est une famille de descente \emph{effective}.
 
-\item[\textbf{R4}] Pour $X \to Y$ dominant dans $R_{S}$, on veut que les
-  $r(X_{i})$ recouvrent $r(Y)$.\footnote{L'axiome R4 est le plus abîmé des
-  quatre sur la page ; la transcription en laisse une partie illisible. Il est
-  donné ici tel qu'il se lit, et non complété. Sa fonction se déduit néanmoins
-  de l'usage qui en est fait : R1 et R3 servent à faire de la surjectivité une
-  topologie, R2 à identifier sous-objets et parties ouvertes et fermées, et R4
-  à assurer que la surjectivité se propage ; c'est ce que la page 191 note :
-  « on a utilisé seulement R1 ; R3 signifie que les topologies sur $R_{S'}$
-  sont localement finies ; R4 que …\ L'axiome sur le changement de base est
-  trivial. »}
+\item[\textbf{R4}] Pour $X \to Y$ dans $R_{S'}$, d'où une décomposition
+  $Y = \coprod_{n \in \mathbb{N}} Y_{n}$ avec $X \times_{Y} Y_{n} \to Y_{n}$
+  de degré $n$, on veut que les $r(Y_{n})$ recouvrent
+  $r(Y)$.\footnote{L'axiome R4 est ajouté d'une écriture serrée entre R3 et
+  la proposition 1. Il se lit maintenant en entier, sauf « de degré $n$ », de
+  lecture douteuse (révisions du 14 et du 28 novembre 2026 sur le fac-similé,
+  \#145, passes machine non vérifiées par un lecteur ; la première lecture
+  donnait « $X \to Y$ dominant » et « les $r(X_{i})$ recouvrent $r(Y)$ », et
+  laissait une partie illisible). La page 191 dit ce que donnent les
+  axiomes : « On n'a utilisé pour l'instant que R1. R3 signifie que la
+  topologie est moins fine que la canonique, R4 que les objets de $R_{S'}$
+  sont loc.\ cts finis. L'axiome sur le changement de base est trivial. » Y
+  sont de lecture douteuse « pour l'instant » et « moins fine », dont le
+  premier mot est surchargé, « plus » et « moins » l'un sur l'autre : R3 rend
+  les familles couvrantes épimorphiques effectives, donc couvrantes pour la
+  topologie canonique, ce qui ne laisse que « moins fine ».}
 \end{itemize}
 
-Les marges de la page portent trois desiderata, qui disent ce qu'on voudrait
+Les marges de la page portent deux desiderata, qui disent ce qu'on voudrait
 sans être des axiomes : que les foncteurs de changement de base soient
-\emph{exacts} ; que dans $\mathrm{Fl}_{S}$ le quotient soit déterminable ; et
-que la famille des objets de $R_{S'}$ soit localement constante finie.
+\emph{exacts} ; et que dans $\mathrm{Fl}_{S}$ « on ait quotient admissible »
+(« on ait » et « admissible » de lecture douteuse). Une troisième note dit
+que « dans $R_{Y}$, il suffirait de supposer $Y = e$ --- n'utilisant que R1
+et R3, R4 » (« suffirait » douteux), et une quatrième, au pied de la page,
+appartient à l'énoncé de la proposition 1.\footnote{Lectures de la révision
+du 28 novembre 2026 sur le fac-similé (\#145), passe machine non vérifiée
+par un lecteur. La lecture antérieure donnait « quotient déterminable » et
+faisait de la note du pied un troisième desideratum, « que la famille des
+objets de $R_{S'}$ soit localement constante finie ».}
 
 \subsection*{Proposition 1 : c'est une topologie}
 
@@ -4849,7 +4874,16 @@ sont telles que les $r(X_{i})$ recouvrent $r(X)$.
 
 \textbf{Proposition 1.} Ces familles sont les familles couvrantes d'une
 \emph{topologie} sur $R_{S'}$, et le foncteur de changement de base
-$R_{S'} \to R_{S''}$ est \emph{continu}.
+$R_{S'} \to R_{S''}$ est \emph{continu}.\footnote{La page complète l'énoncé
+par un ajout entouré, relié par un trait à un signe de renvoi placé après
+« sur $R_{S'}$ » : « (moins fine que la canon. » ; le même signe ouvre la
+note marginale du pied, « et pour laquelle tout objet de $R_{S'}$ est loc.\
+constant fini ». La proposition, telle qu'il l'a complétée, dit donc : une
+topologie moins fine que la topologie canonique, pour laquelle tout objet de
+$R_{S'}$ est localement constant fini ; la page 191 rapporte la première
+propriété à R3 et la seconde à R4. « Moins fine », « canon. » et « et pour
+laquelle » sont de lecture douteuse, et ce complément n'est pas porté dans
+l'énoncé ci-dessus. Lecture de la révision du 28 novembre 2026 sur le fac-similé (\#145), passe machine non vérifiée par un lecteur.}
 
 La vérification des quatre axiomes d'une topologie est page 191, et elle est
 courte :
@@ -4871,9 +4905,17 @@ Le mécanisme est le même dans c) et d) : \emph{$r$
 n'est pas exact à gauche en général, mais il l'est sur les monomorphismes},
 et b) permet toujours de s'y ramener. R1 et R2 ne disent rien de plus.
 
-\textbf{Corollaire.} Prenant les topos associés aux $R_{S'}$, on trouve un
-\emph{champ en topos} $\tilde{R}_{S'}$ au-dessus de la sous-catégorie des
-objets localement constants finis de $R_{S'}$.
+\textbf{Corollaire.} Prenant les topos $\tilde{R}_{S'}$ associés aux
+$R_{S'}$, on trouve sur $\mathrm{Et}(S)$ un \emph{champ en topos} ; et
+$R_{S'}$ s'y retrouve, selon la page, comme la sous-catégorie des objets
+localement constants finis de $\tilde{R}_{S'}$.\footnote{La page : « on
+trouve sur $\mathrm{Et}(S)$ un champ en topos ; $R_{S'}$ « sera » la
+sous-catégorie des objets loc.\ constants finis de $\tilde{R}_{S'}$ », où
+« $\mathrm{Et}(S)$ » et le mot entre guillemets, « sera », sont de lecture
+douteuse. Le tilde est sur le premier et sur le dernier $R_{S'}$ : c'est
+$R_{S'}$ qu'on retrouve dans son topos, et non un champ en topos placé
+« sur » une sous-catégorie de $R_{S'}$, comme le donnait la lecture
+antérieure. Lecture de la révision du 28 novembre 2026 sur le fac-similé (\#145), passe machine non vérifiée par un lecteur.}
 
 Un bloc rayé de plusieurs diagonales pose ensuite une question à laquelle la
 page ne répond pas : pour $X \to Y$ avec $Y = \coprod_{n} Y_{n}$ et chaque
@@ -4895,14 +4937,19 @@ $Y_{n} \to Y$ est-elle couvrante ? Elle est laissée ouverte.
 \subsection*{Subordination}
 
 Soit $C$ une catégorie multigaloisienne et $P$ un objet. Un objet $X$ de $C$
-est dit \emph{subordonné} à $P$ si $X_{P} \to P$ est \emph{constant}, au
-sens où $X_{P}$ est somme de copies de $P$.\footnote{La définition est abîmée
-sur la page 192 et la transcription y laisse deux passages illisibles. Elle est
-fixée ici par l'usage qu'en fait la page 194, où les objets subordonnés à $P$
-sont mis en bijection avec les objets « constants par morceaux » sur $r(P)$ ;
-c'est cette phrase-là qui décide, non le tracé de la page 192. La condition de
-connexité que la page ajoute est celle sous laquelle « constant » et
-« constant par morceaux » coïncident.}
+est dit \emph{subordonné} à $P$ si $X_{P} = X \times P \to P$ est
+\emph{constant par morceaux} : sur le sous-objet $P_{n}$ de $P$ où $X_{P}$
+est de rang $n$, il est constant, c'est-à-dire somme de $n$ copies de
+$P_{n}$.\footnote{La page 192 : « $X_{P} = X \times P \to P$ est tel que,
+sur le ss-objet $P_{n}$ de $P$ où $X_{P}$ est de rang $n$, $X$ est
+constant », où « tel que, sur le » est de lecture douteuse et remplace des
+mots biffés (révisions du 14 et du 28 novembre 2026 sur le fac-similé,
+\#145, passes machine non vérifiées par un lecteur ; la première lecture
+laissait là deux passages illisibles et lisait « connexe » pour
+« constant », et cette lecture modernisée donnait « constant »). C'est la
+définition des objets « constants par morceaux » dont parle la suite de la
+page ; la page 194 met les objets subordonnés à $P$ en bijection avec les
+objets « constants par morceaux » sur $r(P)$.}
 
 Pour $P$ fixé, les objets subordonnés à $P$ forment une sous-catégorie
 \emph{pleine} stable par limites projectives finies et par facteurs directs
@@ -4922,14 +4969,18 @@ porte une proposition :
 $r$ soit \emph{fidèle}}.
 
 \emph{Démonstration.} Supposons $r$ fidèle. Soient $X'$, $X''$ deux sous-objets
-de $X$ avec $r(X') \supset r(X'')$ dans $r(X)$. Comme
+de $X$ avec $r(X') = r(X'')$ dans $r(X)$. Comme
 $r(X' \cap X'') = r(X') \cap r(X'')$, les inclusions
 $X' \cap X'' \subset X'$ et $X' \cap X'' \subset X''$ deviennent des
 isomorphismes par $r$, ce qui ramène au cas d'une inclusion
 $X' \subset X''$, soit $X'' = X' \sqcup X_{1}$. Alors
 $r(X'') = r(X') \sqcup r(X_{1})$, et $r(X') = r(X'')$ équivaut à
 $r(X_{1}) = \varnothing$, donc à $X_{1} = \varnothing$.\footnote{La page
-n'argumente que ce sens, « $r$ fidèle $\Rightarrow$ R2 », et la proposition
+suppose $r(X') = r(X'')$, et non une inclusion comme le donnait la première
+lecture ; sa dernière proposition, « et l'hypothèse $r(X') = r(X'')$ équivaut
+à $r(X_{1}) = \emptyset$ », est biffée d'un trait à part (révision du 14
+novembre 2026 sur le fac-similé, page relue le 28, \#145, passes machine non
+vérifiées par un lecteur). Elle n'argumente que ce sens, « $r$ fidèle $\Rightarrow$ R2 », et la proposition
 est rayée avec le reste du feuillet. La réciproque, que R2 entraîne la
 fidélité de $r$, n'est démontrée ni sur la page ni ici : l'équivalence est
 énoncée par Grothendieck, non établie.}
@@ -5105,7 +5156,12 @@ que comme sous-domaine, et le corollaire suivant dit lequel.
 \textbf{Corollaire.} Si $(R', r')$ est défini par $(Z', G')$, alors
 $\underline{\mathrm{Hom}}\bigl((R,r),(R',r')\bigr)$ est équivalent à la
 catégorie des revêtements \emph{principaux} $P'$ de $Z'$ de groupe $G$, sur
-lesquels $G'$ opère compatiblement avec ses opérations sur $Z'$, munis d'un
+lesquels $G'$ opère compatiblement avec ses opérations sur $Z'$, constants
+par morceaux localement sur $S$,\footnote{La condition « $P'$ constant par
+morceaux loc.\ (ét.) sur $S$ » est une note écrite en long dans la marge
+gauche, reliée par un signe de renvoi à « ses opérations sur $Z'$, » ;
+« (ét.) », localement pour la topologie étale, est de lecture douteuse. La
+première lecture ne donnait pas cette note. Lecture de la révision du 28 novembre 2026 sur le fac-similé (\#145), passe machine non vérifiée par un lecteur.} munis d'un
 isomorphisme de $G$-schémas sur $S$
 \[
   P'/G' \;\simeq\; Z .
@@ -5739,9 +5795,18 @@ tels.
 
 \subsection*{L'unicité}
 
-\textbf{Conclusion.} Dans les conditions de A(iv), la notion de « morphisme de
+\textbf{Corollaire.}\footnote{Le titre souligné de la page 214 est
+« Corollaire », non « Conclusion » comme le donnait la première lecture, et
+la parenthèse finale de l'énoncé se lit « ($Y'$-isom.) ». Dans la récurrence
+qui précède, le degré de $X' \to Y'$ est une lettre repassée à l'encre, lue
+$n$ (lecture douteuse, que la mathématique impose) et suivie d'un mot biffé,
+là où la première lecture donnait « $n - 1$ » ajouté sur un « $n$ » biffé.
+Lectures de la révision du 28 novembre 2026 sur le fac-similé (\#145),
+passe machine non vérifiée par un lecteur.} Dans les conditions de A(iv), la
+notion de « morphisme de
 degré $n$ » est \emph{uniquement déterminée}, et elle équivaut à : il existe
 $Y' \to Y$ épimorphisme effectif universel, et de descente effective, avec
+un $Y'$-isomorphisme
 \[
   X \times_{Y} Y' \;\simeq\; [1, n]_{Y'} .
 \]
