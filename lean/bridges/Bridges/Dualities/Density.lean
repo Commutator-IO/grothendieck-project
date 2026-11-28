@@ -1,0 +1,239 @@
+/-
+Copyright (c) 2026 Michel Hua. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Michel Hua
+-/
+module
+
+public import Mathlib.Order.CompleteBooleanAlgebra
+public import Mathlib.Order.Atoms
+public import Mathlib.Order.UpperLower.Basic
+
+/-!
+# The Comparison Lemma for preorders, and Lindenbaum–Tarski duality as one of its readings
+
+Caramello derives the Stone-type dualities from one statement (*A topos-theoretic approach to
+Stone-type dualities*, arXiv:1103.3493, Theorem 10.13(i), the Comparison Lemma for preorders):
+if `D` is a dense part of a preorder `C` with a coverage `J`, the `J`-ideals of `C` correspond
+to the ideals of the coverage that `J` induces on `D`. A duality is then a choice of `C`, `J`
+and `D`, and two readings of the two sides.
+
+Here a coverage is given by covering sieves: `covers a` is a set of lower sets below `a`,
+stable under restriction. A `J`-ideal is a lower set that contains every element covered by a
+sieve inside it. The frame structure of the ideals, and the toposes of sheaves of which they are
+the subterminal objects, are not formalised; the order isomorphism is.
+
+* `PreorderCoverage.densityOrderIso`: the Comparison Lemma.
+* `completeAtomicBooleanAlgebraOrderIsoSetAtoms`: Lindenbaum–Tarski duality, obtained by taking
+  for `C` a complete atomic Boolean algebra with its canonical coverage, for `D` its atoms, and
+  reading the two sides: the `J`-ideals of `C` are its principal ideals, and the induced
+  coverage on the atoms is trivial, so its ideals are all the sets of atoms.
+-/
+
+@[expose] public section
+
+namespace Bridges.Dualities
+
+open Set
+
+/-- A coverage on a preorder, by covering sieves: each covering sieve of `a` is a lower set
+below `a`, and a covering sieve of `a` restricts to a covering sieve of every `b ≤ a`. -/
+structure PreorderCoverage (α : Type*) [Preorder α] where
+  /-- The covering sieves of each element. -/
+  covers : α → Set (Set α)
+  isLowerSet_of_mem : ∀ {a S}, S ∈ covers a → IsLowerSet S
+  le_of_mem : ∀ {a S}, S ∈ covers a → ∀ b ∈ S, b ≤ a
+  stable : ∀ {a S}, S ∈ covers a → ∀ {b}, b ≤ a → ∃ T ∈ covers b, ∀ t ∈ T, ∃ s ∈ S, t ≤ s
+
+namespace PreorderCoverage
+
+variable {α : Type*} [Preorder α] (J : PreorderCoverage α)
+
+/-- A `J`-ideal: a lower set containing every element that one of its covering sieves inside the
+set covers. -/
+def IsIdeal (I : Set α) : Prop :=
+  IsLowerSet I ∧ ∀ a, ∀ S ∈ J.covers a, S ⊆ I → a ∈ I
+
+/-- The `J`-ideals, ordered by inclusion. -/
+abbrev Ideal : Type _ := {I : Set α // J.IsIdeal I}
+
+instance : PartialOrder J.Ideal := Subtype.partialOrder _
+
+/-- `D` is dense: every element is covered by the sieve of elements below some element of `D`
+below it. -/
+def Dense (D : Set α) : Prop :=
+  ∀ c, {x | ∃ d ∈ D, x ≤ d ∧ d ≤ c} ∈ J.covers c
+
+/-- The coverage induced on a part `D`: the traces on `D` of the covering sieves. -/
+def restrict (D : Set α) : PreorderCoverage D where
+  covers d := {R | ∃ T ∈ J.covers (d : α), R = Subtype.val ⁻¹' T}
+  isLowerSet_of_mem := by
+    rintro d R ⟨T, hT, rfl⟩ x y hxy hy
+    exact J.isLowerSet_of_mem hT hxy hy
+  le_of_mem := by
+    rintro d R ⟨T, hT, rfl⟩ x hx
+    exact J.le_of_mem hT _ hx
+  stable := by
+    rintro d R ⟨T, hT, rfl⟩ e hed
+    obtain ⟨T', hT', h⟩ := J.stable hT hed
+    refine ⟨_, ⟨T', hT', rfl⟩, fun t ht => ?_⟩
+    obtain ⟨s, hs, hts⟩ := h t ht
+    exact ⟨t, J.isLowerSet_of_mem hT hts hs, le_rfl⟩
+
+variable {J}
+
+/-- The smallest `J`-ideal containing a set. -/
+def closure (A : Set α) : Set α :=
+  ⋂₀ {I | J.IsIdeal I ∧ A ⊆ I}
+
+theorem subset_closure (A : Set α) : A ⊆ closure (J := J) A :=
+  fun _ ha => mem_sInter.2 fun _ hI => hI.2 ha
+
+theorem closure_subset {A I : Set α} (hI : J.IsIdeal I) (h : A ⊆ I) : closure (J := J) A ⊆ I :=
+  fun _ hx => mem_sInter.1 hx _ ⟨hI, h⟩
+
+theorem isIdeal_closure (A : Set α) : J.IsIdeal (closure (J := J) A) := by
+  refine ⟨fun x y hxy hy => mem_sInter.2 fun I hI => hI.1.1 hxy (mem_sInter.1 hy I hI),
+    fun a S hS hSc => mem_sInter.2 fun I hI => hI.1.2 a S hS fun s hs => ?_⟩
+  exact mem_sInter.1 (hSc hs) I hI
+
+variable {D : Set α}
+
+theorem isIdeal_preimage (hD : J.Dense D) {I : Set α} (hI : J.IsIdeal I) :
+    (J.restrict D).IsIdeal (Subtype.val ⁻¹' I) := by
+  refine ⟨fun x y hxy hy => hI.1 hxy hy, ?_⟩
+  rintro d R ⟨T, hT, rfl⟩ hRI
+  refine hI.2 d T hT fun t ht => hI.2 t _ (hD t) ?_
+  rintro x ⟨e, he, hxe, het⟩
+  exact hI.1 hxe (hRI (show (⟨e, he⟩ : D) ∈ Subtype.val ⁻¹' T from
+    J.isLowerSet_of_mem hT het ht))
+
+theorem preimage_closure_image {I' : Set D} (hI' : (J.restrict D).IsIdeal I') :
+    Subtype.val ⁻¹' closure (J := J) (Subtype.val '' I') = I' := by
+  refine Subset.antisymm ?_ fun x hx => subset_closure _ ⟨x, hx, rfl⟩
+  -- the elements all of whose lower bounds in `D` lie in `I'` form a `J`-ideal
+  let K : Set α := {c | ∀ x : D, (x : α) ≤ c → x ∈ I'}
+  have hK : J.IsIdeal K := by
+    refine ⟨fun c c' hcc' hc x hx => hc x (hx.trans hcc'), fun a S hS hSK x hxa => ?_⟩
+    obtain ⟨T, hT, h⟩ := J.stable hS hxa
+    refine hI'.2 x _ ⟨T, hT, rfl⟩ fun t ht => ?_
+    obtain ⟨s, hs, hts⟩ := h t ht
+    exact hSK hs t hts
+  have hsub : Subtype.val '' I' ⊆ K := by
+    rintro _ ⟨y, hy, rfl⟩ x hxy
+    exact hI'.1 hxy hy
+  intro x hx
+  exact closure_subset hK hsub hx x le_rfl
+
+theorem closure_image_preimage (hD : J.Dense D) {I : Set α} (hI : J.IsIdeal I) :
+    closure (J := J) (Subtype.val '' (Subtype.val ⁻¹' I : Set D)) = I := by
+  refine Subset.antisymm (closure_subset hI (image_preimage_subset _ _)) fun c hc => ?_
+  refine (isIdeal_closure _).2 c _ (hD c) ?_
+  rintro x ⟨d, hd, hxd, hdc⟩
+  exact (isIdeal_closure _).1 hxd (subset_closure _ ⟨⟨d, hd⟩, hI.1 hdc hc, rfl⟩)
+
+/-- **The Comparison Lemma for preorders** (Caramello, arXiv:1103.3493, Theorem 10.13(i)): for a
+dense part `D`, intersecting with `D` is an order isomorphism from the `J`-ideals to the ideals of
+the induced coverage, with inverse the `J`-closure. -/
+def densityOrderIso (hD : J.Dense D) : J.Ideal ≃o (J.restrict D).Ideal where
+  toFun I := ⟨Subtype.val ⁻¹' I.1, isIdeal_preimage hD I.2⟩
+  invFun I' := ⟨closure (Subtype.val '' I'.1), isIdeal_closure _⟩
+  left_inv I := Subtype.ext (closure_image_preimage hD I.2)
+  right_inv I' := Subtype.ext (preimage_closure_image I'.2)
+  map_rel_iff' {I₁ I₂} := by
+    constructor
+    · intro h c hc
+      have h' : (Subtype.val ⁻¹' I₁.1 : Set D) ⊆ Subtype.val ⁻¹' I₂.1 := h
+      rw [← closure_image_preimage hD I₂.2]
+      rw [← closure_image_preimage hD I₁.2] at hc
+      exact closure_subset (isIdeal_closure _)
+        (by rintro _ ⟨x, hx, rfl⟩; exact subset_closure _ ⟨x, h' hx, rfl⟩) hc
+    · intro h x hx
+      exact h hx
+
+end PreorderCoverage
+
+/-! ## Lindenbaum–Tarski duality as a reading of the Comparison Lemma -/
+
+section LindenbaumTarski
+
+open PreorderCoverage
+
+variable (B : Type*) [CompleteAtomicBooleanAlgebra B]
+
+/-- The canonical coverage of a frame: a lower set below `a` covers `a` when its join is `a`. -/
+def canonicalCoverage : PreorderCoverage B where
+  covers a := {S | IsLowerSet S ∧ (∀ b ∈ S, b ≤ a) ∧ sSup S = a}
+  isLowerSet_of_mem hS := hS.1
+  le_of_mem hS := hS.2.1
+  stable := by
+    rintro a S ⟨hS, hSa, hsup⟩ b hba
+    refine ⟨{x | x ≤ b ∧ ∃ s ∈ S, x ≤ s}, ⟨fun x y hxy hy => ⟨hxy.trans hy.1, ?_⟩,
+      fun x hx => hx.1, le_antisymm (sSup_le fun x hx => hx.1) ?_⟩, fun t ht => ht.2⟩
+    · obtain ⟨s, hs, hys⟩ := hy.2
+      exact ⟨s, hs, hxy.trans hys⟩
+    · calc b = b ⊓ sSup S := by rw [hsup, inf_eq_left.2 hba]
+        _ = ⨆ s ∈ S, b ⊓ s := inf_sSup_eq
+        _ ≤ _ := iSup₂_le fun s hs => le_sSup
+          (show b ⊓ s ∈ {x | x ≤ b ∧ ∃ s ∈ S, x ≤ s} from ⟨inf_le_left, s, hs, inf_le_right⟩)
+
+/-- First reading: the canonical ideals are the principal ideals. -/
+def canonicalIdealOrderIso : B ≃o (canonicalCoverage B).Ideal where
+  toFun a := ⟨Iic a, fun x y hxy hy => hxy.trans hy, fun b S hS hSa =>
+    hS.2.2 ▸ sSup_le fun s hs => hSa hs⟩
+  invFun I := sSup I.1
+  left_inv a := csSup_Iic
+  right_inv I := by
+    refine Subtype.ext (Subset.antisymm (fun x hx => ?_) fun x hx => le_sSup hx)
+    have : sSup I.1 ∈ I.1 :=
+      I.2.2 _ I.1 ⟨I.2.1, fun b hb => le_sSup hb, rfl⟩ le_rfl
+    exact I.2.1 hx this
+  map_rel_iff' {a b} := ⟨fun h => h (le_refl a), fun h x hx => le_trans hx h⟩
+
+/-- The atoms are dense for the canonical coverage (`B` is atomistic). -/
+theorem dense_atoms : (canonicalCoverage B).Dense {a : B | IsAtom a} := by
+  intro c
+  refine ⟨fun x y hxy hy => ?_, fun x ⟨d, _, hxd, hdc⟩ => hxd.trans hdc, ?_⟩
+  · obtain ⟨d, hd, hyd, hdc⟩ := hy
+    exact ⟨d, hd, hxy.trans hyd, hdc⟩
+  · refine le_antisymm (sSup_le fun x ⟨d, _, hxd, hdc⟩ => hxd.trans hdc) ?_
+    obtain ⟨s, hsc, hs⟩ := eq_sSup_atoms c
+    calc c = sSup s := hsc
+      _ ≤ _ := sSup_le_sSup fun a ha =>
+        (show a ∈ {x | ∃ d ∈ {a : B | IsAtom a}, x ≤ d ∧ d ≤ c} from
+          ⟨a, hs a ha, le_rfl, (le_sSup ha).trans_eq hsc.symm⟩)
+
+/-- Second reading: on the atoms, the induced coverage is trivial, so every set of atoms is an
+ideal. -/
+def atomIdealOrderIso :
+    ((canonicalCoverage B).restrict {a : B | IsAtom a}).Ideal ≃o Set {a : B // IsAtom a} where
+  toFun I := I.1
+  invFun I := ⟨I, fun x y hxy hy => by
+      have : (y : B) = x := (x.2.le_iff.1 hxy).resolve_left y.2.1
+      exact Subtype.ext this ▸ hy,
+    fun d R ⟨T, ⟨hT, hTd, hsup⟩, hR⟩ hRI => by
+      subst hR
+      by_contra hd
+      have hsub : T ⊆ {⊥} := fun t ht => by
+        rcases d.2.le_iff.1 (hTd t ht) with h | h
+        · exact h
+        · exact absurd (hRI (show (d : B) ∈ T by rw [← h]; exact ht)) hd
+      exact d.2.1 (le_bot_iff.1 (hsup ▸ sSup_le fun t ht => (hsub ht).le))⟩
+  left_inv I := rfl
+  right_inv I := rfl
+  map_rel_iff' := Iff.rfl
+
+/-- **Lindenbaum–Tarski duality**, read off the Comparison Lemma: a complete atomic Boolean
+algebra is isomorphic to the power set of its atoms. -/
+noncomputable def completeAtomicBooleanAlgebraOrderIsoSetAtoms : B ≃o Set {a : B // IsAtom a} :=
+  (canonicalIdealOrderIso B).trans
+    (((canonicalCoverage B).densityOrderIso (dense_atoms B)).trans (atomIdealOrderIso B))
+
+/-- The isomorphism sends an element to the atoms below it, as in the usual statement. -/
+theorem completeAtomicBooleanAlgebraOrderIsoSetAtoms_apply (a : B) :
+    completeAtomicBooleanAlgebraOrderIsoSetAtoms B a = {x : {a : B // IsAtom a} | (x : B) ≤ a} :=
+  rfl
+
+end LindenbaumTarski
+
+end Bridges.Dualities

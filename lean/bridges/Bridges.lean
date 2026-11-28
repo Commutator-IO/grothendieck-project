@@ -4,6 +4,7 @@ public import Bridges.Aesop.Experiment
 public import Bridges.Combinatorics
 public import Bridges.Corners
 public import Bridges.CubeTest
+public import Bridges.Dualities.Density
 public import Bridges.EssentialPoints
 public import Bridges.FiniteMonoids
 public import Bridges.FundamentalLocalizers

@@ -106,6 +106,35 @@ class FinCat:
                     parent[find(e)] = find(e2)
         return len({find(e) for e in idem})
 
+    def essential_subtopoi(self):
+        """Number of essential subtopoi: by Kelly-Lawvere, the sets of objects of the Karoubi
+        envelope closed under retracts (e is a retract of e' when b . a = e for some a in e' C e
+        and b in e C e')."""
+        idem = [e for e in range(self.n) if self.dom(e) == self.cod(e) and self.c(e, e) == e]
+
+        def retract(e, e2):
+            x, y = self.dom(e), self.dom(e2)
+            return any(self.c(self.c(e2, a), e) == a and self.c(self.c(e, b), e2) == b
+                       and self.c(b, a) == e
+                       for a in range(self.n) if self.arrows[a] == (x, y)
+                       for b in range(self.n) if self.arrows[b] == (y, x))
+        classes = []
+        for e in idem:
+            for cl in classes:
+                if retract(e, cl[0]) and retract(cl[0], e):
+                    cl.append(e)
+                    break
+            else:
+                classes.append([e])
+        reps = [cl[0] for cl in classes]
+        below = {i: {j for j, f in enumerate(reps) if retract(f, e)} for i, e in enumerate(reps)}
+        count = 0
+        for mask in range(1 << len(reps)):
+            D = {i for i in range(len(reps)) if mask >> i & 1}
+            if all(below[i] <= D for i in D):
+                count += 1
+        return count
+
     # --- sieves and topologies -------------------------------------------------------------
     def sieves(self, x):
         """All sieves on x, as frozensets of arrows into x closed under precomposition."""
@@ -193,6 +222,7 @@ class FinCat:
             "EI": self.ei(),
             "points": self.karoubi_classes(),
             "subtopoi": len(self.topologies()),
+            "essential": self.essential_subtopoi(),
         }
 
 
