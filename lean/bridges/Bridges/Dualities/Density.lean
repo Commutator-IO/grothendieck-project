@@ -8,6 +8,7 @@ module
 public import Mathlib.Order.CompleteBooleanAlgebra
 public import Mathlib.Order.Atoms
 public import Mathlib.Order.UpperLower.Basic
+public import Mathlib.Order.Birkhoff
 
 /-!
 # The Comparison Lemma for preorders, and Lindenbaum–Tarski duality as one of its readings
@@ -24,6 +25,9 @@ sieve inside it. The frame structure of the ideals, and the toposes of sheaves o
 the subterminal objects, are not formalised; the order isomorphism is.
 
 * `PreorderCoverage.densityOrderIso`: the Comparison Lemma.
+* `birkhoffOrderIso`: Birkhoff's representation of a finite distributive lattice, from the
+  coherent coverage (finite joins) and the sup-irreducible elements; it agrees with Mathlib's
+  `OrderIso.lowerSetSupIrred` (`birkhoffOrderIso_apply`).
 * `completeAtomicBooleanAlgebraOrderIsoSetAtoms`: Lindenbaum–Tarski duality, obtained by taking
   for `C` a complete atomic Boolean algebra with its canonical coverage, for `D` its atoms, and
   reading the two sides: the `J`-ideals of `C` are its principal ideals, and the induced
@@ -235,5 +239,84 @@ theorem completeAtomicBooleanAlgebraOrderIsoSetAtoms_apply (a : B) :
   rfl
 
 end LindenbaumTarski
+
+/-! ## Birkhoff's representation as a reading of the Comparison Lemma -/
+
+section Birkhoff
+
+open PreorderCoverage
+
+variable (L : Type*) [DistribLattice L] [OrderBot L] [Finite L]
+
+/-- The coherent coverage: a lower set below `a` covers `a` when a finite part of it has join
+`a`. -/
+def coherentCoverage : PreorderCoverage L where
+  covers a := {S | IsLowerSet S ∧ (∀ b ∈ S, b ≤ a) ∧ ∃ F : Finset L, ↑F ⊆ S ∧ F.sup id = a}
+  isLowerSet_of_mem hS := hS.1
+  le_of_mem hS := hS.2.1
+  stable := by
+    classical
+    rintro a S ⟨hS, hSa, F, hFS, hF⟩ b hba
+    refine ⟨{x | x ≤ b ∧ ∃ s ∈ S, x ≤ s}, ⟨fun x y hxy hy => ⟨hxy.trans hy.1, ?_⟩,
+      fun x hx => hx.1, F.image (b ⊓ ·), ?_, ?_⟩, fun t ht => ht.2⟩
+    · obtain ⟨s, hs, hys⟩ := hy.2
+      exact ⟨s, hs, hxy.trans hys⟩
+    · intro x hx
+      obtain ⟨f, hf, rfl⟩ := Finset.mem_image.1 (Finset.mem_coe.1 hx)
+      exact ⟨inf_le_left, f, hFS hf, inf_le_right⟩
+    · rw [Finset.sup_image]
+      calc F.sup (id ∘ (b ⊓ ·)) = b ⊓ F.sup id := (Finset.sup_inf_distrib_left F id b).symm
+        _ = b := by rw [hF, inf_eq_left.2 hba]
+
+/-- First reading: on a finite lattice, the coherent ideals are the principal ideals. -/
+noncomputable def coherentIdealOrderIso : L ≃o (coherentCoverage L).Ideal where
+  toFun a := ⟨Iic a, fun x y hxy hy => hxy.trans hy, fun b S ⟨_, _, F, hFS, hF⟩ hSa =>
+    hF ▸ Finset.sup_le fun f hf => hSa (hFS hf)⟩
+  invFun I := (Set.toFinite I.1).toFinset.sup id
+  left_inv a := le_antisymm (Finset.sup_le fun b hb => by simpa using hb)
+    (Finset.le_sup (f := id) ((Set.Finite.mem_toFinset _).2 (le_refl a)))
+  right_inv I := by
+    have hmem : (Set.toFinite I.1).toFinset.sup id ∈ I.1 :=
+      I.2.2 _ I.1 ⟨I.2.1, fun b hb => Finset.le_sup (f := id) ((Set.Finite.mem_toFinset _).2 hb),
+        (Set.toFinite I.1).toFinset, by simp, rfl⟩ le_rfl
+    exact Subtype.ext (Subset.antisymm (fun x hx => I.2.1 hx hmem)
+      fun x hx => Finset.le_sup (f := id) ((Set.Finite.mem_toFinset _).2 hx))
+  map_rel_iff' {a b} := ⟨fun h => h (le_refl a), fun h x hx => le_trans hx h⟩
+
+/-- The sup-irreducible elements are dense for the coherent coverage. -/
+theorem dense_supIrred : (coherentCoverage L).Dense {a : L | SupIrred a} := by
+  intro c
+  obtain ⟨F, hF, hirr⟩ := exists_supIrred_decomposition c
+  refine ⟨fun x y hxy hy => ?_, fun x ⟨d, _, hxd, hdc⟩ => hxd.trans hdc, F, fun b hb =>
+    ⟨b, hirr hb, le_rfl, hF ▸ Finset.le_sup (f := id) hb⟩, hF⟩
+  obtain ⟨d, hd, hyd, hdc⟩ := hy
+  exact ⟨d, hd, hxy.trans hyd, hdc⟩
+
+/-- Second reading: on the sup-irreducible elements the induced coverage is trivial, so its
+ideals are the lower sets. -/
+def supIrredIdealOrderIso :
+    ((coherentCoverage L).restrict {a : L | SupIrred a}).Ideal ≃o LowerSet {a : L // SupIrred a}
+    where
+  toFun I := ⟨I.1, I.2.1⟩
+  invFun I := ⟨(I : Set {a : L // SupIrred a}), I.lower, fun d R ⟨T, ⟨_, _, F, hFT, hF⟩, hR⟩ hRI => by
+      subst hR
+      obtain ⟨i, hi, hid⟩ := d.2.finset_sup_eq hF
+      exact hRI (show (d : L) ∈ T from hid ▸ hFT hi)⟩
+  left_inv I := rfl
+  right_inv I := rfl
+  map_rel_iff' := Iff.rfl
+
+/-- **Birkhoff's representation theorem**, read off the Comparison Lemma: a finite distributive
+lattice is isomorphic to the lattice of lower sets of its sup-irreducible elements. -/
+noncomputable def birkhoffOrderIso : L ≃o LowerSet {a : L // SupIrred a} :=
+  (coherentIdealOrderIso L).trans
+    (((coherentCoverage L).densityOrderIso (dense_supIrred L)).trans (supIrredIdealOrderIso L))
+
+/-- The machine's output is Mathlib's statement. -/
+theorem birkhoffOrderIso_apply [Fintype L] [DecidablePred (SupIrred (α := L))] (a : L) :
+    birkhoffOrderIso L a = OrderIso.lowerSetSupIrred a :=
+  SetLike.coe_injective rfl
+
+end Birkhoff
 
 end Bridges.Dualities
