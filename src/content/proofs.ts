@@ -2428,4 +2428,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/AlgebraicGeometry/Folder27SemicontinuityRanks.lean',
     theorems: ['ineq6_of_ineq2_ineq5', 'ineq7_of_ineq1_ineq5', 'ineq1_iff_ineq8', 'ineq9_of_ineq1_ineq4', 'not_ineq3_imp_ineq9', 'not_ineq9_imp_ineq3', 'dRadAff', 'ineq10_iff_ineq4', 'not_ineq1_ineq3_imp_ineq10', 'not_ineq1_ineq3_imp_ineq10_ge'],
   },
+  {
+    folder: '94',
+    batch: 1,
+    page: '15–16',
+    name: 'The representability criterion: the Matlis-duality step of Prop. 4',
+    statement:
+      'Let R be a complete local noetherian ring, E an injective hull of its residue field and D = Hom_R(−, E). For artinian M and Q, Hom(D Q, M) ≃ Hom(D M, Q), R-linearly and naturally in M, and D Q is noetherian. So a functor F on artinian R-modules with F ≅ Hom(D −, Q) for an artinian Q is isomorphic to Hom(P, −) with P = D Q noetherian, in particular finitely generated.',
+    found:
+      'The last step of Prop. 4 goes through, with the dualised pro-representation of F as a hypothesis (GrothendieckArchivesProofs 13b67e0; Grothendieck/RingTheory/Folder94Matlis.lean). The evaluation M ≅ D D M of an artinian module and the anti-equivalence between artinian and noetherian modules are those of Stacks tag 08Z9; the equivalence sends g : D Q → M to φ ↦ ev_Q⁻¹(g ≫ φ), and both composites are the identity by χ(ev_Q⁻¹ θ) = θ(χ). The isomorphism F ≅ Hom(D −, Q) is a hypothesis: it is what the pro-representability of the left exact F on modules of finite length gives after dualisation, Q artinian by the finiteness of F(k). Not formalised: that pro-representability and the identification of Q, the extension from artinian to finite modules by the 𝔪-adic completion condition, the passage from the completion of A_𝔭 to A_𝔭, and the rest of Théorème 12 (Rem. 5 bis, Lemme 5, conditions (v) and (vi)).',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/RingTheory/Folder94Matlis.lean',
+    theorems: ['apply_matlisEvaluation_inv', 'homDualEquiv', 'homDualIso', 'isNoetherian_dual', 'exists_representing_of_iso_homDual'],
+  },
 ];
