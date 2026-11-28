@@ -316,7 +316,7 @@ export const PROOFS: Proof[] = [
     statement:
       'On the cartographic torsor, σ_{ℓ−2}σ_{ℓ−1} has order 2ν, ν the lcm of the n_ij; and the spherical, Euclidean and hyperbolic cases of (6) are as listed.',
     found:
-      'Both hold, including the reading’s corrected (c₂). Most of the hypotheses are unused — being a Weyl group, b), d), finiteness — and 2ν holds with infinite orders too. Not proved: the geometric content of (6), maps on surfaces.',
+      'Both hold, including the form (c₂) « p + q ≥ 9 and (p, q) ≠ (3,6), (6,3) », which the page itself writes according to the machine revision of 2026-11-28 on the facsimile (the 9 and the « et » doubtful, not checked by a reader); the wrong form was an artefact of the first transcription. Most of the hypotheses are unused — being a Weyl group, b), d), finiteness — and 2ν holds with infinite orders too. Not proved: the geometric content of (6), maps on surfaces.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Combinatorics/Folder88.lean',
     theorems: ['proposition_ordre', 'spherique_iff', 'euclidien_iff', 'hyperbolique_iff'],

@@ -3000,7 +3000,7 @@ export const FINDINGS: Finding[] = [
     claim:
       'Let G₀ and G′₀ be one-dimensional Barsotti–Tate groups of height [K : ℚ_p] over 𝔽_q with an A-action, given by triples (Ω, ν, ϖ) and (Ω′, ν′, ϖ′), where ν records the twist between the two k-structures on ω. They are isogenous if and only if ϖ = ϖ′, and then Hom_A(G₀, G′₀) is Hom(Ω′, Ω) when ν ≤ ν′ and π·Hom(Ω′, Ω) when ν > ν′.',
     basis:
-      'Page 39 states the proposition (i)⇔(ii)⇔(iii), with M = Ω ⊗ W and F_M = id ⊗ σ + pr_ν[(ϖ − 1) ⊗ σ]. It then gives the general Hom criterion val(v₀) + Σ₀^ν r_i − Σ₀^ν r′_i ≥ 0. Page 41 specialises this to dimension 1. On page 39 the primes on the r_i are \\uncertain{}. On page 41 the comparison sign between ν and ν′ is under an ink stain, recorded as illegible, with ≤ expected.',
+      'Page 39 states the proposition (i)⇔(ii)⇔(iii), with M = Ω ⊗ W and F_M = id ⊗ σ + pr_ν[(π − 1) ⊗ σ]. It then gives the general Hom criterion val(v₀) + Σ₀^ν r_i − Σ₀^ν r′_i ≥ 0. Page 41 specialises this to dimension 1. On page 39 the primes on the r_i are \\uncertain{}. On page 41 the comparison sign between ν and ν′ is under an ink stain, recorded as illegible, with ≤ expected.',
     ours:
       'The edition fixes the hidden sign as ≤ by redoing the computation, and places the primes in the sums of page 39 the same way. It also supplies the argument that moves the unit u from F_{f−1} to F_{ν₀}. The case split, which is the substance of the claim, therefore rests on a sign that nobody has read.',
     literature: [
