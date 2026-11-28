@@ -32,7 +32,7 @@ export interface ReviewItem {
   /** #35's own wording of the check. */
   details: string | null;
   context: string | null;
-  /** 1 (decides what a finding or a statement asserts) to 4 (a material detail); absent counts as 3. */
+  /** 0 (one of the few checks put first), 1 (decides what a finding or a statement asserts) to 4 (a material detail); absent counts as 3. */
   priority?: number;
   /** A doubtful drawing of #128: its id in transcripts/<cote>/drawings/drawings.json. */
   drawing?: string;

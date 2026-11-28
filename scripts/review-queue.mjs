@@ -320,7 +320,7 @@ function push(it, snip) {
     context: it.context ?? null,
     ...(it.drawing ? { drawing: it.drawing } : {}),
     ...(it.finding ? { finding: it.finding } : {}),
-    ...(it.priority ? { priority: it.priority } : {}),
+    ...(it.priority != null ? { priority: it.priority } : {}),
     link: `/fonds/#${it.cote}/${batch}/${edition}${page ? `/p${page}` : ''}`,
   });
   if (snip) snippets[id] = snip;
@@ -991,14 +991,17 @@ for (const READINGS of readingFiles) {
     const box = /^\s*- \[([ xX])\]\s+(\S+)\s+p([\d,–-]+)\s+batch-(\d+):(\d+)([a-z]?)\s*\|(.*)$/.exec(raw);
     if (!box || box[1] !== ' ') continue;
     const [, , cote, pp, bb, line, letter, rest] = box;
-    // A fifth field, « P1 » to « P4 », ranks the question: P1 decides what a finding or a statement
-    // of the edition asserts, P4 is a material detail (ink, accent). Unranked boxes count as P3.
+    // A fifth field, « P0 » to « P4 », ranks the question: P0 is one of the few checks put first
+    // because the most depends on it, P1 decides what a finding or a statement of the edition
+    // asserts, P4 is a material detail (ink, accent). Unranked boxes count as P3. The type is
+    // « reading » (two readings of the page) or « argument » (an argument of the edition to check).
     const [type, where, ours, alternative, rank] = rest.split('|').map((x) => x.trim());
-    const priority = /^P[1-4]$/.test(rank ?? '') ? Number(rank[1]) : 3;
+    const priority = /^P[0-4]$/.test(rank ?? '') ? Number(rank[1]) : 3;
     const batch = Number(bb);
     const file = `transcripts/${cote}/batch-${bb}.fr.tex`;
-    if (type !== 'reading' || !ours || !alternative || !isCote(cote) || !lines(cote, batch)) {
-      skipped.push(`#66 ${cote} ${file}:${line}: ${type === 'reading' ? 'no such batch, or a reading is missing' : `unknown type « ${type} »`}`);
+    const known = type === 'reading' || type === 'argument';
+    if (!known || !ours || !alternative || !isCote(cote) || !lines(cote, batch)) {
+      skipped.push(`#66 ${cote} ${file}:${line}: ${known ? 'no such batch, or a reading is missing' : `unknown type « ${type} »`}`);
       continue;
     }
     const ps = pp.split(',').flatMap((r) => {
@@ -1009,16 +1012,27 @@ for (const READINGS of readingFiles) {
     push({
       id,
       section: `Readings of folder ${cote} to check on the facsimile (#${issue}) · ${heading}`,
-      kind: 'uncertain',
+      ...(type === 'argument'
+        ? {
+            kind: 'argument',
+            prompt: 'Does the edition’s argument hold at the step named?',
+            hint: `${facsimileAt(ps)}; the step and what it rests on are named below.`,
+            choices: [C('It holds', 'right'), C('It fails', 'other', 'Where it fails'), C('It holds with a change', 'other', 'What must change')],
+            details: `${file}:${line}. The argument, and what would settle it.`,
+            context: 'The answer goes into the finding (src/content/findings.ts), with the date and who checked it.',
+          }
+        : {
+            kind: 'uncertain',
+            prompt: ps.length > 1 ? `Which of the two readings do the pages have (${pagesText(ps)})?` : 'Which of the two readings does the page have at this place?',
+            hint: `${facsimileAt(ps)}, at the place named with the two readings.`,
+            choices: [C('Our reading is right', 'right'), C('The alternative is right', 'other'), C('Neither', 'other', 'What the page has')],
+            details: `${file}:${line}. Our reading, and another possible reading to check on the facsimile.`,
+            context: 'The answer is applied in the transcription, with a % Revised line naming the issue that carried it.',
+          }),
       priority,
       cote,
       batch,
       page: ps[0],
-      prompt: ps.length > 1 ? `Which of the two readings do the pages have (${pagesText(ps)})?` : 'Which of the two readings does the page have at this place?',
-      hint: `${facsimileAt(ps)}, at the place named with the two readings.`,
-      choices: [C('Our reading is right', 'right'), C('The alternative is right', 'other'), C('Neither', 'other', 'What the page has')],
-      details: `${file}:${line}. Our reading, and another possible reading to check on the facsimile.`,
-      context: 'The answer is applied in the transcription, with a % Revised line naming the issue that carried it.',
     }, null);
     if (items.at(-1)?.id === id) readingClaims[id] = { where, ours, alternative };
   }

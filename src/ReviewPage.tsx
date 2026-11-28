@@ -35,13 +35,13 @@ import {
  */
 const SHOW_READINGS = import.meta.env.VITE_RENDER_TRANSCRIPTS !== 'false';
 
-// The most important first (priority 1 decides what a finding or a statement asserts, 4 is a
+// The most important first (priority 0 is the few checks put first, 1 decides what a finding or a statement asserts, 4 is a
 // material detail); within a rank, readers of the hand first, then the questions for mathematicians.
 const rankOf = (it: ReviewItem) => it.priority ?? 3;
 const ITEMS = [...(QUEUE.items as ReviewItem[])].sort(
   (a, b) => rankOf(a) - rankOf(b) || Number(isMaths(a.kind)) - Number(isMaths(b.kind)),
 );
-const RANK_NAME: Record<number, string> = { 1: 'Decides a statement', 2: 'In a quoted statement', 3: 'Prose or margin', 4: 'Material detail' };
+const RANK_NAME: Record<number, string> = { 0: 'Check first', 1: 'Decides a statement', 2: 'In a quoted statement', 3: 'Prose or margin', 4: 'Material detail' };
 const AUDIENCE = { readers: 'Reading the hand', maths: 'For mathematicians' } as const;
 const EMPTY_ITEM: ReviewItem = {
   id: '',
@@ -378,9 +378,9 @@ export function ReviewPage() {
                     <span className="rounded bg-brand-700 px-1.5 py-0.5 text-white">{AUDIENCE.maths}</span>
                   )}
                   <span className="rounded bg-ink-100 px-1.5 py-0.5 text-ink-600">{KIND_NAME[item.kind]}</span>
-                  {item.priority && (
+                  {item.priority != null && (
                     <span
-                      className={`rounded px-1.5 py-0.5 ${item.priority === 1 ? 'bg-brand-100 text-brand-800' : 'bg-ink-100 text-ink-600'}`}
+                      className={`rounded px-1.5 py-0.5 ${item.priority <= 1 ? 'bg-brand-100 text-brand-800' : 'bg-ink-100 text-ink-600'}`}
                       title="Importance of the answer for the edition, 1 (most) to 4"
                     >
                       P{item.priority} · {RANK_NAME[item.priority]}

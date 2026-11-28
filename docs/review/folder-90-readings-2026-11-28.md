@@ -18,7 +18,7 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 2. P. 9, the parenthesis of the Prop.
 
-- [ ] 90 p9 batch-01:345a | reading | Prop., the parenthesis after « conditions du Lemme 1 » : whether « si G est de t.f. » is there | « (c.à.d. si G est de t.f. cela signifie que pour tte composante irréd. de G, ttes ses fibres sont non vides) » | « (cela signifie que pour les composantes irréd. de G, leurs fibres sont non vides) » (the earlier reading) | P1
+- [ ] 90 p9 batch-01:345a | reading | Prop., the parenthesis after « conditions du Lemme 1 » : whether « si G est de t.f. » is there | « (c.à.d. si G est de t.f. cela signifie que pour tte composante irréd. de G, ttes ses fibres sont non vides) » | « (cela signifie que pour les composantes irréd. de G, leurs fibres sont non vides) » (the earlier reading) | P0
 - [ ] 90 p9 batch-01:345b | reading | same place, the sign that opens the bracket | « c.à.d. » (flagged) | « NB. » | P3
 
 ## 3. P. 13, statements 1) and 3)
