@@ -298,7 +298,8 @@ def supIrredIdealOrderIso :
     ((coherentCoverage L).restrict {a : L | SupIrred a}).Ideal ≃o LowerSet {a : L // SupIrred a}
     where
   toFun I := ⟨I.1, I.2.1⟩
-  invFun I := ⟨(I : Set {a : L // SupIrred a}), I.lower, fun d R ⟨T, ⟨_, _, F, hFT, hF⟩, hR⟩ hRI => by
+  invFun I := ⟨(I : Set {a : L // SupIrred a}), I.lower,
+    fun d R ⟨T, ⟨_, _, F, hFT, hF⟩, hR⟩ hRI => by
       subst hR
       obtain ⟨i, hi, hid⟩ := d.2.finset_sup_eq hF
       exact hRI (show (d : L) ∈ T from hid ▸ hFT hi)⟩
