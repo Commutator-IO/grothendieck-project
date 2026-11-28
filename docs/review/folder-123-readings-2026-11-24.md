@@ -13,4 +13,4 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 10, the margin of (iv)
 
-- [ ] 123 p10 batch-01:544 | reading | margin bracket of (iv), first two lines, written over a struck line, after « Si T » | « Si T non tordu, i.e. forme intérieure, » | « Si T est trivial, ou … »
+- [ ] 123 p10 batch-01:544 | reading | margin bracket of (iv), first two lines, written over a struck line, after « Si T » | « Si T non tordu, i.e. forme intérieure, » | « Si T est trivial, ou … » | P1

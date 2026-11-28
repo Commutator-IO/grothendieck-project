@@ -13,19 +13,19 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 72, the setting of III)
 
-- [ ] 93 p72 batch-04:212a | reading | III), the parenthesis after the struck « lisse », second line, before « diff. lisse à l'ordre 3) » : its first word | not read (a gap) | « seulement » or « du moins » (say which)
-- [ ] 93 p72 batch-04:212b | reading | III), the last sign of the line above, after the struck « lisse » | « (i.e. » | « (ou »
+- [ ] 93 p72 batch-04:212a | reading | III), the parenthesis after the struck « lisse », second line, before « diff. lisse à l'ordre 3) » : its first word | not read (a gap) | « seulement » or « du moins » (say which) | P2
+- [ ] 93 p72 batch-04:212b | reading | III), the last sign of the line above, after the struck « lisse » | « (i.e. » | « (ou » | P2
 
 ## 2. P. 121, the relation after « Supposons c₀(s) = 0 i.e. »
 
-- [ ] 93 p121 batch-07:68 | reading | the displayed relation (D⁽³⁾s)² = (D⁽¹⁾s)(D⁽…⁾s) : the exponent of the second factor on the right, badly formed | (2) | another exponent (say which)
+- [ ] 93 p121 batch-07:68 | reading | the displayed relation (D⁽³⁾s)² = (D⁽¹⁾s)(D⁽…⁾s) : the exponent of the second factor on the right, badly formed | (2) | another exponent (say which) | P2
 
 ## 3. P. 122, the first lines
 
-- [ ] 93 p122 batch-07:77a | reading | first line, « OPS … ∈ Aᵖ, puis α = 0 » : the words after « OPS » (the second begins with a d) | « pour les éléments » | « par des chgmts »
-- [ ] 93 p122 batch-07:77b | reading | same line, the struck word before « ∈ Aᵖ » | struck, not read | a struck word that can be read (say which)
-- [ ] 93 p122 batch-07:79 | reading | « donc t ∈ …B » and « ≡ a₁ (…B) » : the small sign before B, the same in both places | « 𝔯 » | « t »
+- [ ] 93 p122 batch-07:77a | reading | first line, « OPS … ∈ Aᵖ, puis α = 0 » : the words after « OPS » (the second begins with a d) | « pour les éléments » | « par des chgmts » | P2
+- [ ] 93 p122 batch-07:77b | reading | same line, the struck word before « ∈ Aᵖ » | struck, not read | a struck word that can be read (say which) | P4
+- [ ] 93 p122 batch-07:79 | reading | « donc t ∈ …B » and « ≡ a₁ (…B) » : the small sign before B, the same in both places | « 𝔯 » | « t » | P3
 
 ## 4. P. 208, descent and modules on (X^(p/S), Λ)
 
-- [ ] 93 p208 batch-11:172 | reading | the insertion over the struck words before « E équivaut à celle(s) des modules quasi-cohérents sur (X^(p/S), Λ) » | an insertion not read, then « ou … aux données E équivalent à celles » | « … la catégorie de ces … »
+- [ ] 93 p208 batch-11:172 | reading | the insertion over the struck words before « E équivaut à celle(s) des modules quasi-cohérents sur (X^(p/S), Λ) » | an insertion not read, then « ou … aux données E équivalent à celles » | « … la catégorie de ces … » | P3

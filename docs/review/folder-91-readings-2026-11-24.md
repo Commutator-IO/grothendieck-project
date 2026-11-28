@@ -13,10 +13,10 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 15, the display and the foot margin
 
-- [ ] 91 p15 batch-01:230 | reading | the first word before « φ… », above the display « u ⇝ u∘φ » | « Pour » | « Donné »
-- [ ] 91 p15 batch-01:263 | reading | N.B. in the margin at the foot of the page | « N.B. réduction immédiate … S′ artinien », one word not read | other words (say which)
+- [ ] 91 p15 batch-01:230 | reading | the first word before « φ… », above the display « u ⇝ u∘φ » | « Pour » | « Donné » | P3
+- [ ] 91 p15 batch-01:263 | reading | N.B. in the margin at the foot of the page | « N.B. réduction immédiate … S′ artinien », one word not read | other words (say which) | P3
 
 ## 2. P. 30, the typed letter of 11.9.1967
 
-- [ ] 91 p30 batch-02:351 | reading | second occurrence of the word on the page, « Let Y be locally of finite … and separated over S » : is an accent typed on the e ? | « presentation », no accent (as a reader checked on 3 October) | « présentation », with the accent
-- [ ] 91 p30 batch-02:356 | reading | « Then one can … a subfunctor of Hom_S(X,Y) » : is an accent typed on the e ? | « défine », with the accent | « define », no accent
+- [ ] 91 p30 batch-02:351 | reading | second occurrence of the word on the page, « Let Y be locally of finite … and separated over S » : is an accent typed on the e ? | « presentation », no accent (as a reader checked on 3 October) | « présentation », with the accent | P4
+- [ ] 91 p30 batch-02:356 | reading | « Then one can … a subfunctor of Hom_S(X,Y) » : is an accent typed on the e ? | « défine », with the accent | « define », no accent | P4

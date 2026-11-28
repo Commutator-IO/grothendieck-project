@@ -13,4 +13,4 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 13, Remarques 2.17
 
-- [ ] 21 p13 batch-01:315 | reading | Remarques 2.17, the handwritten exponent in « H ≃ lim T(O_X/I^…) » (the index under lim is n) | « n » | « k »
+- [ ] 21 p13 batch-01:315 | reading | Remarques 2.17, the handwritten exponent in « H ≃ lim T(O_X/I^…) » (the index under lim is n) | « n » | « k » | P3

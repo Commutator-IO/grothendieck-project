@@ -13,15 +13,15 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 11, 15) a)
 
-- [ ] 10 p11 batch-01:457 | reading | a), the insertion above « rep. de poids i », after « i.e. » : its two words | « module d'une » | other words (say which)
+- [ ] 10 p11 batch-01:457 | reading | a), the insertion above « rep. de poids i », after « i.e. » : its two words | « module d'une » | other words (say which) | P2
 
 ## 2. P. 62, the handwritten insertions
 
-- [ ] 10 p62 batch-04:189 | reading | typescript, handwritten insertion after « on peut », before « dire que » | « encore » (one short word) | « en un certain sens »
-- [ ] 10 p62 batch-04:193 | reading | handwritten insertion after K(𝓜) = ℤ^(Σ), before « et sa variance » | « sa partie effective » | other words (say which)
+- [ ] 10 p62 batch-04:189 | reading | typescript, handwritten insertion after « on peut », before « dire que » | « encore » (one short word) | « en un certain sens » | P3
+- [ ] 10 p62 batch-04:193 | reading | handwritten insertion after K(𝓜) = ℤ^(Σ), before « et sa variance » | « sa partie effective » | other words (say which) | P3
 
 ## 3. P. 191, the Lie algebra of G
 
-- [ ] 10 p191 batch-10:482 | reading | « est extension de F ≃ k par H ≃ k » : are these two letters the same as the « F », « H » written under k and k* ? | « F ≃ k par H ≃ k », the same letters as the groups | script or Fraktur capitals (𝔉 ≃ k, ℋ ≃ k), unlike the F, H of the groups
-- [ ] 10 p191 batch-10:483a | reading | the word after « H opérant sur F par », before « (X et Y » | not read (a gap) | « ainsi »
-- [ ] 10 p191 batch-10:483b | reading | in the parenthesis « (X et Y étant les … canoniques de F et H) » : the words after « les » | « éléments de base » | other words (say which)
+- [ ] 10 p191 batch-10:482 | reading | « est extension de F ≃ k par H ≃ k » : are these two letters the same as the « F », « H » written under k and k* ? | « F ≃ k par H ≃ k », the same letters as the groups | script or Fraktur capitals (𝔉 ≃ k, ℋ ≃ k), unlike the F, H of the groups | P2
+- [ ] 10 p191 batch-10:483a | reading | the word after « H opérant sur F par », before « (X et Y » | not read (a gap) | « ainsi » | P3
+- [ ] 10 p191 batch-10:483b | reading | in the parenthesis « (X et Y étant les … canoniques de F et H) » : the words after « les » | « éléments de base » | other words (say which) | P3

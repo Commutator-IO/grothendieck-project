@@ -13,9 +13,9 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 22, case b) and the N.B.
 
-- [ ] 31 p22 batch-02:157 | reading | b), the word after « corps réel » (written again in the N.B., in quotation marks) | « canulant » | another word (say which)
+- [ ] 31 p22 batch-02:157 | reading | b), the word after « corps réel » (written again in the N.B., in quotation marks) | « canulant » | another word (say which) | P2
 
 ## 2. P. 84, 1 bis and 4°
 
-- [ ] 31 p84 batch-05:216 | reading | 1 bis, last version, the words « de 2°, lorsque » before « Supposons ∃ ℓ′ premier tel que Z_ℓ′ inversible. Alors » : struck ? | « de 2°, lorsque » not struck | « de 2°, lorsque » struck, the sentence starting at « Supposons »
-- [ ] 31 p84 batch-05:226 | reading | 4°, « Soit U un ouvert … de X = Spec A » : the word after « ouvert » | « affine » | another word (say which)
+- [ ] 31 p84 batch-05:216 | reading | 1 bis, last version, the words « de 2°, lorsque » before « Supposons ∃ ℓ′ premier tel que Z_ℓ′ inversible. Alors » : struck ? | « de 2°, lorsque » not struck | « de 2°, lorsque » struck, the sentence starting at « Supposons » | P2
+- [ ] 31 p84 batch-05:226 | reading | 4°, « Soit U un ouvert … de X = Spec A » : the word after « ouvert » | « affine » | another word (say which) | P1

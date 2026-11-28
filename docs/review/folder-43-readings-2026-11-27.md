@@ -14,9 +14,9 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 72, c)
 
-- [ ] 43 p72 batch-04:832 | reading | words written above the struck passage of line 6 (the transcription gives them in a note) | « propre sur k » | « propre sur la »
-- [ ] 43 p72 batch-04:867 | reading | six lines from the foot of c), « Cette dernière se … les H¹(X − a, 𝔾_a) » | « dévisse en » | « ramène à »
+- [ ] 43 p72 batch-04:832 | reading | words written above the struck passage of line 6 (the transcription gives them in a note) | « propre sur k » | « propre sur la » | P3
+- [ ] 43 p72 batch-04:867 | reading | six lines from the foot of c), « Cette dernière se … les H¹(X − a, 𝔾_a) » | « dévisse en » | « ramène à » | P3
 
 ## 2. P. 72, d)
 
-- [ ] 43 p72 batch-04:880 | reading | d), after the struck « Hⁱ(X − a, G) = » | « une suite exacte de faisceaux » | other words (say which)
+- [ ] 43 p72 batch-04:880 | reading | d), after the struck « Hⁱ(X − a, G) = » | « une suite exacte de faisceaux » | other words (say which) | P3

@@ -13,8 +13,8 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 70, c)
 
-- [ ] 43 p70 batch-04:754 | reading | c), under the brace, « ne dépend que de la comp. connexe … de G » : the word before « de G » | « unipotente » | another word (say which)
+- [ ] 43 p70 batch-04:754 | reading | c), under the brace, « ne dépend que de la comp. connexe … de G » : the word before « de G » | « unipotente » | another word (say which) | P2
 
 ## 2. P. 166, the left margin
 
-- [ ] 43 p166 batch-09:342 | reading | left margin, condition 2°, between « Si tout hom. (G/e)^n → Γ » and « S → Γ » | four words not read | words that can be read (say which)
+- [ ] 43 p166 batch-09:342 | reading | left margin, condition 2°, between « Si tout hom. (G/e)^n → Γ » and « S → Γ » | four words not read | words that can be read (say which) | P2

@@ -13,22 +13,22 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 4
 
-- [ ] 104 p4 batch-01:305 | reading | the display under the sequence : the brace with « 0 » under it | it covers only the first term, t_{n−1}((t_n y) − s_n(y)) | it covers the whole difference
-- [ ] 104 p4 batch-01:334 | reading | last line of c'), « tel que … ∼ f(w) » | « w' ∼ f(w) » | « w ∼ f(w) »
+- [ ] 104 p4 batch-01:305 | reading | the display under the sequence : the brace with « 0 » under it | it covers only the first term, t_{n−1}((t_n y) − s_n(y)) | it covers the whole difference | P1
+- [ ] 104 p4 batch-01:334 | reading | last line of c'), « tel que … ∼ f(w) » | « w' ∼ f(w) » | « w ∼ f(w) » | P3
 
 ## 2. P. 7
 
-- [ ] 104 p7 batch-01:478 | reading | « Notons que … I_n a un plus grand élément » | « chaque » | « déjà »
+- [ ] 104 p7 batch-01:478 | reading | « Notons que … I_n a un plus grand élément » | « chaque » | « déjà » | P3
 
 ## 3. P. 13
 
-- [ ] 104 p13 batch-01:773 | reading | the word before the struck « (3) Si ξ ∈ K, η ∈ K, alors » | « enfin » | « mais »
+- [ ] 104 p13 batch-01:773 | reading | the word before the struck « (3) Si ξ ∈ K, η ∈ K, alors » | « enfin » | « mais » | P4
 
 ## 4. P. 15, the first paragraph
 
-- [ ] 104 p15 batch-01:829 | reading | first line, « Un cas intéressant est celui où … » : the letter (a K and an X are written one over the other) | « X » | « K »
-- [ ] 104 p15 batch-01:833 | reading | « Pour un ens. ordonné … propriété, un M-épinglage est connu » | « ayant la 2ième propriété » | « qui a cette propriété »
+- [ ] 104 p15 batch-01:829 | reading | first line, « Un cas intéressant est celui où … » : the letter (a K and an X are written one over the other) | « X » | « K » | P2
+- [ ] 104 p15 batch-01:833 | reading | « Pour un ens. ordonné … propriété, un M-épinglage est connu » | « ayant la 2ième propriété » | « qui a cette propriété » | P2
 
 ## 5. P. 16
 
-- [ ] 104 p16 batch-01:866 | reading | « commutant à ces opérations, … » | « dans un sens évident » | « de façon évidente »
+- [ ] 104 p16 batch-01:866 | reading | « commutant à ces opérations, … » | « dans un sens évident » | « de façon évidente » | P2

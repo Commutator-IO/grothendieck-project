@@ -13,12 +13,12 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 22, the second condition
 
-- [ ] 37 p22 batch-02:169 | reading | second condition of the typescript : its label | « (i bis) », the letter typed | « ( bis) », the letter left out by the machine (to be marked « ([i] bis) »)
+- [ ] 37 p22 batch-02:169 | reading | second condition of the typescript : its label | « (i bis) », the letter typed | « ( bis) », the letter left out by the machine (to be marked « ([i] bis) ») | P4
 
 ## 2. P. 74, the note on Deligne's letter
 
-- [ ] 37 p74 batch-04:275 | reading | Deligne's letter, the sentence that the note quotes, « pour que X soit un schéma, … que X_red le soit » | « il faut et il suffit » | « il faut et suffit »
+- [ ] 37 p74 batch-04:275 | reading | Deligne's letter, the sentence that the note quotes, « pour que X soit un schéma, … que X_red le soit » | « il faut et il suffit » | « il faut et suffit » | P3
 
 ## 3. P. 95, the margin
 
-- [ ] 37 p95 batch-05:409 | reading | left margin beside « suites exactes A_n^p → A_n^q → M_n → 0 », « cf. EGA IV 18.3.2.1. » : the ink | all in black ink | « cf. » in ink, the reference in pencil
+- [ ] 37 p95 batch-05:409 | reading | left margin beside « suites exactes A_n^p → A_n^q → M_n → 0 », « cf. EGA IV 18.3.2.1. » : the ink | all in black ink | « cf. » in ink, the reference in pencil | P4

@@ -13,17 +13,17 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 40, the Exemple
 
-- [ ] 156-6 p40 batch-02:564a | reading | Exemple, « (comme … discret) » : the word before « discret » | « ordre » | another word (say which)
-- [ ] 156-6 p40 batch-02:564b | reading | last line, « c'est pas du tout pareil ! » : the word « tout » | struck | not struck (only crossed by the bar of its t's)
+- [ ] 156-6 p40 batch-02:564a | reading | Exemple, « (comme … discret) » : the word before « discret » | « ordre » | another word (say which) | P3
+- [ ] 156-6 p40 batch-02:564b | reading | last line, « c'est pas du tout pareil ! » : the word « tout » | struck | not struck (only crossed by the bar of its t's) | P2
 
 ## 2. Pp. 44–45, the axioms to come
 
-- [ ] 156-6 p44-45 batch-03:177 | reading | last word of p. 44 and first line of p. 45, « … axiomes qui vont suivre, il y en a qui … » | « Parmi » and « vont éliminer » | « Pour moi » and « les éliminent »
+- [ ] 156-6 p44-45 batch-03:177 | reading | last word of p. 44 and first line of p. 45, « … axiomes qui vont suivre, il y en a qui … » | « Parmi » and « vont éliminer » | « Pour moi » and « les éliminent » | P2
 
 ## 3. P. 45, the interline addition
 
-- [ ] 156-6 p45 batch-03:205 | reading | interline addition « (cf … ensembliste) » | « sorite » | « note »
+- [ ] 156-6 p45 batch-03:205 | reading | interline addition « (cf … ensembliste) » | « sorite » | « note » | P3
 
 ## 4. P. 50
 
-- [ ] 156-6 p50 batch-03:333 | reading | line 3, « …, et ne nous préoccupons pas de At 8 » : the first word | « Passons » | « Par exemple »
+- [ ] 156-6 p50 batch-03:333 | reading | line 3, « …, et ne nous préoccupons pas de At 8 » : the first word | « Passons » | « Par exemple » | P3

@@ -13,19 +13,19 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 11, the Lemme
 
-- [ ] 156-3 p11 batch-01:306 | reading | Lemme, « Une structure de [struck word] tronçon … est connue » (the same word on p. 14, l. 3) | « biordre », « biordonné » | « binaire », « binordonné »
-- [ ] 156-3 p11 batch-01:320 | reading | end of the parenthesis after « Choisissons ε ∈ S_0 », « a ≠ b [« car », struck] … on aurait x = y » | « sinon » | another word (say which)
+- [ ] 156-3 p11 batch-01:306 | reading | Lemme, « Une structure de [struck word] tronçon … est connue » (the same word on p. 14, l. 3) | « biordre », « biordonné » | « binaire », « binordonné » | P2
+- [ ] 156-3 p11 batch-01:320 | reading | end of the parenthesis after « Choisissons ε ∈ S_0 », « a ≠ b [« car », struck] … on aurait x = y » | « sinon » | another word (say which) | P3
 
 ## 2. P. 13, the proof
 
-- [ ] 156-3 p13 batch-01:369 | reading | proof, the word between « b), c), d) » and « que I = {x, y, u, v} est un drapeau » | not read (a gap) | « impliquent » or « signifient » (say which)
-- [ ] 156-3 p13 batch-01:372 | reading | proof, « Comme … u, v sont entre x et y » : the word after « Comme » (and is the verb « sont » ?) | not read (a gap), then « u, v sont » | a word that can be read (say which)
+- [ ] 156-3 p13 batch-01:369 | reading | proof, the word between « b), c), d) » and « que I = {x, y, u, v} est un drapeau » | not read (a gap) | « impliquent » or « signifient » (say which) | P3
+- [ ] 156-3 p13 batch-01:372 | reading | proof, « Comme … u, v sont entre x et y » : the word after « Comme » (and is the verb « sont » ?) | not read (a gap), then « u, v sont » | a word that can be read (say which) | P3
 
 ## 3. P. 14, the relation R(a,b,c)
 
-- [ ] 156-3 p14 batch-01:391 | reading | « On va voir … la connaissance » : the word on the line after « On va voir » (the addition above is read « que la connaissance de Drap_2(L), et ») | not read (a gap) | « comment » or « que » (say which)
-- [ ] 156-3 p14 batch-01:401 | reading | « Première condition : {a,b,c} ∈ Drap_3(L) (… de la donnée de Drap_2(L)) » | « connue de la donnée » | « résulte de la donnée »
+- [ ] 156-3 p14 batch-01:391 | reading | « On va voir … la connaissance » : the word on the line after « On va voir » (the addition above is read « que la connaissance de Drap_2(L), et ») | not read (a gap) | « comment » or « que » (say which) | P2
+- [ ] 156-3 p14 batch-01:401 | reading | « Première condition : {a,b,c} ∈ Drap_3(L) (… de la donnée de Drap_2(L)) » | « connue de la donnée » | « résulte de la donnée » | P3
 
 ## 4. P. 15, the two pairs
 
-- [ ] 156-3 p15 batch-01:432 | reading | « pour les deux [« parties », struck] ε, ε' ∈ P_2(J) » : is « paires » written anywhere ? | « paires » is not written (the edition supplies it) | « paires » is written on the page
+- [ ] 156-3 p15 batch-01:432 | reading | « pour les deux [« parties », struck] ε, ε' ∈ P_2(J) » : is « paires » written anywhere ? | « paires » is not written (the edition supplies it) | « paires » is written on the page | P4

@@ -13,11 +13,11 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 14
 
-- [ ] 156-2 p14 batch-01:312 | reading | « l'ens. des parties … ouvertes et fermées de Z » : the two small words above « ouvertes » | « à la fois » | other words (say which)
-- [ ] 156-2 p14 batch-01:318 | reading | NB 1), after « avec voisinage tubulaire : » | « prend S_{A,X} » | « prenons S_{A,X} »
-- [ ] 156-2 p14 batch-01:324 | reading | NB 2), between « alors pour » and « faisceau F sur X » | « tt » | « A » and a word (« pour A fermé »)
-- [ ] 156-2 p14 batch-01:333 | reading | the last word of the page, under « On a » | « Donc », live | « Donc », struck
+- [ ] 156-2 p14 batch-01:312 | reading | « l'ens. des parties … ouvertes et fermées de Z » : the two small words above « ouvertes » | « à la fois » | other words (say which) | P3
+- [ ] 156-2 p14 batch-01:318 | reading | NB 1), after « avec voisinage tubulaire : » | « prend S_{A,X} » | « prenons S_{A,X} » | P3
+- [ ] 156-2 p14 batch-01:324 | reading | NB 2), between « alors pour » and « faisceau F sur X » | « tt » | « A » and a word (« pour A fermé ») | P2
+- [ ] 156-2 p14 batch-01:333 | reading | the last word of the page, under « On a » | « Donc », live | « Donc », struck | P4
 
 ## 2. P. 15, the NB
 
-- [ ] 156-2 p15 batch-01:344 | reading | NB, after « avec unité, l' » | « application précédente est un hom d'alg. unitaires » | « algèbre … de A dans X »
+- [ ] 156-2 p15 batch-01:344 | reading | NB, after « avec unité, l' » | « application précédente est un hom d'alg. unitaires » | « algèbre … de A dans X » | P2

@@ -13,9 +13,9 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 22, the blue-pencil insertion
 
-- [ ] 76 p22 batch-02:155a | reading | after « la condition », the blue-pencil insertion « et x_0 < y_0 dans l'« … » … » : the word between quotation marks | « simplexe » | illegible (a gap, as before)
-- [ ] 76 p22 batch-02:155b | reading | same insertion : its end, after the closing quotation mark | « {x_0, y_0} » | illegible (a gap, as before)
+- [ ] 76 p22 batch-02:155a | reading | after « la condition », the blue-pencil insertion « et x_0 < y_0 dans l'« … » … » : the word between quotation marks | « simplexe » | illegible (a gap, as before) | P3
+- [ ] 76 p22 batch-02:155b | reading | same insertion : its end, after the closing quotation mark | « {x_0, y_0} » | illegible (a gap, as before) | P3
 
 ## 2. P. 26, the parenthesis on D_*
 
-- [ ] 76 p26 batch-02:362 | reading | before « D_* satisfait la condition (a) » : the two words that open the parenthesis | « ceci dit » | « on voit »
+- [ ] 76 p26 batch-02:362 | reading | before « D_* satisfait la condition (a) » : the two words that open the parenthesis | « ceci dit » | « on voit » | P3

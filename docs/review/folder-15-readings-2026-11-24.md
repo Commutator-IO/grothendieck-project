@@ -13,9 +13,9 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 71, the last sentence
 
-- [ ] 15 p71 batch-04:358 | reading | last line, after « les 2-foncteurs B₂ → B₁ → B », before the exclamation mark | « n'ont pas de quasi-inverses « naturels » » | « ne sont pas des équivalences « naturelles » »
+- [ ] 15 p71 batch-04:358 | reading | last line, after « les 2-foncteurs B₂ → B₁ → B », before the exclamation mark | « n'ont pas de quasi-inverses « naturels » » | « ne sont pas des équivalences « naturelles » » | P2
 
 ## 2. P. 116, the two Propositions
 
-- [ ] 15 p116 batch-06:447 | reading | first line, « Soit G un gpe alg. … sur Q » : the word after « alg. » | « commut. » | another word (say which)
-- [ ] 15 p116 batch-06:477 | reading | Proposition 2 (ii), around the erasure after « ε est » : is a « pas » left standing ? | « ε est [a struck word] un carré « normalisé » », no « pas » | « ε n'est pas un carré « normalisé » »
+- [ ] 15 p116 batch-06:447 | reading | first line, « Soit G un gpe alg. … sur Q » : the word after « alg. » | « commut. » | another word (say which) | P1
+- [ ] 15 p116 batch-06:477 | reading | Proposition 2 (ii), around the erasure after « ε est » : is a « pas » left standing ? | « ε est [a struck word] un carré « normalisé » », no « pas » | « ε n'est pas un carré « normalisé » » | P1

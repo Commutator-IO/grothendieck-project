@@ -14,19 +14,19 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 3, the proof of Lemme 1
 
-- [ ] 42 p3 batch-01:170 | reading | last line but one of the proof of Lemme 1, « F_y → F_x injectif, d'où … O.K. » : the index of s | « s_y = ξ_y » | « s_x = ξ_y »
+- [ ] 42 p3 batch-01:170 | reading | last line but one of the proof of Lemme 1, « F_y → F_x injectif, d'où … O.K. » : the index of s | « s_y = ξ_y » | « s_x = ξ_y » | P1
 
 ## 2. P. 3, the Proposition
 
-- [ ] 42 p3 batch-01:137 | reading | Proposition, « il existe un … U de x̄ » : the word after « voisinage » | « ouvert », live (« un voisinage ouvert U de x̄ ») | a struck word (« un voisinage U de x̄ »)
+- [ ] 42 p3 batch-01:137 | reading | Proposition, « il existe un … U de x̄ » : the word after « voisinage » | « ouvert », live (« un voisinage ouvert U de x̄ ») | a struck word (« un voisinage U de x̄ ») | P2
 
 ## 3. P. 4, Corollaire 1 and Lemme 2
 
-- [ ] 42 p4 batch-01:180 | reading | Corollaire 1, « ξ_y est l'image par … de ξ_x » | « générisation » | « généralisation »
-- [ ] 42 p4 batch-01:183 | reading | line under Corollaire 1, « Il … vérifier que les conditions de la prop. sont vérifiées » | « Il suffit de vérifier » | « Il reste à vérifier »
-- [ ] 42 p4 batch-01:189 | reading | Lemme 2, insertion under the line, « q est un idéal premier de A_f … p A_f » : the word before « p A_f » | « contenant » | another word (say which)
+- [ ] 42 p4 batch-01:180 | reading | Corollaire 1, « ξ_y est l'image par … de ξ_x » | « générisation » | « généralisation » | P2
+- [ ] 42 p4 batch-01:183 | reading | line under Corollaire 1, « Il … vérifier que les conditions de la prop. sont vérifiées » | « Il suffit de vérifier » | « Il reste à vérifier » | P2
+- [ ] 42 p4 batch-01:189 | reading | Lemme 2, insertion under the line, « q est un idéal premier de A_f … p A_f » : the word before « p A_f » | « contenant » | another word (say which) | P2
 
 ## 4. P. 5, Lemme 3
 
-- [ ] 42 p5 batch-01:235 | reading | margin beside Lemme 3, « … ceci, on peut … S » (one word before « S » is not read) | « Dans ceci, on peut bien … S » | « Pour ceci, on peut … S »
-- [ ] 42 p5 batch-01:238 | reading | Lemme 3, « alors pour … ⊃ p, F_q → F_p est injectif » | « pour tout q premier ⊃ p » | « pour les q générisant p »
+- [ ] 42 p5 batch-01:235 | reading | margin beside Lemme 3, « … ceci, on peut … S » (one word before « S » is not read) | « Dans ceci, on peut bien … S » | « Pour ceci, on peut … S » | P3
+- [ ] 42 p5 batch-01:238 | reading | Lemme 3, « alors pour … ⊃ p, F_q → F_p est injectif » | « pour tout q premier ⊃ p » | « pour les q générisant p » | P2

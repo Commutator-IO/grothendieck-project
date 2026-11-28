@@ -13,9 +13,9 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 41, the first sentence and Ex 1)
 
-- [ ] 11 p41 batch-03:95 | reading | first sentence, the short words before « κ_A : A → k) » | « on ne donne pas de κ_A » | « on se donne … κ_A »
-- [ ] 11 p41 batch-03:135 | reading | Ex 1), the word between « variétés complètes » and « non singulières » (an abbreviation ending in a point) | not read (a gap) | an abbreviation that can be read (say which)
+- [ ] 11 p41 batch-03:95 | reading | first sentence, the short words before « κ_A : A → k) » | « on ne donne pas de κ_A » | « on se donne … κ_A » | P1
+- [ ] 11 p41 batch-03:135 | reading | Ex 1), the word between « variétés complètes » and « non singulières » (an abbreviation ending in a point) | not read (a gap) | an abbreviation that can be read (say which) | P3
 
 ## 2. P. 56, case 2)
 
-- [ ] 11 p56 batch-03:536 | reading | case 2) k = s + s′, the χ before y_{X^k}, in the heavy ink of the question mark : struck, or gone over ? | χ struck | χ gone over in heavy ink, not struck
+- [ ] 11 p56 batch-03:536 | reading | case 2) k = s + s′, the χ before y_{X^k}, in the heavy ink of the question mark : struck, or gone over ? | χ struck | χ gone over in heavy ink, not struck | P1

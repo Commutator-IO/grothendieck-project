@@ -14,15 +14,15 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 3, the lemma
 
-- [ ] 153 p3 batch-01:252 | reading | the underlined word that opens the lemma, before « si M est un k_0-module libre » | « Lemme » | another word (say which)
-- [ ] 153 p3 batch-01:253 | reading | lemma, third line, « Ω_M ⊂ K_0[T] ⊗ … » | « K_0[T] ⊗_{K_0} M_{K_0} » | « K_0[T] ⊗_{k_0} M »
-- [ ] 153 p3 batch-01:285 | reading | « En effet, dans K_0[X,Y] = K_0[X] ⊗ K_0[Y] » : the index of the tensor sign (inked over) | « K_0 » | « k_0 »
+- [ ] 153 p3 batch-01:252 | reading | the underlined word that opens the lemma, before « si M est un k_0-module libre » | « Lemme » | another word (say which) | P3
+- [ ] 153 p3 batch-01:253 | reading | lemma, third line, « Ω_M ⊂ K_0[T] ⊗ … » | « K_0[T] ⊗_{K_0} M_{K_0} » | « K_0[T] ⊗_{k_0} M » | P1
+- [ ] 153 p3 batch-01:285 | reading | « En effet, dans K_0[X,Y] = K_0[X] ⊗ K_0[Y] » : the index of the tensor sign (inked over) | « K_0 » | « k_0 » | P1
 
 ## 2. P. 7
 
-- [ ] 153 p7 batch-01:431 | reading | Ex 1, « et en tant que (A,A), A … , il a une structure de composition » | « ens. » | another word (say which)
-- [ ] 153 p7 batch-01:482 | reading | last sentence, « On est content … Ω → Ω_{Ω_0} … injectif ! » | « quand … est injectif » | « que … soit injectif »
+- [ ] 153 p7 batch-01:431 | reading | Ex 1, « et en tant que (A,A), A … , il a une structure de composition » | « ens. » | another word (say which) | P3
+- [ ] 153 p7 batch-01:482 | reading | last sentence, « On est content … Ω → Ω_{Ω_0} … injectif ! » | « quand … est injectif » | « que … soit injectif » | P2
 
 ## 3. P. 9
 
-- [ ] 153 p9 batch-01:494 | reading | « Le cas le plus intéressant est celui … (Z ⊂ Q » | « du couple » | « des corps »
+- [ ] 153 p9 batch-01:494 | reading | « Le cas le plus intéressant est celui … (Z ⊂ Q » | « du couple » | « des corps » | P3

@@ -13,11 +13,11 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 5, the last sentence
 
-- [ ] 73 p5 batch-01:335 | reading | « Les quadrilatères dégénérés, … un côté nul » : the word before « un côté nul » | « ayant » | another word (say which)
-- [ ] 73 p5 batch-01:336 | reading | « correspondent aux … pts a_i (i = 0, 1, 2, 3) » : the word before « pts » | « quatre » | another word (say which)
-- [ ] 73 p5 batch-01:339 | reading | « correspondant à deux coordonnées … μ_i nulles » : the word after « coordonnées » | « consécutives » | another word (say which)
+- [ ] 73 p5 batch-01:335 | reading | « Les quadrilatères dégénérés, … un côté nul » : the word before « un côté nul » | « ayant » | another word (say which) | P3
+- [ ] 73 p5 batch-01:336 | reading | « correspondent aux … pts a_i (i = 0, 1, 2, 3) » : the word before « pts » | « quatre » | another word (say which) | P2
+- [ ] 73 p5 batch-01:339 | reading | « correspondant à deux coordonnées … μ_i nulles » : the word after « coordonnées » | « consécutives » | another word (say which) | P2
 
 ## 2. P. 28, the theorem and condition b)
 
-- [ ] 73 p28 batch-02:674 | reading | the parenthesis « (⟹ dim N(u_*) = 1, si λ ∈ N(u_*), λ ≠ 0, donc …) » : the word after « donc » | not read (a gap) | a word that can be read (say which)
-- [ ] 73 p28 batch-02:683 | reading | condition b), « ∀ … ≤ i ≤ n−1 » : the lower bound, an overwritten digit | 1 | 2
+- [ ] 73 p28 batch-02:674 | reading | the parenthesis « (⟹ dim N(u_*) = 1, si λ ∈ N(u_*), λ ≠ 0, donc …) » : the word after « donc » | not read (a gap) | a word that can be read (say which) | P3
+- [ ] 73 p28 batch-02:683 | reading | condition b), « ∀ … ≤ i ≤ n−1 » : the lower bound, an overwritten digit | 1 | 2 | P2

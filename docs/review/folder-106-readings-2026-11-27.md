@@ -13,16 +13,16 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 1, the opening
 
-- [ ] 106 p1 batch-01:160 | reading | « C1 : C3 de Baues (pas … C4) » | « néc. » | « usé »
-- [ ] 106 p1 batch-01:161 | reading | second line, « P. ex on pourrait avoir cof = … » | « cof_we » | another subscripted symbol (say which)
+- [ ] 106 p1 batch-01:160 | reading | « C1 : C3 de Baues (pas … C4) » | « néc. » | « usé » | P2
+- [ ] 106 p1 batch-01:161 | reading | second line, « P. ex on pourrait avoir cof = … » | « cof_we » | another subscripted symbol (say which) | P3
 
 ## 2. P. 11
 
-- [ ] 106 p11 batch-01:589 | reading | « Mais je doute qu'il … d'inverser les équiv. faibles » | « qu'il suffise » | « qu'il ne suffise »
-- [ ] 106 p11 batch-01:595 | reading | last paragraph, « en prenant plutôt la catégorie (… C̃) » : the parenthesis | « (notre précédent C̃) » | « (notée provisoirement par C̃) »
+- [ ] 106 p11 batch-01:589 | reading | « Mais je doute qu'il … d'inverser les équiv. faibles » | « qu'il suffise » | « qu'il ne suffise » | P2
+- [ ] 106 p11 batch-01:595 | reading | last paragraph, « en prenant plutôt la catégorie (… C̃) » : the parenthesis | « (notre précédent C̃) » | « (notée provisoirement par C̃) » | P3
 
 ## 3. P. 15
 
-- [ ] 106 p15 batch-01:713 | reading | the target of the arrow « u : (f_0, α) → … » (the accents are overwritten) | « (f''_0, α'') » | « (f'_0, α') »
-- [ ] 106 p15 batch-01:745 | reading | (⋆⋆), « tel que f ait … » | « une section i », both « deux … » variants struck | « deux sections i, i' »
-- [ ] 106 p15 batch-01:764 | reading | last line, « le foncteur … C → C̃ » | « cherché » | « canonique »
+- [ ] 106 p15 batch-01:713 | reading | the target of the arrow « u : (f_0, α) → … » (the accents are overwritten) | « (f''_0, α'') » | « (f'_0, α') » | P2
+- [ ] 106 p15 batch-01:745 | reading | (⋆⋆), « tel que f ait … » | « une section i », both « deux … » variants struck | « deux sections i, i' » | P2
+- [ ] 106 p15 batch-01:764 | reading | last line, « le foncteur … C → C̃ » | « cherché » | « canonique » | P3

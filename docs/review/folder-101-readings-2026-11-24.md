@@ -13,8 +13,8 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 10, the statement
 
-- [ ] 101 p10 batch-01:423 | reading | after the boxed map, « Je dis que c'est un isomorphisme pour tout i, … » : the underlined words that end the sentence, on two lines | « à peu de choses près » | « à priori … chaque pris … » (the earlier reading, two words unread)
+- [ ] 101 p10 batch-01:423 | reading | after the boxed map, « Je dis que c'est un isomorphisme pour tout i, … » : the underlined words that end the sentence, on two lines | « à peu de choses près » | « à priori … chaque pris … » (the earlier reading, two words unread) | P1
 
 ## 2. P. 10, the case n = 1
 
-- [ ] 101 p10 batch-01:454 | reading | 2) n = 1, « il suffit de prendre U = … générique » : the word before « générique » (it begins with a dot and shows no descender) | « point » | « ouvert »
+- [ ] 101 p10 batch-01:454 | reading | 2) n = 1, « il suffit de prendre U = … générique » : the word before « générique » (it begins with a dot and shows no descender) | « point » | « ouvert » | P2

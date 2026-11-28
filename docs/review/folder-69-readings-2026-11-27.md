@@ -13,20 +13,20 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 25
 
-- [ ] 69 p25 batch-02:304 | reading | line 2, before « par choix d'une « origine » u » | nothing inserted | an inserted « non »
-- [ ] 69 p25 batch-02:306 | reading | line 4, « … (comme {v,w} = …) qu'on … le groupe structural » | « Ceci signifie aussi (…) qu'on a restreint » | « Car le graphe associé (…) qu'on restreint »
-- [ ] 69 p25 batch-02:321 | reading | after the exact sequence, the word before « W_α⃗ ≃ W_{D₄} » | « dans » | « donc »
+- [ ] 69 p25 batch-02:304 | reading | line 2, before « par choix d'une « origine » u » | nothing inserted | an inserted « non » | P2
+- [ ] 69 p25 batch-02:306 | reading | line 4, « … (comme {v,w} = …) qu'on … le groupe structural » | « Ceci signifie aussi (…) qu'on a restreint » | « Car le graphe associé (…) qu'on restreint » | P3
+- [ ] 69 p25 batch-02:321 | reading | after the exact sequence, the word before « W_α⃗ ≃ W_{D₄} » | « dans » | « donc » | P3
 
 ## 2. P. 26
 
-- [ ] 69 p26 batch-02:360 | reading | first line, at the right | « par F₂ » | an isolated « Γ → F₂ »
-- [ ] 69 p26 batch-02:394 | reading | rule c), « x et y sont liés ssi … » (the sign is overwritten in darker ink) | « y = σx » | « y ≠ σx »
-- [ ] 69 p26 batch-02:410 | reading | Cor, the kernel of the exact sequence « 1 → … → W_t → … → 1 » | « Γ̃ » | « P̃ »
+- [ ] 69 p26 batch-02:360 | reading | first line, at the right | « par F₂ » | an isolated « Γ → F₂ » | P2
+- [ ] 69 p26 batch-02:394 | reading | rule c), « x et y sont liés ssi … » (the sign is overwritten in darker ink) | « y = σx » | « y ≠ σx » | P1
+- [ ] 69 p26 batch-02:410 | reading | Cor, the kernel of the exact sequence « 1 → … → W_t → … → 1 » | « Γ̃ » | « P̃ » | P2
 
 ## 3. P. 77, the dodecahedron
 
-- [ ] 69 p77 batch-04:377 | reading | tenth label of the dodecahedron (overwritten) | « ξ₂₅ » | « ξ₁₅ »
+- [ ] 69 p77 batch-04:377 | reading | tenth label of the dodecahedron (overwritten) | « ξ₂₅ » | « ξ₁₅ » | P3
 
 ## 4. P. 81, the figure
 
-- [ ] 69 p81 batch-05:93 | reading | the label of the top vertex | « ξ₄,₁₂ » | « ξ₄,₂ » or « ξ₂₄ » (say which)
+- [ ] 69 p81 batch-05:93 | reading | the label of the top vertex | « ξ₄,₁₂ » | « ξ₄,₂ » or « ξ₂₄ » (say which) | P2

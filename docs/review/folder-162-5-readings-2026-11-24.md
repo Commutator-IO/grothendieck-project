@@ -11,9 +11,9 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. Page 26, the gloss on Quillen's theorem
 
-- [ ] 162-5 p26 batch-02:386 | reading | in the brackets after the theorem, before « une propriété de "lissité différentielle" » | « ce qui s'apparente à » | « ce qui signifie : »
+- [ ] 162-5 p26 batch-02:386 | reading | in the brackets after the theorem, before « une propriété de "lissité différentielle" » | « ce qui s'apparente à » | « ce qui signifie : » | P2
 
 ## 2. Page 30, § 11
 
-- [ ] 162-5 p30 batch-02:546 | reading | « quasi-isom. de [complexes de] … (dans la catég. dérivée) » : the two words before the parenthesis | « faisceaux abéliens », « faisceaux » not struck | « faisceaux » struck, followed by another word (say which)
-- [ ] 162-5 p30 batch-02:550 | reading | the slanted margin note, its last sentence | « Peut-il s'y ramener » | « Peut-on s'y ramener »
+- [ ] 162-5 p30 batch-02:546 | reading | « quasi-isom. de [complexes de] … (dans la catég. dérivée) » : the two words before the parenthesis | « faisceaux abéliens », « faisceaux » not struck | « faisceaux » struck, followed by another word (say which) | P2
+- [ ] 162-5 p30 batch-02:550 | reading | the slanted margin note, its last sentence | « Peut-il s'y ramener » | « Peut-on s'y ramener » | P3

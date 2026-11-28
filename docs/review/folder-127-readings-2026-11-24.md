@@ -13,4 +13,4 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 3, end of (a)
 
-- [ ] 127 p3 batch-01:225 | reading | end of (a), « et que la condition soit vérifiée pour tt x′ … » : the words between x′ and the last letter | « pour tt x′ … X », the words between not read | « pour tt x′ et tt x »
+- [ ] 127 p3 batch-01:225 | reading | end of (a), « et que la condition soit vérifiée pour tt x′ … » : the words between x′ and the last letter | « pour tt x′ … X », the words between not read | « pour tt x′ et tt x » | P2

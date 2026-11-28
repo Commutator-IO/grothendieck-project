@@ -13,18 +13,18 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 9, Cor 1
 
-- [ ] 156-8 p9 batch-01:235 | reading | Cor 1, right-hand side of the equivalence « Z ≪ Y ⇔ X … Y » (the sign is overwritten) | « X ≤ Y » | « X ≪ Y »
+- [ ] 156-8 p9 batch-01:235 | reading | Cor 1, right-hand side of the equivalence « Z ≪ Y ⇔ X … Y » (the sign is overwritten) | « X ≤ Y » | « X ≪ Y » | P1
 
 ## 2. P. 10, Cor. 3
 
-- [ ] 156-8 p10 batch-01:261 | reading | Cor. 3, left-hand side of « X … Y ⇔ X ≤ Y » | « X ≪ Y » | « X ≪° Y » (a small ring on the sign)
+- [ ] 156-8 p10 batch-01:261 | reading | Cor. 3, left-hand side of « X … Y ⇔ X ≤ Y » | « X ≪ Y » | « X ≪° Y » (a small ring on the sign) | P1
 
 ## 3. P. 99, Hypothèse H
 
-- [ ] 156-8 p99 batch-05:740 | reading | Hypothèse H a), the inserted line | « Tout élément minimal de L » | « … él. non minimal de L »
+- [ ] 156-8 p99 batch-05:740 | reading | Hypothèse H a), the inserted line | « Tout élément minimal de L » | « … él. non minimal de L » | P1
 
 ## 4. P. 102
 
-- [ ] 156-8 p102 batch-06:34 | reading | first line | « Cas où on ne fait pas l'hyp. » | « Ceci … fait par l'hyp. »
-- [ ] 156-8 p102 batch-06:49 | reading | margin, a single word | « Canular » | another word (say which)
-- [ ] 156-8 p102 batch-06:51 | reading | before the second diagram | « Par contre, pas de Pb avec » | « Pour contre-exemple pour Pb »
+- [ ] 156-8 p102 batch-06:34 | reading | first line | « Cas où on ne fait pas l'hyp. » | « Ceci … fait par l'hyp. » | P2
+- [ ] 156-8 p102 batch-06:49 | reading | margin, a single word | « Canular » | another word (say which) | P2
+- [ ] 156-8 p102 batch-06:51 | reading | before the second diagram | « Par contre, pas de Pb avec » | « Pour contre-exemple pour Pb » | P2

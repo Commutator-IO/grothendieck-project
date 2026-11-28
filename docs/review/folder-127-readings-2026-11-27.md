@@ -14,14 +14,14 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 7, Cor (2) : the word a finding quotes
 
-- [ ] 127 p7 batch-01:486 | reading | Cor (2), line (i bis), the word added above the struck « et », before « équidimensionnel » | « loc. » | « lisse »
+- [ ] 127 p7 batch-01:486 | reading | Cor (2), line (i bis), the word added above the struck « et », before « équidimensionnel » | « loc. » | « lisse » | P1
 
 ## 2. P. 7, Th. 1.8
 
-- [ ] 127 p7 batch-01:437 | reading | c), « Pour tte gén. y′ de … » : the last letter | small « y » | capital « Y »
-- [ ] 127 p7 batch-01:456 | reading | margin N.B., first line, « Si on suppose Y loc. noeth., … l'énoncé équivaut à dire » | « alors » | « dans »
-- [ ] 127 p7 batch-01:468 | reading | conclusion (1), end of the live line, after « finie et » | « normal » | nothing legible
+- [ ] 127 p7 batch-01:437 | reading | c), « Pour tte gén. y′ de … » : the last letter | small « y » | capital « Y » | P2
+- [ ] 127 p7 batch-01:456 | reading | margin N.B., first line, « Si on suppose Y loc. noeth., … l'énoncé équivaut à dire » | « alors » | « dans » | P3
+- [ ] 127 p7 batch-01:468 | reading | conclusion (1), end of the live line, after « finie et » | « normal » | nothing legible | P1
 
 ## 3. P. 2, before Lemme 1.2
 
-- [ ] 127 p2 batch-01:177 | reading | after « univ. injectif rel/Y. » and the boxed remark, « L'unicité … » | « implique aussi » | another verb (say which)
+- [ ] 127 p2 batch-01:177 | reading | after « univ. injectif rel/Y. » and the boxed remark, « L'unicité … » | « implique aussi » | another verb (say which) | P3

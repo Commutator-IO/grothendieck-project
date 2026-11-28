@@ -13,4 +13,4 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 4, last line but one
 
-- [ ] 5 p4 batch-01:173 | reading | « Par abus de langage, on désigne … par Λ_i, Θ_i » : the two short words after « on désigne » | not read (a gap) | « par la suite »
+- [ ] 5 p4 batch-01:173 | reading | « Par abus de langage, on désigne … par Λ_i, Θ_i » : the two short words after « on désigne » | not read (a gap) | « par la suite » | P3

@@ -13,13 +13,13 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 11, Cor. 1
 
-- [ ] 39 p11 batch-01:526 | reading | Cor. 1, after the « ⇔ » that precedes « si f ∈ A_n, ε(f) = 0 » : the struck opening | « En particulier » (struck, then a gap) | other words (say which)
+- [ ] 39 p11 batch-01:526 | reading | Cor. 1, after the « ⇔ » that precedes « si f ∈ A_n, ε(f) = 0 » : the struck opening | « En particulier » (struck, then a gap) | other words (say which) | P4
 
 ## 2. P. 18, the proof
 
-- [ ] 39 p18 batch-01:758 | reading | second line of the proof, « on est ramené … au cas où A est discret » | « ramené aussitôt au cas » | « ramené au cas » (no word between)
-- [ ] 39 p18 batch-01:759 | reading | fourth line of the proof, « les a_i (0 ≤ i ≤ N−1) sont … nilpotents » | « top. nilpotents » | « nilpotents », with nothing between
+- [ ] 39 p18 batch-01:758 | reading | second line of the proof, « on est ramené … au cas où A est discret » | « ramené aussitôt au cas » | « ramené au cas » (no word between) | P2
+- [ ] 39 p18 batch-01:759 | reading | fourth line of the proof, « les a_i (0 ≤ i ≤ N−1) sont … nilpotents » | « top. nilpotents » | « nilpotents », with nothing between | P2
 
 ## 3. P. 19, the last display
 
-- [ ] 39 p19 batch-01:838 | reading | after the last display, the parenthesis after « Ḟ = ȧ_N α Z^N » : the sign after « α » and the overwritten index | not read (a gap, described in a note) | a sign and an index that can be read (« = » or « − », « a_N » or « a_{N+1} » : say which)
+- [ ] 39 p19 batch-01:838 | reading | after the last display, the parenthesis after « Ḟ = ȧ_N α Z^N » : the sign after « α » and the overwritten index | not read (a gap, described in a note) | a sign and an index that can be read (« = » or « − », « a_N » or « a_{N+1} » : say which) | P3

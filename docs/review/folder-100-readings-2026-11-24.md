@@ -13,4 +13,4 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 22, the proof of Lemme 1
 
-- [ ] 100 p22 batch-02:229 | reading | after « 𝒜 ⊂ f_*(O_S′), f étant un », before « On est donc ramené » : the word (its initial is unlike the « é » of the line above) | « épimorphisme » | another word (say which)
+- [ ] 100 p22 batch-02:229 | reading | after « 𝒜 ⊂ f_*(O_S′), f étant un », before « On est donc ramené » : the word (its initial is unlike the « é » of the line above) | « épimorphisme » | another word (say which) | P2

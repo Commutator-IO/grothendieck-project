@@ -13,10 +13,10 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 9, the last formula
 
-- [ ] 2 p9 batch-01:415 | reading | the three short lines under the α of the last formula : the first of them | « r-ième argument », the other two lines not read | other words (say which)
+- [ ] 2 p9 batch-01:415 | reading | the three short lines under the α of the last formula : the first of them | « r-ième argument », the other two lines not read | other words (say which) | P3
 
 ## 2. P. 21, the Question and the Exemple
 
-- [ ] 2 p21 batch-02:177a | reading | parenthesis after « Non », the long word before « X_s = L » | « générateur » | « finie »
-- [ ] 2 p21 batch-02:177b | reading | same parenthesis, the two short words before it (doubly underlined or struck) | not read (two gaps) | words that can be read (say which)
-- [ ] 2 p21 batch-02:201 | reading | diagonal note in the left margin, the ring after « CK = » : the exponent of ξ | « CK = Z[ξ]/ξ^n » | « CK = Z[ξ]/ξ^{n!} »
+- [ ] 2 p21 batch-02:177a | reading | parenthesis after « Non », the long word before « X_s = L » | « générateur » | « finie » | P2
+- [ ] 2 p21 batch-02:177b | reading | same parenthesis, the two short words before it (doubly underlined or struck) | not read (two gaps) | words that can be read (say which) | P3
+- [ ] 2 p21 batch-02:201 | reading | diagonal note in the left margin, the ring after « CK = » : the exponent of ξ | « CK = Z[ξ]/ξ^n » | « CK = Z[ξ]/ξ^{n!} » | P2

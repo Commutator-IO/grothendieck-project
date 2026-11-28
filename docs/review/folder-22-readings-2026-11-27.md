@@ -13,21 +13,21 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 10, the typescript
 
-- [ ] 22 p10 batch-01:273 | reading | proof of Lemme 3.3, « de type fini » above « modules libres » : typed or written by hand ? | written by hand (an interline addition) | typed
-- [ ] 22 p10 batch-01:286 | reading | Corollaire 3.5, the small handwritten words under the struck « les conditions » | « la condition » | « les conditions », rewritten
+- [ ] 22 p10 batch-01:273 | reading | proof of Lemme 3.3, « de type fini » above « modules libres » : typed or written by hand ? | written by hand (an interline addition) | typed | P4
+- [ ] 22 p10 batch-01:286 | reading | Corollaire 3.5, the small handwritten words under the struck « les conditions » | « la condition » | « les conditions », rewritten | P2
 
 ## 2. P. 22, beside the arrow
 
-- [ ] 22 p22 batch-02:130 | reading | to the right of the arrow Ω¹_k ⊗_k A → Ω¹_A | « admet un inverse à gauche ? » | « devrait être un … ? pourquoi ? »
+- [ ] 22 p22 batch-02:130 | reading | to the right of the arrow Ω¹_k ⊗_k A → Ω¹_A | « admet un inverse à gauche ? » | « devrait être un … ? pourquoi ? » | P3
 
 ## 3. P. 23, near the foot
 
-- [ ] 22 p23 batch-02:176 | reading | six lines from the foot, « il existerait … de type fini K′ de k » : the noun | « une extension » | another noun (say which)
+- [ ] 22 p23 batch-02:176 | reading | six lines from the foot, « il existerait … de type fini K′ de k » : the noun | « une extension » | another noun (say which) | P3
 
 ## 4. P. 26, under the square
 
-- [ ] 22 p26 batch-02:237 | reading | line 5 of the text under the square, the word before « Ω¹_{k/k∩K^p} ⊗_k K → Ω¹_K » | « a fortiori », underlined by a wavy stroke | « injection », struck
+- [ ] 22 p26 batch-02:237 | reading | line 5 of the text under the square, the word before « Ω¹_{k/k∩K^p} ⊗_k K → Ω¹_K » | « a fortiori », underlined by a wavy stroke | « injection », struck | P2
 
 ## 5. P. 28, line 5
 
-- [ ] 22 p28 batch-02:303 | reading | line 5, « si donc (x, y) n'était … p-libre » : the word before « p-libre » | a struck word, not read | « pas », only blotted (« n'était pas p-libre »)
+- [ ] 22 p28 batch-02:303 | reading | line 5, « si donc (x, y) n'était … p-libre » : the word before « p-libre » | a struck word, not read | « pas », only blotted (« n'était pas p-libre ») | P3

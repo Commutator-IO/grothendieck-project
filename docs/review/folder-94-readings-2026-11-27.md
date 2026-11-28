@@ -14,14 +14,14 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 7, the sketch
 
-- [ ] 94 p7 batch-01:339 | reading | sketch, « comme F commute aux lim, on voit qu'on peut … ⊂ N » | « supposer que ces P_p sont tous ⊂ N » | other words (the first pass saw « un … ⊂ N » here : say which)
-- [ ] 94 p7 batch-01:345 | reading | « si on prend U assez petit pour être … » | « normal » | another word (say which)
+- [ ] 94 p7 batch-01:339 | reading | sketch, « comme F commute aux lim, on voit qu'on peut … ⊂ N » | « supposer que ces P_p sont tous ⊂ N » | other words (the first pass saw « un … ⊂ N » here : say which) | P2
+- [ ] 94 p7 batch-01:345 | reading | « si on prend U assez petit pour être … » | « normal » | another word (say which) | P1
 
 ## 2. P. 8, the proof
 
-- [ ] 94 p8 batch-01:379 | reading | proof, « En fait, on prouve … que, posant » | « en même temps » | « un peu plus »
+- [ ] 94 p8 batch-01:379 | reading | proof, « En fait, on prouve … que, posant » | « en même temps » | « un peu plus » | P3
 
 ## 3. P. 15, condition (vi)
 
-- [ ] 94 p15 batch-01:588 | reading | (vi), « Pour tout quotient … B de A » : the two short words added above « quotient » | « non nul » | other words (say which)
-- [ ] 94 p15 batch-01:590 | reading | (vi), « et … de paramètres f_1, …, f_n » | « toute suite de paramètres » | « tout système de paramètres », « de » struck
+- [ ] 94 p15 batch-01:588 | reading | (vi), « Pour tout quotient … B de A » : the two short words added above « quotient » | « non nul » | other words (say which) | P1
+- [ ] 94 p15 batch-01:590 | reading | (vi), « et … de paramètres f_1, …, f_n » | « toute suite de paramètres » | « tout système de paramètres », « de » struck | P2

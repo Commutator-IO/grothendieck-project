@@ -13,18 +13,18 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 4, the partition
 
-- [ ] 121 p4 batch-01:205 | reading | line of the partition, « … = X − Ā » : what the ring of the interior sits on | the whole of ∁A : « (∁A)° = X − Ā » | A only : « ∁Å = X − Ā »
+- [ ] 121 p4 batch-01:205 | reading | line of the partition, « … = X − Ā » : what the ring of the interior sits on | the whole of ∁A : « (∁A)° = X − Ā » | A only : « ∁Å = X − Ā » | P1
 
 ## 2. P. 5, the proof
 
-- [ ] 121 p5 batch-01:254 | reading | proof, twice (« A ∩ b… » and « b… = X_1 ») : the letter after « b » | « bȦ » (an A with a dot) | « bA » with a stray dot
-- [ ] 121 p5 batch-01:264 | reading | « On construit ainsi … X_0 = X ⊃ X_1 » | « de proche en » | « une suite décroissante »
+- [ ] 121 p5 batch-01:254 | reading | proof, twice (« A ∩ b… » and « b… = X_1 ») : the letter after « b » | « bȦ » (an A with a dot) | « bA » with a stray dot | P3
+- [ ] 121 p5 batch-01:264 | reading | « On construit ainsi … X_0 = X ⊃ X_1 » | « de proche en » | « une suite décroissante » | P3
 
 ## 3. P. 8
 
-- [ ] 121 p8 batch-01:366 | reading | γ′), « ∀ A, B ∈ F_0, … des ∈ F_0 qui contiennent A ∩ ∁B » | « l'intersection » | « l'ensemble »
-- [ ] 121 p8 batch-01:394 | reading | NB, « nous … sur U » | « induisons » | « introduisons »
+- [ ] 121 p8 batch-01:366 | reading | γ′), « ∀ A, B ∈ F_0, … des ∈ F_0 qui contiennent A ∩ ∁B » | « l'intersection » | « l'ensemble » | P1
+- [ ] 121 p8 batch-01:394 | reading | NB, « nous … sur U » | « induisons » | « introduisons » | P3
 
 ## 4. P. 14, the Prop
 
-- [ ] 121 p14 batch-01:593 | reading | Prop, « (qui est donc … déterminée) » | « uniquement » | « unique »
+- [ ] 121 p14 batch-01:593 | reading | Prop, « (qui est donc … déterminée) » | « uniquement » | « unique » | P2

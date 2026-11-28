@@ -13,9 +13,9 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 3, the descriptions of Π(E,F)
 
-- [ ] 161-3 p3 batch-01:42 | reading | the parenthesis written between the lines, tied by a brace to « i.e. foncteurs φ° : C → F° » | « (… des flèches) », the first word not read | other words (say which)
+- [ ] 161-3 p3 batch-01:42 | reading | the parenthesis written between the lines, tied by a brace to « i.e. foncteurs φ° : C → F° » | « (… des flèches) », the first word not read | other words (say which) | P3
 
 ## 2. P. 9, the Proposition and the margin
 
-- [ ] 161-3 p9 batch-01:375 | reading | Proposition, the parenthesis between « admette un voisinage » and « quasi-compact » | « (pas néc. ouvert) » | other words (say which)
-- [ ] 161-3 p9 batch-01:385 | reading | diagonal N.B. in the left margin, after « NB comme Top(X × Y) », before « Top(X) ×_top Top(Y) » | « est un sous-topos de » | other words (say which)
+- [ ] 161-3 p9 batch-01:375 | reading | Proposition, the parenthesis between « admette un voisinage » and « quasi-compact » | « (pas néc. ouvert) » | other words (say which) | P1
+- [ ] 161-3 p9 batch-01:385 | reading | diagonal N.B. in the left margin, after « NB comme Top(X × Y) », before « Top(X) ×_top Top(Y) » | « est un sous-topos de » | other words (say which) | P3

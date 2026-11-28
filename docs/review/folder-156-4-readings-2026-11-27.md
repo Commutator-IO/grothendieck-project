@@ -13,13 +13,13 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 64
 
-- [ ] 156-4 p64 batch-04:172 | reading | line 5, « Déjà, il le … tous les F_i sauf un nb fini » | « il le faudrait pour ça que » | « il le faut sûrement pour »
+- [ ] 156-4 p64 batch-04:172 | reading | line 5, « Déjà, il le … tous les F_i sauf un nb fini » | « il le faudrait pour ça que » | « il le faut sûrement pour » | P3
 
 ## 2. P. 65, the title
 
-- [ ] 156-4 p65 batch-04:199 | reading | title, second half, « Support et … » | « cosupport » | « complément »
+- [ ] 156-4 p65 batch-04:199 | reading | title, second half, « Support et … » | « cosupport » | « complément » | P3
 
 ## 3. P. 68, paragraph 2
 
-- [ ] 156-4 p68 batch-04:262a | reading | paragraph 2, first word after the struck line, « … les supports s'identifient » | « Donc » | « Dans ce cas »
-- [ ] 156-4 p68 batch-04:262b | reading | paragraph 2, last sentence | « L'involution correspond au passage au complémentaire » | « … correspondant au passage … l'inclusion »
+- [ ] 156-4 p68 batch-04:262a | reading | paragraph 2, first word after the struck line, « … les supports s'identifient » | « Donc » | « Dans ce cas » | P3
+- [ ] 156-4 p68 batch-04:262b | reading | paragraph 2, last sentence | « L'involution correspond au passage au complémentaire » | « … correspondant au passage … l'inclusion » | P2

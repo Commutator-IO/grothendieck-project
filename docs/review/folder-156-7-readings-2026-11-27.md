@@ -14,19 +14,19 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 82, the two ordered sets I, I′ (the hypothesis of a finding)
 
-- [ ] 156-7 p82 batch-05:126a | reading | line 2, interline addition above the struck « Prendre », « … extrémités, » : the short word | « sans » | « avec »
-- [ ] 156-7 p82 batch-05:126b | reading | line 3, before « un plus petit et un plus grand élément » | « lui ajoutant » | « les ayant »
-- [ ] 156-7 p82 batch-05:126c | reading | line 1, « on peut prendre deux … I, I′ » : the noun after « deux » | « treillis » | « tronçons »
-- [ ] 156-7 p82 batch-05:135 | reading | after « A_z = {z} est un ensemble support, », before « de l'ens. des strates de la figure » | « car ce sera le cosupport » | nothing (« l'ens. des strates », with no « cosupport »)
+- [ ] 156-7 p82 batch-05:126a | reading | line 2, interline addition above the struck « Prendre », « … extrémités, » : the short word | « sans » | « avec » | P1
+- [ ] 156-7 p82 batch-05:126b | reading | line 3, before « un plus petit et un plus grand élément » | « lui ajoutant » | « les ayant » | P1
+- [ ] 156-7 p82 batch-05:126c | reading | line 1, « on peut prendre deux … I, I′ » : the noun after « deux » | « treillis » | « tronçons » | P2
+- [ ] 156-7 p82 batch-05:135 | reading | after « A_z = {z} est un ensemble support, », before « de l'ens. des strates de la figure » | « car ce sera le cosupport » | nothing (« l'ens. des strates », with no « cosupport ») | P2
 
 ## 2. P. 81, the margin
 
-- [ ] 156-7 p81 batch-05:122 | reading | margin, « Attention, ici la fonction … Supp_P 1 » : the verb | « ne satisfait pas » | « satisfait »
+- [ ] 156-7 p81 batch-05:122 | reading | margin, « Attention, ici la fonction … Supp_P 1 » : the verb | « ne satisfait pas » | « satisfait » | P1
 
 ## 3. P. 98, the display
 
-- [ ] 156-7 p98 batch-05:599 | reading | first word of the display « … A ∪ B = ∁A ∩ ∁B = ∅ » | « Cosupp » | « Comme »
+- [ ] 156-7 p98 batch-05:599 | reading | first word of the display « … A ∪ B = ∁A ∩ ∁B = ∅ » | « Cosupp » | « Comme » | P1
 
 ## 4. P. 80, the margin
 
-- [ ] 156-7 p80 batch-04:729 | reading | left margin, after « sans Supp² et » | « même pour » (then one word not read) | « avec moins même »
+- [ ] 156-7 p80 batch-04:729 | reading | left margin, after « sans Supp² et » | « même pour » (then one word not read) | « avec moins même » | P2

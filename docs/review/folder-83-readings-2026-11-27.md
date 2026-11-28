@@ -13,9 +13,9 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 136, the Th. récapitulatif
 
-- [ ] 83 p136 batch-07:320 | reading | Th. récapitulatif ①, « et les 5 flèches qui … AZ_P sont compatibles » | « qui ne sont pas de source AZ_P » | « qui en sont issues de la source AZ_P »
-- [ ] 83 p136 batch-07:331 | reading | margin, the first words, « … une définition … des 1_H » | « Source et but ont une définition en termes des 1_H » | « Comment cette … soit une définition des 1_H »
+- [ ] 83 p136 batch-07:320 | reading | Th. récapitulatif ①, « et les 5 flèches qui … AZ_P sont compatibles » | « qui ne sont pas de source AZ_P » | « qui en sont issues de la source AZ_P » | P1
+- [ ] 83 p136 batch-07:331 | reading | margin, the first words, « … une définition … des 1_H » | « Source et but ont une définition en termes des 1_H » | « Comment cette … soit une définition des 1_H » | P3
 
 ## 2. P. 143, the determinant
 
-- [ ] 83 p143 batch-08:62 | reading | det(u ∗ v) = b²c + … − 4cc′ : the second term | « b'²c' » | « b²c' » (no accent on b)
+- [ ] 83 p143 batch-08:62 | reading | det(u ∗ v) = b²c + … − 4cc′ : the second term | « b'²c' » | « b²c' » (no accent on b) | P2

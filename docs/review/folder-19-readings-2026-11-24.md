@@ -13,18 +13,18 @@ Tick a box when its answer is applied; the transcription then gains a `% Revised
 
 ## 1. P. 4, Théorème 1.12
 
-- [ ] 19 p4 batch-01:136 | reading | a), the reference sign in parentheses after « et si f y commute » (the asterisk after « existent » is another sign) | a second sign, printed « (†) » | another sign (say which)
+- [ ] 19 p4 batch-01:136 | reading | a), the reference sign in parentheses after « et si f y commute » (the asterisk after « existent » is another sign) | a second sign, printed « (†) » | another sign (say which) | P3
 
 ## 2. P. 9, after (3.14)
 
-- [ ] 19 p9 batch-01:445 | reading | the interline sentence written over the struck « Par contre, il semble que 1.6 implique des restrictions à λ′, λ″ » | « Il semble qu'il n'y ait que les conditions … » | other words (say which)
-- [ ] 19 p9 batch-01:448 | reading | the two relations φ″ ∗ λ′ = λ″ ∗ φ″ and λ′ ∗ φ′ = φ′ ∗ λ″ : struck, or only boxed ? | boxed, not struck | boxed and struck
+- [ ] 19 p9 batch-01:445 | reading | the interline sentence written over the struck « Par contre, il semble que 1.6 implique des restrictions à λ′, λ″ » | « Il semble qu'il n'y ait que les conditions … » | other words (say which) | P2
+- [ ] 19 p9 batch-01:448 | reading | the two relations φ″ ∗ λ′ = λ″ ∗ φ″ and λ′ ∗ φ′ = φ′ ∗ λ″ : struck, or only boxed ? | boxed, not struck | boxed and struck | P1
 
 ## 3. P. 15, the functors T′ and T″
 
-- [ ] 19 p15 batch-01:682 | reading | after « M = T′(T″M), » : which functor is called « surjectif » (a T″ is overwritten) | « donc T′T″ est « surjectif » » | « donc T′ est « surjectif » »
+- [ ] 19 p15 batch-01:682 | reading | after « M = T′(T″M), » : which functor is called « surjectif » (a T″ is overwritten) | « donc T′T″ est « surjectif » » | « donc T′ est « surjectif » » | P2
 
 ## 4. P. 80, the bracket closing the Proposition
 
-- [ ] 19 p80 batch-04:640 | reading | « [et si on veut, tous les f_i … = f_1 et f_n, étant des morphismes de topos … des morphismes directs] » : the two unread places | two gaps, after « tous les f_i » and after « morphismes de topos » | words that can be read (say which)
-- [ ] 19 p80 batch-04:642 | reading | last word of the bracket, after « des morphismes » | « directs » | « stricts »
+- [ ] 19 p80 batch-04:640 | reading | « [et si on veut, tous les f_i … = f_1 et f_n, étant des morphismes de topos … des morphismes directs] » : the two unread places | two gaps, after « tous les f_i » and after « morphismes de topos » | words that can be read (say which) | P2
+- [ ] 19 p80 batch-04:642 | reading | last word of the bracket, after « des morphismes » | « directs » | « stricts » | P2
