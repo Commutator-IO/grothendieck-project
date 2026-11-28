@@ -7,7 +7,7 @@ A theorem generator should be tested on inputs whose outputs are known. On the s
 \toprule
 item & number\\
 \midrule
-statements in the calibration log (rows below) & 14\\
+statements in the calibration log (rows below) & 15\\
 statements in the Outputs table of \S\ref{sec:intro} (rows, some of them bundling several statements) & 10\\
 statements first believed new, then found in print & 3\\
 (deck, arch) pairs tried & not recorded\\
@@ -34,8 +34,11 @@ regular (e.g.\ Horn) theories $\times$ De Morgan & classifying topos De Morgan &
 torsors $\times$ Morita & $G$- and $H$-torsors Morita equivalent iff $G\cong H$ & standard (the only essential point of $G$-sets has automorphism group $G$, \S\ref{sec:equivalences})\\
 quotients $\times$ subtopoi & meet of local rings and integral domains & \cite[\S18]{caramello-lattices}\\
 small categories $\times$ Morita & $\widehat C$ is the presheaf topos of a preorder iff $C$ is thin & not in print as such; an exercise in an unpublished note \cite[p.~26]{grothendieck-161-3}, treated in the companion note \cite{bridges-notes}\\
+finite categories $\times$ subtopoi & every subtopos of $\widehat C$ is essential, so subtopoi are the retract-closed sets of objects of $\Kar(C)$: $n+2$ for $\Delta_{\le n}$, $n+1$ for finite sets of size $\le n$, $2^{k}$ for a finite EI category with $k$ objects up to isomorphism & \cite[IV, Ex.~9.1.12]{sga4} through \cite[Prop.~4.1]{wu-xu}; \cite{kelly-lawvere}; \cite[Cor.~3.3, Ex.~6.3--6.4]{menni}\\
 \bottomrule
 \end{tabularx}
 \end{center}
+
+The subtopoi row was computed before it was found in print: the script \nolinkurl{docs/bridges/atlas/categories.py} counts the Grothendieck topologies of a finite category and its retract-closed sets of Karoubi objects, and the two counts agree on 21 decks (truncated simplicial, semi-simplicial and augmented sets, finite sets with all maps, injections or surjections, chains, Boolean lattices, spans, cospans, graphs, incidence structures) and on the 273 monoids of order at most~5.
 
 The confluence line has a reading that is new even though its mathematics is known. For an abstract rewriting system $(S,\to)$, give $S$ the topology whose open sets are the sets of terms closed under rewriting. Then \emph{the system is confluent (Church--Rosser) iff this space is extremally disconnected}: this is the third line of the table applied to the preorder $\to^*$. Confluence of $\beta$-reduction thus says that the space of $\lambda$-terms, with the sets closed under $\beta$-reduction as open sets, is extremally disconnected. We did not find this reading in the rewriting literature, but since it is a direct restatement of a published theorem we do not count it as new.
