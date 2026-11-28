@@ -1,0 +1,66 @@
+% Preamble of docs/dualities/article.tex: the bridges preamble, with fonts loaded by file name
+% so that tectonic builds it.
+% Built with XeLaTeX: cd docs/bridges && xelatex article.tex && xelatex article.tex
+\usepackage{fontspec}
+\setmainfont{XCharter}[Extension=.otf, UprightFont=*-Roman, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\setmonofont{DejaVuSansMono}[Extension=.ttf, BoldFont=*-Bold, ItalicFont=*-Oblique, BoldItalicFont=*-BoldOblique, Scale=0.8]
+\usepackage{microtype}
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{setspace}\setstretch{1.1}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,cd}
+\usepackage{booktabs,array,tabularx}
+\usepackage{fancyvrb}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=*}
+\setlength{\emergencystretch}{2em}
+\setlength{\parskip}{0.35em}
+\numberwithin{equation}{section}
+
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\PSh}{\mathrm{PSh}}
+\newcommand{\Sh}{\mathrm{Sh}}
+\newcommand{\Kar}{\operatorname{Kar}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\B}{\mathbf{B}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\res}[2]{#1|_{#2}}
+\newcommand{\q}[1]{«\,#1\,»}
+\newcommand{\lean}[1]{{\small\nolinkurl{#1}}}
+% let long declaration names break at underscores and dots
+\makeatletter\g@addto@macro\UrlBreaks{\do\_\do\.}\makeatother
+\newcommand{\lp}{\href{https://github.com/LeanPool/lean-pool/tree/main/LeanPool/ToposTheoreticBridges}{\nolinkurl{ToposTheoreticBridges}}}
+
+% Lean code blocks.
+\DefineVerbatimEnvironment{leancode}{Verbatim}{fontsize=\small,frame=leftline,framerule=0.6pt,rulecolor=\color{blue!40},xleftmargin=6pt}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{\thmname}[section]
+\newtheorem{corollary}[theorem]{\corname}
+\newtheorem{proposition}[theorem]{\propname}
+\newtheorem{lemma}[theorem]{\lemname}
+\newtheorem{bridge}{\bridgename}
+\renewcommand{\thebridge}{\Alph{bridge}}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{\defname}
+\newtheorem{example}[theorem]{\exname}
+\newtheorem{exercise}{\exoname}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{\remname}
+\tcolorboxenvironment{theorem}{enhanced, breakable, colback=green!2, colframe=green!35!black, boxrule=0.6pt, arc=0pt, left=7pt, right=7pt, top=4pt, bottom=4pt, before skip=12pt, after skip=8pt}
+\tcolorboxenvironment{bridge}{enhanced, breakable, colback=blue!3, colframe=blue!35!black, boxrule=0.5pt, arc=0pt, left=7pt, right=7pt, top=4pt, bottom=4pt, before skip=12pt, after skip=8pt}
+\tcolorboxenvironment{definition}{enhanced, breakable, colback=black!3, colframe=black!25, boxrule=0.4pt, arc=0pt, left=7pt, right=7pt, top=4pt, bottom=4pt, before skip=10pt, after skip=6pt}
+\newcommand{\entry}[1]{\par\smallskip\noindent\textbf{#1}\enspace}
+
+% Pipeline trace of a generated theorem (labels set per language in article*.tex).
+\newenvironment{trace}{\par\begin{tcolorbox}[enhanced,breakable,colback=yellow!4,colframe=yellow!45!black,boxrule=0.4pt,arc=0pt,fontupper=\small,left=5pt,right=5pt,top=3pt,bottom=3pt,before skip=8pt,after skip=8pt]\textbf{\tracename}\par\begin{description}[leftmargin=2.6cm,labelwidth=2.4cm,labelsep=0.2cm,font=\normalfont\itshape]}{\end{description}\end{tcolorbox}}

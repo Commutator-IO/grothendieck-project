@@ -7,7 +7,7 @@ Un générateur de théorèmes se teste sur des entrées dont on connaît les so
 \toprule
 élément & nombre\\
 \midrule
-énoncés du journal d'étalonnage (lignes ci-dessous) & 14\\
+énoncés du journal d'étalonnage (lignes ci-dessous) & 15\\
 énoncés du tableau des résultats du \S\ref{sec:intro} (lignes, certaines regroupant plusieurs énoncés) & 10\\
 énoncés d'abord crus nouveaux, puis trouvés publiés & 3\\
 couples (tablier, arche) essayés & non consigné\\
@@ -15,7 +15,7 @@ couples (tablier, arche) essayés & non consigné\\
 \end{tabular}
 \end{center}
 
-\begin{center}\small
+\begin{center}\footnotesize
 \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.3cm}}
 \toprule
 tablier $\times$ arche & énoncé engendré & publié\\
@@ -34,8 +34,11 @@ théories de régulières (par exemple de Horn) $\times$ De Morgan & topos class
 torseurs $\times$ Morita & $G$-torseurs et $H$-torseurs Morita-équivalents si et seulement si $G\cong H$ & classique (le seul point essentiel des $G$-ensembles a pour groupe d'automorphismes $G$, \S\ref{sec:equivalences})\\
 quotients $\times$ sous-topos & intersection des anneaux locaux et des anneaux intègres & \cite[\S18]{caramello-lattices}\\
 petites catégories $\times$ Morita & $\widehat C$ est le topos de préfaisceaux d'un préordre si et seulement si $C$ est mince & non publié comme tel; exercice d'une note non publiée \cite[p.~26]{grothendieck-161-3}, traité dans la note associée \cite{bridges-notes}\\
+catégories finies $\times$ sous-topos & tout sous-topos de $\widehat C$ est essentiel, donc les sous-topos sont les ensembles d'objets de $\Kar(C)$ stables par rétracte: $n+2$ pour $\Delta_{\le n}$, $n+1$ pour les ensembles finis de cardinal $\le n$, $2^{k}$ pour une catégorie EI finie à $k$ objets à isomorphisme près & \cite[IV, ex.~9.1.12]{sga4} via \cite[Prop.~4.1]{wu-xu}; \cite{kelly-lawvere}; \cite[Cor.~3.3, ex.~6.3--6.4]{menni}\\
 \bottomrule
 \end{tabularx}
 \end{center}
+
+La ligne des sous-topos a été calculée avant d'être retrouvée dans la littérature: le script \nolinkurl{docs/bridges/atlas/categories.py} compte les topologies de Grothendieck d'une catégorie finie et ses ensembles d'objets de Karoubi stables par rétracte, et les deux nombres coïncident sur 21 tabliers (ensembles simpliciaux tronqués, semi-simpliciaux et augmentés, ensembles finis avec toutes les applications, les injections ou les surjections, chaînes, treillis booléens, spans, cospans, graphes, structures d'incidence) et sur les 273 monoïdes d'ordre au plus~5.
 
 Un résultat mérite qu'on s'y arrête: les mathématiques en sont connues, mais sa lecture est nouvelle. Pour un système de réécriture abstrait $(S,\to)$, on munit $S$ de la topologie dont les ouverts sont les ensembles de termes stables par réécriture. Alors \emph{le système est confluent (Church--Rosser) si et seulement si cet espace est extrêmement discontinu}: c'est la troisième ligne du tableau appliquée au préordre $\to^*$. La confluence de la $\beta$-réduction dit donc que l'espace des $\lambda$-termes, muni des ensembles stables par $\beta$-réduction comme ouverts, est extrêmement discontinu. Nous n'avons pas trouvé cette lecture dans la littérature sur la réécriture, mais, comme elle ne fait que reformuler un théorème publié, nous ne la comptons pas comme nouvelle.

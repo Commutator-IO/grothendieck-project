@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+% Draft of the third bridges article. Built with XeLaTeX:
+% cd docs/dualities && tectonic article.tex
+\usepackage{polyglossia}\setmainlanguage{english}\setotherlanguage{french}
+\newcommand{\thmname}{Theorem}\newcommand{\corname}{Corollary}\newcommand{\propname}{Proposition}
+\newcommand{\lemname}{Lemma}\newcommand{\bridgename}{Bridge}\newcommand{\defname}{Definition}
+\newcommand{\exname}{Example}\newcommand{\exoname}{Exercise}\newcommand{\remname}{Remark}
+\input{preamble}
+\newcommand{\Id}{\mathrm{Id}}
+
+\title{Stone-type dualities from one bridge\\[0.3em] \large Running Caramello's duality machine mechanically, and checking its outputs against Mathlib}
+\author{Michel Hua\\ \small Commutator, Paris\\ \small\texttt{michel@commutator.io} · ORCID 0009-0002-8304-0683}
+\date{Draft outline, 28 November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Caramello showed that the classical Stone-type dualities are instances of one topos-theoretic
+phenomenon \cite{caramello-stone}: the toposes of sheaves on a preorder with a coverage and on
+its locale of ideals are equivalent, and a duality is what one reads when a structure is
+recovered from that topos through an invariant. We run this machine mechanically. Its core, the
+Comparison Lemma for preorders \cite[Thm.~10.13(i)]{caramello-stone}, is proved once in Lean~4,
+without the axiom of choice. Each duality is then the choice of three inputs (a preorder, a
+coverage, a dense part) and two readings, one on each side, and its output is compared with the
+statement already in Mathlib. Birkhoff's representation of finite distributive lattices comes out
+as Mathlib's \lean{OrderIso.lowerSetSupIrred}, definitionally, and Lindenbaum--Tarski duality as
+the isomorphism of a complete atomic Boolean algebra with the power set of its atoms. We list the
+dualities of Mathlib that the machine reaches, what each one needs beyond the machine (a choice of
+points, and for Stone duality a form of choice), and those it does not reach: Gelfand,
+Pontryagin, Morita theory of rings, Tannaka duality. The text is a draft; its sections are
+outlined below, with the parts already checked in Lean marked as such.
+\end{abstract}
+
+\section{The question}\label{sec:intro}
+The companion article \cite{bridges-generator} runs Caramello's generator on presheaf toposes,
+and recovers two classical theorems at once in its section on equivalences: Birkhoff's theorem
+for finite distributive lattices and the correspondence between finite $T_0$ spaces and finite
+posets. Here we ask how far the same mechanism goes for the dualities that are already proved in
+Mathlib, when it is run without any idea added by hand: which inputs it needs, which readings,
+and what has to be supplied that is not a mechanical step. The interest is not in the dualities,
+which are classical, but in the boundary between what the machine produces and what it does not.
+
+\section{The machine}\label{sec:machine}
+\paragraph{Inputs.} Following \cite[\S3, \S9]{caramello-stone}: a preorder $C$; a coverage $J$ on
+$C$ given by covering sieves; and a $J$-dense part $D\subseteq C$, meaning that every $c$ is covered
+by the sieve of elements lying below some $d\in D$ with $d\le c$. For a duality with spaces rather
+than locales, a fourth input: a set of points of the topos.
+
+\paragraph{The bridge.} The $J$-ideals of $C$ (lower sets that contain every element covered by a
+sieve inside them) form the locale $\Id_J(C)$, and $\Sh(C,J)\simeq\Sh(\Id_J(C))$
+\cite[Thm.~3.1]{caramello-stone}. Its order-theoretic core is the Comparison Lemma for preorders:
+
+\begin{leancode}
+def PreorderCoverage.densityOrderIso (hD : J.Dense D) :
+    J.Ideal ≃o (J.restrict D).Ideal
+\end{leancode}
+Intersecting with $D$ is an order isomorphism from the $J$-ideals of $C$ to the ideals of the
+coverage that $J$ induces on $D$, with inverse the $J$-closure. Lean: \lean{Bridges/Dualities/Density.lean};
+\verb|#print axioms| gives \lean{propext} and \lean{Quot.sound}, no choice, in line with
+Caramello's remark that the dualities with locales are constructive.
+
+\paragraph{Readings.} A duality is obtained by reading the two sides of the isomorphism: on the
+left, the $J$-ideals of $C$ in terms of $C$ (for the coverages used below, they are the principal
+ideals, so $C$ itself); on the right, the induced coverage on $D$ (often trivial, so its ideals
+are the lower sets of $D$, or all its subsets).
+
+\section{Outputs checked in Lean}\label{sec:outputs}
+
+\begin{bridge}[Lindenbaum--Tarski]
+A complete atomic Boolean algebra $B$ is isomorphic to the power set of its atoms.
+\end{bridge}
+\emph{Inputs:} $C=B$; the canonical coverage (a lower set below $a$ covers $a$ when its join is
+$a$; stability uses the frame law $b\wedge\bigvee S=\bigvee_{s}b\wedge s$); $D$ the atoms, dense
+because $B$ is atomistic. \emph{Readings:} the canonical ideals are the principal ideals; on the
+atoms the induced coverage is trivial (a covering sieve of an atom contains it), so every set of
+atoms is an ideal. Lean: \lean{completeAtomicBooleanAlgebraOrderIsoSetAtoms}, sending $a$ to the
+atoms below it.
+
+\begin{bridge}[Birkhoff, finite]
+A finite distributive lattice $L$ is isomorphic to the lattice of lower sets of its
+sup-irreducible elements.
+\end{bridge}
+\emph{Inputs:} $C=L$; the coherent coverage (finite joins; stability uses distributivity); $D$ the
+sup-irreducible elements, dense by \lean{exists_supIrred_decomposition}. \emph{Readings:} on a
+finite lattice the coherent ideals are principal; on the sup-irreducibles the induced coverage is
+trivial (\lean{SupIrred.finset_sup_eq}), so its ideals are the lower sets. Lean:
+\lean{birkhoffOrderIso}, and \lean{birkhoffOrderIso_apply} proves it equal to Mathlib's
+\lean{OrderIso.lowerSetSupIrred}.
+
+\begin{bridge}[Preorders and Alexandrov locales]
+A partial order $P$ is recovered from the frame of its lower sets as its supercompact elements.
+\end{bridge}
+\emph{Inputs:} $C=P$; the trivial coverage (only $\downarrow a$ covers $a$); no dense part is
+needed. \emph{Readings:} the ideals are the lower sets (\lean{trivialIdealOrderIso}); and, following
+Caramello's recovery of a structure through an invariant \cite[Thm.~3.27]{caramello-stone}, the
+supercompact elements (below a member of every family whose join they are below) are exactly the
+principal lower sets (\lean{isSupercompact_iff}), so $P\simeq\{x\mid x \text{ supercompact}\}$
+(\lean{orderIsoSupercompact}). This is the localic half of the correspondence between preorders
+and Alexandrov spaces; the spatial half needs the points (\S\ref{sec:registry}).
+
+\section{The grid of translations, checked on finite cases}\label{sec:grid}
+Caramello's second use of the bridge transfers an invariant of the topos across a duality, so that a
+property of the structure becomes a property of its locale or space \cite[\S7.3]{caramello-stone}.
+Her grid crosses four invariants with three dualities:
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.4cm}@{}}
+\toprule
+invariant & distributive lattices (Stone) & meet-semi\-lattices & preorders (Alexandrov)\\
+\midrule
+Boolean (almost discrete) & Prop.~7.7 & Prop.~7.8(i) & Prop.~7.8(ii)\\
+De Morgan (extremally disconnected) & Prop.~7.9 & Prop.~7.10(i) & Prop.~7.10(ii)\\
+two-valued (trivial, non-empty) & Prop.~7.11(i) & Prop.~7.11(ii) & Prop.~7.11(iii)\\
+Gödel--Dummett & Thm~7.12(i) & Thm~7.12(ii) & Thm~7.12(iii)\\
+\bottomrule
+\end{tabularx}
+\end{center}
+The script \nolinkurl{docs/dualities/grid/caramello_grid.py} checks the statements of this grid on
+finite cases, computing each invariant in the topos itself (for a finite poset $Q$, $[Q,\Set]$
+validates a propositional sequent iff the Kripke frame $(Q,\le)$ does) and comparing it with the
+condition the proposition states on the structure. On every poset with at most five elements, on
+the meet-semilattices among them, and on the finite distributive lattices whose poset of
+join-irreducibles has at most four elements, Props.~7.7(v), 7.8, 7.9(iii), 7.10, 7.11 and
+Thm~7.12(iii) hold with no exception, and each test meets both truth values. Thm~7.12(i) and (ii)
+rest on her notion of a Gödel--Dummett lattice and are not checked. Note the direction: the
+Alexandrov topos of $Q$ is $[Q,\Set]$, covariant, so the amalgamation property of Prop.~7.10(ii)
+is the Ore condition of $Q^{\op}$.
+
+\section{The registry of targets}\label{sec:registry}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.6cm}}
+\toprule
+duality (Mathlib) & inputs of the machine & status\\
+\midrule
+Lindenbaum--Tarski & complete atomic Boolean algebra, canonical coverage, atoms & checked in Lean\\
+Birkhoff, finite (\lean{Order/Birkhoff.lean}) & finite distributive lattice, coherent coverage, sup-irreducibles & checked, equal to Mathlib's\\
+preorders and Alexandrov spaces (\lean{AlexandrovDiscrete.lean}) & a partial order, trivial coverage, recovery by supercompact elements; points: the principal filters & localic half checked; spatial half to do\\
+spatial frames and sober spaces (\lean{FrameAdjunction.lean}) & a frame, canonical coverage; points: completely prime filters \cite[\S4.3]{caramello-stone} & to do\\
+Stone, distributive lattices and Boolean algebras & coherent coverage; points: prime filters, whose existence needs the prime ideal theorem \cite[\S4.2]{caramello-stone} & to do; the choice step is not mechanical\\
+Priestley, Esakia (\lean{Topology/Order/Priestley.lean}) & as Stone, with the order on prime filters & to do; Mathlib has the spaces, not the duality\\
+Galois theory, coverings & atomic toposes and their points \cite{caramello-galois} & outside the preorder case; later\\
+Gelfand, Pontryagin, Morita of rings, Wedderburn--Artin, Tannaka & no preorder site; not toposes of this kind & out of reach (\S\ref{sec:limits})\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{What is mechanical, and what is not}\label{sec:mechanical}
+To be written from the runs: the Comparison Lemma and the two readings are uniform, and each
+reading is a short lemma about the chosen coverage; the choices of coverage and of dense part are
+where the duality is decided, and they come from the literature, not from the machine; the passage
+to spaces needs enough points, which for Stone duality is the prime ideal theorem.
+
+\section{Out of reach}\label{sec:limits}
+To be written: why Gelfand and Pontryagin duality, Morita theory of rings and Tannaka duality are
+not outputs of this machine (no site whose topos carries them; categories of modules are not
+toposes).
+
+\begin{thebibliography}{9}
+\bibitem{caramello-stone} O.~Caramello, \emph{A topos-theoretic approach to Stone-type dualities},
+arXiv:1103.3493, 2011.
+\bibitem{caramello-galois} O.~Caramello, \emph{Topological Galois theory}, arXiv:1301.0300, 2013.
+\bibitem{bridges-generator} M.~Hua, \emph{Topos-theoretic bridges as a theorem generator},
+draft, docs/bridges, 2026.
+\end{thebibliography}
+\end{document}

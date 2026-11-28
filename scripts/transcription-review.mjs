@@ -99,6 +99,10 @@ if (existsSync(GA)) {
   if (existsSync(resolve(ARCH, 'U26.pdf'))) copyFileSync(resolve(ARCH, 'U26.pdf'), resolve(SCANS, 'U26.pdf'));
   const all = [];
   for (const f of readdirSync(GA).filter((x) => /^batch-\d+\.en\.tex$/.test(x)).sort()) all.push(...checks(resolve(GA, f), Number(/\d+/.exec(f)[0]), 'ga'));
+  // The appendix of Ch. III, §14 (printed pp. 147–162, scan pp. 151–166) writes up the topos
+  // course of 4 April 1973 (src/content/buffalo-gaeta.json); its checks come first.
+  const topos = (c) => c.page >= 151 && c.page <= 166;
+  all.sort((x, y) => Number(topos(y)) - Number(topos(x)));
   docs.push({ id: 'gaeta-ag', title: "Gaeta, Introduction to Functorial Algebraic Geometry (notes of the 1973 Buffalo course)", base: 'transcripts-gaeta', lang: 'en', pdf: '/csg-scans/U26.pdf', item: 'https://webusers.imj-prg.fr/~leila.schneps/grothendieckcircle/FuncAlg.pdf', notice: 'Second scan', checks: all });
 }
 
